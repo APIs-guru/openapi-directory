@@ -200,6 +200,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
       requestBody:
         required: true
         content:
@@ -233,6 +239,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BatchDisassociateUserStackResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
       requestBody:
         required: true
         content:
@@ -336,23 +354,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateDirectoryConfigResult'
         '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
           description: ResourceAlreadyExistsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
-        '481':
+        '482':
           description: LimitExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '482':
+        '483':
           description: InvalidAccountStatusException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidAccountStatusException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '485':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
       requestBody:
         required: true
         content:
@@ -411,36 +447,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '484':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '485':
           description: InvalidAccountStatusException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidAccountStatusException'
-        '485':
+        '486':
           description: InvalidRoleException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRoleException'
-        '486':
+        '487':
           description: ConcurrentModificationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
-        '487':
+        '488':
           description: InvalidParameterCombinationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
-        '488':
+        '489':
           description: IncompatibleImageException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IncompatibleImageException'
-        '489':
+        '490':
           description: OperationNotPermittedException
           content:
             application/json:
@@ -486,54 +528,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '481':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '482':
           description: InvalidAccountStatusException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidAccountStatusException'
-        '482':
+        '483':
           description: ResourceAlreadyExistsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceAlreadyExistsException'
-        '483':
+        '484':
           description: ResourceNotAvailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotAvailableException'
-        '484':
+        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '485':
+        '486':
           description: InvalidRoleException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRoleException'
-        '486':
+        '487':
           description: ConcurrentModificationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
-        '487':
+        '488':
           description: InvalidParameterCombinationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
-        '488':
+        '489':
           description: IncompatibleImageException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IncompatibleImageException'
-        '489':
+        '490':
           description: OperationNotPermittedException
           content:
             application/json:
@@ -1601,6 +1649,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
       requestBody:
         required: true
         content:
@@ -1736,6 +1790,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
       requestBody:
         required: true
         content:
@@ -1971,24 +2031,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '483':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '484':
           description: InvalidAccountStatusException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidAccountStatusException'
-        '484':
+        '485':
           description: ConcurrentModificationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
-        '485':
+        '486':
           description: ResourceNotAvailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotAvailableException'
-        '486':
+        '487':
           description: InvalidRoleException
           content:
             application/json:
@@ -2294,6 +2360,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '484':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
       requestBody:
         required: true
         content:
@@ -2340,48 +2418,54 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '482':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '483':
           description: InvalidAccountStatusException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidAccountStatusException'
-        '483':
+        '484':
           description: InvalidRoleException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRoleException'
-        '484':
+        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '485':
+        '486':
           description: ResourceNotAvailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotAvailableException'
-        '486':
+        '487':
           description: InvalidParameterCombinationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterCombinationException'
-        '487':
+        '488':
           description: ConcurrentModificationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
-        '488':
+        '489':
           description: IncompatibleImageException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IncompatibleImageException'
-        '489':
+        '490':
           description: OperationNotPermittedException
           content:
             application/json:
@@ -2636,6 +2720,7 @@ components:
         UserStackAssociations:
           $ref: '#/components/schemas/UserStackAssociationList'
           description: The list of UserStackAssociation objects.
+    InvalidParameterCombinationException: {}
     BatchDisassociateUserStackResult:
       type: object
       properties:
@@ -2690,7 +2775,6 @@ components:
       required:
         - DirectoryName
         - OrganizationalUnitDistinguishedNames
-        - ServiceAccountCredentials
       title: CreateDirectoryConfigRequest
       properties:
         DirectoryName:
@@ -2702,6 +2786,7 @@ components:
         ServiceAccountCredentials:
           $ref: '#/components/schemas/ServiceAccountCredentials'
           description: The credentials for the service account used by the fleet or image builder to connect to the directory.
+    InvalidRoleException: {}
     CreateFleetResult:
       type: object
       properties:
@@ -2727,7 +2812,7 @@ components:
           description: 'The ARN of the public, private, or shared image to use.'
         InstanceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
         FleetType:
           $ref: '#/components/schemas/FleetType'
           description: '<p>The fleet type.</p> <dl> <dt>ALWAYS_ON</dt> <dd> <p>Provides users with instant-on access to their apps. You are charged for all running instances in your fleet, even if no users are streaming apps.</p> </dd> <dt>ON_DEMAND</dt> <dd> <p>Provide users with access to applications after they connect, which takes one to two minutes. You are charged for instance streaming when users are connected and a small hourly fee for instances that are not streaming apps.</p> </dd> </dl>'
@@ -2763,9 +2848,11 @@ components:
           description: '<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don''t do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>'
         IamRoleArn:
           $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
-    InvalidRoleException: {}
-    InvalidParameterCombinationException: {}
+          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        StreamView:
+          $ref: '#/components/schemas/StreamView'
+          description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
+    RequestLimitExceededException: {}
     CreateImageBuilderResult:
       type: object
       properties:
@@ -2790,7 +2877,7 @@ components:
           description: 'The ARN of the public, private, or shared image to use.'
         InstanceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The instance type to use when launching the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+          description: '<p>The instance type to use when launching the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
         Description:
           $ref: '#/components/schemas/Description'
           description: The description to display.
@@ -2802,7 +2889,7 @@ components:
           description: The VPC configuration for the image builder. You can specify only one subnet.
         IamRoleArn:
           $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
         EnableDefaultInternetAccess:
           $ref: '#/components/schemas/BooleanObject'
           description: Enables or disables default internet access for the image builder.
@@ -2883,7 +2970,7 @@ components:
           description: The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
         EmbedHostDomains:
           $ref: '#/components/schemas/EmbedHostDomains'
-          description: The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+          description: 'The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. '
     CreateStreamingURLResult:
       type: object
       properties:
@@ -3208,7 +3295,7 @@ components:
           description: The name of the fleet. This value is case-sensitive.
         UserId:
           $ref: '#/components/schemas/UserId'
-          description: The user identifier.
+          description: 'The user identifier (ID). If you specify a user ID, you must also specify the authentication type.'
         NextToken:
           $ref: '#/components/schemas/String'
           description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -3556,7 +3643,7 @@ components:
           description: A unique name for the fleet.
         InstanceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
         ComputeCapacity:
           $ref: '#/components/schemas/ComputeCapacity'
           description: The desired capacity for the fleet.
@@ -3593,7 +3680,10 @@ components:
           description: The fleet attributes to delete.
         IamRoleArn:
           $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+          description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        StreamView:
+          $ref: '#/components/schemas/StreamView'
+          description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
     UpdateImagePermissionsResult:
       type: object
       properties: {}
@@ -3662,7 +3752,7 @@ components:
           description: The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
         EmbedHostDomains:
           $ref: '#/components/schemas/EmbedHostDomains'
-          description: The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+          description: 'The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions. '
     AccessEndpointType:
       type: string
       enum:
@@ -3774,7 +3864,7 @@ components:
       maxLength: 100
     Arn:
       type: string
-      pattern: '^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+      pattern: '^arn:aws(?:\-cn|\-iso\-b|\-iso|\-us\-gov)?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.\\-]{0,1023}$'
     ArnList:
       type: array
       items:
@@ -3916,6 +4006,11 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    StreamView:
+      type: string
+      enum:
+        - APP
+        - DESKTOP
     Fleet:
       type: object
       required:
@@ -3945,7 +4040,7 @@ components:
           description: 'The ARN for the public, private, or shared image.'
         InstanceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+          description: '<p>The instance type to use when launching fleet instances. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
         FleetType:
           $ref: '#/components/schemas/FleetType'
           description: '<p>The fleet type.</p> <dl> <dt>ALWAYS_ON</dt> <dd> <p>Provides users with instant-on access to their apps. You are charged for all running instances in your fleet, even if no users are streaming apps.</p> </dd> <dt>ON_DEMAND</dt> <dd> <p>Provide users with access to applications after they connect, which takes one to two minutes. You are charged for instance streaming when users are connected and a small hourly fee for instances that are not streaming apps.</p> </dd> </dl>'
@@ -3981,7 +4076,10 @@ components:
           description: '<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don''t do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>'
         IamRoleArn:
           $ref: '#/components/schemas/Arn'
-          description: '<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+          description: '<p>The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        StreamView:
+          $ref: '#/components/schemas/StreamView'
+          description: '<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p> <p>The default value is <code>APP</code>.</p>'
       description: Describes a fleet.
     ImageBuilder:
       type: object
@@ -4008,13 +4106,13 @@ components:
           description: The VPC configuration of the image builder.
         InstanceType:
           $ref: '#/components/schemas/String'
-          description: '<p>The instance type for the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
+          description: '<p>The instance type for the image builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.compute.large</p> </li> <li> <p>stream.compute.xlarge</p> </li> <li> <p>stream.compute.2xlarge</p> </li> <li> <p>stream.compute.4xlarge</p> </li> <li> <p>stream.compute.8xlarge</p> </li> <li> <p>stream.memory.large</p> </li> <li> <p>stream.memory.xlarge</p> </li> <li> <p>stream.memory.2xlarge</p> </li> <li> <p>stream.memory.4xlarge</p> </li> <li> <p>stream.memory.8xlarge</p> </li> <li> <p>stream.memory.z1d.large</p> </li> <li> <p>stream.memory.z1d.xlarge</p> </li> <li> <p>stream.memory.z1d.2xlarge</p> </li> <li> <p>stream.memory.z1d.3xlarge</p> </li> <li> <p>stream.memory.z1d.6xlarge</p> </li> <li> <p>stream.memory.z1d.12xlarge</p> </li> <li> <p>stream.graphics-design.large</p> </li> <li> <p>stream.graphics-design.xlarge</p> </li> <li> <p>stream.graphics-design.2xlarge</p> </li> <li> <p>stream.graphics-design.4xlarge</p> </li> <li> <p>stream.graphics-desktop.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.xlarge</p> </li> <li> <p>stream.graphics.g4dn.2xlarge</p> </li> <li> <p>stream.graphics.g4dn.4xlarge</p> </li> <li> <p>stream.graphics.g4dn.8xlarge</p> </li> <li> <p>stream.graphics.g4dn.12xlarge</p> </li> <li> <p>stream.graphics.g4dn.16xlarge</p> </li> <li> <p>stream.graphics-pro.4xlarge</p> </li> <li> <p>stream.graphics-pro.8xlarge</p> </li> <li> <p>stream.graphics-pro.16xlarge</p> </li> </ul>'
         Platform:
           $ref: '#/components/schemas/PlatformType'
           description: The operating system platform of the image builder.
         IamRoleArn:
           $ref: '#/components/schemas/Arn'
-          description: '<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>AppStream_Machine_Role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+          description: '<p>The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
         State:
           $ref: '#/components/schemas/ImageBuilderState'
           description: The state of the image builder.
@@ -4239,7 +4337,7 @@ components:
     UserId:
       type: string
       minLength: 2
-      maxLength: 32
+      maxLength: 128
     SessionList:
       type: array
       description: List of sessions.
@@ -4270,7 +4368,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Domain'
-      maxItems: 10
+      maxItems: 50
     EmbedHostDomain:
       type: string
       pattern: '(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]'
@@ -4464,6 +4562,7 @@ components:
       type: string
       description: The ARN of the resource.
       minLength: 1
+      maxLength: 2048
     SecurityGroupIdList:
       type: array
       description: The security group identifiers.
@@ -4700,6 +4799,7 @@ components:
       enum:
         - STACK_NOT_FOUND
         - USER_NAME_NOT_FOUND
+        - DIRECTORY_NOT_FOUND
         - INTERNAL_ERROR
     UserStackAssociationError:
       type: object
