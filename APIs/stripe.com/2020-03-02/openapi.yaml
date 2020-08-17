@@ -10453,6 +10453,7 @@ paths:
                     other characteristics.
                   items:
                     enum:
+                      - alipay
                       - bacs_debit
                       - bancontact
                       - card
@@ -28397,6 +28398,7 @@ paths:
           required: true
           schema:
             enum:
+              - alipay
               - au_becs_debit
               - bacs_debit
               - bancontact
@@ -41382,6 +41384,7 @@ paths:
                       - payment_intent.created
                       - payment_intent.payment_failed
                       - payment_intent.processing
+                      - payment_intent.requires_action
                       - payment_intent.succeeded
                       - payment_method.attached
                       - payment_method.card_automatically_updated
@@ -41695,6 +41698,7 @@ paths:
                       - payment_intent.created
                       - payment_intent.payment_failed
                       - payment_intent.processing
+                      - payment_intent.requires_action
                       - payment_intent.succeeded
                       - payment_method.attached
                       - payment_method.card_automatically_updated
@@ -48313,6 +48317,7 @@ components:
           description: List of balance transactions associated with this dispute.
           items:
             $ref: "#/components/schemas/balance_transaction"
+          nullable: true
           type: array
         id:
           description: Unique identifier for the object.
@@ -48336,7 +48341,6 @@ components:
             oneOf:
               - $ref: "#/components/schemas/issuing.transaction"
       required:
-        - balance_transactions
         - id
         - livemode
         - object
@@ -58988,7 +58992,10 @@ components:
       description: ""
       properties:
         authenticated:
-          description: Whether or not authentication was performed. 3D Secure will succeed without authentication when the card is not enrolled.
+          description: >-
+            Whether or not authentication was performed. 3D Secure will succeed
+
+            without authentication when the card is not enrolled.
           type: boolean
         authentication_flow:
           description: >-

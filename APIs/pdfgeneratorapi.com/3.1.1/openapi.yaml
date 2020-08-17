@@ -458,7 +458,7 @@ paths:
               --url https://us1.pdfgeneratorapi.com/api/v3/templates \
               --header 'authorization: Bearer REPLACE_BEARER_TOKEN' \
               --header 'content-type: application/json' \
-              --data '{"name":"Invoice template","tags":["invoice","orders"],"isDraft":true,"layout":{"format":"A4","width":21,"height":29.7,"unit":"cm","orientation":"portrait","roation":0,"margins":{"top":0.5,"right":0.5,"bottom":0.5,"left":0.5},"repeatLayout":{"format":"A4","width":21,"height":29.7},"emptyLabels":0},"pages":[{"width":21,"height":29.7,"margins":{"right":0.5,"bottom":0.5},"components":[{"cls":"labelComponent","id":"component-12313","width":3.5,"height":1,"top":4.2,"left":2.5,"zindex":102,"value":"${price}","dataIndex":"line_items"}]}]}'
+              --data '{"name":"Invoice template","tags":["invoice","orders"],"isDraft":true,"layout":{"format":"A4","width":21,"height":29.7,"unit":"cm","orientation":"portrait","rotaion":0,"margins":{"top":0.5,"right":0.5,"bottom":0.5,"left":0.5},"repeatLayout":{"format":"A4","width":21,"height":29.7},"emptyLabels":0},"pages":[{"width":21,"height":29.7,"margins":{"right":0.5,"bottom":0.5},"components":[{"cls":"labelComponent","id":"component-12313","width":3.5,"height":1,"top":4.2,"left":2.5,"zindex":102,"value":"${price}","dataIndex":"line_items"}]}]}'
         - lang: Php + Curl
           source: >-
             <?php
@@ -475,7 +475,7 @@ paths:
               CURLOPT_TIMEOUT => 30,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS => "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}",
+              CURLOPT_POSTFIELDS => "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}",
               CURLOPT_HTTPHEADER => array(
                 "authorization: Bearer REPLACE_BEARER_TOKEN",
                 "content-type: application/json"
@@ -506,7 +506,7 @@ paths:
 
             request.AddHeader("authorization", "Bearer REPLACE_BEARER_TOKEN");
 
-            request.AddParameter("application/json", "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}", ParameterType.RequestBody);
+            request.AddParameter("application/json", "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}", ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
@@ -514,7 +514,7 @@ paths:
             HttpResponse<String> response = Unirest.post("https://us1.pdfgeneratorapi.com/api/v3/templates")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
-              .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
+              .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
               .asString();
         - lang: Node + Native
           source: >-
@@ -557,7 +557,7 @@ paths:
                 height: 29.7,
                 unit: 'cm',
                 orientation: 'portrait',
-                roation: 0,
+                rotaion: 0,
                 margins: {top: 0.5, right: 0.5, bottom: 0.5, left: 0.5},
                 repeatLayout: {format: 'A4', width: 21, height: 29.7},
                 emptyLabels: 0
@@ -593,7 +593,7 @@ paths:
             conn = http.client.HTTPSConnection("us1.pdfgeneratorapi.com")
 
 
-            payload = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
+            payload = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
 
 
             headers = {
@@ -635,7 +635,7 @@ paths:
 
             request["authorization"] = 'Bearer REPLACE_BEARER_TOKEN'
 
-            request.body = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
+            request.body = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
 
 
             response = http.request(request)
@@ -1174,7 +1174,7 @@ paths:
               --url https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D \
               --header 'authorization: Bearer REPLACE_BEARER_TOKEN' \
               --header 'content-type: application/json' \
-              --data '{"name":"Invoice template","tags":["invoice","orders"],"isDraft":true,"layout":{"format":"A4","width":21,"height":29.7,"unit":"cm","orientation":"portrait","roation":0,"margins":{"top":0.5,"right":0.5,"bottom":0.5,"left":0.5},"repeatLayout":{"format":"A4","width":21,"height":29.7},"emptyLabels":0},"pages":[{"width":21,"height":29.7,"margins":{"right":0.5,"bottom":0.5},"components":[{"cls":"labelComponent","id":"component-12313","width":3.5,"height":1,"top":4.2,"left":2.5,"zindex":102,"value":"${price}","dataIndex":"line_items"}]}]}'
+              --data '{"name":"Invoice template","tags":["invoice","orders"],"isDraft":true,"layout":{"format":"A4","width":21,"height":29.7,"unit":"cm","orientation":"portrait","rotaion":0,"margins":{"top":0.5,"right":0.5,"bottom":0.5,"left":0.5},"repeatLayout":{"format":"A4","width":21,"height":29.7},"emptyLabels":0},"pages":[{"width":21,"height":29.7,"margins":{"right":0.5,"bottom":0.5},"components":[{"cls":"labelComponent","id":"component-12313","width":3.5,"height":1,"top":4.2,"left":2.5,"zindex":102,"value":"${price}","dataIndex":"line_items"}]}]}'
         - lang: Php + Curl
           source: >-
             <?php
@@ -1191,7 +1191,7 @@ paths:
               CURLOPT_TIMEOUT => 30,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "PUT",
-              CURLOPT_POSTFIELDS => "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}",
+              CURLOPT_POSTFIELDS => "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}",
               CURLOPT_HTTPHEADER => array(
                 "authorization: Bearer REPLACE_BEARER_TOKEN",
                 "content-type: application/json"
@@ -1222,7 +1222,7 @@ paths:
 
             request.AddHeader("authorization", "Bearer REPLACE_BEARER_TOKEN");
 
-            request.AddParameter("application/json", "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}", ParameterType.RequestBody);
+            request.AddParameter("application/json", "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}", ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
         - lang: Java + Unirest
@@ -1230,7 +1230,7 @@ paths:
             HttpResponse<String> response = Unirest.put("https://us1.pdfgeneratorapi.com/api/v3/templates/%7BtemplateId%7D")
               .header("content-type", "application/json")
               .header("authorization", "Bearer REPLACE_BEARER_TOKEN")
-              .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
+              .body("{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}")
               .asString();
         - lang: Node + Native
           source: >-
@@ -1273,7 +1273,7 @@ paths:
                 height: 29.7,
                 unit: 'cm',
                 orientation: 'portrait',
-                roation: 0,
+                rotaion: 0,
                 margins: {top: 0.5, right: 0.5, bottom: 0.5, left: 0.5},
                 repeatLayout: {format: 'A4', width: 21, height: 29.7},
                 emptyLabels: 0
@@ -1309,7 +1309,7 @@ paths:
             conn = http.client.HTTPSConnection("us1.pdfgeneratorapi.com")
 
 
-            payload = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
+            payload = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
 
 
             headers = {
@@ -1351,7 +1351,7 @@ paths:
 
             request["authorization"] = 'Bearer REPLACE_BEARER_TOKEN'
 
-            request.body = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"roation\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
+            request.body = "{\"name\":\"Invoice template\",\"tags\":[\"invoice\",\"orders\"],\"isDraft\":true,\"layout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7,\"unit\":\"cm\",\"orientation\":\"portrait\",\"rotaion\":0,\"margins\":{\"top\":0.5,\"right\":0.5,\"bottom\":0.5,\"left\":0.5},\"repeatLayout\":{\"format\":\"A4\",\"width\":21,\"height\":29.7},\"emptyLabels\":0},\"pages\":[{\"width\":21,\"height\":29.7,\"margins\":{\"right\":0.5,\"bottom\":0.5},\"components\":[{\"cls\":\"labelComponent\",\"id\":\"component-12313\",\"width\":3.5,\"height\":1,\"top\":4.2,\"left\":2.5,\"zindex\":102,\"value\":\"${price}\",\"dataIndex\":\"line_items\"}]}]}"
 
 
             response = http.request(request)
@@ -2636,7 +2636,7 @@ components:
                   example: 21
                   type: number
               type: object
-            roation:
+            rotation:
               description: Page rotation in degrees
               enum:
                 - 0
@@ -2769,7 +2769,7 @@ components:
                   example: 21
                   type: number
               type: object
-            roation:
+            rotaion:
               description: Page rotation in degrees
               enum:
                 - 0

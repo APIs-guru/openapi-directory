@@ -5,6 +5,8 @@ servers:
 info:
   contact:
     email: dev@fulfillment.com
+    name: Fulfillment.com
+    url: https://fulfillment.com
   description: >
     Welcome to our current iteration of our REST API. While we encourage you to upgrade to v2.0 we will continue support for our [SOAP API](https://github.com/fulfillment/soap-integration).
 
@@ -266,7 +268,7 @@ info:
 
     | 060101 | Test | Test | Test |
   termsOfService: https://fulfillment.github.io/api/terms/
-  title: Fulfillment.com API
+  title: Fulfillment.com APIv2
   version: "2.0"
   x-apisguru-categories:
     - ecommerce
@@ -339,31 +341,84 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/inventoriesArray"
+                properties:
+                  data:
+                    items:
+                      properties:
+                        item:
+                          description: Item this inventory data is based on
+                          properties:
+                            id:
+                              description: FDC ID for this Item
+                              type: integer
+                            skuReference:
+                              description: Sku reference name for this item
+                              type: string
+                          type: object
+                        merchant:
+                          description: Merchant that owns this item
+                          properties:
+                            name:
+                              description: Merchants name for this item
+                              type: string
+                          type: object
+                        quantity:
+                          properties:
+                            total:
+                              properties:
+                                availableToPromise:
+                                  description: Number of items that are available to be used in an order
+                                  type: integer
+                              type: object
+                          type: object
+                      title: ItemInventory.v2
+                      type: object
+                    type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          count:
+                            description: Count of records returned in response, this will be equal to or less then the limit paramater
+                            type: integer
+                          currentPage:
+                            description: Current page of the response, this will match the page paramater
+                            type: integer
+                          total:
+                            description: Total number of records available to request
+                            type: integer
+                          totalPages:
+                            description: Total number of pages available to request
+                            type: integer
+                        title: Pagination.v2
+                        type: object
+                    type: object
+                title: ItemInventoryArray.v2
+                type: object
           description: Found Inventory
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Bad Request
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Unauthorized
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Access Denied
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: No Inventory Found
       security:
         - fdcAuth:
@@ -382,7 +437,56 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/accessTokenRequest"
+              oneOf:
+                - allOf:
+                    - properties:
+                        password:
+                          description: ""
+                          type: string
+                        username:
+                          description: ""
+                          type: string
+                      required:
+                        - username
+                        - password
+                      type: object
+                    - properties:
+                        client_id:
+                          description: Id and secret provided by FDC
+                          type: string
+                        client_secret:
+                          type: string
+                        grant_type:
+                          description: Indicates how you're authenticating your request
+                          enum:
+                            - password
+                            - refresh_token
+                          type: string
+                        scope:
+                          default: oms
+                          description: Currently limited to Order Management System
+                          enum:
+                            - oms
+                          type: string
+                      required:
+                        - scope
+                        - grant_type
+                        - client_secret
+                        - client_id
+                      title: AccessTokenRequestBase.v2
+                      type: object
+                  title: AccessTokenRequestPassword.v2
+                - allOf:
+                    - properties:
+                        refresh_token:
+                          description: You may request future tokens with the `refresh_token` from your previous `/oauth/access_token` request
+                          type: string
+                      required:
+                        - refresh_token
+                      type: object
+                    - $ref: "#/paths/~1oauth~1access_token/post/requestBody/content/application~1json/schema/oneOf/0/allOf/1"
+                  title: AccessTokenRequestRefresh.v2
+              title: AccessTokenRequest.v2
         description: Get an access token
         required: true
       responses:
@@ -390,13 +494,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/accessTokenResponse"
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    type: integer
+                  refresh_token:
+                    type: string
+                  token_type:
+                    default: Bearer
+                    type: string
+                title: AccessTokenResponse.v2
+                type: object
           description: Authorized
         "401":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Unauthorized
       summary: Generate an Access Token
       tags:
@@ -407,63 +522,85 @@ paths:
       description: Retrieve many orders at once
       operationId: get-orders
       parameters:
-        - description: Date-time in ISO 8601 format for selecting orders after, or at, the specified time
-          in: query
-          name: fromDate
-          required: true
-          schema:
-            type: string
-        - description: Date-time in ISO 8601 format for selecting orders before, or at, the specified time
-          in: query
-          name: toDate
-          required: true
-          schema:
-            type: string
-        - description: A CSV of merchant id, '123' or '1,2,3'
-          explode: false
-          in: query
-          name: merchantIds
-          schema:
-            items:
-              type: integer
-            type: array
-          style: form
-        - description: A CSV of warehouse id, '123' or '1,2,3'
-          explode: false
-          in: query
-          name: warehouseIds
-          schema:
-            items:
-              type: integer
-            type: array
-          style: form
-        - description: A multiplier of the number of items (limit paramater) to skip before returning results
-          in: query
-          name: page
-          schema:
-            default: 1
-            minimum: 1
-            type: integer
-        - description: The numbers of items to return
-          in: query
-          name: limit
-          schema:
-            default: 80
-            maximum: 200
-            minimum: 1
-            type: integer
+        - $ref: "#/components/parameters/fromDateParam"
+        - $ref: "#/components/parameters/toDateParam"
+        - $ref: "#/components/parameters/merchantParam"
+        - $ref: "#/components/parameters/warehouseParam"
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/limitParam"
+        - $ref: "#/components/parameters/hydrateParam"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ordersArray"
-          description: Found Orders
+                oneOf:
+                  - $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
+                  - allOf:
+                      - $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
+                      - properties:
+                          integrator:
+                            description: ""
+                            type: string
+                          orderItems:
+                            description: ""
+                            properties:
+                              id:
+                                type: integer
+                              inventoryDetails:
+                                items:
+                                  properties:
+                                    expirationDate:
+                                      format: date
+                                      type: string
+                                    lotNum:
+                                      type: string
+                                    quantity:
+                                      type: integer
+                                    serialNum:
+                                      type: string
+                                  type: object
+                                type: array
+                              lineDetails:
+                                properties:
+                                  description:
+                                    type: string
+                                  externalSku:
+                                    type: string
+                                  id:
+                                    type: integer
+                                  name:
+                                    type: string
+                                  totalQuantity:
+                                    type: integer
+                                type: object
+                              requestedSkuData:
+                                properties:
+                                  declaredValue:
+                                    pattern: ^[0-9.]+$
+                                    type: string
+                                  id:
+                                    type: integer
+                                  quantity:
+                                    type: integer
+                                  sku:
+                                    type: string
+                                type: object
+                            title: OrderItemsResponse.v2
+                            type: object
+                        type: object
+                    description: Requires hydrate to be set in the request and the corresponding node will be filled, respectfully.
+                    title: OrderResponseHydrate.v2
+          description: OK
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                properties:
+                  message:
+                    type: string
+                title: ErrorStandard.v2
+                type: object
           description: No Orders Found
       security:
         - fdcAuth:
@@ -481,7 +618,158 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/newOrder"
+              properties:
+                integrator:
+                  description: Use of this property requires special permission and must be discussed with your account executive; values are restricted while custom values need to be accepted by your AE.
+                  enum:
+                    - 1ShoppingCart
+                    - 3dCart
+                    - AdobeBC
+                    - AmazonAU
+                    - AmazonEU
+                    - AmazonNA
+                    - BigCommerce
+                    - BrandBoom
+                    - BrightPearl
+                    - BuyGoods
+                    - Celery
+                    - ChannelAdvisor
+                    - Clickbank
+                    - CommerceHub
+                    - Custom
+                    - Demandware
+                    - Ebay
+                    - Ecwid
+                    - Etsy
+                    - FoxyCart
+                    - Goodsie
+                    - Infusionsoft
+                    - Konnektive
+                    - LimeLight
+                    - Linio
+                    - Linnworks
+                    - Magento
+                    - Netsuite
+                    - NewEgg
+                    - Nexternal
+                    - NuOrder
+                    - Opencart
+                    - OrderWave
+                    - osCommerce1
+                    - Overstock
+                    - PayPal
+                    - PrestaShop
+                    - Pricefalls
+                    - Quickbooks
+                    - Rakuten
+                    - Sears
+                    - Sellbrite
+                    - SellerCloud
+                    - Shipstation
+                    - Shopify
+                    - Skubana
+                    - SolidCommerce
+                    - SparkPay
+                    - SpreeCommerce
+                    - spsCommerce
+                    - StitchLabs
+                    - StoneEdge
+                    - TradeGecko
+                    - UltraCart
+                    - Volusion
+                    - VTEX
+                    - Walmart
+                    - WooCommerce
+                    - Yahoo
+                  type: string
+                items:
+                  items:
+                    properties:
+                      declaredValue:
+                        description: Using USD, a per unit value of a single SKU. If your declaring a kit this is the sum total for a single kit. In both scenarios we will multiply the `declaredValue` against the `quantity` for customs declaration.
+                        example: "129.99"
+                        format: double
+                        pattern: ^[0-9.]+$
+                        type: string
+                      quantity:
+                        minimum: 1
+                        type: integer
+                      sku:
+                        type: string
+                    required:
+                      - quantity
+                      - sku
+                      - declaredValue
+                    type: object
+                  type: array
+                merchantId:
+                  description: Necessary if you have a multitenancy account, otherwise we will associate the order with your account
+                  type: integer
+                merchantOrderId:
+                  description: Unique ID provided by the merchant
+                  type: string
+                notes:
+                  type: string
+                recipient:
+                  properties:
+                    address1:
+                      description: Address Line 1
+                      type: string
+                    address2:
+                      description: Address Line 2
+                      type: string
+                    addressLocality:
+                      description: City
+                      type: string
+                    addressRegion:
+                      description: Province / State
+                      type: string
+                    companyName:
+                      type: string
+                    country:
+                      description: Country, for best results please provide the two character ISO code
+                      type: string
+                    email:
+                      description: Email, required for international shipments
+                      type: string
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    phone:
+                      description: Phone number, required for international shipments
+                      type: string
+                    postalCode:
+                      description: Postal Code / Zip
+                      type: string
+                  required:
+                    - country
+                    - addressRegion
+                    - addressLocality
+                    - address1
+                    - phone
+                    - lastName
+                    - firstName
+                    - email
+                  title: ConsigneeNew.v2
+                  type: object
+                shippingMethod:
+                  description: Custom for you, it will be mapped to an actual method within the OMS UI
+                  example: Ground
+                  type: string
+                warehouse:
+                  description: We automatically select a warehouse based on inventory availability, requested carrier and delivery schedule, and carrier cost. You may however override this process. Because this is not recommended please inform your AE prior to using so they may enable this feature.
+                  properties:
+                    id:
+                      type: integer
+                  type: object
+              required:
+                - merchantOrderId
+                - shippingMethod
+                - recipient
+                - items
+              title: OrderRequest.v2
+              type: object
         description: The order to create
         required: true
       responses:
@@ -495,17 +783,240 @@ paths:
                       id: 123
                     message: Duplicate Order
               schema:
-                $ref: "#/components/schemas/order"
+                properties:
+                  currentStatus:
+                    properties:
+                      createdBy:
+                        $ref: "#/paths/~1returns/get/responses/200/content/application~1json/schema/properties/data/items/properties/updatedBy"
+                      date:
+                        description: DateTime of Status Event
+                        format: date-time
+                        type: string
+                      id:
+                        type: integer
+                      reason:
+                        description: Explanation for status
+                        type: string
+                      status:
+                        properties:
+                          actionRequiredBy:
+                            description: Responsibility for resolving this issue
+                            properties:
+                              id:
+                                type: integer
+                              name:
+                                description: Human readable description of responsible party to resolve the issue
+                                type: string
+                            type: object
+                          code:
+                            description: Code, see [status codes](#section/Getting-Started/Status-Codes)
+                            pattern: ^\d{6}$
+                            type: string
+                          detail:
+                            type: string
+                          detailCode:
+                            pattern: ^\d{2}$
+                            type: string
+                          id:
+                            description: Depricated, use code instead
+                            type: integer
+                          isClosed:
+                            description: Depricated, does this status event close the order
+                            type: boolean
+                          name:
+                            description: Depricated, use stage/state instead
+                            type: string
+                          reason:
+                            description: Depricated
+                            type: string
+                          stage:
+                            properties:
+                              code:
+                                type: string
+                              name:
+                                type: string
+                            type: object
+                          state:
+                            properties:
+                              code:
+                                type: string
+                              name:
+                                type: string
+                            type: object
+                        required:
+                          - stage
+                          - state
+                          - detailCode
+                          - code
+                        title: StatusType.v2
+                        type: object
+                    required:
+                      - id
+                    title: StatusEvent.v2
+                    type: object
+                  departDate:
+                    description: DateTime order departed an FDC warehouse
+                    format: date-time
+                    type: string
+                  dispatchDate:
+                    description: DateTime order was dispatched for fulfillment by FDC
+                    format: date-time
+                    type: string
+                  id:
+                    description: FDC ID for this order
+                    type: integer
+                  merchant:
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        description: Merchant Company Name
+                        type: string
+                    required:
+                      - id
+                      - name
+                    title: Merchant.v2
+                    type: object
+                  merchantOrderId:
+                    description: Merchant provided ID
+                    type: string
+                  merchantShippingMethod:
+                    description: Requested ship method
+                    type: string
+                  originalConsignee:
+                    description: ""
+                    properties:
+                      address1:
+                        type: string
+                      address2:
+                        type: string
+                      addressLocality:
+                        description: City
+                        type: string
+                      addressRegion:
+                        description: Province / State
+                        type: string
+                      companyName:
+                        type: string
+                      country:
+                        description: Ideally provide the two character ISO code
+                        type: string
+                      email:
+                        type: string
+                      firstName:
+                        type: string
+                      id:
+                        type: integer
+                      iso:
+                        properties:
+                          id:
+                            type: integer
+                          iso2:
+                            description: Two character ISO code
+                            pattern: "[A-Z]{2}"
+                            type: string
+                          name:
+                            description: Country Name
+                            type: string
+                        title: IsoCountry.v2
+                        type: object
+                      lastName:
+                        type: string
+                      phone:
+                        type: string
+                      postalCode:
+                        description: Postal Code / Zip
+                        type: string
+                      updatedAt:
+                        format: date-time
+                        type: string
+                      updatedBy:
+                        $ref: "#/paths/~1returns/get/responses/200/content/application~1json/schema/properties/data/items/properties/updatedBy"
+                    required:
+                      - id
+                      - country
+                      - postalCode
+                      - addressRegion
+                      - addressLocality
+                      - address1
+                      - lastName
+                      - firstName
+                    title: Consignee.v2
+                    type: object
+                  parentOrder:
+                    properties:
+                      id:
+                        description: Reference to parent `id` if order was grouped
+                        type: integer
+                    type: object
+                  purchaseOrderNum:
+                    description: Merchant provided PO#
+                    type: string
+                  recordedOn:
+                    description: DateTime order was recorded by FDC
+                    format: date-time
+                    type: string
+                  trackingNumbers:
+                    items:
+                      properties:
+                        barcodeScanValue:
+                          deprecated: true
+                          description: The computer readable alternative to the human readable
+                          type: string
+                        carrier:
+                          properties:
+                            id:
+                              type: integer
+                          required:
+                            - id
+                          title: CarrierSimple.v2
+                          type: object
+                        value:
+                          description: The human readable tracking number recipients (consignee) expect
+                          type: string
+                      title: TrackingNumber.v2
+                      type: object
+                      x-tags:
+                        - Tracking
+                    type: array
+                  validatedConsignee:
+                    $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema/properties/originalConsignee"
+                  warehouse:
+                    description: ""
+                    properties:
+                      id:
+                        type: integer
+                    required:
+                      - id
+                    title: Warehouse.v2
+                    type: object
+                required:
+                  - id
+                  - validatedConsignee
+                  - originalConsignee
+                  - currentStatus
+                  - merchant
+                  - recordedOn
+                  - merchantShippingMethod
+                  - merchantOrderId
+                title: OrderResponse.v2
+                type: object
           description: Order Created
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Invalid order object
         "401":
           content: {}
           description: You do not have permission to create orders
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
+          description: Forbidden
         "409":
           content:
             application/json:
@@ -516,7 +1027,15 @@ paths:
                       id: 123
                     message: Duplicate Order
               schema:
-                $ref: "#/components/schemas/standardErrorWithContext"
+                properties:
+                  context:
+                    items:
+                      type: object
+                    type: array
+                  message:
+                    type: string
+                title: ErrorStandardWithContext.v2
+                type: object
           description: Conflict
       security:
         - fdcAuth:
@@ -542,7 +1061,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/order"
+                $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
           description: Your order was successfully canceled
         "404":
           content: {}
@@ -551,7 +1070,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: Could not cancel your order, perhaps it already shipped
       security:
         - fdcAuth:
@@ -574,12 +1093,13 @@ paths:
           name: merchantId
           schema:
             type: integer
+        - $ref: "#/components/parameters/hydrateParam"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/order"
+                $ref: "#/paths/~1orders/get/responses/200/content/application~1json/schema"
           description: Order Found
         "404":
           content: {}
@@ -606,7 +1126,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/orderShip"
+              properties:
+                trackingNumber:
+                  description: Tracking number of package
+                  type: string
+                weightOverride:
+                  description: Override predicted weight of package
+                  format: float
+                  type: number
+              required:
+                - trackingNumber
+              title: OrderShip.v2
+              type: object
         description: Shipping Details
         required: true
       responses:
@@ -614,7 +1145,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/order"
+                $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
           description: Order Found
         "404":
           content: {}
@@ -642,7 +1173,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/statusTypeSimple"
+              properties:
+                reason:
+                  description: Human-readable description
+                  type: string
+                status:
+                  properties:
+                    code:
+                      pattern: ^\d{6}$
+                      type: string
+                  required:
+                    - code
+                  type: object
+              required:
+                - reason
+                - status
+              title: StatusTypeSimple.v2
+              type: object
         description: New status event
         required: true
       responses:
@@ -650,7 +1197,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/order"
+                $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
           description: Order Found
         "404":
           content: {}
@@ -699,7 +1246,133 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/returns"
+                properties:
+                  data:
+                    items:
+                      properties:
+                        comments:
+                          nullable: true
+                          type: string
+                        createdAt:
+                          format: date-time
+                          type: string
+                        createdBy:
+                          $ref: "#/paths/~1returns/get/responses/200/content/application~1json/schema/properties/data/items/properties/updatedBy"
+                        id:
+                          type: integer
+                        order:
+                          nullable: true
+                          properties:
+                            id:
+                              type: integer
+                            merchantId:
+                              type: integer
+                            merchantOrderId:
+                              type: string
+                          type: object
+                        reason:
+                          properties:
+                            id:
+                              type: integer
+                            title:
+                              type: string
+                          required:
+                            - id
+                            - title
+                          type: object
+                        returnedBy:
+                          type: string
+                        rmaItems:
+                          items:
+                            properties:
+                              comments:
+                                nullable: true
+                                type: string
+                              id:
+                                type: integer
+                              item:
+                                properties:
+                                  id:
+                                    type: integer
+                                  sku:
+                                    type: string
+                                type: object
+                              nonRestockedReason:
+                                nullable: true
+                                properties:
+                                  id:
+                                    type: integer
+                                  title:
+                                    type: string
+                                type: object
+                              quantityExpected:
+                                nullable: true
+                                type: integer
+                              quantityRestocked:
+                                type: integer
+                              quantityReturned:
+                                type: integer
+                              quantityShipped:
+                                type: integer
+                            title: RmaItem.v2
+                            type: object
+                          type: array
+                        rmaNumber:
+                          nullable: true
+                          type: string
+                        status:
+                          properties:
+                            id:
+                              type: integer
+                            title:
+                              type: string
+                          required:
+                            - id
+                            - title
+                          type: object
+                        updatedAt:
+                          format: date-time
+                          type: string
+                        updatedBy:
+                          properties:
+                            id:
+                              type: integer
+                          required:
+                            - id
+                          title: User.v2
+                          type: object
+                      required:
+                        - id
+                        - updatedBy
+                        - createdBy
+                        - status
+                        - reason
+                        - createdAt
+                        - updatedAt
+                      title: Return.v2
+                      type: object
+                    type: array
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          count:
+                            description: Count of records returned in response, this will be equal to or less then the limit paramater
+                            type: integer
+                          currentPage:
+                            description: Current page of the response, this will match the page paramater
+                            type: integer
+                          total:
+                            description: Total number of records available to request
+                            type: integer
+                          totalPages:
+                            description: Total number of pages available to request
+                            type: integer
+                        title: Pagination.v2
+                        type: object
+                    type: object
+                title: ReturnsArray.v2
+                type: object
           description: Returns
       security:
         - fdcAuth:
@@ -714,7 +1387,33 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/rmaRequest"
+              properties:
+                items:
+                  items:
+                    properties:
+                      quantityExpected:
+                        example: 1
+                        minimum: 1
+                        type: integer
+                      sku:
+                        type: string
+                    required:
+                      - sku
+                      - quantityExpected
+                    type: object
+                  type: array
+                merchantOrderId:
+                  type: string
+                recipient:
+                  $ref: "#/paths/~1orders/post/requestBody/content/application~1json/schema/properties/recipient"
+                rmaNumber:
+                  type: string
+              required:
+                - items
+                - recipient
+                - rmaNumber
+              title: RmaRequest.v2
+              type: object
         description: RMA
         required: true
       responses:
@@ -722,25 +1421,109 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rmaResponse"
+                properties:
+                  items:
+                    items:
+                      properties:
+                        quantityExpected:
+                          example: 1
+                          minimum: 1
+                          type: integer
+                        sku:
+                          type: string
+                      required:
+                        - sku
+                        - quantityExpected
+                      type: object
+                    type: array
+                  merchantOrderId:
+                    type: string
+                  recipient:
+                    description: ""
+                    properties:
+                      address1:
+                        type: string
+                      address2:
+                        type: string
+                      addressLocality:
+                        description: City
+                        type: string
+                      addressRegion:
+                        description: Province / State
+                        type: string
+                      companyName:
+                        type: string
+                      country:
+                        description: Ideally provide the two character ISO code
+                        type: string
+                      email:
+                        type: string
+                      firstName:
+                        type: string
+                      id:
+                        type: integer
+                      iso:
+                        properties:
+                          id:
+                            type: integer
+                          iso2:
+                            description: Two character ISO code
+                            pattern: "[A-Z]{2}"
+                            type: string
+                          name:
+                            description: Country Name
+                            type: string
+                        title: IsoCountry.v2
+                        type: object
+                      lastName:
+                        type: string
+                      phone:
+                        type: string
+                      postalCode:
+                        description: Postal Code / Zip
+                        type: string
+                      updatedAt:
+                        format: date-time
+                        type: string
+                      updatedBy:
+                        $ref: "#/paths/~1returns/get/responses/200/content/application~1json/schema/properties/data/items/properties/updatedBy"
+                    required:
+                      - id
+                      - country
+                      - postalCode
+                      - addressRegion
+                      - addressLocality
+                      - address1
+                      - lastName
+                      - firstName
+                    title: Consignee.v2
+                    type: object
+                  rmaNumber:
+                    type: string
+                required:
+                  - items
+                  - recipient
+                  - rmaNumber
+                title: RmaResponse.v2
+                type: object
           description: RMA Created
         "202":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rmaResponse"
+                $ref: "#/paths/~1returns/put/responses/201/content/application~1json/schema"
           description: RMA Updated
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/standardError"
+                $ref: "#/paths/~1orders/get/responses/404/content/application~1json/schema"
           description: A Component of Your Request Was Not Found
         "409":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/rmaResponse"
+                $ref: "#/paths/~1returns/put/responses/201/content/application~1json/schema"
           description: RMA Already Processed
       security:
         - fdcAuth:
@@ -753,28 +1536,175 @@ paths:
       description: Get uniformed tracking events for any package, this response is carrier independent. Please note, an API Key is required for throttling purposes, please contact your success manager for details.
       operationId: get-track
       parameters:
-        - description: Publicly available tracking number
-          in: query
+        - in: query
           name: trackingNumber
-          required: true
           schema:
-            pattern: "[A-Z0-9]+"
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trackingResponse"
+                description: ""
+                properties:
+                  destination:
+                    $ref: "#/paths/~1track/get/responses/200/content/application~1json/schema/properties/origin"
+                  fdcOrderId:
+                    type: integer
+                  firstCheckedDateTime:
+                    format: date-time
+                    type: string
+                  firstTransitEvent:
+                    format: date-time
+                    type: string
+                  lastCheckedDateTime:
+                    format: date-time
+                    type: string
+                  lastUpdatedDateTime:
+                    format: date-time
+                    type: string
+                  origin:
+                    description: GeoJSon Feature
+                    externalDocs:
+                      url: https://tools.ietf.org/html/rfc7946#section-3.2
+                    properties:
+                      bbox:
+                        items: {}
+                        type: array
+                      centerline:
+                        $ref: "#/paths/~1track/get/responses/200/content/application~1json/schema/properties/origin/properties/geometry"
+                      geometry:
+                        description: GeoJSon geometry
+                        externalDocs:
+                          url: http://geojson.org/geojson-spec.html#geometry-objects
+                        properties:
+                          coordinates:
+                            oneOf:
+                              - items:
+                                  $ref: "#/paths/~1track/get/responses/200/content/application~1json/schema/properties/origin/properties/geometry/properties/coordinates/oneOf/1"
+                                type: array
+                              - items:
+                                  type: number
+                                title: Coordinates.v1
+                                type: array
+                                x-examples:
+                                  example:
+                                    - 102
+                                    - 0.5
+                          type:
+                            description: the geometry type
+                            enum:
+                              - Point
+                              - LineString
+                              - Polygon
+                              - MultiPoint
+                              - MultiLineString
+                              - MultiPolygon
+                            example: Point
+                            type: string
+                        required:
+                          - type
+                          - coordinates
+                        title: Geometry
+                        type: object
+                        x-tags:
+                          - GeoJSON
+                      id:
+                        type: integer
+                      properties:
+                        properties:
+                          name:
+                            type: string
+                        type: object
+                      title:
+                        type: string
+                      type:
+                        enum:
+                          - Feature
+                        example: Feature
+                        type: string
+                    required:
+                      - type
+                      - properties
+                      - geometry
+                    title: Feature
+                    type: object
+                    x-tags:
+                      - GeoJSON
+                  status:
+                    type: string
+                  statusCategoryCode:
+                    type: integer
+                  statusDateTime:
+                    format: date-time
+                    type: string
+                  statusMessage:
+                    type: string
+                  trackedEvents:
+                    items:
+                      properties:
+                        eventCategory:
+                          type: string
+                        eventCategoryCode:
+                          type: integer
+                        eventDateTime:
+                          format: date-time
+                          type: string
+                        eventLocation:
+                          $ref: "#/paths/~1track/get/responses/200/content/application~1json/schema/properties/origin"
+                        eventSource:
+                          enum:
+                            - carrier
+                            - internal
+                          example: carrier
+                          type: string
+                        eventStatus:
+                          type: string
+                      title: TrackingEvent.v2
+                      type: object
+                      x-examples:
+                        example-1:
+                          eventCategory: Delivered
+                          eventCategoryCode: 5
+                          eventDateTime: 2018-07-31 16:15:00
+                          eventLocation: {}
+                          eventStatus: Delivered, In/At Mailbox
+                          statusSource: carrier
+                      x-tags:
+                        - Tracking
+                    type: array
+                  trackingNumber:
+                    properties:
+                      barcodeScanValue:
+                        deprecated: true
+                        description: The computer readable alternative to the human readable
+                        type: string
+                      carrier:
+                        properties:
+                          id:
+                            type: integer
+                        required:
+                          - id
+                        title: CarrierSimple.v2
+                        type: object
+                      value:
+                        description: The human readable tracking number recipients (consignee) expect
+                        type: string
+                    title: TrackingNumber.v2
+                    type: object
+                    x-tags:
+                      - Tracking
+                title: trackingResponse
+                type: object
+                x-examples: {}
+                x-tags:
+                  - Tracking
           description: OK
         "404":
           description: Not Found
         "429":
           description: Too Many Requests
-      security:
-        - fdcAuth: []
-        - apiKey: []
-      summary: Event Tracking
+      summary: Tracking
       tags:
         - Tracking
   /users/me:
@@ -786,7 +1716,79 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/userContact"
+                description: ""
+                properties:
+                  apiKey:
+                    deprecated: true
+                    description: Depricated
+                    type: string
+                  contactInfo:
+                    description: ""
+                    properties:
+                      apiKey:
+                        deprecated: true
+                        description: Depricated
+                        type: string
+                      contactInfo:
+                        $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema/properties/originalConsignee"
+                      createDate:
+                        format: date-time
+                        type: string
+                      deptLeader:
+                        deprecated: true
+                        type: boolean
+                      id:
+                        type: integer
+                      merchant:
+                        properties:
+                          id:
+                            type: integer
+                        type: object
+                      name:
+                        type: string
+                      status:
+                        type: boolean
+                      updatedAt:
+                        format: date-time
+                        type: string
+                      updatedBy:
+                        format: date-time
+                        type: string
+                      username:
+                        type: string
+                    required:
+                      - id
+                    title: UserContact.v2
+                    type: object
+                  createDate:
+                    format: date-time
+                    type: string
+                  deptLeader:
+                    deprecated: true
+                    type: boolean
+                  id:
+                    type: integer
+                  merchant:
+                    properties:
+                      id:
+                        type: integer
+                    type: object
+                  name:
+                    type: string
+                  status:
+                    type: boolean
+                  updatedAt:
+                    format: date-time
+                    type: string
+                  updatedBy:
+                    format: date-time
+                    type: string
+                  username:
+                    type: string
+                required:
+                  - id
+                title: UserContact.v2
+                type: object
           description: User
       security:
         - fdcAuth:
@@ -820,6 +1822,19 @@ components:
       required: true
       schema:
         type: string
+    hydrateParam:
+      description: Adds additional information to the response, uses a CSV format for multiple values.'
+      explode: false
+      in: query
+      name: hydrate
+      schema:
+        items:
+          enum:
+            - integrator
+            - orderItems
+          type: string
+        type: array
+      style: form
     limitParam:
       description: The numbers of items to return
       in: query
@@ -864,862 +1879,7 @@ components:
           type: integer
         type: array
       style: form
-  schemas:
-    accessTokenRequest:
-      properties:
-        client_id:
-          description: Id and secret provided by FDC
-          type: string
-        client_secret:
-          type: string
-        grant_type:
-          description: Indicates how you're authenticating your request, see `username`, `password`, and `refresh_token` below
-          enum:
-            - password
-            - refresh_token
-          type: string
-        password:
-          description: See above
-          type: string
-        refresh_token:
-          description: You may request future tokens with the `refresh_token` from your previous `/oauth/access_token` request
-          type: string
-        scope:
-          default: oms
-          description: Currently limited to Order Management System
-          enum:
-            - oms
-          type: string
-        username:
-          description: Required along with `password` if not "refreshing" the token
-          type: string
-      required:
-        - client_id
-        - client_secret
-        - grant_type
-        - scope
-      type: object
-    accessTokenResponse:
-      properties:
-        access_token:
-          type: string
-        expires_in:
-          type: integer
-        refresh_token:
-          type: string
-        token_type:
-          default: Bearer
-          type: string
-      type: object
-    carrier:
-      oneOf:
-        - $ref: "#/components/schemas/carrierSimple"
-        - $ref: "#/components/schemas/carrierHyrdated"
-    carrierHyrdated:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-      title: carrierHyrdated
-      type: object
-    carrierSimple:
-      properties:
-        id:
-          type: integer
-      required:
-        - id
-      title: carrier
-      type: object
-    consignee:
-      properties:
-        address1:
-          type: string
-        address2:
-          type: string
-        addressLocality:
-          description: City
-          type: string
-        addressRegion:
-          description: Province / State
-          type: string
-        companyName:
-          type: string
-        country:
-          description: Ideally provide the two character ISO code
-          type: string
-        email:
-          type: string
-        firstName:
-          type: string
-        id:
-          type: integer
-        iso:
-          $ref: "#/components/schemas/isoCountry"
-        lastName:
-          type: string
-        phone:
-          type: string
-        postalCode:
-          description: Postal Code / Zip
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        updatedBy:
-          $ref: "#/components/schemas/user"
-      required:
-        - address1
-        - addressLocality
-        - addressRegion
-        - country
-        - firstName
-        - id
-        - lastName
-        - postalCode
-      type: object
-    geojson:
-      properties:
-        geometry:
-          description: Placeholder until GeoJSON fully supported
-          oneOf:
-            - properties:
-                coordinates:
-                  items: {}
-                  type: array
-                type:
-                  default: Point
-                  enum:
-                    - Point
-                    - MultiPoint
-                    - LineString
-                    - MultiLineString
-                    - Polygon
-                    - MultiPolygon
-                    - GeometryCollection
-                  example: Point
-                  type: string
-            - {}
-          type: object
-        properties:
-          properties:
-            name:
-              example: Savannah, GA
-              type: string
-          type: object
-        type:
-          default: Feature
-          enum:
-            - Feature
-          example: Feature
-          type: string
-      title: geojson
-      type: object
-    inventoriesArray:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/itemInventory"
-          type: array
-        meta:
-          properties:
-            pagination:
-              $ref: "#/components/schemas/pagination"
-          type: object
-      type: object
-    isoCountry:
-      properties:
-        id:
-          type: integer
-        iso2:
-          description: Two character ISO code
-          pattern: "[A-Z]{2}"
-          type: string
-        name:
-          description: Country Name
-          type: string
-      type: object
-    itemInventory:
-      properties:
-        item:
-          description: Item this inventory data is based on
-          properties:
-            id:
-              description: FDC ID for this Item
-              type: integer
-            skuReference:
-              description: Sku reference name for this item
-              type: string
-          type: object
-        merchant:
-          description: Merchant that owns this item
-          properties:
-            name:
-              description: Merchants name for this item
-              type: string
-          type: object
-        quantity:
-          properties:
-            total:
-              properties:
-                availableToPromise:
-                  description: Number of items that are available to be used in an order
-                  type: integer
-              type: object
-          type: object
-      type: object
-    merchant:
-      properties:
-        id:
-          type: integer
-        name:
-          description: Merchant Company Name
-          type: string
-      required:
-        - id
-        - name
-      type: object
-    newContactInfo:
-      properties:
-        address1:
-          description: Address Line 1
-          type: string
-        address2:
-          description: Address Line 2
-          type: string
-        addressLocality:
-          description: City
-          type: string
-        addressRegion:
-          description: Province / State
-          type: string
-        companyName:
-          type: string
-        country:
-          description: Country, for best results please provide the two character ISO code
-          type: string
-        email:
-          description: Email, required for international shipments
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        phone:
-          description: Phone number, required for international shipments
-          type: string
-        postalCode:
-          description: Postal Code / Zip
-          type: string
-      required:
-        - address1
-        - addressLocality
-        - addressRegion
-        - country
-        - email
-        - firstName
-        - lastName
-        - phone
-      type: object
-    newOrder:
-      properties:
-        integrator:
-          description: Use of this property requires special permission and must be discussed with your account executive; values are restricted while custom values need to be accepted by your AE.
-          enum:
-            - 1ShoppingCart
-            - 3dCart
-            - AdobeBC
-            - AmazonAU
-            - AmazonEU
-            - AmazonNA
-            - BigCommerce
-            - BrandBoom
-            - BrightPearl
-            - BuyGoods
-            - Celery
-            - ChannelAdvisor
-            - Clickbank
-            - CommerceHub
-            - Custom
-            - Demandware
-            - Ebay
-            - Ecwid
-            - Etsy
-            - FoxyCart
-            - Goodsie
-            - Infusionsoft
-            - Konnektive
-            - LimeLight
-            - Linio
-            - Linnworks
-            - Magento
-            - Netsuite
-            - NewEgg
-            - Nexternal
-            - NuOrder
-            - Opencart
-            - OrderWave
-            - osCommerce1
-            - Overstock
-            - PayPal
-            - PrestaShop
-            - Pricefalls
-            - Quickbooks
-            - Rakuten
-            - Sears
-            - Sellbrite
-            - SellerCloud
-            - Shipstation
-            - Shopify
-            - Skubana
-            - SolidCommerce
-            - SparkPay
-            - SpreeCommerce
-            - spsCommerce
-            - StitchLabs
-            - StoneEdge
-            - TradeGecko
-            - UltraCart
-            - Volusion
-            - VTEX
-            - Walmart
-            - WooCommerce
-            - Yahoo
-          type: string
-        items:
-          items:
-            $ref: "#/components/schemas/newOrderItem"
-          type: array
-        merchantId:
-          description: Necessary if you have a multitenancy account, otherwise we will associate the order with your account
-          type: integer
-        merchantOrderId:
-          description: Unique ID provided by the merchant
-          type: string
-        notes:
-          type: string
-        recipient:
-          $ref: "#/components/schemas/newContactInfo"
-        shippingMethod:
-          type: string
-        warehouse:
-          description: We automatically select a warehouse based on inventory availability, requested carrier and delivery schedule, and carrier cost. You may however override this process. Because this is not recommended please inform your AE prior to using so they may enable this feature.
-          properties:
-            id:
-              type: integer
-          type: object
-      required:
-        - items
-        - merchantOrderId
-        - recipient
-        - shippingMethod
-      type: object
-    newOrderItem:
-      properties:
-        declaredValue:
-          description: Using USD, a per unit value of a single SKU. If your declaring a kit this is the sum total for a single kit. In both scenarios we will multiply the `declaredValue` against the `quantity` for customs declaration.
-          format: double
-          type: number
-        quantity:
-          minimum: 1
-          type: integer
-        sku:
-          type: string
-      required:
-        - declaredValue
-        - quantity
-        - sku
-      type: object
-    order:
-      properties:
-        currentStatus:
-          $ref: "#/components/schemas/statusEvent"
-        departDate:
-          description: DateTime order departed an FDC warehouse
-          format: date-time
-          type: string
-        dispatchDate:
-          description: DateTime order was dispatched for fulfillment by FDC
-          format: date-time
-          type: string
-        id:
-          description: FDC ID for this order
-          type: integer
-        merchant:
-          $ref: "#/components/schemas/merchant"
-        merchantOrderId:
-          description: Merchant provided ID
-          type: string
-        merchantShippingMethod:
-          description: Requested ship method
-          type: string
-        originalConsignee:
-          $ref: "#/components/schemas/consignee"
-        parentOrder:
-          properties:
-            id:
-              description: Reference to parent `id` if order was grouped
-              type: integer
-          type: object
-        purchaseOrderNum:
-          description: Merchant provided PO#
-          type: string
-        recordedOn:
-          description: DateTime order was recorded by FDC
-          format: date-time
-          type: string
-        trackingNumbers:
-          items:
-            $ref: "#/components/schemas/trackingNumber"
-          type: array
-        validatedConsignee:
-          $ref: "#/components/schemas/consignee"
-        warehouse:
-          $ref: "#/components/schemas/warehouse"
-      required:
-        - currentStatus
-        - id
-        - merchant
-        - merchantOrderId
-        - merchantShippingMethod
-        - originalConsignee
-        - recordedOn
-        - validatedConsignee
-      type: object
-    orderShip:
-      properties:
-        trackingNumber:
-          description: Tracking number of package
-          type: string
-        weightOverride:
-          description: Override predicted weight of package
-          format: float
-          type: number
-      type: object
-    ordersArray:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/order"
-          type: array
-        meta:
-          properties:
-            pagination:
-              $ref: "#/components/schemas/pagination"
-          type: object
-      type: object
-    pagination:
-      properties:
-        count:
-          description: Count of records returned in response, this will be equal to or less then the limit paramater
-          type: integer
-        currentPage:
-          description: Current page of the response, this will match the page paramater
-          type: integer
-        total:
-          description: Total number of records available to request
-          type: integer
-        totalPages:
-          description: Total number of pages available to request
-          type: integer
-      type: object
-    return:
-      properties:
-        comments:
-          nullable: true
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        createdBy:
-          $ref: "#/components/schemas/user"
-        id:
-          type: integer
-        order:
-          nullable: true
-          properties:
-            id:
-              type: integer
-            merchantId:
-              type: integer
-            merchantOrderId:
-              type: string
-          type: object
-        reason:
-          properties:
-            id:
-              type: integer
-            title:
-              type: string
-          required:
-            - id
-            - title
-          type: object
-        returnedBy:
-          type: string
-        rmaItems:
-          items:
-            $ref: "#/components/schemas/rmaItem"
-          type: array
-        rmaNumber:
-          nullable: true
-          type: string
-        status:
-          properties:
-            id:
-              type: integer
-            title:
-              type: string
-          required:
-            - id
-            - title
-          type: object
-        updatedAt:
-          format: date-time
-          type: string
-        updatedBy:
-          $ref: "#/components/schemas/user"
-      required:
-        - createdAt
-        - createdBy
-        - id
-        - reason
-        - status
-        - updatedAt
-        - updatedBy
-      type: object
-    returns:
-      properties:
-        data:
-          items:
-            $ref: "#/components/schemas/return"
-          type: array
-        meta:
-          properties:
-            pagination:
-              $ref: "#/components/schemas/pagination"
-          type: object
-      type: object
-    rmaItem:
-      properties:
-        comments:
-          nullable: true
-          type: string
-        id:
-          type: integer
-        item:
-          properties:
-            id:
-              type: integer
-            sku:
-              type: string
-          type: object
-        nonRestockedReason:
-          nullable: true
-          properties:
-            id:
-              type: integer
-            title:
-              type: string
-          type: object
-        quantityExpected:
-          nullable: true
-          type: integer
-        quantityRestocked:
-          type: integer
-        quantityReturned:
-          type: integer
-        quantityShipped:
-          type: integer
-      type: object
-    rmaRequest:
-      properties:
-        items:
-          items:
-            properties:
-              quantityExpected:
-                example: 1
-                minimum: 1
-                type: integer
-              sku:
-                type: string
-            required:
-              - sku
-              - quantityExpected
-          type: array
-        merchantOrderId:
-          type: string
-        recipient:
-          $ref: "#/components/schemas/newContactInfo"
-        rmaNumber:
-          type: string
-      required:
-        - rmaNumber
-        - recipient
-        - items
-      title: ""
-      type: object
-    rmaResponse:
-      properties:
-        items:
-          items:
-            properties:
-              quantityExpected:
-                example: 1
-                minimum: 1
-                type: integer
-              sku:
-                type: string
-            required:
-              - sku
-              - quantityExpected
-          type: array
-        merchantOrderId:
-          type: string
-        recipient:
-          $ref: "#/components/schemas/consignee"
-        rmaNumber:
-          type: string
-      required:
-        - rmaNumber
-        - recipient
-        - items
-      type: object
-    standardError:
-      properties:
-        message:
-          type: string
-      type: object
-    standardErrorWithContext:
-      properties:
-        context:
-          items:
-            type: object
-          type: array
-        message:
-          type: string
-      type: object
-    statusEvent:
-      properties:
-        createdBy:
-          $ref: "#/components/schemas/user"
-        date:
-          description: DateTime of Status Event
-          format: date-time
-          type: string
-        id:
-          type: integer
-        reason:
-          description: Explanation for status
-          type: string
-        status:
-          $ref: "#/components/schemas/statusType"
-      required:
-        - id
-      type: object
-    statusType:
-      properties:
-        actionRequiredBy:
-          description: Responsibility for resolving this issue
-          properties:
-            id:
-              type: integer
-            name:
-              description: Human readable description of responsible party to resolve the issue
-              type: string
-          type: object
-        code:
-          description: Code, see [status codes](#section/Getting-Started/Status-Codes)
-          pattern: ^\d{6}$
-          type: string
-        detail:
-          type: string
-        detailCode:
-          pattern: ^\d{2}$
-          type: string
-        id:
-          description: Depricated, use code instead
-          type: integer
-        isClosed:
-          description: Depricated, does this status event close the order
-          type: boolean
-        name:
-          description: Depricated, use stage/state instead
-          type: string
-        reason:
-          description: Depricated
-          type: string
-        stage:
-          properties:
-            code:
-              type: string
-            name:
-              type: string
-          type: object
-        state:
-          properties:
-            code:
-              type: string
-            name:
-              type: string
-          type: object
-      required:
-        - code
-        - detailCode
-        - stage
-        - state
-      type: object
-    statusTypeSimple:
-      properties:
-        reason:
-          description: Human-readable description
-          type: string
-        status:
-          properties:
-            code:
-              pattern: ^\d{6}$
-              type: string
-          required:
-            - code
-          type: object
-      required:
-        - reason
-        - status
-      type: object
-    trackingEvent:
-      properties:
-        eventCategory:
-          type: string
-        eventCategoryCode:
-          type: integer
-        eventDateTime:
-          format: date-time
-          type: string
-        eventLocation:
-          $ref: "#/components/schemas/geojson"
-        eventSource:
-          enum:
-            - carrier
-            - internal
-          example: carrier
-          type: string
-        eventStatus:
-          type: string
-      title: trackingEvent
-      type: object
-      x-examples:
-        example-1:
-          eventCategory: Delivered
-          eventCategoryCode: 5
-          eventDateTime: 2018-07-31 16:15:00
-          eventLocation: {}
-          eventStatus: Delivered, In/At Mailbox
-          statusSource: carrier
-      x-tags:
-        - Tracking
-    trackingNumber:
-      properties:
-        barcodeScanValue:
-          deprecated: true
-          description: The computer readable alternative to the human readable
-          type: string
-        carrier:
-          $ref: "#/components/schemas/carrier"
-        value:
-          description: The human readable tracking number recipients (consignee) expect
-          type: string
-      type: object
-      x-tags:
-        - Tracking
-    trackingResponse:
-      description: ""
-      properties:
-        destination:
-          $ref: "#/components/schemas/geojson"
-        fdcOrderId:
-          type: integer
-        firstCheckedDateTime:
-          format: date-time
-          type: string
-        firstTransitEvent:
-          format: date-time
-          type: string
-        lastCheckedDateTime:
-          format: date-time
-          type: string
-        lastUpdatedDateTime:
-          format: date-time
-          type: string
-        origin:
-          $ref: "#/components/schemas/geojson"
-        status:
-          type: string
-        statusCategoryCode:
-          type: integer
-        statusDateTime:
-          format: date-time
-          type: string
-        statusMessage:
-          type: string
-        trackedEvents:
-          items:
-            $ref: "#/components/schemas/trackingEvent"
-          type: array
-        trackingNumber:
-          $ref: "#/components/schemas/trackingNumber"
-      title: trackingResponse
-      type: object
-      x-examples: {}
-      x-tags:
-        - Tracking
-    user:
-      properties:
-        id:
-          type: integer
-      required:
-        - id
-      type: object
-    userContact:
-      properties:
-        apiKey:
-          description: Depricated
-          type: string
-        contactInfo:
-          $ref: "#/components/schemas/consignee"
-        createDate:
-          format: date-time
-          type: string
-        deptLeader:
-          type: boolean
-        id:
-          type: integer
-        merchant:
-          properties:
-            id:
-              type: integer
-          type: object
-        name:
-          type: string
-        status:
-          type: boolean
-        updatedAt:
-          format: date-time
-          type: string
-        updatedBy:
-          format: date-time
-          type: string
-        username:
-          type: string
-      required:
-        - id
-      type: object
-    warehouse:
-      properties:
-        id:
-          type: integer
-      required:
-        - id
-      type: object
+  schemas: {}
   securitySchemes:
     apiKey:
       description: ""

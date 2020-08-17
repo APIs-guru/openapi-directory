@@ -608,7 +608,7 @@ paths:
   /listingsByRegion:
     get:
       description: >-
-        Returns a dealer's listings over up to the last 45 days by dealer ID. The ID can be found by calling the /getDealers endpoint. 
+        Returns a dealer's listings over up to the last 45 days by region. 
 
         Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
 
@@ -640,6 +640,78 @@ paths:
             default: 45
             title: Daysback
             type: integer
+        - in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            title: Page
+            type: integer
+        - in: query
+          name: newCars
+          required: false
+          schema:
+            default: true
+            title: Newcars
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Listings by Region
+      tags:
+        - Vehicle Data
+  /listingsByRegionAndDate:
+    get:
+      description: >-
+        Returns listings active in a region in the given date range [startdate, endDate), or in other words dates that satisfy startDate <= X < endDate. Maximum range is 45 days 
+
+        Listing keys are: vin, askPrice, msrp, isNew, firstSeen, lastSeen, modelName, brandName.
+
+        Results are paginated in chunks of up to 20 vehicles. Prices are in the dealer's local currency (generally USD).
+      operationId: getListingsByRegionAndDate_listingsByRegionAndDate_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: regionName
+          required: true
+          schema:
+            title: Regionname
+            type: string
+        - in: query
+          name: modelName
+          required: true
+          schema:
+            title: Modelname
+            type: string
+        - in: query
+          name: startDate
+          required: true
+          schema:
+            format: date
+            title: Startdate
+            type: string
+        - in: query
+          name: endDate
+          required: true
+          schema:
+            format: date
+            title: Enddate
+            type: string
         - in: query
           name: page
           required: false

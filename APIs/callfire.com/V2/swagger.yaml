@@ -6671,6 +6671,10 @@ paths:
       produces:
         - application/json
       responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/TextBroadcastCreateResponse"
         "400":
           description: Bad request
           schema:
@@ -9809,6 +9813,14 @@ definitions:
           - APPROVED
         readOnly: true
         type: string
+    type: object
+  TextBroadcastCreateResponse:
+    description: "~"
+    properties:
+      id:
+        description: "~"
+        format: int64
+        type: integer
     type: object
   TextBroadcastPage:
     allOf:

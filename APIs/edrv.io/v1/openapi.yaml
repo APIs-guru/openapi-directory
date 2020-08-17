@@ -25,7 +25,7 @@ security:
 paths:
   /v1/chargestations:
     get:
-      description: Get ChargeStation info
+      description: List all Chargestations
       operationId: getChargeStations
       parameters:
         - description: Filter by Org. Id
@@ -70,11 +70,11 @@ paths:
         - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
-          description: Success
+          description: An array of chargestation objects
       tags:
         - Charge Stations
     post:
-      description: Create charge station with parameters
+      description: Create a new charge station
       operationId: postChargeStations
       requestBody:
         content:
@@ -89,14 +89,14 @@ paths:
             application/json:
               schema:
                 properties:
-                  connector:
+                  chargestation:
                     type: object
                   message:
                     type: string
                   ok:
                     type: boolean
                 type: object
-          description: A successful response
+          description: Returns the newly created chargestion object
         "400":
           description: A failure response
       tags:
@@ -114,11 +114,13 @@ paths:
             type: string
       responses:
         "200":
-          description: Success
+          description: Returns the deleted chargestion object
+        "400":
+          description: Request Error
       tags:
         - Charge Stations
     get:
-      description: Use to request a single charge station's data
+      description: Get a single charge station's data
       operationId: getChargeStation
       parameters:
         - description: The charge station id that needs to be fetched
@@ -144,11 +146,11 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns a chargestion object
       tags:
         - Charge Stations
     patch:
-      description: Update charge station with parameters
+      description: Update a charge station's data
       operationId: patchChargeStation
       parameters:
         - description: ID of charge station that needs to be updated
@@ -165,7 +167,7 @@ paths:
         description: Include charge station properties to update here
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -177,17 +179,17 @@ paths:
                   result:
                     type: object
                 type: object
-          description: A successful response
+          description: Returns the updated chargestion object
         "400":
           description: A failure response
       tags:
         - Charge Stations
   "/v1/chargestations/{id}/connectors":
     get:
-      description: Get connectors data filtered by chargeStation
+      description: List connectors for a chargestation
       operationId: getChargeStationConnectors
       parameters:
-        - description: The chargeStation id that connectors need to be fetched for
+        - description: chargeStation id
           in: path
           name: id
           required: true
@@ -197,9 +199,41 @@ paths:
         - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
-          description: Success
+          description: Returns an array of connector objects
+        "400":
+          description: A failure response
       tags:
         - Charge Stations
+  /v1/clients:
+    get:
+      description: Get clients info
+      operationId: getClients
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Clients
+    post:
+      description: Create client with parameters
+      operationId: postClients
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  connector:
+                    type: object
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                type: object
+          description: A successful response
+        "400":
+          description: A failure response
+      tags:
+        - Clients
   /v1/commands:
     get:
       description: Get Commands data
@@ -495,7 +529,7 @@ paths:
         - Configurations
   /v1/connectors:
     get:
-      description: Get connectors data
+      description: List connectors
       operationId: getConnectors
       parameters:
         - $ref: "#/components/parameters/paginate_limit1"
@@ -511,11 +545,11 @@ paths:
         - $ref: "#/components/parameters/include_organization1"
       responses:
         "200":
-          description: Success
+          description: Returns an array of connector objects
       tags:
         - Connectors
     post:
-      description: Create connector with parameters
+      description: Create a new connector
       operationId: postConnectors
       requestBody:
         content:
@@ -536,7 +570,7 @@ paths:
         description: Include Connector properties to create here
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -548,14 +582,14 @@ paths:
                   result:
                     type: object
                 type: object
-          description: A successful response
+          description: Returns the new connector object
         "400":
           description: A failure response
       tags:
         - Connectors
   "/v1/connectors/{id}":
     get:
-      description: Get one connector data
+      description: Get a connector
       operationId: getConnector
       parameters:
         - description: ID of connector that needs to be fetched
@@ -576,11 +610,11 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns a connector object
       tags:
         - Connectors
     patch:
-      description: Update connector parameters
+      description: Update a connector's data
       operationId: patchConnector
       parameters:
         - description: ID of connector that needs to be updated
@@ -620,14 +654,14 @@ paths:
                   result:
                     type: object
                 type: object
-          description: A successful response
+          description: Returns the updated connector object
         "400":
           description: A failure response
       tags:
         - Connectors
   /v1/drivers:
     get:
-      description: Get All Drivers data
+      description: List all drivers
       operationId: getDrivers
       parameters:
         - description: Get a list of active drivers
@@ -669,13 +703,13 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: A successful response
-        "401":
+          description: Returns a list of driver objects
+        "400":
           description: A failure response
       tags:
         - Drivers
     post:
-      description: Create driver with parameters
+      description: Create a new driver
       operationId: postDrivers
       requestBody:
         content:
@@ -726,7 +760,7 @@ paths:
         description: Include driver properties to create here
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -738,14 +772,14 @@ paths:
                   result:
                     type: object
                 type: object
-          description: A successful response
+          description: Returns the newly created driver object
         "400":
           description: A failure response
       tags:
         - Drivers
   "/v1/drivers/{id}":
     delete:
-      description: Use to delete a driver
+      description: Delete a driver
       operationId: deleteDriver
       parameters:
         - description: The driver id that needs to be deleted
@@ -756,11 +790,11 @@ paths:
             type: string
       responses:
         "200":
-          description: Success
+          description: Returns the deleted driver object
       tags:
         - Drivers
     get:
-      description: Use to request a single driver
+      description: Get a driver's data
       operationId: getDriver
       parameters:
         - description: The driver id that needs to be fetched
@@ -786,11 +820,11 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns a driver object
       tags:
         - Drivers
     patch:
-      description: Update driver with parameters
+      description: Update a driver's data
       operationId: patchDriver
       parameters:
         - description: ID of driver that needs to be updated
@@ -841,7 +875,7 @@ paths:
         description: Include driver properties to create here
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               schema:
@@ -854,7 +888,7 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: A successful response
+          description: Returns the updated driver object
         "400":
           description: A failure response
       tags:
@@ -881,7 +915,7 @@ paths:
         - Locations
   /v1/organizations:
     get:
-      description: Get Organizations data
+      description: Get an array of all Organizations
       operationId: getOrganizations
       parameters:
         - $ref: "#/components/parameters/paginate_limit1"
@@ -900,12 +934,12 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns an array of Organization Objects
       tags:
         - Organizations
   "/v1/organizations/{id}":
     get:
-      description: Get one organization data by id
+      description: Get one organization's data by id
       operationId: getOrganization
       parameters:
         - description: ID of organization that needs to be fetched
@@ -921,11 +955,11 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns an Organization Object
       tags:
         - Organizations
     patch:
-      description: Update organization with parameters
+      description: Update an organization's data
       operationId: patchOrganization
       parameters:
         - description: ID of organization that needs to be updated
@@ -978,19 +1012,7 @@ paths:
         required: true
       responses:
         "201":
-          content:
-            application/json:
-              schema:
-                properties:
-                  message:
-                    type: string
-                  ok:
-                    type: boolean
-                  result:
-                    items: {}
-                    type: array
-                type: object
-          description: A successful response
+          description: Returns the modified Organization Object
         "400":
           description: A failure response
       tags:
@@ -1136,7 +1158,7 @@ paths:
         - Stats
   /v1/tokens:
     get:
-      description: Get Tokens data
+      description: List tokens
       operationId: getTokens
       parameters:
         - $ref: "#/components/parameters/paginate_limit1"
@@ -1164,13 +1186,13 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: A successful response
+          description: Returns an array of token objects
         "401":
           description: A failure response
       tags:
         - Tokens
     post:
-      description: Create token with parameters
+      description: Create a new token
       operationId: postTokens
       requestBody:
         content:
@@ -1215,7 +1237,7 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: A successful response
+          description: Returns a newly created token object
         "400":
           description: A failure response
       tags:
@@ -1233,11 +1255,11 @@ paths:
             type: string
       responses:
         "200":
-          description: Success
+          description: Returns the deleted token object
       tags:
         - Tokens
     get:
-      description: Use to request a single token
+      description: Get a single token's data
       operationId: getToken
       parameters:
         - description: The token id that needs to be fetched
@@ -1258,11 +1280,11 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns a token object
       tags:
         - Tokens
     patch:
-      description: Update token with parameters
+      description: Update a token
       operationId: patchToken
       parameters:
         - description: ID of token that needs to be updated
@@ -1309,14 +1331,14 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: A successful response
+          description: Returns the updated token
         "400":
           description: A failure response
       tags:
         - Tokens
   /v1/transactions:
     get:
-      description: Get all transactions
+      description: Get a list of transactions
       operationId: getTransactions
       parameters:
         - description: Started to get only active transactions
@@ -1373,8 +1395,8 @@ paths:
                     items: {}
                     type: array
                 type: object
-          description: Success
-        "401":
+          description: Returns an array of transaction objects
+        "400":
           description: Not Found
       tags:
         - Transactions
@@ -1426,11 +1448,33 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Success
+          description: Returns a transaction object
         "401":
           description: Not Found
       tags:
         - Transactions
+  /v1/users/onboard:
+    post:
+      description: Onboard user
+      operationId: postUsersOnboard
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  connector:
+                    type: object
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                type: object
+          description: A successful response
+        "400":
+          description: A failure response
+      tags:
+        - Users
 components:
   parameters:
     include_chargestation1:
@@ -1585,7 +1629,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 835ffdaf49a9b7b058821c7e2767f43efef84cae
+x-github-sha: f15e8e3a9cc1782f645c3cf67b5a339bf609923c
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

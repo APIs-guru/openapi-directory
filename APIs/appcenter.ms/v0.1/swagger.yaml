@@ -33,18 +33,18 @@ securityDefinitions:
 parameters: {}
 tags:
   - name: account
-  - name: build
-  - name: distribute
-  - name: crash
+  - name: alerting
   - name: analytics
+  - name: billing
+  - name: build
+  - name: codepush
+  - name: crash
+  - name: distribute
   - name: errors
   - name: export
+  - name: gdpr
   - name: push
   - name: test
-  - name: codepush
-  - name: alerting
-  - name: billing
-  - name: gdpr
 paths:
   /v0.1/account/test/export:
     get:

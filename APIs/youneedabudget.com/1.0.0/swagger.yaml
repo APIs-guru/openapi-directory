@@ -76,7 +76,7 @@ paths:
       description: Returns a single budget with all related entities.  This resource is effectively a full budget export.
       operationId: getBudgetById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -110,7 +110,7 @@ paths:
       description: Returns all accounts
       operationId: getAccounts
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -139,12 +139,41 @@ paths:
       summary: Account list
       tags:
         - Accounts
+    post:
+      description: Creates a new account.
+      operationId: createAccount
+      parameters:
+        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+          in: path
+          name: budget_id
+          required: true
+          type: string
+        - description: The account to create.
+          in: body
+          name: data
+          required: true
+          schema:
+            $ref: "#/definitions/SaveAccountWrapper"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: The account was successfully created
+          schema:
+            $ref: "#/definitions/AccountResponse"
+        "400":
+          description: The request could not be understood due to malformed syntax or validation error(s).
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      summary: Create a new account
+      tags:
+        - Accounts
   "/budgets/{budget_id}/accounts/{account_id}":
     get:
       description: Returns a single account
       operationId: getAccountById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -178,7 +207,7 @@ paths:
       description: Returns all transactions for a specified account
       operationId: getTransactionsByAccount
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -231,7 +260,7 @@ paths:
       description: Returns all categories grouped by category group.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
       operationId: getCategories
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -265,7 +294,7 @@ paths:
       description: Returns a single category.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
       operationId: getCategoryById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -298,7 +327,7 @@ paths:
       description: Returns all transactions for a specified category
       operationId: getTransactionsByCategory
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -351,7 +380,7 @@ paths:
       description: Returns all budget months
       operationId: getBudgetMonths
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -385,7 +414,7 @@ paths:
       description: Returns a single budget month
       operationId: getBudgetMonth
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -419,7 +448,7 @@ paths:
       description: Returns a single category for a specific budget month.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).
       operationId: getMonthCategoryById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -457,7 +486,7 @@ paths:
       description: Update a category for a specific month.  Only `budgeted` amount can be updated.
       operationId: updateMonthCategory
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -498,7 +527,7 @@ paths:
       description: Returns all payee locations
       operationId: getPayeeLocations
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -526,7 +555,7 @@ paths:
       description: Returns a single payee location
       operationId: getPayeeLocationById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -559,7 +588,7 @@ paths:
       description: Returns all payees
       operationId: getPayees
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -593,7 +622,7 @@ paths:
       description: Returns single payee
       operationId: getPayeeById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -626,7 +655,7 @@ paths:
       description: Returns all payee locations for the specified payee
       operationId: getPayeeLocationsByPayee
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -659,7 +688,7 @@ paths:
       description: Returns all transactions for a specified payee
       operationId: getTransactionsByPayee
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -712,7 +741,7 @@ paths:
       description: Returns all scheduled transactions
       operationId: getScheduledTransactions
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -746,7 +775,7 @@ paths:
       description: Returns a single scheduled transaction
       operationId: getScheduledTransactionById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -779,7 +808,7 @@ paths:
       description: Returns settings for a budget
       operationId: getBudgetSettingsById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -807,7 +836,7 @@ paths:
       description: Returns budget transactions
       operationId: getTransactions
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -854,7 +883,7 @@ paths:
       description: Updates multiple transactions, by `id` or `import_id`.
       operationId: updateTransactions
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -883,7 +912,7 @@ paths:
       description: Creates a single transaction or multiple transactions.  If you provide a body containing a `transaction` object, a single transaction will be created and if you provide a body containing a `transactions` array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.
       operationId: createTransaction
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -917,7 +946,7 @@ paths:
       description: Creates multiple transactions.  Although this endpoint is still supported, it is recommended to use 'POST /budgets/{budget_id}/transactions' to create multiple transactions.
       operationId: bulkCreateTransactions
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -947,7 +976,7 @@ paths:
       description: Imports transactions.
       operationId: importTransactions
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -975,7 +1004,7 @@ paths:
       description: Returns a single transaction
       operationId: getTransactionById
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -1007,7 +1036,7 @@ paths:
       description: Updates a transaction
       operationId: updateTransaction
       parameters:
-        - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
+        - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
           in: path
           name: budget_id
           required: true
@@ -1719,6 +1748,38 @@ definitions:
         type: object
     required:
       - data
+    type: object
+  SaveAccount:
+    properties:
+      balance:
+        description: The current balance of the account in milliunits format
+        format: int64
+        type: integer
+      name:
+        description: The name of the account
+        type: string
+      type:
+        description: The account type
+        enum:
+          - checking
+          - savings
+          - creditCard
+          - cash
+          - lineOfCredit
+          - otherAsset
+          - otherLiability
+        type: string
+    required:
+      - name
+      - type
+      - balance
+    type: object
+  SaveAccountWrapper:
+    properties:
+      account:
+        $ref: "#/definitions/SaveAccount"
+    required:
+      - account
     type: object
   SaveCategoryResponse:
     properties:
