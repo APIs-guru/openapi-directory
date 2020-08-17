@@ -6,8 +6,7 @@ info:
     name: Google
     url: 'https://google.com'
     x-twitter: youtube
-  description: |
-    The PageSpeed Insights API lets you analyze the performance of your website with a simple API.  It offers tailored suggestions for how you can optimize your site, and lets you easily integrate PageSpeed Insights analysis into your development tools and workflow.
+  description: 'The PageSpeed Insights API lets you analyze the performance of your website with a simple API. It offers tailored suggestions for how you can optimize your site, and lets you easily integrate PageSpeed Insights analysis into your development tools and workflow. '
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
@@ -35,10 +34,7 @@ tags:
 paths:
   /pagespeedonline/v5/runPagespeed:
     get:
-      description: |-
-        Runs PageSpeed analysis on the page at the specified URL, and returns
-        PageSpeed scores, a list of suggestions to make that page faster, and other
-        information.
+      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.'
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
         - description: The captcha token passed when filling out a captcha.
@@ -46,9 +42,7 @@ paths:
           name: captchaToken
           schema:
             type: string
-        - description: |-
-            A Lighthouse category to run; if none are given, only Performance category
-            will be run
+        - description: 'A Lighthouse category to run; if none are given, only Performance category will be run'
           explode: true
           in: query
           name: category
@@ -69,9 +63,7 @@ paths:
           name: locale
           schema:
             type: string
-        - description: |-
-            The analysis strategy (desktop or mobile) to use, and desktop is the
-            default
+        - description: 'The analysis strategy (desktop or mobile) to use, and desktop is the default'
           in: query
           name: strategy
           schema:
@@ -80,7 +72,7 @@ paths:
               - DESKTOP
               - MOBILE
             type: string
-        - description: The URL to fetch and analyze
+        - description: Required. The URL to fetch and analyze
           in: query
           name: url
           schema:
@@ -110,17 +102,17 @@ paths:
       tags:
         - pagespeedapi
     parameters:
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/prettyPrint'
       - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/upload_protocol'
 components:
   parameters:
     _.xgafv:
@@ -198,9 +190,7 @@ components:
         type: string
   schemas:
     AuditRefs:
-      description: |-
-        A light reference to an audit by id, used to group and weight audits in a
-        given category.
+      description: 'A light reference to an audit by id, used to group and weight audits in a given category.'
       properties:
         group:
           description: The category group that the audit belongs to (optional).
@@ -214,10 +204,7 @@ components:
           type: number
       type: object
     Bucket:
-      description: |-
-        A proportion of data in the total distribution, bucketed by a min/max
-        percentage. Each bucket's range is bounded by min <= x < max, In
-        millisecond.
+      description: 'A proportion of data in the total distribution, bucketed by a min/max percentage. Each bucket''s range is bounded by min <= x < max, In millisecond.'
       properties:
         max:
           description: Upper bound for a bucket's range.
@@ -240,22 +227,16 @@ components:
           description: 'The accessibility category, containing all accessibility related audits.'
         best-practices:
           $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
-            The best practices category, containing all best practices related
-            audits.
+          description: 'The best practices category, containing all best practices related audits.'
         performance:
           $ref: '#/components/schemas/LighthouseCategoryV5'
           description: 'The performance category, containing all performance related audits.'
         pwa:
           $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
-            The Progressive-Web-App (PWA) category, containing all pwa related
-            audits.
+          description: 'The Progressive-Web-App (PWA) category, containing all pwa related audits.'
         seo:
           $ref: '#/components/schemas/LighthouseCategoryV5'
-          description: |-
-            The Search-Engine-Optimization (SEO) category, containing all seo related
-            audits.
+          description: 'The Search-Engine-Optimization (SEO) category, containing all seo related audits.'
       type: object
     CategoryGroupV5:
       description: Message containing a category
@@ -271,9 +252,7 @@ components:
       description: Message containing the configuration settings for the Lighthouse run.
       properties:
         channel:
-          description: |-
-            How Lighthouse was run, e.g. from the Chrome extension or from the npm
-            module.
+          description: 'How Lighthouse was run, e.g. from the Chrome extension or from the npm module.'
           type: string
         emulatedFormFactor:
           description: The form factor the emulation should use.
@@ -303,9 +282,7 @@ components:
       properties:
         rendererFormattedStrings:
           $ref: '#/components/schemas/RendererFormattedStrings'
-          description: |-
-            Internationalized strings that are formatted to the locale in
-            configSettings.
+          description: Internationalized strings that are formatted to the locale in configSettings.
       type: object
     LighthouseAuditResultV5:
       description: An audit's result object in a Lighthouse result.
@@ -331,10 +308,7 @@ components:
           description: The audit's id.
           type: string
         numericValue:
-          description: |-
-            A numeric value that has a meaning specific to the audit, e.g. the number
-            of nodes in the DOM or the timestamp of a specific load event. More
-            information can be found in the audit details, if present.
+          description: 'A numeric value that has a meaning specific to the audit, e.g. the number of nodes in the DOM or the timestamp of a specific load event. More information can be found in the audit details, if present.'
           format: double
           type: number
         score:
@@ -366,9 +340,7 @@ components:
           description: A description for the manual audits in the category.
           type: string
         score:
-          description: |-
-            The overall score of the category, the weighted average of all its audits.
-            (The category's score, can be null.)
+          description: 'The overall score of the category, the weighted average of all its audits. (The category''s score, can be null.)'
         title:
           description: The human-friendly name of the category.
           type: string
@@ -411,14 +383,12 @@ components:
           description: The original requested url.
           type: string
         runWarnings:
-          description: 'List of all run warnings in the LHR.  Will always output to at least `[]`.'
+          description: 'List of all run warnings in the LHR. Will always output to at least `[]`.'
           items: {}
           type: array
         runtimeError:
           $ref: '#/components/schemas/RuntimeError'
-          description: |-
-            A top-level error message that, if present, indicates a serious enough
-            problem that this Lighthouse result may need to be discarded.
+          description: 'A top-level error message that, if present, indicates a serious enough problem that this Lighthouse result may need to be discarded.'
         stackPacks:
           description: The Stack Pack advice strings.
           items:
@@ -443,7 +413,7 @@ components:
         metrics:
           additionalProperties:
             $ref: '#/components/schemas/UserPageLoadMetricV5'
-          description: 'The map of <metrics, data>.'
+          description: The map of .
           type: object
         origin_fallback:
           description: 'True if the result is an origin fallback from a page, false otherwise.'
@@ -462,9 +432,7 @@ components:
           description: The captcha verify result
           type: string
         id:
-          description: |-
-            Canonicalized and final URL for the document, after following page
-            redirects (if any).
+          description: 'Canonicalized and final URL for the document, after following page redirects (if any).'
           type: string
         kind:
           description: Kind of result.
@@ -514,22 +482,16 @@ components:
           description: The title of the lab data performance category.
           type: string
         lsPerformanceCategoryDescription:
-          description: |-
-            The disclaimer shown under performance explaning that the network can
-            vary.
+          description: The disclaimer shown under performance explaning that the network can vary.
           type: string
         manualAuditsGroupTitle:
-          description: |-
-            The heading shown above a list of audits that were not computerd in the
-            run.
+          description: The heading shown above a list of audits that were not computerd in the run.
           type: string
         notApplicableAuditsGroupTitle:
           description: The heading shown above a list of audits that do not apply to a page.
           type: string
         opportunityResourceColumnLabel:
-          description: |-
-            The heading for the estimated page load savings opportunity of an
-            audit.
+          description: The heading for the estimated page load savings opportunity of an audit.
           type: string
         opportunitySavingsColumnLabel:
           description: The heading for the estimated page load savings of opportunity audits.
@@ -541,9 +503,7 @@ components:
           description: 'The label that explains the score gauges scale (0-49, 50-89, 90-100).'
           type: string
         toplevelWarningsMessage:
-          description: |-
-            The label shown preceding important warnings that may have invalidated
-            an entire report.
+          description: The label shown preceding important warnings that may have invalidated an entire report.
           type: string
         varianceDisclaimer:
           description: The disclaimer shown below a performance metric value.
@@ -610,10 +570,7 @@ components:
           description: Identifies the type of the metric.
           type: string
         percentile:
-          description: |-
-            We use this field to store certain percentile value for this metric.
-            For v4, this field contains pc50.
-            For v5, this field contains pc90.
+          description: 'We use this field to store certain percentile value for this metric. For v4, this field contains pc50. For v5, this field contains pc90.'
           format: int32
           type: integer
       type: object

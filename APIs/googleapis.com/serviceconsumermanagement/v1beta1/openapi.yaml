@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/service-consumer-management/docs/overview
 tags:
-  - name: services
   - name: operations
+  - name: services
 paths:
   "/v1beta1/{name}":
     delete:
@@ -67,10 +67,10 @@ paths:
       tags:
         - services
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: serviceconsumermanagement.operations.get
+      description: Retrieves a summary of quota information for a specific quota limit.
+      operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.get
       parameters:
-        - description: The name of the operation resource.
+        - description: "The resource name of the quota limit, returned by a ListConsumerQuotaMetrics or GetConsumerQuotaMetric call. An example name would be: `services/compute.googleapis.com/projects/123/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`"
           in: path
           name: name
           required: true
@@ -90,7 +90,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/V1Beta1ConsumerQuotaLimit"
           description: Successful response
       security:
         - Oauth2:
@@ -98,19 +98,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - operations
+        - services
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates a producer override.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.patch
@@ -195,30 +195,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1beta1/{parent}/consumerQuotaMetrics:importProducerOverrides":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Create or update multiple producer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.importProducerOverrides
@@ -284,17 +284,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a producer override. A producer override is applied by the owner or administrator of a service to increase or decrease the amount of quota a consumer of the service is allowed to use. To create multiple overrides at once, use ImportProducerOverrides instead. If an override with the specified dimensions already exists, this call will fail. To overwrite an existing override if one is already present ("upsert" semantics), use ImportProducerOverrides instead.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.create

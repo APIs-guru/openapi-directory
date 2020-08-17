@@ -37,10 +37,10 @@ tags:
 paths:
   "/v1beta1/{name}":
     get:
-      description: Gets the requested recommendation. Requires the recommender.*.get IAM permission for the specified recommender.
-      operationId: recommender.projects.locations.recommenders.recommendations.get
+      description: Gets the requested insight. Requires the recommender.*.get IAM permission for the specified insight type.
+      operationId: recommender.projects.locations.insightTypes.insights.get
       parameters:
-        - description: Required. Name of the recommendation.
+        - description: Required. Name of the insight.
           in: path
           name: name
           required: true
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation"
+                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1Insight"
           description: Successful response
       security:
         - Oauth2:
@@ -62,29 +62,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{name}:markAccepted":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Marks the Insight State as Accepted. Users can use this method to indicate to the Recommender API that they have applied some action based on the insight. This stops the insight content from being updated. MarkInsightAccepted can be applied to insights in ACTIVE state. Requires the recommender.*.update IAM permission for the specified insight.
       operationId: recommender.projects.locations.insightTypes.insights.markAccepted
@@ -117,16 +117,16 @@ paths:
   "/v1beta1/{name}:markClaimed":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Marks the Recommendation State as Claimed. Users can use this method to indicate to the Recommender API that they are starting to apply the recommendation themselves. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationClaimed can be applied to recommendations in CLAIMED or ACTIVE state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markClaimed
@@ -159,16 +159,16 @@ paths:
   "/v1beta1/{name}:markFailed":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Marks the Recommendation State as Failed. Users can use this method to indicate to the Recommender API that they have applied the recommendation themselves, and the operation failed. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationFailed can be applied to recommendations in ACTIVE, CLAIMED, SUCCEEDED, or FAILED state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markFailed
@@ -201,16 +201,16 @@ paths:
   "/v1beta1/{name}:markSucceeded":
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Marks the Recommendation State as Succeeded. Users can use this method to indicate to the Recommender API that they have applied the recommendation themselves, and the operation was successful. This stops the recommendation content from being updated. Associated insights are frozen and placed in the ACCEPTED state. MarkRecommendationSucceeded can be applied to recommendations in ACTIVE, CLAIMED, SUCCEEDED, or FAILED state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markSucceeded
@@ -282,16 +282,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1beta1/{parent}/recommendations":
     get:
       description: Lists recommendations for a Cloud project. Requires the recommender.*.list IAM permission for the specified recommender.
@@ -334,16 +334,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:

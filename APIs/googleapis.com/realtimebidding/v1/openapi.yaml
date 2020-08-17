@@ -32,10 +32,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: Gets a creative.
-      operationId: realtimebidding.buyers.creatives.get
+      description: Gets a user list by its name.
+      operationId: realtimebidding.buyers.userLists.get
       parameters:
-        - description: Required. Name of the creative to retrieve. See creative.name.
+        - description: Required. The name of the user list to be retrieved. See UserList.name.
           in: path
           name: name
           required: true
@@ -55,7 +55,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Creative"
+                $ref: "#/components/schemas/UserList"
           description: Successful response
       security:
         - Oauth2:
@@ -65,16 +65,16 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates a creative.
@@ -141,16 +141,16 @@ paths:
         - buyers
   "/v1/{name}:close":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Change the status of a user list to CLOSED. This prevents new users from being added to the user list.
@@ -207,29 +207,29 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
   "/v1/{name}:open":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Change the status of a user list to OPEN. This allows new users to be added to the user list.
@@ -310,16 +310,16 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a creative.
@@ -352,16 +352,16 @@ paths:
         - buyers
   "/v1/{parent}/creatives:watch":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Watches all creatives pertaining to a bidder. It is sufficient to invoke this endpoint once per bidder. A Pub/Sub topic will be created and notifications will be pushed to the topic when any of the bidder's creatives change status. All of the bidder's service accounts will have access to read from the topic. Subsequent invocations of this method will return the existing Pub/Sub configuration.
@@ -428,16 +428,16 @@ paths:
       tags:
         - buyers
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Create a new user list.

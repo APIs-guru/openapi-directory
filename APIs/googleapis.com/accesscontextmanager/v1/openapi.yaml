@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/access-context-manager/docs/reference/rest/
 tags:
-  - name: operations
   - name: accessPolicies
+  - name: operations
 paths:
   /v1/accessPolicies:
     get:
@@ -71,17 +71,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Create an `AccessPolicy`. Fails if this organization already has a `AccessPolicy`. The longrunning Operation will have a successful status once the `AccessPolicy` has propagated to long-lasting storage. Syntactic and basic semantic errors will be returned in `metadata` as a BadRequest proto.
       operationId: accesscontextmanager.accessPolicies.create
@@ -106,10 +106,10 @@ paths:
         - accessPolicies
   "/v1/{name}":
     delete:
-      description: Delete an Access Level by resource name. The longrunning operation from this RPC will have a successful status once the Access Level has been removed from long-lasting storage.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.delete
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: accesscontextmanager.operations.delete
       parameters:
-        - description: "Required. Resource name for the Access Level. Format: `accessPolicies/{policy_id}/accessLevels/{access_level_id}`"
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -120,7 +120,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -128,12 +128,12 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - accessPolicies
+        - operations
     get:
-      description: Get an Access Level by resource name.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: accesscontextmanager.operations.get
       parameters:
-        - description: "Required. Resource name for the Access Level. Format: `accessPolicies/{policy_id}/accessLevels/{access_level_id}`"
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -148,22 +148,12 @@ paths:
               - AS_DEFINED
               - CEL
             type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccessLevel"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -171,24 +161,24 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - accessPolicies
+        - operations
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
-      description: Update an Access Level. The longrunning operation from this RPC will have a successful status once the changes to the Access Level have propagated to long-lasting storage. Access Levels containing errors will result in an error response for the first error encountered.
-      operationId: accesscontextmanager.accessPolicies.accessLevels.patch
+      description: Update a Service Perimeter. The longrunning operation from this RPC will have a successful status once the changes to the Service Perimeter have propagated to long-lasting storage. Service Perimeter containing errors will result in an error response for the first error encountered.
+      operationId: accesscontextmanager.accessPolicies.servicePerimeters.patch
       parameters:
-        - description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length of the `short_name` component is 50 characters."
+        - description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`"
           in: path
           name: name
           required: true
@@ -203,7 +193,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AccessLevel"
+              $ref: "#/components/schemas/ServicePerimeter"
       responses:
         "200":
           content:
@@ -220,17 +210,17 @@ paths:
         - accessPolicies
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: accesscontextmanager.operations.cancel
@@ -305,17 +295,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Create an Access Level. The longrunning operation from this RPC will have a successful status once the Access Level has propagated to long-lasting storage. Access Levels containing errors will result in an error response for the first error encountered.
       operationId: accesscontextmanager.accessPolicies.accessLevels.create
@@ -347,17 +337,17 @@ paths:
         - accessPolicies
   "/v1/{parent}/accessLevels:replaceAll":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Replace all existing Access Levels in an Access Policy with the Access Levels provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Access Levels will not be affected. Operation.response field will contain ReplaceAccessLevelsResponse. Removing Access Levels contained in existing Service Perimeters will result in error.
       operationId: accesscontextmanager.accessPolicies.accessLevels.replaceAll
@@ -423,17 +413,17 @@ paths:
       tags:
         - accessPolicies
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Create a Service Perimeter. The longrunning operation from this RPC will have a successful status once the Service Perimeter has propagated to long-lasting storage. Service Perimeters containing errors will result in an error response for the first error encountered.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.create
@@ -465,17 +455,17 @@ paths:
         - accessPolicies
   "/v1/{parent}/servicePerimeters:commit":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Commit the dry-run spec for all the Service Perimeters in an Access Policy. A commit operation on a Service Perimeter involves copying its `spec` field to that Service Perimeter's `status` field. Only Service Perimeters with `use_explicit_dry_run_spec` field set to true are affected by a commit operation. The longrunning operation from this RPC will have a successful status once the dry-run specs for all the Service Perimeters have been committed. If a commit fails, it will cause the longrunning operation to return an error response and the entire commit operation will be cancelled. When successful, Operation.response field will contain CommitServicePerimetersResponse. The `dry_run` and the `spec` fields will be cleared after a successful commit operation.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.commit
@@ -507,17 +497,17 @@ paths:
         - accessPolicies
   "/v1/{parent}/servicePerimeters:replaceAll":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically. The longrunning operation from this RPC will have a successful status once all replacements have propagated to long-lasting storage. Replacements containing errors will result in an error response for the first error encountered. Replacement will be cancelled on error, existing Service Perimeters will not be affected. Operation.response field will contain ReplaceServicePerimetersResponse.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.replaceAll

@@ -38,10 +38,10 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.sites.domains.delete
       parameters:
-        - description: "Required. The name of the version to be deleted, in the format: sites/ site-name/versions/versionID"
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true
@@ -102,17 +102,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
     patch:
       description: Updates the specified metadata for a version. Note that this method will fail with `FAILED_PRECONDITION` in the event of an invalid state transition. The only valid transition for a version is currently from a `CREATED` status to a `FINALIZED` status. Use [`DeleteVersion`](../sites.versions/delete) to set the status of a version to `DELETED`.
       operationId: firebasehosting.sites.versions.patch
@@ -232,17 +232,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a domain mapping on the specified site.
       operationId: firebasehosting.sites.domains.create
@@ -333,17 +333,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
   "/v1beta1/{parent}/releases":
     get:
       description: Lists the releases that have been created on the specified site.
@@ -392,17 +392,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a new release which makes the content of the specified version actively display on the appropriate URL(s).
       operationId: firebasehosting.sites.channels.releases.create
@@ -494,17 +494,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a new version for a site.
       operationId: firebasehosting.sites.versions.create
@@ -550,17 +550,17 @@ paths:
         - sites
   "/v1beta1/{parent}:populateFiles":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
     post:
       description: Adds content files to a version. Each file must be under 2 GB.
       operationId: firebasehosting.sites.versions.populateFiles
@@ -821,6 +821,13 @@ components:
           description: The user-supplied RE2 regular expression to match against the request URL path.
           type: string
       type: object
+    I18nConfig:
+      description: If provided, i18n rewrites are enabled.
+      properties:
+        root:
+          description: Required. The user-supplied path where country and language specific content will be looked for within the public directory.
+          type: string
+      type: object
     ListDomainsResponse:
       description: The response to listing Domains.
       properties:
@@ -1004,6 +1011,9 @@ components:
           items:
             $ref: "#/components/schemas/Header"
           type: array
+        i18n:
+          $ref: "#/components/schemas/I18nConfig"
+          description: Optional. Defines i18n rewrite behavior.
         redirects:
           description: An array of objects (called redirect rules), where each rule specifies a URL pattern that, if matched to the request URL path, triggers Hosting to respond with a redirect to the specified destination path.
           items:

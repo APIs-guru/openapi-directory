@@ -33,23 +33,23 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-test-lab/
 tags:
-  - name: testEnvironmentCatalog
   - name: applicationDetailService
+  - name: testEnvironmentCatalog
   - name: projects
 paths:
   /v1/applicationDetailService/getApkDetails:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Gets the details of an Android application APK.
       operationId: testing.applicationDetailService.getApkDetails
@@ -74,17 +74,17 @@ paths:
         - applicationDetailService
   "/v1/projects/{projectId}/testMatrices":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. Matrices are limited to at most 200 supported executions. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix expands to more than 200 supported executions"
       operationId: testing.projects.testMatrices.create
@@ -155,30 +155,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
   "/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
     post:
       description: "Cancels unfinished test executions in a test matrix. This call returns immediately and cancellation proceeds asynchronously. If the matrix is already final, this operation will have no effect. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist"
       operationId: testing.projects.testMatrices.cancel
@@ -251,17 +251,17 @@ paths:
       tags:
         - testEnvironmentCatalog
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:

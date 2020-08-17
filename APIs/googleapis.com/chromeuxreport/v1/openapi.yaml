@@ -37,17 +37,17 @@ tags:
 paths:
   /v1/records:queryRecord:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Queries the Chrome User Experience for a single `record` for a given site. Returns a `record` that contains one or more `metrics` corresponding to performance data about the requested site.
       operationId: chromeuxreport.records.queryRecord

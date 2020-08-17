@@ -81,17 +81,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
@@ -192,17 +192,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/jobs/{jobId}/reports":
     get:
       description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
@@ -263,17 +263,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/jobs/{jobId}/reports/{reportId}":
     get:
       description: Gets the metadata of a specific report.
@@ -315,17 +315,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   "/v1/media/{resourceName}":
     get:
       description: Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.
@@ -356,17 +356,17 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
   /v1/reportTypes:
     get:
       description: Lists report types.
@@ -411,17 +411,17 @@ paths:
       tags:
         - reportTypes
     parameters:
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:

@@ -552,6 +552,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If view is set to "css", only return accounts that are assigned label with given ID.
+          in: query
+          name: label
+          schema:
+            type: string
         - description: The maximum number of accounts to return in the response, used for paging.
           in: query
           name: maxResults
@@ -561,6 +566,14 @@ paths:
           in: query
           name: pageToken
           schema:
+            type: string
+        - description: 'Controls which fields will be populated. Acceptable values are: "merchant" and "css". The default value is "merchant".'
+          in: query
+          name: view
+          schema:
+            enum:
+              - css
+              - merchant
             type: string
       responses:
         "200":
@@ -660,6 +673,14 @@ paths:
           name: accountId
           required: true
           schema:
+            type: string
+        - description: 'Controls which fields will be populated. Acceptable values are: "merchant" and "css". The default value is "merchant".'
+          in: query
+          name: view
+          schema:
+            enum:
+              - css
+              - merchant
             type: string
       responses:
         "200":
@@ -855,6 +876,50 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+  "/{merchantId}/accounts/{accountId}/updatelabels":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Updates labels that are assigned to the Merchant Center account by CSS user.
+      operationId: content.accounts.updatelabels
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the account whose labels are updated.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountsUpdateLabelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountsUpdateLabelsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - accounts
   "/{merchantId}/accountstatuses":
     get:
       description: Lists the statuses of the sub-accounts in your Merchant Center account.
@@ -4497,6 +4562,10 @@ components:
         businessInformation:
           $ref: "#/components/schemas/AccountBusinessInformation"
           description: The business information of the account.
+        cssId:
+          description: ID of CSS the account belongs to.
+          format: uint64
+          type: string
         googleMyBusinessLink:
           $ref: "#/components/schemas/AccountGoogleMyBusinessLink"
           description: The GMB account which is linked or in the process of being linked with the Merchant Center account.
@@ -4508,6 +4577,12 @@ components:
           default: content#account
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`"'
           type: string
+        labelIds:
+          description: List of label IDs that are assigned to the account by CSS.
+          items:
+            format: uint64
+            type: string
+          type: array
         name:
           description: Required. Display name for the account.
           type: string
@@ -4902,6 +4977,9 @@ components:
         overwrite:
           description: Only applicable if the method is `claimwebsite`. Indicates whether or not to take the claim from another account in case there is a conflict.
           type: boolean
+        view:
+          description: Controls which fields are visible. Only applicable if the method is 'get'.
+          type: string
       type: object
     AccountsCustomBatchRequestEntryLinkRequest:
       properties:
@@ -5038,6 +5116,22 @@ components:
           items:
             $ref: "#/components/schemas/Account"
           type: array
+      type: object
+    AccountsUpdateLabelsRequest:
+      properties:
+        labelIds:
+          description: The IDs of labels that should be assigned to the account.
+          items:
+            format: uint64
+            type: string
+          type: array
+      type: object
+    AccountsUpdateLabelsResponse:
+      properties:
+        kind:
+          default: content#accountsUpdateLabelsResponse
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsUpdateLabelsResponse".'
+          type: string
       type: object
     AccountstatusesCustomBatchRequest:
       properties:
@@ -7660,7 +7754,7 @@ components:
     OrderShipmentScheduledDeliveryDetails:
       properties:
         carrierPhoneNumber:
-          description: The phone number of the carrier fulfilling the delivery.
+          description: The phone number of the carrier fulfilling the delivery. The phone number is formatted as the international notation in ITU-T Recommendation E.123 (e.g., "+41 44 668 1800").
           type: string
         scheduledDate:
           description: The date a shipment is scheduled for delivery, in ISO 8601 format.
@@ -9663,15 +9757,35 @@ components:
       type: object
     ProductStatusDestinationStatus:
       properties:
+        approvedCountrys:
+          description: List of country codes (ISO 3166-1 alpha-2) where the offer is approved.
+          items:
+            type: string
+          type: array
         destination:
           description: The name of the destination
           type: string
+        disapprovedCountrys:
+          description: List of country codes (ISO 3166-1 alpha-2) where the offer is disapproved.
+          items:
+            type: string
+          type: array
+        pendingCountrys:
+          description: List of country codes (ISO 3166-1 alpha-2) where the offer is pending approval.
+          items:
+            type: string
+          type: array
         status:
           description: Destination approval status in `targetCountry` of the offer.
           type: string
       type: object
     ProductStatusItemLevelIssue:
       properties:
+        applicableCountrys:
+          description: List of country codes (ISO 3166-1 alpha-2) where issue applies to the offer.
+          items:
+            type: string
+          type: array
         attributeName:
           description: The attribute's name, if the issue is caused by a single attribute.
           type: string
@@ -10092,7 +10206,7 @@ components:
           $ref: "#/components/schemas/Price"
           description: The price of the product.
         regionId:
-          description: The ID (name) of the region.
+          description: The ID uniquely identifying each region.
           type: string
         salePrice:
           $ref: "#/components/schemas/Price"

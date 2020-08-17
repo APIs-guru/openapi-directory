@@ -37,6 +37,10 @@ tags:
 paths:
   /v1/challenge:
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
@@ -44,10 +48,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: CreateChallenge API
       operationId: verifiedaccess.challenge.create
@@ -72,6 +72,10 @@ paths:
         - challenge
   /v1/challenge:verify:
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
@@ -79,10 +83,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: VerifyChallengeResponse API
       operationId: verifiedaccess.challenge.verify

@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/run/
 tags:
-  - name: api
-  - name: namespaces
   - name: projects
+  - name: namespaces
+  - name: api
 paths:
   "/api/v1/{name}":
     get:
@@ -63,17 +63,17 @@ paths:
       tags:
         - api
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Rpc to update a namespace.
       operationId: run.api.v1.namespaces.patch
@@ -139,17 +139,17 @@ paths:
         - api
   "/api/v1/{parent}/secrets":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a new secret.
       operationId: run.api.v1.namespaces.secrets.create
@@ -244,17 +244,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/apis/domains.cloudrun.com/v1/{parent}/authorizeddomains":
     get:
       description: List authorized domains.
@@ -291,17 +291,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/apis/domains.cloudrun.com/v1/{parent}/domainmappings":
     get:
       description: List domain mappings.
@@ -363,17 +363,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a new domain mapping.
       operationId: run.namespaces.domainmappings.create
@@ -405,10 +405,10 @@ paths:
         - namespaces
   "/apis/serving.knative.dev/v1/{name}":
     delete:
-      description: Delete a service. This will cause the Service to stop serving traffic and will delete the child entities like Routes, Configurations and Revisions.
-      operationId: run.namespaces.services.delete
+      description: Delete a revision.
+      operationId: run.namespaces.revisions.delete
       parameters:
-        - description: The name of the service to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: The name of the revision to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
           in: path
           name: name
           required: true
@@ -444,10 +444,10 @@ paths:
       tags:
         - namespaces
     get:
-      description: Get information about a route.
-      operationId: run.namespaces.routes.get
+      description: Get information about a configuration.
+      operationId: run.namespaces.configurations.get
       parameters:
-        - description: The name of the route to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: The name of the configuration to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
           in: path
           name: name
           required: true
@@ -458,7 +458,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/Configuration"
           description: Successful response
       security:
         - Oauth2:
@@ -468,17 +468,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     put:
       description: Replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
       operationId: run.namespaces.services.replaceService
@@ -569,17 +569,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/apis/serving.knative.dev/v1/{parent}/revisions":
     get:
       description: List revisions.
@@ -641,17 +641,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/apis/serving.knative.dev/v1/{parent}/routes":
     get:
       description: List routes.
@@ -713,17 +713,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/apis/serving.knative.dev/v1/{parent}/services":
     get:
       description: List services.
@@ -785,17 +785,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a service.
       operationId: run.namespaces.services.create
@@ -827,10 +827,10 @@ paths:
         - namespaces
   "/v1/{name}":
     delete:
-      description: Delete a service. This will cause the Service to stop serving traffic and will delete the child entities like Routes, Configurations and Revisions.
-      operationId: run.projects.locations.services.delete
+      description: Delete a revision.
+      operationId: run.projects.locations.revisions.delete
       parameters:
-        - description: The name of the service to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: The name of the revision to delete. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
           in: path
           name: name
           required: true
@@ -866,10 +866,10 @@ paths:
       tags:
         - projects
     get:
-      description: Get information about a service.
-      operationId: run.projects.locations.services.get
+      description: Get information about a configuration.
+      operationId: run.projects.locations.configurations.get
       parameters:
-        - description: The name of the service to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: The name of the configuration to retrieve. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
           in: path
           name: name
           required: true
@@ -880,7 +880,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Service"
+                $ref: "#/components/schemas/Configuration"
           description: Successful response
       security:
         - Oauth2:
@@ -890,17 +890,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Rpc to update a namespace.
       operationId: run.projects.locations.namespaces.patch
@@ -936,10 +936,10 @@ paths:
       tags:
         - projects
     put:
-      description: Replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
-      operationId: run.projects.locations.services.replaceService
+      description: Rpc to replace a secret. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
+      operationId: run.projects.locations.secrets.replaceSecret
       parameters:
-        - description: The name of the service being replaced. For Cloud Run (fully managed), replace {namespace_id} with the project ID or number.
+        - description: Required. The name of the secret being retrieved. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -949,13 +949,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Service"
+              $ref: "#/components/schemas/Secret"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Service"
+                $ref: "#/components/schemas/Secret"
           description: Successful response
       security:
         - Oauth2:
@@ -1005,21 +1005,21 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{parent}/authorizeddomains":
     get:
       description: List authorized domains.
-      operationId: run.projects.locations.authorizeddomains.list
+      operationId: run.projects.authorizeddomains.list
       parameters:
         - description: "Name of the parent Project resource. Example: `projects/myproject`."
           in: path
@@ -1052,17 +1052,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{parent}/configurations":
     get:
       description: List configurations.
@@ -1124,17 +1124,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{parent}/domainmappings":
     get:
       description: List domain mappings.
@@ -1196,17 +1196,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a new domain mapping.
       operationId: run.projects.locations.domainmappings.create
@@ -1297,17 +1297,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{parent}/routes":
     get:
       description: List routes.
@@ -1369,30 +1369,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{parent}/secrets":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a new secret.
       operationId: run.projects.locations.secrets.create
@@ -1483,17 +1483,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a service.
       operationId: run.projects.locations.services.create
@@ -1554,30 +1554,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.
       operationId: run.projects.locations.services.setIamPolicy
@@ -1609,17 +1609,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
       operationId: run.projects.locations.services.testIamPermissions
@@ -2056,7 +2056,9 @@ components:
       properties:
         command:
           description: "(Optional) Cloud Run fully managed: not supported Cloud Run for Anthos: supported Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell. Exit status of 0 is treated as live/healthy and non-zero is unhealthy."
-          type: string
+          items:
+            type: string
+          type: array
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -2402,7 +2404,7 @@ components:
             $ref: "#/components/schemas/OwnerReference"
           type: array
         resourceVersion:
-          description: "(Optional) An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources. Populated by the system. Read-only. Value must be treated as opaque by clients and . More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency"
+          description: "(Optional) An opaque value that represents the internal version of this object that can be used by clients to determine when objects have changed. May be used for optimistic concurrency, change detection, and the watch operation on a resource or set of resources. Clients must treat these values as opaque and passed unmodified back to the server. They may only be valid for a particular resource or set of resources. Populated by the system. Read-only. Value must be treated as opaque by clients. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency"
           type: string
         selfLink:
           description: (Optional) SelfLink is a URL representing this object. Populated by the system. Read-only. string selfLink = 4;

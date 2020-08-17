@@ -34,9 +34,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/talent-solution/job-search/docs/
 tags:
-  - name: companies
-  - name: jobs
   - name: v2
+  - name: jobs
+  - name: companies
 paths:
   /v2/companies:
     get:
@@ -89,17 +89,17 @@ paths:
       tags:
         - companies
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a new company entity.
       operationId: jobs.companies.create
@@ -208,17 +208,17 @@ paths:
       tags:
         - jobs
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Creates a new job.
@@ -253,17 +253,17 @@ paths:
         - jobs
   /v2/jobs:batchDelete:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Deletes a list of Job postings by filter.
       operationId: jobs.jobs.batchDelete
@@ -292,17 +292,17 @@ paths:
         - jobs
   /v2/jobs:deleteByFilter:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Deprecated. Use BatchDeleteJobs instead.
@@ -339,17 +339,17 @@ paths:
         - jobs
   /v2/jobs:histogram:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Deprecated. Use SearchJobsRequest.histogram_facets instead to make
@@ -402,17 +402,17 @@ paths:
         - jobs
   /v2/jobs:search:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Searches for jobs using the provided SearchJobsRequest.
@@ -449,17 +449,17 @@ paths:
         - jobs
   /v2/jobs:searchForAlert:
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     post:
       description: >-
         Searches for jobs using the provided SearchJobsRequest.
@@ -601,29 +601,26 @@ paths:
       tags:
         - companies
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
   "/v2/{name}":
     delete:
-      description: >-
-        Deletes the specified job.
-
-
-        Typically, the job becomes unsearchable within 10 seconds, but it may take
-
-        up to 5 minutes.
-      operationId: jobs.jobs.delete
+      description: Deletes the specified company.
+      operationId: jobs.companies.delete
       parameters:
-        - description: Required. The resource name of the job to be deleted, such as "jobs/11111111".
+        - description: >-
+            Required. The resource name of the company to be deleted,
+
+            such as, "companies/0000aaaa-1111-bbbb-2222-cccc3333dddd".
           in: path
           name: name
           required: true
@@ -662,15 +659,15 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/jobs
       tags:
-        - jobs
+        - companies
     get:
-      description: >-
-        Retrieves the specified job, whose status is OPEN or recently EXPIRED
-
-        within the last 90 days.
-      operationId: jobs.jobs.get
+      description: Retrieves the specified company.
+      operationId: jobs.companies.get
       parameters:
-        - description: Required. The resource name of the job to retrieve, such as "jobs/11111111".
+        - description: >-
+            Required. Resource name of the company to retrieve,
+
+            such as "companies/0000aaaa-1111-bbbb-2222-cccc3333dddd".
           in: path
           name: name
           required: true
@@ -681,7 +678,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Job"
+                $ref: "#/components/schemas/Company"
           description: Successful response
       security:
         - Oauth2:
@@ -693,38 +690,37 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/jobs
       tags:
-        - jobs
+        - companies
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: >-
-        Updates specified job.
+        Updates the specified company. Company names can't be updated. To update a
 
+        company name, delete the company and all jobs associated with it, and only
 
-        Typically, updated contents become visible in search results within 10
-
-        seconds, but it may take up to 5 minutes.
-      operationId: jobs.jobs.patch
+        then re-create them.
+      operationId: jobs.companies.patch
       parameters:
         - description: >-
-            Required during job update.
+            Required during company update.
 
 
-            Resource name assigned to a job by the API, for example, "/jobs/foo". Use
+            The resource name for a company. This is generated by the service when a
 
-            of this field in job queries and API calls is preferred over the use of
+            company is created, for example,
 
-            requisition_id since this value is unique.
+            "companies/0000aaaa-1111-bbbb-2222-cccc3333dddd".
           in: path
           name: name
           required: true
@@ -777,13 +773,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateJobRequest"
+              $ref: "#/components/schemas/Company"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Job"
+                $ref: "#/components/schemas/Company"
           description: Successful response
       security:
         - Oauth2:
@@ -795,7 +791,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/jobs
       tags:
-        - jobs
+        - companies
   /v2:complete:
     get:
       description: >-
@@ -891,17 +887,17 @@ paths:
       tags:
         - v2
     parameters:
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
 components:
   parameters:
     _.xgafv:

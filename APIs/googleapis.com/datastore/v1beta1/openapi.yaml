@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: >
-    Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
+  description: "Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -38,34 +37,19 @@ tags:
 paths:
   "/v1beta1/projects/{projectId}:export":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Exports a copy of all or a subset of entities from Google Cloud Datastore
-
-        to another storage system, such as Google Cloud Storage. Recent updates to
-
-        entities may not be reflected in the export. The export occurs in the
-
-        background and its progress can be monitored and managed via the
-
-        Operation resource that is created. The output of an export may only be
-
-        used once the associated operation is done. If an export operation is
-
-        cancelled before completion it may leave partial data behind in Google
-
-        Cloud Storage.
+      description: Exports a copy of all or a subset of entities from Google Cloud Datastore to another storage system, such as Google Cloud Storage. Recent updates to entities may not be reflected in the export. The export occurs in the background and its progress can be monitored and managed via the Operation resource that is created. The output of an export may only be used once the associated operation is done. If an export operation is cancelled before completion it may leave partial data behind in Google Cloud Storage.
       operationId: datastore.projects.export
       parameters:
         - description: Project ID against which to make the request.
@@ -99,28 +83,19 @@ paths:
         - projects
   "/v1beta1/projects/{projectId}:import":
     parameters:
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
     post:
-      description: >-
-        Imports entities into Google Cloud Datastore. Existing entities with the
-
-        same key are overwritten. The import occurs in the background and its
-
-        progress can be monitored and managed via the Operation resource that is
-
-        created. If an ImportEntities operation is cancelled, it is possible
-
-        that a subset of the data has already been imported to Cloud Datastore.
+      description: Imports entities into Google Cloud Datastore. Existing entities with the same key are overwritten. The import occurs in the background and its progress can be monitored and managed via the Operation resource that is created. If an ImportEntities operation is cancelled, it is possible that a subset of the data has already been imported to Cloud Datastore.
       operationId: datastore.projects.import
       parameters:
         - description: Project ID against which to make the request.
@@ -238,16 +213,10 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: >-
-            The client-assigned labels which were provided when the operation was
-
-            created. May also include additional labels.
+          description: The client-assigned labels which were provided when the operation was created. May also include additional labels.
           type: object
         operationType:
-          description: >-
-            The type of the operation. Can be used as a filter in
-
-            ListOperationsRequest.
+          description: The type of the operation. Can be used as a filter in ListOperationsRequest.
           enum:
             - OPERATION_TYPE_UNSPECIFIED
             - EXPORT_ENTITIES
@@ -273,30 +242,7 @@ components:
           type: string
       type: object
     GoogleDatastoreAdminV1EntityFilter:
-      description: >-
-        Identifies a subset of entities in a project. This is specified as
-
-        combinations of kinds and namespaces (either or both of which may be all, as
-
-        described in the following examples).
-
-        Example usage:
-
-
-        Entire project:
-          kinds=[], namespace_ids=[]
-
-        Kinds Foo and Bar in all namespaces:
-          kinds=['Foo', 'Bar'], namespace_ids=[]
-
-        Kinds Foo and Bar only in the default namespace:
-          kinds=['Foo', 'Bar'], namespace_ids=['']
-
-        Kinds Foo and Bar in both the default and Baz namespaces:
-          kinds=['Foo', 'Bar'], namespace_ids=['', 'Baz']
-
-        The entire Baz namespace:
-          kinds=[], namespace_ids=['Baz']
+      description: "Identifies a subset of entities in a project. This is specified as combinations of kinds and namespaces (either or both of which may be all, as described in the following examples). Example usage: Entire project: kinds=[], namespace_ids=[] Kinds Foo and Bar in all namespaces: kinds=['Foo', 'Bar'], namespace_ids=[] Kinds Foo and Bar only in the default namespace: kinds=['Foo', 'Bar'], namespace_ids=[''] Kinds Foo and Bar in both the default and Baz namespaces: kinds=['Foo', 'Bar'], namespace_ids=['', 'Baz'] The entire Baz namespace: kinds=[], namespace_ids=['Baz']"
       properties:
         kinds:
           description: If empty, then this represents all kinds.
@@ -304,19 +250,7 @@ components:
             type: string
           type: array
         namespaceIds:
-          description: >-
-            An empty list represents all namespaces. This is the preferred
-
-            usage for projects that don't use namespaces.
-
-
-            An empty string element represents the default namespace. This should be
-
-            used if the project has data in non-default namespaces, but doesn't want to
-
-            include them.
-
-            Each namespace in this list must be unique.
+          description: An empty list represents all namespaces. This is the preferred usage for projects that don't use namespaces. An empty string element represents the default namespace. This should be used if the project has data in non-default namespaces, but doesn't want to include them. Each namespace in this list must be unique.
           items:
             type: string
           type: array
@@ -331,16 +265,7 @@ components:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1EntityFilter"
           description: Description of which entities are being exported.
         outputUrlPrefix:
-          description: >-
-            Location for the export metadata and data files. This will be the same
-
-            value as the
-
-            google.datastore.admin.v1.ExportEntitiesRequest.output_url_prefix
-
-            field. The final output location is provided in
-
-            google.datastore.admin.v1.ExportEntitiesResponse.output_url.
+          description: Location for the export metadata and data files. This will be the same value as the google.datastore.admin.v1.ExportEntitiesRequest.output_url_prefix field. The final output location is provided in google.datastore.admin.v1.ExportEntitiesResponse.output_url.
           type: string
         progressBytes:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1Progress"
@@ -350,20 +275,10 @@ components:
           description: An estimate of the number of entities processed.
       type: object
     GoogleDatastoreAdminV1ExportEntitiesResponse:
-      description: >-
-        The response for
-
-        google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
+      description: The response for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
       properties:
         outputUrl:
-          description: >-
-            Location of the output metadata file. This can be used to begin an import
-
-            into Cloud Datastore (this project or another project). See
-
-            google.datastore.admin.v1.ImportEntitiesRequest.input_url.
-
-            Only present if the operation completed successfully.
+          description: Location of the output metadata file. This can be used to begin an import into Cloud Datastore (this project or another project). See google.datastore.admin.v1.ImportEntitiesRequest.input_url. Only present if the operation completed successfully.
           type: string
       type: object
     GoogleDatastoreAdminV1ImportEntitiesMetadata:
@@ -376,10 +291,7 @@ components:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1EntityFilter"
           description: Description of which entities are being imported.
         inputUrl:
-          description: >-
-            The location of the import metadata file. This will be the same value as
-
-            the google.datastore.admin.v1.ExportEntitiesResponse.output_url field.
+          description: The location of the import metadata file. This will be the same value as the google.datastore.admin.v1.ExportEntitiesResponse.output_url field.
           type: string
         progressBytes:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1Progress"
@@ -405,17 +317,11 @@ components:
       description: Measures the progress of a particular metric.
       properties:
         workCompleted:
-          description: >-
-            The amount of work that has been completed. Note that this may be greater
-
-            than work_estimated.
+          description: The amount of work that has been completed. Note that this may be greater than work_estimated.
           format: int64
           type: string
         workEstimated:
-          description: >-
-            An estimate of how much work needs to be performed. May be zero if the
-
-            work estimate is unavailable.
+          description: An estimate of how much work needs to be performed. May be zero if the work estimate is unavailable.
           format: int64
           type: string
       type: object
@@ -429,16 +335,10 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: >-
-            The client-assigned labels which were provided when the operation was
-
-            created. May also include additional labels.
+          description: The client-assigned labels which were provided when the operation was created. May also include additional labels.
           type: object
         operationType:
-          description: >-
-            The type of the operation. Can be used as a filter in
-
-            ListOperationsRequest.
+          description: The type of the operation. Can be used as a filter in ListOperationsRequest.
           enum:
             - OPERATION_TYPE_UNSPECIFIED
             - EXPORT_ENTITIES
@@ -462,30 +362,7 @@ components:
           type: string
       type: object
     GoogleDatastoreAdminV1beta1EntityFilter:
-      description: >-
-        Identifies a subset of entities in a project. This is specified as
-
-        combinations of kinds and namespaces (either or both of which may be all, as
-
-        described in the following examples).
-
-        Example usage:
-
-
-        Entire project:
-          kinds=[], namespace_ids=[]
-
-        Kinds Foo and Bar in all namespaces:
-          kinds=['Foo', 'Bar'], namespace_ids=[]
-
-        Kinds Foo and Bar only in the default namespace:
-          kinds=['Foo', 'Bar'], namespace_ids=['']
-
-        Kinds Foo and Bar in both the default and Baz namespaces:
-          kinds=['Foo', 'Bar'], namespace_ids=['', 'Baz']
-
-        The entire Baz namespace:
-          kinds=[], namespace_ids=['Baz']
+      description: "Identifies a subset of entities in a project. This is specified as combinations of kinds and namespaces (either or both of which may be all, as described in the following examples). Example usage: Entire project: kinds=[], namespace_ids=[] Kinds Foo and Bar in all namespaces: kinds=['Foo', 'Bar'], namespace_ids=[] Kinds Foo and Bar only in the default namespace: kinds=['Foo', 'Bar'], namespace_ids=[''] Kinds Foo and Bar in both the default and Baz namespaces: kinds=['Foo', 'Bar'], namespace_ids=['', 'Baz'] The entire Baz namespace: kinds=[], namespace_ids=['Baz']"
       properties:
         kinds:
           description: If empty, then this represents all kinds.
@@ -493,19 +370,7 @@ components:
             type: string
           type: array
         namespaceIds:
-          description: >-
-            An empty list represents all namespaces. This is the preferred
-
-            usage for projects that don't use namespaces.
-
-
-            An empty string element represents the default namespace. This should be
-
-            used if the project has data in non-default namespaces, but doesn't want to
-
-            include them.
-
-            Each namespace in this list must be unique.
+          description: An empty list represents all namespaces. This is the preferred usage for projects that don't use namespaces. An empty string element represents the default namespace. This should be used if the project has data in non-default namespaces, but doesn't want to include them. Each namespace in this list must be unique.
           items:
             type: string
           type: array
@@ -520,16 +385,7 @@ components:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1EntityFilter"
           description: Description of which entities are being exported.
         outputUrlPrefix:
-          description: >-
-            Location for the export metadata and data files. This will be the same
-
-            value as the
-
-            google.datastore.admin.v1beta1.ExportEntitiesRequest.output_url_prefix
-
-            field. The final output location is provided in
-
-            google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url.
+          description: Location for the export metadata and data files. This will be the same value as the google.datastore.admin.v1beta1.ExportEntitiesRequest.output_url_prefix field. The final output location is provided in google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url.
           type: string
         progressBytes:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1Progress"
@@ -539,10 +395,7 @@ components:
           description: An estimate of the number of entities processed.
       type: object
     GoogleDatastoreAdminV1beta1ExportEntitiesRequest:
-      description: >-
-        The request for
-
-        google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
+      description: The request for google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
       properties:
         entityFilter:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1EntityFilter"
@@ -553,56 +406,14 @@ components:
           description: Client-assigned labels.
           type: object
         outputUrlPrefix:
-          description: >-
-            Location for the export metadata and data files.
-
-
-            The full resource URL of the external storage location. Currently, only
-
-            Google Cloud Storage is supported. So output_url_prefix should be of the
-
-            form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the
-
-            name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud
-
-            Storage namespace path (this is not a Cloud Datastore namespace). For more
-
-            information about Cloud Storage namespace paths, see
-
-            [Object name
-
-            considerations](https://cloud.google.com/storage/docs/naming#object-considerations).
-
-
-            The resulting files will be nested deeper than the specified URL prefix.
-
-            The final output URL will be provided in the
-
-            google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url
-
-            field. That value should be used for subsequent ImportEntities operations.
-
-
-            By nesting the data files deeper, the same Cloud Storage bucket can be used
-
-            in multiple ExportEntities operations without conflict.
+          description: "Location for the export metadata and data files. The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So output_url_prefix should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name of the Cloud Storage bucket and `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace). For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations). The resulting files will be nested deeper than the specified URL prefix. The final output URL will be provided in the google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url field. That value should be used for subsequent ImportEntities operations. By nesting the data files deeper, the same Cloud Storage bucket can be used in multiple ExportEntities operations without conflict."
           type: string
       type: object
     GoogleDatastoreAdminV1beta1ExportEntitiesResponse:
-      description: >-
-        The response for
-
-        google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
+      description: The response for google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
       properties:
         outputUrl:
-          description: >-
-            Location of the output metadata file. This can be used to begin an import
-
-            into Cloud Datastore (this project or another project). See
-
-            google.datastore.admin.v1beta1.ImportEntitiesRequest.input_url.
-
-            Only present if the operation completed successfully.
+          description: Location of the output metadata file. This can be used to begin an import into Cloud Datastore (this project or another project). See google.datastore.admin.v1beta1.ImportEntitiesRequest.input_url. Only present if the operation completed successfully.
           type: string
       type: object
     GoogleDatastoreAdminV1beta1ImportEntitiesMetadata:
@@ -615,12 +426,7 @@ components:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1EntityFilter"
           description: Description of which entities are being imported.
         inputUrl:
-          description: >-
-            The location of the import metadata file. This will be the same value as
-
-            the google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url
-
-            field.
+          description: The location of the import metadata file. This will be the same value as the google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url field.
           type: string
         progressBytes:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1Progress"
@@ -630,47 +436,13 @@ components:
           description: An estimate of the number of entities processed.
       type: object
     GoogleDatastoreAdminV1beta1ImportEntitiesRequest:
-      description: >-
-        The request for
-
-        google.datastore.admin.v1beta1.DatastoreAdmin.ImportEntities.
+      description: The request for google.datastore.admin.v1beta1.DatastoreAdmin.ImportEntities.
       properties:
         entityFilter:
           $ref: "#/components/schemas/GoogleDatastoreAdminV1beta1EntityFilter"
-          description: >-
-            Optionally specify which kinds/namespaces are to be imported. If provided,
-
-            the list must be a subset of the EntityFilter used in creating the export,
-
-            otherwise a FAILED_PRECONDITION error will be returned. If no filter is
-
-            specified then all entities from the export are imported.
+          description: Optionally specify which kinds/namespaces are to be imported. If provided, the list must be a subset of the EntityFilter used in creating the export, otherwise a FAILED_PRECONDITION error will be returned. If no filter is specified then all entities from the export are imported.
         inputUrl:
-          description: >-
-            The full resource URL of the external storage location. Currently, only
-
-            Google Cloud Storage is supported. So input_url should be of the form:
-
-            `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where
-
-            `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is
-
-            an optional Cloud Storage namespace path (this is not a Cloud Datastore
-
-            namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written
-
-            by the ExportEntities operation. For more information about Cloud Storage
-
-            namespace paths, see
-
-            [Object name
-
-            considerations](https://cloud.google.com/storage/docs/naming#object-considerations).
-
-
-            For more information, see
-
-            google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url.
+          description: "The full resource URL of the external storage location. Currently, only Google Cloud Storage is supported. So input_url should be of the form: `gs://BUCKET_NAME[/NAMESPACE_PATH]/OVERALL_EXPORT_METADATA_FILE`, where `BUCKET_NAME` is the name of the Cloud Storage bucket, `NAMESPACE_PATH` is an optional Cloud Storage namespace path (this is not a Cloud Datastore namespace), and `OVERALL_EXPORT_METADATA_FILE` is the metadata file written by the ExportEntities operation. For more information about Cloud Storage namespace paths, see [Object name considerations](https://cloud.google.com/storage/docs/naming#object-considerations). For more information, see google.datastore.admin.v1beta1.ExportEntitiesResponse.output_url."
           type: string
         labels:
           additionalProperties:
@@ -682,33 +454,19 @@ components:
       description: Measures the progress of a particular metric.
       properties:
         workCompleted:
-          description: >-
-            The amount of work that has been completed. Note that this may be greater
-
-            than work_estimated.
+          description: The amount of work that has been completed. Note that this may be greater than work_estimated.
           format: int64
           type: string
         workEstimated:
-          description: >-
-            An estimate of how much work needs to be performed. May be zero if the
-
-            work estimate is unavailable.
+          description: An estimate of how much work needs to be performed. May be zero if the work estimate is unavailable.
           format: int64
           type: string
       type: object
     GoogleLongrunningOperation:
-      description: >-
-        This resource represents a long-running operation that is the result of a
-
-        network API call.
+      description: This resource represents a long-running operation that is the result of a network API call.
       properties:
         done:
-          description: >-
-            If the value is `false`, it means the operation is still in progress.
-
-            If `true`, the operation is completed, and either `error` or `response` is
-
-            available.
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
           type: boolean
         error:
           $ref: "#/components/schemas/Status"
@@ -716,80 +474,33 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            Service-specific metadata associated with the operation.  It typically
-
-            contains progress information and common metadata such as create time.
-
-            Some services might not provide such metadata.  Any method that returns a
-
-            long-running operation should document the metadata type, if any.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: >-
-            The server-assigned name, which is only unique within the same service that
-
-            originally returns it. If you use the default HTTP mapping, the
-
-            `name` should be a resource name ending with `operations/{unique_id}`.
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            The normal response of the operation in case of success.  If the original
-
-            method returns no data on success, such as `Delete`, the response is
-
-            `google.protobuf.Empty`.  If the original method is standard
-
-            `Get`/`Create`/`Update`, the response should be the resource.  For other
-
-            methods, the response should have the type `XxxResponse`, where `Xxx`
-
-            is the original method name.  For example, if the original method name
-
-            is `TakeSnapshot()`, the inferred response type is
-
-            `TakeSnapshotResponse`.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     Status:
-      description: >-
-        The `Status` type defines a logical error model that is suitable for
-
-        different programming environments, including REST APIs and RPC APIs. It is
-
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
-        three pieces of data: error code, error message, and error details.
-
-
-        You can find out more about this error model and how to work with it in the
-
-        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common set of
-
-            message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: >-
-            A developer-facing error message, which should be in English. Any
-
-            user-facing error message should be localized and sent in the
-
-            google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
   securitySchemes:

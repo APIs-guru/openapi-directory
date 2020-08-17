@@ -33,13 +33,13 @@ info:
 externalDocs:
   url: http://developers.google.com/cloud-dns
 tags:
+  - name: projects
+  - name: managedZones
+  - name: dnsKeys
+  - name: managedZoneOperations
+  - name: changes
   - name: resourceRecordSets
   - name: policies
-  - name: managedZones
-  - name: changes
-  - name: managedZoneOperations
-  - name: dnsKeys
-  - name: projects
 paths:
   "/dns/v2beta1/projects/{project}":
     get:
@@ -84,16 +84,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones":
     get:
@@ -148,16 +148,16 @@ paths:
       tags:
         - managedZones
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new ManagedZone.
@@ -281,16 +281,16 @@ paths:
       tags:
         - managedZones
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing ManagedZone.
@@ -446,16 +446,16 @@ paths:
       tags:
         - changes
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Atomically update the ResourceRecordSet collection.
@@ -556,16 +556,16 @@ paths:
       tags:
         - changes
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
@@ -626,16 +626,16 @@ paths:
       tags:
         - dnsKeys
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
@@ -697,16 +697,16 @@ paths:
       tags:
         - dnsKeys
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations":
     get:
@@ -770,16 +770,16 @@ paths:
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
@@ -836,16 +836,16 @@ paths:
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
@@ -911,16 +911,16 @@ paths:
       tags:
         - resourceRecordSets
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/dns/v2beta1/projects/{project}/policies":
     get:
@@ -953,16 +953,16 @@ paths:
       tags:
         - policies
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new Policy
@@ -1051,16 +1051,16 @@ paths:
       tags:
         - policies
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing Policy.

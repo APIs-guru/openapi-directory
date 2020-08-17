@@ -105,17 +105,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: Sends new traces to Cloud Trace or updates existing traces. If the ID of a trace that you send matches that of an existing trace, any fields in the existing trace and its spans are overwritten by the provided values, and any new fields provided are merged with the existing trace data. If the ID does not match, a new trace is created.
       operationId: cloudtrace.projects.patchTraces
@@ -185,17 +185,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/callback"
 components:
   parameters:
     _.xgafv:

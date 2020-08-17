@@ -61,13 +61,13 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates an existing resource. This method supports patch semantics.
       operationId: groupsSettings.groups.patch

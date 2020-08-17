@@ -33,12 +33,12 @@ info:
 externalDocs:
   url: http://developers.google.com/cloud-dns
 tags:
-  - name: changes
   - name: dnsKeys
-  - name: managedZoneOperations
+  - name: changes
   - name: policies
-  - name: projects
+  - name: managedZoneOperations
   - name: resourceRecordSets
+  - name: projects
   - name: managedZones
 paths:
   "/dns/v1beta2/projects/{project}":
@@ -52,12 +52,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -89,17 +84,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones":
     get:
       description: Enumerate ManagedZones that have been created but not yet deleted.
@@ -116,18 +111,12 @@ paths:
           name: dnsName
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
@@ -159,17 +148,17 @@ paths:
       tags:
         - managedZones
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a new ManagedZone.
       operationId: dns.managedZones.create
@@ -180,12 +169,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -224,21 +208,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -267,21 +243,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -313,17 +281,17 @@ paths:
       tags:
         - managedZones
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Apply a partial update to an existing ManagedZone.
       operationId: dns.managedZones.patch
@@ -334,21 +302,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -386,21 +346,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -439,27 +391,18 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
@@ -503,17 +446,17 @@ paths:
       tags:
         - changes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Atomically update the ResourceRecordSet collection.
       operationId: dns.changes.create
@@ -524,21 +467,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -577,30 +512,19 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            The identifier of the requested change, from a previous
-
-            ResourceRecordSetsChangeResponse.
+        - description: The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.
           in: path
           name: changeId
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -632,17 +556,17 @@ paths:
       tags:
         - changes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
       description: Enumerate DnsKeys to a ResourceRecordSet collection.
@@ -654,37 +578,23 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            An optional comma-separated list of digest types to compute and display
-
-            for key signing keys. If omitted, the recommended digest type will be
-
-            computed and displayed.
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
           in: query
           name: digestType
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
@@ -716,17 +626,17 @@ paths:
       tags:
         - dnsKeys
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
       description: Fetch the representation of an existing DnsKey.
@@ -738,10 +648,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
@@ -753,22 +660,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
             type: string
-        - description: >-
-            An optional comma-separated list of digest types to compute and display
-
-            for key signing keys. If omitted, the recommended digest type will be
-
-            computed and displayed.
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
           in: query
           name: digestType
           schema:
@@ -800,17 +697,17 @@ paths:
       tags:
         - dnsKeys
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/operations":
     get:
       description: Enumerate Operations for the given ManagedZone.
@@ -828,18 +725,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
@@ -879,17 +770,17 @@ paths:
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
       description: Fetch the representation of an existing Operation.
@@ -913,12 +804,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -950,17 +836,17 @@ paths:
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
       description: Enumerate ResourceRecordSets that have been created but not yet deleted.
@@ -972,43 +858,28 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Identifies the managed zone addressed by this request. Can be the managed
-
-            zone name or id.
+        - description: Identifies the managed zone addressed by this request. Can be the managed zone name or id.
           in: path
           name: managedZone
           required: true
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Restricts the list to return only records with this fully qualified domain
-
-            name.
+        - description: Restricts the list to return only records with this fully qualified domain name.
           in: query
           name: name
           schema:
             type: string
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: >-
-            Restricts the list to return only records of this type. If present, the
-
-            "name" parameter must also be present.
+        - description: Restricts the list to return only records of this type. If present, the "name" parameter must also be present.
           in: query
           name: type
           schema:
@@ -1040,17 +911,17 @@ paths:
       tags:
         - resourceRecordSets
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
   "/dns/v1beta2/projects/{project}/policies":
     get:
       description: Enumerate all Policies associated with a project.
@@ -1062,18 +933,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Optional. Maximum number of results to be returned. If unspecified, the
-
-            server will decide how many results to return.
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
             type: integer
-        - description: >-
-            Optional. A tag returned by a previous list request that was truncated.
-
-            Use this parameter to continue a previous list request.
+        - description: Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.
           in: query
           name: pageToken
           schema:
@@ -1105,17 +970,17 @@ paths:
       tags:
         - policies
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Create a new Policy
       operationId: dns.policies.create
@@ -1126,12 +991,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -1161,10 +1021,7 @@ paths:
         - policies
   "/dns/v1beta2/projects/{project}/policies/{policy}":
     delete:
-      description: >-
-        Delete a previously created Policy. Will fail if the policy is still being
-
-        referenced by a network.
+      description: Delete a previously created Policy. Will fail if the policy is still being referenced by a network.
       operationId: dns.policies.delete
       parameters:
         - description: Identifies the project addressed by this request.
@@ -1179,12 +1036,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -1219,12 +1071,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -1256,17 +1103,17 @@ paths:
       tags:
         - policies
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Apply a partial update to an existing Policy.
       operationId: dns.policies.patch
@@ -1283,12 +1130,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -1332,12 +1174,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            For mutating operation requests only. An optional identifier
-
-            specified by the client. Must be unique for operation resources in the
-
-            Operations collection.
+        - description: For mutating operation requests only. An optional identifier specified by the client. Must be unique for operation resources in the Operations collection.
           in: query
           name: clientOperationId
           schema:
@@ -1442,20 +1279,7 @@ components:
         type: string
   schemas:
     Change:
-      description: >-
-        A Change represents a set of ResourceRecordSet additions and deletions
-
-        applied atomically to a ManagedZone. ResourceRecordSets within a
-
-        ManagedZone are modified by creating a new Change element in the Changes
-
-        collection. In turn the Changes collection also records the past
-
-        modifications to the ResourceRecordSets in a ManagedZone. The current
-
-        state of the ManagedZone is the sum effect of applying all Change
-
-        elements in the Changes collection in sequence.
+      description: A Change represents a set of ResourceRecordSet additions and deletions applied atomically to a ManagedZone. ResourceRecordSets within a ManagedZone are modified by creating a new Change element in the Changes collection. In turn the Changes collection also records the past modifications to the ResourceRecordSets in a ManagedZone. The current state of the ManagedZone is the sum effect of applying all Change elements in the Changes collection in sequence.
       properties:
         additions:
           description: Which ResourceRecordSets to add?
@@ -1477,28 +1301,17 @@ components:
           default: dns#change
           type: string
         startTime:
-          description: >-
-            The time that this operation was started by the server (output only). This
-
-            is in RFC3339 text format.
+          description: The time that this operation was started by the server (output only). This is in RFC3339 text format.
           type: string
         status:
-          description: >-
-            Status of the operation (output only). A status of "done" means that the
-
-            request to update the authoritative servers has been sent but the
-
-            servers might not be updated yet.
+          description: Status of the operation (output only). A status of "done" means that the request to update the authoritative servers has been sent but the servers might not be updated yet.
           enum:
             - pending
             - done
           type: string
       type: object
     ChangesListResponse:
-      description: >-
-        The response to a request to enumerate Changes to a ResourceRecordSets
-
-        collection.
+      description: The response to a request to enumerate Changes to a ResourceRecordSets collection.
       properties:
         changes:
           description: The requested changes.
@@ -1512,35 +1325,14 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your pagination token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a "snapshot" of collections larger than the maximum
-
-            page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     DnsKey:
       description: A DNSSEC key pair.
       properties:
         algorithm:
-          description: >-
-            String mnemonic specifying the DNSSEC algorithm of this key. Immutable
-
-            after creation time.
+          description: String mnemonic specifying the DNSSEC algorithm of this key. Immutable after creation time.
           enum:
             - rsasha1
             - rsasha256
@@ -1549,24 +1341,13 @@ components:
             - ecdsap384sha384
           type: string
         creationTime:
-          description: >-
-            The time that this resource was created in the control plane. This is in
-
-            RFC3339 text format. Output only.
+          description: The time that this resource was created in the control plane. This is in RFC3339 text format. Output only.
           type: string
         description:
-          description: >-
-            A mutable string of at most 1024 characters associated with this resource
-
-            for the user's convenience. Has no effect on the resource's function.
+          description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the resource's function.
           type: string
         digests:
-          description: >-
-            Cryptographic hashes of the DNSKEY resource record associated with this
-
-            DnsKey. These digests are needed to construct a DS record that points at
-
-            this DNS key. Output only.
+          description: Cryptographic hashes of the DNSKEY resource record associated with this DnsKey. These digests are needed to construct a DS record that points at this DNS key. Output only.
           items:
             $ref: "#/components/schemas/DnsKeyDigest"
           type: array
@@ -1574,30 +1355,14 @@ components:
           description: Unique identifier for the resource; defined by the server (output only).
           type: string
         isActive:
-          description: >-
-            Active keys will be used to sign subsequent changes to the ManagedZone.
-
-            Inactive keys will still be present as DNSKEY Resource Records for the use
-
-            of resolvers validating existing signatures.
+          description: Active keys will be used to sign subsequent changes to the ManagedZone. Inactive keys will still be present as DNSKEY Resource Records for the use of resolvers validating existing signatures.
           type: boolean
         keyLength:
           description: Length of the key in bits. Specified at creation time then immutable.
           format: uint32
           type: integer
         keyTag:
-          description: >-
-            The key tag is a non-cryptographic hash of the a DNSKEY resource record
-
-            associated with this DnsKey. The key tag can be used to identify a DNSKEY
-
-            more quickly (but it is not a unique identifier). In particular, the key
-
-            tag is used in a parent zone's DS record to point at the DNSKEY in this
-
-            child ManagedZone. The key tag is a number in the range [0, 65535] and the
-
-            algorithm to calculate it is specified in RFC4034 Appendix B. Output only.
+          description: The key tag is a non-cryptographic hash of the a DNSKEY resource record associated with this DnsKey. The key tag can be used to identify a DNSKEY more quickly (but it is not a unique identifier). In particular, the key tag is used in a parent zone's DS record to point at the DNSKEY in this child ManagedZone. The key tag is a number in the range [0, 65535] and the algorithm to calculate it is specified in RFC4034 Appendix B. Output only.
           format: int32
           type: integer
         kind:
@@ -1607,16 +1372,7 @@ components:
           description: Base64 encoded public half of this key. Output only.
           type: string
         type:
-          description: >-
-            One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the
-
-            Secure Entry Point flag set and, when active, will be used to sign only
-
-            resource record sets of type DNSKEY. Otherwise, the Secure Entry Point
-
-            flag will be cleared and this key will be used to sign only resource
-
-            record sets of other types. Immutable after creation time.
+          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, will be used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag will be cleared and this key will be used to sign only resource record sets of other types. Immutable after creation time.
           enum:
             - keySigning
             - zoneSigning
@@ -1625,10 +1381,7 @@ components:
     DnsKeyDigest:
       properties:
         digest:
-          description: >-
-            The base-16 encoded bytes of this digest. Suitable for use in a DS
-
-            resource record.
+          description: The base-16 encoded bytes of this digest. Suitable for use in a DS resource record.
           type: string
         type:
           description: Specifies the algorithm used to calculate this digest.
@@ -1639,10 +1392,7 @@ components:
           type: string
       type: object
     DnsKeySpec:
-      description: >-
-        Parameters for DnsKey key generation. Used for generating initial keys
-
-        for a new ManagedZone and as default when adding a new DnsKey.
+      description: Parameters for DnsKey key generation. Used for generating initial keys for a new ManagedZone and as default when adding a new DnsKey.
       properties:
         algorithm:
           description: String mnemonic specifying the DNSSEC algorithm of this key.
@@ -1658,16 +1408,7 @@ components:
           format: uint32
           type: integer
         keyType:
-          description: >-
-            Specifies whether this is a key signing key (KSK) or a zone signing key
-
-            (ZSK). Key signing keys have the Secure Entry Point flag set and, when
-
-            active, will only be used to sign resource record sets of type DNSKEY.
-
-            Zone signing keys do not have the Secure Entry Point flag set and will be
-
-            used to sign all other types of resource record sets.
+          description: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.
           enum:
             - keySigning
             - zoneSigning
@@ -1691,46 +1432,17 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your pagination token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a "snapshot" of collections larger than the maximum
-
-            page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     ManagedZone:
-      description: >-
-        A zone is a subtree of the DNS namespace under one administrative
-
-        responsibility. A ManagedZone is a resource that represents a DNS zone
-
-        hosted by the Cloud DNS service.
+      description: A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.
       properties:
         creationTime:
-          description: >-
-            The time that this resource was created on the server. This is in RFC3339
-
-            text format. Output only.
+          description: The time that this resource was created on the server. This is in RFC3339 text format. Output only.
           type: string
         description:
-          description: >-
-            A mutable string of at most 1024 characters associated with this resource
-
-            for the user's convenience. Has no effect on the managed zone's function.
+          description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the managed zone's function.
           type: string
         dnsName:
           description: The DNS name of this managed zone, for instance "example.com.".
@@ -1740,12 +1452,7 @@ components:
           description: DNSSEC configuration.
         forwardingConfig:
           $ref: "#/components/schemas/ManagedZoneForwardingConfig"
-          description: >-
-            The presence for this field indicates that outbound forwarding is enabled
-
-            for this zone.  The value of this field contains the set of destinations
-
-            to forward to.
+          description: The presence for this field indicates that outbound forwarding is enabled for this zone. The value of this field contains the set of destinations to forward to.
         id:
           description: Unique identifier for the resource; defined by the server (output only)
           format: uint64
@@ -1759,62 +1466,30 @@ components:
           description: User labels.
           type: object
         name:
-          description: >-
-            User assigned name for this resource. Must be unique within the project.
-
-            The name must be 1-63 characters long, must begin with a letter, end with
-
-            a letter or digit, and only contain lowercase letters, digits or dashes.
+          description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
           type: string
         nameServerSet:
-          description: >-
-            Optionally specifies the NameServerSet for this ManagedZone. A
-
-            NameServerSet is a set of DNS name servers that all host the same
-
-            ManagedZones. Most users will leave this field unset.
+          description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset.
           type: string
         nameServers:
-          description: >-
-            Delegate your managed_zone to these virtual name servers; defined by the
-
-            server (output only)
+          description: Delegate your managed_zone to these virtual name servers; defined by the server (output only)
           items:
             type: string
           type: array
         peeringConfig:
           $ref: "#/components/schemas/ManagedZonePeeringConfig"
-          description: >-
-            The presence of this field indicates that DNS Peering is enabled for this
-
-            zone. The value of this field contains the network to peer with.
+          description: The presence of this field indicates that DNS Peering is enabled for this zone. The value of this field contains the network to peer with.
         privateVisibilityConfig:
           $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfig"
-          description: >-
-            For privately visible zones, the set of Virtual Private Cloud resources
-
-            that the zone is visible from.
+          description: For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
         reverseLookupConfig:
           $ref: "#/components/schemas/ManagedZoneReverseLookupConfig"
-          description: >-
-            The presence of this field indicates that this is a managed reverse
-
-            lookup zone and Cloud DNS will resolve reverse lookup queries using
-
-            automatically configured records for VPC resources. This only applies
-
-            to networks listed under private_visibility_config.
+          description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS will resolve reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
         serviceDirectoryConfig:
           $ref: "#/components/schemas/ManagedZoneServiceDirectoryConfig"
-          description: >-
-            This field links to the associated service directory namespace. This field
-
-            should not be set for public zones or forwarding zones.
+          description: This field links to the associated service directory namespace. This field should not be set for public zones or forwarding zones.
         visibility:
-          description: >-
-            The zone's visibility: public zones are exposed to the Internet, while
-
-            private zones are visible only to Virtual Private Cloud resources.
+          description: "The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources."
           enum:
             - public
             - private
@@ -1823,10 +1498,7 @@ components:
     ManagedZoneDnsSecConfig:
       properties:
         defaultKeySpecs:
-          description: >-
-            Specifies parameters for generating initial DnsKeys for this
-
-            ManagedZone. Can only be changed while the state is OFF.
+          description: Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
           items:
             $ref: "#/components/schemas/DnsKeySpec"
           type: array
@@ -1834,10 +1506,7 @@ components:
           default: dns#managedZoneDnsSecConfig
           type: string
         nonExistence:
-          description: >-
-            Specifies the mechanism for authenticated denial-of-existence responses.
-
-            Can only be changed while the state is OFF.
+          description: Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
           enum:
             - nsec
             - nsec3
@@ -1856,12 +1525,7 @@ components:
           default: dns#managedZoneForwardingConfig
           type: string
         targetNameServers:
-          description: >-
-            List of target name servers to forward to.
-
-            Cloud DNS will select the best available name server if more than one
-
-            target is given.
+          description: List of target name servers to forward to. Cloud DNS will select the best available name server if more than one target is given.
           items:
             $ref: "#/components/schemas/ManagedZoneForwardingConfigNameServerTarget"
           type: array
@@ -1869,16 +1533,7 @@ components:
     ManagedZoneForwardingConfigNameServerTarget:
       properties:
         forwardingPath:
-          description: >-
-            Forwarding path for this NameServerTarget. If unset or set to DEFAULT,
-
-            Cloud DNS will make forwarding decision based on address ranges,
-
-            i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the
-
-            Internet. When set to PRIVATE, Cloud DNS will always send queries
-
-            through VPC for this target.
+          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
           enum:
             - default
             - private
@@ -1898,25 +1553,7 @@ components:
           default: dns#managedZoneOperationsListResponse
           type: string
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your page token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a consistent snapshot of a collection larger than the
-
-            maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         operations:
           description: The operation resources.
@@ -1936,27 +1573,13 @@ components:
     ManagedZonePeeringConfigTargetNetwork:
       properties:
         deactivateTime:
-          description: >-
-            The time at which the zone was deactivated, in RFC 3339 date-time
-
-            format. An empty string indicates that the peering connection is
-
-            active. The producer network can deactivate a zone. The zone is
-
-            automatically deactivated if the producer network that the zone
-
-            targeted is deleted. Output only.
+          description: The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.
           type: string
         kind:
           default: dns#managedZonePeeringConfigTargetNetwork
           type: string
         networkUrl:
-          description: >-
-            The fully qualified URL of the VPC network to forward queries to.
-
-            This should be formatted like
-
-            https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+          description: The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     ManagedZonePrivateVisibilityConfig:
@@ -1976,12 +1599,7 @@ components:
           default: dns#managedZonePrivateVisibilityConfigNetwork
           type: string
         networkUrl:
-          description: >-
-            The fully qualified URL of the VPC network to bind to.
-
-            This should be formatted like
-
-            https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     ManagedZoneReverseLookupConfig:
@@ -2003,23 +1621,13 @@ components:
     ManagedZoneServiceDirectoryConfigNamespace:
       properties:
         deletionTime:
-          description: >-
-            The time that the namespace backing this zone was deleted, empty
-
-            string if it still exists. This is in RFC3339 text format. Output
-
-            only.
+          description: The time that the namespace backing this zone was deleted, empty string if it still exists. This is in RFC3339 text format. Output only.
           type: string
         kind:
           default: dns#managedZoneServiceDirectoryConfigNamespace
           type: string
         namespaceUrl:
-          description: >-
-            The fully qualified URL of the namespace associated with the zone.
-
-            This should be formatted like
-
-            https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}
+          description: The fully qualified URL of the namespace associated with the zone. This should be formatted like https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}
           type: string
       type: object
     ManagedZonesListResponse:
@@ -2036,88 +1644,35 @@ components:
             $ref: "#/components/schemas/ManagedZone"
           type: array
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your page token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a consistent snapshot of a collection larger than the
-
-            maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
       type: object
     Operation:
-      description: >-
-        An operation represents a successful mutation performed on a Cloud DNS
-
-        resource.
-
-        Operations provide:
-
-        - An audit log of server resource mutations.
-
-        - A way to recover/retry API calls in the case where the response is never
-          received by the caller. Use the caller specified client_operation_id.
+      description: "An operation represents a successful mutation performed on a Cloud DNS resource. Operations provide: - An audit log of server resource mutations. - A way to recover/retry API calls in the case where the response is never received by the caller. Use the caller specified client_operation_id."
       properties:
         dnsKeyContext:
           $ref: "#/components/schemas/OperationDnsKeyContext"
           description: Only populated if the operation targeted a DnsKey (output only).
         id:
-          description: >-
-            Unique identifier for the resource. This is the client_operation_id if
-
-            the client specified it when the mutation was initiated, otherwise,
-
-            it is generated by the server. The name must be 1-63 characters long
-
-            and match the regular expression [-a-z0-9]? (output only)
+          description: Unique identifier for the resource. This is the client_operation_id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)
           type: string
         kind:
           default: dns#operation
           type: string
         startTime:
-          description: >-
-            The time that this operation was started by the server. This is in RFC3339
-
-            text format (output only).
+          description: The time that this operation was started by the server. This is in RFC3339 text format (output only).
           type: string
         status:
-          description: >-
-            Status of the operation. Can be one of the following: "PENDING" or "DONE"
-
-            (output only). A status of "DONE" means that the
-
-            request to update the authoritative servers has been sent, but the
-
-            servers might not be updated yet.
+          description: 'Status of the operation. Can be one of the following: "PENDING" or "DONE" (output only). A status of "DONE" means that the request to update the authoritative servers has been sent, but the servers might not be updated yet.'
           enum:
             - pending
             - done
           type: string
         type:
-          description: >-
-            Type of the operation. Operations include insert, update, and delete
-
-            (output only).
+          description: Type of the operation. Operations include insert, update, and delete (output only).
           type: string
         user:
-          description: >-
-            User who requested the operation, for example: user@example.com.
-
-            cloud-dns-system for operations automatically done by the system.
-
-            (output only)
+          description: "User who requested the operation, for example: user@example.com. cloud-dns-system for operations automatically done by the system. (output only)"
           type: string
         zoneContext:
           $ref: "#/components/schemas/OperationManagedZoneContext"
@@ -2150,25 +1705,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your page token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a consistent snapshot of a collection larger than the
-
-            maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         policies:
           description: The policy resources.
@@ -2191,40 +1728,19 @@ components:
           $ref: "#/components/schemas/Policy"
       type: object
     Policy:
-      description: >-
-        A policy is a collection of DNS rules applied to one or more Virtual Private
-
-        Cloud resources.
+      description: A policy is a collection of DNS rules applied to one or more Virtual Private Cloud resources.
       properties:
         alternativeNameServerConfig:
           $ref: "#/components/schemas/PolicyAlternativeNameServerConfig"
-          description: >-
-            Sets an alternative name server for the associated networks. When
-
-            specified, all DNS queries are forwarded to a name server that you
-
-            choose. Names such as .internal are not available when an alternative
-
-            name server is specified.
+          description: Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
         description:
-          description: >-
-            A mutable string of at most 1024 characters associated with this resource
-
-            for the user's convenience. Has no effect on the policy's function.
+          description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the policy's function.
           type: string
         enableInboundForwarding:
-          description: >-
-            Allows networks bound to this policy to receive DNS queries sent by VMs or
-
-            applications over VPN connections. When enabled, a virtual IP address will
-
-            be allocated from each of the sub-networks that are bound to this policy.
+          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.
           type: boolean
         enableLogging:
-          description: >-
-            Controls whether logging is enabled for the networks bound to this policy.
-
-            Defaults to no logging if not set.
+          description: Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
           type: boolean
         id:
           description: Unique identifier for the resource; defined by the server (output only).
@@ -2248,14 +1764,7 @@ components:
           default: dns#policyAlternativeNameServerConfig
           type: string
         targetNameServers:
-          description: >-
-            Sets an alternative name server for the associated networks. When
-
-            specified, all DNS queries are forwarded to a name server that you
-
-            choose. Names such as .internal are not available when an alternative
-
-            name server is specified.
+          description: Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
           items:
             $ref: "#/components/schemas/PolicyAlternativeNameServerConfigTargetNameServer"
           type: array
@@ -2263,16 +1772,7 @@ components:
     PolicyAlternativeNameServerConfigTargetNameServer:
       properties:
         forwardingPath:
-          description: >-
-            Forwarding path for this TargetNameServer. If unset or set to DEFAULT,
-
-            Cloud DNS will make forwarding decision based on address ranges,
-
-            i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the
-
-            Internet. When set to PRIVATE, Cloud DNS will always send queries
-
-            through VPC for this target.
+          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
           enum:
             - default
             - private
@@ -2290,21 +1790,11 @@ components:
           default: dns#policyNetwork
           type: string
         networkUrl:
-          description: >-
-            The fully qualified URL of the VPC network to bind to.
-
-            This should be formatted like
-
-            https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
+          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     Project:
-      description: >-
-        A project resource. The project is a top level container for resources
-
-        including Cloud DNS ManagedZones. Projects can be created only in the APIs
-
-        console.
+      description: A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console.
       properties:
         id:
           description: User assigned unique identifier for the resource (output only).
@@ -2313,10 +1803,7 @@ components:
           default: dns#project
           type: string
         number:
-          description: >-
-            Unique numeric identifier for the resource; defined by the server (output
-
-            only).
+          description: Unique numeric identifier for the resource; defined by the server (output only).
           format: uint64
           type: string
         quota:
@@ -2338,17 +1825,11 @@ components:
           format: int32
           type: integer
         managedZonesPerNetwork:
-          description: >-
-            Maximum allowed number of managed zones which can be attached to a
-
-            network.
+          description: Maximum allowed number of managed zones which can be attached to a network.
           format: int32
           type: integer
         networksPerManagedZone:
-          description: >-
-            Maximum allowed number of networks to which a privately scoped zone can be
-
-            attached.
+          description: Maximum allowed number of networks to which a privately scoped zone can be attached.
           format: int32
           type: integer
         networksPerPolicy:
@@ -2364,17 +1845,11 @@ components:
           format: int32
           type: integer
         rrsetAdditionsPerChange:
-          description: >-
-            Maximum allowed number of ResourceRecordSets to add per
-
-            ChangesCreateRequest.
+          description: Maximum allowed number of ResourceRecordSets to add per ChangesCreateRequest.
           format: int32
           type: integer
         rrsetDeletionsPerChange:
-          description: >-
-            Maximum allowed number of ResourceRecordSets to delete per
-
-            ChangesCreateRequest.
+          description: Maximum allowed number of ResourceRecordSets to delete per ChangesCreateRequest.
           format: int32
           type: integer
         rrsetsPerManagedZone:
@@ -2390,10 +1865,7 @@ components:
           format: int32
           type: integer
         totalRrdataSizePerChange:
-          description: >-
-            Maximum allowed size for total rrdata in one ChangesCreateRequest in
-
-            bytes.
+          description: Maximum allowed size for total rrdata in one ChangesCreateRequest in bytes.
           format: int32
           type: integer
         whitelistedKeySpecs:
@@ -2412,10 +1884,7 @@ components:
           description: For example, www.example.com.
           type: string
         rrdatas:
-          description: >-
-            As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see
-
-            <a href="/dns/records/json-record">examples</a>.
+          description: As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see examples.
           items:
             type: string
           type: array
@@ -2429,12 +1898,7 @@ components:
           format: int32
           type: integer
         type:
-          description: >-
-            The identifier of a supported record type. See the list of
-
-            <a href="/dns/docs/overview#supported_dns_record_types">Supported
-
-            DNS record types</a>.
+          description: The identifier of a supported record type. See the list of Supported DNS record types.
           type: string
       type: object
     ResourceRecordSetsListResponse:
@@ -2446,25 +1910,7 @@ components:
           description: Type of resource.
           type: string
         nextPageToken:
-          description: >-
-            The presence of this field indicates that there exist more results
-
-            following your last page of results in pagination order. To fetch them,
-
-            make another list request using this value as your pagination token.
-
-
-            In this way you can retrieve the complete contents of even very large
-
-            collections one page at a time. However, if the contents of the collection
-
-            change between the first and last paginated list request, the set of all
-
-            elements returned will be an inconsistent view of the collection. There is
-
-            no way to retrieve a consistent snapshot of a collection larger than the
-
-            maximum page size.
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         rrsets:
           description: The resource record set resources.
@@ -2476,12 +1922,7 @@ components:
       description: Elements common to every response.
       properties:
         operationId:
-          description: >-
-            For mutating operation requests that completed successfully.
-
-            This is the client_operation_id if the client specified it,
-
-            otherwise it is generated by the server (output only).
+          description: For mutating operation requests that completed successfully. This is the client_operation_id if the client specified it, otherwise it is generated by the server (output only).
           type: string
       type: object
   securitySchemes:

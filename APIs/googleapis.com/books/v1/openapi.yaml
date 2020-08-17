@@ -33,31 +33,31 @@ info:
 externalDocs:
   url: https://code.google.com/apis/books/docs/v1/getting_started.html
 tags:
-  - name: myconfig
-  - name: notification
-  - name: layers
-  - name: mylibrary
   - name: bookshelves
-  - name: series
-  - name: volumes
-  - name: onboarding
   - name: personalizedstream
-  - name: dictionary
+  - name: myconfig
   - name: cloudloading
   - name: familysharing
+  - name: volumes
+  - name: layers
+  - name: series
+  - name: mylibrary
+  - name: dictionary
+  - name: notification
   - name: promooffer
+  - name: onboarding
 paths:
   /books/v1/cloudloading/addBook:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -100,15 +100,15 @@ paths:
         - cloudloading
   /books/v1/cloudloading/deleteBook:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -136,15 +136,15 @@ paths:
         - cloudloading
   /books/v1/cloudloading/updateBook:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -194,15 +194,15 @@ paths:
       tags:
         - dictionary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/familysharing/getFamilyInfo:
@@ -230,28 +230,28 @@ paths:
       tags:
         - familysharing
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/familysharing/share:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -289,15 +289,15 @@ paths:
         - familysharing
   /books/v1/familysharing/unshare:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -358,28 +358,28 @@ paths:
       tags:
         - myconfig
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/myconfig/releaseDownloadAccess:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -426,15 +426,15 @@ paths:
         - myconfig
   /books/v1/myconfig/requestAccess:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -492,15 +492,15 @@ paths:
         - myconfig
   /books/v1/myconfig/syncVolumeLicenses:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -574,15 +574,15 @@ paths:
         - myconfig
   /books/v1/myconfig/updateUserSettings:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -681,15 +681,15 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -737,15 +737,15 @@ paths:
         - mylibrary
   /books/v1/mylibrary/annotations/summary:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -811,15 +811,15 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     put:
@@ -881,15 +881,15 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/mylibrary/bookshelves/{shelf}":
@@ -923,28 +923,28 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/mylibrary/bookshelves/{shelf}/addVolume":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -993,15 +993,15 @@ paths:
         - mylibrary
   "/books/v1/mylibrary/bookshelves/{shelf}/clearVolumes":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1035,15 +1035,15 @@ paths:
         - mylibrary
   "/books/v1/mylibrary/bookshelves/{shelf}/moveVolume":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1087,15 +1087,15 @@ paths:
         - mylibrary
   "/books/v1/mylibrary/bookshelves/{shelf}/removeVolume":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1205,15 +1205,15 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/mylibrary/readingpositions/{volumeId}":
@@ -1252,28 +1252,28 @@ paths:
       tags:
         - mylibrary
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/mylibrary/readingpositions/{volumeId}/setPosition":
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1373,15 +1373,15 @@ paths:
       tags:
         - notification
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/onboarding/listCategories:
@@ -1409,15 +1409,15 @@ paths:
       tags:
         - onboarding
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/onboarding/listCategoryVolumes:
@@ -1473,15 +1473,15 @@ paths:
       tags:
         - onboarding
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/personalizedstream/get:
@@ -1523,28 +1523,28 @@ paths:
       tags:
         - personalizedstream
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/promooffer/accept:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1606,15 +1606,15 @@ paths:
         - promooffer
   /books/v1/promooffer/dismiss:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -1720,15 +1720,15 @@ paths:
       tags:
         - promooffer
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/series/get:
@@ -1760,15 +1760,15 @@ paths:
       tags:
         - series
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/series/membership/get:
@@ -1806,15 +1806,15 @@ paths:
       tags:
         - series
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/users/{userId}/bookshelves":
@@ -1848,15 +1848,15 @@ paths:
       tags:
         - bookshelves
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/users/{userId}/bookshelves/{shelf}":
@@ -1896,15 +1896,15 @@ paths:
       tags:
         - bookshelves
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/users/{userId}/bookshelves/{shelf}/volumes":
@@ -1959,15 +1959,15 @@ paths:
       tags:
         - bookshelves
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/volumes:
@@ -2091,15 +2091,15 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/volumes/mybooks:
@@ -2180,15 +2180,15 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/volumes/recommended:
@@ -2230,28 +2230,28 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   /books/v1/volumes/recommended/rate:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
@@ -2359,15 +2359,15 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}":
@@ -2429,15 +2429,15 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/associated":
@@ -2495,15 +2495,15 @@ paths:
       tags:
         - volumes
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layers/{layerId}":
@@ -2603,15 +2603,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layers/{layerId}/annotations/{annotationId}":
@@ -2662,15 +2662,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layers/{layerId}/data":
@@ -2764,15 +2764,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layers/{layerId}/data/{annotationDataId}":
@@ -2848,15 +2848,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layersummary":
@@ -2905,15 +2905,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
   "/books/v1/volumes/{volumeId}/layersummary/{summaryId}":
@@ -2958,15 +2958,15 @@ paths:
       tags:
         - layers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
 components:

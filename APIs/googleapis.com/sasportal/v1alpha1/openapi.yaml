@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://developers.google.com/spectrum-access-system/
 tags:
-  - name: customers
-  - name: installer
   - name: nodes
+  - name: installer
+  - name: customers
   - name: policies
 paths:
   /v1alpha1/customers:
@@ -69,29 +69,29 @@ paths:
         - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Generates a secret to be used with the ValidateInstaller method
       operationId: sasportal.installer.generateSecret
@@ -117,16 +117,16 @@ paths:
   /v1alpha1/installer:validate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Validates the identity of a Certified Professional Installer (CPI).
       operationId: sasportal.installer.validate
@@ -152,16 +152,16 @@ paths:
   /v1alpha1/policies:get:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: sasportal.policies.get
@@ -187,16 +187,16 @@ paths:
   /v1alpha1/policies:set:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: sasportal.policies.set
@@ -222,16 +222,16 @@ paths:
   /v1alpha1/policies:test:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Returns permissions that a caller has on the specified resource.
       operationId: sasportal.policies.test
@@ -256,10 +256,10 @@ paths:
         - policies
   "/v1alpha1/{name}":
     delete:
-      description: Deletes a node.
-      operationId: sasportal.nodes.nodes.delete
+      description: Deletes a device.
+      operationId: sasportal.customers.devices.delete
       parameters:
-        - description: Required. The name of the node.
+        - description: Required. The name of the device.
           in: path
           name: name
           required: true
@@ -278,12 +278,12 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
     get:
-      description: Returns a requested node.
-      operationId: sasportal.nodes.nodes.get
+      description: Gets details about a device.
+      operationId: sasportal.customers.devices.get
       parameters:
-        - description: Required. The name of the node.
+        - description: Required. The name of the device.
           in: path
           name: name
           required: true
@@ -294,7 +294,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SasPortalNode"
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
@@ -302,24 +302,24 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     patch:
-      description: Updates an existing node.
-      operationId: sasportal.nodes.nodes.patch
+      description: Updates a device.
+      operationId: sasportal.customers.devices.patch
       parameters:
-        - description: Output only. Resource name.
+        - description: Output only. The resource path name.
           in: path
           name: name
           required: true
@@ -334,13 +334,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SasPortalNode"
+              $ref: "#/components/schemas/SasPortalDevice"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SasPortalNode"
+                $ref: "#/components/schemas/SasPortalDevice"
           description: Successful response
       security:
         - Oauth2:
@@ -348,25 +348,25 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{name}:move":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
-      description: Moves a node under another node or customer.
-      operationId: sasportal.nodes.nodes.move
+      description: Moves a device under another node or customer.
+      operationId: sasportal.customers.devices.move
       parameters:
-        - description: Required. The name of the node to move.
+        - description: Required. The name of the device to move.
           in: path
           name: name
           required: true
@@ -376,7 +376,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SasPortalMoveNodeRequest"
+              $ref: "#/components/schemas/SasPortalMoveDeviceRequest"
       responses:
         "200":
           content:
@@ -390,23 +390,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{name}:signDevice":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Signs a device.
-      operationId: sasportal.nodes.devices.signDevice
+      operationId: sasportal.customers.devices.signDevice
       parameters:
         - description: Output only. The resource path name.
           in: path
@@ -432,23 +432,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{name}:updateSigned":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     patch:
       description: Updates a signed device.
-      operationId: sasportal.nodes.devices.updateSigned
+      operationId: sasportal.customers.devices.updateSigned
       parameters:
         - description: Required. The name of the device to update.
           in: path
@@ -474,11 +474,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{parent}/devices":
     get:
       description: Lists devices under a node or customer.
-      operationId: sasportal.nodes.nodes.devices.list
+      operationId: sasportal.customers.devices.list
       parameters:
         - description: Required. The name of the parent resource.
           in: path
@@ -514,22 +514,22 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a device under a node or customer.
-      operationId: sasportal.nodes.nodes.devices.create
+      operationId: sasportal.customers.devices.create
       parameters:
         - description: Required. The name of the parent resource.
           in: path
@@ -555,23 +555,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{parent}/devices:bulk":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a device under a node or customer. Returned devices are unordered.
-      operationId: sasportal.nodes.nodes.devices.bulk
+      operationId: sasportal.customers.devices.bulk
       parameters:
         - description: Required. The name of the parent resource.
           in: path
@@ -597,23 +597,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{parent}/devices:createSigned":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a signed device under a node or customer.
-      operationId: sasportal.nodes.nodes.devices.createSigned
+      operationId: sasportal.customers.devices.createSigned
       parameters:
         - description: Required. The name of the parent resource.
           in: path
@@ -639,11 +639,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
   "/v1alpha1/{parent}/nodes":
     get:
       description: Lists nodes.
-      operationId: sasportal.nodes.nodes.nodes.list
+      operationId: sasportal.customers.nodes.nodes.list
       parameters:
         - description: Required. The parent resource name, for example, "nodes/1".
           in: path
@@ -674,22 +674,22 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
     post:
       description: Creates a new node.
-      operationId: sasportal.nodes.nodes.nodes.create
+      operationId: sasportal.customers.nodes.nodes.create
       parameters:
         - description: Required. The parent resource name where the node is to be created.
           in: path
@@ -715,7 +715,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
-        - nodes
+        - customers
 components:
   parameters:
     _.xgafv:

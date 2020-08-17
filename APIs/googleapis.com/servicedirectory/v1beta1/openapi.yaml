@@ -85,17 +85,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Updates a endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.patch
@@ -171,30 +171,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
   "/v1beta1/{name}:resolve":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Returns a service and its associated endpoints. Resolving a service is not considered an active developer method.
       operationId: servicedirectory.projects.locations.namespaces.services.resolve
@@ -270,17 +270,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a endpoint, and returns the new Endpoint.
       operationId: servicedirectory.projects.locations.namespaces.services.endpoints.create
@@ -361,17 +361,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a namespace, and returns the new Namespace.
       operationId: servicedirectory.projects.locations.namespaces.create
@@ -452,17 +452,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Creates a service, and returns the new Service.
       operationId: servicedirectory.projects.locations.namespaces.services.create
@@ -499,17 +499,17 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Gets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.getIamPolicy
@@ -541,17 +541,17 @@ paths:
         - projects
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Sets the IAM Policy for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.setIamPolicy
@@ -583,17 +583,17 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Tests IAM permissions for a resource (namespace or service only).
       operationId: servicedirectory.projects.locations.namespaces.services.testIamPermissions

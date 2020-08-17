@@ -34,9 +34,9 @@ externalDocs:
   url: https://developers.google.com/spectrum-access-system/
 tags:
   - name: customers
-  - name: installer
   - name: policies
   - name: nodes
+  - name: installer
 paths:
   /v1alpha1/customers:
     get:
@@ -68,30 +68,30 @@ paths:
       tags:
         - customers
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
   /v1alpha1/installer:generateSecret:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Generates a secret to be used with the ValidateInstaller method
       operationId: prod_tt_sasportal.installer.generateSecret
@@ -116,17 +116,17 @@ paths:
         - installer
   /v1alpha1/installer:validate:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Validates the identity of a Certified Professional Installer (CPI).
       operationId: prod_tt_sasportal.installer.validate
@@ -151,17 +151,17 @@ paths:
         - installer
   /v1alpha1/policies:get:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: prod_tt_sasportal.policies.get
@@ -186,17 +186,17 @@ paths:
         - policies
   /v1alpha1/policies:set:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: prod_tt_sasportal.policies.set
@@ -221,17 +221,17 @@ paths:
         - policies
   /v1alpha1/policies:test:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Returns permissions that a caller has on the specified resource.
       operationId: prod_tt_sasportal.policies.test
@@ -304,17 +304,17 @@ paths:
       tags:
         - nodes
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates an existing node.
       operationId: prod_tt_sasportal.nodes.nodes.patch
@@ -351,17 +351,17 @@ paths:
         - nodes
   "/v1alpha1/{name}:move":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Moves a node under another node or customer.
       operationId: prod_tt_sasportal.nodes.nodes.move
@@ -393,17 +393,17 @@ paths:
         - nodes
   "/v1alpha1/{name}:signDevice":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Signs a device.
       operationId: prod_tt_sasportal.nodes.devices.signDevice
@@ -435,17 +435,17 @@ paths:
         - nodes
   "/v1alpha1/{name}:updateSigned":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates a signed device.
       operationId: prod_tt_sasportal.nodes.devices.updateSigned
@@ -516,17 +516,17 @@ paths:
       tags:
         - nodes
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a device under a node or customer.
       operationId: prod_tt_sasportal.nodes.nodes.devices.create
@@ -558,17 +558,17 @@ paths:
         - nodes
   "/v1alpha1/{parent}/devices:bulk":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a device under a node or customer. Returned devices are unordered.
       operationId: prod_tt_sasportal.nodes.nodes.devices.bulk
@@ -600,17 +600,17 @@ paths:
         - nodes
   "/v1alpha1/{parent}/devices:createSigned":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a signed device under a node or customer.
       operationId: prod_tt_sasportal.nodes.nodes.devices.createSigned
@@ -676,17 +676,17 @@ paths:
       tags:
         - nodes
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a new node.
       operationId: prod_tt_sasportal.nodes.nodes.nodes.create
@@ -969,6 +969,9 @@ components:
         frequencyRange:
           $ref: "#/components/schemas/SasPortalFrequencyRange"
           description: The transmission frequency range.
+        grantId:
+          description: Grant Id.
+          type: string
         maxEirp:
           description: Maximum Equivalent Isotropically Radiated Power (EIRP) permitted by the grant. The maximum EIRP is in units of dBm/MHz. The value of maxEirp represents the average (RMS) EIRP that would be measured by the procedure defined in FCC part 96.41(e)(3).
           format: double

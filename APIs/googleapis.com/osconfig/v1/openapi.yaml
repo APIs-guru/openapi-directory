@@ -40,10 +40,7 @@ paths:
       description: Delete an OS Config patch deployment.
       operationId: osconfig.projects.patchDeployments.delete
       parameters:
-        - description: >-
-            Required. The resource name of the patch deployment in the form
-
-            `projects/*/patchDeployments/*`.
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
           in: path
           name: name
           required: true
@@ -64,13 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: >-
-        Get the patch job. This can be used to track the progress of an
-
-        ongoing patch job or review the details of completed jobs.
-      operationId: osconfig.projects.patchJobs.get
+      description: Get an OS Config patch deployment.
+      operationId: osconfig.projects.patchDeployments.get
       parameters:
-        - description: Required. Name of the patch in the form `projects/*/patchJobs/*`
+        - description: Required. The resource name of the patch deployment in the form `projects/*/patchDeployments/*`.
           in: path
           name: name
           required: true
@@ -81,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PatchJob"
+                $ref: "#/components/schemas/PatchDeployment"
           description: Successful response
       security:
         - Oauth2:
@@ -91,35 +85,32 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: >-
-        Cancel a patch job. The patch job must be active. Canceled patch jobs
-
-        cannot be restarted.
+      description: Cancel a patch job. The patch job must be active. Canceled patch jobs cannot be restarted.
       operationId: osconfig.projects.patchJobs.cancel
       parameters:
         - description: Required. Name of the patch in the form `projects/*/patchJobs/*`
@@ -158,25 +149,17 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            A filter expression that filters results listed in the response. This
-
-            field supports filtering results by instance zone, name, state, or
-
-            `failure_reason`.
+        - description: A filter expression that filters results listed in the response. This field supports filtering results by instance zone, name, state, or `failure_reason`.
           in: query
           name: filter
           schema:
             type: string
-        - description: The maximum number of instance details records to return.  Default is 100.
+        - description: The maximum number of instance details records to return. Default is 100.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A pagination token returned from a previous call
-
-            that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -196,17 +179,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/patchDeployments":
     get:
       description: Get a page of OS Config patch deployments.
@@ -223,10 +206,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            Optional. A pagination token returned from a previous call to ListPatchDeployments
-
-            that indicates where this listing should continue from.
+        - description: Optional. A pagination token returned from a previous call to ListPatchDeployments that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -246,17 +226,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create an OS Config patch deployment.
       operationId: osconfig.projects.patchDeployments.create
@@ -267,20 +247,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Required. A name for the patch deployment in the project. When creating a name
-
-            the following rules apply:
-
-            * Must contain only lowercase letters, numbers, and hyphens.
-
-            * Must start with a letter.
-
-            * Must be between 1-63 characters.
-
-            * Must end with a number or a letter.
-
-            * Must be unique within the project.
+        - description: "Required. A name for the patch deployment in the project. When creating a name the following rules apply: * Must contain only lowercase letters, numbers, and hyphens. * Must start with a letter. * Must be between 1-63 characters. * Must end with a number or a letter. * Must be unique within the project."
           in: query
           name: patchDeploymentId
           schema:
@@ -315,12 +282,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            If provided, this field specifies the criteria that must be met by patch
-
-            jobs to be included in the response.
-
-            Currently, filtering is only available on the patch_deployment field.
+        - description: If provided, this field specifies the criteria that must be met by patch jobs to be included in the response. Currently, filtering is only available on the patch_deployment field.
           in: query
           name: filter
           schema:
@@ -330,10 +292,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A pagination token returned from a previous call
-
-            that indicates where this listing should continue from.
+        - description: A pagination token returned from a previous call that indicates where this listing should continue from.
           in: query
           name: pageToken
           schema:
@@ -353,30 +312,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/patchJobs:execute":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Patch VM instances by creating and running a patch job.
       operationId: osconfig.projects.patchJobs.execute
@@ -483,10 +442,7 @@ components:
         type: string
   schemas:
     AptSettings:
-      description: >-
-        Apt patching is completed by executing `apt-get update && apt-get
-
-        upgrade`. Additional options can be set to control how this is executed.
+      description: Apt patching is completed by executing `apt-get update && apt-get upgrade`. Additional options can be set to control how this is executed.
       properties:
         excludes:
           description: List of packages to exclude from update. These packages will be excluded
@@ -494,22 +450,12 @@ components:
             type: string
           type: array
         exclusivePackages:
-          description: >-
-            An exclusive list of packages to be updated. These are the only packages
-
-            that will be updated. If these packages are not installed, they will be
-
-            ignored. This field cannot be specified with any other patch configuration
-
-            fields.
+          description: An exclusive list of packages to be updated. These are the only packages that will be updated. If these packages are not installed, they will be ignored. This field cannot be specified with any other patch configuration fields.
           items:
             type: string
           type: array
         type:
-          description: >-
-            By changing the type to DIST, the patching is performed
-
-            using `apt-get dist-upgrade` instead.
+          description: By changing the type to DIST, the patching is performed using `apt-get dist-upgrade` instead.
           enum:
             - TYPE_UNSPECIFIED
             - DIST
@@ -521,18 +467,7 @@ components:
       properties: {}
       type: object
     Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining duplicated
-
-        empty messages in your APIs. A typical example is to use it as the request
-
-        or the response type of an API method. For instance:
-
-            service Foo {
-              rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-            }
-
-        The JSON representation for `Empty` is empty JSON object `{}`.
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     ExecResource:
@@ -540,16 +475,10 @@ components:
       properties:
         enforce:
           $ref: "#/components/schemas/ExecResourceExec"
-          description: >-
-            What to run to bring this resource into the desired state.
-
-            Optional if policy is in validate only mode.
+          description: What to run to bring this resource into the desired state. Optional if policy is in validate only mode.
         validate:
           $ref: "#/components/schemas/ExecResourceExec"
-          description: >-
-            What to run to validate this resource is in the desired state.
-
-            A successful exit code indicates resource is in the desired state.
+          description: What to run to validate this resource is in the desired state. A successful exit code indicates resource is in the desired state.
       type: object
     ExecResourceExec:
       description: A file or script to execute.
@@ -594,10 +523,7 @@ components:
       description: Common configurations for an ExecStep.
       properties:
         allowedSuccessCodes:
-          description: >-
-            Defaults to [0]. A list of possible return values that the
-
-            execution can return to indicate a success.
+          description: Defaults to [0]. A list of possible return values that the execution can return to indicate a success.
           items:
             format: int32
             type: integer
@@ -606,14 +532,7 @@ components:
           $ref: "#/components/schemas/GcsObject"
           description: A Cloud Storage object containing the executable.
         interpreter:
-          description: >-
-            The script interpreter to use to run the script. If no interpreter is
-
-            specified the script will be executed directly, which will likely
-
-            only succeed for scripts with [shebang lines]
-
-            (https://en.wikipedia.org/wiki/Shebang_\(Unix\)).
+          description: The script interpreter to use to run the script. If no interpreter is specified the script will be executed directly, which will likely only succeed for scripts with [shebang lines] (https://en.wikipedia.org/wiki/Shebang_\(Unix\)).
           enum:
             - INTERPRETER_UNSPECIFIED
             - SHELL
@@ -624,45 +543,27 @@ components:
           type: string
       type: object
     ExecutePatchJobRequest:
-      description: >-
-        A request message to initiate patching across Compute Engine
-
-        instances.
+      description: A request message to initiate patching across Compute Engine instances.
       properties:
         description:
-          description: >-
-            Description of the patch job. Length of the description is limited
-
-            to 1024 characters.
+          description: Description of the patch job. Length of the description is limited to 1024 characters.
           type: string
         displayName:
           description: Display name for this patch job. This does not have to be unique.
           type: string
         dryRun:
-          description: >-
-            If this patch is a dry-run only, instances are contacted but
-
-            will do nothing.
+          description: If this patch is a dry-run only, instances are contacted but will do nothing.
           type: boolean
         duration:
-          description: >-
-            Duration of the patch job. After the duration ends, the patch job
-
-            times out.
+          description: Duration of the patch job. After the duration ends, the patch job times out.
           format: google-duration
           type: string
         instanceFilter:
           $ref: "#/components/schemas/PatchInstanceFilter"
-          description: >-
-            Required. Instances to patch, either explicitly or filtered by some criteria such
-
-            as zone or labels.
+          description: Required. Instances to patch, either explicitly or filtered by some criteria such as zone or labels.
         patchConfig:
           $ref: "#/components/schemas/PatchConfig"
-          description: >-
-            Patch configuration being applied. If omitted, instances are
-
-            patched using the default configurations.
+          description: Patch configuration being applied. If omitted, instances are patched using the default configurations.
         rollout:
           $ref: "#/components/schemas/PatchRollout"
           description: Rollout strategy of the patch job.
@@ -671,23 +572,13 @@ components:
       description: A resource that extracts an archive
       properties:
         creates:
-          description: >-
-            Local file path that signals this resource is in the desired state.
-
-            The absence of this file will indicate whether the archive needs to be
-
-            extracted.
+          description: Local file path that signals this resource is in the desired state. The absence of this file will indicate whether the archive needs to be extracted.
           type: string
         destination:
           description: Directory to extract archive to.
           type: string
         overwrite:
-          description: >-
-            Whether to overwrite existing files during extraction. If this is set to
-
-            true, any existing files in the destination location will be overwritten by
-
-            the extraction.
+          description: Whether to overwrite existing files during extraction. If this is set to true, any existing files in the destination location will be overwritten by the extraction.
           type: boolean
         source:
           $ref: "#/components/schemas/File"
@@ -708,15 +599,7 @@ components:
       description: A remote or local file.
       properties:
         allowInsecure:
-          description: >-
-            Defaults to false. When false, files will be subject to validations
-
-            based on the file type:
-
-
-            Remote: A checksum must be specified.
-
-            GCS:    An object generation number must be specified.
+          description: "Defaults to false. When false, files will be subject to validations based on the file type: Remote: A checksum must be specified. GCS: An object generation number must be specified."
           type: boolean
         gcs:
           $ref: "#/components/schemas/FileGcs"
@@ -749,10 +632,7 @@ components:
           description: SHA256 checksum of the remote file.
           type: string
         uri:
-          description: >-
-            URI from which to fetch the object. It should contain both the protocol
-
-            and path following the format {protocol}://{location}.
+          description: URI from which to fetch the object. It should contain both the protocol and path following the format {protocol}://{location}.
           type: string
       type: object
     FileResource:
@@ -768,31 +648,7 @@ components:
           description: The absolute path of the file.
           type: string
         permissions:
-          description: >-
-            Consists of three octal digits which represent, in
-
-            order, the permissions of the owner, group, and other users for the
-
-            file (similarly to the numeric mode used in the linux chmod utility).
-
-            Each digit represents a three bit number with the 4 bit
-
-            corresponding to the read permissions, the 2 bit corresponds to the
-
-            write bit, and the one bit corresponds to the execute permission.
-
-            Default behavior is 755.
-
-
-            Below are some examples of permissions and their associated values:
-
-            read, write, and execute: 7
-
-            read and execute: 5
-
-            read and write: 6
-
-            read only: 4
+          description: "Consists of three octal digits which represent, in order, the permissions of the owner, group, and other users for the file (similarly to the numeric mode used in the linux chmod utility). Each digit represents a three bit number with the 4 bit corresponding to the read permissions, the 2 bit corresponds to the write bit, and the one bit corresponds to the execute permission. Default behavior is 755. Below are some examples of permissions and their associated values: read, write, and execute: 7 read and execute: 5 read and write: 6 read only: 4"
           type: string
         state:
           description: Desired state of the file.
@@ -804,20 +660,14 @@ components:
           type: string
       type: object
     FixedOrPercent:
-      description: >-
-        Message encapsulating a value that can be either absolute ("fixed") or
-
-        relative ("percent") to a value.
+      description: Message encapsulating a value that can be either absolute ("fixed") or relative ("percent") to a value.
       properties:
         fixed:
           description: Specifies a fixed value.
           format: int32
           type: integer
         percent:
-          description: >-
-            Specifies the relative value defined as a percentage, which will be
-
-            multiplied by a reference value.
+          description: Specifies the relative value defined as a percentage, which will be multiplied by a reference value.
           format: int32
           type: integer
       type: object
@@ -828,10 +678,7 @@ components:
           description: Required. Bucket of the Cloud Storage object.
           type: string
         generationNumber:
-          description: >-
-            Required. Generation number of the Cloud Storage object. This is used to
-
-            ensure that the ExecStep specified by this PatchJob does not change.
+          description: Required. Generation number of the Cloud Storage object. This is used to ensure that the ExecStep specified by this PatchJob does not change.
           format: int64
           type: string
         object:
@@ -846,10 +693,7 @@ components:
       description: A response message for listing patch deployments.
       properties:
         nextPageToken:
-          description: >-
-            A pagination token that can be used to get the next page of patch
-
-            deployments.
+          description: A pagination token that can be used to get the next page of patch deployments.
           type: string
         patchDeployments:
           description: The list of patch deployments.
@@ -882,20 +726,10 @@ components:
           type: array
       type: object
     MonthlySchedule:
-      description: >-
-        Represents a monthly schedule. An example of a valid monthly schedule is
-
-        "on the third Tuesday of the month" or "on the 15th of the month".
+      description: Represents a monthly schedule. An example of a valid monthly schedule is "on the third Tuesday of the month" or "on the 15th of the month".
       properties:
         monthDay:
-          description: >-
-            Required. One day of the month. 1-31 indicates the 1st to the 31st day. -1
-
-            indicates the last day of the month.
-
-            Months without the target day will be skipped. For example, a schedule to
-
-            run "every month on the 31st" will not run in February, April, June, etc.
+          description: Required. One day of the month. 1-31 indicates the 1st to the 31st day. -1 indicates the last day of the month. Months without the target day will be skipped. For example, a schedule to run "every month on the 31st" will not run in February, April, June, etc.
           format: int32
           type: integer
         weekDayOfMonth:
@@ -903,10 +737,7 @@ components:
           description: Required. Week day in a month.
       type: object
     OneTimeSchedule:
-      description: >-
-        Sets the time for a one time patch deployment. Timestamp is in
-
-        [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+      description: Sets the time for a one time patch deployment. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
       properties:
         executeTime:
           description: Required. The desired patch job execution time.
@@ -923,10 +754,7 @@ components:
           $ref: "#/components/schemas/PackageResourceDeb"
           description: A deb package file.
         desiredState:
-          description: >-
-            The desired_state the agent should maintain for this package. The
-
-            default is to ensure the package is installed.
+          description: The desired_state the agent should maintain for this package. The default is to ensure the package is installed.
           enum:
             - DESIRED_STATE_UNSPECIFIED
             - INSTALLED
@@ -949,12 +777,7 @@ components:
           description: A package managed by Zypper.
       type: object
     PackageResourceAPT:
-      description: >-
-        A package managed by APT.
-
-        install: `apt-get update && apt-get -y install [name]`
-
-        remove: `apt-get -y remove [name]`
+      description: "A package managed by APT. install: `apt-get update && apt-get -y install [name]` remove: `apt-get -y remove [name]`"
       properties:
         name:
           description: Package name.
@@ -964,49 +787,30 @@ components:
       description: A deb package file. dpkg packages only support INSTALLED state.
       properties:
         pullDeps:
-          description: >-
-            Whether dependencies should also be installed.
-
-            install when false: `dpkg -i package`
-
-            install when true: `apt-get update && apt-get -y install package.deb`
+          description: "Whether dependencies should also be installed. install when false: `dpkg -i package` install when true: `apt-get update && apt-get -y install package.deb`"
           type: boolean
         source:
           $ref: "#/components/schemas/File"
           description: A deb package.
       type: object
     PackageResourceGooGet:
-      description: >-
-        A package managed by GooGet.
-
-        install: `googet -noconfirm install package`
-
-        remove: `googet -noconfirm remove package`
+      description: "A package managed by GooGet. install: `googet -noconfirm install package` remove: `googet -noconfirm remove package`"
       properties:
         name:
           description: Package name.
           type: string
       type: object
     PackageResourceMSI:
-      description: >-
-        An MSI package. MSI packages only support INSTALLED state.
-
-        Install msiexec /i /qn /norestart
+      description: An MSI package. MSI packages only support INSTALLED state. Install msiexec /i /qn /norestart
       properties:
         allowedSuccessCodes:
-          description: >-
-            Return codes that indicate that the software installed or updated
-
-            successfully. Behaviour defaults to [0]
+          description: Return codes that indicate that the software installed or updated successfully. Behaviour defaults to [0]
           items:
             format: int32
             type: integer
           type: array
         flags:
-          description: >-
-            Flags to use during package install.
-
-            Appended to the defalts of "/i /qn /norestart"
+          description: Flags to use during package install. Appended to the defalts of "/i /qn /norestart"
           items:
             type: string
           type: array
@@ -1018,61 +822,35 @@ components:
       description: An RPM package file. RPM packages only support INSTALLED state.
       properties:
         pullDeps:
-          description: >-
-            Whether dependencies should also be installed.
-
-            install when false: `rpm --upgrade --replacepkgs package.rpm`
-
-            install when true: `yum -y install package.rpm` or
-
-            `zypper -y install package.rpm`
+          description: "Whether dependencies should also be installed. install when false: `rpm --upgrade --replacepkgs package.rpm` install when true: `yum -y install package.rpm` or `zypper -y install package.rpm`"
           type: boolean
         source:
           $ref: "#/components/schemas/File"
           description: An rpm package.
       type: object
     PackageResourceYUM:
-      description: >-
-        A package managed by YUM.
-
-        install: `yum -y install package`
-
-        remove: `yum -y remove package`
+      description: "A package managed by YUM. install: `yum -y install package` remove: `yum -y remove package`"
       properties:
         name:
           description: Package name.
           type: string
       type: object
     PackageResourceZypper:
-      description: >-
-        A package managed by Zypper.
-
-        install: `zypper -y install package`
-
-        remove: `zypper -y rm package`
+      description: "A package managed by Zypper. install: `zypper -y install package` remove: `zypper -y rm package`"
       properties:
         name:
           description: Package name.
           type: string
       type: object
     PatchConfig:
-      description: >-
-        Patch configuration specifications. Contains details on how to apply the
-
-        patch(es) to a VM instance.
+      description: Patch configuration specifications. Contains details on how to apply the patch(es) to a VM instance.
       properties:
         apt:
           $ref: "#/components/schemas/AptSettings"
-          description: >-
-            Apt update settings. Use this setting to override the default `apt` patch
-
-            rules.
+          description: Apt update settings. Use this setting to override the default `apt` patch rules.
         goo:
           $ref: "#/components/schemas/GooSettings"
-          description: >-
-            Goo update settings. Use this setting to override the default `goo` patch
-
-            rules.
+          description: Goo update settings. Use this setting to override the default `goo` patch rules.
         postStep:
           $ref: "#/components/schemas/ExecStep"
           description: The `ExecStep` to run after the patch update.
@@ -1092,41 +870,21 @@ components:
           description: Windows update settings. Use this override the default windows patch rules.
         yum:
           $ref: "#/components/schemas/YumSettings"
-          description: >-
-            Yum update settings. Use this setting to override the default `yum` patch
-
-            rules.
+          description: Yum update settings. Use this setting to override the default `yum` patch rules.
         zypper:
           $ref: "#/components/schemas/ZypperSettings"
-          description: >-
-            Zypper update settings. Use this setting to override the default `zypper`
-
-            patch rules.
+          description: Zypper update settings. Use this setting to override the default `zypper` patch rules.
       type: object
     PatchDeployment:
-      description: >-
-        Patch deployments are configurations that individual patch jobs use to
-
-        complete a patch. These configurations include instance filter, package
-
-        repository settings, and a schedule. For more information about creating and
-
-        managing patch deployments, see [Scheduling patch
-
-        jobs](https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs).
+      description: Patch deployments are configurations that individual patch jobs use to complete a patch. These configurations include instance filter, package repository settings, and a schedule. For more information about creating and managing patch deployments, see [Scheduling patch jobs](https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs).
       properties:
         createTime:
-          description: >-
-            Output only. Time the patch deployment was created. Timestamp is in
-
-            [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+          description: Output only. Time the patch deployment was created. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
           format: google-datetime
+          readOnly: true
           type: string
         description:
-          description: >-
-            Optional. Description of the patch deployment. Length of the description is limited
-
-            to 1024 characters.
+          description: Optional. Description of the patch deployment. Length of the description is limited to 1024 characters.
           type: string
         duration:
           description: Optional. Duration of the patch. After the duration ends, the patch times out.
@@ -1136,23 +894,12 @@ components:
           $ref: "#/components/schemas/PatchInstanceFilter"
           description: Required. VM instances to patch.
         lastExecuteTime:
-          description: >-
-            Output only. The last time a patch job was started by this deployment.
-
-            Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text
-
-            format.
+          description: Output only. The last time a patch job was started by this deployment. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
           format: google-datetime
+          readOnly: true
           type: string
         name:
-          description: >-
-            Unique name for the patch deployment resource in a project. The patch
-
-            deployment name is in the form:
-
-            `projects/{project_id}/patchDeployments/{patch_deployment_id}`.
-
-            This field is ignored when you create a new patch deployment.
+          description: "Unique name for the patch deployment resource in a project. The patch deployment name is in the form: `projects/{project_id}/patchDeployments/{patch_deployment_id}`. This field is ignored when you create a new patch deployment."
           type: string
         oneTimeSchedule:
           $ref: "#/components/schemas/OneTimeSchedule"
@@ -1167,143 +914,69 @@ components:
           $ref: "#/components/schemas/PatchRollout"
           description: Optional. Rollout strategy of the patch job.
         updateTime:
-          description: >-
-            Output only. Time the patch deployment was last updated. Timestamp is in
-
-            [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+          description: Output only. Time the patch deployment was last updated. Timestamp is in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     PatchInstanceFilter:
-      description: >-
-        A filter to target VM instances for patching. The targeted
-
-        VMs must meet all criteria specified. So if both labels and zones are
-
-        specified, the patch job targets only VMs with those labels and in those
-
-        zones.
+      description: A filter to target VM instances for patching. The targeted VMs must meet all criteria specified. So if both labels and zones are specified, the patch job targets only VMs with those labels and in those zones.
       properties:
         all:
-          description: >-
-            Target all VM instances in the project. If true, no other criteria is
-
-            permitted.
+          description: Target all VM instances in the project. If true, no other criteria is permitted.
           type: boolean
         groupLabels:
-          description: >-
-            Targets VM instances matching ANY of these GroupLabels. This allows
-
-            targeting of disparate groups of VM instances.
+          description: Targets VM instances matching ANY of these GroupLabels. This allows targeting of disparate groups of VM instances.
           items:
             $ref: "#/components/schemas/PatchInstanceFilterGroupLabel"
           type: array
         instanceNamePrefixes:
-          description: >-
-            Targets VMs whose name starts with one of these prefixes. Similar to
-
-            labels, this is another way to group VMs when targeting configs, for
-
-            example prefix="prod-".
+          description: Targets VMs whose name starts with one of these prefixes. Similar to labels, this is another way to group VMs when targeting configs, for example prefix="prod-".
           items:
             type: string
           type: array
         instances:
-          description: >-
-            Targets any of the VM instances specified. Instances are specified by their
-
-            URI in the form `zones/[ZONE]/instances/[INSTANCE_NAME]`,
-
-            `projects/[PROJECT_ID]/zones/[ZONE]/instances/[INSTANCE_NAME]`, or
-
-            `https://www.googleapis.com/compute/v1/projects/[PROJECT_ID]/zones/[ZONE]/instances/[INSTANCE_NAME]`
+          description: Targets any of the VM instances specified. Instances are specified by their URI in the form `zones/[ZONE]/instances/[INSTANCE_NAME]`, `projects/[PROJECT_ID]/zones/[ZONE]/instances/[INSTANCE_NAME]`, or `https://www.googleapis.com/compute/v1/projects/[PROJECT_ID]/zones/[ZONE]/instances/[INSTANCE_NAME]`
           items:
             type: string
           type: array
         zones:
-          description: >-
-            Targets VM instances in ANY of these zones. Leave empty to target VM
-
-            instances in any zone.
+          description: Targets VM instances in ANY of these zones. Leave empty to target VM instances in any zone.
           items:
             type: string
           type: array
       type: object
     PatchInstanceFilterGroupLabel:
-      description: >-
-        Targets a group of VM instances by using their [assigned
-
-        labels](https://cloud.google.com/compute/docs/labeling-resources). Labels
-
-        are key-value pairs. A `GroupLabel` is a combination of labels
-
-        that is used to target VMs for a patch job.
-
-
-        For example, a patch job can target VMs that have the following
-
-        `GroupLabel`: `{"env":"test", "app":"web"}`. This means that the patch job
-
-        is applied to VMs that have both the labels `env=test` and `app=web`.
+      description: 'Targets a group of VM instances by using their [assigned labels](https://cloud.google.com/compute/docs/labeling-resources). Labels are key-value pairs. A `GroupLabel` is a combination of labels that is used to target VMs for a patch job. For example, a patch job can target VMs that have the following `GroupLabel`: `{"env":"test", "app":"web"}`. This means that the patch job is applied to VMs that have both the labels `env=test` and `app=web`.'
       properties:
         labels:
           additionalProperties:
             type: string
-          description: >-
-            Compute Engine instance labels that must be present for a VM
-
-            instance to be targeted by this filter.
+          description: Compute Engine instance labels that must be present for a VM instance to be targeted by this filter.
           type: object
       type: object
     PatchJob:
-      description: >-
-        A high level representation of a patch job that is either in progress
-
-        or has completed.
-
-
-        Instance details are not included in the job. To paginate through instance
-
-        details, use ListPatchJobInstanceDetails.
-
-
-        For more information about patch jobs, see
-
-        [Creating patch
-
-        jobs](https://cloud.google.com/compute/docs/os-patch-management/create-patch-job).
+      description: A high level representation of a patch job that is either in progress or has completed. Instance details are not included in the job. To paginate through instance details, use ListPatchJobInstanceDetails. For more information about patch jobs, see [Creating patch jobs](https://cloud.google.com/compute/docs/os-patch-management/create-patch-job).
       properties:
         createTime:
           description: Time this patch job was created.
           format: google-datetime
           type: string
         description:
-          description: >-
-            Description of the patch job. Length of the description is limited
-
-            to 1024 characters.
+          description: Description of the patch job. Length of the description is limited to 1024 characters.
           type: string
         displayName:
           description: Display name for this patch job. This is not a unique identifier.
           type: string
         dryRun:
-          description: >-
-            If this patch job is a dry run, the agent reports that it has
-
-            finished without running any updates on the VM instance.
+          description: If this patch job is a dry run, the agent reports that it has finished without running any updates on the VM instance.
           type: boolean
         duration:
-          description: >-
-            Duration of the patch job. After the duration ends, the
-
-            patch job times out.
+          description: Duration of the patch job. After the duration ends, the patch job times out.
           format: google-duration
           type: string
         errorMessage:
-          description: >-
-            If this patch job failed, this message provides information about the
-
-            failure.
+          description: If this patch job failed, this message provides information about the failure.
           type: string
         instanceDetailsSummary:
           $ref: "#/components/schemas/PatchJobInstanceDetailsSummary"
@@ -1312,22 +985,17 @@ components:
           $ref: "#/components/schemas/PatchInstanceFilter"
           description: Instances to patch.
         name:
-          description: >-
-            Unique identifier for this patch job in the form
-
-            `projects/*/patchJobs/*`
+          description: Unique identifier for this patch job in the form `projects/*/patchJobs/*`
           type: string
         patchConfig:
           $ref: "#/components/schemas/PatchConfig"
           description: Patch configuration being applied.
         patchDeployment:
           description: Output only. Name of the patch deployment that created this patch job.
+          readOnly: true
           type: string
         percentComplete:
-          description: >-
-            Reflects the overall progress of the patch job in the range of
-
-            0.0 being no progress to 100.0 being complete.
+          description: Reflects the overall progress of the patch job in the range of 0.0 being no progress to 100.0 being complete.
           format: double
           type: number
         rollout:
@@ -1351,14 +1019,7 @@ components:
           type: string
       type: object
     PatchJobInstanceDetails:
-      description: >-
-        Patch details for a VM instance. For more information about reviewing VM
-
-        instance details, see
-
-        [Listing all VM instance details for a specific patch
-
-        job](https://cloud.google.com/compute/docs/os-patch-management/manage-patch-jobs#list-instance-details).
+      description: Patch details for a VM instance. For more information about reviewing VM instance details, see [Listing all VM instance details for a specific patch job](https://cloud.google.com/compute/docs/os-patch-management/manage-patch-jobs#list-instance-details).
       properties:
         attemptCount:
           description: The number of times the agent that the agent attempts to apply the patch.
@@ -1368,10 +1029,7 @@ components:
           description: If the patch fails, this field provides the reason.
           type: string
         instanceSystemId:
-          description: >-
-            The unique identifier for the instance. This identifier is
-
-            defined by the server.
+          description: The unique identifier for the instance. This identifier is defined by the server.
           type: string
         name:
           description: The instance name in the form `projects/*/zones/*/instances/*`
@@ -1398,14 +1056,7 @@ components:
           type: string
       type: object
     PatchJobInstanceDetailsSummary:
-      description: >-
-        A summary of the current patch state across all instances that this patch
-
-        job affects. Contains counts of instances in different states. These states
-
-        map to `InstancePatchState`. List patch job instance details to see the
-
-        specific states of each instance.
+      description: A summary of the current patch state across all instances that this patch job affects. Contains counts of instances in different states. These states map to `InstancePatchState`. List patch job instance details to see the specific states of each instance.
       properties:
         ackedInstanceCount:
           description: Number of instances that have acked and will start shortly.
@@ -1428,12 +1079,7 @@ components:
           format: int64
           type: string
         noAgentDetectedInstanceCount:
-          description: >-
-            Number of instances that do not appear to be running the agent. Check to
-
-            ensure that the agent is installed, running, and able to communicate with
-
-            the service.
+          description: Number of instances that do not appear to be running the agent. Check to ensure that the agent is installed, running, and able to communicate with the service.
           format: int64
           type: string
         notifiedInstanceCount:
@@ -1474,55 +1120,11 @@ components:
           type: string
       type: object
     PatchRollout:
-      description: >-
-        Patch rollout configuration specifications. Contains details on the
-
-        concurrency control when applying patch(es) to all targeted VMs.
+      description: Patch rollout configuration specifications. Contains details on the concurrency control when applying patch(es) to all targeted VMs.
       properties:
         disruptionBudget:
           $ref: "#/components/schemas/FixedOrPercent"
-          description: >-
-            The maximum number (or percentage) of VMs per zone to disrupt at any given
-
-            moment. The number of VMs calculated from multiplying the percentage by the
-
-            total number of VMs in a zone is rounded up.
-
-
-            During patching, a VM is considered disrupted from the time the agent is
-
-            notified to begin until patching has completed. This disruption time
-
-            includes the time to complete reboot and any post-patch steps.
-
-
-            A VM contributes to the disruption budget if its patching operation fails
-
-            either when applying the patches, running pre or post patch steps, or if it
-
-            fails to respond with a success notification before timing out. VMs that
-
-            are not running or do not have an active agent do not count toward this
-
-            disruption budget.
-
-
-            For zone-by-zone rollouts, if the disruption budget in a zone is exceeded,
-
-            the patch job stops, because continuing to the next zone requires
-
-            completion of the patch process in the previous zone.
-
-
-            For example, if the disruption budget has a fixed value of `10`, and 8 VMs
-
-            fail to patch in the current zone, the patch job continues to patch 2 VMs
-
-            at a time until the zone is completed. When that zone is completed
-
-            successfully, patching begins with 10 VMs at a time in the next zone. If 10
-
-            VMs in the next zone fail to patch, the patch job stops.
+          description: The maximum number (or percentage) of VMs per zone to disrupt at any given moment. The number of VMs calculated from multiplying the percentage by the total number of VMs in a zone is rounded up. During patching, a VM is considered disrupted from the time the agent is notified to begin until patching has completed. This disruption time includes the time to complete reboot and any post-patch steps. A VM contributes to the disruption budget if its patching operation fails either when applying the patches, running pre or post patch steps, or if it fails to respond with a success notification before timing out. VMs that are not running or do not have an active agent do not count toward this disruption budget. For zone-by-zone rollouts, if the disruption budget in a zone is exceeded, the patch job stops, because continuing to the next zone requires completion of the patch process in the previous zone. For example, if the disruption budget has a fixed value of `10`, and 8 VMs fail to patch in the current zone, the patch job continues to patch 2 VMs at a time until the zone is completed. When that zone is completed successfully, patching begins with 10 VMs at a time in the next zone. If 10 VMs in the next zone fail to patch, the patch job stops.
         mode:
           description: Mode of the patch rollout.
           enum:
@@ -1535,10 +1137,7 @@ components:
       description: Sets the time for recurring patch deployments.
       properties:
         endTime:
-          description: >-
-            Optional. The end time at which a recurring patch deployment schedule is no longer
-
-            active.
+          description: Optional. The end time at which a recurring patch deployment schedule is no longer active.
           format: google-datetime
           type: string
         frequency:
@@ -1551,6 +1150,7 @@ components:
         lastExecuteTime:
           description: Output only. The time the last patch job ran successfully.
           format: google-datetime
+          readOnly: true
           type: string
         monthly:
           $ref: "#/components/schemas/MonthlySchedule"
@@ -1558,12 +1158,10 @@ components:
         nextExecuteTime:
           description: Output only. The time the next patch job is scheduled to run.
           format: google-datetime
+          readOnly: true
           type: string
         startTime:
-          description: >-
-            Optional. The time that the recurring schedule becomes effective.
-
-            Defaults to `create_time` of the patch deployment.
+          description: Optional. The time that the recurring schedule becomes effective. Defaults to `create_time` of the patch deployment.
           format: google-datetime
           type: string
         timeOfDay:
@@ -1571,10 +1169,7 @@ components:
           description: Required. Time of the day to run a recurring deployment.
         timeZone:
           $ref: "#/components/schemas/TimeZone"
-          description: >-
-            Required. Defines the time zone that `time_of_day` is relative to.
-
-            The rules for daylight saving time are determined by the chosen time zone.
+          description: Required. Defines the time zone that `time_of_day` is relative to. The rules for daylight saving time are determined by the chosen time zone.
         weekly:
           $ref: "#/components/schemas/WeeklySchedule"
           description: Required. Schedule with weekly executions.
@@ -1596,10 +1191,7 @@ components:
           description: A Zypper Repository.
       type: object
     RepositoryResourceAptRepository:
-      description: >-
-        Represents a single apt package repository. These will be added to a repo
-
-        file that will be managed at /etc/apt/sources.list.d/google_osconfig.list.
+      description: Represents a single apt package repository. These will be added to a repo file that will be managed at /etc/apt/sources.list.d/google_osconfig.list.
       properties:
         archiveType:
           description: Type of archive files in this repository. The default behavior is DEB.
@@ -1617,20 +1209,14 @@ components:
           description: Distribution of this repository.
           type: string
         gpgKey:
-          description: >-
-            URI of the key file for this repository. The agent will maintain
-
-            a keyring at /etc/apt/trusted.gpg.d/osconfig_agent_managed.gpg.
+          description: URI of the key file for this repository. The agent will maintain a keyring at /etc/apt/trusted.gpg.d/osconfig_agent_managed.gpg.
           type: string
         uri:
           description: URI for this repository.
           type: string
       type: object
     RepositoryResourceGooRepository:
-      description: >-
-        Represents a Goo package repository. These will be added to a repo file
-
-        that will be managed at C:/ProgramData/GooGet/repos/google_osconfig.repo.
+      description: Represents a Goo package repository. These will be added to a repo file that will be managed at C:/ProgramData/GooGet/repos/google_osconfig.repo.
       properties:
         name:
           description: The name of the repository.
@@ -1640,10 +1226,7 @@ components:
           type: string
       type: object
     RepositoryResourceYumRepository:
-      description: >-
-        Represents a single yum package repository. These will be added to a repo
-
-        file that will be managed at /etc/yum.repos.d/google_osconfig.repo.
+      description: Represents a single yum package repository. These will be added to a repo file that will be managed at /etc/yum.repos.d/google_osconfig.repo.
       properties:
         baseUrl:
           description: The location of the repository directory.
@@ -1657,21 +1240,11 @@ components:
             type: string
           type: array
         id:
-          description: >-
-            A one word, unique name for this repository. This will be
-
-            the `repo id` in the yum config file and also the `display_name` if
-
-            `display_name` is omitted. This id is also used as the unique identifier
-
-            when checking for resource conflicts.
+          description: A one word, unique name for this repository. This will be the `repo id` in the yum config file and also the `display_name` if `display_name` is omitted. This id is also used as the unique identifier when checking for resource conflicts.
           type: string
       type: object
     RepositoryResourceZypperRepository:
-      description: >-
-        Represents a single zypper package repository. These will be added to a
-
-        repo file that will be managed at /etc/zypp/repos.d/google_osconfig.repo.
+      description: Represents a single zypper package repository. These will be added to a repo file that will be managed at /etc/zypp/repos.d/google_osconfig.repo.
       properties:
         baseUrl:
           description: The location of the repository directory.
@@ -1685,14 +1258,7 @@ components:
             type: string
           type: array
         id:
-          description: >-
-            A one word, unique name for this repository. This will be
-
-            the `repo id` in the zypper config file and also the `display_name` if
-
-            `display_name` is omitted. This id is also used as the unique identifier
-
-            when checking for GuestPolicy conflicts.
+          description: A one word, unique name for this repository. This will be the `repo id` in the zypper config file and also the `display_name` if `display_name` is omitted. This id is also used as the unique identifier when checking for GuestPolicy conflicts.
           type: string
       type: object
     ServiceResource:
@@ -1700,18 +1266,10 @@ components:
       properties: {}
       type: object
     TimeOfDay:
-      description: >-
-        Represents a time of day. The date and time zone are either not significant
-
-        or are specified elsewhere. An API may choose to allow leap seconds. Related
-
-        types are google.type.Date and `google.protobuf.Timestamp`.
+      description: Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and `google.protobuf.Timestamp`.
       properties:
         hours:
-          description: >-
-            Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
-
-            to allow the value "24:00:00" for scenarios like business closing time.
+          description: Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value "24:00:00" for scenarios like business closing time.
           format: int32
           type: integer
         minutes:
@@ -1723,18 +1281,12 @@ components:
           format: int32
           type: integer
         seconds:
-          description: >-
-            Seconds of minutes of the time. Must normally be from 0 to 59. An API may
-
-            allow the value 60 if it allows leap-seconds.
+          description: Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
           format: int32
           type: integer
       type: object
     TimeZone:
-      description: >-
-        Represents a time zone from the
-
-        [IANA Time Zone Database](https://www.iana.org/time-zones).
+      description: Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).
       properties:
         id:
           description: IANA Time Zone Database time zone, e.g. "America/New_York".
@@ -1759,10 +1311,7 @@ components:
             - SUNDAY
           type: string
         weekOrdinal:
-          description: >-
-            Required. Week number in a month. 1-4 indicates the 1st to 4th week of the month. -1
-
-            indicates the last week of the month.
+          description: Required. Week number in a month. 1-4 indicates the 1st to 4th week of the month. -1 indicates the last week of the month.
           format: int32
           type: integer
       type: object
@@ -1786,10 +1335,7 @@ components:
       description: Windows patching is performed using the Windows Update Agent.
       properties:
         classifications:
-          description: >-
-            Only apply updates of these windows update classifications. If empty, all
-
-            updates are applied.
+          description: Only apply updates of these windows update classifications. If empty, all updates are applied.
           items:
             enum:
               - CLASSIFICATION_UNSPECIFIED
@@ -1810,42 +1356,21 @@ components:
             type: string
           type: array
         exclusivePatches:
-          description: >-
-            An exclusive list of kbs to be updated. These are the only patches
-
-            that will be updated. This field must not be used with other
-
-            patch configurations.
+          description: An exclusive list of kbs to be updated. These are the only patches that will be updated. This field must not be used with other patch configurations.
           items:
             type: string
           type: array
       type: object
     YumSettings:
-      description: >-
-        Yum patching is performed by executing `yum update`. Additional options
-
-        can be set to control how this is executed.
-
-
-        Note that not all settings are supported on all platforms.
+      description: Yum patching is performed by executing `yum update`. Additional options can be set to control how this is executed. Note that not all settings are supported on all platforms.
       properties:
         excludes:
-          description: >-
-            List of packages to exclude from update. These packages are excluded by
-
-            using the yum `--exclude` flag.
+          description: List of packages to exclude from update. These packages are excluded by using the yum `--exclude` flag.
           items:
             type: string
           type: array
         exclusivePackages:
-          description: >-
-            An exclusive list of packages to be updated. These are the only packages
-
-            that will be updated. If these packages are not installed, they will be
-
-            ignored. This field must not be specified with any other patch
-
-            configuration fields.
+          description: An exclusive list of packages to be updated. These are the only packages that will be updated. If these packages are not installed, they will be ignored. This field must not be specified with any other patch configuration fields.
           items:
             type: string
           type: array
@@ -1853,23 +1378,14 @@ components:
           description: Will cause patch to run `yum update-minimal` instead.
           type: boolean
         security:
-          description: >-
-            Adds the `--security` flag to `yum update`. Not supported on
-
-            all platforms.
+          description: Adds the `--security` flag to `yum update`. Not supported on all platforms.
           type: boolean
       type: object
     ZypperSettings:
-      description: >-
-        Zypper patching is performed by running `zypper patch`.
-
-        See also https://en.opensuse.org/SDB:Zypper_manual.
+      description: Zypper patching is performed by running `zypper patch`. See also https://en.opensuse.org/SDB:Zypper_manual.
       properties:
         categories:
-          description: >-
-            Install only patches with these categories.
-
-            Common categories include security, recommended, and feature.
+          description: Install only patches with these categories. Common categories include security, recommended, and feature.
           items:
             type: string
           type: array
@@ -1879,20 +1395,12 @@ components:
             type: string
           type: array
         exclusivePatches:
-          description: >-
-            An exclusive list of patches to be updated. These are the only patches
-
-            that will be installed using 'zypper patch patch:<patch_name>' command.
-
-            This field must not be used with any other patch configuration fields.
+          description: An exclusive list of patches to be updated. These are the only patches that will be installed using 'zypper patch patch:' command. This field must not be used with any other patch configuration fields.
           items:
             type: string
           type: array
         severities:
-          description: >-
-            Install only patches with these severities.
-
-            Common severities include critical, important, moderate, and low.
+          description: Install only patches with these severities. Common severities include critical, important, moderate, and low.
           items:
             type: string
           type: array

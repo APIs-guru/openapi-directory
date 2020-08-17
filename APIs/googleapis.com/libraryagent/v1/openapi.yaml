@@ -65,17 +65,17 @@ paths:
       tags:
         - shelves
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}":
     get:
       description: Gets a book. Returns NOT_FOUND if the book does not exist.
@@ -102,30 +102,30 @@ paths:
       tags:
         - shelves
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
   "/v1/{name}:borrow":
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.
       operationId: libraryagent.shelves.books.borrow
@@ -152,17 +152,17 @@ paths:
         - shelves
   "/v1/{name}:return":
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Return a book to the library. Returns the book if it is returned to the library successfully. Returns error if the book does not belong to the library or the users didn't borrow before.
       operationId: libraryagent.shelves.books.return
@@ -223,17 +223,17 @@ paths:
       tags:
         - shelves
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
 components:
   parameters:
     _.xgafv:

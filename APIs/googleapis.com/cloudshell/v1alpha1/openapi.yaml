@@ -85,17 +85,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     patch:
       description: Updates an existing environment.
       operationId: cloudshell.users.environments.patch
@@ -132,17 +132,17 @@ paths:
         - users
   "/v1alpha1/{name}:authorize":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Sends OAuth credentials to a running environment on behalf of a user. When this completes, the environment will be authorized to run various Google Cloud command line tools without requiring the user to manually authenticate.
       operationId: cloudshell.users.environments.authorize
@@ -174,17 +174,17 @@ paths:
         - users
   "/v1alpha1/{name}:start":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Starts an existing environment, allowing clients to connect to it. The returned operation will contain an instance of StartEnvironmentMetadata in its metadata field. Users can wait for the environment to start by polling this operation via GetOperation. Once the environment has finished starting and is ready to accept connections, the operation will contain a StartEnvironmentResponse in its response field.
       operationId: cloudshell.users.environments.start
@@ -216,17 +216,17 @@ paths:
         - users
   "/v1alpha1/{parent}/publicKeys":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: Adds a public SSH key to an environment, allowing clients with the corresponding private key to connect to that environment via SSH. If a key with the same format and content already exists, this will return the existing key.
       operationId: cloudshell.users.environments.publicKeys.create

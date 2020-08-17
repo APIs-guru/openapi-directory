@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/service-usage/
 tags:
-  - name: operations
   - name: services
+  - name: operations
 paths:
   /v1beta1/operations:
     get:
@@ -80,17 +80,17 @@ paths:
       tags:
         - operations
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/{name}":
     delete:
       description: Deletes an admin override.
@@ -126,10 +126,10 @@ paths:
       tags:
         - services
     get:
-      description: Retrieves a summary of quota information for a specific quota limit.
-      operationId: serviceusage.services.consumerQuotaMetrics.limits.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: serviceusage.operations.get
       parameters:
-        - description: The resource name of the quota limit. Use the quota limit resource name returned by previous ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -149,7 +149,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConsumerQuotaLimit"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -157,23 +157,23 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/service.management
           Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
+            - https://www.googleapis.com/auth/service.management
       tags:
-        - services
+        - operations
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     patch:
       description: Updates an admin override.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.patch
@@ -219,17 +219,17 @@ paths:
         - services
   "/v1beta1/{name}:disable":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled. Operation
       operationId: serviceusage.services.disable
@@ -265,17 +265,17 @@ paths:
         - services
   "/v1beta1/{name}:enable":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Enable a service so that it can be used with a project. Operation
       operationId: serviceusage.services.enable
@@ -349,17 +349,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates an admin override. An admin override is applied by an administrator of a parent folder or parent organization of the consumer receiving the override. An admin override is intended to limit the amount of quota the consumer can use out of the total quota pool allocated to all children of the folder or organization.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.create
@@ -438,17 +438,17 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a consumer override. A consumer override is applied to the consumer on its own authority to limit its own quota usage. Consumer overrides cannot be used to grant more quota than would be allowed by admin overrides, producer overrides, or the default limit of the service.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.create
@@ -536,30 +536,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Create or update multiple consumer overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
       operationId: serviceusage.services.consumerQuotaMetrics.importConsumerOverrides
@@ -638,30 +638,30 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
   "/v1beta1/{parent}/services:batchEnable":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: "Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. Operation"
       operationId: serviceusage.services.batchEnable
@@ -697,17 +697,17 @@ paths:
         - services
   "/v1beta1/{parent}:generateServiceIdentity":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/callback"
     post:
       description: Generate service identity for service.
       operationId: serviceusage.services.generateServiceIdentity

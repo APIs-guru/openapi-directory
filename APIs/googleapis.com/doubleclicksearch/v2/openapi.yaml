@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://developers.google.com/search-ads
 tags:
-  - name: savedColumns
   - name: conversion
   - name: reports
+  - name: savedColumns
 paths:
   "/doubleclicksearch/v2/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion":
     get:
@@ -125,17 +125,17 @@ paths:
       tags:
         - conversion
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/doubleclicksearch/v2/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns":
     get:
       description: Retrieve the list of saved columns for a specified advertiser.
@@ -168,30 +168,30 @@ paths:
       tags:
         - savedColumns
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   /doubleclicksearch/v2/conversion:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Inserts a batch of new conversions into DoubleClick Search.
       operationId: doubleclicksearch.conversion.insert
@@ -238,17 +238,17 @@ paths:
         - conversion
   /doubleclicksearch/v2/conversion/updateAvailability:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
       operationId: doubleclicksearch.conversion.updateAvailability
@@ -273,17 +273,17 @@ paths:
         - conversion
   /doubleclicksearch/v2/reports:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Inserts a report request into the reporting system.
       operationId: doubleclicksearch.reports.request
@@ -308,17 +308,17 @@ paths:
         - reports
   /doubleclicksearch/v2/reports/generate:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
     post:
       description: Generates and returns a report immediately.
       operationId: doubleclicksearch.reports.generate
@@ -367,17 +367,17 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
   "/doubleclicksearch/v2/reports/{reportId}/files/{reportFragment}":
     get:
       description: Downloads a report file encoded in UTF-8.
@@ -407,17 +407,17 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
 components:
   parameters:
     _.xgafv:

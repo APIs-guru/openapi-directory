@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://www.googleapis.com/doubleclickbidmanager/v1
 info:
   contact:
     name: Google
@@ -34,28 +34,25 @@ externalDocs:
   url: https://developers.google.com/bid-manager/
 tags:
   - name: sdf
-  - name: queries
-  - name: reports
   - name: lineitems
+  - name: reports
+  - name: queries
 paths:
-  /doubleclickbidmanager/v1/lineitems/downloadlineitems:
+  /lineitems/downloadlineitems:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: >-
-        Retrieves line items in CSV format. YouTube & partners line items are not
-
-        supported.
+      description: Retrieves line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.downloadlineitems
       requestBody:
         content:
@@ -76,24 +73,21 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - lineitems
-  /doubleclickbidmanager/v1/lineitems/uploadlineitems:
+  /lineitems/uploadlineitems:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
-      description: >-
-        Uploads line items in CSV format. YouTube & partners line items are not
-
-        supported.
+      description: Uploads line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.uploadlineitems
       requestBody:
         content:
@@ -114,7 +108,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - lineitems
-  /doubleclickbidmanager/v1/queries:
+  /queries:
     get:
       description: Retrieves stored queries.
       operationId: doubleclickbidmanager.queries.listqueries
@@ -133,18 +127,18 @@ paths:
       tags:
         - queries
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
-  "/doubleclickbidmanager/v1/queries/{queryId}/reports":
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+  "/queries/{queryId}/reports":
     get:
       description: Retrieves stored reports.
       operationId: doubleclickbidmanager.reports.listreports
@@ -170,30 +164,30 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
-  /doubleclickbidmanager/v1/query:
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
+  /query:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Creates a query.
       operationId: doubleclickbidmanager.queries.createquery
@@ -216,7 +210,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
-  "/doubleclickbidmanager/v1/query/{queryId}":
+  "/query/{queryId}":
     delete:
       description: Deletes a stored query as well as the associated stored reports.
       operationId: doubleclickbidmanager.queries.deletequery
@@ -262,17 +256,17 @@ paths:
       tags:
         - queries
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Runs a stored query to generate a report.
       operationId: doubleclickbidmanager.queries.runquery
@@ -298,19 +292,19 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
-  /doubleclickbidmanager/v1/sdf/download:
+  /sdf/download:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/_.xgafv"
     post:
       description: Retrieves entities in SDF format.
       operationId: doubleclickbidmanager.sdf.download
@@ -413,18 +407,12 @@ components:
       description: Request to fetch stored line items.
       properties:
         fileSpec:
-          description: >-
-            File specification (column names, types, order) in which the line items
-
-            will be returned. Default to <code>EWF</code>.
+          description: File specification (column names, types, order) in which the line items will be returned. Default to EWF.
           enum:
             - EWF
           type: string
         filterIds:
-          description: >-
-            Ids of the specified filter type used to filter line items to fetch. If
-
-            omitted, all the line items will be returned.
+          description: Ids of the specified filter type used to filter line items to fetch. If omitted, all the line items will be returned.
           items:
             format: int64
             type: string
@@ -437,10 +425,7 @@ components:
             - LINE_ITEM_ID
           type: string
         format:
-          description: >-
-            Format in which the line items will be returned. Default to
-
-            <code>CSV</code>.
+          description: Format in which the line items will be returned. Default to CSV.
           enum:
             - CSV
           type: string
@@ -449,35 +434,14 @@ components:
       description: Download line items response.
       properties:
         lineItems:
-          description: >-
-            Retrieved line items in CSV format. For more information about file
-
-            formats, see <a
-
-            href="https://developers.google.com/bid-manager/guides/entity-write/format">
-
-            Entity Write File Format</a>.
+          description: Retrieved line items in CSV format. For more information about file formats, see Entity Write File Format.
           type: string
       type: object
     DownloadRequest:
-      description: >-
-        Request to fetch stored inventory sources, campaigns, insertion orders, line
-
-        items, YouTube ad groups and ads.
+      description: Request to fetch stored inventory sources, campaigns, insertion orders, line items, YouTube ad groups and ads.
       properties:
         fileTypes:
-          description: >-
-            File types that will be returned. If INVENTORY_SOURCE is requested, no
-
-            other file types may be requested. <br><br>Acceptable values are: <ul>
-
-            <li>"<code>AD</code>"</li> <li>"<code>AD_GROUP</code>"</li>
-
-            <li>"<code>CAMPAIGN</code>"</li> <li>"<code>INSERTION_ORDER</code>"</li>
-
-            <li>"<code>INVENTORY_SOURCE</code>"</li> <li>"<code>LINE_ITEM</code>"</li>
-
-            </ul>
+          description: 'File types that will be returned. If INVENTORY_SOURCE is requested, no other file types may be requested. Acceptable values are: - "AD" - "AD_GROUP" - "CAMPAIGN" - "INSERTION_ORDER" - "INVENTORY_SOURCE" - "LINE_ITEM" '
           items:
             enum:
               - INSERTION_ORDER
@@ -489,19 +453,13 @@ components:
             type: string
           type: array
         filterIds:
-          description: >-
-            The IDs of the specified filter type. This is used to filter entities to
-
-            fetch. At least one ID must be specified.
+          description: The IDs of the specified filter type. This is used to filter entities to fetch. At least one ID must be specified.
           items:
             format: int64
             type: string
           type: array
         filterType:
-          description: >-
-            Filter type used to filter entities to fetch. PARTNER_ID and
-
-            INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
+          description: Filter type used to filter entities to fetch. PARTNER_ID and INVENTORY_SOURCE_ID may only be used when downloading inventory sources.
           enum:
             - ADVERTISER_ID
             - INSERTION_ORDER_ID
@@ -511,10 +469,7 @@ components:
             - PARTNER_ID
           type: string
         version:
-          description: >-
-            SDF Version (column names, types, order) in which the entities will be
-
-            returned. Default to <code>5</code>.
+          description: SDF Version (column names, types, order) in which the entities will be returned. Default to 5.
           type: string
       type: object
     DownloadResponse:
@@ -670,10 +625,7 @@ components:
       description: List queries response.
       properties:
         kind:
-          description: >-
-            Identifies what kind of resource this is. Value: the fixed string
-
-            <code>"doubleclickbidmanager#listQueriesResponse"</code>.
+          description: 'Identifies what kind of resource this is. Value: the fixed string "doubleclickbidmanager#listQueriesResponse".'
           type: string
         queries:
           description: Retrieved queries.
@@ -685,10 +637,7 @@ components:
       description: List reports response.
       properties:
         kind:
-          description: >-
-            Identifies what kind of resource this is. Value: the fixed string
-
-            <code>"doubleclickbidmanager#listReportsResponse"</code>.
+          description: 'Identifies what kind of resource this is. Value: the fixed string "doubleclickbidmanager#listReportsResponse".'
           type: string
         reports:
           description: Retrieved reports.
@@ -1149,10 +1098,7 @@ components:
       description: Represents a query.
       properties:
         kind:
-          description: >-
-            Identifies what kind of resource this is. Value: the fixed string
-
-            <code>"doubleclickbidmanager#query"</code>.
+          description: 'Identifies what kind of resource this is. Value: the fixed string "doubleclickbidmanager#query".'
           type: string
         metadata:
           $ref: "#/components/schemas/QueryMetadata"
@@ -1165,35 +1111,18 @@ components:
           format: int64
           type: string
         reportDataEndTimeMs:
-          description: >-
-            The ending time for the data that is shown in the report. Note,
-
-            <code>reportDataEndTimeMs</code> is required if
-
-            <code>metadata.dataRange</code> is <code>CUSTOM_DATES</code> and ignored
-
-            otherwise.
+          description: The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         reportDataStartTimeMs:
-          description: >-
-            The starting time for the data that is shown in the report. Note,
-
-            <code>reportDataStartTimeMs</code> is required if
-
-            <code>metadata.dataRange</code> is <code>CUSTOM_DATES</code> and ignored
-
-            otherwise.
+          description: The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         schedule:
           $ref: "#/components/schemas/QuerySchedule"
           description: Information on how often and when to run a query.
         timezoneCode:
-          description: >-
-            Canonical timezone code for report data time. Defaults to
-
-            <code>America/New_York</code>.
+          description: Canonical timezone code for report data time. Defaults to America/New_York.
           type: string
       type: object
     QueryMetadata:
@@ -1230,10 +1159,7 @@ components:
             - XLSX
           type: string
         googleCloudStoragePathForLatestReport:
-          description: >-
-            The path to the location in Google Cloud Storage where the latest report is
-
-            stored.
+          description: The path to the location in Google Cloud Storage where the latest report is stored.
           type: string
         googleDrivePathForLatestReport:
           description: The path in Google Drive for the latest report.
@@ -1243,18 +1169,7 @@ components:
           format: int64
           type: string
         locale:
-          description: >-
-            Locale of the generated reports. Valid values are cs      CZECH de
-
-            GERMAN en      ENGLISH es      SPANISH fr      FRENCH it      ITALIAN ja
-
-            JAPANESE ko      KOREAN pl      POLISH pt-BR   BRAZILIAN_PORTUGUESE ru
-
-            RUSSIAN tr      TURKISH uk      UKRAINIAN zh-CN   CHINA_CHINESE zh-TW
-
-            TAIWAN_CHINESE <br><br> An locale string not in the list above will
-
-            generate reports in English.
+          description: Locale of the generated reports. Valid values are cs CZECH de GERMAN en ENGLISH es SPANISH fr FRENCH it ITALIAN ja JAPANESE ko KOREAN pl POLISH pt-BR BRAZILIAN_PORTUGUESE ru RUSSIAN tr TURKISH uk UKRAINIAN zh-CN CHINA_CHINESE zh-TW TAIWAN_CHINESE An locale string not in the list above will generate reports in English.
           type: string
         reportCount:
           description: Number of reports that have been generated for the query.
@@ -1264,16 +1179,10 @@ components:
           description: Whether the latest report is currently running.
           type: boolean
         sendNotification:
-          description: >-
-            Whether to send an email notification when a report is ready. Default to
-
-            false.
+          description: Whether to send an email notification when a report is ready. Default to false.
           type: boolean
         shareEmailAddress:
-          description: >-
-            List of email addresses which are sent email notifications when the report
-
-            is finished. Separate from <code>sendNotification</code>.
+          description: List of email addresses which are sent email notifications when the report is finished. Separate from sendNotification.
           items:
             type: string
           type: array
@@ -1299,17 +1208,11 @@ components:
             - QUARTERLY
           type: string
         nextRunMinuteOfDay:
-          description: >-
-            Time of day at which a new report will be generated, represented as minutes
-
-            past midnight. Range is 0 to 1439. Only applies to scheduled reports.
+          description: Time of day at which a new report will be generated, represented as minutes past midnight. Range is 0 to 1439. Only applies to scheduled reports.
           format: int32
           type: integer
         nextRunTimezoneCode:
-          description: >-
-            Canonical timezone code for report generation time. Defaults to
-
-            <code>America/New_York</code>.
+          description: Canonical timezone code for report generation time. Defaults to America/New_York.
           type: string
       type: object
     Report:
@@ -1367,10 +1270,7 @@ components:
       description: Report metadata.
       properties:
         googleCloudStoragePath:
-          description: >-
-            The path to the location in Google Cloud Storage where the report is
-
-            stored.
+          description: The path to the location in Google Cloud Storage where the report is stored.
           type: string
         reportDataEndTimeMs:
           description: The ending time for the data that is shown in the report.
@@ -1462,51 +1362,30 @@ components:
             - TYPE_NOT_SUPPORTED
           type: string
         reportDataEndTimeMs:
-          description: >-
-            The ending time for the data that is shown in the report. Note,
-
-            <code>reportDataEndTimeMs</code> is required if <code>dataRange</code> is
-
-            <code>CUSTOM_DATES</code> and ignored otherwise.
+          description: The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         reportDataStartTimeMs:
-          description: >-
-            The starting time for the data that is shown in the report. Note,
-
-            <code>reportDataStartTimeMs</code> is required if <code>dataRange</code> is
-
-            <code>CUSTOM_DATES</code> and ignored otherwise.
+          description: The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         timezoneCode:
-          description: >-
-            Canonical timezone code for report data time. Defaults to
-
-            <code>America/New_York</code>.
+          description: Canonical timezone code for report data time. Defaults to America/New_York.
           type: string
       type: object
     UploadLineItemsRequest:
       description: Request to upload line items.
       properties:
         dryRun:
-          description: >-
-            Set to <code>true</code> to get upload status without actually persisting
-
-            the line items.
+          description: Set to true to get upload status without actually persisting the line items.
           type: boolean
         format:
-          description: Format the line items are in. Default to <code>CSV</code>.
+          description: Format the line items are in. Default to CSV.
           enum:
             - CSV
           type: string
         lineItems:
-          description: >-
-            Line items in CSV to upload. Refer to <a
-
-            href="https://developers.google.com/bid-manager/guides/entity-write/format">
-
-            Entity Write File Format</a> for more information on file format.
+          description: Line items in CSV to upload. Refer to Entity Write File Format for more information on file format.
           type: string
       type: object
     UploadLineItemsResponse:

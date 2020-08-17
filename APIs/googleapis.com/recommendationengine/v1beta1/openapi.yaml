@@ -31,10 +31,10 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: Deletes a catalog item.
-      operationId: recommendationengine.projects.locations.catalogs.catalogItems.delete
+      description: Unregister an apiKey from using for predict method.
+      operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.delete
       parameters:
-        - description: Required. Full resource name of catalog item, such as "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+        - description: Required. The API key to unregister including full resource path. "projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store/predictionApiKeyRegistrations/"
           in: path
           name: name
           required: true
@@ -55,10 +55,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a specific catalog item.
-      operationId: recommendationengine.projects.locations.catalogs.catalogItems.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: recommendationengine.projects.locations.catalogs.eventStores.operations.get
       parameters:
-        - description: Required. Full resource name of catalog item, such as "projects/*/locations/global/catalogs/default_catalog/catalogitems/some_catalog_item_id".
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -69,7 +69,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudRecommendationengineV1beta1CatalogItem"
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -79,17 +79,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     patch:
       description: Updates a catalog item. Partial updating is supported. Non-existing items will be created.
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.patch
@@ -127,7 +127,7 @@ paths:
   "/v1beta1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: recommendationengine.projects.locations.catalogs.operations.list
+      operationId: recommendationengine.projects.locations.catalogs.eventStores.operations.list
       parameters:
         - description: The name of the operation's parent resource.
           in: path
@@ -165,30 +165,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1beta1/{name}:predict":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Makes a recommendation prediction. If using API Key based authentication, the API Key must be registered using the PredictionApiKeyRegistry service. [Learn more](/recommendations-ai/docs/setting-up#register-key).
       operationId: recommendationengine.projects.locations.catalogs.eventStores.placements.predict
@@ -259,17 +259,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a catalog item.
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.create
@@ -301,17 +301,17 @@ paths:
         - projects
   "/v1beta1/{parent}/catalogItems:import":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Bulk import of multiple catalog items. Request processing may be synchronous. No partial updating supported. Non-existing items will be created. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully updated.
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.import
@@ -377,17 +377,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1beta1/{parent}/predictionApiKeyRegistrations":
     get:
       description: List the registered apiKeys for use with predict method.
@@ -424,17 +424,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Register an API key for use with predict method.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.create
@@ -505,17 +505,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1beta1/{parent}/userEvents:collect":
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Recommendations AI JavaScript pixel. Users should not call this method directly.
@@ -557,30 +557,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
   "/v1beta1/{parent}/userEvents:import":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Bulk import of User events. Request processing might be synchronous. Events that already exist are skipped. Use this method for backfilling historical user events. Operation.response is of type ImportResponse. Note that it is possible for a subset of the items to be successfully inserted. Operation.metadata is of type ImportMetadata.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.import
@@ -612,17 +612,17 @@ paths:
         - projects
   "/v1beta1/{parent}/userEvents:purge":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.purge
@@ -654,17 +654,17 @@ paths:
         - projects
   "/v1beta1/{parent}/userEvents:rejoin":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Triggers a user event rejoin operation with latest catalog data. Events will not be annotated with detailed catalog information if catalog item is missing at the time the user event is ingested, and these events are stored as unjoined events with a limited usage on training and serving. This API can be used to trigger a 'join' operation on specified events with latest version of catalog items. It can also be used to correct events joined with wrong catalog items.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.rejoin
@@ -696,17 +696,17 @@ paths:
         - projects
   "/v1beta1/{parent}/userEvents:write":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
     post:
       description: Writes a single user event.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.write
@@ -857,7 +857,7 @@ components:
       description: BigQuery source import data from.
       properties:
         dataSchema:
-          description: 'Optional. The schema to use when parsing the data from the source. Supported values for catalog imports: 1: "catalog_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#json (Default for catalogItems.import) 2: "catalog_merchant_center" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#mc Supported values for user event imports: 1: "user_events_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/manage-user-events#import (Default for userEvents.import)'
+          description: 'Optional. The schema to use when parsing the data from the source. Supported values for catalog imports: 1: "catalog_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#json (Default for catalogItems.import) 2: "catalog_merchant_center" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#mc Supported values for user event imports: 1: "user_events_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/manage-user-events#import (Default for userEvents.import) 2. "user_events_ga360" using https://support.google.com/analytics/answer/3437719?hl=en'
           type: string
         datasetId:
           description: Required. The BigQuery data set to copy the data from.
@@ -1032,7 +1032,7 @@ components:
             type: string
           type: array
         jsonSchema:
-          description: 'Optional. The schema to use when parsing the data from the source. Supported values for catalog imports: 1: "catalog_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#json (Default for catalogItems.import) 2: "catalog_merchant_center" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#mc Supported values for user events imports: 1: "user_events_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/manage-user-events#import (Default for userEvents.import)'
+          description: 'Optional. The schema to use when parsing the data from the source. Supported values for catalog imports: 1: "catalog_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#json (Default for catalogItems.import) 2: "catalog_merchant_center" using https://cloud.google.com/recommendations-ai/docs/upload-catalog#mc Supported values for user events imports: 1: "user_events_recommendations_ai" using https://cloud.google.com/recommendations-ai/docs/manage-user-events#import (Default for userEvents.import) 2. "user_events_ga360" using https://support.google.com/analytics/answer/3437719?hl=en'
           type: string
       type: object
     GoogleCloudRecommendationengineV1beta1Image:

@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/run/
 tags:
-  - name: namespaces
   - name: projects
+  - name: namespaces
 paths:
   "/apis/domains.cloudrun.com/v1alpha1/{name}":
     delete:
@@ -106,17 +106,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/domains.cloudrun.com/v1alpha1/{parent}/authorizeddomains":
     get:
       description: RPC to list authorized domains.
@@ -153,17 +153,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/domains.cloudrun.com/v1alpha1/{parent}/domainmappings":
     get:
       description: Rpc to list domain mappings.
@@ -225,17 +225,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new domain mapping.
       operationId: run.namespaces.domainmappings.create
@@ -330,17 +330,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/eventing.knative.dev/v1alpha1/{parent}/triggers":
     get:
       description: Rpc to list triggers.
@@ -402,17 +402,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new trigger.
       operationId: run.namespaces.triggers.create
@@ -444,10 +444,10 @@ paths:
         - namespaces
   "/apis/events.cloud.google.com/v1alpha1/{name}":
     delete:
-      description: Rpc to delete a cloudschedulersource.
-      operationId: run.namespaces.cloudschedulersources.delete
+      description: Rpc to delete a cloudauditlogssource.
+      operationId: run.namespaces.cloudauditlogssources.delete
       parameters:
-        - description: Required. The name of the cloudschedulersource being deleted. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the cloudauditlogssource being deleted. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -483,10 +483,10 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a cloudschedulersource.
-      operationId: run.namespaces.cloudschedulersources.get
+      description: Rpc to get information about a cloudauditlogssource.
+      operationId: run.namespaces.cloudauditlogssources.get
       parameters:
-        - description: Required. The name of the cloudschedulersource being retrieved. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the cloudauditlogssource being retrieved. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -497,7 +497,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudSchedulerSource"
+                $ref: "#/components/schemas/CloudAuditLogsSource"
           description: Successful response
       security:
         - Oauth2:
@@ -507,22 +507,22 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
-      description: Rpc to replace a cloudschedulersource. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
-      operationId: run.namespaces.cloudschedulersources.replaceCloudSchedulerSource
+      description: Rpc to replace a cloudstoragesource. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
+      operationId: run.namespaces.cloudstoragesources.replaceCloudStorageSource
       parameters:
-        - description: Required. The name of the cloudschedulersource being retrieved. If needed, replace {namespace_id} with the project ID.
+        - description: Required. The name of the cloudstoragesource being retrieved. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -532,13 +532,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CloudSchedulerSource"
+              $ref: "#/components/schemas/CloudStorageSource"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudSchedulerSource"
+                $ref: "#/components/schemas/CloudStorageSource"
           description: Successful response
       security:
         - Oauth2:
@@ -608,17 +608,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudauditlogssource.
       operationId: run.namespaces.cloudauditlogssources.create
@@ -709,17 +709,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudpubsubsource.
       operationId: run.namespaces.cloudpubsubsources.create
@@ -810,17 +810,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudschedulersource.
       operationId: run.namespaces.cloudschedulersources.create
@@ -911,17 +911,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudstoragesource.
       operationId: run.namespaces.cloudstoragesources.create
@@ -953,10 +953,10 @@ paths:
         - namespaces
   "/apis/serving.knative.dev/v1alpha1/{name}":
     delete:
-      description: Rpc to delete a revision.
-      operationId: run.namespaces.revisions.delete
+      description: Rpc to delete a service. This will cause the Service to stop serving traffic and will delete the child entities like Routes, Configurations and Revisions.
+      operationId: run.namespaces.services.delete
       parameters:
-        - description: The name of the revision being deleted. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the service being deleted. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -997,10 +997,10 @@ paths:
       tags:
         - namespaces
     get:
-      description: Rpc to get information about a route.
-      operationId: run.namespaces.routes.get
+      description: Rpc to get information about a configuration.
+      operationId: run.namespaces.configurations.get
       parameters:
-        - description: The name of the route being retrieved. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the configuration being retrieved. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -1011,7 +1011,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Route"
+                $ref: "#/components/schemas/Configuration"
           description: Successful response
       security:
         - Oauth2:
@@ -1021,17 +1021,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Rpc to replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
       operationId: run.namespaces.services.replaceService
@@ -1122,17 +1122,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/serving.knative.dev/v1alpha1/{parent}/revisions":
     get:
       description: Rpc to list revisions.
@@ -1194,17 +1194,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/serving.knative.dev/v1alpha1/{parent}/routes":
     get:
       description: Rpc to list routes.
@@ -1266,17 +1266,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/apis/serving.knative.dev/v1alpha1/{parent}/services":
     get:
       description: Rpc to list services.
@@ -1338,17 +1338,17 @@ paths:
       tags:
         - namespaces
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Rpc to create a service.
       operationId: run.namespaces.services.create
@@ -1380,10 +1380,10 @@ paths:
         - namespaces
   "/v1alpha1/{name}":
     delete:
-      description: Rpc to delete a trigger.
-      operationId: run.projects.locations.triggers.delete
+      description: Rpc to delete a cloudauditlogssource.
+      operationId: run.projects.locations.cloudauditlogssources.delete
       parameters:
-        - description: The name of the trigger being deleted. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the cloudauditlogssource being deleted. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -1419,10 +1419,10 @@ paths:
       tags:
         - projects
     get:
-      description: Rpc to get information about a trigger.
-      operationId: run.projects.locations.triggers.get
+      description: Rpc to get information about a cloudauditlogssource.
+      operationId: run.projects.locations.cloudauditlogssources.get
       parameters:
-        - description: The name of the trigger being retrieved. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the cloudauditlogssource being retrieved. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -1433,7 +1433,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Trigger"
+                $ref: "#/components/schemas/CloudAuditLogsSource"
           description: Successful response
       security:
         - Oauth2:
@@ -1443,22 +1443,22 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
-      description: Rpc to replace a cloudschedulersource. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
-      operationId: run.projects.locations.cloudschedulersources.replaceCloudSchedulerSource
+      description: Rpc to replace a service. Only the spec and metadata labels and annotations are modifiable. After the Update request, Cloud Run will work to make the 'status' match the requested 'spec'. May provide metadata.resourceVersion to enforce update from last read for optimistic concurrency control.
+      operationId: run.projects.locations.services.replaceService
       parameters:
-        - description: Required. The name of the cloudschedulersource being retrieved. If needed, replace {namespace_id} with the project ID.
+        - description: The name of the service being replaced. If needed, replace {namespace_id} with the project ID.
           in: path
           name: name
           required: true
@@ -1468,13 +1468,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CloudSchedulerSource"
+              $ref: "#/components/schemas/Service"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CloudSchedulerSource"
+                $ref: "#/components/schemas/Service"
           description: Successful response
       security:
         - Oauth2:
@@ -1524,17 +1524,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/authorizeddomains":
     get:
       description: RPC to list authorized domains.
@@ -1571,17 +1571,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/cloudauditlogssources":
     get:
       description: Rpc to list cloudauditlogssources.
@@ -1643,17 +1643,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudauditlogssource.
       operationId: run.projects.locations.cloudauditlogssources.create
@@ -1744,17 +1744,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudpubsubsource.
       operationId: run.projects.locations.cloudpubsubsources.create
@@ -1845,17 +1845,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudschedulersource.
       operationId: run.projects.locations.cloudschedulersources.create
@@ -1946,17 +1946,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new cloudstoragesource.
       operationId: run.projects.locations.cloudstoragesources.create
@@ -2047,17 +2047,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/domainmappings":
     get:
       description: Rpc to list domain mappings.
@@ -2119,17 +2119,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new domain mapping.
       operationId: run.projects.locations.domainmappings.create
@@ -2220,17 +2220,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/routes":
     get:
       description: Rpc to list routes.
@@ -2292,17 +2292,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{parent}/services":
     get:
       description: Rpc to list services.
@@ -2364,17 +2364,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Rpc to create a service.
       operationId: run.projects.locations.services.create
@@ -2465,17 +2465,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new trigger.
       operationId: run.projects.locations.triggers.create
@@ -2536,30 +2536,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.
       operationId: run.projects.locations.services.setIamPolicy
@@ -2591,17 +2591,17 @@ paths:
         - projects
   "/v1alpha1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
       operationId: run.projects.locations.services.testIamPermissions
@@ -3433,7 +3433,9 @@ components:
       properties:
         command:
           description: Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell. Exit status of 0 is treated as live/healthy and non-zero is unhealthy. +optional
-          type: string
+          items:
+            type: string
+          type: array
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."

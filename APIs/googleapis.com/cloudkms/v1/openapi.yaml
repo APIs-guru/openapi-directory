@@ -37,10 +37,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: Returns metadata for a given CryptoKeyVersion.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.get
+      description: Returns metadata for a given ImportJob.
+      operationId: cloudkms.projects.locations.keyRings.importJobs.get
       parameters:
-        - description: Required. The name of the CryptoKeyVersion to get.
+        - description: Required. The name of the ImportJob to get.
           in: path
           name: name
           required: true
@@ -51,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CryptoKeyVersion"
+                $ref: "#/components/schemas/ImportJob"
           description: Successful response
       security:
         - Oauth2:
@@ -65,17 +65,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Update a CryptoKeyVersion's metadata. state may be changed between ENABLED and DISABLED using this method. See DestroyCryptoKeyVersion and RestoreCryptoKeyVersion to move between other states.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.patch
@@ -159,17 +159,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/publicKey":
     get:
       description: Returns the public key for the given CryptoKeyVersion. The CryptoKey.purpose must be ASYMMETRIC_SIGN or ASYMMETRIC_DECRYPT.
@@ -200,30 +200,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:asymmetricDecrypt":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Decrypts data that was encrypted with a public key retrieved from GetPublicKey corresponding to a CryptoKeyVersion with CryptoKey.purpose ASYMMETRIC_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricDecrypt
@@ -259,17 +259,17 @@ paths:
         - projects
   "/v1/{name}:asymmetricSign":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Signs data using a CryptoKeyVersion with CryptoKey.purpose ASYMMETRIC_SIGN, producing a signature that can be verified with the public key retrieved from GetPublicKey.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.asymmetricSign
@@ -305,17 +305,17 @@ paths:
         - projects
   "/v1/{name}:decrypt":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Decrypts data that was protected by Encrypt. The CryptoKey.purpose must be ENCRYPT_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.decrypt
@@ -351,17 +351,17 @@ paths:
         - projects
   "/v1/{name}:destroy":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Schedule a CryptoKeyVersion for destruction. Upon calling this method, CryptoKeyVersion.state will be set to DESTROY_SCHEDULED and destroy_time will be set to a time 24 hours in the future, at which point the state will be changed to DESTROYED, and the key material will be irrevocably destroyed. Before the destroy_time is reached, RestoreCryptoKeyVersion may be called to reverse the process.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.destroy
@@ -397,17 +397,17 @@ paths:
         - projects
   "/v1/{name}:encrypt":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Encrypts data, so that it can only be recovered by a call to Decrypt. The CryptoKey.purpose must be ENCRYPT_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.encrypt
@@ -443,17 +443,17 @@ paths:
         - projects
   "/v1/{name}:restore":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Restore a CryptoKeyVersion in the DESTROY_SCHEDULED state. Upon restoration of the CryptoKeyVersion, state will be set to DISABLED, and destroy_time will be cleared.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore
@@ -489,17 +489,17 @@ paths:
         - projects
   "/v1/{name}:updatePrimaryVersion":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Update the version of a CryptoKey that will be used in Encrypt. Returns an error if called on an asymmetric key.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion
@@ -591,17 +591,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new CryptoKeyVersion in a CryptoKey. The server will assign the next sequential id. If unset, state will be set to ENABLED.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.create
@@ -637,17 +637,17 @@ paths:
         - projects
   "/v1/{parent}/cryptoKeyVersions:import":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Imports a new CryptoKeyVersion into an existing CryptoKey using the wrapped key material provided in the request. The version ID will be assigned the next sequential id within the CryptoKey.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import
@@ -739,17 +739,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new CryptoKey within a KeyRing. CryptoKey.purpose and CryptoKey.version_template.algorithm are required.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.create
@@ -843,17 +843,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new ImportJob within a KeyRing. ImportJob.import_method is required.
       operationId: cloudkms.projects.locations.keyRings.importJobs.create
@@ -942,17 +942,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new KeyRing in a given Project and Location.
       operationId: cloudkms.projects.locations.keyRings.create
@@ -994,7 +994,7 @@ paths:
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -1026,33 +1026,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -1085,20 +1085,20 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
+      operationId: cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
