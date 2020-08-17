@@ -1,83 +1,101 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Notification/v1'
+  - url: https://cal-test.adyen.com/cal/services/Notification/v1
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
+    url: https://support.adyen.com/
     x-twitter: Adyen
-  description: |-
-    The MarketPay Notification Configuration API provides endpoints for configuration a subscription to a marketplace's MarketPay-related notifications. Notifications are sent upon the occurrence of certain events (such as a KYC check completion or a payout completion), and the subscription to these notifications dictates to where they are sent.
+  description: >-
+    The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
 
-    For further information on MarketPay notifications, please visit the [MarketPay documentation](https://docs.adyen.com/developers/marketpay/marketpay-overview).
+
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms/marketpay-notifications).
+
     ## Authentication
-    To connect to the MarketPay API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+
+    To connect to the Notification Configuration API, you must use basic authentication credentials of your web service user. If you don't have one, contact our [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+
 
     ```
+
     curl
-    -U "ws@Company.YourCompany":"YourWsPassword" \
+
+    -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+
     -H "Content-Type: application/json" \
+
     ...
+
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/developers/api-reference/live-endpoints).
+
+    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+
 
     ## Versioning
-    MarketPay API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    The Notification Configuration API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
 
     For example:
+
     ```
+
     https://cal-test.adyen.com/cal/services/Notification/v1/createNotificationConfiguration
+
     ```
-  termsOfService: 'https://docs.adyen.com/legal/terms-conditions'
-  title: Adyen MarketPay Notification Configuration Service
-  version: '1'
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: "Adyen for Platforms: Notification Configuration API"
+  version: "1"
   x-apisguru-categories:
     - payment
   x-logo:
-    url: 'https://twitter.com/Adyen/profile_image?size=original'
+    url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: openapi
-      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/NotificationConfigurationService-v1.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v1.json
+      version: "3.0"
   x-providerName: adyen.com
   x-serviceName: NotificationConfigurationService
 paths:
   /createNotificationConfiguration:
     post:
-      description: 'This endpoint is used to create a subscription to MarketPay event notifications. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.'
+      description: Creates a subscription to notifications informing you of events on your platform. After the subscription is created, the events specified in the configuration will be sent to the URL specified in the configuration. Subscriptions must be configured on a per-event basis (as opposed to, for example, a per-account holder basis), so all event notifications of a marketplace and of a given type will be sent to the same endpoint(s). A marketplace may have multiple endpoints if desired; an event notification may be sent to as many or as few different endpoints as configured.
+      operationId: post-createNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateNotificationConfigurationRequest'
+              $ref: "#/components/schemas/CreateNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
-      summary: Configure a new subscription to notifications.
+      summary: Subscribe to notifications.
       x-groupName: General
       x-sortIndex: 1
   /deleteNotificationConfigurations:
     post:
-      description: 'This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.'
+      description: This endpoint is used to delete an existing notification subscription configuration. After the subscription is deleted, no further event notifications will be sent to the URL that was in the subscription.
+      operationId: post-deleteNotificationConfigurations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteNotificationConfigurationRequest'
+              $ref: "#/components/schemas/DeleteNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
       summary: Delete an existing notification subscription configuration.
       x-groupName: General
@@ -85,17 +103,18 @@ paths:
   /getNotificationConfiguration:
     post:
       description: This endpoint is used to retrieve the details of the configuration of a notification subscription.
+      operationId: post-getNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetNotificationConfigurationRequest'
+              $ref: "#/components/schemas/GetNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Retrieve an existing notification subscription configuration.
       x-groupName: General
@@ -103,53 +122,56 @@ paths:
   /getNotificationConfigurationList:
     post:
       description: This endpoint is used to retrieve the details of the configurations of all of the notification subscriptions in the marketplace of the executing user.
+      operationId: post-getNotificationConfigurationList
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EmptyRequest'
+              $ref: "#/components/schemas/EmptyRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationListResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationListResponse"
           description: OK - the request has succeeded.
-      summary: Retrive a list of existing notification subscription configurations.
+      summary: Retrieve a list of existing notification subscription configurations.
       x-groupName: General
       x-sortIndex: 3
   /testNotificationConfiguration:
     post:
-      description: 'This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.'
+      description: This endpoint is used to test an existing notification subscription configuration. For each event type specified, a test notification will be generated and sent to the URL configured in the subscription specified.
+      operationId: post-testNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestNotificationConfigurationRequest'
+              $ref: "#/components/schemas/TestNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TestNotificationConfigurationResponse'
+                $ref: "#/components/schemas/TestNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Test an existing notification configuration.
       x-groupName: General
       x-sortIndex: 4
   /updateNotificationConfiguration:
     post:
-      description: 'This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.'
+      description: This endpoint is used to update an existing notification subscription configuration. If updating the event types, all event types desired must be provided, otherwise the previous event type configuration will be overwritten.
+      operationId: post-updateNotificationConfiguration
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateNotificationConfigurationRequest'
+              $ref: "#/components/schemas/UpdateNotificationConfigurationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetNotificationConfigurationResponse'
+                $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
       summary: Update an existing notification subscription configuration.
       x-groupName: General
@@ -159,7 +181,7 @@ components:
     CreateNotificationConfigurationRequest:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the prospective notification subscription configuration.
       required:
         - configurationDetails
@@ -183,38 +205,41 @@ components:
     GenericResponse:
       properties:
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        resultCode:
+          description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's marketplace settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
-      required:
-        - pspReference
-        - submittedAsync
     GetNotificationConfigurationListResponse:
       properties:
         configurations:
           description: Details of the notification subscription configurations.
           items:
-            $ref: '#/components/schemas/NotificationConfigurationDetails'
+            $ref: "#/components/schemas/NotificationConfigurationDetails"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        resultCode:
+          description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's marketplace settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
-        - pspReference
-        - submittedAsync
         - configurations
     GetNotificationConfigurationRequest:
       properties:
@@ -227,21 +252,23 @@ components:
     GetNotificationConfigurationResponse:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the notification subscription configuration.
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        resultCode:
+          description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's marketplace settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
-        - pspReference
-        - submittedAsync
         - configurationDetails
     NotificationConfigurationDetails:
       properties:
@@ -253,18 +280,27 @@ components:
           format: int32
           type: integer
         description:
-          description: |-
-            A description of the notification subscription configuration.
-            >Required when creating a configuration, forbidden when updating a configuration.
+          description: A description of the notification subscription configuration.
           type: string
         eventConfigs:
           description: The types of events whose notifications apply to this configuration.
           items:
-            $ref: '#/components/schemas/NotificationEventConfiguration'
+            $ref: "#/components/schemas/NotificationEventConfiguration"
           type: array
+        messageFormat:
+          deprecated: true
+          description: >-
+            The data format of the notification to be sent.
+
+            >Permitted values: `JSON`, `SOAP`.
+          enum:
+            - JSON
+            - SOAP
+          type: string
         notificationId:
-          description: |-
+          description: >-
             The ID of the configuration.
+
             >Required if updating an existing configuration, ignored during the creation of a configuration.
           format: int64
           type: integer
@@ -277,14 +313,21 @@ components:
         notifyUsername:
           description: The username to use when accessing the notifyURL.
           type: string
+        sendActionHeader:
+          deprecated: true
+          description: >-
+            Indicates whether an action header should be included.
+
+            >Only applies to SOAP messages (as specified in messageFormat).
+          type: boolean
         sslProtocol:
-          description: |-
+          description: >-
             The SSL protocol employed by the endpoint.
-            >Permitted values: `SSL`, `SSLv3`, `SSLInsecureCiphers`, `TLS`, `TLSv10`, `TLSv10InsecureCiphers`, `TLSv11`, `TLSv12`.
+
+            >Permitted values: `SSL`, `SSLInsecureCiphers`, `TLS`, `TLSv10`, `TLSv10InsecureCiphers`, `TLSv11`, `TLSv12`.
           enum:
             - SSL
             - SSLInsecureCiphers
-            - SSLv3
             - TLS
             - TLSv10
             - TLSv10InsecureCiphers
@@ -297,30 +340,39 @@ components:
     NotificationEventConfiguration:
       properties:
         eventType:
-          description: |-
+          description: >-
             The type of event triggering the notification.
-            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
+
+            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           enum:
+            - ACCOUNT_CLOSED
             - ACCOUNT_CREATED
             - ACCOUNT_HOLDER_CREATED
             - ACCOUNT_HOLDER_LIMIT_REACHED
             - ACCOUNT_HOLDER_PAYOUT
             - ACCOUNT_HOLDER_STATUS_CHANGE
+            - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
+            - ACCOUNT_HOLDER_UPCOMING_DEADLINE
             - ACCOUNT_HOLDER_UPDATED
             - ACCOUNT_HOLDER_VERIFICATION
             - ACCOUNT_UPDATED
             - BENEFICIARY_SETUP
             - COMPENSATE_NEGATIVE_BALANCE
+            - DIRECT_DEBIT_INITIATED
             - PAYMENT_FAILURE
+            - REFUND_FUNDS_TRANSFER
             - REPORT_AVAILABLE
             - SCHEDULED_REFUNDS
             - TRANSFER_FUNDS
           type: string
         includeMode:
-          description: |-
+          description: >-
             Indicates whether the specified eventType is to be sent to the endpoint or all events other than the specified eventType (and other specified eventTypes) are to be sent.
+
             >Permitted values: `INCLUDE`, `EXCLUDE`.
+
             >- `INCLUDE`: send the specified eventType.
+
             >- `EXCLUDE`: send all eventTypes other than the specified eventType (and other eventTypes marked with `EXCLUDE`).
           enum:
             - EXCLUDE
@@ -332,22 +384,28 @@ components:
     TestNotificationConfigurationRequest:
       properties:
         eventTypes:
-          description: |-
+          description: >-
             The event types to test.  If left blank, then all of the configured event types will be tested.
-            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
+
+            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
+              - ACCOUNT_CLOSED
               - ACCOUNT_CREATED
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
               - ACCOUNT_HOLDER_PAYOUT
               - ACCOUNT_HOLDER_STATUS_CHANGE
+              - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
+              - ACCOUNT_HOLDER_UPCOMING_DEADLINE
               - ACCOUNT_HOLDER_UPDATED
               - ACCOUNT_HOLDER_VERIFICATION
               - ACCOUNT_UPDATED
               - BENEFICIARY_SETUP
               - COMPENSATE_NEGATIVE_BALANCE
+              - DIRECT_DEBIT_INITIATED
               - PAYMENT_FAILURE
+              - REFUND_FUNDS_TRANSFER
               - REPORT_AVAILABLE
               - SCHEDULED_REFUNDS
               - TRANSFER_FUNDS
@@ -367,22 +425,28 @@ components:
             type: string
           type: array
         eventTypes:
-          description: |-
+          description: >-
             The event types that were tested.
-            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
+
+            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE` `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
           items:
             enum:
+              - ACCOUNT_CLOSED
               - ACCOUNT_CREATED
               - ACCOUNT_HOLDER_CREATED
               - ACCOUNT_HOLDER_LIMIT_REACHED
               - ACCOUNT_HOLDER_PAYOUT
               - ACCOUNT_HOLDER_STATUS_CHANGE
+              - ACCOUNT_HOLDER_STORE_STATUS_CHANGE
+              - ACCOUNT_HOLDER_UPCOMING_DEADLINE
               - ACCOUNT_HOLDER_UPDATED
               - ACCOUNT_HOLDER_VERIFICATION
               - ACCOUNT_UPDATED
               - BENEFICIARY_SETUP
               - COMPENSATE_NEGATIVE_BALANCE
+              - DIRECT_DEBIT_INITIATED
               - PAYMENT_FAILURE
+              - REFUND_FUNDS_TRANSFER
               - REPORT_AVAILABLE
               - SCHEDULED_REFUNDS
               - TRANSFER_FUNDS
@@ -391,7 +455,7 @@ components:
         exchangeMessages:
           description: The notification message and related response messages.
           items:
-            $ref: '#/components/schemas/ExchangeMessage'
+            $ref: "#/components/schemas/ExchangeMessage"
           type: array
         notificationId:
           description: The ID of the notification subscription configuration.
@@ -403,18 +467,20 @@ components:
             type: string
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        resultCode:
+          description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's marketplace settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
-        - pspReference
-        - submittedAsync
         - notificationId
         - eventTypes
         - okMessages
@@ -422,9 +488,17 @@ components:
     UpdateNotificationConfigurationRequest:
       properties:
         configurationDetails:
-          $ref: '#/components/schemas/NotificationConfigurationDetails'
+          $ref: "#/components/schemas/NotificationConfigurationDetails"
           description: Details of the notification subscription configuration to be updated.
       required:
         - configurationDetails
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
   - General

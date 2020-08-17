@@ -1,26 +1,26 @@
 openapi: 3.0.1
 servers:
-  - url: 'https://rest.ably.io'
+  - url: https://rest.ably.io
 info:
   contact:
     email: support@ably.io
     name: Ably Support
-    url: 'https://www.ably.io/contact'
+    url: https://www.ably.io/contact
     x-twitter: ablyrealtime
-  description: 'The [REST API specification](https://www.ably.io/documentation/rest-api) for Ably.'
-  title: Ably
+  description: The [REST API specification](https://www.ably.io/documentation/rest-api) for Ably.
+  title: Ably REST API
   version: 1.1.0
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/ablyrealtime/profile_image?size=original'
+    url: https://twitter.com/ablyrealtime/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.25
       format: openapi
-      url: 'https://raw.githubusercontent.com/ably/open-specs/master/swagger.yaml'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/ably/open-specs/main/swagger.yaml
+      version: "3.0"
   x-providerName: ably.io
 security:
   - basicAuth: []
@@ -56,7 +56,7 @@ paths:
               schema:
                 oneOf:
                   - items:
-                      $ref: '#/components/schemas/ChannelDetails'
+                      $ref: "#/components/schemas/ChannelDetails"
                     type: array
                   - items:
                       type: string
@@ -65,7 +65,7 @@ paths:
               schema:
                 oneOf:
                   - items:
-                      $ref: '#/components/schemas/ChannelDetails'
+                      $ref: "#/components/schemas/ChannelDetails"
                     type: array
                   - items:
                       type: string
@@ -76,61 +76,61 @@ paths:
           description: OK
           headers:
             link:
-              $ref: '#/components/headers/Link'
+              $ref: "#/components/headers/Link"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Enumerate all active channels of the application
       tags:
         - Status
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
-  '/channels/{channel_id}':
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
+  "/channels/{channel_id}":
     get:
       description: Get metadata of a channel
       operationId: getMetadataOfChannel
       parameters:
-        - $ref: '#/components/parameters/channelId'
+        - $ref: "#/components/parameters/channelId"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChannelDetails'
+                $ref: "#/components/schemas/ChannelDetails"
           description: OK
           headers:
             x-ably-serverid:
-              $ref: '#/components/headers/ServerId'
+              $ref: "#/components/headers/ServerId"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Get metadata of a channel
       tags:
         - Status
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
-  '/channels/{channel_id}/messages':
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
+  "/channels/{channel_id}/messages":
     get:
       description: Get message history for a channel
       operationId: getMessagesByChannel
       parameters:
-        - $ref: '#/components/parameters/channelId'
-        - $ref: '#/components/parameters/filterStart'
-        - $ref: '#/components/parameters/filterLimit'
-        - $ref: '#/components/parameters/filterEnd'
-        - $ref: '#/components/parameters/filterDirection'
+        - $ref: "#/components/parameters/channelId"
+        - $ref: "#/components/parameters/filterStart"
+        - $ref: "#/components/parameters/filterLimit"
+        - $ref: "#/components/parameters/filterEnd"
+        - $ref: "#/components/parameters/filterDirection"
       responses:
         2XX:
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Message'
+                  $ref: "#/components/schemas/Message"
                 type: array
             application/x-msgpack:
               schema:
                 items:
-                  $ref: '#/components/schemas/Message'
+                  $ref: "#/components/schemas/Message"
                 type: array
             text/html:
               schema:
@@ -138,40 +138,40 @@ paths:
           description: OK
           headers:
             link:
-              $ref: '#/components/headers/Link'
+              $ref: "#/components/headers/Link"
             x-ably-serverid:
-              $ref: '#/components/headers/ServerId'
+              $ref: "#/components/headers/ServerId"
         default:
           description: Error
           headers:
             x-ably-errorcode:
-              $ref: '#/components/headers/ErrorCode'
+              $ref: "#/components/headers/ErrorCode"
             x-ably-errormessage:
-              $ref: '#/components/headers/ErrorMessage'
+              $ref: "#/components/headers/ErrorMessage"
             x-ably-serverid:
-              $ref: '#/components/headers/ServerId'
+              $ref: "#/components/headers/ServerId"
       summary: Get message history for a channel
       tags:
         - History
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     post:
       description: Publish a message to the specified channel
       operationId: publishMessagesToChannel
       parameters:
-        - $ref: '#/components/parameters/channelId'
+        - $ref: "#/components/parameters/channelId"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Message'
+              $ref: "#/components/schemas/Message"
           application/x-msgpack:
             schema:
-              $ref: '#/components/schemas/Message'
+              $ref: "#/components/schemas/Message"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Message'
+              $ref: "#/components/schemas/Message"
       responses:
         2XX:
           content:
@@ -202,18 +202,18 @@ paths:
           description: OK
           headers:
             x-ably-serverid:
-              $ref: '#/components/headers/ServerId'
+              $ref: "#/components/headers/ServerId"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Publish a message to a channel
       tags:
         - Publishing
-  '/channels/{channel_id}/presence':
+  "/channels/{channel_id}/presence":
     get:
       description: Get presence on a channel
       operationId: getPresenceOfChannel
       parameters:
-        - $ref: '#/components/parameters/channelId'
+        - $ref: "#/components/parameters/channelId"
         - in: query
           name: clientId
           schema:
@@ -228,17 +228,17 @@ paths:
             default: 100
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PresenceMessage'
+                  $ref: "#/components/schemas/PresenceMessage"
                 type: array
             application/x-msgpack:
               schema:
                 items:
-                  $ref: '#/components/schemas/PresenceMessage'
+                  $ref: "#/components/schemas/PresenceMessage"
                 type: array
             text/html:
               schema:
@@ -246,39 +246,39 @@ paths:
           description: OK
           headers:
             link:
-              $ref: '#/components/headers/Link'
+              $ref: "#/components/headers/Link"
             x-ably-serverid:
-              $ref: '#/components/headers/ServerId'
+              $ref: "#/components/headers/ServerId"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Get presence of a channel
       tags:
         - Status
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
-  '/channels/{channel_id}/presence/history':
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
+  "/channels/{channel_id}/presence/history":
     get:
       description: Get presence on a channel
       operationId: getPresenceHistoryOfChannel
       parameters:
-        - $ref: '#/components/parameters/channelId'
-        - $ref: '#/components/parameters/filterStart'
-        - $ref: '#/components/parameters/filterLimit'
-        - $ref: '#/components/parameters/filterEnd'
-        - $ref: '#/components/parameters/filterDirection'
+        - $ref: "#/components/parameters/channelId"
+        - $ref: "#/components/parameters/filterStart"
+        - $ref: "#/components/parameters/filterLimit"
+        - $ref: "#/components/parameters/filterEnd"
+        - $ref: "#/components/parameters/filterDirection"
       responses:
         2XX:
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PresenceMessage'
+                  $ref: "#/components/schemas/PresenceMessage"
                 type: array
             application/x-msgpack:
               schema:
                 items:
-                  $ref: '#/components/schemas/PresenceMessage'
+                  $ref: "#/components/schemas/PresenceMessage"
                 type: array
             text/html:
               schema:
@@ -286,24 +286,24 @@ paths:
           description: OK
           headers:
             link:
-              $ref: '#/components/headers/Link'
+              $ref: "#/components/headers/Link"
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Get presence history of a channel
       tags:
         - History
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
-  '/keys/{keyName}/requestToken':
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
+  "/keys/{keyName}/requestToken":
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     post:
-      description: 'This is the means by which clients obtain access tokens to use the service. You can see how to construct an Ably TokenRequest in the [Ably TokenRequest spec](https://www.ably.io/documentation/rest-api/token-request-spec) documentation, although we recommend you use an Ably SDK rather to create a TokenRequest, as the construction of a TokenRequest is complex. The resulting token response object contains the token properties as defined in Ably TokenRequest spec. Authentication is not required if using a Signed TokenRequest.'
+      description: This is the means by which clients obtain access tokens to use the service. You can see how to construct an Ably TokenRequest in the [Ably TokenRequest spec](https://www.ably.io/documentation/rest-api/token-request-spec) documentation, although we recommend you use an Ably SDK rather to create a TokenRequest, as the construction of a TokenRequest is complex. The resulting token response object contains the token properties as defined in Ably TokenRequest spec. Authentication is not required if using a Signed TokenRequest.
       operationId: requestAccessToken
       parameters:
-        - $ref: '#/components/parameters/key_name'
+        - $ref: "#/components/parameters/key_name"
       requestBody:
         content:
           application/json:
@@ -312,26 +312,26 @@ paths:
                 channel1:
                   - publish
                   - subscribe
-                'wildcard:channels:*':
+                wildcard:channels:*:
                   - publish
               keyName: YourKey.Name
-              timestamp: '1559124196551'
+              timestamp: "1559124196551"
             schema:
               oneOf:
-                - $ref: '#/components/schemas/TokenRequest'
-                - $ref: '#/components/schemas/SignedTokenRequest'
+                - $ref: "#/components/schemas/TokenRequest"
+                - $ref: "#/components/schemas/SignedTokenRequest"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenDetails'
+                $ref: "#/components/schemas/TokenDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/TokenDetails'
+                $ref: "#/components/schemas/TokenDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Request an access token
       tags:
         - Authentication
@@ -345,12 +345,12 @@ paths:
           name: channel
           schema:
             type: string
-        - description: 'Must be set when clientId is empty, cannot be used with clientId.'
+        - description: Must be set when clientId is empty, cannot be used with clientId.
           in: query
           name: deviceId
           schema:
             type: string
-        - description: 'Must be set when deviceId is empty, cannot be used with deviceId.'
+        - description: Must be set when deviceId is empty, cannot be used with deviceId.
           in: query
           name: clientId
           schema:
@@ -359,7 +359,7 @@ paths:
         2XX:
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Delete a registered device's update token
       tags:
         - Push
@@ -394,16 +394,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: List channel subscriptions
       tags:
         - Push
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     post:
       description: Subscribe either a single device or all devices associated with a client ID to receive push notifications from messages sent to a channel.
       operationId: subscribePushDeviceToChannel
@@ -411,7 +411,7 @@ paths:
         content:
           application/json:
             example:
-              channel: 'my:channel'
+              channel: my:channel
               clientId: myClientId
             schema:
               oneOf:
@@ -420,7 +420,7 @@ paths:
                       description: Channel name.
                       type: string
                     deviceId:
-                      description: 'Must be set when clientId is empty, cannot be used with clientId.'
+                      description: Must be set when clientId is empty, cannot be used with clientId.
                       type: string
                   type: object
                 - properties:
@@ -428,12 +428,12 @@ paths:
                       description: Channel name.
                       type: string
                     clientId:
-                      description: 'Must be set when deviceId is empty, cannot be used with deviceId.'
+                      description: Must be set when deviceId is empty, cannot be used with deviceId.
                       type: string
                   type: object
           application/x-msgpack:
             example:
-              channel: 'my:channel'
+              channel: my:channel
               clientId: myClientId
             schema:
               oneOf:
@@ -442,7 +442,7 @@ paths:
                       description: Channel name.
                       type: string
                     deviceId:
-                      description: 'Must be set when clientId is empty, cannot be used with clientId.'
+                      description: Must be set when clientId is empty, cannot be used with clientId.
                       type: string
                   type: object
                 - properties:
@@ -450,12 +450,12 @@ paths:
                       description: Channel name.
                       type: string
                     clientId:
-                      description: 'Must be set when deviceId is empty, cannot be used with deviceId.'
+                      description: Must be set when deviceId is empty, cannot be used with deviceId.
                       type: string
                   type: object
           application/x-www-form-urlencoded:
             example:
-              channel: 'my:channel'
+              channel: my:channel
               clientId: myClientId
             schema:
               oneOf:
@@ -464,7 +464,7 @@ paths:
                       description: Channel name.
                       type: string
                     deviceId:
-                      description: 'Must be set when clientId is empty, cannot be used with clientId.'
+                      description: Must be set when clientId is empty, cannot be used with clientId.
                       type: string
                   type: object
                 - properties:
@@ -472,14 +472,14 @@ paths:
                       description: Channel name.
                       type: string
                     clientId:
-                      description: 'Must be set when deviceId is empty, cannot be used with deviceId.'
+                      description: Must be set when deviceId is empty, cannot be used with deviceId.
                       type: string
                   type: object
       responses:
         2XX:
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Subscribe a device to a channel
       tags:
         - Push
@@ -507,13 +507,13 @@ paths:
                 type: array
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: List all channels with at least one subscribed device
       tags:
         - Push
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
   /push/deviceRegistrations:
     delete:
       description: Unregisters devices. All their subscriptions for receiving push notifications through channels will also be deleted.
@@ -533,7 +533,7 @@ paths:
         2XX:
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Unregister matching devices for push notifications
       tags:
         - Push
@@ -563,62 +563,62 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: List devices registered for receiving push notifications
       tags:
         - Push
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     post:
-      description: 'Register a device’s details, including the information necessary to deliver push notifications to it. Requires "push-admin" capability.'
+      description: Register a device’s details, including the information necessary to deliver push notifications to it. Requires "push-admin" capability.
       operationId: registerPushDevice
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
           application/x-msgpack:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Register a device for receiving push notifications
       tags:
         - Push
-  '/push/deviceRegistrations/{device_id}':
+  "/push/deviceRegistrations/{device_id}":
     delete:
       description: Unregisters a single device by its device ID. All its subscriptions for receiving push notifications through channels will also be deleted.
       operationId: unregisterPushDevice
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: "#/components/parameters/deviceId"
       responses:
         2XX:
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Unregister a single device for push notifications
       tags:
         - Push
@@ -626,127 +626,127 @@ paths:
       description: Get the full details of a device.
       operationId: getPushDeviceDetails
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: "#/components/parameters/deviceId"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Get a device registration
       tags:
         - Push
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     patch:
-      description: 'Specific attributes of an existing registration can be updated. Only clientId, metadata and push.recipient are mutable.'
+      description: Specific attributes of an existing registration can be updated. Only clientId, metadata and push.recipient are mutable.
       operationId: patchPushDeviceDetails
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: "#/components/parameters/deviceId"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
           application/x-msgpack:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Update a device registration
       tags:
         - Push
     put:
-      description: 'Device registrations can be upserted (the existing registration is replaced entirely) with a PUT operation. Only clientId, metadata and push.recipient are mutable.'
+      description: Device registrations can be upserted (the existing registration is replaced entirely) with a PUT operation. Only clientId, metadata and push.recipient are mutable.
       operationId: putPushDeviceDetails
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: "#/components/parameters/deviceId"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
           application/x-msgpack:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/DeviceDetails'
+              $ref: "#/components/schemas/DeviceDetails"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Update a device registration
       tags:
         - Push
-  '/push/deviceRegistrations/{device_id}/resetUpdateToken':
+  "/push/deviceRegistrations/{device_id}/resetUpdateToken":
     get:
       description: Gets an updated device details object.
       operationId: updatePushDeviceDetails
       parameters:
-        - $ref: '#/components/parameters/deviceId'
+        - $ref: "#/components/parameters/deviceId"
       responses:
         2XX:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             application/x-msgpack:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
             text/html:
               schema:
-                $ref: '#/components/schemas/DeviceDetails'
+                $ref: "#/components/schemas/DeviceDetails"
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Reset a registered device's update token
       tags:
         - Push
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
   /push/publish:
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
     post:
       description: A convenience endpoint to deliver a push notification payload to a single device or set of devices identified by their client identifier.
       operationId: publishPushNotificationToDevices
@@ -756,9 +756,9 @@ paths:
             schema:
               properties:
                 push:
-                  $ref: '#/components/schemas/Push'
+                  $ref: "#/components/schemas/Push"
                 recipient:
-                  $ref: '#/components/schemas/Recipient'
+                  $ref: "#/components/schemas/Recipient"
               required:
                 - recipient
               type: object
@@ -766,9 +766,9 @@ paths:
             schema:
               properties:
                 push:
-                  $ref: '#/components/schemas/Push'
+                  $ref: "#/components/schemas/Push"
                 recipient:
-                  $ref: '#/components/schemas/Recipient'
+                  $ref: "#/components/schemas/Recipient"
               required:
                 - recipient
               type: object
@@ -776,9 +776,9 @@ paths:
             schema:
               properties:
                 push:
-                  $ref: '#/components/schemas/Push'
+                  $ref: "#/components/schemas/Push"
                 recipient:
-                  $ref: '#/components/schemas/Recipient'
+                  $ref: "#/components/schemas/Recipient"
               required:
                 - recipient
               type: object
@@ -786,19 +786,19 @@ paths:
         2XX:
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Publish a push notification to device(s)
       tags:
         - Push
   /stats:
     get:
-      description: 'The Ably system can be queried to obtain usage statistics for a given application, and results are provided aggregated across all channels in use in the application in the specified period. Stats may be used to track usage against account quotas.'
+      description: The Ably system can be queried to obtain usage statistics for a given application, and results are provided aggregated across all channels in use in the application in the specified period. Stats may be used to track usage against account quotas.
       operationId: getStats
       parameters:
-        - $ref: '#/components/parameters/filterStart'
-        - $ref: '#/components/parameters/filterLimit'
-        - $ref: '#/components/parameters/filterEnd'
-        - $ref: '#/components/parameters/filterDirection'
+        - $ref: "#/components/parameters/filterStart"
+        - $ref: "#/components/parameters/filterLimit"
+        - $ref: "#/components/parameters/filterEnd"
+        - $ref: "#/components/parameters/filterDirection"
         - description: Specifies the unit of aggregation in the returned results.
           in: query
           name: unit
@@ -818,13 +818,13 @@ paths:
                 type: object
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       summary: Retrieve usage statistics for an application
       tags:
         - Stats
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
   /time:
     get:
       description: This returns the service time in milliseconds since the epoch.
@@ -847,14 +847,14 @@ paths:
                 type: string
           description: OK
         default:
-          $ref: '#/components/responses/Error'
+          $ref: "#/components/responses/Error"
       security: []
       summary: Get the service time
       tags:
         - Stats
     parameters:
-      - $ref: '#/components/parameters/versionHeader'
-      - $ref: '#/components/parameters/responseFormat'
+      - $ref: "#/components/parameters/versionHeader"
+      - $ref: "#/components/parameters/responseFormat"
 components:
   headers:
     ErrorCode:
@@ -866,10 +866,10 @@ components:
       schema:
         type: string
     Link:
-      description: 'Links to related resources, in the format defined by [RFC 5988](https://tools.ietf.org/html/rfc5988#section-5). This will potentially include a link with relation type `next`, `first`, and `current`, where appropiate.'
+      description: Links to related resources, in the format defined by [RFC 5988](https://tools.ietf.org/html/rfc5988#section-5). This will potentially include a link with relation type `next`, `first`, and `current`, where appropiate.
       required: true
       schema:
-        pattern: '(<(.*)?>; rel=\"(first|current|last)?\",)*(<(.*)?>; rel=\"(first|current|last)?\")+'
+        pattern: (<(.*)?>; rel=\"(first|current|last)?\",)*(<(.*)?>; rel=\"(first|current|last)?\")+
         type: string
     ServerId:
       description: The ID for the server communicated with.
@@ -878,7 +878,7 @@ components:
         type: string
   parameters:
     channelId:
-      description: 'The [Channel''s ID](https://www.ably.io/documentation/rest/channels).'
+      description: The [Channel's ID](https://www.ably.io/documentation/rest/channels).
       in: path
       name: channel_id
       required: true
@@ -910,7 +910,7 @@ components:
       in: query
       name: limit
       schema:
-        default: '100'
+        default: "100"
         type: integer
     filterStart:
       in: query
@@ -918,7 +918,7 @@ components:
       schema:
         type: string
     key_name:
-      description: 'The [key name](https://www.ably.io/documentation/rest-api/token-request-spec#api-key-format) comprises of the app ID and key ID of an API key.'
+      description: The [key name](https://www.ably.io/documentation/rest-api/token-request-spec#api-key-format) comprises of the app ID and key ID of an API key.
       in: path
       name: keyName
       required: true
@@ -946,35 +946,35 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
         application/x-msgpack:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
         text/html:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
       description: Error
       headers:
         x-ably-errorcode:
-          $ref: '#/components/headers/ErrorCode'
+          $ref: "#/components/headers/ErrorCode"
         x-ably-errormessage:
-          $ref: '#/components/headers/ErrorMessage'
+          $ref: "#/components/headers/ErrorMessage"
         x-ably-serverid:
-          $ref: '#/components/headers/ServerId'
+          $ref: "#/components/headers/ServerId"
   schemas:
     ChannelDetails:
       properties:
         channelId:
-          description: 'The required name of the channel including any qualifier, if any.'
+          description: The required name of the channel including any qualifier, if any.
           type: string
         isGlobalMaster:
-          description: 'In events relating to the activity of a channel in a specific region, this optionally identifies whether or not that region is responsible for global coordination of the channel.'
+          description: In events relating to the activity of a channel in a specific region, this optionally identifies whether or not that region is responsible for global coordination of the channel.
           type: boolean
         region:
-          description: 'In events relating to the activity of a channel in a specific region, this optionally identifies the region.'
+          description: In events relating to the activity of a channel in a specific region, this optionally identifies the region.
           type: string
         status:
-          $ref: '#/components/schemas/ChannelStatus'
+          $ref: "#/components/schemas/ChannelStatus"
       required:
         - channelId
       type: object
@@ -982,10 +982,10 @@ components:
       description: A ChannelStatus instance.
       properties:
         isActive:
-          description: 'A required boolean value indicating whether the channel that is the subject of the event is active. For events indicating regional activity of a channel this indicates activity in that region, not global activity.'
+          description: A required boolean value indicating whether the channel that is the subject of the event is active. For events indicating regional activity of a channel this indicates activity in that region, not global activity.
           type: boolean
         occupancy:
-          $ref: '#/components/schemas/Occupancy'
+          $ref: "#/components/schemas/Occupancy"
       required:
         - isActive
       type: object
@@ -1021,7 +1021,7 @@ components:
             - android
           type: string
         push.recipient:
-          $ref: '#/components/schemas/Recipient'
+          $ref: "#/components/schemas/Recipient"
         push.state:
           description: the current state of the push device.
           enum:
@@ -1051,37 +1051,37 @@ components:
           type: integer
       type: object
     Extras:
-      description: 'Extras object. Currently only allows for [push](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example) extra.'
+      description: Extras object. Currently only allows for [push](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example) extra.
       properties:
         push:
-          $ref: '#/components/schemas/Push'
+          $ref: "#/components/schemas/Push"
       type: object
     Message:
       description: Message object.
       properties:
         clientId:
-          description: 'The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) of the publisher of this message.'
+          description: The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) of the publisher of this message.
           type: string
         connectionId:
           description: The connection ID of the publisher of this message.
           type: string
         data:
-          description: 'The string encoded payload, with the encoding specified below.'
+          description: The string encoded payload, with the encoding specified below.
           type: string
         encoding:
-          description: 'This will typically be empty as all messages received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.'
+          description: This will typically be empty as all messages received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.
           type: string
         extras:
-          $ref: '#/components/schemas/Extras'
+          $ref: "#/components/schemas/Extras"
         id:
-          description: 'A Unique ID that can be specified by the publisher for [idempotent publishing](https://www.ably.io/documentation/rest/messages#idempotent).'
+          description: A Unique ID that can be specified by the publisher for [idempotent publishing](https://www.ably.io/documentation/rest/messages#idempotent).
           readOnly: true
           type: string
         name:
-          description: 'The event name, if provided.'
+          description: The event name, if provided.
           type: string
         timestamp:
-          description: 'Timestamp when the message was received by the Ably, as milliseconds since the epoch.'
+          description: Timestamp when the message was received by the Ably, as milliseconds since the epoch.
           format: int64
           readOnly: true
           type: integer
@@ -1092,7 +1092,7 @@ components:
           description: Text below title on the expanded notification.
           type: string
         collapseKey:
-          description: 'Platform-specific, used to group notifications together.'
+          description: Platform-specific, used to group notifications together.
           type: string
         icon:
           description: Platform-specific icon for the notification.
@@ -1105,7 +1105,7 @@ components:
           type: string
       type: object
     Occupancy:
-      description: 'An Occupancy instance indicating the occupancy of a channel. For events indicating regional activity of a channel this indicates activity in that region, not global activity.'
+      description: An Occupancy instance indicating the occupancy of a channel. For events indicating regional activity of a channel this indicates activity in that region, not global activity.
       properties:
         presenceConnections:
           description: The number of connections that are authorised to enter members into the presence channel.
@@ -1142,19 +1142,19 @@ components:
           description: The connection ID of the publisher of this presence update.
           type: string
         data:
-          description: 'The presence update payload, if provided.'
+          description: The presence update payload, if provided.
           type: string
         encoding:
-          description: 'This will typically be empty as all presence updates received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.'
+          description: This will typically be empty as all presence updates received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.
           type: string
         extras:
-          $ref: '#/components/schemas/Extras'
+          $ref: "#/components/schemas/Extras"
         id:
           description: Unique ID assigned by Ably to this presence update.
           readOnly: true
           type: string
         timestamp:
-          description: 'Timestamp when the presence update was received by Ably, as milliseconds since the epoch.'
+          description: Timestamp when the presence update was received by Ably, as milliseconds since the epoch.
           format: int64
           readOnly: true
           type: integer
@@ -1162,27 +1162,27 @@ components:
     Push:
       properties:
         apns:
-          description: 'Extends and overrides generic values when delivering via APNs. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)'
+          description: Extends and overrides generic values when delivering via APNs. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
-              $ref: '#/components/schemas/Notification'
+              $ref: "#/components/schemas/Notification"
           type: object
         data:
-          description: 'Arbitrary [key-value string-to-string payload](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example).'
+          description: Arbitrary [key-value string-to-string payload](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example).
           type: string
         fcm:
-          description: 'Extends and overrides generic values when delivering via GCM/FCM. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)'
+          description: Extends and overrides generic values when delivering via GCM/FCM. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
-              $ref: '#/components/schemas/Notification'
+              $ref: "#/components/schemas/Notification"
           type: object
         notification:
-          $ref: '#/components/schemas/Notification'
+          $ref: "#/components/schemas/Notification"
         web:
-          description: 'Extends and overrides generic values when delivering via web. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)'
+          description: Extends and overrides generic values when delivering via web. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
-              $ref: '#/components/schemas/Notification'
+              $ref: "#/components/schemas/Notification"
           type: object
       type: object
     Recipient:
@@ -1197,10 +1197,10 @@ components:
           type: string
           writeOnly: true
         deviceToken:
-          description: 'when using APNs, specifies the required device token.'
+          description: when using APNs, specifies the required device token.
           type: string
         registrationToken:
-          description: 'when using GCM or FCM, specifies the required registration token.'
+          description: when using GCM or FCM, specifies the required registration token.
           type: string
         transportType:
           description: Defines which push platform is being used.
@@ -1212,10 +1212,10 @@ components:
       type: object
     SignedTokenRequest:
       allOf:
-        - $ref: '#/components/schemas/TokenRequest'
+        - $ref: "#/components/schemas/TokenRequest"
         - properties:
             mac:
-              description: 'A signature, generated as an HMAC of each of the above components, using the key secret value.'
+              description: A signature, generated as an HMAC of each of the above components, using the key secret value.
               type: string
           required:
             - mac
@@ -1241,21 +1241,21 @@ components:
     TokenRequest:
       properties:
         capability:
-          description: 'The [capabilities](https://www.ably.io/documentation/core-features/authentication#capabilities-explained) (i.e. a set of channel names/namespaces and, for each, a set of operations) which should be a subset of the set of capabilities associated with the key specified in keyName.'
+          description: The [capabilities](https://www.ably.io/documentation/core-features/authentication#capabilities-explained) (i.e. a set of channel names/namespaces and, for each, a set of operations) which should be a subset of the set of capabilities associated with the key specified in keyName.
           example:
             channel1:
               - publish
               - subscribe
           type: object
         clientId:
-          description: 'The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) to be assosciated with the token. Can be set to * to allow for any client ID to be used.'
+          description: The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) to be assosciated with the token. Can be set to * to allow for any client ID to be used.
           type: string
         keyName:
           description: Name of the key used for the TokenRequest. The keyName comprises of the app ID and key ID on an API Key.
           example: xVLyHw.LMJZxw
           type: string
         nonce:
-          description: 'An unquoted, un-escaped random string of at least 16 characters. Used to ensure the Ably TokenRequest cannot be reused.'
+          description: An unquoted, un-escaped random string of at least 16 characters. Used to ensure the Ably TokenRequest cannot be reused.
           type: string
         timestamp:
           description: Time of creation of the Ably TokenRequest.
@@ -1268,10 +1268,10 @@ components:
       type: object
   securitySchemes:
     basicAuth:
-      description: 'Basic Authentication using an [API key](https://www.ably.io/documentation/core-features/authentication#basic-authentication).'
+      description: Basic Authentication using an [API key](https://www.ably.io/documentation/core-features/authentication#basic-authentication).
       scheme: basic
       type: http
     bearerAuth:
-      description: 'Token Authentication using an [Ably Token](https://www.ably.io/documentation/core-features/authentication#basic-authentication), or optionally an [Ably JWT](https://www.ably.io/documentation/core-features/authentication#ably-jwt-process).'
+      description: Token Authentication using an [Ably Token](https://www.ably.io/documentation/core-features/authentication#basic-authentication), or optionally an [Ably JWT](https://www.ably.io/documentation/core-features/authentication#ably-jwt-process).
       scheme: bearer
       type: http

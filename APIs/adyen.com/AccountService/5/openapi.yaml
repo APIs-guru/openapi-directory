@@ -1,104 +1,151 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Account/v5'
+  - url: https://cal-test.adyen.com/cal/services/Account/v5
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
+    url: https://support.adyen.com/
     x-twitter: Adyen
-  description: |-
-    The MarketPay Account API provides endpoints for managing MarketPay account-related entities. These related entities include account holders, accounts, bank accounts, shareholders, and KYC-related documents. The management operations include actions such as creation, retrieval, updating, and deletion of them.
+  description: >-
+    The Account API provides endpoints for managing account-related entities on your platform. These related entities include account holders, accounts, bank accounts, shareholders, and KYC-related documents. The management operations include actions such as creation, retrieval, updating, and deletion of them.
 
-    For further information on MarketPay API, visit the [MarketPay documentation](https://docs.adyen.com/developers/marketpay).
+
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms).
+
     ## Authentication
-    To connect to the MarketPay API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+
+    To connect to the Account API, you must use basic authentication credentials of your web service user. If you don't have one, please contact the [Adyen Support Team](https://support.adyen.com/hc/en-us/requests/new). Then use its credentials to authenticate your request, for example:
+
 
     ```
+
     curl
-    -U "ws@Company.YourCompany":"YourWsPassword" \
+
+    -U "ws@MarketPlace.YourMarketPlace":"YourWsPassword" \
+
     -H "Content-Type: application/json" \
+
     ...
+
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/developers/development-resources/live-endpoints).
+
+    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+
 
     ## Versioning
-    MarketPay API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
+    The Account API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
+
 
     For example:
+
     ```
+
     https://cal-test.adyen.com/cal/services/Account/v5/createAccountHolder
+
     ```
-  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
-  title: Adyen MarketPay Account Service
-  version: '5'
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: "Adyen for Platforms: Account API"
+  version: "5"
   x-apisguru-categories:
     - payment
   x-logo:
-    url: 'https://twitter.com/Adyen/profile_image?size=original'
+    url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/AccountService-v5.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/AccountService-v5.json
+      version: "3.0"
   x-preferred: false
   x-providerName: adyen.com
   x-serviceName: AccountService
 paths:
-  /closeAccount:
+  /checkAccountHolder:
     post:
-      description: 'This endpoint is used to close an existing account under an account holder. If an account is closed, it may not process transactions or have its funds paid out,and it may not be reopened. Any payments made to a closed account will be directed to the merchant''s liable account.'
+      description: This endpoint allows to trigger the verification of the account holder earlier than it's required by the currently processed volume.
+      operationId: post-checkAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CloseAccountRequest'
+              $ref: "#/components/schemas/PerformVerificationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CloseAccountResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
+          description: Internal Server Error - the server could not process the request.
+      summary: Request to perform verification for an account holder.
+      x-groupName: Verification
+      x-sortIndex: 5
+  /closeAccount:
+    post:
+      description: This endpoint is used to close an existing account under an account holder. If an account is closed, it may not process transactions or have its funds paid out,and it may not be reopened. Any payments made to a closed account will be directed to the merchant's liable account.
+      operationId: post-closeAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloseAccountRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloseAccountResponse"
+          description: OK - the request has succeeded.
+        "400":
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          description: Unauthorized - authentication required.
+        "403":
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          description: Unprocessable Entity - a request validation error.
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Close an existing account under an account holder.
       x-groupName: Accounts
       x-sortIndex: 3
   /closeAccountHolder:
     post:
-      description: 'This endpoint is used to close an existing account holder and its accounts. If an account holder is closed, it may not process transactions or pay out funds, and it may not be reopened. Any payments made to a closed account will be directed to the merchant''s liable account.'
+      description: This endpoint is used to close an existing account holder and its accounts. If an account holder is closed, it may not process transactions or pay out funds, and it may not be reopened. Any payments made to a closed account will be directed to the merchant's liable account.
+      operationId: post-closeAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CloseAccountHolderRequest'
+              $ref: "#/components/schemas/CloseAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CloseAccountHolderResponse'
+                $ref: "#/components/schemas/CloseAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Close an existing account holder.
       x-groupName: Account holders
@@ -106,139 +153,144 @@ paths:
   /createAccount:
     post:
       description: This endpoint is used to create an account under an existing account holder. An account holder may have multiple accounts.
+      operationId: post-createAccount
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAccountRequest'
+              $ref: "#/components/schemas/CreateAccountRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateAccountResponse'
+                $ref: "#/components/schemas/CreateAccountResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Create a new account under an existing account holder.
       x-groupName: Accounts
       x-sortIndex: 1
   /createAccountHolder:
     post:
-      description: 'This endpoint is used to create an account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. Depending on the legal entity type, different details are required to be provided in the call to this endpoint.'
+      description: This endpoint is used to create an account holder. Each account holder represents a single sub-merchant, and each sub-merchant must be represented by an account holder. Depending on the legal entity type, different details are required to be provided in the call to this endpoint.
+      operationId: post-createAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAccountHolderRequest'
+              $ref: "#/components/schemas/CreateAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateAccountHolderResponse'
+                $ref: "#/components/schemas/CreateAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Create a new account holder.
       x-groupName: Account holders
       x-sortIndex: 1
   /deleteBankAccounts:
     post:
-      description: 'This endpoint is used to delete existing bank accounts from an account holder. For this, pass the `accountHolderCode` you got on the account holder creation, and one or more `bankAccountUUIDs` specifying bank accounts to delete.'
+      description: This endpoint is used to delete existing bank accounts from an account holder. For this, pass the `accountHolderCode` you got on the account holder creation, and one or more `bankAccountUUIDs` specifying bank accounts to delete.
+      operationId: post-deleteBankAccounts
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteBankAccountRequest'
+              $ref: "#/components/schemas/DeleteBankAccountRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Delete bank accounts of an existing account holder.
       x-groupName: Verification
       x-sortIndex: 3
-  /deletePayoutInstrumentTokens:
+  /deletePayoutMethods:
     post:
-      description: 'This endpoint is used to delete existing payout instrument tokens from an account holder. For this, pass the `accountHolderCode` you got on the account holder creation, and one or more `payoutInstrumentTokenCodes` specifying payout instrument tokens to delete.'
+      description: This endpoint is used to delete existing payout method from an account holder. For this, pass the `accountHolderCode` you got on the account holder creation, and one or more `payoutMethodCodes` specifying payout methods to delete.
+      operationId: post-deletePayoutMethods
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeletePayoutInstrumentTokenRequest'
+              $ref: "#/components/schemas/DeletePayoutMethodRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
-      summary: Delete payout instrument tokens of an existing account holder.
+      summary: Delete payout methods of an existing account holder.
       x-groupName: Verification
       x-sortIndex: 3
   /deleteShareholders:
     post:
       description: This endpoint is used to delete existing shareholders from an account holder.
+      operationId: post-deleteShareholders
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteShareholderRequest'
+              $ref: "#/components/schemas/DeleteShareholderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Delete shareholders of an existing account holder.
       x-groupName: Verification
@@ -246,114 +298,119 @@ paths:
   /getAccountHolder:
     post:
       description: This endpoint is used to retrieve the details of an account holder.
+      operationId: post-getAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetAccountHolderRequest'
+              $ref: "#/components/schemas/GetAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAccountHolderResponse'
+                $ref: "#/components/schemas/GetAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Retrieve the details of an account holder.
       x-groupName: Account holders
       x-sortIndex: 2
   /getUploadedDocuments:
     post:
-      description: |-
+      description: >-
         This endpoint is used to retrieve documents previously uploaded for use in the KYC Verification of an account holder.
 
-        For further information regarding KYC Verification, please refer to [Verification checks](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks).
+
+        For further information regarding KYC Verification, please refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
+      operationId: post-getUploadedDocuments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetUploadedDocumentsRequest'
+              $ref: "#/components/schemas/GetUploadedDocumentsRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetUploadedDocumentsResponse'
+                $ref: "#/components/schemas/GetUploadedDocumentsResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Retrieve the uploaded documents of an existing account holder.
       x-groupName: Verification
       x-sortIndex: 2
   /suspendAccountHolder:
     post:
-      description: 'This endpoint is used to suspend an existing account holder. If an account holder is suspended, it may not process transactions or pay out funds. Any payments made to a suspended account holder will be directed to the merchant''s liable account.'
+      description: This endpoint is used to suspend an existing account holder. If an account holder is suspended, it may not process transactions or pay out funds. Any payments made to a suspended account holder will be directed to the merchant's liable account.
+      operationId: post-suspendAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SuspendAccountHolderRequest'
+              $ref: "#/components/schemas/SuspendAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuspendAccountHolderResponse'
+                $ref: "#/components/schemas/SuspendAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Suspend an existing account holder.
       x-groupName: Account holders
       x-sortIndex: 5
   /unSuspendAccountHolder:
     post:
-      description: 'This endpoint is used to reinstate an existing account holder, which has been suspended through the `/suspendAccountHolder` endpoint. An account holder which has been suspended due to KYC verification issues cannot be reinstated through this endpoint.'
+      description: This endpoint is used to reinstate an existing account holder, which has been suspended through the `/suspendAccountHolder` endpoint. An account holder which has been suspended due to KYC verification issues cannot be reinstated through this endpoint.
+      operationId: post-unSuspendAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UnSuspendAccountHolderRequest'
+              $ref: "#/components/schemas/UnSuspendAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UnSuspendAccountHolderResponse'
+                $ref: "#/components/schemas/UnSuspendAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Reinstate a disabled account holder.
       x-groupName: Account holders
@@ -361,161 +418,147 @@ paths:
   /updateAccount:
     post:
       description: This endpoint is used to update the description or payout schedule of an existing account.
+      operationId: post-updateAccount
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccountRequest'
+              $ref: "#/components/schemas/UpdateAccountRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateAccountResponse'
+                $ref: "#/components/schemas/UpdateAccountResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Update an existing account under an account holder.
       x-groupName: Accounts
       x-sortIndex: 2
   /updateAccountHolder:
     post:
-      description: |-
+      description: >-
         This endpoint is used to update the `accountHolderDetails` or `processingTier` of an account holder.
 
+
         If updating the `accountHolderDetails`, only the details which have been provided will be updated. Other details will be left as-is with the exception of the following fields:
+
         * `accountHolderDetails.address`
-        * `accountHolderDetails.phoneNumber`
+
+        * `accountHolderDetails.fullPhoneNumber`
+
         * `accountHolderDetails.bankAccountDetails.BankAccountDetail`
+
         * `accountHolderDetails.businessDetails.shareholders.ShareholderContact`, which requires all fields necessary for validation (i.e. in order to update only the `accountHolderDetails.address.postalCode`, the fields `accountHolderDetails.address.country`, `.city`, `.street`, `.postalCode`, and possibly `.stateOrProvince` must be provided as well, so that the address can be properly validated).
+
 
         Note that this endpoint can also be used to create new bank accounts. For this, provide details of a bank account without providing a `bankAccountUUID`.
 
+
         Similarly, it can also be used to create new shareholders by providing details of a shareholder without providing a `shareholderCode`.
+
         > The updating of the `metadata` field will overwite all of the existing account holder metadata. In order to update an existing metadata key-value pair, all otherkey-value pairs should be provided in order to not delete them.
+      operationId: post-updateAccountHolder
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccountHolderRequest'
+              $ref: "#/components/schemas/UpdateAccountHolderRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateAccountHolderResponse'
+                $ref: "#/components/schemas/UpdateAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Update an existing account holder.
       x-groupName: Account holders
       x-sortIndex: 3
   /updateAccountHolderState:
     post:
-      description: |-
+      description: >-
         This endpoint is used to disable or enable the processing or payout state of an account holder. It cannot be used to enable an account holder whose processing or payout state has not been disabled through this endpoint.
 
-        For further information regarding processing and payout states of an account holder, please refer to the [MarketPay documentation](https://docs.adyen.com/developers/marketpay).
+
+        For more information about processing and payout states of an account holder, refer to [our documentation](https://docs.adyen.com/platforms).
+      operationId: post-updateAccountHolderState
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccountHolderStateRequest'
+              $ref: "#/components/schemas/UpdateAccountHolderStateRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAccountHolderStatusResponse'
+                $ref: "#/components/schemas/GetAccountHolderStatusResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Update the state of an existing account holder.
       x-groupName: Account holders
       x-sortIndex: 4
   /uploadDocument:
     post:
-      description: |-
+      description: >-
         This endpoint is used to upload a document for use in the KYC verification of an account holder.
 
-        For further information regarding KYC Verification, please refer to [Verification checks](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks).
+
+        For further information regarding KYC Verification, please refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
+      operationId: post-uploadDocument
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UploadDocumentRequest'
+              $ref: "#/components/schemas/UploadDocumentRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UpdateAccountHolderResponse'
+                $ref: "#/components/schemas/UpdateAccountHolderResponse"
           description: OK - the request has succeeded.
-        '400':
+        "400":
           description: Bad Request - a problem reading or understanding the request.
-        '401':
+        "401":
           description: Unauthorized - authentication required.
-        '403':
+        "403":
           description: Forbidden - insufficient permissions to process the request.
-        '422':
+        "422":
           description: Unprocessable Entity - a request validation error.
-        '500':
+        "500":
           description: Internal Server Error - the server could not process the request.
       summary: Upload a document for an existing account holder.
       x-groupName: Verification
       x-sortIndex: 1
-  /verification:
-    post:
-      description: This endpoint allows to trigger the verification of the account holder earlier than it's required by the currently processed volume.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PerformVerificationRequest'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericResponse'
-          description: OK - the request has succeeded.
-        '400':
-          description: Bad Request - a problem reading or understanding the request.
-        '401':
-          description: Unauthorized - authentication required.
-        '403':
-          description: Forbidden - insufficient permissions to process the request.
-        '422':
-          description: Unprocessable Entity - a request validation error.
-        '500':
-          description: Internal Server Error - the server could not process the request.
-      summary: Request to perform verification for an account holder.
-      x-groupName: Verification
-      x-sortIndex: 5
 components:
   schemas:
     Account:
@@ -533,24 +576,36 @@ components:
           description: A description of the account.
           type: string
         metadata:
-          description: |-
+          additionalProperties:
+            type: string
+          description: >-
             A set of key and value pairs for general use by the merchant.
+
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
+
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
         payoutSchedule:
-          $ref: '#/components/schemas/PayoutScheduleResponse'
+          $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The account's payout schedule.
+        payoutSpeed:
+          description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
+          enum:
+            - SAME_DAY
+            - STANDARD
+          type: string
         status:
-          description: 'The status of the account. Possible values: `Active`, `Inactive`, `Suspended`, `Closed`.'
+          description: "The status of the account. Possible values: `Active`, `Inactive`, `Suspended`, `Closed`."
           type: string
     AccountEvent:
       properties:
         event:
-          description: |-
+          description: >-
             The event.
+
             >Permitted values: `InactivateAccount`, `RefundNotPaidOutTransfers`.
-            For more information, refer to [Verification checks](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks).
+
+            For more information, refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
           enum:
             - InactivateAccount
             - RefundNotPaidOutTransfers
@@ -569,55 +624,73 @@ components:
     AccountHolderDetails:
       properties:
         address:
-          $ref: '#/components/schemas/ViasAddress'
+          $ref: "#/components/schemas/ViasAddress"
           description: The address of the account holder.
         bankAccountDetails:
-          description: |-
+          description: >-
             Each of the bank accounts associated with the account holder.
+
             > Each array entry should represent one bank account.
-            > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks).
+
+            > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
           items:
-            $ref: '#/components/schemas/BankAccountDetail'
+            $ref: "#/components/schemas/BankAccountDetail"
           type: array
+        bankAggregatorDataReference:
+          description: The opaque reference value returned by the Adyen API during bank account login.
+          type: string
         businessDetails:
-          $ref: '#/components/schemas/BusinessDetails'
-          description: |-
+          $ref: "#/components/schemas/BusinessDetails"
+          description: >-
             Details applicable to `Business` legal entities.
+
             Populated only if the account holder's legal entity is of type `Business`.
+
             > Required when being used in a `/createAccountHolder` request in which the legal entity is `Business`.
         email:
           description: The email address of the account holder.
           type: string
         fullPhoneNumber:
-          description: |-
+          description: >-
             The phone number of the account holder provided as a single string. It will be handled as a landline phone.
+
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         individualDetails:
-          $ref: '#/components/schemas/IndividualDetails'
-          description: |-
+          $ref: "#/components/schemas/IndividualDetails"
+          description: >-
             Details applicable to `Individual` legal entities.
+
             Populated only if the account holder's legal entity is of type `Individual`.
+
             > Required when being used in a `/createAccountHolder` request in which the legal entity is `Individual`.
         merchantCategoryCode:
-          description: |-
+          description: >-
             The Merchant Category Code of the account holder.
+
             > If not specified in the request, this will be derived from the platform account (which is configured by Adyen).
           type: string
         metadata:
-          description: |-
+          additionalProperties:
+            type: string
+          description: >-
             A set of key and value pairs for general use by the account holder or merchant.
+
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
+
             > The values being stored have a maximum length of eighty (80) characters and will be truncated if necessary.
+
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
-        payoutInstrumentTokens:
-          description: |-
+        payoutMethods:
+          description: >-
             Each of the card tokens associated with the account holder.
+
             > Each array entry should represent one card token.
-            > For comprehensive detail regarding the required `CardToken` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks).
+
+            > For comprehensive detail regarding the required `CardToken` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
           items:
-            $ref: '#/components/schemas/PayoutInstrumentToken'
+            $ref: "#/components/schemas/PayoutMethod"
           type: array
         webAddress:
           description: The URL of the website of the account holder.
@@ -625,22 +698,24 @@ components:
       required:
         - fullPhoneNumber
         - email
+        - webAddress
     AccountHolderStatus:
       properties:
         events:
           description: A list of events scheduled for the account holder.
           items:
-            $ref: '#/components/schemas/AccountEvent'
+            $ref: "#/components/schemas/AccountEvent"
           type: array
         payoutState:
-          $ref: '#/components/schemas/AccountPayoutState'
+          $ref: "#/components/schemas/AccountPayoutState"
           description: The payout state of the account holder.
         processingState:
-          $ref: '#/components/schemas/AccountProcessingState'
+          $ref: "#/components/schemas/AccountProcessingState"
           description: The processing state of the account holder.
         status:
-          description: |-
+          description: >-
             The status of the account holder.
+
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -653,38 +728,27 @@ components:
           type: string
       required:
         - status
-        - statusReason
-        - processingState
-        - payoutState
-        - events
     AccountPayoutState:
       properties:
         allowPayout:
-          description: 'Indicates whether payouts are allowed. This field is the overarching payout status, and is the aggregate of multiple conditions (e.g., KYC status, disabled flag, etc). If this field is false, no payouts will be permitted for any of the account holder''s accounts. If this field is true, payouts will be permitted for any of the account holder''s accounts.'
+          description: Indicates whether payouts are allowed. This field is the overarching payout status, and is the aggregate of multiple conditions (e.g., KYC status, disabled flag, etc). If this field is false, no payouts will be permitted for any of the account holder's accounts. If this field is true, payouts will be permitted for any of the account holder's accounts.
           type: boolean
         disableReason:
-          description: 'The reason why payouts (to all of the account holder''s accounts) have been disabled (by the platform). If the `disabled` field is true, this field can be used to explain why.'
+          description: The reason why payouts (to all of the account holder's accounts) have been disabled (by the platform). If the `disabled` field is true, this field can be used to explain why.
           type: string
         disabled:
-          description: 'Indicates whether payouts have been disabled (by the platform) for all of the account holder''s accounts. A platform may enable and disable this field at their discretion. If this field is true, `allowPayout` will be false and no payouts will be permitted for any of the account holder''s accounts. If this field is false, `allowPayout` may or may not be enabled, depending on other factors.'
+          description: Indicates whether payouts have been disabled (by the platform) for all of the account holder's accounts. A platform may enable and disable this field at their discretion. If this field is true, `allowPayout` will be false and no payouts will be permitted for any of the account holder's accounts. If this field is false, `allowPayout` may or may not be enabled, depending on other factors.
           type: boolean
         notAllowedReason:
-          description: 'The reason why payouts (to all of the account holder''s accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.'
+          description: The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
           type: string
         payoutLimit:
-          $ref: '#/components/schemas/Amount'
+          $ref: "#/components/schemas/Amount"
           description: The maximum amount that payouts are limited to. Only applies if payouts are allowed but limited.
         tierNumber:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
-      required:
-        - allowPayout
-        - disabled
-        - tierNumber
-        - disableReason
-        - payoutLimit
-        - notAllowedReason
     AccountProcessingState:
       properties:
         disableReason:
@@ -694,33 +758,28 @@ components:
           description: Indicates whether the processing of payments is allowed.
           type: boolean
         processedFrom:
-          $ref: '#/components/schemas/Amount'
-          description: 'The lower bound of the processing tier (i.e., an account holder must have processed at least this amount of money in order to be placed into this tier).'
+          $ref: "#/components/schemas/Amount"
+          description: The lower bound of the processing tier (i.e., an account holder must have processed at least this amount of money in order to be placed into this tier).
         processedTo:
-          $ref: '#/components/schemas/Amount'
-          description: 'The upper bound of the processing tier (i.e., an account holder must have processed less than this amount of money in order to be placed into this tier).'
+          $ref: "#/components/schemas/Amount"
+          description: The upper bound of the processing tier (i.e., an account holder must have processed less than this amount of money in order to be placed into this tier).
         tierNumber:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
-      required:
-        - disabled
-        - disableReason
-        - processedFrom
-        - processedTo
-        - tierNumber
     Amount:
       properties:
         currency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes).'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           maxLength: 3
           minLength: 3
           type: string
         value:
-          description: |-
+          description: >-
             The payable amount that can be charged for the transaction.
 
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/developers/development-resources/currency-codes).
+
+            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -729,17 +788,21 @@ components:
     BankAccountDetail:
       properties:
         accountNumber:
-          description: |-
+          description: >-
             The bank account number (without separators).
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         accountType:
-          description: |-
+          description: >-
             The type of bank account.
+
             Only applicable to bank accounts held in the USA.
+
             The permitted values are: `checking`, `savings`.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankAccountName:
           description: The name of the bank account.
@@ -748,137 +811,169 @@ components:
           description: Merchant reference to the bank account.
           type: string
         bankAccountUUID:
-          description: |
+          description: >
             The unique identifier (UUID) of the Bank Account.
+
             >If, during an account holder create or update request, this field is left blank (but other fields provided), a new Bank Account will be created with a procedurally-generated UUID.
+
 
             >If, during an account holder create request, a UUID is provided, the creation of the Bank Account will fail while the creation of the account holder will continue.
 
+
             >If, during an account holder update request, a UUID that is not correlated with an existing Bank Account is provided, the update of the account holder will fail.
+
 
             >If, during an account holder update request, a UUID that is correlated with an existing Bank Account is provided, the existing Bank Account will be updated.
           type: string
         bankBicSwift:
-          description: |-
+          description: >-
             The bank identifier code.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCity:
-          description: |-
+          description: >-
             The city in which the bank branch is located.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCode:
-          description: |-
+          description: >-
             The bank code of the banking institution with which the bank account is registered.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankName:
-          description: |-
+          description: >-
             The name of the banking institution with which the bank account is held.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         branchCode:
-          description: |-
+          description: >-
             The branch code of the branch under which the bank account is registered. The value to be specified in this parameter depends on the country of the bank account:
+
             * United States - Routing number
+
             * United Kingdom - Sort code
+
             * Germany - Bankleitzahl
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         checkCode:
-          description: |-
+          description: >-
             The check code of the bank account.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         countryCode:
-          description: |-
+          description: >-
             The two-letter country code in which the bank account is registered.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         currencyCode:
-          description: |-
+          description: >-
             The currency in which the bank account deals.
+
             >The permitted currency codes are defined in ISO-4217 (e.g. 'EUR').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         iban:
-          description: |-
+          description: >-
             The international bank account number.
+
             >The IBAN standard is defined in ISO-13616.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCity:
-          description: |-
+          description: >-
             The city of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCountryCode:
-          description: |-
+          description: >-
             The country code of the country of residence of the bank account owner.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerDateOfBirth:
-          description: |
+          description: >
             The date of birth of the bank account owner.
           type: string
         ownerHouseNumberOrName:
-          description: |-
+          description: >-
             The house name or number of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerName:
-          description: |-
+          description: >-
             The name of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerNationality:
-          description: |-
+          description: >-
             The country code of the country of nationality of the bank account owner.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerPostalCode:
-          description: |-
+          description: >-
             The postal code of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerState:
-          description: |-
+          description: >-
             The state of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerStreet:
-          description: |-
+          description: >-
             The street name of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         primaryAccount:
-          description: 'If set to true, the bank account is a primary account.'
+          description: If set to true, the bank account is a primary account.
           type: boolean
         taxId:
-          description: |-
+          description: >-
             The tax ID number.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         urlForVerification:
-          description: |-
+          description: >-
             The URL to be used for bank account verification.
+
             This may be generated on bank account creation.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
     BusinessDetails:
       properties:
@@ -892,11 +987,12 @@ components:
           description: The registration number of the company.
           type: string
         shareholders:
-          description: |-
+          description: >-
             Each of the shareholders associated with the company.
+
             Each array entry should represent one shareholder.
           items:
-            $ref: '#/components/schemas/ShareholderContact'
+            $ref: "#/components/schemas/ShareholderContact"
           type: array
         taxId:
           description: The tax ID of the company.
@@ -911,21 +1007,20 @@ components:
     CloseAccountHolderResponse:
       properties:
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the Account Holder.
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountHolderStatus
     CloseAccountRequest:
       properties:
@@ -936,20 +1031,24 @@ components:
         - accountCode
     CloseAccountResponse:
       properties:
+        accountCode:
+          description: The account code of the account that is closed.
+          type: string
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         status:
-          description: |-
+          description: >-
             The new status of the account.
+
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -958,45 +1057,50 @@ components:
             - Suspended
           type: string
       required:
-        - pspReference
         - status
     CreateAccountHolderRequest:
       properties:
         accountHolderCode:
-          description: |-
+          description: >-
             The desired code of the prospective account holder.
+
             > Must be between three (3) and fifty (50) characters long. Only letters, digits, and hyphens (-) are permitted.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: The details of the prospective account holder.
         createDefaultAccount:
-          description: |-
+          description: >-
             If set to true, an account with the default options is created for this account holder.
+
             **Default Value:** true
           type: boolean
         description:
           description: A description of the prospective account holder.
           type: string
         legalEntity:
-          description: |-
+          description: >-
             The entity type.
+
             Permitted values: `Business`, `Individual`
 
+
             If an account holder is 'Business', then `accountHolderDetails.businessDetails` must be provided, as well as at least one entry in the `accountHolderDetails.businessDetails.shareholders` list.
+
 
             If an account holder is 'Individual', then `accountHolderDetails.individualDetails` must be provided.
           enum:
             - Business
             - Individual
             - NonProfit
+            - Partnership
             - PublicCompany
           type: string
         primaryCurrency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes), with which the prospective account holder primarily deals.'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
         processingTier:
-          description: 'The starting [processing tier](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks#tiers) for the prospective account holder.'
+          description: The starting [processing tier](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks#tiers) for the prospective account holder.
           format: int32
           type: integer
       required:
@@ -1012,10 +1116,10 @@ components:
           description: The code of the new account holder.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: Details of the new account holder.
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
         description:
           description: The description of the new account holder.
@@ -1023,7 +1127,7 @@ components:
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         legalEntity:
           description: The type of legal entity of the new account holder.
@@ -1031,22 +1135,22 @@ components:
             - Business
             - Individual
             - NonProfit
+            - Partnership
             - PublicCompany
           type: string
         primaryCurrency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes), with which the prospective account holder primarily deals.'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         verification:
-          $ref: '#/components/schemas/KYCVerificationResult'
+          $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
       required:
-        - pspReference
         - accountHolderCode
         - accountHolderStatus
         - accountHolderDetails
@@ -1061,20 +1165,28 @@ components:
           description: A description of the account.
           type: string
         metadata:
-          description: |-
+          additionalProperties:
+            type: string
+          description: >-
             A set of key and value pairs for general use by the merchant.
+
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
+
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
         payoutSchedule:
-          description: |-
+          description: >-
             The payout schedule of the prospective account.
+
             >Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
             - DAILY
             - DAILY_6PM
+            - DAILY_AU
+            - DAILY_EU
+            - DAILY_US
             - DEFAULT
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
@@ -1084,15 +1196,20 @@ components:
             - YEARLY
           type: string
         payoutScheduleReason:
-          description: |-
+          description: >-
             The reason for the payout schedule choice.
+
             >Required if the payoutSchedule is `HOLD`.
+          type: string
+        payoutSpeed:
+          default: STANDARD
+          description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
+          enum:
+            - SAME_DAY
+            - STANDARD
           type: string
       required:
         - accountHolderCode
-        - payoutSchedule
-        - payoutScheduleReason
-        - description
     CreateAccountResponse:
       properties:
         accountCode:
@@ -1107,24 +1224,31 @@ components:
         invalidFields:
           description: A list of fields that caused the `/createAccount` request to fail.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         metadata:
           additionalProperties:
             type: string
           type: object
         payoutSchedule:
-          $ref: '#/components/schemas/PayoutScheduleResponse'
+          $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
+        payoutSpeed:
+          description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
+          enum:
+            - SAME_DAY
+            - STANDARD
+          type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         status:
-          description: |-
+          description: >-
             The status of the account.
+
             >Permitted values: `Active`.
           enum:
             - Active
@@ -1133,7 +1257,6 @@ components:
             - Suspended
           type: string
       required:
-        - pspReference
         - accountHolderCode
         - accountCode
         - status
@@ -1150,19 +1273,19 @@ components:
       required:
         - accountHolderCode
         - bankAccountUUIDs
-    DeletePayoutInstrumentTokenRequest:
+    DeletePayoutMethodRequest:
       properties:
         accountHolderCode:
-          description: 'The code of the account holder, from which to delete the payout instrument tokens.'
+          description: The code of the account holder, from which to delete the payout methods.
           type: string
-        payoutInstrumentTokenCodes:
-          description: The codes of the payout instrument tokens to be deleted.
+        payoutMethodCodes:
+          description: The codes of the payout methods to be deleted.
           items:
             type: string
           type: array
       required:
         - accountHolderCode
-        - payoutInstrumentTokenCodes
+        - payoutMethodCodes
     DeleteShareholderRequest:
       properties:
         accountHolderCode:
@@ -1179,52 +1302,63 @@ components:
     DocumentDetail:
       properties:
         accountHolderCode:
-          description: 'The code of account holder, to which the document applies.'
+          description: The code of account holder, to which the document applies.
           type: string
         bankAccountUUID:
-          description: |-
+          description: >-
             The unique ID of the Bank Account to which the document applies.
+
             >Required if the documentType is `BANK_STATEMENT` (i.e., a document is being submitted in order to verify a bank account).
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on when a document should be submitted in order to verify a bank account.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on when a document should be submitted in order to verify a bank account.
           type: string
         description:
           description: Description of the document.
           type: string
         documentType:
-          description: |-
+          description: >-
             The type of a document. Permitted values:
+
             * `BANK_STATEMENT` denotes an image containing a bank statement or other document proving ownership of a specific bank account.
+
             * `PASSPORT` denotes an image containing the identity page(s) of a passport.
-            * `ID_CARD` denotes an image containing both the front and back of the ID card.
+
             * `ID_CARD_FRONT` denotes an image containing only the front of the ID card. In order for a document to be usable, both the `ID_CARD_FRONT` and `ID_CARD_BACK` must be submitted.
+
             * `ID_CARD_BACK` denotes an image containing only the back of the ID card. In order for a document to be usable, both the `ID_CARD_FRONT` and `ID_CARD_BACK` must be submitted.
+
             * `DRIVING_LICENCE_FRONT` denotes an image containing only the front of the driving licence. In order for a document to be usable, both the `DRIVING_LICENCE_FRONT` and `DRIVING_LICENCE_BACK` must be submitted.
+
             * `DRIVING_LICENCE_BACK` denotes an image containing only the back of the driving licence. In order for a document to be usable, both the `DRIVING_LICENCE_FRONT` and `DRIVING_LICENCE_FRONT` must be submitted.
 
-            >Please refer to [Verification checks](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks) for details on when each document type should be submitted.
+
+            >Please refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks) for details on when each document type should be submitted.
           enum:
             - BANK_STATEMENT
             - BSN
+            - COMPANY_REGISTRATION_SCREENING
             - DRIVING_LICENCE
             - DRIVING_LICENCE_BACK
             - DRIVING_LICENCE_FRONT
             - ID_CARD
             - ID_CARD_BACK
             - ID_CARD_FRONT
-            - NHIS
             - PASSPORT
             - SSN
+            - SUPPORTING_DOCUMENTS
           type: string
         filename:
           description: Filename of the document.
           type: string
         shareholderCode:
-          description: |-
+          description: >-
             The code of the shareholder, to which the document applies.
-            >Required if the account holder referred to by the `accountHolderCode` has a `legalEntity` of type `Business` and the `documentType` is either `PASSPORT`, `ID_CARD`, `ID_CARD_FRONT`, `ID_CARD_BACK`, `DRIVING_LICENCE_FRONT`, `DRIVING_LICENCE_BACK` (i.e. a document is being submitted in order to verify a shareholder).
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/developers/marketpay/onboarding-and-verification) section for details on when a document should be submitted in order to verify a shareholder.
+            >Required if the account holder referred to by the `accountHolderCode` has a `legalEntity` of type `Business` and the `documentType` is either `PASSPORT`, `ID_CARD_FRONT`, `ID_CARD_BACK`, `DRIVING_LICENCE_FRONT`, `DRIVING_LICENCE_BACK` (i.e. a document is being submitted in order to verify a shareholder).
+
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on when a document should be submitted in order to verify a shareholder.
           type: string
       required:
         - accountHolderCode
@@ -1240,7 +1374,7 @@ components:
           description: A description of the validation error.
           type: string
         fieldType:
-          $ref: '#/components/schemas/FieldType'
+          $ref: "#/components/schemas/FieldType"
           description: The type of error field.
     FieldType:
       properties:
@@ -1261,6 +1395,7 @@ components:
             - bankAccount
             - bankAccountCode
             - bankAccountName
+            - bankAccountUUID
             - bankBicSwift
             - bankCity
             - bankCode
@@ -1271,6 +1406,7 @@ components:
             - cardToken
             - checkCode
             - city
+            - companyRegistration
             - country
             - countryCode
             - currency
@@ -1293,6 +1429,7 @@ components:
             - firstName
             - fullPhoneNumber
             - gender
+            - hopWebserviceUser
             - houseNumberOrName
             - iban
             - idCard
@@ -1305,11 +1442,13 @@ components:
             - legalBusinessName
             - legalEntity
             - legalEntityType
+            - merchantAccount
             - merchantCategoryCode
             - merchantReference
             - microDeposit
             - name
             - nationality
+            - originalReference
             - ownerCity
             - ownerCountryCode
             - ownerHouseNumberOrName
@@ -1319,6 +1458,7 @@ components:
             - ownerStreet
             - passport
             - passportNumber
+            - payoutMethodCode
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1326,14 +1466,24 @@ components:
             - primaryCurrency
             - reason
             - registrationNumber
+            - returnUrl
             - schedule
             - shareholder
             - shareholderCode
             - socialSecurityNumber
             - sourceAccountCode
             - stateOrProvince
+            - status
+            - stockExchange
+            - stockNumber
+            - stockTicker
+            - store
+            - storeDetail
+            - storeName
+            - storeReference
             - street
             - taxId
+            - tier
             - tierNumber
             - transferCode
             - unknown
@@ -1343,33 +1493,33 @@ components:
             - webAddress
           type: string
         shareholderCode:
-          description: 'The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.'
+          description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
     GenericResponse:
       properties:
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-        - pspReference
     GetAccountHolderRequest:
       properties:
         accountCode:
-          description: |-
+          description: >-
             The code of the account of which to retrieve the details.
+
             > Required if no `accountHolderCode` is provided.
           type: string
         accountHolderCode:
-          description: |-
+          description: >-
             The code of the account holder of which to retrieve the details.
+
             > Required if no `accountCode` is provided.
           type: string
         showDetails:
@@ -1381,15 +1531,15 @@ components:
           description: The code of the account holder.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: Details of the account holder.
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the account holder.
         accounts:
           description: A list of the accounts under the account holder.
           items:
-            $ref: '#/components/schemas/Account'
+            $ref: "#/components/schemas/Account"
           type: array
         description:
           description: The description of the account holder.
@@ -1397,7 +1547,7 @@ components:
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         legalEntity:
           description: The legal entity of the account holder.
@@ -1405,22 +1555,26 @@ components:
             - Business
             - Individual
             - NonProfit
+            - Partnership
             - PublicCompany
           type: string
         primaryCurrency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes), with which the prospective account holder primarily deals.'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
+        systemUpToDateTime:
+          description: The time that shows how up to date is the information in the response.
+          format: date-time
+          type: string
         verification:
-          $ref: '#/components/schemas/KYCVerificationResult'
+          $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
       required:
-        - pspReference
         - accountHolderCode
         - legalEntity
         - accountHolderStatus
@@ -1432,21 +1586,20 @@ components:
           description: The code of the Account Holder.
           type: string
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the Account Holder.
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountHolderCode
         - accountHolderStatus
     GetUploadedDocumentsRequest:
@@ -1467,30 +1620,29 @@ components:
         documentDetails:
           description: A list of the documents and their details.
           items:
-            $ref: '#/components/schemas/DocumentDetail'
+            $ref: "#/components/schemas/DocumentDetail"
           type: array
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-      required:
-        - pspReference
     IndividualDetails:
       properties:
         name:
-          $ref: '#/components/schemas/ViasName'
-          description: |-
+          $ref: "#/components/schemas/ViasName"
+          description: >-
             The name of the individual.
+
             >Make sure your account holder registers using the name shown on their Photo ID.
         personalData:
-          $ref: '#/components/schemas/ViasPersonalData'
+          $ref: "#/components/schemas/ViasPersonalData"
           description: Personal information of the individual.
     KYCBankAccountCheckResult:
       properties:
@@ -1500,20 +1652,25 @@ components:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
-      required:
-        - checks
-        - bankAccountUUID
+    KYCCardCheckResult:
+      properties:
+        checks:
+          description: A list of the checks and their statuses.
+          items:
+            $ref: "#/components/schemas/KYCCheckStatusData"
+          type: array
+        payoutMethodCode:
+          description: The unique ID of the card to which the check applies.
+          type: string
     KYCCheckResult:
       properties:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
-      required:
-        - checks
     KYCCheckStatusData:
       properties:
         requiredFields:
@@ -1522,9 +1679,10 @@ components:
             type: string
           type: array
         status:
-          description: |-
+          description: >-
             The status of the check.
-            >Permitted Values: `UNCHECKED`, `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
+
+            >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
           enum:
             - AWAITING_DATA
             - DATA_PROVIDED
@@ -1537,24 +1695,25 @@ components:
             - UNCHECKED
           type: string
         summary:
-          $ref: '#/components/schemas/KYCCheckSummary'
+          $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: |-
+          description: >-
             The type of check.
-            >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`.
+
+            >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
           enum:
             - BANK_ACCOUNT_VERIFICATION
+            - CARD_VERIFICATION
             - COMPANY_VERIFICATION
             - IDENTITY_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
+            - PAYOUT_METHOD_VERIFICATION
           type: string
       required:
         - type
         - status
-        - summary
-        - requiredFields
     KYCCheckSummary:
       properties:
         kycCheckCode:
@@ -1569,40 +1728,38 @@ components:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
-      required:
-        - checks
-        - shareholderCode
     KYCVerificationResult:
       properties:
         accountHolder:
-          $ref: '#/components/schemas/KYCCheckResult'
+          $ref: "#/components/schemas/KYCCheckResult"
           description: The result(s) of the checks on the account holder.
         bankAccounts:
           description: The result(s) of the checks on the bank account(s).
           items:
-            $ref: '#/components/schemas/KYCBankAccountCheckResult'
+            $ref: "#/components/schemas/KYCBankAccountCheckResult"
+          type: array
+        cards:
+          description: The result(s) of the checks on the card(s).
+          items:
+            $ref: "#/components/schemas/KYCCardCheckResult"
           type: array
         shareholders:
           description: The result(s) of the checks on the shareholder(s).
           items:
-            $ref: '#/components/schemas/KYCShareholderCheckResult'
+            $ref: "#/components/schemas/KYCShareholderCheckResult"
           type: array
-      required:
-        - accountHolder
-        - shareholders
-        - bankAccounts
-    PayoutInstrumentToken:
+    PayoutMethod:
       properties:
         merchantAccount:
           type: string
-        payoutInstrumentTokenCode:
+        payoutMethodCode:
           type: string
-        payoutInstrumentTokenType:
+        payoutMethodType:
           enum:
             - CardToken
           type: string
@@ -1621,14 +1778,18 @@ components:
           format: date-time
           type: string
         schedule:
-          description: |-
+          description: >-
             The payout schedule of the account.
+
             >Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
             - DAILY
             - DAILY_6PM
+            - DAILY_AU
+            - DAILY_EU
+            - DAILY_US
             - DEFAULT
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
@@ -1646,8 +1807,9 @@ components:
           description: The code of the account holder to verify.
           type: string
         accountStateType:
-          description: |-
+          description: >-
             The state required for the account holder.
+
             > Permitted values: `Processing`, `Payout`.
           enum:
             - LimitedPayout
@@ -1668,13 +1830,15 @@ components:
     PersonalDocumentData:
       properties:
         expirationDate:
-          description: |-
+          description: >-
             The expiration date of the document.
+
             The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
           type: string
         issuerCountry:
-          description: |-
+          description: >-
             The two-character country code of the issuer.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           maxLength: 2
           minLength: 2
@@ -1686,8 +1850,9 @@ components:
           description: The number of the document. Delete the given type if the value empty.
           type: string
         type:
-          description: |-
+          description: >-
             The type of the document. More then one item pert type does not allowed.
+
             Valid values: ID, PASSPORT, VISA, DRIVINGLICENSE
           enum:
             - DRIVINGLICENSE
@@ -1698,41 +1863,46 @@ components:
           type: string
       required:
         - type
-        - number
     ShareholderContact:
       properties:
         address:
-          $ref: '#/components/schemas/ViasAddress'
+          $ref: "#/components/schemas/ViasAddress"
           description: The address of the contact.
         email:
           description: The e-mail address of the contact.
           type: string
         fullPhoneNumber:
-          description: |-
+          description: >-
             The phone number of the contact provided as a single string.  It will be handled as a landline phone.
+
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         name:
-          $ref: '#/components/schemas/ViasName'
+          $ref: "#/components/schemas/ViasName"
           description: The name of the contact.
         personalData:
-          $ref: '#/components/schemas/ViasPersonalData'
+          $ref: "#/components/schemas/ViasPersonalData"
           description: Personal data of the Shareholder.
         phoneNumber:
-          $ref: '#/components/schemas/ViasPhoneNumber'
+          $ref: "#/components/schemas/ViasPhoneNumber"
           description: The phone number of the contact.
         shareholderCode:
-          description: |
+          description: >
             The unique identifier (UUID) of the Shareholder.
+
             >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Shareholder will be created with a procedurally-generated UUID.**
+
 
             >**If, during an Account Holder create request, a UUID is provided, the creation of the Shareholder will fail while the creation of the Account Holder will continue.**
 
+
             >**If, during an Account Holder update request, a UUID that is not correlated with an existing Shareholder is provided, the update of the Shareholder will fail.**
 
-            >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Bank Account will be updated.**
+
+            >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Shareholder will be updated.**
           type: string
         shareholderReference:
+          description: Merchant reference to the Shareholder.
           type: string
         webAddress:
           description: The URL of the website of the contact.
@@ -1747,21 +1917,20 @@ components:
     SuspendAccountHolderResponse:
       properties:
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the Account Holder.
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountHolderStatus
     UnSuspendAccountHolderRequest:
       properties:
@@ -1773,21 +1942,20 @@ components:
     UnSuspendAccountHolderResponse:
       properties:
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the Account Holder.
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountHolderStatus
     UpdateAccountHolderRequest:
       properties:
@@ -1795,35 +1963,42 @@ components:
           description: The code of the Account Holder to be updated.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
-          description: |-
+          $ref: "#/components/schemas/AccountHolderDetails"
+          description: >-
             The details to which the Account Holder should be updated.
+
 
             Required if a processingTier is not provided.
         description:
           description: The description to which the Account Holder should be updated.
           type: string
         legalEntity:
-          description: |-
+          description: >-
             The entity type.
+
             Permitted values: `Business`, `Individual`
 
+
             If an account holder is 'Business', then `accountHolderDetails.businessDetails` must be provided, as well as at least one entry in the `accountHolderDetails.businessDetails.shareholders` list.
+
 
             If an account holder is 'Individual', then `accountHolderDetails.individualDetails` must be provided.
           enum:
             - Business
             - Individual
             - NonProfit
+            - Partnership
             - PublicCompany
           type: string
         primaryCurrency:
-          description: 'The primary three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes), to which the account holder should be updated.'
+          description: The primary three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), to which the account holder should be updated.
           type: string
         processingTier:
-          description: |-
+          description: >-
             The processing tier to which the Account Holder should be updated.
+
             >The processing tier can not be lowered through this request.
+
 
             >Required if accountHolderDetails are not provided.
           format: int32
@@ -1836,18 +2011,18 @@ components:
           description: The code of the account holder.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: Details of the account holder.
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
         description:
           description: The description of the account holder.
           type: string
         invalidFields:
-          description: 'in case the account holder has not been updated, contains account holder fields, that did not pass the validation.'
+          description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         legalEntity:
           description: The legal entity of the account holder.
@@ -1855,22 +2030,22 @@ components:
             - Business
             - Individual
             - NonProfit
+            - Partnership
             - PublicCompany
           type: string
         primaryCurrency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/developers/development-resources/currency-codes), with which the prospective account holder primarily deals.'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         verification:
-          $ref: '#/components/schemas/KYCVerificationResult'
+          $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
       required:
-        - pspReference
         - accountHolderStatus
         - verification
         - legalEntity
@@ -1880,16 +2055,18 @@ components:
           description: The code of the Account Holder on which to update the state.
           type: string
         disable:
-          description: 'If true, disable the requested state.  If false, enable the requested state.'
+          description: If true, disable the requested state.  If false, enable the requested state.
           type: boolean
         reason:
-          description: |-
+          description: >-
             The reason that the state is being updated.
+
             >Required if the state is being disabled.
           type: string
         stateType:
-          description: |-
+          description: >-
             The state to be updated.
+
             >Permitted values are: `Processing`, `Payout`
           enum:
             - LimitedPayout
@@ -1912,14 +2089,24 @@ components:
           description: A description of the account.
           type: string
         metadata:
-          description: |-
+          additionalProperties:
+            type: string
+          description: >-
             A set of key and value pairs for general use by the merchant.
+
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
+
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
         payoutSchedule:
-          $ref: '#/components/schemas/UpdatePayoutScheduleRequest'
-          description: 'The details of the payout schedule, to which the account should be updated.'
+          $ref: "#/components/schemas/UpdatePayoutScheduleRequest"
+          description: The details of the payout schedule, to which the account should be updated.
+        payoutSpeed:
+          description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
+          enum:
+            - SAME_DAY
+            - STANDARD
+          type: string
       required:
         - accountCode
     UpdateAccountResponse:
@@ -1933,33 +2120,41 @@ components:
         invalidFields:
           description: A list of fields that caused the `/updateAccount` request to fail.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         metadata:
           additionalProperties:
             type: string
           type: object
         payoutSchedule:
-          $ref: '#/components/schemas/PayoutScheduleResponse'
+          $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
+        payoutSpeed:
+          description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
+          enum:
+            - SAME_DAY
+            - STANDARD
+          type: string
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
       required:
-        - pspReference
         - accountCode
-        - payoutSchedule
     UpdatePayoutScheduleRequest:
       properties:
         action:
-          description: |-
+          description: >-
             Direction on how to handle any payouts that have already been scheduled.
+
             Permitted values:
+
             * `CLOSE` will close the existing batch of payouts.
+
             * `UPDATE` will reschedule the existing batch to the new schedule.
+
             * `NOTHING` (**default**) will allow the payout to proceed.
           enum:
             - CLOSE
@@ -1967,20 +2162,26 @@ components:
             - UPDATE
           type: string
         reason:
-          description: |-
+          description: >-
             The reason for the payout schedule update.
+
             > This field is required when the `schedule` parameter is set to `HOLD`.
           type: string
         schedule:
-          description: |-
+          description: >-
             The payout schedule to which the account is to be updated.
+
             Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
+
             `HOLD` will prevent scheduled payouts from happening but will still allow manual payouts to occur.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
             - DAILY
             - DAILY_6PM
+            - DAILY_AU
+            - DAILY_EU
+            - DAILY_US
             - DEFAULT
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
@@ -1994,14 +2195,15 @@ components:
     UploadDocumentRequest:
       properties:
         documentContent:
-          description: |-
+          description: >-
             The content of the document as represented by a Base64-encoded string.
 
-            To learn about requirements, see [Bank account check](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks/bank-account-check#requirements) and [Photo ID check](https://docs.adyen.com/developers/marketpay/onboarding-and-verification/verification-checks/photo-id-check#requirements).
+
+            To learn about requirements, see [Bank account check](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks/bank-account-check#requirements) and [Photo ID check](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks/photo-id-check#requirements).
           format: byte
           type: string
         documentDetail:
-          $ref: '#/components/schemas/DocumentDetail'
+          $ref: "#/components/schemas/DocumentDetail"
           description: Details of the document being submitted.
       required:
         - documentDetail
@@ -2009,35 +2211,43 @@ components:
     ViasAddress:
       properties:
         city:
-          description: |-
+          description: >-
             The name of the city.
-            >Required if either houseNumberOrName, street, postalCode, or stateOrProvince are provided.
+
+            >Required if either `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.
           type: string
         country:
-          description: |-
-            The two-character country code of the address
-            >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
+          description: >-
+            The two-character country code of the address. The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
+
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
-          description: |-
+          description: >-
             The postal code.
+
             >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
-            >Required if either houseNumberOrName, street, city, or stateOrProvince are provided.
+
+            >Required if either `houseNumberOrName`, `street`, `city`, or `stateOrProvince` are provided.
           type: string
         stateOrProvince:
-          description: |-
+          description: >-
             The abbreviation of the state or province.
+
             >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
-            >Required for an address in the USA or Canada if either houseNumberOrName, street, city, or postalCode are provided.
+
+            >Required for an address in the USA or Canada if either `houseNumberOrName`, `street`, `city`, or `postalCode` are provided.
           type: string
         street:
-          description: |-
+          description: >-
             The name of the street.
+
             >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
-            >Required if either houseNumberOrName, city, postalCode, or stateOrProvince are provided.
+
+            >Required if either `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
       required:
         - country
@@ -2047,8 +2257,9 @@ components:
           description: The first name.
           type: string
         gender:
-          description: |-
+          description: >-
             The gender.
+
             >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
           enum:
             - MALE
@@ -2058,8 +2269,9 @@ components:
           minLength: 1
           type: string
         infix:
-          description: |-
+          description: >-
             The name's infix, if applicable.
+
             >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
@@ -2072,18 +2284,20 @@ components:
     ViasPersonalData:
       properties:
         dateOfBirth:
-          description: |-
+          description: >-
             The date of birth of the person.
+
             The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
           type: string
         documentData:
           description: Key value pairs of document type and identify numbers
           items:
-            $ref: '#/components/schemas/PersonalDocumentData'
+            $ref: "#/components/schemas/PersonalDocumentData"
           type: array
         nationality:
-          description: |-
+          description: >-
             The nationality of the person represented by a two-character country code.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           maxLength: 2
           minLength: 2
@@ -2091,18 +2305,21 @@ components:
     ViasPhoneNumber:
       properties:
         phoneCountryCode:
-          description: |-
+          description: >-
             The two-character country code of the phone number.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           type: string
         phoneNumber:
-          description: |-
+          description: >-
             The phone number.
+
             >The inclusion of the phone number country code is not necessary.
           type: string
         phoneType:
-          description: |-
+          description: >-
             The type of the phone number.
+
             >The following values are permitted: `Landline`, `Mobile`, `SIP`, `Fax`.
           enum:
             - Fax
@@ -2113,6 +2330,14 @@ components:
       required:
         - phoneCountryCode
         - phoneNumber
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
   - Account holders
   - Accounts

@@ -1,28 +1,29 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
-    url: 'https://support.adyen.com/'
+    url: https://support.adyen.com/
     x-twitter: Adyen
-  description: |-
-    The Notification Service sends notifications to the endpoints specified in a given subscription. Subscriptions are managed through the Notification Configuration API. The API specifications listed here detail the format of each notification.
+  description: >-
+    The Notification API sends notifications to the endpoints specified in a given subscription. Subscriptions are managed through the Notification Configuration API. The API specifications listed here detail the format of each notification.
 
-    For further information on MarketPay notifications, please visit the [MarketPay documentation](https://docs.adyen.com/marketpay).
-  termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
-  title: Adyen Notification Service
-  version: '3'
+
+    For more information, refer to our [documentation](https://docs.adyen.com/platforms/marketpay-notifications).
+  termsOfService: https://www.adyen.com/legal/terms-and-conditions
+  title: "Adyen for Platforms: Notifications"
+  version: "3"
   x-apisguru-categories:
     - payment
   x-logo:
-    url: 'https://twitter.com/Adyen/profile_image?size=original'
+    url: https://twitter.com/Adyen/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://raw.githubusercontent.com/adyen/adyen-openapi/master/specs/3.0/MarketPayNotificationService-v3.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/MarketPayNotificationService-v3.json
+      version: "3.0"
   x-preferred: false
   x-providerName: adyen.com
   x-serviceName: MarketPayNotificationService
@@ -30,17 +31,18 @@ paths:
   /ACCOUNT_CLOSED:
     post:
       description: This notification is sent when an account has been closed.
+      operationId: post-ACCOUNT_CLOSED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountCloseNotification'
+              $ref: "#/components/schemas/AccountCloseNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the closure of an account.
       x-groupName: Accounts
@@ -48,17 +50,18 @@ paths:
   /ACCOUNT_CREATED:
     post:
       description: This notification is sent when an account has been created.
+      operationId: post-ACCOUNT_CREATED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountCreateNotification'
+              $ref: "#/components/schemas/AccountCreateNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the creation of an account.
       x-groupName: Accounts
@@ -66,17 +69,18 @@ paths:
   /ACCOUNT_HOLDER_CREATED:
     post:
       description: This notification is sent when an account holder has been created.
+      operationId: post-ACCOUNT_HOLDER_CREATED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHolderCreateNotification'
+              $ref: "#/components/schemas/AccountHolderCreateNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the creation of an account holder.
       x-groupName: Account holders
@@ -84,17 +88,18 @@ paths:
   /ACCOUNT_HOLDER_PAYOUT:
     post:
       description: This notification is sent when a payout request to an account holder has been processed and the payout has been scheduled.
+      operationId: post-ACCOUNT_HOLDER_PAYOUT
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHolderPayoutNotification'
+              $ref: "#/components/schemas/AccountHolderPayoutNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon a payout to an account holder.
       x-groupName: Fund management
@@ -102,35 +107,75 @@ paths:
   /ACCOUNT_HOLDER_STATUS_CHANGE:
     post:
       description: This notification is sent when the status of an account holder has been changed.
+      operationId: post-ACCOUNT_HOLDER_STATUS_CHANGE
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHolderStatusChangeNotification'
+              $ref: "#/components/schemas/AccountHolderStatusChangeNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the status change of an account holder.
       x-groupName: Account holders
       x-sortIndex: 4
-  /ACCOUNT_HOLDER_UPDATED:
+  /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
     post:
-      description: This notification is sent when an account holder has been updated.
+      description: This notification is sent when the status of a store tied to an account holder has been changed.
+      operationId: post-ACCOUNT_HOLDER_STORE_STATUS_CHANGE
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHolderUpdateNotification'
+              $ref: "#/components/schemas/AccountHolderStoreStatusChangeNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the status change of a store tied to an account holder.
+      x-groupName: Account holders
+      x-sortIndex: 4
+  /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
+    post:
+      description: This notification is sent when an Account Holder has a deadline, to fulfill the requirements of a specific event, coming up.
+      operationId: post-ACCOUNT_HOLDER_UPCOMING_DEADLINE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderUpcomingDeadlineNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon an upcoming deadline.
+      x-groupName: Account holders
+      x-sortIndex: 1
+  /ACCOUNT_HOLDER_UPDATED:
+    post:
+      description: This notification is sent when an account holder has been updated.
+      operationId: post-ACCOUNT_HOLDER_UPDATED
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountHolderUpdateNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the update of an account holder.
       x-groupName: Account holders
@@ -138,17 +183,18 @@ paths:
   /ACCOUNT_HOLDER_VERIFICATION:
     post:
       description: This notification is sent when KYC Verification results are made available.
+      operationId: post-ACCOUNT_HOLDER_VERIFICATION
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountHolderVerificationNotification'
+              $ref: "#/components/schemas/AccountHolderVerificationNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the receipt of KYC Verification results.
       x-groupName: Account holders
@@ -156,17 +202,18 @@ paths:
   /ACCOUNT_UPDATED:
     post:
       description: This notification is sent when an account has been updated.
+      operationId: post-ACCOUNT_UPDATED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AccountUpdateNotification'
+              $ref: "#/components/schemas/AccountUpdateNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the update of an account.
       x-groupName: Accounts
@@ -174,17 +221,18 @@ paths:
   /BENEFICIARY_SETUP:
     post:
       description: This notification is sent when a benefactor/beneficiary relationship between accounts has been set up.
+      operationId: post-BENEFICIARY_SETUP
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BeneficiarySetupNotification'
+              $ref: "#/components/schemas/BeneficiarySetupNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the setup of a beneficiary.
       x-groupName: Fund management
@@ -192,53 +240,113 @@ paths:
   /COMPENSATE_NEGATIVE_BALANCE:
     post:
       description: This notification is sent when funds have been transferred from the Marketplace's liable account to an overdrawn account in order to compensate for the overdraft.
+      operationId: post-COMPENSATE_NEGATIVE_BALANCE
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CompensateNegativeBalanceNotification'
+              $ref: "#/components/schemas/CompensateNegativeBalanceNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the compensation of negative account balances.
       x-groupName: Fund management
       x-sortIndex: 5
-  /PAYMENT_FAILURE:
+  /DIRECT_DEBIT_INITIATED:
     post:
-      description: 'This notification is sent when a payment to an account has failed. In these cases, the funds which were meant for the account are redirected to the Marketplace''s liable account.'
+      description: This notification is sent when an automated direct debit is initiated from the Adyen platform.
+      operationId: post-DIRECT_DEBIT_INITIATED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaymentFailureNotification'
+              $ref: "#/components/schemas/DirectDebitInitiatedNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when an automated direct debit is initiated.
+      x-groupName: Fund management
+      x-sortIndex: 7
+  /PAYMENT_FAILURE:
+    post:
+      description: This notification is sent when a payment to an account has failed. In these cases, the funds which were meant for the account are redirected to the Marketplace's liable account.
+      operationId: post-PAYMENT_FAILURE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PaymentFailureNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon an account payment failure.
       x-groupName: Other
       x-sortIndex: 1
-  /REPORT_AVAILABLE:
+  /PAYOUT_CONFIRMED:
     post:
-      description: This notification is sent when a report has been made available.
+      description: This notification is sent when a payout is confirmed from the Adyen platform.
+      operationId: post-PAYOUT_CONFIRMED
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReportAvailableNotification'
+              $ref: "#/components/schemas/AccountHolderPayoutNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered when a payout has been confirmed.
+      x-groupName: Fund management
+      x-sortIndex: 8
+  /REFUND_FUNDS_TRANSFER:
+    post:
+      description: This notification is sent when the refund of funds from an account have been transferred to another account.
+      operationId: post-REFUND_FUNDS_TRANSFER
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundFundsTransferNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
+          description: OK - the request has succeeded.
+      summary: Triggered upon the transfer refund of funds between accounts.
+      x-groupName: Fund management
+      x-sortIndex: 6
+  /REPORT_AVAILABLE:
+    post:
+      description: This notification is sent when a report has been made available.
+      operationId: post-REPORT_AVAILABLE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportAvailableNotification"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered when a report is made available.
       x-groupName: Other
@@ -246,17 +354,18 @@ paths:
   /SCHEDULED_REFUNDS:
     post:
       description: This notification is sent when a 'Refund Transfers Not Paid Out' call has been processed and the associated refunds have been scheduled.
+      operationId: post-SCHEDULED_REFUNDS
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ScheduledRefundsNotification'
+              $ref: "#/components/schemas/ScheduledRefundsNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
       x-groupName: Fund management
@@ -264,17 +373,18 @@ paths:
   /TRANSFER_FUNDS:
     post:
       description: This notification is sent when the funds from an account have been transferred to another account.
+      operationId: post-TRANSFER_FUNDS
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransferFundsNotification'
+              $ref: "#/components/schemas/TransferFundsNotification"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationResponse'
+                $ref: "#/components/schemas/NotificationResponse"
           description: OK - the request has succeeded.
       summary: Triggered upon the transfer of funds between accounts.
       x-groupName: Fund management
@@ -284,7 +394,7 @@ components:
     AccountCloseNotification:
       properties:
         content:
-          $ref: '#/components/schemas/CloseAccountResponse'
+          $ref: "#/components/schemas/CloseAccountResponse"
           description: The details of the Account update.
         eventType:
           description: The event type of the notification.
@@ -293,7 +403,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -307,7 +417,7 @@ components:
     AccountCreateNotification:
       properties:
         content:
-          $ref: '#/components/schemas/CreateAccountResponse'
+          $ref: "#/components/schemas/CreateAccountResponse"
           description: The details of the account creation.
         eventType:
           description: The event type of the notification.
@@ -316,7 +426,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -330,10 +440,12 @@ components:
     AccountEvent:
       properties:
         event:
-          description: |-
+          description: >-
             The event.
+
             >Permitted values: `InactivateAccount`, `RefundNotPaidOutTransfers`.
-            For more information, refer to [Verification checks](https://docs.adyen.com/marketpay/onboarding-and-verification/verification-checks).
+
+            For more information, refer to [Verification checks](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
           enum:
             - InactivateAccount
             - RefundNotPaidOutTransfers
@@ -352,7 +464,7 @@ components:
     AccountHolderCreateNotification:
       properties:
         content:
-          $ref: '#/components/schemas/CreateAccountHolderResponse'
+          $ref: "#/components/schemas/CreateAccountHolderResponse"
           description: The details of the account holder creation.
         eventType:
           description: The event type of the notification.
@@ -361,7 +473,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -375,46 +487,59 @@ components:
     AccountHolderDetails:
       properties:
         address:
-          $ref: '#/components/schemas/ViasAddress'
+          $ref: "#/components/schemas/ViasAddress"
           description: The address of the account holder.
         bankAccountDetails:
-          description: |-
+          description: >-
             Each of the bank accounts associated with the account holder.
+
             > Each array entry should represent one bank account.
-            > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/marketpay/onboarding-and-verification/verification-checks).
+
+            > For comprehensive detail regarding the required `BankAccountDetail` fields, please refer to the [KYC Verification documentation](https://docs.adyen.com/platforms/onboarding-and-verification/verification-checks).
           items:
-            $ref: '#/components/schemas/BankAccountDetail'
+            $ref: "#/components/schemas/BankAccountDetail"
           type: array
         businessDetails:
-          $ref: '#/components/schemas/BusinessDetails'
-          description: |-
+          $ref: "#/components/schemas/BusinessDetails"
+          description: >-
             Details applicable to `Business` legal entities.
+
             Populated only if the account holder's legal entity is of type `Business`.
+
             > Required when being used in a `/createAccountHolder` request in which the legal entity is `Business`.
         email:
           description: The email address of the account holder.
           type: string
         fullPhoneNumber:
-          description: |-
+          description: >-
             The phone number of the account holder provided as a single string. It will be handled as a landline phone.
+
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         individualDetails:
-          $ref: '#/components/schemas/IndividualDetails'
-          description: |-
+          $ref: "#/components/schemas/IndividualDetails"
+          description: >-
             Details applicable to `Individual` legal entities.
+
             Populated only if the account holder's legal entity is of type `Individual`.
+
             > Required when being used in a `/createAccountHolder` request in which the legal entity is `Individual`.
         merchantCategoryCode:
-          description: |-
+          description: >-
             The Merchant Category Code of the account holder.
+
             > If not specified in the request, this will be derived from the platform account (which is configured by Adyen).
           type: string
         metadata:
-          description: |-
+          additionalProperties:
+            type: string
+          description: >-
             A set of key and value pairs for general use by the account holder or merchant.
+
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
+
             > The values being stored have a maximum length of eighty (80) characters and will be truncated if necessary.
+
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
         webAddress:
@@ -423,10 +548,11 @@ components:
       required:
         - fullPhoneNumber
         - email
+        - webAddress
     AccountHolderPayoutNotification:
       properties:
         content:
-          $ref: '#/components/schemas/AccountHolderPayoutNotificationContent'
+          $ref: "#/components/schemas/AccountHolderPayoutNotificationContent"
           description: Details of the payout to the Account Holder.
         eventType:
           description: The event type of the notification.
@@ -435,7 +561,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -455,45 +581,45 @@ components:
           description: The code of the Account Holder to which the payout was made.
           type: string
         amount:
-          $ref: '#/components/schemas/Amount'
-          description: payout amount
+          $ref: "#/components/schemas/Amount"
+          description: The payout amount.
         amounts:
-          description: payout amounts (per currency)
+          description: The payout amounts (per currency).
           items:
-            $ref: '#/components/schemas/Amount'
+            $ref: "#/components/schemas/Amount"
           type: array
         bankAccountDetail:
-          $ref: '#/components/schemas/BankAccountDetail'
+          $ref: "#/components/schemas/BankAccountDetail"
           description: Details of the Bank Account to which the payout was made.
         description:
           description: A description of the payout.
           type: string
         merchantReference:
-          description: merchant reference
+          description: The merchant reference.
           type: string
         status:
-          $ref: '#/components/schemas/OperationStatus'
-          description: payout status
+          $ref: "#/components/schemas/OperationStatus"
+          description: The payout status.
       required:
         - accountHolderCode
         - accountCode
-        - bankAccountDetail
     AccountHolderStatus:
       properties:
         events:
           description: A list of events scheduled for the account holder.
           items:
-            $ref: '#/components/schemas/AccountEvent'
+            $ref: "#/components/schemas/AccountEvent"
           type: array
         payoutState:
-          $ref: '#/components/schemas/AccountPayoutState'
+          $ref: "#/components/schemas/AccountPayoutState"
           description: The payout state of the account holder.
         processingState:
-          $ref: '#/components/schemas/AccountProcessingState'
+          $ref: "#/components/schemas/AccountProcessingState"
           description: The processing state of the account holder.
         status:
-          description: |-
+          description: >-
             The status of the account holder.
+
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -506,14 +632,10 @@ components:
           type: string
       required:
         - status
-        - statusReason
-        - processingState
-        - payoutState
-        - events
     AccountHolderStatusChangeNotification:
       properties:
         content:
-          $ref: '#/components/schemas/AccountHolderStatusChangeNotificationContent'
+          $ref: "#/components/schemas/AccountHolderStatusChangeNotificationContent"
           description: The details of the Account Holder status change.
         eventType:
           description: The event type of the notification.
@@ -522,7 +644,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -538,10 +660,10 @@ components:
           description: The code of the account holder.
           type: string
         newStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
         oldStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The former status of the account holder.
         reason:
           description: The reason for the status change.
@@ -550,11 +672,87 @@ components:
         - accountHolderCode
         - oldStatus
         - newStatus
-        - reason
+    AccountHolderStoreStatusChangeNotification:
+      properties:
+        content:
+          $ref: "#/components/schemas/AccountHolderStoreStatusChangeNotificationContent"
+          description: The details of the Account Holder Store status change.
+        eventType:
+          description: The event type of the notification.
+          type: string
+        executingUserKey:
+          description: The user or process that has triggered the notification.
+          type: string
+        live:
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
+          type: boolean
+        pspReference:
+          description: The PSP reference of the request from which the notification originates.
+          type: string
+      required:
+        - executingUserKey
+        - pspReference
+        - eventType
+        - live
+    AccountHolderStoreStatusChangeNotificationContent: {}
+    AccountHolderUpcomingDeadlineNotification:
+      properties:
+        content:
+          $ref: "#/components/schemas/AccountHolderUpcomingDeadlineNotificationContent"
+          description: The details of the upcoming event.
+        eventType:
+          description: The event type of the notification.
+          type: string
+        executingUserKey:
+          description: The user or process that has triggered the notification.
+          type: string
+        live:
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
+          type: boolean
+        pspReference:
+          description: The PSP reference of the request from which the notification originates.
+          type: string
+      required:
+        - executingUserKey
+        - pspReference
+        - eventType
+        - live
+    AccountHolderUpcomingDeadlineNotificationContent:
+      properties:
+        accountHolderCode:
+          description: The code of the account holder whom the event refers to.
+          type: string
+        event:
+          description: The event name that will be trigger if no action is taken.
+          enum:
+            - AccessPii
+            - CloseAccount
+            - CloseStores
+            - DeleteBankAccounts
+            - DeletePayoutInstrumentTokens
+            - DeletePayoutMethods
+            - DeleteShareholders
+            - InactivateAccount
+            - RecalculateAccountStatusAndProcessingTier
+            - RefundNotPaidOutTransfers
+            - ResolveEvents
+            - SaveAccountHolder
+            - SaveKYCCheckStatus
+            - SuspendAccount
+            - UnSuspendAccount
+            - UpdateAccountHolderState
+            - Verification
+          type: string
+        executionDate:
+          $ref: "#/components/schemas/LocalDate"
+          description: The execution date scheduled for the event.
+        reason:
+          description: The reason that leads to scheduling of the event.
+          type: string
     AccountHolderUpdateNotification:
       properties:
         content:
-          $ref: '#/components/schemas/UpdateAccountHolderResponse'
+          $ref: "#/components/schemas/UpdateAccountHolderResponse"
           description: The details of the Account Holder update.
         eventType:
           description: The event type of the notification.
@@ -563,7 +761,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -577,7 +775,7 @@ components:
     AccountHolderVerificationNotification:
       properties:
         content:
-          $ref: '#/components/schemas/AccountHolderVerificationNotificationContent'
+          $ref: "#/components/schemas/AccountHolderVerificationNotificationContent"
           description: The details of the Account Holder verification.
         eventType:
           description: The event type of the notification.
@@ -586,7 +784,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -612,7 +810,7 @@ components:
           deprecated: true
           description: A summary of the verification status.
           items:
-            $ref: '#/components/schemas/KYCCheckDataSummaryItem'
+            $ref: "#/components/schemas/KYCCheckDataSummaryItem"
           type: array
         verificationStatus:
           description: The status of verification.
@@ -631,37 +829,33 @@ components:
           description: The type of validation performed.
           enum:
             - BANK_ACCOUNT_VERIFICATION
+            - CARD_VERIFICATION
             - COMPANY_VERIFICATION
             - IDENTITY_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
+            - PAYOUT_METHOD_VERIFICATION
           type: string
       required:
         - accountHolderCode
     AccountPayoutState:
       properties:
         allowPayout:
-          description: 'Indicates whether payouts are allowed. This field is the overarching payout status, and is the aggregate of multiple conditions (e.g., KYC status, disabled flag, etc). If this field is false, no payouts will be permitted for any of the account holder''s accounts. If this field is true, payouts will be permitted for any of the account holder''s accounts.'
+          description: Indicates whether payouts are allowed. This field is the overarching payout status, and is the aggregate of multiple conditions (e.g., KYC status, disabled flag, etc). If this field is false, no payouts will be permitted for any of the account holder's accounts. If this field is true, payouts will be permitted for any of the account holder's accounts.
           type: boolean
         disableReason:
-          description: 'The reason why payouts (to all of the account holder''s accounts) have been disabled (by the platform). If the `disabled` field is true, this field can be used to explain why.'
+          description: The reason why payouts (to all of the account holder's accounts) have been disabled (by the platform). If the `disabled` field is true, this field can be used to explain why.
           type: string
         disabled:
-          description: 'Indicates whether payouts have been disabled (by the platform) for all of the account holder''s accounts. A platform may enable and disable this field at their discretion. If this field is true, `allowPayout` will be false and no payouts will be permitted for any of the account holder''s accounts. If this field is false, `allowPayout` may or may not be enabled, depending on other factors.'
+          description: Indicates whether payouts have been disabled (by the platform) for all of the account holder's accounts. A platform may enable and disable this field at their discretion. If this field is true, `allowPayout` will be false and no payouts will be permitted for any of the account holder's accounts. If this field is false, `allowPayout` may or may not be enabled, depending on other factors.
           type: boolean
         payoutLimit:
-          $ref: '#/components/schemas/Amount'
+          $ref: "#/components/schemas/Amount"
           description: The maximum amount that payouts are limited to. Only applies if payouts are allowed but limited.
         tierNumber:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
-      required:
-        - allowPayout
-        - disabled
-        - tierNumber
-        - disableReason
-        - payoutLimit
     AccountProcessingState:
       properties:
         disableReason:
@@ -671,25 +865,19 @@ components:
           description: Indicates whether the processing of payments is allowed.
           type: boolean
         processedFrom:
-          $ref: '#/components/schemas/Amount'
-          description: 'The lower bound of the processing tier (i.e., an account holder must have processed at least this amount of money in order to be placed into this tier).'
+          $ref: "#/components/schemas/Amount"
+          description: The lower bound of the processing tier (i.e., an account holder must have processed at least this amount of money in order to be placed into this tier).
         processedTo:
-          $ref: '#/components/schemas/Amount'
-          description: 'The upper bound of the processing tier (i.e., an account holder must have processed less than this amount of money in order to be placed into this tier).'
+          $ref: "#/components/schemas/Amount"
+          description: The upper bound of the processing tier (i.e., an account holder must have processed less than this amount of money in order to be placed into this tier).
         tierNumber:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
-      required:
-        - disabled
-        - disableReason
-        - processedFrom
-        - processedTo
-        - tierNumber
     AccountUpdateNotification:
       properties:
         content:
-          $ref: '#/components/schemas/UpdateAccountResponse'
+          $ref: "#/components/schemas/UpdateAccountResponse"
           description: The details of the Account update.
         eventType:
           description: The event type of the notification.
@@ -698,7 +886,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -712,13 +900,14 @@ components:
     Amount:
       properties:
         currency:
-          description: 'The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).'
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           maxLength: 3
           minLength: 3
           type: string
         value:
-          description: |-
+          description: >-
             The payable amount that can be charged for the transaction.
+
 
             The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
@@ -729,158 +918,194 @@ components:
     BankAccountDetail:
       properties:
         accountNumber:
-          description: |-
+          description: >-
             The bank account number (without separators).
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         accountType:
-          description: |-
+          description: >-
             The type of bank account.
+
             Only applicable to bank accounts held in the USA.
+
             The permitted values are: `checking`, `savings`.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankAccountName:
           description: The name of the bank account.
           type: string
         bankAccountUUID:
-          description: |
+          description: >
             The unique identifier (UUID) of the Bank Account.
+
             >If, during an account holder create or update request, this field is left blank (but other fields provided), a new Bank Account will be created with a procedurally-generated UUID.
+
 
             >If, during an account holder create request, a UUID is provided, the creation of the Bank Account will fail while the creation of the account holder will continue.
 
+
             >If, during an account holder update request, a UUID that is not correlated with an existing Bank Account is provided, the update of the account holder will fail.
+
 
             >If, during an account holder update request, a UUID that is correlated with an existing Bank Account is provided, the existing Bank Account will be updated.
           type: string
         bankBicSwift:
-          description: |-
+          description: >-
             The bank identifier code.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCity:
-          description: |-
+          description: >-
             The city in which the bank branch is located.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankCode:
-          description: |-
+          description: >-
             The bank code of the banking institution with which the bank account is registered.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         bankName:
-          description: |-
+          description: >-
             The name of the banking institution with which the bank account is held.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         branchCode:
-          description: |-
+          description: >-
             The branch code of the branch under which the bank account is registered. The value to be specified in this parameter depends on the country of the bank account:
+
             * United States - Routing number
+
             * United Kingdom - Sort code
+
             * Germany - Bankleitzahl
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         checkCode:
-          description: |-
+          description: >-
             The check code of the bank account.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         countryCode:
-          description: |-
+          description: >-
             The two-letter country code in which the bank account is registered.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         currencyCode:
-          description: |-
+          description: >-
             The currency in which the bank account deals.
+
             >The permitted currency codes are defined in ISO-4217 (e.g. 'EUR').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         iban:
-          description: |-
+          description: >-
             The international bank account number.
+
             >The IBAN standard is defined in ISO-13616.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCity:
-          description: |-
+          description: >-
             The city of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerCountryCode:
-          description: |-
+          description: >-
             The country code of the country of residence of the bank account owner.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerDateOfBirth:
-          description: |
+          description: >
             The date of birth of the bank account owner.
           type: string
         ownerHouseNumberOrName:
-          description: |-
+          description: >-
             The house name or number of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerName:
-          description: |-
+          description: >-
             The name of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerNationality:
-          description: |-
+          description: >-
             The country code of the country of nationality of the bank account owner.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerPostalCode:
-          description: |-
+          description: >-
             The postal code of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerState:
-          description: |-
+          description: >-
             The state of residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         ownerStreet:
-          description: |-
+          description: >-
             The street name of the residence of the bank account owner.
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         primaryAccount:
-          description: 'If set to true, the bank account is a primary account.'
+          description: If set to true, the bank account is a primary account.
           type: boolean
         taxId:
-          description: |-
+          description: >-
             The tax ID number.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
         urlForVerification:
-          description: |-
+          description: >-
             The URL to be used for bank account verification.
+
             This may be generated on bank account creation.
 
-            >Refer to the [Onboarding and verification](https://docs.adyen.com/marketpay/onboarding-and-verification) section for details on field requirements.
+
+            >Refer to the [Onboarding and verification](https://docs.adyen.com/platforms/onboarding-and-verification) section for details on field requirements.
           type: string
     BeneficiarySetupNotification:
       properties:
         content:
-          $ref: '#/components/schemas/BeneficiarySetupNotificationContent'
+          $ref: "#/components/schemas/BeneficiarySetupNotificationContent"
           description: Details of the beneficiary setup.
         eventType:
           description: The event type of the notification.
@@ -889,7 +1114,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -941,11 +1166,12 @@ components:
           description: The legal name of the company.
           type: string
         shareholders:
-          description: |-
+          description: >-
             Each of the shareholders associated with the company.
+
             Each array entry should represent one shareholder.
           items:
-            $ref: '#/components/schemas/ShareholderContact'
+            $ref: "#/components/schemas/ShareholderContact"
           type: array
         taxId:
           description: The tax ID of the company.
@@ -953,14 +1179,15 @@ components:
     CloseAccountResponse:
       properties:
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         status:
-          description: |-
+          description: >-
             The new status of the account.
+
             >Permitted values: `Active`, `Inactive`, `Suspended`, `Closed`.
           enum:
             - Active
@@ -969,11 +1196,12 @@ components:
             - Suspended
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's platform settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
         - pspReference
@@ -982,7 +1210,7 @@ components:
     CompensateNegativeBalanceNotification:
       properties:
         content:
-          $ref: '#/components/schemas/CompensateNegativeBalanceNotificationContent'
+          $ref: "#/components/schemas/CompensateNegativeBalanceNotificationContent"
           description: Details of the negative balance compensation.
         eventType:
           description: The event type of the notification.
@@ -991,7 +1219,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -1006,7 +1234,7 @@ components:
         records:
           description: A list of the negative balances compensated.
           items:
-            $ref: '#/components/schemas/CompensateNegativeBalanceNotificationRecord'
+            $ref: "#/components/schemas/CompensateNegativeBalanceNotificationRecord"
           type: array
       required:
         - records
@@ -1016,7 +1244,7 @@ components:
           description: The code of the account whose negative balance has been compensated.
           type: string
         amount:
-          $ref: '#/components/schemas/Amount'
+          $ref: "#/components/schemas/Amount"
           description: The amount compensated.
         transferDate:
           description: The date on which the compensation took place.
@@ -1035,31 +1263,32 @@ components:
           description: The code of the new account holder.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: Details of the new account holder.
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's platform settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
         verification:
-          $ref: '#/components/schemas/KYCVerificationResult'
+          $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
       required:
         - pspReference
@@ -1077,17 +1306,18 @@ components:
           description: The code of the account holder.
           type: string
         payoutSchedule:
-          $ref: '#/components/schemas/PayoutScheduleResponse'
+          $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         status:
-          description: |-
+          description: >-
             The status of the account.
+
             >Permitted values: `Active`.
           enum:
             - Active
@@ -1096,11 +1326,12 @@ components:
             - Suspended
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's platform settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
         - pspReference
@@ -1108,6 +1339,49 @@ components:
         - accountHolderCode
         - accountCode
         - status
+    DirectDebitInitiatedNotification:
+      properties:
+        content:
+          $ref: "#/components/schemas/DirectDebitInitiatedNotificationContent"
+          description: Details of the direct debit.
+        eventType:
+          description: The event type of the notification.
+          type: string
+        executingUserKey:
+          description: The user or process that has triggered the notification.
+          type: string
+        live:
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
+          type: boolean
+        pspReference:
+          description: The PSP reference of the request from which the notification originates.
+          type: string
+      required:
+        - executingUserKey
+        - pspReference
+        - eventType
+        - live
+    DirectDebitInitiatedNotificationContent:
+      properties:
+        accountCode:
+          description: The code of the account.
+          type: string
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount to be debited from the funding account.
+        debitInitiationDate:
+          $ref: "#/components/schemas/LocalDate"
+          description: The date of the debit initiation.
+        merchantAccountCode:
+          description: The code of the merchant account.
+          type: string
+        status:
+          $ref: "#/components/schemas/OperationStatus"
+          description: Direct debit status.
+      required:
+        - amount
+        - accountCode
+        - merchantAccountCode
     ErrorFieldType:
       properties:
         errorCode:
@@ -1118,7 +1392,7 @@ components:
           description: A description of the validation error.
           type: string
         fieldType:
-          $ref: '#/components/schemas/FieldType'
+          $ref: "#/components/schemas/FieldType"
           description: The type of error field.
     FieldType:
       properties:
@@ -1139,6 +1413,7 @@ components:
             - bankAccount
             - bankAccountCode
             - bankAccountName
+            - bankAccountUUID
             - bankBicSwift
             - bankCity
             - bankCode
@@ -1149,6 +1424,7 @@ components:
             - cardToken
             - checkCode
             - city
+            - companyRegistration
             - country
             - countryCode
             - currency
@@ -1171,6 +1447,7 @@ components:
             - firstName
             - fullPhoneNumber
             - gender
+            - hopWebserviceUser
             - houseNumberOrName
             - iban
             - idCard
@@ -1183,12 +1460,13 @@ components:
             - legalBusinessName
             - legalEntity
             - legalEntityType
+            - merchantAccount
             - merchantCategoryCode
-            - merchantCode
             - merchantReference
             - microDeposit
             - name
             - nationality
+            - originalReference
             - ownerCity
             - ownerCountryCode
             - ownerHouseNumberOrName
@@ -1198,6 +1476,7 @@ components:
             - ownerStreet
             - passport
             - passportNumber
+            - payoutMethodCode
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1205,6 +1484,7 @@ components:
             - primaryCurrency
             - reason
             - registrationNumber
+            - returnUrl
             - schedule
             - shareholder
             - shareholderCode
@@ -1212,11 +1492,16 @@ components:
             - sourceAccountCode
             - stateOrProvince
             - status
-            - storeCode
+            - stockExchange
+            - stockNumber
+            - stockTicker
+            - store
             - storeDetail
+            - storeName
             - storeReference
             - street
             - taxId
+            - tier
             - tierNumber
             - transferCode
             - unknown
@@ -1226,17 +1511,18 @@ components:
             - webAddress
           type: string
         shareholderCode:
-          description: 'The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.'
+          description: The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.
           type: string
     IndividualDetails:
       properties:
         name:
-          $ref: '#/components/schemas/ViasName'
-          description: |-
+          $ref: "#/components/schemas/ViasName"
+          description: >-
             The name of the individual.
+
             >Make sure your account holder registers using the name shown on their Photo ID.
         personalData:
-          $ref: '#/components/schemas/ViasPersonalData'
+          $ref: "#/components/schemas/ViasPersonalData"
           description: Personal information of the individual.
     KYCBankAccountCheckResult:
       properties:
@@ -1246,11 +1532,8 @@ components:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
-      required:
-        - checks
-        - bankAccountUUID
     KYCCheckDataSummaryItem:
       properties:
         itemCode:
@@ -1265,10 +1548,8 @@ components:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
-      required:
-        - checks
     KYCCheckStatusData:
       properties:
         requiredFields:
@@ -1277,9 +1558,10 @@ components:
             type: string
           type: array
         status:
-          description: |-
+          description: >-
             The status of the check.
-            >Permitted Values: `UNCHECKED`, `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
+
+            >Permitted Values: `DATA_PROVIDED`, `PASSED`, `PENDING`, `AWAITING_DATA`, `RETRY_LIMIT_REACHED`, `INVALID_DATA`, `FAILED`.
           enum:
             - AWAITING_DATA
             - DATA_PROVIDED
@@ -1292,24 +1574,25 @@ components:
             - UNCHECKED
           type: string
         summary:
-          $ref: '#/components/schemas/KYCCheckSummary'
+          $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the execution of the check.
         type:
-          description: |-
+          description: >-
             The type of check.
-            >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`.
+
+            >Permitted Values: `COMPANY_VERIFICATION`, `IDENTITY_VERIFICATION`, `PASSPORT_VERIFICATION`, `BANK_ACCOUNT_VERIFICATION`, `NONPROFIT_VERIFICATION`, `CARD_VERIFICATION`.
           enum:
             - BANK_ACCOUNT_VERIFICATION
+            - CARD_VERIFICATION
             - COMPANY_VERIFICATION
             - IDENTITY_VERIFICATION
             - NONPROFIT_VERIFICATION
             - PASSPORT_VERIFICATION
+            - PAYOUT_METHOD_VERIFICATION
           type: string
       required:
         - type
         - status
-        - summary
-        - requiredFields
     KYCCheckSummary:
       properties:
         code:
@@ -1326,33 +1609,34 @@ components:
         checks:
           description: A list of the checks and their statuses.
           items:
-            $ref: '#/components/schemas/KYCCheckStatusData'
+            $ref: "#/components/schemas/KYCCheckStatusData"
           type: array
         shareholderCode:
           description: The code of the shareholder to which the check applies.
           type: string
-      required:
-        - checks
-        - shareholderCode
     KYCVerificationResult:
       properties:
         accountHolder:
-          $ref: '#/components/schemas/KYCCheckResult'
+          $ref: "#/components/schemas/KYCCheckResult"
           description: The result(s) of the checks on the account holder.
         bankAccounts:
           description: The result(s) of the checks on the bank account(s).
           items:
-            $ref: '#/components/schemas/KYCBankAccountCheckResult'
+            $ref: "#/components/schemas/KYCBankAccountCheckResult"
           type: array
         shareholders:
           description: The result(s) of the checks on the shareholder(s).
           items:
-            $ref: '#/components/schemas/KYCShareholderCheckResult'
+            $ref: "#/components/schemas/KYCShareholderCheckResult"
           type: array
-      required:
-        - accountHolder
-        - shareholders
-        - bankAccounts
+    LocalDate:
+      properties:
+        month:
+          format: int32
+          type: integer
+        year:
+          format: int32
+          type: integer
     Message:
       properties:
         code:
@@ -1364,14 +1648,12 @@ components:
     NotificationResponse:
       properties:
         notificationResponse:
-          description: 'Set this property to **[accepted]** to acknowledge that you received a notification from Adyen.'
+          description: Set this parameter to **[accepted]** to acknowledge that you received a notification from Adyen.
           type: string
-      required:
-        - notificationResponse
     OperationStatus:
       properties:
         message:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
           description: The message regarding the operation status.
         statusCode:
           description: The status code.
@@ -1379,7 +1661,7 @@ components:
     PaymentFailureNotification:
       properties:
         content:
-          $ref: '#/components/schemas/PaymentFailureNotificationContent'
+          $ref: "#/components/schemas/PaymentFailureNotificationContent"
           description: The details of the payment failure.
         eventType:
           description: The event type of the notification.
@@ -1388,7 +1670,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -1404,10 +1686,10 @@ components:
         errorFields:
           description: Missing or invalid fields that caused the payment error.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         errorMessage:
-          $ref: '#/components/schemas/Message'
+          $ref: "#/components/schemas/Message"
           description: The error message.
       required:
         - errorMessage
@@ -1419,14 +1701,18 @@ components:
           format: date-time
           type: string
         schedule:
-          description: |-
+          description: >-
             The payout schedule of the account.
+
             >Permitted values: `DEFAULT`, `HOLD`, `DAILY`, `WEEKLY`, `MONTHLY`.
           enum:
             - BIWEEKLY_ON_1ST_AND_15TH_AT_MIDNIGHT
             - BIWEEKLY_ON_1ST_AND_15TH_AT_NOON
             - DAILY
             - DAILY_6PM
+            - DAILY_AU
+            - DAILY_EU
+            - DAILY_US
             - DEFAULT
             - EVERY_6_HOURS_FROM_MIDNIGHT
             - HOLD
@@ -1441,13 +1727,15 @@ components:
     PersonalDocumentData:
       properties:
         expirationDate:
-          description: |-
+          description: >-
             The expiration date of the document.
+
             The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
           type: string
         issuerCountry:
-          description: |-
+          description: >-
             The two-character country code of the issuer.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           maxLength: 2
           minLength: 2
@@ -1459,8 +1747,9 @@ components:
           description: The number of the document. Delete the given type if the value empty.
           type: string
         type:
-          description: |-
+          description: >-
             The type of the document. More then one item pert type does not allowed.
+
             Valid values: ID, PASSPORT, VISA, DRIVINGLICENSE
           enum:
             - DRIVINGLICENSE
@@ -1471,11 +1760,50 @@ components:
           type: string
       required:
         - type
-        - number
+    RefundFundsTransferNotification:
+      properties:
+        content:
+          $ref: "#/components/schemas/RefundFundsTransferNotificationContent"
+          description: Details of the fund transfer refund.
+        eventType:
+          description: The event type of the notification.
+          type: string
+        executingUserKey:
+          description: The user or process that has triggered the notification.
+          type: string
+        live:
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
+          type: boolean
+        pspReference:
+          description: The PSP reference of the request from which the notification originates.
+          type: string
+      required:
+        - executingUserKey
+        - pspReference
+        - eventType
+        - live
+        - content
+    RefundFundsTransferNotificationContent:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount to be refunded.
+        merchantReference:
+          description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
+          type: string
+        originalReference:
+          description: A PSP reference of the original fund transfer.
+          type: string
+        status:
+          $ref: "#/components/schemas/OperationStatus"
+          description: The status of the fund transfer refund.
+      required:
+        - originalReference
+        - amount
     RefundResult:
       properties:
         originalTransaction:
-          $ref: '#/components/schemas/Transaction'
+          $ref: "#/components/schemas/Transaction"
           description: The transaction that has been refunded.
         pspReference:
           description: The reference of the refund.
@@ -1489,7 +1817,7 @@ components:
     ReportAvailableNotification:
       properties:
         content:
-          $ref: '#/components/schemas/ReportAvailableNotificationContent'
+          $ref: "#/components/schemas/ReportAvailableNotificationContent"
           description: Details of the report.
         eventType:
           description: The event type of the notification.
@@ -1498,7 +1826,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -1530,7 +1858,7 @@ components:
     ScheduledRefundsNotification:
       properties:
         content:
-          $ref: '#/components/schemas/ScheduledRefundsNotificationContent'
+          $ref: "#/components/schemas/ScheduledRefundsNotificationContent"
           description: Details of the scheduling of the refunds.
         eventType:
           description: The event type of the notification.
@@ -1539,7 +1867,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -1559,12 +1887,12 @@ components:
           description: The code of the Account Holder.
           type: string
         lastPayout:
-          $ref: '#/components/schemas/Transaction'
+          $ref: "#/components/schemas/Transaction"
           description: The most recent payout (after which all transactions were scheduled to be refunded).
         refundResults:
           description: A list of the refunds that have been scheduled and their results.
           items:
-            $ref: '#/components/schemas/RefundResult'
+            $ref: "#/components/schemas/RefundResult"
           type: array
       required:
         - accountHolderCode
@@ -1574,35 +1902,40 @@ components:
     ShareholderContact:
       properties:
         address:
-          $ref: '#/components/schemas/ViasAddress'
+          $ref: "#/components/schemas/ViasAddress"
           description: The address of the contact.
         email:
           description: The e-mail address of the contact.
           type: string
         fullPhoneNumber:
-          description: |-
+          description: >-
             The phone number of the contact provided as a single string.  It will be handled as a landline phone.
+
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         name:
-          $ref: '#/components/schemas/ViasName'
+          $ref: "#/components/schemas/ViasName"
           description: The name of the contact.
         personalData:
-          $ref: '#/components/schemas/ViasPersonalData'
+          $ref: "#/components/schemas/ViasPersonalData"
           description: Personal data of the Shareholder.
         phoneNumber:
-          $ref: '#/components/schemas/ViasPhoneNumber'
+          $ref: "#/components/schemas/ViasPhoneNumber"
           description: The phone number of the contact.
         shareholderCode:
-          description: |
+          description: >
             The unique identifier (UUID) of the Shareholder.
+
             >**If, during an Account Holder create or update request, this field is left blank (but other fields provided), a new Shareholder will be created with a procedurally-generated UUID.**
+
 
             >**If, during an Account Holder create request, a UUID is provided, the creation of the Shareholder will fail while the creation of the Account Holder will continue.**
 
+
             >**If, during an Account Holder update request, a UUID that is not correlated with an existing Shareholder is provided, the update of the Shareholder will fail.**
 
-            >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Bank Account will be updated.**
+
+            >**If, during an Account Holder update request, a UUID that is correlated with an existing Shareholder is provided, the existing Shareholder will be updated.**
           type: string
         webAddress:
           description: The URL of the website of the contact.
@@ -1610,10 +1943,10 @@ components:
     Transaction:
       properties:
         amount:
-          $ref: '#/components/schemas/Amount'
+          $ref: "#/components/schemas/Amount"
           description: The amount of the transaction.
         bankAccountDetail:
-          $ref: '#/components/schemas/BankAccountDetail'
+          $ref: "#/components/schemas/BankAccountDetail"
           description: The details of the bank account to where a payout was made.
         captureMerchantReference:
           description: The merchant reference of a related capture.
@@ -1653,22 +1986,32 @@ components:
           description: The code of the account from which funds were debited during an incoming fund transfer.
           type: string
         transactionStatus:
-          description: |-
+          description: >-
             The status of the transaction.
-            >Permitted values: `PendingCredit`, `CreditFailed`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
+
+            >Permitted values: `PendingCredit`, `CreditFailed`, `CreditClosed`, `Credited`, `Converted`, `PendingDebit`, `DebitFailed`, `Debited`, `DebitReversedReceived`, `DebitedReversed`, `ChargebackReceived`, `Chargeback`, `ChargebackReversedReceived`, `ChargebackReversed`, `Payout`, `PayoutReversed`, `FundTransfer`, `PendingFundTransfer`, `ManualCorrected`.
           enum:
             - Chargeback
+            - ChargebackCorrection
+            - ChargebackCorrectionReceived
             - ChargebackReceived
             - ChargebackReversed
+            - ChargebackReversedCorrection
+            - ChargebackReversedCorrectionReceived
             - ChargebackReversedReceived
             - Converted
+            - CreditClosed
             - CreditFailed
+            - CreditReversed
+            - CreditReversedReceived
             - Credited
             - DebitFailed
             - DebitReversedReceived
             - Debited
             - DebitedReversed
+            - Fee
             - FundTransfer
+            - FundTransferReversed
             - ManualCorrected
             - Payout
             - PayoutReversed
@@ -1684,7 +2027,7 @@ components:
     TransferFundsNotification:
       properties:
         content:
-          $ref: '#/components/schemas/TransferFundsNotificationContent'
+          $ref: "#/components/schemas/TransferFundsNotificationContent"
           description: Details of the fund transfer.
         eventType:
           description: The event type of the notification.
@@ -1693,7 +2036,7 @@ components:
           description: The user or process that has triggered the notification.
           type: string
         live:
-          description: 'Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.'
+          description: Indicates whether the notification originated from the live environment or the test environment. If true, the notification originated from the live environment. If false, the notification originated from the test environment.
           type: boolean
         pspReference:
           description: The PSP reference of the request from which the notification originates.
@@ -1707,7 +2050,7 @@ components:
     TransferFundsNotificationContent:
       properties:
         amount:
-          $ref: '#/components/schemas/Amount'
+          $ref: "#/components/schemas/Amount"
           description: The amount transferred.
         destinationAccountCode:
           description: The code of the Account to which funds were credited.
@@ -1719,7 +2062,7 @@ components:
           description: The code of the Account from which funds were debited.
           type: string
         status:
-          $ref: '#/components/schemas/OperationStatus'
+          $ref: "#/components/schemas/OperationStatus"
           description: The status of the fund transfer.
         transferCode:
           description: The transfer code.
@@ -1735,36 +2078,37 @@ components:
           description: The code of the account holder.
           type: string
         accountHolderDetails:
-          $ref: '#/components/schemas/AccountHolderDetails'
+          $ref: "#/components/schemas/AccountHolderDetails"
           description: Details of the account holder.
         accountHolderStatus:
-          $ref: '#/components/schemas/AccountHolderStatus'
+          $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
         invalidFields:
-          description: 'in case the account holder has not been updated, contains account holder fields, that did not pass the validation.'
+          description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
-            $ref: '#/components/schemas/ErrorFieldType'
+            $ref: "#/components/schemas/ErrorFieldType"
           type: array
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's platform settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
         updatedFields:
           description: A list of the fields updated through the request.
           items:
-            $ref: '#/components/schemas/FieldType'
+            $ref: "#/components/schemas/FieldType"
           type: array
         verification:
-          $ref: '#/components/schemas/KYCVerificationResult'
+          $ref: "#/components/schemas/KYCVerificationResult"
           description: The details of KYC Verification of the account holder.
       required:
         - pspReference
@@ -1777,57 +2121,65 @@ components:
           description: The code of the account.
           type: string
         payoutSchedule:
-          $ref: '#/components/schemas/PayoutScheduleResponse'
+          $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
         pspReference:
-          description: The reference of a request.  Can be used to uniquely identify the request.
+          description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
         submittedAsync:
-          description: |-
-            Indicates whether the request is processed synchronously or asynchronously.  Depending on the request's platform settings, the following scenarios may be applied:
-            * **sync:** The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-            * **async:** The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **asyncOnError:** The processing of the request is immediately attempted, but if the providing service is unavailable, the request is scheduled in a queue.
+          description: >-
+            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
+
+            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
+
+            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
           type: boolean
       required:
         - pspReference
         - submittedAsync
         - accountCode
-        - payoutSchedule
     ViasAddress:
       properties:
         city:
-          description: |-
+          description: >-
             The name of the city.
+
             >Required if either `houseNumberOrName`, `street`, `postalCode`, or `stateOrProvince` are provided.
           type: string
         country:
-          description: |-
+          description: >-
             The two-character country code of the address. The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
-            > If you don't know the country or are not collecting the country from the shopper, provide `countryCode` as `ZZ`.
+
+            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
-          description: |-
+          description: >-
             The postal code.
+
             >A maximum of five (5) digits for an address in the USA, or a maximum of ten (10) characters for an address in all other countries.
+
             >Required if either `houseNumberOrName`, `street`, `city`, or `stateOrProvince` are provided.
           type: string
         stateOrProvince:
-          description: |-
+          description: >-
             The abbreviation of the state or province.
+
             >Two (2) characters for an address in the USA or Canada, or a maximum of three (3) characters for an address in all other countries.
+
             >Required for an address in the USA or Canada if either `houseNumberOrName`, `street`, `city`, or `postalCode` are provided.
           type: string
         street:
-          description: |-
+          description: >-
             The name of the street.
+
             >The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
+
             >Required if either `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
       required:
@@ -1838,8 +2190,9 @@ components:
           description: The first name.
           type: string
         gender:
-          description: |-
+          description: >-
             The gender.
+
             >The following values are permitted: `MALE`, `FEMALE`, `UNKNOWN`.
           enum:
             - MALE
@@ -1849,8 +2202,9 @@ components:
           minLength: 1
           type: string
         infix:
-          description: |-
+          description: >-
             The name's infix, if applicable.
+
             >A maximum length of twenty (20) characters is imposed.
           type: string
         lastName:
@@ -1863,22 +2217,24 @@ components:
     ViasPersonalData:
       properties:
         dateOfBirth:
-          description: |-
+          description: >-
             The date of birth of the person.
+
             The date should be in ISO-8601 format yyyy-mm-dd (e.g. 2000-01-31).
           type: string
         documentData:
           description: Key value pairs of document type and identify numbers
           items:
-            $ref: '#/components/schemas/PersonalDocumentData'
+            $ref: "#/components/schemas/PersonalDocumentData"
           type: array
         idNumber:
           deprecated: true
           description: An ID number of the person.
           type: string
         nationality:
-          description: |-
+          description: >-
             The nationality of the person represented by a two-character country code.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           maxLength: 2
           minLength: 2
@@ -1886,18 +2242,21 @@ components:
     ViasPhoneNumber:
       properties:
         phoneCountryCode:
-          description: |-
+          description: >-
             The two-character country code of the phone number.
+
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           type: string
         phoneNumber:
-          description: |-
+          description: >-
             The phone number.
+
             >The inclusion of the phone number country code is not necessary.
           type: string
         phoneType:
-          description: |-
+          description: >-
             The type of the phone number.
+
             >The following values are permitted: `Landline`, `Mobile`, `SIP`, `Fax`.
           enum:
             - Fax
@@ -1908,10 +2267,18 @@ components:
       required:
         - phoneCountryCode
         - phoneNumber
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: X-API-Key
+      type: apiKey
+    BasicAuth:
+      scheme: basic
+      type: http
 x-groups:
   - Account holders
   - Accounts
   - Fund management
   - Other
-x-isWebhook: 'true'
+x-isWebhook: "true"
 x-staticResponse: response.json

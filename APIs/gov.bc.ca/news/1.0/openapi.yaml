@@ -1,24 +1,24 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://news.api.gov.bc.ca/'
+  - url: https://news.api.gov.bc.ca/
 info:
   description: News API
   license:
     name: Apache 2.0
-    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+    url: https://www.apache.org/licenses/LICENSE-2.0
   title: BC Gov News API Service 1.0
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://avatars1.githubusercontent.com/u/916280?v=3&s=200'
+    url: https://avatars1.githubusercontent.com/u/916280?v=3&s=200
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.6.2
       format: openapi
-      url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/news/news-oas3.json'
-      version: '3.0'
+      url: https://raw.githubusercontent.com/bcgov/api-specs/master/news/news-oas3.yaml
+      version: "3.0"
   x-providerName: gov.bc.ca
   x-serviceName: news
 paths:
@@ -26,32 +26,32 @@ paths:
     get:
       operationId: FacebookPosts_GetByUri
       parameters:
-        - description: ''
+        - description: ""
           in: query
           name: uri
           required: false
           schema:
-            default: ''
+            default: ""
             type: string
         - description: The requested API version
           in: query
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FacebookPost'
+                $ref: "#/components/schemas/FacebookPost"
             text/json:
               schema:
-                $ref: '#/components/schemas/FacebookPost'
+                $ref: "#/components/schemas/FacebookPost"
             text/plain:
               schema:
-                $ref: '#/components/schemas/FacebookPost'
+                $ref: "#/components/schemas/FacebookPost"
           description: Success
       summary: Get a Facebook post based on a Uri
       tags:
@@ -65,20 +65,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Home'
+                $ref: "#/components/schemas/Home"
             text/json:
               schema:
-                $ref: '#/components/schemas/Home'
+                $ref: "#/components/schemas/Home"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Home'
+                $ref: "#/components/schemas/Home"
           description: Success
       summary: Returns the top level content for the home page
       tags:
@@ -92,35 +92,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Ministry'
+                  $ref: "#/components/schemas/Ministry"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Ministry'
+                  $ref: "#/components/schemas/Ministry"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Ministry'
+                  $ref: "#/components/schemas/Ministry"
                 type: array
           description: Success
       summary: Get all ministries
       tags:
         - Ministries
-  '/api/Ministries/{key}':
+  "/api/Ministries/{key}":
     get:
       operationId: Ministries_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -131,29 +131,29 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Ministry'
+                $ref: "#/components/schemas/Ministry"
             text/json:
               schema:
-                $ref: '#/components/schemas/Ministry'
+                $ref: "#/components/schemas/Ministry"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Ministry'
+                $ref: "#/components/schemas/Ministry"
           description: Success
       summary: Get the Ministry associated with the ministry key
       tags:
         - Ministries
-  '/api/Ministries/{key}/Minister':
+  "/api/Ministries/{key}/Minister":
     get:
       operationId: Ministries_GetMinister
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -164,20 +164,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Minister'
+                $ref: "#/components/schemas/Minister"
             text/json:
               schema:
-                $ref: '#/components/schemas/Minister'
+                $ref: "#/components/schemas/Minister"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Minister'
+                $ref: "#/components/schemas/Minister"
           description: Success
       summary: Get the Minister associated with the ministry key
       tags:
@@ -191,35 +191,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Newsletter'
+                  $ref: "#/components/schemas/Newsletter"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Newsletter'
+                  $ref: "#/components/schemas/Newsletter"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Newsletter'
+                  $ref: "#/components/schemas/Newsletter"
                 type: array
           description: Success
       summary: Get all newsletters
       tags:
         - Newsletters
-  '/api/Newsletters/Images/{guid}':
+  "/api/Newsletters/Images/{guid}":
     get:
       operationId: Newsletters_GetImage
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: guid
           required: true
@@ -230,25 +230,25 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EditionImage'
+                $ref: "#/components/schemas/EditionImage"
             text/json:
               schema:
-                $ref: '#/components/schemas/EditionImage'
+                $ref: "#/components/schemas/EditionImage"
             text/plain:
               schema:
-                $ref: '#/components/schemas/EditionImage'
+                $ref: "#/components/schemas/EditionImage"
           description: Success
       summary: Get the image object reference by of a Newsletter Edition associated with the image guid
       tags:
         - Newsletters
-  '/api/Newsletters/{newsletterKey}':
+  "/api/Newsletters/{newsletterKey}":
     get:
       operationId: Newsletters_GetOne
       parameters:
@@ -262,35 +262,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Newsletter'
+                $ref: "#/components/schemas/Newsletter"
             text/json:
               schema:
-                $ref: '#/components/schemas/Newsletter'
+                $ref: "#/components/schemas/Newsletter"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Newsletter'
+                $ref: "#/components/schemas/Newsletter"
           description: Success
       summary: Get a specific newsletter
       tags:
         - Newsletters
-  '/api/Newsletters/{newsletterKey}/Editions/{editionKey}':
+  "/api/Newsletters/{newsletterKey}/Editions/{editionKey}":
     get:
       operationId: Newsletters_GetEdition
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: newsletterKey
           required: true
           schema:
             type: string
-        - description: ''
+        - description: ""
           in: path
           name: editionKey
           required: true
@@ -301,41 +301,41 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Edition'
+                $ref: "#/components/schemas/Edition"
             text/json:
               schema:
-                $ref: '#/components/schemas/Edition'
+                $ref: "#/components/schemas/Edition"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Edition'
+                $ref: "#/components/schemas/Edition"
           description: Success
       summary: Returns a specific edition of a newsletter
       tags:
         - Newsletters
-  '/api/Newsletters/{newsletterKey}/Editions/{editionKey}/Articles/{articleKey}':
+  "/api/Newsletters/{newsletterKey}/Editions/{editionKey}/Articles/{articleKey}":
     get:
       operationId: Newsletters_GetArticle
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: newsletterKey
           required: true
           schema:
             type: string
-        - description: ''
+        - description: ""
           in: path
           name: editionKey
           required: true
           schema:
             type: string
-        - description: ''
+        - description: ""
           in: path
           name: articleKey
           required: true
@@ -346,20 +346,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
             text/json:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Article'
+                $ref: "#/components/schemas/Article"
           description: Success
       summary: Get an article belonging to a Newsletter edition
       tags:
@@ -368,13 +368,13 @@ paths:
     get:
       operationId: Posts_Get
       parameters:
-        - description: ''
+        - description: ""
           explode: true
           in: query
           name: postKeys
           required: false
           schema:
-            default: ''
+            default: ""
             items:
               type: string
             type: array
@@ -383,31 +383,31 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
           description: Success
       summary: Get the posts associated with the keys in the list passed in.
       tags:
         - Posts
-  '/api/Posts/Keys/{indexKind}/{indexKey}':
+  "/api/Posts/Keys/{indexKind}/{indexKey}":
     get:
       operationId: Posts_GetAllKeys
       parameters:
@@ -417,25 +417,25 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'default or one key of the categories (ministries, sectors, services, tags, themes)'
+        - description: default or one key of the categories (ministries, sectors, services, tags, themes)
           in: path
           name: indexKey
           required: true
           schema:
             type: string
-        - description: 'One of: releases, stories, factsheets, updates or default (releases+stories+factsheets)'
+        - description: "One of: releases, stories, factsheets, updates or default (releases+stories+factsheets)"
           in: query
           name: postKind
           required: false
           schema:
-            default: ''
+            default: ""
             type: string
         - description: number of posts to return
           in: query
           name: count
           required: false
           schema:
-            default: ''
+            default: ""
             format: int32
             type: integer
         - description: number of posts to skip
@@ -443,7 +443,7 @@ paths:
           name: skip
           required: false
           schema:
-            default: ''
+            default: ""
             format: int32
             type: integer
         - description: The requested API version
@@ -451,35 +451,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/KeyValuePair_2'
+                  $ref: "#/components/schemas/KeyValuePair_2"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/KeyValuePair_2'
+                  $ref: "#/components/schemas/KeyValuePair_2"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/KeyValuePair_2'
+                  $ref: "#/components/schemas/KeyValuePair_2"
                 type: array
           description: Success
       summary: Get all keys for the specified index (newsroom or category)
       tags:
         - Posts
-  '/api/Posts/Keys/{reference}':
+  "/api/Posts/Keys/{reference}":
     get:
       operationId: Posts_GetKeyFromReference
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: reference
           required: true
@@ -490,25 +490,25 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/KeyValuePair_2'
+                $ref: "#/components/schemas/KeyValuePair_2"
             text/json:
               schema:
-                $ref: '#/components/schemas/KeyValuePair_2'
+                $ref: "#/components/schemas/KeyValuePair_2"
             text/plain:
               schema:
-                $ref: '#/components/schemas/KeyValuePair_2'
+                $ref: "#/components/schemas/KeyValuePair_2"
           description: Success
       summary: Get the post key associated with the reference.
       tags:
         - Posts
-  '/api/Posts/Latest/{indexKind}/{indexKey}':
+  "/api/Posts/Latest/{indexKind}/{indexKey}":
     get:
       operationId: Posts_GetLatest
       parameters:
@@ -518,25 +518,25 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'default or one key of the categories (ministries, sectors, services, tags, themes)'
+        - description: default or one key of the categories (ministries, sectors, services, tags, themes)
           in: path
           name: indexKey
           required: true
           schema:
             type: string
-        - description: 'One of: releases, stories, factsheets, updates or default (releases+stories except top/feature)'
+        - description: "One of: releases, stories, factsheets, updates or default (releases+stories except top/feature)"
           in: query
           name: postKind
           required: false
           schema:
-            default: ''
+            default: ""
             type: string
         - description: number of posts to return
           in: query
           name: count
           required: false
           schema:
-            default: ''
+            default: ""
             format: int32
             type: integer
         - description: number of posts to skip
@@ -544,7 +544,7 @@ paths:
           name: skip
           required: false
           schema:
-            default: ''
+            default: ""
             format: int32
             type: integer
         - description: The requested API version
@@ -552,35 +552,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Post'
+                  $ref: "#/components/schemas/Post"
                 type: array
           description: Success
       summary: Get the latest posts of postKind for the specified index (default or category)
       tags:
         - Posts
-  '/api/Posts/LatestMediaUri/{mediaType}':
+  "/api/Posts/LatestMediaUri/{mediaType}":
     get:
       operationId: Posts_GetLatestMediaUri
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: mediaType
           required: true
@@ -591,10 +591,10 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -609,11 +609,11 @@ paths:
       summary: Gets the latest Social Media post for the social media type passed in.
       tags:
         - Posts
-  '/api/Posts/{key}':
+  "/api/Posts/{key}":
     get:
       operationId: Posts_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -624,20 +624,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: "#/components/schemas/Post"
             text/json:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: "#/components/schemas/Post"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Post'
+                $ref: "#/components/schemas/Post"
           description: Success
       summary: Get the post associated with the key
       tags:
@@ -651,25 +651,25 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ResourceLink'
+                  $ref: "#/components/schemas/ResourceLink"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ResourceLink'
+                  $ref: "#/components/schemas/ResourceLink"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/ResourceLink'
+                  $ref: "#/components/schemas/ResourceLink"
                 type: array
           description: Success
       summary: Get all resource links
@@ -684,35 +684,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Sector'
+                  $ref: "#/components/schemas/Sector"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Sector'
+                  $ref: "#/components/schemas/Sector"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Sector'
+                  $ref: "#/components/schemas/Sector"
                 type: array
           description: Success
       summary: Get all Sectors
       tags:
         - Sectors
-  '/api/Sectors/{key}':
+  "/api/Sectors/{key}":
     get:
       operationId: Sectors_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -723,20 +723,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sector'
+                $ref: "#/components/schemas/Sector"
             text/json:
               schema:
-                $ref: '#/components/schemas/Sector'
+                $ref: "#/components/schemas/Sector"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Sector'
+                $ref: "#/components/schemas/Sector"
           description: Success
       summary: Get the sector associated with the key
       tags:
@@ -750,35 +750,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: "#/components/schemas/Service"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: "#/components/schemas/Service"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: "#/components/schemas/Service"
                 type: array
           description: Success
       summary: Get all Services
       tags:
         - Services
-  '/api/Services/{key}':
+  "/api/Services/{key}":
     get:
       operationId: Services_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -789,20 +789,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: "#/components/schemas/Service"
             text/json:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: "#/components/schemas/Service"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Service'
+                $ref: "#/components/schemas/Service"
           description: Success
       summary: Get the service associated with the passed key
       tags:
@@ -816,35 +816,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Slide'
+                  $ref: "#/components/schemas/Slide"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Slide'
+                  $ref: "#/components/schemas/Slide"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Slide'
+                  $ref: "#/components/schemas/Slide"
                 type: array
           description: Success
       summary: Get all Slides
       tags:
         - Slides
-  '/api/Slides/{id}':
+  "/api/Slides/{id}":
     get:
       operationId: Slides_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: id
           required: true
@@ -855,20 +855,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Slide'
+                $ref: "#/components/schemas/Slide"
             text/json:
               schema:
-                $ref: '#/components/schemas/Slide'
+                $ref: "#/components/schemas/Slide"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Slide'
+                $ref: "#/components/schemas/Slide"
           description: Success
       summary: Get the slide associated to the id
       tags:
@@ -882,35 +882,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: "#/components/schemas/Tag"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: "#/components/schemas/Tag"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: "#/components/schemas/Tag"
                 type: array
           description: Success
       summary: Get all Tags
       tags:
         - Tags
-  '/api/Tags/{key}':
+  "/api/Tags/{key}":
     get:
       operationId: Tags_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -921,20 +921,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
             text/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
           description: Success
       summary: Get the Tag associated with the key
       tags:
@@ -948,35 +948,35 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Theme'
+                  $ref: "#/components/schemas/Theme"
                 type: array
             text/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Theme'
+                  $ref: "#/components/schemas/Theme"
                 type: array
             text/plain:
               schema:
                 items:
-                  $ref: '#/components/schemas/Theme'
+                  $ref: "#/components/schemas/Theme"
                 type: array
           description: Success
       summary: Get all Themes
       tags:
         - Themes
-  '/api/Themes/{key}':
+  "/api/Themes/{key}":
     get:
       operationId: Themes_GetOne
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: key
           required: true
@@ -987,20 +987,20 @@ paths:
           name: api-version
           required: true
           schema:
-            default: '1.0'
+            default: "1.0"
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Theme'
+                $ref: "#/components/schemas/Theme"
             text/json:
               schema:
-                $ref: '#/components/schemas/Theme'
+                $ref: "#/components/schemas/Theme"
             text/plain:
               schema:
-                $ref: '#/components/schemas/Theme'
+                $ref: "#/components/schemas/Theme"
           description: Success
       summary: Get the Theme associated with the key
       tags:
@@ -1009,7 +1009,7 @@ components:
   schemas:
     Article:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         editionName:
           type: string
@@ -1028,7 +1028,7 @@ components:
       type: object
     Category:
       allOf:
-        - $ref: '#/components/schemas/DataIndex'
+        - $ref: "#/components/schemas/DataIndex"
       properties:
         audioUri:
           type: string
@@ -1060,7 +1060,7 @@ components:
       type: object
     DataIndex:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         featurePostKey:
           type: string
@@ -1085,7 +1085,7 @@ components:
           type: string
         contacts:
           items:
-            $ref: '#/components/schemas/DocumentContact'
+            $ref: "#/components/schemas/DocumentContact"
           type: array
         detailsHtml:
           type: string
@@ -1108,7 +1108,7 @@ components:
       type: object
     Edition:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         htmlBody:
           type: string
@@ -1117,7 +1117,7 @@ components:
       type: object
     EditionImage:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         fileName:
           type: string
@@ -1129,7 +1129,7 @@ components:
       type: object
     FacebookPost:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         content:
           type: string
@@ -1161,7 +1161,7 @@ components:
       type: object
     Home:
       allOf:
-        - $ref: '#/components/schemas/DataIndex'
+        - $ref: "#/components/schemas/DataIndex"
       properties:
         featurePostKey:
           type: string
@@ -1185,7 +1185,7 @@ components:
       type: object
     Minister:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         details:
           type: string
@@ -1202,14 +1202,14 @@ components:
       type: object
     Ministry:
       allOf:
-        - $ref: '#/components/schemas/Category'
+        - $ref: "#/components/schemas/Category"
       properties:
         audioUri:
           type: string
         childMinistryKey:
           type: string
         contactUser:
-          $ref: '#/components/schemas/Contact'
+          $ref: "#/components/schemas/Contact"
         displayAdditionalName:
           type: string
         featurePostKey:
@@ -1226,21 +1226,21 @@ components:
           type: string
         newsletterLinks:
           items:
-            $ref: '#/components/schemas/ResourceLink'
+            $ref: "#/components/schemas/ResourceLink"
           type: array
         parentMinistryKey:
           type: string
         secondContactUser:
-          $ref: '#/components/schemas/Contact'
+          $ref: "#/components/schemas/Contact"
         serviceLinks:
           items:
-            $ref: '#/components/schemas/ResourceLink'
+            $ref: "#/components/schemas/ResourceLink"
           type: array
         topPostKey:
           type: string
         topicLinks:
           items:
-            $ref: '#/components/schemas/ResourceLink'
+            $ref: "#/components/schemas/ResourceLink"
           type: array
         twitterFeedUsername:
           type: string
@@ -1251,13 +1251,13 @@ components:
       type: object
     Newsletter:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         description:
           type: string
         editions:
           items:
-            $ref: '#/components/schemas/KeyValuePair_2'
+            $ref: "#/components/schemas/KeyValuePair_2"
           type: array
         ministryName:
           type: string
@@ -1266,7 +1266,7 @@ components:
       type: object
     Post:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         assetUrl:
           type: string
@@ -1274,11 +1274,11 @@ components:
           type: string
         azureAssets:
           items:
-            $ref: '#/components/schemas/Asset'
+            $ref: "#/components/schemas/Asset"
           type: array
         documents:
           items:
-            $ref: '#/components/schemas/Document'
+            $ref: "#/components/schemas/Document"
           type: array
         facebookPictureUri:
           type: string
@@ -1322,14 +1322,14 @@ components:
       type: object
     ResourceLink:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         uri:
           type: string
       type: object
     Sector:
       allOf:
-        - $ref: '#/components/schemas/Category'
+        - $ref: "#/components/schemas/Category"
       properties:
         audioUri:
           type: string
@@ -1350,7 +1350,7 @@ components:
       type: object
     Service:
       allOf:
-        - $ref: '#/components/schemas/Category'
+        - $ref: "#/components/schemas/Category"
       properties:
         audioUri:
           type: string
@@ -1371,7 +1371,7 @@ components:
       type: object
     Slide:
       allOf:
-        - $ref: '#/components/schemas/DataModel'
+        - $ref: "#/components/schemas/DataModel"
       properties:
         actionLabel:
           type: string
@@ -1397,7 +1397,7 @@ components:
       type: object
     Tag:
       allOf:
-        - $ref: '#/components/schemas/Category'
+        - $ref: "#/components/schemas/Category"
       properties:
         audioUri:
           type: string
@@ -1418,7 +1418,7 @@ components:
       type: object
     Theme:
       allOf:
-        - $ref: '#/components/schemas/Category'
+        - $ref: "#/components/schemas/Category"
       properties:
         audioUri:
           type: string
