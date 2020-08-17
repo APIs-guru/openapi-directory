@@ -345,7 +345,7 @@ paths:
   '/accounts/{AwsAccountId}/customizations':
     post:
       operationId: CreateAccountCustomization
-      description: Creates a customization for the Amazon QuickSight subscription associated with your AWS account.
+      description: '<p>Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html">Customizing QuickSight</a> in the Amazon QuickSight User Guide.</p> <p>You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don''t share it with the namespace, the theme won''t be visible to your users even if you use this API operation to make it the default theme. </p>'
       responses:
         '200':
           description: Success
@@ -408,7 +408,7 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: The namespace associated with the customization that you're creating.
+          description: The QuickSight namespace that you want to add customizations to.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
@@ -423,7 +423,7 @@ paths:
                 - AccountCustomization
               properties:
                 AccountCustomization:
-                  description: The customizations associated with your AWS account for QuickSight.
+                  description: The Amazon QuickSight customizations associated with your AWS account or a QuickSight namespace in a specific AWS Region.
                   type: object
                   properties:
                     DefaultTheme:
@@ -439,7 +439,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DeleteAccountCustomization
-      description: Deletes customizations for the QuickSight subscription on your AWS account.
+      description: Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS Account and QuickSight namespace.
       responses:
         '200':
           description: Success
@@ -487,7 +487,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The ID for the AWS account that you want to delete QuickSight customizations from.
+          description: The ID for the AWS account that you want to delete QuickSight customizations from in this AWS Region.
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -496,14 +496,14 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: The namespace associated with the customization that you're deleting.
+          description: The QuickSight namespace that you're deleting the customizations from.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
     get:
       operationId: DescribeAccountCustomization
-      description: Describes the customizations associated with your AWS account.
+      description: '<p>Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>AWS Account</code> - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home region. That''s where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region. </p> </li> <li> <p> <code>AWS Region</code> - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace. </p> <p>To run the command in a different AWS Region, you change your region settings. If you''re using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html">command line options</a>. </p> </li> <li> <p>Use <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.</p> </li> <li> <p> <code>Applied customizations</code> - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS Account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the <code>CreateAccountCustomization</code> command in each AWS Region where you want to apply the same customizations. </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -560,7 +560,7 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: The namespace associated with the customization that you're describing.
+          description: The QuickSight namespace that you want to describe QuickSight customizations for.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
@@ -568,12 +568,12 @@ paths:
         - name: resolved
           in: query
           required: false
-          description: The status of the creation of the customization. This is an asynchronous process. A status of <code>CREATED</code> means that your customization is ready to use.
+          description: 'The <code>Resolved</code> flag works with the other parameters to determine which view of QuickSight customizations is returned. You can add this flag to your command to use the same view that QuickSight uses to identify which customizations to apply to the console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations that are configured at different levels. '
           schema:
             type: boolean
     put:
       operationId: UpdateAccountCustomization
-      description: Updates customizations associated with the QuickSight subscription on your AWS account.
+      description: '<p>Updates Amazon QuickSight customizations the current AWS Region. Currently, the only customization you can use is a theme.</p> <p>You can use customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation. </p>'
       responses:
         '200':
           description: Success
@@ -630,7 +630,7 @@ paths:
         - name: namespace
           in: query
           required: false
-          description: The namespace associated with the customization that you're updating.
+          description: The namespace that you want to update QuickSight customizations for.
           schema:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
@@ -645,16 +645,409 @@ paths:
                 - AccountCustomization
               properties:
                 AccountCustomization:
-                  description: The customizations associated with your AWS account for QuickSight.
+                  description: The Amazon QuickSight customizations associated with your AWS account or a QuickSight namespace in a specific AWS Region.
                   type: object
                   properties:
                     DefaultTheme:
                       $ref: '#/components/schemas/Arn'
                       description: The default theme for this QuickSight subscription.
+  '/accounts/{AwsAccountId}/analyses/{AnalysisId}':
+    post:
+      operationId: CreateAnalysis
+      description: Creates an analysis in Amazon QuickSight.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnalysisResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account where you are creating an analysis.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID for the analysis that you're creating. This ID displays in the URL of the analysis.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - SourceEntity
+              properties:
+                Name:
+                  description: 'A descriptive name for the analysis that you''re creating. This name displays for the analysis in the QuickSight console. '
+                  type: string
+                  pattern: '[\u0020-\u00FF]+'
+                  minLength: 1
+                  maxLength: 2048
+                Parameters:
+                  description: A list of QuickSight parameters and the list's override values.
+                  type: object
+                  properties:
+                    StringParameters:
+                      $ref: '#/components/schemas/StringParameterList'
+                      description: String parameters.
+                    IntegerParameters:
+                      $ref: '#/components/schemas/IntegerParameterList'
+                      description: Integer parameters.
+                    DecimalParameters:
+                      $ref: '#/components/schemas/DecimalParameterList'
+                      description: Decimal parameters.
+                    DateTimeParameters:
+                      $ref: '#/components/schemas/DateTimeParameterList'
+                      description: Date-time parameters.
+                Permissions:
+                  description: '<p>A structure that describes the principals and the resource-level permissions on an analysis. You can use the <code>Permissions</code> structure to grant permissions by providing a list of AWS Identity and Access Management (IAM) action information for each principal listed by Amazon Resource Name (ARN). </p> <p>To specify no permissions, omit <code>Permissions</code>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  minItems: 1
+                  maxItems: 64
+                SourceEntity:
+                  description: The source entity of an analysis.
+                  type: object
+                  properties:
+                    SourceTemplate:
+                      $ref: '#/components/schemas/AnalysisSourceTemplate'
+                      description: The source template for the source entity of the analysis.
+                ThemeArn:
+                  description: 'The ARN for the theme to apply to the analysis that you''re creating. To see the theme in the QuickSight console, make sure that you have access to it.'
+                  type: string
+                Tags:
+                  description: Contains a map of the key-value pairs for the resource tag or tags assigned to the analysis.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteAnalysis
+      description: '<p>Deletes an analysis from Amazon QuickSight. You can optionally include a recovery window during which you can restore the analysis. If you don''t specify a recovery window value, the operation defaults to 30 days. QuickSight attaches a <code>DeletionTime</code> stamp to the response that specifies the end of the recovery window. At the end of the recovery window, QuickSight deletes the analysis permanently.</p> <p>At any time before recovery window ends, you can use the <code>RestoreAnalysis</code> API operation to remove the <code>DeletionTime</code> stamp and cancel the deletion of the analysis. The analysis remains visible in the API until it''s deleted, so you can describe it but you can''t make a template from it.</p> <p>An analysis that''s scheduled for deletion isn''t accessible in the QuickSight console. To access it in the console, restore it. Deleting an analysis doesn''t delete the dashboards that you publish from it.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAnalysisResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account where you want to delete an analysis.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID of the analysis that you're deleting.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+        - name: recovery-window-in-days
+          in: query
+          required: false
+          description: A value that specifies the number of days that QuickSight waits before it deletes the analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code> option in the same API call. The default value is 30.
+          schema:
+            type: integer
+            minimum: 7
+            maximum: 30
+        - name: force-delete-without-recovery
+          in: query
+          required: false
+          description: 'This option defaults to the value <code>NoForceDeleteWithoutRecovery</code>. To immediately delete the analysis, add the <code>ForceDeleteWithoutRecovery</code> option. You can''t restore an analysis after it''s deleted. '
+          schema:
+            type: boolean
+    get:
+      operationId: DescribeAnalysis
+      description: Provides a summary of the metadata for an analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAnalysisResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analysis. You must be using the AWS account that the analysis is in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID of the analysis that you're describing. The ID is part of the URL of the analysis.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    put:
+      operationId: UpdateAnalysis
+      description: Updates an analysis in Amazon QuickSight
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnalysisResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analysis that you're updating.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID for the analysis that you're updating. This ID displays in the URL of the analysis.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - SourceEntity
+              properties:
+                Name:
+                  description: A descriptive name for the analysis that you're updating. This name displays for the analysis in the QuickSight console.
+                  type: string
+                  pattern: '[\u0020-\u00FF]+'
+                  minLength: 1
+                  maxLength: 2048
+                Parameters:
+                  description: A list of QuickSight parameters and the list's override values.
+                  type: object
+                  properties:
+                    StringParameters:
+                      $ref: '#/components/schemas/StringParameterList'
+                      description: String parameters.
+                    IntegerParameters:
+                      $ref: '#/components/schemas/IntegerParameterList'
+                      description: Integer parameters.
+                    DecimalParameters:
+                      $ref: '#/components/schemas/DecimalParameterList'
+                      description: Decimal parameters.
+                    DateTimeParameters:
+                      $ref: '#/components/schemas/DateTimeParameterList'
+                      description: Date-time parameters.
+                SourceEntity:
+                  description: The source entity of an analysis.
+                  type: object
+                  properties:
+                    SourceTemplate:
+                      $ref: '#/components/schemas/AnalysisSourceTemplate'
+                      description: The source template for the source entity of the analysis.
+                ThemeArn:
+                  description: 'The Amazon Resource Name (ARN) for the theme to apply to the analysis that you''re creating. To see the theme in the QuickSight console, make sure that you have access to it.'
+                  type: string
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}':
     post:
       operationId: CreateDashboard
-      description: '<p>Creates a dashboard from a template. To first create a template, see the <a>CreateTemplate</a> API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
+      description: '<p>Creates a dashboard from a template. To first create a template, see the <code> <a>CreateTemplate</a> </code> API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>'
       responses:
         '200':
           description: Success
@@ -740,7 +1133,7 @@ paths:
                   minLength: 1
                   maxLength: 2048
                 Parameters:
-                  description: Parameters.
+                  description: A list of QuickSight parameters and the list's override values.
                   type: object
                   properties:
                     StringParameters:
@@ -754,9 +1147,9 @@ paths:
                       description: Decimal parameters.
                     DateTimeParameters:
                       $ref: '#/components/schemas/DateTimeParameterList'
-                      description: DateTime parameters.
+                      description: Date-time parameters.
                 Permissions:
-                  description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
+                  description: '<p>A structure that contains the permissions of the dashboard. You can use this structure for granting permissions by providing a list of IAM action information for each principal ARN. </p> <p>To specify no permissions, omit the permissions list.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/ResourcePermission'
@@ -1053,7 +1446,7 @@ paths:
                       $ref: '#/components/schemas/DashboardSourceTemplate'
                       description: Source template.
                 Parameters:
-                  description: Parameters.
+                  description: A list of QuickSight parameters and the list's override values.
                   type: object
                   properties:
                     StringParameters:
@@ -1067,7 +1460,7 @@ paths:
                       description: Decimal parameters.
                     DateTimeParameters:
                       $ref: '#/components/schemas/DateTimeParameterList'
-                      description: DateTime parameters.
+                      description: Date-time parameters.
                 VersionDescription:
                   description: A description for the first version of the dashboard being created.
                   type: string
@@ -3986,7 +4379,7 @@ paths:
   '/accounts/{AwsAccountId}/data-sources/{DataSourceId}':
     delete:
       operationId: DeleteDataSource
-      description: Deletes the data source permanently. This action breaks all the datasets that reference the deleted data source.
+      description: Deletes the data source permanently. This operation breaks all the datasets that reference the deleted data source.
       responses:
         '200':
           description: Success
@@ -4610,7 +5003,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}':
     delete:
       operationId: DeleteNamespace
-      description: 'Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. '
+      description: 'Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the API operations for the relevant asset. '
       responses:
         '200':
           description: Success
@@ -5007,7 +5400,7 @@ paths:
                   description: The email address of the user that you want to update.
                   type: string
                 Role:
-                  description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+                  description: '<p>The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul> <p>The name of the QuickSight role is invisible to the user except for the console screens dealing with permissions.</p>'
                   type: string
                   enum:
                     - ADMIN
@@ -5016,7 +5409,7 @@ paths:
                     - RESTRICTED_AUTHOR
                     - RESTRICTED_READER
                 CustomPermissionsName:
-                  description: 'The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. '
+                  description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user''s access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
                   type: string
                   pattern: '^[a-zA-Z0-9+=,.@_-]+$'
                   minLength: 1
@@ -5160,7 +5553,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+          description: The ID for the AWS account that contains the settings that you want to list.
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -5176,7 +5569,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateAccountSettings
-      description: Updates the settings for the Amazon QuickSight subscription in your AWS Account.
+      description: Updates the Amazon QuickSight settings in your AWS Account.
       responses:
         '200':
           description: Success
@@ -5224,7 +5617,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+          description: The ID for the AWS account that contains the QuickSight settings that you want to list.
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -5245,8 +5638,160 @@ paths:
                   pattern: '^[a-zA-Z0-9._-]*$'
                   maxLength: 64
                 NotificationEmail:
-                  description: Email address used to send notifications regarding administration of QuickSight.
+                  description: The email address that you want QuickSight to send notifications to regarding your AWS account or QuickSight subscription.
                   type: string
+  '/accounts/{AwsAccountId}/analyses/{AnalysisId}/permissions':
+    get:
+      operationId: DescribeAnalysisPermissions
+      description: Provides the read and write permissions for an analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAnalysisPermissionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analysis whose permissions you're describing. You must be using the AWS account that the analysis is in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID of the analysis whose permissions you're describing. The ID is part of the analysis URL.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateAnalysisPermissions
+      description: Updates the read and write permissions for an analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnalysisPermissionsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analysis whose permissions you're updating. You must be using the AWS account that the analysis is in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID of the analysis whose permissions you're updating. The ID is part of the analysis URL.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                GrantPermissions:
+                  description: A structure that describes the permissions to add and the principal to add them to.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  maxItems: 100
+                RevokePermissions:
+                  description: A structure that describes the permissions to remove and the principal to remove them from.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  maxItems: 100
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/permissions':
     get:
       operationId: DescribeDashboardPermissions
@@ -6195,7 +6740,7 @@ paths:
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url#creds-type':
     get:
       operationId: GetDashboardEmbedUrl
-      description: '<p>Generates a URL and authorization code that you can embed in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user''s browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p>'
+      description: '<p>Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user''s browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html">Embedding Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i> .</p>'
       responses:
         '200':
           description: Success
@@ -6320,7 +6865,7 @@ paths:
         - name: user-arn
           in: query
           required: false
-          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>'
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>'
           schema:
             type: string
     parameters:
@@ -6334,7 +6879,7 @@ paths:
   '/accounts/{AwsAccountId}/session-embed-url':
     get:
       operationId: GetSessionEmbedUrl
-      description: 'Generates a session URL and authorization code that you can embed in your web server code. '
+      description: '<p>Generates a session URL and authorization code that you can use to embed the Amazon QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where you want to provide an authoring portal that allows users to create data sources, datasets, analyses, and dashboards. The users who access an embedded QuickSight console need belong to the author or admin security cohort. If you want to restrict permissions to some of these features, add a custom permissions profile to the user with the <code> <a>UpdateUser</a> </code> API operation. Use <code> <a>RegisterUser</a> </code> API operation to add a new user with a custom permission profile attached. For more information, see the following sections in the <i>Amazon QuickSight User Guide</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/quicksight/latest/user/embedding-the-quicksight-console.html">Embedding the Amazon QuickSight Console</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html">Customizing Access to the Amazon QuickSight Console</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -6400,7 +6945,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The ID for the AWS account that contains the QuickSight session that you're embedding.
+          description: The ID for the AWS account associated with your QuickSight subscription.
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -6409,7 +6954,7 @@ paths:
         - name: entry-point
           in: query
           required: false
-          description: The entry point for the embedded session.
+          description: '<p>The URL you use to access the embedded session. The entry point URL is constrained to the following paths:</p> <ul> <li> <p> <code>/start</code> </p> </li> <li> <p> <code>/start/analyses</code> </p> </li> <li> <p> <code>/start/dashboards</code> </p> </li> <li> <p> <code>/start/favorites</code> </p> </li> <li> <p> <code>/dashboards/<i>DashboardId</i> </code> - where <code>DashboardId</code> is the actual ID key from the QuickSight console URL of the dashboard</p> </li> <li> <p> <code>/analyses/<i>AnalysisId</i> </code> - where <code>AnalysisId</code> is the actual ID key from the QuickSight console URL of the analysis</p> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -6425,9 +6970,88 @@ paths:
         - name: user-arn
           in: query
           required: false
-          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>'
+          description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>'
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/analyses':
+    get:
+      operationId: ListAnalyses
+      description: Lists Amazon QuickSight analyses that exist in the specified AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnalysesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analyses.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8149,15 +8773,189 @@ paths:
                   pattern: '[\u0020-\u00FF]+'
                   minLength: 1
                 CustomPermissionsName:
-                  description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user''s access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
+                  description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user''s access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>To add custom permissions to an existing user, use <code> <a>UpdateUser</a> </code> instead.</p> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
                   type: string
                   pattern: '^[a-zA-Z0-9+=,.@_-]+$'
                   minLength: 1
                   maxLength: 64
+  '/accounts/{AwsAccountId}/restore/analyses/{AnalysisId}':
+    post:
+      operationId: RestoreAnalysis
+      description: Restores an analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreAnalysisResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analysis.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AnalysisId
+          in: path
+          required: true
+          description: The ID of the analysis that you're restoring.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/search/analyses':
+    post:
+      operationId: SearchAnalyses
+      description: Searches for analyses that belong to the user specified in the filter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchAnalysesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the AWS account that contains the analyses that you're searching for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Filters
+              properties:
+                Filters:
+                  description: 'The structure for the search filters that you want to apply to your search. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalysisSearchFilter'
+                  maxItems: 1
+                NextToken:
+                  description: A pagination token that can be used in a subsequent request.
+                  type: string
+                MaxResults:
+                  description: The maximum number of results to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/search/dashboards':
     post:
       operationId: SearchDashboards
-      description: 'Searchs for dashboards that belong to a user. '
+      description: 'Searches for dashboards that belong to a user. '
       responses:
         '200':
           description: Success
@@ -8485,7 +9283,7 @@ components:
           description: 'The namespace associated with the customization you''re creating. '
         AccountCustomization:
           $ref: '#/components/schemas/AccountCustomization'
-          description: The customizations you're adding to the QuickSight subscription for the AWS account.
+          description: 'The QuickSight customizations you''re adding in the current AWS Region. '
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -8495,21 +9293,18 @@ components:
     Arn:
       type: string
     ResourceUnavailableException: {}
-    CreateDashboardResponse:
+    CreateAnalysisResponse:
       type: object
       properties:
         Arn:
           $ref: '#/components/schemas/Arn'
-          description: The ARN of the dashboard.
-        VersionArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The ARN of the dashboard, including the version number of the first version that is created.'
-        DashboardId:
+          description: The ARN for the analysis.
+        AnalysisId:
           $ref: '#/components/schemas/RestrictiveResourceId'
-          description: The ID for the dashboard.
+          description: The ID of the analysis.
         CreationStatus:
           $ref: '#/components/schemas/ResourceStatus'
-          description: The status of the dashboard creation request.
+          description: 'The status of the creation of the analysis. '
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
@@ -8547,9 +9342,9 @@ components:
           description: '<p>The Amazon Resource Name (ARN) of the principal. This can be one of the following:</p> <ul> <li> <p>The ARN of an Amazon QuickSight user, group, or namespace. (This is most common.)</p> </li> <li> <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.) </p> </li> </ul>'
         Actions:
           $ref: '#/components/schemas/ActionList'
-          description: 'The action to grant or revoke permissions on, for example <code>"quicksight:DescribeDashboard"</code>.'
+          description: 'The IAM action to grant or revoke permissions on, for example <code>"quicksight:DescribeDashboard"</code>.'
       description: Permission for the resource.
-    DashboardSourceTemplate:
+    AnalysisSourceTemplate:
       type: object
       required:
         - DataSetReferences
@@ -8557,11 +9352,11 @@ components:
       properties:
         DataSetReferences:
           $ref: '#/components/schemas/DataSetReferenceList'
-          description: Dataset references.
+          description: The dataset references of the source template of an analysis.
         Arn:
           $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the resource.
-      description: Dashboard source template.
+          description: The Amazon Resource Name (ARN) of the source template of an analysis.
+      description: The source template of an analysis.
     Tag:
       type: object
       required:
@@ -8575,6 +9370,42 @@ components:
           $ref: '#/components/schemas/TagValue'
           description: Tag value.
       description: The key or keys of the key-value pairs for the resource tag or tags assigned to the resource.
+    ConflictException: {}
+    UnsupportedUserEditionException: {}
+    CreateDashboardResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the dashboard.
+        VersionArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN of the dashboard, including the version number of the first version that is created.'
+        DashboardId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID for the dashboard.
+        CreationStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+          description: The status of the dashboard creation request.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    DashboardSourceTemplate:
+      type: object
+      required:
+        - DataSetReferences
+        - Arn
+      properties:
+        DataSetReferences:
+          $ref: '#/components/schemas/DataSetReferenceList'
+          description: Dataset references.
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the resource.
+      description: Dashboard source template.
     AdHocFilteringOption:
       type: object
       properties:
@@ -8596,8 +9427,6 @@ components:
           $ref: '#/components/schemas/DashboardUIState'
           description: Visibility state.
       description: Sheet controls option.
-    ConflictException: {}
-    UnsupportedUserEditionException: {}
     CreateDataSetResponse:
       type: object
       properties:
@@ -8959,7 +9788,7 @@ components:
           description: Password.
         AlternateDataSourceParameters:
           $ref: '#/components/schemas/DataSourceParametersList'
-          description: 'A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.'
+          description: 'A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.'
       description: The combination of user name and password that are used as credentials.
     CopySourceArn:
       type: string
@@ -9053,7 +9882,7 @@ components:
           description: 'The AWS Region that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. '
         CreationStatus:
           $ref: '#/components/schemas/NamespaceStatus'
-          description: 'The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up actions.'
+          description: 'The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up tasks.'
         IdentityStore:
           $ref: '#/components/schemas/IdentityStore'
           description: 'Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.'
@@ -9235,6 +10064,24 @@ components:
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    DeleteAnalysisResponse:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the deleted analysis.
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the deleted analysis.
+        DeletionTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The date and time that the analysis is scheduled to be deleted.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
     DeleteDashboardResponse:
       type: object
       properties:
@@ -9408,13 +10255,13 @@ components:
       properties:
         AwsAccountId:
           $ref: '#/components/schemas/AwsAccountId'
-          description: The ID for the AWS account that you want to describe QuickSight customizations for.
+          description: The ID for the AWS account that you're describing.
         Namespace:
           $ref: '#/components/schemas/Namespace'
-          description: The namespace associated with the customization that you're describing.
+          description: 'The QuickSight namespace that you''re describing. '
         AccountCustomization:
           $ref: '#/components/schemas/AccountCustomization'
-          description: The customizations associated with QuickSight.
+          description: 'The QuickSight customizations that exist in the current AWS Region. '
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -9426,13 +10273,43 @@ components:
       properties:
         AccountSettings:
           $ref: '#/components/schemas/AccountSettings'
-          description: 'The settings associated with the QuickSight subscription associated with this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it is technically not an account, but a subscription in your AWS account.'
+          description: 'The QuickSight settings for this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it''s technically not an account by itself. Instead, it''s a subscription to the QuickSight service for your AWS account. The edition that you subscribe to applies to QuickSight in every AWS Region where you use it. '
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    DescribeAnalysisResponse:
+      type: object
+      properties:
+        Analysis:
+          $ref: '#/components/schemas/Analysis'
+          description: A metadata structure that contains summary information for the analysis that you're describing.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    DescribeAnalysisPermissionsResponse:
+      type: object
+      properties:
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the analysis whose permissions you're describing.
+        AnalysisArn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the analysis whose permissions you're describing.
+        Permissions:
+          $ref: '#/components/schemas/ResourcePermissionList'
+          description: A structure that describes the principals and the resource-level permissions on an analysis.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
     DescribeDashboardResponse:
       type: object
       properties:
@@ -9565,7 +10442,7 @@ components:
       properties:
         Namespace:
           $ref: '#/components/schemas/NamespaceInfoV2'
-          description: 'The information about the namespace that you''re describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API lists the namespace error types and messages associated with the creation process.'
+          description: 'The information about the namespace that you''re describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.'
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -9673,7 +10550,7 @@ components:
       properties:
         EmbedUrl:
           $ref: '#/components/schemas/EmbeddingUrl'
-          description: 'A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
+          description: 'A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API operation provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
@@ -9689,7 +10566,22 @@ components:
       properties:
         EmbedUrl:
           $ref: '#/components/schemas/EmbeddingUrl'
-          description: 'A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
+          description: 'A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API operation provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. '
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    ListAnalysesResponse:
+      type: object
+      properties:
+        AnalysisSummaryList:
+          $ref: '#/components/schemas/AnalysisSummaryList'
+          description: Metadata describing each of the analyses that are listed.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: A pagination token that can be used in a subsequent request.
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
@@ -9983,7 +10875,7 @@ components:
       properties:
         User:
           $ref: '#/components/schemas/User'
-          description: The user name.
+          description: The user's user name.
         UserInvitationUrl:
           $ref: '#/components/schemas/String'
           description: The URL the user visits to complete registration and provide a password. This is returned only for users with an identity type of <code>QUICKSIGHT</code>.
@@ -9993,6 +10885,49 @@ components:
         Status:
           $ref: '#/components/schemas/StatusCode'
           description: The HTTP status of the request.
+    RestoreAnalysisResponse:
+      type: object
+      properties:
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the analysis that you're restoring.
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: 'The ID of the analysis that you''re restoring. '
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    SearchAnalysesResponse:
+      type: object
+      properties:
+        AnalysisSummaryList:
+          $ref: '#/components/schemas/AnalysisSummaryList'
+          description: Metadata describing the analyses that you searched for.
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: 'A pagination token that can be used in a subsequent request. '
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    AnalysisSearchFilter:
+      type: object
+      properties:
+        Operator:
+          $ref: '#/components/schemas/FilterOperator'
+          description: 'The comparison operator that you want to use as a filter, for example <code>"Operator": "StringEquals"</code>.'
+        Name:
+          $ref: '#/components/schemas/AnalysisFilterAttribute'
+          description: 'The name of the value that you want to use as a filter, for example <code>"Name": "QUICKSIGHT_USER"</code>.'
+        Value:
+          $ref: '#/components/schemas/String'
+          description: 'The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter, for example <code>"Value"</code>. An example is <code>"arn:aws:quicksight:us-east-1:1:user/default/UserName1"</code>.'
+      description: A filter that you apply when searching for one or more analyses.
     SearchDashboardsResponse:
       type: object
       properties:
@@ -10056,7 +10991,7 @@ components:
           description: The namespace associated with the customization that you're updating.
         AccountCustomization:
           $ref: '#/components/schemas/AccountCustomization'
-          description: The customizations associated with your QuickSight subscription.
+          description: 'The QuickSight customizations you''re updating in the current AWS Region. '
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -10066,6 +11001,42 @@ components:
     UpdateAccountSettingsResponse:
       type: object
       properties:
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+    UpdateAnalysisResponse:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the analysis that you're updating.
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the analysis.
+        UpdateStatus:
+          $ref: '#/components/schemas/ResourceStatus'
+          description: The update status of the last update that was made to the analysis.
+        Status:
+          $ref: '#/components/schemas/StatusCode'
+          description: The HTTP status of the request.
+        RequestId:
+          $ref: '#/components/schemas/String'
+          description: The AWS request ID for this operation.
+    UpdateAnalysisPermissionsResponse:
+      type: object
+      properties:
+        AnalysisArn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the analysis that you updated.
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the analysis that you updated permissions for.
+        Permissions:
+          $ref: '#/components/schemas/ResourcePermissionList'
+          description: A structure that describes the principals and the resource-level permissions on an analysis.
         RequestId:
           $ref: '#/components/schemas/String'
           description: The AWS request ID for this operation.
@@ -10351,7 +11322,7 @@ components:
         DefaultTheme:
           $ref: '#/components/schemas/Arn'
           description: The default theme for this QuickSight subscription.
-      description: The customizations associated with your AWS account for QuickSight.
+      description: The Amazon QuickSight customizations associated with your AWS account or a QuickSight namespace in a specific AWS Region.
     String:
       type: string
     Edition:
@@ -10364,13 +11335,13 @@ components:
       properties:
         AccountName:
           $ref: '#/components/schemas/String'
-          description: The name associated with the QuickSight subscription in your AWS account.
+          description: The "account name" you provided for the QuickSight subscription in your AWS account. You create this name when you sign up for QuickSight. It is unique in all of AWS and it appears only in the console when users sign in.
         Edition:
           $ref: '#/components/schemas/Edition'
-          description: The edition of QuickSight that you're currently subscribed to.
+          description: 'The edition of QuickSight that you''re currently subscribed to: Enterprise edition or Standard edition.'
         DefaultNamespace:
           $ref: '#/components/schemas/Namespace'
-          description: The default QuickSight namespace for your AWS account.
+          description: 'The default QuickSight namespace for your AWS account. '
         NotificationEmail:
           $ref: '#/components/schemas/String'
           description: The main notification email for your QuickSight subscription.
@@ -10413,6 +11384,148 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    RestrictiveResourceId:
+      type: string
+      pattern: '[\w\-]+'
+      minLength: 1
+      maxLength: 2048
+    AnalysisName:
+      type: string
+      pattern: '[\u0020-\u00FF]+'
+      minLength: 1
+      maxLength: 2048
+    ResourceStatus:
+      type: string
+      enum:
+        - CREATION_IN_PROGRESS
+        - CREATION_SUCCESSFUL
+        - CREATION_FAILED
+        - UPDATE_IN_PROGRESS
+        - UPDATE_SUCCESSFUL
+        - UPDATE_FAILED
+        - DELETED
+    AnalysisErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisError'
+      minItems: 1
+    DataSetArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      maxItems: 100
+    Timestamp:
+      type: string
+      format: date-time
+    Analysis:
+      type: object
+      properties:
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the analysis.
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the analysis.
+        Name:
+          $ref: '#/components/schemas/AnalysisName'
+          description: The descriptive name of the analysis.
+        Status:
+          $ref: '#/components/schemas/ResourceStatus'
+          description: Status associated with the analysis.
+        Errors:
+          $ref: '#/components/schemas/AnalysisErrorList'
+          description: Errors associated with the analysis.
+        DataSetArns:
+          $ref: '#/components/schemas/DataSetArnsList'
+          description: The ARNs of the datasets of the analysis.
+        ThemeArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the theme of the analysis.
+        CreatedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the analysis was created.
+        LastUpdatedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the analysis was last updated.
+      description: Metadata structure for an analysis in Amazon QuickSight
+    AnalysisErrorType:
+      type: string
+      enum:
+        - ACCESS_DENIED
+        - SOURCE_NOT_FOUND
+        - DATA_SET_NOT_FOUND
+        - INTERNAL_FAILURE
+        - PARAMETER_VALUE_INCOMPATIBLE
+        - PARAMETER_TYPE_INVALID
+        - PARAMETER_NOT_FOUND
+        - COLUMN_TYPE_MISMATCH
+        - COLUMN_GEOGRAPHIC_ROLE_MISMATCH
+        - COLUMN_REPLACEMENT_MISSING
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+    AnalysisError:
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/AnalysisErrorType'
+          description: The type of the analysis error.
+        Message:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The message associated with the analysis error.
+      description: A metadata error structure for an analysis.
+    AnalysisFilterAttribute:
+      type: string
+      enum:
+        - QUICKSIGHT_USER
+    FilterOperator:
+      type: string
+      enum:
+        - StringEquals
+    AnalysisSearchFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisSearchFilter'
+      maxItems: 1
+    AnalysisSourceEntity:
+      type: object
+      properties:
+        SourceTemplate:
+          $ref: '#/components/schemas/AnalysisSourceTemplate'
+          description: The source template for the source entity of the analysis.
+      description: The source entity of an analysis.
+    DataSetReferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSetReference'
+      minItems: 1
+    AnalysisSummary:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) for the analysis.
+        AnalysisId:
+          $ref: '#/components/schemas/RestrictiveResourceId'
+          description: The ID of the analysis. This ID displays in the URL.
+        Name:
+          $ref: '#/components/schemas/AnalysisName'
+          description: 'The name of the analysis. This name is displayed in the QuickSight console. '
+        Status:
+          $ref: '#/components/schemas/ResourceStatus'
+          description: The last known status for the analysis.
+        CreatedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the analysis was created.
+        LastUpdatedTime:
+          $ref: '#/components/schemas/Timestamp'
+          description: The time that the analysis was last updated.
+      description: The summary metadata that describes an analysis.
+    AnalysisSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisSummary'
+      maxItems: 100
     AssignmentStatus:
       type: string
       enum:
@@ -10654,26 +11767,7 @@ components:
       properties:
         AccountCustomization:
           $ref: '#/components/schemas/AccountCustomization'
-          description: 'The customizations you''re adding to the QuickSight subscription for the AWS account. For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme (<code>DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT"</code>) or to a custom theme (<code>DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"</code>).'
-    CreateColumnsOperation:
-      type: object
-      required:
-        - Columns
-      properties:
-        Columns:
-          $ref: '#/components/schemas/CalculatedColumnList'
-          description: Calculated columns to create.
-      description: A transform operation that creates calculated columns. Columns created in one such operation form a lexical closure.
-    RestrictiveResourceId:
-      type: string
-      pattern: '[\w\-]+'
-      minLength: 1
-      maxLength: 2048
-    DashboardName:
-      type: string
-      pattern: '[\u0020-\u00FF]+'
-      minLength: 1
-      maxLength: 2048
+          description: '<p>The QuickSight customizations you''re adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace. </p> <p>For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>"AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. </code>. Or, you could add a custom theme by specifying <code>"AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }</code>. </p>'
     Parameters:
       type: object
       properties:
@@ -10688,14 +11782,59 @@ components:
           description: Decimal parameters.
         DateTimeParameters:
           $ref: '#/components/schemas/DateTimeParameterList'
-          description: DateTime parameters.
-      description: Parameters.
+          description: Date-time parameters.
+      description: A list of QuickSight parameters and the list's override values.
     ResourcePermissionList:
       type: array
       items:
         $ref: '#/components/schemas/ResourcePermission'
       minItems: 1
       maxItems: 64
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 200
+    CreateAnalysisRequest:
+      type: object
+      required:
+        - Name
+        - SourceEntity
+      title: CreateAnalysisRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/AnalysisName'
+          description: 'A descriptive name for the analysis that you''re creating. This name displays for the analysis in the QuickSight console. '
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+          description: 'The parameter names and override values that you want to use. An analysis can have any parameter type, and some parameters might accept multiple values. '
+        Permissions:
+          $ref: '#/components/schemas/ResourcePermissionList'
+          description: '<p>A structure that describes the principals and the resource-level permissions on an analysis. You can use the <code>Permissions</code> structure to grant permissions by providing a list of AWS Identity and Access Management (IAM) action information for each principal listed by Amazon Resource Name (ARN). </p> <p>To specify no permissions, omit <code>Permissions</code>.</p>'
+        SourceEntity:
+          $ref: '#/components/schemas/AnalysisSourceEntity'
+          description: A source entity to use for the analysis that you're creating. This metadata structure contains details that describe a source template and one or more datasets.
+        ThemeArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The ARN for the theme to apply to the analysis that you''re creating. To see the theme in the QuickSight console, make sure that you have access to it.'
+        Tags:
+          $ref: '#/components/schemas/TagList'
+          description: Contains a map of the key-value pairs for the resource tag or tags assigned to the analysis.
+    CreateColumnsOperation:
+      type: object
+      required:
+        - Columns
+      properties:
+        Columns:
+          $ref: '#/components/schemas/CalculatedColumnList'
+          description: Calculated columns to create.
+      description: A transform operation that creates calculated columns. Columns created in one such operation form a lexical closure.
+    DashboardName:
+      type: string
+      pattern: '[\u0020-\u00FF]+'
+      minLength: 1
+      maxLength: 2048
     DashboardSourceEntity:
       type: object
       properties:
@@ -10703,12 +11842,6 @@ components:
           $ref: '#/components/schemas/DashboardSourceTemplate'
           description: Source template.
       description: Dashboard source entity.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 1
-      maxItems: 200
     VersionDescription:
       type: string
       minLength: 1
@@ -10741,7 +11874,7 @@ components:
           description: 'The parameters for the creation of the dashboard, which you want to use to override the default settings. A dashboard can have any type of parameters, and some parameters might accept multiple values. '
         Permissions:
           $ref: '#/components/schemas/ResourcePermissionList'
-          description: A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.
+          description: '<p>A structure that contains the permissions of the dashboard. You can use this structure for granting permissions by providing a list of IAM action information for each principal ARN. </p> <p>To specify no permissions, omit the permissions list.</p>'
         SourceEntity:
           $ref: '#/components/schemas/DashboardSourceEntity'
           description: '<p>The entity that you are using as a source when you create the dashboard. In <code>SourceEntity</code>, you specify the type of object you''re using as source. You can only create a dashboard from a template, so you use a <code>SourceTemplate</code> entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the <a>CreateTemplate</a> API operation. For <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source template. The <code>SourceTemplate</code>ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p> <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. </p>'
@@ -10753,19 +11886,10 @@ components:
           description: A description for the first version of the dashboard being created.
         DashboardPublishOptions:
           $ref: '#/components/schemas/DashboardPublishOptions'
-          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
+          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .CSV format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
         ThemeArn:
           $ref: '#/components/schemas/Arn'
           description: 'The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that is used in the source entity. The theme ARN must exist in the same AWS account where you create the dashboard.'
-    ResourceStatus:
-      type: string
-      enum:
-        - CREATION_IN_PROGRESS
-        - CREATION_SUCCESSFUL
-        - CREATION_FAILED
-        - UPDATE_IN_PROGRESS
-        - UPDATE_SUCCESSFUL
-        - UPDATE_FAILED
     ResourceId:
       type: string
     ResourceName:
@@ -11042,7 +12166,7 @@ components:
         PrincipalId:
           $ref: '#/components/schemas/String'
           description: The principal ID of the group.
-      description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
+      description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. '
     IdentityMap:
       type: object
       additionalProperties:
@@ -11289,10 +12413,10 @@ components:
           description: The time that this dashboard version was created.
         Errors:
           $ref: '#/components/schemas/DashboardErrorList'
-          description: Errors.
+          description: Errors associated with this dashboard version.
         VersionNumber:
           $ref: '#/components/schemas/VersionNumber'
-          description: Version number.
+          description: Version number for this version of the dashboard.
         Status:
           $ref: '#/components/schemas/ResourceStatus'
           description: The HTTP status of the request.
@@ -11304,14 +12428,14 @@ components:
           description: Source entity ARN.
         DataSetArns:
           $ref: '#/components/schemas/DataSetArnsList'
-          description: The Amazon Resource Numbers (ARNs) for the datasets that are associated with a version of the dashboard.
+          description: The Amazon Resource Numbers (ARNs) for the datasets that are associated with this version of the dashboard.
         Description:
           $ref: '#/components/schemas/VersionDescription'
           description: Description.
+        ThemeArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the theme associated with a version of the dashboard.
       description: Dashboard version.
-    Timestamp:
-      type: string
-      format: date-time
     Dashboard:
       type: object
       properties:
@@ -11350,9 +12474,6 @@ components:
         - COLUMN_TYPE_MISMATCH
         - COLUMN_GEOGRAPHIC_ROLE_MISMATCH
         - COLUMN_REPLACEMENT_MISSING
-    NonEmptyString:
-      type: string
-      pattern: .*\S.*
     DashboardError:
       type: object
       properties:
@@ -11372,20 +12493,11 @@ components:
       type: string
       enum:
         - QUICKSIGHT_USER
-    FilterOperator:
-      type: string
-      enum:
-        - StringEquals
     DashboardSearchFilterList:
       type: array
       items:
         $ref: '#/components/schemas/DashboardSearchFilter'
       maxItems: 1
-    DataSetReferenceList:
-      type: array
-      items:
-        $ref: '#/components/schemas/DataSetReference'
-      minItems: 1
     DashboardSummary:
       type: object
       properties:
@@ -11421,11 +12533,6 @@ components:
       enum:
         - EXPANDED
         - COLLAPSED
-    DataSetArnsList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Arn'
-      maxItems: 100
     DashboardVersionSummary:
       type: object
       properties:
@@ -11605,7 +12712,7 @@ components:
           description: 'The parameters that Amazon QuickSight uses to connect to your underlying source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
         AlternateDataSourceParameters:
           $ref: '#/components/schemas/DataSourceParametersList'
-          description: 'A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.'
+          description: 'A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that''s in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.'
         VpcConnectionProperties:
           $ref: '#/components/schemas/VpcConnectionProperties'
           description: The VPC connection information. You need to use this parameter only when you want QuickSight to use a VPC connection when connecting to your underlying source.
@@ -11643,11 +12750,11 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/NonEmptyString'
-          description: A display name for the dataset.
+          description: A display name for the date-time parameter.
         Values:
           $ref: '#/components/schemas/TimestampList'
-          description: Values.
-      description: Date time parameter.
+          description: The values for the date-time parameter.
+      description: A date-time parameter.
     DoubleList:
       type: array
       items:
@@ -11660,14 +12767,22 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/NonEmptyString'
-          description: A display name for the dataset.
+          description: A display name for the decimal parameter.
         Values:
           $ref: '#/components/schemas/DoubleList'
-          description: Values.
-      description: Decimal parameter.
+          description: The values for the decimal parameter.
+      description: A decimal parameter.
     DeleteAccountCustomizationRequest:
       type: object
       title: DeleteAccountCustomizationRequest
+      properties: {}
+    RecoveryWindowInDays:
+      type: integer
+      minimum: 7
+      maximum: 30
+    DeleteAnalysisRequest:
+      type: object
+      title: DeleteAnalysisRequest
       properties: {}
     DeleteDashboardRequest:
       type: object
@@ -11737,6 +12852,14 @@ components:
     DescribeAccountSettingsRequest:
       type: object
       title: DescribeAccountSettingsRequest
+      properties: {}
+    DescribeAnalysisPermissionsRequest:
+      type: object
+      title: DescribeAnalysisPermissionsRequest
+      properties: {}
+    DescribeAnalysisRequest:
+      type: object
+      title: DescribeAnalysisRequest
       properties: {}
     DescribeDashboardPermissionsRequest:
       type: object
@@ -11859,7 +12982,7 @@ components:
           description: The identity store used for the namespace.
         NamespaceError:
           $ref: '#/components/schemas/NamespaceError'
-          description: An error that occured when the namespace was created.
+          description: An error that occurred when the namespace was created.
       description: The error type.
     DescribeTemplateAliasRequest:
       type: object
@@ -11894,7 +13017,7 @@ components:
         CreatedTime:
           $ref: '#/components/schemas/Timestamp'
           description: Time when this was created.
-      description: <p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>
+      description: <p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with an analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>
     DescribeThemeAliasRequest:
       type: object
       title: DescribeThemeAliasRequest
@@ -11930,7 +13053,7 @@ components:
         Type:
           $ref: '#/components/schemas/ThemeType'
           description: 'The type of theme, based on how it was created. Valid values include: <code>QUICKSIGHT</code> and <code>CUSTOM</code>.'
-      description: <p/>
+      description: Summary information about a theme.
     DescribeUserRequest:
       type: object
       title: DescribeUserRequest
@@ -11962,7 +13085,7 @@ components:
         CustomPermissionsName:
           $ref: '#/components/schemas/RoleName'
           description: The custom permissions profile associated with this user.
-      description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
+      description: 'A registered user of Amazon QuickSight. '
     Double:
       type: number
       format: double
@@ -12185,11 +13308,11 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/NonEmptyString'
-          description: A display name for the dataset.
+          description: The name of the integer parameter.
         Values:
           $ref: '#/components/schemas/LongList'
-          description: Values.
-      description: Integer parameter.
+          description: The values for the integer parameter.
+      description: An integer parameter.
     SiteBaseUrl:
       type: string
       minLength: 1
@@ -12235,6 +13358,10 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    ListAnalysesRequest:
+      type: object
+      title: ListAnalysesRequest
+      properties: {}
     ListDashboardVersionsRequest:
       type: object
       title: ListDashboardVersionsRequest
@@ -12548,7 +13675,7 @@ components:
           description: The Amazon QuickSight user name that you want to create for the user you are registering.
         CustomPermissionsName:
           $ref: '#/components/schemas/RoleName'
-          description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user''s access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
+          description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user''s access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>To add custom permissions to an existing user, use <code> <a>UpdateUser</a> </code> instead.</p> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
     RelationalTableSchema:
       type: string
       maxLength: 64
@@ -12569,6 +13696,10 @@ components:
           $ref: '#/components/schemas/ColumnName'
           description: The new name for the column.
       description: A transform operation that renames a column.
+    RestoreAnalysisRequest:
+      type: object
+      title: RestoreAnalysisRequest
+      properties: {}
     UploadSettings:
       type: object
       properties:
@@ -12588,6 +13719,21 @@ components:
           $ref: '#/components/schemas/Delimiter'
           description: The delimiter between values in the file.
       description: Information about the format for a source file or files.
+    SearchAnalysesRequest:
+      type: object
+      required:
+        - Filters
+      title: SearchAnalysesRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/AnalysisSearchFilterList'
+          description: 'The structure for the search filters that you want to apply to your search. '
+        NextToken:
+          $ref: '#/components/schemas/String'
+          description: A pagination token that can be used in a subsequent request.
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: The maximum number of results to return.
     SearchDashboardsRequest:
       type: object
       required:
@@ -12635,11 +13781,11 @@ components:
       properties:
         Name:
           $ref: '#/components/schemas/NonEmptyString'
-          description: A display name for the dataset.
+          description: A display name for a string parameter.
         Values:
           $ref: '#/components/schemas/StringList'
-          description: Values.
-      description: String parameter.
+          description: The values of a string parameter.
+      description: A string parameter.
     TagValue:
       type: string
       minLength: 1
@@ -12680,22 +13826,25 @@ components:
           description: The time that this template version was created.
         Errors:
           $ref: '#/components/schemas/TemplateErrorList'
-          description: Errors associated with the template.
+          description: Errors associated with this template version.
         VersionNumber:
           $ref: '#/components/schemas/VersionNumber'
-          description: The version number of the template.
+          description: The version number of the template version.
         Status:
           $ref: '#/components/schemas/ResourceStatus'
           description: The HTTP status of the request.
         DataSetConfigurations:
           $ref: '#/components/schemas/DataSetConfigurationList'
-          description: Schema of the dataset identified by the placeholder. The idea is that any dashboard created from the template should be bound to new datasets matching the same schema described through this API. .
+          description: Schema of the dataset identified by the placeholder. Any dashboard created from this template should be bound to new datasets matching the same schema described through this API operation.
         Description:
           $ref: '#/components/schemas/VersionDescription'
           description: The description of the template.
         SourceEntityArn:
           $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the analysis or template which was used to create this template.
+          description: The Amazon Resource Name (ARN) of an analysis or template that was used to create this template.
+        ThemeArn:
+          $ref: '#/components/schemas/Arn'
+          description: The ARN of the theme associated with this version of the template.
       description: A version of a template.
     TemplateErrorType:
       type: string
@@ -12703,6 +13852,7 @@ components:
         - SOURCE_NOT_FOUND
         - DATA_SET_NOT_FOUND
         - INTERNAL_FAILURE
+        - ACCESS_DENIED
     TemplateError:
       type: object
       properties:
@@ -12886,7 +14036,7 @@ components:
       properties:
         AccountCustomization:
           $ref: '#/components/schemas/AccountCustomization'
-          description: The customizations you want to update in QuickSight.
+          description: 'The QuickSight customizations you''re updating in the current AWS Region. '
     UpdateAccountSettingsRequest:
       type: object
       required:
@@ -12898,12 +14048,41 @@ components:
           description: 'The default namespace for this AWS Account. Currently, the default is <code>default</code>. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.'
         NotificationEmail:
           $ref: '#/components/schemas/String'
-          description: Email address used to send notifications regarding administration of QuickSight.
+          description: The email address that you want QuickSight to send notifications to regarding your AWS account or QuickSight subscription.
     UpdateResourcePermissionList:
       type: array
       items:
         $ref: '#/components/schemas/ResourcePermission'
       maxItems: 100
+    UpdateAnalysisPermissionsRequest:
+      type: object
+      title: UpdateAnalysisPermissionsRequest
+      properties:
+        GrantPermissions:
+          $ref: '#/components/schemas/UpdateResourcePermissionList'
+          description: A structure that describes the permissions to add and the principal to add them to.
+        RevokePermissions:
+          $ref: '#/components/schemas/UpdateResourcePermissionList'
+          description: A structure that describes the permissions to remove and the principal to remove them from.
+    UpdateAnalysisRequest:
+      type: object
+      required:
+        - Name
+        - SourceEntity
+      title: UpdateAnalysisRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/AnalysisName'
+          description: A descriptive name for the analysis that you're updating. This name displays for the analysis in the QuickSight console.
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+          description: 'The parameter names and override values that you want to use. An analysis can have any parameter type, and some parameters might accept multiple values. '
+        SourceEntity:
+          $ref: '#/components/schemas/AnalysisSourceEntity'
+          description: A source entity to use for the analysis that you're updating. This metadata structure contains details that describe a source template and one or more datasets.
+        ThemeArn:
+          $ref: '#/components/schemas/Arn'
+          description: 'The Amazon Resource Name (ARN) for the theme to apply to the analysis that you''re creating. To see the theme in the QuickSight console, make sure that you have access to it.'
     UpdateDashboardPermissionsRequest:
       type: object
       title: UpdateDashboardPermissionsRequest
@@ -12939,7 +14118,7 @@ components:
           description: A description for the first version of the dashboard being created.
         DashboardPublishOptions:
           $ref: '#/components/schemas/DashboardPublishOptions'
-          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
+          description: '<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .CSV format isn''t enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>'
         ThemeArn:
           $ref: '#/components/schemas/Arn'
           description: 'The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that was originally associated with the entity. The theme ARN must exist in the same AWS account where you create the dashboard.'
@@ -13113,10 +14292,10 @@ components:
           description: The email address of the user that you want to update.
         Role:
           $ref: '#/components/schemas/UserRole'
-          description: '<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>'
+          description: '<p>The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul> <p>The name of the QuickSight role is invisible to the user except for the console screens dealing with permissions.</p>'
         CustomPermissionsName:
           $ref: '#/components/schemas/RoleName'
-          description: 'The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. '
+          description: '<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user''s access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>'
         UnapplyCustomPermissions:
           $ref: '#/components/schemas/Boolean'
           description: A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.

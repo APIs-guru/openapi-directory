@@ -114,6 +114,60 @@ servers:
     description: The RoboMaker endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /batchDeleteWorlds:
+    post:
+      operationId: BatchDeleteWorlds
+      description: Deletes one or more worlds in a batch operation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteWorldsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - worlds
+              properties:
+                worlds:
+                  description: A list of Amazon Resource Names (arns) that correspond to worlds to delete.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Arn'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /batchDescribeSimulationJob:
     post:
       operationId: BatchDescribeSimulationJob
@@ -339,6 +393,124 @@ paths:
               properties:
                 batch:
                   description: The id of the batch to cancel.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /cancelWorldExportJob:
+    post:
+      operationId: CancelWorldExportJob
+      description: Cancels the specified export job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelWorldExportJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - job
+              properties:
+                job:
+                  description: The Amazon Resource Name (arn) of the world export job to cancel.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /cancelWorldGenerationJob:
+    post:
+      operationId: CancelWorldGenerationJob
+      description: Cancels the specified world generator job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelWorldGenerationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - job
+              properties:
+                job:
+                  description: The Amazon Resource Name (arn) of the world generator job to cancel.
                   type: string
                   pattern: 'arn:.*'
                   minLength: 1
@@ -1121,7 +1293,309 @@ paths:
                   properties:
                     simulationUnitLimit:
                       $ref: '#/components/schemas/SimulationUnit'
-                      description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
+                      description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createWorldExportJob:
+    post:
+      operationId: CreateWorldExportJob
+      description: Creates a world export job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorldExportJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: IdempotentParameterMismatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - worlds
+                - outputLocation
+                - iamRole
+              properties:
+                clientRequestToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_\-=]*'
+                  minLength: 1
+                  maxLength: 64
+                worlds:
+                  description: A list of Amazon Resource Names (arns) that correspond to worlds to export.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Arn'
+                  minItems: 1
+                  maxItems: 100
+                outputLocation:
+                  description: The output location.
+                  type: object
+                  properties:
+                    s3Bucket:
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: The S3 bucket for output.
+                    s3Prefix:
+                      $ref: '#/components/schemas/S3Key'
+                      description: The S3 folder in the <code>s3Bucket</code> where output files will be placed.
+                iamRole:
+                  description: The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.
+                  type: string
+                  pattern: 'arn:aws:iam::\w+:role/.*'
+                  minLength: 1
+                  maxLength: 255
+                tags:
+                  description: A map that contains tag keys and tag values that are attached to the world export job.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createWorldGenerationJob:
+    post:
+      operationId: CreateWorldGenerationJob
+      description: Creates worlds using the specified template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorldGenerationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: IdempotentParameterMismatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+                - worldCount
+              properties:
+                clientRequestToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_\-=]*'
+                  minLength: 1
+                  maxLength: 64
+                template:
+                  description: The Amazon Resource Name (arn) of the world template describing the worlds you want to create.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+                worldCount:
+                  description: '<p>The number of worlds that will be created. You can configure the number of unique floorplans and the number of unique interiors for each floor plan. For example, if you want 1 world with 20 unique interiors, you set <code>floorplanCount = 1</code> and <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>. </p> <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan = 5</code>, there will be 20 worlds with 5 unique floor plans. </p>'
+                  type: object
+                  properties:
+                    floorplanCount:
+                      $ref: '#/components/schemas/FloorplanCount'
+                      description: The number of unique floorplans.
+                    interiorCountPerFloorplan:
+                      $ref: '#/components/schemas/InteriorCountPerFloorplan'
+                      description: The number of unique interiors per floorplan.
+                tags:
+                  description: A map that contains tag keys and tag values that are attached to the world generator job.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /createWorldTemplate:
+    post:
+      operationId: CreateWorldTemplate
+      description: Creates a world template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorldTemplateResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientRequestToken:
+                  description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_\-=]*'
+                  minLength: 1
+                  maxLength: 64
+                name:
+                  description: The name of the world template.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 255
+                templateBody:
+                  description: The world template body.
+                  type: string
+                  pattern: '[\S\s]+'
+                  minLength: 1
+                  maxLength: 262144
+                templateLocation:
+                  description: Information about a template location.
+                  type: object
+                  properties:
+                    s3Bucket:
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: The Amazon S3 bucket name.
+                    s3Key:
+                      $ref: '#/components/schemas/S3Key'
+                      description: The list of S3 keys identifying the data source files.
+                tags:
+                  description: A map that contains tag keys and tag values that are attached to the world template.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1346,6 +1820,65 @@ paths:
                   pattern: '(\$LATEST)|[0-9]*'
                   minLength: 1
                   maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteWorldTemplate:
+    post:
+      operationId: DeleteWorldTemplate
+      description: Deletes a world template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorldTemplateResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+              properties:
+                template:
+                  description: The Amazon Resource Name (arn) of the world template you want to delete.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1839,6 +2372,305 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeWorld:
+    post:
+      operationId: DescribeWorld
+      description: Describes a world.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorldResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - world
+              properties:
+                world:
+                  description: The Amazon Resource Name (arn) of the world you want to describe.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeWorldExportJob:
+    post:
+      operationId: DescribeWorldExportJob
+      description: Describes a world export job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorldExportJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - job
+              properties:
+                job:
+                  description: The Amazon Resource Name (arn) of the world export job to describe.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeWorldGenerationJob:
+    post:
+      operationId: DescribeWorldGenerationJob
+      description: Describes a world generation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorldGenerationJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - job
+              properties:
+                job:
+                  description: The Amazon Resource Name (arn) of the world generation job to describe.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /describeWorldTemplate:
+    post:
+      operationId: DescribeWorldTemplate
+      description: Describes a world template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorldTemplateResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+              properties:
+                template:
+                  description: The Amazon Resource Name (arn) of the world template you want to describe.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /getWorldTemplateBody:
+    post:
+      operationId: GetWorldTemplateBody
+      description: Gets the world template body.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorldTemplateBodyResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template:
+                  description: The Amazon Resource Name (arn) of the world template.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+                generationJob:
+                  description: The Amazon Resource Name (arn) of the world generator job.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /listDeploymentJobs:
     post:
       operationId: ListDeploymentJobs
@@ -1902,7 +2734,7 @@ paths:
                   minItems: 1
                   maxItems: 1
                 nextToken:
-                  description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -1974,7 +2806,7 @@ paths:
               type: object
               properties:
                 nextToken:
-                  description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                  description: '<p>If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>'
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2053,7 +2885,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 nextToken:
-                  description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2132,7 +2964,7 @@ paths:
               type: object
               properties:
                 nextToken:
-                  description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2211,7 +3043,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 nextToken:
-                  description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2278,7 +3110,7 @@ paths:
               type: object
               properties:
                 nextToken:
-                  description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2351,7 +3183,7 @@ paths:
               type: object
               properties:
                 nextToken:
-                  description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
                   type: string
                   pattern: '[a-zA-Z0-9_.\-\/+=]*'
                   minLength: 1
@@ -2487,6 +3319,291 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /listWorldExportJobs:
+    post:
+      operationId: ListWorldExportJobs
+      description: Lists world export jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorldExportJobsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldExportJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                  minLength: 1
+                  maxLength: 2048
+                maxResults:
+                  description: 'When this parameter is used, <code>ListWorldExportJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldExportJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldExportJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                  type: integer
+                filters:
+                  description: Optional filters to limit results. You can use <code>generationJobId</code> and <code>templateId</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 1
+                  maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listWorldGenerationJobs:
+    post:
+      operationId: ListWorldGenerationJobs
+      description: Lists world generator jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorldGenerationJobsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                  minLength: 1
+                  maxLength: 2048
+                maxResults:
+                  description: 'When this parameter is used, <code>ListWorldGeneratorJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldGeneratorJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldGeneratorJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                  type: integer
+                filters:
+                  description: Optional filters to limit results. You can use <code>status</code> and <code>templateId</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 1
+                  maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listWorldTemplates:
+    post:
+      operationId: ListWorldTemplates
+      description: Lists world templates.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorldTemplatesResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldTemplates</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                  minLength: 1
+                  maxLength: 2048
+                maxResults:
+                  description: 'When this parameter is used, <code>ListWorldTemplates</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldTemplates</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldTemplates</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                  type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listWorlds:
+    post:
+      operationId: ListWorlds
+      description: Lists worlds.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorldsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nextToken:
+                  description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+                  type: string
+                  pattern: '[a-zA-Z0-9_.\-\/+=]*'
+                  minLength: 1
+                  maxLength: 2048
+                maxResults:
+                  description: 'When this parameter is used, <code>ListWorlds</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorlds</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorlds</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+                  type: integer
+                filters:
+                  description: Optional filters to limit results. You can use <code>status</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 1
+                  maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /registerRobot:
     post:
       operationId: RegisterRobot
@@ -2697,6 +3814,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/SimulationJobRequest'
                   minItems: 1
+                  maxItems: 1000
                 tags:
                   description: A map that contains tag keys and tag values that are attached to the deployment job batch.
                   type: object
@@ -3054,6 +4172,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateWorldTemplate:
+    post:
+      operationId: UpdateWorldTemplate
+      description: Updates a world template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateWorldTemplateResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - template
+              properties:
+                template:
+                  description: The Amazon Resource Name (arn) of the world template to update.
+                  type: string
+                  pattern: 'arn:.*'
+                  minLength: 1
+                  maxLength: 1224
+                name:
+                  description: The name of the template.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 255
+                templateBody:
+                  description: The world template body.
+                  type: string
+                  pattern: '[\S\s]+'
+                  minLength: 1
+                  maxLength: 262144
+                templateLocation:
+                  description: Information about a template location.
+                  type: object
+                  properties:
+                    s3Bucket:
+                      $ref: '#/components/schemas/S3Bucket'
+                      description: The Amazon S3 bucket name.
+                    s3Key:
+                      $ref: '#/components/schemas/S3Key'
+                      description: The list of S3 keys identifying the data source files.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -3106,6 +4305,20 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchDeleteWorldsResponse:
+      type: object
+      properties:
+        unprocessedWorlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of unprocessed worlds associated with the call. These worlds were not deleted.
+    Arn:
+      type: string
+      pattern: 'arn:.*'
+      minLength: 1
+      maxLength: 1224
+    InvalidParameterException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
     BatchDescribeSimulationJobResponse:
       type: object
       properties:
@@ -3115,15 +4328,7 @@ components:
         unprocessedJobs:
           $ref: '#/components/schemas/Arns'
           description: A list of unprocessed simulation job Amazon Resource Names (ARNs).
-    Arn:
-      type: string
-      pattern: 'arn:.*'
-      minLength: 1
-      maxLength: 1224
     ResourceNotFoundException: {}
-    InvalidParameterException: {}
-    InternalServerException: {}
-    ThrottlingException: {}
     CancelDeploymentJobResponse:
       type: object
       properties: {}
@@ -3131,6 +4336,12 @@ components:
       type: object
       properties: {}
     CancelSimulationJobBatchResponse:
+      type: object
+      properties: {}
+    CancelWorldExportJobResponse:
+      type: object
+      properties: {}
+    CancelWorldGenerationJobResponse:
       type: object
       properties: {}
     CreateDeploymentJobResponse:
@@ -3504,6 +4715,9 @@ components:
         launchConfig:
           $ref: '#/components/schemas/LaunchConfig'
           description: The launch configuration for the simulation application.
+        worldConfigs:
+          $ref: '#/components/schemas/WorldConfigs'
+          description: A list of world configurations.
       description: Information about a simulation application configuration.
     DataSourceConfig:
       type: object
@@ -3541,6 +4755,81 @@ components:
       minimum: 1
       maximum: 15
     ServiceUnavailableException: {}
+    CreateWorldExportJobResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world export job.
+        status:
+          $ref: '#/components/schemas/WorldExportJobStatus'
+          description: <p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world export job was created.'
+        failureCode:
+          $ref: '#/components/schemas/WorldExportJobErrorCode'
+          description: '<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        outputLocation:
+          $ref: '#/components/schemas/OutputLocation'
+        iamRole:
+          $ref: '#/components/schemas/IamRole'
+          description: 'The IAM role that the world export process uses to access the Amazon S3 bucket and put the export. '
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world export job.
+    CreateWorldGenerationJobResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world generator job.
+        status:
+          $ref: '#/components/schemas/WorldGenerationJobStatus'
+          description: <p>The status of the world generator job.</p> <dl> <dt>Pending</dt> <dd> <p>The world generator job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generator job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generator job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generator job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generator job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generator job is being cancelled.</p> </dd> </dl>
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world generator job was created.'
+        failureCode:
+          $ref: '#/components/schemas/WorldGenerationJobErrorCode'
+          description: '<p>The failure code of the world generator job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+        worldCount:
+          $ref: '#/components/schemas/WorldCount'
+          description: 'Information about the world count. '
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world generator job.
+    FloorplanCount:
+      type: integer
+    InteriorCountPerFloorplan:
+      type: integer
+    CreateWorldTemplateResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world template.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world template was created.'
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the world template.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world template.
     DeleteFleetResponse:
       type: object
       properties: {}
@@ -3551,6 +4840,9 @@ components:
       type: object
       properties: {}
     DeleteSimulationApplicationResponse:
+      type: object
+      properties: {}
+    DeleteWorldTemplateResponse:
       type: object
       properties: {}
     DeregisterRobotResponse:
@@ -3820,6 +5112,116 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: A map that contains tag keys and tag values that are attached to the simulation job batch.
+    DescribeWorldResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world.
+        generationJob:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world generation job that generated the world.
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The world template.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world was created.'
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world.
+    DescribeWorldExportJobResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world export job.
+        status:
+          $ref: '#/components/schemas/WorldExportJobStatus'
+          description: <p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> and <code>failureReason</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world export job was created.'
+        failureCode:
+          $ref: '#/components/schemas/WorldExportJobErrorCode'
+          description: '<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+        failureReason:
+          $ref: '#/components/schemas/GenericString'
+          description: The reason why the world export job failed.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        worlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of Amazon Resource Names (arns) that correspond to worlds to be exported.
+        outputLocation:
+          $ref: '#/components/schemas/OutputLocation'
+        iamRole:
+          $ref: '#/components/schemas/IamRole'
+          description: The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world export job.
+    DescribeWorldGenerationJobResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world generation job.
+        status:
+          $ref: '#/components/schemas/WorldGenerationJobStatus'
+          description: '<p>The status of the world generation job:</p> <dl> <dt>Pending</dt> <dd> <p>The world generation job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generation job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generation job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generation job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generation job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generation job is being cancelled.</p> </dd> </dl>'
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world generation job was created.'
+        failureCode:
+          $ref: '#/components/schemas/WorldGenerationJobErrorCode'
+          description: '<p>The failure code of the world generation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+        failureReason:
+          $ref: '#/components/schemas/GenericString'
+          description: The reason why the world generation job failed.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+        worldCount:
+          $ref: '#/components/schemas/WorldCount'
+          description: Information about the world count.
+        finishedWorldsSummary:
+          $ref: '#/components/schemas/FinishedWorldsSummary'
+          description: Summary information about finished worlds.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world generation job.
+    DescribeWorldTemplateResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world template.
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the world template.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world template was created.'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/LastUpdatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world template was last updated.'
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world template.
+    GetWorldTemplateBodyResponse:
+      type: object
+      properties:
+        templateBody:
+          $ref: '#/components/schemas/Json'
+          description: The world template body.
     ListDeploymentJobsResponse:
       type: object
       properties:
@@ -3828,7 +5230,7 @@ components:
           description: A list of deployment jobs that meet the criteria of the request.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     Filter:
       type: object
       properties:
@@ -3847,7 +5249,7 @@ components:
           description: A list of fleet details meeting the request criteria.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListRobotApplicationsResponse:
       type: object
       properties:
@@ -3856,7 +5258,7 @@ components:
           description: A list of robot application summaries that meet the criteria of the request.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListRobotsResponse:
       type: object
       properties:
@@ -3865,7 +5267,7 @@ components:
           description: A list of robots that meet the criteria of the request.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListSimulationApplicationsResponse:
       type: object
       properties:
@@ -3874,7 +5276,7 @@ components:
           description: A list of simulation application summaries that meet the criteria of the request.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListSimulationJobBatchesResponse:
       type: object
       properties:
@@ -3883,7 +5285,7 @@ components:
           description: A list of simulation job batch summaries.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobBatches</code> request. When the results of a <code>ListSimulationJobBatches</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListSimulationJobsResponse:
       type: object
       required:
@@ -3894,13 +5296,53 @@ components:
           description: A list of simulation job summaries that meet the criteria of the request.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: The list of all tags added to the specified resource.
+    ListWorldExportJobsResponse:
+      type: object
+      required:
+        - worldExportJobSummaries
+      properties:
+        worldExportJobSummaries:
+          $ref: '#/components/schemas/WorldExportJobSummaries'
+          description: Summary information for world export jobs.
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldExportJobsRequest</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+    ListWorldGenerationJobsResponse:
+      type: object
+      required:
+        - worldGenerationJobSummaries
+      properties:
+        worldGenerationJobSummaries:
+          $ref: '#/components/schemas/WorldGenerationJobSummaries'
+          description: Summary information for world generator jobs.
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldGeneratorJobsRequest</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+    ListWorldTemplatesResponse:
+      type: object
+      properties:
+        templateSummaries:
+          $ref: '#/components/schemas/TemplateSummaries'
+          description: Summary information for templates.
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldTemplates</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+    ListWorldsResponse:
+      type: object
+      properties:
+        worldSummaries:
+          $ref: '#/components/schemas/WorldSummaries'
+          description: Summary information for worlds.
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
     RegisterRobotResponse:
       type: object
       properties:
@@ -4084,6 +5526,21 @@ components:
         revisionId:
           $ref: '#/components/schemas/RevisionId'
           description: The revision id of the simulation application.
+    UpdateWorldTemplateResponse:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the world template.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world template was created.'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/LastUpdatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world template was last updated.'
     Architecture:
       type: string
       enum:
@@ -4096,6 +5553,15 @@ components:
         $ref: '#/components/schemas/Arn'
       minItems: 1
       maxItems: 100
+    BatchDeleteWorldsRequest:
+      type: object
+      required:
+        - worlds
+      title: BatchDeleteWorldsRequest
+      properties:
+        worlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of Amazon Resource Names (arns) that correspond to worlds to delete.
     BatchDescribeSimulationJobRequest:
       type: object
       required:
@@ -4146,6 +5612,24 @@ components:
         job:
           $ref: '#/components/schemas/Arn'
           description: The simulation job ARN to cancel.
+    CancelWorldExportJobRequest:
+      type: object
+      required:
+        - job
+      title: CancelWorldExportJobRequest
+      properties:
+        job:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world export job to cancel.
+    CancelWorldGenerationJobRequest:
+      type: object
+      required:
+        - job
+      title: CancelWorldGenerationJobRequest
+      properties:
+        job:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world generator job to cancel.
     ClientRequestToken:
       type: string
       pattern: '[a-zA-Z0-9_\-=]*'
@@ -4161,14 +5645,14 @@ components:
       properties:
         simulationUnitLimit:
           $ref: '#/components/schemas/SimulationUnit'
-          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
+          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
       description: Compute information for the simulation job.
     ComputeResponse:
       type: object
       properties:
         simulationUnitLimit:
           $ref: '#/components/schemas/SimulationUnit'
-          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. '
+          description: 'The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. '
       description: Compute information for the simulation job
     DeploymentConfig:
       type: object
@@ -4537,6 +6021,7 @@ components:
       items:
         $ref: '#/components/schemas/SimulationJobRequest'
       minItems: 1
+      maxItems: 1000
     SimulationJobStatus:
       type: string
       enum:
@@ -4605,6 +6090,136 @@ components:
           $ref: '#/components/schemas/Boolean'
           description: A boolean indicating if a public IP was assigned.
       description: VPC configuration associated with your simulation job.
+    CreateWorldExportJobRequest:
+      type: object
+      required:
+        - worlds
+        - outputLocation
+        - iamRole
+      title: CreateWorldExportJobRequest
+      properties:
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        worlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of Amazon Resource Names (arns) that correspond to worlds to export.
+        outputLocation:
+          $ref: '#/components/schemas/OutputLocation'
+        iamRole:
+          $ref: '#/components/schemas/IamRole'
+          description: The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world export job.
+    WorldExportJobStatus:
+      type: string
+      enum:
+        - Pending
+        - Running
+        - Completed
+        - Failed
+        - Canceling
+        - Canceled
+    WorldExportJobErrorCode:
+      type: string
+      enum:
+        - InternalServiceError
+        - LimitExceeded
+        - ResourceNotFound
+        - RequestThrottled
+        - InvalidInput
+        - AccessDenied
+    WorldCount:
+      type: object
+      properties:
+        floorplanCount:
+          $ref: '#/components/schemas/FloorplanCount'
+          description: The number of unique floorplans.
+        interiorCountPerFloorplan:
+          $ref: '#/components/schemas/InteriorCountPerFloorplan'
+          description: The number of unique interiors per floorplan.
+      description: '<p>The number of worlds that will be created. You can configure the number of unique floorplans and the number of unique interiors for each floor plan. For example, if you want 1 world with 20 unique interiors, you set <code>floorplanCount = 1</code> and <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>. </p> <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan = 5</code>, there will be 20 worlds with 5 unique floor plans. </p>'
+    CreateWorldGenerationJobRequest:
+      type: object
+      required:
+        - template
+        - worldCount
+      title: CreateWorldGenerationJobRequest
+      properties:
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template describing the worlds you want to create.
+        worldCount:
+          $ref: '#/components/schemas/WorldCount'
+          description: Information about the world count.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world generator job.
+    WorldGenerationJobStatus:
+      type: string
+      enum:
+        - Pending
+        - Running
+        - Completed
+        - Failed
+        - PartialFailed
+        - Canceling
+        - Canceled
+    WorldGenerationJobErrorCode:
+      type: string
+      enum:
+        - InternalServiceError
+        - LimitExceeded
+        - ResourceNotFound
+        - RequestThrottled
+        - InvalidInput
+        - AllWorldGenerationFailed
+    TemplateName:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 255
+    Json:
+      type: string
+      pattern: '[\S\s]+'
+      minLength: 1
+      maxLength: 262144
+    TemplateLocation:
+      type: object
+      required:
+        - s3Bucket
+        - s3Key
+      properties:
+        s3Bucket:
+          $ref: '#/components/schemas/S3Bucket'
+          description: The Amazon S3 bucket name.
+        s3Key:
+          $ref: '#/components/schemas/S3Key'
+          description: The list of S3 keys identifying the data source files.
+      description: Information about a template location.
+    CreateWorldTemplateRequest:
+      type: object
+      title: CreateWorldTemplateRequest
+      properties:
+        clientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the world template.
+        templateBody:
+          $ref: '#/components/schemas/Json'
+          description: The world template body.
+        templateLocation:
+          $ref: '#/components/schemas/TemplateLocation'
+          description: The location of the world template.
+        tags:
+          $ref: '#/components/schemas/TagMap'
+          description: A map that contains tag keys and tag values that are attached to the world template.
     S3KeyOutputs:
       type: array
       items:
@@ -4674,6 +6289,15 @@ components:
         applicationVersion:
           $ref: '#/components/schemas/Version'
           description: The version of the simulation application to delete.
+    DeleteWorldTemplateRequest:
+      type: object
+      required:
+        - template
+      title: DeleteWorldTemplateRequest
+      properties:
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template you want to delete.
     DeploymentVersion:
       type: string
       pattern: '[0-9]*'
@@ -4887,6 +6511,55 @@ components:
           $ref: '#/components/schemas/GenericString'
           description: The IPv4 public address of the network interface.
       description: Describes a network interface.
+    DescribeWorldExportJobRequest:
+      type: object
+      required:
+        - job
+      title: DescribeWorldExportJobRequest
+      properties:
+        job:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world export job to describe.
+    DescribeWorldGenerationJobRequest:
+      type: object
+      required:
+        - job
+      title: DescribeWorldGenerationJobRequest
+      properties:
+        job:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world generation job to describe.
+    FinishedWorldsSummary:
+      type: object
+      properties:
+        finishedCount:
+          $ref: '#/components/schemas/Integer'
+          description: The total number of finished worlds.
+        succeededWorlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of worlds that succeeded.
+        failureSummary:
+          $ref: '#/components/schemas/FailureSummary'
+          description: Information about worlds that failed.
+      description: Information about worlds that finished.
+    DescribeWorldRequest:
+      type: object
+      required:
+        - world
+      title: DescribeWorldRequest
+      properties:
+        world:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world you want to describe.
+    DescribeWorldTemplateRequest:
+      type: object
+      required:
+        - template
+      title: DescribeWorldTemplateRequest
+      properties:
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template you want to describe.
     EnvironmentVariableKey:
       type: string
       pattern: '[A-Z_][A-Z0-9_]*'
@@ -4916,6 +6589,24 @@ components:
           $ref: '#/components/schemas/FailedAt'
           description: 'The time, in milliseconds since the epoch, when the simulation job batch failed.'
       description: Information about a failed create simulation job request.
+    Integer:
+      type: integer
+    WorldFailures:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorldFailure'
+      minItems: 0
+      maxItems: 100
+    FailureSummary:
+      type: object
+      properties:
+        totalFailureCount:
+          $ref: '#/components/schemas/Integer'
+          description: The total number of failures.
+        failures:
+          $ref: '#/components/schemas/WorldFailures'
+          description: The worlds that failed.
+      description: Information about worlds that failed.
     FilterValues:
       type: array
       items:
@@ -4958,8 +6649,16 @@ components:
       maxItems: 200
     GenericInteger:
       type: integer
-    Integer:
-      type: integer
+    GetWorldTemplateBodyRequest:
+      type: object
+      title: GetWorldTemplateBodyRequest
+      properties:
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+        generationJob:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world generator job.
     PortForwardingConfig:
       type: object
       properties:
@@ -5005,7 +6704,7 @@ components:
           description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
@@ -5015,7 +6714,7 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          description: '<p>If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>'
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListFleets</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
@@ -5036,7 +6735,7 @@ components:
           description: The version qualifier of the robot application.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
@@ -5055,7 +6754,7 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 200. If this parameter is not used, then <code>ListRobots</code> returns up to 200 results and a <code>nextToken</code> value if applicable. '
@@ -5071,7 +6770,7 @@ components:
           description: The version qualifier of the simulation application.
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationApplications</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
@@ -5090,7 +6789,7 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: 'The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. '
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListSimulationJobBatches</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobBatches</code> request with the returned <code>nextToken</code> value. '
@@ -5107,7 +6806,7 @@ components:
       properties:
         nextToken:
           $ref: '#/components/schemas/PaginationToken'
-          description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
         maxResults:
           $ref: '#/components/schemas/MaxResults'
           description: 'When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 1000. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 1000 results and a <code>nextToken</code> value if applicable. '
@@ -5118,6 +6817,75 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListWorldExportJobsRequest:
+      type: object
+      title: ListWorldExportJobsRequest
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldExportJobs</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'When this parameter is used, <code>ListWorldExportJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldExportJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldExportJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        filters:
+          $ref: '#/components/schemas/Filters'
+          description: Optional filters to limit results. You can use <code>generationJobId</code> and <code>templateId</code>.
+    WorldExportJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorldExportJobSummary'
+      minItems: 0
+      maxItems: 100
+    ListWorldGenerationJobsRequest:
+      type: object
+      title: ListWorldGenerationJobsRequest
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'When this parameter is used, <code>ListWorldGeneratorJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldGeneratorJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldGeneratorJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        filters:
+          $ref: '#/components/schemas/Filters'
+          description: Optional filters to limit results. You can use <code>status</code> and <code>templateId</code>.
+    WorldGenerationJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorldGenerationJobSummary'
+      minItems: 0
+      maxItems: 100
+    ListWorldTemplatesRequest:
+      type: object
+      title: ListWorldTemplatesRequest
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldTemplates</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'When this parameter is used, <code>ListWorldTemplates</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldTemplates</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldTemplates</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+    TemplateSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TemplateSummary'
+    ListWorldsRequest:
+      type: object
+      title: ListWorldsRequest
+      properties:
+        nextToken:
+          $ref: '#/components/schemas/PaginationToken'
+          description: 'If the previous paginated request did not return all of the remaining results, the response object''s <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object''s <code>nextToken</code> parameter. If there are no remaining results, the previous response object''s NextToken parameter is set to null. '
+        maxResults:
+          $ref: '#/components/schemas/MaxResults'
+          description: 'When this parameter is used, <code>ListWorlds</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorlds</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorlds</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        filters:
+          $ref: '#/components/schemas/Filters'
+          description: Optional filters to limit results. You can use <code>status</code>.
+    WorldSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorldSummary'
     NonEmptyString:
       type: string
       pattern: .+
@@ -5297,6 +7065,12 @@ components:
           $ref: '#/components/schemas/S3Etag'
           description: The etag for the object.
       description: Information about S3 keys.
+    WorldConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorldConfig'
+      minItems: 0
+      maxItems: 1
     SimulationApplicationNames:
       type: array
       items:
@@ -5500,6 +7274,22 @@ components:
         tags:
           $ref: '#/components/schemas/TagMap'
           description: A map that contains tag keys and tag values that are attached to the resource.
+    TemplateSummary:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the template.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the template was created.'
+        lastUpdatedAt:
+          $ref: '#/components/schemas/LastUpdatedAt'
+          description: 'The time, in milliseconds since the epoch, when the template was last updated.'
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the template.
+      description: Summary information for a template.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -5551,5 +7341,100 @@ components:
         currentRevisionId:
           $ref: '#/components/schemas/RevisionId'
           description: The revision id for the robot application.
+    UpdateWorldTemplateRequest:
+      type: object
+      required:
+        - template
+      title: UpdateWorldTemplateRequest
+      properties:
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template to update.
+        name:
+          $ref: '#/components/schemas/TemplateName'
+          description: The name of the template.
+        templateBody:
+          $ref: '#/components/schemas/Json'
+          description: The world template body.
+        templateLocation:
+          $ref: '#/components/schemas/TemplateLocation'
+          description: The location of the world template.
+    WorldConfig:
+      type: object
+      properties:
+        world:
+          $ref: '#/components/schemas/Arn'
+          description: The world generated by Simulation WorldForge.
+      description: Configuration information for a world.
+    WorldExportJobSummary:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world export job.
+        status:
+          $ref: '#/components/schemas/WorldExportJobStatus'
+          description: <p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world export job was created.'
+        worlds:
+          $ref: '#/components/schemas/Arns'
+          description: A list of worlds.
+      description: Information about a world export job.
+    WorldFailure:
+      type: object
+      properties:
+        failureCode:
+          $ref: '#/components/schemas/WorldGenerationJobErrorCode'
+          description: '<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+        sampleFailureReason:
+          $ref: '#/components/schemas/GenericString'
+          description: 'The sample reason why the world failed. World errors are aggregated. A sample is used as the <code>sampleFailureReason</code>. '
+        failureCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of failed worlds.
+      description: Information about a failed world.
+    WorldGenerationJobSummary:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world generator job.
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world generator job was created.'
+        status:
+          $ref: '#/components/schemas/WorldGenerationJobStatus'
+          description: '<p>The status of the world generator job:</p> <dl> <dt>Pending</dt> <dd> <p>The world generator job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generator job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generator job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generator job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generator job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generator job is being cancelled.</p> </dd> </dl>'
+        worldCount:
+          $ref: '#/components/schemas/WorldCount'
+          description: Information about the world count.
+        succeededWorldCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of worlds that were generated.
+        failedWorldCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of worlds that failed.
+      description: Information about a world generator job.
+    WorldSummary:
+      type: object
+      properties:
+        arn:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (ARN) of the world.
+        createdAt:
+          $ref: '#/components/schemas/CreatedAt'
+          description: 'The time, in milliseconds since the epoch, when the world was created.'
+        generationJob:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world generation job.
+        template:
+          $ref: '#/components/schemas/Arn'
+          description: The Amazon Resource Name (arn) of the world template.
+      description: Information about a world.
 security:
   - hmac: []
