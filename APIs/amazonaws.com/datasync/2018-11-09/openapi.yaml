@@ -2319,6 +2319,8 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: An opaque string that indicates the position at which to begin the next list of locations.
+        Filters:
+          $ref: '#/components/schemas/LocationFilters'
       description: ListLocationsRequest
     ListTagsForResourceResponse:
       type: object
@@ -2390,6 +2392,8 @@ components:
         NextToken:
           $ref: '#/components/schemas/NextToken'
           description: An opaque string that indicates the position at which to begin the next list of tasks.
+        Filters:
+          $ref: '#/components/schemas/TaskFilters'
       description: ListTasksRequest
     StartTaskExecutionResponse:
       type: object
@@ -2878,6 +2882,11 @@ components:
       pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
       minLength: 7
       maxLength: 15
+    FilterAttributeValue:
+      type: string
+      pattern: '^[0-9a-zA-Z_\ \-\:\*\.\\/\?-]*$'
+      minLength: 1
+      maxLength: 255
     FilterRule:
       type: object
       properties:
@@ -2898,6 +2907,10 @@ components:
       type: string
       pattern: '^[^\x00]+$'
       maxLength: 409600
+    FilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterAttributeValue'
     Gid:
       type: string
       enum:
@@ -2929,6 +2942,10 @@ components:
       type: string
       pattern: '[a-zA-Z0-9=_-]+'
       maxLength: 65535
+    LocationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/LocationFilter'
     LocationList:
       type: array
       items:
@@ -2947,10 +2964,46 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TaskExecutionListEntry'
+    TaskFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskFilter'
     TaskList:
       type: array
       items:
         $ref: '#/components/schemas/TaskListEntry'
+    LocationFilterName:
+      type: string
+      enum:
+        - LocationUri
+        - LocationType
+        - CreationTime
+    Operator:
+      type: string
+      enum:
+        - Equals
+        - NotEquals
+        - In
+        - LessThanOrEqual
+        - LessThan
+        - GreaterThanOrEqual
+        - GreaterThan
+        - Contains
+        - NotContains
+        - BeginsWith
+    LocationFilter:
+      type: object
+      required:
+        - Name
+        - Values
+        - Operator
+      properties:
+        Name:
+          $ref: '#/components/schemas/LocationFilterName'
+        Values:
+          $ref: '#/components/schemas/FilterValues'
+        Operator:
+          $ref: '#/components/schemas/Operator'
     LocationListEntry:
       type: object
       properties:
@@ -3059,6 +3112,24 @@ components:
           $ref: '#/components/schemas/TaskExecutionStatus'
           description: The status of a task execution.
       description: Represents a single entry in a list of task executions. <code>TaskExecutionListEntry</code> returns an array that contains a list of specific invocations of a task when <a>ListTaskExecutions</a> operation is called.
+    TaskFilterName:
+      type: string
+      enum:
+        - LocationId
+        - CreationTime
+    TaskFilter:
+      type: object
+      required:
+        - Name
+        - Values
+        - Operator
+      properties:
+        Name:
+          $ref: '#/components/schemas/TaskFilterName'
+        Values:
+          $ref: '#/components/schemas/FilterValues'
+        Operator:
+          $ref: '#/components/schemas/Operator'
     TaskListEntry:
       type: object
       properties:
