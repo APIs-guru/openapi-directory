@@ -3895,16 +3895,16 @@ components:
           description: '<p>One or more finding types in the format of <code>namespace/category/classifier</code> that classify a finding.</p> <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications</p>'
         FirstObservedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+          description: '<p>Indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         LastObservedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+          description: '<p>Indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         CreatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: An ISO8601-formatted timestamp that indicates when the security-findings provider created the potential security issue that a finding captured.
+          description: '<p>Indicates when the security-findings provider created the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         UpdatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. '
+          description: '<p>Indicates when the security-findings provider last updated the finding record.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Severity:
           $ref: '#/components/schemas/Severity'
           description: A finding's severity.
@@ -4423,7 +4423,7 @@ components:
           description: 'The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service.'
         CreatedTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The datetime when the auto scaling group was created.
+          description: '<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Provides details about an auto scaling group.
     AwsCloudFrontDistributionLogging:
       type: object
@@ -4459,7 +4459,7 @@ components:
           description: The entity tag is a hash of the object.
         LastModifiedTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time that the distribution was last modified.
+          description: '<p>Indicates when that the distribution was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Logging:
           $ref: '#/components/schemas/AwsCloudFrontDistributionLogging'
           description: A complex type that controls whether access logs are written for the distribution.
@@ -4573,6 +4573,314 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    AwsDynamoDbTableAttributeDefinition:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the attribute.
+        AttributeType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The type of the attribute.
+      description: Contains a definition of an attribute for the table.
+    AwsDynamoDbTableAttributeDefinitionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableAttributeDefinition'
+    AwsDynamoDbTableBillingModeSummary:
+      type: object
+      properties:
+        BillingMode:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The method used to charge for read and write throughput and to manage capacity.
+        LastUpdateToPayPerRequestDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>If the billing mode is <code>PAY_PER_REQUEST</code>, indicates when the billing mode was set to that value.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Provides information about the billing for read/write capacity on the table.
+    AwsDynamoDbTableGlobalSecondaryIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableGlobalSecondaryIndex'
+    AwsDynamoDbTableKeySchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableKeySchema'
+    AwsDynamoDbTableLocalSecondaryIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableLocalSecondaryIndex'
+    AwsDynamoDbTableProvisionedThroughput:
+      type: object
+      properties:
+        LastDecreaseDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the provisioned throughput was last decreased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        LastIncreaseDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the provisioned throughput was last increased.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        NumberOfDecreasesToday:
+          $ref: '#/components/schemas/Integer'
+          description: The number of times during the current UTC calendar day that the provisioned throughput was decreased.
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
+        WriteCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.
+      description: Information about the provisioned throughput for the table or for a global secondary index.
+    AwsDynamoDbTableReplicaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableReplica'
+    AwsDynamoDbTableRestoreSummary:
+      type: object
+      properties:
+        SourceBackupArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the source backup from which the table was restored.
+        SourceTableArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the source table for the backup.
+        RestoreDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates the point in time that the table was restored to.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        RestoreInProgress:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether a restore is currently in progress.
+      description: Information about the restore for the table.
+    AwsDynamoDbTableSseDescription:
+      type: object
+      properties:
+        InaccessibleEncryptionDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the server-side encryption.
+        SseType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The type of server-side encryption.
+        KmsMasterKeyArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS encryption.
+      description: Information about the server-side encryption for the table.
+    AwsDynamoDbTableStreamSpecification:
+      type: object
+      properties:
+        StreamEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether DynamoDB Streams is enabled on the table.
+        StreamViewType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Determines the information that is written to the table.
+      description: The current DynamoDB Streams configuration for the table.
+    SizeBytes:
+      type: integer
+    AwsDynamoDbTableDetails:
+      type: object
+      properties:
+        AttributeDefinitions:
+          $ref: '#/components/schemas/AwsDynamoDbTableAttributeDefinitionList'
+          description: A list of attribute definitions for the table.
+        BillingModeSummary:
+          $ref: '#/components/schemas/AwsDynamoDbTableBillingModeSummary'
+          description: Information about the billing for read/write capacity on the table.
+        CreationDateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the table was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        GlobalSecondaryIndexes:
+          $ref: '#/components/schemas/AwsDynamoDbTableGlobalSecondaryIndexList'
+          description: List of global secondary indexes for the table.
+        GlobalTableVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version of global tables being used.
+        ItemCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of items in the table.
+        KeySchema:
+          $ref: '#/components/schemas/AwsDynamoDbTableKeySchemaList'
+          description: The primary key structure for the table.
+        LatestStreamArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the latest stream for the table.
+        LatestStreamLabel:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The label of the latest stream. The label is not a unique identifier.
+        LocalSecondaryIndexes:
+          $ref: '#/components/schemas/AwsDynamoDbTableLocalSecondaryIndexList'
+          description: The list of local secondary indexes for the table.
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughput'
+          description: Information about the provisioned throughput for the table.
+        Replicas:
+          $ref: '#/components/schemas/AwsDynamoDbTableReplicaList'
+          description: The list of replicas of this table.
+        RestoreSummary:
+          $ref: '#/components/schemas/AwsDynamoDbTableRestoreSummary'
+          description: Information about the restore for the table.
+        SseDescription:
+          $ref: '#/components/schemas/AwsDynamoDbTableSseDescription'
+          description: Information about the server-side encryption for the table.
+        StreamSpecification:
+          $ref: '#/components/schemas/AwsDynamoDbTableStreamSpecification'
+          description: The current DynamoDB Streams configuration for the table.
+        TableId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the table.
+        TableName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the table.
+        TableSizeBytes:
+          $ref: '#/components/schemas/SizeBytes'
+          description: The total size of the table in bytes.
+        TableStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current status of the table.
+      description: Provides details about a DynamoDB table.
+    AwsDynamoDbTableProjection:
+      type: object
+      properties:
+        NonKeyAttributes:
+          $ref: '#/components/schemas/StringList'
+          description: 'The nonkey attributes that are projected into the index. For each attribute, provide the attribute name.'
+        ProjectionType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The types of attributes that are projected into the index.
+      description: 'For global and local secondary indexes, identifies the attributes that are copied from the table into the index.'
+    AwsDynamoDbTableGlobalSecondaryIndex:
+      type: object
+      properties:
+        Backfilling:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the index is currently backfilling.
+        IndexArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the index.
+        IndexName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the index.
+        IndexSizeBytes:
+          $ref: '#/components/schemas/SizeBytes'
+          description: The total size in bytes of the index.
+        IndexStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current status of the index.
+        ItemCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of items in the index.
+        KeySchema:
+          $ref: '#/components/schemas/AwsDynamoDbTableKeySchemaList'
+          description: The key schema for the index.
+        Projection:
+          $ref: '#/components/schemas/AwsDynamoDbTableProjection'
+          description: Attributes that are copied from the table into an index.
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughput'
+          description: Information about the provisioned throughput settings for the indexes.
+      description: Information abut a global secondary index for the table.
+    AwsDynamoDbTableKeySchema:
+      type: object
+      properties:
+        AttributeName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the key schema attribute.
+        KeyType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The type of key used for the key schema attribute.
+      description: 'A component of the key schema for the DynamoDB table, a global secondary index, or a local secondary index.'
+    AwsDynamoDbTableLocalSecondaryIndex:
+      type: object
+      properties:
+        IndexArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the index.
+        IndexName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the index.
+        KeySchema:
+          $ref: '#/components/schemas/AwsDynamoDbTableKeySchemaList'
+          description: The complete key schema for the index.
+        Projection:
+          $ref: '#/components/schemas/AwsDynamoDbTableProjection'
+          description: 'Attributes that are copied from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.'
+      description: Information about a local secondary index for a DynamoDB table.
+    AwsDynamoDbTableProvisionedThroughputOverride:
+      type: object
+      properties:
+        ReadCapacityUnits:
+          $ref: '#/components/schemas/Integer'
+          description: The read capacity units for the replica.
+      description: Replica-specific configuration for the provisioned throughput.
+    AwsDynamoDbTableReplicaGlobalSecondaryIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsDynamoDbTableReplicaGlobalSecondaryIndex'
+    AwsDynamoDbTableReplica:
+      type: object
+      properties:
+        GlobalSecondaryIndexes:
+          $ref: '#/components/schemas/AwsDynamoDbTableReplicaGlobalSecondaryIndexList'
+          description: List of global secondary indexes for the replica.
+        KmsMasterKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS encryption for the replica.
+        ProvisionedThroughputOverride:
+          $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughputOverride'
+          description: Replica-specific configuration for the provisioned throughput.
+        RegionName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the Region where the replica is located.
+        ReplicaStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current status of the replica.
+        ReplicaStatusDescription:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Detailed information about the replica status.
+      description: Information about a replica of a DynamoDB table.
+    AwsDynamoDbTableReplicaGlobalSecondaryIndex:
+      type: object
+      properties:
+        IndexName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the index.
+        ProvisionedThroughputOverride:
+          $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughputOverride'
+          description: Replica-specific configuration for the provisioned throughput for the index.
+      description: Information about a global secondary index for a DynamoDB table replica.
+    AwsEc2EipDetails:
+      type: object
+      properties:
+        InstanceId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the EC2 instance.
+        PublicIp:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A public IP address that is associated with the EC2 instance.
+        AllocationId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
+        AssociationId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier that represents the association of the Elastic IP address with an EC2 instance.
+        Domain:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The domain in which to allocate the address.</p> <p>If the address is for use with EC2 instances in a VPC, then <code>Domain</code> is <code>vpc</code>. Otherwise, <code>Domain</code> is <code>standard</code>. </p>'
+        PublicIpv4Pool:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of an IP address pool. This parameter allows Amazon EC2 to select an IP address from the address pool.
+        NetworkBorderGroup:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the location from which the Elastic IP address is advertised.
+        NetworkInterfaceId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the network interface.
+        NetworkInterfaceOwnerId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The AWS account ID of the owner of the network interface.
+        PrivateIpAddress:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The private IP address that is associated with the Elastic IP address.
+      description: Information about an Elastic IP address.
     AwsEc2InstanceDetails:
       type: object
       properties:
@@ -4602,14 +4910,14 @@ components:
           description: The identifier of the subnet that the instance was launched in.
         LaunchedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date/time the instance was launched.
+          description: '<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: The details of an Amazon EC2 instance.
     AwsEc2NetworkInterfaceAttachment:
       type: object
       properties:
         AttachTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The timestamp indicating when the attachment initiated.
+          description: '<p>Indicates when the attachment initiated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         AttachmentId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The identifier of the network interface attachment
@@ -4794,7 +5102,7 @@ components:
       properties:
         CreateTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The datetime when the volume was created.
+          description: '<p>Indicates when the volume was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Encrypted:
           $ref: '#/components/schemas/Boolean'
           description: Whether the volume is encrypted.
@@ -4944,7 +5252,7 @@ components:
           description: The ID of the Amazon Route 53 hosted zone associated with the load balancer.
         CreatedTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time the load balancer was created.
+          description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         DNSName:
           $ref: '#/components/schemas/NonEmptyString'
           description: The public DNS name of the load balancer.
@@ -4984,7 +5292,7 @@ components:
           description: The status of the IAM access key related to a finding.
         CreatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The creation date/time of the IAM access key related to a finding.
+          description: '<p>Indicates when the IAM access key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         PrincipalId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The ID of the principal associated with an access key.
@@ -4995,6 +5303,84 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The name of the principal.
       description: IAM access key details related to a finding.
+    AwsIamAttachedManagedPolicy:
+      type: object
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the policy.
+        PolicyArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the policy.
+      description: A managed policy that is attached to an IAM user.
+    AwsIamAttachedManagedPolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamAttachedManagedPolicy'
+    AwsIamPermissionsBoundary:
+      type: object
+      properties:
+        PermissionsBoundaryArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the policy used to set the permissions boundary for the user.
+        PermissionsBoundaryType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The usage type for the permissions boundary.
+      description: Information about the policy used to set the permissions boundary for an IAM user.
+    AwsIamPolicyVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamPolicyVersion'
+    AwsIamPolicyDetails:
+      type: object
+      properties:
+        AttachmentCount:
+          $ref: '#/components/schemas/Integer'
+          description: 'The number of users, groups, and roles that the policy is attached to.'
+        CreateDate:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>When the policy was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        DefaultVersionId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the default version of the policy.
+        Description:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A description of the policy.
+        IsAttachable:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Whether the policy can be attached to a user, group, or role.'
+        Path:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The path to the policy.
+        PermissionsBoundaryUsageCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of users and roles that use the policy to set the permissions boundary.
+        PolicyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The unique identifier of the policy.
+        PolicyName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the policy.
+        PolicyVersionList:
+          $ref: '#/components/schemas/AwsIamPolicyVersionList'
+          description: List of versions of the policy.
+        UpdateDate:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>When the policy was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Represents an IAM permissions policy.
+    AwsIamPolicyVersion:
+      type: object
+      properties:
+        VersionId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the policy version.
+        IsDefaultVersion:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the version is the default version.
+        CreateDate:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: A version of an IAM policy.
     AwsIamRoleAssumeRolePolicyDocument:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
@@ -5008,7 +5394,7 @@ components:
           description: The trust policy that grants permission to assume the role.
         CreateDate:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The date and time, in ISO 8601 date-time format, when the role was created.'
+          description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         RoleId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The stable and unique string identifying the role.
@@ -5022,6 +5408,45 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The path to the role.
       description: 'Contains information about an IAM role, including all of the role''s policies.'
+    AwsIamUserPolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamUserPolicy'
+    AwsIamUserDetails:
+      type: object
+      properties:
+        AttachedManagedPolicies:
+          $ref: '#/components/schemas/AwsIamAttachedManagedPolicyList'
+          description: A list of the managed policies that are attached to the user.
+        CreateDate:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the user was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        GroupList:
+          $ref: '#/components/schemas/StringList'
+          description: A list of IAM groups that the user belongs to.
+        Path:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The path to the user.
+        PermissionsBoundary:
+          $ref: '#/components/schemas/AwsIamPermissionsBoundary'
+          description: The permissions boundary for the user.
+        UserId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The unique identifier for the user.
+        UserName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the user.
+        UserPolicyList:
+          $ref: '#/components/schemas/AwsIamUserPolicyList'
+          description: The list of inline policies that are embedded in the user.
+      description: Information about an IAM user.
+    AwsIamUserPolicy:
+      type: object
+      properties:
+        PolicyName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the policy.
+      description: Information about an inline policy that is embedded in the user.
     AwsKmsKeyDetails:
       type: object
       properties:
@@ -5030,7 +5455,7 @@ components:
           description: The twelve-digit account ID of the AWS account that owns the CMK.
         CreationDate:
           $ref: '#/components/schemas/Double'
-          description: The date and time when the CMK was created.
+          description: '<p>Indicates when the CMK was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         KeyId:
           $ref: '#/components/schemas/NonEmptyString'
           description: The globally unique identifier for the CMK.
@@ -5043,6 +5468,9 @@ components:
         Origin:
           $ref: '#/components/schemas/NonEmptyString'
           description: '<p>The source of the CMK''s key material.</p> <p>When this value is <code>AWS_KMS</code>, AWS KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS CloudHSM cluster associated with a custom key store.</p>'
+        Description:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: A description of the key.
       description: Contains metadata about a customer master key (CMK).
     AwsLambdaFunctionCode:
       type: object
@@ -5127,7 +5555,7 @@ components:
           description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
         LastModified:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).'
+          description: '<p>Indicates when the function was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Layers:
           $ref: '#/components/schemas/AwsLambdaFunctionLayerList'
           description: The function's layers.
@@ -5192,8 +5620,253 @@ components:
           description: '<p>The layer''s compatible runtimes. Maximum number of five items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>'
         CreatedDate:
           $ref: '#/components/schemas/NonEmptyString'
-          description: 'The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. '
+          description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Details about a Lambda layer version.
+    AwsRdsDbClusterAssociatedRole:
+      type: object
+      properties:
+        RoleArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the IAM role.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the association between the IAM role and the DB cluster.
+      description: An IAM role that is associated with the Amazon RDS DB cluster.
+    AwsRdsDbClusterAssociatedRoles:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbClusterAssociatedRole'
+    AwsRdsDbInstanceVpcSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbInstanceVpcSecurityGroup'
+    AwsRdsDbDomainMemberships:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbDomainMembership'
+    AwsRdsDbClusterOptionGroupMemberships:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbClusterOptionGroupMembership'
+    AwsRdsDbClusterMembers:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbClusterMember'
+    AwsRdsDbClusterDetails:
+      type: object
+      properties:
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: 'For all database engines except Aurora, specifies the allocated storage size in gibibytes (GiB).'
+        AvailabilityZones:
+          $ref: '#/components/schemas/StringList'
+          description: A list of Availability Zones (AZs) where instances in the DB cluster can be created.
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/Integer'
+          description: The number of days for which automated backups are retained.
+        DatabaseName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the database.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current status of this DB cluster.
+        Endpoint:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The connection endpoint for the primary instance of the DB cluster.
+        ReaderEndpoint:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The reader endpoint for the DB cluster.
+        CustomEndpoints:
+          $ref: '#/components/schemas/StringList'
+          description: A list of custom endpoints for the DB cluster.
+        MultiAz:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB cluster has instances in multiple Availability Zones.
+        Engine:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the database engine to use for this DB cluster.
+        EngineVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version number of the database engine to use.
+        Port:
+          $ref: '#/components/schemas/Integer'
+          description: The port number on which the DB instances in the DB cluster accept connections.
+        MasterUsername:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the master user for the DB cluster.
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The range of time each day when automated backups are created, if automated backups are enabled.</p> <p>Uses the format <code>HH:MM-HH:MM</code>. For example, <code>04:52-05:22</code>.</p>'
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Uses the format <code>&lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM</code>.</p> <p>For the day values, use <code>mon</code>|<code>tue</code>|<code>wed</code>|<code>thu</code>|<code>fri</code>|<code>sat</code>|<code>sun</code>.</p> <p>For example, <code>sun:09:32-sun:10:02</code>.</p>'
+        ReadReplicaIdentifiers:
+          $ref: '#/components/schemas/StringList'
+          description: The identifiers of the read replicas that are associated with this DB cluster.
+        VpcSecurityGroups:
+          $ref: '#/components/schemas/AwsRdsDbInstanceVpcSecurityGroups'
+          description: A list of VPC security groups that the DB cluster belongs to.
+        HostedZoneId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone.
+        StorageEncrypted:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB cluster is encrypted.
+        KmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+        DbClusterResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the DB cluster. The identifier must be unique within each AWS Region and is immutable.
+        AssociatedRoles:
+          $ref: '#/components/schemas/AwsRdsDbClusterAssociatedRoles'
+          description: A list of the IAM roles that are associated with the DB cluster.
+        ClusterCreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        EnabledCloudWatchLogsExports:
+          $ref: '#/components/schemas/StringList'
+          description: A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+        EngineMode:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The database engine mode of the DB cluster.
+        DeletionProtection:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB cluster has deletion protection enabled.
+        HttpEndpointEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.
+        ActivityStreamStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the database activity stream.
+        CopyTagsToSnapshot:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether tags are copied from the DB cluster to snapshots of the DB cluster.
+        CrossAccountClone:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
+        DomainMemberships:
+          $ref: '#/components/schemas/AwsRdsDbDomainMemberships'
+          description: The Active Directory domain membership records that are associated with the DB cluster.
+        DbClusterParameterGroup:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the DB cluster parameter group for the DB cluster.
+        DbSubnetGroup:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The subnet group that is associated with the DB cluster, including the name, description, and subnets in the subnet group.'
+        DbClusterOptionGroupMemberships:
+          $ref: '#/components/schemas/AwsRdsDbClusterOptionGroupMemberships'
+          description: The list of option group memberships for this DB cluster.
+        DbClusterIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The DB cluster identifier that the user assigned to the cluster. This identifier is the unique key that identifies a DB cluster.
+        DbClusterMembers:
+          $ref: '#/components/schemas/AwsRdsDbClusterMembers'
+          description: The list of instances that make up the DB cluster.
+        IamDatabaseAuthenticationEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the mapping of IAM accounts to database accounts is enabled.
+      description: Information about an Amazon RDS DB cluster.
+    AwsRdsDbClusterMember:
+      type: object
+      properties:
+        IsClusterWriter:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the cluster member is the primary instance for the DB cluster.
+        PromotionTier:
+          $ref: '#/components/schemas/Integer'
+          description: Specifies the order in which an Aurora replica is promoted to the primary instance when the existing primary instance fails.
+        DbInstanceIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The instance identifier for this member of the DB cluster.
+        DbClusterParameterGroupStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the DB cluster parameter group for this member of the DB cluster.
+      description: Information about an instance in the DB cluster.
+    AwsRdsDbClusterOptionGroupMembership:
+      type: object
+      properties:
+        DbClusterOptionGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the DB cluster option group.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the DB cluster option group.
+      description: Information about an option group membership for a DB cluster.
+    AwsRdsDbClusterSnapshotDetails:
+      type: object
+      properties:
+        AvailabilityZones:
+          $ref: '#/components/schemas/StringList'
+          description: A list of Availability Zones where instances in the DB cluster can be created.
+        SnapshotCreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the snapshot was taken.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Engine:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: Specifies the allocated storage size in gibibytes (GiB).
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of this DB cluster snapshot.
+        Port:
+          $ref: '#/components/schemas/Integer'
+          description: The port number on which the DB instances in the DB cluster accept connections.
+        VpcId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The VPC ID that is associated with the DB cluster snapshot.
+        ClusterCreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        MasterUsername:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the master user for the DB cluster.
+        EngineVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The version of the database engine to use.
+        LicenseModel:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The license model information for this DB cluster snapshot.
+        SnapshotType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The type of DB cluster snapshot.
+        PercentProgress:
+          $ref: '#/components/schemas/Integer'
+          description: Specifies the percentage of the estimated data that has been transferred.
+        StorageEncrypted:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB cluster is encrypted.
+        KmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+        DbClusterIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The DB cluster identifier.
+        DbClusterSnapshotIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the DB cluster snapshot.
+        IamDatabaseAuthenticationEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether mapping of IAM accounts to database accounts is enabled.
+      description: Information about an Amazon RDS DB cluster snapshot.
+    AwsRdsDbDomainMembership:
+      type: object
+      properties:
+        Domain:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the Active Directory domain.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the Active Directory Domain membership for the DB instance.
+        Fqdn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The fully qualified domain name of the Active Directory domain.
+        IamRoleName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the IAM role to use when making API calls to the Directory Service.
+      description: Information about an Active Directory domain membership record associated with the DB instance.
     AwsRdsDbInstanceAssociatedRole:
       type: object
       properties:
@@ -5224,10 +5897,93 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
       description: Specifies the connection endpoint.
-    AwsRdsDbInstanceVpcSecurityGroups:
+    AwsRdsDbParameterGroups:
       type: array
       items:
-        $ref: '#/components/schemas/AwsRdsDbInstanceVpcSecurityGroup'
+        $ref: '#/components/schemas/AwsRdsDbParameterGroup'
+    AwsRdsDbSubnetGroup:
+      type: object
+      properties:
+        DbSubnetGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the subnet group.
+        DbSubnetGroupDescription:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The description of the subnet group.
+        VpcId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The VPC ID of the subnet group.
+        SubnetGroupStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the subnet group.
+        Subnets:
+          $ref: '#/components/schemas/AwsRdsDbSubnetGroupSubnets'
+          description: A list of subnets in the subnet group.
+        DbSubnetGroupArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the subnet group.
+      description: Information about the subnet group for the database instance.
+    AwsRdsDbPendingModifiedValues:
+      type: object
+      properties:
+        DbInstanceClass:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        MasterUserPassword:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Port:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        MultiAZ:
+          $ref: '#/components/schemas/Boolean'
+          description: <p/>
+        EngineVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        LicenseModel:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Iops:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        DbInstanceIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        StorageType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        CaCertificateIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        DbSubnetGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        PendingCloudWatchLogsExports:
+          $ref: '#/components/schemas/AwsRdsPendingCloudWatchLogsExports'
+          description: <p/>
+        ProcessorFeatures:
+          $ref: '#/components/schemas/AwsRdsDbProcessorFeatures'
+          description: <p/>
+      description: <p/>
+    AwsRdsDbOptionGroupMemberships:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbOptionGroupMembership'
+    AwsRdsDbStatusInfos:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbStatusInfo'
+    AwsRdsDbProcessorFeatures:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbProcessorFeature'
     AwsRdsDbInstanceDetails:
       type: object
       properties:
@@ -5272,7 +6028,7 @@ components:
           description: '<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p> <p>IAM database authentication can be enabled for the following database engines.</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher</p> </li> </ul>'
         InstanceCreateTime:
           $ref: '#/components/schemas/NonEmptyString'
-          description: Provides the date and time the DB instance was created.
+          description: '<p>Indicates when the DB instance was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         KmsKeyId:
           $ref: '#/components/schemas/NonEmptyString'
           description: 'If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB instance.'
@@ -5288,6 +6044,119 @@ components:
         VpcSecurityGroups:
           $ref: '#/components/schemas/AwsRdsDbInstanceVpcSecurityGroups'
           description: A list of VPC security groups that the DB instance belongs to.
+        MultiAz:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the DB instance is a multiple Availability Zone deployment.
+        EnhancedMonitoringResourceArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the CloudWatch Logs log stream that receives the enhanced monitoring metrics data for the DB instance.
+        DbInstanceStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The current status of the DB instance.
+        MasterUsername:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The master user name of the DB instance.
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: The amount of storage (in gigabytes) to initially allocate for the DB instance.
+        PreferredBackupWindow:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The range of time each day when automated backups are created, if automated backups are enabled.</p> <p>Uses the format <code>HH:MM-HH:MM</code>. For example, <code>04:52-05:22</code>.</p>'
+        BackupRetentionPeriod:
+          $ref: '#/components/schemas/Integer'
+          description: The number of days for which to retain automated backups.
+        DbSecurityGroups:
+          $ref: '#/components/schemas/StringList'
+          description: A list of the DB security groups to assign to the DB instance.
+        DbParameterGroups:
+          $ref: '#/components/schemas/AwsRdsDbParameterGroups'
+          description: A list of the DB parameter groups to assign to the DB instance.
+        AvailabilityZone:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The Availability Zone where the DB instance will be created.
+        DbSubnetGroup:
+          $ref: '#/components/schemas/AwsRdsDbSubnetGroup'
+          description: Information about the subnet group that is associated with the DB instance.
+        PreferredMaintenanceWindow:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Uses the format <code>&lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM</code>.</p> <p>For the day values, use <code>mon</code>|<code>tue</code>|<code>wed</code>|<code>thu</code>|<code>fri</code>|<code>sat</code>|<code>sun</code>.</p> <p>For example, <code>sun:09:32-sun:10:02</code>.</p>'
+        PendingModifiedValues:
+          $ref: '#/components/schemas/AwsRdsDbPendingModifiedValues'
+          description: Changes to the DB instance that are currently pending.
+        LatestRestorableTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Specifies the latest time to which a database can be restored with point-in-time restore.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        AutoMinorVersionUpgrade:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether minor version patches are applied automatically.
+        ReadReplicaSourceDBInstanceIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'If this DB instance is a read replica, contains the identifier of the source DB instance.'
+        ReadReplicaDBInstanceIdentifiers:
+          $ref: '#/components/schemas/StringList'
+          description: List of identifiers of the read replicas associated with this DB instance.
+        ReadReplicaDBClusterIdentifiers:
+          $ref: '#/components/schemas/StringList'
+          description: List of identifiers of Aurora DB clusters to which the RDS DB instance is replicated as a read replica.
+        LicenseModel:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: License model information for this DB instance.
+        Iops:
+          $ref: '#/components/schemas/Integer'
+          description: Specifies the provisioned IOPS (I/O operations per second) for this DB instance.
+        OptionGroupMemberships:
+          $ref: '#/components/schemas/AwsRdsDbOptionGroupMemberships'
+          description: The list of option group memberships for this DB instance.
+        CharacterSetName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the character set that this DB instance is associated with.
+        SecondaryAvailabilityZone:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'For a DB instance with multi-Availability Zone support, the name of the secondary Availability Zone.'
+        StatusInfos:
+          $ref: '#/components/schemas/AwsRdsDbStatusInfos'
+          description: 'The status of a read replica. If the instance isn''t a read replica, this is empty.'
+        StorageType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The storage type for the DB instance.
+        DomainMemberships:
+          $ref: '#/components/schemas/AwsRdsDbDomainMemberships'
+          description: The Active Directory domain membership records associated with the DB instance.
+        CopyTagsToSnapshot:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether to copy resource tags to snapshots of the DB instance.
+        MonitoringInterval:
+          $ref: '#/components/schemas/Integer'
+          description: 'The interval, in seconds, between points when enhanced monitoring metrics are collected for the DB instance.'
+        MonitoringRoleArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring metrics to CloudWatch Logs.
+        PromotionTier:
+          $ref: '#/components/schemas/Integer'
+          description: The order in which to promote an Aurora replica to the primary instance after a failure of the existing primary instance.
+        Timezone:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The time zone of the DB instance.
+        PerformanceInsightsEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Indicates whether Performance Insights is enabled for the DB instance.
+        PerformanceInsightsKmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the AWS KMS key used to encrypt the Performance Insights data.
+        PerformanceInsightsRetentionPeriod:
+          $ref: '#/components/schemas/Integer'
+          description: The number of days to retain Performance Insights data.
+        EnabledCloudWatchLogsExports:
+          $ref: '#/components/schemas/StringList'
+          description: A list of log types that this DB instance is configured to export to CloudWatch Logs.
+        ProcessorFeatures:
+          $ref: '#/components/schemas/AwsRdsDbProcessorFeatures'
+          description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        ListenerEndpoint:
+          $ref: '#/components/schemas/AwsRdsDbInstanceEndpoint'
+        MaxAllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
       description: Contains the details of an Amazon RDS DB instance.
     AwsRdsDbInstanceVpcSecurityGroup:
       type: object
@@ -5299,6 +6168,171 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The status of the VPC security group.
       description: A VPC security groups that the DB instance belongs to.
+    AwsRdsDbOptionGroupMembership:
+      type: object
+      properties:
+        OptionGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+      description: <p/>
+    AwsRdsDbParameterGroup:
+      type: object
+      properties:
+        DbParameterGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        ParameterApplyStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+      description: <p/>
+    AwsRdsPendingCloudWatchLogsExports:
+      type: object
+      properties:
+        LogTypesToEnable:
+          $ref: '#/components/schemas/StringList'
+          description: A list of log types that are being enabled.
+        LogTypesToDisable:
+          $ref: '#/components/schemas/StringList'
+          description: A list of log types that are being disabled.
+      description: Identifies the log types to enable and disable.
+    AwsRdsDbProcessorFeature:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Value:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+      description: <p/>
+    AwsRdsDbSnapshotDetails:
+      type: object
+      properties:
+        DbSnapshotIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        DbInstanceIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        SnapshotCreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Engine:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        AllocatedStorage:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Port:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        AvailabilityZone:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        VpcId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        InstanceCreateTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        MasterUsername:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        EngineVersion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        LicenseModel:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        SnapshotType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Iops:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        OptionGroupName:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        PercentProgress:
+          $ref: '#/components/schemas/Integer'
+          description: <p/>
+        SourceRegion:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        SourceDbSnapshotIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        StorageType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        TdeCredentialArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Encrypted:
+          $ref: '#/components/schemas/Boolean'
+          description: <p/>
+        KmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        Timezone:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+        IamDatabaseAuthenticationEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: <p/>
+        ProcessorFeatures:
+          $ref: '#/components/schemas/AwsRdsDbProcessorFeatures'
+          description: <p/>
+        DbiResourceId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: <p/>
+      description: <p/>
+    AwsRdsDbStatusInfo:
+      type: object
+      properties:
+        StatusType:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The type of status. For a read replica, the status type is read replication.'
+        Normal:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the read replica instance is operating normally.
+        Status:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of the read replica instance.
+        Message:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'If the read replica is currently in an error state, provides the error details.'
+      description: Information about the status of a read replica.
+    AwsRdsDbSubnetGroupSubnets:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRdsDbSubnetGroupSubnet'
+    AwsRdsDbSubnetGroupSubnetAvailabilityZone:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the Availability Zone for a subnet in the subnet group.
+      description: An Availability Zone for a subnet in a subnet group.
+    AwsRdsDbSubnetGroupSubnet:
+      type: object
+      properties:
+        SubnetIdentifier:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of a subnet in the subnet group.
+        SubnetAvailabilityZone:
+          $ref: '#/components/schemas/AwsRdsDbSubnetGroupSubnetAvailabilityZone'
+          description: Information about the Availability Zone for a subnet in the subnet group.
+        SubnetStatus:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The status of a subnet in the subnet group.
+      description: Information about a subnet in a subnet group.
     AwsS3BucketServerSideEncryptionConfiguration:
       type: object
       properties:
@@ -5317,7 +6351,7 @@ components:
           description: The display name of the owner of the S3 bucket.
         CreatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time when the S3 bucket was created.
+          description: '<p>Indicates when the S3 bucket was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ServerSideEncryptionConfiguration:
           $ref: '#/components/schemas/AwsS3BucketServerSideEncryptionConfiguration'
           description: The encryption rules that are applied to the S3 bucket.
@@ -5348,7 +6382,7 @@ components:
       properties:
         LastModified:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time when the object was last modified.
+          description: '<p>Indicates when the object was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         ETag:
           $ref: '#/components/schemas/NonEmptyString'
           description: The opaque identifier assigned by a web server to a specific version of a resource found at a URL.
@@ -5365,6 +6399,41 @@ components:
           $ref: '#/components/schemas/NonEmptyString'
           description: The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
       description: Details about an Amazon S3 object.
+    AwsSecretsManagerSecretRotationRules:
+      type: object
+      properties:
+        AutomaticallyAfterDays:
+          $ref: '#/components/schemas/Integer'
+          description: The number of days after the previous rotation to rotate the secret.
+      description: Defines the rotation schedule for the secret.
+    AwsSecretsManagerSecretDetails:
+      type: object
+      properties:
+        RotationRules:
+          $ref: '#/components/schemas/AwsSecretsManagerSecretRotationRules'
+          description: Defines the rotation schedule for the secret.
+        RotationOccurredWithinFrequency:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the rotation occurred within the specified rotation frequency.
+        KmsKeyId:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.'
+        RotationEnabled:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether rotation is enabled.
+        RotationLambdaArn:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The ARN of the Lambda function that rotates the secret.
+        Deleted:
+          $ref: '#/components/schemas/Boolean'
+          description: Whether the secret is deleted.
+        Name:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The name of the secret.
+        Description:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The user-provided description of the secret.
+      description: Details about an AWS Secrets Manager secret.
     TypeList:
       type: array
       items:
@@ -5457,10 +6526,10 @@ components:
           description: The parent process ID.
         LaunchedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date/time that the process was launched.
+          description: '<p>Indicates when the process was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         TerminatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time when the process was terminated.
+          description: '<p>Indicates when the process was terminated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: The details of process-related information about a finding.
     ThreatIntelIndicatorList:
       type: array
@@ -5531,7 +6600,7 @@ components:
           description: The principal that created a note.
         UpdatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The timestamp of when the note was updated.
+          description: '<p>The timestamp of when the note was updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A user-defined note added to a finding.
     VulnerabilityList:
       type: array
@@ -6089,7 +7158,7 @@ components:
           description: The name of the image related to a finding.
         LaunchedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time when the container started.
+          description: '<p>Indicates when the container started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Container details related to a finding.
     ControlStatus:
       type: string
@@ -6591,19 +7660,20 @@ components:
       type: string
       enum:
         - EQUALS
+        - NOT_EQUALS
     MapFilter:
       type: object
       properties:
         Key:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The key of the map filter.
+          description: 'The key of the map filter. For example, for <code>ResourceTags</code>, <code>Key</code> identifies the name of the tag. For <code>UserDefinedFields</code>, <code>Key</code> is the name of the field.'
         Value:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The value for the key in the map filter.
+          description: 'The value for the key in the map filter. Filter values are case sensitive. For example, one of the values for a tag called <code>Department</code> might be <code>Security</code>. If you provide <code>security</code> as the filter value, then there is no match.'
         Comparison:
           $ref: '#/components/schemas/MapFilterComparison'
-          description: The condition to apply to a key value when querying for findings with a map filter.
-      description: The map filter for querying findings.
+          description: '<p>The condition to apply to the key value when querying for findings with a map filter.</p> <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example, for the <code>ResourceTags</code> field, the filter <code>Department EQUALS Security</code> matches findings that have the value <code>Security</code> for the tag <code>Department</code>.</p> <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For example, for the <code>ResourceTags</code> field, the filter <code>Department NOT_EQUALS Finance</code> matches findings that do not have the value <code>Finance</code> for the tag <code>Department</code>.</p> <p> <code>EQUALS</code> filters on the same field are joined by <code>OR</code>. A finding matches if it matches any one of those filters.</p> <p> <code>NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. A finding matches only if it matches all of those filters.</p> <p>You cannot have both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> filter on the same field.</p>'
+      description: 'A map filter for querying findings. Each map filter provides the field to check, the value to look for, and the comparison operator.'
     Member:
       type: object
       properties:
@@ -6773,6 +7843,9 @@ components:
         AwsEc2Vpc:
           $ref: '#/components/schemas/AwsEc2VpcDetails'
           description: Details for an EC2 VPC.
+        AwsEc2Eip:
+          $ref: '#/components/schemas/AwsEc2EipDetails'
+          description: Details about an Elastic IP address.
         AwsElbv2LoadBalancer:
           $ref: '#/components/schemas/AwsElbv2LoadBalancerDetails'
           description: Details about a load balancer.
@@ -6785,9 +7858,21 @@ components:
         AwsS3Object:
           $ref: '#/components/schemas/AwsS3ObjectDetails'
           description: Details about an Amazon S3 object related to a finding.
+        AwsSecretsManagerSecret:
+          $ref: '#/components/schemas/AwsSecretsManagerSecretDetails'
+          description: Details about a Secrets Manager secret.
         AwsIamAccessKey:
           $ref: '#/components/schemas/AwsIamAccessKeyDetails'
           description: Details about an IAM access key related to a finding.
+        AwsIamUser:
+          $ref: '#/components/schemas/AwsIamUserDetails'
+          description: Details about an IAM user.
+        AwsIamPolicy:
+          $ref: '#/components/schemas/AwsIamPolicyDetails'
+          description: Details about an IAM permissions policy.
+        AwsDynamoDbTable:
+          $ref: '#/components/schemas/AwsDynamoDbTableDetails'
+          description: Details about a DynamoDB table.
         AwsIamRole:
           $ref: '#/components/schemas/AwsIamRoleDetails'
           description: Details about an IAM role.
@@ -6802,7 +7887,7 @@ components:
           description: Details for a Lambda layer version.
         AwsRdsDbInstance:
           $ref: '#/components/schemas/AwsRdsDbInstanceDetails'
-          description: Details for an Amazon RDS database instance.
+          description: Details about an Amazon RDS database instance.
         AwsSnsTopic:
           $ref: '#/components/schemas/AwsSnsTopicDetails'
           description: Details about an SNS topic.
@@ -6812,6 +7897,15 @@ components:
         AwsWafWebAcl:
           $ref: '#/components/schemas/AwsWafWebAclDetails'
           description: Details for a WAF WebACL.
+        AwsRdsDbSnapshot:
+          $ref: '#/components/schemas/AwsRdsDbSnapshotDetails'
+          description: Details about an Amazon RDS database snapshot.
+        AwsRdsDbClusterSnapshot:
+          $ref: '#/components/schemas/AwsRdsDbClusterSnapshotDetails'
+          description: Details about an Amazon RDS database cluster snapshot.
+        AwsRdsDbCluster:
+          $ref: '#/components/schemas/AwsRdsDbClusterDetails'
+          description: Details about an Amazon RDS database cluster.
         Container:
           $ref: '#/components/schemas/ContainerDetails'
           description: Details about a container resource related to a finding.
@@ -6989,15 +8083,17 @@ components:
       enum:
         - EQUALS
         - PREFIX
+        - NOT_EQUALS
+        - PREFIX_NOT_EQUALS
     StringFilter:
       type: object
       properties:
         Value:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The string filter value.
+          description: 'The string filter value. Filter values are case sensitive. For example, the product name for control-based findings is <code>Security Hub</code>. If you provide <code>security hub</code> as the filter text, then there is no match.'
         Comparison:
           $ref: '#/components/schemas/StringFilterComparison'
-          description: 'The condition to be applied to a string value when querying for findings. '
+          description: '<p>The condition to apply to a string value when querying for findings. To search for values that contain the filter criteria value, use one of the following comparison operators:</p> <ul> <li> <p>To search for values that exactly match the filter value, use <code>EQUALS</code>.</p> <p>For example, the filter <code>ResourceType EQUALS AwsEc2SecurityGroup</code> only matches findings that have a resource type of <code>AwsEc2SecurityGroup</code>.</p> </li> <li> <p>To search for values that start with the filter value, use <code>PREFIX</code>.</p> <p>For example, the filter <code>ResourceType PREFIX AwsIam</code> matches findings that have a resource type that starts with <code>AwsIam</code>. Findings with a resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>, or <code>AwsIamUser</code> would all match.</p> </li> </ul> <p> <code>EQUALS</code> and <code>PREFIX</code> filters on the same field are joined by <code>OR</code>. A finding matches if it matches any one of those filters.</p> <p>To search for values that do not contain the filter criteria value, use one of the following comparison operators:</p> <ul> <li> <p>To search for values that do not exactly match the filter value, use <code>NOT_EQUALS</code>.</p> <p>For example, the filter <code>ResourceType NOT_EQUALS AwsIamPolicy</code> matches findings that have a resource type other than <code>AwsIamPolicy</code>.</p> </li> <li> <p>To search for values that do not start with the filter value, use <code>PREFIX_NOT_EQUALS</code>.</p> <p>For example, the filter <code>ResourceType PREFIX_NOT_EQUALS AwsIam</code> matches findings that have a resource type that does not start with <code>AwsIam</code>. Findings with a resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>, or <code>AwsIamUser</code> would all be excluded from the results.</p> </li> </ul> <p> <code>NOT_EQUALS</code> and <code>PREFIX_NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. A finding matches only if it matches all of those filters.</p> <p>For filters on the same field, you cannot provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filter. Combining filters in this way always returns an error, even if the provided filter values would return valid results.</p> <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field. Security Hub first processes the <code>PREFIX</code> filters, then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p> <p> For example, for the following filter, Security Hub first identifies findings that have resource types that start with either <code>AwsIAM</code> or <code>AwsEc2</code>. It then excludes findings that have a resource type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p> <ul> <li> <p> <code>ResourceType PREFIX AwsIam</code> </p> </li> <li> <p> <code>ResourceType PREFIX AwsEc2</code> </p> </li> <li> <p> <code>ResourceType NOT_EQUALS AwsIamPolicy</code> </p> </li> <li> <p> <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code> </p> </li> </ul>'
       description: A string filter for querying findings.
     TagKeyList:
       type: array
@@ -7051,7 +8147,7 @@ components:
           description: The category of a threat intelligence indicator.
         LastObservedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The date and time when the most recent instance of a threat intelligence indicator was observed.
+          description: '<p>Indicates when the most recent instance of a threat intelligence indicator was observed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         Source:
           $ref: '#/components/schemas/NonEmptyString'
           description: The source of the threat intelligence indicator.
@@ -7134,10 +8230,10 @@ components:
           description: The severity that the vendor assigned to the vulnerability.
         VendorCreatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The datetime when the vulnerability advisory was created.
+          description: '<p>Indicates when the vulnerability advisory was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
         VendorUpdatedAt:
           $ref: '#/components/schemas/NonEmptyString'
-          description: The datetime when the vulnerability advisory was last updated.
+          description: '<p>Indicates when the vulnerability advisory was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A vendor that generates a vulnerability report.
     Vulnerability:
       type: object
