@@ -6125,7 +6125,7 @@ components:
           description: The access level to use to obtain results. The default is <code>User</code>.
         Filters:
           $ref: '#/components/schemas/ProvisionedProductFilters'
-          description: '<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>"SearchQuery":["status:AVAILABLE"]</code> </p>'
+          description: '<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, <code>userArnSession</code>, <code>lastProvisioningRecordId</code>, <code>lastSuccessfulProvisioningRecordId</code>, <code>productName</code>, and <code>provisioningArtifactName</code>.</p> <p>Example: <code>"SearchQuery":["status:AVAILABLE"]</code> </p>'
         SortBy:
           $ref: '#/components/schemas/SortField'
           description: 'The sort field. If no value is specified, the results are not sorted. The valid values are <code>arn</code>, <code>id</code>, <code>name</code>, and <code>lastRecordId</code>.'
@@ -7000,6 +7000,12 @@ components:
         LastRecordId:
           $ref: '#/components/schemas/LastRequestId'
           description: The record identifier of the last request performed on this provisioned product.
+        LastProvisioningRecordId:
+          $ref: '#/components/schemas/Id'
+          description: '<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>'
+        LastSuccessfulProvisioningRecordId:
+          $ref: '#/components/schemas/Id'
+          description: '<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>'
         ProductId:
           $ref: '#/components/schemas/Id'
           description: 'The product identifier. For example, <code>prod-abcdzk7xy33qa</code>.'
@@ -7557,6 +7563,12 @@ components:
         LastRecordId:
           $ref: '#/components/schemas/Id'
           description: The record identifier of the last request performed on this provisioned product.
+        LastProvisioningRecordId:
+          $ref: '#/components/schemas/Id'
+          description: '<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>'
+        LastSuccessfulProvisioningRecordId:
+          $ref: '#/components/schemas/Id'
+          description: '<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>'
         Tags:
           $ref: '#/components/schemas/Tags'
           description: One or more tags.
@@ -7566,9 +7578,15 @@ components:
         ProductId:
           $ref: '#/components/schemas/Id'
           description: The product identifier.
+        ProductName:
+          $ref: '#/components/schemas/ProductViewName'
+          description: The name of the product.
         ProvisioningArtifactId:
           $ref: '#/components/schemas/Id'
           description: The identifier of the provisioning artifact.
+        ProvisioningArtifactName:
+          $ref: '#/components/schemas/ProvisioningArtifactName'
+          description: The name of the provisioning artifact.
         UserArn:
           $ref: '#/components/schemas/UserArn'
           description: The Amazon Resource Name (ARN) of the IAM user.

@@ -1347,6 +1347,17 @@ components:
       minLength: 0
       maxLength: 2048
       x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
+    ResourceShareList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RAMResourceShareArn'
+    DetailsMap:
+      type: object
+      properties:
+        ResourceShare:
+          $ref: '#/components/schemas/ResourceShareList'
+          description: A share resource ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).
+      description: '<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p> <p>If a catalog resource is shared through AWS Resource Access Manager (AWS RAM), then there will exist a corresponding RAM share resource ARN.</p>'
     FieldNameString:
       type: string
       enum:
@@ -1436,7 +1447,12 @@ components:
         PermissionsWithGrantOption:
           $ref: '#/components/schemas/PermissionList'
           description: Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).
+        AdditionalDetails:
+          $ref: '#/components/schemas/DetailsMap'
+          description: This attribute can be used to return any additional details of <code>PrincipalResourcePermissions</code>. Currently returns only as a RAM share resource ARN.
       description: The permissions granted or revoked on a resource.
+    RAMResourceShareArn:
+      type: string
     TableResource:
       type: object
       required:
