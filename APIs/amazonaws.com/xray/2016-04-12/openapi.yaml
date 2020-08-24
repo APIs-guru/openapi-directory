@@ -209,6 +209,13 @@ paths:
                 FilterExpression:
                   description: The filter expression defining criteria by which to group traces.
                   type: string
+                Tags:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -299,6 +306,13 @@ paths:
                     Attributes:
                       $ref: '#/components/schemas/AttributeMap'
                       description: Matches attributes derived from the request.
+                Tags:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -957,6 +971,61 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListTagsForResource:
+    post:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+              properties:
+                ResourceARN:
+                  description: ''
+                  type: string
+                  minLength: 1
+                  maxLength: 1011
+                NextToken:
+                  description: ''
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /PutEncryptionConfig:
     post:
       operationId: PutEncryptionConfig
@@ -1105,6 +1174,132 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/TraceSegmentDocument'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /TagResource:
+    post:
+      operationId: TagResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - Tags
+              properties:
+                ResourceARN:
+                  description: ''
+                  type: string
+                  minLength: 1
+                  maxLength: 1011
+                Tags:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /UntagResource:
+    post:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceARN
+                - TagKeys
+              properties:
+                ResourceARN:
+                  description: ''
+                  type: string
+                  minLength: 1
+                  maxLength: 1011
+                TagKeys:
+                  description: ''
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TagKey'
+                  minItems: 0
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1322,6 +1517,16 @@ components:
         Group:
           $ref: '#/components/schemas/Group'
           description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          $ref: '#/components/schemas/TagKey'
+        Value:
+          $ref: '#/components/schemas/TagValue'
     CreateSamplingRuleResult:
       type: object
       properties:
@@ -1523,6 +1728,14 @@ components:
     NullableDouble:
       type: number
       format: double
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          $ref: '#/components/schemas/TagList'
+        NextToken:
+          $ref: '#/components/schemas/String'
+    ResourceNotFoundException: {}
     PutEncryptionConfigResult:
       type: object
       properties:
@@ -1564,6 +1777,17 @@ components:
           description: Segments that failed processing.
     TraceSegmentDocument:
       type: string
+    TagResourceResponse:
+      type: object
+      properties: {}
+    TooManyTagsException: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
     UpdateGroupResult:
       type: object
       properties:
@@ -1599,6 +1823,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Alias'
+    AmazonResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1011
     AnnotationKey:
       type: string
     NullableBoolean:
@@ -1700,6 +1928,12 @@ components:
       maxLength: 32
     FilterExpression:
       type: string
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 0
+      maxItems: 200
     CreateGroupRequest:
       type: object
       required:
@@ -1712,6 +1946,8 @@ components:
         FilterExpression:
           $ref: '#/components/schemas/FilterExpression'
           description: The filter expression defining criteria by which to group traces.
+        Tags:
+          $ref: '#/components/schemas/TagList'
     Group:
       type: object
       properties:
@@ -1788,6 +2024,8 @@ components:
         SamplingRule:
           $ref: '#/components/schemas/SamplingRule'
           description: The rule definition.
+        Tags:
+          $ref: '#/components/schemas/TagList'
     SamplingRuleRecord:
       type: object
       properties:
@@ -2305,6 +2543,16 @@ components:
           $ref: '#/components/schemas/String'
           description: The ID of a corresponding EC2 instance.
       description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
+    ListTagsForResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+      title: ListTagsForResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+        NextToken:
+          $ref: '#/components/schemas/String'
     PutEncryptionConfigRequest:
       type: object
       required:
@@ -2615,6 +2863,27 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ServiceId'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - Tags
+      title: TagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+        Tags:
+          $ref: '#/components/schemas/TagList'
     TimeSeriesServiceStatistics:
       type: object
       properties:
@@ -2758,6 +3027,17 @@ components:
           $ref: '#/components/schemas/String'
           description: The error message.
       description: Information about a segment that failed processing.
+    UntagResourceRequest:
+      type: object
+      required:
+        - ResourceARN
+        - TagKeys
+      title: UntagResourceRequest
+      properties:
+        ResourceARN:
+          $ref: '#/components/schemas/AmazonResourceName'
+        TagKeys:
+          $ref: '#/components/schemas/TagKeyList'
     UpdateGroupRequest:
       type: object
       title: UpdateGroupRequest
