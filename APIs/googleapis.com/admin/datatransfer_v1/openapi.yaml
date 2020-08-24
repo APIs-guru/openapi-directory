@@ -1,17 +1,17 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/admin/datatransfer/v1
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Transfers user data from one user to another.
+  description: Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Admin Data Transfer API
+  title: Admin SDK
   version: datatransfer_v1
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -31,17 +31,17 @@ info:
   x-providerName: googleapis.com
   x-serviceName: admin
 externalDocs:
-  url: https://developers.google.com/admin-sdk/data-transfer/
+  url: http://developers.google.com/admin-sdk/
 tags:
   - name: transfers
   - name: applications
 paths:
-  /applications:
+  /admin/datatransfer/v1/applications:
     get:
       description: Lists the applications available for data transfer for a customer.
       operationId: datatransfer.applications.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Apps account.
           in: query
           name: customerId
           schema:
@@ -77,14 +77,18 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-  "/applications/{applicationId}":
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+  "/admin/datatransfer/v1/applications/{applicationId}":
     get:
       description: Retrieves information about an application for the given application ID.
       operationId: datatransfer.applications.get
@@ -114,19 +118,23 @@ paths:
       tags:
         - applications
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
-  /transfers:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
+  /admin/datatransfer/v1/transfers:
     get:
       description: Lists the transfers for a customer by source user, destination user, or status.
       operationId: datatransfer.transfers.list
       parameters:
-        - description: Immutable ID of the G Suite account.
+        - description: Immutable ID of the Google Apps account.
           in: query
           name: customerId
           schema:
@@ -177,13 +185,17 @@ paths:
       tags:
         - transfers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
     post:
       description: Inserts a data transfer request.
       operationId: datatransfer.transfers.insert
@@ -206,7 +218,7 @@ paths:
             - https://www.googleapis.com/auth/admin.datatransfer
       tags:
         - transfers
-  "/transfers/{dataTransferId}":
+  "/admin/datatransfer/v1/transfers/{dataTransferId}":
     get:
       description: Retrieves a data transfer request by its resource ID.
       operationId: datatransfer.transfers.get
@@ -236,22 +248,49 @@ paths:
       tags:
         - transfers
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/key"
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -278,20 +317,26 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
       schema:
         type: string
   schemas:
     Application:
-      description: The JSON template for an Application resource.
+      description: "The JSON template for an Application resource. STEPLADDER: Generated unstable field number for field 'kind'. (See http://go/stepladder-help#fieldNumber) STEPLADDER: Generated unstable field number for field 'etag'. (See http://go/stepladder-help#fieldNumber)"
       properties:
         etag:
           description: Etag of the resource.
@@ -342,7 +387,7 @@ components:
           type: array
       type: object
     ApplicationsListResponse:
-      description: Template for a collection of Applications.
+      description: "Template for a collection of Applications. STEPLADDER: Generated unstable field number for field 'kind'. (See http://go/stepladder-help#fieldNumber) STEPLADDER: Generated unstable field number for field 'etag'. (See http://go/stepladder-help#fieldNumber)"
       properties:
         applications:
           description: List of applications that support data transfer and are also installed for the customer.
@@ -361,7 +406,7 @@ components:
           type: string
       type: object
     DataTransfer:
-      description: The JSON template for a DataTransfer resource.
+      description: "The JSON template for a DataTransfer resource. STEPLADDER: Generated unstable field number for field 'kind'. (See http://go/stepladder-help#fieldNumber) STEPLADDER: Generated unstable field number for field 'etag'. (See http://go/stepladder-help#fieldNumber)"
       properties:
         applicationDataTransfers:
           description: List of per application data transfer resources. It contains data transfer details of the applications associated with this transfer resource. Note that this list is also used to specify the applications for which data transfer has to be done at the time of the transfer resource creation.
@@ -393,7 +438,7 @@ components:
           type: string
       type: object
     DataTransfersListResponse:
-      description: Template for a collection of DataTransfer resources.
+      description: "Template for a collection of DataTransfer resources. STEPLADDER: Generated unstable field number for field 'kind'. (See http://go/stepladder-help#fieldNumber) STEPLADDER: Generated unstable field number for field 'etag'. (See http://go/stepladder-help#fieldNumber)"
       properties:
         dataTransfers:
           description: List of data transfer requests.

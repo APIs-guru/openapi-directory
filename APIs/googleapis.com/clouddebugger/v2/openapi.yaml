@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://cloud.google.com/debugger
 tags:
-  - name: controller
   - name: debugger
+  - name: controller
 paths:
   /v2/controller/debuggees/register:
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Registers the debuggee with the controller service. All agents attached to the same application must call this method with exactly the same request content to get back the same stable `debuggee_id`. Agents should call this method again whenever `google.rpc.Code.NOT_FOUND` is returned from any controller method. This protocol allows the controller service to disable debuggees, recover from data loss, or change the `debuggee_id` format. Agents must handle `debuggee_id` value changing upon re-registration.
       operationId: clouddebugger.controller.debuggees.register
@@ -120,30 +120,30 @@ paths:
       tags:
         - controller
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
   "/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
     put:
       description: Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the `location`, `condition` and `expressions` fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
       operationId: clouddebugger.controller.debuggees.breakpoints.update
@@ -222,17 +222,17 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
   "/v2/debugger/debuggees/{debuggeeId}/breakpoints":
     get:
       description: Lists all breakpoints for the debuggee.
@@ -296,30 +296,30 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
   "/v2/debugger/debuggees/{debuggeeId}/breakpoints/set":
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
     post:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
@@ -447,17 +447,17 @@ paths:
       tags:
         - debugger
     parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:

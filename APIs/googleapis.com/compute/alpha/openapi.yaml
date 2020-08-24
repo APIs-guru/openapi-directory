@@ -45170,22 +45170,22 @@ components:
             - USE_ORIGIN_HEADERS
           type: string
         clientTtl:
-          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN?s edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
           format: int32
           type: integer
         defaultTtl:
-          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         maxTtl:
-          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         negativeCaching:
           description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 414 (URI Too Long), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
           type: boolean
-        negativeCachingPolicys:
-          description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN?s default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
+        negativeCachingPolicy:
+          description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
           items:
             $ref: "#/components/schemas/BackendBucketCdnPolicyNegativeCachingPolicy"
           type: array
@@ -45210,7 +45210,7 @@ components:
           format: int32
           type: integer
         ttl:
-          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
       type: object
@@ -45475,6 +45475,7 @@ components:
 
             Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancer or for Traffic Director for more information.
           enum:
+            - ALL
             - GRPC
             - HTTP
             - HTTP2
@@ -45622,22 +45623,22 @@ components:
             - USE_ORIGIN_HEADERS
           type: string
         clientTtl:
-          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN?s edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+          description: Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
           format: int32
           type: integer
         defaultTtl:
-          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         maxTtl:
-          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         negativeCaching:
           description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 414 (URI Too Long), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
           type: boolean
-        negativeCachingPolicys:
-          description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN?s default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
+        negativeCachingPolicy:
+          description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
           items:
             $ref: "#/components/schemas/BackendServiceCdnPolicyNegativeCachingPolicy"
           type: array
@@ -45662,7 +45663,7 @@ components:
           format: int32
           type: integer
         ttl:
-          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of ?0? means ?always revalidate? and a value of ?-1? disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
       type: object
@@ -60348,21 +60349,21 @@ components:
     ResourcePolicyInstanceSchedulePolicy:
       description: An InstanceSchedulePolicy specifies when and how frequent certain operations are performed on the instance.
       properties:
+        timeZone:
+          description: "Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database."
+          type: string
         vmStartSchedule:
           $ref: "#/components/schemas/ResourcePolicyInstanceSchedulePolicySchedule"
-          description: Specifies the schedule for starting instance.
+          description: Specifies the schedule for starting instances.
         vmStopSchedule:
           $ref: "#/components/schemas/ResourcePolicyInstanceSchedulePolicySchedule"
-          description: Specifies the schedule for stopping instance.
+          description: Specifies the schedule for stopping instances.
       type: object
     ResourcePolicyInstanceSchedulePolicySchedule:
-      description: Schedule for the instance operation.
+      description: Schedule for an instance operation.
       properties:
         schedule:
           description: Specifies the frequency for the operation, using the unix-cron format.
-          type: string
-        timeZone:
-          description: "Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database."
           type: string
       type: object
     ResourcePolicyList:
@@ -61308,8 +61309,8 @@ components:
 
             "destination.ip == '1.1.0.1' || destination.ip == '8.8.8.8'"
           type: string
-        priority:
-          description: An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 65000. The priority must be unique among rules within a NAT.
+        ruleNumber:
+          description: An integer uniquely identifying a rule in the list. The rule number must be a positive value between 0 and 65000, and must be unique among rules within a NAT.
           format: uint32
           type: integer
       type: object
@@ -61479,8 +61480,8 @@ components:
           description: Number of VM endpoints (i.e., NICs) that have NAT Mappings from this NAT Rule.
           format: int32
           type: integer
-        priority:
-          description: Priority of the rule.
+        ruleNumber:
+          description: Rule number of the rule.
           format: int32
           type: integer
       type: object
@@ -62096,7 +62097,7 @@ components:
             $ref: "#/components/schemas/SecurityPolicyRuleMatcherConfigLayer4Config"
           type: array
         srcIpRanges:
-          description: CIDR IP address range.
+          description: CIDR IP address range. Maximum number of src_ip_ranges allowed is 10.
           items:
             type: string
           type: array
@@ -63794,7 +63795,7 @@ components:
         Represents a Target gRPC Proxy resource.
 
 
-        A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Global forwarding rules reference a target gRPC proxy. The Target gRPC Proxy references a URL map which specifies how traffic routes to gRPC backend services.
+        A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Global forwarding rules reference a target gRPC proxy. The Target gRPC Proxy references a URL map which specifies how traffic routes to gRPC backend services. (== resource_for {$api_version}.targetGrpcProxies ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -63828,7 +63829,7 @@ components:
           description: URL to the UrlMap resource that defines the mapping from URL to the BackendService. The protocol field in the BackendService must be set to GRPC.
           type: string
         validateForProxyless:
-          description: If true, indicates that the BackendServices referenced by the urlMap may be accessed by gRPC applications without using a sidecar proxy. This will enable configuration checks on urlMap and its referenced BackendServices to not allow unsupported features. A gRPC application must use "xds-experimental:///" scheme in the target URI of the service it is connecting to. If false, indicates that the BackendServices referenced by the urlMap will be accessed by gRPC applications via a sidecar proxy. In this case, a gRPC application must not use "xds-experimental:///" scheme in the target URI of the service it is connecting to
+          description: If true, indicates that the BackendServices referenced by the urlMap may be accessed by gRPC applications without using a sidecar proxy. This will enable configuration checks on urlMap and its referenced BackendServices to not allow unsupported features. A gRPC application must use "xds:///" scheme in the target URI of the service it is connecting to. If false, indicates that the BackendServices referenced by the urlMap will be accessed by gRPC applications via a sidecar proxy. In this case, a gRPC application must not use "xds:///" scheme in the target URI of the service it is connecting to
           type: boolean
       type: object
     TargetGrpcProxyList:
@@ -66338,8 +66339,8 @@ components:
           description: Total number of ports across all NAT IPs allocated to this interface by this rule. It equals the aggregated port number in the field nat_ip_port_ranges.
           format: int32
           type: integer
-        priority:
-          description: Priority of the NAT Rule.
+        ruleNumber:
+          description: Rule number of the NAT Rule.
           format: int32
           type: integer
       type: object
@@ -66752,7 +66753,7 @@ components:
         Represents a Cloud VPN Tunnel resource.
 
 
-        For more information about VPN, read the the Cloud VPN Overview. (== resource_for {$api_version}.vpnTunnels ==)
+        For more information about VPN, read the  the Cloud VPN Overview. (== resource_for {$api_version}.vpnTunnels ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."

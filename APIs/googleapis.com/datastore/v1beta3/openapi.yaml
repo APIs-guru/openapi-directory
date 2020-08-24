@@ -37,17 +37,17 @@ tags:
 paths:
   "/v1beta3/projects/{projectId}:allocateIds":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Allocates IDs for the given keys, which is useful for referencing an entity before it is inserted.
       operationId: datastore.projects.allocateIds
@@ -83,17 +83,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:beginTransaction":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Begins a new transaction.
       operationId: datastore.projects.beginTransaction
@@ -129,17 +129,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:commit":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Commits a transaction, optionally creating, deleting or modifying some entities.
       operationId: datastore.projects.commit
@@ -175,17 +175,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:lookup":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Looks up entities by key.
       operationId: datastore.projects.lookup
@@ -221,17 +221,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:reserveIds":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Prevents the supplied keys' IDs from being auto-allocated by Cloud Datastore.
       operationId: datastore.projects.reserveIds
@@ -267,17 +267,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:rollback":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Rolls back a transaction.
       operationId: datastore.projects.rollback
@@ -313,17 +313,17 @@ paths:
         - projects
   "/v1beta3/projects/{projectId}:runQuery":
     parameters:
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Queries for entities.
       operationId: datastore.projects.runQuery

@@ -46,8 +46,8 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: CreateChallenge API
       operationId: verifiedaccess.challenge.create
@@ -81,8 +81,8 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: VerifyChallengeResponse API
       operationId: verifiedaccess.challenge.verify

@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: >-
-    The Google Web Fonts Developer API lets you retrieve information about web fonts served
-        by Google.
+  description: The Google Web Fonts Developer API lets you retrieve information about web fonts served by Google.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -39,10 +37,7 @@ tags:
 paths:
   /v1/webfonts:
     get:
-      description: >-
-        Retrieves the list of fonts currently served by the Google Fonts Developer
-
-        API.
+      description: Retrieves the list of fonts currently served by the Google Fonts Developer API.
       operationId: webfonts.webfonts.list
       parameters:
         - description: Enables sorting of the list.
@@ -67,17 +62,17 @@ paths:
       tags:
         - webfonts
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
     _.xgafv:
@@ -166,10 +161,7 @@ components:
         files:
           additionalProperties:
             type: string
-          description: >-
-            The font files (with all supported scripts) for each one of the available
-
-            variants, as a key : value map.
+          description: "The font files (with all supported scripts) for each one of the available variants, as a key : value map."
           type: object
         kind:
           description: This kind represents a webfont object in the webfonts service.
@@ -192,10 +184,7 @@ components:
           type: string
       type: object
     WebfontList:
-      description: >-
-        Response containing the list of fonts currently served by the
-
-        Google Fonts API.
+      description: Response containing the list of fonts currently served by the Google Fonts API.
       properties:
         items:
           description: The list of fonts currently served by the Google Fonts API.

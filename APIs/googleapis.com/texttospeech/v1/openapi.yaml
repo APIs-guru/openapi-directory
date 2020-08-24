@@ -39,16 +39,16 @@ paths:
   /v1/text:synthesize:
     parameters:
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
     post:
       description: "Synthesizes speech synchronously: receive results after all text input has been processed."
       operationId: texttospeech.text.synthesize
@@ -76,7 +76,7 @@ paths:
       description: Returns a list of Voice supported for synthesis.
       operationId: texttospeech.voices.list
       parameters:
-        - description: Optional. Recommended. [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-*" voices; when specifying "no", you will get supported "no-*" (Norwegian) and "nb-*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-*" voices; specifying "zh-hk" will also get supported "yue-*" voices.
+        - description: Optional. Recommended. [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If specified, the ListVoices call will only return voices that can be used to synthesize this language_code. E.g. when specifying "en-NZ", you will get supported "en-\*" voices; when specifying "no", you will get supported "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh" will also get supported "cmn-\*" voices; specifying "zh-hk" will also get supported "yue-\*" voices.
           in: query
           name: languageCode
           schema:
@@ -97,16 +97,16 @@ paths:
         - voices
     parameters:
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
 components:
   parameters:
     _.xgafv:

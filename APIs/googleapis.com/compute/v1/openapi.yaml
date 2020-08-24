@@ -33646,6 +33646,7 @@ components:
             - DNS_RESOLVER
             - GCE_ENDPOINT
             - NAT_AUTO
+            - SHARED_LOADBALANCER_VIP
             - VPC_PEERING
           type: string
         region:
@@ -48564,7 +48565,7 @@ components:
     SecurityPolicyRuleMatcherConfig:
       properties:
         srcIpRanges:
-          description: CIDR IP address range.
+          description: CIDR IP address range. Maximum number of src_ip_ranges allowed is 10.
           items:
             type: string
           type: array
@@ -49811,7 +49812,7 @@ components:
         Represents a Target gRPC Proxy resource.
 
 
-        A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Global forwarding rules reference a target gRPC proxy. The Target gRPC Proxy references a URL map which specifies how traffic routes to gRPC backend services.
+        A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Global forwarding rules reference a target gRPC proxy. The Target gRPC Proxy references a URL map which specifies how traffic routes to gRPC backend services. (== resource_for {$api_version}.targetGrpcProxies ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -49845,7 +49846,7 @@ components:
           description: URL to the UrlMap resource that defines the mapping from URL to the BackendService. The protocol field in the BackendService must be set to GRPC.
           type: string
         validateForProxyless:
-          description: If true, indicates that the BackendServices referenced by the urlMap may be accessed by gRPC applications without using a sidecar proxy. This will enable configuration checks on urlMap and its referenced BackendServices to not allow unsupported features. A gRPC application must use "xds-experimental:///" scheme in the target URI of the service it is connecting to. If false, indicates that the BackendServices referenced by the urlMap will be accessed by gRPC applications via a sidecar proxy. In this case, a gRPC application must not use "xds-experimental:///" scheme in the target URI of the service it is connecting to
+          description: If true, indicates that the BackendServices referenced by the urlMap may be accessed by gRPC applications without using a sidecar proxy. This will enable configuration checks on urlMap and its referenced BackendServices to not allow unsupported features. A gRPC application must use "xds:///" scheme in the target URI of the service it is connecting to. If false, indicates that the BackendServices referenced by the urlMap will be accessed by gRPC applications via a sidecar proxy. In this case, a gRPC application must not use "xds:///" scheme in the target URI of the service it is connecting to
           type: boolean
       type: object
     TargetGrpcProxyList:
@@ -52451,7 +52452,7 @@ components:
         Represents a Cloud VPN Tunnel resource.
 
 
-        For more information about VPN, read the the Cloud VPN Overview. (== resource_for {$api_version}.vpnTunnels ==)
+        For more information about VPN, read the  the Cloud VPN Overview. (== resource_for {$api_version}.vpnTunnels ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."

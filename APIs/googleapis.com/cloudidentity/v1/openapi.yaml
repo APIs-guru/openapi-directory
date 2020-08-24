@@ -87,16 +87,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a Group.
@@ -162,16 +162,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
   /v1/groups:search:
     get:
@@ -225,16 +225,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
   "/v1/{name}":
     delete:
@@ -298,16 +298,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
     patch:
       description: Updates a Group.
@@ -400,16 +400,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
     post:
       description: Creates a Membership.
@@ -488,16 +488,16 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
 components:
   parameters:
@@ -575,7 +575,17 @@ components:
       schema:
         type: string
   schemas:
-    AndroidAttributes:
+    EntityKey:
+      description: An EntityKey uniquely identifies an Entity. Namespaces are used to provide isolation for IDs. A single ID can be reused across namespaces but the combination of a namespace and an ID must be unique.
+      properties:
+        id:
+          description: The ID of the entity within the given namespace. The ID must be unique within its namespace.
+          type: string
+        namespace:
+          description: Namespaces provide isolation for IDs, so an ID only needs to be unique within its namespace. Namespaces are currently only created as part of IdentitySource creation from Admin Console. A namespace `"identitysources/{identity_source_id}"` is created corresponding to every Identity Source `identity_source_id`.
+          type: string
+      type: object
+    GoogleAppsCloudidentityDevicesV1AndroidAttributes:
       description: Resource representing the Android specific attributes of a Device.
       properties:
         enabledUnknownSources:
@@ -596,35 +606,35 @@ components:
           description: Whether device supports Android work profiles. If false, this service will not block access to corp data even if an administrator turns on the "Enforce Work Profile" policy.
           type: boolean
       type: object
-    ApproveDeviceUserResponse:
+    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse:
       description: Response message for approving the device to access user data.
       properties:
         deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
-    BlockDeviceUserResponse:
+    GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse:
       description: Response message for blocking the device from accessing user data.
       properties:
         deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
-    CancelWipeDeviceResponse:
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse:
       description: Response message for cancelling an unfinished device wipe.
       properties:
         device:
-          $ref: "#/components/schemas/Device"
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
           description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
       type: object
-    CancelWipeDeviceUserResponse:
+    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse:
       description: Response message for cancelling an unfinished user account wipe.
       properties:
         deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
           description: Resultant DeviceUser object for the action.
       type: object
-    ClientState:
+    GoogleAppsCloudidentityDevicesV1ClientState:
       description: Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
       properties:
         assetTags:
@@ -662,7 +672,7 @@ components:
           type: string
         keyValuePairs:
           additionalProperties:
-            $ref: "#/components/schemas/CustomAttributeValue"
+            $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1CustomAttributeValue"
           description: The map of key-value attributes stored by callers specific to a device. The total serialized length of this map may not exceed 10KB. No limit is placed on the number of attributes in a map.
           type: object
         lastUpdateTime:
@@ -693,7 +703,7 @@ components:
           description: A descriptive cause of the health score.
           type: string
       type: object
-    CustomAttributeValue:
+    GoogleAppsCloudidentityDevicesV1CustomAttributeValue:
       description: Additional custom attribute values may be one of these types
       properties:
         boolValue:
@@ -707,11 +717,11 @@ components:
           description: Represents a string value.
           type: string
       type: object
-    Device:
+    GoogleAppsCloudidentityDevicesV1Device:
       description: A Device within the Cloud Identity Devices API. Represents a Device known to Google Cloud, independent of the device ownership, type, and whether it is assigned or in use by a user.
       properties:
         androidSpecificAttributes:
-          $ref: "#/components/schemas/AndroidAttributes"
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1AndroidAttributes"
           description: Output only. Attributes specific to Android devices.
           readOnly: true
         assetTag:
@@ -856,7 +866,7 @@ components:
             type: string
           type: array
       type: object
-    DeviceUser:
+    GoogleAppsCloudidentityDevicesV1DeviceUser:
       description: Represents a user's use of a Device in the Cloud Identity Devices API. A DeviceUser is a resource representing a user's use of a Device
       properties:
         compromisedState:
@@ -915,15 +925,19 @@ components:
           description: Email address of the user registered on the device.
           type: string
       type: object
-    EntityKey:
-      description: An EntityKey uniquely identifies an Entity. Namespaces are used to provide isolation for IDs. A single ID can be reused across namespaces but the combination of a namespace and an ID must be unique.
+    GoogleAppsCloudidentityDevicesV1WipeDeviceResponse:
+      description: Response message for wiping all data on the device.
       properties:
-        id:
-          description: The ID of the entity within the given namespace. The ID must be unique within its namespace.
-          type: string
-        namespace:
-          description: Namespaces provide isolation for IDs, so an ID only needs to be unique within its namespace. Namespaces are currently only created as part of IdentitySource creation from Admin Console. A namespace `"identitysources/{identity_source_id}"` is created corresponding to every Identity Source `identity_source_id`.
-          type: string
+        device:
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1Device"
+          description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
+      type: object
+    GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse:
+      description: Response message for wiping the user's account from the device.
+      properties:
+        deviceUser:
+          $ref: "#/components/schemas/GoogleAppsCloudidentityDevicesV1DeviceUser"
+          description: Resultant DeviceUser object for the action.
       type: object
     Group:
       description: Resource representing a Group.
@@ -1079,20 +1093,6 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
-      type: object
-    WipeDeviceResponse:
-      description: Response message for wiping all data on the device.
-      properties:
-        device:
-          $ref: "#/components/schemas/Device"
-          description: Resultant Device object for the action. Note that asset tags will not be returned in the device object.
-      type: object
-    WipeDeviceUserResponse:
-      description: Response message for wiping the user's account from the device.
-      properties:
-        deviceUser:
-          $ref: "#/components/schemas/DeviceUser"
-          description: Resultant DeviceUser object for the action.
       type: object
   securitySchemes:
     Oauth2:

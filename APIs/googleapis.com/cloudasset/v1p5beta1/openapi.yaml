@@ -93,17 +93,17 @@ paths:
       tags:
         - assets
     parameters:
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/_.xgafv'
       - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/uploadType'
 components:
   parameters:
     _.xgafv:

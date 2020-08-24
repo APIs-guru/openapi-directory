@@ -85,17 +85,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Update a `WorkerPool`.
       operationId: cloudbuild.projects.workerPools.patch
@@ -127,17 +127,17 @@ paths:
         - projects
   "/v1alpha1/{name}:cancel":
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: cloudbuild.projects.locations.operations.cancel
@@ -193,17 +193,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a `WorkerPool` to run the builds, and returns the new worker pool.
       operationId: cloudbuild.projects.workerPools.create
@@ -323,6 +323,7 @@ components:
         timing:
           $ref: "#/components/schemas/TimeSpan"
           description: Output only. Stores timing information for pushing all artifact objects.
+          readOnly: true
       type: object
     ArtifactResult:
       description: An artifact that was uploaded during a build. This is a single record in the artifact manifest JSON file.
@@ -404,12 +405,16 @@ components:
           items:
             $ref: "#/components/schemas/Secret"
           type: array
+        serviceAccount:
+          description: IAM service account whose credentials will be used at build runtime. Must be of the format `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}`. ACCOUNT can be email address or uniqueId of the service account. This field is in alpha and is not publicly available.
+          type: string
         source:
           $ref: "#/components/schemas/Source"
           description: The location of the source files to build.
         sourceProvenance:
           $ref: "#/components/schemas/SourceProvenance"
           description: Output only. A permanent fixed identifier for source.
+          readOnly: true
         startTime:
           description: Output only. Time at which execution of the build was started.
           format: google-datetime
@@ -427,9 +432,11 @@ components:
             - TIMEOUT
             - CANCELLED
             - EXPIRED
+          readOnly: true
           type: string
         statusDetail:
           description: Output only. Customer-readable message about the current status.
+          readOnly: true
           type: string
         steps:
           description: Required. The operations to be performed on the workspace.
@@ -584,6 +591,7 @@ components:
             - TIMEOUT
             - CANCELLED
             - EXPIRED
+          readOnly: true
           type: string
         timeout:
           description: Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.

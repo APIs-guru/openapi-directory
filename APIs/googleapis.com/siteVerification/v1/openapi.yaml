@@ -37,13 +37,13 @@ tags:
 paths:
   /token:
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Get a verification token for placing on a website or domain.
       operationId: siteVerification.webResource.getToken
@@ -89,13 +89,13 @@ paths:
       tags:
         - webResource
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
     post:
       description: Attempt verification of a website or domain.
       operationId: siteVerification.webResource.insert
@@ -175,13 +175,13 @@ paths:
       tags:
         - webResource
     parameters:
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/userIp"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
     patch:
       description: Modify the list of owners for your website or domain. This method supports patch semantics.
       operationId: siteVerification.webResource.patch

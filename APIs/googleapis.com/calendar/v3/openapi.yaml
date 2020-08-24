@@ -33,24 +33,24 @@ info:
 externalDocs:
   url: https://developers.google.com/google-apps/calendar/firstapp
 tags:
-  - name: colors
-  - name: events
-  - name: freebusy
   - name: calendars
   - name: acl
-  - name: calendarList
   - name: channels
+  - name: events
+  - name: colors
+  - name: calendarList
+  - name: freebusy
   - name: settings
 paths:
   /calendars:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a secondary calendar.
       operationId: calendar.calendars.insert
@@ -71,6 +71,10 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
       tags:
         - calendars
   "/calendars/{calendarId}":
@@ -92,6 +96,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
       tags:
         - calendars
     get:
@@ -117,19 +129,31 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - calendars
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates metadata for a calendar. This method supports patch semantics.
       operationId: calendar.calendars.patch
@@ -157,6 +181,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
       tags:
         - calendars
     put:
@@ -186,6 +218,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
       tags:
         - calendars
   "/calendars/{calendarId}/acl":
@@ -239,16 +279,24 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
       tags:
         - acl
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates an access control rule.
       operationId: calendar.acl.insert
@@ -281,17 +329,21 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
       tags:
         - acl
   "/calendars/{calendarId}/acl/watch":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Watch for changes to ACL resources.
       operationId: calendar.acl.watch
@@ -347,6 +399,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
       tags:
         - acl
   "/calendars/{calendarId}/acl/{ruleId}":
@@ -374,6 +434,10 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
       tags:
         - acl
     get:
@@ -405,19 +469,27 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - acl
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates an access control rule. This method supports patch semantics.
       operationId: calendar.acl.patch
@@ -456,6 +528,10 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
       tags:
         - acl
     put:
@@ -496,17 +572,21 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
       tags:
         - acl
   "/calendars/{calendarId}/clear":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.
       operationId: calendar.calendars.clear
@@ -525,6 +605,10 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendars
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendars
       tags:
         - calendars
   "/calendars/{calendarId}/events":
@@ -675,9 +759,29 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.events.readonly
           Oauth2c:
@@ -689,13 +793,13 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates an event.
       operationId: calendar.events.insert
@@ -760,20 +864,28 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
   "/calendars/{calendarId}/events/import":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Imports an event. This operation is used to add a private copy of an existing event to a calendar.
       operationId: calendar.events.import
@@ -814,20 +926,28 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
   "/calendars/{calendarId}/events/quickAdd":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates an event based on a simple text string.
       operationId: calendar.events.quickAdd
@@ -875,20 +995,28 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
   "/calendars/{calendarId}/events/watch":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Watch for changes to Events resources.
       operationId: calendar.events.watch
@@ -1041,9 +1169,29 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.events.readonly
           Oauth2c:
@@ -1098,9 +1246,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
     get:
@@ -1148,9 +1304,29 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.events.readonly
           Oauth2c:
@@ -1162,13 +1338,13 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates an event. This method supports patch semantics.
       operationId: calendar.events.patch
@@ -1244,9 +1420,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
     put:
@@ -1324,9 +1508,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
   "/calendars/{calendarId}/events/{eventId}/instances":
@@ -1406,9 +1598,29 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.events.readonly
           Oauth2c:
@@ -1420,22 +1632,22 @@ paths:
       tags:
         - events
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
   "/calendars/{calendarId}/events/{eventId}/move":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Moves an event to another calendar, i.e. changes an event's organizer.
       operationId: calendar.events.move
@@ -1492,17 +1704,21 @@ paths:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
       tags:
         - events
   /channels/stop:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Stop watching resources through this channel
       operationId: calendar.channels.stop
@@ -1520,9 +1736,45 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.acls.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.events
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.events
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.events.readonly
           Oauth2c:
@@ -1554,28 +1806,56 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.owned.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.public.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - colors
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
   /freeBusy:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Returns free/busy information for a set of calendars.
       operationId: calendar.freebusy.query
@@ -1596,6 +1876,10 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.events.freebusy
         - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
@@ -1665,19 +1949,27 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - calendarList
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Inserts an existing calendar into the user's calendar list.
       operationId: calendar.calendarList.insert
@@ -1704,17 +1996,21 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
       tags:
         - calendarList
   /users/me/calendarList/watch:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Watch for changes to CalendarList resources.
       operationId: calendar.calendarList.watch
@@ -1782,6 +2078,14 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
@@ -1806,6 +2110,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
       tags:
         - calendarList
     get:
@@ -1831,19 +2143,31 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
         - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/calendar.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - calendarList
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     patch:
       description: Updates an existing calendar on the user's calendar list. This method supports patch semantics.
       operationId: calendar.calendarList.patch
@@ -1876,6 +2200,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
       tags:
         - calendarList
     put:
@@ -1910,6 +2242,14 @@ paths:
             - https://www.googleapis.com/auth/calendar
           Oauth2c:
             - https://www.googleapis.com/auth/calendar
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.app.created
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.app.created
+        - Oauth2:
+            - https://www.googleapis.com/auth/calendar.calendarlist
+          Oauth2c:
+            - https://www.googleapis.com/auth/calendar.calendarlist
       tags:
         - calendarList
   /users/me/settings:
@@ -1963,22 +2303,22 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
   /users/me/settings/watch:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Watch for changes to Settings resources.
       operationId: calendar.settings.watch
@@ -2067,13 +2407,13 @@ paths:
       tags:
         - settings
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     alt:
@@ -3267,7 +3607,18 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/calendar: See, edit, share, and permanently delete all the calendars you can access using Google Calendar
+            https://www.googleapis.com/auth/calendar.acls: See and change the sharing permissions of Google calendars you own
+            https://www.googleapis.com/auth/calendar.acls.readonly: See the sharing permissions of Google calendars you own
+            https://www.googleapis.com/auth/calendar.app.created: Make secondary Google calendars, and see, create, change, and delete events on them
+            https://www.googleapis.com/auth/calendar.calendarlist: See, add, and remove Google calendars you’re subscribed to
+            https://www.googleapis.com/auth/calendar.calendarlist.readonly: See the list of Google calendars you’re subscribed to
+            https://www.googleapis.com/auth/calendar.calendars: See and change the properties of Google calendars you have access to, and create secondary calendars
+            https://www.googleapis.com/auth/calendar.calendars.readonly: See the title, description, default time zone, and other properties of Google calendars you have access to
             https://www.googleapis.com/auth/calendar.events: View and edit events on all your calendars
+            https://www.googleapis.com/auth/calendar.events.freebusy: See the availability on Google calendars you have access to
+            https://www.googleapis.com/auth/calendar.events.owned: See, create, change, and delete events on Google calendars you own
+            https://www.googleapis.com/auth/calendar.events.owned.readonly: See the events on Google calendars you own
+            https://www.googleapis.com/auth/calendar.events.public.readonly: See the events on public calendars
             https://www.googleapis.com/auth/calendar.events.readonly: View events on all your calendars
             https://www.googleapis.com/auth/calendar.readonly: View your calendars
             https://www.googleapis.com/auth/calendar.settings.readonly: View your Calendar settings
@@ -3279,7 +3630,18 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/calendar: See, edit, share, and permanently delete all the calendars you can access using Google Calendar
+            https://www.googleapis.com/auth/calendar.acls: See and change the sharing permissions of Google calendars you own
+            https://www.googleapis.com/auth/calendar.acls.readonly: See the sharing permissions of Google calendars you own
+            https://www.googleapis.com/auth/calendar.app.created: Make secondary Google calendars, and see, create, change, and delete events on them
+            https://www.googleapis.com/auth/calendar.calendarlist: See, add, and remove Google calendars you’re subscribed to
+            https://www.googleapis.com/auth/calendar.calendarlist.readonly: See the list of Google calendars you’re subscribed to
+            https://www.googleapis.com/auth/calendar.calendars: See and change the properties of Google calendars you have access to, and create secondary calendars
+            https://www.googleapis.com/auth/calendar.calendars.readonly: See the title, description, default time zone, and other properties of Google calendars you have access to
             https://www.googleapis.com/auth/calendar.events: View and edit events on all your calendars
+            https://www.googleapis.com/auth/calendar.events.freebusy: See the availability on Google calendars you have access to
+            https://www.googleapis.com/auth/calendar.events.owned: See, create, change, and delete events on Google calendars you own
+            https://www.googleapis.com/auth/calendar.events.owned.readonly: See the events on Google calendars you own
+            https://www.googleapis.com/auth/calendar.events.public.readonly: See the events on public calendars
             https://www.googleapis.com/auth/calendar.events.readonly: View events on all your calendars
             https://www.googleapis.com/auth/calendar.readonly: View your calendars
             https://www.googleapis.com/auth/calendar.settings.readonly: View your Calendar settings

@@ -57,16 +57,16 @@ paths:
       tags:
         - media
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
   /v1/spaces:
     get:
@@ -93,16 +93,16 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
   "/v1/{name}":
     delete:
@@ -144,16 +144,16 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
     put:
       description: Updates a message.
@@ -215,29 +215,29 @@ paths:
       tags:
         - spaces
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
   "/v1/{parent}/messages":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/quotaUser"
     post:
       description: Creates a message.
