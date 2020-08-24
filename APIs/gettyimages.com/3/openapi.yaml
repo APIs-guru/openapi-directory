@@ -345,33 +345,25 @@ paths:
           name: page
           schema:
             default: 1
+            description: Request results starting at a page number (default is 1).
             format: int32
             type: integer
         - description: Search for boards the user owns or has been invited to as an editor.
           in: query
           name: board_relationship
           schema:
-            enum:
-              - owned
-              - invited
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/BoardRelationship"
         - description: Sort the list of boards by last update date or name. Defaults to date_last_updated_descending.
           in: query
           name: sort_order
           schema:
-            enum:
-              - date_last_updated_descending
-              - date_last_updated_ascending
-              - name_ascending
-              - name_decending
-            nullable: true
-            type: string
+            $ref: "#/components/schemas/BoardSortOrder"
         - description: Request number of boards to return in each page. (default is 30).
           in: query
           name: pageSize
           schema:
             default: 30
+            description: Request number of boards to return in each page. (default is 30).
             format: int32
             type: integer
       responses:
@@ -394,6 +386,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BoardInfo"
+        description: Specify a name and description of the board to create (name is required).
       responses:
         "201":
           content:
@@ -416,7 +409,8 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to delete.
+            nullable: true
             type: string
       responses:
         "200":
@@ -441,7 +435,8 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Retrieve details for a specific board.
+            nullable: true
             type: string
       responses:
         "200":
@@ -466,13 +461,15 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to update.
+            nullable: true
             type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BoardInfo"
+        description: Specify a new name and description for the board (name is required).
       responses:
         "200":
           description: Success
@@ -497,14 +494,17 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to remove assets from.
+            nullable: true
             type: string
         - description: List the assets to be removed from the board.
           in: query
           name: asset_ids
           schema:
+            description: List the assets to be removed from the board.
             items:
               type: string
+            nullable: true
             type: array
       responses:
         "200":
@@ -527,15 +527,19 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to add assets to.
+            nullable: true
             type: string
       requestBody:
         content:
           application/json:
             schema:
+              description: List assets to add to the board.
               items:
                 $ref: "#/components/schemas/BoardAsset"
+              nullable: true
               type: array
+        description: List assets to add to the board.
       responses:
         "201":
           content:
@@ -562,14 +566,16 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to remove an asset from.
+            nullable: true
             type: string
         - description: Specify the asset to remove from the board.
           in: path
           name: asset_id
           required: true
           schema:
-            default: ""
+            description: Specify the asset to remove from the board.
+            nullable: true
             type: string
       responses:
         "200":
@@ -592,14 +598,16 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to add an asset to.
+            nullable: true
             type: string
         - description: Specify the asset to add to the board. If it is already in the board's asset collection, no action is taken.
           in: path
           name: asset_id
           required: true
           schema:
-            default: ""
+            description: Specify the asset to add to the board. If it is already in the board's asset collection, no action is taken.
+            nullable: true
             type: string
       responses:
         "201":
@@ -623,7 +631,8 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to retrieve comments from.
+            nullable: true
             type: string
       responses:
         "200":
@@ -648,13 +657,15 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board to add a comment to.
+            nullable: true
             type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/CommentRequest"
+        description: Comment to be added to the board.
       responses:
         "201":
           content:
@@ -681,14 +692,16 @@ paths:
           name: board_id
           required: true
           schema:
-            default: ""
+            description: Specify the board containing the comment to delete.
+            nullable: true
             type: string
         - description: Specify the comment to delete.
           in: path
           name: comment_id
           required: true
           schema:
-            default: ""
+            description: Specify the comment to delete.
+            nullable: true
             type: string
       responses:
         "200":
@@ -5371,10 +5384,12 @@ components:
         assets_added:
           items:
             $ref: "#/components/schemas/BoardAsset"
+          nullable: true
           type: array
         assets_not_added:
           items:
             type: string
+          nullable: true
           type: array
       type: object
     AffiliateImage:
@@ -5636,6 +5651,7 @@ components:
       additionalProperties: false
       properties:
         asset_type:
+          nullable: true
           type: string
         date_added:
           format: date-time
@@ -5643,8 +5659,10 @@ components:
         display_sizes:
           items:
             $ref: "#/components/schemas/DisplaySize"
+          nullable: true
           type: array
         id:
+          nullable: true
           type: string
       type: object
     AssetChanges:
@@ -5722,6 +5740,7 @@ components:
       additionalProperties: false
       properties:
         id:
+          nullable: true
           type: string
       type: object
     BoardDetail:
@@ -5733,6 +5752,7 @@ components:
         assets:
           items:
             $ref: "#/components/schemas/Asset"
+          nullable: true
           type: array
         comment_count:
           format: int32
@@ -5744,12 +5764,15 @@ components:
           format: date-time
           type: string
         description:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         links:
           $ref: "#/components/schemas/Links"
         name:
+          nullable: true
           type: string
         permissions:
           $ref: "#/components/schemas/BoardPermissions"
@@ -5758,6 +5781,7 @@ components:
       additionalProperties: false
       properties:
         description:
+          nullable: true
           type: string
         name:
           type: string
@@ -5773,6 +5797,7 @@ components:
         boards:
           items:
             $ref: "#/components/schemas/BoardListBoard"
+          nullable: true
           type: array
       type: object
     BoardListBoard:
@@ -5782,6 +5807,7 @@ components:
           format: int32
           type: integer
         board_relationship:
+          nullable: true
           type: string
         date_created:
           format: date-time
@@ -5790,12 +5816,15 @@ components:
           format: date-time
           type: string
         description:
+          nullable: true
           type: string
         hero_asset:
           $ref: "#/components/schemas/Asset"
         id:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
       type: object
     BoardPermissions:
@@ -5814,6 +5843,18 @@ components:
         can_update_name:
           type: boolean
       type: object
+    BoardRelationship:
+      enum:
+        - owned
+        - invited
+      type: string
+    BoardSortOrder:
+      enum:
+        - date_last_updated_descending
+        - date_last_updated_ascending
+        - name_ascending
+        - name_decending
+      type: string
     ChangedAssetDetail:
       additionalProperties: false
       properties:
@@ -5872,8 +5913,10 @@ components:
       additionalProperties: false
       properties:
         first_name:
+          nullable: true
           type: string
         last_name:
+          nullable: true
           type: string
       type: object
     Collection:
@@ -5923,16 +5966,19 @@ components:
           format: date-time
           type: string
         id:
+          nullable: true
           type: string
         permissions:
           $ref: "#/components/schemas/CommentPermissions"
         text:
+          nullable: true
           type: string
       type: object
     CommentCreated:
       additionalProperties: false
       properties:
         id:
+          nullable: true
           type: string
       type: object
     CommentPermissions:
@@ -5945,6 +5991,7 @@ components:
       additionalProperties: false
       properties:
         text:
+          nullable: true
           type: string
       type: object
     CommentsList:
@@ -5953,6 +6000,7 @@ components:
         comments:
           items:
             $ref: "#/components/schemas/Comment"
+          nullable: true
           type: array
         permissions:
           $ref: "#/components/schemas/BoardCommentPermissions"
@@ -6190,8 +6238,10 @@ components:
       additionalProperties: false
       properties:
         name:
+          nullable: true
           type: string
         uri:
+          nullable: true
           type: string
       type: object
     Download:
@@ -7051,8 +7101,10 @@ components:
       additionalProperties: false
       properties:
         invitation:
+          nullable: true
           type: string
         share:
+          nullable: true
           type: string
       type: object
     Location:
@@ -7135,6 +7187,9 @@ components:
           nullable: true
           type: string
         id:
+          nullable: true
+          type: string
+        invoice_number:
           nullable: true
           type: string
         notes:
@@ -7434,10 +7489,13 @@ components:
       additionalProperties: false
       properties:
         email:
+          nullable: true
           type: string
         id:
+          nullable: true
           type: string
         name:
+          nullable: true
           type: string
       type: object
     SortOrder:

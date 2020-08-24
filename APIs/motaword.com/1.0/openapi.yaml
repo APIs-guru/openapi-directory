@@ -1,36 +1,36 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.motaword.com/'
-  - url: 'https://sandbox.motaword.com/'
-  - url: 'http://localhost/'
+  - url: https://api.motaword.com/
+  - url: https://sandbox.motaword.com/
+  - url: http://localhost/
 info:
   description: Use MotaWord API to post and track your translation projects.
   title: MotaWord API
-  version: '1.0'
+  version: "1.0"
   x-apiClientRegistration:
-    url: 'https://www.motaword.com/developer/register'
+    url: https://www.motaword.com/developer/register
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png'
+    url: https://dentycj2qhk72.cloudfront.net/new/images/new_logo_horizontal.png
   x-origin:
     - format: openapi
-      url: 'https://api.motaword.com/swagger'
-      version: '3.0'
+      url: https://api.motaword.com/swagger
+      version: "3.0"
   x-providerName: motaword.com
 externalDocs:
-  url: 'https://www.motaword.com/developer'
+  url: https://www.motaword.com/developer
 security:
   - mwoAuth:
       - default
 paths:
   /:
     get:
-      description: |
+      description: >
         The root endpoint will provide you a JSON Swagger definition.
       operationId: getEndpoints
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -40,7 +40,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Authentication error
       security: []
       summary: Available endpoints
@@ -58,18 +58,18 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/octet-stream:
               schema:
                 format: binary
                 type: string
           description: File
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Download async request files
       tags:
@@ -78,13 +78,13 @@ paths:
     get:
       operationId: getBlogPosts
       parameters:
-        - description: 'Article language, default `en`. When no blog article is available and `fallback=true` is specified, it falls back to `en`.'
+        - description: Article language, default `en`. When no blog article is available and `fallback=true` is specified, it falls back to `en`.
           in: query
           name: locale
           required: false
           schema:
             type: string
-        - description: 'When `true`, and no article is found in the locale, it falls back to `locale=en`.'
+        - description: When `true`, and no article is found in the locale, it falls back to `locale=en`.
           in: query
           name: fallback
           required: false
@@ -105,16 +105,16 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BlogArticleList'
+                $ref: "#/components/schemas/BlogArticleList"
           description: List of blog articles
       summary: Get blog posts - ordered by created desc by default
       tags:
         - Blog
-  '/corporates/{corporateId}/users':
+  "/corporates/{corporateId}/users":
     get:
       description: Get a list of users for this corporate id
       operationId: getCorporateUsers
@@ -127,17 +127,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserList'
+                $ref: "#/components/schemas/UserList"
           description: User list
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of users for this corporate id
       tags:
@@ -146,17 +146,17 @@ paths:
     delete:
       operationId: deleteAccount
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Delete requester account
       tags:
@@ -166,7 +166,7 @@ paths:
       description: Get a list of your documents
       operationId: getDocuments
       parameters:
-        - description: 'When true, this will return the most 4 recent active documents.'
+        - description: When true, this will return the most 4 recent active documents.
           in: query
           name: recent
           required: false
@@ -197,7 +197,7 @@ paths:
               - STYLE_GUIDES
               - GLOSSARIES
             type: string
-        - description: 'searches in source language of documents, in source and target languages of document''s quote'
+        - description: searches in source language of documents, in source and target languages of document's quote
           in: query
           name: language_code
           required: false
@@ -232,11 +232,11 @@ paths:
           name: order_type
           required: false
           schema:
-            $ref: '#/components/schemas/ListOrderType'
+            $ref: "#/components/schemas/ListOrderType"
             default: desc
-        - description: 'Attach further information. Possible values ''preview'' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.'
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -246,18 +246,18 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentList'
+                $ref: "#/components/schemas/DocumentList"
           description: Document list
       summary: Get a list of your documents
       tags:
         - Document
-  '/documents/{documentId}/similars':
+  "/documents/{documentId}/similars":
     get:
-      description: 'Find documents similar to this document. Optionally, include translation information.'
+      description: Find documents similar to this document. Optionally, include translation information.
       operationId: getSimilarDocuments
       parameters:
         - description: Document ID
@@ -276,11 +276,11 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentList'
+                $ref: "#/components/schemas/DocumentList"
           description: Document list
       summary: Find documents similar to this document.
       tags:
@@ -289,19 +289,19 @@ paths:
     post:
       operationId: downgradeProofreader
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Vendor is already a translator
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound
       tags:
         - User
@@ -309,33 +309,33 @@ paths:
     get:
       operationId: getEarnings
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Earnings'
+                $ref: "#/components/schemas/Earnings"
           description: Earnings for vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: 'Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.'
+      summary: Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.
       tags:
         - User
   /formats:
     get:
-      description: |
+      description: >
         Get a list of supported formats for documents, style guides and extensions.
       operationId: getFormats
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Formats'
+                  $ref: "#/components/schemas/Formats"
                 type: object
           description: A list of supported formats
       security: []
@@ -346,19 +346,19 @@ paths:
     post:
       operationId: freezeAccount
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Account is already frozen for notifications
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Freeze requester account for project notifications
       tags:
@@ -368,17 +368,17 @@ paths:
       description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalGlossary
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: string
           description: Glossary file streamed.
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
       summary: Download the global glossary.
       tags:
@@ -392,7 +392,7 @@ paths:
             schema:
               properties:
                 glossary:
-                  description: |
+                  description: >
                     Glossary file. Currently supported formats: .xlsx, .tbx
                   format: binary
                   type: string
@@ -400,23 +400,23 @@ paths:
                 - glossary
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge FileTooSmall NoFileUploaded
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedGlossaryFormat
       summary: Create or update the global glossary.
       tags:
@@ -426,12 +426,12 @@ paths:
       description: Get a list of supported languages
       operationId: getLanguages
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Language'
+                  $ref: "#/components/schemas/Language"
                 type: array
           description: A list of supported languages
       security: []
@@ -445,40 +445,40 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LocationUpdateContent'
+              $ref: "#/components/schemas/LocationUpdateContent"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: 'Log user''s current location. This data is used in our Intelligent Project Manager for various data analysis, including project prioritization for vendors and account validation.'
+      summary: Log user's current location. This data is used in our Intelligent Project Manager for various data analysis, including project prioritization for vendors and account validation.
       tags:
         - User
   /make-proofreader:
     post:
       operationId: makeProofreader
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Vendor is already a proofreader
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound
       tags:
         - User
@@ -486,19 +486,19 @@ paths:
     get:
       operationId: getMe
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: User summary
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: 'Get your user information, including client or vendor specific info.'
+      summary: Get your user information, including client or vendor specific info.
       tags:
         - User
     post:
@@ -507,25 +507,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserUpdateContent'
+              $ref: "#/components/schemas/UserUpdateContent"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: User info
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Update your user information.
       tags:
@@ -537,25 +537,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NotificationSubscription'
+              $ref: "#/components/schemas/NotificationSubscription"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Saved notification subscription information
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingParameter | Failed to save subscription
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       tags:
         - User
@@ -566,25 +566,25 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NotificationSubscription'
+              $ref: "#/components/schemas/NotificationSubscription"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Deleted notification subscription information
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingParameter | Failed to delete subscription
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       tags:
         - User
@@ -595,38 +595,38 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PasswordUpdateContent'
+              $ref: "#/components/schemas/PasswordUpdateContent"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
-      summary: 'Update user password. Password should contain at least one uppercase, lowercase character and one number'
+      summary: Update user password. Password should contain at least one uppercase, lowercase character and one number
       tags:
         - User
   /payment:
     get:
       operationId: getPaymentInfo
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentInfo'
-          description: 'Returns billing and saved card information for user, and their corporate if present.'
-        '404':
+                $ref: "#/components/schemas/PaymentInfo"
+          description: Returns billing and saved card information for user, and their corporate if present.
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser
       summary: Get your payment Info
       tags:
@@ -637,19 +637,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePaymentInfo'
+              $ref: "#/components/schemas/UpdatePaymentInfo"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentInfo'
+                $ref: "#/components/schemas/PaymentInfo"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Update payment info
       tags:
@@ -663,30 +663,30 @@ paths:
             schema:
               properties:
                 profile_picture:
-                  description: 'Profile picture file contents. Accepted extensions are png, jpg.'
+                  description: Profile picture file contents. Accepted extensions are png, jpg.
                   format: binary
                   type: string
               required:
                 - profile_picture
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: Email already exists
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       tags:
         - User
@@ -709,17 +709,17 @@ paths:
             default: 10
             format: int64
             type: integer
-        - description: 'Filter projects by status. Accepts multiple statuses. Possible values ''pending'', ''started'', ''completed'''
+        - description: Filter projects by status. Accepts multiple statuses. Possible values 'pending', 'started', 'completed'
           in: query
-          name: 'status[]'
+          name: status[]
           required: false
           schema:
             items:
-              $ref: '#/components/schemas/ProjectStatus'
-              description: 'progress-related project status enums are not supported, such as "translated", "proofread".'
+              $ref: "#/components/schemas/ProjectStatus"
+              description: progress-related project status enums are not supported, such as "translated", "proofread".
             type: array
         - deprecated: true
-          description: 'deprecated. use `status[]` param.'
+          description: deprecated. use `status[]` param.
           in: query
           name: with_pending
           required: false
@@ -727,7 +727,7 @@ paths:
             default: true
             type: boolean
         - deprecated: true
-          description: 'deprecated. use `status[]` param.'
+          description: deprecated. use `status[]` param.
           in: query
           name: with_started
           required: false
@@ -735,7 +735,7 @@ paths:
             default: true
             type: boolean
         - deprecated: true
-          description: 'deprecated. use `status[]` param.'
+          description: deprecated. use `status[]` param.
           in: query
           name: with_completed
           required: false
@@ -757,14 +757,14 @@ paths:
           name: order_type
           required: false
           schema:
-            $ref: '#/components/schemas/ListOrderType'
+            $ref: "#/components/schemas/ListOrderType"
             default: desc
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: "#/components/schemas/ProjectList"
           description: Project list
       summary: Get a list of your projects
       tags:
@@ -778,65 +778,65 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: 'Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
+                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
                   type: string
                 coupon_code:
                   description: Coupon code to redeem
                   type: string
                 custom:
-                  description: 'Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value.'
+                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value.
                   items:
                     type: string
                   type: array
-                'documents[]':
-                  description: 'Optional. You can add as many files as you want in documents[] parameter. Or you add your documents later in separate calls.'
+                "documents[]":
+                  description: Optional. You can add as many files as you want in documents[] parameter. Or you add your documents later in separate calls.
                   format: binary
                   type: string
-                'glossaries[]':
+                "glossaries[]":
                   description: Optional. Only one glossary is supported at the moment.
                   format: binary
                   type: string
                 source_language:
                   type: string
-                'styleguides[]':
-                  description: 'Optional. You can add as many files as you want in styleguides[] parameter. Or you add your style guides later in separate calls.'
+                "styleguides[]":
+                  description: Optional. You can add as many files as you want in styleguides[] parameter. Or you add your style guides later in separate calls.
                   format: binary
                   type: string
-                'target_languages[]':
+                "target_languages[]":
                   items:
                     type: string
                   type: array
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Newly created project
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedDocumentFormat UnsupportedStyleGuideFormat UnsupportedGlossaryFormat
-        '406':
+        "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedLanguage TooManyGlossaries ProjectAlreadyHasGlossary
-        '500':
+        "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectInsertFailed
       summary: Get a new quote
       tags:
@@ -852,7 +852,7 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: 'Return only projects that have been completed. When `true`, this makes `joined` true as well.'
+        - description: Return only projects that have been completed. When `true`, this makes `joined` true as well.
           in: query
           name: completed
           required: false
@@ -873,22 +873,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: "#/components/schemas/ProjectList"
           description: Vendor project list
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound - this is not a vendor user account
       summary: Get a list of your vendor projects
       tags:
         - Project
-  '/projects/{id}':
+  "/projects/{id}":
     delete:
       description: Delete(cancel) a project.
       operationId: deleteProject
@@ -901,17 +901,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Project canceled successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Delete a project
       tags:
@@ -927,9 +927,9 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'Include detailed information. Possible values ''client'', ''vendor'', ''score'''
+        - description: Include detailed information. Possible values 'client', 'vendor', 'score'
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -940,17 +940,17 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Project model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get single project
       tags:
@@ -972,46 +972,46 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: 'Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
+                  description: Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
                   type: string
                 coupon_code:
                   description: Coupon code to redeem
                   type: string
                 custom:
-                  description: 'Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.'
+                  description: Optional. This is a consistent custom data parameter that will be given to you in the response across every request of this project model. Values should be provided like this, custom[my_key] = my_value. If you previously provided one, it will be replaced.
                   items:
                     type: string
                   type: array
                 source_language:
                   type: string
-                'target_languages[]':
+                "target_languages[]":
                   items:
                     type: string
                   type: array
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Updated project
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-        '406':
+        "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedLanguage
       summary: Update project language pairs
       tags:
         - Project
-  '/projects/{id}/callback/{actionType}':
+  "/projects/{id}/callback/{actionType}":
     get:
       description: Trigger a call to your callback URL related to this project.
       operationId: triggerCallback
@@ -1034,22 +1034,22 @@ paths:
               - completed
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CallbackResult'
+                $ref: "#/components/schemas/CallbackResult"
           description: Callback result
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Trigger a call to your callback URL related to this project.
       tags:
         - Project
-  '/projects/{id}/cancel':
+  "/projects/{id}/cancel":
     post:
       operationId: cancelProject
       parameters:
@@ -1070,22 +1070,22 @@ paths:
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Project canceled successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Cancel your translation project
       tags:
         - Project
-  '/projects/{id}/deliver':
+  "/projects/{id}/deliver":
     post:
       operationId: deliverProject
       parameters:
@@ -1097,22 +1097,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Operation started successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Deliver project
       tags:
         - Project
-  '/projects/{id}/download':
+  "/projects/{id}/download":
     get:
       description: Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
       operationId: download
@@ -1125,29 +1125,29 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/octet-stream:
               schema:
                 format: binary
                 type: string
-          description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
-        '402':
+          description: Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
       summary: Download the latest translation package.
       tags:
         - Project
-  '/projects/{id}/download/{language}':
+  "/projects/{id}/download/{language}":
     get:
       description: Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
       operationId: downloadLanguage
@@ -1166,29 +1166,29 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/octet-stream:
               schema:
                 format: binary
                 type: string
-          description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
-        '402':
+          description: Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
       summary: Download the latest translation package.
       tags:
         - Project
-  '/projects/{id}/invoice':
+  "/projects/{id}/invoice":
     get:
       description: Get invoice details
       operationId: getInvoice
@@ -1201,22 +1201,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                $ref: "#/components/schemas/Invoice"
           description: Invoice
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
       summary: Get invoice details
       tags:
         - Project
-  '/projects/{id}/invoice.html':
+  "/projects/{id}/invoice.html":
     get:
       description: Download invoice as html by project id.
       operationId: downloadHtmlInvoice
@@ -1229,22 +1229,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             text/html:
               schema:
                 type: string
           description: Invoice
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
       summary: Download invoice as hmtl
       tags:
         - Project
-  '/projects/{id}/invoice.pdf':
+  "/projects/{id}/invoice.pdf":
     get:
       description: Download invoice as pdf by project id.
       operationId: downloadPdfInvoice
@@ -1257,23 +1257,23 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/pdf:
               schema:
                 format: binary
                 type: string
           description: Invoice
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound or InvoiceNotFound
       summary: Download invoice as pdf
       tags:
         - Project
-  '/projects/{id}/launch':
+  "/projects/{id}/launch":
     post:
       operationId: launchProject
       parameters:
@@ -1296,14 +1296,14 @@ paths:
                   description: Optional with corporate accounts. Not available for others.
                   type: string
                 card_id:
-                  description: 'Optional. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin.'
+                  description: Optional. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin.
                   format: int64
                   type: integer
                 payment_code:
                   description: Optional. `corporate` payment method requires this.s
                   type: string
                 payment_method:
-                  description: 'Optional. Determines which method to use for payment. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin. `corporate` method follows corporate account policy automatically, either follows invoicing flow or automatically charges corporate''s primary card.'
+                  description: Optional. Determines which method to use for payment. `client`, `app`, `corporate_card` methods require a credit card ID. `credit` method requires Stripe token and bin. `corporate` method follows corporate account policy automatically, either follows invoicing flow or automatically charges corporate's primary card.
                   enum:
                     - corporate
                     - client
@@ -1312,40 +1312,40 @@ paths:
                     - corporate_card
                   type: string
                 stripe_token:
-                  description: 'This is required if you are using a one-time credit card. This is the token generted from frontend via Stripe SDK. If you are using a one-time card with `stripe_token`, you must also provide `bin`, last 4 digits of the card.'
+                  description: This is required if you are using a one-time credit card. This is the token generted from frontend via Stripe SDK. If you are using a one-time card with `stripe_token`, you must also provide `bin`, last 4 digits of the card.
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectLaunchResponse'
+                $ref: "#/components/schemas/ProjectLaunchResponse"
           description: Project launched successfully
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingPaymentCode MissingCorporateAccount MissingPaymentMethod
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: CorporateAccountNotAllowedForApiPayment ApiClientMissingPaymentInformation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Launch your translation project
       tags:
         - Project
-  '/projects/{id}/package':
+  "/projects/{id}/package":
     post:
-      description: 'Package the translation project, make it ready to be downloaded.'
+      description: Package the translation project, make it ready to be downloaded.
       operationId: package
       parameters:
         - description: Project ID
@@ -1355,7 +1355,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
+        - description: If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -1363,29 +1363,29 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/octet-stream:
               schema:
                 format: binary
                 type: string
           description: Packaged translation streamed.
-        '402':
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
       summary: Package the translation of all languages to be downloaded.
       tags:
         - Project
-  '/projects/{id}/package/check':
+  "/projects/{id}/package/check":
     get:
       description: This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.
       operationId: trackPackage
@@ -1403,30 +1403,30 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PackageStatus'
+                $ref: "#/components/schemas/PackageStatus"
           description: Current status of packaging process.
-        '402':
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: PackagingStatusMissing
       summary: Track the status of translation packaging.
       tags:
         - Project
-  '/projects/{id}/package/{language}':
+  "/projects/{id}/package/{language}":
     post:
-      description: 'Package the translation project, make it ready to be downloaded.'
+      description: Package the translation project, make it ready to be downloaded.
       operationId: packageLanguage
       parameters:
         - description: Project ID
@@ -1442,7 +1442,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
+        - description: If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -1450,32 +1450,32 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Package'
+                $ref: "#/components/schemas/Package"
             application/octet-stream:
               schema:
                 format: binary
                 type: string
-          description: 'Packaging status and tracking code. With the package key, you can track the progress of translation packaging.Also packaged translation streamed.'
-        '402':
+          description: Packaging status and tracking code. With the package key, you can track the progress of translation packaging.Also packaged translation streamed.
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: TranslationPackageNotFound
       summary: Package the translation of a specific target language to be downloaded.
       tags:
         - Project
-  '/projects/{id}/progress':
+  "/projects/{id}/progress":
     get:
       description: Get the progress of an already launched project.
       operationId: getProgress
@@ -1487,35 +1487,35 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'This will return a more raw progress information for translation and proofreading. For instance, when completed, we will return 100% for both tasks by default, whereas their actual progress may be lower than 100%.'
+        - description: This will return a more raw progress information for translation and proofreading. For instance, when completed, we will return 100% for both tasks by default, whereas their actual progress may be lower than 100%.
           in: query
           name: raw
           schema:
             default: false
             type: boolean
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Progress'
+                $ref: "#/components/schemas/Progress"
           description: Progress information
-        '402':
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get project progress
       tags:
         - Project
-  '/projects/{id}/recreate':
+  "/projects/{id}/recreate":
     post:
       operationId: recreateProject
       parameters:
@@ -1527,28 +1527,28 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Project recreation process started successfully
-        '401':
+        "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnauthorizedUser
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-      summary: 'Recreate your translation project from scratch. This is a risky action, you will lose current translations.'
+      summary: Recreate your translation project from scratch. This is a risky action, you will lose current translations.
       tags:
         - Project
-  '/projects/{id}/reports':
+  "/projects/{id}/reports":
     post:
       operationId: submitProjectReports
       parameters:
@@ -1572,28 +1572,28 @@ paths:
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Report submitted successfully
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingMessage
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Submit reports for a project
       tags:
         - Project
-  '/projects/{id}/webhooks':
+  "/projects/{id}/webhooks":
     delete:
       description: Delete project webhooks. Projects currently support registering only 1 webhook. This endpoint deletes the previously registered webhook.
       operationId: deleteProjectWebhook
@@ -1606,17 +1606,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Project webhook deleted successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Delete project webhooks
       tags:
@@ -1633,17 +1633,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Project model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get project information (includes callback_url for webhook)
       tags:
@@ -1665,21 +1665,21 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: 'Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
+                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Updated project
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Update project webhook URL
       tags:
@@ -1701,28 +1701,28 @@ paths:
             schema:
               properties:
                 callback_url:
-                  description: 'Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
+                  description: Webhook URL. We will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'.
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Updated project
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Update project webhook URL
       tags:
         - Project Webhooks
-  '/projects/{projectId}/activities':
+  "/projects/{projectId}/activities":
     get:
-      description: 'Get a list of realtime activities on the project, such as translation suggestion and translation approval.'
+      description: Get a list of realtime activities on the project, such as translation suggestion and translation approval.
       operationId: getActivities
       parameters:
         - description: Project ID
@@ -1745,22 +1745,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ActivityList'
+                $ref: "#/components/schemas/ActivityList"
           description: A list of activity models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of realtime activities.
       tags:
         - Activity
-  '/projects/{projectId}/activities/{activityId}':
+  "/projects/{projectId}/activities/{activityId}":
     get:
       description: Get a single realtime activity.
       operationId: getActivity
@@ -1780,17 +1780,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Activity'
+                $ref: "#/components/schemas/Activity"
           description: Activity model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
       summary: Get a single realtime activity.
       tags:
@@ -1825,22 +1825,22 @@ paths:
                 - comment
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Comment'
+                $ref: "#/components/schemas/Comment"
           description: Comment model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
       summary: Submit a blog to an activity.
       tags:
         - Activity
-  '/projects/{projectId}/activities/{activityId}/comments':
+  "/projects/{projectId}/activities/{activityId}/comments":
     get:
       description: Get a list of comments belonging to this activity.
       operationId: getActivityComments
@@ -1860,22 +1860,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentList'
+                $ref: "#/components/schemas/CommentList"
           description: A list of Comment models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectActivityNotFound
       summary: Get a list of comments belonging to this activity.
       tags:
         - Activity
-  '/projects/{projectId}/comments':
+  "/projects/{projectId}/comments":
     get:
       description: Get a list of activity comments throughout the whole project.
       operationId: getComments
@@ -1900,22 +1900,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentList'
+                $ref: "#/components/schemas/CommentList"
           description: A list of Comment models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of activity comments throughout the whole project.
       tags:
         - Activity
-  '/projects/{projectId}/documents':
+  "/projects/{projectId}/documents":
     get:
       description: Get a list of documents
       operationId: getProjectDocuments
@@ -1927,9 +1927,9 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'Attach further information. Possible values ''preview'' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.'
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -1939,17 +1939,17 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentList'
+                $ref: "#/components/schemas/DocumentList"
           description: A list of document models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of documents
       tags:
@@ -1970,62 +1970,62 @@ paths:
           multipart/form-data:
             schema:
               properties:
-                'documents[]':
-                  description: 'You can add as many files as you want in documents[] parameter.'
+                "documents[]":
+                  description: You can add as many files as you want in documents[] parameter.
                   items:
                     format: binary
                     type: string
                   type: array
-                'schemes[]':
-                  description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+                "schemes[]":
+                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
                   type: string
-                'source-links[]':
-                  description: 'When provided, we will download the files from these URLs, in addition to files provded in `documents` parameter and then save as source documents'
+                "source-links[]":
+                  description: When provided, we will download the files from these URLs, in addition to files provded in `documents` parameter and then save as source documents
                   items:
-                    $ref: '#/components/schemas/LinkedSourceDocument'
+                    $ref: "#/components/schemas/LinkedSourceDocument"
                   type: array
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentList'
+                $ref: "#/components/schemas/DocumentList"
           description: A list of successfully added new documents.
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedDocumentFormat
-        '406':
+        "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: InvalidDocumentScheme
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Upload a new document
       tags:
         - Project Document
-  '/projects/{projectId}/documents/{documentId}':
+  "/projects/{projectId}/documents/{documentId}":
     delete:
       description: Delete the document
       operationId: deleteProjectDocument
@@ -2045,23 +2045,23 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Document deleted successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: DocumentNotFound
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Delete the document
       tags:
@@ -2084,9 +2084,9 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'Attach further information. Possible values ''preview'' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.'
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -2096,17 +2096,17 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Document'
+                $ref: "#/components/schemas/Document"
           description: Document model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: DocumentNotFound
       summary: Get single document
       tags:
@@ -2139,52 +2139,52 @@ paths:
                   format: binary
                   type: string
                 schemes:
-                  description: 'JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.'
+                  description: JSON string. If your documents have a scheme, as in cases of CSV files, use the same array index keys for `schemes` parameter to specify their schemes. See `Document Schemes` title in the API documentation.
                   type: string
                 source-link:
-                  $ref: '#/components/schemas/LinkedSourceDocument'
+                  $ref: "#/components/schemas/LinkedSourceDocument"
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Document'
+                $ref: "#/components/schemas/Document"
           description: Updated document model
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge FileTooSmall FileWasAlreadyUploaded
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: DocumentNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedDocumentFormat
-        '406':
+        "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: InvalidDocumentScheme
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Update the document.
       tags:
         - Project Document
-  '/projects/{projectId}/documents/{documentId}/download':
+  "/projects/{projectId}/documents/{documentId}/download":
     get:
       description: Download a document
       operationId: downloadProjectDocument
@@ -2204,22 +2204,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: string
           description: Document streamed
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: DocumentNotFound
       summary: Download a document
       tags:
         - Project Document
-  '/projects/{projectId}/documents/{documentId}/translations':
+  "/projects/{projectId}/documents/{documentId}/translations":
     get:
       operationId: getDocumentTranslations
       parameters:
@@ -2238,16 +2238,16 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
       summary: Get a list of strings and its translations in the document.
       tags:
         - Translations
-  '/projects/{projectId}/documents/{documentId}/translations/{language}':
+  "/projects/{projectId}/documents/{documentId}/translations/{language}":
     get:
       operationId: getDocumentTranslationsForLanguage
       parameters:
@@ -2272,16 +2272,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
       summary: Get a list of strings and its translations in the document for this target language of the project.
       tags:
         - Translations
-  '/projects/{projectId}/glossaries':
+  "/projects/{projectId}/glossaries":
     get:
       description: Get a list of glossaries
       operationId: getGlossaries
@@ -2294,17 +2294,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GlossaryList'
+                $ref: "#/components/schemas/GlossaryList"
           description: A list of glossary models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of glossaries
       tags:
@@ -2326,53 +2326,53 @@ paths:
             schema:
               properties:
                 glossaries:
-                  description: 'You can only add one glossary, even though the name suggests multiple glossaries. This may be updated in the future to support multiple glossaries.'
+                  description: You can only add one glossary, even though the name suggests multiple glossaries. This may be updated in the future to support multiple glossaries.
                   format: binary
                   type: string
               required:
                 - glossaries
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Glossary'
+                $ref: "#/components/schemas/Glossary"
           description: Newly created glossary model.
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedGlossaryFormat
-        '406':
+        "406":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyHasGlossary
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Upload a new glossary
       tags:
         - Glossary
-  '/projects/{projectId}/glossaries/{glossaryId}':
+  "/projects/{projectId}/glossaries/{glossaryId}":
     delete:
       description: Delete the glossary
       operationId: deleteGlossary
@@ -2392,23 +2392,23 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Glossary deleted successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Delete the glossary
       tags:
@@ -2432,17 +2432,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Glossary'
+                $ref: "#/components/schemas/Glossary"
           description: Glossary model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
       summary: Get single glossary
       tags:
@@ -2478,40 +2478,40 @@ paths:
                 - glossaries
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Glossary'
+                $ref: "#/components/schemas/Glossary"
           description: Updated glossary model
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedGlossaryFormat
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Update the glossary.
       tags:
         - Glossary
-  '/projects/{projectId}/glossaries/{glossaryId}/download':
+  "/projects/{projectId}/glossaries/{glossaryId}/download":
     get:
       description: Download a glossary
       operationId: downloadGlossary
@@ -2531,22 +2531,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: string
           description: Glossary streamed
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: GlossaryNotFound
       summary: Download a glossary
       tags:
         - Glossary
-  '/projects/{projectId}/strings':
+  "/projects/{projectId}/strings":
     get:
       operationId: getProjectStrings
       parameters:
@@ -2558,16 +2558,16 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
       summary: Get a list of strings and its translations in the project.
       tags:
         - Strings
-  '/projects/{projectId}/strings/package':
+  "/projects/{projectId}/strings/package":
     post:
       operationId: packageProjectTranslationMemory
       parameters:
@@ -2578,7 +2578,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'If you want to package and download the translation memory synchronously, mark this parameter as ''0''. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.'
+        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -2593,11 +2593,11 @@ paths:
             default: tmx
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
             application/xml:
               schema:
                 format: binary
@@ -2606,7 +2606,7 @@ paths:
       summary: Get the translation memory of a project in TMX format
       tags:
         - Strings
-  '/projects/{projectId}/strings/package/status':
+  "/projects/{projectId}/strings/package/status":
     get:
       operationId: packageProjectTranslationMemoryStatus
       parameters:
@@ -2624,16 +2624,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: 'If package call was async, check the status of the request'
+      summary: If package call was async, check the status of the request
       tags:
         - Strings
-  '/projects/{projectId}/strings/{languageCode}/package':
+  "/projects/{projectId}/strings/{languageCode}/package":
     post:
       operationId: packageProjectTranslationMemoryForLanguage
       parameters:
@@ -2650,7 +2650,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If you want to package and download the translation memory synchronously, mark this parameter as ''0''. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.'
+        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
           in: query
           name: async
           schema:
@@ -2665,11 +2665,11 @@ paths:
             default: tmx
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
             application/xml:
               schema:
                 format: binary
@@ -2678,7 +2678,7 @@ paths:
       summary: Get the translation memory of a project in TMX format
       tags:
         - Strings
-  '/projects/{projectId}/strings/{languageCode}/package/status':
+  "/projects/{projectId}/strings/{languageCode}/package/status":
     get:
       operationId: packageProjectTranslationMemoryForLanguageStatus
       parameters:
@@ -2702,16 +2702,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: 'If package call was async, check the status of the request'
+      summary: If package call was async, check the status of the request
       tags:
         - Strings
-  '/projects/{projectId}/strings/{language}':
+  "/projects/{projectId}/strings/{language}":
     get:
       operationId: getProjectStringsForLanguage
       parameters:
@@ -2729,16 +2729,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
       summary: Get a list of strings and its translations in the project for this target language in the project.
       tags:
         - Strings
-  '/projects/{projectId}/styleguides':
+  "/projects/{projectId}/styleguides":
     get:
       description: Get a list of style guides
       operationId: getStyleGuides
@@ -2750,9 +2750,9 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'Attach further information. Possible values ''preview'' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.'
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -2761,17 +2761,17 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StyleGuideList'
+                $ref: "#/components/schemas/StyleGuideList"
           description: A list of style guide models
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of style guides
       tags:
@@ -2792,48 +2792,48 @@ paths:
           multipart/form-data:
             schema:
               properties:
-                'styleguides[]':
-                  description: 'You can add as many files as you want in styleguides[] parameter.'
+                "styleguides[]":
+                  description: You can add as many files as you want in styleguides[] parameter.
                   format: binary
                   type: string
               required:
-                - 'styleguides[]'
+                - styleguides[]
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StyleGuideList'
+                $ref: "#/components/schemas/StyleGuideList"
           description: Newly created style guide model or a list of new style guide models
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedStyleGuideFormat
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Upload a new style guide
       tags:
         - Style Guide
-  '/projects/{projectId}/styleguides/{styleGuideId}':
+  "/projects/{projectId}/styleguides/{styleGuideId}":
     delete:
       description: Delete the style guide
       operationId: deleteStyleGuide
@@ -2853,23 +2853,23 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Style guide deleted successfully
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Delete the style guide
       tags:
@@ -2892,9 +2892,9 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'Attach further information. Possible values ''preview'' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.'
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
           in: query
-          name: 'with[]'
+          name: with[]
           required: false
           schema:
             items:
@@ -2903,17 +2903,17 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StyleGuide'
+                $ref: "#/components/schemas/StyleGuide"
           description: Style guide model
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
       summary: Get single style guide
       tags:
@@ -2949,40 +2949,40 @@ paths:
                 - styleguides
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StyleGuide'
+                $ref: "#/components/schemas/StyleGuide"
           description: Updated style guide model
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedStyleGuideFormat
-        '409':
+        "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectAlreadyStarted
       summary: Update the style guide.
       tags:
         - Style Guide
-  '/projects/{projectId}/styleguides/{styleGuideId}/download':
+  "/projects/{projectId}/styleguides/{styleGuideId}/download":
     get:
       description: Download a style guide
       operationId: downloadStyleGuide
@@ -3002,22 +3002,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: string
           description: Style guide streamed
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
       summary: Download a style guide
       tags:
         - Style Guide
-  '/projects/{projectId}/translations':
+  "/projects/{projectId}/translations":
     get:
       deprecated: true
       operationId: getProjectTranslations
@@ -3030,16 +3030,16 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: 'Deprecated. Use /projects/{projectId}/strings instead.'
+      summary: Deprecated. Use /projects/{projectId}/strings instead.
       tags:
         - Translations
-  '/projects/{projectId}/translations/{language}':
+  "/projects/{projectId}/translations/{language}":
     get:
       deprecated: true
       operationId: getProjectTranslationsForLanguage
@@ -3058,16 +3058,16 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StringList'
+                $ref: "#/components/schemas/StringList"
           description: Response for strings and their translations
-      summary: 'Deprecated. use /projects/{projectId}/strings/{language} instead.'
+      summary: Deprecated. use /projects/{projectId}/strings/{language} instead.
       tags:
         - Translations
-  '/projects/{projectId}/vendors':
+  "/projects/{projectId}/vendors":
     get:
       description: Get a list of vendors.
       operationId: getProjectVendors
@@ -3080,23 +3080,23 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserList'
+                $ref: "#/components/schemas/UserList"
           description: User list
-        '402':
+        "402":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotLaunchedYet
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: ProjectNotFound
       summary: Get a list of vendors.
       tags:
@@ -3108,20 +3108,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReportFilter'
+              $ref: "#/components/schemas/ReportFilter"
         required: false
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LanguagePairsReport'
+                $ref: "#/components/schemas/LanguagePairsReport"
           description: Language pairs stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns a report of language pairs.
       tags:
@@ -3133,20 +3133,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReportFilter'
+              $ref: "#/components/schemas/ReportFilter"
         required: false
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectList'
+                $ref: "#/components/schemas/ProjectList"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns a report of corporate account users.
       tags:
@@ -3158,20 +3158,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReportFilter'
+              $ref: "#/components/schemas/ReportFilter"
         required: false
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsersReport'
+                $ref: "#/components/schemas/UsersReport"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns a report of corporate account users.
       tags:
@@ -3180,12 +3180,12 @@ paths:
     post:
       operationId: sendEmailConfirmation
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/OperationStatus'
+                  - $ref: "#/components/schemas/OperationStatus"
                   - properties:
                       status:
                         default: success
@@ -3194,7 +3194,7 @@ paths:
                           - already_confirmed
                         type: string
                     type: object
-          description: 'When confirmation email is sent, status is `success`, or `already_confirmed` when user has already confirmed their email address.'
+          description: When confirmation email is sent, status is `success`, or `already_confirmed` when user has already confirmed their email address.
       summary: Sends email confirmation email for current user
       tags:
         - User
@@ -3212,23 +3212,23 @@ paths:
               - weekly
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponsivityList'
+                $ref: "#/components/schemas/ResponsivityList"
           description: Vendor responsivity stats
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound - this is not a vendor user account
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns your vendor responsivity stats
       tags:
@@ -3243,9 +3243,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Search in these entities. Current oprions are projects, documents, strings. Can be multiple. When not provided, we''ll search through all entities.'
+        - description: Search in these entities. Current oprions are projects, documents, strings. Can be multiple. When not provided, we'll search through all entities.
           in: query
-          name: 'include[]'
+          name: include[]
           required: false
           schema:
             items:
@@ -3270,24 +3270,24 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchEverywhereResult'
+                $ref: "#/components/schemas/SearchEverywhereResult"
           description: Search result for multiple entities and paging
-      summary: 'Search everywhere! Including projects, documents, translations...'
+      summary: Search everywhere! Including projects, documents, translations...
       tags:
         - Search
   /search/documents/reindex:
     post:
       operationId: reindexDocuments
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
       summary: Reindex for search all of the client source and translation documents.
       tags:
@@ -3303,11 +3303,11 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
       summary: Check reindex status of the client source and translation documents.
       tags:
@@ -3316,17 +3316,17 @@ paths:
     get:
       operationId: getStats
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stats'
+                $ref: "#/components/schemas/Stats"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns your client and vendor statistics. This used to be called "summary" (\@deprecated).
       tags:
@@ -3335,17 +3335,17 @@ paths:
     get:
       operationId: getPopularPairs
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PopularLanguagePairs'
+                $ref: "#/components/schemas/PopularLanguagePairs"
           description: User's most ordered language pairs
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns the language pairs that you have ordered most.
       tags:
@@ -3354,17 +3354,17 @@ paths:
     get:
       operationId: getProjectStats
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientProjectStats'
+                $ref: "#/components/schemas/ClientProjectStats"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns your project statistics.
       tags:
@@ -3373,17 +3373,17 @@ paths:
     get:
       operationId: getStringStats
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientStringStats'
+                $ref: "#/components/schemas/ClientStringStats"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Returns your string statistics.
       tags:
@@ -3407,11 +3407,11 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientStrings'
+                $ref: "#/components/schemas/ClientStrings"
           description: List of strings in JSON
       summary: Get a list of client/corporate strings (20 per page)
       tags:
@@ -3435,16 +3435,16 @@ paths:
                   type: array
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MachineTranslatedStrings'
+                $ref: "#/components/schemas/MachineTranslatedStrings"
           description: Machine Translated Strings in JSON
       summary: Translate Strings with MT
       tags:
         - Strings
-  '/strings/{languageCode}/package':
+  "/strings/{languageCode}/package":
     post:
       operationId: packageUserTranslationMemory
       parameters:
@@ -3454,14 +3454,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'If you want to package and download the translation memory synchronously, mark this parameter as ''0''. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.'
+        - description: If you want to package and download the translation memory synchronously, mark this parameter as '0'. It will package the translation memory and then return the packaged file in the response, identical to async/download call after an asynchronous /package call.
           in: query
           name: async
           schema:
             default: 0
             format: int64
             type: integer
-        - description: 'If you don''t need us to email the TMX, set this to ''0''. Default is 1.'
+        - description: If you don't need us to email the TMX, set this to '0'. Default is 1.
           in: query
           name: email
           schema:
@@ -3469,11 +3469,11 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
             application/xml:
               schema:
                 format: binary
@@ -3482,7 +3482,7 @@ paths:
       summary: Get the translation memory of a client or corporate in TMX format
       tags:
         - Strings
-  '/strings/{languageCode}/package/status':
+  "/strings/{languageCode}/package/status":
     get:
       operationId: packageUserTranslationMemoryForLanguageStatus
       parameters:
@@ -3499,13 +3499,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AsyncOperationStatus'
+                $ref: "#/components/schemas/AsyncOperationStatus"
           description: Async operation status. Use the key to query status of this operation.
-      summary: 'If package call was async, check the status of the request'
+      summary: If package call was async, check the status of the request
       tags:
         - Strings
   /styleguide:
@@ -3513,17 +3513,17 @@ paths:
       description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalStyleGuide
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: string
           description: Style guide file streamed.
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: StyleGuideNotFound
       summary: Download the global style guide.
       tags:
@@ -3537,7 +3537,7 @@ paths:
             schema:
               properties:
                 styleguide:
-                  description: |
+                  description: >
                     Style guide file. Currently supported formats: .pdf, .docx, .txt
                   format: binary
                   type: string
@@ -3545,23 +3545,23 @@ paths:
                 - styleguide
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: FileTooLarge FileTooSmall NoFileUploaded MissingCorporateAccount
-        '405':
+        "405":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UnsupportedStyleGuideFormat
       summary: Create or update the global style guide.
       tags:
@@ -3571,7 +3571,7 @@ paths:
       description: Get Swagger JSON
       operationId: getSwaggerJson
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
@@ -3582,7 +3582,7 @@ paths:
         - Static
   /token:
     post:
-      description: |
+      description: >
         MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
       operationId: getAccessToken
       requestBody:
@@ -3591,7 +3591,7 @@ paths:
             schema:
               properties:
                 grant_type:
-                  description: 'OAuth2 grant type. Supports ''client_credentials'', ''password'' or ''refresh_token'', ''user_id'' available.'
+                  description: OAuth2 grant type. Supports 'client_credentials', 'password' or 'refresh_token', 'user_id' available.
                   type: string
                 password:
                   description: MW Account password (to be used in password grant type)
@@ -3614,18 +3614,18 @@ paths:
                 - scope
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: "#/components/schemas/Token"
           description: Authentication response
         default:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenError'
-          description: 'Authentication error - for vendor auth, it will also fail if their account is not approved yet. In that case, the error response will include "account_status" key.'
+                $ref: "#/components/schemas/TokenError"
+          description: Authentication error - for vendor auth, it will also fail if their account is not approved yet. In that case, the error response will include "account_status" key.
       security:
         - basicAuth: []
       summary: Retrieve an access token to interact with the API.
@@ -3635,19 +3635,19 @@ paths:
     post:
       operationId: unfreezeAccount
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Account is already unfrozen for notifications
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Unfreeze requester account for project notifications
       tags:
@@ -3681,11 +3681,11 @@ paths:
               - all
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserList'
+                $ref: "#/components/schemas/UserList"
           description: User list
       summary: Get a list of platform users
       tags:
@@ -3697,24 +3697,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Email'
+              $ref: "#/components/schemas/Email"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-          description: 'Reminder already sent, wait for a while before new request!'
+                $ref: "#/components/schemas/Error"
+          description: Reminder already sent, wait for a while before new request!
       summary: Sends password reset email to the user's registered email address
       tags:
         - User
-  '/{userId}':
+  "/{userId}":
     get:
       operationId: getUser
       parameters:
@@ -3726,22 +3726,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: User summary
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
-      summary: 'Get user information, including client or vendor specific info.'
+      summary: Get user information, including client or vendor specific info.
       tags:
         - User
     post:
@@ -3758,23 +3758,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserUpdateContent'
+              $ref: "#/components/schemas/UserUpdateContent"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: User info
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       tags:
         - User
-  '/{userId}/approve':
+  "/{userId}/approve":
     post:
       operationId: approveVendorApplication
       parameters:
@@ -3786,24 +3786,24 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Vendor application of this user is approved. User is ready to work with us.
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/delete-account':
+  "/{userId}/delete-account":
     delete:
       operationId: deleteUserAccount
       parameters:
@@ -3815,22 +3815,22 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Delete requester account
       tags:
         - User
-  '/{userId}/documents':
+  "/{userId}/documents":
     get:
       description: Get a list of your documents
       operationId: getUserDocuments
@@ -3842,7 +3842,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: 'When true, this will return the most 4 recent active documents.'
+        - description: When true, this will return the most 4 recent active documents.
           in: query
           name: recent
           required: false
@@ -3873,7 +3873,7 @@ paths:
               - STYLE_GUIDES
               - GLOSSARIES
             type: string
-        - description: 'searches in source language of documents, in source and target languages of document''s quote'
+        - description: searches in source language of documents, in source and target languages of document's quote
           in: query
           name: language_code
           required: false
@@ -3908,19 +3908,19 @@ paths:
           name: order_type
           required: false
           schema:
-            $ref: '#/components/schemas/ListOrderType'
+            $ref: "#/components/schemas/ListOrderType"
             default: desc
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DocumentList'
+                $ref: "#/components/schemas/DocumentList"
           description: Document list
       summary: Get a list of your documents
       tags:
         - Document
-  '/{userId}/downgrade-proofreader':
+  "/{userId}/downgrade-proofreader":
     post:
       operationId: downgradeUserProofreader
       parameters:
@@ -3932,26 +3932,26 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Vendor is already a translator
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/earnings':
+  "/{userId}/earnings":
     get:
       operationId: getUserEarnings
       parameters:
@@ -3963,25 +3963,25 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Earnings'
+                $ref: "#/components/schemas/Earnings"
           description: Earnings for vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
-      summary: 'Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.'
+      summary: Returns your vendor earnings. Includes real-time earnings from ongoing projects, and fixed earnings from completed projects. Also includes total earnings and string edits.
       tags:
         - User
-  '/{userId}/freeze-account':
+  "/{userId}/freeze-account":
     post:
       operationId: freezeUserAccount
       parameters:
@@ -3993,24 +3993,24 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Account is already frozen for notifications
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Freeze requester account for project notifications
       tags:
         - User
-  '/{userId}/make-proofreader':
+  "/{userId}/make-proofreader":
     post:
       operationId: makeUserProofreader
       parameters:
@@ -4022,26 +4022,26 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Vendor is already a proofreader
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/notifications/subscribe':
+  "/{userId}/notifications/subscribe":
     post:
       operationId: subscribeUserNotification
       parameters:
@@ -4056,32 +4056,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NotificationSubscription'
+              $ref: "#/components/schemas/NotificationSubscription"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Saved notification subscription information
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingParameter | Failed to save subscription
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/notifications/unsubscribe':
+  "/{userId}/notifications/unsubscribe":
     post:
       operationId: unsubscribeUserNotification
       parameters:
@@ -4096,32 +4096,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NotificationSubscription'
+              $ref: "#/components/schemas/NotificationSubscription"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Deleted notification subscription information
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: MissingParameter | Failed to delete subscription
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/payment':
+  "/{userId}/payment":
     get:
       operationId: getUserPaymentInfo
       parameters:
@@ -4133,17 +4133,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaymentInfo'
-          description: 'Returns billing and saved card information for user, and their corporate if present.'
-        '404':
+                $ref: "#/components/schemas/PaymentInfo"
+          description: Returns billing and saved card information for user, and their corporate if present.
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound UnauthorizedUser
       summary: Get user payment Info
       tags:
@@ -4162,24 +4162,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaymentInfo'
+              $ref: "#/components/schemas/PaymentInfo"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Update user payment info
       tags:
         - User
-  '/{userId}/profile-picture':
+  "/{userId}/profile-picture":
     post:
       operationId: uploadUserProfilePicture
       parameters:
@@ -4196,37 +4196,37 @@ paths:
             schema:
               properties:
                 profile_picture:
-                  description: 'Profile picture file contents. Accepted extensions are png, jpg.'
+                  description: Profile picture file contents. Accepted extensions are png, jpg.
                   format: binary
                   type: string
               required:
                 - profile_picture
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: NoFileUploaded
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/reject':
+  "/{userId}/reject":
     post:
       operationId: rejectVendorApplication
       parameters:
@@ -4238,24 +4238,24 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Vendor application of this user is rejected.
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/resend-email-confirmation':
+  "/{userId}/resend-email-confirmation":
     post:
       operationId: sendUserEmailConfirmation
       parameters:
@@ -4267,12 +4267,12 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/OperationStatus'
+                  - $ref: "#/components/schemas/OperationStatus"
                   - properties:
                       status:
                         default: success
@@ -4281,12 +4281,12 @@ paths:
                         type: string
                     type: object
           description: confirmation email has been sent
-        '202':
+        "202":
           content:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/OperationStatus'
+                  - $ref: "#/components/schemas/OperationStatus"
                   - properties:
                       status:
                         default: already_confirmed
@@ -4295,17 +4295,17 @@ paths:
                         type: string
                     type: object
           description: status is `already_confirmed` when user has already confirmed their email address.
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound - this is not a vendor user account
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
@@ -4313,7 +4313,7 @@ paths:
       summary: Sends email confirmation email for a user
       tags:
         - User
-  '/{userId}/responsivity':
+  "/{userId}/responsivity":
     get:
       operationId: getUserResponsivity
       parameters:
@@ -4334,23 +4334,23 @@ paths:
               - weekly
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponsivityList'
+                $ref: "#/components/schemas/ResponsivityList"
           description: Vendor responsivity stats
-        '400':
+        "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: VendorNotFound - this is not a vendor user account
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
@@ -4358,7 +4358,7 @@ paths:
       summary: Returns a user's vendor responsivity stats
       tags:
         - User
-  '/{userId}/stats':
+  "/{userId}/stats":
     get:
       operationId: getUserStats
       parameters:
@@ -4370,17 +4370,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stats'
+                $ref: "#/components/schemas/Stats"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
@@ -4388,7 +4388,7 @@ paths:
       summary: Returns a user's client and vendor statistics. This used to be called "summary" (\@deprecated).
       tags:
         - User
-  '/{userId}/stats/popular-pairs':
+  "/{userId}/stats/popular-pairs":
     get:
       operationId: getUserPopularPairs
       parameters:
@@ -4400,17 +4400,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PopularLanguagePairs'
+                $ref: "#/components/schemas/PopularLanguagePairs"
           description: User's most ordered language pairs
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
@@ -4418,7 +4418,7 @@ paths:
       summary: Returns the language pairs that the user has ordered most.
       tags:
         - User
-  '/{userId}/stats/projects':
+  "/{userId}/stats/projects":
     get:
       operationId: getUserProjectStats
       parameters:
@@ -4430,17 +4430,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientProjectStats'
+                $ref: "#/components/schemas/ClientProjectStats"
           description: User stats for client and vendors
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
@@ -4448,7 +4448,7 @@ paths:
       summary: Returns a user's project statistics.
       tags:
         - User
-  '/{userId}/suspend':
+  "/{userId}/suspend":
     post:
       operationId: suspendUser
       parameters:
@@ -4469,24 +4469,24 @@ paths:
                   type: string
               type: object
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Suspended user account.
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       security:
         - mwoAuth:
             - privileged
       tags:
         - User
-  '/{userId}/unfreeze-account':
+  "/{userId}/unfreeze-account":
     post:
       operationId: unfreezeUserAccount
       parameters:
@@ -4498,19 +4498,19 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationStatus'
+                $ref: "#/components/schemas/OperationStatus"
           description: Successful operation
-        '304':
+        "304":
           description: Account is already unfrozen for notifications
-        '404':
+        "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
           description: UserNotFound
       summary: Unfreeze requester account for project notifications
       tags:
@@ -4527,19 +4527,19 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/ActivityLinks'
+          $ref: "#/components/schemas/ActivityLinks"
         source_text:
           description: Source text
           type: string
         target_text:
-          description: 'Target text of the activity, which is actually the translation of the source text.'
+          description: Target text of the activity, which is actually the translation of the source text.
           type: string
         translator:
           description: Unique identifier of the translator/proofreader of this activity.
           format: int64
           type: integer
         type:
-          description: 'Currently there are two available activity types; ''translated'', ''proofread''.'
+          description: Currently there are two available activity types; 'translated', 'proofread'.
           enum:
             - translated
             - proofread
@@ -4547,21 +4547,21 @@ components:
       type: object
     ActivityLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             comments:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             project:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     ActivityList:
       properties:
         activities:
           items:
-            $ref: '#/components/schemas/Activity'
+            $ref: "#/components/schemas/Activity"
           type: array
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
       type: object
     Address:
       properties:
@@ -4587,7 +4587,7 @@ components:
         message:
           type: object
         status:
-          $ref: '#/components/schemas/AsyncOperationStatusEnum'
+          $ref: "#/components/schemas/AsyncOperationStatusEnum"
       type: object
     AsyncOperationStatusEnum:
       default: sent
@@ -4599,11 +4599,11 @@ components:
       type: string
     BillingAddress:
       allOf:
-        - $ref: '#/components/schemas/Address'
+        - $ref: "#/components/schemas/Address"
         - properties:
             name:
-              default: ''
-              description: 'addressing name, such as company name. used in billing address.'
+              default: ""
+              description: addressing name, such as company name. used in billing address.
               type: string
           type: object
     BlogArticle:
@@ -4621,7 +4621,7 @@ components:
           description: Article content
           type: string
         created_at:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         excerpt:
@@ -4634,7 +4634,7 @@ components:
           description: language code
           type: string
         links:
-          $ref: '#/components/schemas/BlogArticleLinks'
+          $ref: "#/components/schemas/BlogArticleLinks"
         slug:
           type: string
         title:
@@ -4644,35 +4644,35 @@ components:
       type: object
     BlogArticleLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             android:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             header_image:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             ios:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             web:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     BlogArticleList:
       properties:
         articles:
           items:
-            $ref: '#/components/schemas/BlogArticle'
+            $ref: "#/components/schemas/BlogArticle"
           type: array
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
       type: object
     CallbackResult:
       properties:
         data:
-          $ref: '#/components/schemas/Project'
+          $ref: "#/components/schemas/Project"
         result:
           description: Callback response returned from `url`.
           type: string
         type:
-          $ref: '#/components/schemas/ProjectStatus'
+          $ref: "#/components/schemas/ProjectStatus"
         url:
           description: The URL that received the callback.
           type: string
@@ -4698,7 +4698,7 @@ components:
       properties:
         stats:
           items:
-            $ref: '#/components/schemas/ClientProjectStat'
+            $ref: "#/components/schemas/ClientProjectStat"
           type: array
       type: object
     ClientStats:
@@ -4713,7 +4713,7 @@ components:
           format: int64
           type: integer
         total_discounted:
-          $ref: '#/components/schemas/Monetary'
+          $ref: "#/components/schemas/Monetary"
         total_project_count:
           format: int64
           type: integer
@@ -4728,7 +4728,7 @@ components:
       properties:
         language_counts:
           items:
-            $ref: '#/components/schemas/LanguageStringStat'
+            $ref: "#/components/schemas/LanguageStringStat"
           type: array
         total_project_strings_count:
           format: int64
@@ -4742,7 +4742,7 @@ components:
         content:
           type: string
         last_changed:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         resource:
@@ -4764,21 +4764,21 @@ components:
         language:
           type: string
         last_changed:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         translations:
           items:
-            $ref: '#/components/schemas/ClientStringTranslation'
+            $ref: "#/components/schemas/ClientStringTranslation"
           type: array
       type: object
     ClientStrings:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         strings:
           items:
-            $ref: '#/components/schemas/ClientStringWithTranslations'
+            $ref: "#/components/schemas/ClientStringWithTranslations"
           type: array
       type: object
     Comment:
@@ -4794,26 +4794,26 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/CommentLinks'
+          $ref: "#/components/schemas/CommentLinks"
       type: object
     CommentLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             activity:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
               description: Link to the activity to which this comment was submitted.
             project:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     CommentList:
       properties:
         activities:
           items:
-            $ref: '#/components/schemas/Comment'
+            $ref: "#/components/schemas/Comment"
           type: array
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
       type: object
     CreditCard:
       properties:
@@ -4832,7 +4832,7 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/DocumentLinks'
+          $ref: "#/components/schemas/DocumentLinks"
         name:
           type: string
         scheme:
@@ -4840,7 +4840,7 @@ components:
         source_language:
           type: string
         subject:
-          $ref: '#/components/schemas/DocumentSubject'
+          $ref: "#/components/schemas/DocumentSubject"
         target_languages:
           items:
             type: string
@@ -4855,50 +4855,50 @@ components:
       type: object
     DocumentInSearch:
       allOf:
-        - $ref: '#/components/schemas/Document'
+        - $ref: "#/components/schemas/Document"
         - properties:
             search_result_reason:
               type: string
           type: object
     DocumentLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             admins:
               additionalProperties:
-                $ref: '#/components/schemas/Href'
-                description: 'MotaWord admin link for this file, in this language code.'
+                $ref: "#/components/schemas/Href"
+                description: MotaWord admin link for this file, in this language code.
               type: object
             download:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             editors:
               additionalProperties:
-                $ref: '#/components/schemas/Href'
-                description: 'MotaWord editor link for this file, in this language code.'
+                $ref: "#/components/schemas/Href"
+                description: MotaWord editor link for this file, in this language code.
               type: object
             preview-box:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
               description: Box.com URL to preview this document. This URL is temporary. You need to re-fetch the file to refresh the Box.com preview URL. Available for documents and style guides.
             preview-pdf:
-              $ref: '#/components/schemas/Href'
-              description: 'This is our fallback preview URL, providing a PDF file. Use this file to embed in your PDF viewer. Available for documents and style guides.'
+              $ref: "#/components/schemas/Href"
+              description: This is our fallback preview URL, providing a PDF file. Use this file to embed in your PDF viewer. Available for documents and style guides.
             preview-pdf-viewer:
-              $ref: '#/components/schemas/Href'
-              description: 'This is another version of preview-pdf, this time pointing to a preview viewer page on front application. This page requires authentication and comes with its own PDF viewer.'
+              $ref: "#/components/schemas/Href"
+              description: This is another version of preview-pdf, this time pointing to a preview viewer page on front application. This page requires authentication and comes with its own PDF viewer.
             project:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             thumbnail:
-              $ref: '#/components/schemas/Href'
-              description: 'Thumbnail preview URL of the document. If doc has a page structure, this is probably only the first page.'
+              $ref: "#/components/schemas/Href"
+              description: Thumbnail preview URL of the document. If doc has a page structure, this is probably only the first page.
           type: object
     DocumentList:
       properties:
         documents:
           items:
-            $ref: '#/components/schemas/Document'
+            $ref: "#/components/schemas/Document"
           type: array
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
       type: object
     DocumentSubject:
       enum:
@@ -4923,7 +4923,7 @@ components:
           default: usd
           type: string
         due_date:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         status:
@@ -4944,8 +4944,8 @@ components:
       type: object
     EarningWithTQS:
       allOf:
-        - $ref: '#/components/schemas/Earning'
-        - $ref: '#/components/schemas/ProjectTQS'
+        - $ref: "#/components/schemas/Earning"
+        - $ref: "#/components/schemas/ProjectTQS"
         - properties:
             project_id:
               format: int64
@@ -4955,11 +4955,11 @@ components:
       properties:
         completed:
           items:
-            $ref: '#/components/schemas/EarningWithTQS'
+            $ref: "#/components/schemas/EarningWithTQS"
           type: array
         ongoing:
           items:
-            $ref: '#/components/schemas/EarningWithTQS'
+            $ref: "#/components/schemas/EarningWithTQS"
           type: array
         total:
           format: float
@@ -5016,7 +5016,7 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/DocumentLinks'
+          $ref: "#/components/schemas/DocumentLinks"
         name:
           type: string
         uploaded_at:
@@ -5028,10 +5028,10 @@ components:
       properties:
         glossaries:
           items:
-            $ref: '#/components/schemas/Glossary'
+            $ref: "#/components/schemas/Glossary"
           type: array
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
       type: object
     Href:
       properties:
@@ -5045,7 +5045,7 @@ components:
           format: float
           type: number
         billing:
-          $ref: '#/components/schemas/BillingAddress'
+          $ref: "#/components/schemas/BillingAddress"
         currency:
           type: string
         id:
@@ -5055,30 +5055,30 @@ components:
           format: int64
           type: integer
         invoiced_at:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         links:
-          $ref: '#/components/schemas/InvoiceLinks'
+          $ref: "#/components/schemas/InvoiceLinks"
         status:
           type: string
       type: object
     InvoiceLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             corporate:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             html:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             json:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             pdf:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             project:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             view:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     Language:
       properties:
@@ -5097,7 +5097,7 @@ components:
     LanguagePairsReport:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         report:
           items:
             properties:
@@ -5140,7 +5140,7 @@ components:
           format: int64
           type: integer
         source:
-          description: 'Preferred source names are listed as enum. If you have a custom file type, simply enter that name.'
+          description: Preferred source names are listed as enum. If you have a custom file type, simply enter that name.
           enum:
             - dropbox
             - googledrive
@@ -5153,7 +5153,7 @@ components:
     LinksMeta:
       properties:
         self:
-          $ref: '#/components/schemas/Href'
+          $ref: "#/components/schemas/Href"
       type: object
     ListOrderType:
       enum:
@@ -5179,10 +5179,10 @@ components:
     MachineTranslatedStrings:
       properties:
         cost:
-          $ref: '#/components/schemas/Monetary'
+          $ref: "#/components/schemas/Monetary"
         strings:
           items:
-            $ref: '#/components/schemas/ClientStringWithTranslations'
+            $ref: "#/components/schemas/ClientStringWithTranslations"
           type: array
       type: object
     Monetary:
@@ -5221,7 +5221,7 @@ components:
     OperationStatus:
       properties:
         status:
-          $ref: '#/components/schemas/OperationStatusEnum'
+          $ref: "#/components/schemas/OperationStatusEnum"
       type: object
     OperationStatusEnum:
       default: success
@@ -5231,7 +5231,7 @@ components:
       type: string
     Package:
       allOf:
-        - $ref: '#/components/schemas/PackageStatus'
+        - $ref: "#/components/schemas/PackageStatus"
         - properties:
             key:
               description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
@@ -5240,10 +5240,10 @@ components:
     PackageStatus:
       properties:
         status:
-          $ref: '#/components/schemas/PackageStatusEnum'
+          $ref: "#/components/schemas/PackageStatusEnum"
       type: object
     PackageStatusEnum:
-      description: 'The status of translation packaging. Possible values are ''started'', ''packaging'', ''completed''. When completed, you can make a /download call to download the last translation package.'
+      description: The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package.
       enum:
         - started
         - packaging
@@ -5251,7 +5251,7 @@ components:
       type: string
     PagingLinksMeta:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             next:
               type: string
@@ -5263,7 +5263,7 @@ components:
         paging:
           properties:
             links:
-              $ref: '#/components/schemas/PagingLinksMeta'
+              $ref: "#/components/schemas/PagingLinksMeta"
             page:
               default: 1
               format: int64
@@ -5286,9 +5286,9 @@ components:
     PaymentInfo:
       properties:
         billing:
-          $ref: '#/components/schemas/BillingAddress'
+          $ref: "#/components/schemas/BillingAddress"
         card:
-          $ref: '#/components/schemas/CreditCard'
+          $ref: "#/components/schemas/CreditCard"
         corporate:
           properties:
             allow_api_invoicing:
@@ -5298,16 +5298,16 @@ components:
             auto_charge:
               type: boolean
             billing:
-              $ref: '#/components/schemas/BillingAddress'
+              $ref: "#/components/schemas/BillingAddress"
             card:
-              $ref: '#/components/schemas/CreditCard'
+              $ref: "#/components/schemas/CreditCard"
           type: object
       type: object
     PopularLanguagePairs:
       properties:
         pairs:
           items:
-            $ref: '#/components/schemas/LanguagePair'
+            $ref: "#/components/schemas/LanguagePair"
           type: array
       type: object
     Progress:
@@ -5315,20 +5315,20 @@ components:
         - properties:
             languages:
               additionalProperties:
-                $ref: '#/components/schemas/ProgressSub'
+                $ref: "#/components/schemas/ProgressSub"
               type: object
             links:
-              $ref: '#/components/schemas/ProgressLink'
+              $ref: "#/components/schemas/ProgressLink"
             project_status:
-              $ref: '#/components/schemas/ProjectStatus'
+              $ref: "#/components/schemas/ProjectStatus"
           type: object
-        - $ref: '#/components/schemas/ProgressSub'
+        - $ref: "#/components/schemas/ProgressSub"
     ProgressLink:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             project:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     ProgressSub:
       properties:
@@ -5346,7 +5346,7 @@ components:
       properties:
         average_scores:
           additionalProperties:
-            $ref: '#/components/schemas/LanguageScore'
+            $ref: "#/components/schemas/LanguageScore"
           type: object
         budget_code:
           type: string
@@ -5354,10 +5354,10 @@ components:
           description: Callback URL to notify when project status changed.
           type: string
         client:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
           description: User entity for Client. This is only given when project is requested with detailed=true
         completed_on:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         created_at:
@@ -5372,9 +5372,9 @@ components:
           format: int64
           type: integer
         errors:
-          description: 'A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.'
+          description: A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
           type: array
         id:
           format: int64
@@ -5382,10 +5382,10 @@ components:
         is_manual:
           type: boolean
         links:
-          $ref: '#/components/schemas/ProjectLinks'
+          $ref: "#/components/schemas/ProjectLinks"
         pairs:
-          $ref: '#/components/schemas/VendorProjectPairs'
-          description: 'Currently authed vendor''s available working language pairs in this project. Includes rates per language pair. Includes complex pair logic such as bilingualism, project reverse pair enforcement etc.'
+          $ref: "#/components/schemas/VendorProjectPairs"
+          description: Currently authed vendor's available working language pairs in this project. Includes rates per language pair. Includes complex pair logic such as bilingualism, project reverse pair enforcement etc.
         price:
           properties:
             amount:
@@ -5395,7 +5395,7 @@ components:
               default: usd
               type: string
             usd_amount:
-              description: 'USD is our base pricing currency. If `currency` is different, this will help.'
+              description: USD is our base pricing currency. If `currency` is different, this will help.
               format: float
               type: number
           type: object
@@ -5408,22 +5408,22 @@ components:
               default: usd
               type: string
             usd_amount:
-              description: 'USD is our base pricing currency. If `currency` is different, this will help.'
+              description: USD is our base pricing currency. If `currency` is different, this will help.
               format: float
               type: number
           type: object
         role:
-          $ref: '#/components/schemas/VendorProjectRole'
+          $ref: "#/components/schemas/VendorProjectRole"
         source:
-          $ref: '#/components/schemas/ProjectSource'
-          descriptipon: 'The source platform where this project was first created. Current options are "api", "web".'
+          $ref: "#/components/schemas/ProjectSource"
+          descriptipon: The source platform where this project was first created. Current options are "api", "web".
         source_language:
           type: string
         status:
-          $ref: '#/components/schemas/ProjectStatus'
+          $ref: "#/components/schemas/ProjectStatus"
         subjects:
           items:
-            $ref: '#/components/schemas/DocumentSubject'
+            $ref: "#/components/schemas/DocumentSubject"
           type: array
         target_languages:
           items:
@@ -5445,7 +5445,7 @@ components:
       type: object
     ProjectInSearch:
       allOf:
-        - $ref: '#/components/schemas/Project'
+        - $ref: "#/components/schemas/Project"
         - properties:
             search_result_reason:
               type: string
@@ -5453,7 +5453,7 @@ components:
     ProjectLaunchResponse:
       properties:
         status:
-          $ref: '#/components/schemas/ProjectLaunchResponseEnum'
+          $ref: "#/components/schemas/ProjectLaunchResponseEnum"
       type: object
     ProjectLaunchResponseEnum:
       enum:
@@ -5461,22 +5461,22 @@ components:
       type: string
     ProjectLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             documents:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             glossaries:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
             styleguides:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     ProjectList:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         projects:
           items:
-            $ref: '#/components/schemas/Project'
+            $ref: "#/components/schemas/Project"
           type: array
       type: object
     ProjectSource:
@@ -5515,11 +5515,11 @@ components:
           description: budget code filter. valid for corporate accounts only.
           type: string
         date_from:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         date_to:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         source_languages:
@@ -5565,29 +5565,29 @@ components:
       properties:
         links:
           allOf:
-            - $ref: '#/components/schemas/LinksMeta'
+            - $ref: "#/components/schemas/LinksMeta"
         responsivity:
           items:
-            $ref: '#/components/schemas/Responsivity'
+            $ref: "#/components/schemas/Responsivity"
           type: array
       type: object
     SearchEverywhereResult:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         result:
           properties:
             documents:
               items:
-                $ref: '#/components/schemas/DocumentInSearch'
+                $ref: "#/components/schemas/DocumentInSearch"
               type: array
             projects:
               items:
-                $ref: '#/components/schemas/ProjectInSearch'
+                $ref: "#/components/schemas/ProjectInSearch"
               type: array
             strings:
               items:
-                $ref: '#/components/schemas/StringInSearch'
+                $ref: "#/components/schemas/StringInSearch"
               type: array
           type: object
       type: object
@@ -5614,9 +5614,9 @@ components:
     Stats:
       properties:
         client:
-          $ref: '#/components/schemas/ClientStats'
+          $ref: "#/components/schemas/ClientStats"
         vendor:
-          $ref: '#/components/schemas/VendorStats'
+          $ref: "#/components/schemas/VendorStats"
       type: object
     StringInSearch:
       properties:
@@ -5627,7 +5627,7 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: 'the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
         project_id:
@@ -5639,7 +5639,7 @@ components:
         source:
           type: string
         status:
-          $ref: '#/components/schemas/StringTranslationState'
+          $ref: "#/components/schemas/StringTranslationState"
         string_id:
           format: int64
           type: integer
@@ -5652,7 +5652,7 @@ components:
         tm_name:
           type: string
         type:
-          description: 'String search result typ from ZNT. Options are LOCAL_PROJECT, IMPORTED_TM. Imported TM results should probably not be visible to end users.'
+          description: String search result typ from ZNT. Options are LOCAL_PROJECT, IMPORTED_TM. Imported TM results should probably not be visible to end users.
           enum:
             - LOCAL_PROJECT
             - IMPORTED_TM
@@ -5661,10 +5661,10 @@ components:
     StringList:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         translations:
           items:
-            $ref: '#/components/schemas/StringWithTranslations'
+            $ref: "#/components/schemas/StringWithTranslations"
           type: array
       type: object
     StringTranslation:
@@ -5675,7 +5675,7 @@ components:
         id:
           type: string
         state:
-          $ref: '#/components/schemas/StringTranslationState'
+          $ref: "#/components/schemas/StringTranslationState"
       type: object
     StringTranslationState:
       enum:
@@ -5684,11 +5684,11 @@ components:
       type: string
     StringWithTranslations:
       allOf:
-        - $ref: '#/components/schemas/SingleString'
+        - $ref: "#/components/schemas/SingleString"
         - properties:
             translations:
               additionalProperties:
-                $ref: '#/components/schemas/StringTranslation'
+                $ref: "#/components/schemas/StringTranslation"
               type: object
           type: object
     StyleGuide:
@@ -5697,7 +5697,7 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/DocumentLinks'
+          $ref: "#/components/schemas/DocumentLinks"
         name:
           type: string
         uploaded_at:
@@ -5708,10 +5708,10 @@ components:
     StyleGuideList:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         styleguides:
           items:
-            $ref: '#/components/schemas/StyleGuide'
+            $ref: "#/components/schemas/StyleGuide"
           type: array
       type: object
     Tag:
@@ -5734,7 +5734,7 @@ components:
           type: integer
     TokenError:
       allOf:
-        - $ref: '#/components/schemas/Error'
+        - $ref: "#/components/schemas/Error"
         - properties:
             account_status:
               enum:
@@ -5751,7 +5751,7 @@ components:
           type: object
     UpdatePaymentInfo:
       allOf:
-        - $ref: '#/components/schemas/Address'
+        - $ref: "#/components/schemas/Address"
         - properties:
             bin:
               type: string
@@ -5761,7 +5761,7 @@ components:
     User:
       properties:
         billing:
-          $ref: '#/components/schemas/BillingAddress'
+          $ref: "#/components/schemas/BillingAddress"
         birthday:
           format: date
           type: string
@@ -5832,7 +5832,7 @@ components:
           deprecated: true
           description: \@deprecated. use `vendor` key
           items:
-            $ref: '#/components/schemas/LanguagePair'
+            $ref: "#/components/schemas/LanguagePair"
           type: array
         last_name:
           type: string
@@ -5841,12 +5841,12 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/UserLinks'
+          $ref: "#/components/schemas/UserLinks"
         locale:
           description: User Locale
           type: string
         mailing:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         name:
           type: string
         native_language:
@@ -5863,7 +5863,7 @@ components:
         profile_picture_path:
           type: string
         social_media:
-          $ref: '#/components/schemas/SocialMedia'
+          $ref: "#/components/schemas/SocialMedia"
         state:
           deprecated: true
           description: \@deprecated. use mailing or billing key.
@@ -5890,7 +5890,7 @@ components:
               type: boolean
             language_pairs:
               items:
-                $ref: '#/components/schemas/LanguagePair'
+                $ref: "#/components/schemas/LanguagePair"
               type: array
             native_language:
               description: Native language of user
@@ -5901,7 +5901,7 @@ components:
               type: boolean
             tags:
               items:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
               type: array
             tms_user_name:
               type: string
@@ -5913,29 +5913,29 @@ components:
       type: object
     UserLinks:
       allOf:
-        - $ref: '#/components/schemas/LinksMeta'
+        - $ref: "#/components/schemas/LinksMeta"
         - properties:
             projects:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
               description: client users only
             responsivity:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
               description: vendor users only
             stats:
-              $ref: '#/components/schemas/Href'
+              $ref: "#/components/schemas/Href"
           type: object
     UserList:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         users:
           items:
-            $ref: '#/components/schemas/User'
+            $ref: "#/components/schemas/User"
           type: array
       type: object
     UserUpdateContent:
       allOf:
-        - $ref: '#/components/schemas/Address'
+        - $ref: "#/components/schemas/Address"
         - properties:
             email:
               description: Optional. User e-mail.
@@ -5966,7 +5966,7 @@ components:
     UsersReport:
       properties:
         meta:
-          $ref: '#/components/schemas/PagingMeta'
+          $ref: "#/components/schemas/PagingMeta"
         report:
           items:
             properties:
@@ -5974,7 +5974,7 @@ components:
                 format: float
                 type: number
               user:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
               word_count:
                 format: int64
                 type: integer
@@ -5997,7 +5997,7 @@ components:
           description: Indicates if the vendor be able to proofred this pair
           type: boolean
         proofreader:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
         proofreading_rate:
           format: float
           type: number
@@ -6013,10 +6013,10 @@ components:
       type: object
     VendorProjectPairs:
       items:
-        $ref: '#/components/schemas/VendorProjectPair'
+        $ref: "#/components/schemas/VendorProjectPair"
       type: array
     VendorProjectRole:
-      description: 'Currently authed vendor''s role in this project. If vendor has already joined, this contains the role they joined the project with. If not joined yet, this is the role that they can join the project with.'
+      description: Currently authed vendor's role in this project. If vendor has already joined, this contains the role they joined the project with. If not joined yet, this is the role that they can join the project with.
       enum:
         - translator
         - proofreader
@@ -6039,11 +6039,11 @@ components:
     VendorStats:
       properties:
         earnings:
-          $ref: '#/components/schemas/VendorEarningStats'
+          $ref: "#/components/schemas/VendorEarningStats"
         projects:
-          $ref: '#/components/schemas/VendorProjectStats'
+          $ref: "#/components/schemas/VendorProjectStats"
         words:
-          $ref: '#/components/schemas/VendorWordStats'
+          $ref: "#/components/schemas/VendorWordStats"
       type: object
     VendorWordStats:
       properties:
@@ -6061,7 +6061,7 @@ components:
       scheme: basic
       type: http
     mwoAuth:
-      description: 'OAuth2 authentication, Client Credentials flow.'
+      description: OAuth2 authentication, Client Credentials flow.
       flows:
         authorizationCode:
           authorizationUrl: /token

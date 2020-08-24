@@ -1309,7 +1309,7 @@ paths:
       tags:
         - Orders
     put:
-      description: "Only 'status', 'tracking_number', 'tracking_company', 'additional_information' and 'additional_fields' are available for update.<br/>Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\", \"tracking_company\": \"other\", \"tracking_number\": \"123456789\", \"additional_information\": \"My custom message.\", \"additional_fields\": [{\"label\": \"Gift Name\", \"value\": \"Duarte\"}, {\"label\": \"Gift Wrapping Color\", \"value\": \"Green\"}]} }}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"order\": {\"status\": \"Paid\", \"additional_information\": \"My custom message.\"}}' \"https://api.jumpseller.com/api/v1/orders/{id}.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
+      description: "Only 'status', 'shipment_status', 'tracking_number', 'tracking_company', 'additional_information' and 'additional_fields' are available for update.<br/>Use the JSON format:<br/>'{ \"order\": {\"status\": \"Paid\", \"tracking_company\": \"other\", \"tracking_number\": \"123456789\", \"additional_information\": \"My custom message.\", \"additional_fields\": [{\"label\": \"Gift Name\", \"value\": \"Duarte\"}, {\"label\": \"Gift Wrapping Color\", \"value\": \"Green\"}]} }}'<br/>or in CURL:<br/>curl -X PUT -d '{ \"order\": {\"status\": \"Paid\", \"shipment_status\": \"delivered\" \"additional_information\": \"My custom message.\"}}' \"https://api.jumpseller.com/api/v1/orders/{id}.json?login=storecode&authtoken=XXXXX\" -H \"Content-Type:application/json\" "
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -3611,6 +3611,8 @@ definitions:
         items:
           $ref: "#/definitions/OrderShippingTax"
         type: array
+      source:
+        $ref: "#/definitions/TrafficSource"
       status:
         description: Status of the Order
         enum:
@@ -4481,6 +4483,26 @@ definitions:
         format: float
         type: number
     type: object
+  TrafficSource:
+    properties:
+      campaign:
+        description: The campaign that referred the customer to the checkout
+        type: string
+      medium:
+        description: The medium that referred the customer to the checkout
+        type: string
+      referral_code:
+        description: The code that referred the customer to the checkout
+        type: string
+      referral_url:
+        description: The website that referred the customer to the checkout
+        type: string
+      source_name:
+        description: Where the checkout originated
+        type: string
+      user_agent:
+        description: User agent of the referred request to checkout
+        type: string
   Variant:
     properties:
       variant:

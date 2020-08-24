@@ -844,6 +844,9 @@ definitions:
     type: object
   Info_Public:
     properties:
+      api_version:
+        description: version of api release
+        type: string
       conditions_count:
         format: int32
         type: integer

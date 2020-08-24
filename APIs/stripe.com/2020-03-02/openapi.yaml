@@ -45115,6 +45115,7 @@ components:
           nullable: true
         sources:
           description: The customer's payment sources, if any.
+          nullable: true
           properties:
             data:
               description: Details about each object.
@@ -45188,6 +45189,7 @@ components:
           type: string
         tax_ids:
           description: The customer's tax IDs.
+          nullable: true
           properties:
             data:
               description: Details about each object.
@@ -45220,7 +45222,6 @@ components:
         - id
         - livemode
         - object
-        - sources
       title: Customer
       type: object
       x-expandableFields:
@@ -46816,6 +46817,11 @@ components:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
           format: unix-time
           type: integer
+        expires_at:
+          description: The time at which the file expires and is no longer available in epoch seconds.
+          format: unix-time
+          nullable: true
+          type: integer
         filename:
           description: A filename for the file, suitable for saving to a filesystem.
           maxLength: 5000
@@ -47954,6 +47960,11 @@ components:
         amount:
           description: The total amount that was authorized or rejected. This amount is in the card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
           type: integer
+        amount_details:
+          anyOf:
+            - $ref: "#/components/schemas/issuing_authorization_amount_details"
+          description: Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+          nullable: true
         approved:
           description: Whether the authorization has been approved.
           type: boolean
@@ -48067,6 +48078,7 @@ components:
       title: IssuingAuthorization
       type: object
       x-expandableFields:
+        - amount_details
         - balance_transactions
         - card
         - cardholder
@@ -48449,6 +48461,11 @@ components:
         amount:
           description: The transaction amount, which will be reflected in your balance. This amount is in your currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
           type: integer
+        amount_details:
+          anyOf:
+            - $ref: "#/components/schemas/issuing_transaction_amount_details"
+          description: Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+          nullable: true
         authorization:
           anyOf:
             - maxLength: 5000
@@ -48549,6 +48566,7 @@ components:
       title: IssuingTransaction
       type: object
       x-expandableFields:
+        - amount_details
         - authorization
         - balance_transaction
         - card
@@ -48556,6 +48574,16 @@ components:
         - merchant_data
         - purchase_details
       x-resourceId: issuing.transaction
+    issuing_authorization_amount_details:
+      description: ""
+      properties:
+        atm_fee:
+          description: The fee charged by the ATM for the cash withdrawal.
+          nullable: true
+          type: integer
+      title: IssuingAuthorizationAmountDetails
+      type: object
+      x-expandableFields: []
     issuing_authorization_merchant_data:
       description: ""
       properties:
@@ -48604,6 +48632,11 @@ components:
         amount:
           description: The additional amount Stripe will hold if the authorization is approved, in the card's [currency](https://stripe.com/docs/api#issuing_authorization_object-pending-request-currency) and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
           type: integer
+        amount_details:
+          anyOf:
+            - $ref: "#/components/schemas/issuing_authorization_amount_details"
+          description: Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+          nullable: true
         currency:
           description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
           type: string
@@ -48624,13 +48657,19 @@ components:
         - merchant_currency
       title: IssuingAuthorizationPendingRequest
       type: object
-      x-expandableFields: []
+      x-expandableFields:
+        - amount_details
     issuing_authorization_request:
       description: ""
       properties:
         amount:
           description: The authorization amount in your card's currency and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal). Stripe held this amount from your account to fund the authorization if the request was approved.
           type: integer
+        amount_details:
+          anyOf:
+            - $ref: "#/components/schemas/issuing_authorization_amount_details"
+          description: Detailed breakdown of amount components. These amounts are denominated in `currency` and in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal).
+          nullable: true
         approved:
           description: Whether this request was approved.
           type: boolean
@@ -48677,7 +48716,8 @@ components:
         - reason
       title: IssuingAuthorizationRequest
       type: object
-      x-expandableFields: []
+      x-expandableFields:
+        - amount_details
     issuing_authorization_verification_data:
       description: ""
       properties:
@@ -50768,6 +50808,16 @@ components:
       type: object
       x-expandableFields:
         - document
+    issuing_transaction_amount_details:
+      description: ""
+      properties:
+        atm_fee:
+          description: The fee charged by the ATM for the cash withdrawal.
+          nullable: true
+          type: integer
+      title: IssuingTransactionAmountDetails
+      type: object
+      x-expandableFields: []
     issuing_transaction_flight_data:
       description: ""
       properties:

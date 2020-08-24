@@ -73,6 +73,7 @@ paths:
               * `title` - Mr., Mrs., etc.
               * `social_role` - academic degrees, etc.
               * `suffix`
+              * `variation` - substantially the same; the only difference is a style (e.g. hypocorism or colloquial vs formal) or a language or a spelling
       summary: Compare named entities
   /extract_text:
     post:
@@ -760,7 +761,7 @@ paths:
         Tisane supports automatic, context-aware spelling correction. Whether it's a misspelling or a purported obfuscation, Tisane attempts to deduce the intended meaning, if the language model does not recognize the word. 
 
 
-        When or if it's found, Tisane adds the `corrected_text` attribute to the word (if the words / lexical chunks are returned) and the sentence (if the sentence text is generated). 
+        When or if it's found, Tisane adds the `corrected_text` attribute to the word (if the words / lexical chunks are returned) and the sentence (if the sentence text is generated). Sentence-level `corrected_text` is displayed if `words` or `parses` are set to _true_.
 
 
         Note that **the invocation of spell-checking does not depend on whether the sentences and the words sections are generated in the output**. The spellchecking can be disabled by [setting](#content-cues-and-instructions) `disable_spellcheck` to `true`.

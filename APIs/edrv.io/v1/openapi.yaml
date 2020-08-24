@@ -893,6 +893,110 @@ paths:
           description: A failure response
       tags:
         - Drivers
+  "/v1/location/{id}":
+    delete:
+      description: Delete a location
+      operationId: deleteLocation
+      parameters:
+        - description: The location id that needs to be deleted
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the deleted location object
+      tags:
+        - Locations
+    get:
+      description: Get a location's data
+      operationId: getLocation
+      parameters:
+        - description: The location id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: Populate chargestations
+          in: query
+          name: include_chargestations
+          schema:
+            type: boolean
+        - description: Populate organization
+          in: query
+          name: include_organization
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Returns a location object
+      tags:
+        - Locations
+    patch:
+      description: Update a location's data
+      operationId: patchLocation
+      parameters:
+        - description: ID of location that needs to be updated
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                active:
+                  default: true
+                  type: boolean
+                address:
+                  properties:
+                    city:
+                      type: string
+                    country:
+                      type: string
+                    postalCode:
+                      type: string
+                    streetAndNumber:
+                      type: string
+                  type: object
+                chargestations:
+                  items: {}
+                  type: array
+                coordinates:
+                  properties:
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+                  type: object
+                operatorName:
+                  type: string
+              type: object
+        description: Include location properties to create here
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                  result:
+                    items: {}
+                    type: array
+                type: object
+          description: Returns the updated location object
+        "400":
+          description: A failure response
+      tags:
+        - Locations
   /v1/locations:
     get:
       description: Get Locations data
@@ -911,6 +1015,67 @@ paths:
       responses:
         "200":
           description: Success
+        "400":
+          description: A failure response
+      tags:
+        - Locations
+    post:
+      description: Create a new location
+      operationId: postLocations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                active:
+                  default: true
+                  type: boolean
+                address:
+                  properties:
+                    city:
+                      type: string
+                    country:
+                      type: string
+                    postalCode:
+                      type: string
+                    streetAndNumber:
+                      type: string
+                  type: object
+                chargestations:
+                  items: {}
+                  type: array
+                coordinates:
+                  properties:
+                    latitude:
+                      type: number
+                    longitude:
+                      type: number
+                  type: object
+                operatorName:
+                  type: string
+              required:
+                - operatorName
+                - address
+                - coordinates
+              type: object
+        description: Include location properties to create here
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                  result:
+                    type: object
+                type: object
+          description: Returns the newly created location object
+        "400":
+          description: A failure response
       tags:
         - Locations
   /v1/organizations:
@@ -1584,7 +1749,7 @@ components:
     oauth2:
       flows:
         implicit:
-          authorizationUrl: https://edrv.auth0.com/authorize
+          authorizationUrl: https://auth.edrv.io/authorize
           scopes:
             read:chargestations: Read chargestations
             read:chargestations/:id: Read a chargestation
@@ -1629,7 +1794,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: f15e8e3a9cc1782f645c3cf67b5a339bf609923c
+x-github-sha: 7cf32a003bc9c18f44342ff26fe8772996b6bbae
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

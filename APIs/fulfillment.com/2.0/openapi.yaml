@@ -534,6 +534,7 @@ paths:
           content:
             application/json:
               schema:
+                description: Standard Order Response or a Hydrated Response
                 oneOf:
                   - $ref: "#/paths/~1orders/post/responses/201/content/application~1json/schema"
                   - allOf:
@@ -542,55 +543,87 @@ paths:
                           integrator:
                             description: ""
                             type: string
-                          orderItems:
-                            description: ""
-                            properties:
-                              id:
-                                type: integer
-                              inventoryDetails:
-                                items:
+                          lineItems:
+                            items:
+                              description: ""
+                              properties:
+                                id:
+                                  type: integer
+                                inventoryDetails:
+                                  items:
+                                    properties:
+                                      expirationDate:
+                                        format: date
+                                        type: string
+                                      lotNum:
+                                        type: string
+                                      quantity:
+                                        type: integer
+                                      serialNum:
+                                        type: string
+                                    type: object
+                                  type: array
+                                lineDetails:
                                   properties:
-                                    expirationDate:
-                                      format: date
+                                    description:
                                       type: string
-                                    lotNum:
+                                    externalSku:
                                       type: string
+                                    id:
+                                      type: integer
+                                    name:
+                                      type: string
+                                    totalQuantity:
+                                      type: integer
+                                  type: object
+                                requestedSkuData:
+                                  properties:
+                                    declaredValue:
+                                      pattern: ^[0-9.]+$
+                                      type: string
+                                    id:
+                                      type: integer
                                     quantity:
                                       type: integer
-                                    serialNum:
+                                    sku:
                                       type: string
                                   type: object
-                                type: array
-                              lineDetails:
-                                properties:
-                                  description:
-                                    type: string
-                                  externalSku:
-                                    type: string
-                                  id:
-                                    type: integer
-                                  name:
-                                    type: string
-                                  totalQuantity:
-                                    type: integer
-                                type: object
-                              requestedSkuData:
-                                properties:
-                                  declaredValue:
-                                    pattern: ^[0-9.]+$
-                                    type: string
-                                  id:
-                                    type: integer
-                                  quantity:
-                                    type: integer
-                                  sku:
-                                    type: string
-                                type: object
-                            title: OrderItemsResponse.v2
-                            type: object
+                              title: LineItemsResponse.v2
+                              type: object
+                            type: array
+                          trackingNumbers:
+                            items:
+                              properties:
+                                carrier:
+                                  properties:
+                                    canReprintPostage:
+                                      type: boolean
+                                    enabled:
+                                      type: boolean
+                                    id:
+                                      type: integer
+                                    includePeripherals:
+                                      type: boolean
+                                    internalRatesOnly:
+                                      type: boolean
+                                    name:
+                                      type: string
+                                    requiresDimensions:
+                                      type: boolean
+                                    symbol:
+                                      type: string
+                                  required:
+                                    - id
+                                    - name
+                                    - symbol
+                                  title: CarrierHydrated.v2
+                                  type: object
+                              type: object
+                            type: array
                         type: object
-                    description: Requires hydrate to be set in the request and the corresponding node will be filled, respectfully.
+                    description: Requires hydrate to be set in the request and the corresponding node will be filled.
                     title: OrderResponseHydrate.v2
+                title: OrderResponseOneOf.v2
           description: OK
         "404":
           content:
@@ -776,12 +809,6 @@ paths:
         "201":
           content:
             application/json:
-              examples:
-                duplicate-order:
-                  value:
-                    context:
-                      id: 123
-                    message: Duplicate Order
               schema:
                 properties:
                   currentStatus:
@@ -1831,7 +1858,8 @@ components:
         items:
           enum:
             - integrator
-            - orderItems
+            - lineItems
+            - trackingNumbers.carrier
           type: string
         type: array
       style: form

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.api2cart.com
@@ -8,21 +8,21 @@ info:
     email: contact@api2cart.com
     x-twitter: API2Cart
   description: API2Cart
-  termsOfService: 'https://api2cart.com/terms-service'
+  termsOfService: https://api2cart.com/terms-service
   title: Swagger API2Cart
-  version: '1.1'
+  version: "1.1"
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/API2Cart/profile_image?size=original'
+    url: https://twitter.com/API2Cart/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://app.api2cart.com/default/index/swagger-json'
-      version: '2.0'
+      url: https://app.api2cart.com/default/index/swagger-json
+      version: "2.0"
   x-providerName: api2cart.com
 externalDocs:
   description: Find out more about API2Cart
-  url: 'http://docs.api2cart.com'
+  url: http://docs.api2cart.com
 securityDefinitions:
   api_key:
     in: query
@@ -51,6 +51,47 @@ paths:
       operationId: AccountCartAdd
       parameters:
         - description: Store’s identifier which you can get from cart_list method
+          enum:
+            - 3DCartApi
+            - AceShop
+            - Amazon
+            - AspDotNetStorefront
+            - BigcommerceApi
+            - Creloaded
+            - Cscart
+            - Cubecart
+            - Demandware
+            - EBay
+            - Ecwid
+            - Etsy
+            - Gambio
+            - Interspire
+            - JooCart
+            - Magento1212
+            - MijoShop
+            - Neto
+            - Opencart14
+            - Oscmax2
+            - Oscommerce22ms2
+            - Oxid
+            - Pinnacle
+            - Prestashop
+            - SSPremium
+            - Shopify
+            - Squarespace
+            - Shopware
+            - Tomatocart
+            - Ubercart
+            - Virtuemart
+            - Volusion
+            - WPecommerce
+            - Walmart
+            - WebAsyst
+            - Woocommerce
+            - Xcart
+            - Xtcommerce
+            - XtcommerceVeyton
+            - Zencart137
           in: query
           name: cart_id
           required: true
@@ -87,7 +128,7 @@ paths:
           name: verify
           required: false
           type: boolean
-        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
           in: query
           name: db_tables_prefix
           required: false
@@ -107,12 +148,14 @@ paths:
           name: ftp_password
           required: false
           type: string
-        - description: FTP Port
+        - default: 21
+          description: FTP Port
           in: query
           name: ftp_port
           required: false
           type: integer
-        - description: FTP Store dir
+        - default: /
+          description: FTP Store dir
           in: query
           name: ftp_store_dir
           required: false
@@ -340,10 +383,25 @@ paths:
           name: hybris_client_secret
           required: false
           type: string
+        - description: User Name
+          in: query
+          name: hybris_username
+          required: false
+          type: string
+        - description: User password
+          in: query
+          name: hybris_password
+          required: false
+          type: string
+        - description: Squarespace API Key
+          in: query
+          name: squarespace_api_key
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -402,7 +460,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -457,7 +515,7 @@ paths:
           name: store_root
           required: false
           type: string
-        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
           in: query
           name: db_tables_prefix
           required: false
@@ -673,10 +731,35 @@ paths:
           name: walmart_client_secret
           required: false
           type: string
+        - description: Squarespace API Key
+          in: query
+          name: squarespace_api_key
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client ID
+          in: query
+          name: hybris_client_id
+          required: false
+          type: string
+        - description: Omni Commerce Connector Client Secret
+          in: query
+          name: hybris_client_secret
+          required: false
+          type: string
+        - description: User Name
+          in: query
+          name: hybris_username
+          required: false
+          type: string
+        - description: User password
+          in: query
+          name: hybris_password
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -722,7 +805,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -736,7 +819,7 @@ paths:
                         entity_id:
                           type: string
                         time:
-                          $ref: '#/definitions/A2CDateTime'
+                          $ref: "#/definitions/A2CDateTime"
                         webhook_id:
                           type: integer
                       type: object
@@ -761,7 +844,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -777,9 +860,28 @@ paths:
                         cart_versions:
                           type: string
                         params:
-                          items:
-                            type: string
-                          type: array
+                          properties:
+                            additional:
+                              items:
+                                properties:
+                                  description:
+                                    type: string
+                                  name:
+                                    type: string
+                                type: object
+                              type: array
+                            required:
+                              items:
+                                items:
+                                  properties:
+                                    description:
+                                      type: string
+                                    name:
+                                      type: string
+                                  type: object
+                                type: array
+                              type: array
+                          type: object
                       type: object
                     type: array
                 type: object
@@ -850,6 +952,11 @@ paths:
           name: position
           required: false
           type: integer
+        - description: Filter by attribute_group_id
+          in: query
+          name: attribute_group_id
+          required: false
+          type: string
         - default: Store
           description: Attribute saving scope
           in: query
@@ -862,7 +969,7 @@ paths:
           name: is_searchable
           required: false
           type: boolean
-        - default: 'No'
+        - default: No
           description: Use In Layered Navigation
           in: query
           name: is_filterable
@@ -925,7 +1032,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -960,7 +1067,7 @@ paths:
           in: query
           name: group_id
           required: true
-          type: integer
+          type: string
         - description: Attribute set id
           in: query
           name: attribute_set_id
@@ -969,7 +1076,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1004,7 +1111,7 @@ paths:
           in: query
           name: group_id
           required: false
-          type: integer
+          type: string
         - description: Attribute set id
           in: query
           name: attribute_set_id
@@ -1013,7 +1120,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1051,7 +1158,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name'
+        - default: id,name
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -1065,13 +1172,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
                 items:
-                  $ref: '#/definitions/StoreAttribute_Group'
+                  $ref: "#/definitions/StoreAttribute_Group"
                 type: array
               return_code:
                 type: integer
@@ -1123,7 +1230,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1162,7 +1269,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1200,7 +1307,12 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name'
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
+        - default: id,name
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -1219,13 +1331,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
                 items:
-                  $ref: '#/definitions/StoreAttribute_Group'
+                  $ref: "#/definitions/StoreAttribute_Group"
                 type: array
               return_code:
                 type: integer
@@ -1273,12 +1385,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/StoreAttribute'
+                $ref: "#/definitions/StoreAttribute"
               return_code:
                 type: integer
               return_message:
@@ -1328,7 +1440,7 @@ paths:
           name: lang_id
           required: false
           type: string
-        - default: 'id,name,code,type'
+        - default: id,name,code,type
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -1357,7 +1469,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1365,7 +1477,7 @@ paths:
                 properties:
                   order:
                     items:
-                      $ref: '#/definitions/StoreAttribute'
+                      $ref: "#/definitions/StoreAttribute"
                     type: array
                 type: object
               return_code:
@@ -1388,7 +1500,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1425,11 +1537,11 @@ paths:
           in: query
           name: group_id
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1468,7 +1580,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1518,12 +1630,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Basket'
+                $ref: "#/definitions/Basket"
               return_code:
                 type: integer
               return_message:
@@ -1570,7 +1682,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1614,7 +1726,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1648,7 +1760,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1694,7 +1806,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1702,7 +1814,7 @@ paths:
                 properties:
                   live_shipping_services:
                     items:
-                      $ref: '#/definitions/Basket_LiveShippingService'
+                      $ref: "#/definitions/Basket_LiveShippingService"
                     type: array
                 type: object
               return_code:
@@ -1725,7 +1837,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1760,7 +1872,7 @@ paths:
       produces:
         - application/zip
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             type: file
@@ -1779,7 +1891,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1808,7 +1920,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1843,7 +1955,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1869,7 +1981,7 @@ paths:
       description: Get list of cart configs
       operationId: CartConfig
       parameters:
-        - default: 'store_name,store_url,db_prefix'
+        - default: store_name,store_url,db_prefix
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -1883,7 +1995,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1918,11 +2030,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CartConfigUpdate'
+            $ref: "#/definitions/CartConfigUpdate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -1949,11 +2061,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CartCouponAdd'
+            $ref: "#/definitions/CartCouponAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2029,14 +2141,14 @@ paths:
             - ==
             - <
             - <=
-            - '>'
-            - '>='
+            - ">"
+            - ">="
             - ONE_OF
           in: query
           name: operator
           required: true
           type: string
-        - description: 'Defines condition value, can be comma separated according to the operator.'
+        - description: Defines condition value, can be comma separated according to the operator.
           in: query
           name: value
           required: true
@@ -2044,7 +2156,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2104,7 +2216,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2143,7 +2255,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2169,6 +2281,11 @@ paths:
       description: Get cart coupon discounts.
       operationId: CartCouponList
       parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -2235,22 +2352,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  coupon:
-                    items:
-                      $ref: '#/definitions/Coupon'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Cart_Coupon_List"
       security:
         - api_key: []
           store_key: []
@@ -2264,6 +2369,47 @@ paths:
       operationId: CartCreate
       parameters:
         - description: Store’s identifier which you can get from cart_list method
+          enum:
+            - 3DCartApi
+            - AceShop
+            - Amazon
+            - AspDotNetStorefront
+            - BigcommerceApi
+            - Creloaded
+            - Cscart
+            - Cubecart
+            - Demandware
+            - EBay
+            - Ecwid
+            - Etsy
+            - Gambio
+            - Interspire
+            - JooCart
+            - Magento1212
+            - MijoShop
+            - Neto
+            - Opencart14
+            - Oscmax2
+            - Oscommerce22ms2
+            - Oxid
+            - Pinnacle
+            - Prestashop
+            - SSPremium
+            - Shopify
+            - Squarespace
+            - Shopware
+            - Tomatocart
+            - Ubercart
+            - Virtuemart
+            - Volusion
+            - WPecommerce
+            - Walmart
+            - WebAsyst
+            - Woocommerce
+            - Xcart
+            - Xtcommerce
+            - XtcommerceVeyton
+            - Zencart137
           in: query
           name: cart_id
           required: true
@@ -2305,7 +2451,7 @@ paths:
           name: verify
           required: false
           type: boolean
-        - description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
           in: query
           name: db_tables_prefix
           required: false
@@ -2325,12 +2471,14 @@ paths:
           name: ftp_password
           required: false
           type: string
-        - description: FTP Port
+        - default: 21
+          description: FTP Port
           in: query
           name: ftp_port
           required: false
           type: integer
-        - description: FTP Store dir
+        - default: /
+          description: FTP Store dir
           in: query
           name: ftp_store_dir
           required: false
@@ -2543,7 +2691,7 @@ paths:
           required: false
           type: string
         - default: production
-          description: ''
+          description: ""
           in: query
           name: environment
           required: false
@@ -2556,6 +2704,16 @@ paths:
         - description: Omni Commerce Connector Client Secret
           in: query
           name: hybris_client_secret
+          required: false
+          type: string
+        - description: User Name
+          in: query
+          name: hybris_username
+          required: false
+          type: string
+        - description: User password
+          in: query
+          name: hybris_password
           required: false
           type: string
         - description: Walmart client ID
@@ -2571,7 +2729,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2599,7 +2757,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2634,7 +2792,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2678,7 +2836,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2714,7 +2872,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2740,6 +2898,11 @@ paths:
       description: Get gift cards list.
       operationId: CartGiftcardList
       parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -2771,22 +2934,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  gift_card:
-                    items:
-                      $ref: '#/definitions/GiftCard'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Cart_GiftCard_List"
       security:
         - api_key: []
           store_key: []
@@ -2799,7 +2950,7 @@ paths:
       description: Get cart information
       operationId: CartInfo
       parameters:
-        - default: 'store_name,store_url,db_prefix'
+        - default: store_name,store_url,db_prefix
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -2818,12 +2969,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Cart'
+                $ref: "#/definitions/Cart"
               return_code:
                 type: integer
               return_message:
@@ -2844,7 +2995,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2875,6 +3026,173 @@ paths:
         - api_key: []
       tags:
         - cart
+  /cart.meta_data.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get entity meta data
+      operationId: CartMetaDataList
+      parameters:
+        - description: Entity Id
+          in: query
+          name: entity_id
+          required: true
+          type: string
+        - default: product
+          description: Entity
+          in: query
+          name: entity
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Key
+          in: query
+          name: key
+          required: false
+          type: string
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
+        - default: key,value
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Model_Response_Cart_MetaData_List"
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.meta_data.set.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Set meta data for a specific entity
+      operationId: CartMetaDataSet
+      parameters:
+        - description: Entity Id
+          in: query
+          name: entity_id
+          required: true
+          type: string
+        - default: product
+          description: Entity
+          in: query
+          name: entity
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Key
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Value
+          in: query
+          name: value
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  id:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.meta_data.unset.json:
+    delete:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Unset meta data for a specific entity
+      operationId: CartMetaDataUnset
+      parameters:
+        - description: Entity Id
+          in: query
+          name: entity_id
+          required: true
+          type: string
+        - default: product
+          description: Entity
+          in: query
+          name: entity
+          required: false
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Key
+          in: query
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  status:
+                    type: boolean
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
   /cart.methods.json:
     get:
       consumes:
@@ -2885,7 +3203,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2938,7 +3256,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -2948,7 +3266,7 @@ paths:
                     type: integer
                   plugins:
                     items:
-                      $ref: '#/definitions/PluginList'
+                      $ref: "#/definitions/PluginList"
                     type: array
                 type: object
               return_code:
@@ -3007,7 +3325,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3046,7 +3364,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3072,6 +3390,11 @@ paths:
       description: Get scripts installed to the storefront
       operationId: CartScriptList
       parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -3084,17 +3407,6 @@ paths:
           name: count
           required: false
           type: integer
-        - default: force_all
-          description: Set this parameter in order to choose which entity fields you want to retrieve
-          in: query
-          name: params
-          required: false
-          type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-          in: query
-          name: exclude
-          required: false
-          type: string
         - description: Retrieve entities from their creation date
           in: query
           name: created_from
@@ -3125,25 +3437,24 @@ paths:
           name: store_id
           required: false
           type: string
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  scripts:
-                    items:
-                      $ref: '#/definitions/Script'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Cart_Script_List"
       security:
         - api_key: []
           store_key: []
@@ -3164,12 +3475,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Cart_ShippingZone'
+                $ref: "#/definitions/Cart_ShippingZone"
               return_code:
                 type: integer
               return_message:
@@ -3184,7 +3495,7 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: 'Check store availability, bridge connection for the downloadable carts, identify DB prefix, validate API accesses for API carts.'
+      description: Check store availability, bridge connection for the downloadable carts, identify DB prefix, validate API accesses for API carts.
       operationId: CartValidate
       parameters:
         - default: false
@@ -3196,7 +3507,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3232,7 +3543,8 @@ paths:
           name: parent_id
           required: false
           type: string
-        - description: Create category in the stores that is specified by comma-separated stores' id
+        - default: 0
+          description: Create category in the stores that is specified by comma-separated stores' id
           in: query
           name: stores_ids
           required: false
@@ -3292,7 +3604,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3318,12 +3630,12 @@ paths:
       description: Assign category to product
       operationId: CategoryAssign
       parameters:
-        - description: 'Defines category assign to the product, specified by product id'
+        - description: Defines category assign to the product, specified by product id
           in: query
           name: product_id
           required: true
           type: string
-        - description: 'Defines category assign, specified by category id'
+        - description: Defines category assign, specified by category id
           in: query
           name: category_id
           required: true
@@ -3331,7 +3643,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3372,7 +3684,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3398,7 +3710,7 @@ paths:
       description: Delete category in store
       operationId: CategoryDelete
       parameters:
-        - description: 'Defines category removal, specified by category id'
+        - description: Defines category removal, specified by category id
           in: query
           name: id
           required: true
@@ -3406,7 +3718,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3452,7 +3764,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3507,7 +3819,7 @@ paths:
           name: label
           required: false
           type: string
-        - description: 'Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.'
+        - description: Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
           in: query
           name: mime
           required: false
@@ -3534,7 +3846,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3578,7 +3890,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3609,7 +3921,7 @@ paths:
           name: id
           required: true
           type: string
-        - default: 'id,parent_id,name,description'
+        - default: id,parent_id,name,description
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -3633,12 +3945,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Category'
+                $ref: "#/definitions/Category"
               return_code:
                 type: integer
               return_message:
@@ -3668,12 +3980,17 @@ paths:
           name: count
           required: false
           type: integer
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - description: Retrieves categories specified by parent id
           in: query
           name: parent_id
           required: false
           type: string
-        - default: 'id,parent_id,name,description'
+        - default: id,parent_id,name,description
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -3697,22 +4014,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  category:
-                    items:
-                      $ref: '#/definitions/Category'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Category_List"
       security:
         - api_key: []
           store_key: []
@@ -3725,12 +4030,12 @@ paths:
       description: Unassign category to product
       operationId: CategoryUnassign
       parameters:
-        - description: 'Defines category unassign, specified by category id'
+        - description: Defines category unassign, specified by category id
           in: query
           name: category_id
           required: true
           type: string
-        - description: 'Defines category unassign to the product, specified by product id'
+        - description: Defines category unassign to the product, specified by product id
           in: query
           name: product_id
           required: true
@@ -3738,7 +4043,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3776,7 +4081,8 @@ paths:
           name: parent_id
           required: false
           type: string
-        - description: Update category in the stores that is specified by comma-separated stores' id
+        - default: 0
+          description: Update category in the stores that is specified by comma-separated stores' id
           in: query
           name: stores_ids
           required: false
@@ -3824,7 +4130,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3854,24 +4160,80 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/CustomerAdd'
+            $ref: "#/definitions/CustomerAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
                 properties:
                   customer_id:
-                    type: integer
+                    type: string
                 type: object
               return_code:
                 type: integer
               return_message:
                 type: string
             type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - customer
+  /customer.attribute.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get attributes for specific customer
+      operationId: CustomerAttributeList
+      parameters:
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
+        - description: Retrieves orders specified by customer id
+          in: query
+          name: customer_id
+          required: true
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
+        - default: force_all
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Model_Response_Customer_Attribute_List"
       security:
         - api_key: []
           store_key: []
@@ -3888,7 +4250,7 @@ paths:
           in: query
           name: group_id
           required: false
-          type: integer
+          type: string
         - description: Retrieve entities from their creation date
           in: query
           name: created_from
@@ -3922,7 +4284,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -3973,7 +4335,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4023,13 +4385,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
                 items:
-                  $ref: '#/definitions/Customer_Group'
+                  $ref: "#/definitions/Customer_Group"
                 type: object
               return_code:
                 type: integer
@@ -4048,6 +4410,11 @@ paths:
       description: Get list of customers groups.
       operationId: CustomerGroupList
       parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -4089,19 +4456,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                items:
-                  $ref: '#/definitions/Customer_Group'
-                type: array
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Customer_Group_List"
       security:
         - api_key: []
           store_key: []
@@ -4119,7 +4477,7 @@ paths:
           name: id
           required: true
           type: string
-        - default: 'id,email,first_name,last_name'
+        - default: id,email,first_name,last_name
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4138,12 +4496,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Customer'
+                $ref: "#/definitions/Customer"
               return_code:
                 type: integer
               return_message:
@@ -4161,6 +4519,11 @@ paths:
       description: Get list of customers from store.
       operationId: CustomerList
       parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -4193,7 +4556,7 @@ paths:
           name: modified_to
           required: false
           type: string
-        - default: 'id,email,first_name,last_name'
+        - default: id,email,first_name,last_name
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4208,7 +4571,7 @@ paths:
           in: query
           name: group_id
           required: false
-          type: integer
+          type: string
         - description: Retrieves customers specified by store id
           in: query
           name: store_id
@@ -4222,22 +4585,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  customer:
-                    items:
-                      $ref: '#/definitions/Customer'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Customer_List"
       security:
         - api_key: []
           store_key: []
@@ -4250,11 +4601,6 @@ paths:
       description: Get list of orders that were left by customers before completing the order.
       operationId: OrderAbandonedList
       parameters:
-        - description: Store Id
-          in: query
-          name: store_id
-          required: false
-          type: string
         - description: Retrieves orders specified by customer id
           in: query
           name: customer_id
@@ -4263,29 +4609,6 @@ paths:
         - description: Retrieves orders specified by customer email
           in: query
           name: customer_email
-          required: false
-          type: string
-        - default: 0
-          description: This parameter sets the number from which you want to get entities
-          in: query
-          name: start
-          required: false
-          type: integer
-        - default: 10
-          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
-          in: query
-          name: count
-          required: false
-          type: integer
-        - default: 'customer,totals,address,items'
-          description: Set this parameter in order to choose which entity fields you want to retrieve
-          in: query
-          name: params
-          required: false
-          type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
-          in: query
-          name: exclude
           required: false
           type: string
         - description: Retrieve entities to their creation date
@@ -4314,25 +4637,46 @@ paths:
           name: skip_empty_email
           required: false
           type: boolean
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: customer,totals,items
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  order:
-                    items:
-                      $ref: '#/definitions/OrderAbandoned'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Order_Abandoned_List"
       security:
         - api_key: []
           store_key: []
@@ -4349,11 +4693,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderAdd'
+            $ref: "#/definitions/OrderAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4452,7 +4796,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4481,7 +4825,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4541,7 +4885,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'order_id,customer,totals,address,items,bundles,status'
+        - default: order_id,customer,totals,address,items,bundles,status
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4580,7 +4924,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4588,7 +4932,7 @@ paths:
                 properties:
                   order:
                     items:
-                      $ref: '#/definitions/Order'
+                      $ref: "#/definitions/Order"
                     type: array
                 type: object
               return_code:
@@ -4611,9 +4955,14 @@ paths:
         - description: Retrieves order’s info specified by order id
           in: query
           name: order_id
-          required: true
+          required: false
           type: string
-        - default: 'order_id,customer,totals,address,items,bundles,status'
+        - description: Retrieves order info specified by id
+          in: query
+          name: id
+          required: false
+          type: string
+        - default: order_id,customer,totals,address,items,bundles,status
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4629,15 +4978,21 @@ paths:
           name: store_id
           required: false
           type: string
+        - default: false
+          description: If the value is 'true' and order exist in our cache, we will return order.info response from cache
+          in: query
+          name: enable_cache
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Order'
+                $ref: "#/definitions/Order"
               return_code:
                 type: integer
               return_message:
@@ -4670,6 +5025,13 @@ paths:
           name: order_status
           required: false
           type: string
+        - description: Retrieves orders specified by order statuses
+          in: query
+          items:
+            type: string
+          name: order_status_ids
+          required: false
+          type: array
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -4699,7 +5061,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - default: 'order_id,customer,totals,address,items,bundles,status'
+        - default: order_id,customer,totals,address,items,bundles,status
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4785,20 +5147,24 @@ paths:
           name: is_deleted
           required: false
           type: boolean
+        - description: Retrieve entities according to shipping country
+          in: query
+          name: shipping_country_iso3
+          required: false
+          type: string
+        - default: false
+          description: If the value is 'true', we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add)
+          in: query
+          name: enable_cache
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                $ref: '#/definitions/Model_Response_Order_List'
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Order_List"
       security:
         - api_key: []
           store_key: []
@@ -4815,11 +5181,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderRefundAdd'
+            $ref: "#/definitions/OrderRefundAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4849,11 +5215,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderShipmentAdd'
+            $ref: "#/definitions/OrderShipmentAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4884,6 +5250,11 @@ paths:
           name: order_id
           required: true
           type: string
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -4896,7 +5267,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,order_id,tracking_numbers'
+        - default: id,order_id,items,tracking_numbers
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -4925,22 +5296,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  shipment:
-                    items:
-                      $ref: '#/definitions/Shipment'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Order_Shipment_List"
       security:
         - api_key: []
           store_key: []
@@ -4957,11 +5316,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderShipmentTrackingAdd'
+            $ref: "#/definitions/OrderShipmentTrackingAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -4991,11 +5350,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderShipmentUpdate'
+            $ref: "#/definitions/OrderShipmentUpdate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5024,7 +5383,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5077,6 +5436,16 @@ paths:
           name: comment
           required: false
           type: string
+        - description: Specifies admin's order comment
+          in: query
+          name: admin_comment
+          required: false
+          type: string
+        - description: Specifies private admin's order comment
+          in: query
+          name: admin_private_comment
+          required: false
+          type: string
         - description: Specifies order's  modification date
           in: query
           name: date_modified
@@ -5106,7 +5475,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5136,11 +5505,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductAdd'
+            $ref: "#/definitions/ProductAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5163,13 +5532,13 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: Get list of attributes.
+      description: Get list of attributes and values.
       operationId: ProductAttributeList
       parameters:
-        - description: Retrieves attributes specified by product id
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
           in: query
-          name: product_id
-          required: true
+          name: page_cursor
+          required: false
           type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
@@ -5183,37 +5552,14 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'attribute_id,name'
-          description: Set this parameter in order to choose which entity fields you want to retrieve
+        - description: Retrieves attributes specified by product id
           in: query
-          name: params
-          required: false
+          name: product_id
+          required: true
           type: string
-        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+        - description: Defines product's variants specified by variant id
           in: query
-          name: exclude
-          required: false
-          type: string
-        - default: attribute_id
-          description: Set field to sort by
-          in: query
-          name: sort_by
-          required: false
-          type: string
-        - default: asc
-          description: Set sorting direction
-          in: query
-          name: sort_direction
-          required: false
-          type: string
-        - description: Retrieves attributes specified by language id
-          in: query
-          name: lang_id
-          required: false
-          type: string
-        - description: Retrieves attributes specified by store id
-          in: query
-          name: store_id
+          name: variant_id
           required: false
           type: string
         - description: Retrieves info for specified attribute_id
@@ -5231,25 +5577,46 @@ paths:
           name: set_name
           required: false
           type: string
+        - description: Retrieves attributes specified by language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
+        - description: Retrieves attributes specified by store id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - default: attribute_id
+          description: Set field to sort by
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - default: asc
+          description: Set sorting direction
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - default: attribute_id,name
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  attributes:
-                    items:
-                      $ref: '#/definitions/Product_Attribute'
-                    type: array
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Product_Attribute_List"
       security:
         - api_key: []
           store_key: []
@@ -5305,7 +5672,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5316,6 +5683,68 @@ paths:
                   product_id:
                     type: string
                   value_id:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - product
+  /product.attribute.value.unset.json:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Removes attribute value for a product.
+      operationId: ProductAttributeValueUnset
+      parameters:
+        - description: Product id
+          in: query
+          name: product_id
+          required: true
+          type: string
+        - description: Attribute Id
+          in: query
+          name: attribute_id
+          required: true
+          type: string
+        - description: Store Id
+          in: query
+          name: store_id
+          required: false
+          type: string
+        - default: false
+          description: Boolean, whether or not to unset default value of the attribute, if applicable
+          in: query
+          name: include_default
+          required: false
+          type: boolean
+        - default: true
+          description: Is reindex required
+          in: query
+          name: reindex
+          required: false
+          type: boolean
+        - default: true
+          description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  success:
                     type: string
                 type: object
               return_code:
@@ -5347,7 +5776,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name,short_description,active,url'
+        - default: id,name,short_description,active,url
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -5396,7 +5825,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5404,7 +5833,7 @@ paths:
                 properties:
                   product:
                     items:
-                      $ref: '#/definitions/Brand'
+                      $ref: "#/definitions/Brand"
                     type: array
                 type: object
               return_code:
@@ -5449,7 +5878,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5457,7 +5886,7 @@ paths:
                 properties:
                   children:
                     items:
-                      $ref: '#/definitions/Child'
+                      $ref: "#/definitions/Child"
                 type: object
               return_code:
                 type: integer
@@ -5505,12 +5934,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Child'
+                $ref: "#/definitions/Child"
               return_code:
                 type: integer
               return_message:
@@ -5528,6 +5957,11 @@ paths:
       description: Get child items list of specific product(s).
       operationId: ProductChildItemList
       parameters:
+        - description: Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
         - default: 0
           description: This parameter sets the number from which you want to get entities
           in: query
@@ -5574,9 +6008,9 @@ paths:
         - description: Filter by parent product id
           in: query
           name: product_id
-          required: true
+          required: false
           type: string
-        - description: Filter by parent product id
+        - description: Filter by parent product ids
           in: query
           name: product_ids
           required: false
@@ -5615,24 +6049,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                properties:
-                  children:
-                    items:
-                      $ref: '#/definitions/Child'
-                    type: array
-                  total_count:
-                    type: integer
-                type: object
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Product_ChildItem_List"
       security:
         - api_key: []
           store_key: []
@@ -5709,7 +6129,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5775,7 +6195,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5813,7 +6233,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'name,iso3,default,avail'
+        - default: name,iso3,default,avail
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -5837,7 +6257,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5845,7 +6265,7 @@ paths:
                 properties:
                   currency:
                     items:
-                      $ref: '#/definitions/Currency'
+                      $ref: "#/definitions/Currency"
                     type: array
                 type: object
               return_code:
@@ -5873,7 +6293,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5902,7 +6322,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -5948,10 +6368,15 @@ paths:
           name: find_what
           required: false
           type: string
+        - description: Search products specified by language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6018,7 +6443,7 @@ paths:
           name: label
           required: false
           type: string
-        - description: 'Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.'
+        - description: Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
           in: query
           name: mime
           required: false
@@ -6052,7 +6477,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6096,7 +6521,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6166,7 +6591,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6197,7 +6622,7 @@ paths:
           name: id
           required: true
           type: string
-        - default: 'id,name,description,price,categories_ids'
+        - default: id,name,description,price,categories_ids
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -6243,12 +6668,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Product'
+                $ref: "#/definitions/Product"
               return_code:
                 type: integer
               return_message:
@@ -6283,7 +6708,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name,description,price,categories_ids'
+        - default: id,name,description,price,categories_ids
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -6397,17 +6822,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            properties:
-              result:
-                $ref: '#/definitions/Model_Response_Product_List'
-              return_code:
-                type: integer
-              return_message:
-                type: string
-            type: object
+            $ref: "#/definitions/Model_Response_Product_List"
       security:
         - api_key: []
           store_key: []
@@ -6433,7 +6851,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6518,7 +6936,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6559,7 +6977,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6597,7 +7015,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name,description'
+        - default: id,name,description
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -6626,7 +7044,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6634,7 +7052,7 @@ paths:
                 properties:
                   option:
                     items:
-                      $ref: '#/definitions/Product_Option'
+                      $ref: "#/definitions/Product_Option"
                     type: array
                 type: object
               return_code:
@@ -6673,7 +7091,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6712,7 +7130,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6756,7 +7174,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6786,11 +7204,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductPriceAdd'
+            $ref: "#/definitions/ProductPriceAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6829,7 +7247,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6859,11 +7277,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductPriceUpdate'
+            $ref: "#/definitions/ProductPriceUpdate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6921,7 +7339,7 @@ paths:
           name: status
           required: false
           type: string
-        - default: 'id,customer_id,email,message,status'
+        - default: id,customer_id,email,message,status
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -6935,7 +7353,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -6943,7 +7361,7 @@ paths:
                 properties:
                   reviews:
                     items:
-                      $ref: '#/definitions/Product_Review'
+                      $ref: "#/definitions/Product_Review"
                     type: array
                   total_count:
                     type: integer
@@ -6978,7 +7396,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7008,11 +7426,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductTaxAdd'
+            $ref: "#/definitions/ProductTaxAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7113,6 +7531,11 @@ paths:
           name: manage_stock
           required: false
           type: boolean
+        - description: Set backorder status
+          in: query
+          name: backorder_status
+          required: false
+          type: string
         - description: Defines product's name that has to be updated
           in: query
           name: name
@@ -7200,7 +7623,7 @@ paths:
           required: false
           type: boolean
         - default: true
-          description: Defines if the reindex is required
+          description: Is reindex required
           in: query
           name: reindex
           required: false
@@ -7210,10 +7633,21 @@ paths:
           name: tags
           required: false
           type: string
+        - default: true
+          description: Is cache clear required
+          in: query
+          name: clear_cache
+          required: false
+          type: boolean
+        - description: Global Trade Item Number. An GTIN is an identifier for trade items.
+          in: query
+          name: gtin
+          required: false
+          type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7243,11 +7677,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductVariantAdd'
+            $ref: "#/definitions/ProductVariantAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7311,7 +7745,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7337,7 +7771,7 @@ paths:
       description: Delete variant.
       operationId: ProductVariantDelete
       parameters:
-        - description: 'Defines variant removal, specified by variant id'
+        - description: Defines variant removal, specified by variant id
           in: query
           name: id
           required: true
@@ -7350,7 +7784,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7376,7 +7810,7 @@ paths:
       description: Get variant info.
       operationId: ProductVariantInfo
       parameters:
-        - default: 'id,name,description,price'
+        - default: id,name,description,price
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -7400,12 +7834,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/Product'
+                $ref: "#/definitions/Product"
               return_code:
                 type: integer
               return_message:
@@ -7435,7 +7869,7 @@ paths:
           name: count
           required: false
           type: integer
-        - default: 'id,name,description,price'
+        - default: id,name,description,price
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -7484,7 +7918,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7492,7 +7926,7 @@ paths:
                 properties:
                   variant:
                     items:
-                      $ref: '#/definitions/Product'
+                      $ref: "#/definitions/Product"
                     type: array
                 type: object
               return_code:
@@ -7516,11 +7950,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductVariantPriceAdd'
+            $ref: "#/definitions/ProductVariantPriceAdd"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7559,7 +7993,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7589,11 +8023,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ProductVariantPriceUpdate'
+            $ref: "#/definitions/ProductVariantPriceUpdate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7743,7 +8177,7 @@ paths:
           required: false
           type: number
         - default: true
-          description: Defines if the reindex is required
+          description: Is reindex required
           in: query
           name: reindex
           required: false
@@ -7751,7 +8185,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7819,7 +8253,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7827,7 +8261,7 @@ paths:
                 properties:
                   subscribers:
                     items:
-                      $ref: '#/definitions/Subscriber'
+                      $ref: "#/definitions/Subscriber"
                     type: array
                   total_count:
                     type: integer
@@ -7854,7 +8288,7 @@ paths:
           name: tax_class_id
           required: true
           type: string
-        - default: 'tax_class_id,name,avail'
+        - default: tax_class_id,name,avail
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -7868,12 +8302,12 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
               result:
-                $ref: '#/definitions/TaxClass'
+                $ref: "#/definitions/TaxClass"
               return_code:
                 type: integer
               return_message:
@@ -7909,7 +8343,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -7935,12 +8369,12 @@ paths:
       description: Create webhook on the store and subscribe to it.
       operationId: WebhookCreate
       parameters:
-        - description: 'Specify the entity that you want to enable webhooks for (e.g product, order, customer, category)'
+        - description: Specify the entity that you want to enable webhooks for (e.g product, order, customer, category)
           in: query
           name: entity
           required: true
           type: string
-        - description: 'Specify what action (event) will trigger the webhook (e.g add, delete, or update)'
+        - description: Specify what action (event) will trigger the webhook (e.g add, delete, or update)
           in: query
           name: action
           required: true
@@ -7975,7 +8409,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -8009,7 +8443,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -8038,7 +8472,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -8073,7 +8507,7 @@ paths:
       description: List registered webhook on the store.
       operationId: WebhookList
       parameters:
-        - default: 'id,entity,action,callback'
+        - default: id,entity,action,callback
           description: Set this parameter in order to choose which entity fields you want to retrieve
           in: query
           name: params
@@ -8096,7 +8530,7 @@ paths:
           name: entity
           required: false
           type: string
-        - description: 'The action you want to filter webhooks by (e.g. add, update, or delete)'
+        - description: The action you want to filter webhooks by (e.g. add, update, or delete)
           in: query
           name: action
           required: false
@@ -8114,7 +8548,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -8122,7 +8556,7 @@ paths:
                 properties:
                   webhook:
                     items:
-                      $ref: '#/definitions/Webhook'
+                      $ref: "#/definitions/Webhook"
                     type: array
                 type: object
               return_code:
@@ -8170,7 +8604,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
             properties:
@@ -8222,22 +8656,22 @@ definitions:
         type: object
       basket_products:
         items:
-          $ref: '#/definitions/Basket_Item'
+          $ref: "#/definitions/Basket_Item"
         type: array
       basket_url:
         type: string
       created_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: "#/definitions/Currency"
       custom_fields:
         type: object
       customer:
-        $ref: '#/definitions/BaseCustomer'
+        $ref: "#/definitions/BaseCustomer"
       id:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
     type: object
   Basket_Item:
     properties:
@@ -8251,7 +8685,7 @@ definitions:
         type: string
       options:
         items:
-          $ref: '#/definitions/Basket_Item_Option'
+          $ref: "#/definitions/Basket_Item_Option"
         type: array
       parent_id:
         type: string
@@ -8353,7 +8787,7 @@ definitions:
         type: string
       shipping_methods:
         items:
-          $ref: '#/definitions/Order_ShippingMethod'
+          $ref: "#/definitions/Order_ShippingMethod"
         type: array
     type: object
   Cart:
@@ -8368,11 +8802,11 @@ definitions:
         type: string
       shipping_zones:
         items:
-          $ref: '#/definitions/Cart_ShippingZone'
+          $ref: "#/definitions/Cart_ShippingZone"
         type: array
       stores_info:
         items:
-          $ref: '#/definitions/Cart_StoreInfo'
+          $ref: "#/definitions/Cart_StoreInfo"
         type: array
       url:
         type: string
@@ -8380,7 +8814,7 @@ definitions:
         type: string
       warehouses:
         items:
-          $ref: '#/definitions/Cart_Warehouse'
+          $ref: "#/definitions/Cart_Warehouse"
         type: array
     type: object
   CartConfigUpdate:
@@ -8389,7 +8823,7 @@ definitions:
         description: This parameter sets the list of params to the shopping cart.
         type: object
       db_tables_prefix:
-        description: 'This parameter is deprecated for this method. Please, use this parameter in method account.config.update'
+        description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
         type: string
       store_id:
         description: Store Id
@@ -8420,7 +8854,7 @@ definitions:
         description: Defines condition attribute value/s. Can be comma separated string.
         type: string
       action_scope:
-        description: 'Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.'
+        description: Specify how discount should be applied. If scope=matching_items, then discount will be applied to each of the items that match action conditions. Scope order means that discount will be applied once.
         enum:
           - order
           - matching_items
@@ -8465,6 +8899,19 @@ definitions:
       - action_scope
       - action_amount
     type: object
+  Cart_MetaData:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      key:
+        type: string
+      value:
+        type: string
+    type: object
   Cart_ShippingZone:
     properties:
       additional_fields:
@@ -8492,12 +8939,12 @@ definitions:
         type: object
       carrier_info:
         items:
-          $ref: '#/definitions/Carrier'
+          $ref: "#/definitions/Carrier"
         type: array
       country:
         type: string
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: "#/definitions/Currency"
       custom_fields:
         type: object
       default_warehouse_id:
@@ -8516,16 +8963,16 @@ definitions:
         type: string
       store_currencies:
         items:
-          $ref: '#/definitions/Currency'
+          $ref: "#/definitions/Currency"
         type: array
       store_id:
         type: string
       store_languages:
         items:
-          $ref: '#/definitions/Language'
+          $ref: "#/definitions/Language"
         type: array
       store_owner_info:
-        $ref: '#/definitions/Info'
+        $ref: "#/definitions/Info"
       timezone:
         type: string
       weight_unit:
@@ -8536,7 +8983,7 @@ definitions:
       additional_fields:
         type: object
       address:
-        $ref: '#/definitions/Customer_Address'
+        $ref: "#/definitions/Customer_Address"
       avail:
         type: boolean
       carriers_ids:
@@ -8563,7 +9010,7 @@ definitions:
       avail:
         type: boolean
       created_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       description:
@@ -8572,7 +9019,7 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       keywords:
         type: string
@@ -8581,7 +9028,7 @@ definitions:
       meta_title:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       name:
         type: string
       parent_id:
@@ -8605,7 +9052,7 @@ definitions:
         type: object
       advanced_price:
         items:
-          $ref: '#/definitions/Product_AdvancedPrice'
+          $ref: "#/definitions/Product_AdvancedPrice"
         type: array
       allow_backorders:
         type: boolean
@@ -8621,7 +9068,7 @@ definitions:
           type: object
         type: array
       created_time:
-        type: string
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       default_price:
@@ -8642,13 +9089,13 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       in_stock:
         type: boolean
       inventory:
         items:
-          $ref: '#/definitions/Product_Inventory'
+          $ref: "#/definitions/Product_Inventory"
         type: array
       inventory_level:
         type: number
@@ -8663,7 +9110,7 @@ definitions:
       min_quantity:
         type: number
       modified_time:
-        type: string
+        $ref: "#/definitions/A2CDateTime"
       mpn:
         type: string
       name:
@@ -8706,7 +9153,7 @@ definitions:
     properties:
       actions:
         items:
-          $ref: '#/definitions/Coupon_Action'
+          $ref: "#/definitions/Coupon_Action"
         type: array
       additional_fields:
         type: object
@@ -8716,18 +9163,18 @@ definitions:
         type: string
       codes:
         items:
-          $ref: '#/definitions/Coupon_Code'
+          $ref: "#/definitions/Coupon_Code"
         type: array
       conditions:
         items:
-          $ref: '#/definitions/Coupon_Condition'
+          $ref: "#/definitions/Coupon_Condition"
         type: array
       custom_fields:
         type: object
       date_end:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       date_start:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       description:
         type: string
       id:
@@ -8740,7 +9187,7 @@ definitions:
         type: integer
       usage_history:
         items:
-          $ref: '#/definitions/Coupon_History'
+          $ref: "#/definitions/Coupon_History"
         type: array
       usage_limit:
         type: integer
@@ -8759,7 +9206,7 @@ definitions:
         type: string
       conditions:
         items:
-          $ref: '#/definitions/Coupon_Condition'
+          $ref: "#/definitions/Coupon_Condition"
         type: array
       currency_code:
         type: string
@@ -8811,7 +9258,7 @@ definitions:
         type: string
       sub-conditions:
         items:
-          $ref: '#/definitions/Coupon_Condition'
+          $ref: "#/definitions/Coupon_Condition"
         type: array
       value:
         type: string
@@ -8856,14 +9303,14 @@ definitions:
         type: object
       address_book:
         items:
-          $ref: '#/definitions/Customer_Address'
+          $ref: "#/definitions/Customer_Address"
         type: array
       birth_day:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       company:
         type: string
       created_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       email:
@@ -8876,14 +9323,14 @@ definitions:
         type: string
       group:
         items:
-          $ref: '#/definitions/Customer_Group'
+          $ref: "#/definitions/Customer_Group"
         type: array
       id:
         type: string
       ip_address:
         type: string
       last_login:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       last_name:
         type: string
       last_order_id:
@@ -8891,7 +9338,7 @@ definitions:
       login:
         type: string
       modified_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       news_letter_subscription:
         type: boolean
       orders_count:
@@ -9033,7 +9480,7 @@ definitions:
       company:
         type: string
       country:
-        $ref: '#/definitions/Country'
+        $ref: "#/definitions/Country"
       custom_fields:
         type: object
       default:
@@ -9055,10 +9502,40 @@ definitions:
       region:
         type: string
       state:
-        $ref: '#/definitions/State'
+        $ref: "#/definitions/State"
       type:
         type: string
       website:
+        type: string
+    type: object
+  Customer_Attribute:
+    properties:
+      additional_fields:
+        type: object
+      attribute_id:
+        type: string
+      code:
+        type: string
+      custom_fields:
+        type: object
+      name:
+        type: string
+      type:
+        type: string
+      values:
+        items:
+          $ref: "#/definitions/Customer_Attribute_Value"
+        type: array
+    type: object
+  Customer_Attribute_Value:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      value:
         type: string
     type: object
   Customer_Group:
@@ -9112,7 +9589,7 @@ definitions:
         type: string
       usage_history:
         items:
-          $ref: '#/definitions/Coupon_History'
+          $ref: "#/definitions/Coupon_History"
         type: array
     type: object
   Image:
@@ -9124,7 +9601,7 @@ definitions:
       avail:
         type: boolean
       create_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       file_name:
@@ -9136,7 +9613,7 @@ definitions:
       mime-type:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       size:
         type: integer
       sort_order:
@@ -9184,6 +9661,141 @@ definitions:
       name:
         type: string
     type: object
+  Model_Response_Cart_Coupon_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Cart_Coupon_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Cart_GiftCard_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Cart_Giftcard_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Cart_MetaData_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Cart_MetaData_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Cart_Script_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Cart_Script_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Category_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Category_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Customer_Attribute_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Customer_Attribute_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Customer_Group_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Customer_Group_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Customer_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Customer_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Order_Abandoned_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Order_Abandoned_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
   Model_Response_Order_List:
     properties:
       additional_fields:
@@ -9191,9 +9803,54 @@ definitions:
       custom_fields:
         type: object
       pagination:
-        $ref: '#/definitions/Pagination'
+        $ref: "#/definitions/Pagination"
       result:
-        $ref: '#/definitions/Response_Order_List_Result'
+        $ref: "#/definitions/Response_Order_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Order_Shipment_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Order_Shipment_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Product_Attribute_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Product_Attribute_List_Result"
+      return_code:
+        type: integer
+      return_message:
+        type: string
+    type: object
+  Model_Response_Product_ChildItem_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Product_ChildItem_List_Result"
       return_code:
         type: integer
       return_message:
@@ -9206,9 +9863,9 @@ definitions:
       custom_fields:
         type: object
       pagination:
-        $ref: '#/definitions/Pagination'
+        $ref: "#/definitions/Pagination"
       result:
-        $ref: '#/definitions/Response_Product_List_Result'
+        $ref: "#/definitions/Response_Product_List_Result"
       return_code:
         type: integer
       return_message:
@@ -9221,17 +9878,17 @@ definitions:
       basket_id:
         type: string
       billing_address:
-        $ref: '#/definitions/Customer_Address'
+        $ref: "#/definitions/Customer_Address"
       bundles:
         items:
-          $ref: '#/definitions/Order_Item'
+          $ref: "#/definitions/Order_Item"
         type: array
       comment:
         type: string
       create_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: "#/definitions/Currency"
       custom_fields:
         type: object
       customer:
@@ -9246,42 +9903,42 @@ definitions:
             type: string
       discounts:
         items:
-          $ref: '#/definitions/Order_Totals_NewDiscount'
+          $ref: "#/definitions/Order_Totals_NewDiscount"
         type: array
       finished_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       id:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       order_id:
         type: string
       order_products:
         items:
-          $ref: '#/definitions/Order_Item'
+          $ref: "#/definitions/Order_Item"
         type: array
       payment_method:
-        $ref: '#/definitions/Order_PaymentMethod'
+        $ref: "#/definitions/Order_PaymentMethod"
       refunds:
         items:
-          $ref: '#/definitions/Order_Refund'
+          $ref: "#/definitions/Order_Refund"
         type: array
       shipping_address:
-        $ref: '#/definitions/Customer_Address'
+        $ref: "#/definitions/Customer_Address"
       shipping_method:
-        $ref: '#/definitions/Order_ShippingMethod'
+        $ref: "#/definitions/Order_ShippingMethod"
       shipping_methods:
         items:
-          $ref: '#/definitions/Order_ShippingMethod'
+          $ref: "#/definitions/Order_ShippingMethod"
         type: array
       status:
-        $ref: '#/definitions/Order_Status'
+        $ref: "#/definitions/Order_Status"
       store_id:
         type: string
       total:
-        $ref: '#/definitions/Order_Total'
+        $ref: "#/definitions/Order_Total"
       totals:
-        $ref: '#/definitions/Order_Totals'
+        $ref: "#/definitions/Order_Totals"
       warehouses_ids:
         items:
           type: string
@@ -9296,9 +9953,9 @@ definitions:
       basket_url:
         type: string
       created_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       currency:
-        $ref: '#/definitions/Currency'
+        $ref: "#/definitions/Currency"
       custom_fields:
         type: object
       customer:
@@ -9314,18 +9971,21 @@ definitions:
       id:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       order_products:
         items:
-          $ref: '#/definitions/Order_Item'
+          $ref: "#/definitions/Order_Item"
         type: array
       totals:
-        $ref: '#/definitions/Order_Totals'
+        $ref: "#/definitions/Order_Totals"
     type: object
   OrderAdd:
     properties:
       admin_comment:
         description: Specifies admin's order comment
+        type: string
+      admin_private_comment:
+        description: Specifies private admin's order comment
         type: string
       bill_address_1:
         description: Specifies first billing address
@@ -9393,7 +10053,7 @@ definitions:
         description: Specifies customer’s phone
         type: string
       date:
-        description: 'Specifies an order creation date in format Y-m-d H:i:s'
+        description: Specifies an order creation date in format Y-m-d H:i:s
         type: string
       date_finished:
         description: Specifies order's  finished date
@@ -9420,8 +10080,18 @@ definitions:
         type: number
       inventory_behaviour:
         default: bypass
-        description: 'The behaviour to use when updating inventory.<hr><div style="font-style:normal">Values description:<div style="margin-left: 2%; padding-top: 2%"><div style="font-size:85%"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product''s </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product''s </br> inventory policy.</br></br></div></div></div>'
+        description: "The behaviour to use when updating inventory.<hr><div style=\"font-style:normal\">Values description:<div style=\"margin-left: 2%; padding-top: 2%\"><div style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div>"
         type: string
+      note_attributes:
+        description: Defines note attributes
+        items:
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+          type: object
+        type: array
       order_id:
         description: Defines the order id if it is supported by the cart
         type: string
@@ -9447,13 +10117,13 @@ definitions:
               items:
                 properties:
                   order_item_option_name:
-                    description: 'Ordered Product Option Name. Where x is order item ID, y is order item option ID'
+                    description: Ordered Product Option Name. Where x is order item ID, y is order item option ID
                     type: string
                   order_item_option_price:
-                    description: 'Ordered product option price Where x is order item ID, y - order item option ID'
+                    description: Ordered product option price Where x is order item ID, y - order item option ID
                     type: number
                   order_item_option_value:
-                    description: 'Ordered product option value Where x is order item ID, y - order item option ID'
+                    description: Ordered product option value Where x is order item ID, y - order item option ID
                     type: string
                 type: object
               type: array
@@ -9474,10 +10144,10 @@ definitions:
               items:
                 properties:
                   order_item_property_name:
-                    description: 'Ordered product property name. Where x is order item ID, y is order item property ID'
+                    description: Ordered product property name. Where x is order item ID, y is order item property ID
                     type: string
                   order_item_property_value:
-                    description: 'Ordered product property value. Where x is order item ID, y - order item property ID'
+                    description: Ordered product property value. Where x is order item ID, y - order item property ID
                     type: string
                 type: object
               type: array
@@ -9508,6 +10178,10 @@ definitions:
       order_status:
         description: Defines order status.
         type: string
+      send_admin_notifications:
+        default: false
+        description: Notify admin when new order was created.
+        type: boolean
       send_notifications:
         default: false
         description: Send notifications to customer after order was created
@@ -9556,7 +10230,7 @@ definitions:
         description: Defines store id where the order should be assigned
         type: string
       subtotal_price:
-        description: 'Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts'
+        description: Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts
         type: number
       tags:
         description: Order tags
@@ -9586,7 +10260,7 @@ definitions:
   OrderRefundAdd:
     properties:
       date:
-        description: 'Specifies an order creation date in format Y-m-d H:i:s'
+        description: Specifies an order creation date in format Y-m-d H:i:s
         type: string
       fee_price:
         description: Specifies refund's fee price
@@ -9597,7 +10271,7 @@ definitions:
         type: boolean
       item_restock:
         default: false
-        description: 'Boolean, whether or not to add the line items back to the store inventory.'
+        description: Boolean, whether or not to add the line items back to the store inventory.
         type: boolean
       items:
         description: Defines items in the order that will be refunded
@@ -9612,7 +10286,7 @@ definitions:
           type: object
         type: array
       message:
-        description: 'Refund reason, or some else message which assigned to refund.'
+        description: Refund reason, or some else message which assigned to refund.
         type: string
       order_id:
         description: Defines the order for which the refund will be created.
@@ -9627,14 +10301,16 @@ definitions:
       total_price:
         description: Defines order refund amount.
         type: number
-    required:
-      - order_id
     type: object
   OrderShipmentAdd:
     properties:
       adjust_stock:
         default: false
         description: This parameter is used for adjust stock.
+        type: boolean
+      enable_cache:
+        default: false
+        description: If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
         type: boolean
       items:
         description: Defines items in the order that will be shipped
@@ -9656,8 +10332,11 @@ definitions:
       shipment_provider:
         description: Defines company name that provide tracking of shipment
         type: string
+      store_id:
+        description: Store Id
+        type: string
       tracking_numbers:
-        description: 'Defines shipment''s tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method'
+        description: Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method
         items:
           properties:
             carrier_id:
@@ -9669,8 +10348,6 @@ definitions:
       warehouse_id:
         description: This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
         type: string
-    required:
-      - order_id
     type: object
   OrderShipmentTrackingAdd:
     properties:
@@ -9696,7 +10373,6 @@ definitions:
         description: Defines name of the company which provides shipment tracking
         type: string
     required:
-      - order_id
       - shipment_id
       - tracking_number
     type: object
@@ -9713,7 +10389,7 @@ definitions:
         description: Shipment id indicates the number of delivery
         type: string
       tracking_numbers:
-        description: 'Defines shipment''s tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method'
+        description: Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method
         items:
           properties:
             carrier_id:
@@ -9724,7 +10400,6 @@ definitions:
         type: array
     required:
       - shipment_id
-      - order_id
     type: object
   Order_Item:
     properties:
@@ -9740,7 +10415,7 @@ definitions:
         type: string
       options:
         items:
-          $ref: '#/definitions/Order_Item_Option'
+          $ref: "#/definitions/Order_Item_Option"
         type: array
       order_product_id:
         type: string
@@ -9813,10 +10488,10 @@ definitions:
         type: string
       items:
         items:
-          $ref: '#/definitions/Order_Status_Refund_Item'
+          $ref: "#/definitions/Order_Status_Refund_Item"
         type: array
       modified_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       shipping:
         type: number
       tax:
@@ -9841,14 +10516,14 @@ definitions:
         type: object
       history:
         items:
-          $ref: '#/definitions/Order_Status_HistoryItem'
+          $ref: "#/definitions/Order_Status_HistoryItem"
         type: array
       id:
         type: string
       name:
         type: string
       refund_info:
-        $ref: '#/definitions/Order_Status_Refund'
+        $ref: "#/definitions/Order_Status_Refund"
     type: object
   Order_Status_HistoryItem:
     properties:
@@ -9861,7 +10536,7 @@ definitions:
       id:
         type: string
       modified_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       name:
         type: string
       notify:
@@ -9879,14 +10554,14 @@ definitions:
         type: number
       refunded_items:
         items:
-          $ref: '#/definitions/Order_Status_Refund_Item'
+          $ref: "#/definitions/Order_Status_Refund_Item"
         type: array
       shipping:
         type: number
       tax:
         type: number
       time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       total_refunded:
         type: number
     type: object
@@ -9990,7 +10665,7 @@ definitions:
         type: object
       plugins:
         items:
-          $ref: '#/definitions/Plugin'
+          $ref: "#/definitions/Plugin"
         type: array
     type: object
   Product:
@@ -9999,7 +10674,7 @@ definitions:
         type: object
       advanced_price:
         items:
-          $ref: '#/definitions/Product_AdvancedPrice'
+          $ref: "#/definitions/Product_AdvancedPrice"
         type: array
       avail_sale:
         type: boolean
@@ -10012,7 +10687,7 @@ definitions:
           type: string
         type: array
       create_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       description:
@@ -10021,7 +10696,7 @@ definitions:
         type: string
       group_price:
         items:
-          $ref: '#/definitions/Product_GroupPrice'
+          $ref: "#/definitions/Product_GroupPrice"
         type: array
       height:
         type: number
@@ -10029,11 +10704,11 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       inventory:
         items:
-          $ref: '#/definitions/Product_Inventory'
+          $ref: "#/definitions/Product_Inventory"
         type: array
       is_downloadable:
         type: boolean
@@ -10050,14 +10725,14 @@ definitions:
       meta_title:
         type: string
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       name:
         type: string
       price:
         type: number
       product_options:
         items:
-          $ref: '#/definitions/Product_Option'
+          $ref: "#/definitions/Product_Option"
         type: array
       quantity:
         type: number
@@ -10072,7 +10747,7 @@ definitions:
       sort_order:
         type: integer
       special_price:
-        $ref: '#/definitions/SpecialPrice'
+        $ref: "#/definitions/SpecialPrice"
       stores_ids:
         items:
           type: string
@@ -10081,7 +10756,7 @@ definitions:
         type: string
       tier_price:
         items:
-          $ref: '#/definitions/Product_TierPrice'
+          $ref: "#/definitions/Product_TierPrice"
         type: array
       type:
         type: string
@@ -10126,6 +10801,9 @@ definitions:
         default: true
         description: Specifies the set of visible/invisible products for users
         type: boolean
+      barcode:
+        description: A barcode is a unique code composed of numbers used as a product identifier.
+        type: string
       best_offer:
         description: 'The price at which Best Offers are automatically accepted.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">best_offer[<b>minimum_offer_price</b>] = decimal</br>best_offer[<b>auto_accept_price</b>] = decimal</br></code></div></div>'
         items:
@@ -10134,8 +10812,12 @@ definitions:
       categories_ids:
         description: Defines product add that is specified by comma-separated categories id
         type: string
+      clear_cache:
+        default: true
+        description: Is cache clear required
+        type: boolean
       condition:
-        description: 'The human-readable label for the condition (e.g., "New").'
+        description: The human-readable label for the condition (e.g., "New").
         type: string
       created_at:
         description: Defines the date of entity creation
@@ -10160,6 +10842,15 @@ definitions:
               type: number
           type: object
         type: array
+      gtin:
+        description: Global Trade Item Number. An GTIN is an identifier for trade items.
+        type: string
+      image_name:
+        description: Defines image's name
+        type: string
+      image_url:
+        description: Image Url
+        type: string
       isbn:
         description: International Standard Book Number. An ISBN is a unique identifier for books.
         type: string
@@ -10219,14 +10910,31 @@ definitions:
         description: Indicates whether the seller allows the buyer to return the item.
         type: boolean
       sales_tax:
-        description: 'Percent of an item''s price to be charged as the sales tax for the order. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">sales_tax[<b>tax_percent</b>] = decimal (##.###)</br>sales_tax[<b>tax_state</b>] = string</br>sales_tax[<b>shipping_inc_in_tax</b>] = bool</br></code></div></div>'
+        description: "Percent of an item's price to be charged as the sales tax for the order. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">sales_tax[<b>tax_percent</b>] = decimal (##.###)</br>sales_tax[<b>tax_state</b>] = string</br>sales_tax[<b>shipping_inc_in_tax</b>] = bool</br></code></div></div>"
         items:
           type: string
         type: array
+      seller_profiles:
+        description: 'If the seller is subscribed to "Business Policies", use the seller_profiles instead of the shipping_details, payment_methods and return_accepted params.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">seller_profiles[<b>shipping_profile_id</b>] = integer</br>seller_profiles[<b>payment_profile_id</b>] = integer</br>seller_profiles[<b>return_profile_id</b>] = integer</br></code></div></div>'
+        properties:
+          payment_profile_id:
+            type: string
+          return_profile_id:
+            type: string
+          shipping_profile_id:
+            type: string
+        type: object
       shipping_details:
-        description: 'The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>'
+        description: 'The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style="font-style:normal">Param structure:<div style="margin-left: 2%;"><code style="padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;">shipping_details[0][<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_type</b>] = string </br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>'
         items:
-          type: string
+          properties:
+            shipping_cost:
+              type: number
+            shipping_service:
+              type: string
+            shipping_type:
+              type: string
+          type: object
         type: array
       shipping_template_id:
         default: 0
@@ -10242,7 +10950,7 @@ definitions:
         description: Defines product's model that has to be added
         type: number
       specifics:
-        description: |-
+        description: >-
           An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.
                   <hr>
                   <div style="font-style:normal">Param structure:
@@ -10266,6 +10974,7 @@ definitions:
         description: Defines the date of special price modification
         type: string
       stores_ids:
+        default: 0
         description: Assign product to the stores that is specified by comma-separated stores' id
         type: string
       tags:
@@ -10332,8 +11041,6 @@ definitions:
       product_id:
         description: Defines the product to which the price has to be added
         type: string
-    required:
-      - product_id
     type: object
   ProductPriceUpdate:
     properties:
@@ -10352,8 +11059,6 @@ definitions:
       product_id:
         description: Defines the product where the price has to be updated
         type: string
-    required:
-      - product_id
     type: object
   ProductTaxAdd:
     properties:
@@ -10376,7 +11081,6 @@ definitions:
           type: object
         type: array
     required:
-      - product_id
       - name
       - tax_rates
     type: object
@@ -10394,6 +11098,13 @@ definitions:
       available_for_view:
         default: true
         description: Specifies the set of visible/invisible product's variants for users
+        type: boolean
+      barcode:
+        description: A barcode is a unique code composed of numbers used as a product identifier.
+        type: string
+      clear_cache:
+        default: true
+        description: Is cache clear required
         type: boolean
       created_at:
         description: Defines the date of entity creation
@@ -10463,8 +11174,10 @@ definitions:
         default: 0
         description: Weight
         type: number
+      weight_unit:
+        description: Weight Unit
+        type: string
     required:
-      - product_id
       - model
     type: object
   ProductVariantPriceAdd:
@@ -10482,8 +11195,6 @@ definitions:
       id:
         description: Defines the variant to which the price has to be added
         type: string
-    required:
-      - id
     type: object
   ProductVariantPriceUpdate:
     properties:
@@ -10502,8 +11213,6 @@ definitions:
       id:
         description: Defines the variant where the price has to be updated
         type: string
-    required:
-      - id
     type: object
   Product_AdvancedPrice:
     properties:
@@ -10514,7 +11223,7 @@ definitions:
       custom_fields:
         type: object
       expire_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       group_id:
         type: string
       id:
@@ -10522,7 +11231,7 @@ definitions:
       quantity_from:
         type: number
       start_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       value:
         type: number
     type: object
@@ -10553,6 +11262,8 @@ definitions:
       type:
         type: string
       value:
+        type: string
+      variant_id:
         type: string
       visible:
         type: boolean
@@ -10609,7 +11320,7 @@ definitions:
         type: string
       option_items:
         items:
-          $ref: '#/definitions/Product_Option_Item'
+          $ref: "#/definitions/Product_Option_Item"
         type: array
       product_option_id:
         type: string
@@ -10652,7 +11363,7 @@ definitions:
       additional_fields:
         type: object
       created_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       customer_id:
@@ -10671,7 +11382,7 @@ definitions:
         type: number
       ratings:
         items:
-          $ref: '#/definitions/Product_Review_Rating'
+          $ref: "#/definitions/Product_Review_Rating"
         type: array
       status:
         type: string
@@ -10702,6 +11413,119 @@ definitions:
       qty:
         type: number
     type: object
+  Response_Cart_Coupon_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      coupon:
+        items:
+          $ref: "#/definitions/Coupon"
+        type: array
+      coupon_count:
+        type: integer
+      custom_fields:
+        type: object
+    type: object
+  Response_Cart_Giftcard_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      gift_card:
+        items:
+          $ref: "#/definitions/GiftCard"
+        type: array
+    type: object
+  Response_Cart_MetaData_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      items:
+        items:
+          $ref: "#/definitions/Cart_MetaData"
+        type: array
+      total_count:
+        type: integer
+    type: object
+  Response_Cart_Script_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      scripts:
+        items:
+          $ref: "#/definitions/Script"
+        type: array
+      total_count:
+        type: integer
+    type: object
+  Response_Category_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      categories_count:
+        type: integer
+      category:
+        items:
+          $ref: "#/definitions/Category"
+        type: array
+      custom_fields:
+        type: object
+    type: object
+  Response_Customer_Attribute_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      items:
+        items:
+          $ref: "#/definitions/Customer_Attribute"
+        type: array
+      total_count:
+        type: integer
+    type: object
+  Response_Customer_Group_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      group:
+        items:
+          $ref: "#/definitions/Customer_Group"
+        type: array
+      group_count:
+        type: integer
+    type: object
+  Response_Customer_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      customer:
+        items:
+          $ref: "#/definitions/Customer"
+        type: array
+      customers_count:
+        type: integer
+    type: object
+  Response_Order_Abandoned_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      order:
+        items:
+          $ref: "#/definitions/OrderAbandoned"
+        type: array
+    type: object
   Response_Order_List_Result:
     properties:
       additional_fields:
@@ -10710,9 +11534,46 @@ definitions:
         type: object
       order:
         items:
-          $ref: '#/definitions/Order'
+          $ref: "#/definitions/Order"
         type: array
       orders_count:
+        type: integer
+    type: object
+  Response_Order_Shipment_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      shipment:
+        items:
+          $ref: "#/definitions/Shipment"
+        type: array
+      shipment_count:
+        type: integer
+    type: object
+  Response_Product_Attribute_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      attribute:
+        items:
+          $ref: "#/definitions/Product_Attribute"
+        type: array
+      custom_fields:
+        type: object
+    type: object
+  Response_Product_ChildItem_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      children:
+        items:
+          $ref: "#/definitions/Child"
+        type: array
+      custom_fields:
+        type: object
+      total_count:
         type: integer
     type: object
   Response_Product_List_Result:
@@ -10723,7 +11584,7 @@ definitions:
         type: object
       product:
         items:
-          $ref: '#/definitions/Product'
+          $ref: "#/definitions/Product"
         type: array
       products_count:
         type: integer
@@ -10733,7 +11594,7 @@ definitions:
       additional_fields:
         type: object
       created_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       description:
@@ -10747,7 +11608,7 @@ definitions:
       load_method:
         type: string
       modified_time:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       name:
         type: string
       scope:
@@ -10760,7 +11621,7 @@ definitions:
       additional_fields:
         type: object
       created_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       id:
@@ -10786,7 +11647,7 @@ definitions:
         type: string
       tracking_numbers:
         items:
-          $ref: '#/definitions/Shipment_TrackingNumber'
+          $ref: "#/definitions/Shipment_TrackingNumber"
         type: array
       warehouse_id:
         type: string
@@ -10809,13 +11670,13 @@ definitions:
       avail:
         type: boolean
       created_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       custom_fields:
         type: object
       expired_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       modified_at:
-        $ref: '#/definitions/A2CDateTime'
+        $ref: "#/definitions/A2CDateTime"
       value:
         type: number
     type: object
@@ -10923,7 +11784,7 @@ definitions:
         type: number
       tax_rates:
         items:
-          $ref: '#/definitions/TaxClass_Rate'
+          $ref: "#/definitions/TaxClass_Rate"
         type: array
       tax_type:
         type: integer

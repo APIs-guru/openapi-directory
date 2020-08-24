@@ -2436,7 +2436,7 @@ paths:
 
             * `invalid_folder_id`: `folder_id` is not valid
 
-            * `invalid_file_name`: `file_name` is not valid
+            * `item_name_invalid`: `file_name` is not valid
 
             * `missing_file_size`: `file_size` was not provided
 
@@ -2445,6 +2445,30 @@ paths:
             * `file_size_too_small`: `file_size` is below minimum file size for
               uploads via this API
             * `missing_file_name`: `file_name` was not provided
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error if the operation is not allowed for some reason.
+
+
+            * `storage_limit_exceeded`: Account storage limit reached
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error if the parent folder could not be found, or
+
+            the authenticated user does not have access to it.
+
+
+            * `invalid_parameter`: The `folder_id` value represents a
+              folder that the user does not have access to, or does not
+              exist.
         "409":
           content:
             application/json:
@@ -10359,6 +10383,35 @@ paths:
             format: int64
             maximum: 1000
             type: integer
+        - description: >-
+            A comma-separated list of attributes to include in the
+
+            response. This can be used to request fields that are
+
+            not normally returned in a standard response.
+
+
+            Be aware that specifying this parameter will have the
+
+            effect that none of the standard fields are returned in
+
+            the response unless explicitly specified, instead only
+
+            fields for the mini representation are returned, additional
+
+            to the fields requested.
+          example:
+            - id
+            - type
+            - name
+          explode: false
+          in: query
+          name: fields
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -11122,11 +11175,6 @@ paths:
         which the query matches. To get additional fields for each item, including any
 
         of the metadata, use the `fields` attribute in the query.
-
-
-        This feature currently has limited availability. To enable this feature,
-
-        contact our [Metadata Query team](mailto:metadata-query-feedback@box.com).
       operationId: post_metadata_queries_execute_read
       requestBody:
         content:
@@ -12906,7 +12954,7 @@ paths:
 
             query search term.
 
-            * `modified_at`  returns the results ordered in descending order by date
+            * `modified_at` returns the results ordered in descending order by date
 
             at which the item was last modified.
           example: modified_at
@@ -12991,7 +13039,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Items"
+                $ref: "#/components/schemas/SearchResults"
           description: >-
             Returns a collection of search results. If there are no matching
 
@@ -21047,6 +21095,71 @@ components:
         - mini
         - standard
     LegalHoldPolicyAssignment:
+      allOf:
+        - $ref: "#/components/schemas/LegalHoldPolicyAssignment--Base"
+        - properties:
+            assigned_at:
+              description: >-
+                When the legal hold policy assignment object was
+
+                created
+              example: 2012-12-12T10:53:43-08:00
+              format: date-time
+              type: string
+            assigned_by:
+              allOf:
+                - $ref: "#/components/schemas/User--Mini"
+                - description: >-
+                    The user who created the legal hold policy
+
+                    assignment
+            assigned_to:
+              allOf:
+                - oneOf:
+                    - $ref: "#/components/schemas/File"
+                    - $ref: "#/components/schemas/Folder"
+                    - $ref: "#/components/schemas/WebLink"
+                - description: >-
+                    The item that the the legal hold policy
+
+                    is assigned to. Includes type and ID.
+            deleted_at:
+              description: >-
+                When the assignment release request was sent.
+
+                (Because it can take time for an assignment to fully
+
+                delete, this isn't quite the same time that the
+
+                assignment is fully deleted). If null, Assignment
+
+                was not deleted.
+              example: 2012-12-12T10:53:43-08:00
+              format: date-time
+              type: string
+            legal_hold_policy:
+              allOf:
+                - $ref: "#/components/schemas/LegalHoldPolicy--Mini"
+                - description: >-
+                    The policy that the legal hold policy assignment
+
+                    is part of
+      description: >-
+        Legal Hold Assignments are used to assign Legal Hold
+
+        Policies to Users, Folders, Files, or File Versions.
+
+
+        Creating a Legal Hold Assignment puts a hold
+
+        on the File-Versions that belong to the Assignment's
+
+        'apply-to' entity.
+      title: Legal hold policy assignment
+      type: object
+      x-box-resource-id: legal_hold_policy_assignment
+      x-box-tag: legal_hold_policy_assignments
+    LegalHoldPolicyAssignment--Base:
       description: >-
         Legal Hold Assignments are used to assign Legal Hold
 
@@ -21059,66 +21172,25 @@ components:
 
         'apply-to' entity.
       properties:
-        assigned_at:
-          description: >-
-            When the legal hold policy assignment object was
-
-            created
-          example: 2012-12-12T10:53:43-08:00
-          format: date-time
-          type: string
-        assigned_by:
-          allOf:
-            - $ref: "#/components/schemas/User--Mini"
-            - description: >-
-                The user who created the legal hold policy
-
-                assignment
-        assigned_to:
-          allOf:
-            - oneOf:
-                - $ref: "#/components/schemas/File"
-                - $ref: "#/components/schemas/Folder"
-                - $ref: "#/components/schemas/WebLink"
-            - description: >-
-                The item that the the legal hold policy
-
-                is assigned to. Includes type and ID.
-        deleted_at:
-          description: >-
-            When the assignment release request was sent.
-
-            (Because it can take time for an assignment to fully
-
-            delete, this isn't quite the same time that the
-
-            assignment is fully deleted). If null, Assignment
-
-            was not deleted.
-          example: 2012-12-12T10:53:43-08:00
-          format: date-time
-          type: string
         id:
           description: The unique identifier for this legal hold assignment
           example: "11446498"
           type: string
-        legal_hold_policy:
-          allOf:
-            - $ref: "#/components/schemas/LegalHoldPolicy--Mini"
-            - description: >-
-                The policy that the legal hold policy assignment
-
-                is part of
         type:
           description: "`legal_hold_policy_assignment`"
           enum:
             - legal_hold_policy_assignment
           example: legal_hold_policy_assignment
           type: string
-      title: Legal hold policy assignment
+      title: Legal hold policy assignment (Base)
       type: object
-      x-box-resource-id: legal_hold_policy_assignment
+      x-box-resource-id: legal_hold_policy_assignment--base
+      x-box-sanitized: true
       x-box-tag: legal_hold_policy_assignments
+      x-box-variant: base
+      x-box-variants:
+        - base
+        - standard
     LegalHoldPolicyAssignments:
       allOf:
         - description: >-
@@ -21150,7 +21222,7 @@ components:
         - properties:
             entries:
               items:
-                $ref: "#/components/schemas/LegalHoldPolicyAssignment"
+                $ref: "#/components/schemas/LegalHoldPolicyAssignment--Base"
               type: array
       description: A list of legal hold policies assignments.
       title: Legal hold policy assignments
@@ -22491,6 +22563,49 @@ components:
       type: object
       x-box-resource-id: retention_policy_assignments
       x-box-tag: retention_policy_assignments
+    SearchResults:
+      description: A list of files, folders and web links that matched the search query.
+      properties:
+        entries:
+          description: The search results for the query provided.
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/File"
+              - $ref: "#/components/schemas/Folder"
+              - $ref: "#/components/schemas/WebLink"
+          type: array
+        limit:
+          description: >-
+            The limit that was used for this search. This will be the same as the
+
+            `limit` query parameter unless that value exceeded the maximum value
+
+            allowed.
+          example: 1000
+          format: int64
+          type: integer
+        offset:
+          description: >-
+            The 0-based offset of the first entry in this set. This will be the same
+
+            as the `offset` query parameter used.
+          example: 2000
+          format: int64
+          type: integer
+        total_count:
+          description: >-
+            One greater than the offset of the last entry in the search results.
+
+            The total number of entries in the collection may be less than
+
+            `total_count`.
+          example: 5000
+          format: int64
+          type: integer
+      title: Search Results
+      type: object
+      x-box-resource-id: search_results
+      x-box-tag: search
     SkillCard:
       description: A generic Box Skill metadata card.
       properties:

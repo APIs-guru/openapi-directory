@@ -4858,6 +4858,7 @@ paths:
         - audio/wav
         - audio/mp3
         - audio/m4a
+        - video/3gpp
       responses:
         "200":
           description: successful operation
@@ -4983,6 +4984,7 @@ paths:
         - audio/wav
         - audio/mp3
         - audio/m4a
+        - video/3gpp
       responses:
         "200":
           description: successful operation
@@ -8909,8 +8911,7 @@ definitions:
         type: integer
       internalCode:
         description: "~"
-        format: int32
-        type: integer
+        type: string
       message:
         description: "~"
         type: string
