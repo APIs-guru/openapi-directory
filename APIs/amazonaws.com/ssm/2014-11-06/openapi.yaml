@@ -981,7 +981,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DeleteInventory:
     post:
       operationId: DeleteInventory
-      description: 'Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.'
+      description: Delete a custom inventory type or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
       responses:
         '200':
           description: Success
@@ -3396,7 +3396,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetCalendarState:
     post:
       operationId: GetCalendarState
-      description: 'Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>. For more information about Systems Manager Change Calendar, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">AWS Systems Manager Change Calendar</a> in the <i>AWS Systems Manager User Guide</i>.'
+      description: '<p>Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries have two possible states: <code>OPEN</code> or <code>CLOSED</code>.</p> <p>If you specify more than one calendar in a request, the command returns the status of <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is <code>CLOSED</code>.</p> <p>For more information about Systems Manager Change Calendar, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html">AWS Systems Manager Change Calendar</a> in the <i>AWS Systems Manager User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -7820,7 +7820,7 @@ components:
       type: object
       properties:
         DeletionId:
-          $ref: '#/components/schemas/InventoryDeletionId'
+          $ref: '#/components/schemas/UUID'
           description: 'Every <code>DeleteInventory</code> action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. '
         TypeName:
           $ref: '#/components/schemas/InventoryItemTypeName'
@@ -7836,7 +7836,7 @@ components:
       properties:
         TypeName:
           $ref: '#/components/schemas/InventoryItemTypeName'
-          description: 'The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. '
+          description: 'The name of the custom inventory type for which you want to delete either all previously collected data or the inventory type itself. '
         SchemaDeleteOption:
           $ref: '#/components/schemas/InventorySchemaDeleteOption'
           description: '<p>Use the <code>SchemaDeleteOption</code> to delete a custom inventory type (schema). If you don''t choose this option, the system only deletes existing inventory data associated with the custom inventory type. Choose one of the following options:</p> <p>DisableSchema: If you choose this option, the system ignores all inventory data for the specified version, and any earlier versions. To enable this schema again, you must call the <code>PutInventory</code> action for a version greater than the disabled version.</p> <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You can recreate the schema later, if you want.</p>'
@@ -7844,7 +7844,7 @@ components:
           $ref: '#/components/schemas/DryRun'
           description: 'Use this option to view a summary of the deletion request without deleting any data or the data type. This option is useful when you only want to understand what will be deleted. Once you validate that the data to be deleted is what you intend to delete, you can run the same command without specifying the <code>DryRun</code> option.'
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
+          $ref: '#/components/schemas/UUID'
           description: User-provided idempotency token.
     InvalidTypeNameException: {}
     InvalidOptionException: {}
@@ -8428,7 +8428,7 @@ components:
       title: DescribeInventoryDeletionsRequest
       properties:
         DeletionId:
-          $ref: '#/components/schemas/InventoryDeletionId'
+          $ref: '#/components/schemas/UUID'
           description: Specify the delete inventory ID for which you want information. This ID was returned by the <code>DeleteInventory</code> action.
         NextToken:
           $ref: '#/components/schemas/NextToken'
@@ -10084,7 +10084,7 @@ components:
           description: <p>Information about the parameter that you want to add to the system. Optional but recommended.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>
         Value:
           $ref: '#/components/schemas/PSParameterValue'
-          description: The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
+          description: '<p>The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p> <note> <p>Parameters can''t be referenced or nested in the values of other parameters. You can''t include <code>{{}}</code> or <code>{{ssm:<i>parameter-name</i>}}</code> in a parameter value.</p> </note>'
         Type:
           $ref: '#/components/schemas/ParameterType'
           description: '<p>The type of parameter that you want to add to the system.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can''t use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <important> <p>Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter.</p> </important>'
@@ -13045,8 +13045,9 @@ components:
         - DeleteSchema
     DryRun:
       type: boolean
-    InventoryDeletionId:
+    UUID:
       type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
     InventoryDeletionSummary:
       type: object
       properties:
@@ -14377,7 +14378,7 @@ components:
       type: object
       properties:
         DeletionId:
-          $ref: '#/components/schemas/InventoryDeletionId'
+          $ref: '#/components/schemas/UUID'
           description: The deletion ID returned by the <code>DeleteInventory</code> action.
         TypeName:
           $ref: '#/components/schemas/InventoryItemTypeName'
@@ -15033,6 +15034,8 @@ components:
       maxLength: 100
     OpsDataAttributeName:
       type: string
+      minLength: 1
+      maxLength: 128
     OpsAggregatorValueMap:
       type: object
       minProperties: 0
@@ -15149,6 +15152,8 @@ components:
       description: A filter for viewing OpsItem summaries.
     OpsFilterValue:
       type: string
+      minLength: 0
+      maxLength: 256
     OpsItemStatus:
       type: string
       enum:

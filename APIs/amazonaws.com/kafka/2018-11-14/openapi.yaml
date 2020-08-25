@@ -746,12 +746,12 @@ paths:
                      
           schema:
             type: string
-  '/v1/operations/{clusterOperationArn}':
-    get:
-      operationId: DescribeClusterOperation
+  '/v1/configurations/{arn}':
+    delete:
+      operationId: DeleteConfiguration
       description: |2-
 
-                    <p>Returns a description of the cluster operation specified by the ARN.</p>
+                    <p>Deletes an MSK Configuration.</p>
                  
       responses:
         '200':
@@ -759,7 +759,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DescribeClusterOperationResponse'
+                $ref: '#/components/schemas/DeleteConfigurationResponse'
         '480':
           description: NotFoundException
           content:
@@ -773,30 +773,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '482':
-          description: UnauthorizedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnauthorizedException'
-        '483':
           description: InternalServerErrorException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerErrorException'
-        '484':
+        '483':
           description: ForbiddenException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ForbiddenException'
       parameters:
-        - name: clusterOperationArn
+        - name: arn
           in: path
           required: true
           description: |2-
 
-                        <p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>
                      
           schema:
             type: string
@@ -808,7 +802,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/v1/configurations/{arn}':
     get:
       operationId: DescribeConfiguration
       description: |2-
@@ -865,6 +858,141 @@ paths:
           description: |2-
 
                         <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.</p>
+                     
+          schema:
+            type: string
+    put:
+      operationId: UpdateConfiguration
+      description: |2-
+
+                    <p>Updates an MSK configuration.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the configuration.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - serverProperties
+              properties:
+                description:
+                  description: |2-
+
+                                <p>The description of the configuration revision.</p>
+                             
+                  type: string
+                serverProperties:
+                  description: |2-
+
+                                <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+                                   When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
+                             
+                  type: string
+  '/v1/operations/{clusterOperationArn}':
+    get:
+      operationId: DescribeClusterOperation
+      description: |2-
+
+                    <p>Returns a description of the cluster operation specified by the ARN.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClusterOperationResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterOperationArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>
                      
           schema:
             type: string
@@ -2479,6 +2607,14 @@ components:
 
                         <p>The name of the configuration.</p>
                      
+        State:
+          xml:
+            name: state
+          $ref: '#/components/schemas/ConfigurationState'
+          description: |2-
+
+                        <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
+                     
     DeleteClusterResponse:
       type: object
       properties:
@@ -2499,6 +2635,25 @@ components:
                         <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
                      
     NotFoundException: {}
+    DeleteConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          xml:
+            name: arn
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>
+                     
+        State:
+          xml:
+            name: state
+          $ref: '#/components/schemas/ConfigurationState'
+          description: |2-
+
+                        <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
+                     
     DescribeClusterResponse:
       type: object
       properties:
@@ -2571,6 +2726,14 @@ components:
           description: |2-
 
                         <p>The name of the configuration.</p>
+                     
+        State:
+          xml:
+            name: state
+          $ref: '#/components/schemas/ConfigurationState'
+          description: |2-
+
+                        <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
                      
     DescribeConfigurationRevisionResponse:
       type: object
@@ -2849,6 +3012,25 @@ components:
 
                     <p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>
                  
+    UpdateConfigurationResponse:
+      type: object
+      properties:
+        Arn:
+          xml:
+            name: arn
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the configuration.</p>
+                     
+        LatestRevision:
+          xml:
+            name: latestRevision
+          $ref: '#/components/schemas/ConfigurationRevision'
+          description: |2-
+
+                        <p>Latest revision of the configuration.</p>
+                     
     UpdateClusterConfigurationResponse:
       type: object
       properties:
@@ -3619,6 +3801,16 @@ components:
 
                     <p>Describes a configuration revision.</p>
                  
+    ConfigurationState:
+      type: string
+      enum:
+        - ACTIVE
+        - DELETING
+        - DELETE_FAILED
+      description: |2-
+
+                    <p>The state of a configuration.</p>
+                 
     Configuration:
       type: object
       required:
@@ -3628,6 +3820,7 @@ components:
         - KafkaVersions
         - Arn
         - Name
+        - State
       properties:
         Arn:
           xml:
@@ -3676,6 +3869,14 @@ components:
           description: |2-
 
                         <p>The name of the configuration.</p>
+                     
+        State:
+          xml:
+            name: state
+          $ref: '#/components/schemas/ConfigurationState'
+          description: |2-
+
+                        <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
                      
       description: |2-
 
@@ -3874,6 +4075,10 @@ components:
     DeleteClusterRequest:
       type: object
       title: DeleteClusterRequest
+      properties: {}
+    DeleteConfigurationRequest:
+      type: object
+      title: DeleteConfigurationRequest
       properties: {}
     DescribeClusterOperationRequest:
       type: object
@@ -4367,5 +4572,28 @@ components:
             name: loggingInfo
           $ref: '#/components/schemas/LoggingInfo'
       description: Request body for UpdateMonitoring.
+    UpdateConfigurationRequest:
+      type: object
+      required:
+        - ServerProperties
+      title: UpdateConfigurationRequest
+      properties:
+        Description:
+          xml:
+            name: description
+          $ref: '#/components/schemas/__string'
+          description: |2-
+
+                        <p>The description of the configuration revision.</p>
+                     
+        ServerProperties:
+          xml:
+            name: serverProperties
+          $ref: '#/components/schemas/__blob'
+          description: |2-
+
+                        <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+                           When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
+                     
 security:
   - hmac: []
