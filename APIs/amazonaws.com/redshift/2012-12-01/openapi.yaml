@@ -9543,7 +9543,7 @@ paths:
         - name: Encrypted
           in: query
           required: false
-          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
+          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. </p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
           schema:
             type: boolean
         - name: KmsKeyId
@@ -11806,7 +11806,7 @@ paths:
     get:
       x-aws-operation-name: ResizeCluster
       operationId: GET_ResizeCluster
-      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
+      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -11890,7 +11890,7 @@ paths:
         - name: NumberOfNodes
           in: query
           required: false
-          description: The new number of nodes for the cluster.
+          description: 'The new number of nodes for the cluster. If not specified, the cluster''s current number of nodes is used.'
           schema:
             type: integer
         - name: Classic
@@ -11924,7 +11924,7 @@ paths:
     post:
       x-aws-operation-name: ResizeCluster
       operationId: POST_ResizeCluster
-      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
+      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -13354,7 +13354,7 @@ components:
           description: An optional string to provide additional details about the resize action.
         TargetEncryptionType:
           $ref: '#/components/schemas/String'
-          description: '<p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. In the China region possible values are: <code>Legacy</code> and <code>None</code>.</p>'
+          description: <p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. </p>
         DataTransferProgressPercent:
           $ref: '#/components/schemas/DoubleOptional'
           description: The percent of data transferred from source cluster to target cluster.
@@ -13505,10 +13505,11 @@ components:
           description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
         NumberOfNodes:
           $ref: '#/components/schemas/Integer'
-          description: The new number of nodes for the cluster.
+          description: 'The new number of nodes for the cluster. If not specified, the cluster''s current number of nodes is used.'
         Classic:
           $ref: '#/components/schemas/BooleanOptional'
           description: 'A boolean value indicating whether the resize operation is using the classic resize process. If you don''t provide this parameter or set the value to <code>false</code>, the resize type is elastic. '
+      description: 'Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. '
     PauseClusterMessage:
       type: object
       required:
@@ -13518,6 +13519,7 @@ components:
         ClusterIdentifier:
           $ref: '#/components/schemas/String'
           description: The identifier of the cluster to be paused.
+      description: 'Describes a pause cluster operation. For example, a scheduled action to run the <code>PauseCluster</code> API operation. '
     ResumeClusterMessage:
       type: object
       required:
@@ -13527,6 +13529,7 @@ components:
         ClusterIdentifier:
           $ref: '#/components/schemas/String'
           description: The identifier of the cluster to be resumed.
+      description: 'Describes a resume cluster operation. For example, a scheduled action to run the <code>ResumeCluster</code> API operation. '
     ScheduledActionAlreadyExistsFault: {}
     ScheduledActionQuotaExceededFault: {}
     ScheduledActionTypeUnsupportedFault: {}
@@ -14573,7 +14576,7 @@ components:
           description: The name of the maintenance track that the cluster will change to during the next maintenance window.
         EncryptionType:
           $ref: '#/components/schemas/String'
-          description: 'The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. '
+          description: 'The encryption type for a cluster. Possible values are: KMS and None. '
       description: Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.
     RestoreStatus:
       type: object
@@ -16737,7 +16740,7 @@ components:
           description: 'The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the <code>PendingModifiedValues</code> for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.'
         Encrypted:
           $ref: '#/components/schemas/BooleanOptional'
-          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
+          description: '<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don''t provide a <code>KmsKeyId</code>, we encrypt with the default key. </p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>'
         KmsKeyId:
           $ref: '#/components/schemas/String'
           description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
@@ -16755,7 +16758,7 @@ components:
         Parameters:
           $ref: '#/components/schemas/ParametersList'
           description: '<p>An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.</p> <p>For each parameter to be modified, you must supply at least the parameter name and parameter value; other name-value pairs of the parameter are optional.</p> <p>For the workload management (WLM) configuration, you must supply all the name-value pairs in the wlm_json_configuration parameter.</p>'
-      description: <p/>
+      description: 'Describes a modify cluster parameter group operation. '
     ModifyClusterSnapshotMessage:
       type: object
       required:

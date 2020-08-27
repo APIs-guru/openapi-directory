@@ -4398,7 +4398,7 @@ paths:
     get:
       x-aws-operation-name: CreateCustomerGateway
       operationId: GET_CreateCustomerGateway
-      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway''s external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> Region, and 9059, which is reserved in the <code>eu-west-1</code> Region.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>'
+      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway''s external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4480,7 +4480,7 @@ paths:
     post:
       x-aws-operation-name: CreateCustomerGateway
       operationId: POST_CreateCustomerGateway
-      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway''s external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> Region, and 9059, which is reserved in the <code>eu-west-1</code> Region.</p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>'
+      description: '<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway''s external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device''s BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don''t have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10073,6 +10073,18 @@ paths:
               TunnelOptions:
                 $ref: '#/components/schemas/VpnTunnelOptionsSpecificationsList'
                 description: The tunnel options for the VPN connection.
+              LocalIpv4NetworkCidr:
+                $ref: '#/components/schemas/String'
+                description: '<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+              RemoteIpv4NetworkCidr:
+                $ref: '#/components/schemas/String'
+                description: '<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+              LocalIpv6NetworkCidr:
+                $ref: '#/components/schemas/String'
+                description: '<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+              RemoteIpv6NetworkCidr:
+                $ref: '#/components/schemas/String'
+                description: '<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
             description: Describes VPN connection options.
         - name: TagSpecification
           in: query
@@ -37164,6 +37176,108 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=ModifyVpnConnectionOptions:
+    get:
+      x-aws-operation-name: ModifyVpnConnectionOptions
+      operationId: GET_ModifyVpnConnectionOptions
+      description: '<p>Modifies the connection options for your Site-to-Site VPN VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyVpnConnectionOptionsResult'
+      parameters:
+        - name: VpnConnectionId
+          in: query
+          required: true
+          description: 'The ID of the Site-to-Site VPN VPN connection. '
+          schema:
+            type: string
+        - name: LocalIpv4NetworkCidr
+          in: query
+          required: false
+          description: '<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+          schema:
+            type: string
+        - name: RemoteIpv4NetworkCidr
+          in: query
+          required: false
+          description: '<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+          schema:
+            type: string
+        - name: LocalIpv6NetworkCidr
+          in: query
+          required: false
+          description: '<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+          schema:
+            type: string
+        - name: RemoteIpv6NetworkCidr
+          in: query
+          required: false
+          description: '<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyVpnConnectionOptions
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyVpnConnectionOptions
+      operationId: POST_ModifyVpnConnectionOptions
+      description: '<p>Modifies the connection options for your Site-to-Site VPN VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyVpnConnectionOptionsResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyVpnConnectionOptionsRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyVpnConnectionOptions
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=ModifyVpnTunnelCertificate:
     get:
       x-aws-operation-name: ModifyVpnTunnelCertificate
@@ -37307,6 +37421,9 @@ paths:
               DPDTimeoutSeconds:
                 $ref: '#/components/schemas/Integer'
                 description: '<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>'
+              DPDTimeoutAction:
+                $ref: '#/components/schemas/String'
+                description: '<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p> <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code> </p> <p>Default: <code>clear</code> </p>'
               Phase1EncryptionAlgorithms:
                 xml:
                   name: Phase1EncryptionAlgorithm
@@ -37342,6 +37459,9 @@ paths:
                   name: IKEVersion
                 $ref: '#/components/schemas/IKEVersionsRequestList'
                 description: '<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>'
+              StartupAction:
+                $ref: '#/components/schemas/String'
+                description: '<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>'
             description: The AWS Site-to-Site VPN tunnel options to modify.
         - name: DryRun
           in: query
@@ -49448,6 +49568,13 @@ components:
           xml:
             name: vpnConnection
           $ref: '#/components/schemas/VpnConnection'
+    ModifyVpnConnectionOptionsResult:
+      type: object
+      properties:
+        VpnConnection:
+          xml:
+            name: vpnConnection
+          $ref: '#/components/schemas/VpnConnection'
     ModifyVpnTunnelCertificateResult:
       type: object
       properties:
@@ -57110,6 +57237,18 @@ components:
         TunnelOptions:
           $ref: '#/components/schemas/VpnTunnelOptionsSpecificationsList'
           description: The tunnel options for the VPN connection.
+        LocalIpv4NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+        RemoteIpv4NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+        LocalIpv6NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+        RemoteIpv6NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
       description: Describes VPN connection options.
     CreateVpnConnectionRequest:
       type: object
@@ -69928,6 +70067,30 @@ components:
         DryRun:
           $ref: '#/components/schemas/Boolean'
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    ModifyVpnConnectionOptionsRequest:
+      type: object
+      required:
+        - VpnConnectionId
+      title: ModifyVpnConnectionOptionsRequest
+      properties:
+        VpnConnectionId:
+          $ref: '#/components/schemas/VpnConnectionId'
+          description: 'The ID of the Site-to-Site VPN VPN connection. '
+        LocalIpv4NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+        RemoteIpv4NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>'
+        LocalIpv6NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+        RemoteIpv6NetworkCidr:
+          $ref: '#/components/schemas/String'
+          description: '<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>'
+        DryRun:
+          $ref: '#/components/schemas/Boolean'
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     ModifyVpnConnectionRequest:
       type: object
       required:
@@ -69995,6 +70158,9 @@ components:
         DPDTimeoutSeconds:
           $ref: '#/components/schemas/Integer'
           description: '<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>'
+        DPDTimeoutAction:
+          $ref: '#/components/schemas/String'
+          description: '<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p> <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code> </p> <p>Default: <code>clear</code> </p>'
         Phase1EncryptionAlgorithms:
           xml:
             name: Phase1EncryptionAlgorithm
@@ -70030,6 +70196,9 @@ components:
             name: IKEVersion
           $ref: '#/components/schemas/IKEVersionsRequestList'
           description: '<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>'
+        StartupAction:
+          $ref: '#/components/schemas/String'
+          description: '<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>'
       description: The AWS Site-to-Site VPN tunnel options to modify.
     ModifyVpnTunnelOptionsRequest:
       type: object
@@ -74598,6 +74767,11 @@ components:
             name: dpdTimeoutSeconds
           $ref: '#/components/schemas/Integer'
           description: The number of seconds after which a DPD timeout occurs.
+        DpdTimeoutAction:
+          xml:
+            name: dpdTimeoutAction
+          $ref: '#/components/schemas/String'
+          description: The action to take after a DPD timeout occurs.
         Phase1EncryptionAlgorithms:
           xml:
             name: phase1EncryptionAlgorithmSet
@@ -74633,6 +74807,11 @@ components:
             name: ikeVersionSet
           $ref: '#/components/schemas/IKEVersionsList'
           description: The IKE versions that are permitted for the VPN tunnel.
+        StartupAction:
+          xml:
+            name: startupAction
+          $ref: '#/components/schemas/String'
+          description: The action to take when the establishing the VPN tunnels for a VPN connection.
       description: The VPN tunnel options.
     TunnelOptionsList:
       type: array
@@ -75288,6 +75467,26 @@ components:
             name: staticRoutesOnly
           $ref: '#/components/schemas/Boolean'
           description: Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.
+        LocalIpv4NetworkCidr:
+          xml:
+            name: localIpv4NetworkCidr
+          $ref: '#/components/schemas/String'
+          description: The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.
+        RemoteIpv4NetworkCidr:
+          xml:
+            name: remoteIpv4NetworkCidr
+          $ref: '#/components/schemas/String'
+          description: The IPv4 CIDR on the AWS side of the VPN connection.
+        LocalIpv6NetworkCidr:
+          xml:
+            name: localIpv6NetworkCidr
+          $ref: '#/components/schemas/String'
+          description: The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+        RemoteIpv6NetworkCidr:
+          xml:
+            name: remoteIpv6NetworkCidr
+          $ref: '#/components/schemas/String'
+          description: The IPv6 CIDR on the AWS side of the VPN connection.
         TunnelInsideIpVersion:
           xml:
             name: tunnelInsideIpVersion
@@ -75358,6 +75557,9 @@ components:
         DPDTimeoutSeconds:
           $ref: '#/components/schemas/Integer'
           description: '<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>'
+        DPDTimeoutAction:
+          $ref: '#/components/schemas/String'
+          description: '<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p> <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code> </p> <p>Default: <code>clear</code> </p>'
         Phase1EncryptionAlgorithms:
           xml:
             name: Phase1EncryptionAlgorithm
@@ -75393,6 +75595,9 @@ components:
             name: IKEVersion
           $ref: '#/components/schemas/IKEVersionsRequestList'
           description: '<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>'
+        StartupAction:
+          $ref: '#/components/schemas/String'
+          description: '<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>'
       description: The tunnel options for a single VPN tunnel.
     WithdrawByoipCidrRequest:
       type: object
