@@ -1436,6 +1436,118 @@ paths:
           description: The maximum number of invalidation batches that you want in the response body.
           schema:
             type: string
+  '/2020-05-31/distributions/{DistributionId}/monitoring-subscription':
+    post:
+      operationId: CreateMonitoringSubscription2020_05_31
+      description: '<p>Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional">Viewing additional CloudFront distribution metrics</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateMonitoringSubscriptionResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+      parameters:
+        - name: DistributionId
+          in: path
+          required: true
+          description: The ID of the distribution that you are enabling metrics for.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - MonitoringSubscription
+              properties:
+                MonitoringSubscription:
+                  description: A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+                  type: object
+                  properties:
+                    RealtimeMetricsSubscriptionConfig:
+                      $ref: '#/components/schemas/RealtimeMetricsSubscriptionConfig'
+                      description: A subscription configuration for additional CloudWatch metrics.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteMonitoringSubscription2020_05_31
+      description: Disables additional CloudWatch metrics for the specified CloudFront distribution.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteMonitoringSubscriptionResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+      parameters:
+        - name: DistributionId
+          in: path
+          required: true
+          description: The ID of the distribution that you are disabling metrics for.
+          schema:
+            type: string
+    get:
+      operationId: GetMonitoringSubscription2020_05_31
+      description: Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetMonitoringSubscriptionResult'
+        '480':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '481':
+          description: NoSuchDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchDistribution'
+      parameters:
+        - name: DistributionId
+          in: path
+          required: true
+          description: The ID of the distribution that you are getting metrics information for.
+          schema:
+            type: string
   /2020-05-31/origin-request-policy:
     post:
       operationId: CreateOriginRequestPolicy2020_05_31
@@ -5040,6 +5152,21 @@ components:
     NoSuchDistribution: {}
     BatchTooLarge: {}
     TooManyInvalidationsInProgress: {}
+    CreateMonitoringSubscriptionResult:
+      type: object
+      properties:
+        MonitoringSubscription:
+          $ref: '#/components/schemas/MonitoringSubscription'
+          description: A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+    RealtimeMetricsSubscriptionConfig:
+      type: object
+      required:
+        - RealtimeMetricsSubscriptionStatus
+      properties:
+        RealtimeMetricsSubscriptionStatus:
+          $ref: '#/components/schemas/RealtimeMetricsSubscriptionStatus'
+          description: A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+      description: A subscription configuration for additional CloudWatch metrics.
     CreateOriginRequestPolicyResult:
       type: object
       properties:
@@ -5199,6 +5326,9 @@ components:
     DistributionNotDisabled: {}
     FieldLevelEncryptionConfigInUse: {}
     FieldLevelEncryptionProfileInUse: {}
+    DeleteMonitoringSubscriptionResult:
+      type: object
+      properties: {}
     OriginRequestPolicyInUse: {}
     PublicKeyInUse: {}
     StreamingDistributionNotDisabled: {}
@@ -5275,6 +5405,12 @@ components:
           description: 'The invalidation''s information. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html">Invalidation Complex Type</a>. '
       description: The returned result of the corresponding request.
     NoSuchInvalidation: {}
+    GetMonitoringSubscriptionResult:
+      type: object
+      properties:
+        MonitoringSubscription:
+          $ref: '#/components/schemas/MonitoringSubscription'
+          description: A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
     GetOriginRequestPolicyResult:
       type: object
       properties:
@@ -6221,6 +6357,24 @@ components:
           $ref: '#/components/schemas/InvalidationBatch'
           description: 'The current invalidation information for the batch request. '
       description: 'An invalidation. '
+    MonitoringSubscription:
+      type: object
+      properties:
+        RealtimeMetricsSubscriptionConfig:
+          $ref: '#/components/schemas/RealtimeMetricsSubscriptionConfig'
+          description: A subscription configuration for additional CloudWatch metrics.
+      description: A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+    CreateMonitoringSubscriptionRequest:
+      type: object
+      required:
+        - MonitoringSubscription
+      title: CreateMonitoringSubscriptionRequest
+      properties:
+        MonitoringSubscription:
+          $ref: '#/components/schemas/MonitoringSubscription'
+          description: A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
     OriginRequestPolicyConfig:
       type: object
       required:
@@ -6498,6 +6652,10 @@ components:
     DeleteFieldLevelEncryptionProfileRequest:
       type: object
       title: DeleteFieldLevelEncryptionProfileRequest
+      properties: {}
+    DeleteMonitoringSubscriptionRequest:
+      type: object
+      title: DeleteMonitoringSubscriptionRequest
       properties: {}
     DeleteOriginRequestPolicyRequest:
       type: object
@@ -6894,6 +7052,10 @@ components:
       title: GetInvalidationRequest
       properties: {}
       description: 'The request to get an invalidation''s information. '
+    GetMonitoringSubscriptionRequest:
+      type: object
+      title: GetMonitoringSubscriptionRequest
+      properties: {}
     GetOriginRequestPolicyConfigRequest:
       type: object
       title: GetOriginRequestPolicyConfigRequest
@@ -7428,6 +7590,11 @@ components:
         xml:
           name: Name
         $ref: '#/components/schemas/string'
+    RealtimeMetricsSubscriptionStatus:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
     SSLSupportMethod:
       type: string
       enum:
