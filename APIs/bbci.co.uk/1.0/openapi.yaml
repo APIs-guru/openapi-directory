@@ -17,13 +17,13 @@ info:
     - media
   x-logo:
     backgroundColor: "#FFFFFF"
-    url: https://twitter.com/BBCiPlayer/profile_image?size=original
+    url: https://avatars0.githubusercontent.com/u/828722?s=200&v=4
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/openapi.yaml
       version: "3.0"
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-484
+  x-release: 1.0.0-487
   x-schema-id: https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json
   x-unofficialSpec: true
 externalDocs:
@@ -1110,7 +1110,26 @@ components:
               id:
                 type: string
               kind:
-                type: string
+                enum:
+                  - legal
+                  - editorial
+                  - technical-replacement
+                  - original
+                  - iplayer-version
+                  - lengthened
+                  - shortened
+                  - pre-watershed
+                  - post-watershed
+                  - warnings-higher
+                  - warnings-lower
+                  - warnings-none
+                  - duplication
+                  - open-subtitled
+                  - other
+                  - audio-described
+                  - signed
+                  - webcast
+                  - simulcast
               rrc:
                 additionalProperties: false
                 properties:
@@ -1472,7 +1491,26 @@ components:
                   id:
                     type: string
                   kind:
-                    type: string
+                    enum:
+                      - legal
+                      - editorial
+                      - technical-replacement
+                      - original
+                      - iplayer-version
+                      - lengthened
+                      - shortened
+                      - pre-watershed
+                      - post-watershed
+                      - warnings-higher
+                      - warnings-lower
+                      - warnings-none
+                      - duplication
+                      - open-subtitled
+                      - other
+                      - audio-described
+                      - signed
+                      - webcast
+                      - simulcast
                   rrc:
                     additionalProperties: false
                     properties:
@@ -2121,7 +2159,26 @@ components:
         id:
           type: string
         kind:
-          type: string
+          enum:
+            - legal
+            - editorial
+            - technical-replacement
+            - original
+            - iplayer-version
+            - lengthened
+            - shortened
+            - pre-watershed
+            - post-watershed
+            - warnings-higher
+            - warnings-lower
+            - warnings-none
+            - duplication
+            - open-subtitled
+            - other
+            - audio-described
+            - signed
+            - webcast
+            - simulcast
         rrc:
           additionalProperties: false
           properties:
