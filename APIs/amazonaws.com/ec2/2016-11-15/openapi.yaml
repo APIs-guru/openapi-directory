@@ -33323,6 +33323,17 @@ paths:
             enum:
               - no-termination
               - termination
+        - name: LaunchTemplateConfig
+          in: query
+          required: false
+          description: The launch template and overrides.
+          schema:
+            type: array
+            items:
+              xml:
+                name: item
+              $ref: '#/components/schemas/FleetLaunchTemplateConfigRequest'
+            maxItems: 50
         - name: FleetId
           in: query
           required: true
@@ -35259,6 +35270,16 @@ paths:
             enum:
               - noTermination
               - default
+        - name: LaunchTemplateConfig
+          in: query
+          required: false
+          description: 'The launch template and overrides. You can only use this parameter if you specified a launch template (<code>LaunchTemplateConfigs</code>) in your Spot Fleet request. If you specified <code>LaunchSpecifications</code> in your Spot Fleet request, then omit this parameter.'
+          schema:
+            type: array
+            items:
+              xml:
+                name: item
+              $ref: '#/components/schemas/LaunchTemplateConfig'
         - name: SpotFleetRequestId
           in: query
           required: true
@@ -49436,6 +49457,20 @@ components:
           $ref: '#/components/schemas/Boolean'
           description: 'Is <code>true</code> if the request succeeds, and an error otherwise.'
       description: Contains the output of ModifySpotFleetRequest.
+    LaunchTemplateConfig:
+      type: object
+      properties:
+        LaunchTemplateSpecification:
+          xml:
+            name: launchTemplateSpecification
+          $ref: '#/components/schemas/FleetLaunchTemplateSpecification'
+          description: The launch template.
+        Overrides:
+          xml:
+            name: overrides
+          $ref: '#/components/schemas/LaunchTemplateOverridesList'
+          description: Any parameters that you specify override the same parameters in the launch template.
+      description: Describes a launch template and overrides.
     ModifyTrafficMirrorFilterNetworkServicesResult:
       type: object
       properties:
@@ -68020,20 +68055,6 @@ components:
         xml:
           name: item
         $ref: '#/components/schemas/LaunchTemplateOverrides'
-    LaunchTemplateConfig:
-      type: object
-      properties:
-        LaunchTemplateSpecification:
-          xml:
-            name: launchTemplateSpecification
-          $ref: '#/components/schemas/FleetLaunchTemplateSpecification'
-          description: The launch template.
-        Overrides:
-          xml:
-            name: overrides
-          $ref: '#/components/schemas/LaunchTemplateOverridesList'
-          description: Any parameters that you specify override the same parameters in the launch template.
-      description: Describes a launch template and overrides.
     LaunchTemplateCpuOptions:
       type: object
       properties:
@@ -68469,6 +68490,7 @@ components:
         - customer-gateway
         - dedicated-host
         - dhcp-options
+        - egress-only-internet-gateway
         - elastic-ip
         - elastic-gpu
         - export-image-task
@@ -68944,6 +68966,11 @@ components:
         ExcessCapacityTerminationPolicy:
           $ref: '#/components/schemas/FleetExcessCapacityTerminationPolicy'
           description: Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+        LaunchTemplateConfigs:
+          xml:
+            name: LaunchTemplateConfig
+          $ref: '#/components/schemas/FleetLaunchTemplateConfigListRequest'
+          description: The launch template and overrides.
         FleetId:
           $ref: '#/components/schemas/FleetId'
           description: The ID of the EC2 Fleet.
@@ -69511,6 +69538,11 @@ components:
             name: excessCapacityTerminationPolicy
           $ref: '#/components/schemas/ExcessCapacityTerminationPolicy'
           description: Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.
+        LaunchTemplateConfigs:
+          xml:
+            name: LaunchTemplateConfig
+          $ref: '#/components/schemas/LaunchTemplateConfigList'
+          description: 'The launch template and overrides. You can only use this parameter if you specified a launch template (<code>LaunchTemplateConfigs</code>) in your Spot Fleet request. If you specified <code>LaunchSpecifications</code> in your Spot Fleet request, then omit this parameter.'
         SpotFleetRequestId:
           xml:
             name: spotFleetRequestId

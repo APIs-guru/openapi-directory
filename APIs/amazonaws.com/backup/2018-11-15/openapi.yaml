@@ -260,7 +260,7 @@ paths:
   '/backup/plans/{backupPlanId}/selections/':
     put:
       operationId: CreateBackupSelection
-      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"STRINGEQUALS"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"STRINGEQUALS"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically ''put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
+      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically ''put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
       responses:
         '200':
           description: Success
@@ -323,13 +323,13 @@ paths:
                       description: The display name of a resource selection document.
                     IamRoleArn:
                       $ref: '#/components/schemas/IAMRoleArn'
-                      description: 'The ARN of the IAM role that AWS Backup uses to authenticate when restoring the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+                      description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
                     Resources:
                       $ref: '#/components/schemas/ResourceArns'
                       description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
                     ListOfTags:
                       $ref: '#/components/schemas/ListOfTags'
-                      description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting"</code>.'
+                      description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
                 CreatorRequestId:
                   description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
                   type: string
@@ -4014,13 +4014,13 @@ components:
           description: The display name of a resource selection document.
         IamRoleArn:
           $ref: '#/components/schemas/IAMRoleArn'
-          description: 'The ARN of the IAM role that AWS Backup uses to authenticate when restoring the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
+          description: 'The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.'
         Resources:
           $ref: '#/components/schemas/ResourceArns'
           description: An array of strings that contain Amazon Resource Names (ARNs) of resources to assign to a backup plan.
         ListOfTags:
           $ref: '#/components/schemas/ListOfTags'
-          description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"STRINGEQUALS": {"ec2:ResourceTag/Department": "accounting"</code>.'
+          description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
       description: Used to specify a set of resources to a backup plan.
     BackupSelectionsListMember:
       type: object
@@ -4109,14 +4109,14 @@ components:
       properties:
         ConditionType:
           $ref: '#/components/schemas/ConditionType'
-          description: 'An operation, such as <code>STRINGEQUALS</code>, that is applied to a key-value pair used to filter resources in a selection.'
+          description: 'An operation, such as <code>StringEquals</code>, that is applied to a key-value pair used to filter resources in a selection.'
         ConditionKey:
           $ref: '#/components/schemas/ConditionKey'
           description: 'The key in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"ec2:ResourceTag/Department"</code> is the key.'
         ConditionValue:
           $ref: '#/components/schemas/ConditionValue'
           description: 'The value in a key-value pair. For example, in <code>"ec2:ResourceTag/Department": "accounting"</code>, <code>"accounting"</code> is the value.'
-      description: 'Contains an array of triplets made up of a condition type (such as <code>STRINGEQUALS</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
+      description: 'Contains an array of triplets made up of a condition type (such as <code>StringEquals</code>), a key, and a value. Conditions are used to filter resources in a selection that is assigned to a backup plan.'
     CopyAction:
       type: object
       required:
