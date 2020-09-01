@@ -94,8 +94,6 @@ security:
 tags:
   - description: >
       Read-only route providing information about how the requesting client is authenticated on the API, as well as corresponding permissions.
-    externalDocs:
-      url: ""
     name: authinfo
   - description: >
       The `blobs` resource provides a service for storing binary objects on the Brain, e.g. images.
@@ -104,8 +102,6 @@ tags:
 
 
       See also the `kvpairs` resource.
-    externalDocs:
-      url: ""
     name: blobs
   - description: >
       The `events` resource temporarily holds Brain events that match an event subscription in the `subscriptions` resource.
@@ -135,8 +131,6 @@ tags:
       It is not possible to access this resource using API key authentication.
 
       This resource is therefore irrelevant to most applications.
-    externalDocs:
-      url: ""
     name: keys
   - description: >
       The `kvpairs` resource provides a service for storing generic JSON key/value pairs on the Brain.
@@ -145,8 +139,6 @@ tags:
 
 
       See also the `blobs` resource.
-    externalDocs:
-      url: ""
     name: kvpairs
   - description: >
       The `locations` resource is an abstraction for the area around a physical location that items can be localized at.
@@ -155,8 +147,6 @@ tags:
     name: locations
   - description: >
       Location rules are directives for the localization engine that may be useful for certain solutions.
-    externalDocs:
-      url: ""
     name: locationrules
   - description: >
       The `presences` resource is an abstraction for the detection of an item (from the `items` resource) at a location (from the `locations` resource).
@@ -169,15 +159,11 @@ tags:
       The Brain consists of several software components with their own responsibilities, referred to as "services".
 
       Some of these services have status information and/or configuration that can be managed using the `services` resource.
-    externalDocs:
-      url: ""
     name: services
   - description: >
       It can be useful to group items or Smartspots in a list. The `sets` resource can be used to create and manage such list sets.
 
       Sets can be utilized in various Brain Management Console utilities and can also be useful in custom Brain applications.
-    externalDocs:
-      url: ""
     name: sets
   - description: >
       The `spots` resource contains representations of Smartspot devices that have connected to this Brain at least once.
@@ -210,8 +196,6 @@ tags:
       It is not possible to access this resource using API key authentication.
 
       This resource is therefore irrelevant to most applications.
-    externalDocs:
-      url: ""
     name: users
 paths:
   /authinfo:
@@ -3342,7 +3326,7 @@ components:
         that these endpoints can only be used when logged in into the Graphical
 
         front-end of the Brain.
-      in: cookie
+      in: query
       name: brain.sid
       type: apiKey
     HeaderApiKey:
