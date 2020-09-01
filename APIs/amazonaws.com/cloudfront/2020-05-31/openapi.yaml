@@ -1786,6 +1786,97 @@ paths:
           description: 'The maximum number of public keys you want in the response body. '
           schema:
             type: string
+  /2020-05-31/realtime-log-config:
+    post:
+      operationId: CreateRealtimeLogConfig2020_05_31
+      description: '<p>Creates a real-time log configuration.</p> <p>After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream.</p> <p>For more information about real-time log configurations, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateRealtimeLogConfigResult'
+        '480':
+          description: RealtimeLogConfigAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RealtimeLogConfigAlreadyExists'
+        '481':
+          description: TooManyRealtimeLogConfigs
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyRealtimeLogConfigs'
+        '482':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - EndPoints
+                - Fields
+                - Name
+                - SamplingRate
+              properties:
+                EndPoints:
+                  description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EndPoint'
+                Fields:
+                  description: '<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+                  type: array
+                  items:
+                    xml:
+                      name: Field
+                    $ref: '#/components/schemas/string'
+                Name:
+                  description: A unique name to identify this real-time log configuration.
+                  type: string
+                SamplingRate:
+                  description: 'The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.'
+                  type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRealtimeLogConfigs2020_05_31
+      description: '<p>Gets a list of real-time log configurations.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListRealtimeLogConfigsResult'
+      parameters:
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of real-time log configurations that you want in the response.
+          schema:
+            type: string
+        - name: Marker
+          in: query
+          required: false
+          description: 'Use this field when paginating results to indicate where to begin in your list of real-time log configurations. The response includes real-time log configurations in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+          schema:
+            type: string
   /2020-05-31/streaming-distribution:
     post:
       operationId: CreateStreamingDistribution2020_05_31
@@ -2927,6 +3018,53 @@ paths:
           description: Request the ID for the public key.
           schema:
             type: string
+  /2020-05-31/delete-realtime-log-config/:
+    post:
+      operationId: DeleteRealtimeLogConfig2020_05_31
+      description: '<p>Deletes a real-time log configuration.</p> <p>You cannot delete a real-time log configuration if it’s attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration.</p> <p>To delete a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '481':
+          description: RealtimeLogConfigInUse
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RealtimeLogConfigInUse'
+        '482':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the real-time log configuration to delete.
+                  type: string
+                ARN:
+                  description: The Amazon Resource Name (ARN) of the real-time log configuration to delete.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/streaming-distribution/{Id}':
     delete:
       operationId: DeleteStreamingDistribution2020_05_31
@@ -4125,6 +4263,51 @@ paths:
                     Comment:
                       $ref: '#/components/schemas/string'
                       description: An optional comment about a public key.
+  /2020-05-31/get-realtime-log-config/:
+    post:
+      operationId: GetRealtimeLogConfig2020_05_31
+      description: '<p>Gets a real-time log configuration.</p> <p>To get a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to get.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetRealtimeLogConfigResult'
+        '480':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the real-time log configuration to get.
+                  type: string
+                ARN:
+                  description: The Amazon Resource Name (ARN) of the real-time log configuration to get.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/streaming-distribution/{Id}/config':
     get:
       operationId: GetStreamingDistributionConfig2020_05_31
@@ -4413,6 +4596,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2020-05-31/distributionsByRealtimeLogConfig/:
+    post:
+      operationId: ListDistributionsByRealtimeLogConfig2020_05_31
+      description: '<p>Gets a list of distribution that have a cache behavior that’s associated with the specified real-time log configuration.</p> <p>You can specify the real-time log configuration by its name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to list distributions for.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListDistributionsByRealtimeLogConfigResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              properties:
+                Marker:
+                  description: 'Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+                  type: string
+                MaxItems:
+                  description: The maximum number of distributions that you want in the response.
+                  type: string
+                RealtimeLogConfigName:
+                  description: The name of the real-time log configuration whose associated distributions you want to list.
+                  type: string
+                RealtimeLogConfigArn:
+                  description: The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/distributionsByWebACLId/{WebACLId}':
     get:
       operationId: ListDistributionsByWebACLId2020_05_31
@@ -4654,6 +4882,66 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2020-05-31/realtime-log-config/:
+    put:
+      operationId: UpdateRealtimeLogConfig2020_05_31
+      description: '<p>Updates a real-time log configuration.</p> <p>When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:</p> <ol> <li> <p>Call <code>GetRealtimeLogConfig</code> to get the current real-time log configuration.</p> </li> <li> <p>Locally modify the parameters in the real-time log configuration that you want to update.</p> </li> <li> <p>Call this API (<code>UpdateRealtimeLogConfig</code>) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.</p> </li> </ol> <p>You cannot update a real-time log configuration’s <code>Name</code> or <code>ARN</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateRealtimeLogConfigResult'
+        '480':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              properties:
+                EndPoints:
+                  description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/EndPoint'
+                Fields:
+                  description: '<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+                  type: array
+                  items:
+                    xml:
+                      name: Field
+                    $ref: '#/components/schemas/string'
+                Name:
+                  description: The name for this real-time log configuration.
+                  type: string
+                ARN:
+                  description: The Amazon Resource Name (ARN) for this real-time log configuration.
+                  type: string
+                SamplingRate:
+                  description: 'The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.'
+                  type: integer
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -4829,6 +5117,9 @@ components:
         FieldLevelEncryptionId:
           $ref: '#/components/schemas/string'
           description: The value of <code>ID</code> for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.
+        RealtimeLogConfigArn:
+          $ref: '#/components/schemas/string'
+          description: 'The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.'
         CachePolicyId:
           $ref: '#/components/schemas/string'
           description: 'The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
@@ -4922,7 +5213,7 @@ components:
           description: '<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and the SSL/TLS certificate is stored in <a href="https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html">AWS Certificate Manager (ACM)</a>, provide the Amazon Resource Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US East (N. Virginia) Region (<code>us-east-1</code>).</p> <p>If you specify an ACM certificate ARN, you must also specify values for <code>MinimumProtocolVerison</code> and <code>SSLSupportMethod</code>. </p>'
         SSLSupportMethod:
           $ref: '#/components/schemas/SSLSupportMethod'
-          description: '<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.</p> <ul> <li> <p> <code>sni-only</code> – The distribution accepts HTTPS connections from only viewers that support <a href="https://en.wikipedia.org/wiki/Server_Name_Indication">server name indication (SNI)</a>. This is recommended. Most browsers and clients support SNI.</p> </li> <li> <p> <code>vip</code> – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> </ul> <p>If the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a value for this field.</p>'
+          description: '<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.</p> <ul> <li> <p> <code>sni-only</code> – The distribution accepts HTTPS connections from only viewers that support <a href="https://en.wikipedia.org/wiki/Server_Name_Indication">server name indication (SNI)</a>. This is recommended. Most browsers and clients support SNI.</p> </li> <li> <p> <code>vip</code> – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> <li> <p> <code>static-ip</code> - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the <a href="https://console.aws.amazon.com/support/home">AWS Support Center</a>.</p> </li> </ul> <p>If the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a value for this field.</p>'
         MinimumProtocolVersion:
           $ref: '#/components/schemas/MinimumProtocolVersion'
           description: '<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), specify the security policy that you want CloudFront to use for HTTPS connections with viewers. The security policy determines two settings:</p> <ul> <li> <p>The minimum SSL/TLS protocol that CloudFront can use to communicate with viewers.</p> </li> <li> <p>The ciphers that CloudFront can use to encrypt the content that it returns to viewers.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValues-security-policy">Security Policy</a> and <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers">Supported Protocols and Ciphers Between Viewers and CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <note> <p>On the CloudFront console, this setting is called <b>Security Policy</b>.</p> </note> <p>When you’re using SNI only (you set <code>SSLSupportMethod</code> to <code>sni-only</code>), you must specify <code>TLSv1</code> or higher. </p> <p>If the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code> (you set <code>CloudFrontDefaultCertificate</code> to <code>true</code>), CloudFront automatically sets the security policy to <code>TLSv1</code> regardless of the value that you set here.</p>'
@@ -5220,6 +5511,26 @@ components:
           description: Returned when you add a public key.
     PublicKeyAlreadyExists: {}
     TooManyPublicKeys: {}
+    CreateRealtimeLogConfigResult:
+      type: object
+      properties:
+        RealtimeLogConfig:
+          $ref: '#/components/schemas/RealtimeLogConfig'
+          description: A real-time log configuration.
+    EndPoint:
+      type: object
+      required:
+        - StreamType
+      properties:
+        StreamType:
+          $ref: '#/components/schemas/string'
+          description: The type of data stream where you are sending real-time log data. The only valid value is <code>Kinesis</code>.
+        KinesisStreamConfig:
+          $ref: '#/components/schemas/KinesisStreamConfig'
+          description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+      description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.
+    RealtimeLogConfigAlreadyExists: {}
+    TooManyRealtimeLogConfigs: {}
     CreateStreamingDistributionResult:
       type: object
       properties:
@@ -5331,6 +5642,8 @@ components:
       properties: {}
     OriginRequestPolicyInUse: {}
     PublicKeyInUse: {}
+    NoSuchRealtimeLogConfig: {}
+    RealtimeLogConfigInUse: {}
     StreamingDistributionNotDisabled: {}
     NoSuchStreamingDistribution: {}
     GetCachePolicyResult:
@@ -5435,6 +5748,12 @@ components:
         PublicKeyConfig:
           $ref: '#/components/schemas/PublicKeyConfig'
           description: Return the result for the public key configuration.
+    GetRealtimeLogConfigResult:
+      type: object
+      properties:
+        RealtimeLogConfig:
+          $ref: '#/components/schemas/RealtimeLogConfig'
+          description: A real-time log configuration.
     GetStreamingDistributionResult:
       type: object
       properties:
@@ -5481,6 +5800,11 @@ components:
         DistributionIdList:
           $ref: '#/components/schemas/DistributionIdList'
           description: A list of distribution IDs.
+    ListDistributionsByRealtimeLogConfigResult:
+      type: object
+      properties:
+        DistributionList:
+          $ref: '#/components/schemas/DistributionList'
     ListDistributionsByWebACLIdResult:
       type: object
       properties:
@@ -5519,6 +5843,12 @@ components:
         PublicKeyList:
           $ref: '#/components/schemas/PublicKeyList'
           description: Returns a list of all public keys that have been added to CloudFront for this account.
+    ListRealtimeLogConfigsResult:
+      type: object
+      properties:
+        RealtimeLogConfigs:
+          $ref: '#/components/schemas/RealtimeLogConfigs'
+          description: A list of real-time log configurations.
     ListStreamingDistributionsResult:
       type: object
       properties:
@@ -5594,6 +5924,12 @@ components:
           $ref: '#/components/schemas/PublicKey'
           description: Return the results of updating the public key.
     CannotChangeImmutablePublicKeyFields: {}
+    UpdateRealtimeLogConfigResult:
+      type: object
+      properties:
+        RealtimeLogConfig:
+          $ref: '#/components/schemas/RealtimeLogConfig'
+          description: A real-time log configuration.
     UpdateStreamingDistributionResult:
       type: object
       properties:
@@ -5764,6 +6100,9 @@ components:
         FieldLevelEncryptionId:
           $ref: '#/components/schemas/string'
           description: The value of <code>ID</code> for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
+        RealtimeLogConfigArn:
+          $ref: '#/components/schemas/string'
+          description: 'The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.'
         CachePolicyId:
           $ref: '#/components/schemas/string'
           description: 'The unique identifier of the cache policy that is attached to this cache behavior. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy">Creating cache policies</a> or <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.'
@@ -6475,6 +6814,62 @@ components:
           $ref: '#/components/schemas/PublicKeyConfig'
           description: A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
       description: A complex data type of public keys you add to CloudFront to use with features like field-level encryption.
+    EndPointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EndPoint'
+    FieldList:
+      type: array
+      items:
+        xml:
+          name: Field
+        $ref: '#/components/schemas/string'
+    CreateRealtimeLogConfigRequest:
+      type: object
+      required:
+        - EndPoints
+        - Fields
+        - Name
+        - SamplingRate
+      title: CreateRealtimeLogConfigRequest
+      properties:
+        EndPoints:
+          $ref: '#/components/schemas/EndPointList'
+          description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+        Fields:
+          $ref: '#/components/schemas/FieldList'
+          description: '<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+        Name:
+          $ref: '#/components/schemas/string'
+          description: A unique name to identify this real-time log configuration.
+        SamplingRate:
+          $ref: '#/components/schemas/long'
+          description: 'The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.'
+    RealtimeLogConfig:
+      type: object
+      required:
+        - ARN
+        - Name
+        - SamplingRate
+        - EndPoints
+        - Fields
+      properties:
+        ARN:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of this real-time log configuration.
+        Name:
+          $ref: '#/components/schemas/string'
+          description: The unique name of this real-time log configuration.
+        SamplingRate:
+          $ref: '#/components/schemas/long'
+          description: 'The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. The sampling rate is an integer between 1 and 100, inclusive.'
+        EndPoints:
+          $ref: '#/components/schemas/EndPointList'
+          description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.
+        Fields:
+          $ref: '#/components/schemas/FieldList'
+          description: '<p>A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      description: A real-time log configuration.
     CreateStreamingDistributionRequest:
       type: object
       required:
@@ -6665,6 +7060,16 @@ components:
       type: object
       title: DeletePublicKeyRequest
       properties: {}
+    DeleteRealtimeLogConfigRequest:
+      type: object
+      title: DeleteRealtimeLogConfigRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/string'
+          description: The name of the real-time log configuration to delete.
+        ARN:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the real-time log configuration to delete.
     DeleteStreamingDistributionRequest:
       type: object
       title: DeleteStreamingDistributionRequest
@@ -6854,6 +7259,19 @@ components:
           $ref: '#/components/schemas/FieldPatterns'
           description: 'Field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted. You can provide the full field name, or any beginning characters followed by a wildcard (*). You can''t overlap field patterns. For example, you can''t have both ABC* and AB*. Note that field patterns are case-sensitive. '
       description: 'Complex data type for field-level encryption profiles that includes the encryption key and field pattern specifications. '
+    KinesisStreamConfig:
+      type: object
+      required:
+        - RoleARN
+        - StreamARN
+      properties:
+        RoleARN:
+          $ref: '#/components/schemas/string'
+          description: '<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream.</p> <p>For more information the IAM role, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role">Real-time log configuration IAM role</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+        StreamARN:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.
+      description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
     EventType:
       type: string
       enum:
@@ -7072,6 +7490,16 @@ components:
       type: object
       title: GetPublicKeyRequest
       properties: {}
+    GetRealtimeLogConfigRequest:
+      type: object
+      title: GetRealtimeLogConfigRequest
+      properties:
+        Name:
+          $ref: '#/components/schemas/string'
+          description: The name of the real-time log configuration to get.
+        ARN:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the real-time log configuration to get.
     GetStreamingDistributionConfigRequest:
       type: object
       title: GetStreamingDistributionConfigRequest
@@ -7197,6 +7625,22 @@ components:
       type: object
       title: ListDistributionsByOriginRequestPolicyIdRequest
       properties: {}
+    ListDistributionsByRealtimeLogConfigRequest:
+      type: object
+      title: ListDistributionsByRealtimeLogConfigRequest
+      properties:
+        Marker:
+          $ref: '#/components/schemas/string'
+          description: 'Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+        MaxItems:
+          $ref: '#/components/schemas/string'
+          description: The maximum number of distributions that you want in the response.
+        RealtimeLogConfigName:
+          $ref: '#/components/schemas/string'
+          description: The name of the real-time log configuration whose associated distributions you want to list.
+        RealtimeLogConfigArn:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.
     ListDistributionsByWebACLIdRequest:
       type: object
       title: ListDistributionsByWebACLIdRequest
@@ -7271,6 +7715,33 @@ components:
           $ref: '#/components/schemas/PublicKeySummaryList'
           description: An array of information about a public key you add to CloudFront to use with features like field-level encryption.
       description: A list of public keys you've added to CloudFront to use with features like field-level encryption.
+    ListRealtimeLogConfigsRequest:
+      type: object
+      title: ListRealtimeLogConfigsRequest
+      properties: {}
+    RealtimeLogConfigs:
+      type: object
+      required:
+        - MaxItems
+        - IsTruncated
+        - Marker
+      properties:
+        MaxItems:
+          $ref: '#/components/schemas/integer'
+          description: The maximum number of real-time log configurations requested.
+        Items:
+          $ref: '#/components/schemas/RealtimeLogConfigList'
+          description: Contains the list of real-time log configurations.
+        IsTruncated:
+          $ref: '#/components/schemas/boolean'
+          description: A flag that indicates whether there are more real-time log configurations than are contained in this list.
+        Marker:
+          $ref: '#/components/schemas/string'
+          description: This parameter indicates where this list of real-time log configurations begins. This list includes real-time log configurations that occur after the marker.
+        NextMarker:
+          $ref: '#/components/schemas/string'
+          description: 'If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing real-time log configurations where you left off. '
+      description: A list of real-time log configurations.
     ListStreamingDistributionsRequest:
       type: object
       title: ListStreamingDistributionsRequest
@@ -7590,6 +8061,10 @@ components:
         xml:
           name: Name
         $ref: '#/components/schemas/string'
+    RealtimeLogConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RealtimeLogConfig'
     RealtimeMetricsSubscriptionStatus:
       type: string
       enum:
@@ -7600,6 +8075,7 @@ components:
       enum:
         - sni-only
         - vip
+        - static-ip
     Signer:
       type: object
       properties:
@@ -7813,6 +8289,25 @@ components:
           description: Request to update public key information.
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    UpdateRealtimeLogConfigRequest:
+      type: object
+      title: UpdateRealtimeLogConfigRequest
+      properties:
+        EndPoints:
+          $ref: '#/components/schemas/EndPointList'
+          description: Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+        Fields:
+          $ref: '#/components/schemas/FieldList'
+          description: '<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+        Name:
+          $ref: '#/components/schemas/string'
+          description: The name for this real-time log configuration.
+        ARN:
+          $ref: '#/components/schemas/string'
+          description: The Amazon Resource Name (ARN) for this real-time log configuration.
+        SamplingRate:
+          $ref: '#/components/schemas/long'
+          description: 'The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.'
     UpdateStreamingDistributionRequest:
       type: object
       required:
