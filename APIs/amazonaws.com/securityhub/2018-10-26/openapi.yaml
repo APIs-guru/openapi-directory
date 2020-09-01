@@ -3974,6 +3974,9 @@ components:
         Vulnerabilities:
           $ref: '#/components/schemas/VulnerabilityList'
           description: Provides a list of vulnerabilities associated with the findings.
+        PatchSummary:
+          $ref: '#/components/schemas/PatchSummary'
+          description: Provides an overview of the patch compliance status for an instance against a selected compliance standard.
       description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
@@ -6606,6 +6609,45 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Vulnerability'
+    PatchSummary:
+      type: object
+      required:
+        - Id
+      properties:
+        Id:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The identifier of the compliance standard that was used to determine the patch compliance status.
+        InstalledCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of patches from the compliance standard that were installed successfully.
+        MissingCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of patches that are part of the compliance standard but are not installed. The count includes patches that failed to install.
+        FailedCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of patches from the compliance standard that failed to install.
+        InstalledOtherCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of installed patches that are not part of the compliance standard.
+        InstalledRejectedCount:
+          $ref: '#/components/schemas/Integer'
+          description: The number of patches that are installed but are also on a list of patches that the customer rejected.
+        InstalledPendingReboot:
+          $ref: '#/components/schemas/Integer'
+          description: The number of patches that were installed since the last time the instance was rebooted.
+        OperationStartTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the operation started.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        OperationEndTime:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: '<p>Indicates when the operation completed.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        RebootOption:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: The reboot option specified for the instance.
+        Operation:
+          $ref: '#/components/schemas/NonEmptyString'
+          description: 'The type of patch operation performed. For Patch Manager, the values are <code>SCAN</code> and <code>INSTALL</code>. '
+      description: Provides an overview of the patch compliance status for an instance against a selected compliance standard.
     AwsSecurityFindingFilters:
       type: object
       properties:
