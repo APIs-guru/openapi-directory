@@ -2981,6 +2981,15 @@ paths:
             fields for the mini representation are returned, additional
 
             to the fields requested.
+
+
+            Additionally this field can be used to query any metadata
+
+            applied to the file by specifying the `metadata` field as well
+
+            as the scope and key of the template to retrieve, for example
+
+            `?field=metadata.enterprise_12345.contractTemplate`.
           example:
             - id
             - type
@@ -5479,7 +5488,26 @@ paths:
         - Trashed files
       x-box-tag: trashed_files
     get:
-      description: Retrieves a file that has been moved to the trash.
+      description: >-
+        Retrieves a file that has been moved to the trash.
+
+
+        Please note that only if the file itself has been moved to the
+
+        trash can it be retrieved with this API call. If instead one of
+
+        its parent folders was moved to the trash, only that folder
+
+        can be inspected using the
+
+        [`GET /folders/:id/trash`](e://get_folders_id_trash) API.
+
+
+        To list all items that have been moved to the trash, please
+
+        use the [`GET /folders/trash/items`](e://get-folders-trash-items/)
+
+        API.
       operationId: get_files_id_trash
       parameters:
         - description: >-
@@ -5547,7 +5575,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientError"
-          description: Returns an error if the file is not in the trash.
+          description: >-
+            Returns an error if the file can not be found directly
+
+            in the trash.
+
+
+            Please note that a `HTTP 404` is also returned if any of
+
+            the file's parent folders have been moved to the trash.
+
+
+            In that case, only that parent folder can be inspected using
+
+            the [`GET /folders/:id/trash`](e://get_folders_id_trash) API.
         default:
           content:
             application/json:
@@ -6751,6 +6792,15 @@ paths:
             fields for the mini representation are returned, additional
 
             to the fields requested.
+
+
+            Additionally this field can be used to query any metadata
+
+            applied to the file by specifying the `metadata` field as well
+
+            as the scope and key of the template to retrieve, for example
+
+            `?field=metadata.enterprise_12345.contractTemplate`.
           example:
             - id
             - type
@@ -7801,6 +7851,15 @@ paths:
             fields for the mini representation are returned, additional
 
             to the fields requested.
+
+
+            Additionally this field can be used to query any metadata
+
+            applied to the file by specifying the `metadata` field as well
+
+            as the scope and key of the template to retrieve, for example
+
+            `?field=metadata.enterprise_12345.contractTemplate`.
           example:
             - id
             - type
@@ -8634,7 +8693,26 @@ paths:
         - Trashed folders
       x-box-tag: trashed_folders
     get:
-      description: Retrieves a folder that has been moved to the trash.
+      description: >-
+        Retrieves a folder that has been moved to the trash.
+
+
+        Please note that only if the folder itself has been moved to the
+
+        trash can it be retrieved with this API call. If instead one of
+
+        its parent folders was moved to the trash, only that folder
+
+        can be inspected using the
+
+        [`GET /folders/:id/trash`](e://get_folders_id_trash) API.
+
+
+        To list all items that have been moved to the trash, please
+
+        use the [`GET /folders/trash/items`](e://get-folders-trash-items/)
+
+        API.
       operationId: get_folders_id_trash
       parameters:
         - description: >-
@@ -8708,7 +8786,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientError"
-          description: Returns an error if the folder is not in the trash.
+          description: >-
+            Returns an error if the folder can not be found directly
+
+            in the trash.
+
+
+            Please note that a `HTTP 404` is also returned if any of
+
+            the folder's parent folders have been moved to the trash.
+
+
+            In that case, only that parent folder can be inspected using
+
+            the [`GET /folders/:id/trash`](e://get_folders_id_trash) API.
         default:
           content:
             application/json:
@@ -10907,6 +10998,29 @@ paths:
                     The key of the targeted metadata template. This template will
 
                     need to already have an instance applied to the targeted folder.
+
+
+                    In many cases the template key is automatically derived
+
+                    of its display name, for example `Contract Template` would
+
+                    become `contractTemplate`. In some cases the creator of the
+
+                    template will have provided its own template key.
+
+
+                    Please [list the templates for an enterprise][list], or
+
+                    get all instances on a [file][file] or [folder][folder]
+
+                    to inspect a template's key.
+
+
+                    [list]: e://get-metadata-templates-enterprise
+
+                    [file]: e://get-files-id-metadata
+
+                    [folder]: e://get-folders-id-metadata
                   example: productInfo
                   type: string
               required:
@@ -12699,10 +12813,13 @@ paths:
             descriptions, text content of files, and various other fields of
 
             the different item types.
+
+
+            Required unless `mdfilters` parameter is defined.
           example: sales
           in: query
           name: query
-          required: true
+          required: false
           schema:
             type: string
         - description: >-
@@ -12886,66 +13003,39 @@ paths:
               - trashed_only
             type: string
         - description: >-
-            Limits search results to items that match the
+            A list containing 1 metadata template to filter
 
-            metadata template name and content.
+            search results by. This list can currently only
+
+            contain one entry.
+
+
+            Required unless `query` is defined.
           example:
             - filters:
-                documentType: datasheet
+                category: online
               scope: enterprise
-              templateKey: marketingCollateral
+              templateKey: contract
           in: query
           name: mdfilters
           required: false
           schema:
+            description: >-
+              A list of metadata templates to filter the search results by.
+
+
+              Required unless `query` parameter is defined.
             items:
-              description: >-
-                A metadata filter used for searching by metadata
-
-                template
-              properties:
-                filters:
-                  additionalProperties:
-                    description: The value for the custom field
-                    example: datasheet
-                    type: string
-                    x-box-example-key: documentType
-                  description: >-
-                    Additional key/value pairs for the template to search for.
-
-
-                    For floats and dates, you can include an (inclusive) upper
-
-                    bound parameter `lt` or (inclusive) lower bound parameter
-
-                    `gt`, or both.
-
-
-                    An example filter for a `contractExpiration` on or before
-
-                    `08-01-16 UTC` would be listed as follow.
-
-
-                    `{"contractExpiration":{"lt":"2016-08-01T00:00:00Z"}}`
-                  example:
-                    documentType: datasheet
-                  type: object
-                scope:
-                  description: Specifies the scope of the template to search for.
-                  enum:
-                    - global
-                    - enterprise
-                  example: global
-                  type: string
-                templateKey:
-                  description: >-
-                    The key name of the template to search for. Only
-
-                    one template name can be specified per filter.
-                  example: marketingCollateral
-                  type: string
-              type: object
+              $ref: "#/components/schemas/MetadataFilter"
+            maxItems: 1
+            minItems: 1
             type: array
+          x-example:
+            - filters:
+                category: online
+                contractValue: 1000000
+              scope: enterprise
+              templateKey: contract
         - description: >-
             Defines the order in which results are returned. Defaults to `relevance`.
 
@@ -17052,7 +17142,7 @@ components:
             When the `status` of the collaboration object changed to
 
             `accepted` or `rejected`
-          example: 2012-12-12T10:53:43-08:00
+          example: 2012-12-12T10:55:20-08:00
           format: date-time
           type: string
         created_at:
@@ -17064,18 +17154,23 @@ components:
           allOf:
             - $ref: "#/components/schemas/User--Mini"
             - description: The user who created the collaboration object
+            - example:
+                - id: 33224412
+                - type: user
+                - login: dylan@example.com
+                - name: Dylan Smith
         expires_at:
           description: >-
             When the collaboration will expire, or `null` if no expiration
 
             date is set.
-          example: 2012-12-12T10:53:43-08:00
+          example: 2012-12-26T10:53:43-08:00
           format: date-time
           nullable: true
           type: string
         id:
           description: The unique identifier for this collaboration.
-          example: "11446498"
+          example: "12345678"
           type: string
         invite_email:
           description: >-
@@ -21419,6 +21514,29 @@ components:
             The key of the of the template that is cascaded down to the folder's
 
             children.
+
+
+            In many cases the template key is automatically derived
+
+            of its display name, for example `Contract Template` would
+
+            become `contractTemplate`. In some cases the creator of the
+
+            template will have provided its own template key.
+
+
+            Please [list the templates for an enterprise][list], or
+
+            get all instances on a [file][file] or [folder][folder]
+
+            to inspect a template's key.
+
+
+            [list]: e://get-metadata-templates-enterprise
+
+            [file]: e://get-files-id-metadata
+
+            [folder]: e://get-folders-id-metadata
           example: productInfo
           type: string
         type:
@@ -21431,6 +21549,236 @@ components:
       type: object
       x-box-resource-id: metadata_cascade_policy
       x-box-tag: metadata_cascade_policies
+    MetadataFieldFilterDateRange:
+      additionalProperties:
+        description: Match a `date` metadata field to a range of values.
+        example:
+          gt: 2016-08-01T00:00:00Z
+          lt: 2017-08-01T00:00:00Z
+        properties:
+          gt:
+            description: >-
+              Specifies the (inclusive) lower bound for the metadata field
+
+              value. The value of a field must be greater than (`gt`) or
+
+              equal to this value for the search query to match this
+
+              template.
+            example: 2016-08-01T00:00:00Z
+            format: date-time
+            type: string
+          lt:
+            description: >-
+              Specifies the (inclusive) upper bound for the metadata field
+
+              value. The value of a field must be lower than (`lt`) or
+
+              equal to this value for the search query to match this
+
+              template.
+            example: 2017-08-01T00:00:00Z
+            format: date-time
+            type: string
+        type: object
+        x-box-example-key: expirationDate
+      description: >-
+        Specifies which `date` field on the template to filter the search
+
+        results by, specifying a range of dates that can match.
+      example:
+        expirationDate:
+          gt: 2016-08-01T00:00:00Z
+          lt: 2017-08-01T00:00:00Z
+      title: Metadata field filter (date range)
+      type: object
+      x-box-resource-id: metadata_field_filter_date_range
+    MetadataFieldFilterFloat:
+      additionalProperties:
+        description: >-
+          A mapping between a metadata `float` field key and
+
+          the value to match search results on.
+        example: 10000
+        type: number
+        x-box-example-key: contractValue
+      description: >-
+        Specifies which `float` field on the template to filter the search
+
+        results by.
+      example:
+        contractValue: 10000
+      title: Metadata field filter (float)
+      type: object
+      x-box-resource-id: metadata_field_filter_float
+    MetadataFieldFilterFloatRange:
+      additionalProperties:
+        description: >-
+          Specifies which `float` field on the template to filter the search
+
+          results by, specifying a range of values that can match.
+        example:
+          gt: 100000
+          lt: 200000
+        properties:
+          gt:
+            description: >-
+              Specifies the (inclusive) lower bound for the metadata field
+
+              value. The value of a field must be greater than (`gt`) or
+
+              equal to this value for the search query to match this
+
+              template.
+            example: 100000
+            type: number
+          lt:
+            description: >-
+              Specifies the (inclusive) upper bound for the metadata field
+
+              value. The value of a field must be lower than (`lt`) or
+
+              equal to this value for the search query to match this
+
+              template.
+            example: 200000
+            type: number
+        type: object
+        x-box-example-key: value
+      description: >-
+        Specifies which `float` field on the template to filter the search
+
+        results by, specifying a range of values that can match.
+      example:
+        contractValue:
+          gt: 100000
+          lt: 200000
+      title: Metadata field filter (float range)
+      type: object
+      x-box-resource-id: metadata_field_filter_float_range
+    MetadataFieldFilterMultiSelect:
+      additionalProperties:
+        description: >-
+          A mapping between a metadata `multiSelect` field key and
+
+          the one or more values to match search results on.
+
+
+          When performing a search, the query will essentially
+
+          perform an `OR` operation to match any template where any of
+
+          the provided values match this field.
+        example:
+          - online
+          - enterprise
+        items:
+          type: string
+        type: array
+        x-box-example-key: category
+      description: >-
+        Specifies the values to match for a `multiSelect` metadata
+
+        field. When performing a search, the query will essentially
+
+        perform an `OR` operation to match any template where any of
+
+        the provided values match this field.
+      example:
+        category:
+          - online
+          - enterprise
+      title: Metadata field filter (multi-select)
+      type: object
+      x-box-resource-id: metadata_field_filter_multi_select
+    MetadataFieldFilterString:
+      additionalProperties:
+        description: >-
+          A mapping between a metadata `string` field key and
+
+          the value to match search results on.
+        example: online
+        type: string
+        x-box-example-key: category
+      description: >-
+        Specifies which text field on the template to filter the search
+
+        results by.
+      example:
+        category: online
+      title: Metadata field filter (string)
+      type: object
+      x-box-resource-id: metadata_field_filter_string
+    MetadataFilter:
+      description: A metadata template to filter the search results by.
+      properties:
+        filters:
+          allOf:
+            - anyOf:
+                - $ref: "#/components/schemas/MetadataFieldFilterString"
+                - $ref: "#/components/schemas/MetadataFieldFilterFloat"
+                - $ref: "#/components/schemas/MetadataFieldFilterMultiSelect"
+                - $ref: "#/components/schemas/MetadataFieldFilterFloatRange"
+                - $ref: "#/components/schemas/MetadataFieldFilterDateRange"
+            - description: >-
+                Specifies which fields on the template to filter the search
+
+                results by. When more than one field is specified, the query
+
+                performs a logical `AND` to ensure that the instance of the
+
+                template matches each of the fields specified.
+            - example:
+                category: online
+                contractValue: 1000000
+        scope:
+          description: >-
+            Specifies the scope of the template to filter search results by.
+
+
+            This will be `enterprise_{enterprise_id}` for templates defined
+
+            for use in this enterprise, and `global` for general templates
+
+            that are available to all enterprises using Box.
+          enum:
+            - global
+            - enterprise
+            - enterprise_{enterprise_id}
+          example: enterprise
+          type: string
+        templateKey:
+          description: >-
+            The key of the template to filter search results by.
+
+
+            In many cases the template key is automatically derived
+
+            of its display name, for example `Contract Template` would
+
+            become `contractTemplate`. In some cases the creator of the
+
+            template will have provided its own template key.
+
+
+            Please [list the templates for an enterprise][list], or
+
+            get all instances on a [file][file] or [folder][folder]
+
+            to inspect a template's key.
+
+
+            [list]: e://get-metadata-templates-enterprise
+
+            [file]: e://get-files-id-metadata
+
+            [folder]: e://get-folders-id-metadata
+          example: contract
+          type: string
+      title: Metadata filter
+      type: object
+      x-box-resource-id: metadata_filter
+      x-box-tag: search
     MetadataQuery:
       description: >-
         Create a search using SQL-like syntax to return items that match specific

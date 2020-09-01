@@ -398,6 +398,7 @@ paths:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/include_relationships"
         - $ref: "#/components/parameters/include_outline"
+        - $ref: "#/components/parameters/full"
       responses:
         "200":
           $ref: "#/components/responses/story"
@@ -791,7 +792,13 @@ paths:
         "400":
           $ref: "#/components/responses/badrequest"
         "401":
-          $ref: "#/components/responses/unauthorized"
+          content:
+            text/html:
+              schema:
+                description: html document with a link to the login page
+                title: Login Button
+                type: string
+          description: An html document containing a login button
         "404":
           $ref: "#/components/responses/notfound"
       summary: "Story: Get Story at Reveal.js Document"
@@ -890,6 +897,13 @@ components:
       required: true
       schema:
         type: string
+    full:
+      description: Pull a story object with associated collaborator user, permission, and session data(faster if cached from prior api call)
+      in: query
+      name: full
+      required: false
+      schema:
+        type: boolean
     id:
       description: the id from the story object
       in: path

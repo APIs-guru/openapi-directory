@@ -92,7 +92,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -168,7 +168,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -315,7 +315,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -381,7 +381,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemSnapshotResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":
@@ -449,7 +449,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -478,13 +478,13 @@ definitions:
         description: A pipe-separated list of alerts available for the item. For example, if the DELAYED_DELIVERY alert was returned for an item, it would indicate a delay in shipping by the seller.
         type: string
       availability:
-        description: "An enumeration value representing the item's availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html'>eBay API documentation</a>"
+        description: "An enumeration value representing the item's availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:AvailabilityEnum'>eBay API documentation</a>"
         type: string
       availabilityThreshold:
         description: This column has a value only when the seller sets their 'display item quantity' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.
         type: integer
       availabilityThresholdType:
-        description: "This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html'>eBay API documentation</a>"
+        description: "This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:AvailabilityThresholdEnum'>eBay API documentation</a>"
         type: string
       brand:
         description: The name brand of the item, such as Nike, Apple, etc.
@@ -499,13 +499,13 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
-        description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/DeliveryOptionsEnum.html'>eBay API documentation</a>
+        description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>
         type: string
       discountAmount:
         description: "The calculated amount of the discount (originalPriceValue - priceValue). For example, if originalPriceValue is 70 and priceValue is 56, this value would be 14. Note: The currency shown in originalPriceCurrency is used for both discountAmount and originalPriceCurrency."
@@ -559,7 +559,7 @@ definitions:
         description: The unique identifier of the eBay listing that contains the item. This is the traditional/legacy ID that is often seen in the URL of the listing View Item page.
         type: string
       lengthUnitOfMeasure:
-        description: The unit of measurement used for the package dimensions, such as INCH, FEET, CENTIMETER, or METER. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/LengthUnitOfMeasureEnum.html'>eBay API documentation</a>
+        description: The unit of measurement used for the package dimensions, such as INCH, FEET, CENTIMETER, or METER. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:LengthUnitOfMeasureEnum'>eBay API documentation</a>
         type: string
       localizedAspects:
         description: "A semicolon separated list of the name/value pairs for the aspects of the item, which are BASE64 encoded. The aspect label is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue &nbsp;&nbsp; Encoded Example (The delimiters are empathized): &nbsp;&nbsp;&nbsp;U2l6ZQ==:WEw=;Q29sb3I=:UmVk;U2xlZXZlcw==:TG9uZw== &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Size:XL;Color:Red;Sleeves:Long Example with Label &nbsp;&nbsp; Encoded Format: &nbsp;&nbsp;&nbsp;encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel| &nbsp;&nbsp; Encoded Example (The delimiters are empathized): &nbsp;&nbsp;&nbsp;UHJvZHVjdCBJZGVudGlmaWVycw==|R1RJTg==:MDE5MDE5ODA2NjYzMw==;QlJBTkQ=:QXBwbGU=;UHJvZHVjdCBLZXkgRmVhdHVyZXM=|TW9kZWw=:aVBob25lIDc= &nbsp;&nbsp; Decoded: &nbsp;&nbsp;&nbsp;Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide."
@@ -571,7 +571,7 @@ definitions:
         description: The manufacturer part number, which is a number that is used in combination with brand to identify a product.
         type: string
       originalPriceCurrency:
-        description: The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+        description: The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
         type: string
       originalPriceValue:
         description: The original selling price of the item. This lets you surface a strikethrough price for the item.
@@ -589,7 +589,7 @@ definitions:
         description: The width of the shipping package that contains the item.
         type: string
       priceCurrency:
-        description: The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+        description: The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
         type: string
       priceValue:
         description: The price of the item. This price can be a discounted price. If it is discounted, information about the discount is returned in the originalPriceValue, originalPriceCurrency, discountAmount, and discountPercentage columns.
@@ -607,19 +607,19 @@ definitions:
         description: The number of items used when calculating the estimation information.
         type: integer
       refundMethod:
-        description: An enumeration value that indicates how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html'>eBay API documentation</a>
+        description: An enumeration value that indicates how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:RefundMethodEnum'>eBay API documentation</a>
         type: string
       returnMethod:
-        description: An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnMethodEnum.html'>eBay API documentation</a>
+        description: An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:ReturnMethodEnum'>eBay API documentation</a>
         type: string
       returnPeriodUnit:
-        description: An enumeration value that indicates the period of time being used to measure the duration, such as business days, months, or years. TimeDurationUnitEnum is a common type shared by multiple eBay APIs and fields to express the time unit, but for return period duration, this value will always be DAY. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html'>eBay API documentation</a>
+        description: An enumeration value that indicates the period of time being used to measure the duration, such as business days, months, or years. TimeDurationUnitEnum is a common type shared by multiple eBay APIs and fields to express the time unit, but for return period duration, this value will always be DAY. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
         type: string
       returnPeriodValue:
         description: The amount of days that the buyer has to return the item after the purchase date. For example, if this value is '30', the return period is 30 days.
         type: integer
       returnShippingCostPayer:
-        description: "The party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>"
+        description: "The party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>"
         type: string
       returnsAccepted:
         description: Indicates whether the seller accepts returns for the item.
@@ -637,7 +637,7 @@ definitions:
         description: "An identifier generated/incremented when a seller revises the item. There are two types of item revisions: Seller changes, such as changing the title eBay system changes, such as changing the quantity when an item is purchased This ID is changed only when the seller makes a change to the item."
         type: string
       sellerTrustLevel:
-        description: An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html'>eBay API documentation</a>
+        description: An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:SellerTrustLevelEnum'>eBay API documentation</a>
         type: string
       sellerUsername:
         description: The seller's eBay user name.
@@ -673,7 +673,7 @@ definitions:
         description: "The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item. This helps buyers compare prices. For example, the following tells the buyer that the item is 7.99 per 100 grams. &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;"
         type: string
       weightUnitOfMeasure:
-        description: The unit of measurement used for the package weight, such as POUND, KILOGRAM, OUNCE, or GRAM. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/WeightUnitOfMeasureEnum.html'>eBay API documentation</a>
+        description: The unit of measurement used for the package weight, such as POUND, KILOGRAM, OUNCE, or GRAM. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:WeightUnitOfMeasureEnum'>eBay API documentation</a>
         type: string
     type: object
   ItemGroup:
@@ -735,13 +735,13 @@ definitions:
         description: A pipe-separated list of alerts available for the item. For example, if the DELAYED_DELIVERY alert was returned for an item, it would indicate a delay in shipping by the seller.
         type: string
       availability:
-        description: "An enumeration value representing the item's availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html'>eBay API documentation</a>"
+        description: "An enumeration value representing the item's availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:AvailabilityEnum'>eBay API documentation</a>"
         type: string
       availabilityThreshold:
         description: This column has a value only when the seller sets their 'display item quantity' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.
         type: integer
       availabilityThresholdType:
-        description: "This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html'>eBay API documentation</a>"
+        description: "This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the 'Display Item Quantity', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:AvailabilityThresholdEnum'>eBay API documentation</a>"
         type: string
       brand:
         description: The name brand of the item, such as Nike, Apple, etc.
@@ -756,13 +756,13 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
-        description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/DeliveryOptionsEnum.html'>eBay API documentation</a>
+        description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>
         type: string
       discountAmount:
         description: "The calculated amount of the discount (originalPriceValue - priceValue). For example, if originalPriceValue is 70 and priceValue is 56, this value would be 14. Note: The currency shown in originalPriceCurrency is used for both discountAmount and originalPriceCurrency."
@@ -819,13 +819,13 @@ definitions:
         description: The manufacturer part number, which is a number that is used in combination with brand to identify a product.
         type: string
       originalPriceCurrency:
-        description: The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+        description: The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
         type: string
       originalPriceValue:
         description: The original selling price of the item. This lets you surface a strikethrough price for the item.
         type: string
       priceCurrency:
-        description: The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+        description: The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
         type: string
       priceValue:
         description: "The price of the item. Note: This price can be a discounted price."
@@ -843,19 +843,19 @@ definitions:
         description: The number of items used when calculating the shipping estimation information.
         type: integer
       refundMethod:
-        description: An enumeration value representing how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html'>eBay API documentation</a>
+        description: An enumeration value representing how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:RefundMethodEnum'>eBay API documentation</a>
         type: string
       returnMethod:
-        description: An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnMethodEnum.html'>eBay API documentation</a>
+        description: An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:ReturnMethodEnum'>eBay API documentation</a>
         type: string
       returnPeriodUnit:
-        description: An enumeration value that indicates the period of time being used to measure the duration, such as business days, months, or years. TimeDurationUnitEnum is a common type shared by multiple eBay APIs and fields to express the time unit, but for return period duration, this value will always be DAY. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html'>eBay API documentation</a>
+        description: An enumeration value that indicates the period of time being used to measure the duration, such as business days, months, or years. TimeDurationUnitEnum is a common type shared by multiple eBay APIs and fields to express the time unit, but for return period duration, this value will always be DAY. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
         type: string
       returnPeriodValue:
         description: The amount of days that the buyer has to return the item after the purchase date. For example, if this value is 30, the return period is 30 days.
         type: integer
       returnShippingCostPayer:
-        description: "An enumeration value that indicates the party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>"
+        description: "An enumeration value that indicates the party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>"
         type: string
       returnsAccepted:
         description: Indicates whether the seller accepts returns for the item.
@@ -873,7 +873,7 @@ definitions:
         description: "An identifier generated/incremented when a seller revises the item. There are two types of item revisions: Seller changes, such as changing the title eBay system changes, such as changing the quantity when an item is purchased This ID is changed only when the seller makes a change to the item."
         type: string
       sellerTrustLevel:
-        description: An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html'>eBay API documentation</a>
+        description: An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:SellerTrustLevelEnum'>eBay API documentation</a>
         type: string
       sellerUsername:
         description: The seller's eBay user name.

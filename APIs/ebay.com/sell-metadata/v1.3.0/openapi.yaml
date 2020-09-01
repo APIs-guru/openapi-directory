@@ -582,7 +582,7 @@ components:
           description: This flag denotes whether or not you must list the item condition in a listing for the specified category. If set to true, you must specify an item condition for the associated category.
           type: boolean
         itemConditions:
-          description: The item-condition values allowed in the category.
+          description: "The item-condition values allowed in the category. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Once this change happens, if a seller attempts to create a new listing or revise an existing listing with the Inventory or Trading APIs using the &lsquo;Manufacturer Refurbished&rsquo; item condition, the listing or revision will be blocked."
           items:
             $ref: "#/components/schemas/ItemCondition"
           type: array

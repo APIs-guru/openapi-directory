@@ -169,6 +169,12 @@ responses:
     description: ContentsResponse
     schema:
       $ref: "#/definitions/ContentsResponse"
+  CronList:
+    description: CronList
+    schema:
+      items:
+        $ref: "#/definitions/Cron"
+      type: array
   DeployKey:
     description: DeployKey
     schema:
@@ -541,6 +547,47 @@ responses:
       url:
         type: string
 paths:
+  /admin/cron:
+    get:
+      operationId: adminCronList
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/CronList"
+        "403":
+          $ref: "#/responses/forbidden"
+      summary: List cron tasks
+      tags:
+        - admin
+  "/admin/cron/{task}":
+    post:
+      operationId: adminCronRun
+      parameters:
+        - description: task to run
+          in: path
+          name: task
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
+      summary: Run cron task
+      tags:
+        - admin
   /admin/orgs:
     get:
       operationId: adminGetAllOrgs
@@ -7610,17 +7657,18 @@ paths:
           name: username
           required: true
           type: string
-        - description: token to be deleted
-          format: int64
+        - description: token to be deleted, identified by ID and if not available by name
           in: path
           name: token
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
       responses:
         "204":
           $ref: "#/responses/empty"
+        "422":
+          $ref: "#/responses/error"
       summary: delete an access token
       tags:
         - user
@@ -8634,6 +8682,29 @@ definitions:
       - username
       - email
       - password
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  Cron:
+    description: Cron represents a Cron task
+    properties:
+      exec_times:
+        format: int64
+        type: integer
+        x-go-name: ExecTimes
+      name:
+        type: string
+        x-go-name: Name
+      next:
+        format: date-time
+        type: string
+        x-go-name: Next
+      prev:
+        format: date-time
+        type: string
+        x-go-name: Prev
+      schedule:
+        type: string
+        x-go-name: Schedule
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   DeleteEmailOption:
@@ -9718,6 +9789,9 @@ definitions:
       auth_password:
         type: string
         x-go-name: AuthPassword
+      auth_token:
+        type: string
+        x-go-name: AuthToken
       auth_username:
         type: string
         x-go-name: AuthUsername
@@ -9751,6 +9825,10 @@ definitions:
       repo_name:
         type: string
         x-go-name: RepoName
+      service:
+        format: int64
+        type: integer
+        x-go-name: Service
       uid:
         format: int64
         type: integer

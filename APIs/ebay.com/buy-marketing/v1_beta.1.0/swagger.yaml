@@ -35,20 +35,20 @@ securityDefinitions:
 paths:
   /merchandised_product:
     get:
-      description: This call returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product Id (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this call in the Browse API search call to retrieve items for this product. Restrictions For a list of supported sites and other restrictions, see API Restrictions.
+      description: This method returns an array of products based on the category and metric specified. This includes details of the product, such as the eBay product ID (EPID), title, and user reviews and ratings for the product. You can use the epid returned by this method in the Browse API search method to retrieve items for this product. Restrictions To test getMerchandisedProducts in Sandbox, you must use category ID 9355 and the response will be mock data. For a list of supported sites and other restrictions, see API Restrictions.
       operationId: getMerchandisedProducts
       parameters:
-        - description: "The aspect name/value pairs used to further refine product results. For example: &nbsp;&nbsp;&nbsp;/buy/marketing/v1_beta/merchandised_product?category_id=31388&amp;metric_name=BEST_SELLING&amp;aspect_filter=Brand:Canon You can use the Browse API search call with the fieldgroups=ASPECT_REFINEMENTS field to return the aspects of a product. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/marketing/types/MarketingAspectFilter.html"
+        - description: "The aspect name/value pairs used to further refine product results. For example: &nbsp;&nbsp;&nbsp;/buy/marketing/v1_beta/merchandised_product?category_id=31388&amp;metric_name=BEST_SELLING&amp;aspect_filter=Brand:Canon You can use the Browse API search method with the fieldgroups=ASPECT_REFINEMENTS field to return the aspects of a product. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/buy/marketing/types/gct:MarketingAspectFilter"
           in: query
           name: aspect_filter
           required: false
           type: string
-        - description: "This query parameter limits the products returned to a specific eBay category. The list of eBay category Ids is not published and category Ids are not all the same across all the eBay maketplace. You can use the following techniques to find a category by site. Use the Category Changes page. Use the Taxonomy API. For details see Categories for Buy API Calls. Use the Browse API and submit the following call to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Maximum: 1 Required: 1"
+        - description: "This query parameter limits the products returned to a specific eBay category. The list of eBay category IDs is not published and category IDs are not all the same across all the eBay maketplace. You can use the following techniques to find a category by site: Use the Category Changes page. Use the Taxonomy API. For details see Get Categories for Buy APIs. Use the Browse API and submit the following method to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Maximum: 1 Required: 1"
           in: query
           name: category_id
           required: true
           type: string
-        - description: "This value specifies the maximum number of products to return in a result set. Note: Maximum value means the call will return up to that many products per set, but it can be less than this value. If the number of products found is less than this value, the call will return all of the products matching the criteria. Default: 8 Maximum: 100"
+        - description: "This value specifies the maximum number of products to return in a result set. Note: Maximum value means the method will return up to that many products per set, but it can be less than this value. If the number of products found is less than this value, the method will return all of the products matching the criteria. Default: 8 Maximum: 100"
           in: query
           name: limit
           required: false
@@ -65,8 +65,48 @@ paths:
             $ref: "#/definitions/BestSellingProductResponse"
         "400":
           description: Bad Request
+          x-response-codes:
+            errors:
+              "70001":
+                category: REQUEST
+                description: A metric_name is required to make the API call.
+                domain: API_MARKETING
+              "70002":
+                category: REQUEST
+                description: The metric_name {metric_name} is invalid.
+                domain: API_MARKETING
+              "70003":
+                category: REQUEST
+                description: A categoryId is required to make the API call.
+                domain: API_MARKETING
+              "70004":
+                category: REQUEST
+                description: The category id {categoryId} is invalid
+                domain: API_MARKETING
+              "70005":
+                category: REQUEST
+                description: The 'limit' value should be between 1 and 100 (inclusive).
+                domain: API_MARKETING
+              "70006":
+                category: REQUEST
+                description: The 'limit' value must be an integer value.
+                domain: API_MARKETING
+        "409":
+          description: Conflict
+          x-response-codes:
+            errors:
+              "70007":
+                category: BUSINESS
+                description: "The marketplace value {marketplace} is not supported. The supported values are: {marketplaces}."
+                domain: API_MARKETING
         "500":
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "70000":
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_MARKETING
       security:
         - Client Credentials:
             - https://api.ebay.com/oauth/api_scope/buy.marketing
@@ -74,7 +114,7 @@ paths:
         - merchandised_product
   /merchandised_product/get_also_bought_products:
     get:
-      description: "This call returns products that were also bought when shoppers bought the product specified in the request. Showing 'also bought' products inspires up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria."
+      description: "This method returns products that were also bought when shoppers bought the product specified in the request. Showing 'also bought' products inspires up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand - (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The method will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the method will return all of the products matching the criteria."
       operationId: getAlsoBoughtByProduct
       parameters:
         - description: "The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
@@ -87,7 +127,7 @@ paths:
           name: epid
           required: false
           type: string
-        - description: "The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
+        - description: "The unique Global Trade Item Number of the item as defined by https://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
           in: query
           name: gtin
           required: false
@@ -108,10 +148,40 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+          x-response-codes:
+            errors:
+              "70100":
+                category: REQUEST
+                description: The request must have only one valid 'epid',  or one  'gtin', or one 'brand' PLUS 'mpn' pair.
+                domain: API_MARKETING
+              "70101":
+                category: REQUEST
+                description: The EPID value {epid} does not exist in the eBay  product catalog.
+                domain: API_MARKETING
+              "70102":
+                category: REQUEST
+                description: The GTIN value {gtin} does not exist in the eBay product catalog.
+                domain: API_MARKETING
+              "70103":
+                category: REQUEST
+                description: The combination of MPN {mpn} and brand {brand} does not exist in the eBay product catalog.
+                domain: API_MARKETING
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "70007":
+                category: BUSINESS
+                description: "The marketplace value {marketplace} is not supported. The supported values are: {marketplaces}."
+                domain: API_MARKETING
         "500":
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "70000":
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_MARKETING
       security:
         - Client Credentials:
             - https://api.ebay.com/oauth/api_scope/buy.marketing
@@ -119,7 +189,7 @@ paths:
         - merchandised_product
   /merchandised_product/get_also_viewed_products:
     get:
-      description: "This call returns products that were also viewed when shoppers viewed the product specified in the request. Showing 'also viewed' products encourages up-selling and cross-selling. You specify the product by one of the following. epid (eBay Product Id) gtin (Global Trade Item Number) brand (brand name such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Maximum: A maximum of 12 products are returned. The call will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the call will return all of the products matching the criteria."
+      description: "This method returns products that were also viewed when shoppers viewed the product specified in the request. Showing 'also viewed' products encourages up-selling and cross-selling. You specify the product by one of the following: epid - eBay Product ID gtin - Global Trade Item Number (UPC, ISBN, EAN) brand (brand name, such as Nike) plus mpn (Manufacturer's Part Number) Restrictions For a list of supported sites and other restrictions, see API Restrictions. Note: A maximum of 12 products are returned. The method will return up to 12 products, but it can be less than 12. If the number of products found is less than 12, the method will return all of the products matching the criteria."
       operationId: getAlsoViewedByProduct
       parameters:
         - description: "The brand of the product. Restriction: This must be used along with mpn. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
@@ -132,7 +202,7 @@ paths:
           name: epid
           required: false
           type: string
-        - description: "The unique Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
+        - description: "The unique Global Trade Item Number of the item as defined by https://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number value. Required: You must specify one epid, or one gtin, or one brand plus mpn pair."
           in: query
           name: gtin
           required: false
@@ -153,10 +223,40 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+          x-response-codes:
+            errors:
+              "70100":
+                category: REQUEST
+                description: The request must have only one valid 'epid',  or one  'gtin', or one 'brand' PLUS 'mpn' pair.
+                domain: API_MARKETING
+              "70101":
+                category: REQUEST
+                description: The EPID value {epid} does not exist in the eBay  product catalog.
+                domain: API_MARKETING
+              "70102":
+                category: REQUEST
+                description: The GTIN value {gtin} does not exist in the eBay product catalog.
+                domain: API_MARKETING
+              "70103":
+                category: REQUEST
+                description: The combination of MPN {mpn} and brand {brand} does not exist in the eBay product catalog.
+                domain: API_MARKETING
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "70007":
+                category: BUSINESS
+                description: "The marketplace value {marketplace} is not supported. The supported values are: {marketplaces}."
+                domain: API_MARKETING
         "500":
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "70000":
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_MARKETING
       security:
         - Client Credentials:
             - https://api.ebay.com/oauth/api_scope/buy.marketing
@@ -167,7 +267,7 @@ definitions:
     description: This type defines the monetary value of an amount and the currency used.
     properties:
       currency:
-        description: A three-letter ISO 4217 code that indicates the currency of the amount in the value field. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/marketing/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+        description: The three-letter ISO 4217 code representing the currency of the amount in the value field. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/marketing/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
         type: string
       value:
         description: The monetary amount, in the currency specified by the currency field.
@@ -200,7 +300,7 @@ definitions:
         description: A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
         type: integer
       inputRefIds:
-        description: An array of reference Ids that identify the specific request elements most closely associated to the error or warning, if any.
+        description: An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any.
         items:
           type: string
         type: array
@@ -211,7 +311,7 @@ definitions:
         description: A description of the condition that caused the error or warning.
         type: string
       outputRefIds:
-        description: An array of reference Ids that identify the specific response elements most closely associated to the error or warning, if any.
+        description: An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any.
         items:
           type: string
         type: array
@@ -225,7 +325,7 @@ definitions:
         type: string
     type: object
   ErrorParameter:
-    description: An array of name/value pairs that provide more details regarding error condition.
+    description: An array of name/value pairs that provide details regarding the error.
     properties:
       name:
         description: This is the name of input field that caused an issue with the call request.
@@ -251,10 +351,10 @@ definitions:
     description: The type that defines the fields for details about the product, such as condition and estimated start price.
     properties:
       conditionGroup:
-        description: "The name for the condition of the product. For example: NEW"
+        description: "The name for the condition of the product. For example: NEW Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500)."
         type: string
       conditionIds:
-        description: An array of condition identifiers for the product.
+        description: "An array of condition identifiers for the product. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500)."
         items:
           type: string
         type: array
@@ -268,7 +368,7 @@ definitions:
         description: The average rating for the product based on eBay user ratings.
         type: string
       epid:
-        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search call to retrieve items for this product.
+        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search method to retrieve items for this product.
         type: string
       image:
         $ref: "#/definitions/Image"

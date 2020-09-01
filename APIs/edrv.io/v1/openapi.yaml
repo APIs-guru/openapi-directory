@@ -588,6 +588,21 @@ paths:
       tags:
         - Connectors
   "/v1/connectors/{id}":
+    delete:
+      description: Delete a connector
+      operationId: deleteConnector
+      parameters:
+        - description: The connector id that needs to be deleted
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the deleted connector object
+      tags:
+        - Connectors
     get:
       description: Get a connector
       operationId: getConnector
@@ -1531,11 +1546,7 @@ paths:
           schema:
             type: boolean
         - $ref: "#/components/parameters/include_driver1"
-        - description: Populate token
-          in: query
-          name: include_token
-          schema:
-            type: boolean
+        - $ref: "#/components/parameters/include_token1"
         - description: Populate reservation
           in: query
           name: include_reservation
@@ -1640,6 +1651,173 @@ paths:
           description: A failure response
       tags:
         - Users
+  /v1/vehicles:
+    get:
+      description: List all vehicles
+      operationId: getVehicles
+      parameters:
+        - description: Get a list of active vehicles
+          in: query
+          name: active
+          schema:
+            type: boolean
+        - $ref: "#/components/parameters/paginate_limit1"
+        - $ref: "#/components/parameters/paginate_page1"
+        - $ref: "#/components/parameters/paginate_enabled1"
+        - $ref: "#/components/parameters/sort_by1"
+        - $ref: "#/components/parameters/sort_order1"
+        - $ref: "#/components/parameters/parameter1"
+        - $ref: "#/components/parameters/parameter2"
+        - $ref: "#/components/parameters/parameter3"
+        - $ref: "#/components/parameters/parameter4"
+        - $ref: "#/components/parameters/include_driver1"
+        - $ref: "#/components/parameters/include_token1"
+        - $ref: "#/components/parameters/include_organization1"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                  result:
+                    items: {}
+                    type: array
+                type: object
+          description: Returns a list of vehicle objects
+        "400":
+          description: A failure response
+      tags:
+        - Vehicles
+  "/v1/vehicles/{id}":
+    get:
+      description: Get a vehicle's data
+      operationId: getVehicle
+      parameters:
+        - description: The driver id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - $ref: "#/components/parameters/include_driver1"
+        - $ref: "#/components/parameters/include_token1"
+        - $ref: "#/components/parameters/include_organization1"
+      responses:
+        "200":
+          description: Returns a vehicle object
+      tags:
+        - Vehicles
+  "/v1/vehicles/{id}/battery":
+    get:
+      description: Get a vehicle's battery
+      operationId: getVehicleBattery
+      parameters:
+        - description: The vehicle id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a vehicle object
+      tags:
+        - Vehicles
+  "/v1/vehicles/{id}/charge":
+    get:
+      description: Get a vehicle's charge
+      operationId: getVehicleCharge
+      parameters:
+        - description: The vehicle id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a vehicle object
+      tags:
+        - Vehicles
+    post:
+      description: Change charge
+      operationId: postCharge
+      parameters:
+        - description: The vehicle id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                action:
+                  enum:
+                    - START
+                    - STOP
+                  type: string
+              required:
+                - action
+              type: object
+        description: Include command properties to send here
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                  result:
+                    type: object
+                type: object
+          description: Returns the status of the command
+        "400":
+          description: A failure response
+      tags:
+        - Vehicles
+  "/v1/vehicles/{id}/location":
+    get:
+      description: Get a vehicle's location
+      operationId: getVehicleLocation
+      parameters:
+        - description: The vehicle id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a vehicle object
+      tags:
+        - Vehicles
+  "/v1/vehicles/{id}/odometer":
+    get:
+      description: Get a vehicle's odometer
+      operationId: getVehicleOdometer
+      parameters:
+        - description: The vehicle id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a vehicle object
+      tags:
+        - Vehicles
 components:
   parameters:
     include_chargestation1:
@@ -1664,6 +1842,12 @@ components:
       description: Populate organization
       in: query
       name: include_organization
+      schema:
+        type: boolean
+    include_token1:
+      description: Populate token
+      in: query
+      name: include_token
       schema:
         type: boolean
     paginate_enabled1:
@@ -1794,7 +1978,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 7cf32a003bc9c18f44342ff26fe8772996b6bbae
+x-github-sha: 882e19b14b20ad037f891d8747168d4e37c93f23
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

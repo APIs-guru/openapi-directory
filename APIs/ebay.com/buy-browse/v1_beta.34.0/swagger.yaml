@@ -1370,10 +1370,10 @@ definitions:
     description: The container that defines the fields for the conditions refinements. This container is returned when <b> fieldgroups</b> is set to <code>CONDITION_REFINEMENTS</code> or <code>FULL</code> in the request.
     properties:
       condition:
-        description: The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       conditionId:
-        description: The identifier of the condition. For example, 1000 is the identifier for NEW.
+        description: "The identifier of the condition. For example, 1000 is the identifier for NEW. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       matchCount:
         description: The number of items having the condition.
@@ -1529,13 +1529,13 @@ definitions:
         description: (Primary Item Aspect) Text describing the color of the item. All the item aspects, including this aspect, are returned in the localizedAspects container.
         type: string
       condition:
-        description: A short text description for the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "A short text description for the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       conditionDescription:
-        description: A full text description for the condition of the item. This field elaborates on the value specified in the condition field and provides full details for the condition of the item.
+        description: "A full text description for the condition of the item. This field elaborates on the value specified in the condition field and provides full details for the condition of the item. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       conditionId:
-        description: The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       currentBidPrice:
         $ref: "#/definitions/ConvertedAmount"
@@ -1803,10 +1803,10 @@ definitions:
           $ref: "#/definitions/CompatibilityProperty"
         type: array
       condition:
-        description: The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       conditionId:
-        description: The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list. Note: Starting in mid-September 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500)."
         type: string
       currentBidPrice:
         $ref: "#/definitions/ConvertedAmount"

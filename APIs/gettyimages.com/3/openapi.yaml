@@ -189,12 +189,14 @@ paths:
           in: query
           name: channel_id
           schema:
+            description: Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.
             format: int32
             type: integer
         - description: Specifies the number of assets to return. The default is 10; maximum is 500.
           in: query
           name: batch_size
           schema:
+            description: Specifies the number of assets to return. The default is 10; maximum is 500.
             format: int32
             nullable: true
             type: integer
@@ -239,6 +241,7 @@ paths:
           name: change-set-id
           required: true
           schema:
+            description: Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.
             format: int64
             type: integer
       responses:
@@ -5670,11 +5673,13 @@ components:
       properties:
         change_set_id:
           description: Contains the identifier for the change-set resource. Passed into ConfirmAssetChanges requests to confirm receipt of the asset changes in the response.
+          nullable: true
           type: string
         changed_assets:
           description: Contains a list of ChangedAssetList results for the query.
           items:
             $ref: "#/components/schemas/ChangedAssetDetail"
+          nullable: true
           type: array
       type: object
     AssetDownloadHistoryResults:
@@ -5688,6 +5693,13 @@ components:
           nullable: true
           type: string
       type: object
+    AssetFamily:
+      enum:
+        - NotSet
+        - Editorial
+        - Creative
+        - Both
+      type: string
     AssetIdFromOrder:
       additionalProperties: false
       properties:
@@ -5715,6 +5727,13 @@ components:
           format: int32
           type: integer
       type: object
+    AssetType:
+      enum:
+        - NotSet
+        - Image
+        - Film
+        - Music
+      type: string
     BlendedImageSortOrder:
       enum:
         - best_match
@@ -5864,36 +5883,31 @@ components:
           type: string
         asset_lifecycle:
           description: Contains the type of change this asset change is. (i.e. "New," "Updated" or "Deleted")
+          nullable: true
           type: string
         asset_type:
           description: Contains the type of asset this asset change is (i.e. "Image").
+          nullable: true
           type: string
         id:
           description: Contains the Id for the asset change.
+          nullable: true
           type: string
         uri:
           description: Contains the asset download URL for assets with an AssetLifecycle of "New."
+          nullable: true
           type: string
       type: object
     Channel:
       additionalProperties: false
       properties:
         AssetChangeType:
+          nullable: true
           type: string
         AssetFamily:
-          enum:
-            - NotSet
-            - Editorial
-            - Creative
-            - Both
-          type: string
+          $ref: "#/components/schemas/AssetFamily"
         AssetType:
-          enum:
-            - NotSet
-            - Image
-            - Film
-            - Music
-          type: string
+          $ref: "#/components/schemas/AssetType"
         ChannelId:
           format: int32
           type: integer
@@ -5901,6 +5915,7 @@ components:
           format: date-time
           type: string
         Metadata:
+          nullable: true
           type: string
         NotificationCount:
           format: int32

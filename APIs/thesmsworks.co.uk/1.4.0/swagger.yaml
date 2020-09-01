@@ -190,6 +190,8 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorModel"
+      security:
+        - JWT: []
       tags:
         - credits
     x-swagger-router-controller: account-client
@@ -250,7 +252,6 @@ paths:
   /message/send:
     post:
       description: Sends an SMS message
-      operationId: sendMessage
       parameters:
         - description: Message properties
           in: body
@@ -275,7 +276,6 @@ paths:
         - JWT: []
       tags:
         - messages
-    x-swagger-router-controller: smpp-client
   /messages:
     post:
       description: Get messages matching your search criteria

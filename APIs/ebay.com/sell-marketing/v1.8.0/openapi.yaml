@@ -110,7 +110,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -358,7 +358,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -418,7 +418,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -520,7 +520,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35077":
@@ -532,7 +532,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -612,7 +612,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35068":
@@ -620,7 +620,7 @@ paths:
                 description: You have exceeded the maximum number of listing IDs. Only {maxSupportedNumber} listings are supported per call.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -702,7 +702,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -889,7 +889,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -961,7 +961,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35052":
@@ -1199,7 +1199,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -1247,7 +1247,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -1326,7 +1326,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -1473,7 +1473,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -1552,7 +1552,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35061":
@@ -1715,7 +1715,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -1813,7 +1813,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35062":
@@ -2308,7 +2308,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2389,7 +2389,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35055":
@@ -2458,7 +2458,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2482,7 +2482,7 @@ paths:
                 $ref: "#/components/schemas/ReportMetadatas"
           description: Success
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2582,7 +2582,7 @@ paths:
                 description: "The 'report_task_statuses' {invalid_report_task_statuses} is invalid. Valid values are: {supportedReportTaskStatuses}."
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2758,7 +2758,7 @@ paths:
                 description: The Report Task with 'report_task_id' {report_task_id} is being modified. Please wait a few minutes and try the call again.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2798,7 +2798,7 @@ paths:
         "404":
           description: Not found
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -3382,7 +3382,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business Error
           x-response-codes:
             errors:
               "38248":
@@ -5771,7 +5771,7 @@ components:
           description: Indicates the source of the category ID; eBay or seller's store. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:CategoryScopeEnum'>eBay API documentation</a>
           type: string
         listingConditionIds:
-          description: "The ID of the listing's condition. Valid values: 1000 = New 2000 = Manufacturer refurbished 2500 = Seller refurbished 3000 = Used/Like new/Pre owned"
+          description: "The ID of the listing's condition. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500) Valid values: 1000 = New 2000 = Manufacturer refurbished 2500 = Seller refurbished 3000 = Used/Like new/Pre owned"
           items:
             type: string
           type: array

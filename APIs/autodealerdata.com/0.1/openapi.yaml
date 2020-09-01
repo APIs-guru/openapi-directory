@@ -23,6 +23,12 @@ info:
 
     &nbsp;
 
+    <div>Endpoints may appear more than once on this page if they are associated with multiple tags. eg "Sales Data", "Premium", "Pro Plan or Greater" To see which endpoints are included in different
+
+    plans look under the "X Plan or Greater" tags for the respective plan name.</div>
+
+    &nbsp;
+
     <h3>If you signed up for our API through RapidAPI you can make your test calls <a href="https://rapidapi.com/competitive-intelligence-solutions-llc-competitive-intelligence-solutions-llc-default/api/cis-automotive">on their platform</a>. 
 
     Your RapidAPI credentials will not work on this page.</h3><h3> Do not use your RapidAPI keys on this page.</h3>
@@ -95,6 +101,7 @@ paths:
       summary: Days worth of supply left on dealer lots
       tags:
         - Supply Data
+        - Pro Plan Or Greater
   /daysToSell:
     get:
       description: >-
@@ -145,6 +152,7 @@ paths:
       summary: Days a vehicle takes to sell
       tags:
         - Supply Data
+        - Pro Plan Or Greater
   /getBrands:
     get:
       description: >-
@@ -178,6 +186,7 @@ paths:
       summary: Get a list of brand names
       tags:
         - Static Data
+        - Standard Plan Or Greater
   /getDealers:
     get:
       description: >-
@@ -215,6 +224,7 @@ paths:
       tags:
         - Dealership Data
         - Premium
+        - Pro Plan Or Greater
   /getDealersByID:
     get:
       description: >-
@@ -252,6 +262,7 @@ paths:
       tags:
         - Dealership Data
         - Premium
+        - Pro Plan Or Greater
   /getDealersByRegion:
     get:
       description: Premium. Dealership information in a given region. Returns name, address, state, zipCode, and IDs. Results are paginated with up to 30 results per page.
@@ -294,6 +305,7 @@ paths:
       tags:
         - Dealership Data
         - Premium
+        - Pro Plan Or Greater
   /getInactiveModels:
     get:
       description: >-
@@ -339,6 +351,7 @@ paths:
       summary: Get a list of model names including discontinued models
       tags:
         - Static Data
+        - Standard Plan Or Greater
   /getModels:
     get:
       description: >-
@@ -380,6 +393,84 @@ paths:
       summary: Get a list of model names
       tags:
         - Static Data
+        - Standard Plan Or Greater
+  /getRegionBrandMarketShare:
+    get:
+      description: Market share of a given brand in a given region by number of vehicles sold over the last 45 days.
+      operationId: getRegionBrandMarketShare_getRegionBrandMarketShare_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Market share of a brand in region
+      tags:
+        - Sales Data
+        - Ultra Plan Or Greater
+  /getRegionMarketShare:
+    get:
+      description: Market share of a all brands in a given region by number of vehicles sold over the last 45 days.
+      operationId: getRegionMarketShare_getRegionMarketShare_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Market share of all brands in region
+      tags:
+        - Sales Data
+        - Premium
+        - Ultra Plan Or Greater
   /getRegions:
     get:
       description: >-
@@ -410,6 +501,40 @@ paths:
       summary: Get a list of region names
       tags:
         - Static Data
+        - Standard Plan Or Greater
+  /getSubUserKeys:
+    get:
+      description: Get a list of your issued SubUser API Keys. Includes active and revoked keys.
+      operationId: getSubUserKeys_getSubUserKeys_get
+      parameters:
+        - in: query
+          name: apiID
+          required: true
+          schema:
+            title: Apiid
+            type: string
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            title: Apikey
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Get all Sub User Keys associated with your account.
+      tags:
+        - Authentication
   /getToken:
     get:
       description: >-
@@ -553,6 +678,7 @@ paths:
       summary: Stats on ask price of new vehicles
       tags:
         - Pricing Data
+        - Standard Plan Or Greater
   /listings:
     get:
       description: >-
@@ -605,6 +731,7 @@ paths:
       summary: Listings by Dealer ID
       tags:
         - Vehicle Data
+        - Ultra Plan Or Greater
   /listingsByRegion:
     get:
       description: >-
@@ -670,6 +797,7 @@ paths:
       summary: Listings by Region
       tags:
         - Vehicle Data
+        - Ultra Plan Or Greater
   /listingsByRegionAndDate:
     get:
       description: >-
@@ -742,6 +870,116 @@ paths:
       summary: Listings by Dealer ID
       tags:
         - Vehicle Data
+        - Ultra Plan Or Greater
+  /makeSubUserKey:
+    post:
+      description: >-
+        This endpoint is only fully available to users with a paid plan. Users on Basic or Trial plans may only create keys valid on the "localhost" domain.
+
+        This endpoint creates an API key that can be embedded in frontend applications such as web pages that allow your users to directly make API calls. 
+
+        The "endpoints" value is an array of strings that name the allowed endpoints that may be called using the Sub User Key. Passing a "*" value in the array will allow
+
+        all endpoints that require a JWT (JSON Web Token) to be called by the Sub User Key. The keys are valid for as long as your account is valid or you revoke the Sub User Key.
+
+        All API calls made by the Sub User Keys are billed to your account. Additionally you should not call this endpoint or the /revokeSubUserKey endpoint at a combined rate 
+
+        higher than once per second. 
+      operationId: makeSubUserKey_makeSubUserKey_post
+      parameters:
+        - in: query
+          name: apiID
+          required: true
+          schema:
+            title: Apiid
+            type: string
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            title: Apikey
+            type: string
+        - in: query
+          name: siteName
+          required: false
+          schema:
+            default: localhost
+            title: Sitename
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndpointList"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubUserJSONWebToken"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Generate a Sub User Key that can be used by your users to make API calls in frontend applications.
+      tags:
+        - Authentication
+  /modelYearDist:
+    get:
+      description: >-
+        Market share of used vehicles over the last 45 days by model and year. All values are relative to vehicles of the same model.
+
+        For example: a percentOfMarket value of 25, year of 2017, and modelName of Camry means that 25% of used Camrys on the market 
+
+        in the given region over the last 45 days were from the 2017 model year.
+      operationId: getModelUsedDist_modelYearDist_get
+      parameters:
+        - in: query
+          name: jwt
+          required: true
+          schema:
+            title: Jwt
+            type: string
+        - in: query
+          name: modelName
+          required: true
+          schema:
+            title: Modelname
+            type: string
+        - in: query
+          name: brandName
+          required: true
+          schema:
+            title: Brandname
+            type: string
+        - in: query
+          name: regionName
+          required: false
+          schema:
+            default: REGION_STATE_CA
+            title: Regionname
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Used market share of model year by model
+      tags:
+        - Sales Data
+        - Standard Plan Or Greater
   /regionDailySales:
     get:
       description: >-
@@ -794,6 +1032,7 @@ paths:
       summary: Brand sales by region and Day
       tags:
         - Sales Data
+        - Ultra Plan Or Greater
   /regionSales:
     get:
       description: >-
@@ -847,6 +1086,46 @@ paths:
       tags:
         - Sales Data
         - Premium
+        - Ultra Plan Or Greater
+  /revokeSubUserKey:
+    put:
+      description: Revoke a SubUser API Key with the given UUID. This action can not be undone.
+      operationId: revokeSubUserKey_revokeSubUserKey_put
+      parameters:
+        - in: query
+          name: apiID
+          required: true
+          schema:
+            title: Apiid
+            type: string
+        - in: query
+          name: apiKey
+          required: true
+          schema:
+            title: Apikey
+            type: string
+        - in: query
+          name: subUserKeyUUID
+          required: true
+          schema:
+            title: Subuserkeyuuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericResponse"
+          description: Successful Response
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      summary: Revoke a Sub User Key associated with your account.
+      tags:
+        - Authentication
   /salePrice:
     get:
       description: >-
@@ -891,6 +1170,7 @@ paths:
       summary: Stats on sale price of new vehicles
       tags:
         - Pricing Data
+        - Standard Plan Or Greater
   /salePriceHistogram:
     get:
       description: >-
@@ -942,6 +1222,7 @@ paths:
       summary: Histogram of sales price of new vehicles by model
       tags:
         - Pricing Data
+        - Standard Plan Or Greater
   /similarSalePrice:
     get:
       description: >-
@@ -1001,6 +1282,7 @@ paths:
         - Vehicle Data
         - Premium
         - Pricing Data
+        - Standard Plan Or Greater
   /topModels:
     get:
       description: >-
@@ -1046,6 +1328,7 @@ paths:
       summary: Top models in a given region
       tags:
         - Sales Data
+        - Standard Plan Or Greater
   /vehicleHistory:
     get:
       description: >-
@@ -1083,6 +1366,7 @@ paths:
       tags:
         - Vehicle Data
         - Premium
+        - Pro Plan Or Greater
   /vinDecode:
     get:
       description: >-
@@ -1128,8 +1412,20 @@ paths:
       summary: Vin decoder and Recall Info
       tags:
         - Vehicle Data
+        - Standard Plan Or Greater
 components:
   schemas:
+    EndpointList:
+      properties:
+        endPoints:
+          default:
+            - "*"
+          items:
+            type: string
+          title: Endpoints
+          type: array
+      title: EndpointList
+      type: object
     GenericResponse:
       properties:
         brandName:
@@ -1178,6 +1474,36 @@ components:
       required:
         - token
       title: JSONWebToken
+      type: object
+    SubUserJSONWebToken:
+      properties:
+        createdOn:
+          title: Createdon
+          type: integer
+        domain:
+          title: Domain
+          type: string
+        endPoints:
+          default:
+            - "*"
+          items:
+            type: string
+          title: Endpoints
+          type: array
+        expires:
+          title: Expires
+          type: integer
+        token:
+          title: Token
+          type: string
+        uuid:
+          title: Uuid
+          type: string
+      required:
+        - token
+        - domain
+        - uuid
+      title: SubUserJSONWebToken
       type: object
     ValidationError:
       properties:
