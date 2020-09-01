@@ -951,6 +951,12 @@ paths:
     delete:
       description: Permanently deletes all of the user's trashed files.
       operationId: drive.files.emptyTrash
+      parameters:
+        - description: Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. If an item's last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+          in: query
+          name: enforceSingleParent
+          schema:
+            type: boolean
       responses:
         "200":
           description: Successful response
@@ -980,6 +986,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Set to true to opt in to API behavior that aims for all items to have exactly one parent. This parameter will only take effect if the item is not in a shared drive. If an item's last parent is deleted but the item itself is not, the item will be placed under its owner's root.
+          in: query
+          name: enforceSingleParent
+          schema:
+            type: boolean
         - description: Whether the requesting application supports both My Drives and shared drives.
           in: query
           name: supportsAllDrives

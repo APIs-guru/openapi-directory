@@ -37,17 +37,17 @@ tags:
 paths:
   /v1p1beta1/videos:annotate:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Performs asynchronous video annotation. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `AnnotateVideoProgress` (progress). `Operation.response` contains `AnnotateVideoResponse` (results).
       operationId: videointelligence.videos.annotate

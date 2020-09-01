@@ -33,14 +33,14 @@ info:
 externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
+  - name: folders
   - name: organizations
   - name: projects
-  - name: folders
 paths:
   "/v1beta1/{name}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: cloudasset.folders.operations.get
+      operationId: cloudasset.projects.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -61,19 +61,19 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
+        - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
   "/v1beta1/{parent}:batchGetAssetsHistory":
     get:
       description: Batch gets the update history of assets that overlap a time window. For IAM_POLICY content, this API outputs history when the asset and its attached IAM POLICY both exist. This can create gaps in the output history. Otherwise, this API outputs history with asset in both non-delete or deleted status. If a specified asset does not exist, this API returns an INVALID_ARGUMENT error.
@@ -128,33 +128,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
   "/v1beta1/{parent}:exportAssets":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
     post:
       description: Exports assets with time and resource types to a given Cloud Storage location. The output format is newline-delimited JSON. This API implements the google.longrunning.Operation API allowing you to keep track of the export. We recommend intervals of at least 2 seconds with exponential retry to poll the export operation result. For regular-size resource parent, the export operation usually finishes within 5 minutes.
-      operationId: cloudasset.folders.exportAssets
+      operationId: cloudasset.projects.exportAssets
       parameters:
         - description: Required. The relative name of the root asset. This can only be an organization number (such as "organizations/123"), a project ID (such as "projects/my-project-id"), a project number (such as "projects/12345"), or a folder number (such as "folders/123").
           in: path
@@ -180,7 +180,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
+        - projects
 components:
   parameters:
     _.xgafv:

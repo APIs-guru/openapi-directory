@@ -33,24 +33,24 @@ info:
 externalDocs:
   url: http://developers.google.com/admin-sdk/
 tags:
+  - name: asps
+  - name: channels
+  - name: chromeosdevices
+  - name: customers
+  - name: domainAliases
+  - name: domains
   - name: groups
   - name: members
-  - name: domains
-  - name: asps
-  - name: roles
-  - name: roleAssignments
   - name: mobiledevices
-  - name: customers
-  - name: schemas
   - name: orgunits
-  - name: tokens
-  - name: resources
   - name: privileges
+  - name: resources
+  - name: roleAssignments
+  - name: roles
+  - name: schemas
+  - name: tokens
   - name: users
   - name: verificationCodes
-  - name: domainAliases
-  - name: chromeosdevices
-  - name: channels
 paths:
   "/admin/directory/v1/customer/{customerId}/devices/chromeos":
     get:
@@ -135,30 +135,30 @@ paths:
       tags:
         - chromeosdevices
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customerId}/devices/chromeos/moveDevicesToOu":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Move or insert multiple Chrome OS Devices to organizational unit
       operationId: directory.chromeosdevices.moveDevicesToOu
@@ -235,17 +235,17 @@ paths:
       tags:
         - chromeosdevices
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Chrome OS Device
       operationId: directory.chromeosdevices.patch
@@ -336,17 +336,17 @@ paths:
         - chromeosdevices
   "/admin/directory/v1/customer/{customerId}/devices/chromeos/{resourceId}/action":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Take action on Chrome OS Device
       operationId: directory.chromeosdevices.action
@@ -462,17 +462,17 @@ paths:
       tags:
         - mobiledevices
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}":
     delete:
       description: Delete Mobile Device
@@ -548,30 +548,30 @@ paths:
       tags:
         - mobiledevices
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}/action":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Take action on Mobile Device
       operationId: directory.mobiledevices.action
@@ -651,17 +651,17 @@ paths:
       tags:
         - orgunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Add organizational unit
       operationId: directory.orgunits.insert
@@ -753,17 +753,17 @@ paths:
       tags:
         - orgunits
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch organization unit via Apiary Patch Orchestration
       operationId: directory.orgunits.patch
@@ -864,17 +864,17 @@ paths:
       tags:
         - schemas
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create schema.
       operationId: directory.schemas.insert
@@ -966,17 +966,17 @@ paths:
       tags:
         - schemas
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Schema via Apiary Patch Orchestration
       operationId: directory.schemas.patch
@@ -1082,17 +1082,17 @@ paths:
       tags:
         - domainAliases
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a domain alias of the customer.
       operationId: directory.domainAliases.insert
@@ -1184,17 +1184,17 @@ paths:
       tags:
         - domainAliases
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customer}/domains":
     get:
       description: Lists the domains of the customer.
@@ -1225,17 +1225,17 @@ paths:
       tags:
         - domains
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a domain of the customer.
       operationId: directory.domains.insert
@@ -1327,17 +1327,17 @@ paths:
       tags:
         - domains
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customer}/resources/buildings":
     get:
       description: Retrieves a list of buildings for an account.
@@ -1380,17 +1380,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a building.
       operationId: directory.resources.buildings.insert
@@ -1492,17 +1492,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a building via Apiary Patch Orchestration.
       operationId: directory.resources.buildings.patch
@@ -1645,17 +1645,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a calendar resource.
       operationId: directory.resources.calendars.insert
@@ -1747,17 +1747,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a calendar resource via Apiary Patch Orchestration.
       operationId: directory.resources.calendars.patch
@@ -1870,17 +1870,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a feature.
       operationId: directory.resources.features.insert
@@ -1972,17 +1972,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a feature via Apiary Patch Orchestration.
       operationId: directory.resources.features.patch
@@ -2055,17 +2055,17 @@ paths:
         - resources
   "/admin/directory/v1/customer/{customer}/resources/features/{oldName}/rename":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Renames a feature.
       operationId: directory.resources.features.rename
@@ -2149,17 +2149,17 @@ paths:
       tags:
         - roleAssignments
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a role assignment.
       operationId: directory.roleAssignments.insert
@@ -2251,17 +2251,17 @@ paths:
       tags:
         - roleAssignments
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customer}/roles":
     get:
       description: Retrieves a paginated list of all the roles in a domain.
@@ -2304,17 +2304,17 @@ paths:
       tags:
         - roles
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a role.
       operationId: directory.roles.insert
@@ -2374,17 +2374,17 @@ paths:
       tags:
         - privileges
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/customer/{customer}/roles/{roleId}":
     delete:
       description: Deletes a role.
@@ -2447,17 +2447,17 @@ paths:
       tags:
         - roles
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch role via Apiary Patch Orchestration
       operationId: directory.roles.patch
@@ -2558,17 +2558,17 @@ paths:
       tags:
         - customers
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Customers via Apiary Patch Orchestration
       operationId: directory.customers.patch
@@ -2699,17 +2699,17 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create Group
       operationId: directory.groups.insert
@@ -2782,17 +2782,17 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Groups via Apiary Patch Orchestration
       operationId: directory.groups.patch
@@ -2881,17 +2881,17 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Add a alias for the group
       operationId: directory.groups.aliases.insert
@@ -2949,17 +2949,17 @@ paths:
       tags:
         - groups
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/groups/{groupKey}/hasMember/{memberKey}":
     get:
       description: Checks whether the given user is a member of the group. Membership can be direct or nested.
@@ -3004,17 +3004,17 @@ paths:
       tags:
         - members
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/groups/{groupKey}/members":
     get:
       description: Retrieve all members in a group (paginated)
@@ -3074,17 +3074,17 @@ paths:
       tags:
         - members
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Add user to the specified group.
       operationId: directory.members.insert
@@ -3192,17 +3192,17 @@ paths:
       tags:
         - members
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Member via Apiary Patch Orchestration
       operationId: directory.members.patch
@@ -3384,17 +3384,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: create user.
       operationId: directory.users.insert
@@ -3419,17 +3419,17 @@ paths:
         - users
   /admin/directory/v1/users/watch:
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Watch for changes in users list
       operationId: directory.users.watch
@@ -3553,17 +3553,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Users via Apiary Patch Orchestration
       operationId: directory.users.patch
@@ -3660,17 +3660,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Add a alias for the user
       operationId: directory.users.aliases.insert
@@ -3706,17 +3706,17 @@ paths:
         - users
   "/admin/directory/v1/users/{userKey}/aliases/watch":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Watch for changes in users list
       operationId: directory.users.aliases.watch
@@ -3799,17 +3799,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/asps":
     get:
       description: List the ASPs issued by a user.
@@ -3836,17 +3836,17 @@ paths:
       tags:
         - asps
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/asps/{codeId}":
     delete:
       description: Delete an ASP issued by a user.
@@ -3905,30 +3905,30 @@ paths:
       tags:
         - asps
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/makeAdmin":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: change admin status of a user
       operationId: directory.users.makeAdmin
@@ -4004,17 +4004,17 @@ paths:
       tags:
         - users
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patch Photo via Apiary Patch Orchestration
       operationId: directory.users.photos.patch
@@ -4099,17 +4099,17 @@ paths:
       tags:
         - tokens
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/tokens/{clientId}":
     delete:
       description: Delete all access tokens issued by a user for an application.
@@ -4168,30 +4168,30 @@ paths:
       tags:
         - tokens
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/undelete":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Undelete a deleted user
       operationId: directory.users.undelete
@@ -4243,30 +4243,30 @@ paths:
       tags:
         - verificationCodes
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/verificationCodes/generate":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Generate new backup verification codes for the user.
       operationId: directory.verificationCodes.generate
@@ -4289,17 +4289,17 @@ paths:
         - verificationCodes
   "/admin/directory/v1/users/{userKey}/verificationCodes/invalidate":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Invalidate the current backup verification codes for the user.
       operationId: directory.verificationCodes.invalidate
@@ -4322,17 +4322,17 @@ paths:
         - verificationCodes
   /admin/directory_v1/channels/stop:
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Stop watching resources through this channel.
       operationId: admin.channels.stop

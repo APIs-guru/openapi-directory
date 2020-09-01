@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/speech-to-text/docs/quickstart-protocol
 tags:
+  - name: operations
   - name: projects
   - name: speech
-  - name: operations
 paths:
   /v1/operations:
     get:
@@ -78,16 +78,16 @@ paths:
         - operations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/operations/{name}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
@@ -115,29 +115,29 @@ paths:
         - operations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/speech:longrunningrecognize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Performs asynchronous speech recognition: receive results via the google.longrunning.Operations interface. Returns either an `Operation.error` or an `Operation.response` which contains a `LongRunningRecognizeResponse` message. For more information on asynchronous speech recognition, see the [how-to](https://cloud.google.com/speech-to-text/docs/async-recognize)."
       operationId: speech.speech.longrunningrecognize
@@ -163,16 +163,16 @@ paths:
   /v1/speech:recognize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Performs synchronous speech recognition: receive results after all audio has been sent and processed."
       operationId: speech.speech.recognize
@@ -222,16 +222,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -274,16 +274,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

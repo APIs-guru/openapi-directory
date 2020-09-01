@@ -93,17 +93,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
     patch:
       description: Updates a sink. This method updates fields in the existing sink according to the provided update mask. The sink's name cannot be changed nor any output-only fields (e.g. the writer_identity).
       operationId: cloudtrace.projects.traceSinks.patch
@@ -182,17 +182,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
     post:
       description: Creates a sink that exports trace spans to a destination. The export of newly-ingested traces begins immediately, unless the sink's `writer_identity` is not permitted to write to the destination. A sink can export traces only from the resource owning the sink (the 'parent').
       operationId: cloudtrace.projects.traceSinks.create

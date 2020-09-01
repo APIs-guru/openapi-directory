@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/pubsub/docs
 tags:
-  - name: topics
   - name: subscriptions
+  - name: topics
 paths:
   /v1beta1a/subscriptions:
     get:
@@ -75,17 +75,17 @@ paths:
       tags:
         - subscriptions
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates a subscription on a given topic for a given subscriber. If the subscription already exists, returns ALREADY_EXISTS. If the corresponding topic doesn't exist, returns NOT_FOUND. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic.
       operationId: pubsub.subscriptions.create
@@ -114,17 +114,17 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/acknowledge:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: "Acknowledges a particular received message: the Pub/Sub system can remove the given message from the subscription. Acknowledging a message whose Ack deadline has expired may succeed, but the message could have been already redelivered. Acknowledging a message more than once will not result in an error. This is only used for messages received via pull."
       operationId: pubsub.subscriptions.acknowledge
@@ -153,17 +153,17 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyAckDeadline:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Modifies the Ack deadline for a message received from a pull request.
       operationId: pubsub.subscriptions.modifyAckDeadline
@@ -192,17 +192,17 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/modifyPushConfig:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Modifies the PushConfig for a specified subscription. This method can be used to suspend the flow of messages to an endpoint by clearing the PushConfig field in the request. Messages will be accumulated for delivery even if no push configuration is defined or while the configuration is modified.
       operationId: pubsub.subscriptions.modifyPushConfig
@@ -231,17 +231,17 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pull:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Pulls a single message from the server. If return_immediately is true, and no messages are available in the subscription, this method returns FAILED_PRECONDITION. The system is free to return an UNAVAILABLE error if no messages are available in a reasonable amount of time (to reduce system load).
       operationId: pubsub.subscriptions.pull
@@ -270,17 +270,17 @@ paths:
         - subscriptions
   /v1beta1a/subscriptions/pullBatch:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Pulls messages from the server. Returns an empty list if there are no messages available in the backlog. The system is free to return UNAVAILABLE if there are too many pull requests outstanding for the given subscription.
       operationId: pubsub.subscriptions.pullBatch
@@ -365,17 +365,17 @@ paths:
       tags:
         - subscriptions
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
   /v1beta1a/topics:
     get:
       description: Lists matching topics.
@@ -415,17 +415,17 @@ paths:
       tags:
         - topics
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Creates the given topic with the given name.
       operationId: pubsub.topics.create
@@ -454,17 +454,17 @@ paths:
         - topics
   /v1beta1a/topics/publish:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Adds a message to the topic. Returns NOT_FOUND if the topic does not exist.
       operationId: pubsub.topics.publish
@@ -493,17 +493,17 @@ paths:
         - topics
   /v1beta1a/topics/publishBatch:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
     post:
       description: Adds one or more messages to the topic. Returns NOT_FOUND if the topic does not exist.
       operationId: pubsub.topics.publishBatch
@@ -588,17 +588,17 @@ paths:
       tags:
         - topics
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
 components:
   parameters:
     _.xgafv:

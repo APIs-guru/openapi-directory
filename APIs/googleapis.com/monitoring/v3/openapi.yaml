@@ -33,9 +33,9 @@ info:
 externalDocs:
   url: https://cloud.google.com/monitoring/api/
 tags:
+  - name: projects
   - name: services
   - name: uptimeCheckIps
-  - name: projects
 paths:
   /v3/uptimeCheckIps:
     get:
@@ -75,31 +75,31 @@ paths:
       tags:
         - uptimeCheckIps
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v3/{name}":
     delete:
-      description: Deletes an alerting policy.
-      operationId: monitoring.projects.alertPolicies.delete
+      description: Delete the given ServiceLevelObjective.
+      operationId: monitoring.services.serviceLevelObjectives.delete
       parameters:
-        - description: "Required. The alerting policy to delete. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] For more information, see AlertPolicy."
+        - description: "Required. Resource name of the ServiceLevelObjective to delete. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] "
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: If this field is true, then the request means to delete a group with all its descendants. Otherwise, the request means to delete a group only when it has no descendants. The default value is false.
+        - description: If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.
           in: query
-          name: recursive
+          name: force
           schema:
             type: boolean
       responses:
@@ -119,12 +119,12 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/monitoring
       tags:
-        - projects
+        - services
     get:
-      description: Gets a single channel descriptor. The descriptor indicates which fields are expected / permitted for a notification channel of the given type.
-      operationId: monitoring.projects.notificationChannelDescriptors.get
+      description: Get a ServiceLevelObjective by name.
+      operationId: monitoring.services.serviceLevelObjectives.get
       parameters:
-        - description: "Required. The channel type for which to execute the request. The format is: projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE] "
+        - description: "Required. Resource name of the ServiceLevelObjective to get. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] "
           in: path
           name: name
           required: true
@@ -144,7 +144,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NotificationChannelDescriptor"
+                $ref: "#/components/schemas/ServiceLevelObjective"
           description: Successful response
       security:
         - Oauth2:
@@ -164,30 +164,30 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
-        - projects
+        - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
-      operationId: monitoring.projects.alertPolicies.patch
+      description: Update the given ServiceLevelObjective.
+      operationId: monitoring.services.serviceLevelObjectives.patch
       parameters:
-        - description: "Required if the policy exists. The resource name for this policy. The format is: projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID] [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request."
+        - description: "Resource name for this ServiceLevelObjective. The format is: projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME] "
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert_policy), or to the field's default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display_name, documentation, documentation.content, documentation.mime_type, user_labels, user_label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following: The new policy will have the same [ALERT_POLICY_ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents. Conditions in the new policy will keep their former [CONDITION_ID] if the supplied condition includes the name field with that [CONDITION_ID]. If the supplied condition omits the name field, then a new [CONDITION_ID] is created."
+        - description: A set of field paths defining which fields to use for the update.
           in: query
           name: updateMask
           schema:
@@ -196,13 +196,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AlertPolicy"
+              $ref: "#/components/schemas/ServiceLevelObjective"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AlertPolicy"
+                $ref: "#/components/schemas/ServiceLevelObjective"
           description: Successful response
       security:
         - Oauth2:
@@ -214,7 +214,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/monitoring
       tags:
-        - projects
+        - services
     put:
       description: Updates an existing group. You can change any group attributes except name.
       operationId: monitoring.projects.groups.update
@@ -307,16 +307,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new alerting policy.
@@ -353,16 +353,16 @@ paths:
         - projects
   "/v3/{name}/collectdTimeSeries":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Stackdriver Monitoring Agent only: Creates a new time series.This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead."
@@ -460,16 +460,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new group.
@@ -568,16 +568,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v3/{name}/metricDescriptors":
     get:
@@ -632,16 +632,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new metric descriptor. User-created metric descriptors define custom metrics (https://cloud.google.com/monitoring/custom-metrics).
@@ -733,16 +733,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v3/{name}/notificationChannelDescriptors":
     get:
@@ -788,16 +788,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v3/{name}/notificationChannels":
     get:
@@ -853,16 +853,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.
@@ -1028,16 +1028,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
@@ -1078,16 +1078,16 @@ paths:
         - projects
   "/v3/{name}/timeSeries:query":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Queries time series using Monitoring Query Language. This method does not require a Workspace.
@@ -1128,16 +1128,16 @@ paths:
         - projects
   "/v3/{name}:getVerificationCode":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as "G-123456") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.
@@ -1174,16 +1174,16 @@ paths:
         - projects
   "/v3/{name}:sendVerificationCode":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.
@@ -1220,16 +1220,16 @@ paths:
         - projects
   "/v3/{name}:verify":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
@@ -1322,16 +1322,16 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a ServiceLevelObjective for the given Service.
@@ -1382,7 +1382,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'A filter specifying what Services to return. The filter currently supports the following fields: - `identifier_case` - `app_engine.module_id` - `cloud_endpoints.service` - `mesh_istio.mesh_uid` - `mesh_istio.service_namespace` - `mesh_istio.service_name` - `cluster_istio.location` (deprecated) - `cluster_istio.cluster_name` (deprecated) - `cluster_istio.service_namespace` (deprecated) - `cluster_istio.service_name` (deprecated) identifier_case refers to which option in the identifier oneof is populated. For example, the filter identifier_case = "CUSTOM" would match all services with a value for the custom field. Valid options are "CUSTOM", "APP_ENGINE", "CLOUD_ENDPOINTS", "MESH_ISTIO", and "CLUSTER_ISTIO" (deprecated),'
+        - description: 'A filter specifying what Services to return. The filter currently supports the following fields: - `identifier_case` - `app_engine.module_id` - `cloud_endpoints.service` (reserved for future use) - `mesh_istio.mesh_uid` - `mesh_istio.service_namespace` - `mesh_istio.service_name` - `cluster_istio.location` (deprecated) - `cluster_istio.cluster_name` (deprecated) - `cluster_istio.service_namespace` (deprecated) - `cluster_istio.service_name` (deprecated) identifier_case refers to which option in the identifier oneof is populated. For example, the filter identifier_case = "CUSTOM" would match all services with a value for the custom field. Valid options are "CUSTOM", "APP_ENGINE", "MESH_ISTIO", plus "CLUSTER_ISTIO" (deprecated) and "CLOUD_ENDPOINTS" (reserved for future use).'
           in: query
           name: filter
           schema:
@@ -1420,16 +1420,16 @@ paths:
       tags:
         - services
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a Service.
@@ -1513,16 +1513,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new Uptime check configuration.
@@ -2015,7 +2015,7 @@ components:
           $ref: "#/components/schemas/Range"
           description: If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Cloud Monitoring API v3.
         sumOfSquaredDeviation:
-          description: "The sum of squared deviations from the mean of the values in the population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth, \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero."
+          description: "The sum of squared deviations from the mean of the values in the population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth, \"The Art of Computer Programming\", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero."
           format: double
           type: number
       type: object
@@ -2560,7 +2560,7 @@ components:
           description: The number/percent of time series for which the comparison must hold in order for the condition to trigger. If unspecified, then the condition will trigger if the comparison is true for any of the time series that have been identified by filter and aggregations.
       type: object
     MetricDescriptor:
-      description: "Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type's existing data unusable.The following are specific rules for service defined Monitoring metric descriptors: type, metric_kind, value_type and description fields are all required. The unit field must be specified if the value_type is any of DOUBLE, INT64, DISTRIBUTION. Maximum of default 500 metric descriptors per service is allowed. Maximum of default 10 labels per metric descriptor is allowed.The default maximum limit can be overridden. Please follow https://cloud.google.com/monitoring/quotas"
+      description: Defines a metric type and its schema. Once a metric descriptor is created, deleting or altering it stops data collection and makes the metric type's existing data unusable.
       properties:
         description:
           description: A detailed description of the metric, which can be used in documentation.
@@ -2569,7 +2569,7 @@ components:
           description: A concise name for the metric, which can be displayed in user interfaces. Use sentence case without an ending period, for example "Request count". This field is optional but it is recommended to be set for any metrics associated with user-visible concepts, such as Quota.
           type: string
         labels:
-          description: "The set of labels that can be used to describe a specific instance of this metric type.The label key name must follow: Only upper and lower-case letters, digits and underscores (_) are allowed. Label name must start with a letter or digit. The maximum length of a label name is 100 characters.For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed."
+          description: The set of labels that can be used to describe a specific instance of this metric type. For example, the appengine.googleapis.com/http/server/response_latencies metric type has a label for the HTTP response code, response_code, so you can look at latencies for successful responses or just for responses that failed.
           items:
             $ref: "#/components/schemas/LabelDescriptor"
           type: array
@@ -2605,7 +2605,7 @@ components:
           description: The resource name of the metric descriptor.
           type: string
         type:
-          description: "The metric type, including its DNS name prefix. The type is not URL-encoded.All service defined metrics must be prefixed with the service name, in the format of {service name}/{relative metric name}, such as cloudsql.googleapis.com/database/cpu/utilization. The relative metric name must follow: Only upper and lower-case letters, digits, '/' and underscores '_' are allowed. The maximum number of characters allowed for the relative_metric_name is 100.All user-defined metric types have the DNS name custom.googleapis.com, external.googleapis.com, or logging.googleapis.com/user/.Metric types should use a natural hierarchical grouping. For example: \"custom.googleapis.com/invoice/paid/amount\" \"external.googleapis.com/prometheus/up\" \"appengine.googleapis.com/http/server/response_latencies\" "
+          description: 'The metric type, including its DNS name prefix. The type is not URL-encoded. All user-defined metric types have the DNS name custom.googleapis.com or external.googleapis.com. Metric types should use a natural hierarchical grouping. For example: "custom.googleapis.com/invoice/paid/amount" "external.googleapis.com/prometheus/up" "appengine.googleapis.com/http/server/response_latencies" '
           type: string
         unit:
           description: 'The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.Different systems may scale the values to be more easily displayed (so a value of 0.02KBy might be displayed as 20By, and a value of 3523KBy might be displayed as 3.5MBy). However, if the unit is KBy, then the value of the metric is always in thousands of bytes, no matter how it may be displayed..If you want a custom metric to record the exact number of CPU-seconds used by a job, you can create an INT64 CUMULATIVE metric whose unit is s{CPU} (or equivalently 1s{CPU} or just s). If the job uses 12,005 CPU-seconds, then the value is written as 12005.Alternatively, if you want a custom metric to record data in a more granular way, you can create a DOUBLE CUMULATIVE metric whose unit is ks{CPU}, and then write the value 12.005 (which is 12005/1000), or use Kis{CPU} and write 11.723 (which is 12005/1024).The supported units are a subset of The Unified Code for Units of Measure (http://unitsofmeasure.org/ucum.html) standard:Basic units (UNIT) bit bit By byte s second min minute h hour d day 1 dimensionlessPrefixes (PREFIX) k kilo (10^3) M mega (10^6) G giga (10^9) T tera (10^12) P peta (10^15) E exa (10^18) Z zetta (10^21) Y yotta (10^24) m milli (10^-3) u micro (10^-6) n nano (10^-9) p pico (10^-12) f femto (10^-15) a atto (10^-18) z zepto (10^-21) y yocto (10^-24) Ki kibi (2^10) Mi mebi (2^20) Gi gibi (2^30) Ti tebi (2^40) Pi pebi (2^50)GrammarThe grammar also includes these connectors: / division or ratio (as an infix operator). For examples, kBy/{email} or MiBy/10ms (although you should almost never have /s in a metric unit; rates should always be computed at query time from the underlying cumulative or delta value). . multiplication or composition (as an infix operator). For examples, GBy.d or k{watt}.h.The grammar for a unit is as follows: Expression = Component { "." Component } { "/" Component } ; Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ] | Annotation | "1" ; Annotation = "{" NAME "}" ; Notes: Annotation is just a comment if it follows a UNIT. If the annotation is used alone, then the unit is equivalent to 1. For examples, {request}/s == 1/s, By{transmitted}/s == By/s. NAME is a sequence of non-blank printable ASCII characters not containing { or }. 1 represents a unitary dimensionless unit (https://en.wikipedia.org/wiki/Dimensionless_quantity) of 1, such as in 1/s. It is typically used when none of the basic units are appropriate. For example, "new users per day" can be represented as 1/d or {new-users}/d (and a metric value 5 would mean "5 new users). Alternatively, "thousands of page views per day" would be represented as 1000/d or k1/d or k{page_views}/d (and a metric value of 5.3 would mean "5300 page views per day"). % represents dimensionless value of 1/100, and annotates values giving a percentage (so the metric values are typically in the range of 0..100, and a metric value 3 means "3 percent"). 10^2.% indicates a metric contains a ratio, typically in the range 0..1, that will be multiplied by 100 and displayed as a percentage (so a metric value 0.03 means "3 percent").'
@@ -2711,7 +2711,7 @@ components:
           type: string
       type: object
     MonitoredResourceDescriptor:
-      description: 'An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different services can support different monitored resource types.The following are specific rules to service defined monitored resources for Monitoring and Logging: The type, display_name, description, labels and launch_stage fields are all required. The first label of the monitored resource descriptor must be resource_container. There are legacy monitored resource descritptors start with project_id. It must include a location label. Maximum of default 5 service defined monitored resource descriptors is allowed per service. Maximum of default 10 labels per monitored resource is allowed.The default maximum limit can be overridden. Please follow https://cloud.google.com/monitoring/quotas'
+      description: An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of "gce_instance" and specifies the use of the labels "instance_id" and "zone" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.
       properties:
         description:
           description: Optional. A detailed description of the monitored resource type that might be used in documentation.
@@ -2720,7 +2720,7 @@ components:
           description: Optional. A concise name for the monitored resource type that might be displayed in user interfaces. It should be a Title Cased Noun Phrase, without any article or other determiners. For example, "Google Cloud SQL Database".
           type: string
         labels:
-          description: "Required. A set of labels used to describe instances of this monitored resource type. The label key name must follow: Only upper and lower-case letters, digits and underscores (_) are allowed. Label name must start with a letter or digit. The maximum length of a label name is 100 characters.For example, an individual Google Cloud SQL database is identified by values for the labels database_id and location."
+          description: Required. A set of labels used to describe instances of this monitored resource type. For example, an individual Google Cloud SQL database is identified by values for the labels "database_id" and "zone".
           items:
             $ref: "#/components/schemas/LabelDescriptor"
           type: array
@@ -2740,7 +2740,7 @@ components:
           description: 'Optional. The resource name of the monitored resource descriptor: "projects/{project_id}/monitoredResourceDescriptors/{type}" where {type} is the value of the type field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format "monitoredResourceDescriptors/{type}".'
           type: string
         type:
-          description: "Required. The monitored resource type. For example, the type cloudsql_database represents databases in Google Cloud SQL.All service defined monitored resource types must be prefixed with the service name, in the format of {service name}/{relative resource name}. The relative resource name must follow: Only upper and lower-case letters and digits are allowed. It must start with upper case character and is recommended to use Upper Camel Case style. The maximum number of characters allowed for the relative_resource_name is 100.Note there are legacy service monitored resources not following this rule."
+          description: Required. The monitored resource type. For example, the type "cloudsql_database" represents databases in Google Cloud SQL.
           type: string
       type: object
     MonitoredResourceMetadata:

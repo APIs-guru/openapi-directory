@@ -86,29 +86,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Cancel a patch job. The patch job must be active. Canceled patch jobs cannot be restarted.
       operationId: osconfig.projects.patchJobs.cancel
@@ -180,16 +180,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/patchDeployments":
     get:
       description: Get a page of OS Config patch deployments.
@@ -227,16 +227,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create an OS Config patch deployment.
       operationId: osconfig.projects.patchDeployments.create
@@ -313,29 +313,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/patchJobs:execute":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Patch VM instances by creating and running a patch job.
       operationId: osconfig.projects.patchJobs.execute

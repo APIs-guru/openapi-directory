@@ -36,13 +36,42 @@ tags:
 paths:
   "/v1beta1/{name}":
     delete:
-      description: Deletes a model. Returns `google.protobuf.Empty` in the response field when it completes, and `delete_details` in the metadata field.
-      operationId: automl.projects.locations.models.delete
+      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: automl.projects.locations.operations.delete
       parameters:
-        - description: Required. Resource name of the model being deleted.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: automl.projects.locations.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Mask specifying which fields to read.
+          in: query
+          name: fieldMask
           schema:
             type: string
       responses:
@@ -59,47 +88,18 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-    get:
-      description: Gets a model evaluation.
-      operationId: automl.projects.locations.models.modelEvaluations.get
-      parameters:
-        - description: Required. Resource name for the model evaluation.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Mask specifying which fields to read.
-          in: query
-          name: fieldMask
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelEvaluation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates a column spec.
       operationId: automl.projects.locations.datasets.tableSpecs.columnSpecs.patch
@@ -175,17 +175,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -227,30 +227,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}:batchPredict":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Perform a batch prediction. Unlike the online Predict, batch prediction result won't be immediately available in the response. Instead, a long running operation object is returned. User can poll the operation result via GetOperation method. Once the operation is done, BatchPredictResult is returned in the response field. Available for following ML problems: * Image Classification * Image Object Detection * Video Classification * Video Object Tracking * Text Extraction * Tables"
       operationId: automl.projects.locations.models.batchPredict
@@ -282,17 +282,17 @@ paths:
         - projects
   "/v1beta1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: automl.projects.locations.operations.cancel
@@ -324,17 +324,17 @@ paths:
         - projects
   "/v1beta1/{name}:deploy":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Deploys a model. If a model is already deployed, deploying it with the same parameters has no effect. Deploying with different parametrs (as e.g. changing node_number) will reset the deployment state without pausing the model's availability. Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage deployment automatically. Returns an empty response in the response field when it completes.
       operationId: automl.projects.locations.models.deploy
@@ -366,17 +366,17 @@ paths:
         - projects
   "/v1beta1/{name}:export":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Exports a trained, "export-able", model to a user specified Google Cloud Storage location. A model is considered export-able if and only if it has an export format defined for it in ModelExportOutputConfig. Returns an empty response in the response field when it completes.
       operationId: automl.projects.locations.models.export
@@ -408,17 +408,17 @@ paths:
         - projects
   "/v1beta1/{name}:exportData":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Exports dataset's data to the provided output location. Returns an empty response in the response field when it completes.
       operationId: automl.projects.locations.datasets.exportData
@@ -450,17 +450,17 @@ paths:
         - projects
   "/v1beta1/{name}:exportEvaluatedExamples":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Exports examples on which the model was evaluated (i.e. which were in the TEST set of the dataset the model was created from), together with their ground truth annotations and the annotations created (predicted) by the model. The examples, ground truth and predictions are exported in the state they were at the moment the model was evaluated. This export is available only for 30 days since the model evaluation is created. Currently only available for Tables. Returns an empty response in the response field when it completes.
       operationId: automl.projects.locations.models.exportEvaluatedExamples
@@ -492,17 +492,17 @@ paths:
         - projects
   "/v1beta1/{name}:importData":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Imports data into a dataset. For Tables this method can only be called on an empty Dataset. For Tables: * A schema_inference_version parameter must be explicitly set. Returns an empty response in the response field when it completes."
       operationId: automl.projects.locations.datasets.importData
@@ -534,17 +534,17 @@ paths:
         - projects
   "/v1beta1/{name}:predict":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Perform an online prediction. The prediction result will be directly returned in the response. Available for following ML problems, and their expected request payloads: * Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB. * Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes up to 30MB. * Text Classification - TextSnippet, content up to 60,000 characters, UTF-8 encoded. * Text Extraction - TextSnippet, content up to 30,000 characters, UTF-8 NFC encoded. * Translation - TextSnippet, content up to 25,000 characters, UTF-8 encoded. * Tables - Row, with column values matching the columns of the model, up to 5MB. Not available for FORECASTING prediction_type. * Text Sentiment - TextSnippet, content up 500 characters, UTF-8 encoded."
       operationId: automl.projects.locations.models.predict
@@ -576,17 +576,17 @@ paths:
         - projects
   "/v1beta1/{name}:undeploy":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Undeploys a model. If the model is not deployed this method has no effect. Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically. Returns an empty response in the response field when it completes.
       operationId: automl.projects.locations.models.undeploy
@@ -618,17 +618,17 @@ paths:
         - projects
   "/v1beta1/{name}:wait":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Waits for the specified long-running operation until it is done or reaches at most a specified timeout, returning the latest state. If the operation is already done, the latest state is immediately returned. If the timeout specified is greater than the default HTTP/RPC timeout, the HTTP/RPC timeout is used. If the server does not support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Note that this method is on a best-effort basis. It may return the latest state before the specified timeout (including immediately), meaning even an immediate response is no guarantee that the operation is done.
       operationId: automl.projects.locations.operations.wait
@@ -704,17 +704,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/datasets":
     get:
       description: Lists datasets in a project.
@@ -756,17 +756,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a dataset.
       operationId: automl.projects.locations.datasets.create
@@ -837,17 +837,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/models":
     get:
       description: Lists models.
@@ -889,17 +889,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Creates a model. Returns a Model in the response field when it completes. When you create a model, several model evaluations are created for it: a global evaluation, and one evaluation for each annotation spec."
       operationId: automl.projects.locations.models.create
@@ -975,17 +975,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -1017,30 +1017,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: automl.projects.locations.models.setIamPolicy
@@ -1072,17 +1072,17 @@ paths:
         - projects
   "/v1beta1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: automl.projects.locations.testIamPermissions

@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://cloud.google.com/genomics
 tags:
-  - name: projects
   - name: pipelines
+  - name: projects
   - name: workers
 paths:
   /v2alpha1/pipelines:run:
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Runs a pipeline. The returned Operation's metadata field will contain a google.genomics.v2alpha1.Metadata object describing the status of the pipeline execution. The [response] field will contain a google.genomics.v2alpha1.RunPipelineResponse object if the pipeline completes successfully. **Note:** Before you can use this method, the Genomics Service Agent must have access to your project. This is done automatically when the Cloud Genomics API is first enabled, but if you delete this permission, or if you enabled the Cloud Genomics API before the v2alpha1 API launch, you must disable and re-enable the API to grant the Genomics Service Agent the required permissions. Authorization requires the following [Google IAM](https://cloud.google.com/iam/) permission: * `genomics.operations.create` [1]: /genomics/gsa"
@@ -78,16 +78,16 @@ paths:
         - pipelines
   "/v2alpha1/workers/{id}:checkIn":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: The worker uses this method to retrieve the assigned operation and provide periodic status updates.
@@ -124,16 +124,16 @@ paths:
         - workers
   "/v2alpha1/{id}:checkIn":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: The worker uses this method to retrieve the assigned operation and provide periodic status updates.
@@ -170,13 +170,28 @@ paths:
         - projects
   "/v2alpha1/{name}":
     get:
-      description: "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.get`"
-      operationId: genomics.projects.operations.get
+      description: "Lists operations that match the specified filter in the request. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.list`"
+      operationId: genomics.projects.operations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: 'A string for filtering Operations. In v2alpha1, the following filter fields are supported: * createTime: The time this job was created * events: The set of event (names) that have occurred while running the pipeline. The : operator can be used to determine if a particular event has occurred. * error: If the pipeline is running, this value is NULL. Once the pipeline finishes, the value is the standard Google error code. * labels.key or labels."key with space" where key is a label key. * done: If the pipeline is running, this value is false. Once the pipeline finishes, the value is true. In v1 and v1alpha2, the following filter fields are supported: * projectId: Required. Corresponds to OperationMetadata.projectId. * createTime: The time this job was created, in seconds from the [epoch](http://en.wikipedia.org/wiki/Unix_time). Can use `>=` and/or `<=` operators. * status: Can be `RUNNING`, `SUCCESS`, `FAILURE`, or `CANCELED`. Only one status may be specified. * labels.key where key is a label key. Examples: * `projectId = my-project AND createTime >= 1432140000` * `projectId = my-project AND createTime >= 1432140000 AND createTime <= 1432150000 AND status = RUNNING` * `projectId = my-project AND labels.color = *` * `projectId = my-project AND labels.color = red`'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. The maximum value is 256.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -184,7 +199,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -198,29 +213,29 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v2alpha1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.cancel`"

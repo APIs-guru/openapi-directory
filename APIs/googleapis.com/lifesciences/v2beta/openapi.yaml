@@ -61,17 +61,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
   "/v2beta/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -113,17 +113,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
   "/v2beta/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `lifesciences.operations.list`"
@@ -165,30 +165,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
   "/v2beta/{name}:cancel":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. Clients may use Operations.GetOperation or Operations.ListOperations to check whether the cancellation succeeded or the operation completed despite cancellation. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `lifesciences.operations.cancel`"
       operationId: lifesciences.projects.locations.operations.cancel
@@ -220,17 +220,17 @@ paths:
         - projects
   "/v2beta/{parent}/pipelines:run":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Runs a pipeline. The returned Operation's metadata field will contain a google.cloud.lifesciences.v2beta.Metadata object describing the status of the pipeline execution. The response field will contain a google.cloud.lifesciences.v2beta.RunPipelineResponse object if the pipeline completes successfully. **Note:** Before you can use this method, the *Life Sciences Service Agent* must have access to your project. This is done automatically when the Cloud Life Sciences API is first enabled, but if you delete this permission you must disable and re-enable the API to grant the Life Sciences Service Agent the required permissions. Authorization requires the following [Google IAM](https://cloud.google.com/iam/) permission: * `lifesciences.workflows.run`"
       operationId: lifesciences.projects.locations.pipelines.run

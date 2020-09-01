@@ -21,13 +21,9 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/webfonts/v1/rest
+    - format: google
+      url: https://webfonts.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: webfonts
 externalDocs:
@@ -62,17 +58,17 @@ paths:
       tags:
         - webfonts
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/_.xgafv"
 components:
   parameters:
     _.xgafv:

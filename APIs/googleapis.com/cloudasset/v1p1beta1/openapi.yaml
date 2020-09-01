@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://cloud.google.com/asset-inventory/docs/quickstart
 tags:
-  - name: resources
   - name: iamPolicies
+  - name: resources
 paths:
   "/v1p1beta1/{scope}/iamPolicies:searchAll":
     get:
@@ -77,17 +77,17 @@ paths:
       tags:
         - iamPolicies
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1p1beta1/{scope}/resources:searchAll":
     get:
       description: Searches all the resources within a given accessible CRM scope (project/folder/organization). This RPC gives callers especially administrators the ability to search all the resources within a scope, even if they don't have `.get` permission of all the resources. Callers should have `cloud.assets.SearchAllResources` permission on the requested scope, otherwise the request will be rejected.
@@ -143,17 +143,17 @@ paths:
       tags:
         - resources
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

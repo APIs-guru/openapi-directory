@@ -33,22 +33,22 @@ info:
 externalDocs:
   url: https://developers.google.com/android/management
 tags:
-  - name: signupUrls
   - name: enterprises
+  - name: signupUrls
 paths:
   /v1/enterprises:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates an enterprise. This is the last step in the enterprise signup flow.
       operationId: androidmanagement.enterprises.create
@@ -89,17 +89,17 @@ paths:
         - enterprises
   /v1/signupUrls:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates an enterprise signup URL.
       operationId: androidmanagement.signupUrls.create
@@ -130,10 +130,10 @@ paths:
         - signupUrls
   "/v1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED.
-      operationId: androidmanagement.enterprises.devices.operations.delete
+      description: Deletes a web app.
+      operationId: androidmanagement.enterprises.webApps.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.
           in: path
           name: name
           required: true
@@ -172,18 +172,28 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: androidmanagement.enterprises.devices.operations.get
+      description: Gets a web app.
+      operationId: androidmanagement.enterprises.webApps.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the web app in the form enterprises/{enterpriseId}/webApp/{packageName}.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.
+        - description: The standard list filter.
           in: query
-          name: languageCode
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
           schema:
             type: string
       responses:
@@ -191,7 +201,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/WebApp"
           description: Successful response
       security:
         - Oauth2:
@@ -201,22 +211,22 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a device.
-      operationId: androidmanagement.enterprises.devices.patch
+      description: Updates a web app.
+      operationId: androidmanagement.enterprises.webApps.patch
       parameters:
-        - description: The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.
+        - description: The name of the web app in the form enterprises/{enterpriseId}/webApps/{packageName}.
           in: path
           name: name
           required: true
@@ -231,13 +241,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Device"
+              $ref: "#/components/schemas/WebApp"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Device"
+                $ref: "#/components/schemas/WebApp"
           description: Successful response
       security:
         - Oauth2:
@@ -248,17 +258,17 @@ paths:
         - enterprises
   "/v1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to Code.CANCELLED.
       operationId: androidmanagement.enterprises.devices.operations.cancel
@@ -285,17 +295,17 @@ paths:
         - enterprises
   "/v1/{name}:issueCommand":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Issues a command to a device. The Operation resource returned contains a Command in its metadata field. Use the get operation method to get the status of the command.
       operationId: androidmanagement.enterprises.devices.issueCommand
@@ -361,30 +371,30 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/enrollmentTokens":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates an enrollment token for a given enterprise.
       operationId: androidmanagement.enterprises.enrollmentTokens.create
@@ -450,17 +460,17 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/webApps":
     get:
       description: Lists web apps for a given enterprise.
@@ -497,17 +507,17 @@ paths:
       tags:
         - enterprises
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a web app.
       operationId: androidmanagement.enterprises.webApps.create
@@ -539,17 +549,17 @@ paths:
         - enterprises
   "/v1/{parent}/webTokens":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a web token to access an embeddable managed Google Play web UI for a given enterprise.
       operationId: androidmanagement.enterprises.webTokens.create
@@ -1223,7 +1233,7 @@ components:
           description: Optional, arbitrary data associated with the enrollment token. This could contain, for example, the ID of an org unit the device is assigned to after enrollment. After a device enrolls with the token, this data will be exposed in the enrollment_token_data field of the Device resource. The data must be 1024 characters or less; otherwise, the creation request will fail.
           type: string
         allowPersonalUsage:
-          description: Controls personal usage on devices provisioned using this enrollment token.
+          description: "Controls whether personal usage is allowed on a device provisioned with this enrollment token.For company-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage requires the user provision the device as a fully managed device.For personally-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage will prevent the device from provisioning. Personal usage cannot be disabled on personally-owned device."
           enum:
             - ALLOW_PERSONAL_USAGE_UNSPECIFIED
             - PERSONAL_USAGE_ALLOWED
@@ -1873,7 +1883,7 @@ components:
           type: string
       type: object
     PersonalApplicationPolicy:
-      description: Policies for apps on the personal profile of a Corporate Owned Personally Enabled device.
+      description: Policies for apps in the personal profile of a company-owned device with a work profile.
       properties:
         installType:
           description: The type of installation to perform.
@@ -1886,7 +1896,7 @@ components:
           type: string
       type: object
     PersonalUsagePolicies:
-      description: Policies controlling personal usage on a Corporate Owned Personally Enabled device.
+      description: Policies controlling personal usage on a company-owned device with a work profile.
       properties:
         accountTypesWithManagementDisabled:
           description: Account types that can't be managed by the user.
@@ -1901,12 +1911,12 @@ components:
           format: int32
           type: integer
         personalApplications:
-          description: Policy applied to applications on the personal profile.
+          description: Policy applied to applications in the personal profile.
           items:
             $ref: "#/components/schemas/PersonalApplicationPolicy"
           type: array
         personalPlayStoreMode:
-          description: Controls how apps on the personal profile are allowed or blocked.
+          description: Used together with personal_applications to control how apps in the personal profile are allowed or blocked.
           enum:
             - PLAY_STORE_MODE_UNSPECIFIED
             - BLACKLIST
@@ -2406,6 +2416,9 @@ components:
         securityPatchLevel:
           description: Security patch level, e.g. 2016-05-01.
           type: string
+        systemUpdateInfo:
+          $ref: "#/components/schemas/SystemUpdateInfo"
+          description: Information about a potential pending system update.
       type: object
     Status:
       description: "The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https://github.com/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https://cloud.google.com/apis/design/errors)."
@@ -2482,6 +2495,23 @@ components:
             - AUTOMATIC
             - WINDOWED
             - POSTPONE
+          type: string
+      type: object
+    SystemUpdateInfo:
+      description: Information about a potential pending system update.
+      properties:
+        updateReceivedTime:
+          description: The time when the update was first available. A zero value indicates that this field is not set. This field is set only if an update is available (that is, updateStatus is neither UPDATE_STATUS_UNKNOWN nor UP_TO_DATE).
+          format: google-datetime
+          type: string
+        updateStatus:
+          description: "The status of an update: whether an update exists and what type it is."
+          enum:
+            - UPDATE_STATUS_UNKNOWN
+            - UP_TO_DATE
+            - UNKNOWN_UPDATE_AVAILABLE
+            - SECURITY_UPDATE_AVAILABLE
+            - OS_UPDATE_AVAILABLE
           type: string
       type: object
     TermsAndConditions:

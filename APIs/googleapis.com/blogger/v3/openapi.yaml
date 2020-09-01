@@ -33,14 +33,14 @@ info:
 externalDocs:
   url: https://developers.google.com/blogger/docs/3.0/getting_started
 tags:
-  - name: pageViews
   - name: blogs
-  - name: postUserInfos
+  - name: blogUserInfos
   - name: comments
   - name: pages
+  - name: pageViews
   - name: posts
+  - name: postUserInfos
   - name: users
-  - name: blogUserInfos
 paths:
   /v3/blogs/byurl:
     get:
@@ -81,16 +81,16 @@ paths:
         - blogs
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}":
     get:
       description: Gets a blog by id.
@@ -134,16 +134,16 @@ paths:
         - blogs
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/comments":
     get:
       description: Lists comments by blog.
@@ -207,16 +207,16 @@ paths:
         - comments
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/pages":
     get:
       description: Lists pages.
@@ -279,16 +279,16 @@ paths:
         - pages
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a page.
       operationId: blogger.pages.insert
@@ -389,16 +389,16 @@ paths:
         - pages
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a page.
       operationId: blogger.pages.patch
@@ -484,16 +484,16 @@ paths:
   "/v3/blogs/{blogId}/pages/{pageId}/publish":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Publishes a page.
       operationId: blogger.pages.publish
@@ -525,16 +525,16 @@ paths:
   "/v3/blogs/{blogId}/pages/{pageId}/revert":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Reverts a published or scheduled page to draft state.
       operationId: blogger.pages.revert
@@ -601,16 +601,16 @@ paths:
         - pageViews
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/posts":
     get:
       description: Lists posts.
@@ -698,16 +698,16 @@ paths:
         - posts
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a post.
       operationId: blogger.posts.insert
@@ -796,16 +796,16 @@ paths:
         - posts
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/posts/search":
     get:
       description: Searches for posts matching given query terms in the specified blog.
@@ -853,16 +853,16 @@ paths:
         - posts
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/posts/{postId}":
     delete:
       description: Deletes a post by blog id and post id.
@@ -943,16 +943,16 @@ paths:
         - posts
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a post.
       operationId: blogger.posts.patch
@@ -1132,16 +1132,16 @@ paths:
         - comments
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}":
     delete:
       description: Deletes a comment by blog id, post id and comment id.
@@ -1220,29 +1220,29 @@ paths:
         - comments
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Marks a comment as not spam by blog id, post id and comment id.
       operationId: blogger.comments.approve
@@ -1279,16 +1279,16 @@ paths:
   "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Removes the content of a comment by blog id, post id and comment id.
       operationId: blogger.comments.removeContent
@@ -1325,16 +1325,16 @@ paths:
   "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Marks a comment as spam by blog id, post id and comment id.
       operationId: blogger.comments.markAsSpam
@@ -1371,16 +1371,16 @@ paths:
   "/v3/blogs/{blogId}/posts/{postId}/publish":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Publishes a post.
       operationId: blogger.posts.publish
@@ -1416,16 +1416,16 @@ paths:
   "/v3/blogs/{blogId}/posts/{postId}/revert":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Reverts a published or scheduled post to draft state.
       operationId: blogger.posts.revert
@@ -1484,16 +1484,16 @@ paths:
         - users
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/users/{userId}/blogs":
     get:
       description: Lists blogs by user.
@@ -1562,16 +1562,16 @@ paths:
         - blogs
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/users/{userId}/blogs/{blogId}":
     get:
       description: Gets one blog and user info pair by blog id and user id.
@@ -1611,16 +1611,16 @@ paths:
         - blogUserInfos
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/users/{userId}/blogs/{blogId}/posts":
     get:
       description: Lists post and user info pairs.
@@ -1709,16 +1709,16 @@ paths:
         - postUserInfos
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3/users/{userId}/blogs/{blogId}/posts/{postId}":
     get:
       description: Gets one post and user info pair, by post_id and user_id.
@@ -1763,16 +1763,16 @@ paths:
         - postUserInfos
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

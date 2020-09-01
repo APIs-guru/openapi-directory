@@ -34,10 +34,10 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: Deletes a single Instance.
-      operationId: memcache.projects.locations.instances.delete
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.'
+      operationId: memcache.projects.locations.operations.delete
       parameters:
-        - description: 'Required. Memcached instance resource name in the format: `projects/{project_id}/locations/{location_id}/instances/{instance_id}` where `location_id` refers to a GCP region'
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: '#/components/schemas/Empty'
           description: Successful response
       security:
         - Oauth2:
@@ -58,61 +58,15 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single Instance.
-      operationId: memcache.projects.locations.instances.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: memcache.projects.locations.operations.get
       parameters:
-        - description: 'Required. Memcached instance resource name in the format: `projects/{project_id}/locations/{location_id}/instances/{instance_id}` where `location_id` refers to a GCP region'
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
           schema:
             type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Instance'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
-    patch:
-      description: Updates an existing Instance in a given project and location.
-      operationId: memcache.projects.locations.instances.patch
-      parameters:
-        - description: 'Required. Unique name of the resource in this scope including project and location using the form: `projects/{project_id}/locations/{location_id}/instances/{instance_id}` Note: Memcached instances are managed and addressed at regional level so location_id here refers to a GCP region; however, users may choose which zones Memcached nodes within an instances should be provisioned in. Refer to [zones] field for more details.'
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Required. Mask of fields to update. * `displayName`
-          in: query
-          name: updateMask
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Instance'
       responses:
         '200':
           content:
@@ -127,6 +81,18 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+    parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/v1/{name}/locations':
     get:
       description: Lists information about the supported locations for this service.
@@ -168,17 +134,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/v1/{name}/operations':
     get:
       description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `"/v1/{name=users/*}/operations"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
@@ -220,72 +186,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
-  '/v1/{name}:applyParameters':
-    parameters:
-      - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/callback'
-    post:
-      description: ApplyParameters will update current set of Parameters to the set of specified nodes of the Memcached Instance.
-      operationId: memcache.projects.locations.instances.applyParameters
-      parameters:
-        - description: Required. Resource name of the Memcached instance for which parameter group updates should be applied.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApplyParametersRequest'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Operation'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/v1/{name}:cancel':
     parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: '#/components/parameters/access_token'
       - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
       operationId: memcache.projects.locations.operations.cancel
@@ -307,139 +231,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Empty'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-  '/v1/{name}:updateParameters':
-    parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
-    patch:
-      description: 'Updates the defined Memcached Parameters for an existing Instance. This method only stages the parameters, it must be followed by ApplyParameters to apply the parameters to nodes of the Memcached Instance.'
-      operationId: memcache.projects.locations.instances.updateParameters
-      parameters:
-        - description: Required. Resource name of the Memcached instance for which the parameters should be updated.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateParametersRequest'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Operation'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-  '/v1/{parent}/instances':
-    get:
-      description: Lists Instances in a given project and location.
-      operationId: memcache.projects.locations.instances.list
-      parameters:
-        - description: 'Required. The resource name of the instance location using the form: `projects/{project_id}/locations/{location_id}` where `location_id` refers to a GCP region'
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: 'List filter. For example, exclude all Memcached instances with name as my-instance by specifying "name != my-instance".'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: 'Sort results. Supported values are "name", "name desc" or "" (unsorted).'
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: 'The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response''s next_page_token to determine if there are more instances left to be queried.'
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: 'The next_page_token value returned from a previous List request, if any.'
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListInstancesResponse'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/callback'
-    post:
-      description: Creates a new Instance in a given project and location.
-      operationId: memcache.projects.locations.instances.create
-      parameters:
-        - description: 'Required. The resource name of the instance location using the form: `projects/{project_id}/locations/{location_id}` where `location_id` refers to a GCP region'
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: 'Required. The logical name of the Memcached instance in the user project with the following restrictions: * Must contain only lowercase letters, numbers, and hyphens. * Must start with a letter. * Must be between 1-40 characters. * Must end with a number or a letter. * Must be unique within the user project / location'
-          in: query
-          name: instanceId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Instance'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Operation'
           description: Successful response
       security:
         - Oauth2:
@@ -524,18 +315,6 @@ components:
       schema:
         type: string
   schemas:
-    ApplyParametersRequest:
-      description: Request for ApplyParameters.
-      properties:
-        applyAll:
-          description: 'Whether to apply instance-level parameter group to all nodes. If set to true, will explicitly restrict users from specifying any nodes, and apply parameter group updates to all nodes within the instance.'
-          type: boolean
-        nodeIds:
-          description: Nodes to which we should apply the instance-level parameter group.
-          items:
-            type: string
-          type: array
-      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -543,40 +322,6 @@ components:
     Empty:
       description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
       properties: {}
-      type: object
-    GoogleCloudMemcacheV1OperationMetadata:
-      description: Represents the metadata of a long-running operation.
-      properties:
-        apiVersion:
-          description: Output only. API version used to start the operation.
-          readOnly: true
-          type: string
-        cancelRequested:
-          description: 'Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
-          readOnly: true
-          type: boolean
-        createTime:
-          description: Output only. Time when the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. Time when the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        statusDetail:
-          description: 'Output only. Human-readable status of the operation, if any.'
-          readOnly: true
-          type: string
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1Instance:
       properties:
@@ -753,112 +498,6 @@ components:
           description: Name of the SLO tier the Instance belongs to. This name will be expected to match the tiers specified in the service SLO configuration. Field is mandatory and must not be empty.
           type: string
       type: object
-    Instance:
-      properties:
-        authorizedNetwork:
-          description: 'The full name of the Google Compute Engine [network](/compute/docs/networks-and-firewalls#networks) to which the instance is connected. If left unspecified, the `default` network will be used.'
-          type: string
-        createTime:
-          description: Output only. The time the instance was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        discoveryEndpoint:
-          description: Output only. Endpoint for Discovery API
-          readOnly: true
-          type: string
-        displayName:
-          description: User provided name for the instance only used for display purposes. Cannot be more than 80 characters.
-          type: string
-        instanceMessages:
-          description: List of messages that describe current statuses of memcached instance.
-          items:
-            $ref: '#/components/schemas/InstanceMessage'
-          type: array
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Resource labels to represent user-provided metadata. Refer to cloud documentation on labels for more details. https://cloud.google.com/compute/docs/labeling-resources'
-          type: object
-        memcacheFullVersion:
-          description: Output only. The full version of memcached server running on this instance. System automatically determines the full memcached version for an instance based on the input MemcacheVersion. The full version format will be "memcached-1.5.16".
-          readOnly: true
-          type: string
-        memcacheNodes:
-          description: 'Output only. List of Memcached nodes. Refer to [Node] message for more details.'
-          items:
-            $ref: '#/components/schemas/Node'
-          readOnly: true
-          type: array
-        memcacheVersion:
-          description: 'The major version of Memcached software. If not provided, latest supported version will be used. Currently the latest supported major version is MEMCACHE_1_5. The minor version will be automatically determined by our system based on the latest supported minor version.'
-          enum:
-            - MEMCACHE_VERSION_UNSPECIFIED
-            - MEMCACHE_1_5
-          type: string
-        name:
-          description: 'Required. Unique name of the resource in this scope including project and location using the form: `projects/{project_id}/locations/{location_id}/instances/{instance_id}` Note: Memcached instances are managed and addressed at regional level so location_id here refers to a GCP region; however, users may choose which zones Memcached nodes within an instances should be provisioned in. Refer to [zones] field for more details.'
-          type: string
-        nodeConfig:
-          $ref: '#/components/schemas/NodeConfig'
-          description: Required. Configuration for Memcached nodes.
-        nodeCount:
-          description: Required. Number of nodes in the Memcached instance.
-          format: int32
-          type: integer
-        parameters:
-          $ref: '#/components/schemas/MemcacheParameters'
-          description: 'Optional: User defined parameters to apply to the memcached process on each node.'
-        state:
-          description: Output only. The state of this Memcached instance.
-          enum:
-            - STATE_UNSPECIFIED
-            - CREATING
-            - READY
-            - DELETING
-            - PERFORMING_MAINTENANCE
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. The time the instance was updated.
-          format: google-datetime
-          readOnly: true
-          type: string
-        zones:
-          description: 'Zones where Memcached nodes should be provisioned in. Memcached nodes will be equally distributed across these zones. If not provided, the service will by default create nodes in all zones in the region for the instance.'
-          items:
-            type: string
-          type: array
-      type: object
-    InstanceMessage:
-      properties:
-        code:
-          description: A code that correspond to one type of user-facing message.
-          enum:
-            - CODE_UNSPECIFIED
-            - ZONE_DISTRIBUTION_UNBALANCED
-          type: string
-        message:
-          description: Message on memcached instance which will be exposed to users.
-          type: string
-      type: object
-    ListInstancesResponse:
-      description: Response for ListInstances.
-      properties:
-        nextPageToken:
-          description: 'Token to retrieve the next page of results, or empty if there are no more results in the list.'
-          type: string
-        resources:
-          description: 'A list of Memcached instances in the project in the specified location, or across all locations. If the `location_id` in the parent field of the request is "-", all regions available to the project are queried, and the results aggregated.'
-          items:
-            $ref: '#/components/schemas/Instance'
-          type: array
-        unreachable:
-          description: Locations that could not be reached.
-          items:
-            type: string
-          type: array
-      type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
       properties:
@@ -915,63 +554,6 @@ components:
           description: 'Output only. The set of available zones in the location. The map is keyed by the lowercase ID of each zone, as defined by GCE. These keys can be specified in the `zones` field when creating a Memcached instance.'
           readOnly: true
           type: object
-      type: object
-    MemcacheParameters:
-      properties:
-        id:
-          description: Output only. The unique ID associated with this set of parameters. Users can use this id to determine if the parameters associated with the instance differ from the parameters associated with the nodes and any action needs to be taken to apply parameters on nodes.
-          readOnly: true
-          type: string
-        params:
-          additionalProperties:
-            type: string
-          description: User defined set of parameters to use in the memcached process.
-          type: object
-      type: object
-    Node:
-      properties:
-        host:
-          description: Output only. Hostname or IP address of the Memcached node used by the clients to connect to the Memcached server on this node.
-          readOnly: true
-          type: string
-        nodeId:
-          description: Output only. Identifier of the Memcached node. The node id does not include project or location like the Memcached instance name.
-          readOnly: true
-          type: string
-        parameters:
-          $ref: '#/components/schemas/MemcacheParameters'
-          description: User defined parameters currently applied to the node.
-        port:
-          description: Output only. The port number of the Memcached server on this node.
-          format: int32
-          readOnly: true
-          type: integer
-        state:
-          description: Output only. Current state of the Memcached node.
-          enum:
-            - STATE_UNSPECIFIED
-            - CREATING
-            - READY
-            - DELETING
-            - UPDATING
-          readOnly: true
-          type: string
-        zone:
-          description: Output only. Location (GCP Zone) for the Memcached node.
-          readOnly: true
-          type: string
-      type: object
-    NodeConfig:
-      description: Configuration for a Memcached Node.
-      properties:
-        cpuCount:
-          description: Required. Number of cpus per Memcached node.
-          format: int32
-          type: integer
-        memorySizeMb:
-          description: Required. Memory size in MiB for each Memcached node.
-          format: int32
-          type: integer
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -1046,17 +628,6 @@ components:
           type: array
         message:
           description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
-          type: string
-      type: object
-    UpdateParametersRequest:
-      description: Request for UpdateParameters.
-      properties:
-        parameters:
-          $ref: '#/components/schemas/MemcacheParameters'
-          description: The parameters to apply to the instance.
-        updateMask:
-          description: Required. Mask of fields to update.
-          format: google-fieldmask
           type: string
       type: object
     ZoneMetadata:

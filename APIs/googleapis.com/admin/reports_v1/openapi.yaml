@@ -33,11 +33,11 @@ info:
 externalDocs:
   url: http://developers.google.com/admin-sdk/
 tags:
-  - name: userUsageReport
+  - name: activities
+  - name: channels
   - name: customerUsageReports
   - name: entityUsageReports
-  - name: channels
-  - name: activities
+  - name: userUsageReport
 paths:
   "/admin/reports/v1/activity/users/{userKey}/applications/{applicationName}":
     get:
@@ -139,30 +139,30 @@ paths:
       tags:
         - activities
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
   "/admin/reports/v1/activity/users/{userKey}/applications/{applicationName}/watch":
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
     post:
       description: Start receiving notifications for account activities. For more information, see Receiving Push Notifications.
       operationId: reports.activities.watch
@@ -307,17 +307,17 @@ paths:
       tags:
         - customerUsageReports
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
   "/admin/reports/v1/usage/users/{userKey}/dates/{date}":
     get:
       description: Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report's parameters, see the Users Usage parameters reference guides.
@@ -382,17 +382,17 @@ paths:
       tags:
         - userUsageReport
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
   "/admin/reports/v1/usage/{entityType}/{entityKey}/dates/{date}":
     get:
       description: Retrieves a report which is a collection of properties and statistics for entities used by users within the account. For more information, see the Entities Usage Report guide. For more information about the entities report's parameters, see the Entities Usage parameters reference guides.
@@ -465,30 +465,30 @@ paths:
       tags:
         - entityUsageReports
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
   /admin/reports_v1/channels/stop:
     parameters:
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
     post:
       description: Stop watching resources through this channel.
       operationId: admin.channels.stop

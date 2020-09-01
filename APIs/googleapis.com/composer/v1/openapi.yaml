@@ -85,17 +85,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Update an environment.
       operationId: composer.projects.locations.environments.patch
@@ -171,17 +171,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/environments":
     get:
       description: List environments.
@@ -218,17 +218,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new environment.
       operationId: composer.projects.locations.environments.create
@@ -294,17 +294,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

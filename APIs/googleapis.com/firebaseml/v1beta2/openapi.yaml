@@ -61,10 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a model resource.
-      operationId: firebaseml.projects.models.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: firebaseml.projects.operations.get
       parameters:
-        - description: Required. The name of the model to get. The name must have the form `projects/{project_id}/models/{model_id}`
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Model"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -85,16 +85,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates a model. The longrunning operation will eventually return a Model.
@@ -171,16 +171,16 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a model in Firebase ML. The longrunning operation will eventually return a Model

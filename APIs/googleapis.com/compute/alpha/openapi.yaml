@@ -38,8 +38,8 @@ tags:
   - name: autoscalers
   - name: backendBuckets
   - name: backendServices
-  - name: diskTypes
   - name: disks
+  - name: diskTypes
   - name: externalVpnGateways
   - name: firewalls
   - name: forwardingRules
@@ -55,8 +55,8 @@ tags:
   - name: images
   - name: instanceGroupManagers
   - name: instanceGroups
-  - name: instanceTemplates
   - name: instances
+  - name: instanceTemplates
   - name: interconnectAttachments
   - name: interconnectLocations
   - name: interconnects
@@ -78,10 +78,10 @@ tags:
   - name: regionAutoscalers
   - name: regionBackendServices
   - name: regionCommitments
-  - name: regionDiskTypes
   - name: regionDisks
-  - name: regionHealthCheckServices
+  - name: regionDiskTypes
   - name: regionHealthChecks
+  - name: regionHealthCheckServices
   - name: regionInPlaceSnapshots
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
@@ -89,11 +89,11 @@ tags:
   - name: regionNetworkEndpointGroups
   - name: regionNotificationEndpoints
   - name: regionOperations
+  - name: regions
   - name: regionSslCertificates
   - name: regionTargetHttpProxies
   - name: regionTargetHttpsProxies
   - name: regionUrlMaps
-  - name: regions
   - name: reservations
   - name: resourcePolicies
   - name: routers
@@ -364,7 +364,7 @@ paths:
       description: Creates a new policy in the specified project using the data included in the request.
       operationId: compute.organizationSecurityPolicies.insert
       parameters:
-        - description: Parent ID for this request.
+        - description: Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
           in: query
           name: parentId
           schema:
@@ -43792,6 +43792,7 @@ components:
           enum:
             - DNS_RESOLVER
             - GCE_ENDPOINT
+            - IPSEC_INTERCONNECT
             - NAT_AUTO
             - PRIVATE_SERVICE_CONNECT
             - PSC_PRODUCER_NAT_RANGE
@@ -44036,6 +44037,10 @@ components:
         enableNestedVirtualization:
           description: Whether to enable nested virtualization or not (default is false).
           type: boolean
+        threadsPerCore:
+          description: The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.
+          format: int32
+          type: integer
       type: object
     AliasIpRange:
       description: An alias IP range attached to an instance's network interface.
@@ -45162,6 +45167,11 @@ components:
     BackendBucketCdnPolicy:
       description: Message containing Cloud CDN configuration for a backend bucket.
       properties:
+        bypassCacheOnRequestHeaders:
+          description: Bypass the cache when the specified request headers are matched - e.g. Pragma or Authorization headers. Up to 5 headers can be specified. The cache is bypassed for all cdnPolicy.cacheMode settings.
+          items:
+            $ref: "#/components/schemas/BackendBucketCdnPolicyBypassCacheOnRequestHeader"
+          type: array
         cacheMode:
           enum:
             - CACHE_ALL_STATIC
@@ -45192,6 +45202,10 @@ components:
         requestCoalescing:
           description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
           type: boolean
+        serveWhileStale:
+          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800(1 week). Set this to zero (0) to disable serve-while-stale.
+          format: int32
+          type: integer
         signedUrlCacheMaxAgeSec:
           description: 'Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a "Cache-Control: public, max-age=[TTL]" header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
           format: int64
@@ -45201,6 +45215,13 @@ components:
           items:
             type: string
           type: array
+      type: object
+    BackendBucketCdnPolicyBypassCacheOnRequestHeader:
+      description: Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
+      properties:
+        headerName:
+          description: The header field name to match on when bypassing cache. Values are case-insensitive.
+          type: string
       type: object
     BackendBucketCdnPolicyNegativeCachingPolicy:
       description: Specify CDN TTLs for response error codes.
@@ -45306,7 +45327,11 @@ components:
         (== resource_for {$api_version}.backendService ==)
       properties:
         affinityCookieTtlSec:
-          description: If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400).
+          description: >-
+            If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400).
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         backends:
@@ -45327,7 +45352,10 @@ components:
 
             - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. 
 
-            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
+            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.  
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         connectionDraining:
           $ref: "#/components/schemas/ConnectionDraining"
         consistentHash:
@@ -45340,7 +45368,10 @@ components:
 
             - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. 
 
-            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
+            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.  
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -45420,7 +45451,10 @@ components:
             - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.  
 
 
-            If sessionAffinity is not NONE, and this field is not set to >MAGLEV or RING_HASH, session affinity settings will not take effect.
+            If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect.
+
+
+            Only the default ROUND_ROBIN policy is supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           enum:
             - INVALID_LB_POLICY
             - LEAST_REQUEST
@@ -45450,7 +45484,10 @@ components:
 
             - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. 
 
-            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
+            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.  
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         port:
           description: >-
             Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80.
@@ -45474,6 +45511,9 @@ components:
 
 
             Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancer or for Traffic Director for more information.
+
+
+            Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
           enum:
             - ALL
             - GRPC
@@ -45516,6 +45556,9 @@ components:
 
 
             When the loadBalancingScheme is INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, possible values are NONE, CLIENT_IP, GENERATED_COOKIE, HEADER_FIELD, or HTTP_COOKIE.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           enum:
             - CLIENT_IP
             - CLIENT_IP_NO_DESTINATION
@@ -45612,6 +45655,11 @@ components:
     BackendServiceCdnPolicy:
       description: Message containing Cloud CDN configuration for a backend service.
       properties:
+        bypassCacheOnRequestHeaders:
+          description: Bypass the cache when the specified request headers are matched - e.g. Pragma or Authorization headers. Up to 5 headers can be specified. The cache is bypassed for all cdnPolicy.cacheMode settings.
+          items:
+            $ref: "#/components/schemas/BackendServiceCdnPolicyBypassCacheOnRequestHeader"
+          type: array
         cacheKeyPolicy:
           $ref: "#/components/schemas/CacheKeyPolicy"
           description: The CacheKeyPolicy for this CdnPolicy.
@@ -45645,6 +45693,10 @@ components:
         requestCoalescing:
           description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
           type: boolean
+        serveWhileStale:
+          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800(1 week). Set this to zero (0) to disable serve-while-stale.
+          format: int32
+          type: integer
         signedUrlCacheMaxAgeSec:
           description: 'Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a "Cache-Control: public, max-age=[TTL]" header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.'
           format: int64
@@ -45654,6 +45706,13 @@ components:
           items:
             type: string
           type: array
+      type: object
+    BackendServiceCdnPolicyBypassCacheOnRequestHeader:
+      description: Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
+      properties:
+        headerName:
+          description: The header field name to match on when bypassing cache. Values are case-insensitive.
+          type: string
       type: object
     BackendServiceCdnPolicyNegativeCachingPolicy:
       description: Specify CDN TTLs for response error codes.
@@ -46694,7 +46753,6 @@ components:
           type: integer
       type: object
     CustomerEncryptionKey:
-      description: Represents a customer-supplied encryption key
       properties:
         kmsKeyName:
           description: The name of the encryption key that is stored in Google Cloud KMS.
@@ -46877,6 +46935,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this disk satisfies zone separation."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
@@ -46949,6 +47010,19 @@ components:
           type: string
         sourceInPlaceSnapshotId:
           description: "[Deprecated] [Output Only] The unique ID of the in-place snapshot used to create this disk. This value identifies the exact in-place snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an in-place snapshot that was later deleted and recreated under the same name, the source in-place snapshot ID would identify the exact version of the in-place snapshot that was used."
+          type: string
+        sourceInstantSnapshot:
+          description: >-
+            The source instant snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  
+
+            - https://www.googleapis.com/compute/v1/projects/project/zones/zone/instantSnapshots/instantSnapshot 
+
+            - projects/project/zones/zone/instantSnapshots/instantSnapshot 
+
+            - zones/zone/instantSnapshots/instantSnapshot
+          type: string
+        sourceInstantSnapshotId:
+          description: "[Output Only] The unique ID of the instant snapshot used to create this disk. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact version of the instant snapshot that was used."
           type: string
         sourceSnapshot:
           description: >-
@@ -48378,6 +48452,9 @@ components:
 
 
             The loadBalancingScheme and the forwarding rule's target determine the type of IP address that you can use. For detailed information, refer to [IP address specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+
+
+            Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
           type: string
         IPProtocol:
           description: >-
@@ -48494,9 +48571,9 @@ components:
           type: string
         metadataFilters:
           description: >-
-            Opaque filter criteria used by Loadbalancer to restrict routing configuration to a limited set of xDS compliant clients. In their xDS requests to Loadbalancer, xDS clients present node metadata. If a match takes place, the relevant configuration is made available to those proxies. Otherwise, all the resources (e.g. TargetHttpProxy, UrlMap) referenced by the ForwardingRule will not be visible to those proxies.
+            Opaque filter criteria used by Loadbalancer to restrict routing configuration to a limited set of xDS compliant clients. In their xDS requests to Loadbalancer, xDS clients present node metadata. When there is a match, the relevant configuration is made available to those proxies. Otherwise, all the resources (e.g. TargetHttpProxy, UrlMap) referenced by the ForwardingRule will not be visible to those proxies.
 
-            For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata.
+            For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata. If multiple metadataFilters are specified, all of them need to be satisfied in order to be considered a match.
 
             metadataFilters specified here will be applifed before those specified in the UrlMap that this ForwardingRule references.
 
@@ -48575,6 +48652,11 @@ components:
         selfLinkWithId:
           description: "[Output Only] Server-defined URL for this resource with the resource id."
           type: string
+        serviceDirectoryRegistrations:
+          description: Service Directory resources to register this forwarding rule with. Currently, only supports a single Service Directory resource.
+          items:
+            $ref: "#/components/schemas/ForwardingRuleServiceDirectoryRegistration"
+          type: array
         serviceLabel:
           description: >-
             An optional prefix to the service name for this Forwarding Rule. If specified, the prefix is the first label of the fully qualified service name.
@@ -48759,6 +48841,16 @@ components:
     ForwardingRuleReference:
       properties:
         forwardingRule:
+          type: string
+      type: object
+    ForwardingRuleServiceDirectoryRegistration:
+      description: Describes the auto-registration of the Forwarding Rule to Service Directory. The region and project of the Service Directory resource generated from this registration will be the same as this Forwarding Rule.
+      properties:
+        namespace:
+          description: Service Directory namespace to register the forwarding rule under.
+          type: string
+        service:
+          description: Service Directory service to register the forwarding rule under.
           type: string
       type: object
     ForwardingRulesScopedList:
@@ -49642,7 +49734,11 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         hosts:
-          description: The list of host patterns to match. They must be valid hostnames with optional port numbers in the format host:port. * matches any string of ([a-z0-9-.]*). In that case, * must be the first character and must be followed in the pattern by either - or ..
+          description: >-
+            The list of host patterns to match. They must be valid hostnames with optional port numbers in the format host:port. * matches any string of ([a-z0-9-.]*). In that case, * must be the first character and must be followed in the pattern by either - or ..
+
+
+            * based matching is not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             type: string
           type: array
@@ -50203,9 +50299,9 @@ components:
           type: boolean
         metadataFilters:
           description: >-
-            Opaque filter criteria used by Loadbalancer to restrict routing configuration to a limited set of xDS compliant clients. In their xDS requests to Loadbalancer, xDS clients present node metadata. If a match takes place, the relevant routing configuration is made available to those proxies.
+            Opaque filter criteria used by Loadbalancer to restrict routing configuration to a limited set of xDS compliant clients. In their xDS requests to Loadbalancer, xDS clients present node metadata. When there is a match, the relevant routing configuration is made available to those proxies.
 
-            For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata.
+            For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata. If multiple metadataFilters are specified, all of them need to be satisfied in order to be considered a match.
 
             metadataFilters specified here will be applied after those specified in ForwardingRule that refers to the UrlMap this HttpRouteRuleMatch belongs to.
 
@@ -50956,6 +51052,9 @@ components:
           items:
             type: string
           type: array
+        satisfiesPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this instance satisfies zone separation."
+          type: boolean
         scheduling:
           $ref: "#/components/schemas/Scheduling"
           description: Sets the scheduling options for this instance.
@@ -53125,6 +53224,12 @@ components:
             - AVAILABILITY_DOMAIN_2
             - AVAILABILITY_DOMAIN_ANY
           type: string
+        encryption:
+          description: Indicates the user-supplied encryption option of this interconnect attachment.
+          enum:
+            - IPSEC
+            - NONE
+          type: string
         googleReferenceId:
           description: "[Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues. [Deprecated] This field is not used."
           type: string
@@ -53135,6 +53240,11 @@ components:
         interconnect:
           description: URL of the underlying Interconnect object that this attachment's traffic will traverse through.
           type: string
+        ipsecInternalAddresses:
+          description: URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway?s IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway?s interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+          items:
+            type: string
+          type: array
         kind:
           default: compute#interconnectAttachment
           description: "[Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments."
@@ -54587,7 +54697,7 @@ components:
           type: string
         deprecated:
           $ref: "#/components/schemas/DeprecationStatus"
-          description: "[Output Only] The deprecation status associated with this machine type."
+          description: "[Output Only] The deprecation status associated with this machine type. Only applicable if the machine type is unavailable."
         description:
           description: "[Output Only] An optional textual description of the resource."
           type: string
@@ -55961,7 +56071,7 @@ components:
           description: An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.
           type: string
         maintenancePolicy:
-          description: Specifies how to handle instances when a node in the group undergoes maintenance.
+          description: "Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see  Maintenance policies."
           enum:
             - DEFAULT
             - MAINTENANCE_POLICY_UNSPECIFIED
@@ -56085,7 +56195,7 @@ components:
           format: int32
           type: integer
         mode:
-          description: The autoscaling mode.
+          description: "The autoscaling mode. Set to one of: ON, OFF, or ONLY_SCALE_OUT. For more information, see  Autoscaler modes."
           enum:
             - MODE_UNSPECIFIED
             - OFF
@@ -56205,6 +56315,9 @@ components:
         nodeType:
           description: The type of this node.
           type: string
+        satisfiesPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this node satisfies zone separation."
+          type: boolean
         serverBinding:
           $ref: "#/components/schemas/ServerBinding"
           description: Binding properties for the physical server.
@@ -57909,6 +58022,9 @@ components:
             Only one of defaultRouteAction or defaultUrlRedirect must be set.
 
             UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within a pathMatcher's defaultRouteAction.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         defaultService:
           description: >-
             The full or partial URL to the BackendService resource. This will be used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource:  
@@ -57925,7 +58041,10 @@ components:
 
             - compute.backendBuckets.use 
 
-            - compute.backendServices.use
+            - compute.backendServices.use  
+
+
+            pathMatchers[].defaultService is the only option available when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           type: string
         defaultUrlRedirect:
           $ref: "#/components/schemas/HttpRedirectAction"
@@ -57933,6 +58052,9 @@ components:
             When none of the specified pathRules or routeRules match, the request is redirected to a URL specified by defaultUrlRedirect.
 
             If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy.
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
@@ -57944,6 +58066,9 @@ components:
             HeaderAction specified here are applied after the matching HttpRouteRule HeaderAction and before the HeaderAction in the UrlMap 
 
             Note that headerAction is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         name:
           description: The name to which this PathMatcher is referred by the HostRule.
           type: string
@@ -57954,6 +58079,9 @@ components:
             For example: a pathRule with a path /a/b/c/* will match before /a/b/* irrespective of the order in which those paths appear in this list.
 
             Within a given pathMatcher, only one of pathRules or routeRules must be set.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/PathRule"
           type: array
@@ -57962,6 +58090,9 @@ components:
             The list of HTTP route rules. Use this list instead of pathRules when advanced route matching and routing actions are desired. routeRules are evaluated in order of priority, from the lowest to highest number.
 
             Within a given pathMatcher, you can set only one of pathRules or routeRules.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/HttpRouteRule"
           type: array
@@ -58309,7 +58440,7 @@ components:
           $ref: "#/components/schemas/UsageExportLocation"
           description: The naming prefix for daily usage reports and the Google Cloud Storage bucket where they are stored.
         xpnProjectStatus:
-          description: "[Output Only] The role this project has in a shared VPC configuration. Currently only HOST projects are differentiated."
+          description: "[Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated."
           enum:
             - HOST
             - UNSPECIFIED_XPN_PROJECT_STATUS
@@ -58499,8 +58630,14 @@ components:
     PublicAdvertisedPrefixPublicDelegatedPrefix:
       description: Represents a CIDR range which can be used to assign addresses.
       properties:
+        ipRange:
+          description: The IP address range of the public delegated prefix
+          type: string
         name:
           description: The name of the public delegated prefix
+          type: string
+        project:
+          description: The project number of the public delegated prefix
           type: string
         region:
           description: The region of the public delegated prefix if it is regional. If absent, the prefix is global.
@@ -59016,6 +59153,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this region supports physical zone separation."
+          type: boolean
         zones:
           description: "[Output Only] A list of zones available in this region, in the form of resource URLs."
           items:
@@ -59376,7 +59516,7 @@ components:
           type: array
       type: object
     RegionInstanceGroupManagersApplyUpdatesRequest:
-      description: InstanceGroupManagers.applyUpdatesToInstances
+      description: RegionInstanceGroupManagers.applyUpdatesToInstances
       properties:
         allInstances:
           description: Flag to update all instances instead of specified list of ?instances?. If the flag is set to true then the instances may not be specified in the request.
@@ -62141,7 +62281,7 @@ components:
     SecurityPolicyRuleRateLimitOptions:
       properties:
         blockDuration:
-          description: Can only be specifed if the action for the rule is "rate_based_blacklist" If specified, determines the time (in seconds) the traffic will continue to be blocked by the rate limit after the rate falls below the threshold. The default value is 0 seconds.
+          description: Can only be specified if the action for the rule is "rate_based_blacklist" If specified, determines the time (in seconds) the traffic will continue to be blocked by the rate limit after the rate falls below the threshold. The default value is 0 seconds.
           format: int32
           type: integer
         conformAction:
@@ -62180,6 +62320,8 @@ components:
             clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
 
             If left blank, communications are not encrypted.
+
+            Note: This field currently has no impact.
           type: string
         clientTlsSettings:
           $ref: "#/components/schemas/ClientTlsSettings"
@@ -62191,6 +62333,8 @@ components:
             Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities.
 
             Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode).
+
+            Note: This field currently has no impact.
           items:
             type: string
           type: array
@@ -62565,6 +62709,9 @@ components:
           description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        satisfiesPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this snapshot satisfies zone separation."
+          type: boolean
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
@@ -64285,6 +64432,8 @@ components:
             Refer to the AuthorizationPolicy resource for additional details.
 
             authorizationPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+            Note: This field currently has no impact.
           type: string
         certificateMap:
           description: URL of a certificate map that identifies a certificate map associated with the given target proxy. This field can only be set for global target proxies. If set, sslCertificates will be ignored.
@@ -64344,6 +64493,8 @@ components:
             serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
 
             If left blank, communications are not encrypted.
+
+            Note: This field currently has no impact.
           type: string
         sslCertificates:
           description: URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
@@ -65776,10 +65927,10 @@ components:
       description: Upcoming Maintenance notification information.
       properties:
         date:
-          description: "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format."
+          description: "[Output Only] The date when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use start_time_window instead."
           type: string
         time:
-          description: "[Output Only] The time when the maintenance will take place. This value is in RFC3339 text format."
+          description: "[Output Only] The time when the maintenance will take place. This value is in RFC3339 text format. DEPRECATED: Use start_time_window instead."
           type: string
         type:
           description: Defines the type of maintenance.
@@ -65806,6 +65957,12 @@ components:
         * urlMaps are used by external HTTP(S) load balancers and Traffic Director. * regionUrlMaps are used by internal HTTP(S) load balancers.
 
 
+        For a list of supported URL map features by load balancer type, see the  Load balancing features: Routing and traffic management table.
+
+
+        For a list of supported URL map features for Traffic Director, see the  Traffic Director features: Routing and traffic management table.
+
+
         This resource defines mappings from host names and URL paths to either a backend service or a backend bucket.
 
 
@@ -65822,11 +65979,17 @@ components:
             Only one of defaultRouteAction or defaultUrlRedirect must be set.
 
             UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within defaultRouteAction.
+
+
+            defaultRouteAction has no effect when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         defaultService:
           description: >-
             The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified.
 
             Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
+
+
+            defaultService has no effect when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           type: string
         defaultUrlRedirect:
           $ref: "#/components/schemas/HttpRedirectAction"
@@ -65834,6 +65997,9 @@ components:
             When none of the specified hostRules match, the request is redirected to a URL specified by defaultUrlRedirect.
 
             If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy.
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
@@ -65851,6 +66017,9 @@ components:
             Specifies changes to request and response headers that need to take effect for the selected backendService.
 
             The headerAction specified here take effect after headerAction specified under pathMatcher.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         hostRules:
           description: The list of HostRules to use against the URL.
           items:
@@ -65880,7 +66049,11 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         tests:
-          description: The list of expected URL mapping tests. Request to update this UrlMap will succeed only if all of the test cases pass. You can specify a maximum of 100 tests per UrlMap.
+          description: >-
+            The list of expected URL mapping tests. Request to update this UrlMap will succeed only if all of the test cases pass. You can specify a maximum of 100 tests per UrlMap.
+
+
+            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/UrlMapTest"
           type: array
@@ -66681,6 +66854,9 @@ components:
           description: The numeric ID of this VPN gateway interface.
           format: uint32
           type: integer
+        interconnectAttachment:
+          description: URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec over Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
+          type: string
         ipAddress:
           description: "[Output Only] The external IP address for this VPN gateway interface."
           type: string
@@ -67269,6 +67445,9 @@ components:
             - DOWN
             - UP
           type: string
+        supportsPhysicalZoneSeparation:
+          description: "[Output Only] Specifies whether this zone supports physical zone separation."
+          type: boolean
       type: object
     ZoneList:
       description: Contains a list of zone resources.

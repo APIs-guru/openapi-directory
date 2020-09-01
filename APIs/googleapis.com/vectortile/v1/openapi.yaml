@@ -27,20 +27,25 @@ info:
 externalDocs:
   url: https://developers.google.com/maps/contact-sales/
 tags:
-  - name: terraintiles
   - name: featuretiles
+  - name: terraintiles
 paths:
   "/v1/{name}":
     get:
-      description: Gets a feature tile by its tile resource name.
-      operationId: vectortile.featuretiles.get
+      description: Gets a terrain tile by its tile resource name.
+      operationId: vectortile.terraintiles.get
       parameters:
-        - description: Required. Resource name of the tile. The tile resource name is prefixed by its collection ID `tiles/` followed by the resource ID, which encodes the tile's global x and y coordinates and zoom level as `@,,z`. For example, `tiles/@1,2,3z`.
+        - description: Required. Resource name of the tile. The tile resource name is prefixed by its collection ID `terraintiles/` followed by the resource ID, which encodes the tile's global x and y coordinates and zoom level as `@,,z`. For example, `terraintiles/@1,2,3z`.
           in: path
           name: name
           required: true
           schema:
             type: string
+        - description: "The precision of terrain altitudes in centimeters. Possible values: between 1 (cm level precision) and 1,000,000 (10-kilometer level precision)."
+          in: query
+          name: altitudePrecisionCentimeters
+          schema:
+            type: integer
         - description: API client name and version. For example, the SDK calling the API. The exact format is up to the client.
           in: query
           name: clientInfo.apiClient
@@ -65,6 +70,15 @@ paths:
           in: query
           name: clientInfo.operatingSystem
           schema:
+            enum:
+              - PLATFORM_UNSPECIFIED
+              - EDITOR
+              - MAC_OS
+              - WINDOWS
+              - LINUX
+              - ANDROID
+              - IOS
+              - WEB_GL
             type: string
         - description: Platform where the application is running.
           in: query
@@ -84,35 +98,21 @@ paths:
           in: query
           name: clientInfo.userId
           schema:
-            enum:
-              - PLATFORM_UNSPECIFIED
-              - EDITOR
-              - MAC_OS
-              - WINDOWS
-              - LINUX
-              - ANDROID
-              - IOS
-              - WEB_GL
             type: string
-        - description: Optional version id identifying the tile that is already in the client's cache. This field should be populated with the most recent version_id value returned by the API for the requested tile. If the version id is empty the server always returns a newly rendered tile. If it is provided the server checks if the tile contents would be identical to one that's already on the client, and if so, returns a stripped-down response tile with STATUS_OK_DATA_UNCHANGED instead.
+        - description: "The maximum allowed resolution for the returned elevation heightmap. Possible values: between 1 and 1024 (and not less than min_elevation_resolution_cells). Over-sized heightmaps will be non-uniformly down-sampled such that each edge is no longer than this value. Non-uniformity is chosen to maximise the amount of preserved data. For example: Original resolution: 100px (width) * 30px (height) max_elevation_resolution: 30 New resolution: 30px (width) * 30px (height)"
           in: query
-          name: clientTileVersionId
+          name: maxElevationResolutionCells
           schema:
-            type: string
-        - description: Flag indicating whether detailed highway types should be returned. If this is set, the CONTROLLED_ACCESS_HIGHWAY type may be returned. If not, then these highways will have the generic HIGHWAY type. This exists for backwards compatibility reasons.
+            type: integer
+        - description: "The minimum allowed resolution for the returned elevation heightmap. Possible values: between 0 and 1024 (and not more than max_elevation_resolution_cells). Zero is supported for backward compatibility. Under-sized heightmaps will be non-uniformly up-sampled such that each edge is no shorter than this value. Non-uniformity is chosen to maximise the amount of preserved data. For example: Original resolution: 30px (width) * 10px (height) min_elevation_resolution: 30 New resolution: 30px (width) * 30px (height)"
           in: query
-          name: enableDetailedHighwayTypes
+          name: minElevationResolutionCells
           schema:
-            type: boolean
-        - description: Flag indicating whether human-readable names should be returned for features. If this is set, the display_name field on the feature will be filled out.
-          in: query
-          name: enableFeatureNames
-          schema:
-            type: boolean
-        - description: Flag indicating whether 3D building models should be enabled. If this is set structures will be returned as 3D modeled volumes rather than 2.5D extruded areas where possible.
+            type: integer
+        - description: Terrain formats that the client understands.
           explode: true
           in: query
-          name: enableModeledVolumes
+          name: terrainFormats
           schema:
             items:
               enum:
@@ -120,7 +120,7 @@ paths:
                 - FIRST_DERIVATIVE
                 - SECOND_DERIVATIVE
               type: string
-            type: boolean
+            type: array
           style: form
         - description: Flag indicating whether political features should be returned.
           in: query
@@ -152,22 +152,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FeatureTile"
+                $ref: "#/components/schemas/TerrainTile"
           description: Successful response
       tags:
-        - featuretiles
+        - terraintiles
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/access_token"
 components:
   parameters:
     _.xgafv:

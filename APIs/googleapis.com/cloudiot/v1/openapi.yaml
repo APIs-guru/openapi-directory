@@ -98,17 +98,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates a device.
       operationId: cloudiot.projects.locations.registries.devices.patch
@@ -182,17 +182,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/states":
     get:
       description: "Lists the last few versions of the device state in descending order (i.e.: newest first)."
@@ -228,30 +228,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:modifyCloudToDeviceConfig":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Modifies the configuration for the device, which is eventually sent from the Cloud IoT Core servers. Returns the modified configuration version and its metadata.
       operationId: cloudiot.projects.locations.registries.devices.modifyCloudToDeviceConfig
@@ -287,17 +287,17 @@ paths:
         - projects
   "/v1/{name}:sendCommandToDevice":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Sends a command to the specified device. In order for a device to be able to receive commands, it must: 1) be connected to Cloud IoT Core using the MQTT protocol, and 2) be subscribed to the group of MQTT topics specified by /devices/{device-id}/commands/#. This subscription will receive commands at the top-level topic /devices/{device-id}/commands as well as commands for subfolders, like /devices/{device-id}/commands/subfolder. Note that subscribing to specific subfolders is not supported. If the command could not be delivered to the device, this method will return an error; in particular, if the device is not subscribed, this method will return FAILED_PRECONDITION. Otherwise, this method will return OK. If the subscription is QoS 1, at least once delivery will be guaranteed; for QoS 0, no acknowledgment will be expected from the device."
       operationId: cloudiot.projects.locations.registries.devices.sendCommandToDevice
@@ -413,17 +413,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a device in a device registry.
       operationId: cloudiot.projects.locations.registries.devices.create
@@ -497,17 +497,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a device registry that contains devices.
       operationId: cloudiot.projects.locations.registries.create
@@ -543,17 +543,17 @@ paths:
         - projects
   "/v1/{parent}:bindDeviceToGateway":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Associates the device with the gateway.
       operationId: cloudiot.projects.locations.registries.bindDeviceToGateway
@@ -589,17 +589,17 @@ paths:
         - projects
   "/v1/{parent}:unbindDeviceFromGateway":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Deletes the association between the device and the gateway.
       operationId: cloudiot.projects.locations.registries.unbindDeviceFromGateway
@@ -635,17 +635,17 @@ paths:
         - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: cloudiot.projects.locations.registries.groups.getIamPolicy
@@ -681,17 +681,17 @@ paths:
         - projects
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
       operationId: cloudiot.projects.locations.registries.groups.setIamPolicy
@@ -727,17 +727,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.
       operationId: cloudiot.projects.locations.registries.groups.testIamPermissions

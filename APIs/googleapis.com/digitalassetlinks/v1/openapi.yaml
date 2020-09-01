@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/digital-asset-links/
 tags:
-  - name: statements
   - name: assetlinks
+  - name: statements
 paths:
   /v1/assetlinks:check:
     get:
@@ -309,17 +309,17 @@ paths:
       tags:
         - assetlinks
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/statements:list:
     get:
       description: >-
@@ -484,17 +484,17 @@ paths:
       tags:
         - statements
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

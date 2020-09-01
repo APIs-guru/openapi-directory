@@ -1,21 +1,24 @@
 openapi: 3.0.0
 servers:
   - url: https://sourcerepo.googleapis.com/
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
     url: https://google.com
+    x-twitter: youtube
   description: Accesses source code repositories hosted by Google.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Cloud Source Repositories
+  title: Cloud Source Repositories API
   version: v1
   x-apiClientRegistration:
     url: https://console.developers.google.com
   x-apisguru-categories:
-    - developer_tools
+    - analytics
+    - media
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
@@ -47,11 +50,10 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
@@ -79,11 +81,10 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Repo"
           description: Successful response
@@ -107,17 +108,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates information about a repo.
       operationId: sourcerepo.projects.repos.patch
@@ -131,7 +132,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -140,7 +140,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Repo"
           description: Successful response
@@ -165,11 +165,10 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/ProjectConfig"
           description: Successful response
@@ -181,17 +180,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates the Cloud Source Repositories configuration of the project.
       operationId: sourcerepo.projects.updateConfig
@@ -205,7 +204,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -214,7 +212,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/ProjectConfig"
           description: Successful response
@@ -242,7 +240,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: >-
             Maximum number of repositories to return; between 1 and 500.
 
@@ -264,7 +261,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/ListReposResponse"
           description: Successful response
@@ -288,30 +285,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:sync":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Synchronize a connected repo.
@@ -329,7 +326,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -338,7 +334,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
           description: Successful response
@@ -351,17 +347,17 @@ paths:
         - projects
   "/v1/{parent}/repos":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Creates a repo in the given project with the given name.
@@ -381,7 +377,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -390,7 +385,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Repo"
           description: Successful response
@@ -424,7 +419,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
         - description: >-
             Optional. The policy format version to be returned.
 
@@ -439,6 +433,13 @@ paths:
             Policies without any conditional bindings may specify any valid value or
 
             leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           in: query
           name: options.requestedPolicyVersion
           schema:
@@ -446,7 +447,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Policy"
           description: Successful response
@@ -470,30 +471,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Sets the access control policy on the specified resource. Replaces any
@@ -510,7 +511,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -519,7 +519,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/Policy"
           description: Successful response
@@ -536,17 +536,17 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: >-
         Returns permissions that a caller has on the specified resource.
@@ -565,7 +565,6 @@ paths:
           required: true
           schema:
             type: string
-          x-reservedExpansion: true
       requestBody:
         content:
           application/json:
@@ -574,7 +573,7 @@ paths:
       responses:
         "200":
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
@@ -619,7 +618,6 @@ components:
       in: query
       name: alt
       schema:
-        default: json
         enum:
           - json
           - media
@@ -654,7 +652,6 @@ components:
       in: query
       name: prettyPrint
       schema:
-        default: true
         type: boolean
     quotaUser:
       description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
@@ -700,7 +697,7 @@ components:
             {
               "audit_configs": [
                 {
-                  "service": "allServices"
+                  "service": "allServices",
                   "audit_log_configs": [
                     {
                       "log_type": "DATA_READ",
@@ -709,18 +706,18 @@ components:
                       ]
                     },
                     {
-                      "log_type": "DATA_WRITE",
+                      "log_type": "DATA_WRITE"
                     },
                     {
-                      "log_type": "ADMIN_READ",
+                      "log_type": "ADMIN_READ"
                     }
                   ]
                 },
                 {
-                  "service": "sampleservice.googleapis.com"
+                  "service": "sampleservice.googleapis.com",
                   "audit_log_configs": [
                     {
-                      "log_type": "DATA_READ",
+                      "log_type": "DATA_READ"
                     },
                     {
                       "log_type": "DATA_WRITE",
@@ -768,7 +765,7 @@ components:
                   ]
                 },
                 {
-                  "log_type": "DATA_WRITE",
+                  "log_type": "DATA_WRITE"
                 }
               ]
             }
@@ -804,11 +801,24 @@ components:
           description: >-
             The condition that is associated with this binding.
 
-            NOTE: An unsatisfied condition will not allow user access via current
 
-            binding. Different bindings, including their conditions, are examined
+            If the condition evaluates to `true`, then this binding applies to the
 
-            independently.
+            current request.
+
+
+            If the condition evaluates to `false`, then this binding does not apply to
+
+            the current request. However, a different role binding might grant the same
+
+            role to one or more of the members in this binding.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM
+
+            documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
           description: >+
             Specifies the identities requesting access for a Cloud Platform resource.
@@ -1069,13 +1079,17 @@ components:
         custom role.
 
 
-        Optionally, a `binding` can specify a `condition`, which is a logical
+        For some types of Google Cloud resources, a `binding` can also specify a
 
-        expression that allows access to a resource only if the expression evaluates
+        `condition`, which is a logical expression that allows access to a resource
 
-        to `true`. A condition can add constraints based on attributes of the
+        only if the expression evaluates to `true`. A condition can add constraints
 
-        request, the resource, or both.
+        based on attributes of the request, the resource, or both. To learn which
+
+        resources support conditions in their IAM policies, see the
+
+        [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
 
 
         **JSON example:**
@@ -1093,7 +1107,9 @@ components:
                 },
                 {
                   "role": "roles/resourcemanager.organizationViewer",
-                  "members": ["user:eve@example.com"],
+                  "members": [
+                    "user:eve@example.com"
+                  ],
                   "condition": {
                     "title": "expirable access",
                     "description": "Does not grant access after Sep 2020",
@@ -1205,6 +1221,11 @@ components:
             If a policy does not include any conditions, operations on that policy may
 
             specify any valid version or leave the field unset.
+
+
+            To learn which resources support conditions in their IAM policies, see the
+
+            [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           format: int32
           type: integer
       type: object
@@ -1317,9 +1338,8 @@ components:
 
             following default mask is used:
 
-            paths: "bindings, etag"
 
-            This field is only used by Cloud IAM.
+            `paths: "bindings, etag"`
           format: google-fieldmask
           type: string
       type: object
@@ -1463,7 +1483,7 @@ components:
             https://www.googleapis.com/auth/source.read_write: Manage the contents of your source code repositories
       type: oauth2
     Oauth2c:
-      description: Oauth 2.0 accessCode authentication
+      description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth

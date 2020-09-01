@@ -33,23 +33,23 @@ info:
 externalDocs:
   url: https://developers.google.com/cloud-test-lab/
 tags:
-  - name: testEnvironmentCatalog
-  - name: projects
   - name: applicationDetailService
+  - name: projects
+  - name: testEnvironmentCatalog
 paths:
   /v1/applicationDetailService/getApkDetails:
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the details of an Android application APK.
       operationId: testing.applicationDetailService.getApkDetails
@@ -74,17 +74,17 @@ paths:
         - applicationDetailService
   "/v1/projects/{projectId}/testMatrices":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. Matrices are limited to at most 200 supported executions. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix expands to more than 200 supported executions"
       operationId: testing.projects.testMatrices.create
@@ -155,30 +155,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel":
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Cancels unfinished test executions in a test matrix. This call returns immediately and cancellation proceeds asynchronously. If the matrix is already final, this operation will have no effect. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist"
       operationId: testing.projects.testMatrices.cancel
@@ -251,17 +251,17 @@ paths:
       tags:
         - testEnvironmentCatalog
     parameters:
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -974,6 +974,11 @@ components:
     IosTestSetup:
       description: A description of how to set up an iOS device prior to running the test.
       properties:
+        additionalIpas:
+          description: iOS apps to install in addition to those being directly tested.
+          items:
+            $ref: "#/components/schemas/FileReference"
+          type: array
         networkProfile:
           description: The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string

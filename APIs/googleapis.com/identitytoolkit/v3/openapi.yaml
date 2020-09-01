@@ -37,12 +37,12 @@ tags:
 paths:
   /createAuthUri:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Creates the URI used by the IdP to authenticate the user.
@@ -68,12 +68,12 @@ paths:
         - relyingparty
   /deleteAccount:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Delete user account.
@@ -99,12 +99,12 @@ paths:
         - relyingparty
   /downloadAccount:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Batch download user accounts.
@@ -134,12 +134,12 @@ paths:
         - relyingparty
   /emailLinkSignin:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Reset password for a user.
@@ -165,12 +165,12 @@ paths:
         - relyingparty
   /getAccountInfo:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Returns the account info.
@@ -196,12 +196,12 @@ paths:
         - relyingparty
   /getOobConfirmationCode:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Get a code for user action confirmation.
@@ -255,12 +255,12 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
   /getRecaptchaParam:
     get:
@@ -281,12 +281,12 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
   /publicKeys:
     get:
@@ -307,21 +307,21 @@ paths:
       tags:
         - relyingparty
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
   /resetPassword:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Reset password for a user.
@@ -347,12 +347,12 @@ paths:
         - relyingparty
   /sendVerificationCode:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Send SMS verification code.
@@ -378,12 +378,12 @@ paths:
         - relyingparty
   /setAccountInfo:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Set account info for a user.
@@ -409,12 +409,12 @@ paths:
         - relyingparty
   /setProjectConfig:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Set project configuration.
@@ -440,12 +440,12 @@ paths:
         - relyingparty
   /signOutUser:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Sign out user.
@@ -471,12 +471,12 @@ paths:
         - relyingparty
   /signupNewUser:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Signup new user.
@@ -502,12 +502,12 @@ paths:
         - relyingparty
   /uploadAccount:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Batch upload existing user accounts.
@@ -537,12 +537,12 @@ paths:
         - relyingparty
   /verifyAssertion:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Verifies the assertion returned by the IdP.
@@ -568,12 +568,12 @@ paths:
         - relyingparty
   /verifyCustomToken:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Verifies the developer asserted ID token.
@@ -599,12 +599,12 @@ paths:
         - relyingparty
   /verifyPassword:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Verifies the user entered password.
@@ -630,12 +630,12 @@ paths:
         - relyingparty
   /verifyPhoneNumber:
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
       description: Verifies ownership of a phone number and creates/updates the user account accordingly.

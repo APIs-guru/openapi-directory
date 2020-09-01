@@ -34,8 +34,8 @@ externalDocs:
   url: https://developers.google.com/zero-touch/
 tags:
   - name: customers
-  - name: partners
   - name: operations
+  - name: partners
 paths:
   /v1/customers:
     get:
@@ -63,29 +63,29 @@ paths:
         - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/partners/{metadataOwnerId}/devices/{deviceId}/metadata":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Updates reseller metadata associated with the device.
       operationId: androiddeviceprovisioning.partners.devices.metadata
@@ -148,29 +148,29 @@ paths:
         - partners
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/partners/{partnerId}/devices:claim":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Claims a device for a customer and adds it to zero-touch enrollment. If the device is already claimed by another customer, the call returns an error.
       operationId: androiddeviceprovisioning.partners.devices.claim
@@ -198,16 +198,16 @@ paths:
   "/v1/partners/{partnerId}/devices:claimAsync":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Claims a batch of devices for a customer asynchronously. Adds the devices to zero-touch enrollment. To learn more, read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.claimAsync
@@ -235,16 +235,16 @@ paths:
   "/v1/partners/{partnerId}/devices:findByIdentifier":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Finds devices by hardware identifiers, such as IMEI.
       operationId: androiddeviceprovisioning.partners.devices.findByIdentifier
@@ -272,16 +272,16 @@ paths:
   "/v1/partners/{partnerId}/devices:findByOwner":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Finds devices claimed for customers. The results only contain devices registered to the reseller that's identified by the `partnerId` argument. The customer's devices purchased from other resellers don't appear in the results.
       operationId: androiddeviceprovisioning.partners.devices.findByOwner
@@ -309,16 +309,16 @@ paths:
   "/v1/partners/{partnerId}/devices:unclaim":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Unclaims a device from a customer and removes it from zero-touch enrollment.
       operationId: androiddeviceprovisioning.partners.devices.unclaim
@@ -346,16 +346,16 @@ paths:
   "/v1/partners/{partnerId}/devices:unclaimAsync":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Unclaims a batch of devices for a customer asynchronously. Removes the devices from zero-touch enrollment. To learn more, read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.unclaimAsync
@@ -383,16 +383,16 @@ paths:
   "/v1/partners/{partnerId}/devices:updateMetadataAsync":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an `Operation` that can be used to track progress. Read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
       operationId: androiddeviceprovisioning.partners.devices.updateMetadataAsync
@@ -438,10 +438,10 @@ paths:
       tags:
         - customers
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: androiddeviceprovisioning.operations.get
+      description: Gets a device.
+      operationId: androiddeviceprovisioning.partners.devices.get
       parameters:
-        - description: The name of the operation resource.
+        - description: Required. The device API resource name in the format `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
           in: path
           name: name
           required: true
@@ -452,22 +452,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Device"
           description: Successful response
       tags:
-        - operations
+        - partners
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates a configuration's field values.
       operationId: androiddeviceprovisioning.customers.configurations.patch
@@ -519,16 +519,16 @@ paths:
         - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new configuration. Once created, a customer can apply the configuration to devices.
       operationId: androiddeviceprovisioning.customers.configurations.create
@@ -585,16 +585,16 @@ paths:
         - partners
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a customer for zero-touch enrollment. After the method returns successfully, admin and owner roles can manage devices and EMM configs by calling API methods or using their zero-touch enrollment portal. The customer receives an email that welcomes them to zero-touch enrollment and explains how to sign into the portal.
       operationId: androiddeviceprovisioning.partners.customers.create
@@ -651,29 +651,29 @@ paths:
         - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/devices:applyConfiguration":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Applies a Configuration to the device to register the device for zero-touch enrollment. After applying a configuration to a device, the device automatically provisions itself on first boot, or next factory reset.
       operationId: androiddeviceprovisioning.customers.devices.applyConfiguration
@@ -701,16 +701,16 @@ paths:
   "/v1/{parent}/devices:removeConfiguration":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Removes a configuration from device.
       operationId: androiddeviceprovisioning.customers.devices.removeConfiguration
@@ -738,16 +738,16 @@ paths:
   "/v1/{parent}/devices:unclaim":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Unclaims a device from a customer and removes it from zero-touch enrollment. After removing a device, a customer must contact their reseller to register the device into zero-touch enrollment again.
       operationId: androiddeviceprovisioning.customers.devices.unclaim
@@ -794,16 +794,16 @@ paths:
         - customers
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/vendors":
     get:
       description: Lists the vendors of the partner.
@@ -836,16 +836,16 @@ paths:
         - partners
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

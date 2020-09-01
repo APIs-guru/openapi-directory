@@ -93,17 +93,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -149,17 +149,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -205,30 +205,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{name}:cancel":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: translate.projects.locations.operations.cancel
@@ -264,17 +264,17 @@ paths:
         - projects
   "/v3beta1/{name}:wait":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Waits for the specified long-running operation until it is done or reaches at most a specified timeout, returning the latest state. If the operation is already done, the latest state is immediately returned. If the timeout specified is greater than the default HTTP/RPC timeout, the HTTP/RPC timeout is used. If the server does not support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Note that this method is on a best-effort basis. It may return the latest state before the specified timeout (including immediately), meaning even an immediate response is no guarantee that the operation is done.
       operationId: translate.projects.locations.operations.wait
@@ -353,17 +353,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a glossary and returns the long-running operation. Returns NOT_FOUND, if the project doesn't exist.
       operationId: translate.projects.locations.glossaries.create
@@ -433,30 +433,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v3beta1/{parent}:batchTranslateText":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Translates a large volume of text in asynchronous batch mode. This function provides real-time output as the inputs are being processed. If caller cancels a request, the partial results (for an input file, it's all or nothing) may still be available on the specified output location. This call returns immediately and you can use google.longrunning.Operation.name to poll the status of the call.
       operationId: translate.projects.locations.batchTranslateText
@@ -488,17 +488,17 @@ paths:
         - projects
   "/v3beta1/{parent}:detectLanguage":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Detects the language of text within a request.
       operationId: translate.projects.locations.detectLanguage
@@ -534,17 +534,17 @@ paths:
         - projects
   "/v3beta1/{parent}:translateText":
     parameters:
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Translates input text and returns translated text.
       operationId: translate.projects.locations.translateText

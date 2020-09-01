@@ -85,17 +85,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Updates an attestor. Returns NOT_FOUND if the attestor does not exist.
       operationId: binaryauthorization.projects.attestors.update
@@ -161,17 +161,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates an attestor, and returns a copy of the new attestor. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the attestor already exists.
       operationId: binaryauthorization.projects.attestors.create
@@ -209,7 +209,7 @@ paths:
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: binaryauthorization.projects.attestors.getIamPolicy
+      operationId: binaryauthorization.projects.policy.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -237,33 +237,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: binaryauthorization.projects.attestors.setIamPolicy
+      operationId: binaryauthorization.projects.policy.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -292,20 +292,20 @@ paths:
         - projects
   "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: binaryauthorization.projects.attestors.testIamPermissions
+      operationId: binaryauthorization.projects.policy.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -476,6 +476,9 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
+        bindingId:
+          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
+          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).

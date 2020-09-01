@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.googleapis.com/'
+  - url: 'https://tagmanager.googleapis.com/'
 info:
   contact:
     name: Google
@@ -66,16 +66,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/tagmanager/v2/{parent}/built_in_variables':
     get:
       description: Lists all the enabled Built-In Variables of a GTM Container.
@@ -112,16 +112,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates one or more GTM Built-In Variables.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.create
@@ -302,16 +302,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a Container.
       operationId: tagmanager.accounts.containers.create
@@ -377,16 +377,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.create
@@ -452,16 +452,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.create
@@ -527,16 +527,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Tag.
       operationId: tagmanager.accounts.containers.workspaces.tags.create
@@ -602,16 +602,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Custom Template.
       operationId: tagmanager.accounts.containers.workspaces.templates.create
@@ -677,16 +677,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Trigger.
       operationId: tagmanager.accounts.containers.workspaces.triggers.create
@@ -748,16 +748,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a user's Account & Container access.
       operationId: tagmanager.accounts.user_permissions.create
@@ -823,16 +823,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Variable.
       operationId: tagmanager.accounts.containers.workspaces.variables.create
@@ -907,16 +907,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/tagmanager/v2/{parent}/version_headers:latest':
     get:
       description: Gets the latest container version header
@@ -948,16 +948,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/tagmanager/v2/{parent}/versions:live':
     get:
       description: Gets the live (i.e. published) container version
@@ -989,16 +989,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/tagmanager/v2/{parent}/workspaces':
     get:
       description: Lists all Workspaces that belong to a GTM Container.
@@ -1035,16 +1035,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a Workspace.
       operationId: tagmanager.accounts.containers.workspaces.create
@@ -1110,16 +1110,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Creates a GTM Zone.
       operationId: tagmanager.accounts.containers.workspaces.zones.create
@@ -1318,9 +1318,9 @@ paths:
           Oauth2c:
             - 'https://www.googleapis.com/auth/tagmanager.manage.users'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/tagmanager.readonly'
           Oauth2c:
@@ -1329,16 +1329,16 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     put:
       description: Updates a user's Account & Container access.
       operationId: tagmanager.accounts.user_permissions.update
@@ -1349,7 +1349,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the container version in storage.'
+        - description: 'When provided, this fingerprint must match the fingerprint of the zone in storage.'
           in: query
           name: fingerprint
           schema:
@@ -1376,16 +1376,16 @@ paths:
   '/tagmanager/v2/{path}/built_in_variables:revert':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Reverts changes to a GTM Built-In Variables in a GTM Workspace.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.revert
@@ -1557,29 +1557,29 @@ paths:
         - accounts
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
   '/tagmanager/v2/{path}:create_version':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: 'Creates a Container Version from the entities present in the workspace, deletes the workspace, and sets the base container version to the newly created version.'
       operationId: tagmanager.accounts.containers.workspaces.create_version
@@ -1612,16 +1612,16 @@ paths:
   '/tagmanager/v2/{path}:entities':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: List all entities in a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.entities
@@ -1658,16 +1658,16 @@ paths:
   '/tagmanager/v2/{path}:move_entities_to_folder':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Moves entities to a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.move_entities_to_folder
@@ -1723,16 +1723,16 @@ paths:
   '/tagmanager/v2/{path}:publish':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Publishes a Container Version.
       operationId: tagmanager.accounts.containers.versions.publish
@@ -1765,16 +1765,16 @@ paths:
   '/tagmanager/v2/{path}:quick_preview':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Quick previews a workspace by creating a fake container version from all entities in the provided workspace.
       operationId: tagmanager.accounts.containers.workspaces.quick_preview
@@ -1802,16 +1802,16 @@ paths:
   '/tagmanager/v2/{path}:reauthorize':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Re-generates the authorization code for a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.reauthorize
@@ -1844,16 +1844,16 @@ paths:
   '/tagmanager/v2/{path}:resolve_conflict':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Resolves a merge conflict for a workspace entity by updating it to the resolved entity passed in the request.
       operationId: tagmanager.accounts.containers.workspaces.resolve_conflict
@@ -1887,27 +1887,27 @@ paths:
   '/tagmanager/v2/{path}:revert':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
-      description: Reverts changes to a GTM Variable in a GTM Workspace.
-      operationId: tagmanager.accounts.containers.workspaces.variables.revert
+      description: Reverts changes to a GTM Zone in a GTM Workspace.
+      operationId: tagmanager.accounts.containers.workspaces.zones.revert
       parameters:
-        - description: 'GTM Variable''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/variables/{variable_id}'
+        - description: 'GTM Zone''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/zones/{zone_id}'
           in: path
           name: path
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the variable in storage.'
+        - description: 'When provided, this fingerprint must match the fingerprint of the zone in storage.'
           in: query
           name: fingerprint
           schema:
@@ -1917,7 +1917,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RevertVariableResponse'
+                $ref: '#/components/schemas/RevertZoneResponse'
           description: Successful response
       security:
         - Oauth2:
@@ -1929,16 +1929,16 @@ paths:
   '/tagmanager/v2/{path}:set_latest':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Sets the latest version used for synchronization of workspaces when detecting conflicts and errors.
       operationId: tagmanager.accounts.containers.versions.set_latest
@@ -1966,16 +1966,16 @@ paths:
   '/tagmanager/v2/{path}:sync':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Syncs a workspace to the latest container version by updating all unmodified workspace entities and displaying conflicts for modified entities.
       operationId: tagmanager.accounts.containers.workspaces.sync
@@ -2003,16 +2003,16 @@ paths:
   '/tagmanager/v2/{path}:undelete':
     parameters:
       - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/alt'
       - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
       - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/key'
       - $ref: '#/components/parameters/oauth_token'
+      - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
+      - $ref: '#/components/parameters/upload_protocol'
+      - $ref: '#/components/parameters/uploadType'
     post:
       description: Undeletes a Container Version.
       operationId: tagmanager.accounts.containers.versions.undelete

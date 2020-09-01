@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/doubleclickbidmanager/v1
+  - url: https://doubleclickbidmanager.googleapis.com/doubleclickbidmanager/v1
 info:
   contact:
     name: Google
@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/bid-manager/
 tags:
-  - name: queries
   - name: lineitems
+  - name: queries
   - name: reports
   - name: sdf
 paths:
@@ -42,15 +42,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
     post:
       description: Retrieves line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.downloadlineitems
@@ -77,15 +77,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
     post:
       description: Uploads line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.uploadlineitems
@@ -129,15 +129,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
   "/queries/{queryId}/reports":
     get:
       description: Retrieves stored reports.
@@ -166,28 +166,28 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
   /query:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
     post:
       description: Creates a query.
       operationId: doubleclickbidmanager.queries.createquery
@@ -258,15 +258,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
     post:
       description: Runs a stored query to generate a report.
       operationId: doubleclickbidmanager.queries.runquery
@@ -296,15 +296,15 @@ paths:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
     post:
       description: Retrieves entities in SDF format.
       operationId: doubleclickbidmanager.sdf.download

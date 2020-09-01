@@ -32,10 +32,10 @@ tags:
 paths:
   '/v2/{name}':
     delete:
-      description: Deletes the specified intent and its direct or indirect followup intents.
-      operationId: dialogflow.projects.agent.intents.delete
+      description: Deletes the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
+      operationId: dialogflow.projects.agent.sessions.entityTypes.delete
       parameters:
-        - description: 'Required. The name of the intent to delete. If this intent has direct or indirect followup intents, we also delete them. Format: `projects//agent/intents/`.'
+        - description: 'Required. The name of the entity type to delete. Format: `projects//agent/sessions//entityTypes/` or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: name
           required: true
@@ -101,30 +101,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     patch:
-      description: Updates the specified intent.
-      operationId: dialogflow.projects.agent.intents.patch
+      description: Updates the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
+      operationId: dialogflow.projects.agent.sessions.entityTypes.patch
       parameters:
-        - description: 'Optional. The unique identifier of this intent. Required for Intents.UpdateIntent and Intents.BatchUpdateIntents methods. Format: `projects//agent/intents/`.'
+        - description: 'Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. The resource view to apply to the returned intent.
+        - description: Optional. The mask to control which fields get updated.
           in: query
-          name: intentView
+          name: updateMask
           schema:
             enum:
               - INTENT_VIEW_UNSPECIFIED
@@ -135,22 +135,17 @@ paths:
           name: languageCode
           schema:
             type: string
-        - description: Optional. The mask to control which fields get updated.
-          in: query
-          name: updateMask
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleCloudDialogflowV2Intent'
+              $ref: '#/components/schemas/GoogleCloudDialogflowV2SessionEntityType'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GoogleCloudDialogflowV2Intent'
+                $ref: '#/components/schemas/GoogleCloudDialogflowV2SessionEntityType'
           description: Successful response
       security:
         - Oauth2:
@@ -208,30 +203,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
   '/v2/{name}:cancel':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
       operationId: dialogflow.projects.operations.cancel
@@ -318,17 +313,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates/updates the specified agent.
       operationId: dialogflow.projects.setAgent
@@ -402,30 +397,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
   '/v2/{parent}/agent:export':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Exports the specified agent to a ZIP file. Operation '
       operationId: dialogflow.projects.agent.export
@@ -461,17 +456,17 @@ paths:
         - projects
   '/v2/{parent}/agent:import':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when importing is complete. It only tracks when the draft agent is updated not when it is done training.'
       operationId: dialogflow.projects.agent.import
@@ -507,17 +502,17 @@ paths:
         - projects
   '/v2/{parent}/agent:restore':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when restoring is complete. It only tracks when the draft agent is updated not when it is done training.'
       operationId: dialogflow.projects.agent.restore
@@ -591,30 +586,30 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
   '/v2/{parent}/agent:train':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Trains the specified agent. Operation '
       operationId: dialogflow.projects.agent.train
@@ -716,17 +711,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates a context. If the specified context already exists, overrides the context.'
       operationId: dialogflow.projects.agent.sessions.contexts.create
@@ -762,17 +757,17 @@ paths:
         - projects
   '/v2/{parent}/entities:batchCreate':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates multiple new entities in the specified entity type. Operation '
       operationId: dialogflow.projects.agent.entityTypes.entities.batchCreate
@@ -808,17 +803,17 @@ paths:
         - projects
   '/v2/{parent}/entities:batchDelete':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Deletes entities in the specified entity type. Operation '
       operationId: dialogflow.projects.agent.entityTypes.entities.batchDelete
@@ -854,17 +849,17 @@ paths:
         - projects
   '/v2/{parent}/entities:batchUpdate':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren''t explicitly specified in the request. Operation '
       operationId: dialogflow.projects.agent.entityTypes.entities.batchUpdate
@@ -938,17 +933,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Creates a session entity type. If the specified session entity type already exists, overrides the session entity type. This method doesn''t work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.'
       operationId: dialogflow.projects.agent.sessions.entityTypes.create
@@ -989,17 +984,17 @@ paths:
         - projects
   '/v2/{parent}/entityTypes:batchDelete':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Deletes entity types in the specified agent. Operation '
       operationId: dialogflow.projects.agent.entityTypes.batchDelete
@@ -1035,17 +1030,17 @@ paths:
         - projects
   '/v2/{parent}/entityTypes:batchUpdate':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Updates/Creates multiple entity types in the specified agent. Operation '
       operationId: dialogflow.projects.agent.entityTypes.batchUpdate
@@ -1119,17 +1114,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
   '/v2/{parent}/intents':
     get:
       description: Returns the list of all intents in the specified agent.
@@ -1183,17 +1178,17 @@ paths:
       tags:
         - projects
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: Creates an intent in the specified agent.
       operationId: dialogflow.projects.agent.intents.create
@@ -1242,17 +1237,17 @@ paths:
         - projects
   '/v2/{parent}/intents:batchDelete':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Deletes intents in the specified agent. Operation '
       operationId: dialogflow.projects.agent.intents.batchDelete
@@ -1288,17 +1283,17 @@ paths:
         - projects
   '/v2/{parent}/intents:batchUpdate':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Updates/Creates multiple intents in the specified agent. Operation '
       operationId: dialogflow.projects.agent.intents.batchUpdate
@@ -1334,17 +1329,17 @@ paths:
         - projects
   '/v2/{session}:detectIntent':
     parameters:
+      - $ref: '#/components/parameters/_.xgafv'
+      - $ref: '#/components/parameters/access_token'
+      - $ref: '#/components/parameters/alt'
+      - $ref: '#/components/parameters/callback'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/oauth_token'
       - $ref: '#/components/parameters/prettyPrint'
+      - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/fields'
     post:
       description: 'Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries.'
       operationId: dialogflow.projects.agent.sessions.detectIntent
@@ -1470,6 +1465,13 @@ components:
           type: string
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportAgentResponse:
+      description: The response message for Agents.ImportAgent.
+      properties:
+        agent:
+          description: 'The unique identifier of the new agent. Format: `projects//locations//agents/`.'
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1PageInfo:
@@ -4466,6 +4468,13 @@ components:
           type: string
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
+          type: string
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportAgentResponse:
+      description: The response message for Agents.ImportAgent.
+      properties:
+        agent:
+          description: 'The unique identifier of the new agent. Format: `projects//locations//agents/`.'
           type: string
       type: object
     GoogleLongrunningListOperationsResponse:

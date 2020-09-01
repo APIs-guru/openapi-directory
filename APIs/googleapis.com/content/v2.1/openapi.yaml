@@ -9599,6 +9599,11 @@ components:
         shippingWidth:
           $ref: "#/components/schemas/ProductShippingDimension"
           description: Width of the item for shipping.
+        shoppingAdsExcludedCountries:
+          description: List of country codes (ISO 3166-1 alpha-2) to exclude the offer from Shopping Ads destination. Countries from this list are removed from countries configured in MC feed settings.
+          items:
+            type: string
+          type: array
         sizeSystem:
           description: System in which the size is specified. Recommended for apparel items.
           type: string
@@ -9757,7 +9762,7 @@ components:
       type: object
     ProductStatusDestinationStatus:
       properties:
-        approvedCountrys:
+        approvedCountries:
           description: List of country codes (ISO 3166-1 alpha-2) where the offer is approved.
           items:
             type: string
@@ -9765,12 +9770,12 @@ components:
         destination:
           description: The name of the destination
           type: string
-        disapprovedCountrys:
+        disapprovedCountries:
           description: List of country codes (ISO 3166-1 alpha-2) where the offer is disapproved.
           items:
             type: string
           type: array
-        pendingCountrys:
+        pendingCountries:
           description: List of country codes (ISO 3166-1 alpha-2) where the offer is pending approval.
           items:
             type: string
@@ -9781,7 +9786,7 @@ components:
       type: object
     ProductStatusItemLevelIssue:
       properties:
-        applicableCountrys:
+        applicableCountries:
           description: List of country codes (ISO 3166-1 alpha-2) where issue applies to the offer.
           items:
             type: string

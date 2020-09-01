@@ -33,8 +33,8 @@ info:
 externalDocs:
   url: https://developers.google.com/fact-check/tools/api/
 tags:
-  - name: pages
   - name: claims
+  - name: pages
 paths:
   /v1alpha1/claims:search:
     get:
@@ -86,17 +86,17 @@ paths:
       tags:
         - claims
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha1/pages:
     get:
       description: List the `ClaimReview` markup pages for a specific URL or for an organization.
@@ -142,17 +142,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create `ClaimReview` markup on a page.
       operationId: factchecktools.pages.create
@@ -225,17 +225,17 @@ paths:
       tags:
         - pages
     parameters:
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Update for all `ClaimReview` markup on a page Note that this is a full update. To retain the existing `ClaimReview` markup on a page, first perform a Get operation, then modify the returned markup, and finally call Update with the entire `ClaimReview` markup as the body.
       operationId: factchecktools.pages.update

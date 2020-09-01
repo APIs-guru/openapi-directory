@@ -33,12 +33,12 @@ info:
 externalDocs:
   url: https://developers.google.com/domains/rdap/
 tags:
-  - name: domain
-  - name: nameserver
-  - name: v1
   - name: autnum
+  - name: domain
   - name: entity
   - name: ip
+  - name: nameserver
+  - name: v1
 paths:
   "/v1/autnum/{autnumId}":
     get:
@@ -60,17 +60,17 @@ paths:
       tags:
         - autnum
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/domain/{domainName}":
     get:
       description: Look up RDAP information for a domain by name.
@@ -92,17 +92,17 @@ paths:
       tags:
         - domain
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/domains:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -117,17 +117,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/entities:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -142,17 +142,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/entity/{entityId}":
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -173,17 +173,17 @@ paths:
       tags:
         - entity
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/help:
     get:
       description: Get help information for the RDAP API, including links to documentation.
@@ -198,17 +198,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/ip:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -223,17 +223,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/ip/{ipId}/{ipId1}":
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -259,17 +259,17 @@ paths:
       tags:
         - ip
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/nameserver/{nameserverId}":
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -290,17 +290,17 @@ paths:
       tags:
         - nameserver
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/nameservers:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
@@ -315,17 +315,17 @@ paths:
       tags:
         - v1
     parameters:
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:

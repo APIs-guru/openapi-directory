@@ -33,66 +33,66 @@ info:
 externalDocs:
   url: https://developers.google.com/doubleclick-advertisers/
 tags:
-  - name: advertiserGroups
-  - name: accountUserProfiles
-  - name: creativeFields
-  - name: sites
-  - name: languages
-  - name: remarketingListShares
-  - name: cities
-  - name: files
-  - name: userRoles
-  - name: conversions
-  - name: targetableRemarketingLists
-  - name: mobileApps
-  - name: countries
-  - name: userRolePermissionGroups
-  - name: floodlightActivityGroups
-  - name: campaignCreativeAssociations
-  - name: mobileCarriers
-  - name: browsers
-  - name: campaigns
-  - name: userProfiles
-  - name: accountPermissionGroups
-  - name: placementStrategies
-  - name: accounts
-  - name: operatingSystems
   - name: accountActiveAdSummaries
-  - name: orderDocuments
-  - name: creativeFieldValues
-  - name: floodlightActivities
-  - name: creativeAssets
-  - name: dynamicTargetingKeys
-  - name: floodlightConfigurations
-  - name: userRolePermissions
-  - name: directorySites
-  - name: videoFormats
-  - name: changeLogs
-  - name: regions
-  - name: contentCategories
-  - name: sizes
-  - name: connectionTypes
-  - name: reports
-  - name: inventoryItems
-  - name: creatives
-  - name: operatingSystemVersions
+  - name: accountPermissionGroups
   - name: accountPermissions
-  - name: eventTags
-  - name: remarketingLists
-  - name: dimensionValues
-  - name: advertisers
+  - name: accounts
+  - name: accountUserProfiles
   - name: ads
+  - name: advertiserGroups
+  - name: advertiserLandingPages
+  - name: advertisers
+  - name: browsers
+  - name: campaignCreativeAssociations
+  - name: campaigns
+  - name: changeLogs
+  - name: cities
+  - name: connectionTypes
+  - name: contentCategories
+  - name: conversions
+  - name: countries
+  - name: creativeAssets
+  - name: creativeFields
+  - name: creativeFieldValues
+  - name: creativeGroups
+  - name: creatives
+  - name: dimensionValues
+  - name: directorySites
+  - name: dynamicTargetingKeys
+  - name: eventTags
+  - name: files
+  - name: floodlightActivities
+  - name: floodlightActivityGroups
+  - name: floodlightConfigurations
+  - name: inventoryItems
+  - name: languages
+  - name: metros
+  - name: mobileApps
+  - name: mobileCarriers
+  - name: operatingSystems
+  - name: operatingSystemVersions
+  - name: orderDocuments
+  - name: orders
   - name: placementGroups
   - name: placements
-  - name: projects
-  - name: orders
-  - name: targetingTemplates
-  - name: creativeGroups
-  - name: postalCodes
-  - name: advertiserLandingPages
+  - name: placementStrategies
   - name: platformTypes
+  - name: postalCodes
+  - name: projects
+  - name: regions
+  - name: remarketingLists
+  - name: remarketingListShares
+  - name: reports
+  - name: sites
+  - name: sizes
   - name: subaccounts
-  - name: metros
+  - name: targetableRemarketingLists
+  - name: targetingTemplates
+  - name: userProfiles
+  - name: userRolePermissionGroups
+  - name: userRolePermissions
+  - name: userRoles
+  - name: videoFormats
 paths:
   "/reports/{reportId}/files/{fileId}":
     get:
@@ -126,17 +126,17 @@ paths:
       tags:
         - files
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /userprofiles:
     get:
       description: Retrieves list of user profiles for a user.
@@ -164,17 +164,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}":
     get:
       description: Gets one user profile by ID.
@@ -209,17 +209,17 @@ paths:
       tags:
         - userProfiles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}":
     get:
       description: Gets the account's active ad summary by account ID.
@@ -252,17 +252,17 @@ paths:
       tags:
         - accountActiveAdSummaries
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountPermissionGroups":
     get:
       description: Retrieves the list of account permission groups.
@@ -289,17 +289,17 @@ paths:
       tags:
         - accountPermissionGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountPermissionGroups/{id}":
     get:
       description: Gets one account permission group by ID.
@@ -332,17 +332,17 @@ paths:
       tags:
         - accountPermissionGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountPermissions":
     get:
       description: Retrieves the list of account permissions.
@@ -369,17 +369,17 @@ paths:
       tags:
         - accountPermissions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountPermissions/{id}":
     get:
       description: Gets one account permission by ID.
@@ -412,17 +412,17 @@ paths:
       tags:
         - accountPermissions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accountUserProfiles":
     get:
       description: Retrieves a list of account user profiles, possibly filtered. This method supports paging.
@@ -506,17 +506,17 @@ paths:
       tags:
         - accountUserProfiles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing account user profile. This method supports patch semantics.
       operationId: dfareporting.accountUserProfiles.patch
@@ -641,17 +641,17 @@ paths:
       tags:
         - accountUserProfiles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/accounts":
     get:
       description: Retrieves the list of accounts, possibly filtered. This method supports paging.
@@ -725,17 +725,17 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing account. This method supports patch semantics.
       operationId: dfareporting.accounts.patch
@@ -831,17 +831,17 @@ paths:
       tags:
         - accounts
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/ads":
     get:
       description: Retrieves a list of ads, possibly filtered. This method supports paging.
@@ -1043,17 +1043,17 @@ paths:
       tags:
         - ads
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing ad. This method supports patch semantics.
       operationId: dfareporting.ads.patch
@@ -1178,17 +1178,17 @@ paths:
       tags:
         - ads
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/advertiserGroups":
     get:
       description: Retrieves a list of advertiser groups, possibly filtered. This method supports paging.
@@ -1257,17 +1257,17 @@ paths:
       tags:
         - advertiserGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing advertiser group. This method supports patch semantics.
       operationId: dfareporting.advertiserGroups.patch
@@ -1418,17 +1418,17 @@ paths:
       tags:
         - advertiserGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/advertiserLandingPages":
     get:
       description: Retrieves a list of landing pages.
@@ -1525,17 +1525,17 @@ paths:
       tags:
         - advertiserLandingPages
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing advertiser landing page. This method supports patch semantics.
       operationId: dfareporting.advertiserLandingPages.patch
@@ -1660,17 +1660,17 @@ paths:
       tags:
         - advertiserLandingPages
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/advertisers":
     get:
       description: Retrieves a list of advertisers, possibly filtered. This method supports paging.
@@ -1780,17 +1780,17 @@ paths:
       tags:
         - advertisers
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing advertiser. This method supports patch semantics.
       operationId: dfareporting.advertisers.patch
@@ -1915,17 +1915,17 @@ paths:
       tags:
         - advertisers
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/browsers":
     get:
       description: Retrieves a list of browsers.
@@ -1952,17 +1952,17 @@ paths:
       tags:
         - browsers
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/campaigns":
     get:
       description: Retrieves a list of campaigns, possibly filtered. This method supports paging.
@@ -2078,17 +2078,17 @@ paths:
       tags:
         - campaigns
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing campaign. This method supports patch semantics.
       operationId: dfareporting.campaigns.patch
@@ -2233,17 +2233,17 @@ paths:
       tags:
         - campaignCreativeAssociations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
       operationId: dfareporting.campaignCreativeAssociations.insert
@@ -2311,17 +2311,17 @@ paths:
       tags:
         - campaigns
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/changeLogs":
     get:
       description: Retrieves a list of change logs. This method supports paging.
@@ -2471,17 +2471,17 @@ paths:
       tags:
         - changeLogs
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/changeLogs/{id}":
     get:
       description: Gets one change log by ID.
@@ -2514,17 +2514,17 @@ paths:
       tags:
         - changeLogs
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/cities":
     get:
       description: Retrieves a list of cities, possibly filtered.
@@ -2583,17 +2583,17 @@ paths:
       tags:
         - cities
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/connectionTypes":
     get:
       description: Retrieves a list of connection types.
@@ -2620,17 +2620,17 @@ paths:
       tags:
         - connectionTypes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/connectionTypes/{id}":
     get:
       description: Gets one connection type by ID.
@@ -2663,17 +2663,17 @@ paths:
       tags:
         - connectionTypes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/contentCategories":
     get:
       description: Retrieves a list of content categories, possibly filtered. This method supports paging.
@@ -2742,17 +2742,17 @@ paths:
       tags:
         - contentCategories
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing content category. This method supports patch semantics.
       operationId: dfareporting.contentCategories.patch
@@ -2903,30 +2903,30 @@ paths:
       tags:
         - contentCategories
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/conversions/batchinsert":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts conversions.
       operationId: dfareporting.conversions.batchinsert
@@ -2958,17 +2958,17 @@ paths:
         - conversions
   "/userprofiles/{profileId}/conversions/batchupdate":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Updates existing conversions.
       operationId: dfareporting.conversions.batchupdate
@@ -3024,17 +3024,17 @@ paths:
       tags:
         - countries
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/countries/{dartId}":
     get:
       description: Gets one country by ID.
@@ -3067,30 +3067,30 @@ paths:
       tags:
         - countries
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a new creative asset.
       operationId: dfareporting.creativeAssets.insert
@@ -3203,17 +3203,17 @@ paths:
       tags:
         - creativeFields
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing creative field. This method supports patch semantics.
       operationId: dfareporting.creativeFields.patch
@@ -3380,17 +3380,17 @@ paths:
       tags:
         - creativeFieldValues
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing creative field value. This method supports patch semantics.
       operationId: dfareporting.creativeFieldValues.patch
@@ -3571,17 +3571,17 @@ paths:
       tags:
         - creativeFieldValues
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/creativeFields/{id}":
     delete:
       description: Deletes an existing creative field.
@@ -3640,17 +3640,17 @@ paths:
       tags:
         - creativeFields
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/creativeGroups":
     get:
       description: Retrieves a list of creative groups, possibly filtered. This method supports paging.
@@ -3735,17 +3735,17 @@ paths:
       tags:
         - creativeGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing creative group. This method supports patch semantics.
       operationId: dfareporting.creativeGroups.patch
@@ -3870,17 +3870,17 @@ paths:
       tags:
         - creativeGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/creatives":
     get:
       description: Retrieves a list of creatives, possibly filtered. This method supports paging.
@@ -4045,17 +4045,17 @@ paths:
       tags:
         - creatives
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing creative. This method supports patch semantics.
       operationId: dfareporting.creatives.patch
@@ -4180,30 +4180,30 @@ paths:
       tags:
         - creatives
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/dimensionvalues/query":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Retrieves list of report dimension values for a list of filters.
       operationId: dfareporting.dimensionValues.query
@@ -4338,17 +4338,17 @@ paths:
       tags:
         - directorySites
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a new directory site.
       operationId: dfareporting.directorySites.insert
@@ -4410,17 +4410,17 @@ paths:
       tags:
         - directorySites
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/dynamicTargetingKeys":
     get:
       description: Retrieves a list of dynamic targeting keys.
@@ -4476,17 +4476,17 @@ paths:
       tags:
         - dynamicTargetingKeys
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser's ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.
       operationId: dfareporting.dynamicTargetingKeys.insert
@@ -4561,17 +4561,17 @@ paths:
       tags:
         - dynamicTargetingKeys
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/eventTags":
     get:
       description: Retrieves a list of event tags, possibly filtered.
@@ -4666,17 +4666,17 @@ paths:
       tags:
         - eventTags
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.eventTags.patch
@@ -4827,17 +4827,17 @@ paths:
       tags:
         - eventTags
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/files":
     get:
       description: Lists files for a user profile.
@@ -4901,17 +4901,17 @@ paths:
       tags:
         - files
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/floodlightActivities":
     get:
       description: Retrieves a list of floodlight activities, possibly filtered. This method supports paging.
@@ -5022,17 +5022,17 @@ paths:
       tags:
         - floodlightActivities
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing floodlight activity. This method supports patch semantics.
       operationId: dfareporting.floodlightActivities.patch
@@ -5127,17 +5127,17 @@ paths:
         - floodlightActivities
   "/userprofiles/{profileId}/floodlightActivities/generatetag":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Generates a tag for a floodlight activity.
       operationId: dfareporting.floodlightActivities.generatetag
@@ -5225,17 +5225,17 @@ paths:
       tags:
         - floodlightActivities
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/floodlightActivityGroups":
     get:
       description: Retrieves a list of floodlight activity groups, possibly filtered. This method supports paging.
@@ -5322,17 +5322,17 @@ paths:
       tags:
         - floodlightActivityGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing floodlight activity group. This method supports patch semantics.
       operationId: dfareporting.floodlightActivityGroups.patch
@@ -5457,17 +5457,17 @@ paths:
       tags:
         - floodlightActivityGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/floodlightConfigurations":
     get:
       description: Retrieves a list of floodlight configurations, possibly filtered.
@@ -5503,17 +5503,17 @@ paths:
       tags:
         - floodlightConfigurations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing floodlight configuration. This method supports patch semantics.
       operationId: dfareporting.floodlightConfigurations.patch
@@ -5609,17 +5609,17 @@ paths:
       tags:
         - floodlightConfigurations
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/languages":
     get:
       description: Retrieves a list of languages.
@@ -5646,17 +5646,17 @@ paths:
       tags:
         - languages
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/metros":
     get:
       description: Retrieves a list of metros.
@@ -5683,17 +5683,17 @@ paths:
       tags:
         - metros
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/mobileApps":
     get:
       description: Retrieves list of available mobile apps.
@@ -5759,17 +5759,17 @@ paths:
       tags:
         - mobileApps
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/mobileApps/{id}":
     get:
       description: Gets one mobile app by ID.
@@ -5802,17 +5802,17 @@ paths:
       tags:
         - mobileApps
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/mobileCarriers":
     get:
       description: Retrieves a list of mobile carriers.
@@ -5839,17 +5839,17 @@ paths:
       tags:
         - mobileCarriers
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/mobileCarriers/{id}":
     get:
       description: Gets one mobile carrier by ID.
@@ -5882,17 +5882,17 @@ paths:
       tags:
         - mobileCarriers
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/operatingSystemVersions":
     get:
       description: Retrieves a list of operating system versions.
@@ -5919,17 +5919,17 @@ paths:
       tags:
         - operatingSystemVersions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/operatingSystemVersions/{id}":
     get:
       description: Gets one operating system version by ID.
@@ -5962,17 +5962,17 @@ paths:
       tags:
         - operatingSystemVersions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/operatingSystems":
     get:
       description: Retrieves a list of operating systems.
@@ -5999,17 +5999,17 @@ paths:
       tags:
         - operatingSystems
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/operatingSystems/{dartId}":
     get:
       description: Gets one operating system by DART ID.
@@ -6042,17 +6042,17 @@ paths:
       tags:
         - operatingSystems
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/placementGroups":
     get:
       description: Retrieves a list of placement groups, possibly filtered. This method supports paging.
@@ -6224,17 +6224,17 @@ paths:
       tags:
         - placementGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing placement group. This method supports patch semantics.
       operationId: dfareporting.placementGroups.patch
@@ -6359,17 +6359,17 @@ paths:
       tags:
         - placementGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/placementStrategies":
     get:
       description: Retrieves a list of placement strategies, possibly filtered. This method supports paging.
@@ -6438,17 +6438,17 @@ paths:
       tags:
         - placementStrategies
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing placement strategy. This method supports patch semantics.
       operationId: dfareporting.placementStrategies.patch
@@ -6599,17 +6599,17 @@ paths:
       tags:
         - placementStrategies
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/placements":
     get:
       description: Retrieves a list of placements, possibly filtered. This method supports paging.
@@ -6815,17 +6815,17 @@ paths:
       tags:
         - placements
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing placement. This method supports patch semantics.
       operationId: dfareporting.placements.patch
@@ -6920,17 +6920,17 @@ paths:
         - placements
   "/userprofiles/{profileId}/placements/generatetags":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Generates tags for a placement.
       operationId: dfareporting.placements.generatetags
@@ -7030,17 +7030,17 @@ paths:
       tags:
         - placements
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/platformTypes":
     get:
       description: Retrieves a list of platform types.
@@ -7067,17 +7067,17 @@ paths:
       tags:
         - platformTypes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/platformTypes/{id}":
     get:
       description: Gets one platform type by ID.
@@ -7110,17 +7110,17 @@ paths:
       tags:
         - platformTypes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/postalCodes":
     get:
       description: Retrieves a list of postal codes.
@@ -7147,17 +7147,17 @@ paths:
       tags:
         - postalCodes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/postalCodes/{code}":
     get:
       description: Gets one postal code by ID.
@@ -7190,17 +7190,17 @@ paths:
       tags:
         - postalCodes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects":
     get:
       description: Retrieves a list of projects, possibly filtered. This method supports paging .
@@ -7278,17 +7278,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{id}":
     get:
       description: Gets one project by ID.
@@ -7321,17 +7321,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/inventoryItems":
     get:
       description: Retrieves a list of inventory items, possibly filtered. This method supports paging.
@@ -7432,17 +7432,17 @@ paths:
       tags:
         - inventoryItems
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}":
     get:
       description: Gets one inventory item by ID.
@@ -7481,17 +7481,17 @@ paths:
       tags:
         - inventoryItems
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/orderDocuments":
     get:
       description: Retrieves a list of order documents, possibly filtered. This method supports paging.
@@ -7589,17 +7589,17 @@ paths:
       tags:
         - orderDocuments
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}":
     get:
       description: Gets one order document by ID.
@@ -7638,17 +7638,17 @@ paths:
       tags:
         - orderDocuments
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/orders":
     get:
       description: Retrieves a list of orders, possibly filtered. This method supports paging.
@@ -7732,17 +7732,17 @@ paths:
       tags:
         - orders
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/orders/{id}":
     get:
       description: Gets one order by ID.
@@ -7781,17 +7781,17 @@ paths:
       tags:
         - orders
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/regions":
     get:
       description: Retrieves a list of regions.
@@ -7818,30 +7818,30 @@ paths:
       tags:
         - regions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/remarketingListShares":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Updates an existing remarketing list share.
       operationId: dfareporting.remarketingListShares.update
@@ -7903,17 +7903,17 @@ paths:
       tags:
         - remarketingListShares
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/remarketingLists":
     get:
       description: Retrieves a list of remarketing lists, possibly filtered. This method supports paging.
@@ -7989,17 +7989,17 @@ paths:
       tags:
         - remarketingLists
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing remarketing list. This method supports patch semantics.
       operationId: dfareporting.remarketingLists.patch
@@ -8124,30 +8124,30 @@ paths:
       tags:
         - remarketingLists
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/remarketingLists/{remarketingListId}/remarketingListShares":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing remarketing list share. This method supports patch semantics.
       operationId: dfareporting.remarketingListShares.patch
@@ -8251,17 +8251,17 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a report.
       operationId: dfareporting.reports.insert
@@ -8293,17 +8293,17 @@ paths:
         - reports
   "/userprofiles/{profileId}/reports/compatiblefields/query":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.
       operationId: dfareporting.reports.compatibleFields.query
@@ -8391,17 +8391,17 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing report. This method supports patch semantics.
       operationId: dfareporting.reports.patch
@@ -8532,17 +8532,17 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}":
     get:
       description: Retrieves a report file by its report ID and file ID. This method supports media download.
@@ -8581,30 +8581,30 @@ paths:
       tags:
         - reports
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/reports/{reportId}/run":
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Runs a report.
       operationId: dfareporting.reports.run
@@ -8761,17 +8761,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing site. This method supports patch semantics.
       operationId: dfareporting.sites.patch
@@ -8896,17 +8896,17 @@ paths:
       tags:
         - sites
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/sizes":
     get:
       description: Retrieves a list of sizes, possibly filtered. Retrieved sizes are globally unique and may include values not currently in use by your account. Due to this, the list of sizes returned by this method may differ from the list seen in the Trafficking UI.
@@ -8961,17 +8961,17 @@ paths:
       tags:
         - sizes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Inserts a new size.
       operationId: dfareporting.sizes.insert
@@ -9033,17 +9033,17 @@ paths:
       tags:
         - sizes
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/subaccounts":
     get:
       description: Gets a list of subaccounts, possibly filtered. This method supports paging.
@@ -9112,17 +9112,17 @@ paths:
       tags:
         - subaccounts
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing subaccount. This method supports patch semantics.
       operationId: dfareporting.subaccounts.patch
@@ -9247,17 +9247,17 @@ paths:
       tags:
         - subaccounts
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/targetableRemarketingLists":
     get:
       description: Retrieves a list of targetable remarketing lists, possibly filtered. This method supports paging.
@@ -9328,17 +9328,17 @@ paths:
       tags:
         - targetableRemarketingLists
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/targetableRemarketingLists/{id}":
     get:
       description: Gets one remarketing list by ID.
@@ -9371,17 +9371,17 @@ paths:
       tags:
         - targetableRemarketingLists
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/targetingTemplates":
     get:
       description: Retrieves a list of targeting templates, optionally filtered. This method supports paging.
@@ -9455,17 +9455,17 @@ paths:
       tags:
         - targetingTemplates
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing targeting template. This method supports patch semantics.
       operationId: dfareporting.targetingTemplates.patch
@@ -9590,17 +9590,17 @@ paths:
       tags:
         - targetingTemplates
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/userRolePermissionGroups":
     get:
       description: Gets a list of all supported user role permission groups.
@@ -9627,17 +9627,17 @@ paths:
       tags:
         - userRolePermissionGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/userRolePermissionGroups/{id}":
     get:
       description: Gets one user role permission group by ID.
@@ -9670,17 +9670,17 @@ paths:
       tags:
         - userRolePermissionGroups
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/userRolePermissions":
     get:
       description: Gets a list of user role permissions, possibly filtered.
@@ -9716,17 +9716,17 @@ paths:
       tags:
         - userRolePermissions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/userRolePermissions/{id}":
     get:
       description: Gets one user role permission by ID.
@@ -9759,17 +9759,17 @@ paths:
       tags:
         - userRolePermissions
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/userRoles":
     get:
       description: Retrieves a list of user roles, possibly filtered. This method supports paging.
@@ -9848,17 +9848,17 @@ paths:
       tags:
         - userRoles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates an existing user role. This method supports patch semantics.
       operationId: dfareporting.userRoles.patch
@@ -10009,17 +10009,17 @@ paths:
       tags:
         - userRoles
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/videoFormats":
     get:
       description: Lists available video formats.
@@ -10046,17 +10046,17 @@ paths:
       tags:
         - videoFormats
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/videoFormats/{id}":
     get:
       description: Gets one video format by ID.
@@ -10089,17 +10089,17 @@ paths:
       tags:
         - videoFormats
     parameters:
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -10220,7 +10220,7 @@ components:
           format: int64
           type: string
         currencyId:
-          description: 'ID of currency associated with this account. This is a required field. Acceptable values are: - "1" for USD - "2" for GBP - "3" for ESP - "4" for SEK - "5" for CAD - "6" for JPY - "7" for DEM - "8" for AUD - "9" for FRF - "10" for ITL - "11" for DKK - "12" for NOK - "13" for FIM - "14" for ZAR - "15" for IEP - "16" for NLG - "17" for EUR - "18" for KRW - "19" for TWD - "20" for SGD - "21" for CNY - "22" for HKD - "23" for NZD - "24" for MYR - "25" for BRL - "26" for PTE - "27" for MXP - "28" for CLP - "29" for TRY - "30" for ARS - "31" for PEN - "32" for ILS - "33" for CHF - "34" for VEF - "35" for COP - "36" for GTQ - "37" for PLN - "39" for INR - "40" for THB - "41" for IDR - "42" for CZK - "43" for RON - "44" for HUF - "45" for RUB - "46" for AED - "47" for BGN - "48" for HRK - "49" for MXN - "50" for NGN - "51" for EGP '
+          description: 'ID of currency associated with this account. This is a required field. Acceptable values are: - "1" for USD - "2" for GBP - "3" for ESP - "4" for SEK - "5" for CAD - "6" for JPY - "7" for DEM - "8" for AUD - "9" for FRF - "10" for ITL - "11" for DKK - "12" for NOK - "13" for FIM - "14" for ZAR - "15" for IEP - "16" for NLG - "17" for EUR - "18" for KRW - "19" for TWD - "20" for SGD - "21" for CNY - "22" for HKD - "23" for NZD - "24" for MYR - "25" for BRL - "26" for PTE - "28" for CLP - "29" for TRY - "30" for ARS - "31" for PEN - "32" for ILS - "33" for CHF - "34" for VEF - "35" for COP - "36" for GTQ - "37" for PLN - "39" for INR - "40" for THB - "41" for IDR - "42" for CZK - "43" for RON - "44" for HUF - "45" for RUB - "46" for AED - "47" for BGN - "48" for HRK - "49" for MXN - "50" for NGN - "51" for EGP '
           format: int64
           type: string
         defaultCreativeSizeId:

@@ -61,10 +61,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a model version. Models can have multiple versions. You can call projects.models.versions.list to get the same information that this method returns for all of the versions of a model.
-      operationId: ml.projects.models.versions.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: ml.projects.operations.get
       parameters:
-        - description: Required. The name of the version.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudMlV1__Version"
+                $ref: "#/components/schemas/GoogleLongrunning__Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -90,16 +90,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates the specified Version resource. Currently the only update-able fields are `description`, `requestLoggingConfig`, `autoScaling.minNodes`, and `manualScaling.nodes`.
       operationId: ml.projects.models.versions.patch
@@ -176,29 +176,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:addMeasurement":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Adds a measurement of the objective metrics to a trial. This measurement is assumed to have been taken before the trial is complete.
       operationId: ml.projects.locations.studies.trials.addMeasurement
@@ -231,19 +231,19 @@ paths:
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-      operationId: ml.projects.locations.operations.cancel
+      operationId: ml.projects.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -273,16 +273,16 @@ paths:
   "/v1/{name}:checkEarlyStoppingState":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Checks whether a trial should stop or not. Returns a long-running operation. When the operation is successful, it will contain a CheckTrialEarlyStoppingStateResponse.
       operationId: ml.projects.locations.studies.trials.checkEarlyStoppingState
@@ -315,16 +315,16 @@ paths:
   "/v1/{name}:complete":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Marks a trial as complete.
       operationId: ml.projects.locations.studies.trials.complete
@@ -357,16 +357,16 @@ paths:
   "/v1/{name}:explain":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Performs explanation on the data in the request. {% dynamic include "/ai-platform/includes/___explain-request" %} '
       operationId: ml.projects.explain
@@ -423,29 +423,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:predict":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Performs online prediction on the data in the request. {% dynamic include "/ai-platform/includes/___predict-request" %} '
       operationId: ml.projects.predict
@@ -478,16 +478,16 @@ paths:
   "/v1/{name}:setDefault":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Designates a version to be the default for the model. The default version is used for prediction requests made against the model that don't specify a version. The first version to be created for a model is automatically set as the default. You must make any subsequent changes to the default version setting manually using this method.
       operationId: ml.projects.models.versions.setDefault
@@ -520,16 +520,16 @@ paths:
   "/v1/{name}:stop":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Stops a trial.
       operationId: ml.projects.locations.studies.trials.stop
@@ -605,16 +605,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a training or a batch prediction job.
       operationId: ml.projects.jobs.create
@@ -685,16 +685,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/models":
     get:
       description: "Lists the models in a project. Each project can contain multiple models, and each model can have multiple versions. If there are no models that match the request parameters, the list request returns an empty response body: {}."
@@ -741,16 +741,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a model which will later contain one or more versions. You must add at least one version before you can request predictions from the model. Add versions by calling projects.models.versions.create.
       operationId: ml.projects.models.create
@@ -807,16 +807,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a study.
       operationId: ml.projects.locations.studies.create
@@ -878,16 +878,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Adds a user provided trial to a study.
       operationId: ml.projects.locations.studies.trials.create
@@ -920,16 +920,16 @@ paths:
   "/v1/{parent}/trials:suggest":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Adds one or more trials to a study, with parameter values suggested by AI Platform Optimizer. Returns a long-running operation associated with the generation of trial suggestions. When this long-running operation succeeds, it will contain a SuggestTrialsResponse.
       operationId: ml.projects.locations.studies.trials.suggest
@@ -1005,16 +1005,16 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new version of a model from a trained TensorFlow model. If the version created in the cloud by this call is the first deployed version of the specified model, it will be made the default version of the model. When you add a version to a model that already has one or more versions, the default version does not automatically change. If you want a new version to be the default, you must call projects.models.versions.setDefault.
       operationId: ml.projects.models.versions.create
@@ -1076,29 +1076,29 @@ paths:
         - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: ml.projects.models.setIamPolicy
@@ -1131,16 +1131,16 @@ paths:
   "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: ml.projects.models.testIamPermissions
@@ -1586,6 +1586,41 @@ components:
           description: The service account Cloud ML uses to run on TPU node.
           type: string
       type: object
+    GoogleCloudMlV1__ContainerPort:
+      description: ContainerPort represents a network port in a single container.
+      properties:
+        containerPort:
+          description: Number of port to expose on the pod's IP address. This must be a valid port number, 0 < x < 65536.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudMlV1__ContainerSpec:
+      description: Specify a custom container to deploy. Our ContainerSpec is a subset of the Kubernetes Container specification. https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.10/#container-v1-core
+      properties:
+        args:
+          description: "Immutable. Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell"
+          items:
+            type: string
+          type: array
+        command:
+          description: "Immutable. Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell"
+          items:
+            type: string
+          type: array
+        env:
+          description: Immutable. List of environment variables to set in the container.
+          items:
+            $ref: "#/components/schemas/GoogleCloudMlV1__EnvVar"
+          type: array
+        image:
+          description: "Docker image name. More info: https://kubernetes.io/docs/concepts/containers/images"
+          type: string
+        ports:
+          description: Immutable. List of ports to expose from the container. Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed. Any port which is listening on the default "0.0.0.0" address inside a container will be accessible from the network.
+          items:
+            $ref: "#/components/schemas/GoogleCloudMlV1__ContainerPort"
+          type: array
+      type: object
     GoogleCloudMlV1__EncryptionConfig:
       description: Represents a custom encryption key configuration that can be applied to a resource.
       properties:
@@ -1593,17 +1628,14 @@ components:
           description: "The Cloud KMS resource identifier of the customer-managed encryption key used to protect a resource, such as a training job. It has the following format: `projects/{PROJECT_ID}/locations/{REGION}/keyRings/{KEY_RING_NAME}/cryptoKeys/{KEY_NAME}`"
           type: string
       type: object
-    GoogleCloudMlV1__EndpointMap:
-      description: " EndpointMap is used to provide paths for predict/explain/healthcheck to customers. It's an output only field in the version proto which can be only set on the server side. Public endpoints follow the format specified on the user facing doc, and private endpoints are customized for each privately deploymed model/version."
+    GoogleCloudMlV1__EnvVar:
+      description: EnvVar represents an environment variable present in a Container.
       properties:
-        explain:
-          description: Optional. Http(s) path to send explain requests.
+        name:
+          description: Name of the environment variable. Must be a C_IDENTIFIER.
           type: string
-        health:
-          description: Http(s) path to send health check requests.
-          type: string
-        predict:
-          description: Http(s) path to send prediction requests.
+        value:
+          description: 'Variable references $(VAR_NAME) are expanded using the previous defined environment variables in the container and any service environment variables. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Defaults to "".'
           type: string
       type: object
     GoogleCloudMlV1__ExplainRequest:
@@ -1614,7 +1646,7 @@ components:
           description: Required. The explanation request body.
       type: object
     GoogleCloudMlV1__ExplanationConfig:
-      description: "Message holding configuration options for explaining model predictions. There are two feature attribution methods supported for TensorFlow models: integrated gradients and sampled Shapley. [Learn more about feature attributions.](/ai-platform/prediction/docs/ai-explanations/overview)"
+      description: "Message holding configuration options for explaining model predictions. There are three feature attribution methods supported for TensorFlow models: integrated gradients, sampled Shapley, and XRAI. [Learn more about feature attributions.](/ai-platform/prediction/docs/ai-explanations/overview)"
       properties:
         integratedGradientsAttribution:
           $ref: "#/components/schemas/GoogleCloudMlV1__IntegratedGradientsAttribution"
@@ -1956,7 +1988,6 @@ components:
             - UPDATE_MODEL
             - UPDATE_VERSION
             - UPDATE_CONFIG
-            - MIGRATE_TO_UCAIP
           type: string
         projectNumber:
           description: Contains the project number associated with the operation.
@@ -2131,6 +2162,16 @@ components:
           format: double
           type: number
       type: object
+    GoogleCloudMlV1__RouteMap:
+      description: RouteMap is used to override HTTP paths sent to a Custom Container. If specified, the HTTP server implemented in the ContainerSpec must support the route. If unspecified, standard HTTP paths will be used.
+      properties:
+        health:
+          description: HTTP path to send health check requests.
+          type: string
+        predict:
+          description: HTTP path to send prediction requests.
+          type: string
+      type: object
     GoogleCloudMlV1__SampledShapleyAttribution:
       description: An attribution method that approximates Shapley values for features that contribute to the label being predicted. A sampling strategy is used to approximate the value rather than considering all subsets of features.
       properties:
@@ -2143,10 +2184,11 @@ components:
       description: All parameters related to scheduling of training jobs.
       properties:
         maxRunningTime:
-          description: "Optional. The maximum job running time, expressed in seconds. The field can contain up to nine fractional digits, terminated by `s`. If not specified, this field defaults to `604800s` (seven days). If the training job is still running after this duration, AI Platform Training cancels it. For example, if you want to ensure your job runs for no more than 2 hours, set this field to `7200s` (2 hours * 60 minutes / hour * 60 seconds / minute). If you submit your training job using the `gcloud` tool, you can [provide this field in a `config.yaml` file](/ai-platform/training/docs/training-jobs#formatting_your_configuration_parameters). For example: ```yaml trainingInput: ... scheduling: maxRunningTime: 7200s ... ```"
+          description: "Optional. The maximum job running time, expressed in seconds. The field can contain up to nine fractional digits, terminated by `s`. If not specified, this field defaults to `604800s` (seven days). If the training job is still running after this duration, AI Platform Training cancels it. The duration is measured from when the job enters the `RUNNING` state; therefore it does not overlap with the duration limited by Scheduling.max_wait_time. For example, if you want to ensure your job runs for no more than 2 hours, set this field to `7200s` (2 hours * 60 minutes / hour * 60 seconds / minute). If you submit your training job using the `gcloud` tool, you can [specify this field in a `config.yaml` file](/ai-platform/training/docs/training-jobs#formatting_your_configuration_parameters). For example: ```yaml trainingInput: scheduling: maxRunningTime: 7200s ```"
           format: google-duration
           type: string
         maxWaitTime:
+          description: "Optional. The maximum job wait time, expressed in seconds. The field can contain up to nine fractional digits, terminated by `s`. If not specified, there is no limit to the wait time. The minimum for this field is `1800s` (30 minutes). If the training job has not entered the `RUNNING` state after this duration, AI Platform Training cancels it. After the job begins running, it can no longer be cancelled due to the maximum wait time. Therefore the duration limited by this field does not overlap with the duration limited by Scheduling.max_running_time. For example, if the job temporarily stops running and retries due to a [VM restart](/ai-platform/training/docs/overview#restarts), this cannot lead to a maximum wait time cancellation. However, independently of this constraint, AI Platform Training might stop a job if there are too many retries due to exhausted resources in a region. The following example describes how you might use this field: To cancel your job if it doesn't start running within 1 hour, set this field to `3600s` (1 hour * 60 minutes / hour * 60 seconds / minute). If the job is still in the `QUEUED` or `PREPARING` state after an hour of waiting, AI Platform Training cancels the job. If you submit your training job using the `gcloud` tool, you can [specify this field in a `config.yaml` file](/ai-platform/training/docs/training-jobs#formatting_your_configuration_parameters). For example: ```yaml trainingInput: scheduling: maxWaitTime: 3600s ```"
           format: google-duration
           type: string
       type: object
@@ -2448,6 +2490,8 @@ components:
         autoScaling:
           $ref: "#/components/schemas/GoogleCloudMlV1__AutoScaling"
           description: Automatically scale the number of nodes used to serve the model in response to increases and decreases in traffic. Care should be taken to ramp up traffic according to the model's ability to scale or you will start seeing increases in latency and 429 response codes. Note that you cannot use AutoScaling if your version uses [GPUs](#Version.FIELDS.accelerator_config). Instead, you must use specify `manual_scaling`.
+        container:
+          $ref: "#/components/schemas/GoogleCloudMlV1__ContainerSpec"
         createTime:
           description: Output only. The time the version was created.
           format: google-datetime
@@ -2458,10 +2502,6 @@ components:
         description:
           description: Optional. The description specified for the version when it was created.
           type: string
-        endpoints:
-          $ref: "#/components/schemas/GoogleCloudMlV1__EndpointMap"
-          description: Optional. Output only. If set by server, the http(s) endpoints returned to user after the public/private deployment is successful. https://cloud.google.com/apis/design/design_patterns#output_fields.
-          readOnly: true
         errorMessage:
           description: Output only. The details of a failure or a cancellation.
           type: string
@@ -2515,6 +2555,8 @@ components:
         requestLoggingConfig:
           $ref: "#/components/schemas/GoogleCloudMlV1__RequestLoggingConfig"
           description: Optional. *Only* specify this field in a projects.models.versions.patch request. Specifying it in a projects.models.versions.create request has no effect. Configures the request-response pair logging on predictions from this Version.
+        routes:
+          $ref: "#/components/schemas/GoogleCloudMlV1__RouteMap"
         runtimeVersion:
           description: Required. The AI Platform runtime version to use for this deployment. For more information, see the [runtime version list](/ml-engine/docs/runtime-version-list) and [how to manage runtime versions](/ml-engine/docs/versioning).
           type: string

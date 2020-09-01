@@ -31,17 +31,17 @@ tags:
 paths:
   /v3:logImpressions:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Logs new events when playable locations are displayed, and when they are interacted with. Impressions are not partially saved; either all impressions are saved and this request succeeds, or no impressions are saved, and this request fails.
       operationId: playablelocations.logImpressions
@@ -61,17 +61,17 @@ paths:
         - v3
   /v3:logPlayerReports:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Logs bad playable location reports submitted by players. Reports are not partially saved; either all reports are saved and this request succeeds, or no reports are saved, and this request fails.
       operationId: playablelocations.logPlayerReports
@@ -91,17 +91,17 @@ paths:
         - v3
   /v3:samplePlayableLocations:
     parameters:
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Returns a set of playable locations that lie within a specified area, that satisfy optional filter criteria. Note: Identical `SamplePlayableLocations` requests can return different results as the state of the world changes over time."
       operationId: playablelocations.samplePlayableLocations

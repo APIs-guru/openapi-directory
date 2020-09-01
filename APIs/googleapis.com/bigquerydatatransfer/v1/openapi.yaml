@@ -65,10 +65,10 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves a supported data source and returns its settings, which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.dataSources.get
+      description: Returns information about the particular transfer run.
+      operationId: bigquerydatatransfer.projects.transferConfigs.runs.get
       parameters:
-        - description: "Required. The field will contain name of the resource requested, for example: `projects/{project_id}/dataSources/{data_source_id}` or `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`"
+        - description: "Required. The field will contain name of the resource requested, for example: `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`"
           in: path
           name: name
           required: true
@@ -79,7 +79,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DataSource"
+                $ref: "#/components/schemas/TransferRun"
           description: Successful response
       security:
         - Oauth2:
@@ -101,17 +101,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates a data transfer configuration. All fields must be set, even if they are not updated.
       operationId: bigquerydatatransfer.projects.transferConfigs.patch
@@ -214,33 +214,33 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:checkValidCreds":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Returns true if valid credentials exist for the given data source and requesting user. Some data sources doesn't support service account, so we need to talk to them on behalf of the end user. This API just checks whether we have OAuth token for the particular user, which is a pre-requisite before user can create a transfer config.
-      operationId: bigquerydatatransfer.projects.dataSources.checkValidCreds
+      operationId: bigquerydatatransfer.projects.locations.dataSources.checkValidCreds
       parameters:
         - description: "Required. The data source in the form: `projects/{project_id}/dataSources/{data_source_id}` or `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`."
           in: path
@@ -282,7 +282,7 @@ paths:
   "/v1/{parent}/dataSources":
     get:
       description: Lists supported data sources and returns their settings, which can be used for UI rendering.
-      operationId: bigquerydatatransfer.projects.dataSources.list
+      operationId: bigquerydatatransfer.projects.locations.dataSources.list
       parameters:
         - description: "Required. The BigQuery project id for which data sources should be returned. Must be in the form: `projects/{project_id}` or `projects/{project_id}/locations/{location_id}"
           in: path
@@ -327,17 +327,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/runs":
     get:
       description: Returns information about running and completed jobs.
@@ -410,17 +410,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/transferConfigs":
     get:
       description: Returns information about all data transfers in the project.
@@ -478,17 +478,17 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new data transfer configuration.
       operationId: bigquerydatatransfer.projects.transferConfigs.create
@@ -595,30 +595,30 @@ paths:
       tags:
         - projects
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}:scheduleRuns":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: "Creates transfer runs for a time range [start_time, end_time]. For each date - or whatever granularity the data source supports - in the range, one transfer run is created. Note that runs are created per UTC time in the time range. DEPRECATED: use StartManualTransferRuns instead."
       operationId: bigquerydatatransfer.projects.transferConfigs.scheduleRuns
@@ -654,17 +654,17 @@ paths:
         - projects
   "/v1/{parent}:startManualRuns":
     parameters:
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Start manual transfer runs to be executed now with schedule_time equal to current time. The transfer runs can be created for a time range where the run_time is between start_time (inclusive) and end_time (exclusive), or for a specific run_time.
       operationId: bigquerydatatransfer.projects.transferConfigs.startManualRuns
