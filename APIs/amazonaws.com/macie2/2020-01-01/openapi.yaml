@@ -344,7 +344,7 @@ paths:
                   description: A custom description of the job. The description can contain as many as 200 characters.
                   type: string
                 initialRun:
-                  description: 'Specifies whether to run the job immediately, after it''s created.'
+                  description: 'Specifies whether to analyze all existing, eligible objects immediately after the job is created.'
                   type: boolean
                 jobType:
                   description: 'The schedule for running a classification job. Valid values are:'
@@ -1756,7 +1756,7 @@ paths:
                   properties:
                     attributeName:
                       $ref: '#/components/schemas/__string'
-                      description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName, accountId, or lastUpdated.'
+                      description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
                     orderBy:
                       $ref: '#/components/schemas/OrderBy'
                       description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
@@ -4125,7 +4125,7 @@ components:
           description: The custom description of the job.
         initialRun:
           $ref: '#/components/schemas/__boolean'
-          description: Specifies whether the job has run for the first time.
+          description: 'Specifies whether the job is configured to analyze all existing, eligible objects immediately after it''s created.'
         jobArn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the job.
@@ -4134,7 +4134,7 @@ components:
           description: The unique identifier for the job.
         jobStatus:
           $ref: '#/components/schemas/JobStatus'
-          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
         jobType:
           $ref: '#/components/schemas/JobType'
           description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
@@ -4149,7 +4149,7 @@ components:
           description: 'The S3 buckets that the job is configured to analyze, and the scope of that analysis.'
         samplingPercentage:
           $ref: '#/components/schemas/__integer'
-          description: 'The sampling depth, as a percentage, that determines the number of objects that the job processes.'
+          description: 'The sampling depth, as a percentage, that determines the percentage of eligible objects that the job analyzes.'
         scheduleFrequency:
           $ref: '#/components/schemas/JobScheduleFrequency'
           description: 'The recurrence pattern for running the job. If the job is configured to run only once, this value is null.'
@@ -4197,25 +4197,34 @@ components:
           description: The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
         bucketCountByEncryptionType:
           $ref: '#/components/schemas/BucketCountByEncryptionType'
-          description: 'The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren''t encrypted.'
+          description: 'The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that don''t encrypt objects by default.'
         bucketCountBySharedAccessType:
           $ref: '#/components/schemas/BucketCountBySharedAccessType'
           description: The total number of buckets that are shared with another AWS account.
         classifiableObjectCount:
           $ref: '#/components/schemas/__long'
-          description: 'The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.'
+          description: The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
+        classifiableSizeInBytes:
+          $ref: '#/components/schemas/__long'
+          description: 'The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.'
         lastUpdated:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the buckets.'
+          description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the buckets from Amazon S3.'
         objectCount:
           $ref: '#/components/schemas/__long'
-          description: The total number of objects in all the buckets.
+          description: The total number of objects in the buckets.
         sizeInBytes:
           $ref: '#/components/schemas/__long'
-          description: 'The total storage size, in bytes, of all the buckets.'
+          description: 'The total storage size, in bytes, of the buckets.'
         sizeInBytesCompressed:
           $ref: '#/components/schemas/__long'
-          description: 'The total compressed storage size, in bytes, of all the buckets.'
+          description: 'The total compressed storage size, in bytes, of the buckets.'
+        unclassifiableObjectCount:
+          $ref: '#/components/schemas/ObjectLevelStatistics'
+          description: The total number of objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+        unclassifiableObjectSizeInBytes:
+          $ref: '#/components/schemas/ObjectLevelStatistics'
+          description: 'The total storage size, in bytes, of all the objects that Amazon Macie can''t analyze in the buckets. These objects use an unsupported file or storage format or storage class.'
     GetClassificationExportConfigurationResponse:
       type: object
       properties:
@@ -4779,7 +4788,7 @@ components:
         bucketPolicy:
           $ref: '#/components/schemas/BucketPolicy'
           description: The permissions settings of the bucket policy for the bucket. This value is null if a bucket policy hasn't been defined for the bucket.
-      description: Provides information about bucket-level permissions settings for an S3 bucket.
+      description: Provides information about the bucket-level permissions settings for an S3 bucket.
     ObjectCountByEncryptionType:
       type: object
       properties:
@@ -4801,11 +4810,11 @@ components:
       properties:
         effectivePermission:
           $ref: '#/components/schemas/EffectivePermission'
-          description: 'Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are: PUBLIC, the bucket is publicly accessible; and, NOT_PUBLIC, the bucket isn''t publicly accessible.'
+          description: ' <p>Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are:</p> <ul><li><p>NOT_PUBLIC - The bucket isn''t publicly accessible.</p></li> <li><p>PUBLIC - The bucket is publicly accessible.</p></li> <li><p>UNKNOWN - Amazon Macie can''t determine whether the bucket is publicly accessible.</p></li></ul>'
         permissionConfiguration:
           $ref: '#/components/schemas/BucketPermissionConfiguration'
           description: The account-level and bucket-level permissions for the bucket.
-      description: Provides information about permissions settings that determine whether an S3 bucket is publicly accessible.
+      description: Provides information about the permissions settings that determine whether an S3 bucket is publicly accessible.
     ReplicationDetails:
       type: object
       properties:
@@ -4814,7 +4823,7 @@ components:
           description: Specifies whether the bucket is configured to replicate one or more objects to any destination.
         replicatedExternally:
           $ref: '#/components/schemas/__boolean'
-          description: Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the Amazon Macie organization.
+          description: Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.
         replicationAccounts:
           $ref: '#/components/schemas/__listOf__string'
           description: 'An array of AWS account IDs, one for each AWS account that the bucket is configured to replicate one or more objects to.'
@@ -4825,16 +4834,30 @@ components:
         - EXTERNAL
         - INTERNAL
         - NOT_SHARED
+        - UNKNOWN
     __listOfKeyValuePair:
       type: array
       items:
         $ref: '#/components/schemas/KeyValuePair'
+    ObjectLevelStatistics:
+      type: object
+      properties:
+        fileType:
+          $ref: '#/components/schemas/__long'
+          description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format.
+        storageClass:
+          $ref: '#/components/schemas/__long'
+          description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class.
+        total:
+          $ref: '#/components/schemas/__long'
+          description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format or storage class.
+      description: 'Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can''t analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results.'
     BucketMetadata:
       type: object
       properties:
         accountId:
           $ref: '#/components/schemas/__string'
-          description: The unique identifier for the AWS account that's associated with the bucket.
+          description: The unique identifier for the AWS account that owns the bucket.
         bucketArn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the bucket.
@@ -4846,10 +4869,13 @@ components:
           description: The name of the bucket.
         classifiableObjectCount:
           $ref: '#/components/schemas/__long'
-          description: 'The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.'
+          description: The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
+        classifiableSizeInBytes:
+          $ref: '#/components/schemas/__long'
+          description: 'The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.'
         lastUpdated:
           $ref: '#/components/schemas/__timestampIso8601'
-          description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the bucket.'
+          description: 'The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the bucket from Amazon S3.'
         objectCount:
           $ref: '#/components/schemas/__long'
           description: The total number of objects in the bucket.
@@ -4867,7 +4893,7 @@ components:
           description: 'Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.'
         sharedAccess:
           $ref: '#/components/schemas/SharedAccess'
-          description: '<p>Specifies whether the bucket is shared with another AWS account. Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li></ul>'
+          description: ' <p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn''t able to evaluate the shared access settings for the bucket.</p></li></ul>'
         sizeInBytes:
           $ref: '#/components/schemas/__long'
           description: 'The total storage size, in bytes, of the bucket.'
@@ -4877,6 +4903,12 @@ components:
         tags:
           $ref: '#/components/schemas/__listOfKeyValuePair'
           description: An array that specifies the tags (keys and values) that are associated with the bucket.
+        unclassifiableObjectCount:
+          $ref: '#/components/schemas/ObjectLevelStatistics'
+          description: The total number of objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+        unclassifiableObjectSizeInBytes:
+          $ref: '#/components/schemas/ObjectLevelStatistics'
+          description: 'The total storage size, in bytes, of the objects that Amazon Macie can''t analyze in the bucket. These objects use an unsupported file or storage format or storage class.'
         versioning:
           $ref: '#/components/schemas/__boolean'
           description: Specifies whether versioning is enabled for the bucket.
@@ -4890,18 +4922,19 @@ components:
         bucketLevelPermissions:
           $ref: '#/components/schemas/BucketLevelPermissions'
           description: The bucket-level permissions settings for the bucket.
-      description: The account-level and bucket-level permissions settings for an S3 bucket.
+      description: Provides information about the account-level and bucket-level permissions settings for an S3 bucket.
     EffectivePermission:
       type: string
       enum:
         - PUBLIC
         - NOT_PUBLIC
+        - UNKNOWN
     BucketSortCriteria:
       type: object
       properties:
         attributeName:
           $ref: '#/components/schemas/__string'
-          description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName, accountId, or lastUpdated.'
+          description: 'The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.'
         orderBy:
           $ref: '#/components/schemas/OrderBy'
           description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
@@ -4930,7 +4963,7 @@ components:
       properties:
         detailedResultsLocation:
           $ref: '#/components/schemas/__string'
-          description: 'The Amazon Resource Name (ARN) of the file that contains the detailed record, including offsets, for the finding.'
+          description: 'The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery results for the finding. If a finding applies to a large archive or compressed file, this is a path to a folder. Otherwise, this is a path to a file.'
         jobArn:
           $ref: '#/components/schemas/__string'
           description: The Amazon Resource Name (ARN) of the classification job that produced the finding.
@@ -4939,7 +4972,7 @@ components:
           description: The unique identifier for the classification job that produced the finding.
         result:
           $ref: '#/components/schemas/ClassificationResult'
-          description: The status and detailed results of the finding.
+          description: The status and other details for the finding.
       description: 'Provides information about a sensitive data finding, including the classification job that produced the finding.'
     ClassificationExportConfiguration:
       type: object
@@ -4968,7 +5001,7 @@ components:
       properties:
         code:
           $ref: '#/components/schemas/__string'
-          description: 'The status of the finding, such as COMPLETE.'
+          description: ' <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn''t able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that''s in an unsupported format.</p></li></ul>'
         reason:
           $ref: '#/components/schemas/__string'
           description: 'A brief description of the status of the finding. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding.'
@@ -5029,7 +5062,7 @@ components:
           description: A custom description of the job. The description can contain as many as 200 characters.
         initialRun:
           $ref: '#/components/schemas/__boolean'
-          description: 'Specifies whether to run the job immediately, after it''s created.'
+          description: 'Specifies whether to analyze all existing, eligible objects immediately after the job is created.'
         jobType:
           $ref: '#/components/schemas/JobType'
           description: '<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don''t specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>'
@@ -5897,7 +5930,7 @@ components:
           description: 'A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.'
         tagScopeTerm:
           $ref: '#/components/schemas/TagScopeTerm'
-          description: ' <p>A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.</p>'
+          description: A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
       description: Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.
     __listOfJobScopeTerm:
       type: array
@@ -5924,7 +5957,7 @@ components:
           description: The unique identifier for the job.
         jobStatus:
           $ref: '#/components/schemas/JobStatus'
-          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+          description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
         jobType:
           $ref: '#/components/schemas/JobType'
           description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
@@ -6151,7 +6184,7 @@ components:
           description: 'The entity tag (ETag) that identifies the affected version of the object. If the object was overwritten or changed after Amazon Macie produced the finding, this value might be different from the current ETag for the object.'
         extension:
           $ref: '#/components/schemas/__string'
-          description: 'The file extension of the object. If the object doesn''t have a file extension, this value is "".'
+          description: 'The file name extension of the object. If the object doesn''t have a file name extension, this value is "".'
         key:
           $ref: '#/components/schemas/__string'
           description: The full key (name) that's assigned to the object.
@@ -6188,7 +6221,7 @@ components:
           description: 'The server-side encryption algorithm that''s used when storing data in the bucket or object. If encryption is disabled for the bucket or object, this value is NONE.'
         kmsMasterKeyId:
           $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if KMS isn't used to encrypt the bucket or object.
+          description: The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.
       description: Provides information about the server-side encryption settings for an S3 bucket or object.
     S3BucketOwner:
       type: object
