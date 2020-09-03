@@ -4343,19 +4343,25 @@ components:
             - xml:
                 name: domainDetails
               description: The domain information for the AWS API call.
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: errorCode
+              description: The error code of the failed AWS API action.
         RemoteIpDetails:
           allOf:
             - $ref: '#/components/schemas/RemoteIpDetails'
             - xml:
                 name: remoteIpDetails
-              description: The remote IP information of the connection.
+              description: The remote IP information of the connection that initiated the AWS API call.
         ServiceName:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: serviceName
               description: The AWS service name whose API was invoked.
-      description: Contains information about the API operation.
+      description: Contains information about the API action.
     DnsRequestAction:
       type: object
       properties:
@@ -5186,7 +5192,7 @@ components:
             - xml:
                 name: kmsMasterKeyArn
               description: 'The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket <code>EncryptionType</code> is <code>aws:kms</code>.'
-      description: 'Contains information on the server side encryption method used in the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html">S3 Server-Side Encryption</a> for more information.'
+      description: 'Contains information on the server side encryption method used in the S3 bucket. See <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html">S3 Server-Side Encryption</a> for more information.'
     DeleteDetectorRequest:
       type: object
       title: DeleteDetectorRequest

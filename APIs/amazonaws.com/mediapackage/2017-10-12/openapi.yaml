@@ -662,6 +662,18 @@ paths:
                         - xml:
                             name: suggestedPresentationDelaySeconds
                           description: Duration (in seconds) to delay live content before presentation.
+                    UtcTiming:
+                      allOf:
+                        - $ref: '#/components/schemas/UtcTiming'
+                        - xml:
+                            name: utcTiming
+                          description: Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+                    UtcTimingUri:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: utcTimingUri
+                          description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
                 description:
                   description: A short text description of the OriginEndpoint.
                   type: string
@@ -1393,6 +1405,18 @@ paths:
                         - xml:
                             name: suggestedPresentationDelaySeconds
                           description: Duration (in seconds) to delay live content before presentation.
+                    UtcTiming:
+                      allOf:
+                        - $ref: '#/components/schemas/UtcTiming'
+                        - xml:
+                            name: utcTiming
+                          description: Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+                    UtcTimingUri:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: utcTimingUri
+                          description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
                 description:
                   description: A short text description of the OriginEndpoint.
                   type: string
@@ -2178,6 +2202,12 @@ components:
         - NUMBER_WITH_TIMELINE
         - TIME_WITH_TIMELINE
         - NUMBER_WITH_DURATION
+      type: string
+    UtcTiming:
+      enum:
+        - NONE
+        - HTTP-HEAD
+        - HTTP-ISO
       type: string
     AdMarkers:
       enum:
@@ -3080,6 +3110,18 @@ components:
             - xml:
                 name: suggestedPresentationDelaySeconds
               description: Duration (in seconds) to delay live content before presentation.
+        UtcTiming:
+          allOf:
+            - $ref: '#/components/schemas/UtcTiming'
+            - xml:
+                name: utcTiming
+              description: Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+        UtcTimingUri:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: utcTimingUri
+              description: Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
       description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
     HlsPackage:
       type: object

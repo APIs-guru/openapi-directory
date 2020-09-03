@@ -1483,7 +1483,6 @@ components:
         - stateMachineArn
         - status
         - startDate
-        - input
       properties:
         executionArn:
           allOf:
@@ -1512,11 +1511,15 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The string that contains the JSON input data of the execution.
+            - description: 'The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
+            - description: '<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
+        outputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
     DescribeExecutionInput:
       type: object
       required:
@@ -1630,7 +1633,7 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveDataJobInput'
-            - description: The string that contains the JSON input data for the task.
+            - description: 'The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
     GetActivityTaskInput:
       type: object
       required:
@@ -1681,6 +1684,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PageToken'
             - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+        includeExecutionData:
+          allOf:
+            - $ref: '#/components/schemas/IncludeExecutionDataGetExecutionHistory'
+            - description: You can select whether execution data (input or output of a history event) is returned. The default is <code>true</code>.
     InvalidToken: {}
     ListActivitiesOutput:
       type: object
@@ -1836,7 +1843,7 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON output of the task.
+            - description: 'The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
     InvalidOutput: {}
     StartExecutionOutput:
       type: object
@@ -1869,7 +1876,7 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
+            - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>'
     ExecutionLimitExceeded: {}
     ExecutionAlreadyExists: {}
     InvalidExecutionInput: {}
@@ -2039,8 +2046,16 @@ components:
       description: Contains details about an activity schedule failure that occurred during an execution.
     SensitiveData:
       type: string
-      maxLength: 32768
+      maxLength: 262144
       format: password
+    HistoryEventExecutionDataDetails:
+      type: object
+      properties:
+        truncated:
+          allOf:
+            - $ref: '#/components/schemas/truncated'
+            - description: Indicates whether input or output was truncated in the response. Always <code>false</code>.
+      description: 'Contains details about the data from an execution''s events. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Logs.'
     TimeoutInSeconds:
       type: integer
     ActivityScheduledEventDetails:
@@ -2055,7 +2070,11 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data input to the activity task.
+            - description: 'The JSON data input to the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the input for an execution history event.
         timeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/TimeoutInSeconds'
@@ -2082,7 +2101,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data output by the activity task.
+            - description: 'The JSON data output by the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about an activity that successfully terminated during an execution.
     ActivityTimedOutEventDetails:
       type: object
@@ -2096,6 +2119,16 @@ components:
             - $ref: '#/components/schemas/SensitiveCause'
             - description: A more detailed explanation of the cause of the timeout.
       description: Contains details about an activity timeout that occurred during an execution.
+    included:
+      type: boolean
+    CloudWatchEventsExecutionDataDetails:
+      type: object
+      properties:
+        included:
+          allOf:
+            - $ref: '#/components/schemas/included'
+            - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Events.'
+      description: Provides details about execution input.
     CloudWatchLogsLogGroup:
       type: object
       properties:
@@ -2107,7 +2140,7 @@ components:
     ConnectorParameters:
       type: string
       minLength: 0
-      maxLength: 32768
+      maxLength: 262144
       format: password
     TagList:
       type: array
@@ -2133,7 +2166,7 @@ components:
         includeExecutionData:
           allOf:
             - $ref: '#/components/schemas/IncludeExecutionData'
-            - description: 'Determines whether execution data is included in your log. When set to <code>FALSE</code>, data is excluded.'
+            - description: 'Determines whether execution data is included in your log. When set to <code>false</code>, data is excluded.'
         destinations:
           allOf:
             - $ref: '#/components/schemas/LogDestinationList'
@@ -2222,7 +2255,11 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data input to the execution.
+            - description: 'The JSON data input to the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the input for an execution history event.
         roleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -2234,7 +2271,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data output by the execution.
+            - description: 'The JSON data output by the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about the successful termination of the execution.
     ExecutionTimedOutEventDetails:
       type: object
@@ -2254,7 +2295,7 @@ components:
       maxLength: 1024
     SensitiveDataJobInput:
       type: string
-      maxLength: 65536
+      maxLength: 262144
       format: password
     PageSize:
       type: integer
@@ -2266,6 +2307,8 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+    IncludeExecutionDataGetExecutionHistory:
+      type: boolean
     HistoryEventList:
       type: array
       description: Contains details about the events that occurred during an execution.
@@ -2375,11 +2418,15 @@ components:
         parameters:
           allOf:
             - $ref: '#/components/schemas/ConnectorParameters'
-            - description: The JSON data passed to the resource referenced in a task state.
+            - description: 'The JSON data passed to the resource referenced in a task state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
         timeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/TimeoutInSeconds'
             - description: The maximum allowed duration of the task.
+        heartbeatInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInSeconds'
+            - description: The maximum allowed duration between two heartbeats for the task.
       description: Contains details about a task scheduled during an execution.
     TaskStartFailedEventDetails:
       type: object
@@ -2459,7 +2506,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The response from a resource when a task has started.
+            - description: 'The response from a resource when a task has started. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about a task submitted to a resource .
     TaskSucceededEventDetails:
       type: object
@@ -2478,7 +2529,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
+            - description: 'The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about the successful completion of a task state.
     TaskTimedOutEventDetails:
       type: object
@@ -2559,7 +2614,11 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data input to the lambda function.
+            - description: 'The JSON data input to the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about input for an execution history event.
         timeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/TimeoutInSeconds'
@@ -2583,7 +2642,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON data output by the lambda function.
+            - description: 'The JSON data output by the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about a lambda function that successfully terminated during an execution.
     LambdaFunctionTimedOutEventDetails:
       type: object
@@ -2609,7 +2672,11 @@ components:
         input:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The string that contains the JSON input data for the state.
+            - description: 'The string that contains the JSON input data for the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the input for an execution history event.
       description: Contains details about a state entered during an execution.
     StateExitedEventDetails:
       type: object
@@ -2623,7 +2690,11 @@ components:
         output:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The JSON output data of the state.
+            - description: 'The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        outputDetails:
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventExecutionDataDetails'
+            - description: Contains details about the output of an execution history event.
       description: Contains details about an exit from a state during an execution.
     HistoryEvent:
       type: object
@@ -2745,6 +2816,8 @@ components:
         stateExitedEventDetails:
           $ref: '#/components/schemas/StateExitedEventDetails'
       description: Contains details about the events of an execution.
+    truncated:
+      type: boolean
     IncludeExecutionData:
       type: boolean
     ListExecutionsPageToken:
