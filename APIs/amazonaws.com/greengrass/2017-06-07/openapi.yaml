@@ -336,8 +336,9 @@ paths:
                   type: object
                   properties:
                     Connectors:
-                      $ref: '#/components/schemas/__listOfConnector'
-                      description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfConnector'
+                        - description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
                 Name:
                   description: The name of the connector definition.
                   type: string
@@ -498,8 +499,9 @@ paths:
                   type: object
                   properties:
                     Cores:
-                      $ref: '#/components/schemas/__listOfCore'
-                      description: A list of cores in the core definition version.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfCore'
+                        - description: A list of cores in the core definition version.
                 Name:
                   description: The name of the core definition.
                   type: string
@@ -756,8 +758,9 @@ paths:
                   type: object
                   properties:
                     Devices:
-                      $ref: '#/components/schemas/__listOfDevice'
-                      description: A list of devices in the definition version.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfDevice'
+                        - description: A list of devices in the definition version.
                 Name:
                   description: The name of the device definition.
                   type: string
@@ -918,11 +921,13 @@ paths:
                   type: object
                   properties:
                     DefaultConfig:
-                      $ref: '#/components/schemas/FunctionDefaultConfig'
-                      description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+                      allOf:
+                        - $ref: '#/components/schemas/FunctionDefaultConfig'
+                        - description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
                     Functions:
-                      $ref: '#/components/schemas/__listOfFunction'
-                      description: A list of Lambda functions in this function definition version.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfFunction'
+                        - description: A list of Lambda functions in this function definition version.
                 Name:
                   description: The name of the function definition.
                   type: string
@@ -1089,26 +1094,33 @@ paths:
                   type: object
                   properties:
                     ConnectorDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the connector definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the connector definition version for this group.
                     CoreDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the core definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the core definition version for this group.
                     DeviceDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the device definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the device definition version for this group.
                     FunctionDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the function definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the function definition version for this group.
                     LoggerDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the logger definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the logger definition version for this group.
                     ResourceDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the resource definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the resource definition version for this group.
                     SubscriptionDefinitionVersionArn:
-                      $ref: '#/components/schemas/__string'
-                      description: The ARN of the subscription definition version for this group.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The ARN of the subscription definition version for this group.
                 Name:
                   description: The name of the group.
                   type: string
@@ -1358,8 +1370,9 @@ paths:
                   type: object
                   properties:
                     Loggers:
-                      $ref: '#/components/schemas/__listOfLogger'
-                      description: A list of loggers.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfLogger'
+                        - description: A list of loggers.
                 Name:
                   description: The name of the logger definition.
                   type: string
@@ -1520,8 +1533,9 @@ paths:
                   type: object
                   properties:
                     Resources:
-                      $ref: '#/components/schemas/__listOfResource'
-                      description: A list of resources.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfResource'
+                        - description: A list of resources.
                 Name:
                   description: The name of the resource definition.
                   type: string
@@ -1775,8 +1789,9 @@ paths:
                   type: object
                   properties:
                     Subscriptions:
-                      $ref: '#/components/schemas/__listOfSubscription'
-                      description: A list of subscriptions.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfSubscription'
+                        - description: A list of subscriptions.
                 Name:
                   description: The name of the subscription definition.
                   type: string
@@ -3570,40 +3585,49 @@ components:
       type: object
       properties:
         AssociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the role ARN was associated with the group.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the role ARN was associated with the group.'
     BadRequestException: {}
     InternalServerErrorException: {}
     AssociateServiceRoleToAccountResponse:
       type: object
       properties:
         AssociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: The time when the service role was associated with the account.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The time when the service role was associated with the account.
     CreateConnectorDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfConnector:
       type: array
       items:
@@ -3614,17 +3638,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Connector:
       type: object
       required:
@@ -3632,39 +3660,49 @@ components:
         - Id
       properties:
         ConnectorArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the connector.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the connector.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.'
         Parameters:
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The parameters or configuration that the connector uses.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - description: The parameters or configuration that the connector uses.
       description: 'Information about a connector. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.'
     CreateCoreDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfCore:
       type: array
       items:
@@ -3673,17 +3711,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Core:
       type: object
       required:
@@ -3692,51 +3734,64 @@ components:
         - CertificateArn
       properties:
         CertificateArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the certificate associated with the core.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the certificate associated with the core.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
         SyncShadow:
-          $ref: '#/components/schemas/__boolean'
-          description: 'If true, the core''s local shadow is automatically synced with the cloud.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'If true, the core''s local shadow is automatically synced with the cloud.'
         ThingArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the thing which is the core.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the thing which is the core.
       description: Information about a core.
     CreateDeploymentResponse:
       type: object
       properties:
         DeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the deployment.
         DeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the deployment.
     CreateDeviceDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfDevice:
       type: array
       items:
@@ -3745,17 +3800,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Device:
       type: object
       required:
@@ -3764,42 +3823,53 @@ components:
         - CertificateArn
       properties:
         CertificateArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the certificate associated with the device.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the certificate associated with the device.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
         SyncShadow:
-          $ref: '#/components/schemas/__boolean'
-          description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'If true, the device''s local shadow will be automatically synced with the cloud.'
         ThingArn:
-          $ref: '#/components/schemas/__string'
-          description: The thing ARN of the device.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The thing ARN of the device.
       description: Information about a device.
     CreateFunctionDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     FunctionDefaultConfig:
       type: object
       properties:
@@ -3814,17 +3884,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     FunctionDefaultExecutionConfig:
       type: object
       properties:
@@ -3839,84 +3913,106 @@ components:
         - Id
       properties:
         FunctionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the Lambda function.
         FunctionConfiguration:
-          $ref: '#/components/schemas/FunctionConfiguration'
-          description: The configuration of the Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/FunctionConfiguration'
+            - description: The configuration of the Lambda function.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
       description: Information about a Lambda function.
     CreateGroupResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     CreateGroupCertificateAuthorityResponse:
       type: object
       properties:
         GroupCertificateAuthorityArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the group certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the group certificate authority.
     CreateGroupVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     CreateLoggerDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfLogger:
       type: array
       items:
@@ -3925,17 +4021,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Logger:
       type: object
       required:
@@ -3945,45 +4045,57 @@ components:
         - Component
       properties:
         Component:
-          $ref: '#/components/schemas/LoggerComponent'
-          description: The component that will be subject to logging.
+          allOf:
+            - $ref: '#/components/schemas/LoggerComponent'
+            - description: The component that will be subject to logging.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
         Level:
-          $ref: '#/components/schemas/LoggerLevel'
-          description: The level of the logs.
+          allOf:
+            - $ref: '#/components/schemas/LoggerLevel'
+            - description: The level of the logs.
         Space:
-          $ref: '#/components/schemas/__integer'
-          description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The amount of file space, in KB, to use if the local file system is used for logging purposes.'
         Type:
-          $ref: '#/components/schemas/LoggerType'
-          description: The type of log output which will be used.
+          allOf:
+            - $ref: '#/components/schemas/LoggerType'
+            - description: The type of log output which will be used.
       description: Information about a logger
     CreateResourceDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfResource:
       type: array
       items:
@@ -3992,17 +4104,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Resource:
       type: object
       required:
@@ -4011,51 +4127,64 @@ components:
         - Name
       properties:
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
         Name:
-          $ref: '#/components/schemas/__string'
-          description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''. This must be unique within a Greengrass group.'
         ResourceDataContainer:
-          $ref: '#/components/schemas/ResourceDataContainer'
-          description: A container of data for all resource types.
+          allOf:
+            - $ref: '#/components/schemas/ResourceDataContainer'
+            - description: A container of data for all resource types.
       description: Information about a resource.
     CreateSoftwareUpdateJobResponse:
       type: object
       properties:
         IotJobArn:
-          $ref: '#/components/schemas/__string'
-          description: The IoT Job ARN corresponding to this update.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The IoT Job ARN corresponding to this update.
         IotJobId:
-          $ref: '#/components/schemas/__string'
-          description: The IoT Job Id corresponding to this update.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The IoT Job Id corresponding to this update.
         PlatformSoftwareVersion:
-          $ref: '#/components/schemas/__string'
-          description: The software version installed on the device or devices after the update.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The software version installed on the device or devices after the update.
     CreateSubscriptionDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     __listOfSubscription:
       type: array
       items:
@@ -4064,17 +4193,21 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
     Subscription:
       type: object
       required:
@@ -4084,17 +4217,21 @@ components:
         - Source
       properties:
         Id:
-          $ref: '#/components/schemas/__string'
-          description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''''[a-zA-Z0-9:_-]+''''.'
         Source:
-          $ref: '#/components/schemas/__string'
-          description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
         Subject:
-          $ref: '#/components/schemas/__string'
-          description: The MQTT topic used to route the message.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The MQTT topic used to route the message.
         Target:
-          $ref: '#/components/schemas/__string'
-          description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
       description: Information about a subscription.
     DeleteConnectorDefinitionResponse:
       type: object
@@ -4124,658 +4261,831 @@ components:
       type: object
       properties:
         DisassociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the role was disassociated from the group.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the role was disassociated from the group.'
     DisassociateServiceRoleFromAccountResponse:
       type: object
       properties:
         DisassociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: The time when the service role was disassociated from the account.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The time when the service role was disassociated from the account.
     GetAssociatedRoleResponse:
       type: object
       properties:
         AssociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: The time when the role was associated with the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The time when the role was associated with the group.
         RoleArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the role that is associated with the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the role that is associated with the group.
     GetBulkDeploymentStatusResponse:
       type: object
       properties:
         BulkDeploymentMetrics:
-          $ref: '#/components/schemas/BulkDeploymentMetrics'
-          description: Relevant metrics on input records processed during bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/BulkDeploymentMetrics'
+            - description: Relevant metrics on input records processed during bulk deployment.
         BulkDeploymentStatus:
-          $ref: '#/components/schemas/BulkDeploymentStatus'
-          description: The status of the bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/BulkDeploymentStatus'
+            - description: The status of the bulk deployment.
         CreatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in ISO format, when the deployment was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in ISO format, when the deployment was created.'
         ErrorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: Error details
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Error details
         ErrorMessage:
-          $ref: '#/components/schemas/__string'
-          description: Error message
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Error message
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetConnectivityInfoResponse:
       type: object
       properties:
         ConnectivityInfo:
-          $ref: '#/components/schemas/__listOfConnectivityInfo'
-          description: Connectivity info list.
+          allOf:
+            - $ref: '#/components/schemas/__listOfConnectivityInfo'
+            - description: Connectivity info list.
         Message:
-          xml:
-            name: message
-          $ref: '#/components/schemas/__string'
-          description: A message about the connectivity info request.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: message
+              description: A message about the connectivity info request.
     GetConnectorDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetConnectorDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the connector definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the connector definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the connector definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the connector definition version was created.'
         Definition:
-          $ref: '#/components/schemas/ConnectorDefinitionVersion'
-          description: Information about the connector definition version.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorDefinitionVersion'
+            - description: Information about the connector definition version.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the connector definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the connector definition version.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the connector definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the connector definition version.
     GetCoreDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetCoreDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the core definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the core definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the core definition version was created.'
         Definition:
-          $ref: '#/components/schemas/CoreDefinitionVersion'
-          description: Information about the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/CoreDefinitionVersion'
+            - description: Information about the core definition version.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the core definition version.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the core definition version.
     GetDeploymentStatusResponse:
       type: object
       properties:
         DeploymentStatus:
-          $ref: '#/components/schemas/__string'
-          description: 'The status of the deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The status of the deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
         DeploymentType:
-          $ref: '#/components/schemas/DeploymentType'
-          description: The type of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentType'
+            - description: The type of the deployment.
         ErrorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: Error details
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Error details
         ErrorMessage:
-          $ref: '#/components/schemas/__string'
-          description: Error message
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Error message
         UpdatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the deployment status was updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the deployment status was updated.'
     GetDeviceDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetDeviceDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the device definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the device definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the device definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the device definition version was created.'
         Definition:
-          $ref: '#/components/schemas/DeviceDefinitionVersion'
-          description: Information about the device definition version.
+          allOf:
+            - $ref: '#/components/schemas/DeviceDefinitionVersion'
+            - description: Information about the device definition version.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the device definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the device definition version.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the device definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the device definition version.
     GetFunctionDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetFunctionDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the function definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the function definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the function definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the function definition version was created.'
         Definition:
-          $ref: '#/components/schemas/FunctionDefinitionVersion'
-          description: Information on the definition.
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefinitionVersion'
+            - description: Information on the definition.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the function definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the function definition version.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the function definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the function definition version.
     GetGroupResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetGroupCertificateAuthorityResponse:
       type: object
       properties:
         GroupCertificateAuthorityArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the certificate authority for the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the certificate authority for the group.
         GroupCertificateAuthorityId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the certificate authority for the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the certificate authority for the group.
         PemEncodedCertificate:
-          $ref: '#/components/schemas/__string'
-          description: The PEM encoded certificate for the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The PEM encoded certificate for the group.
     GetGroupCertificateConfigurationResponse:
       type: object
       properties:
         CertificateAuthorityExpiryInMilliseconds:
-          $ref: '#/components/schemas/__string'
-          description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
         CertificateExpiryInMilliseconds:
-          $ref: '#/components/schemas/__string'
-          description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The amount of time remaining before the certificate expires, in milliseconds.'
         GroupId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group certificate configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group certificate configuration.
     GetGroupVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the group version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the group version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the group version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the group version was created.'
         Definition:
-          $ref: '#/components/schemas/GroupVersion'
-          description: Information about the group version definition.
+          allOf:
+            - $ref: '#/components/schemas/GroupVersion'
+            - description: Information about the group version definition.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group version.
     GetLoggerDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetLoggerDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the logger definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the logger definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the logger definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the logger definition version was created.'
         Definition:
-          $ref: '#/components/schemas/LoggerDefinitionVersion'
-          description: Information about the logger definition version.
+          allOf:
+            - $ref: '#/components/schemas/LoggerDefinitionVersion'
+            - description: Information about the logger definition version.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the logger definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the logger definition version.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the logger definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the logger definition version.
     GetResourceDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetResourceDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: Arn of the resource definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Arn of the resource definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the resource definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the resource definition version was created.'
         Definition:
-          $ref: '#/components/schemas/ResourceDefinitionVersion'
-          description: Information about the definition.
+          allOf:
+            - $ref: '#/components/schemas/ResourceDefinitionVersion'
+            - description: Information about the definition.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the resource definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the resource definition version.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the resource definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the resource definition version.
     GetServiceRoleForAccountResponse:
       type: object
       properties:
         AssociatedAt:
-          $ref: '#/components/schemas/__string'
-          description: The time when the service role was associated with the account.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The time when the service role was associated with the account.
         RoleArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the role which is associated with the account.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the role which is associated with the account.
     GetSubscriptionDefinitionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) attached to the resource arn.
     GetSubscriptionDefinitionVersionResponse:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the subscription definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the subscription definition version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the subscription definition version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the subscription definition version was created.'
         Definition:
-          $ref: '#/components/schemas/SubscriptionDefinitionVersion'
-          description: Information about the subscription definition version.
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionDefinitionVersion'
+            - description: Information about the subscription definition version.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the subscription definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the subscription definition version.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The version of the subscription definition version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The version of the subscription definition version.
     ListBulkDeploymentDetailedReportsResponse:
       type: object
       properties:
         Deployments:
-          $ref: '#/components/schemas/BulkDeploymentResults'
-          description: A list of the individual group deployments in the bulk deployment operation.
+          allOf:
+            - $ref: '#/components/schemas/BulkDeploymentResults'
+            - description: A list of the individual group deployments in the bulk deployment operation.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListBulkDeploymentsResponse:
       type: object
       properties:
         BulkDeployments:
-          $ref: '#/components/schemas/BulkDeployments'
-          description: A list of bulk deployments.
+          allOf:
+            - $ref: '#/components/schemas/BulkDeployments'
+            - description: A list of bulk deployments.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListConnectorDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListConnectorDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListCoreDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListCoreDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListDeploymentsResponse:
       type: object
       properties:
         Deployments:
-          $ref: '#/components/schemas/Deployments'
-          description: A list of deployments for the requested groups.
+          allOf:
+            - $ref: '#/components/schemas/Deployments'
+            - description: A list of deployments for the requested groups.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListDeviceDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListDeviceDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListFunctionDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListFunctionDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListGroupCertificateAuthoritiesResponse:
       type: object
       properties:
         GroupCertificateAuthorities:
-          $ref: '#/components/schemas/__listOfGroupCertificateAuthorityProperties'
-          description: A list of certificate authorities associated with the group.
+          allOf:
+            - $ref: '#/components/schemas/__listOfGroupCertificateAuthorityProperties'
+            - description: A list of certificate authorities associated with the group.
     ListGroupVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListGroupsResponse:
       type: object
       properties:
         Groups:
-          $ref: '#/components/schemas/__listOfGroupInformation'
-          description: Information about a group.
+          allOf:
+            - $ref: '#/components/schemas/__listOfGroupInformation'
+            - description: Information about a group.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListLoggerDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListLoggerDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListResourceDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListResourceDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListSubscriptionDefinitionVersionsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
         Versions:
-          $ref: '#/components/schemas/__listOfVersionInformation'
-          description: Information about a version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfVersionInformation'
+            - description: Information about a version.
     ListSubscriptionDefinitionsResponse:
       type: object
       properties:
         Definitions:
-          $ref: '#/components/schemas/__listOfDefinitionInformation'
-          description: Information about a definition.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDefinitionInformation'
+            - description: Information about a definition.
         NextToken:
-          $ref: '#/components/schemas/__string'
-          description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The token for the next set of results, or ''''null'''' if there are no additional results.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -4785,20 +5095,24 @@ components:
       type: object
       properties:
         DeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the deployment.
         DeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the deployment.
     StartBulkDeploymentResponse:
       type: object
       properties:
         BulkDeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the bulk deployment.
         BulkDeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the bulk deployment.
     StopBulkDeploymentResponse:
       type: object
       properties: {}
@@ -4806,28 +5120,34 @@ components:
       type: object
       properties:
         Message:
-          xml:
-            name: message
-          $ref: '#/components/schemas/__string'
-          description: A message about the connectivity info update request.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: message
+              description: A message about the connectivity info update request.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The new version of the connectivity info.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The new version of the connectivity info.
     ConnectivityInfo:
       type: object
       properties:
         HostAddress:
-          $ref: '#/components/schemas/__string'
-          description: The endpoint for the Greengrass core. Can be an IP address or DNS.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The endpoint for the Greengrass core. Can be an IP address or DNS.
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the connectivity information.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the connectivity information.
         Metadata:
-          $ref: '#/components/schemas/__string'
-          description: Metadata for this endpoint.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Metadata for this endpoint.
         PortNumber:
-          $ref: '#/components/schemas/__integer'
-          description: The port of the Greengrass core. Usually 8883.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The port of the Greengrass core. Usually 8883.
       description: Information about a Greengrass core's connectivity.
     UpdateConnectorDefinitionResponse:
       type: object
@@ -4848,14 +5168,17 @@ components:
       type: object
       properties:
         CertificateAuthorityExpiryInMilliseconds:
-          $ref: '#/components/schemas/__string'
-          description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The amount of time remaining before the certificate authority expires, in milliseconds.'
         CertificateExpiryInMilliseconds:
-          $ref: '#/components/schemas/__string'
-          description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The amount of time remaining before the certificate expires, in milliseconds.'
         GroupId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group certificate configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group certificate configuration.
     UpdateLoggerDefinitionResponse:
       type: object
       properties: {}
@@ -4872,8 +5195,9 @@ components:
       title: AssociateRoleToGroupRequest
       properties:
         RoleArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the role you wish to associate with this group. The existence of the role is not validated.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the role you wish to associate with this group. The existence of the role is not validated.
     AssociateServiceRoleToAccountRequest:
       type: object
       required:
@@ -4881,20 +5205,24 @@ components:
       title: AssociateServiceRoleToAccountRequest
       properties:
         RoleArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the service role you wish to associate with your account.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the service role you wish to associate with your account.
     BulkDeployment:
       type: object
       properties:
         BulkDeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the bulk deployment.
         BulkDeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the bulk deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the bulk deployment.
         CreatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in ISO format, when the deployment was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in ISO format, when the deployment was created.'
       description: Information about a bulk deployment. You cannot start a new bulk deployment while another one is still running or in a non-terminal state.
     __integer:
       type: integer
@@ -4902,14 +5230,17 @@ components:
       type: object
       properties:
         InvalidInputRecords:
-          $ref: '#/components/schemas/__integer'
-          description: 'The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn''t grant permission to deploy a group or group version.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn''t grant permission to deploy a group or group version.'
         RecordsProcessed:
-          $ref: '#/components/schemas/__integer'
-          description: 'The total number of group records from the input file that have been processed so far, or attempted.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The total number of group records from the input file that have been processed so far, or attempted.'
         RetryAttempts:
-          $ref: '#/components/schemas/__integer'
-          description: 'The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''''StartBulkDeployment'''' retries a group deployment up to five times.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''''StartBulkDeployment'''' retries a group deployment up to five times.'
       description: Relevant metrics on input records processed during bulk deployment.
     DeploymentType:
       type: string
@@ -4928,29 +5259,37 @@ components:
       type: object
       properties:
         CreatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in ISO format, when the deployment was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in ISO format, when the deployment was created.'
         DeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the group deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the group deployment.
         DeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group deployment.
         DeploymentStatus:
-          $ref: '#/components/schemas/__string'
-          description: 'The current status of the group deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The current status of the group deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
         DeploymentType:
-          $ref: '#/components/schemas/DeploymentType'
-          description: The type of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentType'
+            - description: The type of the deployment.
         ErrorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: Details about the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Details about the error.
         ErrorMessage:
-          $ref: '#/components/schemas/__string'
-          description: The error message for a failed deployment
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The error message for a failed deployment
         GroupArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the Greengrass group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the Greengrass group.
       description: Information about an individual group deployment in a bulk deployment operation.
     BulkDeploymentResults:
       type: array
@@ -4978,8 +5317,9 @@ components:
       type: object
       properties:
         Connectors:
-          $ref: '#/components/schemas/__listOfConnector'
-          description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+          allOf:
+            - $ref: '#/components/schemas/__listOfConnector'
+            - description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
       description: 'Information about the connector definition version, which is a container for connectors.'
     __boolean:
       type: boolean
@@ -4987,8 +5327,9 @@ components:
       type: object
       properties:
         Cores:
-          $ref: '#/components/schemas/__listOfCore'
-          description: A list of cores in the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfCore'
+            - description: A list of cores in the core definition version.
       description: Information about a core definition version.
     Tags:
       type: object
@@ -5000,42 +5341,50 @@ components:
       title: CreateConnectorDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/ConnectorDefinitionVersion'
-          description: Information about the initial version of the connector definition.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorDefinitionVersion'
+            - description: Information about the initial version of the connector definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the connector definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the connector definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateConnectorDefinitionVersionRequest:
       type: object
       title: CreateConnectorDefinitionVersionRequest
       properties:
         Connectors:
-          $ref: '#/components/schemas/__listOfConnector'
-          description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
+          allOf:
+            - $ref: '#/components/schemas/__listOfConnector'
+            - description: 'A list of references to connectors in this version, with their corresponding configuration settings.'
     CreateCoreDefinitionRequest:
       type: object
       title: CreateCoreDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/CoreDefinitionVersion'
-          description: Information about the initial version of the core definition.
+          allOf:
+            - $ref: '#/components/schemas/CoreDefinitionVersion'
+            - description: Information about the initial version of the core definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the core definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the core definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
       description: Information needed to create a core definition.
     CreateCoreDefinitionVersionRequest:
       type: object
       title: CreateCoreDefinitionVersionRequest
       properties:
         Cores:
-          $ref: '#/components/schemas/__listOfCore'
-          description: A list of cores in the core definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfCore'
+            - description: A list of cores in the core definition version.
     CreateDeploymentRequest:
       type: object
       required:
@@ -5043,74 +5392,89 @@ components:
       title: CreateDeploymentRequest
       properties:
         DeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the deployment if you wish to redeploy a previous deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the deployment if you wish to redeploy a previous deployment.
         DeploymentType:
-          $ref: '#/components/schemas/DeploymentType'
-          description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
+          allOf:
+            - $ref: '#/components/schemas/DeploymentType'
+            - description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
         GroupVersionId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group version to be deployed.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group version to be deployed.
     DeviceDefinitionVersion:
       type: object
       properties:
         Devices:
-          $ref: '#/components/schemas/__listOfDevice'
-          description: A list of devices in the definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDevice'
+            - description: A list of devices in the definition version.
       description: Information about a device definition version.
     CreateDeviceDefinitionRequest:
       type: object
       title: CreateDeviceDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/DeviceDefinitionVersion'
-          description: Information about the initial version of the device definition.
+          allOf:
+            - $ref: '#/components/schemas/DeviceDefinitionVersion'
+            - description: Information about the initial version of the device definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the device definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the device definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateDeviceDefinitionVersionRequest:
       type: object
       title: CreateDeviceDefinitionVersionRequest
       properties:
         Devices:
-          $ref: '#/components/schemas/__listOfDevice'
-          description: A list of devices in the definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDevice'
+            - description: A list of devices in the definition version.
     FunctionDefinitionVersion:
       type: object
       properties:
         DefaultConfig:
-          $ref: '#/components/schemas/FunctionDefaultConfig'
-          description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefaultConfig'
+            - description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
         Functions:
-          $ref: '#/components/schemas/__listOfFunction'
-          description: A list of Lambda functions in this function definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfFunction'
+            - description: A list of Lambda functions in this function definition version.
       description: Information about a function definition version.
     CreateFunctionDefinitionRequest:
       type: object
       title: CreateFunctionDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/FunctionDefinitionVersion'
-          description: Information about the initial version of the function definition.
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefinitionVersion'
+            - description: Information about the initial version of the function definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the function definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the function definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateFunctionDefinitionVersionRequest:
       type: object
       title: CreateFunctionDefinitionVersionRequest
       properties:
         DefaultConfig:
-          $ref: '#/components/schemas/FunctionDefaultConfig'
-          description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+          allOf:
+            - $ref: '#/components/schemas/FunctionDefaultConfig'
+            - description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
         Functions:
-          $ref: '#/components/schemas/__listOfFunction'
-          description: A list of Lambda functions in this function definition version.
+          allOf:
+            - $ref: '#/components/schemas/__listOfFunction'
+            - description: A list of Lambda functions in this function definition version.
       description: Information needed to create a function definition version.
     CreateGroupCertificateAuthorityRequest:
       type: object
@@ -5120,119 +5484,146 @@ components:
       type: object
       properties:
         ConnectorDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the connector definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the connector definition version for this group.
         CoreDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the core definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the core definition version for this group.
         DeviceDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the device definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the device definition version for this group.
         FunctionDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the function definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the function definition version for this group.
         LoggerDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the logger definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the logger definition version for this group.
         ResourceDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the resource definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the resource definition version for this group.
         SubscriptionDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the subscription definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the subscription definition version for this group.
       description: Information about a group version.
     CreateGroupRequest:
       type: object
       title: CreateGroupRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/GroupVersion'
-          description: Information about the initial version of the group.
+          allOf:
+            - $ref: '#/components/schemas/GroupVersion'
+            - description: Information about the initial version of the group.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the group.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateGroupVersionRequest:
       type: object
       title: CreateGroupVersionRequest
       properties:
         ConnectorDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the connector definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the connector definition version for this group.
         CoreDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the core definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the core definition version for this group.
         DeviceDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the device definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the device definition version for this group.
         FunctionDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the function definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the function definition version for this group.
         LoggerDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the logger definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the logger definition version for this group.
         ResourceDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the resource definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the resource definition version for this group.
         SubscriptionDefinitionVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the subscription definition version for this group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the subscription definition version for this group.
     LoggerDefinitionVersion:
       type: object
       properties:
         Loggers:
-          $ref: '#/components/schemas/__listOfLogger'
-          description: A list of loggers.
+          allOf:
+            - $ref: '#/components/schemas/__listOfLogger'
+            - description: A list of loggers.
       description: Information about a logger definition version.
     CreateLoggerDefinitionRequest:
       type: object
       title: CreateLoggerDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/LoggerDefinitionVersion'
-          description: Information about the initial version of the logger definition.
+          allOf:
+            - $ref: '#/components/schemas/LoggerDefinitionVersion'
+            - description: Information about the initial version of the logger definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the logger definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the logger definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateLoggerDefinitionVersionRequest:
       type: object
       title: CreateLoggerDefinitionVersionRequest
       properties:
         Loggers:
-          $ref: '#/components/schemas/__listOfLogger'
-          description: A list of loggers.
+          allOf:
+            - $ref: '#/components/schemas/__listOfLogger'
+            - description: A list of loggers.
     ResourceDefinitionVersion:
       type: object
       properties:
         Resources:
-          $ref: '#/components/schemas/__listOfResource'
-          description: A list of resources.
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - description: A list of resources.
       description: Information about a resource definition version.
     CreateResourceDefinitionRequest:
       type: object
       title: CreateResourceDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/ResourceDefinitionVersion'
-          description: Information about the initial version of the resource definition.
+          allOf:
+            - $ref: '#/components/schemas/ResourceDefinitionVersion'
+            - description: Information about the initial version of the resource definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the resource definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the resource definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateResourceDefinitionVersionRequest:
       type: object
       title: CreateResourceDefinitionVersionRequest
       properties:
         Resources:
-          $ref: '#/components/schemas/__listOfResource'
-          description: A list of resources.
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - description: A list of resources.
     S3UrlSignerRole:
       type: string
       description: The IAM Role that Greengrass will use to create pre-signed URLs pointing towards the update artifact.
@@ -5301,58 +5692,71 @@ components:
       type: object
       properties:
         Subscriptions:
-          $ref: '#/components/schemas/__listOfSubscription'
-          description: A list of subscriptions.
+          allOf:
+            - $ref: '#/components/schemas/__listOfSubscription'
+            - description: A list of subscriptions.
       description: Information about a subscription definition version.
     CreateSubscriptionDefinitionRequest:
       type: object
       title: CreateSubscriptionDefinitionRequest
       properties:
         InitialVersion:
-          $ref: '#/components/schemas/SubscriptionDefinitionVersion'
-          description: Information about the initial version of the subscription definition.
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionDefinitionVersion'
+            - description: Information about the initial version of the subscription definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the subscription definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the subscription definition.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     CreateSubscriptionDefinitionVersionRequest:
       type: object
       title: CreateSubscriptionDefinitionVersionRequest
       properties:
         Subscriptions:
-          $ref: '#/components/schemas/__listOfSubscription'
-          description: A list of subscriptions.
+          allOf:
+            - $ref: '#/components/schemas/__listOfSubscription'
+            - description: A list of subscriptions.
     DefinitionInformation:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the definition.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the definition.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the definition was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the definition.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the definition.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) attached to the resource arn.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+              description: Tag(s) attached to the resource arn.
       description: Information about a definition.
     DeleteConnectorDefinitionRequest:
       type: object
@@ -5390,20 +5794,25 @@ components:
       type: object
       properties:
         CreatedAt:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the deployment was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the deployment was created.'
         DeploymentArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the deployment.
         DeploymentId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the deployment.
         DeploymentType:
-          $ref: '#/components/schemas/DeploymentType'
-          description: The type of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentType'
+            - description: The type of the deployment.
         GroupArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the group for this deployment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the group for this deployment.
       description: Information about a deployment.
     Deployments:
       type: array
@@ -5426,52 +5835,65 @@ components:
       type: object
       properties:
         DetailedErrorCode:
-          $ref: '#/components/schemas/__string'
-          description: A detailed error code.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A detailed error code.
         DetailedErrorMessage:
-          $ref: '#/components/schemas/__string'
-          description: A detailed error message.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: A detailed error message.
       description: Details about the error.
     FunctionConfiguration:
       type: object
       properties:
         EncodingType:
-          $ref: '#/components/schemas/EncodingType'
-          description: The expected encoding type of the input payload for the function. The default is ''json''.
+          allOf:
+            - $ref: '#/components/schemas/EncodingType'
+            - description: The expected encoding type of the input payload for the function. The default is ''json''.
         Environment:
-          $ref: '#/components/schemas/FunctionConfigurationEnvironment'
-          description: The environment configuration of the function.
+          allOf:
+            - $ref: '#/components/schemas/FunctionConfigurationEnvironment'
+            - description: The environment configuration of the function.
         ExecArgs:
-          $ref: '#/components/schemas/__string'
-          description: The execution arguments.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The execution arguments.
         Executable:
-          $ref: '#/components/schemas/__string'
-          description: The name of the function executable.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the function executable.
         MemorySize:
-          $ref: '#/components/schemas/__integer'
-          description: 'The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.'
         Pinned:
-          $ref: '#/components/schemas/__boolean'
-          description: True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
         Timeout:
-          $ref: '#/components/schemas/__integer'
-          description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.'
       description: The configuration of the Lambda function.
     FunctionConfigurationEnvironment:
       type: object
       properties:
         AccessSysfs:
-          $ref: '#/components/schemas/__boolean'
-          description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'If true, the Lambda function is allowed to access the host''s /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.'
         Execution:
-          $ref: '#/components/schemas/FunctionExecutionConfig'
-          description: Configuration related to executing the Lambda function
+          allOf:
+            - $ref: '#/components/schemas/FunctionExecutionConfig'
+            - description: Configuration related to executing the Lambda function
         ResourceAccessPolicies:
-          $ref: '#/components/schemas/__listOfResourceAccessPolicy'
-          description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.'
+          allOf:
+            - $ref: '#/components/schemas/__listOfResourceAccessPolicy'
+            - description: 'A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.'
         Variables:
-          $ref: '#/components/schemas/__mapOf__string'
-          description: Environment variables for the Lambda function's configuration.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - description: Environment variables for the Lambda function's configuration.
       description: The environment configuration of the function.
     FunctionExecutionConfig:
       type: object
@@ -5495,11 +5917,13 @@ components:
       type: object
       properties:
         Gid:
-          $ref: '#/components/schemas/__integer'
-          description: The group ID whose permissions are used to run a Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The group ID whose permissions are used to run a Lambda function.
         Uid:
-          $ref: '#/components/schemas/__integer'
-          description: The user ID whose permissions are used to run a Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: The user ID whose permissions are used to run a Lambda function.
       description: 'Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''''IsolationMode'''' to ''''NoContainer'''' and update config.json in ''''greengrass-root/config'''' to set ''''allowFunctionsToRunAsRoot'''' to ''''yes''''.'
     GetAssociatedRoleRequest:
       type: object
@@ -5601,46 +6025,57 @@ components:
       type: object
       properties:
         GroupCertificateAuthorityArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the certificate authority for the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the certificate authority for the group.
         GroupCertificateAuthorityId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the certificate authority for the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the certificate authority for the group.
       description: Information about a certificate authority for a group.
     GroupInformation:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the group.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the group was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the group was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the group.
         LastUpdatedTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the group was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the group was last updated.'
         LatestVersion:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the latest version associated with the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the latest version associated with the group.
         LatestVersionArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the latest version associated with the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the latest version associated with the group.
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the group.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the group.
       description: Information about a group.
     GroupOwnerSetting:
       type: object
       properties:
         AutoAddGroupOwner:
-          $ref: '#/components/schemas/__boolean'
-          description: 'If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.'
         GroupOwner:
-          $ref: '#/components/schemas/__string'
-          description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
       description: Group owner related settings for local resources.
     ListBulkDeploymentDetailedReportsRequest:
       type: object
@@ -5746,24 +6181,29 @@ components:
       type: object
       properties:
         GroupOwnerSetting:
-          $ref: '#/components/schemas/GroupOwnerSetting'
-          description: Group/owner related settings for local resources.
+          allOf:
+            - $ref: '#/components/schemas/GroupOwnerSetting'
+            - description: Group/owner related settings for local resources.
         SourcePath:
-          $ref: '#/components/schemas/__string'
-          description: The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
       description: Attributes that define a local device resource.
     LocalVolumeResourceData:
       type: object
       properties:
         DestinationPath:
-          $ref: '#/components/schemas/__string'
-          description: The absolute local path of the resource inside the Lambda environment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The absolute local path of the resource inside the Lambda environment.
         GroupOwnerSetting:
-          $ref: '#/components/schemas/GroupOwnerSetting'
-          description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
+          allOf:
+            - $ref: '#/components/schemas/GroupOwnerSetting'
+            - description: Allows you to configure additional group privileges for the Lambda process. This field is optional.
         SourcePath:
-          $ref: '#/components/schemas/__string'
-          description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
       description: Attributes that define a local volume resource.
     LoggerComponent:
       type: string
@@ -5794,27 +6234,33 @@ components:
       title: ResetDeploymentsRequest
       properties:
         Force:
-          $ref: '#/components/schemas/__boolean'
-          description: 'If true, performs a best-effort only core reset.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: 'If true, performs a best-effort only core reset.'
       description: Information needed to reset deployments.
     ResourceDataContainer:
       type: object
       properties:
         LocalDeviceResourceData:
-          $ref: '#/components/schemas/LocalDeviceResourceData'
-          description: Attributes that define the local device resource.
+          allOf:
+            - $ref: '#/components/schemas/LocalDeviceResourceData'
+            - description: Attributes that define the local device resource.
         LocalVolumeResourceData:
-          $ref: '#/components/schemas/LocalVolumeResourceData'
-          description: Attributes that define the local volume resource.
+          allOf:
+            - $ref: '#/components/schemas/LocalVolumeResourceData'
+            - description: Attributes that define the local volume resource.
         S3MachineLearningModelResourceData:
-          $ref: '#/components/schemas/S3MachineLearningModelResourceData'
-          description: Attributes that define an Amazon S3 machine learning resource.
+          allOf:
+            - $ref: '#/components/schemas/S3MachineLearningModelResourceData'
+            - description: Attributes that define an Amazon S3 machine learning resource.
         SageMakerMachineLearningModelResourceData:
-          $ref: '#/components/schemas/SageMakerMachineLearningModelResourceData'
-          description: Attributes that define an Amazon SageMaker machine learning resource.
+          allOf:
+            - $ref: '#/components/schemas/SageMakerMachineLearningModelResourceData'
+            - description: Attributes that define an Amazon SageMaker machine learning resource.
         SecretsManagerSecretResourceData:
-          $ref: '#/components/schemas/SecretsManagerSecretResourceData'
-          description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager.'
+          allOf:
+            - $ref: '#/components/schemas/SecretsManagerSecretResourceData'
+            - description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager.'
       description: 'A container for resource data. The container takes only one of the following supported resource data types: ''''LocalDeviceResourceData'''', ''''LocalVolumeResourceData'''', ''''SageMakerMachineLearningModelResourceData'''', ''''S3MachineLearningModelResourceData'''', ''''SecretsManagerSecretResourceData''''.'
     ResourceAccessPolicy:
       type: object
@@ -5822,45 +6268,53 @@ components:
         - ResourceId
       properties:
         Permission:
-          $ref: '#/components/schemas/Permission'
-          description: The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
+          allOf:
+            - $ref: '#/components/schemas/Permission'
+            - description: The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
         ResourceId:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
       description: A policy used by the function to access a resource.
     S3MachineLearningModelResourceData:
       type: object
       properties:
         DestinationPath:
-          $ref: '#/components/schemas/__string'
-          description: The absolute local path of the resource inside the Lambda environment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The absolute local path of the resource inside the Lambda environment.
         OwnerSetting:
           $ref: '#/components/schemas/ResourceDownloadOwnerSetting'
         S3Uri:
-          $ref: '#/components/schemas/__string'
-          description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
       description: Attributes that define an Amazon S3 machine learning resource.
     SageMakerMachineLearningModelResourceData:
       type: object
       properties:
         DestinationPath:
-          $ref: '#/components/schemas/__string'
-          description: The absolute local path of the resource inside the Lambda environment.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The absolute local path of the resource inside the Lambda environment.
         OwnerSetting:
           $ref: '#/components/schemas/ResourceDownloadOwnerSetting'
         SageMakerJobArn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the Amazon SageMaker training job that represents the source model.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the Amazon SageMaker training job that represents the source model.
       description: Attributes that define an Amazon SageMaker machine learning resource.
     SecretsManagerSecretResourceData:
       type: object
       properties:
         ARN:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
         AdditionalStagingLabelsToDownload:
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - description: 'Optional. The staging labels whose values you want to make available on the core, in addition to ''''AWSCURRENT''''.'
       description: 'Attributes that define a secret resource, which references a secret from AWS Secrets Manager. AWS IoT Greengrass stores a local, encrypted copy of the secret on the Greengrass core, where it can be securely accessed by connectors and Lambda functions.'
     ResourceDownloadOwnerSetting:
       type: object
@@ -5869,11 +6323,13 @@ components:
         - GroupPermission
       properties:
         GroupOwner:
-          $ref: '#/components/schemas/__string'
-          description: The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
         GroupPermission:
-          $ref: '#/components/schemas/Permission'
-          description: The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
+          allOf:
+            - $ref: '#/components/schemas/Permission'
+            - description: The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
       description: The owner setting for downloaded machine learning resources.
     __listOf__string:
       type: array
@@ -5887,14 +6343,17 @@ components:
       title: StartBulkDeploymentRequest
       properties:
         ExecutionRoleArn:
-          $ref: '#/components/schemas/__string'
-          description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''''greengrass:CreateDeployment'''' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.'
         InputFileUri:
-          $ref: '#/components/schemas/__string'
-          description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URI of the input file contained in the S3 bucket. The execution role must have ''''getObject'''' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''''NewDeployment'''' deployment types.'
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Tag(s) to add to the new resource.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Tag(s) to add to the new resource.
     StopBulkDeploymentRequest:
       type: object
       title: StopBulkDeploymentRequest
@@ -5915,87 +6374,101 @@ components:
       title: UpdateConnectivityInfoRequest
       properties:
         ConnectivityInfo:
-          $ref: '#/components/schemas/__listOfConnectivityInfo'
-          description: A list of connectivity info.
+          allOf:
+            - $ref: '#/components/schemas/__listOfConnectivityInfo'
+            - description: A list of connectivity info.
       description: Connectivity information.
     UpdateConnectorDefinitionRequest:
       type: object
       title: UpdateConnectorDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateCoreDefinitionRequest:
       type: object
       title: UpdateCoreDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateDeviceDefinitionRequest:
       type: object
       title: UpdateDeviceDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateFunctionDefinitionRequest:
       type: object
       title: UpdateFunctionDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateGroupCertificateConfigurationRequest:
       type: object
       title: UpdateGroupCertificateConfigurationRequest
       properties:
         CertificateExpiryInMilliseconds:
-          $ref: '#/components/schemas/__string'
-          description: 'The amount of time remaining before the certificate expires, in milliseconds.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The amount of time remaining before the certificate expires, in milliseconds.'
     UpdateGroupRequest:
       type: object
       title: UpdateGroupRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateLoggerDefinitionRequest:
       type: object
       title: UpdateLoggerDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateResourceDefinitionRequest:
       type: object
       title: UpdateResourceDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     UpdateSubscriptionDefinitionRequest:
       type: object
       title: UpdateSubscriptionDefinitionRequest
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
-          description: The name of the definition.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name of the definition.
     VersionInformation:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/__string'
-          description: The ARN of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ARN of the version.
         CreationTimestamp:
-          $ref: '#/components/schemas/__string'
-          description: 'The time, in milliseconds since the epoch, when the version was created.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The time, in milliseconds since the epoch, when the version was created.'
         Id:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the parent definition that the version is associated with.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the parent definition that the version is associated with.
         Version:
-          $ref: '#/components/schemas/__string'
-          description: The ID of the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The ID of the version.
       description: Information about a version.
 security:
   - hmac: []

@@ -1372,14 +1372,17 @@ components:
       title: AddApplicationCloudWatchLoggingOptionRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: The Kinesis Analytics application name.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The Kinesis Analytics application name.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: The version ID of the Kinesis Analytics application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The version ID of the Kinesis Analytics application.
         CloudWatchLoggingOption:
-          $ref: '#/components/schemas/CloudWatchLoggingOption'
-          description: 'Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLoggingOption'
+            - description: 'Provides the CloudWatch log stream Amazon Resource Name (ARN) and the IAM role ARN. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
     ResourceNotFoundException: {}
     ResourceInUseException: {}
     InvalidArgumentException: {}
@@ -1398,14 +1401,17 @@ components:
       title: AddApplicationInputRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of your existing Amazon Kinesis Analytics application to which you want to add the streaming source.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Current version of your Amazon Kinesis Analytics application. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to find the current application version.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Current version of your Amazon Kinesis Analytics application. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to find the current application version.'
         Input:
-          $ref: '#/components/schemas/Input'
-          description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html">Input</a> to add.'
+          allOf:
+            - $ref: '#/components/schemas/Input'
+            - description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html">Input</a> to add.'
       description: <p/>
     CodeValidationException: {}
     AddApplicationInputProcessingConfigurationResponse:
@@ -1421,17 +1427,21 @@ components:
       title: AddApplicationInputProcessingConfigurationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application to which you want to add the input processing configuration.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application to which you want to add the input processing configuration.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Version of the application to which you want to add the input processing configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Version of the application to which you want to add the input processing configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
         InputId:
-          $ref: '#/components/schemas/Id'
-          description: 'The ID of the input configuration to add the input processing configuration to. You can get a list of the input IDs for an application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'The ID of the input configuration to add the input processing configuration to. You can get a list of the input IDs for an application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
         InputProcessingConfiguration:
-          $ref: '#/components/schemas/InputProcessingConfiguration'
-          description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to add to the application.'
+          allOf:
+            - $ref: '#/components/schemas/InputProcessingConfiguration'
+            - description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to add to the application.'
     AddApplicationOutputResponse:
       type: object
       properties: {}
@@ -1445,14 +1455,17 @@ components:
       title: AddApplicationOutputRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application to which you want to add the output configuration.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application to which you want to add the output configuration.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Version of the application to which you want to add the output configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Version of the application to which you want to add the output configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
         Output:
-          $ref: '#/components/schemas/Output'
-          description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.'
+          allOf:
+            - $ref: '#/components/schemas/Output'
+            - description: 'An array of objects, each describing one output configuration. In the output configuration, you specify the name of an in-application stream, a destination (that is, an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), and record the formation to use when writing to the destination.'
       description: <p/>
     AddApplicationReferenceDataSourceResponse:
       type: object
@@ -1467,14 +1480,17 @@ components:
       title: AddApplicationReferenceDataSourceRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of an existing application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of an existing application.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Version of the application for which you are adding the reference data source. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Version of the application for which you are adding the reference data source. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
         ReferenceDataSource:
-          $ref: '#/components/schemas/ReferenceDataSource'
-          description: 'The reference data source can be an object in your Amazon S3 bucket. Amazon Kinesis Analytics reads the object and copies the data into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting in-application table that is created. You must also provide an IAM role with the necessary permissions that Amazon Kinesis Analytics can assume to read the object from your S3 bucket on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/ReferenceDataSource'
+            - description: 'The reference data source can be an object in your Amazon S3 bucket. Amazon Kinesis Analytics reads the object and copies the data into the in-application table that is created. You provide an S3 bucket, object key name, and the resulting in-application table that is created. You must also provide an IAM role with the necessary permissions that Amazon Kinesis Analytics can assume to read the object from your S3 bucket on your behalf.'
       description: <p/>
     CreateApplicationResponse:
       type: object
@@ -1482,8 +1498,9 @@ components:
         - ApplicationSummary
       properties:
         ApplicationSummary:
-          $ref: '#/components/schemas/ApplicationSummary'
-          description: 'In response to your <code>CreateApplication</code> request, Amazon Kinesis Analytics returns a response with a summary of the application it created, including the application Amazon Resource Name (ARN), name, and status.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSummary'
+            - description: 'In response to your <code>CreateApplication</code> request, Amazon Kinesis Analytics returns a response with a summary of the application it created, including the application Amazon Resource Name (ARN), name, and status.'
       description: TBD
     CreateApplicationRequest:
       type: object
@@ -1492,26 +1509,33 @@ components:
       title: CreateApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: 'Name of your Amazon Kinesis Analytics application (for example, <code>sample-app</code>).'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: 'Name of your Amazon Kinesis Analytics application (for example, <code>sample-app</code>).'
         ApplicationDescription:
-          $ref: '#/components/schemas/ApplicationDescription'
-          description: Summary description of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDescription'
+            - description: Summary description of the application.
         Inputs:
-          $ref: '#/components/schemas/Inputs'
-          description: '<p>Use this parameter to configure the application input.</p> <p>You can configure your application to receive input from a single streaming source. In this configuration, you map this streaming source to an in-application stream that is created. Your application code can then query the in-application stream like a table (you can think of it as a constantly updating table).</p> <p>For the streaming source, you provide its Amazon Resource Name (ARN) and format of data on the stream (for example, JSON, CSV, etc.). You also must provide an IAM role that Amazon Kinesis Analytics can assume to read this stream on your behalf.</p> <p>To create the in-application stream, you need to specify a schema to transform your data into a schematized version used in SQL. In the schema, you provide the necessary mapping of the data elements in the streaming source to record columns in the in-app stream.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Inputs'
+            - description: '<p>Use this parameter to configure the application input.</p> <p>You can configure your application to receive input from a single streaming source. In this configuration, you map this streaming source to an in-application stream that is created. Your application code can then query the in-application stream like a table (you can think of it as a constantly updating table).</p> <p>For the streaming source, you provide its Amazon Resource Name (ARN) and format of data on the stream (for example, JSON, CSV, etc.). You also must provide an IAM role that Amazon Kinesis Analytics can assume to read this stream on your behalf.</p> <p>To create the in-application stream, you need to specify a schema to transform your data into a schematized version used in SQL. In the schema, you provide the necessary mapping of the data elements in the streaming source to record columns in the in-app stream.</p>'
         Outputs:
-          $ref: '#/components/schemas/Outputs'
-          description: '<p>You can configure application output to write data from any of the in-application streams to up to three destinations.</p> <p>These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose delivery streams, AWS Lambda destinations, or any combination of the three.</p> <p>In the configuration, you specify the in-application stream name, the destination stream or Lambda function Amazon Resource Name (ARN), and the format to use when writing data. You must also provide an IAM role that Amazon Kinesis Analytics can assume to write to the destination stream or Lambda function on your behalf.</p> <p>In the output configuration, you also provide the output stream or Lambda function ARN. For stream destinations, you provide the format of data in the stream (for example, JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can assume to write to the stream or Lambda function on your behalf.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Outputs'
+            - description: '<p>You can configure application output to write data from any of the in-application streams to up to three destinations.</p> <p>These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose delivery streams, AWS Lambda destinations, or any combination of the three.</p> <p>In the configuration, you specify the in-application stream name, the destination stream or Lambda function Amazon Resource Name (ARN), and the format to use when writing data. You must also provide an IAM role that Amazon Kinesis Analytics can assume to write to the destination stream or Lambda function on your behalf.</p> <p>In the output configuration, you also provide the output stream or Lambda function ARN. For stream destinations, you provide the format of data in the stream (for example, JSON, CSV). You also must provide an IAM role that Amazon Kinesis Analytics can assume to write to the stream or Lambda function on your behalf.</p>'
         CloudWatchLoggingOptions:
-          $ref: '#/components/schemas/CloudWatchLoggingOptions'
-          description: 'Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLoggingOptions'
+            - description: 'Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>.'
         ApplicationCode:
-          $ref: '#/components/schemas/ApplicationCode'
-          description: '<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more information about the typical pattern, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCode'
+            - description: '<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more information about the typical pattern, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>'
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html">Using Tagging</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html">Using Tagging</a>.'
       description: TBD
     LimitExceededException: {}
     TooManyTagsException: {}
@@ -1527,11 +1551,13 @@ components:
       title: DeleteApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the Amazon Kinesis Analytics application to delete.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the Amazon Kinesis Analytics application to delete.
         CreateTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' You can use the <code>DescribeApplication</code> operation to get this value. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' You can use the <code>DescribeApplication</code> operation to get this value. '
       description: <p/>
     DeleteApplicationCloudWatchLoggingOptionResponse:
       type: object
@@ -1545,14 +1571,17 @@ components:
       title: DeleteApplicationCloudWatchLoggingOptionRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: The Kinesis Analytics application name.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The Kinesis Analytics application name.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: The version ID of the Kinesis Analytics application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The version ID of the Kinesis Analytics application.
         CloudWatchLoggingOptionId:
-          $ref: '#/components/schemas/Id'
-          description: 'The <code>CloudWatchLoggingOptionId</code> of the CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation. '
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'The <code>CloudWatchLoggingOptionId</code> of the CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation. '
     DeleteApplicationInputProcessingConfigurationResponse:
       type: object
       properties: {}
@@ -1565,14 +1594,17 @@ components:
       title: DeleteApplicationInputProcessingConfigurationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: The Kinesis Analytics application name.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The Kinesis Analytics application name.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: The version ID of the Kinesis Analytics application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: The version ID of the Kinesis Analytics application.
         InputId:
-          $ref: '#/components/schemas/Id'
-          description: 'The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
     DeleteApplicationOutputResponse:
       type: object
       properties: {}
@@ -1586,14 +1618,17 @@ components:
       title: DeleteApplicationOutputRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Amazon Kinesis Analytics application name.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Amazon Kinesis Analytics application name.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Amazon Kinesis Analytics application version. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Amazon Kinesis Analytics application version. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. '
         OutputId:
-          $ref: '#/components/schemas/Id'
-          description: 'The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html">AddApplicationOutput</a> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the specific <code>OutputId</code>. '
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html">AddApplicationOutput</a> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the specific <code>OutputId</code>. '
       description: <p/>
     DeleteApplicationReferenceDataSourceResponse:
       type: object
@@ -1607,22 +1642,26 @@ components:
       title: DeleteApplicationReferenceDataSourceRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of an existing application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of an existing application.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'Version of the application. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'Version of the application. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.'
         ReferenceId:
-          $ref: '#/components/schemas/Id'
-          description: 'ID of the reference data source. When you add a reference data source to your application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html">AddApplicationReferenceDataSource</a>, Amazon Kinesis Analytics assigns an ID. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the reference ID. '
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'ID of the reference data source. When you add a reference data source to your application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html">AddApplicationReferenceDataSource</a>, Amazon Kinesis Analytics assigns an ID. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get the reference ID. '
     DescribeApplicationResponse:
       type: object
       required:
         - ApplicationDetail
       properties:
         ApplicationDetail:
-          $ref: '#/components/schemas/ApplicationDetail'
-          description: 'Provides a description of the application, such as the application Amazon Resource Name (ARN), status, latest version, and input and output configuration details.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDetail'
+            - description: 'Provides a description of the application, such as the application Amazon Resource Name (ARN), status, latest version, and input and output configuration details.'
       description: <p/>
     DescribeApplicationRequest:
       type: object
@@ -1631,44 +1670,54 @@ components:
       title: DescribeApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application.
       description: <p/>
     DiscoverInputSchemaResponse:
       type: object
       properties:
         InputSchema:
-          $ref: '#/components/schemas/SourceSchema'
-          description: Schema inferred from the streaming source. It identifies the format of the data in the streaming source and how each data element maps to corresponding columns in the in-application stream that you can create.
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: Schema inferred from the streaming source. It identifies the format of the data in the streaming source and how each data element maps to corresponding columns in the in-application stream that you can create.
         ParsedInputRecords:
-          $ref: '#/components/schemas/ParsedInputRecords'
-          description: 'An array of elements, where each element corresponds to a row in a stream record (a stream record can have more than one row).'
+          allOf:
+            - $ref: '#/components/schemas/ParsedInputRecords'
+            - description: 'An array of elements, where each element corresponds to a row in a stream record (a stream record can have more than one row).'
         ProcessedInputRecords:
-          $ref: '#/components/schemas/ProcessedInputRecords'
-          description: Stream data that was modified by the processor specified in the <code>InputProcessingConfiguration</code> parameter.
+          allOf:
+            - $ref: '#/components/schemas/ProcessedInputRecords'
+            - description: Stream data that was modified by the processor specified in the <code>InputProcessingConfiguration</code> parameter.
         RawInputRecords:
-          $ref: '#/components/schemas/RawInputRecords'
-          description: Raw stream data that was sampled to infer the schema.
+          allOf:
+            - $ref: '#/components/schemas/RawInputRecords'
+            - description: Raw stream data that was sampled to infer the schema.
       description: <p/>
     DiscoverInputSchemaRequest:
       type: object
       title: DiscoverInputSchemaRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the streaming source.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf.
         InputStartingPositionConfiguration:
-          $ref: '#/components/schemas/InputStartingPositionConfiguration'
-          description: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
+          allOf:
+            - $ref: '#/components/schemas/InputStartingPositionConfiguration'
+            - description: Point at which you want Amazon Kinesis Analytics to start reading records from the specified streaming source discovery purposes.
         S3Configuration:
-          $ref: '#/components/schemas/S3Configuration'
-          description: Specify this parameter to discover a schema from data in an Amazon S3 object.
+          allOf:
+            - $ref: '#/components/schemas/S3Configuration'
+            - description: Specify this parameter to discover a schema from data in an Amazon S3 object.
         InputProcessingConfiguration:
-          $ref: '#/components/schemas/InputProcessingConfiguration'
-          description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.'
+          allOf:
+            - $ref: '#/components/schemas/InputProcessingConfiguration'
+            - description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.'
     UnableToDetectSchemaException: {}
     ResourceProvisionedThroughputExceededException: {}
     ServiceUnavailableException: {}
@@ -1679,29 +1728,34 @@ components:
         - HasMoreApplications
       properties:
         ApplicationSummaries:
-          $ref: '#/components/schemas/ApplicationSummaries'
-          description: 'List of <code>ApplicationSummary</code> objects. '
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSummaries'
+            - description: 'List of <code>ApplicationSummary</code> objects. '
         HasMoreApplications:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Returns true if there are more applications to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Returns true if there are more applications to retrieve.
       description: <p/>
     ListApplicationsRequest:
       type: object
       title: ListApplicationsRequest
       properties:
         Limit:
-          $ref: '#/components/schemas/ListApplicationsInputLimit'
-          description: Maximum number of applications to list.
+          allOf:
+            - $ref: '#/components/schemas/ListApplicationsInputLimit'
+            - description: Maximum number of applications to list.
         ExclusiveStartApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: 'Name of the application to start the list with. When using pagination to retrieve the list, you don''t need to specify this parameter in the first request. However, in subsequent requests, you add the last application name from the previous response to get the next page of applications.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: 'Name of the application to start the list with. When using pagination to retrieve the list, you don''t need to specify this parameter in the first request. However, in subsequent requests, you add the last application name from the previous response to get the next page of applications.'
       description: <p/>
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: The key-value tags assigned to the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The key-value tags assigned to the application.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1709,8 +1763,9 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/KinesisAnalyticsARN'
-          description: The ARN of the application for which to retrieve tags.
+          allOf:
+            - $ref: '#/components/schemas/KinesisAnalyticsARN'
+            - description: The ARN of the application for which to retrieve tags.
     StartApplicationResponse:
       type: object
       properties: {}
@@ -1723,11 +1778,13 @@ components:
       title: StartApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application.
         InputConfigurations:
-          $ref: '#/components/schemas/InputConfigurations'
-          description: 'Identifies the specific input, by ID, that the application starts consuming. Amazon Kinesis Analytics starts reading the streaming source associated with the input. You can also specify where in the streaming source you want Amazon Kinesis Analytics to start reading.'
+          allOf:
+            - $ref: '#/components/schemas/InputConfigurations'
+            - description: 'Identifies the specific input, by ID, that the application starts consuming. Amazon Kinesis Analytics starts reading the streaming source associated with the input. You can also specify where in the streaming source you want Amazon Kinesis Analytics to start reading.'
       description: <p/>
     InvalidApplicationConfigurationException: {}
     StopApplicationResponse:
@@ -1741,8 +1798,9 @@ components:
       title: StopApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the running application to stop.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the running application to stop.
       description: <p/>
     TagResourceResponse:
       type: object
@@ -1755,11 +1813,13 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/KinesisAnalyticsARN'
-          description: The ARN of the application to assign the tags.
+          allOf:
+            - $ref: '#/components/schemas/KinesisAnalyticsARN'
+            - description: The ARN of the application to assign the tags.
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: The key-value tags to assign to the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The key-value tags to assign to the application.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1771,11 +1831,13 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/KinesisAnalyticsARN'
-          description: The ARN of the Kinesis Analytics application from which to remove the tags.
+          allOf:
+            - $ref: '#/components/schemas/KinesisAnalyticsARN'
+            - description: The ARN of the Kinesis Analytics application from which to remove the tags.
         TagKeys:
-          $ref: '#/components/schemas/TagKeys'
-          description: A list of keys of tags to remove from the specified application.
+          allOf:
+            - $ref: '#/components/schemas/TagKeys'
+            - description: A list of keys of tags to remove from the specified application.
     UpdateApplicationResponse:
       type: object
       properties: {}
@@ -1788,14 +1850,17 @@ components:
       title: UpdateApplicationRequest
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the Amazon Kinesis Analytics application to update.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the Amazon Kinesis Analytics application to update.
         CurrentApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: 'The current application version ID. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get this value.'
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: 'The current application version ID. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get this value.'
         ApplicationUpdate:
-          $ref: '#/components/schemas/ApplicationUpdate'
-          description: Describes application updates.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationUpdate'
+            - description: Describes application updates.
     ApplicationName:
       type: string
       pattern: '[a-zA-Z0-9_.-]+'
@@ -1812,11 +1877,13 @@ components:
         - RoleARN
       properties:
         LogStreamARN:
-          $ref: '#/components/schemas/LogStreamARN'
-          description: ARN of the CloudWatch log to receive application messages.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamARN'
+            - description: ARN of the CloudWatch log to receive application messages.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role that is used must have the <code>PutLogEvents</code> policy action enabled.'
       description: 'Provides a description of CloudWatch logging options, including the log stream Amazon Resource Name (ARN) and the role ARN.'
     Id:
       type: string
@@ -1829,8 +1896,9 @@ components:
         - InputLambdaProcessor
       properties:
         InputLambdaProcessor:
-          $ref: '#/components/schemas/InputLambdaProcessor'
-          description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.'
+          allOf:
+            - $ref: '#/components/schemas/InputLambdaProcessor'
+            - description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.'
       description: 'Provides a description of a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.'
     Input:
       type: object
@@ -1839,23 +1907,29 @@ components:
         - InputSchema
       properties:
         NamePrefix:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: 'Name prefix to use when creating an in-application stream. Suppose that you specify a prefix "MyInApplicationStream." Amazon Kinesis Analytics then creates one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with names "MyInApplicationStream_001," "MyInApplicationStream_002," and so on. '
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: 'Name prefix to use when creating an in-application stream. Suppose that you specify a prefix "MyInApplicationStream." Amazon Kinesis Analytics then creates one or more (as per the <code>InputParallelism</code> count you specified) in-application streams with names "MyInApplicationStream_001," "MyInApplicationStream_002," and so on. '
         InputProcessingConfiguration:
-          $ref: '#/components/schemas/InputProcessingConfiguration'
-          description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application''s SQL code executes. Currently, the only input processing configuration available is <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a>.'
+          allOf:
+            - $ref: '#/components/schemas/InputProcessingConfiguration'
+            - description: 'The <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application''s SQL code executes. Currently, the only input processing configuration available is <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a>.'
         KinesisStreamsInput:
-          $ref: '#/components/schemas/KinesisStreamsInput'
-          description: '<p>If the streaming source is an Amazon Kinesis stream, identifies the stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsInput'
+            - description: '<p>If the streaming source is an Amazon Kinesis stream, identifies the stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
         KinesisFirehoseInput:
-          $ref: '#/components/schemas/KinesisFirehoseInput'
-          description: '<p>If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseInput'
+            - description: '<p>If the streaming source is an Amazon Kinesis Firehose delivery stream, identifies the delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.</p> <p>Note: Either <code>KinesisStreamsInput</code> or <code>KinesisFirehoseInput</code> is required.</p>'
         InputParallelism:
-          $ref: '#/components/schemas/InputParallelism'
-          description: '<p>Describes the number of in-application streams to create. </p> <p>Data from your source is routed to these in-application input streams.</p> <p> (see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/InputParallelism'
+            - description: '<p>Describes the number of in-application streams to create. </p> <p>Data from your source is routed to these in-application input streams.</p> <p> (see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>.</p>'
         InputSchema:
-          $ref: '#/components/schemas/SourceSchema'
-          description: '<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.</p> <p>Also used to describe the format of the reference data source.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: '<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.</p> <p>Also used to describe the format of the reference data source.</p>'
       description: 'When you configure the application input, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
     Output:
       type: object
@@ -1864,20 +1938,25 @@ components:
         - DestinationSchema
       properties:
         Name:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: Name of the in-application stream.
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: Name of the in-application stream.
         KinesisStreamsOutput:
-          $ref: '#/components/schemas/KinesisStreamsOutput'
-          description: Identifies an Amazon Kinesis stream as the destination.
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsOutput'
+            - description: Identifies an Amazon Kinesis stream as the destination.
         KinesisFirehoseOutput:
-          $ref: '#/components/schemas/KinesisFirehoseOutput'
-          description: Identifies an Amazon Kinesis Firehose delivery stream as the destination.
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseOutput'
+            - description: Identifies an Amazon Kinesis Firehose delivery stream as the destination.
         LambdaOutput:
-          $ref: '#/components/schemas/LambdaOutput'
-          description: Identifies an AWS Lambda function as the destination.
+          allOf:
+            - $ref: '#/components/schemas/LambdaOutput'
+            - description: Identifies an AWS Lambda function as the destination.
         DestinationSchema:
-          $ref: '#/components/schemas/DestinationSchema'
-          description: 'Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.'
+          allOf:
+            - $ref: '#/components/schemas/DestinationSchema'
+            - description: 'Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.'
       description: '<p> Describes application output configuration in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. </p> <p/> <p>For limits on how many destinations an application can write and other limitations, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>. </p>'
     ReferenceDataSource:
       type: object
@@ -1886,14 +1965,17 @@ components:
         - ReferenceSchema
       properties:
         TableName:
-          $ref: '#/components/schemas/InAppTableName'
-          description: Name of the in-application table to create.
+          allOf:
+            - $ref: '#/components/schemas/InAppTableName'
+            - description: Name of the in-application table to create.
         S3ReferenceDataSource:
-          $ref: '#/components/schemas/S3ReferenceDataSource'
-          description: 'Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf. An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <code>UpdateApplication</code> operation to trigger reloading of data into your application. '
+          allOf:
+            - $ref: '#/components/schemas/S3ReferenceDataSource'
+            - description: 'Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf. An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <code>UpdateApplication</code> operation to trigger reloading of data into your application. '
         ReferenceSchema:
-          $ref: '#/components/schemas/SourceSchema'
-          description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
       description: 'Describes the reference data source by providing the source information (S3 bucket name and object key name), the resulting in-application table name that is created, and the necessary schema to map the data elements in the Amazon S3 object to the in-application table.'
     ApplicationCode:
       type: string
@@ -1945,41 +2027,53 @@ components:
         - ApplicationVersionId
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application.
         ApplicationDescription:
-          $ref: '#/components/schemas/ApplicationDescription'
-          description: Description of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationDescription'
+            - description: Description of the application.
         ApplicationARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the application.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the application.
         ApplicationStatus:
-          $ref: '#/components/schemas/ApplicationStatus'
-          description: Status of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+            - description: Status of the application.
         CreateTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: Time stamp when the application version was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Time stamp when the application version was created.
         LastUpdateTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: Time stamp when the application was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Time stamp when the application was last updated.
         InputDescriptions:
-          $ref: '#/components/schemas/InputDescriptions'
-          description: 'Describes the application input configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
+          allOf:
+            - $ref: '#/components/schemas/InputDescriptions'
+            - description: 'Describes the application input configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
         OutputDescriptions:
-          $ref: '#/components/schemas/OutputDescriptions'
-          description: 'Describes the application output configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
+          allOf:
+            - $ref: '#/components/schemas/OutputDescriptions'
+            - description: 'Describes the application output configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
         ReferenceDataSourceDescriptions:
-          $ref: '#/components/schemas/ReferenceDataSourceDescriptions'
-          description: 'Describes reference data sources configured for the application. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
+          allOf:
+            - $ref: '#/components/schemas/ReferenceDataSourceDescriptions'
+            - description: 'Describes reference data sources configured for the application. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
         CloudWatchLoggingOptionDescriptions:
-          $ref: '#/components/schemas/CloudWatchLoggingOptionDescriptions'
-          description: 'Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>. '
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLoggingOptionDescriptions'
+            - description: 'Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html">Working with Amazon CloudWatch Logs</a>. '
         ApplicationCode:
-          $ref: '#/components/schemas/ApplicationCode'
-          description: Returns the application code that you provided to perform data analysis on any of the in-application streams in your application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCode'
+            - description: Returns the application code that you provided to perform data analysis on any of the in-application streams in your application.
         ApplicationVersionId:
-          $ref: '#/components/schemas/ApplicationVersionId'
-          description: Provides the current application version.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationVersionId'
+            - description: Provides the current application version.
       description: '<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href="/kinesisanalytics/latest/apiv2/Welcome.html">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Provides a description of the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configuration.</p>'
     ApplicationSummary:
       type: object
@@ -1989,14 +2083,17 @@ components:
         - ApplicationStatus
       properties:
         ApplicationName:
-          $ref: '#/components/schemas/ApplicationName'
-          description: Name of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: Name of the application.
         ApplicationARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the application.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the application.
         ApplicationStatus:
-          $ref: '#/components/schemas/ApplicationStatus'
-          description: Status of the application.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationStatus'
+            - description: Status of the application.
       description: '<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href="/kinesisanalytics/latest/apiv2/Welcome.html">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>'
     ApplicationSummaries:
       type: array
@@ -2022,20 +2119,25 @@ components:
       type: object
       properties:
         InputUpdates:
-          $ref: '#/components/schemas/InputUpdates'
-          description: Describes application input configuration updates.
+          allOf:
+            - $ref: '#/components/schemas/InputUpdates'
+            - description: Describes application input configuration updates.
         ApplicationCodeUpdate:
-          $ref: '#/components/schemas/ApplicationCode'
-          description: Describes application code updates.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationCode'
+            - description: Describes application code updates.
         OutputUpdates:
-          $ref: '#/components/schemas/OutputUpdates'
-          description: Describes application output configuration updates.
+          allOf:
+            - $ref: '#/components/schemas/OutputUpdates'
+            - description: Describes application output configuration updates.
         ReferenceDataSourceUpdates:
-          $ref: '#/components/schemas/ReferenceDataSourceUpdates'
-          description: Describes application reference data source updates.
+          allOf:
+            - $ref: '#/components/schemas/ReferenceDataSourceUpdates'
+            - description: Describes application reference data source updates.
         CloudWatchLoggingOptionUpdates:
-          $ref: '#/components/schemas/CloudWatchLoggingOptionUpdates'
-          description: Describes application CloudWatch logging option updates.
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLoggingOptionUpdates'
+            - description: Describes application CloudWatch logging option updates.
       description: Describes updates to apply to an existing Amazon Kinesis Analytics application.
     BooleanObject:
       type: boolean
@@ -2057,11 +2159,13 @@ components:
         - RecordColumnDelimiter
       properties:
         RecordRowDelimiter:
-          $ref: '#/components/schemas/RecordRowDelimiter'
-          description: 'Row delimiter. For example, in a CSV format, <i>''\n''</i> is the typical row delimiter.'
+          allOf:
+            - $ref: '#/components/schemas/RecordRowDelimiter'
+            - description: 'Row delimiter. For example, in a CSV format, <i>''\n''</i> is the typical row delimiter.'
         RecordColumnDelimiter:
-          $ref: '#/components/schemas/RecordColumnDelimiter'
-          description: 'Column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.'
+          allOf:
+            - $ref: '#/components/schemas/RecordColumnDelimiter'
+            - description: 'Column delimiter. For example, in a CSV format, a comma (",") is the typical column delimiter.'
       description: '<p>Provides additional mapping information when the record format uses delimiters, such as CSV. For example, the following sample records use CSV format, where the records use the <i>''\n''</i> as the row delimiter and a comma (",") as the column delimiter: </p> <p> <code>"name1", "address1"</code> </p> <p> <code>"name2", "address2"</code> </p>'
     LogStreamARN:
       type: string
@@ -2080,14 +2184,17 @@ components:
         - RoleARN
       properties:
         CloudWatchLoggingOptionId:
-          $ref: '#/components/schemas/Id'
-          description: ID of the CloudWatch logging option description.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: ID of the CloudWatch logging option description.
         LogStreamARN:
-          $ref: '#/components/schemas/LogStreamARN'
-          description: ARN of the CloudWatch log to receive application messages.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamARN'
+            - description: ARN of the CloudWatch log to receive application messages.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.'
       description: Description of the CloudWatch logging option.
     CloudWatchLoggingOptionUpdate:
       type: object
@@ -2095,14 +2202,17 @@ components:
         - CloudWatchLoggingOptionId
       properties:
         CloudWatchLoggingOptionId:
-          $ref: '#/components/schemas/Id'
-          description: ID of the CloudWatch logging option to update
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: ID of the CloudWatch logging option to update
         LogStreamARNUpdate:
-          $ref: '#/components/schemas/LogStreamARN'
-          description: ARN of the CloudWatch log to receive application messages.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamARN'
+            - description: ARN of the CloudWatch log to receive application messages.
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'IAM ARN of the role to use to send application messages. Note: To write application messages to CloudWatch, the IAM role used must have the <code>PutLogEvents</code> policy action enabled.'
       description: Describes CloudWatch logging option updates.
     CloudWatchLoggingOptions:
       type: array
@@ -2133,15 +2243,17 @@ components:
         - RecordFormatType
       properties:
         RecordFormatType:
-          $ref: '#/components/schemas/RecordFormatType'
-          description: Specifies the format of the records on the output stream.
+          allOf:
+            - $ref: '#/components/schemas/RecordFormatType'
+            - description: Specifies the format of the records on the output stream.
       description: 'Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>. '
     InputStartingPositionConfiguration:
       type: object
       properties:
         InputStartingPosition:
-          $ref: '#/components/schemas/InputStartingPosition'
-          description: '<p>The starting position on the stream.</p> <ul> <li> <p> <code>NOW</code> - Start reading just after the most recent record in the stream, start at the request time stamp that the customer issued.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Firehose delivery stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/InputStartingPosition'
+            - description: '<p>The starting position on the stream.</p> <ul> <li> <p> <code>NOW</code> - Start reading just after the most recent record in the stream, start at the request time stamp that the customer issued.</p> </li> <li> <p> <code>TRIM_HORIZON</code> - Start reading at the last untrimmed record in the stream, which is the oldest record available in the stream. This option is not available for an Amazon Kinesis Firehose delivery stream.</p> </li> <li> <p> <code>LAST_STOPPED_POINT</code> - Resume reading from where the application last stopped reading.</p> </li> </ul>'
       description: Describes the point at which the application reads from the streaming source.
     S3Configuration:
       type: object
@@ -2151,14 +2263,17 @@ components:
         - FileKey
       properties:
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: IAM ARN of the role used to access the data.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: IAM ARN of the role used to access the data.
         BucketARN:
-          $ref: '#/components/schemas/BucketARN'
-          description: ARN of the S3 bucket that contains the data.
+          allOf:
+            - $ref: '#/components/schemas/BucketARN'
+            - description: ARN of the S3 bucket that contains the data.
         FileKey:
-          $ref: '#/components/schemas/FileKey'
-          description: The name of the object that contains the data.
+          allOf:
+            - $ref: '#/components/schemas/FileKey'
+            - description: The name of the object that contains the data.
       description: 'Provides a description of an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used to access the bucket, and the name of the Amazon S3 object that contains the data.'
     SourceSchema:
       type: object
@@ -2167,14 +2282,17 @@ components:
         - RecordColumns
       properties:
         RecordFormat:
-          $ref: '#/components/schemas/RecordFormat'
-          description: Specifies the format of the records on the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/RecordFormat'
+            - description: Specifies the format of the records on the streaming source.
         RecordEncoding:
-          $ref: '#/components/schemas/RecordEncoding'
-          description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
+          allOf:
+            - $ref: '#/components/schemas/RecordEncoding'
+            - description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
         RecordColumns:
-          $ref: '#/components/schemas/RecordColumns'
-          description: A list of <code>RecordColumn</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/RecordColumns'
+            - description: A list of <code>RecordColumn</code> objects.
       description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
     ParsedInputRecords:
       type: array
@@ -2211,11 +2329,13 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the input Amazon Kinesis stream to read.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the input Amazon Kinesis stream to read.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
       description: ' Identifies an Amazon Kinesis stream as the streaming source. You provide the stream''s Amazon Resource Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.'
     KinesisFirehoseInput:
       type: object
@@ -2224,18 +2344,21 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the input delivery stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the input delivery stream.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to make sure that the role has the necessary permissions to access the stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to make sure that the role has the necessary permissions to access the stream.
       description: ' Identifies an Amazon Kinesis Firehose delivery stream as the streaming source. You provide the delivery stream''s Amazon Resource Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics to access the stream on your behalf.'
     InputParallelism:
       type: object
       properties:
         Count:
-          $ref: '#/components/schemas/InputParallelismCount'
-          description: 'Number of in-application streams to create. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>. '
+          allOf:
+            - $ref: '#/components/schemas/InputParallelismCount'
+            - description: 'Number of in-application streams to create. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html">Limits</a>. '
       description: 'Describes the number of in-application streams to create for a given streaming source. For information about parallelism, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
     InputConfiguration:
       type: object
@@ -2244,11 +2367,13 @@ components:
         - InputStartingPositionConfiguration
       properties:
         Id:
-          $ref: '#/components/schemas/Id'
-          description: 'Input source ID. You can get this ID by calling the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'Input source ID. You can get this ID by calling the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation.'
         InputStartingPositionConfiguration:
-          $ref: '#/components/schemas/InputStartingPositionConfiguration'
-          description: Point at which you want the application to start processing records from the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/InputStartingPositionConfiguration'
+            - description: Point at which you want the application to start processing records from the streaming source.
       description: 'When you start your application, you provide this configuration, which identifies the input source and the point in the input source at which you want the application to start processing records.'
     InputConfigurations:
       type: array
@@ -2258,59 +2383,73 @@ components:
       type: object
       properties:
         InputLambdaProcessorDescription:
-          $ref: '#/components/schemas/InputLambdaProcessorDescription'
-          description: 'Provides configuration information about the associated <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html">InputLambdaProcessorDescription</a>.'
+          allOf:
+            - $ref: '#/components/schemas/InputLambdaProcessorDescription'
+            - description: 'Provides configuration information about the associated <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html">InputLambdaProcessorDescription</a>.'
       description: 'Provides configuration information about an input processor. Currently, the only input processor available is <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a>.'
     KinesisStreamsInputDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis stream.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
       description: ' Describes the Amazon Kinesis stream that is configured as the streaming source in the application input configuration. '
     KinesisFirehoseInputDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics assumes to access the stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics assumes to access the stream.
       description: ' Describes the Amazon Kinesis Firehose delivery stream that is configured as the streaming source in the application input configuration. '
     InputDescription:
       type: object
       properties:
         InputId:
-          $ref: '#/components/schemas/Id'
-          description: 'Input ID associated with the application input. This is the ID that Amazon Kinesis Analytics assigns to each input configuration you add to your application. '
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'Input ID associated with the application input. This is the ID that Amazon Kinesis Analytics assigns to each input configuration you add to your application. '
         NamePrefix:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: In-application name prefix.
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: In-application name prefix.
         InAppStreamNames:
-          $ref: '#/components/schemas/InAppStreamNames'
-          description: Returns the in-application stream names that are mapped to the stream source.
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamNames'
+            - description: Returns the in-application stream names that are mapped to the stream source.
         InputProcessingConfigurationDescription:
-          $ref: '#/components/schemas/InputProcessingConfigurationDescription'
-          description: The description of the preprocessor that executes on records in this input before the application's code is run.
+          allOf:
+            - $ref: '#/components/schemas/InputProcessingConfigurationDescription'
+            - description: The description of the preprocessor that executes on records in this input before the application's code is run.
         KinesisStreamsInputDescription:
-          $ref: '#/components/schemas/KinesisStreamsInputDescription'
-          description: 'If an Amazon Kinesis stream is configured as streaming source, provides Amazon Kinesis stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsInputDescription'
+            - description: 'If an Amazon Kinesis stream is configured as streaming source, provides Amazon Kinesis stream''s Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
         KinesisFirehoseInputDescription:
-          $ref: '#/components/schemas/KinesisFirehoseInputDescription'
-          description: 'If an Amazon Kinesis Firehose delivery stream is configured as a streaming source, provides the delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseInputDescription'
+            - description: 'If an Amazon Kinesis Firehose delivery stream is configured as a streaming source, provides the delivery stream''s ARN and an IAM role that enables Amazon Kinesis Analytics to access the stream on your behalf.'
         InputSchema:
-          $ref: '#/components/schemas/SourceSchema'
-          description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. '
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created. '
         InputParallelism:
-          $ref: '#/components/schemas/InputParallelism'
-          description: Describes the configured parallelism (number of in-application streams mapped to the streaming source).
+          allOf:
+            - $ref: '#/components/schemas/InputParallelism'
+            - description: Describes the configured parallelism (number of in-application streams mapped to the streaming source).
         InputStartingPositionConfiguration:
-          $ref: '#/components/schemas/InputStartingPositionConfiguration'
-          description: Point at which the application is configured to read from the input stream.
+          allOf:
+            - $ref: '#/components/schemas/InputStartingPositionConfiguration'
+            - description: Point at which the application is configured to read from the input stream.
       description: 'Describes the application input configuration. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html">Configuring Application Input</a>. '
     InputLambdaProcessor:
       type: object
@@ -2319,31 +2458,37 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: '<p>The ARN of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: '<p>The ARN of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: The ARN of the IAM role that is used to access the AWS Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: The ARN of the IAM role that is used to access the AWS Lambda function.
       description: 'An object that contains the Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda function. '
     InputLambdaProcessorDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: 'The ARN of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.'
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The ARN of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: The ARN of the IAM role that is used to access the AWS Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: The ARN of the IAM role that is used to access the AWS Lambda function.
       description: 'An object that contains the Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda expression.'
     InputLambdaProcessorUpdate:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: '<p>The Amazon Resource Name (ARN) of the new <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: '<p>The Amazon Resource Name (ARN) of the new <a href="https://docs.aws.amazon.com/lambda/">AWS Lambda</a> function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: The ARN of the new IAM role that is used to access the AWS Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: The ARN of the new IAM role that is used to access the AWS Lambda function.
       description: 'Represents an update to the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a> that is used to preprocess the records in the stream.'
     InputParallelismCount:
       type: integer
@@ -2353,8 +2498,9 @@ components:
       type: object
       properties:
         CountUpdate:
-          $ref: '#/components/schemas/InputParallelismCount'
-          description: Number of in-application streams to create for the specified streaming source.
+          allOf:
+            - $ref: '#/components/schemas/InputParallelismCount'
+            - description: Number of in-application streams to create for the specified streaming source.
       description: Provides updates to the parallelism count.
     InputProcessingConfigurationUpdate:
       type: object
@@ -2362,8 +2508,9 @@ components:
         - InputLambdaProcessorUpdate
       properties:
         InputLambdaProcessorUpdate:
-          $ref: '#/components/schemas/InputLambdaProcessorUpdate'
-          description: 'Provides update information for an <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a>.'
+          allOf:
+            - $ref: '#/components/schemas/InputLambdaProcessorUpdate'
+            - description: 'Provides update information for an <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html">InputLambdaProcessor</a>.'
       description: 'Describes updates to an <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html">InputProcessingConfiguration</a>. '
     RecordFormat:
       type: object
@@ -2371,11 +2518,13 @@ components:
         - RecordFormatType
       properties:
         RecordFormatType:
-          $ref: '#/components/schemas/RecordFormatType'
-          description: The type of record format.
+          allOf:
+            - $ref: '#/components/schemas/RecordFormatType'
+            - description: The type of record format.
         MappingParameters:
-          $ref: '#/components/schemas/MappingParameters'
-          description: 'When configuring application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
+          allOf:
+            - $ref: '#/components/schemas/MappingParameters'
+            - description: 'When configuring application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
       description: ' Describes the record format and relevant mapping information that should be applied to schematize the records on the stream. '
     RecordEncoding:
       type: string
@@ -2390,14 +2539,17 @@ components:
       type: object
       properties:
         RecordFormatUpdate:
-          $ref: '#/components/schemas/RecordFormat'
-          description: Specifies the format of the records on the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/RecordFormat'
+            - description: Specifies the format of the records on the streaming source.
         RecordEncodingUpdate:
-          $ref: '#/components/schemas/RecordEncoding'
-          description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
+          allOf:
+            - $ref: '#/components/schemas/RecordEncoding'
+            - description: 'Specifies the encoding of the records in the streaming source. For example, UTF-8.'
         RecordColumnUpdates:
-          $ref: '#/components/schemas/RecordColumns'
-          description: 'A list of <code>RecordColumn</code> objects. Each object describes the mapping of the streaming source element to the corresponding column in the in-application stream. '
+          allOf:
+            - $ref: '#/components/schemas/RecordColumns'
+            - description: 'A list of <code>RecordColumn</code> objects. Each object describes the mapping of the streaming source element to the corresponding column in the in-application stream. '
       description: Describes updates for the application's input schema.
     InputStartingPosition:
       type: string
@@ -2409,21 +2561,25 @@ components:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the input Amazon Kinesis stream to read.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the input Amazon Kinesis stream to read.
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
       description: 'When updating application input configuration, provides information about an Amazon Kinesis stream as the streaming source.'
     KinesisFirehoseInputUpdate:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose delivery stream to read.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose delivery stream to read.
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
       description: 'When updating application input configuration, provides information about an Amazon Kinesis Firehose delivery stream as the streaming source.'
     InputUpdate:
       type: object
@@ -2431,26 +2587,33 @@ components:
         - InputId
       properties:
         InputId:
-          $ref: '#/components/schemas/Id'
-          description: Input ID of the application input to be updated.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: Input ID of the application input to be updated.
         NamePrefixUpdate:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: Name prefix for in-application streams that Amazon Kinesis Analytics creates for the specific streaming source.
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: Name prefix for in-application streams that Amazon Kinesis Analytics creates for the specific streaming source.
         InputProcessingConfigurationUpdate:
-          $ref: '#/components/schemas/InputProcessingConfigurationUpdate'
-          description: Describes updates for an input processing configuration.
+          allOf:
+            - $ref: '#/components/schemas/InputProcessingConfigurationUpdate'
+            - description: Describes updates for an input processing configuration.
         KinesisStreamsInputUpdate:
-          $ref: '#/components/schemas/KinesisStreamsInputUpdate'
-          description: 'If an Amazon Kinesis stream is the streaming source to be updated, provides an updated stream Amazon Resource Name (ARN) and IAM role ARN.'
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsInputUpdate'
+            - description: 'If an Amazon Kinesis stream is the streaming source to be updated, provides an updated stream Amazon Resource Name (ARN) and IAM role ARN.'
         KinesisFirehoseInputUpdate:
-          $ref: '#/components/schemas/KinesisFirehoseInputUpdate'
-          description: 'If an Amazon Kinesis Firehose delivery stream is the streaming source to be updated, provides an updated stream ARN and IAM role ARN.'
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseInputUpdate'
+            - description: 'If an Amazon Kinesis Firehose delivery stream is the streaming source to be updated, provides an updated stream ARN and IAM role ARN.'
         InputSchemaUpdate:
-          $ref: '#/components/schemas/InputSchemaUpdate'
-          description: 'Describes the data format on the streaming source, and how record elements on the streaming source map to columns of the in-application stream that is created.'
+          allOf:
+            - $ref: '#/components/schemas/InputSchemaUpdate'
+            - description: 'Describes the data format on the streaming source, and how record elements on the streaming source map to columns of the in-application stream that is created.'
         InputParallelismUpdate:
-          $ref: '#/components/schemas/InputParallelismUpdate'
-          description: Describes the parallelism updates (the number in-application streams Amazon Kinesis Analytics creates for the specific streaming source).
+          allOf:
+            - $ref: '#/components/schemas/InputParallelismUpdate'
+            - description: Describes the parallelism updates (the number in-application streams Amazon Kinesis Analytics creates for the specific streaming source).
       description: 'Describes updates to a specific input configuration (identified by the <code>InputId</code> of an application). '
     RecordRowPath:
       type: string
@@ -2461,8 +2624,9 @@ components:
         - RecordRowPath
       properties:
         RecordRowPath:
-          $ref: '#/components/schemas/RecordRowPath'
-          description: Path to the top-level parent that contains the records.
+          allOf:
+            - $ref: '#/components/schemas/RecordRowPath'
+            - description: Path to the top-level parent that contains the records.
       description: Provides additional mapping information when JSON is the record format on the streaming source.
     KinesisAnalyticsARN:
       type: string
@@ -2476,31 +2640,37 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the destination Amazon Kinesis Firehose delivery stream to write to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the destination Amazon Kinesis Firehose delivery stream to write to.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.
       description: 'When configuring application output, identifies an Amazon Kinesis Firehose delivery stream as the destination. You provide the stream Amazon Resource Name (ARN) and an IAM role that enables Amazon Kinesis Analytics to write to the stream on your behalf.'
     KinesisFirehoseOutputDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
       description: ' For an application output, describes the Amazon Kinesis Firehose delivery stream configured as its destination. '
     KinesisFirehoseOutputUpdate:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream to write to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery stream to write to.
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
       description: ' When updating an output configuration using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html">UpdateApplication</a> operation, provides information about an Amazon Kinesis Firehose delivery stream configured as the destination. '
     KinesisStreamsOutput:
       type: object
@@ -2509,31 +2679,37 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: ARN of the destination Amazon Kinesis stream to write to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: ARN of the destination Amazon Kinesis stream to write to.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination stream on your behalf. You need to grant the necessary permissions to this role.
       description: 'When configuring application output, identifies an Amazon Kinesis stream as the destination. You provide the stream Amazon Resource Name (ARN) and also an IAM role ARN that Amazon Kinesis Analytics can use to write to the stream on your behalf.'
     KinesisStreamsOutputDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis stream.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream.
       description: ' For an application output, describes the Amazon Kinesis stream configured as its destination. '
     KinesisStreamsOutputUpdate:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the Amazon Kinesis stream where you want to write the output.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the Amazon Kinesis stream where you want to write the output.
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.
       description: ' When updating an output configuration using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html">UpdateApplication</a> operation, provides information about an Amazon Kinesis stream configured as the destination. '
     LambdaOutput:
       type: object
@@ -2542,31 +2718,37 @@ components:
         - RoleARN
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: '<p>Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: '<p>Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. '
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. '
       description: 'When configuring application output, identifies an AWS Lambda function as the destination. You provide the function Amazon Resource Name (ARN) and also an IAM role ARN that Amazon Kinesis Analytics can use to write to the function on your behalf. '
     LambdaOutputDescription:
       type: object
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Amazon Resource Name (ARN) of the destination Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Amazon Resource Name (ARN) of the destination Lambda function.
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function.
       description: 'For an application output, describes the AWS Lambda function configured as its destination. '
     LambdaOutputUpdate:
       type: object
       properties:
         ResourceARNUpdate:
-          $ref: '#/components/schemas/ResourceARN'
-          description: '<p>Amazon Resource Name (ARN) of the destination Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: '<p>Amazon Resource Name (ARN) of the destination Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda">Example ARNs: AWS Lambda</a> </p> </note>'
         RoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. '
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. '
       description: 'When updating an output configuration using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html">UpdateApplication</a> operation, provides information about an AWS Lambda function configured as the destination.'
     ListApplicationsInputLimit:
       type: integer
@@ -2576,33 +2758,41 @@ components:
       type: object
       properties:
         JSONMappingParameters:
-          $ref: '#/components/schemas/JSONMappingParameters'
-          description: Provides additional mapping information when JSON is the record format on the streaming source.
+          allOf:
+            - $ref: '#/components/schemas/JSONMappingParameters'
+            - description: Provides additional mapping information when JSON is the record format on the streaming source.
         CSVMappingParameters:
-          $ref: '#/components/schemas/CSVMappingParameters'
-          description: 'Provides additional mapping information when the record format uses delimiters (for example, CSV).'
+          allOf:
+            - $ref: '#/components/schemas/CSVMappingParameters'
+            - description: 'Provides additional mapping information when the record format uses delimiters (for example, CSV).'
       description: 'When configuring application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source.'
     OutputDescription:
       type: object
       properties:
         OutputId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the output configuration.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the output configuration.
         Name:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: Name of the in-application stream configured as output.
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: Name of the in-application stream configured as output.
         KinesisStreamsOutputDescription:
-          $ref: '#/components/schemas/KinesisStreamsOutputDescription'
-          description: Describes Amazon Kinesis stream configured as the destination where output is written.
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsOutputDescription'
+            - description: Describes Amazon Kinesis stream configured as the destination where output is written.
         KinesisFirehoseOutputDescription:
-          $ref: '#/components/schemas/KinesisFirehoseOutputDescription'
-          description: Describes the Amazon Kinesis Firehose delivery stream configured as the destination where output is written.
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseOutputDescription'
+            - description: Describes the Amazon Kinesis Firehose delivery stream configured as the destination where output is written.
         LambdaOutputDescription:
-          $ref: '#/components/schemas/LambdaOutputDescription'
-          description: Describes the AWS Lambda function configured as the destination where output is written.
+          allOf:
+            - $ref: '#/components/schemas/LambdaOutputDescription'
+            - description: Describes the AWS Lambda function configured as the destination where output is written.
         DestinationSchema:
-          $ref: '#/components/schemas/DestinationSchema'
-          description: Data format used for writing data to the destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationSchema'
+            - description: Data format used for writing data to the destination.
       description: 'Describes the application output configuration, which includes the in-application stream name and the destination where the stream data is written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. '
     OutputUpdate:
       type: object
@@ -2610,23 +2800,29 @@ components:
         - OutputId
       properties:
         OutputId:
-          $ref: '#/components/schemas/Id'
-          description: Identifies the specific output configuration that you want to update.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: Identifies the specific output configuration that you want to update.
         NameUpdate:
-          $ref: '#/components/schemas/InAppStreamName'
-          description: 'If you want to specify a different in-application stream for this output configuration, use this field to specify the new in-application stream name.'
+          allOf:
+            - $ref: '#/components/schemas/InAppStreamName'
+            - description: 'If you want to specify a different in-application stream for this output configuration, use this field to specify the new in-application stream name.'
         KinesisStreamsOutputUpdate:
-          $ref: '#/components/schemas/KinesisStreamsOutputUpdate'
-          description: Describes an Amazon Kinesis stream as the destination for the output.
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamsOutputUpdate'
+            - description: Describes an Amazon Kinesis stream as the destination for the output.
         KinesisFirehoseOutputUpdate:
-          $ref: '#/components/schemas/KinesisFirehoseOutputUpdate'
-          description: Describes an Amazon Kinesis Firehose delivery stream as the destination for the output.
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseOutputUpdate'
+            - description: Describes an Amazon Kinesis Firehose delivery stream as the destination for the output.
         LambdaOutputUpdate:
-          $ref: '#/components/schemas/LambdaOutputUpdate'
-          description: Describes an AWS Lambda function as the destination for the output.
+          allOf:
+            - $ref: '#/components/schemas/LambdaOutputUpdate'
+            - description: Describes an AWS Lambda function as the destination for the output.
         DestinationSchemaUpdate:
-          $ref: '#/components/schemas/DestinationSchema'
-          description: 'Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.'
+          allOf:
+            - $ref: '#/components/schemas/DestinationSchema'
+            - description: 'Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.'
       description: ' Describes updates to the output configuration identified by the <code>OutputId</code>. '
     ParsedInputRecordField:
       type: string
@@ -2652,14 +2848,17 @@ components:
         - SqlType
       properties:
         Name:
-          $ref: '#/components/schemas/RecordColumnName'
-          description: Name of the column created in the in-application input stream or reference table.
+          allOf:
+            - $ref: '#/components/schemas/RecordColumnName'
+            - description: Name of the column created in the in-application input stream or reference table.
         Mapping:
-          $ref: '#/components/schemas/RecordColumnMapping'
-          description: 'Reference to the data element in the streaming input or the reference data source. This element is required if the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel">RecordFormatType</a> is <code>JSON</code>.'
+          allOf:
+            - $ref: '#/components/schemas/RecordColumnMapping'
+            - description: 'Reference to the data element in the streaming input or the reference data source. This element is required if the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel">RecordFormatType</a> is <code>JSON</code>.'
         SqlType:
-          $ref: '#/components/schemas/RecordColumnSqlType'
-          description: Type of column created in the in-application input stream or reference table.
+          allOf:
+            - $ref: '#/components/schemas/RecordColumnSqlType'
+            - description: Type of column created in the in-application input stream or reference table.
       description: <p>Describes the mapping of each data element in the streaming source to the corresponding column in the in-application stream.</p> <p>Also used to describe the format of the reference data source.</p>
     S3ReferenceDataSource:
       type: object
@@ -2669,14 +2868,17 @@ components:
         - ReferenceRoleARN
       properties:
         BucketARN:
-          $ref: '#/components/schemas/BucketARN'
-          description: Amazon Resource Name (ARN) of the S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/BucketARN'
+            - description: Amazon Resource Name (ARN) of the S3 bucket.
         FileKey:
-          $ref: '#/components/schemas/FileKey'
-          description: Object key name containing reference data.
+          allOf:
+            - $ref: '#/components/schemas/FileKey'
+            - description: Object key name containing reference data.
         ReferenceRoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'ARN of the IAM role that the service can assume to read data on your behalf. This role must have permission for the <code>s3:GetObject</code> action on the object and trust policy that allows Amazon Kinesis Analytics service principal to assume this role.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'ARN of the IAM role that the service can assume to read data on your behalf. This role must have permission for the <code>s3:GetObject</code> action on the object and trust policy that allows Amazon Kinesis Analytics service principal to assume this role.'
       description: '<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf.</p> <p>An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html">UpdateApplication</a> operation to trigger reloading of data into your application.</p>'
     S3ReferenceDataSourceDescription:
       type: object
@@ -2686,14 +2888,17 @@ components:
         - ReferenceRoleARN
       properties:
         BucketARN:
-          $ref: '#/components/schemas/BucketARN'
-          description: Amazon Resource Name (ARN) of the S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/BucketARN'
+            - description: Amazon Resource Name (ARN) of the S3 bucket.
         FileKey:
-          $ref: '#/components/schemas/FileKey'
-          description: Amazon S3 object key name.
+          allOf:
+            - $ref: '#/components/schemas/FileKey'
+            - description: Amazon S3 object key name.
         ReferenceRoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf to populate the in-application reference table.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf to populate the in-application reference table.
       description: Provides the bucket name and object key name that stores the reference data.
     ReferenceDataSourceDescription:
       type: object
@@ -2703,30 +2908,37 @@ components:
         - S3ReferenceDataSourceDescription
       properties:
         ReferenceId:
-          $ref: '#/components/schemas/Id'
-          description: 'ID of the reference data source. This is the ID that Amazon Kinesis Analytics assigns when you add the reference data source to your application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html">AddApplicationReferenceDataSource</a> operation.'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'ID of the reference data source. This is the ID that Amazon Kinesis Analytics assigns when you add the reference data source to your application using the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html">AddApplicationReferenceDataSource</a> operation.'
         TableName:
-          $ref: '#/components/schemas/InAppTableName'
-          description: The in-application table name created by the specific reference data source configuration.
+          allOf:
+            - $ref: '#/components/schemas/InAppTableName'
+            - description: The in-application table name created by the specific reference data source configuration.
         S3ReferenceDataSourceDescription:
-          $ref: '#/components/schemas/S3ReferenceDataSourceDescription'
-          description: 'Provides the S3 bucket name, the object key name that contains the reference data. It also provides the Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application reference table.'
+          allOf:
+            - $ref: '#/components/schemas/S3ReferenceDataSourceDescription'
+            - description: 'Provides the S3 bucket name, the object key name that contains the reference data. It also provides the Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application reference table.'
         ReferenceSchema:
-          $ref: '#/components/schemas/SourceSchema'
-          description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream.'
       description: Describes the reference data source configured for an application.
     S3ReferenceDataSourceUpdate:
       type: object
       properties:
         BucketARNUpdate:
-          $ref: '#/components/schemas/BucketARN'
-          description: Amazon Resource Name (ARN) of the S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/BucketARN'
+            - description: Amazon Resource Name (ARN) of the S3 bucket.
         FileKeyUpdate:
-          $ref: '#/components/schemas/FileKey'
-          description: Object key name.
+          allOf:
+            - $ref: '#/components/schemas/FileKey'
+            - description: Object key name.
         ReferenceRoleARNUpdate:
-          $ref: '#/components/schemas/RoleARN'
-          description: ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application.
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: ARN of the IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object and populate the in-application.
       description: 'Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
     ReferenceDataSourceUpdate:
       type: object
@@ -2734,17 +2946,21 @@ components:
         - ReferenceId
       properties:
         ReferenceId:
-          $ref: '#/components/schemas/Id'
-          description: 'ID of the reference data source being updated. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get this value.'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: 'ID of the reference data source being updated. You can use the <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html">DescribeApplication</a> operation to get this value.'
         TableNameUpdate:
-          $ref: '#/components/schemas/InAppTableName'
-          description: In-application table name that is created by this update.
+          allOf:
+            - $ref: '#/components/schemas/InAppTableName'
+            - description: In-application table name that is created by this update.
         S3ReferenceDataSourceUpdate:
-          $ref: '#/components/schemas/S3ReferenceDataSourceUpdate'
-          description: 'Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
+          allOf:
+            - $ref: '#/components/schemas/S3ReferenceDataSourceUpdate'
+            - description: 'Describes the S3 bucket name, object key name, and IAM role that Amazon Kinesis Analytics can assume to read the Amazon S3 object on your behalf and populate the in-application reference table.'
         ReferenceSchemaUpdate:
-          $ref: '#/components/schemas/SourceSchema'
-          description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
+          allOf:
+            - $ref: '#/components/schemas/SourceSchema'
+            - description: 'Describes the format of the data in the streaming source, and how each data element maps to corresponding columns created in the in-application stream. '
       description: 'When you update a reference data source configuration for an application, this object provides all the updated values (such as the source bucket name and object key name), the in-application table name that is created, and updated mapping information that maps the data in the Amazon S3 object to the in-application reference table that is created.'
     TagKey:
       type: string
@@ -2760,11 +2976,13 @@ components:
         - Key
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the key-value tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the key-value tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the key-value tag. The value is optional.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the key-value tag. The value is optional.
       description: 'A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html">Using Tagging</a>.'
     TagKeys:
       type: array

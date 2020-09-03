@@ -1581,8 +1581,9 @@ components:
       type: object
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This is of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This is of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
     CreateCertificateAuthorityRequest:
       type: object
       required:
@@ -1591,20 +1592,25 @@ components:
       title: CreateCertificateAuthorityRequest
       properties:
         CertificateAuthorityConfiguration:
-          $ref: '#/components/schemas/CertificateAuthorityConfiguration'
-          description: 'Name and bit size of the private key algorithm, the name of the signing algorithm, and X.500 certificate subject information.'
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityConfiguration'
+            - description: 'Name and bit size of the private key algorithm, the name of the signing algorithm, and X.500 certificate subject information.'
         RevocationConfiguration:
-          $ref: '#/components/schemas/RevocationConfiguration'
-          description: 'Contains a Boolean value that you can use to enable a certification revocation list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will write the CRL, and an optional CNAME alias that you can use to hide the name of your bucket in the <b>CRL Distribution Points</b> extension of your CA certificate. For more information, see the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html">CrlConfiguration</a> structure. '
+          allOf:
+            - $ref: '#/components/schemas/RevocationConfiguration'
+            - description: 'Contains a Boolean value that you can use to enable a certification revocation list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will write the CRL, and an optional CNAME alias that you can use to hide the name of your bucket in the <b>CRL Distribution Points</b> extension of your CA certificate. For more information, see the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html">CrlConfiguration</a> structure. '
         CertificateAuthorityType:
-          $ref: '#/components/schemas/CertificateAuthorityType'
-          description: The type of the certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityType'
+            - description: The type of the certificate authority.
         IdempotencyToken:
-          $ref: '#/components/schemas/IdempotencyToken'
-          description: 'Alphanumeric string that can be used to distinguish between calls to <b>CreateCertificateAuthority</b>. For a given token, ACM Private CA creates exactly one CA. If you issue a subsequent call using the same token, ACM Private CA returns the ARN of the existing CA and takes no further action. If you change the idempotency token across multiple calls, ACM Private CA creates a unique CA for each unique token.'
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Alphanumeric string that can be used to distinguish between calls to <b>CreateCertificateAuthority</b>. For a given token, ACM Private CA creates exactly one CA. If you issue a subsequent call using the same token, ACM Private CA returns the ARN of the existing CA and takes no further action. If you change the idempotency token across multiple calls, ACM Private CA creates a unique CA for each unique token.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA. For information using tags with IAM to manage permissions, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA. For information using tags with IAM to manage permissions, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.'
     InvalidArgsException: {}
     InvalidPolicyException: {}
     InvalidTagException: {}
@@ -1613,11 +1619,13 @@ components:
       type: object
       properties:
         AuditReportId:
-          $ref: '#/components/schemas/AuditReportId'
-          description: An alphanumeric string that contains a report identifier.
+          allOf:
+            - $ref: '#/components/schemas/AuditReportId'
+            - description: An alphanumeric string that contains a report identifier.
         S3Key:
-          $ref: '#/components/schemas/S3Key'
-          description: The <b>key</b> that uniquely identifies the report file in your S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: The <b>key</b> that uniquely identifies the report file in your S3 bucket.
     CreateCertificateAuthorityAuditReportRequest:
       type: object
       required:
@@ -1627,14 +1635,17 @@ components:
       title: CreateCertificateAuthorityAuditReportRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>'
         S3BucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The name of the S3 bucket that will contain the audit report.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket that will contain the audit report.
         AuditReportResponseFormat:
-          $ref: '#/components/schemas/AuditReportResponseFormat'
-          description: The format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.
+          allOf:
+            - $ref: '#/components/schemas/AuditReportResponseFormat'
+            - description: The format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.
     RequestInProgressException: {}
     RequestFailedException: {}
     ResourceNotFoundException: {}
@@ -1649,17 +1660,21 @@ components:
       title: CreatePermissionRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the CA that grants the permissions. You can find the ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the CA that grants the permissions. You can find the ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
         Principal:
-          $ref: '#/components/schemas/Principal'
-          description: 'The AWS service or identity that receives the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Principal'
+            - description: 'The AWS service or identity that receives the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
         SourceAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: The ID of the calling account.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the calling account.
         Actions:
-          $ref: '#/components/schemas/ActionList'
-          description: 'The actions that the specified AWS service principal can use. These include <code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: 'The actions that the specified AWS service principal can use. These include <code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>.'
     PermissionAlreadyExistsException: {}
     DeleteCertificateAuthorityRequest:
       type: object
@@ -1668,11 +1683,13 @@ components:
       title: DeleteCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
         PermanentDeletionTimeInDays:
-          $ref: '#/components/schemas/PermanentDeletionTimeInDays'
-          description: 'The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.'
+          allOf:
+            - $ref: '#/components/schemas/PermanentDeletionTimeInDays'
+            - description: 'The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.'
     ConcurrentModificationException: {}
     DeletePermissionRequest:
       type: object
@@ -1682,14 +1699,17 @@ components:
       title: DeletePermissionRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Number (ARN) of the private CA that issued the permissions. You can find the CA''s ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Number (ARN) of the private CA that issued the permissions. You can find the CA''s ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
         Principal:
-          $ref: '#/components/schemas/Principal'
-          description: 'The AWS service or identity that will have its CA permissions revoked. At this time, the only valid service principal is <code>acm.amazonaws.com</code> '
+          allOf:
+            - $ref: '#/components/schemas/Principal'
+            - description: 'The AWS service or identity that will have its CA permissions revoked. At this time, the only valid service principal is <code>acm.amazonaws.com</code> '
         SourceAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: The AWS account that calls this action.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account that calls this action.
     DeletePolicyRequest:
       type: object
       required:
@@ -1697,15 +1717,17 @@ components:
       title: DeletePolicyRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Number (ARN) of the private CA that will have its policy deleted. You can find the CA''s ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. The ARN value must have the form <code>arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-0123456789ab</code>. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Number (ARN) of the private CA that will have its policy deleted. You can find the CA''s ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. The ARN value must have the form <code>arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-0123456789ab</code>. '
     LockoutPreventedException: {}
     DescribeCertificateAuthorityResponse:
       type: object
       properties:
         CertificateAuthority:
-          $ref: '#/components/schemas/CertificateAuthority'
-          description: 'A <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CertificateAuthority.html">CertificateAuthority</a> structure that contains information about your private CA.'
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthority'
+            - description: 'A <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CertificateAuthority.html">CertificateAuthority</a> structure that contains information about your private CA.'
     DescribeCertificateAuthorityRequest:
       type: object
       required:
@@ -1713,23 +1735,28 @@ components:
       title: DescribeCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
     DescribeCertificateAuthorityAuditReportResponse:
       type: object
       properties:
         AuditReportStatus:
-          $ref: '#/components/schemas/AuditReportStatus'
-          description: 'Specifies whether report creation is in progress, has succeeded, or has failed.'
+          allOf:
+            - $ref: '#/components/schemas/AuditReportStatus'
+            - description: 'Specifies whether report creation is in progress, has succeeded, or has failed.'
         S3BucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: Name of the S3 bucket that contains the report.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: Name of the S3 bucket that contains the report.
         S3Key:
-          $ref: '#/components/schemas/S3Key'
-          description: S3 <b>key</b> that uniquely identifies the report file in your S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: S3 <b>key</b> that uniquely identifies the report file in your S3 bucket.
         CreatedAt:
-          $ref: '#/components/schemas/TStamp'
-          description: The date and time at which the report was created.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time at which the report was created.
     DescribeCertificateAuthorityAuditReportRequest:
       type: object
       required:
@@ -1738,20 +1765,24 @@ components:
       title: DescribeCertificateAuthorityAuditReportRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the private CA. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the private CA. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
         AuditReportId:
-          $ref: '#/components/schemas/AuditReportId'
-          description: 'The report ID returned by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html">CreateCertificateAuthorityAuditReport</a> action.'
+          allOf:
+            - $ref: '#/components/schemas/AuditReportId'
+            - description: 'The report ID returned by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html">CreateCertificateAuthorityAuditReport</a> action.'
     GetCertificateResponse:
       type: object
       properties:
         Certificate:
-          $ref: '#/components/schemas/CertificateBody'
-          description: The base64 PEM-encoded certificate specified by the <code>CertificateArn</code> parameter.
+          allOf:
+            - $ref: '#/components/schemas/CertificateBody'
+            - description: The base64 PEM-encoded certificate specified by the <code>CertificateArn</code> parameter.
         CertificateChain:
-          $ref: '#/components/schemas/CertificateChain'
-          description: 'The base64 PEM-encoded certificate chain that chains up to the on-premises root CA certificate that you used to sign your private CA certificate. '
+          allOf:
+            - $ref: '#/components/schemas/CertificateChain'
+            - description: 'The base64 PEM-encoded certificate chain that chains up to the on-premises root CA certificate that you used to sign your private CA certificate. '
     GetCertificateRequest:
       type: object
       required:
@@ -1760,20 +1791,24 @@ components:
       title: GetCertificateRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
         CertificateArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The ARN of the issued certificate. The ARN contains the certificate serial number and must be in the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The ARN of the issued certificate. The ARN contains the certificate serial number and must be in the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
     GetCertificateAuthorityCertificateResponse:
       type: object
       properties:
         Certificate:
-          $ref: '#/components/schemas/CertificateBody'
-          description: Base64-encoded certificate authority (CA) certificate.
+          allOf:
+            - $ref: '#/components/schemas/CertificateBody'
+            - description: Base64-encoded certificate authority (CA) certificate.
         CertificateChain:
-          $ref: '#/components/schemas/CertificateChain'
-          description: 'Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.'
+          allOf:
+            - $ref: '#/components/schemas/CertificateChain'
+            - description: 'Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.'
     GetCertificateAuthorityCertificateRequest:
       type: object
       required:
@@ -1781,14 +1816,16 @@ components:
       title: GetCertificateAuthorityCertificateRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of your private CA. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of your private CA. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
     GetCertificateAuthorityCsrResponse:
       type: object
       properties:
         Csr:
-          $ref: '#/components/schemas/CsrBody'
-          description: The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
+          allOf:
+            - $ref: '#/components/schemas/CsrBody'
+            - description: The base64 PEM-encoded certificate signing request (CSR) for your private CA certificate.
     GetCertificateAuthorityCsrRequest:
       type: object
       required:
@@ -1796,14 +1833,16 @@ components:
       title: GetCertificateAuthorityCsrRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
     GetPolicyResponse:
       type: object
       properties:
         Policy:
-          $ref: '#/components/schemas/AWSPolicy'
-          description: The policy attached to the private CA as a JSON document.
+          allOf:
+            - $ref: '#/components/schemas/AWSPolicy'
+            - description: The policy attached to the private CA as a JSON document.
     GetPolicyRequest:
       type: object
       required:
@@ -1811,8 +1850,9 @@ components:
       title: GetPolicyRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved. You can find the CA''s ARN by calling the ListCertificateAuthorities action. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved. You can find the CA''s ARN by calling the ListCertificateAuthorities action. '
     ImportCertificateAuthorityCertificateRequest:
       type: object
       required:
@@ -1821,14 +1861,17 @@ components:
       title: ImportCertificateAuthorityCertificateRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         Certificate:
-          $ref: '#/components/schemas/CertificateBodyBlob'
-          description: 'The PEM-encoded certificate for a private CA. This may be a self-signed certificate in the case of a root CA, or it may be signed by another CA that you control.'
+          allOf:
+            - $ref: '#/components/schemas/CertificateBodyBlob'
+            - description: 'The PEM-encoded certificate for a private CA. This may be a self-signed certificate in the case of a root CA, or it may be signed by another CA that you control.'
         CertificateChain:
-          $ref: '#/components/schemas/CertificateChainBlob'
-          description: '<p>A PEM-encoded file that contains all of your certificates, other than the certificate you''re importing, chaining up to your root CA. Your ACM Private CA-hosted or on-premises root certificate is the last in the chain, and each certificate in the chain signs the one preceding. </p> <p>This parameter must be supplied when you import a subordinate CA. When you import a root CA, there is no chain.</p>'
+          allOf:
+            - $ref: '#/components/schemas/CertificateChainBlob'
+            - description: '<p>A PEM-encoded file that contains all of your certificates, other than the certificate you''re importing, chaining up to your root CA. Your ACM Private CA-hosted or on-premises root certificate is the last in the chain, and each certificate in the chain signs the one preceding. </p> <p>This parameter must be supplied when you import a subordinate CA. When you import a root CA, there is no chain.</p>'
     InvalidRequestException: {}
     MalformedCertificateException: {}
     CertificateMismatchException: {}
@@ -1836,8 +1879,9 @@ components:
       type: object
       properties:
         CertificateArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the issued certificate and the certificate serial number. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>/certificate/<i>286535153982981100925020015808220737245</i> </code> </p>'
     IssueCertificateRequest:
       type: object
       required:
@@ -1848,56 +1892,69 @@ components:
       title: IssueCertificateRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         Csr:
-          $ref: '#/components/schemas/CsrBlob'
-          description: '<p>The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key. </p> <p> <code>openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>If you have a configuration file, you can use the following OpenSSL command. The <code>usr_cert</code> block in the configuration file contains your X509 version 3 extensions. </p> <p> <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>Note: A CSR must provide either a <i>subject name</i> or a <i>subject alternative name</i> or the request will be rejected. </p>'
+          allOf:
+            - $ref: '#/components/schemas/CsrBlob'
+            - description: '<p>The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key. </p> <p> <code>openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>If you have a configuration file, you can use the following OpenSSL command. The <code>usr_cert</code> block in the configuration file contains your X509 version 3 extensions. </p> <p> <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>Note: A CSR must provide either a <i>subject name</i> or a <i>subject alternative name</i> or the request will be rejected. </p>'
         SigningAlgorithm:
-          $ref: '#/components/schemas/SigningAlgorithm'
-          description: <p>The name of the algorithm that will be used to sign the certificate to be issued. </p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign a CSR.</p>
+          allOf:
+            - $ref: '#/components/schemas/SigningAlgorithm'
+            - description: <p>The name of the algorithm that will be used to sign the certificate to be issued. </p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign a CSR.</p>
         TemplateArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the <code>EndEntityCertificate/V1</code> template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLen<i>N</i> portion of the ARN, where <i>N</i> is the <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth">CA depth</a>.</p> <p>Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy.</p> <p>The following service-owned <code>TemplateArn</code> values are supported by ACM Private CA: </p> <ul> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/RootCACertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html">Using Templates</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the <code>EndEntityCertificate/V1</code> template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLen<i>N</i> portion of the ARN, where <i>N</i> is the <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth">CA depth</a>.</p> <p>Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy.</p> <p>The following service-owned <code>TemplateArn</code> values are supported by ACM Private CA: </p> <ul> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/RootCACertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html">Using Templates</a>.</p>'
         Validity:
-          $ref: '#/components/schemas/Validity'
-          description: '<p>Information describing the validity period of the certificate.</p> <p>When issuing a certificate, ACM Private CA sets the "Not Before" date in the validity field to date and time minus 60 minutes. This is intended to compensate for time inconsistencies across systems of 60 minutes or less. </p> <p>The validity period configured on a certificate must not exceed the limit set by its parents in the CA hierarchy.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Validity'
+            - description: '<p>Information describing the validity period of the certificate.</p> <p>When issuing a certificate, ACM Private CA sets the "Not Before" date in the validity field to date and time minus 60 minutes. This is intended to compensate for time inconsistencies across systems of 60 minutes or less. </p> <p>The validity period configured on a certificate must not exceed the limit set by its parents in the CA hierarchy.</p>'
         IdempotencyToken:
-          $ref: '#/components/schemas/IdempotencyToken'
-          description: 'Custom string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens time out after one hour. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.'
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Custom string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens time out after one hour. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.'
     MalformedCSRException: {}
     ListCertificateAuthoritiesResponse:
       type: object
       properties:
         CertificateAuthorities:
-          $ref: '#/components/schemas/CertificateAuthorities'
-          description: Summary information about each certificate authority you have created.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorities'
+            - description: Summary information about each certificate authority you have created.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'When the list is truncated, this value is present and should be used for the <code>NextToken</code> parameter in a subsequent pagination request.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When the list is truncated, this value is present and should be used for the <code>NextToken</code> parameter in a subsequent pagination request.'
     ListCertificateAuthoritiesRequest:
       type: object
       title: ListCertificateAuthoritiesRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the <code>NextToken</code> parameter from the response you just received.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of the <code>NextToken</code> parameter from the response you just received.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response on each page. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response on each page. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.'
         ResourceOwner:
-          $ref: '#/components/schemas/ResourceOwner'
-          description: Use this parameter to filter the returned set of certificate authorities based on their owner. The default is SELF.
+          allOf:
+            - $ref: '#/components/schemas/ResourceOwner'
+            - description: Use this parameter to filter the returned set of certificate authorities based on their owner. The default is SELF.
     InvalidNextTokenException: {}
     ListPermissionsResponse:
       type: object
       properties:
         Permissions:
-          $ref: '#/components/schemas/PermissionList'
-          description: 'Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.'
+          allOf:
+            - $ref: '#/components/schemas/PermissionList'
+            - description: 'Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
     ListPermissionsRequest:
       type: object
       required:
@@ -1905,23 +1962,28 @@ components:
       title: ListPermissionsRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must be of the form: <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> You can get a private CA''s ARN by running the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action.'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action. This must be of the form: <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> You can get a private CA''s ARN by running the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action.'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
     ListTagsResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags associated with your private CA.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with your private CA.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
     ListTagsRequest:
       type: object
       required:
@@ -1929,14 +1991,17 @@ components:
       title: ListTagsRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
     PutPolicyRequest:
       type: object
       required:
@@ -1945,11 +2010,13 @@ components:
       title: PutPolicyRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Number (ARN) of the private CA to associate with the policy. The ARN of the CA can be found by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action.</p> <p/>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Number (ARN) of the private CA to associate with the policy. The ARN of the CA can be found by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html">ListCertificateAuthorities</a> action.</p> <p/>'
         Policy:
-          $ref: '#/components/schemas/AWSPolicy'
-          description: 'The path and filename of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the <code>PutPolicy</code> action returns an <code>InvalidPolicyException</code>. For information about IAM policy and statement structure, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json">Overview of JSON Policies</a>.'
+          allOf:
+            - $ref: '#/components/schemas/AWSPolicy'
+            - description: 'The path and filename of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the <code>PutPolicy</code> action returns an <code>InvalidPolicyException</code>. For information about IAM policy and statement structure, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json">Overview of JSON Policies</a>.'
     RestoreCertificateAuthorityRequest:
       type: object
       required:
@@ -1957,8 +2024,9 @@ components:
       title: RestoreCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
     RevokeCertificateRequest:
       type: object
       required:
@@ -1968,14 +2036,17 @@ components:
       title: RevokeCertificateRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         CertificateSerial:
-          $ref: '#/components/schemas/String128'
-          description: '<p>Serial number of the certificate to be revoked. This must be in hexadecimal format. You can retrieve the serial number by calling <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html">GetCertificate</a> with the Amazon Resource Name (ARN) of the certificate you want and the ARN of your private CA. The <b>GetCertificate</b> action retrieves the certificate in the PEM format. You can use the following OpenSSL command to list the certificate in text format and copy the hexadecimal serial number. </p> <p> <code>openssl x509 -in <i>file_path</i> -text -noout</code> </p> <p>You can also copy the serial number from the console or use the <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html">DescribeCertificate</a> action in the <i>AWS Certificate Manager API Reference</i>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/String128'
+            - description: '<p>Serial number of the certificate to be revoked. This must be in hexadecimal format. You can retrieve the serial number by calling <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificate.html">GetCertificate</a> with the Amazon Resource Name (ARN) of the certificate you want and the ARN of your private CA. The <b>GetCertificate</b> action retrieves the certificate in the PEM format. You can use the following OpenSSL command to list the certificate in text format and copy the hexadecimal serial number. </p> <p> <code>openssl x509 -in <i>file_path</i> -text -noout</code> </p> <p>You can also copy the serial number from the console or use the <a href="https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html">DescribeCertificate</a> action in the <i>AWS Certificate Manager API Reference</i>. </p>'
         RevocationReason:
-          $ref: '#/components/schemas/RevocationReason'
-          description: Specifies why you revoked the certificate.
+          allOf:
+            - $ref: '#/components/schemas/RevocationReason'
+            - description: Specifies why you revoked the certificate.
     RequestAlreadyProcessedException: {}
     TagCertificateAuthorityRequest:
       type: object
@@ -1985,11 +2056,13 @@ components:
       title: TagCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: List of tags to be associated with the CA.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: List of tags to be associated with the CA.
     TooManyTagsException: {}
     UntagCertificateAuthorityRequest:
       type: object
@@ -1999,11 +2072,13 @@ components:
       title: UntagCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) that was returned when you called <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a>. This must be of the form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: List of tags to be removed from the CA.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: List of tags to be removed from the CA.
     UpdateCertificateAuthorityRequest:
       type: object
       required:
@@ -2011,14 +2086,17 @@ components:
       title: UpdateCertificateAuthorityRequest
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>'
         RevocationConfiguration:
-          $ref: '#/components/schemas/RevocationConfiguration'
-          description: Revocation information for your private CA.
+          allOf:
+            - $ref: '#/components/schemas/RevocationConfiguration'
+            - description: Revocation information for your private CA.
         Status:
-          $ref: '#/components/schemas/CertificateAuthorityStatus'
-          description: Status of your private CA.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityStatus'
+            - description: Status of your private CA.
     ASN1PrintableString64:
       type: string
       pattern: '[a-zA-Z0-9''()+-.?:/= ]*'
@@ -2057,47 +2135,61 @@ components:
       type: object
       properties:
         Country:
-          $ref: '#/components/schemas/CountryCodeString'
-          description: Two-digit code that specifies the country in which the certificate subject located.
+          allOf:
+            - $ref: '#/components/schemas/CountryCodeString'
+            - description: Two-digit code that specifies the country in which the certificate subject located.
         Organization:
-          $ref: '#/components/schemas/String64'
-          description: 'Legal name of the organization with which the certificate subject is affiliated. '
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: 'Legal name of the organization with which the certificate subject is affiliated. '
         OrganizationalUnit:
-          $ref: '#/components/schemas/String64'
-          description: A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: A subdivision or unit of the organization (such as sales or finance) with which the certificate subject is affiliated.
         DistinguishedNameQualifier:
-          $ref: '#/components/schemas/ASN1PrintableString64'
-          description: Disambiguating information for the certificate subject.
+          allOf:
+            - $ref: '#/components/schemas/ASN1PrintableString64'
+            - description: Disambiguating information for the certificate subject.
         State:
-          $ref: '#/components/schemas/String128'
-          description: State in which the subject of the certificate is located.
+          allOf:
+            - $ref: '#/components/schemas/String128'
+            - description: State in which the subject of the certificate is located.
         CommonName:
-          $ref: '#/components/schemas/String64'
-          description: Fully qualified domain name (FQDN) associated with the certificate subject.
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: Fully qualified domain name (FQDN) associated with the certificate subject.
         SerialNumber:
-          $ref: '#/components/schemas/ASN1PrintableString64'
-          description: The certificate serial number.
+          allOf:
+            - $ref: '#/components/schemas/ASN1PrintableString64'
+            - description: The certificate serial number.
         Locality:
-          $ref: '#/components/schemas/String128'
-          description: The locality (such as a city or town) in which the certificate subject is located.
+          allOf:
+            - $ref: '#/components/schemas/String128'
+            - description: The locality (such as a city or town) in which the certificate subject is located.
         Title:
-          $ref: '#/components/schemas/String64'
-          description: 'A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.'
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: 'A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.'
         Surname:
-          $ref: '#/components/schemas/String40'
-          description: 'Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.'
+          allOf:
+            - $ref: '#/components/schemas/String40'
+            - description: 'Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.'
         GivenName:
-          $ref: '#/components/schemas/String16'
-          description: First name.
+          allOf:
+            - $ref: '#/components/schemas/String16'
+            - description: First name.
         Initials:
-          $ref: '#/components/schemas/String5'
-          description: 'Concatenation that typically contains the first letter of the <b>GivenName</b>, the first letter of the middle name if one exists, and the first letter of the <b>SurName</b>.'
+          allOf:
+            - $ref: '#/components/schemas/String5'
+            - description: 'Concatenation that typically contains the first letter of the <b>GivenName</b>, the first letter of the middle name if one exists, and the first letter of the <b>SurName</b>.'
         Pseudonym:
-          $ref: '#/components/schemas/String128'
-          description: 'Typically a shortened version of a longer <b>GivenName</b>. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.'
+          allOf:
+            - $ref: '#/components/schemas/String128'
+            - description: 'Typically a shortened version of a longer <b>GivenName</b>. For example, Jonathan is often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.'
         GenerationQualifier:
-          $ref: '#/components/schemas/String3'
-          description: 'Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.'
+          allOf:
+            - $ref: '#/components/schemas/String3'
+            - description: 'Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.'
       description: 'Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The <b>Subject</b> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <b>Subject</b> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity. '
     AWSPolicy:
       type: string
@@ -2148,44 +2240,57 @@ components:
       type: object
       properties:
         Arn:
-          $ref: '#/components/schemas/Arn'
-          description: Amazon Resource Name (ARN) for your private certificate authority (CA). The format is <code> <i>12345678-1234-1234-1234-123456789012</i> </code>.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) for your private certificate authority (CA). The format is <code> <i>12345678-1234-1234-1234-123456789012</i> </code>.
         OwnerAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: The AWS account ID that owns the certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID that owns the certificate authority.
         CreatedAt:
-          $ref: '#/components/schemas/TStamp'
-          description: Date and time at which your private CA was created.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Date and time at which your private CA was created.
         LastStateChangeAt:
-          $ref: '#/components/schemas/TStamp'
-          description: Date and time at which your private CA was last updated.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Date and time at which your private CA was last updated.
         Type:
-          $ref: '#/components/schemas/CertificateAuthorityType'
-          description: Type of your private CA.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityType'
+            - description: Type of your private CA.
         Serial:
-          $ref: '#/components/schemas/String'
-          description: Serial number of your private CA.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Serial number of your private CA.
         Status:
-          $ref: '#/components/schemas/CertificateAuthorityStatus'
-          description: Status of your private CA.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityStatus'
+            - description: Status of your private CA.
         NotBefore:
-          $ref: '#/components/schemas/TStamp'
-          description: Date and time before which your private CA certificate is not valid.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Date and time before which your private CA certificate is not valid.
         NotAfter:
-          $ref: '#/components/schemas/TStamp'
-          description: Date and time after which your private CA certificate is not valid.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Date and time after which your private CA certificate is not valid.
         FailureReason:
-          $ref: '#/components/schemas/FailureReason'
-          description: Reason the request to create your private CA failed.
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: Reason the request to create your private CA failed.
         CertificateAuthorityConfiguration:
-          $ref: '#/components/schemas/CertificateAuthorityConfiguration'
-          description: Your private CA configuration.
+          allOf:
+            - $ref: '#/components/schemas/CertificateAuthorityConfiguration'
+            - description: Your private CA configuration.
         RevocationConfiguration:
-          $ref: '#/components/schemas/RevocationConfiguration'
-          description: 'Information about the certificate revocation list (CRL) created and maintained by your private CA. '
+          allOf:
+            - $ref: '#/components/schemas/RevocationConfiguration'
+            - description: 'Information about the certificate revocation list (CRL) created and maintained by your private CA. '
         RestorableUntil:
-          $ref: '#/components/schemas/TStamp'
-          description: 'The period during which a deleted CA can be restored. For more information, see the <code>PermanentDeletionTimeInDays</code> parameter of the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html">DeleteCertificateAuthorityRequest</a> action. '
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The period during which a deleted CA can be restored. For more information, see the <code>PermanentDeletionTimeInDays</code> parameter of the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html">DeleteCertificateAuthorityRequest</a> action. '
       description: 'Contains information about your private certificate authority (CA). Your private CA can issue and revoke X.509 digital certificates. Digital certificates verify that the entity named in the certificate <b>Subject</b> field owns or controls the public key contained in the <b>Subject Public Key Info</b> field. Call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action to create your private CA. You must then call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html">GetCertificateAuthorityCertificate</a> action to retrieve a private CA certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted or on-premises root or subordinate CA certificate. Call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html">ImportCertificateAuthorityCertificate</a> action to import the signed certificate into AWS Certificate Manager (ACM). '
     CertificateAuthorities:
       type: array
@@ -2225,21 +2330,25 @@ components:
         - Subject
       properties:
         KeyAlgorithm:
-          $ref: '#/components/schemas/KeyAlgorithm'
-          description: 'Type of the public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate. When you create a subordinate CA, you must use a key algorithm supported by the parent CA.'
+          allOf:
+            - $ref: '#/components/schemas/KeyAlgorithm'
+            - description: 'Type of the public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate. When you create a subordinate CA, you must use a key algorithm supported by the parent CA.'
         SigningAlgorithm:
-          $ref: '#/components/schemas/SigningAlgorithm'
-          description: <p>Name of the algorithm your private CA uses to sign certificate requests.</p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign certificates when they are issued.</p>
+          allOf:
+            - $ref: '#/components/schemas/SigningAlgorithm'
+            - description: <p>Name of the algorithm your private CA uses to sign certificate requests.</p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign certificates when they are issued.</p>
         Subject:
-          $ref: '#/components/schemas/ASN1Subject'
-          description: Structure that contains X.500 distinguished name information for your private CA.
+          allOf:
+            - $ref: '#/components/schemas/ASN1Subject'
+            - description: Structure that contains X.500 distinguished name information for your private CA.
       description: 'Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate. It also includes the signature algorithm that it uses when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action. '
     RevocationConfiguration:
       type: object
       properties:
         CrlConfiguration:
-          $ref: '#/components/schemas/CrlConfiguration'
-          description: 'Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.'
+          allOf:
+            - $ref: '#/components/schemas/CrlConfiguration'
+            - description: 'Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.'
       description: 'Certificate revocation information used by the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> and <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA) can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates revoked by your CA. For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html">RevokeCertificate</a>.'
     KeyAlgorithm:
       type: string
@@ -2310,17 +2419,21 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. You can use this value to enable certificate revocation for a new CA when you call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action or for an existing CA when you call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. You can use this value to enable certificate revocation for a new CA when you call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html">CreateCertificateAuthority</a> action or for an existing CA when you call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. '
         ExpirationInDays:
-          $ref: '#/components/schemas/Integer1To5000'
-          description: Number of days until a certificate expires.
+          allOf:
+            - $ref: '#/components/schemas/Integer1To5000'
+            - description: Number of days until a certificate expires.
         CustomCname:
-          $ref: '#/components/schemas/String253'
-          description: Name inserted into the certificate <b>CRL Distribution Points</b> extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public.
+          allOf:
+            - $ref: '#/components/schemas/String253'
+            - description: Name inserted into the certificate <b>CRL Distribution Points</b> extension that enables the use of an alias for the CRL distribution point. Use this value if you don't want the name of your S3 bucket to be public.
         S3BucketName:
-          $ref: '#/components/schemas/String3To255'
-          description: 'Name of the S3 bucket that contains the CRL. If you do not provide a value for the <b>CustomCname</b> argument, the name of your S3 bucket is placed into the <b>CRL Distribution Points</b> extension of the issued certificate. You can change the name of your bucket by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.'
+          allOf:
+            - $ref: '#/components/schemas/String3To255'
+            - description: 'Name of the S3 bucket that contains the CRL. If you do not provide a value for the <b>CustomCname</b> argument, the name of your S3 bucket is placed into the <b>CRL Distribution Points</b> extension of the issued certificate. You can change the name of your bucket by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html">UpdateCertificateAuthority</a> action. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.'
       description: '<p>Contains configuration information for a certificate revocation list (CRL). Your private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You can enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA writes CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by specifying a value for the <b>CustomCname</b> parameter. Your private CA copies the CNAME or the S3 bucket name to the <b>CRL Distribution Points</b> extension of each certificate it issues. Your S3 bucket policy must give write permission to ACM Private CA. </p> <p>ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption">Encrypting Your CRLs</a>.</p> <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed at 1/2 the age of next update or when a certificate is revoked. When a certificate is revoked, it is recorded in the next CRL that is generated and in the next audit report. Only time valid certificates are listed in the CRL. Expired certificates are not included. </p> <p>CRLs contain the following fields:</p> <ul> <li> <p> <b>Version</b>: The current version number defined in RFC 5280 is V2. The integer value is 0x1. </p> </li> <li> <p> <b>Signature Algorithm</b>: The name of the algorithm used to sign the CRL.</p> </li> <li> <p> <b>Issuer</b>: The X.500 distinguished name of your private CA that issued the CRL.</p> </li> <li> <p> <b>Last Update</b>: The issue date and time of this CRL.</p> </li> <li> <p> <b>Next Update</b>: The day and time by which the next CRL will be issued.</p> </li> <li> <p> <b>Revoked Certificates</b>: List of revoked certificates. Each list item contains the following information.</p> <ul> <li> <p> <b>Serial Number</b>: The serial number, in hexadecimal format, of the revoked certificate.</p> </li> <li> <p> <b>Revocation Date</b>: Date and time the certificate was revoked.</p> </li> <li> <p> <b>CRL Entry Extensions</b>: Optional extensions for the CRL entry.</p> <ul> <li> <p> <b>X509v3 CRL Reason Code</b>: Reason the certificate was revoked.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>CRL Extensions</b>: Optional extensions for the CRL.</p> <ul> <li> <p> <b>X509v3 Authority Key Identifier</b>: Identifies the public key associated with the private key used to sign the certificate.</p> </li> <li> <p> <b>X509v3 CRL Number:</b>: Decimal sequence number for the CRL.</p> </li> </ul> </li> <li> <p> <b>Signature Algorithm</b>: Algorithm used by your private CA to sign the CRL.</p> </li> <li> <p> <b>Signature Value</b>: Signature computed over the CRL.</p> </li> </ul> <p>Certificate revocation lists created by ACM Private CA are DER-encoded. You can use the following OpenSSL command to list a CRL.</p> <p> <code>openssl crl -inform DER -text -in <i>crl_path</i> -noout</code> </p>'
     CsrBlob:
       type: string
@@ -2339,11 +2452,13 @@ components:
         - Type
       properties:
         Value:
-          $ref: '#/components/schemas/PositiveLong'
-          description: 'A long integer interpreted according to the value of <code>Type</code>, below.'
+          allOf:
+            - $ref: '#/components/schemas/PositiveLong'
+            - description: 'A long integer interpreted according to the value of <code>Type</code>, below.'
         Type:
-          $ref: '#/components/schemas/ValidityPeriodType'
-          description: '<p>Determines how <i>ACM Private CA</i> interprets the <code>Value</code> parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output. </p> <p> <code>END_DATE</code>: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.</p> <ul> <li> <p>Sample input value: 491231235959 (UTCTime format)</p> </li> <li> <p>Output expiration date/time: 12/31/2049 23:59:59</p> </li> </ul> <p> <code>ABSOLUTE</code>: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch. </p> <ul> <li> <p>Sample input value: 2524608000</p> </li> <li> <p>Output expiration date/time: 01/01/2050 00:00:00</p> </li> </ul> <p> <code>DAYS</code>, <code>MONTHS</code>, <code>YEARS</code>: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years. </p> <p>Example if <code>DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:</p> <ul> <li> <p>Sample input value: 90</p> </li> <li> <p>Output expiration date: 01/10/2020 12:34:54 UTC</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ValidityPeriodType'
+            - description: '<p>Determines how <i>ACM Private CA</i> interprets the <code>Value</code> parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output. </p> <p> <code>END_DATE</code>: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.</p> <ul> <li> <p>Sample input value: 491231235959 (UTCTime format)</p> </li> <li> <p>Output expiration date/time: 12/31/2049 23:59:59</p> </li> </ul> <p> <code>ABSOLUTE</code>: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch. </p> <ul> <li> <p>Sample input value: 2524608000</p> </li> <li> <p>Output expiration date/time: 01/01/2050 00:00:00</p> </li> </ul> <p> <code>DAYS</code>, <code>MONTHS</code>, <code>YEARS</code>: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years. </p> <p>Example if <code>DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:</p> <ul> <li> <p>Sample input value: 90</p> </li> <li> <p>Output expiration date: 01/10/2020 12:34:54 UTC</p> </li> </ul>'
       description: '<p>Validity specifies the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the certificate expires, or as a span of time after issuance, stated in days, months, or years. For more information, see <a href="https://tools.ietf.org/html/rfc5280#section-4.1.2.5">Validity</a> in RFC 5280.</p> <p>You can issue a certificate by calling the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html">IssueCertificate</a> action.</p>'
     NextToken:
       type: string
@@ -2367,23 +2482,29 @@ components:
       type: object
       properties:
         CertificateAuthorityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Number (ARN) of the private CA from which the permission was issued.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) of the private CA from which the permission was issued.
         CreatedAt:
-          $ref: '#/components/schemas/TStamp'
-          description: The time at which the permission was created.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time at which the permission was created.
         Principal:
-          $ref: '#/components/schemas/Principal'
-          description: 'The AWS service or entity that holds the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Principal'
+            - description: 'The AWS service or entity that holds the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
         SourceAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: The ID of the account that assigned the permission.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the account that assigned the permission.
         Actions:
-          $ref: '#/components/schemas/ActionList'
-          description: The private CA actions that can be performed by the designated AWS service.
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: The private CA actions that can be performed by the designated AWS service.
         Policy:
-          $ref: '#/components/schemas/AWSPolicy'
-          description: The name of the policy that is associated with the permission.
+          allOf:
+            - $ref: '#/components/schemas/AWSPolicy'
+            - description: The name of the policy that is associated with the permission.
       description: 'Permissions designate which private CA actions can be performed by an AWS service or entity. In order for ACM to automatically renew private certificates, you must give the ACM service principal all available permissions (<code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be assigned with the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html">CreatePermission</a> action, removed with the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html">DeletePermission</a> action, and listed with the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html">ListPermissions</a> action.'
     PositiveLong:
       type: integer
@@ -2415,11 +2536,13 @@ components:
         - Key
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: Key (name) of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: Key (name) of the tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: Value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Value of the tag.
       description: 'Tags are labels that you can use to identify and organize your private CAs. Each tag consists of a key and an optional value. You can associate up to 50 tags with a private CA. To add one or more tags to a private CA, call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html">TagCertificateAuthority</a> action. To remove a tag, call the <a href="https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html">UntagCertificateAuthority</a> action. '
     ValidityPeriodType:
       type: string

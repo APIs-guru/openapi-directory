@@ -2430,11 +2430,13 @@ components:
       title: AssociateKmsKeyRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. This must be a symmetric CMK. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and Asymmetric Keys</a>.'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. This must be a symmetric CMK. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using Symmetric and Asymmetric Keys</a>.'
     InvalidParameterException: {}
     ResourceNotFoundException: {}
     OperationAbortedException: {}
@@ -2446,15 +2448,17 @@ components:
       title: CancelExportTaskRequest
       properties:
         taskId:
-          $ref: '#/components/schemas/ExportTaskId'
-          description: The ID of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskId'
+            - description: The ID of the export task.
     InvalidOperationException: {}
     CreateExportTaskResponse:
       type: object
       properties:
         taskId:
-          $ref: '#/components/schemas/ExportTaskId'
-          description: The ID of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskId'
+            - description: The ID of the export task.
     CreateExportTaskRequest:
       type: object
       required:
@@ -2465,26 +2469,33 @@ components:
       title: CreateExportTaskRequest
       properties:
         taskName:
-          $ref: '#/components/schemas/ExportTaskName'
-          description: The name of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskName'
+            - description: The name of the export task.
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamNamePrefix:
-          $ref: '#/components/schemas/LogStreamName'
-          description: 'Export only log streams that match the provided prefix. If you don''t specify a value, no prefix filter is applied.'
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: 'Export only log streams that match the provided prefix. If you don''t specify a value, no prefix filter is applied.'
         from:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The start time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not exported.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The start time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not exported.'
         to:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
         destination:
-          $ref: '#/components/schemas/ExportDestinationBucket'
-          description: The name of S3 bucket for the exported log data. The bucket must be in the same AWS region.
+          allOf:
+            - $ref: '#/components/schemas/ExportDestinationBucket'
+            - description: The name of S3 bucket for the exported log data. The bucket must be in the same AWS region.
         destinationPrefix:
-          $ref: '#/components/schemas/ExportDestinationPrefix'
-          description: 'The prefix used as the start of the key for every object exported. If you don''t specify a value, the default is <code>exportedlogs</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ExportDestinationPrefix'
+            - description: 'The prefix used as the start of the key for every object exported. If you don''t specify a value, the default is <code>exportedlogs</code>.'
     LimitExceededException: {}
     ResourceAlreadyExistsException: {}
     CreateLogGroupRequest:
@@ -2494,14 +2505,17 @@ components:
       title: CreateLogGroupRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: 'The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.'
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The key-value pairs to use for the tags.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The key-value pairs to use for the tags.
     CreateLogStreamRequest:
       type: object
       required:
@@ -2510,11 +2524,13 @@ components:
       title: CreateLogStreamRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
     DeleteDestinationRequest:
       type: object
       required:
@@ -2522,8 +2538,9 @@ components:
       title: DeleteDestinationRequest
       properties:
         destinationName:
-          $ref: '#/components/schemas/DestinationName'
-          description: The name of the destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the destination.
     DeleteLogGroupRequest:
       type: object
       required:
@@ -2531,8 +2548,9 @@ components:
       title: DeleteLogGroupRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
     DeleteLogStreamRequest:
       type: object
       required:
@@ -2541,11 +2559,13 @@ components:
       title: DeleteLogStreamRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
     DeleteMetricFilterRequest:
       type: object
       required:
@@ -2554,17 +2574,20 @@ components:
       title: DeleteMetricFilterRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: The name of the metric filter.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The name of the metric filter.
     DeleteQueryDefinitionResponse:
       type: object
       properties:
         success:
-          $ref: '#/components/schemas/Success'
-          description: A value of TRUE indicates that the operation succeeded. FALSE indicates that the operation failed.
+          allOf:
+            - $ref: '#/components/schemas/Success'
+            - description: A value of TRUE indicates that the operation succeeded. FALSE indicates that the operation failed.
     DeleteQueryDefinitionRequest:
       type: object
       required:
@@ -2572,15 +2595,17 @@ components:
       title: DeleteQueryDefinitionRequest
       properties:
         queryDefinitionId:
-          $ref: '#/components/schemas/QueryId'
-          description: 'The ID of the query definition that you want to delete. You can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a> to retrieve the IDs of your saved query definitions.'
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: 'The ID of the query definition that you want to delete. You can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a> to retrieve the IDs of your saved query definitions.'
     DeleteResourcePolicyRequest:
       type: object
       title: DeleteResourcePolicyRequest
       properties:
         policyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy to be revoked. This parameter is required.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy to be revoked. This parameter is required.
     DeleteRetentionPolicyRequest:
       type: object
       required:
@@ -2588,8 +2613,9 @@ components:
       title: DeleteRetentionPolicyRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
     DeleteSubscriptionFilterRequest:
       type: object
       required:
@@ -2598,17 +2624,20 @@ components:
       title: DeleteSubscriptionFilterRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: The name of the subscription filter.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The name of the subscription filter.
     DescribeDestinationsResponse:
       type: object
       properties:
         destinations:
-          $ref: '#/components/schemas/Destinations'
-          description: The destinations.
+          allOf:
+            - $ref: '#/components/schemas/Destinations'
+            - description: The destinations.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeDestinationsRequest:
@@ -2616,20 +2645,24 @@ components:
       title: DescribeDestinationsRequest
       properties:
         DestinationNamePrefix:
-          $ref: '#/components/schemas/DestinationName'
-          description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
     DescribeExportTasksResponse:
       type: object
       properties:
         exportTasks:
-          $ref: '#/components/schemas/ExportTasks'
-          description: The export tasks.
+          allOf:
+            - $ref: '#/components/schemas/ExportTasks'
+            - description: The export tasks.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeExportTasksRequest:
@@ -2637,23 +2670,28 @@ components:
       title: DescribeExportTasksRequest
       properties:
         taskId:
-          $ref: '#/components/schemas/ExportTaskId'
-          description: The ID of the export task. Specifying a task ID filters the results to zero or one export tasks.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskId'
+            - description: The ID of the export task. Specifying a task ID filters the results to zero or one export tasks.
         statusCode:
-          $ref: '#/components/schemas/ExportTaskStatusCode'
-          description: The status code of the export task. Specifying a status code filters the results to zero or more export tasks.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskStatusCode'
+            - description: The status code of the export task. Specifying a status code filters the results to zero or more export tasks.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
     DescribeLogGroupsResponse:
       type: object
       properties:
         logGroups:
-          $ref: '#/components/schemas/LogGroups'
-          description: '<p>The log groups.</p> <p>If the <code>retentionInDays</code> value if not included for a log group, then that log group is set to have its events never expire.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogGroups'
+            - description: '<p>The log groups.</p> <p>If the <code>retentionInDays</code> value if not included for a log group, then that log group is set to have its events never expire.</p>'
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeLogGroupsRequest:
@@ -2661,20 +2699,24 @@ components:
       title: DescribeLogGroupsRequest
       properties:
         logGroupNamePrefix:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The prefix to match.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The prefix to match.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
     DescribeLogStreamsResponse:
       type: object
       properties:
         logStreams:
-          $ref: '#/components/schemas/LogStreams'
-          description: The log streams.
+          allOf:
+            - $ref: '#/components/schemas/LogStreams'
+            - description: The log streams.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeLogStreamsRequest:
@@ -2684,29 +2726,36 @@ components:
       title: DescribeLogStreamsRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamNamePrefix:
-          $ref: '#/components/schemas/LogStreamName'
-          description: '<p>The prefix to match.</p> <p>If <code>orderBy</code> is <code>LastEventTime</code>, you cannot specify this parameter.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: '<p>The prefix to match.</p> <p>If <code>orderBy</code> is <code>LastEventTime</code>, you cannot specify this parameter.</p>'
         orderBy:
-          $ref: '#/components/schemas/OrderBy'
-          description: '<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name. If the value is <code>LastEventTime</code>, the results are ordered by the event time. The default value is <code>LogStreamName</code>.</p> <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p> <p> <code>lastEventTimeStamp</code> represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. <code>lastEventTimeStamp</code> updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.</p>'
+          allOf:
+            - $ref: '#/components/schemas/OrderBy'
+            - description: '<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name. If the value is <code>LastEventTime</code>, the results are ordered by the event time. The default value is <code>LogStreamName</code>.</p> <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p> <p> <code>lastEventTimeStamp</code> represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. <code>lastEventTimeStamp</code> updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.</p>'
         descending:
-          $ref: '#/components/schemas/Descending'
-          description: 'If the value is true, results are returned in descending order. If the value is to false, results are returned in ascending order. The default value is false.'
+          allOf:
+            - $ref: '#/components/schemas/Descending'
+            - description: 'If the value is true, results are returned in descending order. If the value is to false, results are returned in ascending order. The default value is false.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
     DescribeMetricFiltersResponse:
       type: object
       properties:
         metricFilters:
-          $ref: '#/components/schemas/MetricFilters'
-          description: The metric filters.
+          allOf:
+            - $ref: '#/components/schemas/MetricFilters'
+            - description: The metric filters.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeMetricFiltersRequest:
@@ -2714,29 +2763,36 @@ components:
       title: DescribeMetricFiltersRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterNamePrefix:
-          $ref: '#/components/schemas/FilterName'
-          description: The prefix to match. CloudWatch Logs uses the value you set here only if you also include the <code>logGroupName</code> parameter in your request.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The prefix to match. CloudWatch Logs uses the value you set here only if you also include the <code>logGroupName</code> parameter in your request.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
         metricName:
-          $ref: '#/components/schemas/MetricName'
-          description: 'Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the <code>metricNamespace</code> parameter.'
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: 'Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the <code>metricNamespace</code> parameter.'
         metricNamespace:
-          $ref: '#/components/schemas/MetricNamespace'
-          description: 'Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the <code>metricName</code> parameter.'
+          allOf:
+            - $ref: '#/components/schemas/MetricNamespace'
+            - description: 'Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the <code>metricName</code> parameter.'
     DescribeQueriesResponse:
       type: object
       properties:
         queries:
-          $ref: '#/components/schemas/QueryInfoList'
-          description: The list of queries that match the request.
+          allOf:
+            - $ref: '#/components/schemas/QueryInfoList'
+            - description: The list of queries that match the request.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeQueriesRequest:
@@ -2744,22 +2800,26 @@ components:
       title: DescribeQueriesRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: Limits the returned queries to only those for the specified log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: Limits the returned queries to only those for the specified log group.
         status:
-          $ref: '#/components/schemas/QueryStatus'
-          description: 'Limits the returned queries to only those that have the specified status. Valid values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, and <code>Scheduled</code>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryStatus'
+            - description: 'Limits the returned queries to only those that have the specified status. Valid values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, and <code>Scheduled</code>.'
         maxResults:
-          $ref: '#/components/schemas/DescribeQueriesMaxResults'
-          description: Limits the number of returned queries to the specified number.
+          allOf:
+            - $ref: '#/components/schemas/DescribeQueriesMaxResults'
+            - description: Limits the number of returned queries to the specified number.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeQueryDefinitionsResponse:
       type: object
       properties:
         queryDefinitions:
-          $ref: '#/components/schemas/QueryDefinitionList'
-          description: The list of query definitions that match your request.
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionList'
+            - description: The list of query definitions that match your request.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeQueryDefinitionsRequest:
@@ -2767,19 +2827,22 @@ components:
       title: DescribeQueryDefinitionsRequest
       properties:
         queryDefinitionNamePrefix:
-          $ref: '#/components/schemas/QueryDefinitionName'
-          description: Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionName'
+            - description: Use this parameter to filter your results to only the query definitions that have names that start with the prefix you specify.
         maxResults:
-          $ref: '#/components/schemas/QueryListMaxResults'
-          description: Limits the number of returned query definitions to the specified number.
+          allOf:
+            - $ref: '#/components/schemas/QueryListMaxResults'
+            - description: Limits the number of returned query definitions to the specified number.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeResourcePoliciesResponse:
       type: object
       properties:
         resourcePolicies:
-          $ref: '#/components/schemas/ResourcePolicies'
-          description: The resource policies that exist in this account.
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicies'
+            - description: The resource policies that exist in this account.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeResourcePoliciesRequest:
@@ -2789,14 +2852,16 @@ components:
         nextToken:
           $ref: '#/components/schemas/NextToken'
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: The maximum number of resource policies to be displayed with one call of this API.
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: The maximum number of resource policies to be displayed with one call of this API.
     DescribeSubscriptionFiltersResponse:
       type: object
       properties:
         subscriptionFilters:
-          $ref: '#/components/schemas/SubscriptionFilters'
-          description: The subscription filters.
+          allOf:
+            - $ref: '#/components/schemas/SubscriptionFilters'
+            - description: The subscription filters.
         nextToken:
           $ref: '#/components/schemas/NextToken'
     DescribeSubscriptionFiltersRequest:
@@ -2806,17 +2871,21 @@ components:
       title: DescribeSubscriptionFiltersRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterNamePrefix:
-          $ref: '#/components/schemas/FilterName'
-          description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: 'The prefix to match. If you don''t specify a value, no prefix filter is applied.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/DescribeLimit'
-          description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeLimit'
+            - description: 'The maximum number of items returned. If you don''t specify a value, the default is up to 50 items.'
     DisassociateKmsKeyRequest:
       type: object
       required:
@@ -2824,20 +2893,24 @@ components:
       title: DisassociateKmsKeyRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
     FilterLogEventsResponse:
       type: object
       properties:
         events:
-          $ref: '#/components/schemas/FilteredLogEvents'
-          description: The matched events.
+          allOf:
+            - $ref: '#/components/schemas/FilteredLogEvents'
+            - description: The matched events.
         searchedLogStreams:
-          $ref: '#/components/schemas/SearchedLogStreams'
-          description: '<p> <b>IMPORTANT</b> Starting on May 15, 2020, this parameter will be deprecated. This parameter will be an empty list after the deprecation occurs.</p> <p>Indicates which log streams have been searched and whether each has been searched completely.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SearchedLogStreams'
+            - description: '<p> <b>IMPORTANT</b> Starting on May 15, 2020, this parameter will be deprecated. This parameter will be an empty list after the deprecation occurs.</p> <p>Indicates which log streams have been searched and whether each has been searched completely.</p>'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token to use when requesting the next set of items. The token expires after 24 hours.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use when requesting the next set of items. The token expires after 24 hours.
     FilterLogEventsRequest:
       type: object
       required:
@@ -2845,45 +2918,57 @@ components:
       title: FilterLogEventsRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group to search.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group to search.
         logStreamNames:
-          $ref: '#/components/schemas/InputLogStreamNames'
-          description: '<p>Filters the results to only logs from the log streams in this list.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
+          allOf:
+            - $ref: '#/components/schemas/InputLogStreamNames'
+            - description: '<p>Filters the results to only logs from the log streams in this list.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
         logStreamNamePrefix:
-          $ref: '#/components/schemas/LogStreamName'
-          description: '<p>Filters the results to include only events from log streams that have names starting with this prefix.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, but the value for <code>logStreamNamePrefix</code> does not match any log stream names specified in <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: '<p>Filters the results to include only events from log streams that have names starting with this prefix.</p> <p>If you specify a value for both <code>logStreamNamePrefix</code> and <code>logStreamNames</code>, but the value for <code>logStreamNamePrefix</code> does not match any log stream names specified in <code>logStreamNames</code>, the action returns an <code>InvalidParameterException</code> error.</p>'
         startTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: '<p>The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.</p> <p>If you omit <code>startTime</code> and <code>endTime</code> the most recent log events are retrieved, to up 1 MB or 10,000 log events.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: '<p>The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.</p> <p>If you omit <code>startTime</code> and <code>endTime</code> the most recent log events are retrieved, to up 1 MB or 10,000 log events.</p>'
         endTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.'
         filterPattern:
-          $ref: '#/components/schemas/FilterPattern'
-          description: '<p>The filter pattern to use. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html">Filter and Pattern Syntax</a>.</p> <p>If not provided, all the events are matched.</p>'
+          allOf:
+            - $ref: '#/components/schemas/FilterPattern'
+            - description: '<p>The filter pattern to use. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html">Filter and Pattern Syntax</a>.</p> <p>If not provided, all the events are matched.</p>'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of events to return. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of events to return. (You received this token from a previous call.)
         limit:
-          $ref: '#/components/schemas/EventsLimit'
-          description: 'The maximum number of events to return. The default is 10,000 events.'
+          allOf:
+            - $ref: '#/components/schemas/EventsLimit'
+            - description: 'The maximum number of events to return. The default is 10,000 events.'
         interleaved:
-          deprecated: true
-          $ref: '#/components/schemas/Interleaved'
-          description: '<p>If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.</p> <p> <b>Important:</b> Starting on June 17, 2019, this parameter is ignored and the value is assumed to be true. The response from this operation always interleaves events from multiple log streams within a log group.</p>Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group.'
+          allOf:
+            - $ref: '#/components/schemas/Interleaved'
+            - deprecated: true
+              description: '<p>If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.</p> <p> <b>Important:</b> Starting on June 17, 2019, this parameter is ignored and the value is assumed to be true. The response from this operation always interleaves events from multiple log streams within a log group.</p>Starting on June 17, 2019, this parameter will be ignored and the value will be assumed to be true. The response from this operation will always interleave events from multiple log streams within a log group.'
     GetLogEventsResponse:
       type: object
       properties:
         events:
-          $ref: '#/components/schemas/OutputLogEvents'
-          description: The events.
+          allOf:
+            - $ref: '#/components/schemas/OutputLogEvents'
+            - description: The events.
         nextForwardToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token for the next set of items in the forward direction. The token expires after 24 hours. If you have reached the end of the stream, it returns the same token you passed in.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of items in the forward direction. The token expires after 24 hours. If you have reached the end of the stream, it returns the same token you passed in.'
         nextBackwardToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token for the next set of items in the backward direction. The token expires after 24 hours. This token is never null. If you have reached the end of the stream, it returns the same token you passed in.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of items in the backward direction. The token expires after 24 hours. This token is never null. If you have reached the end of the stream, it returns the same token you passed in.'
     GetLogEventsRequest:
       type: object
       required:
@@ -2892,32 +2977,40 @@ components:
       title: GetLogEventsRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
         startTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this time or later than this time are included. Events with a timestamp earlier than this time are not included.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this time or later than this time are included. Events with a timestamp earlier than this time are not included.'
         endTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time are not included.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time are not included.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: <p>The token for the next set of items to return. (You received this token from a previous call.)</p> <p>Using this token works only when you specify <code>true</code> for <code>startFromHead</code>.</p>
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token for the next set of items to return. (You received this token from a previous call.)</p> <p>Using this token works only when you specify <code>true</code> for <code>startFromHead</code>.</p>
         limit:
-          $ref: '#/components/schemas/EventsLimit'
-          description: 'The maximum number of log events returned. If you don''t specify a value, the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.'
+          allOf:
+            - $ref: '#/components/schemas/EventsLimit'
+            - description: 'The maximum number of log events returned. If you don''t specify a value, the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.'
         startFromHead:
-          $ref: '#/components/schemas/StartFromHead'
-          description: '<p>If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.</p> <p>If you are using <code>nextToken</code> in this operation, you must specify <code>true</code> for <code>startFromHead</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/StartFromHead'
+            - description: '<p>If the value is true, the earliest log events are returned first. If the value is false, the latest log events are returned first. The default value is false.</p> <p>If you are using <code>nextToken</code> in this operation, you must specify <code>true</code> for <code>startFromHead</code>.</p>'
     GetLogGroupFieldsResponse:
       type: object
       properties:
         logGroupFields:
-          $ref: '#/components/schemas/LogGroupFieldList'
-          description: 'The array of fields found in the query. Each object in the array contains the name of the field, along with the percentage of time it appeared in the log events that were queried.'
+          allOf:
+            - $ref: '#/components/schemas/LogGroupFieldList'
+            - description: 'The array of fields found in the query. Each object in the array contains the name of the field, along with the percentage of time it appeared in the log events that were queried.'
     GetLogGroupFieldsRequest:
       type: object
       required:
@@ -2925,17 +3018,20 @@ components:
       title: GetLogGroupFieldsRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group to search.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group to search.
         time:
-          $ref: '#/components/schemas/Timestamp'
-          description: '<p>The time to set as the center of the query. If you specify <code>time</code>, the 8 minutes before and 8 minutes after this time are searched. If you omit <code>time</code>, the past 15 minutes are queried.</p> <p>The <code>time</code> value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: '<p>The time to set as the center of the query. If you specify <code>time</code>, the 8 minutes before and 8 minutes after this time are searched. If you omit <code>time</code>, the past 15 minutes are queried.</p> <p>The <code>time</code> value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.</p>'
     GetLogRecordResponse:
       type: object
       properties:
         logRecord:
-          $ref: '#/components/schemas/LogRecord'
-          description: 'The requested log event, as a JSON string.'
+          allOf:
+            - $ref: '#/components/schemas/LogRecord'
+            - description: 'The requested log event, as a JSON string.'
     GetLogRecordRequest:
       type: object
       required:
@@ -2943,20 +3039,24 @@ components:
       title: GetLogRecordRequest
       properties:
         logRecordPointer:
-          $ref: '#/components/schemas/LogRecordPointer'
-          description: 'The pointer corresponding to the log event record you want to retrieve. You get this from the response of a <code>GetQueryResults</code> operation. In that response, the value of the <code>@ptr</code> field for a log event is the value to use as <code>logRecordPointer</code> to retrieve that complete log event record.'
+          allOf:
+            - $ref: '#/components/schemas/LogRecordPointer'
+            - description: 'The pointer corresponding to the log event record you want to retrieve. You get this from the response of a <code>GetQueryResults</code> operation. In that response, the value of the <code>@ptr</code> field for a log event is the value to use as <code>logRecordPointer</code> to retrieve that complete log event record.'
     GetQueryResultsResponse:
       type: object
       properties:
         results:
-          $ref: '#/components/schemas/QueryResults'
-          description: <p>The log events that matched the query criteria during the most recent time it ran.</p> <p>The <code>results</code> value is an array of arrays. Each log event is one object in the top-level array. Each of these log event objects is an array of <code>field</code>/<code>value</code> pairs.</p>
+          allOf:
+            - $ref: '#/components/schemas/QueryResults'
+            - description: <p>The log events that matched the query criteria during the most recent time it ran.</p> <p>The <code>results</code> value is an array of arrays. Each log event is one object in the top-level array. Each of these log event objects is an array of <code>field</code>/<code>value</code> pairs.</p>
         statistics:
-          $ref: '#/components/schemas/QueryStatistics'
-          description: 'Includes the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned. These values reflect the full raw results of the query.'
+          allOf:
+            - $ref: '#/components/schemas/QueryStatistics'
+            - description: 'Includes the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned. These values reflect the full raw results of the query.'
         status:
-          $ref: '#/components/schemas/QueryStatus'
-          description: '<p>The status of the most recent running of the query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, <code>Timeout</code>, and <code>Unknown</code>.</p> <p>Queries time out after 15 minutes of execution. To avoid having your queries time out, reduce the time range being searched or partition your query into a number of queries.</p>'
+          allOf:
+            - $ref: '#/components/schemas/QueryStatus'
+            - description: '<p>The status of the most recent running of the query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, <code>Timeout</code>, and <code>Unknown</code>.</p> <p>Queries time out after 15 minutes of execution. To avoid having your queries time out, reduce the time range being searched or partition your query into a number of queries.</p>'
     GetQueryResultsRequest:
       type: object
       required:
@@ -2964,14 +3064,16 @@ components:
       title: GetQueryResultsRequest
       properties:
         queryId:
-          $ref: '#/components/schemas/QueryId'
-          description: The ID number of the query.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The ID number of the query.
     ListTagsLogGroupResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags for the log group.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags for the log group.
     ListTagsLogGroupRequest:
       type: object
       required:
@@ -2979,14 +3081,16 @@ components:
       title: ListTagsLogGroupRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
     PutDestinationResponse:
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/Destination'
-          description: The destination.
+          allOf:
+            - $ref: '#/components/schemas/Destination'
+            - description: The destination.
     PutDestinationRequest:
       type: object
       required:
@@ -2996,14 +3100,17 @@ components:
       title: PutDestinationRequest
       properties:
         destinationName:
-          $ref: '#/components/schemas/DestinationName'
-          description: A name for the destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: A name for the destination.
         targetArn:
-          $ref: '#/components/schemas/TargetArn'
-          description: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
+          allOf:
+            - $ref: '#/components/schemas/TargetArn'
+            - description: The ARN of an Amazon Kinesis stream to which to deliver matching log events.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis <code>PutRecord</code> operation on the destination stream.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis <code>PutRecord</code> operation on the destination stream.
     PutDestinationPolicyRequest:
       type: object
       required:
@@ -3012,20 +3119,24 @@ components:
       title: PutDestinationPolicyRequest
       properties:
         destinationName:
-          $ref: '#/components/schemas/DestinationName'
-          description: A name for an existing destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: A name for an existing destination.
         accessPolicy:
-          $ref: '#/components/schemas/AccessPolicy'
-          description: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination. This can be up to 5120 bytes.
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicy'
+            - description: An IAM policy document that authorizes cross-account users to deliver their log events to the associated destination. This can be up to 5120 bytes.
     PutLogEventsResponse:
       type: object
       properties:
         nextSequenceToken:
-          $ref: '#/components/schemas/SequenceToken'
-          description: The next sequence token.
+          allOf:
+            - $ref: '#/components/schemas/SequenceToken'
+            - description: The next sequence token.
         rejectedLogEventsInfo:
-          $ref: '#/components/schemas/RejectedLogEventsInfo'
-          description: The rejected events.
+          allOf:
+            - $ref: '#/components/schemas/RejectedLogEventsInfo'
+            - description: The rejected events.
     PutLogEventsRequest:
       type: object
       required:
@@ -3035,17 +3146,21 @@ components:
       title: PutLogEventsRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
         logEvents:
-          $ref: '#/components/schemas/InputLogEvents'
-          description: The log events.
+          allOf:
+            - $ref: '#/components/schemas/InputLogEvents'
+            - description: The log events.
         sequenceToken:
-          $ref: '#/components/schemas/SequenceToken'
-          description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html">DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls might be successful or one might be rejected.'
+          allOf:
+            - $ref: '#/components/schemas/SequenceToken'
+            - description: 'The sequence token obtained from the response of the previous <code>PutLogEvents</code> call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html">DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow time period using the same value for <code>sequenceToken</code>, both calls might be successful or one might be rejected.'
     InvalidSequenceTokenException: {}
     DataAlreadyAcceptedException: {}
     UnrecognizedClientException: {}
@@ -3059,23 +3174,28 @@ components:
       title: PutMetricFilterRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: A name for the metric filter.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: A name for the metric filter.
         filterPattern:
-          $ref: '#/components/schemas/FilterPattern'
-          description: A filter pattern for extracting metric data out of ingested log events.
+          allOf:
+            - $ref: '#/components/schemas/FilterPattern'
+            - description: A filter pattern for extracting metric data out of ingested log events.
         metricTransformations:
-          $ref: '#/components/schemas/MetricTransformations'
-          description: A collection of information that defines how metric data gets emitted.
+          allOf:
+            - $ref: '#/components/schemas/MetricTransformations'
+            - description: A collection of information that defines how metric data gets emitted.
     PutQueryDefinitionResponse:
       type: object
       properties:
         queryDefinitionId:
-          $ref: '#/components/schemas/QueryId'
-          description: The ID of the query definition.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The ID of the query definition.
     PutQueryDefinitionRequest:
       type: object
       required:
@@ -3084,33 +3204,40 @@ components:
       title: PutQueryDefinitionRequest
       properties:
         name:
-          $ref: '#/components/schemas/QueryDefinitionName'
-          description: 'A name for the query definition. If you are saving a lot of query definitions, we recommend that you name them so that you can easily find the ones you want by using the first part of the name as a filter in the <code>queryDefinitionNamePrefix</code> parameter of <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionName'
+            - description: 'A name for the query definition. If you are saving a lot of query definitions, we recommend that you name them so that you can easily find the ones you want by using the first part of the name as a filter in the <code>queryDefinitionNamePrefix</code> parameter of <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a>.'
         queryDefinitionId:
-          $ref: '#/components/schemas/QueryId'
-          description: '<p>If you are updating a query definition, use this parameter to specify the ID of the query definition that you want to update. You can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a> to retrieve the IDs of your saved query definitions.</p> <p>If you are creating a query definition, do not specify this parameter. CloudWatch generates a unique ID for the new query definition and include it in the response to this operation.</p>'
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: '<p>If you are updating a query definition, use this parameter to specify the ID of the query definition that you want to update. You can use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html">DescribeQueryDefinitions</a> to retrieve the IDs of your saved query definitions.</p> <p>If you are creating a query definition, do not specify this parameter. CloudWatch generates a unique ID for the new query definition and include it in the response to this operation.</p>'
         logGroupNames:
-          $ref: '#/components/schemas/LogGroupNames'
-          description: '<p>Use this parameter to include specific log groups as part of your query definition.</p> <p>If you are updating a query definition and you omit this parameter, then the updated definition will contain no log groups.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogGroupNames'
+            - description: '<p>Use this parameter to include specific log groups as part of your query definition.</p> <p>If you are updating a query definition and you omit this parameter, then the updated definition will contain no log groups.</p>'
         queryString:
-          $ref: '#/components/schemas/QueryDefinitionString'
-          description: 'The query string to use for this definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionString'
+            - description: 'The query string to use for this definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
     PutResourcePolicyResponse:
       type: object
       properties:
         resourcePolicy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: The new policy.
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: The new policy.
     PutResourcePolicyRequest:
       type: object
       title: PutResourcePolicyRequest
       properties:
         policyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: Name of the new policy. This parameter is required.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: Name of the new policy. This parameter is required.
         policyDocument:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: '<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. This parameter is required.</p> <p>The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace <code>"logArn"</code> with the ARN of your CloudWatch Logs resource, such as a log group or log stream.</p> <p> <code>{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] } </code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: '<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. This parameter is required.</p> <p>The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace <code>"logArn"</code> with the ARN of your CloudWatch Logs resource, such as a log group or log stream.</p> <p> <code>{ "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] } </code> </p>'
     PutRetentionPolicyRequest:
       type: object
       required:
@@ -3119,8 +3246,9 @@ components:
       title: PutRetentionPolicyRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         retentionInDays:
           $ref: '#/components/schemas/Days'
     PutSubscriptionFilterRequest:
@@ -3133,29 +3261,36 @@ components:
       title: PutSubscriptionFilterRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html">DescribeSubscriptionFilters</a>.'
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: 'A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in <code>filterName</code>. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html">DescribeSubscriptionFilters</a>.'
         filterPattern:
-          $ref: '#/components/schemas/FilterPattern'
-          description: A filter pattern for subscribing to a filtered stream of log events.
+          allOf:
+            - $ref: '#/components/schemas/FilterPattern'
+            - description: A filter pattern for subscribing to a filtered stream of log events.
         destinationArn:
-          $ref: '#/components/schemas/DestinationArn'
-          description: '<p>The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/DestinationArn'
+            - description: '<p>The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:</p> <ul> <li> <p>An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.</p> </li> <li> <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.</p> </li> <li> <p>An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.</p> </li> </ul>'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of an IAM role that grants CloudWatch Logs permissions to deliver ingested log events to the destination stream. You don't need to provide the ARN when you are working with a logical destination for cross-account delivery.
         distribution:
-          $ref: '#/components/schemas/Distribution'
-          description: 'The method used to distribute log data to the destination. By default, log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. '
+          allOf:
+            - $ref: '#/components/schemas/Distribution'
+            - description: 'The method used to distribute log data to the destination. By default, log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. '
     StartQueryResponse:
       type: object
       properties:
         queryId:
-          $ref: '#/components/schemas/QueryId'
-          description: 'The unique ID of the query. '
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: 'The unique ID of the query. '
     StartQueryRequest:
       type: object
       required:
@@ -3165,30 +3300,37 @@ components:
       title: StartQueryRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: '<p>The log group on which to perform the query.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: '<p>The log group on which to perform the query.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>'
         logGroupNames:
-          $ref: '#/components/schemas/LogGroupNames'
-          description: '<p>The list of log groups to be queried. You can include up to 20 log groups.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LogGroupNames'
+            - description: '<p>The list of log groups to be queried. You can include up to 20 log groups.</p> <p>A <code>StartQuery</code> operation must include a <code>logGroupNames</code> or a <code>logGroupName</code> parameter, but not both.</p>'
         startTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The beginning of the time range to query. The range is inclusive, so the specified start time is included in the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The beginning of the time range to query. The range is inclusive, so the specified start time is included in the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
         endTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The end of the time range to query. The range is inclusive, so the specified end time is included in the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end of the time range to query. The range is inclusive, so the specified end time is included in the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
         queryString:
-          $ref: '#/components/schemas/QueryString'
-          description: 'The query string to use. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: 'The query string to use. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
         limit:
-          $ref: '#/components/schemas/EventsLimit'
-          description: 'The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command, only the specified fields and their values are returned. The default is 1000.'
+          allOf:
+            - $ref: '#/components/schemas/EventsLimit'
+            - description: 'The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command, only the specified fields and their values are returned. The default is 1000.'
     MalformedQueryException: {}
     StopQueryResponse:
       type: object
       properties:
         success:
-          $ref: '#/components/schemas/Success'
-          description: This is true if the query was stopped by the <code>StopQuery</code> operation.
+          allOf:
+            - $ref: '#/components/schemas/Success'
+            - description: This is true if the query was stopped by the <code>StopQuery</code> operation.
     StopQueryRequest:
       type: object
       required:
@@ -3196,8 +3338,9 @@ components:
       title: StopQueryRequest
       properties:
         queryId:
-          $ref: '#/components/schemas/QueryId'
-          description: 'The ID number of the query to stop. To find this ID number, use <code>DescribeQueries</code>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: 'The ID number of the query to stop. To find this ID number, use <code>DescribeQueries</code>.'
     TagLogGroupRequest:
       type: object
       required:
@@ -3206,17 +3349,20 @@ components:
       title: TagLogGroupRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The key-value pairs to use for the tags.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The key-value pairs to use for the tags.
     TestMetricFilterResponse:
       type: object
       properties:
         matches:
-          $ref: '#/components/schemas/MetricFilterMatches'
-          description: The matched events.
+          allOf:
+            - $ref: '#/components/schemas/MetricFilterMatches'
+            - description: The matched events.
     TestMetricFilterRequest:
       type: object
       required:
@@ -3227,8 +3373,9 @@ components:
         filterPattern:
           $ref: '#/components/schemas/FilterPattern'
         logEventMessages:
-          $ref: '#/components/schemas/TestEventMessages'
-          description: The log event messages to test.
+          allOf:
+            - $ref: '#/components/schemas/TestEventMessages'
+            - description: The log event messages to test.
     UntagLogGroupRequest:
       type: object
       required:
@@ -3237,11 +3384,13 @@ components:
       title: UntagLogGroupRequest
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tag keys. The corresponding tags are removed from the log group.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag keys. The corresponding tags are removed from the log group.
     AccessPolicy:
       type: string
       minLength: 1
@@ -3407,23 +3556,29 @@ components:
       type: object
       properties:
         destinationName:
-          $ref: '#/components/schemas/DestinationName'
-          description: The name of the destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationName'
+            - description: The name of the destination.
         targetArn:
-          $ref: '#/components/schemas/TargetArn'
-          description: 'The Amazon Resource Name (ARN) of the physical target where the log events are delivered (for example, a Kinesis stream).'
+          allOf:
+            - $ref: '#/components/schemas/TargetArn'
+            - description: 'The Amazon Resource Name (ARN) of the physical target where the log events are delivered (for example, a Kinesis stream).'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'A role for impersonation, used when delivering log events to the target.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'A role for impersonation, used when delivering log events to the target.'
         accessPolicy:
-          $ref: '#/components/schemas/AccessPolicy'
-          description: An IAM policy document that governs which AWS accounts can create subscription filters against this destination.
+          allOf:
+            - $ref: '#/components/schemas/AccessPolicy'
+            - description: An IAM policy document that governs which AWS accounts can create subscription filters against this destination.
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The ARN of this destination.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of this destination.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the destination, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the destination, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: Represents a cross-account destination that receives subscription log events.
     DestinationArn:
       type: string
@@ -3449,52 +3604,65 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/ExportTaskStatusCode'
-          description: The status code of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskStatusCode'
+            - description: The status code of the export task.
         message:
-          $ref: '#/components/schemas/ExportTaskStatusMessage'
-          description: The status message related to the status code.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskStatusMessage'
+            - description: The status message related to the status code.
       description: Represents the status of an export task.
     ExportTaskExecutionInfo:
       type: object
       properties:
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         completionTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: Represents the status of an export task.
     ExportTask:
       type: object
       properties:
         taskId:
-          $ref: '#/components/schemas/ExportTaskId'
-          description: The ID of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskId'
+            - description: The ID of the export task.
         taskName:
-          $ref: '#/components/schemas/ExportTaskName'
-          description: The name of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskName'
+            - description: The name of the export task.
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group from which logs data was exported.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group from which logs data was exported.
         from:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The start time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not exported.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The start time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not exported.'
         to:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.'
         destination:
-          $ref: '#/components/schemas/ExportDestinationBucket'
-          description: The name of the S3 bucket to which the log data was exported.
+          allOf:
+            - $ref: '#/components/schemas/ExportDestinationBucket'
+            - description: The name of the S3 bucket to which the log data was exported.
         destinationPrefix:
-          $ref: '#/components/schemas/ExportDestinationPrefix'
-          description: The prefix that was used as the start of Amazon S3 key for every object exported.
+          allOf:
+            - $ref: '#/components/schemas/ExportDestinationPrefix'
+            - description: The prefix that was used as the start of Amazon S3 key for every object exported.
         status:
-          $ref: '#/components/schemas/ExportTaskStatus'
-          description: The status of the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskStatus'
+            - description: The status of the export task.
         executionInfo:
-          $ref: '#/components/schemas/ExportTaskExecutionInfo'
-          description: Execution information about the export task.
+          allOf:
+            - $ref: '#/components/schemas/ExportTaskExecutionInfo'
+            - description: Execution information about the export task.
       description: Represents an export task.
     ExportTaskStatusMessage:
       type: string
@@ -3533,20 +3701,25 @@ components:
       type: object
       properties:
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream to which this event belongs.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream to which this event belongs.
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         message:
-          $ref: '#/components/schemas/EventMessage'
-          description: The data contained in the log event.
+          allOf:
+            - $ref: '#/components/schemas/EventMessage'
+            - description: The data contained in the log event.
         ingestionTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         eventId:
-          $ref: '#/components/schemas/EventId'
-          description: The ID of the event.
+          allOf:
+            - $ref: '#/components/schemas/EventId'
+            - description: The ID of the event.
       description: Represents a matched event.
     StartFromHead:
       type: boolean
@@ -3572,14 +3745,17 @@ components:
       type: object
       properties:
         recordsMatched:
-          $ref: '#/components/schemas/StatsValue'
-          description: The number of log events that matched the query string.
+          allOf:
+            - $ref: '#/components/schemas/StatsValue'
+            - description: The number of log events that matched the query string.
         recordsScanned:
-          $ref: '#/components/schemas/StatsValue'
-          description: The total number of log events scanned during the query.
+          allOf:
+            - $ref: '#/components/schemas/StatsValue'
+            - description: The total number of log events scanned during the query.
         bytesScanned:
-          $ref: '#/components/schemas/StatsValue'
-          description: The total number of bytes in the log events scanned during the query.
+          allOf:
+            - $ref: '#/components/schemas/StatsValue'
+            - description: The total number of bytes in the log events scanned during the query.
       description: 'Contains the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.'
     InputLogEvent:
       type: object
@@ -3588,11 +3764,13 @@ components:
         - message
       properties:
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         message:
-          $ref: '#/components/schemas/EventMessage'
-          description: The raw event message.
+          allOf:
+            - $ref: '#/components/schemas/EventMessage'
+            - description: The raw event message.
       description: 'Represents a log event, which is a record of activity that was recorded by the application or resource being monitored.'
     InputLogEvents:
       type: array
@@ -3609,25 +3787,31 @@ components:
       type: object
       properties:
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         retentionInDays:
           $ref: '#/components/schemas/Days'
         metricFilterCount:
-          $ref: '#/components/schemas/FilterCount'
-          description: The number of metric filters.
+          allOf:
+            - $ref: '#/components/schemas/FilterCount'
+            - description: The number of metric filters.
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the log group.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the log group.
         storedBytes:
-          $ref: '#/components/schemas/StoredBytes'
-          description: The number of bytes stored.
+          allOf:
+            - $ref: '#/components/schemas/StoredBytes'
+            - description: The number of bytes stored.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
       description: Represents a log group.
     Percentage:
       type: integer
@@ -3637,11 +3821,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/Field'
-          description: The name of a log field.
+          allOf:
+            - $ref: '#/components/schemas/Field'
+            - description: The name of a log field.
         percent:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of log events queried that contained the field.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of log events queried that contained the field.
       description: 'The fields contained in log events found by a <code>GetLogGroupFields</code> operation, along with the percentage of queried log events in which each field appears.'
     LogGroupNames:
       type: array
@@ -3654,30 +3840,38 @@ components:
       type: object
       properties:
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the stream, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the stream, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         firstEventTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time of the first event, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time of the first event, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         lastEventTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. The <code>lastEventTime</code> value updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. The <code>lastEventTime</code> value updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.'
         lastIngestionTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The ingestion time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The ingestion time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         uploadSequenceToken:
-          $ref: '#/components/schemas/SequenceToken'
-          description: The sequence token.
+          allOf:
+            - $ref: '#/components/schemas/SequenceToken'
+            - description: The sequence token.
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the log stream.
         storedBytes:
-          deprecated: true
-          $ref: '#/components/schemas/StoredBytes'
-          description: '<p>The number of bytes stored.</p> <p> <b>Important:</b> On June 17, 2019, this parameter was deprecated for log streams, and is always reported as zero. This change applies only to log streams. The <code>storedBytes</code> parameter for log groups is not affected.</p>Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected.'
+          allOf:
+            - $ref: '#/components/schemas/StoredBytes'
+            - deprecated: true
+              description: '<p>The number of bytes stored.</p> <p> <b>Important:</b> On June 17, 2019, this parameter was deprecated for log streams, and is always reported as zero. This change applies only to log streams. The <code>storedBytes</code> parameter for log groups is not affected.</p>Starting on June 17, 2019, this parameter will be deprecated for log streams, and will be reported as zero. This change applies only to log streams. The storedBytes parameter for log groups is not affected.'
       description: 'Represents a log stream, which is a sequence of log events from a single emitter of logs.'
     LogStreamSearchedCompletely:
       type: boolean
@@ -3691,32 +3885,39 @@ components:
       type: object
       properties:
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: The name of the metric filter.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The name of the metric filter.
         filterPattern:
           $ref: '#/components/schemas/FilterPattern'
         metricTransformations:
-          $ref: '#/components/schemas/MetricTransformations'
-          description: The metric transformations.
+          allOf:
+            - $ref: '#/components/schemas/MetricTransformations'
+            - description: The metric transformations.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the metric filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the metric filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
       description: Metric filters express how CloudWatch Logs would extract metric observations from ingested log events and transform them into metric data in a CloudWatch metric.
     MetricFilterMatchRecord:
       type: object
       properties:
         eventNumber:
-          $ref: '#/components/schemas/EventNumber'
-          description: The event number.
+          allOf:
+            - $ref: '#/components/schemas/EventNumber'
+            - description: The event number.
         eventMessage:
-          $ref: '#/components/schemas/EventMessage'
-          description: The raw event data.
+          allOf:
+            - $ref: '#/components/schemas/EventMessage'
+            - description: The raw event data.
         extractedValues:
-          $ref: '#/components/schemas/ExtractedValues'
-          description: The values extracted from the event data by the filter.
+          allOf:
+            - $ref: '#/components/schemas/ExtractedValues'
+            - description: The values extracted from the event data by the filter.
       description: Represents a matched event.
     MetricFilterMatches:
       type: array
@@ -3734,30 +3935,37 @@ components:
         - metricValue
       properties:
         metricName:
-          $ref: '#/components/schemas/MetricName'
-          description: The name of the CloudWatch metric.
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: The name of the CloudWatch metric.
         metricNamespace:
-          $ref: '#/components/schemas/MetricNamespace'
-          description: 'A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace">Namespaces</a>.'
+          allOf:
+            - $ref: '#/components/schemas/MetricNamespace'
+            - description: 'A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace">Namespaces</a>.'
         metricValue:
-          $ref: '#/components/schemas/MetricValue'
-          description: The value to publish to the CloudWatch metric when a filter pattern matches a log event.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The value to publish to the CloudWatch metric when a filter pattern matches a log event.
         defaultValue:
-          $ref: '#/components/schemas/DefaultValue'
-          description: (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
+          allOf:
+            - $ref: '#/components/schemas/DefaultValue'
+            - description: (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
       description: Indicates how to transform ingested log events to metric data in a CloudWatch metric.
     OutputLogEvent:
       type: object
       properties:
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
         message:
-          $ref: '#/components/schemas/EventMessage'
-          description: The data contained in the log event.
+          allOf:
+            - $ref: '#/components/schemas/EventMessage'
+            - description: The data contained in the log event.
         ingestionTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: Represents a log event.
     PolicyDocument:
       type: string
@@ -3767,14 +3975,17 @@ components:
       type: object
       properties:
         tooNewLogEventStartIndex:
-          $ref: '#/components/schemas/LogEventIndex'
-          description: The log events that are too new.
+          allOf:
+            - $ref: '#/components/schemas/LogEventIndex'
+            - description: The log events that are too new.
         tooOldLogEventEndIndex:
-          $ref: '#/components/schemas/LogEventIndex'
-          description: The log events that are too old.
+          allOf:
+            - $ref: '#/components/schemas/LogEventIndex'
+            - description: The log events that are too old.
         expiredLogEventEndIndex:
-          $ref: '#/components/schemas/LogEventIndex'
-          description: The expired log events.
+          allOf:
+            - $ref: '#/components/schemas/LogEventIndex'
+            - description: The expired log events.
       description: Represents the rejected events.
     QueryDefinitionString:
       type: string
@@ -3784,33 +3995,41 @@ components:
       type: object
       properties:
         policyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the resource policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the resource policy.
         policyDocument:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: The details of the policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: The details of the policy.
         lastUpdatedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: A policy enabling one or more entities to put logs to a log group in this account.
     QueryDefinition:
       type: object
       properties:
         queryDefinitionId:
-          $ref: '#/components/schemas/QueryId'
-          description: The unique ID of the query definition.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The unique ID of the query definition.
         name:
-          $ref: '#/components/schemas/QueryDefinitionName'
-          description: The name of the query definition.
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionName'
+            - description: The name of the query definition.
         queryString:
-          $ref: '#/components/schemas/QueryDefinitionString'
-          description: 'The query string to use for this definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryDefinitionString'
+            - description: 'The query string to use for this definition. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'
         lastModified:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date that the query definition was most recently modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date that the query definition was most recently modified.
         logGroupNames:
-          $ref: '#/components/schemas/LogGroupNames'
-          description: 'If this query definition contains a list of log groups that it is limited to, that list appears here.'
+          allOf:
+            - $ref: '#/components/schemas/LogGroupNames'
+            - description: 'If this query definition contains a list of log groups that it is limited to, that list appears here.'
       description: This structure contains details about a saved CloudWatch Logs Insights query definition.
     QueryString:
       type: string
@@ -3820,20 +4039,25 @@ components:
       type: object
       properties:
         queryId:
-          $ref: '#/components/schemas/QueryId'
-          description: The unique ID number of this query.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The unique ID number of this query.
         queryString:
-          $ref: '#/components/schemas/QueryString'
-          description: The query string used in this query.
+          allOf:
+            - $ref: '#/components/schemas/QueryString'
+            - description: The query string used in this query.
         status:
-          $ref: '#/components/schemas/QueryStatus'
-          description: 'The status of this query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, and <code>Unknown</code>.'
+          allOf:
+            - $ref: '#/components/schemas/QueryStatus'
+            - description: 'The status of this query. Possible values are <code>Cancelled</code>, <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, and <code>Unknown</code>.'
         createTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that this query was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that this query was created.
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group scanned by this query.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group scanned by this query.
       description: 'Information about one CloudWatch Logs Insights query that matches the request in a <code>DescribeQueries</code> operation. '
     ResultRows:
       type: array
@@ -3846,44 +4070,53 @@ components:
       type: object
       properties:
         field:
-          $ref: '#/components/schemas/Field'
-          description: The log event field.
+          allOf:
+            - $ref: '#/components/schemas/Field'
+            - description: The log event field.
         value:
-          $ref: '#/components/schemas/Value'
-          description: The value of this field.
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: The value of this field.
       description: '<p>Contains one field from one log event returned by a CloudWatch Logs Insights query, along with the value of that field.</p> <p>For more information about the fields that are generated by CloudWatch logs, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData-discoverable-fields.html">Supported Logs and Discovered Fields</a>.</p>'
     SearchedLogStream:
       type: object
       properties:
         logStreamName:
-          $ref: '#/components/schemas/LogStreamName'
-          description: The name of the log stream.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamName'
+            - description: The name of the log stream.
         searchedCompletely:
-          $ref: '#/components/schemas/LogStreamSearchedCompletely'
-          description: Indicates whether all the events in this log stream were searched.
+          allOf:
+            - $ref: '#/components/schemas/LogStreamSearchedCompletely'
+            - description: Indicates whether all the events in this log stream were searched.
       description: Represents the search status of a log stream.
     SubscriptionFilter:
       type: object
       properties:
         filterName:
-          $ref: '#/components/schemas/FilterName'
-          description: The name of the subscription filter.
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: The name of the subscription filter.
         logGroupName:
-          $ref: '#/components/schemas/LogGroupName'
-          description: The name of the log group.
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group.
         filterPattern:
           $ref: '#/components/schemas/FilterPattern'
         destinationArn:
-          $ref: '#/components/schemas/DestinationArn'
-          description: The Amazon Resource Name (ARN) of the destination.
+          allOf:
+            - $ref: '#/components/schemas/DestinationArn'
+            - description: The Amazon Resource Name (ARN) of the destination.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: <p/>
         distribution:
           $ref: '#/components/schemas/Distribution'
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.'
       description: Represents a subscription filter.
     TagKey:
       type: string

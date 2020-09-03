@@ -375,8 +375,9 @@ components:
       title: DeleteReportDefinitionRequest
       properties:
         ReportName:
-          $ref: '#/components/schemas/ReportName'
-          description: 'The name of the report that you want to delete. The name must be unique, is case sensitive, and can''t include spaces.'
+          allOf:
+            - $ref: '#/components/schemas/ReportName'
+            - description: 'The name of the report that you want to delete. The name must be unique, is case sensitive, and can''t include spaces.'
       description: Deletes the specified report.
     InternalErrorException: {}
     ValidationException: {}
@@ -408,8 +409,9 @@ components:
             TimeUnit: HOURLY
       properties:
         ReportDefinitions:
-          $ref: '#/components/schemas/ReportDefinitionList'
-          description: A list of AWS Cost and Usage reports owned by the account.
+          allOf:
+            - $ref: '#/components/schemas/ReportDefinitionList'
+            - description: A list of AWS Cost and Usage reports owned by the account.
         NextToken:
           $ref: '#/components/schemas/GenericString'
       description: 'If the action is successful, the service sends back an HTTP 200 response.'
@@ -447,8 +449,9 @@ components:
       title: PutReportDefinitionRequest
       properties:
         ReportDefinition:
-          $ref: '#/components/schemas/ReportDefinition'
-          description: 'Represents the output of the PutReportDefinition operation. The content consists of the detailed metadata and data file information. '
+          allOf:
+            - $ref: '#/components/schemas/ReportDefinition'
+            - description: 'Represents the output of the PutReportDefinition operation. The content consists of the detailed metadata and data file information. '
       description: Creates a Cost and Usage Report.
     DuplicateReportNameException: {}
     ReportLimitReachedException: {}
@@ -542,8 +545,9 @@ components:
         Compression:
           $ref: '#/components/schemas/CompressionFormat'
         AdditionalSchemaElements:
-          $ref: '#/components/schemas/SchemaElementList'
-          description: 'A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs. '
+          allOf:
+            - $ref: '#/components/schemas/SchemaElementList'
+            - description: 'A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs. '
         S3Bucket:
           $ref: '#/components/schemas/S3Bucket'
         S3Prefix:
@@ -551,14 +555,17 @@ components:
         S3Region:
           $ref: '#/components/schemas/AWSRegion'
         AdditionalArtifacts:
-          $ref: '#/components/schemas/AdditionalArtifactList'
-          description: A list of manifests that you want Amazon Web Services to create for this report.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalArtifactList'
+            - description: A list of manifests that you want Amazon Web Services to create for this report.
         RefreshClosedReports:
-          $ref: '#/components/schemas/RefreshClosedReports'
-          description: 'Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.'
+          allOf:
+            - $ref: '#/components/schemas/RefreshClosedReports'
+            - description: 'Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.'
         ReportVersioning:
-          $ref: '#/components/schemas/ReportVersioning'
-          description: Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
+          allOf:
+            - $ref: '#/components/schemas/ReportVersioning'
+            - description: Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.
       description: 'The definition of AWS Cost and Usage Report. You can specify the report name, time unit, report format, compression format, S3 bucket, additional artifacts, and schema elements in the definition. '
     RefreshClosedReports:
       type: boolean

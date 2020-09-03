@@ -170,14 +170,17 @@ paths:
                   type: object
                   properties:
                     CodeCommit:
-                      $ref: '#/components/schemas/CodeCommitRepository'
-                      description: Information about an AWS CodeCommit repository.
+                      allOf:
+                        - $ref: '#/components/schemas/CodeCommitRepository'
+                        - description: Information about an AWS CodeCommit repository.
                     Bitbucket:
-                      $ref: '#/components/schemas/ThirdPartySourceRepository'
-                      description: ' Information about a Bitbucket repository. '
+                      allOf:
+                        - $ref: '#/components/schemas/ThirdPartySourceRepository'
+                        - description: ' Information about a Bitbucket repository. '
                     GitHubEnterpriseServer:
-                      $ref: '#/components/schemas/ThirdPartySourceRepository'
-                      description: ' Information about a GitHub Enterprise Server repository. '
+                      allOf:
+                        - $ref: '#/components/schemas/ThirdPartySourceRepository'
+                        - description: ' Information about a GitHub Enterprise Server repository. '
                 ClientRequestToken:
                   description: 'Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. '
                   type: string
@@ -353,8 +356,9 @@ paths:
                   type: object
                   properties:
                     RepositoryAnalysis:
-                      $ref: '#/components/schemas/RepositoryAnalysis'
-                      description: ' A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a> '
+                      allOf:
+                        - $ref: '#/components/schemas/RepositoryAnalysis'
+                        - description: ' A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a> '
                 ClientRequestToken:
                   description: ' Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries. '
                   type: string
@@ -1022,16 +1026,18 @@ components:
       type: object
       properties:
         RepositoryAssociation:
-          $ref: '#/components/schemas/RepositoryAssociation'
-          description: Information about the repository association.
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociation'
+            - description: Information about the repository association.
     CodeCommitRepository:
       type: object
       required:
         - Name
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: 'The name of the AWS CodeCommit repository. For more information, see <a href="https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName">repositoryName</a> in the <i>AWS CodeCommit API Reference</i>.'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The name of the AWS CodeCommit repository. For more information, see <a href="https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName">repositoryName</a> in the <i>AWS CodeCommit API Reference</i>.'
       description: 'Information about an AWS CodeCommit repository. The CodeCommit repository must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. '
     ThirdPartySourceRepository:
       type: object
@@ -1041,14 +1047,17 @@ components:
         - Owner
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the third party source repository. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the third party source repository. '
         ConnectionArn:
-          $ref: '#/components/schemas/ConnectionArn'
-          description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionArn'
+            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
         Owner:
-          $ref: '#/components/schemas/Owner'
-          description: ' The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: ' The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. '
       description: ' Information about a third-party source repository connected to CodeGuru Reviewer. '
     InternalServerException: {}
     ValidationException: {}
@@ -1066,44 +1075,51 @@ components:
         - RepositoryHead
       properties:
         RepositoryHead:
-          $ref: '#/components/schemas/RepositoryHeadSourceCodeType'
-          description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies the tip of a branch in an associated repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryHeadSourceCodeType'
+            - description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies the tip of a branch in an associated repository. '
       description: ' A code review type that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN when you call <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a>. '
     ResourceNotFoundException: {}
     DescribeCodeReviewResponse:
       type: object
       properties:
         CodeReview:
-          $ref: '#/components/schemas/CodeReview'
-          description: ' Information about the code review. '
+          allOf:
+            - $ref: '#/components/schemas/CodeReview'
+            - description: ' Information about the code review. '
     DescribeRecommendationFeedbackResponse:
       type: object
       properties:
         RecommendationFeedback:
-          $ref: '#/components/schemas/RecommendationFeedback'
-          description: ' The recommendation feedback given by the user. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationFeedback'
+            - description: ' The recommendation feedback given by the user. '
     DescribeRepositoryAssociationResponse:
       type: object
       properties:
         RepositoryAssociation:
-          $ref: '#/components/schemas/RepositoryAssociation'
-          description: Information about the repository association.
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociation'
+            - description: Information about the repository association.
     NotFoundException: {}
     DisassociateRepositoryResponse:
       type: object
       properties:
         RepositoryAssociation:
-          $ref: '#/components/schemas/RepositoryAssociation'
-          description: Information about the disassociated repository.
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociation'
+            - description: Information about the disassociated repository.
     ListCodeReviewsResponse:
       type: object
       properties:
         CodeReviewSummaries:
-          $ref: '#/components/schemas/CodeReviewSummaries'
-          description: ' A list of code reviews that meet the criteria of the request. '
+          allOf:
+            - $ref: '#/components/schemas/CodeReviewSummaries'
+            - description: ' A list of code reviews that meet the criteria of the request. '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' Pagination token. '
     ProviderType:
       type: string
       enum:
@@ -1127,11 +1143,13 @@ components:
       type: object
       properties:
         RecommendationFeedbackSummaries:
-          $ref: '#/components/schemas/RecommendationFeedbackSummaries'
-          description: ' Recommendation feedback summaries corresponding to the code review ARN. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationFeedbackSummaries'
+            - description: ' Recommendation feedback summaries corresponding to the code review ARN. '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
     UserId:
       type: string
       minLength: 1
@@ -1144,20 +1162,24 @@ components:
       type: object
       properties:
         RecommendationSummaries:
-          $ref: '#/components/schemas/RecommendationSummaries'
-          description: ' List of recommendations for the requested code review. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationSummaries'
+            - description: ' List of recommendations for the requested code review. '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' Pagination token. '
     ListRepositoryAssociationsResponse:
       type: object
       properties:
         RepositoryAssociationSummaries:
-          $ref: '#/components/schemas/RepositoryAssociationSummaries'
-          description: A list of repository associations that meet the criteria of the request.
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociationSummaries'
+            - description: A list of repository associations that meet the criteria of the request.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The <code>nextToken</code> value to include in a future <code>ListRecommendations</code> request. When the results of a <code>ListRecommendations</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The <code>nextToken</code> value to include in a future <code>ListRecommendations</code> request. When the results of a <code>ListRecommendations</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. '
     RepositoryAssociationState:
       type: string
       enum:
@@ -1187,14 +1209,17 @@ components:
       type: object
       properties:
         CodeCommit:
-          $ref: '#/components/schemas/CodeCommitRepository'
-          description: Information about an AWS CodeCommit repository.
+          allOf:
+            - $ref: '#/components/schemas/CodeCommitRepository'
+            - description: Information about an AWS CodeCommit repository.
         Bitbucket:
-          $ref: '#/components/schemas/ThirdPartySourceRepository'
-          description: ' Information about a Bitbucket repository. '
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartySourceRepository'
+            - description: ' Information about a Bitbucket repository. '
         GitHubEnterpriseServer:
-          $ref: '#/components/schemas/ThirdPartySourceRepository'
-          description: ' Information about a GitHub Enterprise Server repository. '
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartySourceRepository'
+            - description: ' Information about a GitHub Enterprise Server repository. '
       description: ' Information about an associated AWS CodeCommit repository or an associated repository that is managed by AWS CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object is not used if your source code is in an associated GitHub repository. '
     ClientRequestToken:
       type: string
@@ -1208,44 +1233,56 @@ components:
       title: AssociateRepositoryRequest
       properties:
         Repository:
-          $ref: '#/components/schemas/Repository'
-          description: The repository to associate.
+          allOf:
+            - $ref: '#/components/schemas/Repository'
+            - description: The repository to associate.
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: 'Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. '
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: 'Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. '
     RepositoryAssociation:
       type: object
       properties:
         AssociationId:
-          $ref: '#/components/schemas/AssociationId'
-          description: The ID of the repository association.
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: The ID of the repository association.
         AssociationArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) identifying the repository association.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) identifying the repository association.
         ConnectionArn:
-          $ref: '#/components/schemas/ConnectionArn'
-          description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionArn'
+            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the repository.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the repository.
         Owner:
-          $ref: '#/components/schemas/Owner'
-          description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
         ProviderType:
-          $ref: '#/components/schemas/ProviderType'
-          description: The provider type of the repository association.
+          allOf:
+            - $ref: '#/components/schemas/ProviderType'
+            - description: The provider type of the repository association.
         State:
-          $ref: '#/components/schemas/RepositoryAssociationState'
-          description: '<p>The state of the repository association.</p> <p>The valid repository association states are:</p> <ul> <li> <p> <b>Associated</b>: The repository association is complete. </p> </li> <li> <p> <b>Associating</b>: CodeGuru Reviewer is: </p> <ul> <li> <p> Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. </p> <note> <p> If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered. </p> </note> </li> <li> <p> Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository. </p> </li> </ul> </li> <li> <p> <b>Failed</b>: The repository failed to associate or disassociate. </p> </li> <li> <p> <b>Disassociating</b>: CodeGuru Reviewer is removing the repository''s pull request notifications and source code access. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociationState'
+            - description: '<p>The state of the repository association.</p> <p>The valid repository association states are:</p> <ul> <li> <p> <b>Associated</b>: The repository association is complete. </p> </li> <li> <p> <b>Associating</b>: CodeGuru Reviewer is: </p> <ul> <li> <p> Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. </p> <note> <p> If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered. </p> </note> </li> <li> <p> Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository. </p> </li> </ul> </li> <li> <p> <b>Failed</b>: The repository failed to associate or disassociate. </p> </li> <li> <p> <b>Disassociating</b>: CodeGuru Reviewer is removing the repository''s pull request notifications and source code access. </p> </li> </ul>'
         StateReason:
-          $ref: '#/components/schemas/StateReason'
-          description: A description of why the repository association is in the current state.
+          allOf:
+            - $ref: '#/components/schemas/StateReason'
+            - description: A description of why the repository association is in the current state.
         LastUpdatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: 'The time, in milliseconds since the epoch, when the repository association was last updated.'
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: 'The time, in milliseconds since the epoch, when the repository association was last updated.'
         CreatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: 'The time, in milliseconds since the epoch, when the repository association was created.'
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: 'The time, in milliseconds since the epoch, when the repository association was created.'
       description: 'Information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html"> <code>DescribeRepositoryAssociation</code> </a> operation returns a <code>RepositoryAssociation</code> object.'
     AssociationId:
       type: string
@@ -1275,8 +1312,9 @@ components:
       type: object
       properties:
         CommitDiff:
-          $ref: '#/components/schemas/CommitDiffSourceCodeType'
-          description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies a commit diff created by a pull request on an associated repository. '
+          allOf:
+            - $ref: '#/components/schemas/CommitDiffSourceCodeType'
+            - description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies a commit diff created by a pull request on an associated repository. '
         RepositoryHead:
           $ref: '#/components/schemas/RepositoryHeadSourceCodeType'
       description: ' Specifies the source code that is analyzed in a code review. A code review can analyze the source code that is specified using a pull request diff or a branch in an associated repository. '
@@ -1284,54 +1322,69 @@ components:
       type: object
       properties:
         MeteredLinesOfCodeCount:
-          $ref: '#/components/schemas/MeteredLinesOfCodeCount'
-          description: ' Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. '
+          allOf:
+            - $ref: '#/components/schemas/MeteredLinesOfCodeCount'
+            - description: ' Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. '
         FindingsCount:
-          $ref: '#/components/schemas/FindingsCount'
-          description: ' Total number of recommendations found in the code review. '
+          allOf:
+            - $ref: '#/components/schemas/FindingsCount'
+            - description: ' Total number of recommendations found in the code review. '
       description: ' Information about the statistics from the code review. '
     CodeReview:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the code review. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the code review. '
         CodeReviewArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
         RepositoryName:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the repository. '
         Owner:
-          $ref: '#/components/schemas/Owner'
-          description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
         ProviderType:
-          $ref: '#/components/schemas/ProviderType'
-          description: ' The type of repository that contains the reviewed code (for example, GitHub or Bitbucket). '
+          allOf:
+            - $ref: '#/components/schemas/ProviderType'
+            - description: ' The type of repository that contains the reviewed code (for example, GitHub or Bitbucket). '
         State:
-          $ref: '#/components/schemas/JobState'
-          description: '<p>The valid code review states are:</p> <ul> <li> <p> <code>Completed</code>: The code review is complete. </p> </li> <li> <p> <code>Pending</code>: The code review started and has not completed or failed. </p> </li> <li> <p> <code>Failed</code>: The code review failed. </p> </li> <li> <p> <code>Deleting</code>: The code review is being deleted. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/JobState'
+            - description: '<p>The valid code review states are:</p> <ul> <li> <p> <code>Completed</code>: The code review is complete. </p> </li> <li> <p> <code>Pending</code>: The code review started and has not completed or failed. </p> </li> <li> <p> <code>Failed</code>: The code review failed. </p> </li> <li> <p> <code>Deleting</code>: The code review is being deleted. </p> </li> </ul>'
         StateReason:
-          $ref: '#/components/schemas/StateReason'
-          description: ' The reason for the state of the code review. '
+          allOf:
+            - $ref: '#/components/schemas/StateReason'
+            - description: ' The reason for the state of the code review. '
         CreatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time, in milliseconds since the epoch, when the code review was created. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time, in milliseconds since the epoch, when the code review was created. '
         LastUpdatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
         Type:
-          $ref: '#/components/schemas/Type'
-          description: ' The type of code review. '
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: ' The type of code review. '
         PullRequestId:
-          $ref: '#/components/schemas/PullRequestId'
-          description: ' The pull request ID for the code review. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestId'
+            - description: ' The pull request ID for the code review. '
         SourceCodeType:
-          $ref: '#/components/schemas/SourceCodeType'
-          description: ' The type of the source code for the code review. '
+          allOf:
+            - $ref: '#/components/schemas/SourceCodeType'
+            - description: ' The type of the source code for the code review. '
         Metrics:
-          $ref: '#/components/schemas/Metrics'
-          description: ' The statistics from the code review. '
+          allOf:
+            - $ref: '#/components/schemas/Metrics'
+            - description: ' The statistics from the code review. '
       description: ' Information about a code review. '
     CodeReviewName:
       type: string
@@ -1342,38 +1395,49 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the code review. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the code review. '
         CodeReviewArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
         RepositoryName:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the repository. '
         Owner:
-          $ref: '#/components/schemas/Owner'
-          description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
         ProviderType:
-          $ref: '#/components/schemas/ProviderType'
-          description: ' The provider type of the repository association. '
+          allOf:
+            - $ref: '#/components/schemas/ProviderType'
+            - description: ' The provider type of the repository association. '
         State:
-          $ref: '#/components/schemas/JobState'
-          description: '<p> The state of the code review. </p> <p>The valid code review states are:</p> <ul> <li> <p> <code>Completed</code>: The code review is complete. </p> </li> <li> <p> <code>Pending</code>: The code review started and has not completed or failed. </p> </li> <li> <p> <code>Failed</code>: The code review failed. </p> </li> <li> <p> <code>Deleting</code>: The code review is being deleted. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/JobState'
+            - description: '<p> The state of the code review. </p> <p>The valid code review states are:</p> <ul> <li> <p> <code>Completed</code>: The code review is complete. </p> </li> <li> <p> <code>Pending</code>: The code review started and has not completed or failed. </p> </li> <li> <p> <code>Failed</code>: The code review failed. </p> </li> <li> <p> <code>Deleting</code>: The code review is being deleted. </p> </li> </ul>'
         CreatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time, in milliseconds since the epoch, when the code review was created. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time, in milliseconds since the epoch, when the code review was created. '
         LastUpdatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time, in milliseconds since the epoch, when the code review was last updated. '
         Type:
-          $ref: '#/components/schemas/Type'
-          description: ' The type of the code review. '
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: ' The type of the code review. '
         PullRequestId:
-          $ref: '#/components/schemas/PullRequestId'
-          description: ' The pull request ID for the code review. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestId'
+            - description: ' The pull request ID for the code review. '
         MetricsSummary:
-          $ref: '#/components/schemas/MetricsSummary'
-          description: ' The statistics from the code review. '
+          allOf:
+            - $ref: '#/components/schemas/MetricsSummary'
+            - description: ' The statistics from the code review. '
       description: ' Information about the summary of the code review. '
     CodeReviewSummaries:
       type: array
@@ -1383,11 +1447,13 @@ components:
       type: object
       properties:
         MeteredLinesOfCodeCount:
-          $ref: '#/components/schemas/MeteredLinesOfCodeCount'
-          description: ' Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. '
+          allOf:
+            - $ref: '#/components/schemas/MeteredLinesOfCodeCount'
+            - description: ' Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. '
         FindingsCount:
-          $ref: '#/components/schemas/FindingsCount'
-          description: ' Total number of recommendations found in the code review. '
+          allOf:
+            - $ref: '#/components/schemas/FindingsCount'
+            - description: ' Total number of recommendations found in the code review. '
       description: ' Information about metrics summaries. '
     CodeReviewType:
       type: object
@@ -1395,8 +1461,9 @@ components:
         - RepositoryAnalysis
       properties:
         RepositoryAnalysis:
-          $ref: '#/components/schemas/RepositoryAnalysis'
-          description: ' A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a> '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAnalysis'
+            - description: ' A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a> '
       description: '<p> The type of a code review. There are two code review types: </p> <ul> <li> <p> <code>PullRequest</code> - A code review that is automatically triggered by a pull request on an assocaited repository. Because this type of code review is automatically generated, you cannot specify this code review type using <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a>. </p> </li> <li> <p> <code>RepositoryAnalysis</code> - A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview"> <code>CreateCodeReview</code> </a>. </p> </li> </ul>'
     CommitId:
       type: string
@@ -1406,11 +1473,13 @@ components:
       type: object
       properties:
         SourceCommit:
-          $ref: '#/components/schemas/CommitId'
-          description: ' The SHA of the source commit used to generate a commit diff. '
+          allOf:
+            - $ref: '#/components/schemas/CommitId'
+            - description: ' The SHA of the source commit used to generate a commit diff. '
         DestinationCommit:
-          $ref: '#/components/schemas/CommitId'
-          description: ' The SHA of the destination commit used to generate a commit diff. '
+          allOf:
+            - $ref: '#/components/schemas/CommitId'
+            - description: ' The SHA of the destination commit used to generate a commit diff. '
       description: ' A type of <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies the commit diff for a pull request on an associated repository. '
     ConnectionArn:
       type: string
@@ -1426,17 +1495,21 @@ components:
       title: CreateCodeReviewRequest
       properties:
         Name:
-          $ref: '#/components/schemas/CodeReviewName'
-          description: ' The name of the code review. Each code review of the same code review type must have a unique name in your AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/CodeReviewName'
+            - description: ' The name of the code review. Each code review of the same code review type must have a unique name in your AWS account. '
         RepositoryAssociationArn:
-          $ref: '#/components/schemas/Arn'
-          description: '<p> The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html"> <code>RepositoryAssociation</code> </a> object. You can retrieve this ARN by calling <code>ListRepositories</code>. </p> <p> A code review can only be created on an associated repository. This is the ARN of the associated repository. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p> The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html"> <code>RepositoryAssociation</code> </a> object. You can retrieve this ARN by calling <code>ListRepositories</code>. </p> <p> A code review can only be created on an associated repository. This is the ARN of the associated repository. </p>'
         Type:
-          $ref: '#/components/schemas/CodeReviewType'
-          description: ' The type of code review to create. This is specified using a <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html"> <code>CodeReviewType</code> </a> object. '
+          allOf:
+            - $ref: '#/components/schemas/CodeReviewType'
+            - description: ' The type of code review to create. This is specified using a <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html"> <code>CodeReviewType</code> </a> object. '
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: ' Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries. '
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: ' Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries. '
     DescribeCodeReviewRequest:
       type: object
       title: DescribeCodeReviewRequest
@@ -1449,23 +1522,29 @@ components:
       type: object
       properties:
         CodeReviewArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
         RecommendationId:
-          $ref: '#/components/schemas/RecommendationId'
-          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
         Reactions:
-          $ref: '#/components/schemas/Reactions'
-          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. You can send an empty list to clear off all your feedback. '
+          allOf:
+            - $ref: '#/components/schemas/Reactions'
+            - description: ' List for storing reactions. Reactions are utf-8 text code for emojis. You can send an empty list to clear off all your feedback. '
         UserId:
-          $ref: '#/components/schemas/UserId'
-          description: '<p> The ID of the user that made the API call. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: '<p> The ID of the user that made the API call. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
         CreatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time at which the feedback was created. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time at which the feedback was created. '
         LastUpdatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: ' The time at which the feedback was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: ' The time at which the feedback was last updated. '
       description: ' Information about the recommendation feedback. '
     DescribeRepositoryAssociationRequest:
       type: object
@@ -1588,45 +1667,56 @@ components:
       title: PutRecommendationFeedbackRequest
       properties:
         CodeReviewArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html"> <code>CodeReview</code> </a> object. '
         RecommendationId:
-          $ref: '#/components/schemas/RecommendationId'
-          description: ' The recommendation ID that can be used to track the provided recommendations and then to collect the feedback. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: ' The recommendation ID that can be used to track the provided recommendations and then to collect the feedback. '
         Reactions:
-          $ref: '#/components/schemas/Reactions'
-          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. If you send an empty list it clears all your feedback. '
+          allOf:
+            - $ref: '#/components/schemas/Reactions'
+            - description: ' List for storing reactions. Reactions are utf-8 text code for emojis. If you send an empty list it clears all your feedback. '
     RecommendationFeedbackSummary:
       type: object
       properties:
         RecommendationId:
-          $ref: '#/components/schemas/RecommendationId'
-          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
         Reactions:
-          $ref: '#/components/schemas/Reactions'
-          description: ' List for storing reactions. Reactions are utf-8 text code for emojis. '
+          allOf:
+            - $ref: '#/components/schemas/Reactions'
+            - description: ' List for storing reactions. Reactions are utf-8 text code for emojis. '
         UserId:
-          $ref: '#/components/schemas/UserId'
-          description: '<p> The ID of the user that gave the feedback. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: '<p> The ID of the user that gave the feedback. </p> <p> The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying"> Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>. </p>'
       description: ' Information about recommendation feedback summaries. '
     RecommendationSummary:
       type: object
       properties:
         FilePath:
-          $ref: '#/components/schemas/FilePath'
-          description: Name of the file on which a recommendation is provided.
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: Name of the file on which a recommendation is provided.
         RecommendationId:
-          $ref: '#/components/schemas/RecommendationId'
-          description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: ' The recommendation ID that can be used to track the provided recommendations. Later on it can be used to collect the feedback. '
         StartLine:
-          $ref: '#/components/schemas/LineNumber'
-          description: ' Start line from where the recommendation is applicable in the source commit or source branch. '
+          allOf:
+            - $ref: '#/components/schemas/LineNumber'
+            - description: ' Start line from where the recommendation is applicable in the source commit or source branch. '
         EndLine:
-          $ref: '#/components/schemas/LineNumber'
-          description: ' Last line where the recommendation is applicable in the source commit or source branch. For a single line comment the start line and end line values are the same. '
+          allOf:
+            - $ref: '#/components/schemas/LineNumber'
+            - description: ' Last line where the recommendation is applicable in the source commit or source branch. For a single line comment the start line and end line values are the same. '
         Description:
-          $ref: '#/components/schemas/Text'
-          description: ' A description of the recommendation generated by CodeGuru Reviewer for the lines of code between the start line and the end line. '
+          allOf:
+            - $ref: '#/components/schemas/Text'
+            - description: ' A description of the recommendation generated by CodeGuru Reviewer for the lines of code between the start line and the end line. '
       description: ' Information about recommendations. '
     Text:
       type: string
@@ -1638,36 +1728,45 @@ components:
         - BranchName
       properties:
         BranchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name of the branch in an associated repository. The <code>RepositoryHeadSourceCodeType</code> specifies the tip of this branch. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name of the branch in an associated repository. The <code>RepositoryHeadSourceCodeType</code> specifies the tip of this branch. '
       description: ' A <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType"> <code>SourceCodeType</code> </a> that specifies the tip of a branch in an associated repository. '
     RepositoryAssociationSummary:
       type: object
       properties:
         AssociationArn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html"> <code>RepositoryAssociation</code> </a> object. You can retrieve this ARN by calling <code>ListRepositories</code>. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The Amazon Resource Name (ARN) of the <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html"> <code>RepositoryAssociation</code> </a> object. You can retrieve this ARN by calling <code>ListRepositories</code>. '
         ConnectionArn:
-          $ref: '#/components/schemas/ConnectionArn'
-          description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionArn'
+            - description: ' The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see <a href="https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html"> <code>Connection</code> </a> in the <i>AWS CodeStar Connections API Reference</i>. '
         LastUpdatedTimeStamp:
-          $ref: '#/components/schemas/TimeStamp'
-          description: 'The time, in milliseconds since the epoch, since the repository association was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: 'The time, in milliseconds since the epoch, since the repository association was last updated. '
         AssociationId:
-          $ref: '#/components/schemas/AssociationId'
-          description: ' The repository association ID. '
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: ' The repository association ID. '
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the repository association.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the repository association.
         Owner:
-          $ref: '#/components/schemas/Owner'
-          description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: 'The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.'
         ProviderType:
-          $ref: '#/components/schemas/ProviderType'
-          description: The provider type of the repository association.
+          allOf:
+            - $ref: '#/components/schemas/ProviderType'
+            - description: The provider type of the repository association.
         State:
-          $ref: '#/components/schemas/RepositoryAssociationState'
-          description: '<p>The state of the repository association.</p> <p>The valid repository association states are:</p> <ul> <li> <p> <b>Associated</b>: The repository association is complete. </p> </li> <li> <p> <b>Associating</b>: CodeGuru Reviewer is: </p> <ul> <li> <p> Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. </p> <note> <p> If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered. </p> </note> </li> <li> <p> Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository. </p> </li> </ul> </li> <li> <p> <b>Failed</b>: The repository failed to associate or disassociate. </p> </li> <li> <p> <b>Disassociating</b>: CodeGuru Reviewer is removing the repository''s pull request notifications and source code access. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/RepositoryAssociationState'
+            - description: '<p>The state of the repository association.</p> <p>The valid repository association states are:</p> <ul> <li> <p> <b>Associated</b>: The repository association is complete. </p> </li> <li> <p> <b>Associating</b>: CodeGuru Reviewer is: </p> <ul> <li> <p> Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review. </p> <note> <p> If your repository <code>ProviderType</code> is <code>GitHub</code>, <code>GitHub Enterprise Server</code>, or <code>Bitbucket</code>, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered. </p> </note> </li> <li> <p> Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository. </p> </li> </ul> </li> <li> <p> <b>Failed</b>: The repository failed to associate or disassociate. </p> </li> <li> <p> <b>Disassociating</b>: CodeGuru Reviewer is removing the repository''s pull request notifications and source code access. </p> </li> </ul>'
       description: 'Summary information about a repository association. The <a href="https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html"> <code>ListRepositoryAssociations</code> </a> operation returns a list of <code>RepositoryAssociationSummary</code> objects.'
 security:
   - hmac: []

@@ -180,15 +180,17 @@ paths:
                   type: object
                   properties:
                     Id:
-                      xml:
-                        name: id
-                      $ref: '#/components/schemas/__string'
-                      description: Required. The unique ID that Amazon MQ generates for the configuration.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: id
+                          description: Required. The unique ID that Amazon MQ generates for the configuration.
                     Revision:
-                      xml:
-                        name: revision
-                      $ref: '#/components/schemas/__integer'
-                      description: The revision number of the configuration.
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: revision
+                          description: The revision number of the configuration.
                 creatorRequestId:
                   description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
                   type: string
@@ -203,15 +205,17 @@ paths:
                   type: object
                   properties:
                     KmsKeyId:
-                      xml:
-                        name: kmsKeyId
-                      $ref: '#/components/schemas/__string'
-                      description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: kmsKeyId
+                          description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
                     UseAwsOwnedKey:
-                      xml:
-                        name: useAwsOwnedKey
-                      $ref: '#/components/schemas/__boolean'
-                      description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: useAwsOwnedKey
+                          description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
                 engineType:
                   description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
                   type: string
@@ -228,93 +232,109 @@ paths:
                   type: object
                   properties:
                     Hosts:
-                      xml:
-                        name: hosts
-                      $ref: '#/components/schemas/__listOf__string'
-                      description: Fully qualified domain name of the LDAP server. Optional failover server.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: hosts
+                          description: Fully qualified domain name of the LDAP server. Optional failover server.
                     RoleBase:
-                      xml:
-                        name: roleBase
-                      $ref: '#/components/schemas/__string'
-                      description: Fully qualified name of the directory to search for a user’s groups.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleBase
+                          description: Fully qualified name of the directory to search for a user’s groups.
                     RoleName:
-                      xml:
-                        name: roleName
-                      $ref: '#/components/schemas/__string'
-                      description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleName
+                          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
                     RoleSearchMatching:
-                      xml:
-                        name: roleSearchMatching
-                      $ref: '#/components/schemas/__string'
-                      description: The search criteria for groups.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleSearchMatching
+                          description: The search criteria for groups.
                     RoleSearchSubtree:
-                      xml:
-                        name: roleSearchSubtree
-                      $ref: '#/components/schemas/__boolean'
-                      description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: roleSearchSubtree
+                          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
                     ServiceAccountPassword:
-                      xml:
-                        name: serviceAccountPassword
-                      $ref: '#/components/schemas/__string'
-                      description: Service account password.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: serviceAccountPassword
+                          description: Service account password.
                     ServiceAccountUsername:
-                      xml:
-                        name: serviceAccountUsername
-                      $ref: '#/components/schemas/__string'
-                      description: Service account username.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: serviceAccountUsername
+                          description: Service account username.
                     UserBase:
-                      xml:
-                        name: userBase
-                      $ref: '#/components/schemas/__string'
-                      description: Fully qualified name of the directory where you want to search for users.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userBase
+                          description: Fully qualified name of the directory where you want to search for users.
                     UserRoleName:
-                      xml:
-                        name: userRoleName
-                      $ref: '#/components/schemas/__string'
-                      description: Specifies the name of the LDAP attribute for the user group membership.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userRoleName
+                          description: Specifies the name of the LDAP attribute for the user group membership.
                     UserSearchMatching:
-                      xml:
-                        name: userSearchMatching
-                      $ref: '#/components/schemas/__string'
-                      description: The search criteria for users.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userSearchMatching
+                          description: The search criteria for users.
                     UserSearchSubtree:
-                      xml:
-                        name: userSearchSubtree
-                      $ref: '#/components/schemas/__boolean'
-                      description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: userSearchSubtree
+                          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
                   properties:
                     Audit:
-                      xml:
-                        name: audit
-                      $ref: '#/components/schemas/__boolean'
-                      description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: audit
+                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
                     General:
-                      xml:
-                        name: general
-                      $ref: '#/components/schemas/__boolean'
-                      description: Enables general logging.
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: general
+                          description: Enables general logging.
                 maintenanceWindowStartTime:
                   description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
                   type: object
                   properties:
                     DayOfWeek:
-                      xml:
-                        name: dayOfWeek
-                      $ref: '#/components/schemas/DayOfWeek'
-                      description: Required. The day of the week.
+                      allOf:
+                        - $ref: '#/components/schemas/DayOfWeek'
+                        - xml:
+                            name: dayOfWeek
+                          description: Required. The day of the week.
                     TimeOfDay:
-                      xml:
-                        name: timeOfDay
-                      $ref: '#/components/schemas/__string'
-                      description: 'Required. The time, in 24-hour format.'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: timeOfDay
+                          description: 'Required. The time, in 24-hour format.'
                     TimeZone:
-                      xml:
-                        name: timeZone
-                      $ref: '#/components/schemas/__string'
-                      description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: timeZone
+                          description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
                 publiclyAccessible:
                   description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
                   type: boolean
@@ -1026,15 +1046,17 @@ paths:
                   type: object
                   properties:
                     Id:
-                      xml:
-                        name: id
-                      $ref: '#/components/schemas/__string'
-                      description: Required. The unique ID that Amazon MQ generates for the configuration.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: id
+                          description: Required. The unique ID that Amazon MQ generates for the configuration.
                     Revision:
-                      xml:
-                        name: revision
-                      $ref: '#/components/schemas/__integer'
-                      description: The revision number of the configuration.
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: revision
+                          description: The revision number of the configuration.
                 engineVersion:
                   description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
                   type: string
@@ -1046,74 +1068,87 @@ paths:
                   type: object
                   properties:
                     Hosts:
-                      xml:
-                        name: hosts
-                      $ref: '#/components/schemas/__listOf__string'
-                      description: Fully qualified domain name of the LDAP server. Optional failover server.
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: hosts
+                          description: Fully qualified domain name of the LDAP server. Optional failover server.
                     RoleBase:
-                      xml:
-                        name: roleBase
-                      $ref: '#/components/schemas/__string'
-                      description: Fully qualified name of the directory to search for a user’s groups.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleBase
+                          description: Fully qualified name of the directory to search for a user’s groups.
                     RoleName:
-                      xml:
-                        name: roleName
-                      $ref: '#/components/schemas/__string'
-                      description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleName
+                          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
                     RoleSearchMatching:
-                      xml:
-                        name: roleSearchMatching
-                      $ref: '#/components/schemas/__string'
-                      description: The search criteria for groups.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: roleSearchMatching
+                          description: The search criteria for groups.
                     RoleSearchSubtree:
-                      xml:
-                        name: roleSearchSubtree
-                      $ref: '#/components/schemas/__boolean'
-                      description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: roleSearchSubtree
+                          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
                     ServiceAccountPassword:
-                      xml:
-                        name: serviceAccountPassword
-                      $ref: '#/components/schemas/__string'
-                      description: Service account password.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: serviceAccountPassword
+                          description: Service account password.
                     ServiceAccountUsername:
-                      xml:
-                        name: serviceAccountUsername
-                      $ref: '#/components/schemas/__string'
-                      description: Service account username.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: serviceAccountUsername
+                          description: Service account username.
                     UserBase:
-                      xml:
-                        name: userBase
-                      $ref: '#/components/schemas/__string'
-                      description: Fully qualified name of the directory where you want to search for users.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userBase
+                          description: Fully qualified name of the directory where you want to search for users.
                     UserRoleName:
-                      xml:
-                        name: userRoleName
-                      $ref: '#/components/schemas/__string'
-                      description: Specifies the name of the LDAP attribute for the user group membership.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userRoleName
+                          description: Specifies the name of the LDAP attribute for the user group membership.
                     UserSearchMatching:
-                      xml:
-                        name: userSearchMatching
-                      $ref: '#/components/schemas/__string'
-                      description: The search criteria for users.
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: userSearchMatching
+                          description: The search criteria for users.
                     UserSearchSubtree:
-                      xml:
-                        name: userSearchSubtree
-                      $ref: '#/components/schemas/__boolean'
-                      description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: userSearchSubtree
+                          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
                 logs:
                   description: The list of information about logs to be enabled for the specified broker.
                   type: object
                   properties:
                     Audit:
-                      xml:
-                        name: audit
-                      $ref: '#/components/schemas/__boolean'
-                      description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: audit
+                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
                     General:
-                      xml:
-                        name: general
-                      $ref: '#/components/schemas/__boolean'
-                      description: Enables general logging.
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: general
+                          description: Enables general logging.
                 securityGroups:
                   description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
                   type: array
@@ -1701,15 +1736,17 @@ components:
       type: object
       properties:
         BrokerArn:
-          xml:
-            name: brokerArn
-          $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerArn
+              description: The Amazon Resource Name (ARN) of the broker.
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: The unique ID that Amazon MQ generates for the broker.
     __string:
       type: string
     __integer:
@@ -1734,25 +1771,29 @@ components:
       type: object
       properties:
         ConsoleAccess:
-          xml:
-            name: consoleAccess
-          $ref: '#/components/schemas/__boolean'
-          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: consoleAccess
+              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
-          xml:
-            name: groups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: groups
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
         Password:
-          xml:
-            name: password
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: password
+              description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
         Username:
-          xml:
-            name: username
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: username
+              description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       description: An ActiveMQ user associated with the broker.
     BadRequestException: {}
     UnauthorizedException: {}
@@ -1763,35 +1804,41 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          $ref: '#/components/schemas/__string'
-          description: Required. The Amazon Resource Name (ARN) of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: Required. The Amazon Resource Name (ARN) of the configuration.
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy associated with the configuration.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy associated with the configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration.
         Id:
-          xml:
-            name: id
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         LatestRevision:
-          xml:
-            name: latestRevision
-          $ref: '#/components/schemas/ConfigurationRevision'
-          description: The latest revision of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationRevision'
+            - xml:
+                name: latestRevision
+              description: The latest revision of the configuration.
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
     NotFoundException: {}
     CreateUserResponse:
       type: object
@@ -1800,10 +1847,11 @@ components:
       type: object
       properties:
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: The unique ID that Amazon MQ generates for the broker.
     DeleteUserResponse:
       type: object
       properties: {}
@@ -1811,370 +1859,437 @@ components:
       type: object
       properties:
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy used to secure the broker.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
-          xml:
-            name: autoMinorVersionUpgrade
-          $ref: '#/components/schemas/__boolean'
-          description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: autoMinorVersionUpgrade
+              description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
         BrokerArn:
-          xml:
-            name: brokerArn
-          $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerArn
+              description: The Amazon Resource Name (ARN) of the broker.
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: The unique ID that Amazon MQ generates for the broker.
         BrokerInstances:
-          xml:
-            name: brokerInstances
-          $ref: '#/components/schemas/__listOfBrokerInstance'
-          description: A list of information about allocated brokers.
+          allOf:
+            - $ref: '#/components/schemas/__listOfBrokerInstance'
+            - xml:
+                name: brokerInstances
+              description: A list of information about allocated brokers.
         BrokerName:
-          xml:
-            name: brokerName
-          $ref: '#/components/schemas/__string'
-          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerName
+              description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
         BrokerState:
-          xml:
-            name: brokerState
-          $ref: '#/components/schemas/BrokerState'
-          description: The status of the broker.
+          allOf:
+            - $ref: '#/components/schemas/BrokerState'
+            - xml:
+                name: brokerState
+              description: The status of the broker.
         Configurations:
-          xml:
-            name: configurations
-          $ref: '#/components/schemas/Configurations'
-          description: The list of all revisions for the specified configuration.
+          allOf:
+            - $ref: '#/components/schemas/Configurations'
+            - xml:
+                name: configurations
+              description: The list of all revisions for the specified configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: The time when the broker was created.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: The time when the broker was created.
         DeploymentMode:
-          xml:
-            name: deploymentMode
-          $ref: '#/components/schemas/DeploymentMode'
-          description: Required. The deployment mode of the broker.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentMode'
+            - xml:
+                name: deploymentMode
+              description: Required. The deployment mode of the broker.
         EncryptionOptions:
-          xml:
-            name: encryptionOptions
-          $ref: '#/components/schemas/EncryptionOptions'
-          description: Encryption options for the broker.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionOptions'
+            - xml:
+                name: encryptionOptions
+              description: Encryption options for the broker.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: The broker's instance type.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: The broker's instance type.
         LdapServerMetadata:
-          xml:
-            name: ldapServerMetadata
-          $ref: '#/components/schemas/LdapServerMetadataOutput'
-          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+          allOf:
+            - $ref: '#/components/schemas/LdapServerMetadataOutput'
+            - xml:
+                name: ldapServerMetadata
+              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
-          xml:
-            name: logs
-          $ref: '#/components/schemas/LogsSummary'
-          description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
+          allOf:
+            - $ref: '#/components/schemas/LogsSummary'
+            - xml:
+                name: logs
+              description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
         MaintenanceWindowStartTime:
-          xml:
-            name: maintenanceWindowStartTime
-          $ref: '#/components/schemas/WeeklyStartTime'
-          description: The parameters that determine the WeeklyStartTime.
+          allOf:
+            - $ref: '#/components/schemas/WeeklyStartTime'
+            - xml:
+                name: maintenanceWindowStartTime
+              description: The parameters that determine the WeeklyStartTime.
         PendingAuthenticationStrategy:
-          xml:
-            name: pendingAuthenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy that will be applied when the broker is rebooted.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: pendingAuthenticationStrategy
+              description: The authentication strategy that will be applied when the broker is rebooted.
         PendingEngineVersion:
-          xml:
-            name: pendingEngineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pendingEngineVersion
+              description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         PendingHostInstanceType:
-          xml:
-            name: pendingHostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pendingHostInstanceType
+              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
         PendingLdapServerMetadata:
-          xml:
-            name: pendingLdapServerMetadata
-          $ref: '#/components/schemas/LdapServerMetadataOutput'
-          description: The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
+          allOf:
+            - $ref: '#/components/schemas/LdapServerMetadataOutput'
+            - xml:
+                name: pendingLdapServerMetadata
+              description: The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
         PendingSecurityGroups:
-          xml:
-            name: pendingSecurityGroups
-          $ref: '#/components/schemas/__listOf__string'
-          description: The list of pending security groups to authorize connections to brokers.
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: pendingSecurityGroups
+              description: The list of pending security groups to authorize connections to brokers.
         PubliclyAccessible:
-          xml:
-            name: publiclyAccessible
-          $ref: '#/components/schemas/__boolean'
-          description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: publiclyAccessible
+              description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
         SecurityGroups:
-          xml:
-            name: securityGroups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
         StorageType:
-          xml:
-            name: storageType
-          $ref: '#/components/schemas/BrokerStorageType'
-          description: The broker's storage type.
+          allOf:
+            - $ref: '#/components/schemas/BrokerStorageType'
+            - xml:
+                name: storageType
+              description: The broker's storage type.
         SubnetIds:
-          xml:
-            name: subnetIds
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: subnetIds
+              description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The list of all tags associated with this broker.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: The list of all tags associated with this broker.
         Users:
-          xml:
-            name: users
-          $ref: '#/components/schemas/__listOfUserSummary'
-          description: The list of all ActiveMQ usernames for the specified broker.
+          allOf:
+            - $ref: '#/components/schemas/__listOfUserSummary'
+            - xml:
+                name: users
+              description: The list of all ActiveMQ usernames for the specified broker.
     DescribeBrokerEngineTypesResponse:
       type: object
       properties:
         BrokerEngineTypes:
-          xml:
-            name: brokerEngineTypes
-          $ref: '#/components/schemas/__listOfBrokerEngineType'
-          description: List of available engine types and versions.
+          allOf:
+            - $ref: '#/components/schemas/__listOfBrokerEngineType'
+            - xml:
+                name: brokerEngineTypes
+              description: List of available engine types and versions.
         MaxResults:
-          xml:
-            name: maxResults
-          $ref: '#/components/schemas/__integerMin5Max100'
-          description: Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          allOf:
+            - $ref: '#/components/schemas/__integerMin5Max100'
+            - xml:
+                name: maxResults
+              description: Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
     DescribeBrokerInstanceOptionsResponse:
       type: object
       properties:
         BrokerInstanceOptions:
-          xml:
-            name: brokerInstanceOptions
-          $ref: '#/components/schemas/__listOfBrokerInstanceOption'
-          description: List of available broker instance options.
+          allOf:
+            - $ref: '#/components/schemas/__listOfBrokerInstanceOption'
+            - xml:
+                name: brokerInstanceOptions
+              description: List of available broker instance options.
         MaxResults:
-          xml:
-            name: maxResults
-          $ref: '#/components/schemas/__integerMin5Max100'
-          description: Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          allOf:
+            - $ref: '#/components/schemas/__integerMin5Max100'
+            - xml:
+                name: maxResults
+              description: Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
     DescribeConfigurationResponse:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          $ref: '#/components/schemas/__string'
-          description: Required. The ARN of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: Required. The ARN of the configuration.
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy associated with the configuration.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy associated with the configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration revision.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration revision.
         Description:
-          xml:
-            name: description
-          $ref: '#/components/schemas/__string'
-          description: Required. The description of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: Required. The description of the configuration.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         Id:
-          xml:
-            name: id
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         LatestRevision:
-          xml:
-            name: latestRevision
-          $ref: '#/components/schemas/ConfigurationRevision'
-          description: Required. The latest revision of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationRevision'
+            - xml:
+                name: latestRevision
+              description: Required. The latest revision of the configuration.
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The list of all tags associated with this configuration.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: The list of all tags associated with this configuration.
     DescribeConfigurationRevisionResponse:
       type: object
       properties:
         ConfigurationId:
-          xml:
-            name: configurationId
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: configurationId
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration.
         Data:
-          xml:
-            name: data
-          $ref: '#/components/schemas/__string'
-          description: Required. The base64-encoded XML configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: data
+              description: Required. The base64-encoded XML configuration.
         Description:
-          xml:
-            name: description
-          $ref: '#/components/schemas/__string'
-          description: The description of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: The description of the configuration.
     DescribeUserResponse:
       type: object
       properties:
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: Required. The unique ID that Amazon MQ generates for the broker.
         ConsoleAccess:
-          xml:
-            name: consoleAccess
-          $ref: '#/components/schemas/__boolean'
-          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: consoleAccess
+              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
-          xml:
-            name: groups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: groups
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
         Pending:
-          xml:
-            name: pending
-          $ref: '#/components/schemas/UserPendingChanges'
-          description: The status of the changes pending for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/UserPendingChanges'
+            - xml:
+                name: pending
+              description: The status of the changes pending for the ActiveMQ user.
         Username:
-          xml:
-            name: username
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: username
+              description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
     ListBrokersResponse:
       type: object
       properties:
         BrokerSummaries:
-          xml:
-            name: brokerSummaries
-          $ref: '#/components/schemas/__listOfBrokerSummary'
-          description: A list of information about all brokers.
+          allOf:
+            - $ref: '#/components/schemas/__listOfBrokerSummary'
+            - xml:
+                name: brokerSummaries
+              description: A list of information about all brokers.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
     ListConfigurationRevisionsResponse:
       type: object
       properties:
         ConfigurationId:
-          xml:
-            name: configurationId
-          $ref: '#/components/schemas/__string'
-          description: The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: configurationId
+              description: The unique ID that Amazon MQ generates for the configuration.
         MaxResults:
-          xml:
-            name: maxResults
-          $ref: '#/components/schemas/__integer'
-          description: The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxResults
+              description: The maximum number of configuration revisions that can be returned per page (20 by default). This value must be an integer from 5 to 100.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
         Revisions:
-          xml:
-            name: revisions
-          $ref: '#/components/schemas/__listOfConfigurationRevision'
-          description: The list of all revisions for the specified configuration.
+          allOf:
+            - $ref: '#/components/schemas/__listOfConfigurationRevision'
+            - xml:
+                name: revisions
+              description: The list of all revisions for the specified configuration.
     ListConfigurationsResponse:
       type: object
       properties:
         Configurations:
-          xml:
-            name: configurations
-          $ref: '#/components/schemas/__listOfConfiguration'
-          description: The list of all revisions for the specified configuration.
+          allOf:
+            - $ref: '#/components/schemas/__listOfConfiguration'
+            - xml:
+                name: configurations
+              description: The list of all revisions for the specified configuration.
         MaxResults:
-          xml:
-            name: maxResults
-          $ref: '#/components/schemas/__integer'
-          description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxResults
+              description: The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
     ListTagsResponse:
       type: object
       properties:
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The key-value pair for the resource tag.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: The key-value pair for the resource tag.
     ListUsersResponse:
       type: object
       properties:
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: Required. The unique ID that Amazon MQ generates for the broker.
         MaxResults:
-          xml:
-            name: maxResults
-          $ref: '#/components/schemas/__integerMin5Max100'
-          description: Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+          allOf:
+            - $ref: '#/components/schemas/__integerMin5Max100'
+            - xml:
+                name: maxResults
+              description: Required. The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
         NextToken:
-          xml:
-            name: nextToken
-          $ref: '#/components/schemas/__string'
-          description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.'
         Users:
-          xml:
-            name: users
-          $ref: '#/components/schemas/__listOfUserSummary'
-          description: Required. The list of all ActiveMQ usernames for the specified broker.
+          allOf:
+            - $ref: '#/components/schemas/__listOfUserSummary'
+            - xml:
+                name: users
+              description: Required. The list of all ActiveMQ usernames for the specified broker.
     RebootBrokerResponse:
       type: object
       properties: {}
@@ -2182,83 +2297,98 @@ components:
       type: object
       properties:
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy used to secure the broker.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
-          xml:
-            name: autoMinorVersionUpgrade
-          $ref: '#/components/schemas/__boolean'
-          description: The new value of automatic upgrades to new minor version for brokers.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: autoMinorVersionUpgrade
+              description: The new value of automatic upgrades to new minor version for brokers.
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: Required. The unique ID that Amazon MQ generates for the broker.
         Configuration:
-          xml:
-            name: configuration
-          $ref: '#/components/schemas/ConfigurationId'
-          description: The ID of the updated configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationId'
+            - xml:
+                name: configuration
+              description: The ID of the updated configuration.
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
         LdapServerMetadata:
-          xml:
-            name: ldapServerMetadata
-          $ref: '#/components/schemas/LdapServerMetadataOutput'
-          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+          allOf:
+            - $ref: '#/components/schemas/LdapServerMetadataOutput'
+            - xml:
+                name: ldapServerMetadata
+              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
-          xml:
-            name: logs
-          $ref: '#/components/schemas/Logs'
-          description: The list of information about logs to be enabled for the specified broker.
+          allOf:
+            - $ref: '#/components/schemas/Logs'
+            - xml:
+                name: logs
+              description: The list of information about logs to be enabled for the specified broker.
         SecurityGroups:
-          xml:
-            name: securityGroups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
     UpdateConfigurationResponse:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          $ref: '#/components/schemas/__string'
-          description: Required. The Amazon Resource Name (ARN) of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: Required. The Amazon Resource Name (ARN) of the configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration.
         Id:
-          xml:
-            name: id
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         LatestRevision:
-          xml:
-            name: latestRevision
-          $ref: '#/components/schemas/ConfigurationRevision'
-          description: The latest revision of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationRevision'
+            - xml:
+                name: latestRevision
+              description: The latest revision of the configuration.
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
         Warnings:
-          xml:
-            name: warnings
-          $ref: '#/components/schemas/__listOfSanitizationWarning'
-          description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
+          allOf:
+            - $ref: '#/components/schemas/__listOfSanitizationWarning'
+            - xml:
+                name: warnings
+              description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
     UpdateUserResponse:
       type: object
       properties: {}
@@ -2272,10 +2402,11 @@ components:
       type: object
       properties:
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: Id for the availability zone.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: Id for the availability zone.
       description: Name of the availability zone.
     EngineType:
       type: string
@@ -2290,34 +2421,39 @@ components:
       type: object
       properties:
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: The type of broker engine.
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: The type of broker engine.
         EngineVersions:
-          xml:
-            name: engineVersions
-          $ref: '#/components/schemas/__listOfEngineVersion'
-          description: The list of engine versions.
+          allOf:
+            - $ref: '#/components/schemas/__listOfEngineVersion'
+            - xml:
+                name: engineVersions
+              description: The list of engine versions.
       description: Types of broker engines.
     BrokerInstance:
       type: object
       properties:
         ConsoleURL:
-          xml:
-            name: consoleURL
-          $ref: '#/components/schemas/__string'
-          description: The URL of the broker's ActiveMQ Web Console.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: consoleURL
+              description: The URL of the broker's ActiveMQ Web Console.
         Endpoints:
-          xml:
-            name: endpoints
-          $ref: '#/components/schemas/__listOf__string'
-          description: The broker's wire-level protocol endpoints.
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: endpoints
+              description: The broker's wire-level protocol endpoints.
         IpAddress:
-          xml:
-            name: ipAddress
-          $ref: '#/components/schemas/__string'
-          description: The IP address of the Elastic Network Interface (ENI) attached to the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: ipAddress
+              description: The IP address of the Elastic Network Interface (ENI) attached to the broker.
       description: Returns information about all brokers.
     __listOfAvailabilityZone:
       type: array
@@ -2337,35 +2473,41 @@ components:
       type: object
       properties:
         AvailabilityZones:
-          xml:
-            name: availabilityZones
-          $ref: '#/components/schemas/__listOfAvailabilityZone'
-          description: The list of available az.
+          allOf:
+            - $ref: '#/components/schemas/__listOfAvailabilityZone'
+            - xml:
+                name: availabilityZones
+              description: The list of available az.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: The type of broker engine.
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: The type of broker engine.
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: The type of broker instance.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: The type of broker instance.
         StorageType:
-          xml:
-            name: storageType
-          $ref: '#/components/schemas/BrokerStorageType'
-          description: The broker's storage type.
+          allOf:
+            - $ref: '#/components/schemas/BrokerStorageType'
+            - xml:
+                name: storageType
+              description: The broker's storage type.
         SupportedDeploymentModes:
-          xml:
-            name: supportedDeploymentModes
-          $ref: '#/components/schemas/__listOfDeploymentMode'
-          description: The list of supported deployment modes.
+          allOf:
+            - $ref: '#/components/schemas/__listOfDeploymentMode'
+            - xml:
+                name: supportedDeploymentModes
+              description: The list of supported deployment modes.
         SupportedEngineVersions:
-          xml:
-            name: supportedEngineVersions
-          $ref: '#/components/schemas/__listOf__string'
-          description: The list of supported engine versions.
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: supportedEngineVersions
+              description: The list of supported engine versions.
       description: Option for host instance type.
     BrokerState:
       type: string
@@ -2389,40 +2531,47 @@ components:
       type: object
       properties:
         BrokerArn:
-          xml:
-            name: brokerArn
-          $ref: '#/components/schemas/__string'
-          description: The Amazon Resource Name (ARN) of the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerArn
+              description: The Amazon Resource Name (ARN) of the broker.
         BrokerId:
-          xml:
-            name: brokerId
-          $ref: '#/components/schemas/__string'
-          description: The unique ID that Amazon MQ generates for the broker.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: The unique ID that Amazon MQ generates for the broker.
         BrokerName:
-          xml:
-            name: brokerName
-          $ref: '#/components/schemas/__string'
-          description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerName
+              description: 'The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
         BrokerState:
-          xml:
-            name: brokerState
-          $ref: '#/components/schemas/BrokerState'
-          description: The status of the broker.
+          allOf:
+            - $ref: '#/components/schemas/BrokerState'
+            - xml:
+                name: brokerState
+              description: The status of the broker.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: The time when the broker was created.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: The time when the broker was created.
         DeploymentMode:
-          xml:
-            name: deploymentMode
-          $ref: '#/components/schemas/DeploymentMode'
-          description: Required. The deployment mode of the broker.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentMode'
+            - xml:
+                name: deploymentMode
+              description: Required. The deployment mode of the broker.
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: The broker's instance type.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: The broker's instance type.
       description: The Amazon Resource Name (ARN) of the broker.
     ChangeType:
       type: string
@@ -2435,20 +2584,23 @@ components:
       type: object
       properties:
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration revision.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration revision.
         Description:
-          xml:
-            name: description
-          $ref: '#/components/schemas/__string'
-          description: The description of the configuration revision.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: The description of the configuration revision.
         Revision:
-          xml:
-            name: revision
-          $ref: '#/components/schemas/__integer'
-          description: Required. The revision number of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: revision
+              description: Required. The revision number of the configuration.
       description: Returns information about the specified configuration revision.
     __mapOf__string:
       type: object
@@ -2458,69 +2610,81 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          $ref: '#/components/schemas/__string'
-          description: Required. The ARN of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: Required. The ARN of the configuration.
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy associated with the configuration.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy associated with the configuration.
         Created:
-          xml:
-            name: created
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: Required. The date and time of the configuration revision.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: created
+              description: Required. The date and time of the configuration revision.
         Description:
-          xml:
-            name: description
-          $ref: '#/components/schemas/__string'
-          description: Required. The description of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: Required. The description of the configuration.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         Id:
-          xml:
-            name: id
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         LatestRevision:
-          xml:
-            name: latestRevision
-          $ref: '#/components/schemas/ConfigurationRevision'
-          description: Required. The latest revision of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationRevision'
+            - xml:
+                name: latestRevision
+              description: Required. The latest revision of the configuration.
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The list of all tags associated with this configuration.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: The list of all tags associated with this configuration.
       description: Returns information about all configurations.
     ConfigurationId:
       type: object
       properties:
         Id:
-          xml:
-            name: id
-          $ref: '#/components/schemas/__string'
-          description: Required. The unique ID that Amazon MQ generates for the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: Required. The unique ID that Amazon MQ generates for the configuration.
         Revision:
-          xml:
-            name: revision
-          $ref: '#/components/schemas/__integer'
-          description: The revision number of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: revision
+              description: The revision number of the configuration.
       description: A list of information about the configuration.
     __listOfConfigurationId:
       type: array
@@ -2530,20 +2694,23 @@ components:
       type: object
       properties:
         Current:
-          xml:
-            name: current
-          $ref: '#/components/schemas/ConfigurationId'
-          description: The current configuration of the broker.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationId'
+            - xml:
+                name: current
+              description: The current configuration of the broker.
         History:
-          xml:
-            name: history
-          $ref: '#/components/schemas/__listOfConfigurationId'
-          description: The history of configurations applied to the broker.
+          allOf:
+            - $ref: '#/components/schemas/__listOfConfigurationId'
+            - xml:
+                name: history
+              description: The history of configurations applied to the broker.
         Pending:
-          xml:
-            name: pending
-          $ref: '#/components/schemas/ConfigurationId'
-          description: The pending configuration of the broker.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationId'
+            - xml:
+                name: pending
+              description: The pending configuration of the broker.
       description: Broker configuration information
     EncryptionOptions:
       type: object
@@ -2551,107 +2718,125 @@ components:
         - UseAwsOwnedKey
       properties:
         KmsKeyId:
-          xml:
-            name: kmsKeyId
-          $ref: '#/components/schemas/__string'
-          description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: kmsKeyId
+              description: 'The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
         UseAwsOwnedKey:
-          xml:
-            name: useAwsOwnedKey
-          $ref: '#/components/schemas/__boolean'
-          description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: useAwsOwnedKey
+              description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
       description: Encryption options for the broker.
     LdapServerMetadataInput:
       type: object
       properties:
         Hosts:
-          xml:
-            name: hosts
-          $ref: '#/components/schemas/__listOf__string'
-          description: Fully qualified domain name of the LDAP server. Optional failover server.
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: hosts
+              description: Fully qualified domain name of the LDAP server. Optional failover server.
         RoleBase:
-          xml:
-            name: roleBase
-          $ref: '#/components/schemas/__string'
-          description: Fully qualified name of the directory to search for a user’s groups.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleBase
+              description: Fully qualified name of the directory to search for a user’s groups.
         RoleName:
-          xml:
-            name: roleName
-          $ref: '#/components/schemas/__string'
-          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleName
+              description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
         RoleSearchMatching:
-          xml:
-            name: roleSearchMatching
-          $ref: '#/components/schemas/__string'
-          description: The search criteria for groups.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleSearchMatching
+              description: The search criteria for groups.
         RoleSearchSubtree:
-          xml:
-            name: roleSearchSubtree
-          $ref: '#/components/schemas/__boolean'
-          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: roleSearchSubtree
+              description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
         ServiceAccountPassword:
-          xml:
-            name: serviceAccountPassword
-          $ref: '#/components/schemas/__string'
-          description: Service account password.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: serviceAccountPassword
+              description: Service account password.
         ServiceAccountUsername:
-          xml:
-            name: serviceAccountUsername
-          $ref: '#/components/schemas/__string'
-          description: Service account username.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: serviceAccountUsername
+              description: Service account username.
         UserBase:
-          xml:
-            name: userBase
-          $ref: '#/components/schemas/__string'
-          description: Fully qualified name of the directory where you want to search for users.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userBase
+              description: Fully qualified name of the directory where you want to search for users.
         UserRoleName:
-          xml:
-            name: userRoleName
-          $ref: '#/components/schemas/__string'
-          description: Specifies the name of the LDAP attribute for the user group membership.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userRoleName
+              description: Specifies the name of the LDAP attribute for the user group membership.
         UserSearchMatching:
-          xml:
-            name: userSearchMatching
-          $ref: '#/components/schemas/__string'
-          description: The search criteria for users.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userSearchMatching
+              description: The search criteria for users.
         UserSearchSubtree:
-          xml:
-            name: userSearchSubtree
-          $ref: '#/components/schemas/__boolean'
-          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: userSearchSubtree
+              description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
       description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
     Logs:
       type: object
       properties:
         Audit:
-          xml:
-            name: audit
-          $ref: '#/components/schemas/__boolean'
-          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: audit
+              description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
         General:
-          xml:
-            name: general
-          $ref: '#/components/schemas/__boolean'
-          description: Enables general logging.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: general
+              description: Enables general logging.
       description: The list of information about logs to be enabled for the specified broker.
     WeeklyStartTime:
       type: object
       properties:
         DayOfWeek:
-          xml:
-            name: dayOfWeek
-          $ref: '#/components/schemas/DayOfWeek'
-          description: Required. The day of the week.
+          allOf:
+            - $ref: '#/components/schemas/DayOfWeek'
+            - xml:
+                name: dayOfWeek
+              description: Required. The day of the week.
         TimeOfDay:
-          xml:
-            name: timeOfDay
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The time, in 24-hour format.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: timeOfDay
+              description: 'Required. The time, in 24-hour format.'
         TimeZone:
-          xml:
-            name: timeZone
-          $ref: '#/components/schemas/__string'
-          description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: timeZone
+              description: 'The time zone, UTC by default, in either the Country/City format, or the UTC offset format.'
       description: The scheduled time period relative to UTC during which Amazon MQ begins to apply pending updates or patches to the broker.
     __listOfUser:
       type: array
@@ -2662,160 +2847,188 @@ components:
       title: CreateBrokerRequest
       properties:
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy used to secure the broker.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
-          xml:
-            name: autoMinorVersionUpgrade
-          $ref: '#/components/schemas/__boolean'
-          description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: autoMinorVersionUpgrade
+              description: 'Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
         BrokerName:
-          xml:
-            name: brokerName
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerName
+              description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
         Configuration:
-          xml:
-            name: configuration
-          $ref: '#/components/schemas/ConfigurationId'
-          description: A list of information about the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationId'
+            - xml:
+                name: configuration
+              description: A list of information about the configuration.
         CreatorRequestId:
-          xml:
-            name: creatorRequestId
-          $ref: '#/components/schemas/__string'
-          description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: creatorRequestId
+              description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
         DeploymentMode:
-          xml:
-            name: deploymentMode
-          $ref: '#/components/schemas/DeploymentMode'
-          description: Required. The deployment mode of the broker.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentMode'
+            - xml:
+                name: deploymentMode
+              description: Required. The deployment mode of the broker.
         EncryptionOptions:
-          xml:
-            name: encryptionOptions
-          $ref: '#/components/schemas/EncryptionOptions'
-          description: Encryption options for the broker.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionOptions'
+            - xml:
+                name: encryptionOptions
+              description: Encryption options for the broker.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: Required. The broker's instance type.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: Required. The broker's instance type.
         LdapServerMetadata:
-          xml:
-            name: ldapServerMetadata
-          $ref: '#/components/schemas/LdapServerMetadataInput'
-          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+          allOf:
+            - $ref: '#/components/schemas/LdapServerMetadataInput'
+            - xml:
+                name: ldapServerMetadata
+              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
-          xml:
-            name: logs
-          $ref: '#/components/schemas/Logs'
-          description: Enables Amazon CloudWatch logging for brokers.
+          allOf:
+            - $ref: '#/components/schemas/Logs'
+            - xml:
+                name: logs
+              description: Enables Amazon CloudWatch logging for brokers.
         MaintenanceWindowStartTime:
-          xml:
-            name: maintenanceWindowStartTime
-          $ref: '#/components/schemas/WeeklyStartTime'
-          description: The parameters that determine the WeeklyStartTime.
+          allOf:
+            - $ref: '#/components/schemas/WeeklyStartTime'
+            - xml:
+                name: maintenanceWindowStartTime
+              description: The parameters that determine the WeeklyStartTime.
         PubliclyAccessible:
-          xml:
-            name: publiclyAccessible
-          $ref: '#/components/schemas/__boolean'
-          description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: publiclyAccessible
+              description: Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
         SecurityGroups:
-          xml:
-            name: securityGroups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
         StorageType:
-          xml:
-            name: storageType
-          $ref: '#/components/schemas/BrokerStorageType'
-          description: The broker's storage type.
+          allOf:
+            - $ref: '#/components/schemas/BrokerStorageType'
+            - xml:
+                name: storageType
+              description: The broker's storage type.
         SubnetIds:
-          xml:
-            name: subnetIds
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: subnetIds
+              description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: Create tags when creating the broker.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: Create tags when creating the broker.
         Users:
-          xml:
-            name: users
-          $ref: '#/components/schemas/__listOfUser'
-          description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOfUser'
+            - xml:
+                name: users
+              description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       description: Creates a broker using the specified properties.
     CreateConfigurationRequest:
       type: object
       title: CreateConfigurationRequest
       properties:
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy associated with the configuration.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy associated with the configuration.
         EngineType:
-          xml:
-            name: engineType
-          $ref: '#/components/schemas/EngineType'
-          description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: Create tags when creating the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: Create tags when creating the configuration.
       description: Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
     CreateTagsRequest:
       type: object
       title: CreateTagsRequest
       properties:
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/__mapOf__string'
-          description: The key-value pair for the resource tag.
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: The key-value pair for the resource tag.
       description: A map of the key-value pairs for the resource tag.
     CreateUserRequest:
       type: object
       title: CreateUserRequest
       properties:
         ConsoleAccess:
-          xml:
-            name: consoleAccess
-          $ref: '#/components/schemas/__boolean'
-          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: consoleAccess
+              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
-          xml:
-            name: groups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: groups
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
         Password:
-          xml:
-            name: password
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: password
+              description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
       description: Creates a new ActiveMQ user.
     DeleteBrokerRequest:
       type: object
@@ -2865,84 +3078,99 @@ components:
       type: object
       properties:
         Hosts:
-          xml:
-            name: hosts
-          $ref: '#/components/schemas/__listOf__string'
-          description: Fully qualified domain name of the LDAP server. Optional failover server.
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: hosts
+              description: Fully qualified domain name of the LDAP server. Optional failover server.
         RoleBase:
-          xml:
-            name: roleBase
-          $ref: '#/components/schemas/__string'
-          description: Fully qualified name of the directory to search for a user’s groups.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleBase
+              description: Fully qualified name of the directory to search for a user’s groups.
         RoleName:
-          xml:
-            name: roleName
-          $ref: '#/components/schemas/__string'
-          description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleName
+              description: Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
         RoleSearchMatching:
-          xml:
-            name: roleSearchMatching
-          $ref: '#/components/schemas/__string'
-          description: The search criteria for groups.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleSearchMatching
+              description: The search criteria for groups.
         RoleSearchSubtree:
-          xml:
-            name: roleSearchSubtree
-          $ref: '#/components/schemas/__boolean'
-          description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: roleSearchSubtree
+              description: 'The directory search scope for the role. If set to true, scope is to search the entire sub-tree.'
         ServiceAccountUsername:
-          xml:
-            name: serviceAccountUsername
-          $ref: '#/components/schemas/__string'
-          description: Service account username.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: serviceAccountUsername
+              description: Service account username.
         UserBase:
-          xml:
-            name: userBase
-          $ref: '#/components/schemas/__string'
-          description: Fully qualified name of the directory where you want to search for users.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userBase
+              description: Fully qualified name of the directory where you want to search for users.
         UserRoleName:
-          xml:
-            name: userRoleName
-          $ref: '#/components/schemas/__string'
-          description: Specifies the name of the LDAP attribute for the user group membership.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userRoleName
+              description: Specifies the name of the LDAP attribute for the user group membership.
         UserSearchMatching:
-          xml:
-            name: userSearchMatching
-          $ref: '#/components/schemas/__string'
-          description: The search criteria for users.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userSearchMatching
+              description: The search criteria for users.
         UserSearchSubtree:
-          xml:
-            name: userSearchSubtree
-          $ref: '#/components/schemas/__boolean'
-          description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: userSearchSubtree
+              description: 'The directory search scope for the user. If set to true, scope is to search the entire sub-tree.'
       description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
     LogsSummary:
       type: object
       properties:
         Audit:
-          xml:
-            name: audit
-          $ref: '#/components/schemas/__boolean'
-          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: audit
+              description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
         AuditLogGroup:
-          xml:
-            name: auditLogGroup
-          $ref: '#/components/schemas/__string'
-          description: The location of the CloudWatch Logs log group where audit logs are sent.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: auditLogGroup
+              description: The location of the CloudWatch Logs log group where audit logs are sent.
         General:
-          xml:
-            name: general
-          $ref: '#/components/schemas/__boolean'
-          description: Enables general logging.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: general
+              description: Enables general logging.
         GeneralLogGroup:
-          xml:
-            name: generalLogGroup
-          $ref: '#/components/schemas/__string'
-          description: The location of the CloudWatch Logs log group where general logs are sent.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: generalLogGroup
+              description: The location of the CloudWatch Logs log group where general logs are sent.
         Pending:
-          xml:
-            name: pending
-          $ref: '#/components/schemas/PendingLogs'
-          description: The list of information about logs pending to be deployed for the specified broker.
+          allOf:
+            - $ref: '#/components/schemas/PendingLogs'
+            - xml:
+                name: pending
+              description: The list of information about logs pending to be deployed for the specified broker.
       description: The list of information about logs currently enabled and pending to be deployed for the specified broker.
     __listOfUserSummary:
       type: array
@@ -2964,29 +3192,33 @@ components:
       type: object
       properties:
         ConsoleAccess:
-          xml:
-            name: consoleAccess
-          $ref: '#/components/schemas/__boolean'
-          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: consoleAccess
+              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
-          xml:
-            name: groups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: groups
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
         PendingChange:
-          xml:
-            name: pendingChange
-          $ref: '#/components/schemas/ChangeType'
-          description: Required. The type of change pending for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/ChangeType'
+            - xml:
+                name: pendingChange
+              description: Required. The type of change pending for the ActiveMQ user.
       description: Returns information about the status of the changes pending for the ActiveMQ user.
     EngineVersion:
       type: object
       properties:
         Name:
-          xml:
-            name: name
-          $ref: '#/components/schemas/__string'
-          description: Id for the version.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: name
+              description: Id for the version.
       description: Id of the engine version.
     ListBrokersRequest:
       type: object
@@ -3024,15 +3256,17 @@ components:
       type: object
       properties:
         Audit:
-          xml:
-            name: audit
-          $ref: '#/components/schemas/__boolean'
-          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: audit
+              description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
         General:
-          xml:
-            name: general
-          $ref: '#/components/schemas/__boolean'
-          description: Enables general logging.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: general
+              description: Enables general logging.
       description: The list of information about logs to be enabled for the specified broker.
     RebootBrokerRequest:
       type: object
@@ -3049,80 +3283,93 @@ components:
       type: object
       properties:
         AttributeName:
-          xml:
-            name: attributeName
-          $ref: '#/components/schemas/__string'
-          description: The name of the XML attribute that has been sanitized.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: attributeName
+              description: The name of the XML attribute that has been sanitized.
         ElementName:
-          xml:
-            name: elementName
-          $ref: '#/components/schemas/__string'
-          description: The name of the XML element that has been sanitized.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: elementName
+              description: The name of the XML element that has been sanitized.
         Reason:
-          xml:
-            name: reason
-          $ref: '#/components/schemas/SanitizationWarningReason'
-          description: Required. The reason for which the XML elements or attributes were sanitized.
+          allOf:
+            - $ref: '#/components/schemas/SanitizationWarningReason'
+            - xml:
+                name: reason
+              description: Required. The reason for which the XML elements or attributes were sanitized.
       description: Returns information about the XML element or attribute that was sanitized in the configuration.
     UpdateBrokerRequest:
       type: object
       title: UpdateBrokerRequest
       properties:
         AuthenticationStrategy:
-          xml:
-            name: authenticationStrategy
-          $ref: '#/components/schemas/AuthenticationStrategy'
-          description: The authentication strategy used to secure the broker.
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationStrategy'
+            - xml:
+                name: authenticationStrategy
+              description: The authentication strategy used to secure the broker.
         AutoMinorVersionUpgrade:
-          xml:
-            name: autoMinorVersionUpgrade
-          $ref: '#/components/schemas/__boolean'
-          description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: autoMinorVersionUpgrade
+              description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
         Configuration:
-          xml:
-            name: configuration
-          $ref: '#/components/schemas/ConfigurationId'
-          description: A list of information about the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationId'
+            - xml:
+                name: configuration
+              description: A list of information about the configuration.
         EngineVersion:
-          xml:
-            name: engineVersion
-          $ref: '#/components/schemas/__string'
-          description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: engineVersion
+              description: 'The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
         HostInstanceType:
-          xml:
-            name: hostInstanceType
-          $ref: '#/components/schemas/__string'
-          description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostInstanceType
+              description: 'The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types'
         LdapServerMetadata:
-          xml:
-            name: ldapServerMetadata
-          $ref: '#/components/schemas/LdapServerMetadataInput'
-          description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+          allOf:
+            - $ref: '#/components/schemas/LdapServerMetadataInput'
+            - xml:
+                name: ldapServerMetadata
+              description: The metadata of the LDAP server used to authenticate and authorize connections to the broker.
         Logs:
-          xml:
-            name: logs
-          $ref: '#/components/schemas/Logs'
-          description: Enables Amazon CloudWatch logging for brokers.
+          allOf:
+            - $ref: '#/components/schemas/Logs'
+            - xml:
+                name: logs
+              description: Enables Amazon CloudWatch logging for brokers.
         SecurityGroups:
-          xml:
-            name: securityGroups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
       description: Updates the broker using the specified properties.
     UpdateConfigurationRequest:
       type: object
       title: UpdateConfigurationRequest
       properties:
         Data:
-          xml:
-            name: data
-          $ref: '#/components/schemas/__string'
-          description: Required. The base64-encoded XML configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: data
+              description: Required. The base64-encoded XML configuration.
         Description:
-          xml:
-            name: description
-          $ref: '#/components/schemas/__string'
-          description: The description of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: The description of the configuration.
       description: Updates the specified configuration.
     __listOfSanitizationWarning:
       type: array
@@ -3133,34 +3380,39 @@ components:
       title: UpdateUserRequest
       properties:
         ConsoleAccess:
-          xml:
-            name: consoleAccess
-          $ref: '#/components/schemas/__boolean'
-          description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: consoleAccess
+              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
         Groups:
-          xml:
-            name: groups
-          $ref: '#/components/schemas/__listOf__string'
-          description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: groups
+              description: 'The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
         Password:
-          xml:
-            name: password
-          $ref: '#/components/schemas/__string'
-          description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: password
+              description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
       description: Updates the information for an ActiveMQ user.
     UserSummary:
       type: object
       properties:
         PendingChange:
-          xml:
-            name: pendingChange
-          $ref: '#/components/schemas/ChangeType'
-          description: The type of change pending for the ActiveMQ user.
+          allOf:
+            - $ref: '#/components/schemas/ChangeType'
+            - xml:
+                name: pendingChange
+              description: The type of change pending for the ActiveMQ user.
         Username:
-          xml:
-            name: username
-          $ref: '#/components/schemas/__string'
-          description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: username
+              description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       description: Returns a list of all ActiveMQ users.
 security:
   - hmac: []

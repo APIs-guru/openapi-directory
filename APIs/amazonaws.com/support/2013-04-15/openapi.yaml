@@ -773,11 +773,13 @@ components:
       type: object
       properties:
         attachmentSetId:
-          $ref: '#/components/schemas/AttachmentSetId'
-          description: 'The ID of the attachment set. If an <code>attachmentSetId</code> was not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> was specified, the attachments are added to the specified set, if it exists.'
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSetId'
+            - description: 'The ID of the attachment set. If an <code>attachmentSetId</code> was not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> was specified, the attachments are added to the specified set, if it exists.'
         expiryTime:
-          $ref: '#/components/schemas/ExpiryTime'
-          description: The time and date when the attachment set expires.
+          allOf:
+            - $ref: '#/components/schemas/ExpiryTime'
+            - description: The time and date when the attachment set expires.
       description: The ID and expiry time of the attachment set returned by the <a>AddAttachmentsToSet</a> operation.
     AddAttachmentsToSetRequest:
       type: object
@@ -786,11 +788,13 @@ components:
       title: AddAttachmentsToSetRequest
       properties:
         attachmentSetId:
-          $ref: '#/components/schemas/AttachmentSetId'
-          description: 'The ID of the attachment set. If an <code>attachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.'
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSetId'
+            - description: 'The ID of the attachment set. If an <code>attachmentSetId</code> is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an <code>attachmentSetId</code> is specified, the attachments are added to the specified set, if it exists.'
         attachments:
-          $ref: '#/components/schemas/Attachments'
-          description: '<p>One or more attachments to add to the set. You can add up to three attachments per set. The size limit is 5 MB per attachment.</p> <p>In the <code>Attachment</code> object, use the <code>data</code> parameter to specify the contents of the attachment file. In the previous request syntax, the value for <code>data</code> appear as <code>blob</code>, which is represented as a base64-encoded string. The value for <code>fileName</code> is the name of the attachment, such as <code>troubleshoot-screenshot.png</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Attachments'
+            - description: '<p>One or more attachments to add to the set. You can add up to three attachments per set. The size limit is 5 MB per attachment.</p> <p>In the <code>Attachment</code> object, use the <code>data</code> parameter to specify the contents of the attachment file. In the previous request syntax, the value for <code>data</code> appear as <code>blob</code>, which is represented as a base64-encoded string. The value for <code>fileName</code> is the name of the attachment, such as <code>troubleshoot-screenshot.png</code>.</p>'
     InternalServerError: {}
     AttachmentSetIdNotFound: {}
     AttachmentSetExpired: {}
@@ -800,8 +804,9 @@ components:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/Result'
-          description: 'True if <a>AddCommunicationToCase</a> succeeds. Otherwise, returns an error.'
+          allOf:
+            - $ref: '#/components/schemas/Result'
+            - description: 'True if <a>AddCommunicationToCase</a> succeeds. Otherwise, returns an error.'
       description: The result of the <a>AddCommunicationToCase</a> operation.
     AddCommunicationToCaseRequest:
       type: object
@@ -810,24 +815,29 @@ components:
       title: AddCommunicationToCaseRequest
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
         communicationBody:
-          $ref: '#/components/schemas/CommunicationBody'
-          description: The body of an email communication to add to the support case.
+          allOf:
+            - $ref: '#/components/schemas/CommunicationBody'
+            - description: The body of an email communication to add to the support case.
         ccEmailAddresses:
-          $ref: '#/components/schemas/CcEmailAddressList'
-          description: The email addresses in the CC line of an email to be added to the support case.
+          allOf:
+            - $ref: '#/components/schemas/CcEmailAddressList'
+            - description: The email addresses in the CC line of an email to be added to the support case.
         attachmentSetId:
-          $ref: '#/components/schemas/AttachmentSetId'
-          description: 'The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a> '
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSetId'
+            - description: 'The ID of a set of one or more attachments for the communication to add to the case. Create the set by calling <a>AddAttachmentsToSet</a> '
     CaseIdNotFound: {}
     CreateCaseResponse:
       type: object
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string in the following format: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string in the following format: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
       description: The AWS Support case ID returned by a successful completion of the <a>CreateCase</a> operation.
     CreateCaseRequest:
       type: object
@@ -837,39 +847,49 @@ components:
       title: CreateCaseRequest
       properties:
         subject:
-          $ref: '#/components/schemas/Subject'
-          description: 'The title of the AWS Support case. The title appears in the <b>Subject</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.'
+          allOf:
+            - $ref: '#/components/schemas/Subject'
+            - description: 'The title of the AWS Support case. The title appears in the <b>Subject</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.'
         serviceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: The code for the AWS service. You can use the <a>DescribeServices</a> operation to get the possible <code>serviceCode</code> values.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: The code for the AWS service. You can use the <a>DescribeServices</a> operation to get the possible <code>serviceCode</code> values.
         severityCode:
-          $ref: '#/components/schemas/SeverityCode'
-          description: '<p>A value that indicates the urgency of the case. This value determines the response time according to your service level agreement with AWS Support. You can use the <a>DescribeSeverityLevels</a> operation to get the possible values for <code>severityCode</code>. </p> <p>For more information, see <a>SeverityLevel</a> and <a href="https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity">Choosing a Severity</a> in the <i>AWS Support User Guide</i>.</p> <note> <p>The availability of severity levels depends on the support plan for the AWS account.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SeverityCode'
+            - description: '<p>A value that indicates the urgency of the case. This value determines the response time according to your service level agreement with AWS Support. You can use the <a>DescribeSeverityLevels</a> operation to get the possible values for <code>severityCode</code>. </p> <p>For more information, see <a>SeverityLevel</a> and <a href="https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity">Choosing a Severity</a> in the <i>AWS Support User Guide</i>.</p> <note> <p>The availability of severity levels depends on the support plan for the AWS account.</p> </note>'
         categoryCode:
-          $ref: '#/components/schemas/CategoryCode'
-          description: The category of problem for the AWS Support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each AWS service defines its own set of category codes.
+          allOf:
+            - $ref: '#/components/schemas/CategoryCode'
+            - description: The category of problem for the AWS Support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each AWS service defines its own set of category codes.
         communicationBody:
-          $ref: '#/components/schemas/CommunicationBody'
-          description: 'The communication body text that describes the issue. This text appears in the <b>Description</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.'
+          allOf:
+            - $ref: '#/components/schemas/CommunicationBody'
+            - description: 'The communication body text that describes the issue. This text appears in the <b>Description</b> field on the AWS Support Center <a href="https://console.aws.amazon.com/support/home#/case/create">Create Case</a> page.'
         ccEmailAddresses:
-          $ref: '#/components/schemas/CcEmailAddressList'
-          description: 'A list of email addresses that AWS Support copies on case correspondence. AWS Support identifies the account that creates the case when you specify your AWS credentials in an HTTP POST method or use the <a href="http://aws.amazon.com/tools/">AWS SDKs</a>. '
+          allOf:
+            - $ref: '#/components/schemas/CcEmailAddressList'
+            - description: 'A list of email addresses that AWS Support copies on case correspondence. AWS Support identifies the account that creates the case when you specify your AWS credentials in an HTTP POST method or use the <a href="http://aws.amazon.com/tools/">AWS SDKs</a>. '
         language:
-          $ref: '#/components/schemas/Language'
-          description: 'The language in which AWS Support handles the case. You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language. Currently, English ("en") and Japanese ("ja") are supported.'
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: 'The language in which AWS Support handles the case. You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language. Currently, English ("en") and Japanese ("ja") are supported.'
         issueType:
-          $ref: '#/components/schemas/IssueType'
-          description: 'The type of issue for the case. You can specify <code>customer-service</code> or <code>technical</code>. If you don''t specify a value, the default is <code>technical</code>.'
+          allOf:
+            - $ref: '#/components/schemas/IssueType'
+            - description: 'The type of issue for the case. You can specify <code>customer-service</code> or <code>technical</code>. If you don''t specify a value, the default is <code>technical</code>.'
         attachmentSetId:
-          $ref: '#/components/schemas/AttachmentSetId'
-          description: The ID of a set of one or more attachments for the case. Create the set by using the <a>AddAttachmentsToSet</a> operation.
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSetId'
+            - description: The ID of a set of one or more attachments for the case. Create the set by using the <a>AddAttachmentsToSet</a> operation.
     CaseCreationLimitExceeded: {}
     DescribeAttachmentResponse:
       type: object
       properties:
         attachment:
-          $ref: '#/components/schemas/Attachment'
-          description: '<p>This object includes the attachment content and file name.</p> <p>In the previous response syntax, the value for the <code>data</code> parameter appears as <code>blob</code>, which is represented as a base64-encoded string. The value for <code>fileName</code> is the name of the attachment, such as <code>troubleshoot-screenshot.png</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Attachment'
+            - description: '<p>This object includes the attachment content and file name.</p> <p>In the previous response syntax, the value for the <code>data</code> parameter appears as <code>blob</code>, which is represented as a base64-encoded string. The value for <code>fileName</code> is the name of the attachment, such as <code>troubleshoot-screenshot.png</code>.</p>'
       description: The content and file name of the attachment returned by the <a>DescribeAttachment</a> operation.
     DescribeAttachmentRequest:
       type: object
@@ -878,60 +898,74 @@ components:
       title: DescribeAttachmentRequest
       properties:
         attachmentId:
-          $ref: '#/components/schemas/AttachmentId'
-          description: The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.
+          allOf:
+            - $ref: '#/components/schemas/AttachmentId'
+            - description: The ID of the attachment to return. Attachment IDs are returned by the <a>DescribeCommunications</a> operation.
     DescribeAttachmentLimitExceeded: {}
     AttachmentIdNotFound: {}
     DescribeCasesResponse:
       type: object
       properties:
         cases:
-          $ref: '#/components/schemas/CaseList'
-          description: The details for the cases that match the request.
+          allOf:
+            - $ref: '#/components/schemas/CaseList'
+            - description: The details for the cases that match the request.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A resumption point for pagination.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A resumption point for pagination.
       description: 'Returns an array of <a href="https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html">CaseDetails</a> objects and a <code>nextToken</code> that defines a point for pagination in the result set.'
     DescribeCasesRequest:
       type: object
       title: DescribeCasesRequest
       properties:
         caseIdList:
-          $ref: '#/components/schemas/CaseIdList'
-          description: A list of ID numbers of the support cases you want returned. The maximum number of cases is 100.
+          allOf:
+            - $ref: '#/components/schemas/CaseIdList'
+            - description: A list of ID numbers of the support cases you want returned. The maximum number of cases is 100.
         displayId:
-          $ref: '#/components/schemas/DisplayId'
-          description: The ID displayed for a case in the AWS Support Center user interface.
+          allOf:
+            - $ref: '#/components/schemas/DisplayId'
+            - description: The ID displayed for a case in the AWS Support Center user interface.
         afterTime:
-          $ref: '#/components/schemas/AfterTime'
-          description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
+          allOf:
+            - $ref: '#/components/schemas/AfterTime'
+            - description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
         beforeTime:
-          $ref: '#/components/schemas/BeforeTime'
-          description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
+          allOf:
+            - $ref: '#/components/schemas/BeforeTime'
+            - description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
         includeResolvedCases:
-          $ref: '#/components/schemas/IncludeResolvedCases'
-          description: 'Specifies whether to include resolved support cases in the <code>DescribeCases</code> response. By default, resolved cases aren''t included.'
+          allOf:
+            - $ref: '#/components/schemas/IncludeResolvedCases'
+            - description: 'Specifies whether to include resolved support cases in the <code>DescribeCases</code> response. By default, resolved cases aren''t included.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A resumption point for pagination.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A resumption point for pagination.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to return before paginating.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return before paginating.
         language:
-          $ref: '#/components/schemas/Language'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
         includeCommunications:
-          $ref: '#/components/schemas/IncludeCommunications'
-          description: 'Specifies whether to include communications in the <code>DescribeCases</code> response. By default, communications are incuded.'
+          allOf:
+            - $ref: '#/components/schemas/IncludeCommunications'
+            - description: 'Specifies whether to include communications in the <code>DescribeCases</code> response. By default, communications are incuded.'
     DescribeCommunicationsResponse:
       type: object
       properties:
         communications:
-          $ref: '#/components/schemas/CommunicationList'
-          description: The communications for the case.
+          allOf:
+            - $ref: '#/components/schemas/CommunicationList'
+            - description: The communications for the case.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A resumption point for pagination.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A resumption point for pagination.
       description: The communications returned by the <a>DescribeCommunications</a> operation.
     DescribeCommunicationsRequest:
       type: object
@@ -940,59 +974,70 @@ components:
       title: DescribeCommunicationsRequest
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
         beforeTime:
-          $ref: '#/components/schemas/BeforeTime'
-          description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
+          allOf:
+            - $ref: '#/components/schemas/BeforeTime'
+            - description: The end date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
         afterTime:
-          $ref: '#/components/schemas/AfterTime'
-          description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
+          allOf:
+            - $ref: '#/components/schemas/AfterTime'
+            - description: The start date for a filtered date search on support case communications. Case communications are available for 12 months after creation.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A resumption point for pagination.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A resumption point for pagination.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to return before paginating.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return before paginating.
     DescribeServicesResponse:
       type: object
       properties:
         services:
-          $ref: '#/components/schemas/ServiceList'
-          description: A JSON-formatted list of AWS services.
+          allOf:
+            - $ref: '#/components/schemas/ServiceList'
+            - description: A JSON-formatted list of AWS services.
       description: The list of AWS services returned by the <a>DescribeServices</a> operation.
     DescribeServicesRequest:
       type: object
       title: DescribeServicesRequest
       properties:
         serviceCodeList:
-          $ref: '#/components/schemas/ServiceCodeList'
-          description: A JSON-formatted list of service codes available for AWS services.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCodeList'
+            - description: A JSON-formatted list of service codes available for AWS services.
         language:
-          $ref: '#/components/schemas/Language'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     DescribeSeverityLevelsResponse:
       type: object
       properties:
         severityLevels:
-          $ref: '#/components/schemas/SeverityLevelsList'
-          description: The available severity levels for the support case. Available severity levels are defined by your service level agreement with AWS.
+          allOf:
+            - $ref: '#/components/schemas/SeverityLevelsList'
+            - description: The available severity levels for the support case. Available severity levels are defined by your service level agreement with AWS.
       description: The list of severity levels returned by the <a>DescribeSeverityLevels</a> operation.
     DescribeSeverityLevelsRequest:
       type: object
       title: DescribeSeverityLevelsRequest
       properties:
         language:
-          $ref: '#/components/schemas/Language'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     DescribeTrustedAdvisorCheckRefreshStatusesResponse:
       type: object
       required:
         - statuses
       properties:
         statuses:
-          $ref: '#/components/schemas/TrustedAdvisorCheckRefreshStatusList'
-          description: The refresh status of the specified Trusted Advisor checks.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCheckRefreshStatusList'
+            - description: The refresh status of the specified Trusted Advisor checks.
       description: The statuses of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckRefreshStatuses</a> operation.
     DescribeTrustedAdvisorCheckRefreshStatusesRequest:
       type: object
@@ -1001,14 +1046,16 @@ components:
       title: DescribeTrustedAdvisorCheckRefreshStatusesRequest
       properties:
         checkIds:
-          $ref: '#/components/schemas/StringList'
-          description: '<p>The IDs of the Trusted Advisor checks to get the status of. </p> <note> <p>If you specify the check ID of a check that is automatically refreshed, you might see an <code>InvalidParameterValue</code> error.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IDs of the Trusted Advisor checks to get the status of. </p> <note> <p>If you specify the check ID of a check that is automatically refreshed, you might see an <code>InvalidParameterValue</code> error.</p> </note>'
     DescribeTrustedAdvisorCheckResultResponse:
       type: object
       properties:
         result:
-          $ref: '#/components/schemas/TrustedAdvisorCheckResult'
-          description: The detailed results of the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCheckResult'
+            - description: The detailed results of the Trusted Advisor check.
       description: The result of the Trusted Advisor check returned by the <a>DescribeTrustedAdvisorCheckResult</a> operation.
     DescribeTrustedAdvisorCheckResultRequest:
       type: object
@@ -1017,11 +1064,13 @@ components:
       title: DescribeTrustedAdvisorCheckResultRequest
       properties:
         checkId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the Trusted Advisor check.
         language:
-          $ref: '#/components/schemas/String'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
       description: <p/>
     DescribeTrustedAdvisorCheckSummariesResponse:
       type: object
@@ -1029,8 +1078,9 @@ components:
         - summaries
       properties:
         summaries:
-          $ref: '#/components/schemas/TrustedAdvisorCheckSummaryList'
-          description: The summary information for the requested Trusted Advisor checks.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCheckSummaryList'
+            - description: The summary information for the requested Trusted Advisor checks.
       description: The summaries of the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorCheckSummaries</a> operation.
     DescribeTrustedAdvisorCheckSummariesRequest:
       type: object
@@ -1039,16 +1089,18 @@ components:
       title: DescribeTrustedAdvisorCheckSummariesRequest
       properties:
         checkIds:
-          $ref: '#/components/schemas/StringList'
-          description: The IDs of the Trusted Advisor checks.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The IDs of the Trusted Advisor checks.
     DescribeTrustedAdvisorChecksResponse:
       type: object
       required:
         - checks
       properties:
         checks:
-          $ref: '#/components/schemas/TrustedAdvisorCheckList'
-          description: Information about all available Trusted Advisor checks.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCheckList'
+            - description: Information about all available Trusted Advisor checks.
       description: Information about the Trusted Advisor checks returned by the <a>DescribeTrustedAdvisorChecks</a> operation.
     DescribeTrustedAdvisorChecksRequest:
       type: object
@@ -1057,16 +1109,18 @@ components:
       title: DescribeTrustedAdvisorChecksRequest
       properties:
         language:
-          $ref: '#/components/schemas/String'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
     RefreshTrustedAdvisorCheckResponse:
       type: object
       required:
         - status
       properties:
         status:
-          $ref: '#/components/schemas/TrustedAdvisorCheckRefreshStatus'
-          description: 'The current refresh status for a check, including the amount of time until the check is eligible for refresh.'
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCheckRefreshStatus'
+            - description: 'The current refresh status for a check, including the amount of time until the check is eligible for refresh.'
       description: The current refresh status of a Trusted Advisor check.
     RefreshTrustedAdvisorCheckRequest:
       type: object
@@ -1075,26 +1129,30 @@ components:
       title: RefreshTrustedAdvisorCheckRequest
       properties:
         checkId:
-          $ref: '#/components/schemas/String'
-          description: 'The unique identifier for the Trusted Advisor check to refresh. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The unique identifier for the Trusted Advisor check to refresh. <b>Note:</b> Specifying the check ID of a check that is automatically refreshed causes an <code>InvalidParameterValue</code> error.'
       description: <p/>
     ResolveCaseResponse:
       type: object
       properties:
         initialCaseStatus:
-          $ref: '#/components/schemas/CaseStatus'
-          description: The status of the case when the <a>ResolveCase</a> request was sent.
+          allOf:
+            - $ref: '#/components/schemas/CaseStatus'
+            - description: The status of the case when the <a>ResolveCase</a> request was sent.
         finalCaseStatus:
-          $ref: '#/components/schemas/CaseStatus'
-          description: The status of the case after the <a>ResolveCase</a> request was processed.
+          allOf:
+            - $ref: '#/components/schemas/CaseStatus'
+            - description: The status of the case after the <a>ResolveCase</a> request was processed.
       description: The status of the case returned by the <a>ResolveCase</a> operation.
     ResolveCaseRequest:
       type: object
       title: ResolveCaseRequest
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
     AttachmentSetId:
       type: string
     Attachments:
@@ -1127,11 +1185,13 @@ components:
       type: object
       properties:
         fileName:
-          $ref: '#/components/schemas/FileName'
-          description: The name of the attachment file.
+          allOf:
+            - $ref: '#/components/schemas/FileName'
+            - description: The name of the attachment file.
         data:
-          $ref: '#/components/schemas/Data'
-          description: The content of the attachment file.
+          allOf:
+            - $ref: '#/components/schemas/Data'
+            - description: The content of the attachment file.
       description: An attachment to a case communication. The attachment consists of the file name and the content of the file.
     AttachmentId:
       type: string
@@ -1139,11 +1199,13 @@ components:
       type: object
       properties:
         attachmentId:
-          $ref: '#/components/schemas/AttachmentId'
-          description: The ID of the attachment.
+          allOf:
+            - $ref: '#/components/schemas/AttachmentId'
+            - description: The ID of the attachment.
         fileName:
-          $ref: '#/components/schemas/FileName'
-          description: The file name of the attachment.
+          allOf:
+            - $ref: '#/components/schemas/FileName'
+            - description: The file name of the attachment.
       description: The file name and ID of an attachment to a case communication. You can use the ID to retrieve the attachment with the <a>DescribeAttachment</a> operation.
     AttachmentSet:
       type: array
@@ -1173,11 +1235,13 @@ components:
       type: object
       properties:
         communications:
-          $ref: '#/components/schemas/CommunicationList'
-          description: The five most recent communications associated with the case.
+          allOf:
+            - $ref: '#/components/schemas/CommunicationList'
+            - description: The five most recent communications associated with the case.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A resumption point for pagination.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A resumption point for pagination.
       description: The five most recent communications associated with the case.
     Language:
       type: string
@@ -1185,41 +1249,53 @@ components:
       type: object
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
         displayId:
-          $ref: '#/components/schemas/DisplayId'
-          description: The ID displayed for the case in the AWS Support Center. This is a numeric string.
+          allOf:
+            - $ref: '#/components/schemas/DisplayId'
+            - description: The ID displayed for the case in the AWS Support Center. This is a numeric string.
         subject:
-          $ref: '#/components/schemas/Subject'
-          description: The subject line for the case in the AWS Support Center.
+          allOf:
+            - $ref: '#/components/schemas/Subject'
+            - description: The subject line for the case in the AWS Support Center.
         status:
-          $ref: '#/components/schemas/Status'
-          description: '<p>The status of the case.</p> <p>Valid values:</p> <ul> <li> <p> <code>opened</code> </p> </li> <li> <p> <code>pending-customer-action</code> </p> </li> <li> <p> <code>reopened</code> </p> </li> <li> <p> <code>resolved</code> </p> </li> <li> <p> <code>unassigned</code> </p> </li> <li> <p> <code>work-in-progress</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: '<p>The status of the case.</p> <p>Valid values:</p> <ul> <li> <p> <code>opened</code> </p> </li> <li> <p> <code>pending-customer-action</code> </p> </li> <li> <p> <code>reopened</code> </p> </li> <li> <p> <code>resolved</code> </p> </li> <li> <p> <code>unassigned</code> </p> </li> <li> <p> <code>work-in-progress</code> </p> </li> </ul>'
         serviceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: The code for the AWS service. You can get a list of codes and the corresponding service names by calling <a>DescribeServices</a>.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: The code for the AWS service. You can get a list of codes and the corresponding service names by calling <a>DescribeServices</a>.
         categoryCode:
-          $ref: '#/components/schemas/CategoryCode'
-          description: The category of problem for the AWS Support case.
+          allOf:
+            - $ref: '#/components/schemas/CategoryCode'
+            - description: The category of problem for the AWS Support case.
         severityCode:
-          $ref: '#/components/schemas/SeverityCode'
-          description: The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.
+          allOf:
+            - $ref: '#/components/schemas/SeverityCode'
+            - description: The code for the severity level returned by the call to <a>DescribeSeverityLevels</a>.
         submittedBy:
-          $ref: '#/components/schemas/SubmittedBy'
-          description: The email address of the account that submitted the case.
+          allOf:
+            - $ref: '#/components/schemas/SubmittedBy'
+            - description: The email address of the account that submitted the case.
         timeCreated:
-          $ref: '#/components/schemas/TimeCreated'
-          description: The time that the case was created in the AWS Support Center.
+          allOf:
+            - $ref: '#/components/schemas/TimeCreated'
+            - description: The time that the case was created in the AWS Support Center.
         recentCommunications:
-          $ref: '#/components/schemas/RecentCaseCommunications'
-          description: 'The five most recent communications between you and AWS Support Center, including the IDs of any attachments to the communications. Also includes a <code>nextToken</code> that you can use to retrieve earlier communications.'
+          allOf:
+            - $ref: '#/components/schemas/RecentCaseCommunications'
+            - description: 'The five most recent communications between you and AWS Support Center, including the IDs of any attachments to the communications. Also includes a <code>nextToken</code> that you can use to retrieve earlier communications.'
         ccEmailAddresses:
-          $ref: '#/components/schemas/CcEmailAddressList'
-          description: The email addresses that receive copies of communication about the case.
+          allOf:
+            - $ref: '#/components/schemas/CcEmailAddressList'
+            - description: The email addresses that receive copies of communication about the case.
         language:
-          $ref: '#/components/schemas/Language'
-          description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
       description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained in the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId.</b> The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode.</b> The category of problem for the AWS Support case. Corresponds to the CategoryCode values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId.</b> The identifier for the case on pages in the AWS Support Center.</p> </li> <li> <p> <b>language.</b> The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.</p> </li> <li> <p> <b>nextToken.</b> A resumption point for pagination.</p> </li> <li> <p> <b>recentCommunications.</b> One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>serviceCode.</b> The identifier for the AWS service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode.</b> The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>. The possible values are: <code>low</code>, <code>normal</code>, <code>high</code>, <code>urgent</code>, and <code>critical</code>.</p> </li> <li> <p> <b>status.</b> The status of the case in the AWS Support Center. Valid values:</p> <ul> <li> <p> <code>opened</code> </p> </li> <li> <p> <code>pending-customer-action</code> </p> </li> <li> <p> <code>reopened</code> </p> </li> <li> <p> <code>resolved</code> </p> </li> <li> <p> <code>unassigned</code> </p> </li> <li> <p> <code>work-in-progress</code> </p> </li> </ul> </li> <li> <p> <b>subject.</b> The subject line of the case.</p> </li> <li> <p> <b>submittedBy.</b> The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated.</b> The time the case was created, in ISO-8601 format.</p> </li> </ul>'
     CaseIdList:
       type: array
@@ -1239,11 +1315,13 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/CategoryCode'
-          description: The category code for the support case.
+          allOf:
+            - $ref: '#/components/schemas/CategoryCode'
+            - description: The category code for the support case.
         name:
-          $ref: '#/components/schemas/CategoryName'
-          description: The category name for the support case.
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: The category name for the support case.
       description: 'A JSON-formatted name/value pair that represents the category name and category code of the problem, selected from the <a>DescribeServices</a> response for each AWS service.'
     CategoryList:
       type: array
@@ -1255,20 +1333,25 @@ components:
       type: object
       properties:
         caseId:
-          $ref: '#/components/schemas/CaseId'
-          description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
+          allOf:
+            - $ref: '#/components/schemas/CaseId'
+            - description: 'The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
         body:
-          $ref: '#/components/schemas/CommunicationBody'
-          description: The text of the communication between the customer and AWS Support.
+          allOf:
+            - $ref: '#/components/schemas/CommunicationBody'
+            - description: The text of the communication between the customer and AWS Support.
         submittedBy:
-          $ref: '#/components/schemas/SubmittedBy'
-          description: 'The identity of the account that submitted, or responded to, the support case. Customer entries include the role or IAM user as well as the email address. For example, "AdminRole (Role) &lt;someone@example.com&gt;. Entries from the AWS Support team display "Amazon Web Services," and do not show an email address. '
+          allOf:
+            - $ref: '#/components/schemas/SubmittedBy'
+            - description: 'The identity of the account that submitted, or responded to, the support case. Customer entries include the role or IAM user as well as the email address. For example, "AdminRole (Role) &lt;someone@example.com&gt;. Entries from the AWS Support team display "Amazon Web Services," and do not show an email address. '
         timeCreated:
-          $ref: '#/components/schemas/TimeCreated'
-          description: The time the communication was created.
+          allOf:
+            - $ref: '#/components/schemas/TimeCreated'
+            - description: The time the communication was created.
         attachmentSet:
-          $ref: '#/components/schemas/AttachmentSet'
-          description: Information about the attachments to the case communication.
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSet'
+            - description: Information about the attachments to the case communication.
       description: 'A communication associated with an AWS Support case. The communication consists of the case ID, the message body, attachment information, the submitter of the communication, and the date and time of the communication.'
     CommunicationList:
       type: array
@@ -1321,22 +1404,27 @@ components:
         - flaggedResources
       properties:
         checkId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the Trusted Advisor check.
         timestamp:
-          $ref: '#/components/schemas/String'
-          description: The time of the last refresh of the check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time of the last refresh of the check.
         status:
-          $ref: '#/components/schemas/String'
-          description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
         resourcesSummary:
           $ref: '#/components/schemas/TrustedAdvisorResourcesSummary'
         categorySpecificSummary:
-          $ref: '#/components/schemas/TrustedAdvisorCategorySpecificSummary'
-          description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCategorySpecificSummary'
+            - description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
         flaggedResources:
-          $ref: '#/components/schemas/TrustedAdvisorResourceDetailList'
-          description: The details about each resource listed in the check result.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorResourceDetailList'
+            - description: The details about each resource listed in the check result.
       description: The results of a Trusted Advisor check returned by <a>DescribeTrustedAdvisorCheckResult</a>.
     TrustedAdvisorCheckSummaryList:
       type: array
@@ -1359,14 +1447,17 @@ components:
         - millisUntilNextRefreshable
       properties:
         checkId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the Trusted Advisor check.
         status:
-          $ref: '#/components/schemas/String'
-          description: '<p>The status of the Trusted Advisor check for which a refresh has been requested: </p> <ul> <li> <p> <code>none:</code> The check is not refreshed or the non-success status exceeds the timeout</p> </li> <li> <p> <code>enqueued:</code> The check refresh requests has entered the refresh queue</p> </li> <li> <p> <code>processing:</code> The check refresh request is picked up by the rule processing engine</p> </li> <li> <p> <code>success:</code> The check is successfully refreshed</p> </li> <li> <p> <code>abandoned:</code> The check refresh has failed</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The status of the Trusted Advisor check for which a refresh has been requested: </p> <ul> <li> <p> <code>none:</code> The check is not refreshed or the non-success status exceeds the timeout</p> </li> <li> <p> <code>enqueued:</code> The check refresh requests has entered the refresh queue</p> </li> <li> <p> <code>processing:</code> The check refresh request is picked up by the rule processing engine</p> </li> <li> <p> <code>success:</code> The check is successfully refreshed</p> </li> <li> <p> <code>abandoned:</code> The check refresh has failed</p> </li> </ul>'
         millisUntilNextRefreshable:
-          $ref: '#/components/schemas/Long'
-          description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The amount of time, in milliseconds, until the Trusted Advisor check is eligible for refresh.'
       description: The refresh status of a Trusted Advisor check.
     ServiceName:
       type: string
@@ -1374,14 +1465,17 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/ServiceCode'
-          description: The code for an AWS service returned by the <a>DescribeServices</a> response. The <code>name</code> element contains the corresponding friendly name.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: The code for an AWS service returned by the <a>DescribeServices</a> response. The <code>name</code> element contains the corresponding friendly name.
         name:
-          $ref: '#/components/schemas/ServiceName'
-          description: The friendly name for an AWS service. The <code>code</code> element contains the corresponding code.
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The friendly name for an AWS service. The <code>code</code> element contains the corresponding code.
         categories:
-          $ref: '#/components/schemas/CategoryList'
-          description: A list of categories that describe the type of support issue a case describes. Categories consist of a category name and a category code. Category names and codes are passed to AWS Support when you call <a>CreateCase</a>.
+          allOf:
+            - $ref: '#/components/schemas/CategoryList'
+            - description: A list of categories that describe the type of support issue a case describes. Categories consist of a category name and a category code. Category names and codes are passed to AWS Support when you call <a>CreateCase</a>.
       description: Information about an AWS service returned by the <a>DescribeServices</a> operation.
     SeverityLevelCode:
       type: string
@@ -1391,11 +1485,13 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/SeverityLevelCode'
-          description: '<p>The code for case severity level.</p> <p>Valid values: <code>low</code> | <code>normal</code> | <code>high</code> | <code>urgent</code> | <code>critical</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/SeverityLevelCode'
+            - description: '<p>The code for case severity level.</p> <p>Valid values: <code>low</code> | <code>normal</code> | <code>high</code> | <code>urgent</code> | <code>critical</code> </p>'
         name:
-          $ref: '#/components/schemas/SeverityLevelName'
-          description: '<p>The name of the severity level that corresponds to the severity level code.</p> <note> <p>The values returned by the API differ from the values that are displayed in the AWS Support Center. For example, for the code "low", the API name is "Low", but the name in the Support Center is "General guidance". These are the Support Center code/name mappings:</p> <ul> <li> <p> <code>low</code>: General guidance</p> </li> <li> <p> <code>normal</code>: System impaired</p> </li> <li> <p> <code>high</code>: Production system impaired</p> </li> <li> <p> <code>urgent</code>: Production system down</p> </li> <li> <p> <code>critical</code>: Business-critical system down</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity">Choosing a severity</a> in the <i>AWS Support User Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SeverityLevelName'
+            - description: '<p>The name of the severity level that corresponds to the severity level code.</p> <note> <p>The values returned by the API differ from the values that are displayed in the AWS Support Center. For example, for the code "low", the API name is "Low", but the name in the Support Center is "General guidance". These are the Support Center code/name mappings:</p> <ul> <li> <p> <code>low</code>: General guidance</p> </li> <li> <p> <code>normal</code>: System impaired</p> </li> <li> <p> <code>high</code>: Production system impaired</p> </li> <li> <p> <code>urgent</code>: Production system down</p> </li> <li> <p> <code>critical</code>: Business-critical system down</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity">Choosing a severity</a> in the <i>AWS Support User Guide</i>.</p>'
       description: 'A code and name pair that represents the severity level of a support case. The available values depend on the support plan for the account. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity">Choosing a severity</a> in the <i>AWS Support User Guide</i>.'
     TrustedAdvisorCostOptimizingSummary:
       type: object
@@ -1404,18 +1500,21 @@ components:
         - estimatedPercentMonthlySavings
       properties:
         estimatedMonthlySavings:
-          $ref: '#/components/schemas/Double'
-          description: The estimated monthly savings that might be realized if the recommended operations are taken.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The estimated monthly savings that might be realized if the recommended operations are taken.
         estimatedPercentMonthlySavings:
-          $ref: '#/components/schemas/Double'
-          description: The estimated percentage of savings that might be realized if the recommended operations are taken.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The estimated percentage of savings that might be realized if the recommended operations are taken.
       description: The estimated cost savings that might be realized if the recommended operations are taken.
     TrustedAdvisorCategorySpecificSummary:
       type: object
       properties:
         costOptimizing:
-          $ref: '#/components/schemas/TrustedAdvisorCostOptimizingSummary'
-          description: The summary information about cost savings for a Trusted Advisor check that is in the Cost Optimizing category.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCostOptimizingSummary'
+            - description: The summary information about cost savings for a Trusted Advisor check that is in the Cost Optimizing category.
       description: The container for summary information that relates to the category of the Trusted Advisor check.
     TrustedAdvisorCheckDescription:
       type: object
@@ -1427,20 +1526,25 @@ components:
         - metadata
       properties:
         id:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the Trusted Advisor check.
         name:
-          $ref: '#/components/schemas/String'
-          description: The display name for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The display name for the Trusted Advisor check.
         description:
-          $ref: '#/components/schemas/String'
-          description: 'The description of the Trusted Advisor check, which includes the alert criteria and recommended operations (contains HTML markup).'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The description of the Trusted Advisor check, which includes the alert criteria and recommended operations (contains HTML markup).'
         category:
-          $ref: '#/components/schemas/String'
-          description: The category of the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The category of the Trusted Advisor check.
         metadata:
-          $ref: '#/components/schemas/StringList'
-          description: 'The column headings for the data returned by the Trusted Advisor check. The order of the headings corresponds to the order of the data in the <b>Metadata</b> element of the <a>TrustedAdvisorResourceDetail</a> for the check. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'The column headings for the data returned by the Trusted Advisor check. The order of the headings corresponds to the order of the data in the <b>Metadata</b> element of the <a>TrustedAdvisorResourceDetail</a> for the check. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data. '
       description: The description and metadata for a Trusted Advisor check.
     TrustedAdvisorResourcesSummary:
       type: object
@@ -1451,17 +1555,21 @@ components:
         - resourcesSuppressed
       properties:
         resourcesProcessed:
-          $ref: '#/components/schemas/Long'
-          description: The number of AWS resources that were analyzed by the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of AWS resources that were analyzed by the Trusted Advisor check.
         resourcesFlagged:
-          $ref: '#/components/schemas/Long'
-          description: The number of AWS resources that were flagged (listed) by the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of AWS resources that were flagged (listed) by the Trusted Advisor check.
         resourcesIgnored:
-          $ref: '#/components/schemas/Long'
-          description: The number of AWS resources ignored by Trusted Advisor because information was unavailable.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of AWS resources ignored by Trusted Advisor because information was unavailable.
         resourcesSuppressed:
-          $ref: '#/components/schemas/Long'
-          description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of AWS resources ignored by Trusted Advisor because they were marked as suppressed by the user.
       description: Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.
     TrustedAdvisorResourceDetailList:
       type: array
@@ -1477,22 +1585,27 @@ components:
         - categorySpecificSummary
       properties:
         checkId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the Trusted Advisor check.
         timestamp:
-          $ref: '#/components/schemas/String'
-          description: The time of the last refresh of the check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The time of the last refresh of the check.
         status:
-          $ref: '#/components/schemas/String'
-          description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The alert status of the check: "ok" (green), "warning" (yellow), "error" (red), or "not_available".'
         hasFlaggedResources:
-          $ref: '#/components/schemas/Boolean'
-          description: Specifies whether the Trusted Advisor check has flagged resources.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the Trusted Advisor check has flagged resources.
         resourcesSummary:
           $ref: '#/components/schemas/TrustedAdvisorResourcesSummary'
         categorySpecificSummary:
-          $ref: '#/components/schemas/TrustedAdvisorCategorySpecificSummary'
-          description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
+          allOf:
+            - $ref: '#/components/schemas/TrustedAdvisorCategorySpecificSummary'
+            - description: Summary information that relates to the category of the check. Cost Optimizing is the only category that is currently supported.
       description: 'A summary of a Trusted Advisor check result, including the alert status, last refresh, and number of resources examined.'
     TrustedAdvisorResourceDetail:
       type: object
@@ -1502,20 +1615,25 @@ components:
         - metadata
       properties:
         status:
-          $ref: '#/components/schemas/String'
-          description: The status code for the resource identified in the Trusted Advisor check.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status code for the resource identified in the Trusted Advisor check.
         region:
-          $ref: '#/components/schemas/String'
-          description: The AWS region in which the identified resource is located.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS region in which the identified resource is located.
         resourceId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the identified resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the identified resource.
         isSuppressed:
-          $ref: '#/components/schemas/Boolean'
-          description: Specifies whether the AWS resource was ignored by Trusted Advisor because it was marked as suppressed by the user.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the AWS resource was ignored by Trusted Advisor because it was marked as suppressed by the user.
         metadata:
-          $ref: '#/components/schemas/StringList'
-          description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data.'
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'Additional information about the identified resource. The exact metadata and its order can be obtained by inspecting the <a>TrustedAdvisorCheckDescription</a> object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel download, even in those cases where the UI shows just summary data.'
       description: Contains information about a resource identified by a Trusted Advisor check.
 security:
   - hmac: []

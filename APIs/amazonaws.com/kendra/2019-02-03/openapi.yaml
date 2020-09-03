@@ -1816,8 +1816,9 @@ components:
       type: object
       properties:
         FailedDocuments:
-          $ref: '#/components/schemas/BatchDeleteDocumentResponseFailedDocuments'
-          description: A list of documents that could not be removed from the index. Each entry contains an error message that indicates why the document couldn't be removed from the index.
+          allOf:
+            - $ref: '#/components/schemas/BatchDeleteDocumentResponseFailedDocuments'
+            - description: A list of documents that could not be removed from the index. Each entry contains an error message that indicates why the document couldn't be removed from the index.
     BatchDeleteDocumentRequest:
       type: object
       required:
@@ -1826,11 +1827,13 @@ components:
       title: BatchDeleteDocumentRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the documents to delete.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the documents to delete.
         DocumentIdList:
-          $ref: '#/components/schemas/DocumentIdList'
-          description: One or more identifiers for documents to delete from the index.
+          allOf:
+            - $ref: '#/components/schemas/DocumentIdList'
+            - description: One or more identifiers for documents to delete from the index.
         DataSourceSyncJobMetricTarget:
           $ref: '#/components/schemas/DataSourceSyncJobMetricTarget'
     ValidationException: {}
@@ -1843,8 +1846,9 @@ components:
       type: object
       properties:
         FailedDocuments:
-          $ref: '#/components/schemas/BatchPutDocumentResponseFailedDocuments'
-          description: '<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn''t be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>'
+          allOf:
+            - $ref: '#/components/schemas/BatchPutDocumentResponseFailedDocuments'
+            - description: '<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn''t be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>'
     BatchPutDocumentRequest:
       type: object
       required:
@@ -1853,14 +1857,17 @@ components:
       title: BatchPutDocumentRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index to add the documents to. You need to create the index first using the <a>CreateIndex</a> operation.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index to add the documents to. You need to create the index first using the <a>CreateIndex</a> operation.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The Amazon Resource Name (ARN) of a role that is allowed to run the <code>BatchPutDocument</code> operation. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) of a role that is allowed to run the <code>BatchPutDocument</code> operation. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
         Documents:
-          $ref: '#/components/schemas/DocumentList'
-          description: '<p>One or more documents to add to the index. </p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DocumentList'
+            - description: '<p>One or more documents to add to the index. </p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
     ServiceQuotaExceededException: {}
     CreateDataSourceResponse:
       type: object
@@ -1868,8 +1875,9 @@ components:
         - Id
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: A unique identifier for the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: A unique identifier for the data source.
     CreateDataSourceRequest:
       type: object
       required:
@@ -1881,36 +1889,45 @@ components:
       title: CreateDataSourceRequest
       properties:
         Name:
-          $ref: '#/components/schemas/DataSourceName'
-          description: A unique name for the data source. A data source name can't be changed without deleting and recreating the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceName'
+            - description: A unique name for the data source. A data source name can't be changed without deleting and recreating the data source.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that should be associated with this data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that should be associated with this data source.
         Type:
-          $ref: '#/components/schemas/DataSourceType'
-          description: The type of repository that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: The type of repository that contains the data source.
         Configuration:
-          $ref: '#/components/schemas/DataSourceConfiguration'
-          description: The connector configuration information that is required to access the repository.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceConfiguration'
+            - description: The connector configuration information that is required to access the repository.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description for the data source.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the data source.
         Schedule:
-          $ref: '#/components/schemas/ScanSchedule'
-          description: Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.
+          allOf:
+            - $ref: '#/components/schemas/ScanSchedule'
+            - description: Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.
     ResourceAlreadyExistException: {}
     CreateFaqResponse:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/FaqId'
-          description: The unique identifier of the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqId'
+            - description: The unique identifier of the FAQ.
     CreateFaqRequest:
       type: object
       required:
@@ -1921,29 +1938,36 @@ components:
       title: CreateFaqRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the FAQ.
         Name:
-          $ref: '#/components/schemas/FaqName'
-          description: The name that should be associated with the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqName'
+            - description: The name that should be associated with the FAQ.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the FAQ.
         S3Path:
-          $ref: '#/components/schemas/S3Path'
-          description: The S3 location of the FAQ input data.
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: The S3 location of the FAQ input data.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.
     CreateIndexResponse:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: 'The unique identifier of the index. Use this identifier when you query an index, set up a data source, or index a document.'
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: 'The unique identifier of the index. Use this identifier when you query an index, set up a data source, or index a document.'
     CreateIndexRequest:
       type: object
       required:
@@ -1952,26 +1976,33 @@ components:
       title: CreateIndexRequest
       properties:
         Name:
-          $ref: '#/components/schemas/IndexName'
-          description: The name for the new index.
+          allOf:
+            - $ref: '#/components/schemas/IndexName'
+            - description: The name for the new index.
         Edition:
-          $ref: '#/components/schemas/IndexEdition'
-          description: 'The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can''t be changed. '
+          allOf:
+            - $ref: '#/components/schemas/IndexEdition'
+            - description: 'The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can''t be changed. '
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
         ServerSideEncryptionConfiguration:
-          $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
-          description: The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+          allOf:
+            - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
+            - description: The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description for the index.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description for the index.
         ClientToken:
-          $ref: '#/components/schemas/ClientTokenName'
-          description: A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
     DeleteDataSourceRequest:
       type: object
       required:
@@ -1980,11 +2011,13 @@ components:
       title: DeleteDataSourceRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The unique identifier of the data source to delete.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The unique identifier of the data source to delete.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The unique identifier of the index associated with the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The unique identifier of the index associated with the data source.
     DeleteFaqRequest:
       type: object
       required:
@@ -1993,11 +2026,13 @@ components:
       title: DeleteFaqRequest
       properties:
         Id:
-          $ref: '#/components/schemas/FaqId'
-          description: The identifier of the FAQ to remove.
+          allOf:
+            - $ref: '#/components/schemas/FaqId'
+            - description: The identifier of the FAQ to remove.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The index to remove the FAQ from.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The index to remove the FAQ from.
     DeleteIndexRequest:
       type: object
       required:
@@ -2005,47 +2040,60 @@ components:
       title: DeleteIndexRequest
       properties:
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index to delete.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index to delete.
     DescribeDataSourceResponse:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The identifier of the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
         Name:
-          $ref: '#/components/schemas/DataSourceName'
-          description: The name that you gave the data source when it was created.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceName'
+            - description: The name that you gave the data source when it was created.
         Type:
-          $ref: '#/components/schemas/DataSourceType'
-          description: The type of the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: The type of the data source.
         Configuration:
-          $ref: '#/components/schemas/DataSourceConfiguration'
-          description: Information that describes where the data source is located and how the data source is configured. The specific information in the description depends on the data source provider.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceConfiguration'
+            - description: Information that describes where the data source is located and how the data source is configured. The specific information in the description depends on the data source provider.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix timestamp of when the data source was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp of when the data source was created.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix timestamp of when the data source was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp of when the data source was last updated.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the data source.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the data source.
         Status:
-          $ref: '#/components/schemas/DataSourceStatus'
-          description: 'The current status of the data source. When the status is <code>ACTIVE</code> the data source is ready to use. When the status is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason that the data source failed.'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceStatus'
+            - description: 'The current status of the data source. When the status is <code>ACTIVE</code> the data source is ready to use. When the status is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason that the data source failed.'
         Schedule:
-          $ref: '#/components/schemas/ScanSchedule'
-          description: The schedule that Amazon Kendra will update the data source.
+          allOf:
+            - $ref: '#/components/schemas/ScanSchedule'
+            - description: The schedule that Amazon Kendra will update the data source.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The Amazon Resource Name (ARN) of the role that enables the data source to access its resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the role that enables the data source to access its resources.
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: 'When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a description of the error that caused the data source to fail.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a description of the error that caused the data source to fail.'
     DescribeDataSourceRequest:
       type: object
       required:
@@ -2054,43 +2102,54 @@ components:
       title: DescribeDataSourceRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The unique identifier of the data source to describe.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The unique identifier of the data source to describe.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
     DescribeFaqResponse:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/FaqId'
-          description: The identifier of the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqId'
+            - description: The identifier of the FAQ.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the FAQ.
         Name:
-          $ref: '#/components/schemas/FaqName'
-          description: The name that you gave the FAQ when it was created.
+          allOf:
+            - $ref: '#/components/schemas/FaqName'
+            - description: The name that you gave the FAQ when it was created.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the FAQ that you provided when it was created.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the FAQ that you provided when it was created.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the FAQ was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the FAQ was created.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the FAQ was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the FAQ was last updated.
         S3Path:
           $ref: '#/components/schemas/S3Path'
         Status:
-          $ref: '#/components/schemas/FaqStatus'
-          description: The status of the FAQ. It is ready to use when the status is <code>ACTIVE</code>.
+          allOf:
+            - $ref: '#/components/schemas/FaqStatus'
+            - description: The status of the FAQ. It is ready to use when the status is <code>ACTIVE</code>.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The Amazon Resource Name (ARN) of the role that provides access to the S3 bucket containing the input files for the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the role that provides access to the S3 bucket containing the input files for the FAQ.
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: 'If the <code>Status</code> field is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason why the FAQ failed.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'If the <code>Status</code> field is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason why the FAQ failed.'
     DescribeFaqRequest:
       type: object
       required:
@@ -2099,53 +2158,68 @@ components:
       title: DescribeFaqRequest
       properties:
         Id:
-          $ref: '#/components/schemas/FaqId'
-          description: The unique identifier of the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqId'
+            - description: The unique identifier of the FAQ.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the FAQ.
     DescribeIndexResponse:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/IndexName'
-          description: The name of the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexName'
+            - description: The name of the index.
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: the name of the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: the name of the index.
         Edition:
-          $ref: '#/components/schemas/IndexEdition'
-          description: The Amazon Kendra edition used for the index. You decide the edition when you create the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexEdition'
+            - description: The Amazon Kendra edition used for the index. You decide the edition when you create the index.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.
         ServerSideEncryptionConfiguration:
-          $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
-          description: The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+          allOf:
+            - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
+            - description: The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
         Status:
-          $ref: '#/components/schemas/IndexStatus'
-          description: 'The current status of the index. When the value is <code>ACTIVE</code>, the index is ready for use. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
+          allOf:
+            - $ref: '#/components/schemas/IndexStatus'
+            - description: 'The current status of the index. When the value is <code>ACTIVE</code>, the index is ready for use. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the index.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the index.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix datetime that the index was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the index was created.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix datetime that the index was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the index was last updated.
         DocumentMetadataConfigurations:
-          $ref: '#/components/schemas/DocumentMetadataConfigurationList'
-          description: Configuration settings for any metadata applied to the documents in the index.
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataConfigurationList'
+            - description: Configuration settings for any metadata applied to the documents in the index.
         IndexStatistics:
-          $ref: '#/components/schemas/IndexStatistics'
-          description: Provides information about the number of FAQ questions and answers and the number of text documents indexed.
+          allOf:
+            - $ref: '#/components/schemas/IndexStatistics'
+            - description: Provides information about the number of FAQ questions and answers and the number of text documents indexed.
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: 'When th e<code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'When th e<code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.'
         CapacityUnits:
-          $ref: '#/components/schemas/CapacityUnitsConfiguration'
-          description: 'For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.'
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitsConfiguration'
+            - description: 'For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.'
     DescribeIndexRequest:
       type: object
       required:
@@ -2153,17 +2227,20 @@ components:
       title: DescribeIndexRequest
       properties:
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: The name of the index to describe.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The name of the index to describe.
     ListDataSourceSyncJobsResponse:
       type: object
       properties:
         History:
-          $ref: '#/components/schemas/DataSourceSyncJobHistoryList'
-          description: A history of synchronization jobs for the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSyncJobHistoryList'
+            - description: A history of synchronization jobs for the data source.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The <code>GetDataSourceSyncJobHistory</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the NextPage token. Include the token in the next request to the <code>GetDataSourceSyncJobHistory</code> operation to return in the next page of jobs.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The <code>GetDataSourceSyncJobHistory</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the NextPage token. Include the token in the next request to the <code>GetDataSourceSyncJobHistory</code> operation to return in the next page of jobs.'
     ListDataSourceSyncJobsRequest:
       type: object
       required:
@@ -2172,32 +2249,40 @@ components:
       title: ListDataSourceSyncJobsRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The identifier of the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the result of the previous request to <code>GetDataSourceSyncJobHistory</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous request to <code>GetDataSourceSyncJobHistory</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResultsIntegerForListDataSourceSyncJobsRequest'
-          description: 'The maximum number of synchronization jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListDataSourceSyncJobsRequest'
+            - description: 'The maximum number of synchronization jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
         StartTimeFilter:
-          $ref: '#/components/schemas/TimeRange'
-          description: 'When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates. '
+          allOf:
+            - $ref: '#/components/schemas/TimeRange'
+            - description: 'When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates. '
         StatusFilter:
-          $ref: '#/components/schemas/DataSourceSyncJobStatus'
-          description: 'When specified, only returns synchronization jobs with the <code>Status</code> field equal to the specified status.'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSyncJobStatus'
+            - description: 'When specified, only returns synchronization jobs with the <code>Status</code> field equal to the specified status.'
     ListDataSourcesResponse:
       type: object
       properties:
         SummaryItems:
-          $ref: '#/components/schemas/DataSourceSummaryList'
-          description: An array of summary information for one or more data sources.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSummaryList'
+            - description: An array of summary information for one or more data sources.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of data sources. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of data sources. '
     ListDataSourcesRequest:
       type: object
       required:
@@ -2205,23 +2290,28 @@ components:
       title: ListDataSourcesRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data sources (<code>DataSourceSummaryItems</code>). '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of data sources (<code>DataSourceSummaryItems</code>). '
         MaxResults:
-          $ref: '#/components/schemas/MaxResultsIntegerForListDataSourcesRequest'
-          description: The maximum number of data sources to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListDataSourcesRequest'
+            - description: The maximum number of data sources to return.
     ListFaqsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The <code>ListFaqs</code> operation returns a page of FAQs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListFaqs</code> operation to return the next page of FAQs.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The <code>ListFaqs</code> operation returns a page of FAQs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Kendra returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListFaqs</code> operation to return the next page of FAQs.'
         FaqSummaryItems:
-          $ref: '#/components/schemas/FaqSummaryItems'
-          description: information about the FAQs associated with the specified index.
+          allOf:
+            - $ref: '#/components/schemas/FaqSummaryItems'
+            - description: information about the FAQs associated with the specified index.
     ListFaqsRequest:
       type: object
       required:
@@ -2229,39 +2319,47 @@ components:
       title: ListFaqsRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The index that contains the FAQ lists.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The index that contains the FAQ lists.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the result of the previous request to <code>ListFaqs</code> was truncated, include the <code>NextToken</code> to fetch the next set of FAQs.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous request to <code>ListFaqs</code> was truncated, include the <code>NextToken</code> to fetch the next set of FAQs.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResultsIntegerForListFaqsRequest'
-          description: 'The maximum number of FAQs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListFaqsRequest'
+            - description: 'The maximum number of FAQs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
     ListIndicesResponse:
       type: object
       properties:
         IndexConfigurationSummaryItems:
-          $ref: '#/components/schemas/IndexConfigurationSummaryList'
-          description: An array of summary information for one or more indexes.
+          allOf:
+            - $ref: '#/components/schemas/IndexConfigurationSummaryList'
+            - description: An array of summary information for one or more indexes.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of indexes.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of indexes.'
     ListIndicesRequest:
       type: object
       title: ListIndicesRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of indexes (<code>DataSourceSummaryItems</code>). '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of indexes (<code>DataSourceSummaryItems</code>). '
         MaxResults:
-          $ref: '#/components/schemas/MaxResultsIntegerForListIndicesRequest'
-          description: The maximum number of data sources to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListIndicesRequest'
+            - description: The maximum number of data sources to return.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'A list of tags associated with the index, FAQ, or data source.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags associated with the index, FAQ, or data source.'
     ListTagsForResourceRequest:
       type: object
       required:
@@ -2269,24 +2367,29 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags for.'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags for.'
     ResourceUnavailableException: {}
     QueryResult:
       type: object
       properties:
         QueryId:
-          $ref: '#/components/schemas/QueryId'
-          description: The unique identifier for the search. You use <code>QueryId</code> to identify the search when using the feedback API.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The unique identifier for the search. You use <code>QueryId</code> to identify the search when using the feedback API.
         ResultItems:
-          $ref: '#/components/schemas/QueryResultItemList'
-          description: The results of the search.
+          allOf:
+            - $ref: '#/components/schemas/QueryResultItemList'
+            - description: The results of the search.
         FacetResults:
-          $ref: '#/components/schemas/FacetResultList'
-          description: Contains the facet results. A <code>FacetResult</code> contains the counts for each attribute key that was specified in the <code>Facets</code> input parameter.
+          allOf:
+            - $ref: '#/components/schemas/FacetResultList'
+            - description: Contains the facet results. A <code>FacetResult</code> contains the counts for each attribute key that was specified in the <code>Facets</code> input parameter.
         TotalNumberOfResults:
-          $ref: '#/components/schemas/Integer'
-          description: The number of items returned by the search. Use this to determine when you have requested the last set of results.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of items returned by the search. Use this to determine when you have requested the last set of results.
     QueryRequest:
       type: object
       required:
@@ -2295,38 +2398,48 @@ components:
       title: QueryRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The unique identifier of the index to search. The identifier is returned in the response from the operation.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The unique identifier of the index to search. The identifier is returned in the response from the operation.
         QueryText:
-          $ref: '#/components/schemas/QueryText'
-          description: The text to search for.
+          allOf:
+            - $ref: '#/components/schemas/QueryText'
+            - description: The text to search for.
         AttributeFilter:
-          $ref: '#/components/schemas/AttributeFilter'
-          description: '<p>Enables filtered searches based on document attributes. You can only provide one attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and <code>OrAllFilters</code> parameters contain a list of other filters.</p> <p>The <code>AttributeFilter</code> parameter enables you to create a set of filtering rules that a document must satisfy to be included in the query results.</p>'
+          allOf:
+            - $ref: '#/components/schemas/AttributeFilter'
+            - description: '<p>Enables filtered searches based on document attributes. You can only provide one attribute filter; however, the <code>AndAllFilters</code>, <code>NotFilter</code>, and <code>OrAllFilters</code> parameters contain a list of other filters.</p> <p>The <code>AttributeFilter</code> parameter enables you to create a set of filtering rules that a document must satisfy to be included in the query results.</p>'
         Facets:
-          $ref: '#/components/schemas/FacetList'
-          description: An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. You can use this information to help narrow the search for your user.
+          allOf:
+            - $ref: '#/components/schemas/FacetList'
+            - description: An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. You can use this information to help narrow the search for your user.
         RequestedDocumentAttributes:
-          $ref: '#/components/schemas/DocumentAttributeKeyList'
-          description: 'An array of document attributes to include in the response. No other document attributes are included in the response. By default all document attributes are included in the response. '
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeKeyList'
+            - description: 'An array of document attributes to include in the response. No other document attributes are included in the response. By default all document attributes are included in the response. '
         QueryResultTypeFilter:
-          $ref: '#/components/schemas/QueryResultType'
-          description: Sets the type of query. Only results for the specified query type are returned.
+          allOf:
+            - $ref: '#/components/schemas/QueryResultType'
+            - description: Sets the type of query. Only results for the specified query type are returned.
         PageNumber:
-          $ref: '#/components/schemas/Integer'
-          description: 'Query results are returned in pages the size of the <code>PageSize</code> parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.'
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Query results are returned in pages the size of the <code>PageSize</code> parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.'
         PageSize:
-          $ref: '#/components/schemas/Integer'
-          description: 'Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.'
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.'
         SortingConfiguration:
-          $ref: '#/components/schemas/SortingConfiguration'
-          description: '<p>Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance.</p> <p>If you don''t provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SortingConfiguration'
+            - description: '<p>Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance.</p> <p>If you don''t provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.</p>'
     StartDataSourceSyncJobResponse:
       type: object
       properties:
         ExecutionId:
-          $ref: '#/components/schemas/String'
-          description: Identifies a particular synchronization job.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies a particular synchronization job.
     StartDataSourceSyncJobRequest:
       type: object
       required:
@@ -2335,11 +2448,13 @@ components:
       title: StartDataSourceSyncJobRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The identifier of the data source to synchronize.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source to synchronize.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
     ResourceInUseException: {}
     StopDataSourceSyncJobRequest:
       type: object
@@ -2349,11 +2464,13 @@ components:
       title: StopDataSourceSyncJobRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The identifier of the data source for which to stop the synchronization jobs.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source for which to stop the synchronization jobs.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source.
     SubmitFeedbackRequest:
       type: object
       required:
@@ -2362,17 +2479,21 @@ components:
       title: SubmitFeedbackRequest
       properties:
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that was queried.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that was queried.
         QueryId:
-          $ref: '#/components/schemas/QueryId'
-          description: The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the operation.
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the operation.
         ClickFeedbackItems:
-          $ref: '#/components/schemas/ClickFeedbackList'
-          description: 'Tells Amazon Kendra that a particular search result link was chosen by the user. '
+          allOf:
+            - $ref: '#/components/schemas/ClickFeedbackList'
+            - description: 'Tells Amazon Kendra that a particular search result link was chosen by the user. '
         RelevanceFeedbackItems:
-          $ref: '#/components/schemas/RelevanceFeedbackList'
-          description: Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.
+          allOf:
+            - $ref: '#/components/schemas/RelevanceFeedbackList'
+            - description: Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2384,11 +2505,13 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'A list of tag keys to add to the index, FAQ, or data source. If a tag already exists, the existing value is replaced with the new value.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tag keys to add to the index, FAQ, or data source. If a tag already exists, the existing value is replaced with the new value.'
     UntagResourceResponse:
       type: object
       properties: {}
@@ -2400,11 +2523,13 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.'
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: 'A list of tag keys to remove from the index, FAQ, or data source. If a tag key does not exist on the resource, it is ignored.'
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: 'A list of tag keys to remove from the index, FAQ, or data source. If a tag key does not exist on the resource, it is ignored.'
     UpdateDataSourceRequest:
       type: object
       required:
@@ -2413,25 +2538,31 @@ components:
       title: UpdateDataSourceRequest
       properties:
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The unique identifier of the data source to update.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The unique identifier of the data source to update.
         Name:
-          $ref: '#/components/schemas/DataSourceName'
-          description: The name of the data source to update. The name of the data source can't be updated. To rename a data source you must delete the data source and re-create it.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceName'
+            - description: The name of the data source to update. The name of the data source can't be updated. To rename a data source you must delete the data source and re-create it.
         IndexId:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index that contains the data source to update.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index that contains the data source to update.
         Configuration:
           $ref: '#/components/schemas/DataSourceConfiguration'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The new description for the data source.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The new description for the data source.
         Schedule:
-          $ref: '#/components/schemas/ScanSchedule'
-          description: The new update schedule for the data source.
+          allOf:
+            - $ref: '#/components/schemas/ScanSchedule'
+            - description: The new update schedule for the data source.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The Amazon Resource Name (ARN) of the new role to use when the data source is accessing resources on your behalf.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the new role to use when the data source is accessing resources on your behalf.
     UpdateIndexRequest:
       type: object
       required:
@@ -2439,23 +2570,29 @@ components:
       title: UpdateIndexRequest
       properties:
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: The identifier of the index to update.
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index to update.
         Name:
-          $ref: '#/components/schemas/IndexName'
-          description: The name of the index to update.
+          allOf:
+            - $ref: '#/components/schemas/IndexName'
+            - description: The name of the index to update.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: A new IAM role that gives Amazon Kendra permission to access your Amazon CloudWatch logs.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: A new IAM role that gives Amazon Kendra permission to access your Amazon CloudWatch logs.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A new description for the index.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A new description for the index.
         DocumentMetadataConfigurationUpdates:
-          $ref: '#/components/schemas/DocumentMetadataConfigurationList'
-          description: 'The document metadata to update. '
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataConfigurationList'
+            - description: 'The document metadata to update. '
         CapacityUnits:
-          $ref: '#/components/schemas/CapacityUnitsConfiguration'
-          description: '<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can''t reduce the storage capacity below that required to meet the storage needs for your index.</p>'
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitsConfiguration'
+            - description: '<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can''t reduce the storage capacity below that required to meet the storage needs for your index.</p>'
     S3ObjectKey:
       type: string
       minLength: 1
@@ -2464,8 +2601,9 @@ components:
       type: object
       properties:
         KeyPath:
-          $ref: '#/components/schemas/S3ObjectKey'
-          description: Path to the AWS S3 bucket that contains the ACL files.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: Path to the AWS S3 bucket that contains the ACL files.
       description: Access Control List files for the documents in a data source.
     ColumnName:
       type: string
@@ -2478,8 +2616,9 @@ components:
         - AllowedGroupsColumnName
       properties:
         AllowedGroupsColumnName:
-          $ref: '#/components/schemas/ColumnName'
-          description: 'A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <a>Query</a> operation.'
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: 'A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <a>Query</a> operation.'
       description: Provides information about the column that should be used for filtering the query response by groups.
     String:
       type: string
@@ -2493,8 +2632,9 @@ components:
       type: object
       properties:
         TextWithHighlightsValue:
-          $ref: '#/components/schemas/TextWithHighlights'
-          description: The text associated with the attribute and information about the highlight to apply to the text.
+          allOf:
+            - $ref: '#/components/schemas/TextWithHighlights'
+            - description: The text associated with the attribute and information about the highlight to apply to the text.
       description: An attribute returned with a document from a search.
     AdditionalResultAttribute:
       type: object
@@ -2504,14 +2644,17 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/String'
-          description: The key that identifies the attribute.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key that identifies the attribute.
         ValueType:
-          $ref: '#/components/schemas/AdditionalResultAttributeValueType'
-          description: The data type of the <code>Value</code> property.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResultAttributeValueType'
+            - description: The data type of the <code>Value</code> property.
         Value:
-          $ref: '#/components/schemas/AdditionalResultAttributeValue'
-          description: An object that contains the attribute value.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResultAttributeValue'
+            - description: An object that contains the attribute value.
       description: An attribute returned from an index query.
     AdditionalResultAttributeList:
       type: array
@@ -2521,11 +2664,13 @@ components:
       type: object
       properties:
         Text:
-          $ref: '#/components/schemas/String'
-          description: The text to display to the user.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text to display to the user.
         Highlights:
-          $ref: '#/components/schemas/HighlightList'
-          description: The beginning and end of the text that should be highlighted.
+          allOf:
+            - $ref: '#/components/schemas/HighlightList'
+            - description: The beginning and end of the text that should be highlighted.
       description: Provides text and information about where to highlight the text.
     AmazonResourceName:
       type: string
@@ -2539,35 +2684,45 @@ components:
       type: object
       properties:
         AndAllFilters:
-          $ref: '#/components/schemas/AttributeFilterList'
-          description: Performs a logical <code>AND</code> operation on all supplied filters.
+          allOf:
+            - $ref: '#/components/schemas/AttributeFilterList'
+            - description: Performs a logical <code>AND</code> operation on all supplied filters.
         OrAllFilters:
-          $ref: '#/components/schemas/AttributeFilterList'
-          description: Performs a logical <code>OR</code> operation on all supplied filters.
+          allOf:
+            - $ref: '#/components/schemas/AttributeFilterList'
+            - description: Performs a logical <code>OR</code> operation on all supplied filters.
         NotFilter:
-          $ref: '#/components/schemas/AttributeFilter'
-          description: Performs a logical <code>NOT</code> operation on all supplied filters.
+          allOf:
+            - $ref: '#/components/schemas/AttributeFilter'
+            - description: Performs a logical <code>NOT</code> operation on all supplied filters.
         EqualsTo:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Performs an equals operation on two document attributes.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Performs an equals operation on two document attributes.
         ContainsAll:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Returns true when a document contains all of the specified document attributes. This filter is only appicable to <code>StringListValue</code> metadata.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Returns true when a document contains all of the specified document attributes. This filter is only appicable to <code>StringListValue</code> metadata.
         ContainsAny:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Returns true when a document contains any of the specified document attributes.This filter is only appicable to <code>StringListValue</code> metadata.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Returns true when a document contains any of the specified document attributes.This filter is only appicable to <code>StringListValue</code> metadata.
         GreaterThan:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Performs a greater than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Performs a greater than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
         GreaterThanOrEquals:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Performs a greater or equals than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Performs a greater or equals than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
         LessThan:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Performs a less than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Performs a less than operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
         LessThanOrEquals:
-          $ref: '#/components/schemas/DocumentAttribute'
-          description: Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttribute'
+            - description: Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.
       description: '<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use 2 layers under the first attribute filter. For example, you can use:</p> <p> <code>&lt;AndAllFilters&gt;</code> </p> <ol> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol> <p>If you use more than 2 layers, you receive a <code>ValidationException</code> exception with the message "<code>AttributeFilter</code> cannot have a depth of more than 2."</p>'
     DocumentAttribute:
       type: object
@@ -2576,11 +2731,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/DocumentAttributeKey'
-          description: The identifier for the attribute.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeKey'
+            - description: The identifier for the attribute.
         Value:
-          $ref: '#/components/schemas/DocumentAttributeValue'
-          description: The value of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeValue'
+            - description: The value of the attribute.
       description: 'A custom attribute value assigned to a document. '
     IndexId:
       type: string
@@ -2600,11 +2757,13 @@ components:
         - DataSourceSyncJobId
       properties:
         DataSourceId:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The ID of the data source that is running the sync job.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The ID of the data source that is running the sync job.
         DataSourceSyncJobId:
-          $ref: '#/components/schemas/DataSourceSyncJobId'
-          description: The ID of the sync job that is running on the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSyncJobId'
+            - description: The ID of the sync job that is running on the data source.
       description: Maps a particular data source sync job to a particular data source.
     BatchDeleteDocumentResponseFailedDocuments:
       type: array
@@ -2628,14 +2787,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/DocumentId'
-          description: The identifier of the document that couldn't be removed from the index.
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The identifier of the document that couldn't be removed from the index.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The error code for why the document couldn't be removed from the index.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code for why the document couldn't be removed from the index.
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: An explanation for why the document couldn't be removed from the index.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: An explanation for why the document couldn't be removed from the index.
       description: Provides information about documents that could not be removed from an index by the <a>BatchDeleteDocument</a> operation.
     RoleArn:
       type: string
@@ -2656,14 +2818,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/DocumentId'
-          description: The unique identifier of the document.
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The unique identifier of the document.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The type of error that caused the document to fail to be indexed.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The type of error that caused the document to fail to be indexed.
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: A description of the reason why the document could not be indexed.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: A description of the reason why the document could not be indexed.
       description: Provides information about a document that could not be indexed.
     Blob:
       type: string
@@ -2682,11 +2847,13 @@ components:
         - QueryCapacityUnits
       properties:
         StorageCapacityUnits:
-          $ref: '#/components/schemas/StorageCapacityUnit'
-          description: 'The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.'
+          allOf:
+            - $ref: '#/components/schemas/StorageCapacityUnit'
+            - description: 'The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.'
         QueryCapacityUnits:
-          $ref: '#/components/schemas/QueryCapacityUnit'
-          description: 'The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.'
+          allOf:
+            - $ref: '#/components/schemas/QueryCapacityUnit'
+            - description: 'The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.'
       description: Specifies capacity units configured for your index. You can add and remove capacity units to tune an index to your requirements.
     ChangeDetectingColumns:
       type: array
@@ -2708,11 +2875,13 @@ components:
         - ClickTime
       properties:
         ResultId:
-          $ref: '#/components/schemas/ResultId'
-          description: The unique identifier of the search result that was clicked.
+          allOf:
+            - $ref: '#/components/schemas/ResultId'
+            - description: The unique identifier of the search result that was clicked.
         ClickTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix timestamp of the date and time that the result was clicked.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp of the date and time that the result was clicked.
       description: Gathers information about when a particular result was clicked by a user. Your application uses the <a>SubmitFeedback</a> operation to provide click information.
     ClickFeedbackList:
       type: array
@@ -2736,20 +2905,25 @@ components:
         - ChangeDetectingColumns
       properties:
         DocumentIdColumnName:
-          $ref: '#/components/schemas/ColumnName'
-          description: The column that provides the document's unique identifier.
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The column that provides the document's unique identifier.
         DocumentDataColumnName:
-          $ref: '#/components/schemas/ColumnName'
-          description: The column that contains the contents of the document.
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The column that contains the contents of the document.
         DocumentTitleColumnName:
-          $ref: '#/components/schemas/ColumnName'
-          description: The column that contains the title of the document.
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The column that contains the title of the document.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <a>UpdateIndex</a> operation.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <a>UpdateIndex</a> operation.
         ChangeDetectingColumns:
-          $ref: '#/components/schemas/ChangeDetectingColumns'
-          description: One to five columns that indicate when a document in the database has changed.
+          allOf:
+            - $ref: '#/components/schemas/ChangeDetectingColumns'
+            - description: One to five columns that indicate when a document in the database has changed.
       description: Provides information about how Amazon Kendra should use the columns of a database in an index.
     DatabaseHost:
       type: string
@@ -2784,20 +2958,25 @@ components:
         - SecretArn
       properties:
         DatabaseHost:
-          $ref: '#/components/schemas/DatabaseHost'
-          description: The name of the host for the database. Can be either a string (host.subdomain.domain.tld) or an IPv4 or IPv6 address.
+          allOf:
+            - $ref: '#/components/schemas/DatabaseHost'
+            - description: The name of the host for the database. Can be either a string (host.subdomain.domain.tld) or an IPv4 or IPv6 address.
         DatabasePort:
-          $ref: '#/components/schemas/DatabasePort'
-          description: The port that the database uses for connections.
+          allOf:
+            - $ref: '#/components/schemas/DatabasePort'
+            - description: The port that the database uses for connections.
         DatabaseName:
-          $ref: '#/components/schemas/DatabaseName'
-          description: The name of the database containing the document data.
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: The name of the database containing the document data.
         TableName:
-          $ref: '#/components/schemas/TableName'
-          description: The name of the table that contains the document data.
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of the table that contains the document data.
         SecretArn:
-          $ref: '#/components/schemas/SecretArn'
-          description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
       description: Provides the information necessary to connect to a database.
     ContentType:
       type: string
@@ -2825,23 +3004,29 @@ components:
       type: object
       properties:
         S3Configuration:
-          $ref: '#/components/schemas/S3DataSourceConfiguration'
-          description: Provides information to create a connector for a document repository in an Amazon S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/S3DataSourceConfiguration'
+            - description: Provides information to create a connector for a document repository in an Amazon S3 bucket.
         SharePointConfiguration:
-          $ref: '#/components/schemas/SharePointConfiguration'
-          description: Provides information necessary to create a connector for a Microsoft SharePoint site.
+          allOf:
+            - $ref: '#/components/schemas/SharePointConfiguration'
+            - description: Provides information necessary to create a connector for a Microsoft SharePoint site.
         DatabaseConfiguration:
-          $ref: '#/components/schemas/DatabaseConfiguration'
-          description: Provides information necessary to create a connector for a database.
+          allOf:
+            - $ref: '#/components/schemas/DatabaseConfiguration'
+            - description: Provides information necessary to create a connector for a database.
         SalesforceConfiguration:
-          $ref: '#/components/schemas/SalesforceConfiguration'
-          description: Provides configuration information for data sources that connect to a Salesforce site.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceConfiguration'
+            - description: Provides configuration information for data sources that connect to a Salesforce site.
         OneDriveConfiguration:
-          $ref: '#/components/schemas/OneDriveConfiguration'
-          description: Provided configuration for data sources that connect to Microsoft OneDrive.
+          allOf:
+            - $ref: '#/components/schemas/OneDriveConfiguration'
+            - description: Provided configuration for data sources that connect to Microsoft OneDrive.
         ServiceNowConfiguration:
-          $ref: '#/components/schemas/ServiceNowConfiguration'
-          description: Provides configuration for data sources that connect to ServiceNow instances.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowConfiguration'
+            - description: Provides configuration for data sources that connect to ServiceNow instances.
       description: Configuration information for a Amazon Kendra data source.
     Description:
       type: string
@@ -2873,11 +3058,13 @@ components:
         - Key
       properties:
         Bucket:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The name of the S3 bucket that contains the file.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket that contains the file.
         Key:
-          $ref: '#/components/schemas/S3ObjectKey'
-          description: The name of the file.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The name of the file.
       description: Information required to find a specific file in an Amazon S3 bucket.
     FaqId:
       type: string
@@ -2898,8 +3085,9 @@ components:
       type: object
       properties:
         KmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
       description: Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
     S3DataSourceConfiguration:
       type: object
@@ -2907,19 +3095,23 @@ components:
         - BucketName
       properties:
         BucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The name of the bucket that contains the documents.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the bucket that contains the documents.
         InclusionPrefixes:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: A list of S3 prefixes for the documents that should be included in the index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: A list of S3 prefixes for the documents that should be included in the index.
         ExclusionPatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
         DocumentsMetadataConfiguration:
           $ref: '#/components/schemas/DocumentsMetadataConfiguration'
         AccessControlListConfiguration:
-          $ref: '#/components/schemas/AccessControlListConfiguration'
-          description: Provides the path to the S3 bucket that contains the user context filtering files for the data source.
+          allOf:
+            - $ref: '#/components/schemas/AccessControlListConfiguration'
+            - description: Provides the path to the S3 bucket that contains the user context filtering files for the data source.
       description: Provides configuration information for a data source to index documents in an Amazon S3 bucket.
     SharePointConfiguration:
       type: object
@@ -2929,34 +3121,43 @@ components:
         - SecretArn
       properties:
         SharePointVersion:
-          $ref: '#/components/schemas/SharePointVersion'
-          description: The version of Microsoft SharePoint that you are using as a data source.
+          allOf:
+            - $ref: '#/components/schemas/SharePointVersion'
+            - description: The version of Microsoft SharePoint that you are using as a data source.
         Urls:
-          $ref: '#/components/schemas/SharePointUrlList'
-          description: The URLs of the Microsoft SharePoint site that contains the documents that should be indexed.
+          allOf:
+            - $ref: '#/components/schemas/SharePointUrlList'
+            - description: The URLs of the Microsoft SharePoint site that contains the documents that should be indexed.
         SecretArn:
-          $ref: '#/components/schemas/SecretArn'
-          description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
         CrawlAttachments:
-          $ref: '#/components/schemas/Boolean'
-          description: ' <code>TRUE</code> to include attachments to documents stored in your Microsoft SharePoint site in the index; otherwise, <code>FALSE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' <code>TRUE</code> to include attachments to documents stored in your Microsoft SharePoint site in the index; otherwise, <code>FALSE</code>.'
         UseChangeLog:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Set to <code>TRUE</code> to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Set to <code>TRUE</code> to use the Microsoft SharePoint change log to determine the documents that need to be updated in the index. Depending on the size of the SharePoint change log, it may take longer for Amazon Kendra to use the change log than it takes it to determine the changed documents using the Amazon Kendra document crawler.'
         InclusionPatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
         ExclusionPatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>'
         VpcConfiguration:
           $ref: '#/components/schemas/DataSourceVpcConfiguration'
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: 'A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping Data Source Fields</a>.'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: 'A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html">Mapping Data Source Fields</a>.'
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The Microsoft SharePoint attribute field that contains the title of the document.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The Microsoft SharePoint attribute field that contains the title of the document.
       description: Provides configuration information for connecting to a Microsoft SharePoint data source.
     DatabaseConfiguration:
       type: object
@@ -2966,22 +3167,27 @@ components:
         - ColumnConfiguration
       properties:
         DatabaseEngineType:
-          $ref: '#/components/schemas/DatabaseEngineType'
-          description: The type of database engine that runs the database.
+          allOf:
+            - $ref: '#/components/schemas/DatabaseEngineType'
+            - description: The type of database engine that runs the database.
         ConnectionConfiguration:
-          $ref: '#/components/schemas/ConnectionConfiguration'
-          description: The information necessary to connect to a database.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionConfiguration'
+            - description: The information necessary to connect to a database.
         VpcConfiguration:
           $ref: '#/components/schemas/DataSourceVpcConfiguration'
         ColumnConfiguration:
-          $ref: '#/components/schemas/ColumnConfiguration'
-          description: Information about where the index should get the document information from the database.
+          allOf:
+            - $ref: '#/components/schemas/ColumnConfiguration'
+            - description: Information about where the index should get the document information from the database.
         AclConfiguration:
-          $ref: '#/components/schemas/AclConfiguration'
-          description: Information about the database column that provides information for user context filtering.
+          allOf:
+            - $ref: '#/components/schemas/AclConfiguration'
+            - description: Information about the database column that provides information for user context filtering.
         SqlConfiguration:
-          $ref: '#/components/schemas/SqlConfiguration'
-          description: Provides information about how Amazon Kendra uses quote marks around SQL identifiers when querying a database data source.
+          allOf:
+            - $ref: '#/components/schemas/SqlConfiguration'
+            - description: Provides information about how Amazon Kendra uses quote marks around SQL identifiers when querying a database data source.
       description: 'Provides the information necessary to connect a database to an index. '
     SalesforceConfiguration:
       type: object
@@ -2990,32 +3196,41 @@ components:
         - SecretArn
       properties:
         ServerUrl:
-          $ref: '#/components/schemas/Url'
-          description: The instance URL for the Salesforce site that you want to index.
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The instance URL for the Salesforce site that you want to index.
         SecretArn:
-          $ref: '#/components/schemas/SecretArn'
-          description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
         StandardObjectConfigurations:
-          $ref: '#/components/schemas/SalesforceStandardObjectConfigurationList'
-          description: Specifies the Salesforce standard objects that Amazon Kendra indexes.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceStandardObjectConfigurationList'
+            - description: Specifies the Salesforce standard objects that Amazon Kendra indexes.
         KnowledgeArticleConfiguration:
-          $ref: '#/components/schemas/SalesforceKnowledgeArticleConfiguration'
-          description: 'Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/SalesforceKnowledgeArticleConfiguration'
+            - description: 'Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.'
         ChatterFeedConfiguration:
-          $ref: '#/components/schemas/SalesforceChatterFeedConfiguration'
-          description: Specifies configuration information for Salesforce chatter feeds.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceChatterFeedConfiguration'
+            - description: Specifies configuration information for Salesforce chatter feeds.
         CrawlAttachments:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether Amazon Kendra should index attachments to Salesforce objects.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether Amazon Kendra should index attachments to Salesforce objects.
         StandardObjectAttachmentConfiguration:
-          $ref: '#/components/schemas/SalesforceStandardObjectAttachmentConfiguration'
-          description: 'Provides configuration information for processing attachments to Salesforce standard objects. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceStandardObjectAttachmentConfiguration'
+            - description: 'Provides configuration information for processing attachments to Salesforce standard objects. '
         IncludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don''t match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>'
         ExcludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don''t match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>'
       description: Provides configuration information for connecting to a Salesforce data source.
     OneDriveConfiguration:
       type: object
@@ -3025,23 +3240,29 @@ components:
         - OneDriveUsers
       properties:
         TenantDomain:
-          $ref: '#/components/schemas/TenantDomain'
-          description: 'Tha Azure Active Directory domain of the organization. '
+          allOf:
+            - $ref: '#/components/schemas/TenantDomain'
+            - description: 'Tha Azure Active Directory domain of the organization. '
         SecretArn:
-          $ref: '#/components/schemas/SecretArn'
-          description: 'The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.'
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: 'The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.'
         OneDriveUsers:
-          $ref: '#/components/schemas/OneDriveUsers'
-          description: A list of user accounts whose documents should be indexed.
+          allOf:
+            - $ref: '#/components/schemas/OneDriveUsers'
+            - description: A list of user accounts whose documents should be indexed.
         InclusionPatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>A list of regular expression patterns. Documents that match the pattern are included in the index. Documents that don''t match the pattern are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. </p> <p>The exclusion pattern is applied to the file name.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of regular expression patterns. Documents that match the pattern are included in the index. Documents that don''t match the pattern are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. </p> <p>The exclusion pattern is applied to the file name.</p>'
         ExclusionPatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: '<p>List of regular expressions applied to documents. Items that match the exclusion pattern are not indexed. If you provide both an inclusion pattern and an exclusion pattern, any item that matches the exclusion pattern isn''t indexed. </p> <p>The exclusion pattern is applied to the file name.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>List of regular expressions applied to documents. Items that match the exclusion pattern are not indexed. If you provide both an inclusion pattern and an exclusion pattern, any item that matches the exclusion pattern isn''t indexed. </p> <p>The exclusion pattern is applied to the file name.</p>'
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
       description: Provides configuration information for data sources that connect to OneDrive.
     ServiceNowConfiguration:
       type: object
@@ -3051,20 +3272,25 @@ components:
         - ServiceNowBuildVersion
       properties:
         HostUrl:
-          $ref: '#/components/schemas/ServiceNowHostUrl'
-          description: 'The ServiceNow instance that the data source connects to. The host endpoint should look like the following: <code>{instance}.service-now.com.</code> '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowHostUrl'
+            - description: 'The ServiceNow instance that the data source connects to. The host endpoint should look like the following: <code>{instance}.service-now.com.</code> '
         SecretArn:
-          $ref: '#/components/schemas/SecretArn'
-          description: The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.
         ServiceNowBuildVersion:
-          $ref: '#/components/schemas/ServiceNowBuildVersionType'
-          description: 'The identifier of the release that the ServiceNow host is running. If the host is not running the <code>LONDON</code> release, use <code>OTHERS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowBuildVersionType'
+            - description: 'The identifier of the release that the ServiceNow host is running. If the host is not running the <code>LONDON</code> release, use <code>OTHERS</code>.'
         KnowledgeArticleConfiguration:
-          $ref: '#/components/schemas/ServiceNowKnowledgeArticleConfiguration'
-          description: Provides configuration information for crawling knowledge articles in the ServiceNow site.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowKnowledgeArticleConfiguration'
+            - description: Provides configuration information for crawling knowledge articles in the ServiceNow site.
         ServiceCatalogConfiguration:
-          $ref: '#/components/schemas/ServiceNowServiceCatalogConfiguration'
-          description: Provides configuration information for crawling service catalogs in the ServiceNow site.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowServiceCatalogConfiguration'
+            - description: Provides configuration information for crawling service catalogs in the ServiceNow site.
       description: Provides configuration information required to connect to a ServiceNow data source.
     DataSourceDateFieldFormat:
       type: string
@@ -3098,23 +3324,29 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/DataSourceName'
-          description: The name of the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceName'
+            - description: The name of the data source.
         Id:
-          $ref: '#/components/schemas/DataSourceId'
-          description: The unique identifier for the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The unique identifier for the data source.
         Type:
-          $ref: '#/components/schemas/DataSourceType'
-          description: The type of the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceType'
+            - description: The type of the data source.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime that the data source was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime that the data source was created.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The UNIX datetime that the data source was lasted updated. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The UNIX datetime that the data source was lasted updated. '
         Status:
-          $ref: '#/components/schemas/DataSourceStatus'
-          description: The status of the data source. When the status is <code>ATIVE</code> the data source is ready to use.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceStatus'
+            - description: The status of the data source. When the status is <code>ATIVE</code> the data source is ready to use.
       description: Summary information for a Amazon Kendra data source. Returned in a call to .
     DataSourceSummaryList:
       type: array
@@ -3134,48 +3366,61 @@ components:
       type: object
       properties:
         DocumentsAdded:
-          $ref: '#/components/schemas/MetricValue'
-          description: The number of documents added from the data source up to now in the data source sync.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The number of documents added from the data source up to now in the data source sync.
         DocumentsModified:
-          $ref: '#/components/schemas/MetricValue'
-          description: The number of documents modified in the data source up to now in the data source sync run.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The number of documents modified in the data source up to now in the data source sync run.
         DocumentsDeleted:
-          $ref: '#/components/schemas/MetricValue'
-          description: The number of documents deleted from the data source up to now in the data source sync run.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The number of documents deleted from the data source up to now in the data source sync run.
         DocumentsFailed:
-          $ref: '#/components/schemas/MetricValue'
-          description: The number of documents that failed to sync from the data source up to now in the data source sync run.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The number of documents that failed to sync from the data source up to now in the data source sync run.
         DocumentsScanned:
-          $ref: '#/components/schemas/MetricValue'
-          description: The current number of documents crawled by the current sync job in the data source.
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The current number of documents crawled by the current sync job in the data source.
       description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
     DataSourceSyncJob:
       type: object
       properties:
         ExecutionId:
-          $ref: '#/components/schemas/String'
-          description: A unique identifier for the synchronization job.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for the synchronization job.
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime that the synchronization job was started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime that the synchronization job was started.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime that the synchronization job was completed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime that the synchronization job was completed.
         Status:
-          $ref: '#/components/schemas/DataSourceSyncJobStatus'
-          description: 'The execution status of the synchronization job. When the <code>Status</code> field is set to <code>SUCCEEDED</code>, the synchronization job is done. If the status code is set to <code>FAILED</code>, the <code>ErrorCode</code> and <code>ErrorMessage</code> fields give you the reason for the failure.'
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSyncJobStatus'
+            - description: 'The execution status of the synchronization job. When the <code>Status</code> field is set to <code>SUCCEEDED</code>, the synchronization job is done. If the status code is set to <code>FAILED</code>, the <code>ErrorCode</code> and <code>ErrorMessage</code> fields give you the reason for the failure.'
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: 'If the <code>Status</code> field is set to <code>ERROR</code>, the <code>ErrorMessage</code> field contains a description of the error that caused the synchronization to fail.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'If the <code>Status</code> field is set to <code>ERROR</code>, the <code>ErrorMessage</code> field contains a description of the error that caused the synchronization to fail.'
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: 'If the <code>Status</code> field is set to <code>FAILED</code>, the <code>ErrorCode</code> field contains a the reason that the synchronization failed.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: 'If the <code>Status</code> field is set to <code>FAILED</code>, the <code>ErrorCode</code> field contains a the reason that the synchronization failed.'
         DataSourceErrorCode:
-          $ref: '#/components/schemas/String'
-          description: 'If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.'
         Metrics:
-          $ref: '#/components/schemas/DataSourceSyncJobMetrics'
-          description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceSyncJobMetrics'
+            - description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
       description: Provides information about a synchronization job.
     DataSourceSyncJobHistoryList:
       type: array
@@ -3201,14 +3446,17 @@ components:
         - IndexFieldName
       properties:
         DataSourceFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the column or attribute in the data source.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the column or attribute in the data source.
         DateFieldFormat:
-          $ref: '#/components/schemas/DataSourceDateFieldFormat'
-          description: The type of data stored in the column or attribute.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceDateFieldFormat'
+            - description: The type of data stored in the column or attribute.
         IndexFieldName:
-          $ref: '#/components/schemas/IndexFieldName'
-          description: The name of the field in the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexFieldName'
+            - description: The name of the field in the index.
       description: Maps a column or attribute in the data source to an index field. You must first create the fields in the index using the <a>UpdateIndex</a> operation.
     SubnetIdList:
       type: array
@@ -3229,11 +3477,13 @@ components:
         - SecurityGroupIds
       properties:
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIdList'
-          description: 'A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.'
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: 'A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.'
         SecurityGroupIds:
-          $ref: '#/components/schemas/SecurityGroupIdList'
-          description: A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Kendra to connect to the data source.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: A list of identifiers of security groups within your Amazon VPC. The security groups should enable Amazon Kendra to connect to the data source.
       description: Provides information for connecting to an Amazon VPC.
     DatabaseEngineType:
       type: string
@@ -3246,8 +3496,9 @@ components:
       type: object
       properties:
         QueryIdentifiersEnclosingOption:
-          $ref: '#/components/schemas/QueryIdentifiersEnclosingOption'
-          description: '<p>Determines whether Amazon Kendra encloses SQL identifiers in double quotes (") when making a database query.</p> <p>By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes.</p> <p>PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character''s case.</p> <p>For MySQL databases, you must enable the <code>ansi_quotes</code> option when you choose this option.</p>'
+          allOf:
+            - $ref: '#/components/schemas/QueryIdentifiersEnclosingOption'
+            - description: '<p>Determines whether Amazon Kendra encloses SQL identifiers in double quotes (") when making a database query.</p> <p>By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes.</p> <p>PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character''s case.</p> <p>For MySQL databases, you must enable the <code>ansi_quotes</code> option when you choose this option.</p>'
       description: Provides information that configures Amazon Kendra to use a SQL database.
     FaqStatus:
       type: string
@@ -3279,11 +3530,13 @@ components:
         - TextDocumentStatistics
       properties:
         FaqStatistics:
-          $ref: '#/components/schemas/FaqStatistics'
-          description: The number of question and answer topics in the index.
+          allOf:
+            - $ref: '#/components/schemas/FaqStatistics'
+            - description: The number of question and answer topics in the index.
         TextDocumentStatistics:
-          $ref: '#/components/schemas/TextDocumentStatistics'
-          description: The number of text documents indexed.
+          allOf:
+            - $ref: '#/components/schemas/TextDocumentStatistics'
+            - description: The number of text documents indexed.
       description: Provides information about the number of documents and the number of questions and answers in an index.
     Title:
       type: string
@@ -3301,25 +3554,31 @@ components:
         - Id
       properties:
         Id:
-          $ref: '#/components/schemas/DocumentId'
-          description: A unique identifier of the document in the index.
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: A unique identifier of the document in the index.
         Title:
-          $ref: '#/components/schemas/Title'
-          description: The title of the document.
+          allOf:
+            - $ref: '#/components/schemas/Title'
+            - description: The title of the document.
         Blob:
-          $ref: '#/components/schemas/Blob'
-          description: '<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you''re using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: '<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you''re using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>'
         S3Path:
           $ref: '#/components/schemas/S3Path'
         Attributes:
-          $ref: '#/components/schemas/DocumentAttributeList'
-          description: 'Custom attributes to apply to the document. Use the custom attributes to provide additional information for searching, to provide facets for refining searches, and to provide additional information in the query response.'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeList'
+            - description: 'Custom attributes to apply to the document. Use the custom attributes to provide additional information for searching, to provide facets for refining searches, and to provide additional information in the query response.'
         AccessControlList:
-          $ref: '#/components/schemas/PrincipalList'
-          description: Information to use for user context filtering.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalList'
+            - description: Information to use for user context filtering.
         ContentType:
-          $ref: '#/components/schemas/ContentType'
-          description: The file type of the document in the <code>Blob</code> field.
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: The file type of the document in the <code>Blob</code> field.
       description: A document in an index.
     DocumentAttributeKey:
       type: string
@@ -3330,17 +3589,21 @@ components:
       type: object
       properties:
         StringValue:
-          $ref: '#/components/schemas/DocumentAttributeStringValue'
-          description: 'A string, such as "department".'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeStringValue'
+            - description: 'A string, such as "department".'
         StringListValue:
-          $ref: '#/components/schemas/DocumentAttributeStringListValue'
-          description: 'A list of strings. '
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeStringListValue'
+            - description: 'A list of strings. '
         LongValue:
-          $ref: '#/components/schemas/Long'
-          description: A long integer value.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: A long integer value.
         DateValue:
-          $ref: '#/components/schemas/Timestamp'
-          description: A date expressed as an ISO 8601 string.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A date expressed as an ISO 8601 string.
       description: The value of a custom document attribute. You can only provide one value for a custom attribute.
     DocumentAttributeKeyList:
       type: array
@@ -3364,11 +3627,13 @@ components:
       type: object
       properties:
         DocumentAttributeValue:
-          $ref: '#/components/schemas/DocumentAttributeValue'
-          description: 'The value of the attribute. For example, "HR."'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeValue'
+            - description: 'The value of the attribute. For example, "HR."'
         Count:
-          $ref: '#/components/schemas/Integer'
-          description: The number of documents in the response that have the attribute value for the key.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of documents in the response that have the attribute value for the key.
       description: Provides the count of documents that match a particular attribute when doing a faceted search.
     DocumentAttributeValueCountPairList:
       type: array
@@ -3391,36 +3656,45 @@ components:
       type: object
       properties:
         Freshness:
-          $ref: '#/components/schemas/DocumentMetadataBoolean'
-          description: 'Indicates that this field determines how "fresh" a document is. For example, if document 1 was created on November 5, and document 2 was created on October 31, document 1 is "fresher" than document 2. You can only set the <code>Freshness</code> field on one <code>DATE</code> type field. Only applies to <code>DATE</code> fields.'
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataBoolean'
+            - description: 'Indicates that this field determines how "fresh" a document is. For example, if document 1 was created on November 5, and document 2 was created on October 31, document 1 is "fresher" than document 2. You can only set the <code>Freshness</code> field on one <code>DATE</code> type field. Only applies to <code>DATE</code> fields.'
         Importance:
-          $ref: '#/components/schemas/Importance'
-          description: The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers.
+          allOf:
+            - $ref: '#/components/schemas/Importance'
+            - description: The relative importance of the field in the search. Larger numbers provide more of a boost than smaller numbers.
         Duration:
-          $ref: '#/components/schemas/Duration'
-          description: '<p>Specifies the time period that the boost applies to. For example, to make the boost apply to documents with the field value within the last month, you would use "2628000s". Once the field value is beyond the specified range, the effect of the boost drops off. The higher the importance, the faster the effect drops off. If you don''t specify a value, the default is 3 months. The value of the field is a numeric string followed by the character "s", for example "86400s" for one day, or "604800s" for one week. </p> <p>Only applies to <code>DATE</code> fields.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Duration'
+            - description: '<p>Specifies the time period that the boost applies to. For example, to make the boost apply to documents with the field value within the last month, you would use "2628000s". Once the field value is beyond the specified range, the effect of the boost drops off. The higher the importance, the faster the effect drops off. If you don''t specify a value, the default is 3 months. The value of the field is a numeric string followed by the character "s", for example "86400s" for one day, or "604800s" for one week. </p> <p>Only applies to <code>DATE</code> fields.</p>'
         RankOrder:
-          $ref: '#/components/schemas/Order'
-          description: '<p>Determines how values should be interpreted.</p> <p>When the <code>RankOrder</code> field is <code>ASCENDING</code>, higher numbers are better. For example, a document with a rating score of 10 is higher ranking than a document with a rating score of 1.</p> <p>When the <code>RankOrder</code> field is <code>DESCENDING</code>, lower numbers are better. For example, in a task tracking application, a priority 1 task is more important than a priority 5 task.</p> <p>Only applies to <code>LONG</code> and <code>DOUBLE</code> fields.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Order'
+            - description: '<p>Determines how values should be interpreted.</p> <p>When the <code>RankOrder</code> field is <code>ASCENDING</code>, higher numbers are better. For example, a document with a rating score of 10 is higher ranking than a document with a rating score of 1.</p> <p>When the <code>RankOrder</code> field is <code>DESCENDING</code>, lower numbers are better. For example, in a task tracking application, a priority 1 task is more important than a priority 5 task.</p> <p>Only applies to <code>LONG</code> and <code>DOUBLE</code> fields.</p>'
         ValueImportanceMap:
-          $ref: '#/components/schemas/ValueImportanceMap'
-          description: '<p>A list of values that should be given a different boost when they appear in the result list. For example, if you are boosting a field called "department," query terms that match the department field are boosted in the result. However, you can add entries from the department field to boost documents with those values higher. </p> <p>For example, you can add entries to the map with names of departments. If you add "HR",5 and "Legal",3 those departments are given special attention when they appear in the metadata of a document. When those terms appear they are given the specified importance instead of the regular importance for the boost.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ValueImportanceMap'
+            - description: '<p>A list of values that should be given a different boost when they appear in the result list. For example, if you are boosting a field called "department," query terms that match the department field are boosted in the result. However, you can add entries from the department field to boost documents with those values higher. </p> <p>For example, you can add entries to the map with names of departments. If you add "HR",5 and "Legal",3 those departments are given special attention when they appear in the metadata of a document. When those terms appear they are given the specified importance instead of the regular importance for the boost.</p>'
       description: 'Provides information for manually tuning the relevance of a field in a search. When a query includes terms that match the field, the results are given a boost in the response based on these tuning parameters.'
     Search:
       type: object
       properties:
         Facetable:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is <code>false</code> .'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is <code>false</code> .'
         Searchable:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Determines whether the field is used in the search. If the <code>Searchable</code> field is <code>true</code>, you can use relevance tuning to manually tune how Amazon Kendra weights the field in the search. The default is <code>true</code> for string fields and <code>false</code> for number and date fields.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Determines whether the field is used in the search. If the <code>Searchable</code> field is <code>true</code>, you can use relevance tuning to manually tune how Amazon Kendra weights the field in the search. The default is <code>true</code> for string fields and <code>false</code> for number and date fields.'
         Displayable:
-          $ref: '#/components/schemas/Boolean'
-          description: Determines whether the field is returned in the query response. The default is <code>true</code>.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Determines whether the field is returned in the query response. The default is <code>true</code>.
         Sortable:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Determines whether the field can be used to sort the results of a query. If you specify sorting on a field that does not have <code>Sortable</code> set to <code>true</code>, Amazon Kendra returns an exception. The default is <code>false</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Determines whether the field can be used to sort the results of a query. If you specify sorting on a field that does not have <code>Sortable</code> set to <code>true</code>, Amazon Kendra returns an exception. The default is <code>false</code>.'
       description: Provides information about how a custom index field is used during a search.
     DocumentMetadataConfiguration:
       type: object
@@ -3429,24 +3703,29 @@ components:
         - Type
       properties:
         Name:
-          $ref: '#/components/schemas/DocumentMetadataConfigurationName'
-          description: The name of the index field.
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataConfigurationName'
+            - description: The name of the index field.
         Type:
-          $ref: '#/components/schemas/DocumentAttributeValueType'
-          description: 'The data type of the index field. '
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeValueType'
+            - description: 'The data type of the index field. '
         Relevance:
-          $ref: '#/components/schemas/Relevance'
-          description: Provides manual tuning parameters to determine how the field affects the search results.
+          allOf:
+            - $ref: '#/components/schemas/Relevance'
+            - description: Provides manual tuning parameters to determine how the field affects the search results.
         Search:
-          $ref: '#/components/schemas/Search'
-          description: Provides information about how the field is used during a search.
+          allOf:
+            - $ref: '#/components/schemas/Search'
+            - description: Provides information about how the field is used during a search.
       description: Specifies the properties of a custom index field.
     DocumentsMetadataConfiguration:
       type: object
       properties:
         S3Prefix:
-          $ref: '#/components/schemas/S3ObjectKey'
-          description: A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.
       description: 'Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document.'
     Duration:
       type: string
@@ -3457,8 +3736,9 @@ components:
       type: object
       properties:
         DocumentAttributeKey:
-          $ref: '#/components/schemas/DocumentAttributeKey'
-          description: The unique key for the document attribute.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeKey'
+            - description: The unique key for the document attribute.
       description: Information about a document attribute
     FacetList:
       type: array
@@ -3468,11 +3748,13 @@ components:
       type: object
       properties:
         DocumentAttributeKey:
-          $ref: '#/components/schemas/DocumentAttributeKey'
-          description: The key for the facet values. This is the same as the <code>DocumentAttributeKey</code> provided in the query.
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeKey'
+            - description: The key for the facet values. This is the same as the <code>DocumentAttributeKey</code> provided in the query.
         DocumentAttributeValueCountPairs:
-          $ref: '#/components/schemas/DocumentAttributeValueCountPairList'
-          description: 'An array of key/value pairs, where the key is the value of the attribute and the count is the number of documents that share the key value.'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeValueCountPairList'
+            - description: 'An array of key/value pairs, where the key is the value of the attribute and the count is the number of documents that share the key value.'
       description: The facet values for the documents in the response.
     FacetResultList:
       type: array
@@ -3487,27 +3769,33 @@ components:
         - IndexedQuestionAnswersCount
       properties:
         IndexedQuestionAnswersCount:
-          $ref: '#/components/schemas/IndexedQuestionAnswersCount'
-          description: The total number of FAQ questions and answers contained in the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexedQuestionAnswersCount'
+            - description: The total number of FAQ questions and answers contained in the index.
       description: Provides statistical information about the FAQ questions and answers contained in an index.
     FaqSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/FaqId'
-          description: The unique identifier of the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqId'
+            - description: The unique identifier of the FAQ.
         Name:
-          $ref: '#/components/schemas/FaqName'
-          description: The name that you assigned the FAQ when you created or updated the FAQ.
+          allOf:
+            - $ref: '#/components/schemas/FaqName'
+            - description: The name that you assigned the FAQ when you created or updated the FAQ.
         Status:
-          $ref: '#/components/schemas/FaqStatus'
-          description: The current status of the FAQ. When the status is <code>ACTIVE</code> the FAQ is ready for use.
+          allOf:
+            - $ref: '#/components/schemas/FaqStatus'
+            - description: The current status of the FAQ. When the status is <code>ACTIVE</code> the FAQ is ready for use.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime that the FAQ was added to the index.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime that the FAQ was added to the index.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime that the FAQ was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime that the FAQ was last updated.
       description: Provides information about a frequently asked questions and answer contained in an index.
     FaqSummaryItems:
       type: array
@@ -3520,14 +3808,17 @@ components:
         - EndOffset
       properties:
         BeginOffset:
-          $ref: '#/components/schemas/Integer'
-          description: The zero-based location in the response string where the highlight starts.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The zero-based location in the response string where the highlight starts.
         EndOffset:
-          $ref: '#/components/schemas/Integer'
-          description: The zero-based location in the response string where the highlight ends.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The zero-based location in the response string where the highlight ends.
         TopAnswer:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Indicates whether the response is the best response. True if this is the best response; otherwise, false.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether the response is the best response. True if this is the best response; otherwise, false.'
       description: Provides information that you can use to highlight a search result so that your users can quickly identify terms in the response.
     HighlightList:
       type: array
@@ -3545,23 +3836,29 @@ components:
         - Status
       properties:
         Name:
-          $ref: '#/components/schemas/IndexName'
-          description: The name of the index.
+          allOf:
+            - $ref: '#/components/schemas/IndexName'
+            - description: The name of the index.
         Id:
-          $ref: '#/components/schemas/IndexId'
-          description: 'A unique identifier for the index. Use this to identify the index when you are using operations such as <code>Query</code>, <code>DescribeIndex</code>, <code>UpdateIndex</code>, and <code>DeleteIndex</code>.'
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: 'A unique identifier for the index. Use this to identify the index when you are using operations such as <code>Query</code>, <code>DescribeIndex</code>, <code>UpdateIndex</code>, and <code>DeleteIndex</code>.'
         Edition:
-          $ref: '#/components/schemas/IndexEdition'
-          description: 'Indicates whether the index is a enterprise edition index or a developer edition index. '
+          allOf:
+            - $ref: '#/components/schemas/IndexEdition'
+            - description: 'Indicates whether the index is a enterprise edition index or a developer edition index. '
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix timestamp when the index was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp when the index was created.
         UpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix timestamp when the index was last updated by the <code>UpdateIndex</code> operation.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix timestamp when the index was last updated by the <code>UpdateIndex</code> operation.
         Status:
-          $ref: '#/components/schemas/IndexStatus'
-          description: 'The current status of the index. When the status is <code>ACTIVE</code>, the index is ready to search.'
+          allOf:
+            - $ref: '#/components/schemas/IndexStatus'
+            - description: 'The current status of the index. When the status is <code>ACTIVE</code>, the index is ready to search.'
       description: A summary of information about an index.
     IndexConfigurationSummaryList:
       type: array
@@ -3574,11 +3871,13 @@ components:
         - IndexedTextBytes
       properties:
         IndexedTextDocumentsCount:
-          $ref: '#/components/schemas/IndexedTextDocumentsCount'
-          description: The number of text documents indexed.
+          allOf:
+            - $ref: '#/components/schemas/IndexedTextDocumentsCount'
+            - description: The number of text documents indexed.
         IndexedTextBytes:
-          $ref: '#/components/schemas/IndexedTextBytes'
-          description: 'The total size, in bytes, of the indexed documents.'
+          allOf:
+            - $ref: '#/components/schemas/IndexedTextBytes'
+            - description: 'The total size, in bytes, of the indexed documents.'
       description: Provides information about text documents indexed in an index.
     IndexedTextBytes:
       type: integer
@@ -3603,11 +3902,13 @@ components:
       type: object
       properties:
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime of the beginning of the time range.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime of the beginning of the time range.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UNIX datetime of the end of the time range.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UNIX datetime of the end of the time range.
       description: Provides a range of time.
     MaxResultsIntegerForListDataSourcesRequest:
       type: integer
@@ -3630,11 +3931,13 @@ components:
       type: object
       properties:
         OneDriveUserList:
-          $ref: '#/components/schemas/OneDriveUserList'
-          description: 'A list of users whose documents should be indexed. Specify the user names in email format, for example, <code>username@tenantdomain</code>. If you need to index the documents of more than 100 users, use the <code>OneDriveUserS3Path</code> field to specify the location of a file containing a list of users.'
+          allOf:
+            - $ref: '#/components/schemas/OneDriveUserList'
+            - description: 'A list of users whose documents should be indexed. Specify the user names in email format, for example, <code>username@tenantdomain</code>. If you need to index the documents of more than 100 users, use the <code>OneDriveUserS3Path</code> field to specify the location of a file containing a list of users.'
         OneDriveUserS3Path:
-          $ref: '#/components/schemas/S3Path'
-          description: The S3 bucket location of a file containing a list of users whose documents should be indexed.
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: The S3 bucket location of a file containing a list of users whose documents should be indexed.
       description: User accounts whose documents should be indexed.
     OneDriveUser:
       type: string
@@ -3675,14 +3978,17 @@ components:
         - Access
       properties:
         Name:
-          $ref: '#/components/schemas/PrincipalName'
-          description: The name of the user or group.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalName'
+            - description: The name of the user or group.
         Type:
-          $ref: '#/components/schemas/PrincipalType'
-          description: The type of principal.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalType'
+            - description: The type of principal.
         Access:
-          $ref: '#/components/schemas/ReadAccessType'
-          description: Whether to allow or deny access to the principal.
+          allOf:
+            - $ref: '#/components/schemas/ReadAccessType'
+            - description: Whether to allow or deny access to the principal.
       description: Provides user and group information for document access filtering.
     QueryId:
       type: string
@@ -3711,11 +4017,13 @@ components:
         - SortOrder
       properties:
         DocumentAttributeKey:
-          $ref: '#/components/schemas/DocumentAttributeKey'
-          description: '<p>The name of the document attribute used to sort the response. You can use any field that has the <code>Sortable</code> flag set to true.</p> <p>You can also sort by any of the following built-in attributes:</p> <ul> <li> <p>_category</p> </li> <li> <p>_created_at</p> </li> <li> <p>_last_updated_at</p> </li> <li> <p>_version</p> </li> <li> <p>_view_count</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeKey'
+            - description: '<p>The name of the document attribute used to sort the response. You can use any field that has the <code>Sortable</code> flag set to true.</p> <p>You can also sort by any of the following built-in attributes:</p> <ul> <li> <p>_category</p> </li> <li> <p>_created_at</p> </li> <li> <p>_last_updated_at</p> </li> <li> <p>_version</p> </li> <li> <p>_view_count</p> </li> </ul>'
         SortOrder:
-          $ref: '#/components/schemas/SortOrder'
-          description: 'The order that the results should be returned in. In case of ties, the relevance assigned to the result by Amazon Kendra is used as the tie-breaker.'
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: 'The order that the results should be returned in. In case of ties, the relevance assigned to the result by Amazon Kendra is used as the tie-breaker.'
       description: 'Specifies the document attribute to use to sort the response to a Amazon Kendra query. You can specify a single attribute for sorting. The attribute must have the <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra returns an exception.'
     QueryResultItemList:
       type: array
@@ -3730,29 +4038,37 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ResultId'
-          description: The unique identifier for the query result.
+          allOf:
+            - $ref: '#/components/schemas/ResultId'
+            - description: The unique identifier for the query result.
         Type:
-          $ref: '#/components/schemas/QueryResultType'
-          description: 'The type of document. '
+          allOf:
+            - $ref: '#/components/schemas/QueryResultType'
+            - description: 'The type of document. '
         AdditionalAttributes:
-          $ref: '#/components/schemas/AdditionalResultAttributeList'
-          description: One or more additional attribues associated with the query result.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalResultAttributeList'
+            - description: One or more additional attribues associated with the query result.
         DocumentId:
-          $ref: '#/components/schemas/DocumentId'
-          description: The unique identifier for the document.
+          allOf:
+            - $ref: '#/components/schemas/DocumentId'
+            - description: The unique identifier for the document.
         DocumentTitle:
-          $ref: '#/components/schemas/TextWithHighlights'
-          description: The title of the document. Contains the text of the title and information for highlighting the relevant terms in the title.
+          allOf:
+            - $ref: '#/components/schemas/TextWithHighlights'
+            - description: The title of the document. Contains the text of the title and information for highlighting the relevant terms in the title.
         DocumentExcerpt:
-          $ref: '#/components/schemas/TextWithHighlights'
-          description: An extract of the text in the document. Contains information about highlighting the relevant terms in the excerpt.
+          allOf:
+            - $ref: '#/components/schemas/TextWithHighlights'
+            - description: An extract of the text in the document. Contains information about highlighting the relevant terms in the excerpt.
         DocumentURI:
-          $ref: '#/components/schemas/Url'
-          description: The URI of the original location of the document.
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The URI of the original location of the document.
         DocumentAttributes:
-          $ref: '#/components/schemas/DocumentAttributeList'
-          description: 'An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.'
+          allOf:
+            - $ref: '#/components/schemas/DocumentAttributeList'
+            - description: 'An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.'
       description: '<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>'
     ValueImportanceMap:
       type: object
@@ -3770,11 +4086,13 @@ components:
         - RelevanceValue
       properties:
         ResultId:
-          $ref: '#/components/schemas/ResultId'
-          description: The unique identifier of the search result that the user provided relevance feedback for.
+          allOf:
+            - $ref: '#/components/schemas/ResultId'
+            - description: The unique identifier of the search result that the user provided relevance feedback for.
         RelevanceValue:
-          $ref: '#/components/schemas/RelevanceType'
-          description: Whether to document was relevant or not relevant to the search.
+          allOf:
+            - $ref: '#/components/schemas/RelevanceType'
+            - description: Whether to document was relevant or not relevant to the search.
       description: Provides feedback on how relevant a document is to a search. Your application uses the <a>SubmitFeedback</a> operation to provide relevance information.
     RelevanceFeedbackList:
       type: array
@@ -3797,17 +4115,21 @@ components:
         - DocumentDataFieldName
       properties:
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the column in the Salesforce FeedItem table that contains the content to index. Typically this is the <code>Body</code> column.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the column in the Salesforce FeedItem table that contains the content to index. Typically this is the <code>Body</code> column.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> collumn.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> collumn.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
         IncludeFilterTypes:
-          $ref: '#/components/schemas/SalesforceChatterFeedIncludeFilterTypes'
-          description: Filters the documents in the feed based on status of the user. When you specify <code>ACTIVE_USERS</code> only documents from users who have an active account are indexed. When you specify <code>STANDARD_USER</code> only documents for Salesforce standard users are documented. You can specify both.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceChatterFeedIncludeFilterTypes'
+            - description: Filters the documents in the feed based on status of the user. When you specify <code>ACTIVE_USERS</code> only documents from users who have an active account are indexed. When you specify <code>STANDARD_USER</code> only documents for Salesforce standard users are documented. You can specify both.
       description: Defines configuration for syncing a Salesforce chatter feed. The contents of the object comes from the Salesforce FeedItem table.
     SalesforceChatterFeedIncludeFilterType:
       type: string
@@ -3826,24 +4148,29 @@ components:
         - IncludedStates
       properties:
         IncludedStates:
-          $ref: '#/components/schemas/SalesforceKnowledgeArticleStateList'
-          description: Specifies the document states that should be included when Amazon Kendra indexes knowledge articles. You must specify at least one state.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceKnowledgeArticleStateList'
+            - description: Specifies the document states that should be included when Amazon Kendra indexes knowledge articles. You must specify at least one state.
         StandardKnowledgeArticleTypeConfiguration:
-          $ref: '#/components/schemas/SalesforceStandardKnowledgeArticleTypeConfiguration'
-          description: Provides configuration information for standard Salesforce knowledge articles.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceStandardKnowledgeArticleTypeConfiguration'
+            - description: Provides configuration information for standard Salesforce knowledge articles.
         CustomKnowledgeArticleTypeConfigurations:
-          $ref: '#/components/schemas/SalesforceCustomKnowledgeArticleTypeConfigurationList'
-          description: Provides configuration information for custom Salesforce knowledge articles.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceCustomKnowledgeArticleTypeConfigurationList'
+            - description: Provides configuration information for custom Salesforce knowledge articles.
       description: 'Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both '
     SalesforceStandardObjectAttachmentConfiguration:
       type: object
       properties:
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field used for the document title.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field used for the document title.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: One or more objects that map fields in attachments to Amazon Kendra index fields.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: One or more objects that map fields in attachments to Amazon Kendra index fields.
       description: 'Provides configuration information for processing attachments to Salesforce standard objects. '
     SalesforceCustomKnowledgeArticleTypeName:
       type: string
@@ -3857,17 +4184,21 @@ components:
         - DocumentDataFieldName
       properties:
         Name:
-          $ref: '#/components/schemas/SalesforceCustomKnowledgeArticleTypeName'
-          description: The name of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceCustomKnowledgeArticleTypeName'
+            - description: The name of the configuration.
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field in the custom knowledge article that contains the document data to index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field in the custom knowledge article that contains the document data to index.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field in the custom knowledge article that contains the document title.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field in the custom knowledge article that contains the document title.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: One or more objects that map fields in the custom knowledge article to fields in the Amazon Kendra index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: One or more objects that map fields in the custom knowledge article to fields in the Amazon Kendra index.
       description: Provides configuration information for indexing Salesforce custom articles.
     SalesforceCustomKnowledgeArticleTypeConfigurationList:
       type: array
@@ -3887,14 +4218,17 @@ components:
         - DocumentDataFieldName
       properties:
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field that contains the document data to index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field that contains the document data to index.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field that contains the document title.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field that contains the document title.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: One or more objects that map fields in the knowledge article to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: One or more objects that map fields in the knowledge article to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
       description: Provides configuration information for standard Salesforce knowledge articles.
     SalesforceKnowledgeArticleState:
       type: string
@@ -3929,17 +4263,21 @@ components:
         - DocumentDataFieldName
       properties:
         Name:
-          $ref: '#/components/schemas/SalesforceStandardObjectName'
-          description: The name of the standard object.
+          allOf:
+            - $ref: '#/components/schemas/SalesforceStandardObjectName'
+            - description: The name of the standard object.
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field in the standard object table that contains the document contents.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field in the standard object table that contains the document contents.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the field in the standard object table that contains the document titleB.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the field in the standard object table that contains the document titleB.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
       description: Specifies confguration information for indexing a single standard object.
     VpcSecurityGroupId:
       type: string
@@ -3962,23 +4300,29 @@ components:
         - DocumentDataFieldName
       properties:
         CrawlAttachments:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether Amazon Kendra should index attachments to knowledge articles.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether Amazon Kendra should index attachments to knowledge articles.
         IncludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code>.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code>.
         ExcludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: 'List of regular expressions applied to knowledge articles. Items that don''t match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code> '
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: 'List of regular expressions applied to knowledge articles. Items that don''t match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code> '
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the ServiceNow field that is mapped to the index document title field.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the ServiceNow field that is mapped to the index document title field.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
       description: Provides configuration information for crawling knowledge articles in the ServiceNow site.
     ServiceNowServiceCatalogConfiguration:
       type: object
@@ -3986,23 +4330,29 @@ components:
         - DocumentDataFieldName
       properties:
         CrawlAttachments:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Indicates whether Amazon Kendra should crawl attachments to the service catalog items. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether Amazon Kendra should crawl attachments to the service catalog items. '
         IncludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: 'Determines the types of file attachments that are included in the index. '
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: 'Determines the types of file attachments that are included in the index. '
         ExcludeAttachmentFilePatterns:
-          $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-          description: Determines the types of file attachments that are excluded from the index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: Determines the types of file attachments that are excluded from the index.
         DocumentDataFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
         DocumentTitleFieldName:
-          $ref: '#/components/schemas/DataSourceFieldName'
-          description: The name of the ServiceNow field that is mapped to the index document title field.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceFieldName'
+            - description: The name of the ServiceNow field that is mapped to the index document title field.
         FieldMappings:
-          $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
-          description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
       description: Provides configuration information for crawling service catalog items in the ServiceNow site
     SharePointVersion:
       type: string
@@ -4039,11 +4389,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: 'The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or data source.'
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or data source.'
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value associated with the tag. The value may be an empty string but it can't be null.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value associated with the tag. The value may be an empty string but it can't be null.
       description: 'A list of key/value pairs that identify an index, FAQ, or data source. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.'
     TagKeyList:
       type: array

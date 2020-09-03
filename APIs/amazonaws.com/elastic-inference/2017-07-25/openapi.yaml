@@ -499,8 +499,9 @@ components:
       type: object
       properties:
         acceleratorTypeOfferings:
-          $ref: '#/components/schemas/AcceleratorTypeOfferingList'
-          description: ' The list of accelerator type offerings for a specific location. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeOfferingList'
+            - description: ' The list of accelerator type offerings for a specific location. '
     AcceleratorTypeName:
       type: string
       pattern: ^\S+$
@@ -513,17 +514,20 @@ components:
       type: object
       properties:
         acceleratorTypes:
-          $ref: '#/components/schemas/AcceleratorTypeList'
-          description: ' The available accelerator types. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeList'
+            - description: ' The available accelerator types. '
     DescribeAcceleratorsResponse:
       type: object
       properties:
         acceleratorSet:
-          $ref: '#/components/schemas/ElasticInferenceAcceleratorSet'
-          description: ' The details of the Elastic Inference Accelerators. '
+          allOf:
+            - $ref: '#/components/schemas/ElasticInferenceAcceleratorSet'
+            - description: ' The details of the Elastic Inference Accelerators. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     AcceleratorId:
       type: string
       pattern: '^eia-[0-9a-f]+$'
@@ -533,18 +537,21 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/FilterName'
-          description: ' The filter name for the Elastic Inference Accelerator list. It can assume the following values: accelerator-type: the type of Elastic Inference Accelerator to filter for. instance-id: an EC2 instance id to filter for. '
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: ' The filter name for the Elastic Inference Accelerator list. It can assume the following values: accelerator-type: the type of Elastic Inference Accelerator to filter for. instance-id: an EC2 instance id to filter for. '
         values:
-          $ref: '#/components/schemas/ValueStringList'
-          description: ' The values for the filter of the Elastic Inference Accelerator list. '
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - description: ' The values for the filter of the Elastic Inference Accelerator list. '
       description: ' A filter expression for the Elastic Inference Accelerator list. '
     ListTagsForResourceResult:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags of the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags of the Elastic Inference Accelerator. '
     TagResourceResult:
       type: object
       properties: {}
@@ -573,8 +580,9 @@ components:
       type: object
       properties:
         sizeInMiB:
-          $ref: '#/components/schemas/Integer'
-          description: ' The size in mebibytes of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The size in mebibytes of the Elastic Inference Accelerator type. '
       description: ' The memory information of an Elastic Inference Accelerator type. '
     ThroughputInfoList:
       type: array
@@ -586,14 +594,17 @@ components:
       type: object
       properties:
         acceleratorTypeName:
-          $ref: '#/components/schemas/AcceleratorTypeName'
-          description: ' The name of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeName'
+            - description: ' The name of the Elastic Inference Accelerator type. '
         memoryInfo:
-          $ref: '#/components/schemas/MemoryInfo'
-          description: ' The memory information of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/MemoryInfo'
+            - description: ' The memory information of the Elastic Inference Accelerator type. '
         throughputInfo:
-          $ref: '#/components/schemas/ThroughputInfoList'
-          description: ' The throughput information of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/ThroughputInfoList'
+            - description: ' The throughput information of the Elastic Inference Accelerator type. '
       description: ' The details of an Elastic Inference Accelerator type. '
     AcceleratorTypeList:
       type: array
@@ -623,14 +634,17 @@ components:
       type: object
       properties:
         acceleratorType:
-          $ref: '#/components/schemas/AcceleratorTypeName'
-          description: ' The name of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeName'
+            - description: ' The name of the Elastic Inference Accelerator type. '
         locationType:
-          $ref: '#/components/schemas/LocationType'
-          description: ' The location type for the offering. It can assume the following values: region: defines that the offering is at the regional level. availability-zone: defines that the offering is at the availability zone level. availability-zone-id: defines that the offering is at the availability zone level, defined by the availability zone id. '
+          allOf:
+            - $ref: '#/components/schemas/LocationType'
+            - description: ' The location type for the offering. It can assume the following values: region: defines that the offering is at the regional level. availability-zone: defines that the offering is at the availability zone level. availability-zone-id: defines that the offering is at the availability zone level, defined by the availability zone id. '
         location:
-          $ref: '#/components/schemas/Location'
-          description: ' The location for the offering. It will return either the region, availability zone or availability zone id for the offering depending on the locationType value. '
+          allOf:
+            - $ref: '#/components/schemas/Location'
+            - description: ' The location for the offering. It will return either the region, availability zone or availability zone id for the offering depending on the locationType value. '
       description: ' The offering for an Elastic Inference Accelerator type. '
     AcceleratorTypeOfferingList:
       type: array
@@ -649,11 +663,13 @@ components:
       title: DescribeAcceleratorOfferingsRequest
       properties:
         locationType:
-          $ref: '#/components/schemas/LocationType'
-          description: ' The location type that you want to describe accelerator type offerings for. It can assume the following values: region: will return the accelerator type offering at the regional level. availability-zone: will return the accelerator type offering at the availability zone level. availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id. '
+          allOf:
+            - $ref: '#/components/schemas/LocationType'
+            - description: ' The location type that you want to describe accelerator type offerings for. It can assume the following values: region: will return the accelerator type offering at the regional level. availability-zone: will return the accelerator type offering at the availability zone level. availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id. '
         acceleratorTypes:
-          $ref: '#/components/schemas/AcceleratorTypeNameList'
-          description: ' The list of accelerator types to describe. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeNameList'
+            - description: ' The list of accelerator types to describe. '
     DescribeAcceleratorTypesRequest:
       type: object
       title: DescribeAcceleratorTypesRequest
@@ -678,17 +694,21 @@ components:
       title: DescribeAcceleratorsRequest
       properties:
         acceleratorIds:
-          $ref: '#/components/schemas/AcceleratorIdList'
-          description: ' The IDs of the accelerators to describe. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorIdList'
+            - description: ' The IDs of the accelerators to describe. '
         filters:
-          $ref: '#/components/schemas/FilterList'
-          description: ' One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. '
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: ' One or more filters. Filter names and values are case-sensitive. Valid filter names are: accelerator-types: can provide a list of accelerator type names to filter for. instance-id: can provide a list of EC2 instance ids to filter for. '
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: ' The total number of items to return in the command''s output. If the total number of items available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the AWS CLI. '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' The total number of items to return in the command''s output. If the total number of items available is more than the value specified, a NextToken is provided in the command''s output. To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command. Do not use the NextToken response element directly outside of the AWS CLI. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ElasticInferenceAcceleratorSet:
       type: array
       items:
@@ -697,8 +717,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/AcceleratorHealthStatus'
-          description: ' The health status of the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorHealthStatus'
+            - description: ' The health status of the Elastic Inference Accelerator. '
       description: ' The health details of an Elastic Inference Accelerator. '
     ResourceArn:
       type: string
@@ -708,20 +729,25 @@ components:
       type: object
       properties:
         acceleratorHealth:
-          $ref: '#/components/schemas/ElasticInferenceAcceleratorHealth'
-          description: ' The health of the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/ElasticInferenceAcceleratorHealth'
+            - description: ' The health of the Elastic Inference Accelerator. '
         acceleratorType:
-          $ref: '#/components/schemas/AcceleratorTypeName'
-          description: ' The type of the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorTypeName'
+            - description: ' The type of the Elastic Inference Accelerator. '
         acceleratorId:
-          $ref: '#/components/schemas/AcceleratorId'
-          description: ' The ID of the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorId'
+            - description: ' The ID of the Elastic Inference Accelerator. '
         availabilityZone:
-          $ref: '#/components/schemas/AvailabilityZone'
-          description: ' The availability zone where the Elastic Inference Accelerator is present. '
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: ' The availability zone where the Elastic Inference Accelerator is present. '
         attachedResource:
-          $ref: '#/components/schemas/ResourceArn'
-          description: ' The ARN of the resource that the Elastic Inference Accelerator is attached to. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' The ARN of the resource that the Elastic Inference Accelerator is attached to. '
       description: ' The details of an Elastic Inference Accelerator. '
     FilterName:
       type: string
@@ -747,11 +773,13 @@ components:
       type: object
       properties:
         key:
-          $ref: '#/components/schemas/Key'
-          description: ' The throughput value of the Elastic Inference Accelerator type. It can assume the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS. TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS. '
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: ' The throughput value of the Elastic Inference Accelerator type. It can assume the following values: TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS. TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS. '
         value:
-          $ref: '#/components/schemas/Value'
-          description: ' The throughput value of the Elastic Inference Accelerator type. '
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: ' The throughput value of the Elastic Inference Accelerator type. '
       description: ' A throughput entry for an Elastic Inference Accelerator type. '
     ResourceARN:
       type: string
@@ -785,8 +813,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags to add to the Elastic Inference Accelerator. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags to add to the Elastic Inference Accelerator. '
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

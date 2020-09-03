@@ -395,22 +395,26 @@ components:
         - workbookCursor
       properties:
         results:
-          $ref: '#/components/schemas/ResultSetMap'
-          description: A map of all the rows on the screen keyed by block name.
+          allOf:
+            - $ref: '#/components/schemas/ResultSetMap'
+            - description: A map of all the rows on the screen keyed by block name.
         workbookCursor:
-          $ref: '#/components/schemas/WorkbookCursor'
-          description: ' Indicates the cursor of the workbook at which the data returned by this workbook is read. Workbook cursor keeps increasing with every update and the increments are not sequential. '
+          allOf:
+            - $ref: '#/components/schemas/WorkbookCursor'
+            - description: ' Indicates the cursor of the workbook at which the data returned by this workbook is read. Workbook cursor keeps increasing with every update and the increments are not sequential. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the query has been loaded. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' Provides the pagination token to load the next page if there are more results matching the request. If a pagination token is not present in the response, it means that all data matching the query has been loaded. '
     VariableValue:
       type: object
       required:
         - rawValue
       properties:
         rawValue:
-          $ref: '#/components/schemas/RawValue'
-          description: Raw value of the variable.
+          allOf:
+            - $ref: '#/components/schemas/RawValue'
+            - description: Raw value of the variable.
       description: The input variables to the app to be used by the InvokeScreenAutomation action request.
     AccessDeniedException: {}
     InternalServerException: {}
@@ -425,8 +429,9 @@ components:
         - workbookCursor
       properties:
         workbookCursor:
-          $ref: '#/components/schemas/WorkbookCursor'
-          description: The updated workbook cursor after performing the automation action.
+          allOf:
+            - $ref: '#/components/schemas/WorkbookCursor'
+            - description: The updated workbook cursor after performing the automation action.
     AutomationExecutionException: {}
     AutomationExecutionTimeoutException: {}
     ClientRequestToken:
@@ -457,11 +462,13 @@ components:
         - format
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the column.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the column.
         format:
-          $ref: '#/components/schemas/Format'
-          description: The format of the column.
+          allOf:
+            - $ref: '#/components/schemas/Format'
+            - description: The format of the column.
       description: Metadata for column in the table.
     RawValue:
       type: string
@@ -471,14 +478,17 @@ components:
       type: object
       properties:
         overrideFormat:
-          $ref: '#/components/schemas/Format'
-          description: ' The overrideFormat is optional and is specified only if a particular row of data has a different format for the data than the default format defined on the screen or the table. '
+          allOf:
+            - $ref: '#/components/schemas/Format'
+            - description: ' The overrideFormat is optional and is specified only if a particular row of data has a different format for the data than the default format defined on the screen or the table. '
         rawValue:
-          $ref: '#/components/schemas/RawValue'
-          description: The raw value of the data. e.g. jsmith@example.com
+          allOf:
+            - $ref: '#/components/schemas/RawValue'
+            - description: The raw value of the data. e.g. jsmith@example.com
         formattedValue:
-          $ref: '#/components/schemas/FormattedValue'
-          description: The formatted value of the data. e.g. John Smith.
+          allOf:
+            - $ref: '#/components/schemas/FormattedValue'
+            - description: The formatted value of the data. e.g. John Smith.
       description: The data in a particular data cell defined on the screen.
     DataItems:
       type: array
@@ -508,23 +518,29 @@ components:
       title: GetScreenDataRequest
       properties:
         workbookId:
-          $ref: '#/components/schemas/ResourceId'
-          description: The ID of the workbook that contains the screen.
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the workbook that contains the screen.
         appId:
-          $ref: '#/components/schemas/ResourceId'
-          description: The ID of the app that contains the screem.
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the app that contains the screem.
         screenId:
-          $ref: '#/components/schemas/ResourceId'
-          description: The ID of the screen.
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the screen.
         variables:
-          $ref: '#/components/schemas/VariableValueMap'
-          description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+          allOf:
+            - $ref: '#/components/schemas/VariableValueMap'
+            - description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '<p> The number of results to be returned on a single page. Specify a number between 1 and 100. The maximum value is 100. </p> <p> This parameter is optional. If you don''t specify this parameter, the default page size is 100. </p>'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p> The number of results to be returned on a single page. Specify a number between 1 and 100. The maximum value is 100. </p> <p> This parameter is optional. If you don''t specify this parameter, the default page size is 100. </p>'
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: '<p> This parameter is optional. If a nextToken is not specified, the API returns the first page of data. </p> <p> Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. </p>'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: '<p> This parameter is optional. If a nextToken is not specified, the API returns the first page of data. </p> <p> Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API will throw ValidationException. </p>'
     ResultSetMap:
       type: object
       additionalProperties:
@@ -539,14 +555,17 @@ components:
       title: InvokeScreenAutomationRequest
       properties:
         variables:
-          $ref: '#/components/schemas/VariableValueMap'
-          description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
+          allOf:
+            - $ref: '#/components/schemas/VariableValueMap'
+            - description: ' Variables are optional and are needed only if the screen requires them to render correctly. Variables are specified as a map where the key is the name of the variable as defined on the screen. The value is an object which currently has only one property, rawValue, which holds the value of the variable to be passed to the screen. '
         rowId:
-          $ref: '#/components/schemas/RowId'
-          description: ' The row ID for the automation if the automation is defined inside a block with source or list. '
+          allOf:
+            - $ref: '#/components/schemas/RowId'
+            - description: ' The row ID for the automation if the automation is defined inside a block with source or list. '
         clientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: '<p> The request token for performing the automation action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will return the response of the previous call rather than performing the action again. </p> <p> Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. </p>'
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: '<p> The request token for performing the automation action. Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error like a failed network connection, you can retry the call with the same request token. The service ensures that if the first call using that request token is successfully performed, the second call will return the response of the previous call rather than performing the action again. </p> <p> Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests spanning hours or days. </p>'
     ResultHeader:
       type: array
       items:
@@ -557,11 +576,13 @@ components:
         - dataItems
       properties:
         rowId:
-          $ref: '#/components/schemas/RowId'
-          description: The ID for a particular row.
+          allOf:
+            - $ref: '#/components/schemas/RowId'
+            - description: The ID for a particular row.
         dataItems:
-          $ref: '#/components/schemas/DataItems'
-          description: List of all the data cells in a row.
+          allOf:
+            - $ref: '#/components/schemas/DataItems'
+            - description: List of all the data cells in a row.
       description: A single row in the ResultSet.
     ResultRows:
       type: array
@@ -574,11 +595,13 @@ components:
         - rows
       properties:
         headers:
-          $ref: '#/components/schemas/ResultHeader'
-          description: '<p> List of headers for all the data cells in the block. The header identifies the name and default format of the data cell. Data cells appear in the same order in all rows as defined in the header. The names and formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank value is used. </p> <p> For example, a task list that displays the task name, due date and assigned person might have headers [ { "name": "Task Name"}, {"name": "Due Date", "format": "DATE"}, {"name": "Assigned", "format": "CONTACT"} ]. Every row in the result will have the task name as the first item, due date as the second item and assigned person as the third item. If a particular task does not have a due date, that row will still have a blank value in the second element and the assigned person will still be in the third element. </p>'
+          allOf:
+            - $ref: '#/components/schemas/ResultHeader'
+            - description: '<p> List of headers for all the data cells in the block. The header identifies the name and default format of the data cell. Data cells appear in the same order in all rows as defined in the header. The names and formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank value is used. </p> <p> For example, a task list that displays the task name, due date and assigned person might have headers [ { "name": "Task Name"}, {"name": "Due Date", "format": "DATE"}, {"name": "Assigned", "format": "CONTACT"} ]. Every row in the result will have the task name as the first item, due date as the second item and assigned person as the third item. If a particular task does not have a due date, that row will still have a blank value in the second element and the assigned person will still be in the third element. </p>'
         rows:
-          $ref: '#/components/schemas/ResultRows'
-          description: ' List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data cells will be present in the same order as they are defined in the header. '
+          allOf:
+            - $ref: '#/components/schemas/ResultRows'
+            - description: ' List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data cells will be present in the same order as they are defined in the header. '
       description: ' ResultSet contains the results of the request for a single block or list defined on the screen. '
     VariableName:
       type: string

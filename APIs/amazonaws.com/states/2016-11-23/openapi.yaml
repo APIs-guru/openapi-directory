@@ -1343,11 +1343,13 @@ components:
         - creationDate
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the created activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the created activity.
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the activity is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the activity is created.
     CreateActivityInput:
       type: object
       required:
@@ -1355,11 +1357,13 @@ components:
       title: CreateActivityInput
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: '<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>The list of tags to add to a resource.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     ActivityLimitExceeded: {}
     InvalidName: {}
     TooManyTags: {}
@@ -1370,11 +1374,13 @@ components:
         - creationDate
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the created state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the created state machine.
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the state machine is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the state machine is created.
     CreateStateMachineInput:
       type: object
       required:
@@ -1384,23 +1390,29 @@ components:
       title: CreateStateMachineInput
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the state machine. </p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         definition:
-          $ref: '#/components/schemas/Definition'
-          description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Definition'
+            - description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
         roleArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
         type:
-          $ref: '#/components/schemas/StateMachineType'
-          description: Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You cannot update the <code>type</code> of a state machine once it has been created.
+          allOf:
+            - $ref: '#/components/schemas/StateMachineType'
+            - description: Determines whether a Standard or Express state machine is created. The default is <code>STANDARD</code>. You cannot update the <code>type</code> of a state machine once it has been created.
         loggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-          description: '<p>Defines what execution history events are logged and where they are logged.</p> <note> <p>By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS Step Functions User Guide.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfiguration'
+            - description: '<p>Defines what execution history events are logged and where they are logged.</p> <note> <p>By default, the <code>level</code> is set to <code>OFF</code>. For more information see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html">Log Levels</a> in the AWS Step Functions User Guide.</p> </note>'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     InvalidArn: {}
     InvalidDefinition: {}
     InvalidLoggingConfiguration: {}
@@ -1418,8 +1430,9 @@ components:
       title: DeleteActivityInput
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the activity to delete.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the activity to delete.
     DeleteStateMachineOutput:
       type: object
       properties: {}
@@ -1430,8 +1443,9 @@ components:
       title: DeleteStateMachineInput
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine to delete.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine to delete.
     DescribeActivityOutput:
       type: object
       required:
@@ -1440,14 +1454,17 @@ components:
         - creationDate
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the activity.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the activity is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the activity is created.
     DescribeActivityInput:
       type: object
       required:
@@ -1455,8 +1472,9 @@ components:
       title: DescribeActivityInput
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the activity to describe.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the activity to describe.
     ActivityDoesNotExist: {}
     DescribeExecutionOutput:
       type: object
@@ -1468,29 +1486,37 @@ components:
         - input
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that id entifies the execution.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that id entifies the execution.
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the executed stated machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the executed stated machine.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
-          description: The current status of the execution.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: The current status of the execution.
         startDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the execution is started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the execution is started.
         stopDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'If the execution has already ended, the date the execution stopped.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'If the execution has already ended, the date the execution stopped.'
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The string that contains the JSON input data of the execution.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The string that contains the JSON input data of the execution.
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: '<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
     DescribeExecutionInput:
       type: object
       required:
@@ -1498,8 +1524,9 @@ components:
       title: DescribeExecutionInput
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the execution to describe.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the execution to describe.
     ExecutionDoesNotExist: {}
     DescribeStateMachineOutput:
       type: object
@@ -1512,26 +1539,33 @@ components:
         - creationDate
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the state machine.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         status:
-          $ref: '#/components/schemas/StateMachineStatus'
-          description: The current status of the state machine.
+          allOf:
+            - $ref: '#/components/schemas/StateMachineStatus'
+            - description: The current status of the state machine.
         definition:
-          $ref: '#/components/schemas/Definition'
-          description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Definition'
+            - description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
         roleArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role maintains security by granting Step Functions access to AWS resources.)
         type:
-          $ref: '#/components/schemas/StateMachineType'
-          description: The <code>type</code> of the state machine (<code>STANDARD</code> or <code>EXPRESS</code>).
+          allOf:
+            - $ref: '#/components/schemas/StateMachineType'
+            - description: The <code>type</code> of the state machine (<code>STANDARD</code> or <code>EXPRESS</code>).
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the state machine is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the state machine is created.
         loggingConfiguration:
           $ref: '#/components/schemas/LoggingConfiguration'
     DescribeStateMachineInput:
@@ -1541,8 +1575,9 @@ components:
       title: DescribeStateMachineInput
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine to describe.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine to describe.
     StateMachineDoesNotExist: {}
     DescribeStateMachineForExecutionOutput:
       type: object
@@ -1554,20 +1589,25 @@ components:
         - updateDate
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine associated with the execution.
         name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the state machine associated with the execution.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the state machine associated with the execution.
         definition:
-          $ref: '#/components/schemas/Definition'
-          description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Definition'
+            - description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
         roleArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. '
         updateDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
         loggingConfiguration:
           $ref: '#/components/schemas/LoggingConfiguration'
     DescribeStateMachineForExecutionInput:
@@ -1577,17 +1617,20 @@ components:
       title: DescribeStateMachineForExecutionInput
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the execution you want state machine information for.
     GetActivityTaskOutput:
       type: object
       properties:
         taskToken:
-          $ref: '#/components/schemas/TaskToken'
-          description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
+          allOf:
+            - $ref: '#/components/schemas/TaskToken'
+            - description: 'A token that identifies the scheduled task. This token must be copied and included in subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or <a>SendTaskFailure</a> in order to report the progress or completion of the task.'
         input:
-          $ref: '#/components/schemas/SensitiveDataJobInput'
-          description: The string that contains the JSON input data for the task.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveDataJobInput'
+            - description: The string that contains the JSON input data for the task.
     GetActivityTaskInput:
       type: object
       required:
@@ -1595,11 +1638,13 @@ components:
       title: GetActivityTaskInput
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using <a>CreateActivity</a>.)
         workerName:
-          $ref: '#/components/schemas/Name'
-          description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
     ActivityWorkerLimitExceeded: {}
     GetExecutionHistoryOutput:
       type: object
@@ -1607,11 +1652,13 @@ components:
         - events
       properties:
         events:
-          $ref: '#/components/schemas/HistoryEventList'
-          description: The list of events that occurred in the execution.
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventList'
+            - description: The list of events that occurred in the execution.
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     GetExecutionHistoryInput:
       type: object
       required:
@@ -1619,17 +1666,21 @@ components:
       title: GetExecutionHistoryInput
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the execution.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the execution.
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
         reverseOrder:
-          $ref: '#/components/schemas/ReverseOrder'
-          description: Lists events in descending order of their <code>timeStamp</code>.
+          allOf:
+            - $ref: '#/components/schemas/ReverseOrder'
+            - description: Lists events in descending order of their <code>timeStamp</code>.
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     InvalidToken: {}
     ListActivitiesOutput:
       type: object
@@ -1637,32 +1688,38 @@ components:
         - activities
       properties:
         activities:
-          $ref: '#/components/schemas/ActivityList'
-          description: The list of activities.
+          allOf:
+            - $ref: '#/components/schemas/ActivityList'
+            - description: The list of activities.
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListActivitiesInput:
       type: object
       title: ListActivitiesInput
       properties:
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListExecutionsOutput:
       type: object
       required:
         - executions
       properties:
         executions:
-          $ref: '#/components/schemas/ExecutionList'
-          description: The list of matching executions.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionList'
+            - description: The list of matching executions.
         nextToken:
-          $ref: '#/components/schemas/ListExecutionsPageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/ListExecutionsPageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListExecutionsInput:
       type: object
       required:
@@ -1670,17 +1727,21 @@ components:
       title: ListExecutionsInput
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine whose executions is listed.
         statusFilter:
-          $ref: '#/components/schemas/ExecutionStatus'
-          description: 'If specified, only list the executions whose current execution status matches the given filter.'
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: 'If specified, only list the executions whose current execution status matches the given filter.'
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
         nextToken:
-          $ref: '#/components/schemas/ListExecutionsPageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/ListExecutionsPageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListStateMachinesOutput:
       type: object
       required:
@@ -1689,24 +1750,28 @@ components:
         stateMachines:
           $ref: '#/components/schemas/StateMachineList'
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListStateMachinesInput:
       type: object
       title: ListStateMachinesInput
       properties:
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: <p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>
         nextToken:
-          $ref: '#/components/schemas/PageToken'
-          description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.'
     ListTagsForResourceOutput:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: An array of tags associated with the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: An array of tags associated with the resource.
     ListTagsForResourceInput:
       type: object
       required:
@@ -1714,8 +1779,9 @@ components:
       title: ListTagsForResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
     ResourceNotFound: {}
     SendTaskFailureOutput:
       type: object
@@ -1727,14 +1793,17 @@ components:
       title: SendTaskFailureInput
       properties:
         taskToken:
-          $ref: '#/components/schemas/TaskToken'
-          description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
+          allOf:
+            - $ref: '#/components/schemas/TaskToken'
+            - description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
     TaskDoesNotExist: {}
     TaskTimedOut: {}
     SendTaskHeartbeatOutput:
@@ -1747,8 +1816,9 @@ components:
       title: SendTaskHeartbeatInput
       properties:
         taskToken:
-          $ref: '#/components/schemas/TaskToken'
-          description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
+          allOf:
+            - $ref: '#/components/schemas/TaskToken'
+            - description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
     SendTaskSuccessOutput:
       type: object
       properties: {}
@@ -1760,11 +1830,13 @@ components:
       title: SendTaskSuccessInput
       properties:
         taskToken:
-          $ref: '#/components/schemas/TaskToken'
-          description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
+          allOf:
+            - $ref: '#/components/schemas/TaskToken'
+            - description: 'The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the <a href="https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html">context object</a> when a workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.'
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON output of the task.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON output of the task.
     InvalidOutput: {}
     StartExecutionOutput:
       type: object
@@ -1773,11 +1845,13 @@ components:
         - startDate
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that id entifies the execution.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that id entifies the execution.
         startDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the execution is started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the execution is started.
     StartExecutionInput:
       type: object
       required:
@@ -1785,14 +1859,17 @@ components:
       title: StartExecutionInput
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine to execute.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine to execute.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions"> Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note>'
     ExecutionLimitExceeded: {}
     ExecutionAlreadyExists: {}
     InvalidExecutionInput: {}
@@ -1802,8 +1879,9 @@ components:
         - stopDate
       properties:
         stopDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the execution is stopped.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the execution is stopped.
     StopExecutionInput:
       type: object
       required:
@@ -1811,14 +1889,17 @@ components:
       title: StopExecutionInput
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the execution to stop.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the execution to stop.
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
     TagResourceOutput:
       type: object
       properties: {}
@@ -1830,11 +1911,13 @@ components:
       title: TagResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: '<p>The list of tags to add to a resource.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>The list of tags to add to a resource.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     UntagResourceOutput:
       type: object
       properties: {}
@@ -1846,19 +1929,22 @@ components:
       title: UntagResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
         tagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The list of tags to remove from the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The list of tags to remove from the resource.
     UpdateStateMachineOutput:
       type: object
       required:
         - updateDate
       properties:
         updateDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time the state machine was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the state machine was updated.
     UpdateStateMachineInput:
       type: object
       required:
@@ -1866,17 +1952,21 @@ components:
       title: UpdateStateMachineInput
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine.
         definition:
-          $ref: '#/components/schemas/Definition'
-          description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Definition'
+            - description: 'The Amazon States Language definition of the state machine. See <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a>.'
         roleArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the IAM role of the state machine.
         loggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-          description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfiguration'
+            - description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
     MissingRequiredParameter: {}
     SensitiveError:
       type: string
@@ -1892,11 +1982,13 @@ components:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about an activity that failed during an execution.
     ActivityListItem:
       type: object
@@ -1906,14 +1998,17 @@ components:
         - creationDate
       properties:
         activityArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the activity.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the activity.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the activity is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the activity is created.
       description: Contains details about an activity.
     ActivityList:
       type: array
@@ -1934,11 +2029,13 @@ components:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about an activity schedule failure that occurred during an execution.
     SensitiveData:
       type: string
@@ -1952,17 +2049,21 @@ components:
         - resource
       properties:
         resource:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the scheduled activity.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the scheduled activity.
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data input to the activity task.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data input to the activity task.
         timeoutInSeconds:
-          $ref: '#/components/schemas/TimeoutInSeconds'
-          description: The maximum allowed duration of the activity task.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInSeconds'
+            - description: The maximum allowed duration of the activity task.
         heartbeatInSeconds:
-          $ref: '#/components/schemas/TimeoutInSeconds'
-          description: The maximum allowed duration between two heartbeats for the activity task.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInSeconds'
+            - description: The maximum allowed duration between two heartbeats for the activity task.
       description: Contains details about an activity scheduled during an execution.
     Identity:
       type: string
@@ -1971,32 +2072,37 @@ components:
       type: object
       properties:
         workerName:
-          $ref: '#/components/schemas/Identity'
-          description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The name of the worker that the task is assigned to. These names are provided by the workers when calling <a>GetActivityTask</a>.
       description: Contains details about the start of an activity during an execution.
     ActivitySucceededEventDetails:
       type: object
       properties:
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data output by the activity task.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data output by the activity task.
       description: Contains details about an activity that successfully terminated during an execution.
     ActivityTimedOutEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the timeout.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the timeout.
       description: Contains details about an activity timeout that occurred during an execution.
     CloudWatchLogsLogGroup:
       type: object
       properties:
         logGroupArn:
-          $ref: '#/components/schemas/Arn'
-          description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with <code>:*</code> '
       description: <p/>
     ConnectorParameters:
       type: string
@@ -2021,14 +2127,17 @@ components:
       type: object
       properties:
         level:
-          $ref: '#/components/schemas/LogLevel'
-          description: Defines which category of execution history events are logged.
+          allOf:
+            - $ref: '#/components/schemas/LogLevel'
+            - description: Defines which category of execution history events are logged.
         includeExecutionData:
-          $ref: '#/components/schemas/IncludeExecutionData'
-          description: 'Determines whether execution data is included in your log. When set to <code>FALSE</code>, data is excluded.'
+          allOf:
+            - $ref: '#/components/schemas/IncludeExecutionData'
+            - description: 'Determines whether execution data is included in your log. When set to <code>FALSE</code>, data is excluded.'
         destinations:
-          $ref: '#/components/schemas/LogDestinationList'
-          description: 'An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.'
+          allOf:
+            - $ref: '#/components/schemas/LogDestinationList'
+            - description: 'An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.'
       description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
     ExecutionStatus:
       type: string
@@ -2049,21 +2158,25 @@ components:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about an abort of an execution.
     ExecutionFailedEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about an execution failure event.
     ExecutionListItem:
       type: object
@@ -2075,23 +2188,29 @@ components:
         - startDate
       properties:
         executionArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that id entifies the execution.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that id entifies the execution.
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the executed state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the executed state machine.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the execution.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         status:
-          $ref: '#/components/schemas/ExecutionStatus'
-          description: The current status of the execution.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: The current status of the execution.
         startDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the execution started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the execution started.
         stopDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'If the execution already ended, the date the execution stopped.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'If the execution already ended, the date the execution stopped.'
       description: Contains details about an execution.
     ExecutionList:
       type: array
@@ -2101,28 +2220,33 @@ components:
       type: object
       properties:
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data input to the execution.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data input to the execution.
         roleArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
       description: Contains details about the start of the execution.
     ExecutionSucceededEventDetails:
       type: object
       properties:
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data output by the execution.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data output by the execution.
       description: Contains details about the successful termination of the execution.
     ExecutionTimedOutEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the timeout.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the timeout.
       description: Contains details about the execution timeout that occurred during the execution.
     TaskToken:
       type: string
@@ -2212,17 +2336,21 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a task failure event.
     TaskScheduledEventDetails:
       type: object
@@ -2233,20 +2361,25 @@ components:
         - parameters
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         region:
-          $ref: '#/components/schemas/Name'
-          description: The region of the scheduled task
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The region of the scheduled task
         parameters:
-          $ref: '#/components/schemas/ConnectorParameters'
-          description: The JSON data passed to the resource referenced in a task state.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorParameters'
+            - description: The JSON data passed to the resource referenced in a task state.
         timeoutInSeconds:
-          $ref: '#/components/schemas/TimeoutInSeconds'
-          description: The maximum allowed duration of the task.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInSeconds'
+            - description: The maximum allowed duration of the task.
       description: Contains details about a task scheduled during an execution.
     TaskStartFailedEventDetails:
       type: object
@@ -2255,17 +2388,21 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a task that failed to start during an execution.
     TaskStartedEventDetails:
       type: object
@@ -2274,11 +2411,13 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
       description: Contains details about the start of a task during an execution.
     TaskSubmitFailedEventDetails:
       type: object
@@ -2287,17 +2426,21 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a task that failed to submit during an execution.
     TaskSubmittedEventDetails:
       type: object
@@ -2306,14 +2449,17 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The response from a resource when a task has started.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The response from a resource when a task has started.
       description: Contains details about a task submitted to a resource .
     TaskSucceededEventDetails:
       type: object
@@ -2322,14 +2468,17 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
       description: Contains details about the successful completion of a task state.
     TaskTimedOutEventDetails:
       type: object
@@ -2338,54 +2487,65 @@ components:
         - resource
       properties:
         resourceType:
-          $ref: '#/components/schemas/Name'
-          description: The action of the resource called by a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The action of the resource called by a task state.
         resource:
-          $ref: '#/components/schemas/Name'
-          description: The service name of the resource in a task state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The service name of the resource in a task state.
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a resource timeout that occurred during an execution.
     MapStateStartedEventDetails:
       type: object
       properties:
         length:
-          $ref: '#/components/schemas/UnsignedInteger'
-          description: The size of the array for Map state iterations.
+          allOf:
+            - $ref: '#/components/schemas/UnsignedInteger'
+            - description: The size of the array for Map state iterations.
       description: Details about a Map state that was started.
     MapIterationEventDetails:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the iteration’s parent Map state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the iteration’s parent Map state.
         index:
-          $ref: '#/components/schemas/UnsignedInteger'
-          description: The index of the array belonging to the Map state iteration.
+          allOf:
+            - $ref: '#/components/schemas/UnsignedInteger'
+            - description: The index of the array belonging to the Map state iteration.
       description: Contains details about an iteration of a Map state.
     LambdaFunctionFailedEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a lambda function that failed during an execution.
     LambdaFunctionScheduleFailedEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a failed lambda function schedule event that occurred during an execution.
     LambdaFunctionScheduledEventDetails:
       type: object
@@ -2393,41 +2553,49 @@ components:
         - resource
       properties:
         resource:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the scheduled lambda function.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the scheduled lambda function.
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data input to the lambda function.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data input to the lambda function.
         timeoutInSeconds:
-          $ref: '#/components/schemas/TimeoutInSeconds'
-          description: The maximum allowed duration of the lambda function.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInSeconds'
+            - description: The maximum allowed duration of the lambda function.
       description: Contains details about a lambda function scheduled during an execution.
     LambdaFunctionStartFailedEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
       description: Contains details about a lambda function that failed to start during an execution.
     LambdaFunctionSucceededEventDetails:
       type: object
       properties:
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON data output by the lambda function.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON data output by the lambda function.
       description: Contains details about a lambda function that successfully terminated during an execution.
     LambdaFunctionTimedOutEventDetails:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/SensitiveError'
-          description: The error code of the failure.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
         cause:
-          $ref: '#/components/schemas/SensitiveCause'
-          description: A more detailed explanation of the cause of the timeout.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the timeout.
       description: Contains details about a lambda function timeout that occurred during an execution.
     StateEnteredEventDetails:
       type: object
@@ -2435,11 +2603,13 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the state.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the state.
         input:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The string that contains the JSON input data for the state.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The string that contains the JSON input data for the state.
       description: Contains details about a state entered during an execution.
     StateExitedEventDetails:
       type: object
@@ -2447,11 +2617,13 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the state.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         output:
-          $ref: '#/components/schemas/SensitiveData'
-          description: The JSON output data of the state.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: The JSON output data of the state.
       description: Contains details about an exit from a state during an execution.
     HistoryEvent:
       type: object
@@ -2461,22 +2633,27 @@ components:
         - id
       properties:
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time the event occurred.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the event occurred.
         type:
-          $ref: '#/components/schemas/HistoryEventType'
-          description: The type of the event.
+          allOf:
+            - $ref: '#/components/schemas/HistoryEventType'
+            - description: The type of the event.
         id:
-          $ref: '#/components/schemas/EventId'
-          description: 'The id of the event. Events are numbered sequentially, starting at one.'
+          allOf:
+            - $ref: '#/components/schemas/EventId'
+            - description: 'The id of the event. Events are numbered sequentially, starting at one.'
         previousEventId:
-          $ref: '#/components/schemas/EventId'
-          description: The id of the previous event.
+          allOf:
+            - $ref: '#/components/schemas/EventId'
+            - description: The id of the previous event.
         activityFailedEventDetails:
           $ref: '#/components/schemas/ActivityFailedEventDetails'
         activityScheduleFailedEventDetails:
-          $ref: '#/components/schemas/ActivityScheduleFailedEventDetails'
-          description: Contains details about an activity schedule event that failed during an execution.
+          allOf:
+            - $ref: '#/components/schemas/ActivityScheduleFailedEventDetails'
+            - description: Contains details about an activity schedule event that failed during an execution.
         activityScheduledEventDetails:
           $ref: '#/components/schemas/ActivityScheduledEventDetails'
         activityStartedEventDetails:
@@ -2486,29 +2663,37 @@ components:
         activityTimedOutEventDetails:
           $ref: '#/components/schemas/ActivityTimedOutEventDetails'
         taskFailedEventDetails:
-          $ref: '#/components/schemas/TaskFailedEventDetails'
-          description: Contains details about the failure of a task.
+          allOf:
+            - $ref: '#/components/schemas/TaskFailedEventDetails'
+            - description: Contains details about the failure of a task.
         taskScheduledEventDetails:
-          $ref: '#/components/schemas/TaskScheduledEventDetails'
-          description: Contains details about a task that was scheduled.
+          allOf:
+            - $ref: '#/components/schemas/TaskScheduledEventDetails'
+            - description: Contains details about a task that was scheduled.
         taskStartFailedEventDetails:
-          $ref: '#/components/schemas/TaskStartFailedEventDetails'
-          description: Contains details about a task that failed to start.
+          allOf:
+            - $ref: '#/components/schemas/TaskStartFailedEventDetails'
+            - description: Contains details about a task that failed to start.
         taskStartedEventDetails:
-          $ref: '#/components/schemas/TaskStartedEventDetails'
-          description: Contains details about a task that was started.
+          allOf:
+            - $ref: '#/components/schemas/TaskStartedEventDetails'
+            - description: Contains details about a task that was started.
         taskSubmitFailedEventDetails:
-          $ref: '#/components/schemas/TaskSubmitFailedEventDetails'
-          description: Contains details about a task that where the submit failed.
+          allOf:
+            - $ref: '#/components/schemas/TaskSubmitFailedEventDetails'
+            - description: Contains details about a task that where the submit failed.
         taskSubmittedEventDetails:
-          $ref: '#/components/schemas/TaskSubmittedEventDetails'
-          description: Contains details about a submitted task.
+          allOf:
+            - $ref: '#/components/schemas/TaskSubmittedEventDetails'
+            - description: Contains details about a submitted task.
         taskSucceededEventDetails:
-          $ref: '#/components/schemas/TaskSucceededEventDetails'
-          description: Contains details about a task that succeeded.
+          allOf:
+            - $ref: '#/components/schemas/TaskSucceededEventDetails'
+            - description: Contains details about a task that succeeded.
         taskTimedOutEventDetails:
-          $ref: '#/components/schemas/TaskTimedOutEventDetails'
-          description: Contains details about a task that timed out.
+          allOf:
+            - $ref: '#/components/schemas/TaskTimedOutEventDetails'
+            - description: Contains details about a task that timed out.
         executionFailedEventDetails:
           $ref: '#/components/schemas/ExecutionFailedEventDetails'
         executionStartedEventDetails:
@@ -2520,20 +2705,25 @@ components:
         executionTimedOutEventDetails:
           $ref: '#/components/schemas/ExecutionTimedOutEventDetails'
         mapStateStartedEventDetails:
-          $ref: '#/components/schemas/MapStateStartedEventDetails'
-          description: Contains details about Map state that was started.
+          allOf:
+            - $ref: '#/components/schemas/MapStateStartedEventDetails'
+            - description: Contains details about Map state that was started.
         mapIterationStartedEventDetails:
-          $ref: '#/components/schemas/MapIterationEventDetails'
-          description: Contains details about an iteration of a Map state that was started.
+          allOf:
+            - $ref: '#/components/schemas/MapIterationEventDetails'
+            - description: Contains details about an iteration of a Map state that was started.
         mapIterationSucceededEventDetails:
-          $ref: '#/components/schemas/MapIterationEventDetails'
-          description: Contains details about an iteration of a Map state that succeeded.
+          allOf:
+            - $ref: '#/components/schemas/MapIterationEventDetails'
+            - description: Contains details about an iteration of a Map state that succeeded.
         mapIterationFailedEventDetails:
-          $ref: '#/components/schemas/MapIterationEventDetails'
-          description: Contains details about an iteration of a Map state that failed.
+          allOf:
+            - $ref: '#/components/schemas/MapIterationEventDetails'
+            - description: Contains details about an iteration of a Map state that failed.
         mapIterationAbortedEventDetails:
-          $ref: '#/components/schemas/MapIterationEventDetails'
-          description: Contains details about an iteration of a Map state that was aborted.
+          allOf:
+            - $ref: '#/components/schemas/MapIterationEventDetails'
+            - description: Contains details about an iteration of a Map state that was aborted.
         lambdaFunctionFailedEventDetails:
           $ref: '#/components/schemas/LambdaFunctionFailedEventDetails'
         lambdaFunctionScheduleFailedEventDetails:
@@ -2541,11 +2731,13 @@ components:
         lambdaFunctionScheduledEventDetails:
           $ref: '#/components/schemas/LambdaFunctionScheduledEventDetails'
         lambdaFunctionStartFailedEventDetails:
-          $ref: '#/components/schemas/LambdaFunctionStartFailedEventDetails'
-          description: Contains details about a lambda function that failed to start during an execution.
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionStartFailedEventDetails'
+            - description: Contains details about a lambda function that failed to start during an execution.
         lambdaFunctionSucceededEventDetails:
-          $ref: '#/components/schemas/LambdaFunctionSucceededEventDetails'
-          description: Contains details about a lambda function that terminated successfully during an execution.
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionSucceededEventDetails'
+            - description: Contains details about a lambda function that terminated successfully during an execution.
         lambdaFunctionTimedOutEventDetails:
           $ref: '#/components/schemas/LambdaFunctionTimedOutEventDetails'
         stateEnteredEventDetails:
@@ -2567,8 +2759,9 @@ components:
       type: object
       properties:
         cloudWatchLogsLogGroup:
-          $ref: '#/components/schemas/CloudWatchLogsLogGroup'
-          description: 'An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLogsLogGroup'
+            - description: 'An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.'
       description: <p/>
     LogDestinationList:
       type: array
@@ -2593,17 +2786,21 @@ components:
         - creationDate
       properties:
         stateMachineArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) that identifies the state machine.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the state machine.
         name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the state machine.</p> <p>A name must <i>not</i> contain:</p> <ul> <li> <p>white space</p> </li> <li> <p>brackets <code>&lt; &gt; { } [ ]</code> </p> </li> <li> <p>wildcard characters <code>? *</code> </p> </li> <li> <p>special characters <code>" # % \ ^ | ~ ` $ &amp; , ; : /</code> </p> </li> <li> <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p> </li> </ul> <p>To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.</p>'
         type:
-          $ref: '#/components/schemas/StateMachineType'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/StateMachineType'
+            - description: <p/>
         creationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date the state machine is created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the state machine is created.
       description: Contains details about the state machine.
     TagKey:
       type: string
@@ -2617,11 +2814,13 @@ components:
       type: object
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of a tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of a tag.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of a tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of a tag.
       description: '<p>Tags are key-value pairs that can be associated with Step Functions state machines and activities.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
     TagKeyList:
       type: array

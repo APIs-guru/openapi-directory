@@ -207,17 +207,21 @@ paths:
                   type: object
                   properties:
                     Name:
-                      $ref: '#/components/schemas/NetworkMemberNameString'
-                      description: The name of the member.
+                      allOf:
+                        - $ref: '#/components/schemas/NetworkMemberNameString'
+                        - description: The name of the member.
                     Description:
-                      $ref: '#/components/schemas/DescriptionString'
-                      description: An optional description of the member.
+                      allOf:
+                        - $ref: '#/components/schemas/DescriptionString'
+                        - description: An optional description of the member.
                     FrameworkConfiguration:
-                      $ref: '#/components/schemas/MemberFrameworkConfiguration'
-                      description: Configuration properties of the blockchain framework relevant to the member.
+                      allOf:
+                        - $ref: '#/components/schemas/MemberFrameworkConfiguration'
+                        - description: Configuration properties of the blockchain framework relevant to the member.
                     LogPublishingConfiguration:
-                      $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-                      description: <p/>
+                      allOf:
+                        - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
+                        - description: <p/>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -413,31 +417,37 @@ paths:
                   type: object
                   properties:
                     Fabric:
-                      $ref: '#/components/schemas/NetworkFabricConfiguration'
-                      description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
+                      allOf:
+                        - $ref: '#/components/schemas/NetworkFabricConfiguration'
+                        - description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
                 VotingPolicy:
                   description: ' The voting rules for the network to decide if a proposal is accepted '
                   type: object
                   properties:
                     ApprovalThresholdPolicy:
-                      $ref: '#/components/schemas/ApprovalThresholdPolicy'
-                      description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
+                      allOf:
+                        - $ref: '#/components/schemas/ApprovalThresholdPolicy'
+                        - description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
                 MemberConfiguration:
                   description: Configuration properties of the member.
                   type: object
                   properties:
                     Name:
-                      $ref: '#/components/schemas/NetworkMemberNameString'
-                      description: The name of the member.
+                      allOf:
+                        - $ref: '#/components/schemas/NetworkMemberNameString'
+                        - description: The name of the member.
                     Description:
-                      $ref: '#/components/schemas/DescriptionString'
-                      description: An optional description of the member.
+                      allOf:
+                        - $ref: '#/components/schemas/DescriptionString'
+                        - description: An optional description of the member.
                     FrameworkConfiguration:
-                      $ref: '#/components/schemas/MemberFrameworkConfiguration'
-                      description: Configuration properties of the blockchain framework relevant to the member.
+                      allOf:
+                        - $ref: '#/components/schemas/MemberFrameworkConfiguration'
+                        - description: Configuration properties of the blockchain framework relevant to the member.
                     LogPublishingConfiguration:
-                      $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-                      description: <p/>
+                      allOf:
+                        - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
+                        - description: <p/>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -630,14 +640,17 @@ paths:
                   type: object
                   properties:
                     InstanceType:
-                      $ref: '#/components/schemas/InstanceTypeString'
-                      description: The Amazon Managed Blockchain instance type for the node.
+                      allOf:
+                        - $ref: '#/components/schemas/InstanceTypeString'
+                        - description: The Amazon Managed Blockchain instance type for the node.
                     AvailabilityZone:
-                      $ref: '#/components/schemas/AvailabilityZoneString'
-                      description: The Availability Zone in which the node exists.
+                      allOf:
+                        - $ref: '#/components/schemas/AvailabilityZoneString'
+                        - description: The Availability Zone in which the node exists.
                     LogPublishingConfiguration:
-                      $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-                      description: <p/>
+                      allOf:
+                        - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
+                        - description: <p/>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -820,11 +833,13 @@ paths:
                   type: object
                   properties:
                     Invitations:
-                      $ref: '#/components/schemas/InviteActionList'
-                      description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
+                      allOf:
+                        - $ref: '#/components/schemas/InviteActionList'
+                        - description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
                     Removals:
-                      $ref: '#/components/schemas/RemoveActionList'
-                      description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
+                      allOf:
+                        - $ref: '#/components/schemas/RemoveActionList'
+                        - description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
                 Description:
                   description: 'A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."'
                   type: string
@@ -1111,8 +1126,9 @@ paths:
                   type: object
                   properties:
                     Fabric:
-                      $ref: '#/components/schemas/MemberFabricLogPublishingConfiguration'
-                      description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+                      allOf:
+                        - $ref: '#/components/schemas/MemberFabricLogPublishingConfiguration'
+                        - description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
   '/networks/{networkId}/members/{memberId}/nodes/{nodeId}':
     delete:
       operationId: DeleteNode
@@ -1335,8 +1351,9 @@ paths:
                   type: object
                   properties:
                     Fabric:
-                      $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
-                      description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+                      allOf:
+                        - $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
+                        - description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
   '/networks/{networkId}':
     get:
       operationId: GetNetwork
@@ -1835,8 +1852,9 @@ components:
       type: object
       properties:
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member.
     NetworkMemberNameString:
       type: string
       pattern: '^(?!-)^[^0-9](?!.*--)[A-Za-z0-9-]+[^- ]$'
@@ -1849,15 +1867,17 @@ components:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/MemberFabricConfiguration'
-          description: Attributes of Hyperledger Fabric for a member on a Managed Blockchain network that uses Hyperledger Fabric.
+          allOf:
+            - $ref: '#/components/schemas/MemberFabricConfiguration'
+            - description: Attributes of Hyperledger Fabric for a member on a Managed Blockchain network that uses Hyperledger Fabric.
       description: Configuration properties relevant to a member for the blockchain framework that the Managed Blockchain network uses.
     MemberLogPublishingConfiguration:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/MemberFabricLogPublishingConfiguration'
-          description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+          allOf:
+            - $ref: '#/components/schemas/MemberFabricLogPublishingConfiguration'
+            - description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
       description: Configuration properties for logging events associated with a member of a Managed Blockchain network.
     InvalidRequestException: {}
     AccessDeniedException: {}
@@ -1871,39 +1891,46 @@ components:
       type: object
       properties:
         NetworkId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier for the network.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier for the network.
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier for the first member within the network.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier for the first member within the network.
     NetworkFabricConfiguration:
       type: object
       required:
         - Edition
       properties:
         Edition:
-          $ref: '#/components/schemas/Edition'
-          description: 'The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Edition'
+            - description: 'The edition of Amazon Managed Blockchain that the network uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
       description: Hyperledger Fabric configuration properties for the network.
     ApprovalThresholdPolicy:
       type: object
       properties:
         ThresholdPercentage:
-          $ref: '#/components/schemas/ThresholdPercentageInt'
-          description: 'The percentage of votes among all members that must be <code>YES</code> for a proposal to be approved. For example, a <code>ThresholdPercentage</code> value of <code>50</code> indicates 50%. The <code>ThresholdComparator</code> determines the precise comparison. If a <code>ThresholdPercentage</code> value of <code>50</code> is specified on a network with 10 members, along with a <code>ThresholdComparator</code> value of <code>GREATER_THAN</code>, this indicates that 6 <code>YES</code> votes are required for the proposal to be approved.'
+          allOf:
+            - $ref: '#/components/schemas/ThresholdPercentageInt'
+            - description: 'The percentage of votes among all members that must be <code>YES</code> for a proposal to be approved. For example, a <code>ThresholdPercentage</code> value of <code>50</code> indicates 50%. The <code>ThresholdComparator</code> determines the precise comparison. If a <code>ThresholdPercentage</code> value of <code>50</code> is specified on a network with 10 members, along with a <code>ThresholdComparator</code> value of <code>GREATER_THAN</code>, this indicates that 6 <code>YES</code> votes are required for the proposal to be approved.'
         ProposalDurationInHours:
-          $ref: '#/components/schemas/ProposalDurationInt'
-          description: 'The duration from the time that a proposal is created until it expires. If members cast neither the required number of <code>YES</code> votes to approve the proposal nor the number of <code>NO</code> votes required to reject it before the duration expires, the proposal is <code>EXPIRED</code> and <code>ProposalActions</code> are not carried out.'
+          allOf:
+            - $ref: '#/components/schemas/ProposalDurationInt'
+            - description: 'The duration from the time that a proposal is created until it expires. If members cast neither the required number of <code>YES</code> votes to approve the proposal nor the number of <code>NO</code> votes required to reject it before the duration expires, the proposal is <code>EXPIRED</code> and <code>ProposalActions</code> are not carried out.'
         ThresholdComparator:
-          $ref: '#/components/schemas/ThresholdComparator'
-          description: Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.
+          allOf:
+            - $ref: '#/components/schemas/ThresholdComparator'
+            - description: Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.
       description: A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.
     CreateNodeOutput:
       type: object
       properties:
         NodeId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the node.
     InstanceTypeString:
       type: string
     AvailabilityZoneString:
@@ -1912,15 +1939,17 @@ components:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
-          description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
+          allOf:
+            - $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
+            - description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
       description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
     CreateProposalOutput:
       type: object
       properties:
         ProposalId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the proposal.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the proposal.
     InviteActionList:
       type: array
       items:
@@ -1939,80 +1968,96 @@ components:
       type: object
       properties:
         Member:
-          $ref: '#/components/schemas/Member'
-          description: The properties of a member.
+          allOf:
+            - $ref: '#/components/schemas/Member'
+            - description: The properties of a member.
     GetNetworkOutput:
       type: object
       properties:
         Network:
-          $ref: '#/components/schemas/Network'
-          description: An object containing network configuration parameters.
+          allOf:
+            - $ref: '#/components/schemas/Network'
+            - description: An object containing network configuration parameters.
     GetNodeOutput:
       type: object
       properties:
         Node:
-          $ref: '#/components/schemas/Node'
-          description: Properties of the node configuration.
+          allOf:
+            - $ref: '#/components/schemas/Node'
+            - description: Properties of the node configuration.
     GetProposalOutput:
       type: object
       properties:
         Proposal:
-          $ref: '#/components/schemas/Proposal'
-          description: Information about a proposal.
+          allOf:
+            - $ref: '#/components/schemas/Proposal'
+            - description: Information about a proposal.
     ListInvitationsOutput:
       type: object
       properties:
         Invitations:
-          $ref: '#/components/schemas/InvitationList'
-          description: The invitations for the network.
+          allOf:
+            - $ref: '#/components/schemas/InvitationList'
+            - description: The invitations for the network.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The pagination token that indicates the next set of results to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
     ListMembersOutput:
       type: object
       properties:
         Members:
-          $ref: '#/components/schemas/MemberSummaryList'
-          description: An array of <code>MemberSummary</code> objects. Each object contains details about a network member.
+          allOf:
+            - $ref: '#/components/schemas/MemberSummaryList'
+            - description: An array of <code>MemberSummary</code> objects. Each object contains details about a network member.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The pagination token that indicates the next set of results to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
     ListNetworksOutput:
       type: object
       properties:
         Networks:
-          $ref: '#/components/schemas/NetworkSummaryList'
-          description: An array of <code>NetworkSummary</code> objects that contain configuration properties for each network.
+          allOf:
+            - $ref: '#/components/schemas/NetworkSummaryList'
+            - description: An array of <code>NetworkSummary</code> objects that contain configuration properties for each network.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The pagination token that indicates the next set of results to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
     ListNodesOutput:
       type: object
       properties:
         Nodes:
-          $ref: '#/components/schemas/NodeSummaryList'
-          description: An array of <code>NodeSummary</code> objects that contain configuration properties for each node.
+          allOf:
+            - $ref: '#/components/schemas/NodeSummaryList'
+            - description: An array of <code>NodeSummary</code> objects that contain configuration properties for each node.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The pagination token that indicates the next set of results to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
     ListProposalVotesOutput:
       type: object
       properties:
         ProposalVotes:
-          $ref: '#/components/schemas/ProposalVoteList'
-          description: ' The listing of votes. '
+          allOf:
+            - $ref: '#/components/schemas/ProposalVoteList'
+            - description: ' The listing of votes. '
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' The pagination token that indicates the next set of results to retrieve. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' The pagination token that indicates the next set of results to retrieve. '
     ListProposalsOutput:
       type: object
       properties:
         Proposals:
-          $ref: '#/components/schemas/ProposalSummaryList'
-          description: The summary of each proposal made on the network.
+          allOf:
+            - $ref: '#/components/schemas/ProposalSummaryList'
+            - description: The summary of each proposal made on the network.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The pagination token that indicates the next set of results to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
     RejectInvitationOutput:
       type: object
       properties: {}
@@ -2024,8 +2069,9 @@ components:
       type: object
       properties:
         CaLogs:
-          $ref: '#/components/schemas/LogConfigurations'
-          description: 'Configuration properties for logging events associated with a member''s Certificate Authority (CA). CA logs help you determine when a member in your account joins the network, or when new peers register with a member CA.'
+          allOf:
+            - $ref: '#/components/schemas/LogConfigurations'
+            - description: 'Configuration properties for logging events associated with a member''s Certificate Authority (CA). CA logs help you determine when a member in your account joins the network, or when new peers register with a member CA.'
       description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
     UpdateNodeOutput:
       type: object
@@ -2034,11 +2080,13 @@ components:
       type: object
       properties:
         ChaincodeLogs:
-          $ref: '#/components/schemas/LogConfigurations'
-          description: 'Configuration properties for logging events associated with chaincode execution on a peer node. Chaincode logs contain the results of instantiating, invoking, and querying the chaincode. A peer can run multiple instances of chaincode. When enabled, a log stream is created for all chaincodes, with an individual log stream for each chaincode.'
+          allOf:
+            - $ref: '#/components/schemas/LogConfigurations'
+            - description: 'Configuration properties for logging events associated with chaincode execution on a peer node. Chaincode logs contain the results of instantiating, invoking, and querying the chaincode. A peer can run multiple instances of chaincode. When enabled, a log stream is created for all chaincodes, with an individual log stream for each chaincode.'
         PeerLogs:
-          $ref: '#/components/schemas/LogConfigurations'
-          description: 'Configuration properties for a peer node log. Peer node logs contain messages generated when your client submits transaction proposals to peer nodes, requests to join channels, enrolls an admin peer, and lists the chaincode instances on a peer node. '
+          allOf:
+            - $ref: '#/components/schemas/LogConfigurations'
+            - description: 'Configuration properties for a peer node log. Peer node logs contain messages generated when your client submits transaction proposals to peer nodes, requests to join channels, enrolls an admin peer, and lists the chaincode instances on a peer node. '
       description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
     VoteOnProposalOutput:
       type: object
@@ -2071,17 +2119,21 @@ components:
         - FrameworkConfiguration
       properties:
         Name:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: The name of the member.
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: The name of the member.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: An optional description of the member.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: An optional description of the member.
         FrameworkConfiguration:
-          $ref: '#/components/schemas/MemberFrameworkConfiguration'
-          description: Configuration properties of the blockchain framework relevant to the member.
+          allOf:
+            - $ref: '#/components/schemas/MemberFrameworkConfiguration'
+            - description: Configuration properties of the blockchain framework relevant to the member.
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
+            - description: <p/>
       description: Configuration properties of the member.
     CreateMemberInput:
       type: object
@@ -2092,14 +2144,17 @@ components:
       title: CreateMemberInput
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestTokenString'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
         InvitationId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the invitation that is sent to the member to join the network.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the invitation that is sent to the member to join the network.
         MemberConfiguration:
-          $ref: '#/components/schemas/MemberConfiguration'
-          description: Member configuration parameters.
+          allOf:
+            - $ref: '#/components/schemas/MemberConfiguration'
+            - description: Member configuration parameters.
     NameString:
       type: string
       pattern: .*\S.*
@@ -2117,15 +2172,17 @@ components:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/NetworkFabricConfiguration'
-          description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricConfiguration'
+            - description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
       description: ' Configuration properties relevant to the network for the blockchain framework that the network uses. '
     VotingPolicy:
       type: object
       properties:
         ApprovalThresholdPolicy:
-          $ref: '#/components/schemas/ApprovalThresholdPolicy'
-          description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
+          allOf:
+            - $ref: '#/components/schemas/ApprovalThresholdPolicy'
+            - description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
       description: ' The voting rules for the network to decide if a proposal is accepted '
     CreateNetworkInput:
       type: object
@@ -2139,29 +2196,37 @@ components:
       title: CreateNetworkInput
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestTokenString'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
         Name:
-          $ref: '#/components/schemas/NameString'
-          description: The name of the network.
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the network.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: An optional description for the network.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: An optional description for the network.
         Framework:
-          $ref: '#/components/schemas/Framework'
-          description: The blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: The blockchain framework that the network uses.
         FrameworkVersion:
-          $ref: '#/components/schemas/FrameworkVersionString'
-          description: The version of the blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/FrameworkVersionString'
+            - description: The version of the blockchain framework that the network uses.
         FrameworkConfiguration:
-          $ref: '#/components/schemas/NetworkFrameworkConfiguration'
-          description: ' Configuration properties of the blockchain framework relevant to the network configuration. '
+          allOf:
+            - $ref: '#/components/schemas/NetworkFrameworkConfiguration'
+            - description: ' Configuration properties of the blockchain framework relevant to the network configuration. '
         VotingPolicy:
-          $ref: '#/components/schemas/VotingPolicy'
-          description: ' The voting rules used by the network to determine if a proposal is approved. '
+          allOf:
+            - $ref: '#/components/schemas/VotingPolicy'
+            - description: ' The voting rules used by the network to determine if a proposal is approved. '
         MemberConfiguration:
-          $ref: '#/components/schemas/MemberConfiguration'
-          description: Configuration properties for the first member within the network.
+          allOf:
+            - $ref: '#/components/schemas/MemberConfiguration'
+            - description: Configuration properties for the first member within the network.
     NodeConfiguration:
       type: object
       required:
@@ -2169,14 +2234,17 @@ components:
         - AvailabilityZone
       properties:
         InstanceType:
-          $ref: '#/components/schemas/InstanceTypeString'
-          description: The Amazon Managed Blockchain instance type for the node.
+          allOf:
+            - $ref: '#/components/schemas/InstanceTypeString'
+            - description: The Amazon Managed Blockchain instance type for the node.
         AvailabilityZone:
-          $ref: '#/components/schemas/AvailabilityZoneString'
-          description: The Availability Zone in which the node exists.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneString'
+            - description: The Availability Zone in which the node exists.
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
+            - description: <p/>
       description: Configuration properties of a peer node.
     CreateNodeInput:
       type: object
@@ -2186,20 +2254,24 @@ components:
       title: CreateNodeInput
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestTokenString'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
         NodeConfiguration:
-          $ref: '#/components/schemas/NodeConfiguration'
-          description: The properties of a node configuration.
+          allOf:
+            - $ref: '#/components/schemas/NodeConfiguration'
+            - description: The properties of a node configuration.
     ProposalActions:
       type: object
       properties:
         Invitations:
-          $ref: '#/components/schemas/InviteActionList'
-          description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
+          allOf:
+            - $ref: '#/components/schemas/InviteActionList'
+            - description: ' The actions to perform for an <code>APPROVED</code> proposal to invite an AWS account to create a member and join the network. '
         Removals:
-          $ref: '#/components/schemas/RemoveActionList'
-          description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
+          allOf:
+            - $ref: '#/components/schemas/RemoveActionList'
+            - description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
       description: ' The actions to carry out if a proposal is <code>APPROVED</code>. '
     CreateProposalInput:
       type: object
@@ -2210,17 +2282,21 @@ components:
       title: CreateProposalInput
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestTokenString'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member that is creating the proposal. This identifier is especially useful for identifying the member making the proposal when multiple members exist in a single AWS account.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member that is creating the proposal. This identifier is especially useful for identifying the member making the proposal when multiple members exist in a single AWS account.
         Actions:
-          $ref: '#/components/schemas/ProposalActions'
-          description: 'The type of actions proposed, such as inviting a member or removing a member. The types of <code>Actions</code> in a proposal are mutually exclusive. For example, a proposal with <code>Invitations</code> actions cannot also contain <code>Removals</code> actions.'
+          allOf:
+            - $ref: '#/components/schemas/ProposalActions'
+            - description: 'The type of actions proposed, such as inviting a member or removing a member. The types of <code>Actions</code> in a proposal are mutually exclusive. For example, a proposal with <code>Invitations</code> actions cannot also contain <code>Removals</code> actions.'
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: 'A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."'
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: 'A description for the proposal that is visible to voting members, for example, "Proposal to add Example Corp. as member."'
     DeleteMemberInput:
       type: object
       title: DeleteMemberInput
@@ -2244,29 +2320,37 @@ components:
       type: object
       properties:
         NetworkId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the network to which the member belongs.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the network to which the member belongs.
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member.
         Name:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: The name of the member.
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: The name of the member.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: An optional description for the member.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: An optional description for the member.
         FrameworkAttributes:
-          $ref: '#/components/schemas/MemberFrameworkAttributes'
-          description: Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.
+          allOf:
+            - $ref: '#/components/schemas/MemberFrameworkAttributes'
+            - description: Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-          description: Configuration properties for logging events associated with a member.
+          allOf:
+            - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
+            - description: Configuration properties for logging events associated with a member.
         Status:
-          $ref: '#/components/schemas/MemberStatus'
-          description: '<p>The status of a member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+            - description: '<p>The status of a member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the member was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the member was created.
       description: Member configuration properties.
     GetNetworkInput:
       type: object
@@ -2276,35 +2360,45 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the network.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the network.
         Name:
-          $ref: '#/components/schemas/NameString'
-          description: The name of the network.
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the network.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: Attributes of the blockchain framework for the network.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: Attributes of the blockchain framework for the network.
         Framework:
-          $ref: '#/components/schemas/Framework'
-          description: The blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: The blockchain framework that the network uses.
         FrameworkVersion:
-          $ref: '#/components/schemas/FrameworkVersionString'
-          description: The version of the blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/FrameworkVersionString'
+            - description: The version of the blockchain framework that the network uses.
         FrameworkAttributes:
-          $ref: '#/components/schemas/NetworkFrameworkAttributes'
-          description: Attributes of the blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/NetworkFrameworkAttributes'
+            - description: Attributes of the blockchain framework that the network uses.
         VpcEndpointServiceName:
-          $ref: '#/components/schemas/String'
-          description: The VPC endpoint service name of the VPC endpoint service of the network. Members use the VPC endpoint service name to create a VPC endpoint to access network resources.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The VPC endpoint service name of the VPC endpoint service of the network. Members use the VPC endpoint service name to create a VPC endpoint to access network resources.
         VotingPolicy:
-          $ref: '#/components/schemas/VotingPolicy'
-          description: The voting rules for the network to decide if a proposal is accepted.
+          allOf:
+            - $ref: '#/components/schemas/VotingPolicy'
+            - description: The voting rules for the network to decide if a proposal is accepted.
         Status:
-          $ref: '#/components/schemas/NetworkStatus'
-          description: The current status of the network.
+          allOf:
+            - $ref: '#/components/schemas/NetworkStatus'
+            - description: The current status of the network.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the network was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the network was created.
       description: Network configuration properties.
     GetNodeInput:
       type: object
@@ -2314,32 +2408,41 @@ components:
       type: object
       properties:
         NetworkId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the network that the node is in.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the network that the node is in.
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member to which the node belongs.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member to which the node belongs.
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the node.
         InstanceType:
-          $ref: '#/components/schemas/InstanceTypeString'
-          description: The instance type of the node.
+          allOf:
+            - $ref: '#/components/schemas/InstanceTypeString'
+            - description: The instance type of the node.
         AvailabilityZone:
-          $ref: '#/components/schemas/AvailabilityZoneString'
-          description: The Availability Zone in which the node exists.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneString'
+            - description: The Availability Zone in which the node exists.
         FrameworkAttributes:
-          $ref: '#/components/schemas/NodeFrameworkAttributes'
-          description: Attributes of the blockchain framework being used.
+          allOf:
+            - $ref: '#/components/schemas/NodeFrameworkAttributes'
+            - description: Attributes of the blockchain framework being used.
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
+            - description: <p/>
         Status:
-          $ref: '#/components/schemas/NodeStatus'
-          description: The status of the node.
+          allOf:
+            - $ref: '#/components/schemas/NodeStatus'
+            - description: The status of the node.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the node was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the node was created.
       description: Configuration properties of a peer node.
     GetProposalInput:
       type: object
@@ -2349,41 +2452,53 @@ components:
       type: object
       properties:
         ProposalId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the proposal.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the proposal.
         NetworkId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the network for which the proposal is made.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the network for which the proposal is made.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: The description of the proposal.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The description of the proposal.
         Actions:
-          $ref: '#/components/schemas/ProposalActions'
-          description: The actions to perform on the network if the proposal is <code>APPROVED</code>.
+          allOf:
+            - $ref: '#/components/schemas/ProposalActions'
+            - description: The actions to perform on the network if the proposal is <code>APPROVED</code>.
         ProposedByMemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member that created the proposal.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member that created the proposal.
         ProposedByMemberName:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: The name of the member that created the proposal.
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: The name of the member that created the proposal.
         Status:
-          $ref: '#/components/schemas/ProposalStatus'
-          description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error. The <code>ACTION_FAILED</code> status occurs even if only one ProposalAction fails and other actions are successful.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ProposalStatus'
+            - description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error. The <code>ACTION_FAILED</code> status occurs even if only one ProposalAction fails and other actions are successful.</p> </li> </ul>'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' The date and time that the proposal was created. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date and time that the proposal was created. '
         ExpirationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
         YesVoteCount:
-          $ref: '#/components/schemas/VoteCount'
-          description: ' The current total of <code>YES</code> votes cast on the proposal by members. '
+          allOf:
+            - $ref: '#/components/schemas/VoteCount'
+            - description: ' The current total of <code>YES</code> votes cast on the proposal by members. '
         NoVoteCount:
-          $ref: '#/components/schemas/VoteCount'
-          description: ' The current total of <code>NO</code> votes cast on the proposal by members. '
+          allOf:
+            - $ref: '#/components/schemas/VoteCount'
+            - description: ' The current total of <code>NO</code> votes cast on the proposal by members. '
         OutstandingVoteCount:
-          $ref: '#/components/schemas/VoteCount'
-          description: ' The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes. '
+          allOf:
+            - $ref: '#/components/schemas/VoteCount'
+            - description: ' The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes. '
       description: Properties of a proposal on a Managed Blockchain network.
     Timestamp:
       type: string
@@ -2400,42 +2515,53 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the network.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the network.
         Name:
-          $ref: '#/components/schemas/NameString'
-          description: The name of the network.
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the network.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: An optional description of the network.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: An optional description of the network.
         Framework:
-          $ref: '#/components/schemas/Framework'
-          description: The blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: The blockchain framework that the network uses.
         FrameworkVersion:
-          $ref: '#/components/schemas/FrameworkVersionString'
-          description: The version of the blockchain framework that the network uses.
+          allOf:
+            - $ref: '#/components/schemas/FrameworkVersionString'
+            - description: The version of the blockchain framework that the network uses.
         Status:
-          $ref: '#/components/schemas/NetworkStatus'
-          description: The current status of the network.
+          allOf:
+            - $ref: '#/components/schemas/NetworkStatus'
+            - description: The current status of the network.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the network was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the network was created.
       description: A summary of network configuration properties.
     Invitation:
       type: object
       properties:
         InvitationId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier for the invitation.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier for the invitation.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the invitation was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the invitation was created.
         ExpirationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time that the invitation expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, the invitee can no longer create a member and join the network using this <code>InvitationId</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time that the invitation expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, the invitee can no longer create a member and join the network using this <code>InvitationId</code>.'
         Status:
-          $ref: '#/components/schemas/InvitationStatus'
-          description: '<p>The status of the invitation:</p> <ul> <li> <p> <code>PENDING</code> - The invitee has not created a member to join the network, and the invitation has not yet expired.</p> </li> <li> <p> <code>ACCEPTING</code> - The invitee has begun creating a member, and creation has not yet completed.</p> </li> <li> <p> <code>ACCEPTED</code> - The invitee created a member and joined the network using the <code>InvitationID</code>.</p> </li> <li> <p> <code>REJECTED</code> - The invitee rejected the invitation.</p> </li> <li> <p> <code>EXPIRED</code> - The invitee neither created a member nor rejected the invitation before the <code>ExpirationDate</code>.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/InvitationStatus'
+            - description: '<p>The status of the invitation:</p> <ul> <li> <p> <code>PENDING</code> - The invitee has not created a member to join the network, and the invitation has not yet expired.</p> </li> <li> <p> <code>ACCEPTING</code> - The invitee has begun creating a member, and creation has not yet completed.</p> </li> <li> <p> <code>ACCEPTED</code> - The invitee created a member and joined the network using the <code>InvitationID</code>.</p> </li> <li> <p> <code>REJECTED</code> - The invitee rejected the invitation.</p> </li> <li> <p> <code>EXPIRED</code> - The invitee neither created a member nor rejected the invitation before the <code>ExpirationDate</code>.</p> </li> </ul>'
         NetworkSummary:
           $ref: '#/components/schemas/NetworkSummary'
       description: An invitation to an AWS account to create a member and join the network.
@@ -2451,8 +2577,9 @@ components:
         - Principal
       properties:
         Principal:
-          $ref: '#/components/schemas/PrincipalString'
-          description: The AWS account ID to invite.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalString'
+            - description: The AWS account ID to invite.
       description: An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.
     IsOwned:
       type: boolean
@@ -2552,22 +2679,25 @@ components:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Enabled'
-          description: Indicates whether logging is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Enabled'
+            - description: Indicates whether logging is enabled.
       description: A configuration for logging events.
     LogConfigurations:
       type: object
       properties:
         Cloudwatch:
-          $ref: '#/components/schemas/LogConfiguration'
-          description: Parameters for publishing logs to Amazon CloudWatch Logs.
+          allOf:
+            - $ref: '#/components/schemas/LogConfiguration'
+            - description: Parameters for publishing logs to Amazon CloudWatch Logs.
       description: A collection of log configurations.
     MemberFrameworkAttributes:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/MemberFabricAttributes'
-          description: Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain network that uses Hyperledger Fabric.
+          allOf:
+            - $ref: '#/components/schemas/MemberFabricAttributes'
+            - description: Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain network that uses Hyperledger Fabric.
       description: Attributes relevant to a member for the blockchain framework that the Managed Blockchain network uses.
     UsernameString:
       type: string
@@ -2578,11 +2708,13 @@ components:
       type: object
       properties:
         AdminUsername:
-          $ref: '#/components/schemas/UsernameString'
-          description: The user name for the initial administrator user for the member.
+          allOf:
+            - $ref: '#/components/schemas/UsernameString'
+            - description: The user name for the initial administrator user for the member.
         CaEndpoint:
-          $ref: '#/components/schemas/String'
-          description: The endpoint used to access the member's certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint used to access the member's certificate authority.
       description: Attributes of Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.
     PasswordString:
       type: string
@@ -2597,86 +2729,105 @@ components:
         - AdminPassword
       properties:
         AdminUsername:
-          $ref: '#/components/schemas/UsernameString'
-          description: The user name for the member's initial administrative user.
+          allOf:
+            - $ref: '#/components/schemas/UsernameString'
+            - description: The user name for the member's initial administrative user.
         AdminPassword:
-          $ref: '#/components/schemas/PasswordString'
-          description: 'The password for the member''s initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quote(‘), double quote(“), forward slash(/), backward slash(\), @, or a space.'
+          allOf:
+            - $ref: '#/components/schemas/PasswordString'
+            - description: 'The password for the member''s initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quote(‘), double quote(“), forward slash(/), backward slash(\), @, or a space.'
       description: Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.
     MemberSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member.
         Name:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: The name of the member.
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: The name of the member.
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: An optional description of the member.
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: An optional description of the member.
         Status:
-          $ref: '#/components/schemas/MemberStatus'
-          description: '<p>The status of the member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+            - description: '<p>The status of the member.</p> <ul> <li> <p> <code>CREATING</code> - The AWS account is in the process of creating a member.</p> </li> <li> <p> <code>AVAILABLE</code> - The member has been created and can participate in the network.</p> </li> <li> <p> <code>CREATE_FAILED</code> - The AWS account attempted to create a member and creation failed.</p> </li> <li> <p> <code>DELETING</code> - The member and all associated resources are in the process of being deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> <li> <p> <code>DELETED</code> - The member can no longer participate on the network and all associated resources are deleted. Either the AWS account that owns the member deleted it, or the member is being deleted as the result of an <code>APPROVED</code> <code>PROPOSAL</code> to remove the member.</p> </li> </ul>'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the member was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the member was created.
         IsOwned:
-          $ref: '#/components/schemas/IsOwned'
-          description: An indicator of whether the member is owned by your AWS account or a different AWS account.
+          allOf:
+            - $ref: '#/components/schemas/IsOwned'
+            - description: An indicator of whether the member is owned by your AWS account or a different AWS account.
       description: A summary of configuration properties for a member.
     NetworkFrameworkAttributes:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/NetworkFabricAttributes'
-          description: Attributes of Hyperledger Fabric for a Managed Blockchain network that uses Hyperledger Fabric.
+          allOf:
+            - $ref: '#/components/schemas/NetworkFabricAttributes'
+            - description: Attributes of Hyperledger Fabric for a Managed Blockchain network that uses Hyperledger Fabric.
       description: Attributes relevant to the network for the blockchain framework that the network uses.
     NetworkFabricAttributes:
       type: object
       properties:
         OrderingServiceEndpoint:
-          $ref: '#/components/schemas/String'
-          description: The endpoint of the ordering service for the network.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint of the ordering service for the network.
         Edition:
-          $ref: '#/components/schemas/Edition'
-          description: 'The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Edition'
+            - description: 'The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more information, see <a href="http://aws.amazon.com/managed-blockchain/pricing/">Amazon Managed Blockchain Pricing</a>.'
       description: Attributes of Hyperledger Fabric for a network.
     NodeFrameworkAttributes:
       type: object
       properties:
         Fabric:
-          $ref: '#/components/schemas/NodeFabricAttributes'
-          description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
+          allOf:
+            - $ref: '#/components/schemas/NodeFabricAttributes'
+            - description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
       description: Attributes relevant to a peer node on a Managed Blockchain network for the blockchain framework that the network uses.
     NodeFabricAttributes:
       type: object
       properties:
         PeerEndpoint:
-          $ref: '#/components/schemas/String'
-          description: The endpoint that identifies the peer node for all services except peer channel-based event services.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint that identifies the peer node for all services except peer channel-based event services.
         PeerEventEndpoint:
-          $ref: '#/components/schemas/String'
-          description: The endpoint that identifies the peer node for peer channel-based event services.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The endpoint that identifies the peer node for peer channel-based event services.
       description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
     NodeSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the node.
         Status:
-          $ref: '#/components/schemas/NodeStatus'
-          description: The status of the node.
+          allOf:
+            - $ref: '#/components/schemas/NodeStatus'
+            - description: The status of the node.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the node was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the node was created.
         AvailabilityZone:
-          $ref: '#/components/schemas/AvailabilityZoneString'
-          description: The Availability Zone in which the node exists.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneString'
+            - description: The Availability Zone in which the node exists.
         InstanceType:
-          $ref: '#/components/schemas/InstanceTypeString'
-          description: The EC2 instance type for the node.
+          allOf:
+            - $ref: '#/components/schemas/InstanceTypeString'
+            - description: The EC2 instance type for the node.
       description: A summary of configuration properties for a peer node.
     ProposalStatus:
       type: string
@@ -2692,39 +2843,49 @@ components:
       type: object
       properties:
         ProposalId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: ' The unique identifier of the proposal. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: ' The unique identifier of the proposal. '
         Description:
-          $ref: '#/components/schemas/DescriptionString'
-          description: ' The description of the proposal. '
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: ' The description of the proposal. '
         ProposedByMemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: ' The unique identifier of the member that created the proposal. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: ' The unique identifier of the member that created the proposal. '
         ProposedByMemberName:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: ' The name of the member that created the proposal. '
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: ' The name of the member that created the proposal. '
         Status:
-          $ref: '#/components/schemas/ProposalStatus'
-          description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ProposalStatus'
+            - description: '<p>The status of the proposal. Values are as follows:</p> <ul> <li> <p> <code>IN_PROGRESS</code> - The proposal is active and open for member voting.</p> </li> <li> <p> <code>APPROVED</code> - The proposal was approved with sufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified proposal actions are carried out.</p> </li> <li> <p> <code>REJECTED</code> - The proposal was rejected with insufficient <code>YES</code> votes among members according to the <code>VotingPolicy</code> specified for the <code>Network</code>. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>EXPIRED</code> - Members did not cast the number of votes required to determine the proposal outcome before the proposal expired. The specified <code>ProposalActions</code> are not carried out.</p> </li> <li> <p> <code>ACTION_FAILED</code> - One or more of the specified <code>ProposalActions</code> in a proposal that was approved could not be completed because of an error.</p> </li> </ul>'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' The date and time that the proposal was created. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date and time that the proposal was created. '
         ExpirationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
       description: Properties of a proposal.
     VoteSummary:
       type: object
       properties:
         Vote:
-          $ref: '#/components/schemas/VoteValue'
-          description: ' The vote value, either <code>YES</code> or <code>NO</code>. '
+          allOf:
+            - $ref: '#/components/schemas/VoteValue'
+            - description: ' The vote value, either <code>YES</code> or <code>NO</code>. '
         MemberName:
-          $ref: '#/components/schemas/NetworkMemberNameString'
-          description: ' The name of the member that cast the vote. '
+          allOf:
+            - $ref: '#/components/schemas/NetworkMemberNameString'
+            - description: ' The name of the member that cast the vote. '
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: ' The unique identifier of the member that cast the vote. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: ' The unique identifier of the member that cast the vote. '
       description: ' Properties of an individual vote that a member cast for a proposal. '
     RejectInvitationInput:
       type: object
@@ -2736,23 +2897,26 @@ components:
         - MemberId
       properties:
         MemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: The unique identifier of the member to remove.
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The unique identifier of the member to remove.
       description: An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.
     UpdateMemberInput:
       type: object
       title: UpdateMemberInput
       properties:
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-          description: Configuration properties for publishing to Amazon CloudWatch Logs.
+          allOf:
+            - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
+            - description: Configuration properties for publishing to Amazon CloudWatch Logs.
     UpdateNodeInput:
       type: object
       title: UpdateNodeInput
       properties:
         LogPublishingConfiguration:
-          $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-          description: Configuration properties for publishing to Amazon CloudWatch Logs.
+          allOf:
+            - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
+            - description: Configuration properties for publishing to Amazon CloudWatch Logs.
     VoteValue:
       type: string
       enum:
@@ -2766,10 +2930,12 @@ components:
       title: VoteOnProposalInput
       properties:
         VoterMemberId:
-          $ref: '#/components/schemas/ResourceIdString'
-          description: 'The unique identifier of the member casting the vote. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: 'The unique identifier of the member casting the vote. '
         Vote:
-          $ref: '#/components/schemas/VoteValue'
-          description: ' The value of the vote. '
+          allOf:
+            - $ref: '#/components/schemas/VoteValue'
+            - description: ' The value of the vote. '
 security:
   - hmac: []

@@ -255,9 +255,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: Tag
-              $ref: '#/components/schemas/Tag'
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
         - name: Action
           in: query
           required: true
@@ -723,9 +724,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: DBSecurityGroupName
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: DBSecurityGroupName
         - name: VpcSecurityGroupIds
           in: query
           required: false
@@ -733,9 +735,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: VpcSecurityGroupId
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcSecurityGroupId
         - name: AvailabilityZone
           in: query
           required: false
@@ -1649,9 +1652,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: SubnetIdentifier
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: SubnetIdentifier
         - name: Action
           in: query
           required: true
@@ -1815,9 +1819,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: EventCategory
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: EventCategory
         - name: SourceIds
           in: query
           required: false
@@ -1825,9 +1830,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: SourceId
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: SourceId
         - name: Enabled
           in: query
           required: false
@@ -3976,9 +3982,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: EventCategory
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: EventCategory
         - name: MaxRecords
           in: query
           required: false
@@ -5012,9 +5019,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: DBSecurityGroupName
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: DBSecurityGroupName
         - name: VpcSecurityGroupIds
           in: query
           required: false
@@ -5022,9 +5030,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: VpcSecurityGroupId
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: VpcSecurityGroupId
         - name: ApplyImmediately
           in: query
           required: false
@@ -5266,9 +5275,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: Parameter
-              $ref: '#/components/schemas/Parameter'
+              allOf:
+                - $ref: '#/components/schemas/Parameter'
+                - xml:
+                    name: Parameter
         - name: Action
           in: query
           required: true
@@ -5396,9 +5406,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: SubnetIdentifier
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: SubnetIdentifier
         - name: Action
           in: query
           required: true
@@ -5556,9 +5567,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: EventCategory
-              $ref: '#/components/schemas/String'
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: EventCategory
         - name: Enabled
           in: query
           required: false
@@ -5692,9 +5704,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: OptionConfiguration
-              $ref: '#/components/schemas/OptionConfiguration'
+              allOf:
+                - $ref: '#/components/schemas/OptionConfiguration'
+                - xml:
+                    name: OptionConfiguration
         - name: OptionsToRemove
           in: query
           required: false
@@ -6346,9 +6359,10 @@ paths:
           schema:
             type: array
             items:
-              xml:
-                name: Parameter
-              $ref: '#/components/schemas/Parameter'
+              allOf:
+                - $ref: '#/components/schemas/Parameter'
+                - xml:
+                    name: Parameter
         - name: Action
           in: query
           required: true
@@ -7630,9 +7644,10 @@ components:
     TagList:
       type: array
       items:
-        xml:
-          name: Tag
-        $ref: '#/components/schemas/Tag'
+        allOf:
+          - $ref: '#/components/schemas/Tag'
+          - xml:
+              name: Tag
     AddTagsToResourceMessage:
       type: object
       required:
@@ -7692,9 +7707,10 @@ components:
     AvailabilityZoneList:
       type: array
       items:
-        xml:
-          name: AvailabilityZone
-        $ref: '#/components/schemas/AvailabilityZone'
+        allOf:
+          - $ref: '#/components/schemas/AvailabilityZone'
+          - xml:
+              name: AvailabilityZone
     BooleanOptional:
       type: boolean
     CharacterSet:
@@ -7755,15 +7771,17 @@ components:
     DBSecurityGroupNameList:
       type: array
       items:
-        xml:
-          name: DBSecurityGroupName
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: DBSecurityGroupName
     VpcSecurityGroupIdList:
       type: array
       items:
-        xml:
-          name: VpcSecurityGroupId
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: VpcSecurityGroupId
     CreateDBInstanceMessage:
       type: object
       required:
@@ -7959,9 +7977,10 @@ components:
     SubnetIdentifierList:
       type: array
       items:
-        xml:
-          name: SubnetIdentifier
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: SubnetIdentifier
     CreateDBSubnetGroupMessage:
       type: object
       required:
@@ -7992,15 +8011,17 @@ components:
     EventCategoriesList:
       type: array
       items:
-        xml:
-          name: EventCategory
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: EventCategory
     SourceIdsList:
       type: array
       items:
-        xml:
-          name: SourceId
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: SourceId
     CreateEventSubscriptionMessage:
       type: object
       required:
@@ -8057,9 +8078,10 @@ components:
     SupportedCharacterSetsList:
       type: array
       items:
-        xml:
-          name: CharacterSet
-        $ref: '#/components/schemas/CharacterSet'
+        allOf:
+          - $ref: '#/components/schemas/CharacterSet'
+          - xml:
+              name: CharacterSet
     DBEngineVersion:
       type: object
       properties:
@@ -8080,9 +8102,10 @@ components:
     DBEngineVersionList:
       type: array
       items:
-        xml:
-          name: DBEngineVersion
-        $ref: '#/components/schemas/DBEngineVersion'
+        allOf:
+          - $ref: '#/components/schemas/DBEngineVersion'
+          - xml:
+              name: DBEngineVersion
     Endpoint:
       type: object
       properties:
@@ -8098,21 +8121,24 @@ components:
     DBSecurityGroupMembershipList:
       type: array
       items:
-        xml:
-          name: DBSecurityGroup
-        $ref: '#/components/schemas/DBSecurityGroupMembership'
+        allOf:
+          - $ref: '#/components/schemas/DBSecurityGroupMembership'
+          - xml:
+              name: DBSecurityGroup
     VpcSecurityGroupMembershipList:
       type: array
       items:
-        xml:
-          name: VpcSecurityGroupMembership
-        $ref: '#/components/schemas/VpcSecurityGroupMembership'
+        allOf:
+          - $ref: '#/components/schemas/VpcSecurityGroupMembership'
+          - xml:
+              name: VpcSecurityGroupMembership
     DBParameterGroupStatusList:
       type: array
       items:
-        xml:
-          name: DBParameterGroup
-        $ref: '#/components/schemas/DBParameterGroupStatus'
+        allOf:
+          - $ref: '#/components/schemas/DBParameterGroupStatus'
+          - xml:
+              name: DBParameterGroup
     PendingModifiedValues:
       type: object
       properties:
@@ -8137,33 +8163,38 @@ components:
     ReadReplicaDBInstanceIdentifierList:
       type: array
       items:
-        xml:
-          name: ReadReplicaDBInstanceIdentifier
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: ReadReplicaDBInstanceIdentifier
     OptionGroupMembershipList:
       type: array
       items:
-        xml:
-          name: OptionGroupMembership
-        $ref: '#/components/schemas/OptionGroupMembership'
+        allOf:
+          - $ref: '#/components/schemas/OptionGroupMembership'
+          - xml:
+              name: OptionGroupMembership
     DBInstanceList:
       type: array
       items:
-        xml:
-          name: DBInstance
-        $ref: '#/components/schemas/DBInstance'
+        allOf:
+          - $ref: '#/components/schemas/DBInstance'
+          - xml:
+              name: DBInstance
     ParametersList:
       type: array
       items:
-        xml:
-          name: Parameter
-        $ref: '#/components/schemas/Parameter'
+        allOf:
+          - $ref: '#/components/schemas/Parameter'
+          - xml:
+              name: Parameter
     DBParameterGroupList:
       type: array
       items:
-        xml:
-          name: DBParameterGroup
-        $ref: '#/components/schemas/DBParameterGroup'
+        allOf:
+          - $ref: '#/components/schemas/DBParameterGroup'
+          - xml:
+              name: DBParameterGroup
     DBParameterGroupStatus:
       type: object
       properties:
@@ -8174,15 +8205,17 @@ components:
     EC2SecurityGroupList:
       type: array
       items:
-        xml:
-          name: EC2SecurityGroup
-        $ref: '#/components/schemas/EC2SecurityGroup'
+        allOf:
+          - $ref: '#/components/schemas/EC2SecurityGroup'
+          - xml:
+              name: EC2SecurityGroup
     IPRangeList:
       type: array
       items:
-        xml:
-          name: IPRange
-        $ref: '#/components/schemas/IPRange'
+        allOf:
+          - $ref: '#/components/schemas/IPRange'
+          - xml:
+              name: IPRange
     DBSecurityGroupMembership:
       type: object
       properties:
@@ -8193,27 +8226,31 @@ components:
     DBSecurityGroups:
       type: array
       items:
-        xml:
-          name: DBSecurityGroup
-        $ref: '#/components/schemas/DBSecurityGroup'
+        allOf:
+          - $ref: '#/components/schemas/DBSecurityGroup'
+          - xml:
+              name: DBSecurityGroup
     DBSnapshotList:
       type: array
       items:
-        xml:
-          name: DBSnapshot
-        $ref: '#/components/schemas/DBSnapshot'
+        allOf:
+          - $ref: '#/components/schemas/DBSnapshot'
+          - xml:
+              name: DBSnapshot
     SubnetList:
       type: array
       items:
-        xml:
-          name: Subnet
-        $ref: '#/components/schemas/Subnet'
+        allOf:
+          - $ref: '#/components/schemas/Subnet'
+          - xml:
+              name: Subnet
     DBSubnetGroups:
       type: array
       items:
-        xml:
-          name: DBSubnetGroup
-        $ref: '#/components/schemas/DBSubnetGroup'
+        allOf:
+          - $ref: '#/components/schemas/DBSubnetGroup'
+          - xml:
+              name: DBSubnetGroup
     DeleteDBInstanceMessage:
       type: object
       required:
@@ -8316,9 +8353,10 @@ components:
     DescribeDBLogFilesList:
       type: array
       items:
-        xml:
-          name: DescribeDBLogFilesDetails
-        $ref: '#/components/schemas/DescribeDBLogFilesDetails'
+        allOf:
+          - $ref: '#/components/schemas/DescribeDBLogFilesDetails'
+          - xml:
+              name: DescribeDBLogFilesDetails
     DescribeDBLogFilesMessage:
       type: object
       required:
@@ -8601,21 +8639,24 @@ components:
     EventCategoriesMapList:
       type: array
       items:
-        xml:
-          name: EventCategoriesMap
-        $ref: '#/components/schemas/EventCategoriesMap'
+        allOf:
+          - $ref: '#/components/schemas/EventCategoriesMap'
+          - xml:
+              name: EventCategoriesMap
     EventList:
       type: array
       items:
-        xml:
-          name: Event
-        $ref: '#/components/schemas/Event'
+        allOf:
+          - $ref: '#/components/schemas/Event'
+          - xml:
+              name: Event
     EventSubscriptionsList:
       type: array
       items:
-        xml:
-          name: EventSubscription
-        $ref: '#/components/schemas/EventSubscription'
+        allOf:
+          - $ref: '#/components/schemas/EventSubscription'
+          - xml:
+              name: EventSubscription
     IPRange:
       type: object
       properties:
@@ -8720,9 +8761,10 @@ components:
     OptionConfigurationList:
       type: array
       items:
-        xml:
-          name: OptionConfiguration
-        $ref: '#/components/schemas/OptionConfiguration'
+        allOf:
+          - $ref: '#/components/schemas/OptionConfiguration'
+          - xml:
+              name: OptionConfiguration
     OptionNamesList:
       type: array
       items:
@@ -8744,9 +8786,10 @@ components:
     OptionSettingConfigurationList:
       type: array
       items:
-        xml:
-          name: OptionSetting
-        $ref: '#/components/schemas/OptionSetting'
+        allOf:
+          - $ref: '#/components/schemas/OptionSetting'
+          - xml:
+              name: OptionSetting
     Option:
       type: object
       properties:
@@ -8767,15 +8810,17 @@ components:
     OptionSettingsList:
       type: array
       items:
-        xml:
-          name: OptionSetting
-        $ref: '#/components/schemas/OptionSetting'
+        allOf:
+          - $ref: '#/components/schemas/OptionSetting'
+          - xml:
+              name: OptionSetting
     OptionsList:
       type: array
       items:
-        xml:
-          name: Option
-        $ref: '#/components/schemas/Option'
+        allOf:
+          - $ref: '#/components/schemas/Option'
+          - xml:
+              name: Option
     OptionGroupMembership:
       type: object
       properties:
@@ -8786,15 +8831,17 @@ components:
     OptionsDependedOn:
       type: array
       items:
-        xml:
-          name: OptionName
-        $ref: '#/components/schemas/String'
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: OptionName
     OptionGroupOptionSettingsList:
       type: array
       items:
-        xml:
-          name: OptionGroupOptionSetting
-        $ref: '#/components/schemas/OptionGroupOptionSetting'
+        allOf:
+          - $ref: '#/components/schemas/OptionGroupOptionSetting'
+          - xml:
+              name: OptionGroupOptionSetting
     OptionGroupOption:
       type: object
       properties:
@@ -8836,15 +8883,17 @@ components:
     OptionGroupOptionsList:
       type: array
       items:
-        xml:
-          name: OptionGroupOption
-        $ref: '#/components/schemas/OptionGroupOption'
+        allOf:
+          - $ref: '#/components/schemas/OptionGroupOption'
+          - xml:
+              name: OptionGroupOption
     OptionGroupsList:
       type: array
       items:
-        xml:
-          name: OptionGroup
-        $ref: '#/components/schemas/OptionGroup'
+        allOf:
+          - $ref: '#/components/schemas/OptionGroup'
+          - xml:
+              name: OptionGroup
     OptionSetting:
       type: object
       properties:
@@ -8888,9 +8937,10 @@ components:
     OrderableDBInstanceOptionsList:
       type: array
       items:
-        xml:
-          name: OrderableDBInstanceOption
-        $ref: '#/components/schemas/OrderableDBInstanceOption'
+        allOf:
+          - $ref: '#/components/schemas/OrderableDBInstanceOption'
+          - xml:
+              name: OrderableDBInstanceOption
     PromoteReadReplicaMessage:
       type: object
       required:
@@ -8966,9 +9016,10 @@ components:
     RecurringChargeList:
       type: array
       items:
-        xml:
-          name: RecurringCharge
-        $ref: '#/components/schemas/RecurringCharge'
+        allOf:
+          - $ref: '#/components/schemas/RecurringCharge'
+          - xml:
+              name: RecurringCharge
     RemoveSourceIdentifierFromSubscriptionMessage:
       type: object
       required:
@@ -8994,9 +9045,10 @@ components:
     ReservedDBInstanceList:
       type: array
       items:
-        xml:
-          name: ReservedDBInstance
-        $ref: '#/components/schemas/ReservedDBInstance'
+        allOf:
+          - $ref: '#/components/schemas/ReservedDBInstance'
+          - xml:
+              name: ReservedDBInstance
     ReservedDBInstancesOffering:
       type: object
       properties:
@@ -9023,9 +9075,10 @@ components:
     ReservedDBInstancesOfferingList:
       type: array
       items:
-        xml:
-          name: ReservedDBInstancesOffering
-        $ref: '#/components/schemas/ReservedDBInstancesOffering'
+        allOf:
+          - $ref: '#/components/schemas/ReservedDBInstancesOffering'
+          - xml:
+              name: ReservedDBInstancesOffering
     ResetDBParameterGroupMessage:
       type: object
       required:

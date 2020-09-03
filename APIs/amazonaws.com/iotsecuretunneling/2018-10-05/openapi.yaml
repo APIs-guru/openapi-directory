@@ -455,18 +455,21 @@ components:
       title: CloseTunnelRequest
       properties:
         tunnelId:
-          $ref: '#/components/schemas/TunnelId'
-          description: The ID of the tunnel to close.
+          allOf:
+            - $ref: '#/components/schemas/TunnelId'
+            - description: The ID of the tunnel to close.
         delete:
-          $ref: '#/components/schemas/DeleteFlag'
-          description: 'When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.'
+          allOf:
+            - $ref: '#/components/schemas/DeleteFlag'
+            - description: 'When set to true, AWS IoT Secure Tunneling deletes the tunnel data immediately.'
     ResourceNotFoundException: {}
     DescribeTunnelResponse:
       type: object
       properties:
         tunnel:
-          $ref: '#/components/schemas/Tunnel'
-          description: The tunnel being described.
+          allOf:
+            - $ref: '#/components/schemas/Tunnel'
+            - description: The tunnel being described.
     DescribeTunnelRequest:
       type: object
       required:
@@ -474,14 +477,16 @@ components:
       title: DescribeTunnelRequest
       properties:
         tunnelId:
-          $ref: '#/components/schemas/TunnelId'
-          description: The tunnel to describe.
+          allOf:
+            - $ref: '#/components/schemas/TunnelId'
+            - description: The tunnel to describe.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the specified resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the specified resource.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -489,61 +494,75 @@ components:
       title: ListTagsForResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: The resource ARN.
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The resource ARN.
     ListTunnelsResponse:
       type: object
       properties:
         tunnelSummaries:
-          $ref: '#/components/schemas/TunnelSummaryList'
-          description: A short description of the tunnels in an AWS account.
+          allOf:
+            - $ref: '#/components/schemas/TunnelSummaryList'
+            - description: A short description of the tunnels in an AWS account.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A token to used to retrieve the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token to used to retrieve the next set of results.
     ListTunnelsRequest:
       type: object
       title: ListTunnelsRequest
       properties:
         thingName:
-          $ref: '#/components/schemas/ThingName'
-          description: The name of the IoT thing associated with the destination device.
+          allOf:
+            - $ref: '#/components/schemas/ThingName'
+            - description: The name of the IoT thing associated with the destination device.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to return at once.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return at once.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: A token to retrieve the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token to retrieve the next set of results.
     OpenTunnelResponse:
       type: object
       properties:
         tunnelId:
-          $ref: '#/components/schemas/TunnelId'
-          description: A unique alpha-numeric tunnel ID.
+          allOf:
+            - $ref: '#/components/schemas/TunnelId'
+            - description: A unique alpha-numeric tunnel ID.
         tunnelArn:
-          $ref: '#/components/schemas/TunnelArn'
-          description: 'The Amazon Resource Name for the tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
+          allOf:
+            - $ref: '#/components/schemas/TunnelArn'
+            - description: 'The Amazon Resource Name for the tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
         sourceAccessToken:
-          $ref: '#/components/schemas/ClientAccessToken'
-          description: The access token the source local proxy uses to connect to AWS IoT Secure Tunneling.
+          allOf:
+            - $ref: '#/components/schemas/ClientAccessToken'
+            - description: The access token the source local proxy uses to connect to AWS IoT Secure Tunneling.
         destinationAccessToken:
-          $ref: '#/components/schemas/ClientAccessToken'
-          description: The access token the destination local proxy uses to connect to AWS IoT Secure Tunneling.
+          allOf:
+            - $ref: '#/components/schemas/ClientAccessToken'
+            - description: The access token the destination local proxy uses to connect to AWS IoT Secure Tunneling.
     OpenTunnelRequest:
       type: object
       title: OpenTunnelRequest
       properties:
         description:
-          $ref: '#/components/schemas/Description'
-          description: 'A short text description of the tunnel. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A short text description of the tunnel. '
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: A collection of tag metadata.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A collection of tag metadata.
         destinationConfig:
-          $ref: '#/components/schemas/DestinationConfig'
-          description: The destination configuration for the OpenTunnel request.
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfig'
+            - description: The destination configuration for the OpenTunnel request.
         timeoutConfig:
-          $ref: '#/components/schemas/TimeoutConfig'
-          description: Timeout configuration for a tunnel.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutConfig'
+            - description: Timeout configuration for a tunnel.
     LimitExceededException: {}
     TagResourceResponse:
       type: object
@@ -556,11 +575,13 @@ components:
       title: TagResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: The ARN of the resource.
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The ARN of the resource.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the resource.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -572,11 +593,13 @@ components:
       title: UntagResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/AmazonResourceName'
-          description: The resource ARN.
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The resource ARN.
         tagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The keys of the tags to remove.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The keys of the tags to remove.
     AmazonResourceName:
       type: string
       minLength: 1
@@ -601,48 +624,61 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/ConnectionStatus'
-          description: The connection status of the tunnel. Valid values are <code>CONNECTED</code> and <code>DISCONNECTED</code>.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionStatus'
+            - description: The connection status of the tunnel. Valid values are <code>CONNECTED</code> and <code>DISCONNECTED</code>.
         lastUpdatedAt:
-          $ref: '#/components/schemas/DateType'
-          description: The last time the connection status was updated.
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The last time the connection status was updated.
       description: The state of a connection.
     Tunnel:
       type: object
       properties:
         tunnelId:
-          $ref: '#/components/schemas/TunnelId'
-          description: A unique alpha-numeric ID that identifies a tunnel.
+          allOf:
+            - $ref: '#/components/schemas/TunnelId'
+            - description: A unique alpha-numeric ID that identifies a tunnel.
         tunnelArn:
-          $ref: '#/components/schemas/TunnelArn'
-          description: 'The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
+          allOf:
+            - $ref: '#/components/schemas/TunnelArn'
+            - description: 'The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
         status:
-          $ref: '#/components/schemas/TunnelStatus'
-          description: 'The status of a tunnel. Valid values are: Open and Closed.'
+          allOf:
+            - $ref: '#/components/schemas/TunnelStatus'
+            - description: 'The status of a tunnel. Valid values are: Open and Closed.'
         sourceConnectionState:
-          $ref: '#/components/schemas/ConnectionState'
-          description: The connection state of the source application.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionState'
+            - description: The connection state of the source application.
         destinationConnectionState:
-          $ref: '#/components/schemas/ConnectionState'
-          description: The connection state of the destination application.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionState'
+            - description: The connection state of the destination application.
         description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the tunnel.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the tunnel.
         destinationConfig:
-          $ref: '#/components/schemas/DestinationConfig'
-          description: The destination configuration that specifies the thing name of the destination device and a service name that the local proxy uses to connect to the destination application.
+          allOf:
+            - $ref: '#/components/schemas/DestinationConfig'
+            - description: The destination configuration that specifies the thing name of the destination device and a service name that the local proxy uses to connect to the destination application.
         timeoutConfig:
-          $ref: '#/components/schemas/TimeoutConfig'
-          description: Timeout configuration for the tunnel.
+          allOf:
+            - $ref: '#/components/schemas/TimeoutConfig'
+            - description: Timeout configuration for the tunnel.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tag metadata associated with the secure tunnel.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tag metadata associated with the secure tunnel.
         createdAt:
-          $ref: '#/components/schemas/DateType'
-          description: The time when the tunnel was created.
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The time when the tunnel was created.
         lastUpdatedAt:
-          $ref: '#/components/schemas/DateType'
-          description: The last time the tunnel was updated.
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The last time the tunnel was updated.
       description: A connection between a source computer and a destination device.
     Description:
       type: string
@@ -665,11 +701,13 @@ components:
         - services
       properties:
         thingName:
-          $ref: '#/components/schemas/ThingName'
-          description: The name of the IoT thing to which you want to connect.
+          allOf:
+            - $ref: '#/components/schemas/ThingName'
+            - description: The name of the IoT thing to which you want to connect.
         services:
-          $ref: '#/components/schemas/ServiceList'
-          description: 'A list of service names that identity the target application. Currently, you can only specify a single name. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.'
+          allOf:
+            - $ref: '#/components/schemas/ServiceList'
+            - description: 'A list of service names that identity the target application. Currently, you can only specify a single name. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.'
       description: The destination configuration.
     TagList:
       type: array
@@ -692,8 +730,9 @@ components:
       type: object
       properties:
         maxLifetimeTimeoutMinutes:
-          $ref: '#/components/schemas/TimeoutInMin'
-          description: 'The maximum amount of time (in minutes) a tunnel can remain open. If not specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are from 1 minute to 12 hours (720 minutes) '
+          allOf:
+            - $ref: '#/components/schemas/TimeoutInMin'
+            - description: 'The maximum amount of time (in minutes) a tunnel can remain open. If not specified, maxLifetimeTimeoutMinutes defaults to 720 minutes. Valid values are from 1 minute to 12 hours (720 minutes) '
       description: Tunnel timeout configuration.
     TunnelArn:
       type: string
@@ -721,11 +760,13 @@ components:
         - value
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: An arbitary key/value pair used to add searchable metadata to secure tunnel resources.
     TagKeyList:
       type: array
@@ -746,23 +787,29 @@ components:
       type: object
       properties:
         tunnelId:
-          $ref: '#/components/schemas/TunnelId'
-          description: The unique alpha-numeric identifier for the tunnel.
+          allOf:
+            - $ref: '#/components/schemas/TunnelId'
+            - description: The unique alpha-numeric identifier for the tunnel.
         tunnelArn:
-          $ref: '#/components/schemas/TunnelArn'
-          description: 'The Amazon Resource Name of the tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
+          allOf:
+            - $ref: '#/components/schemas/TunnelArn'
+            - description: 'The Amazon Resource Name of the tunnel. The tunnel ARN format is <code>arn:aws:tunnel:&lt;region&gt;:&lt;account-id&gt;:tunnel/&lt;tunnel-id&gt;</code> '
         status:
-          $ref: '#/components/schemas/TunnelStatus'
-          description: 'The status of a tunnel. Valid values are: Open and Closed.'
+          allOf:
+            - $ref: '#/components/schemas/TunnelStatus'
+            - description: 'The status of a tunnel. Valid values are: Open and Closed.'
         description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the tunnel.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the tunnel.
         createdAt:
-          $ref: '#/components/schemas/DateType'
-          description: The time the tunnel was created.
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The time the tunnel was created.
         lastUpdatedAt:
-          $ref: '#/components/schemas/DateType'
-          description: The time the tunnel was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The time the tunnel was last updated.
       description: Information about the tunnel.
 security:
   - hmac: []

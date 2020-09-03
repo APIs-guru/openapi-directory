@@ -1180,8 +1180,9 @@ components:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of the operation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the operation.
     AddTagsToResourceRequest:
       type: object
       required:
@@ -1190,20 +1191,24 @@ components:
       title: AddTagsToResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
         TagList:
-          $ref: '#/components/schemas/TagList'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags.
     CloudHsmServiceException:
       type: object
       properties:
         message:
-          $ref: '#/components/schemas/String'
-          description: Additional information about the error.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Additional information about the error.
         retryable:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates if the action can be retried.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates if the action can be retried.
       description: Indicates that an exception occurred in the AWS CloudHSM service.
     CloudHsmInternalException:
       type: object
@@ -1217,8 +1222,9 @@ components:
       type: object
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group.
       description: Contains the output of the <a>CreateHAPartitionGroup</a> action.
     CreateHapgRequest:
       type: object
@@ -1227,15 +1233,17 @@ components:
       title: CreateHapgRequest
       properties:
         Label:
-          $ref: '#/components/schemas/Label'
-          description: The label of the new high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: The label of the new high-availability partition group.
       description: Contains the inputs for the <a>CreateHapgRequest</a> action.
     CreateHsmResponse:
       type: object
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM.
       description: Contains the output of the <code>CreateHsm</code> operation.
     CreateHsmRequest:
       type: object
@@ -1247,35 +1255,43 @@ components:
       title: CreateHsmRequest
       properties:
         SubnetId:
-          $ref: '#/components/schemas/SubnetId'
-          description: The identifier of the subnet in your VPC in which to place the HSM.
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - description: The identifier of the subnet in your VPC in which to place the HSM.
         SshKey:
-          $ref: '#/components/schemas/SshKey'
-          description: The SSH public key to install on the HSM.
+          allOf:
+            - $ref: '#/components/schemas/SshKey'
+            - description: The SSH public key to install on the HSM.
         EniIp:
-          $ref: '#/components/schemas/IpAddress'
-          description: '<p>The IP address to assign to the HSM''s ENI.</p> <p>If an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the subnet.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: '<p>The IP address to assign to the HSM''s ENI.</p> <p>If an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the subnet.</p>'
         IamRoleArn:
-          $ref: '#/components/schemas/IamRoleArn'
-          description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on your behalf.
         ExternalId:
-          $ref: '#/components/schemas/ExternalId'
-          description: 'The external ID from <code>IamRoleArn</code>, if present.'
+          allOf:
+            - $ref: '#/components/schemas/ExternalId'
+            - description: 'The external ID from <code>IamRoleArn</code>, if present.'
         SubscriptionType:
           $ref: '#/components/schemas/SubscriptionType'
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A user-defined token to ensure idempotence. Subsequent calls to this operation with the same token will be ignored.
         SyslogIp:
-          $ref: '#/components/schemas/IpAddress'
-          description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
       description: Contains the inputs for the <code>CreateHsm</code> operation.
     CreateLunaClientResponse:
       type: object
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
       description: Contains the output of the <a>CreateLunaClient</a> action.
     CreateLunaClientRequest:
       type: object
@@ -1284,11 +1300,13 @@ components:
       title: CreateLunaClientRequest
       properties:
         Label:
-          $ref: '#/components/schemas/ClientLabel'
-          description: The label for the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientLabel'
+            - description: The label for the client.
         Certificate:
-          $ref: '#/components/schemas/Certificate'
-          description: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
       description: Contains the inputs for the <a>CreateLunaClient</a> action.
     DeleteHapgResponse:
       type: object
@@ -1296,8 +1314,9 @@ components:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of the action.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the action.
       description: Contains the output of the <a>DeleteHapg</a> action.
     DeleteHapgRequest:
       type: object
@@ -1306,8 +1325,9 @@ components:
       title: DeleteHapgRequest
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group to delete.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group to delete.
       description: Contains the inputs for the <a>DeleteHapg</a> action.
     DeleteHsmResponse:
       type: object
@@ -1315,8 +1335,9 @@ components:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of the operation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the operation.
       description: Contains the output of the <a>DeleteHsm</a> operation.
     DeleteHsmRequest:
       type: object
@@ -1325,8 +1346,9 @@ components:
       title: DeleteHsmRequest
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM to delete.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM to delete.
       description: Contains the inputs for the <a>DeleteHsm</a> operation.
     DeleteLunaClientResponse:
       type: object
@@ -1334,8 +1356,9 @@ components:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of the action.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the action.
     DeleteLunaClientRequest:
       type: object
       required:
@@ -1343,38 +1366,48 @@ components:
       title: DeleteLunaClientRequest
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client to delete.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client to delete.
     DescribeHapgResponse:
       type: object
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group.
         HapgSerial:
-          $ref: '#/components/schemas/String'
-          description: The serial number of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The serial number of the high-availability partition group.
         HsmsLastActionFailed:
-          $ref: '#/components/schemas/HsmList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/HsmList'
+            - description: <p/>
         HsmsPendingDeletion:
-          $ref: '#/components/schemas/HsmList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/HsmList'
+            - description: <p/>
         HsmsPendingRegistration:
-          $ref: '#/components/schemas/HsmList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/HsmList'
+            - description: <p/>
         Label:
-          $ref: '#/components/schemas/Label'
-          description: The label for the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: The label for the high-availability partition group.
         LastModifiedTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time the high-availability partition group was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the high-availability partition group was last modified.
         PartitionSerialList:
-          $ref: '#/components/schemas/PartitionSerialList'
-          description: The list of partition serial numbers that belong to the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/PartitionSerialList'
+            - description: The list of partition serial numbers that belong to the high-availability partition group.
         State:
-          $ref: '#/components/schemas/CloudHsmObjectState'
-          description: The state of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/CloudHsmObjectState'
+            - description: The state of the high-availability partition group.
       description: Contains the output of the <a>DescribeHapg</a> action.
     DescribeHapgRequest:
       type: object
@@ -1383,126 +1416,159 @@ components:
       title: DescribeHapgRequest
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group to describe.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group to describe.
       description: Contains the inputs for the <a>DescribeHapg</a> action.
     DescribeHsmResponse:
       type: object
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM.
         Status:
-          $ref: '#/components/schemas/HsmStatus'
-          description: The status of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/HsmStatus'
+            - description: The status of the HSM.
         StatusDetails:
-          $ref: '#/components/schemas/String'
-          description: Contains additional information about the status of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains additional information about the status of the HSM.
         AvailabilityZone:
-          $ref: '#/components/schemas/AZ'
-          description: The Availability Zone that the HSM is in.
+          allOf:
+            - $ref: '#/components/schemas/AZ'
+            - description: The Availability Zone that the HSM is in.
         EniId:
-          $ref: '#/components/schemas/EniId'
-          description: The identifier of the elastic network interface (ENI) attached to the HSM.
+          allOf:
+            - $ref: '#/components/schemas/EniId'
+            - description: The identifier of the elastic network interface (ENI) attached to the HSM.
         EniIp:
-          $ref: '#/components/schemas/IpAddress'
-          description: The IP address assigned to the HSM's ENI.
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address assigned to the HSM's ENI.
         SubscriptionType:
           $ref: '#/components/schemas/SubscriptionType'
         SubscriptionStartDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The subscription start date.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The subscription start date.
         SubscriptionEndDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The subscription end date.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The subscription end date.
         VpcId:
-          $ref: '#/components/schemas/VpcId'
-          description: The identifier of the VPC that the HSM is in.
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The identifier of the VPC that the HSM is in.
         SubnetId:
-          $ref: '#/components/schemas/SubnetId'
-          description: The identifier of the subnet that the HSM is in.
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - description: The identifier of the subnet that the HSM is in.
         IamRoleArn:
-          $ref: '#/components/schemas/IamRoleArn'
-          description: The ARN of the IAM role assigned to the HSM.
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The ARN of the IAM role assigned to the HSM.
         SerialNumber:
-          $ref: '#/components/schemas/HsmSerialNumber'
-          description: The serial number of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/HsmSerialNumber'
+            - description: The serial number of the HSM.
         VendorName:
-          $ref: '#/components/schemas/String'
-          description: The name of the HSM vendor.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the HSM vendor.
         HsmType:
-          $ref: '#/components/schemas/String'
-          description: The HSM model type.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The HSM model type.
         SoftwareVersion:
-          $ref: '#/components/schemas/String'
-          description: The HSM software version.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The HSM software version.
         SshPublicKey:
-          $ref: '#/components/schemas/SshKey'
-          description: The public SSH key.
+          allOf:
+            - $ref: '#/components/schemas/SshKey'
+            - description: The public SSH key.
         SshKeyLastUpdated:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the SSH key was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the SSH key was last updated.
         ServerCertUri:
-          $ref: '#/components/schemas/String'
-          description: The URI of the certificate server.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URI of the certificate server.
         ServerCertLastUpdated:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the server certificate was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the server certificate was last updated.
         Partitions:
-          $ref: '#/components/schemas/PartitionList'
-          description: The list of partitions on the HSM.
+          allOf:
+            - $ref: '#/components/schemas/PartitionList'
+            - description: The list of partitions on the HSM.
       description: Contains the output of the <a>DescribeHsm</a> operation.
     DescribeHsmRequest:
       type: object
       title: DescribeHsmRequest
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM. Either the <code>HsmArn</code> or the <code>SerialNumber</code> parameter must be specified.
         HsmSerialNumber:
-          $ref: '#/components/schemas/HsmSerialNumber'
-          description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
+          allOf:
+            - $ref: '#/components/schemas/HsmSerialNumber'
+            - description: The serial number of the HSM. Either the <code>HsmArn</code> or the <code>HsmSerialNumber</code> parameter must be specified.
       description: Contains the inputs for the <a>DescribeHsm</a> operation.
     DescribeLunaClientResponse:
       type: object
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
         Certificate:
-          $ref: '#/components/schemas/Certificate'
-          description: The certificate installed on the HSMs used by this client.
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The certificate installed on the HSMs used by this client.
         CertificateFingerprint:
-          $ref: '#/components/schemas/CertificateFingerprint'
-          description: The certificate fingerprint.
+          allOf:
+            - $ref: '#/components/schemas/CertificateFingerprint'
+            - description: The certificate fingerprint.
         LastModifiedTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time the client was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the client was last modified.
         Label:
-          $ref: '#/components/schemas/Label'
-          description: The label of the client.
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: The label of the client.
     DescribeLunaClientRequest:
       type: object
       title: DescribeLunaClientRequest
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
         CertificateFingerprint:
-          $ref: '#/components/schemas/CertificateFingerprint'
-          description: The certificate fingerprint.
+          allOf:
+            - $ref: '#/components/schemas/CertificateFingerprint'
+            - description: The certificate fingerprint.
     GetConfigResponse:
       type: object
       properties:
         ConfigType:
-          $ref: '#/components/schemas/String'
-          description: The type of credentials.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of credentials.
         ConfigFile:
-          $ref: '#/components/schemas/String'
-          description: The chrystoki.conf configuration file.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The chrystoki.conf configuration file.
         ConfigCred:
-          $ref: '#/components/schemas/String'
-          description: The certificate file containing the server.pem files of the HSMs.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The certificate file containing the server.pem files of the HSMs.
     GetConfigRequest:
       type: object
       required:
@@ -1512,20 +1578,24 @@ components:
       title: GetConfigRequest
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
         ClientVersion:
-          $ref: '#/components/schemas/ClientVersion'
-          description: The client version.
+          allOf:
+            - $ref: '#/components/schemas/ClientVersion'
+            - description: The client version.
         HapgList:
-          $ref: '#/components/schemas/HapgList'
-          description: A list of ARNs that identify the high-availability partition groups that are associated with the client.
+          allOf:
+            - $ref: '#/components/schemas/HapgList'
+            - description: A list of ARNs that identify the high-availability partition groups that are associated with the client.
     ListAvailableZonesResponse:
       type: object
       properties:
         AZList:
-          $ref: '#/components/schemas/AZList'
-          description: The list of Availability Zones that have available AWS CloudHSM capacity.
+          allOf:
+            - $ref: '#/components/schemas/AZList'
+            - description: The list of Availability Zones that have available AWS CloudHSM capacity.
     ListAvailableZonesRequest:
       type: object
       title: ListAvailableZonesRequest
@@ -1537,61 +1607,71 @@ components:
         - HapgList
       properties:
         HapgList:
-          $ref: '#/components/schemas/HapgList'
-          description: The list of high-availability partition groups.
+          allOf:
+            - $ref: '#/components/schemas/HapgList'
+            - description: The list of high-availability partition groups.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If not null, more results are available. Pass this value to <code>ListHapgs</code> to retrieve the next set of items.'
     ListHapgsRequest:
       type: object
       title: ListHapgsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The <code>NextToken</code> value from a previous call to <code>ListHapgs</code>. Pass null if this is the first call.
     ListHsmsResponse:
       type: object
       properties:
         HsmList:
-          $ref: '#/components/schemas/HsmList'
-          description: The list of ARNs that identify the HSMs.
+          allOf:
+            - $ref: '#/components/schemas/HsmList'
+            - description: The list of ARNs that identify the HSMs.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If not null, more results are available. Pass this value to <code>ListHsms</code> to retrieve the next set of items.'
       description: Contains the output of the <code>ListHsms</code> operation.
     ListHsmsRequest:
       type: object
       title: ListHsmsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The <code>NextToken</code> value from a previous call to <code>ListHsms</code>. Pass null if this is the first call.
     ListLunaClientsResponse:
       type: object
       required:
         - ClientList
       properties:
         ClientList:
-          $ref: '#/components/schemas/ClientList'
-          description: The list of clients.
+          allOf:
+            - $ref: '#/components/schemas/ClientList'
+            - description: The list of clients.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If not null, more results are available. Pass this to <code>ListLunaClients</code> to retrieve the next set of items.'
     ListLunaClientsRequest:
       type: object
       title: ListLunaClientsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The <code>NextToken</code> value from a previous call to <code>ListLunaClients</code>. Pass null if this is the first call.
     ListTagsForResourceResponse:
       type: object
       required:
         - TagList
       properties:
         TagList:
-          $ref: '#/components/schemas/TagList'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1599,14 +1679,16 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
     ModifyHapgResponse:
       type: object
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group.
     ModifyHapgRequest:
       type: object
       required:
@@ -1614,20 +1696,24 @@ components:
       title: ModifyHapgRequest
       properties:
         HapgArn:
-          $ref: '#/components/schemas/HapgArn'
-          description: The ARN of the high-availability partition group to modify.
+          allOf:
+            - $ref: '#/components/schemas/HapgArn'
+            - description: The ARN of the high-availability partition group to modify.
         Label:
-          $ref: '#/components/schemas/Label'
-          description: The new label for the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: The new label for the high-availability partition group.
         PartitionSerialList:
-          $ref: '#/components/schemas/PartitionSerialList'
-          description: The list of partition serial numbers to make members of the high-availability partition group.
+          allOf:
+            - $ref: '#/components/schemas/PartitionSerialList'
+            - description: The list of partition serial numbers to make members of the high-availability partition group.
     ModifyHsmResponse:
       type: object
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM.
       description: Contains the output of the <a>ModifyHsm</a> operation.
     ModifyHsmRequest:
       type: object
@@ -1636,30 +1722,37 @@ components:
       title: ModifyHsmRequest
       properties:
         HsmArn:
-          $ref: '#/components/schemas/HsmArn'
-          description: The ARN of the HSM to modify.
+          allOf:
+            - $ref: '#/components/schemas/HsmArn'
+            - description: The ARN of the HSM to modify.
         SubnetId:
-          $ref: '#/components/schemas/SubnetId'
-          description: The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - description: The new identifier of the subnet that the HSM is in. The new subnet must be in the same Availability Zone as the current subnet.
         EniIp:
-          $ref: '#/components/schemas/IpAddress'
-          description: '<p>The new IP address for the elastic network interface (ENI) attached to the HSM.</p> <p>If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: '<p>The new IP address for the elastic network interface (ENI) attached to the HSM.</p> <p>If the HSM is moved to a different subnet, and an IP address is not specified, an IP address will be randomly chosen from the CIDR range of the new subnet.</p>'
         IamRoleArn:
-          $ref: '#/components/schemas/IamRoleArn'
-          description: The new IAM role ARN.
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The new IAM role ARN.
         ExternalId:
-          $ref: '#/components/schemas/ExternalId'
-          description: The new external ID.
+          allOf:
+            - $ref: '#/components/schemas/ExternalId'
+            - description: The new external ID.
         SyslogIp:
-          $ref: '#/components/schemas/IpAddress'
-          description: The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The new IP address for the syslog monitoring server. The AWS CloudHSM service only supports one syslog monitoring server.
       description: Contains the inputs for the <a>ModifyHsm</a> operation.
     ModifyLunaClientResponse:
       type: object
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
     ModifyLunaClientRequest:
       type: object
       required:
@@ -1668,19 +1761,22 @@ components:
       title: ModifyLunaClientRequest
       properties:
         ClientArn:
-          $ref: '#/components/schemas/ClientArn'
-          description: The ARN of the client.
+          allOf:
+            - $ref: '#/components/schemas/ClientArn'
+            - description: The ARN of the client.
         Certificate:
-          $ref: '#/components/schemas/Certificate'
-          description: The new certificate for the client.
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The new certificate for the client.
     RemoveTagsFromResourceResponse:
       type: object
       required:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of the operation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of the operation.
     RemoveTagsFromResourceRequest:
       type: object
       required:
@@ -1689,11 +1785,13 @@ components:
       title: RemoveTagsFromResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
         TagKeyList:
-          $ref: '#/components/schemas/TagKeyList'
-          description: '<p>The tag key or keys to remove.</p> <p>Specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: '<p>The tag key or keys to remove.</p> <p>Specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use <a>AddTagsToResource</a>.</p>'
     AZ:
       type: string
       pattern: '[a-zA-Z0-9\-]*'
@@ -1839,11 +1937,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: A key-value pair that identifies or specifies metadata about an AWS CloudHSM resource.
 security:
   - hmac: []

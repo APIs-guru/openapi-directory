@@ -895,24 +895,29 @@ paths:
                   type: object
                   properties:
                     ApplicationArns:
-                      $ref: '#/components/schemas/ApplicationArnList'
-                      description: List of SNS platform application ARNs that could be used by clients.
+                      allOf:
+                        - $ref: '#/components/schemas/ApplicationArnList'
+                        - description: List of SNS platform application ARNs that could be used by clients.
                     RoleArn:
-                      $ref: '#/components/schemas/AssumeRoleArn'
-                      description: A role configured to allow Cognito to call SNS on behalf of the developer.
+                      allOf:
+                        - $ref: '#/components/schemas/AssumeRoleArn'
+                        - description: A role configured to allow Cognito to call SNS on behalf of the developer.
                 CognitoStreams:
                   description: Configuration options for configure Cognito streams.
                   type: object
                   properties:
                     StreamName:
-                      $ref: '#/components/schemas/StreamName'
-                      description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+                      allOf:
+                        - $ref: '#/components/schemas/StreamName'
+                        - description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
                     RoleArn:
-                      $ref: '#/components/schemas/AssumeRoleArn'
-                      description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+                      allOf:
+                        - $ref: '#/components/schemas/AssumeRoleArn'
+                        - description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
                     StreamingStatus:
-                      $ref: '#/components/schemas/StreamingStatus'
-                      description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/StreamingStatus'
+                        - description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
   '/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets':
     get:
       operationId: ListDatasets
@@ -1471,8 +1476,9 @@ components:
       type: object
       properties:
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
       description: The output for the BulkPublish operation.
     NotAuthorizedException:
       type: object
@@ -1480,8 +1486,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: The message returned by a NotAuthorizedException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: The message returned by a NotAuthorizedException.
       description: Thrown when a user is not authorized to access the requested resource.
     InvalidParameterException:
       type: object
@@ -1489,8 +1496,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by InvalidParameterException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by InvalidParameterException.
       description: Thrown when a request parameter does not comply with the associated constraints.
     ResourceNotFoundException:
       type: object
@@ -1498,8 +1506,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by a ResourceNotFoundException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by a ResourceNotFoundException.
       description: Thrown if the resource doesn't exist.
     InternalErrorException:
       type: object
@@ -1507,8 +1516,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by InternalErrorException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by InternalErrorException.
       description: Indicates an internal service error.
     DuplicateRequestException:
       type: object
@@ -1516,8 +1526,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: The message associated with the DuplicateRequestException exception.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: The message associated with the DuplicateRequestException exception.
       description: An exception thrown when there is an IN_PROGRESS bulk publish operation for the given identity pool.
     AlreadyStreamedException:
       type: object
@@ -1525,15 +1536,17 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: The message associated with the AlreadyStreamedException exception.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: The message associated with the AlreadyStreamedException exception.
       description: An exception thrown when a bulk publish operation is requested less than 24 hours after a previous bulk publish operation completed successfully.
     DeleteDatasetResponse:
       type: object
       properties:
         Dataset:
-          $ref: '#/components/schemas/Dataset'
-          description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+          allOf:
+            - $ref: '#/components/schemas/Dataset'
+            - description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
       description: Response to a successful DeleteDataset request.
     TooManyRequestsException:
       type: object
@@ -1541,8 +1554,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by a TooManyRequestsException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by a TooManyRequestsException.
       description: Thrown if the request is throttled.
     ResourceConflictException:
       type: object
@@ -1550,135 +1564,165 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: The message returned by a ResourceConflictException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: The message returned by a ResourceConflictException.
       description: Thrown if an update can't be applied because the resource was changed by another call and this would result in a conflict.
     DescribeDatasetResponse:
       type: object
       properties:
         Dataset:
-          $ref: '#/components/schemas/Dataset'
-          description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
+          allOf:
+            - $ref: '#/components/schemas/Dataset'
+            - description: 'Meta data for a collection of data for an identity. An identity can have multiple datasets. A dataset can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
       description: Response to a successful DescribeDataset request.
     DescribeIdentityPoolUsageResponse:
       type: object
       properties:
         IdentityPoolUsage:
-          $ref: '#/components/schemas/IdentityPoolUsage'
-          description: Information about the usage of the identity pool.
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolUsage'
+            - description: Information about the usage of the identity pool.
       description: Response to a successful DescribeIdentityPoolUsage request.
     DescribeIdentityUsageResponse:
       type: object
       properties:
         IdentityUsage:
-          $ref: '#/components/schemas/IdentityUsage'
-          description: Usage information for the identity.
+          allOf:
+            - $ref: '#/components/schemas/IdentityUsage'
+            - description: Usage information for the identity.
       description: The response to a successful DescribeIdentityUsage request.
     GetBulkPublishDetailsResponse:
       type: object
       properties:
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
         BulkPublishStartTime:
-          $ref: '#/components/schemas/Date'
-          description: The date/time at which the last bulk publish was initiated.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date/time at which the last bulk publish was initiated.
         BulkPublishCompleteTime:
-          $ref: '#/components/schemas/Date'
-          description: 'If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed.'
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: 'If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation completed.'
         BulkPublishStatus:
-          $ref: '#/components/schemas/BulkPublishStatus'
-          description: 'Status of the last bulk publish operation, valid values are: <p>NOT_STARTED - No bulk publish has been requested for this identity pool</p> <p>IN_PROGRESS - Data is being published to the configured stream</p> <p>SUCCEEDED - All data for the identity pool has been published to the configured stream</p> <p>FAILED - Some portion of the data has failed to publish, check FailureMessage for the cause.</p>'
+          allOf:
+            - $ref: '#/components/schemas/BulkPublishStatus'
+            - description: 'Status of the last bulk publish operation, valid values are: <p>NOT_STARTED - No bulk publish has been requested for this identity pool</p> <p>IN_PROGRESS - Data is being published to the configured stream</p> <p>SUCCEEDED - All data for the identity pool has been published to the configured stream</p> <p>FAILED - Some portion of the data has failed to publish, check FailureMessage for the cause.</p>'
         FailureMessage:
-          $ref: '#/components/schemas/String'
-          description: If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: If BulkPublishStatus is FAILED this field will contain the error message that caused the bulk publish to fail.
       description: The output for the GetBulkPublishDetails operation.
     GetCognitoEventsResponse:
       type: object
       properties:
         Events:
-          $ref: '#/components/schemas/Events'
-          description: The Cognito Events returned from the GetCognitoEvents request
+          allOf:
+            - $ref: '#/components/schemas/Events'
+            - description: The Cognito Events returned from the GetCognitoEvents request
       description: The response from the GetCognitoEvents request
     GetIdentityPoolConfigurationResponse:
       type: object
       properties:
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
         PushSync:
-          $ref: '#/components/schemas/PushSync'
-          description: Options to apply to this identity pool for push synchronization.
+          allOf:
+            - $ref: '#/components/schemas/PushSync'
+            - description: Options to apply to this identity pool for push synchronization.
         CognitoStreams:
-          $ref: '#/components/schemas/CognitoStreams'
-          description: Options to apply to this identity pool for Amazon Cognito streams.
+          allOf:
+            - $ref: '#/components/schemas/CognitoStreams'
+            - description: Options to apply to this identity pool for Amazon Cognito streams.
       description: The output for the GetIdentityPoolConfiguration operation.
     ListDatasetsResponse:
       type: object
       properties:
         Datasets:
-          $ref: '#/components/schemas/DatasetList'
-          description: A set of datasets.
+          allOf:
+            - $ref: '#/components/schemas/DatasetList'
+            - description: A set of datasets.
         Count:
-          $ref: '#/components/schemas/Integer'
-          description: Number of datasets returned.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of datasets returned.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: A pagination token for obtaining the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A pagination token for obtaining the next page of results.
       description: Returned for a successful ListDatasets request.
     ListIdentityPoolUsageResponse:
       type: object
       properties:
         IdentityPoolUsages:
-          $ref: '#/components/schemas/IdentityPoolUsageList'
-          description: Usage information for the identity pools.
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolUsageList'
+            - description: Usage information for the identity pools.
         MaxResults:
-          $ref: '#/components/schemas/Integer'
-          description: The maximum number of results to be returned.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of results to be returned.
         Count:
-          $ref: '#/components/schemas/Integer'
-          description: Total number of identities for the identity pool.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Total number of identities for the identity pool.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: A pagination token for obtaining the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A pagination token for obtaining the next page of results.
       description: Returned for a successful ListIdentityPoolUsage request.
     ListRecordsResponse:
       type: object
       properties:
         Records:
-          $ref: '#/components/schemas/RecordList'
-          description: A list of all records.
+          allOf:
+            - $ref: '#/components/schemas/RecordList'
+            - description: A list of all records.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: A pagination token for obtaining the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A pagination token for obtaining the next page of results.
         Count:
-          $ref: '#/components/schemas/Integer'
-          description: Total number of records.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Total number of records.
         DatasetSyncCount:
-          $ref: '#/components/schemas/Long'
-          description: Server sync count for this dataset.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Server sync count for this dataset.
         LastModifiedBy:
-          $ref: '#/components/schemas/String'
-          description: The user/device that made the last change to this record.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user/device that made the last change to this record.
         MergedDatasetNames:
-          $ref: '#/components/schemas/MergedDatasetNameList'
-          description: Names of merged datasets.
+          allOf:
+            - $ref: '#/components/schemas/MergedDatasetNameList'
+            - description: Names of merged datasets.
         DatasetExists:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the dataset exists.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the dataset exists.
         DatasetDeletedAfterRequestedSyncCount:
-          $ref: '#/components/schemas/Boolean'
-          description: A boolean value specifying whether to delete the dataset locally.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A boolean value specifying whether to delete the dataset locally.
         SyncSessionToken:
-          $ref: '#/components/schemas/String'
-          description: 'A token containing a session ID, identity ID, and expiration.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token containing a session ID, identity ID, and expiration.'
       description: Returned for a successful ListRecordsRequest.
     RegisterDeviceResponse:
       type: object
       properties:
         DeviceId:
-          $ref: '#/components/schemas/DeviceId'
-          description: The unique ID generated for this device by Cognito.
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The unique ID generated for this device by Cognito.
       description: Response to a RegisterDevice request.
     InvalidConfigurationException:
       type: object
@@ -1686,22 +1730,26 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by InvalidConfigurationException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by InvalidConfigurationException.
     LambdaFunctionArn:
       type: string
     SetIdentityPoolConfigurationResponse:
       type: object
       properties:
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito.'
         PushSync:
-          $ref: '#/components/schemas/PushSync'
-          description: Options to apply to this identity pool for push synchronization.
+          allOf:
+            - $ref: '#/components/schemas/PushSync'
+            - description: Options to apply to this identity pool for push synchronization.
         CognitoStreams:
-          $ref: '#/components/schemas/CognitoStreams'
-          description: Options to apply to this identity pool for Amazon Cognito streams.
+          allOf:
+            - $ref: '#/components/schemas/CognitoStreams'
+            - description: Options to apply to this identity pool for Amazon Cognito streams.
       description: The output for the SetIdentityPoolConfiguration operation
     ApplicationArnList:
       type: array
@@ -1727,8 +1775,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/String'
-          description: The message returned by a ConcurrentModicationException.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message returned by a ConcurrentModicationException.
       description: Thrown if there are parallel requests to modify a resource.
     SubscribeToDatasetResponse:
       type: object
@@ -1742,8 +1791,9 @@ components:
       type: object
       properties:
         Records:
-          $ref: '#/components/schemas/RecordList'
-          description: A list of records that have been updated.
+          allOf:
+            - $ref: '#/components/schemas/RecordList'
+            - description: A list of records that have been updated.
       description: Returned for a successful UpdateRecordsRequest.
     RecordPatch:
       type: object
@@ -1753,20 +1803,25 @@ components:
         - SyncCount
       properties:
         Op:
-          $ref: '#/components/schemas/Operation'
-          description: 'An operation, either replace or remove.'
+          allOf:
+            - $ref: '#/components/schemas/Operation'
+            - description: 'An operation, either replace or remove.'
         Key:
-          $ref: '#/components/schemas/RecordKey'
-          description: The key associated with the record patch.
+          allOf:
+            - $ref: '#/components/schemas/RecordKey'
+            - description: The key associated with the record patch.
         Value:
-          $ref: '#/components/schemas/RecordValue'
-          description: The value associated with the record patch.
+          allOf:
+            - $ref: '#/components/schemas/RecordValue'
+            - description: The value associated with the record patch.
         SyncCount:
-          $ref: '#/components/schemas/Long'
-          description: Last known server sync count for this record. Set to 0 if unknown.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Last known server sync count for this record. Set to 0 if unknown.
         DeviceLastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: The last modified date of the client device.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modified date of the client device.
       description: An update operation for a record.
     LimitExceededException:
       type: object
@@ -1774,8 +1829,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: Message returned by LimitExceededException.
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: Message returned by LimitExceededException.
       description: Thrown when the limit on the number of objects or operations has been exceeded.
     InvalidLambdaFunctionOutputException:
       type: object
@@ -1783,8 +1839,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: A message returned when an InvalidLambdaFunctionOutputException occurs
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: A message returned when an InvalidLambdaFunctionOutputException occurs
       description: The AWS Lambda function returned invalid output or an exception.
     LambdaThrottledException:
       type: object
@@ -1792,8 +1849,9 @@ components:
         - message
       properties:
         message:
-          $ref: '#/components/schemas/ExceptionMessage'
-          description: A message returned when an LambdaThrottledException is thrown
+          allOf:
+            - $ref: '#/components/schemas/ExceptionMessage'
+            - description: A message returned when an LambdaThrottledException is thrown
       description: 'AWS Lambda throttled your account, please contact AWS Support'
     ExceptionMessage:
       type: string
@@ -1827,14 +1885,17 @@ components:
       type: object
       properties:
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the Cognito stream to receive updates. This stream must be in the developers account and in the same region as the identity pool.
         RoleArn:
-          $ref: '#/components/schemas/AssumeRoleArn'
-          description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
+          allOf:
+            - $ref: '#/components/schemas/AssumeRoleArn'
+            - description: The ARN of the role Amazon Cognito can assume in order to publish to the stream. This role must grant access to Amazon Cognito (cognito-sync) to invoke PutRecord on your Cognito stream.
         StreamingStatus:
-          $ref: '#/components/schemas/StreamingStatus'
-          description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
+          allOf:
+            - $ref: '#/components/schemas/StreamingStatus'
+            - description: 'Status of the Cognito streams. Valid values are: <p>ENABLED - Streaming of updates to identity pool is enabled.</p> <p>DISABLED - Streaming of updates to identity pool is disabled. Bulk publish will also fail if StreamingStatus is DISABLED.</p>'
       description: Configuration options for configure Cognito streams.
     String:
       type: string
@@ -1857,26 +1918,33 @@ components:
       type: object
       properties:
         IdentityId:
-          $ref: '#/components/schemas/IdentityId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
         DatasetName:
-          $ref: '#/components/schemas/DatasetName'
-          description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: 'A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, ''_'' (underscore), ''-'' (dash), and ''.'' (dot).'
         CreationDate:
-          $ref: '#/components/schemas/Date'
-          description: Date on which the dataset was created.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Date on which the dataset was created.
         LastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: Date when the dataset was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Date when the dataset was last modified.
         LastModifiedBy:
-          $ref: '#/components/schemas/String'
-          description: The device that made the last change to this dataset.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The device that made the last change to this dataset.
         DataStorage:
-          $ref: '#/components/schemas/Long'
-          description: Total size in bytes of the records in this dataset.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Total size in bytes of the records in this dataset.
         NumRecords:
-          $ref: '#/components/schemas/Long'
-          description: Number of records in this dataset.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Number of records in this dataset.
       description: 'A collection of data for an identity pool. An identity pool can have multiple datasets. A dataset is per identity and can be general or associated with a particular entity in an application (like a saved game). Datasets are automatically created if they don''t exist. Data is synced by dataset, and a dataset can hold up to 1MB of key-value pairs.'
     DatasetList:
       type: array
@@ -1901,17 +1969,21 @@ components:
       type: object
       properties:
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
         SyncSessionsCount:
-          $ref: '#/components/schemas/Long'
-          description: Number of sync sessions for the identity pool.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Number of sync sessions for the identity pool.
         DataStorage:
-          $ref: '#/components/schemas/Long'
-          description: Data storage information for the identity pool.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Data storage information for the identity pool.
         LastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: Date on which the identity pool was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Date on which the identity pool was last modified.
       description: Usage information for the identity pool.
     DescribeIdentityUsageRequest:
       type: object
@@ -1922,20 +1994,25 @@ components:
       type: object
       properties:
         IdentityId:
-          $ref: '#/components/schemas/IdentityId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: 'A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.'
         LastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: Date on which the identity was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: Date on which the identity was last modified.
         DatasetCount:
-          $ref: '#/components/schemas/Integer'
-          description: Number of datasets for the identity.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of datasets for the identity.
         DataStorage:
-          $ref: '#/components/schemas/Long'
-          description: Total data storage for this identity.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Total data storage for this identity.
       description: Usage information for the identity.
     DeviceId:
       type: string
@@ -1965,11 +2042,13 @@ components:
       type: object
       properties:
         ApplicationArns:
-          $ref: '#/components/schemas/ApplicationArnList'
-          description: List of SNS platform application ARNs that could be used by clients.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationArnList'
+            - description: List of SNS platform application ARNs that could be used by clients.
         RoleArn:
-          $ref: '#/components/schemas/AssumeRoleArn'
-          description: A role configured to allow Cognito to call SNS on behalf of the developer.
+          allOf:
+            - $ref: '#/components/schemas/AssumeRoleArn'
+            - description: A role configured to allow Cognito to call SNS on behalf of the developer.
       description: Configuration options to be applied to the identity pool.
     IdentityPoolUsageList:
       type: array
@@ -2029,23 +2108,29 @@ components:
       type: object
       properties:
         Key:
-          $ref: '#/components/schemas/RecordKey'
-          description: The key for the record.
+          allOf:
+            - $ref: '#/components/schemas/RecordKey'
+            - description: The key for the record.
         Value:
-          $ref: '#/components/schemas/RecordValue'
-          description: The value for the record.
+          allOf:
+            - $ref: '#/components/schemas/RecordValue'
+            - description: The value for the record.
         SyncCount:
-          $ref: '#/components/schemas/Long'
-          description: The server sync count for this record.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The server sync count for this record.
         LastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: The date on which the record was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date on which the record was last modified.
         LastModifiedBy:
-          $ref: '#/components/schemas/String'
-          description: The user/device that made the last change to this record.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user/device that made the last change to this record.
         DeviceLastModifiedDate:
-          $ref: '#/components/schemas/Date'
-          description: The last modified date of the client device.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modified date of the client device.
       description: The basic data structure of a dataset.
     RecordPatchList:
       type: array
@@ -2059,11 +2144,13 @@ components:
       title: RegisterDeviceRequest
       properties:
         Platform:
-          $ref: '#/components/schemas/Platform'
-          description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: 'The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).'
         Token:
-          $ref: '#/components/schemas/PushToken'
-          description: The push token.
+          allOf:
+            - $ref: '#/components/schemas/PushToken'
+            - description: The push token.
       description: A request to RegisterDevice.
     SetCognitoEventsRequest:
       type: object
@@ -2072,19 +2159,22 @@ components:
       title: SetCognitoEventsRequest
       properties:
         Events:
-          $ref: '#/components/schemas/Events'
-          description: The events to configure
+          allOf:
+            - $ref: '#/components/schemas/Events'
+            - description: The events to configure
       description: <p>A request to configure Cognito Events"</p>"
     SetIdentityPoolConfigurationRequest:
       type: object
       title: SetIdentityPoolConfigurationRequest
       properties:
         PushSync:
-          $ref: '#/components/schemas/PushSync'
-          description: Options to apply to this identity pool for push synchronization.
+          allOf:
+            - $ref: '#/components/schemas/PushSync'
+            - description: Options to apply to this identity pool for push synchronization.
         CognitoStreams:
-          $ref: '#/components/schemas/CognitoStreams'
-          description: Options to apply to this identity pool for Amazon Cognito streams.
+          allOf:
+            - $ref: '#/components/schemas/CognitoStreams'
+            - description: Options to apply to this identity pool for Amazon Cognito streams.
       description: The input for the SetIdentityPoolConfiguration operation.
     SubscribeToDatasetRequest:
       type: object
@@ -2103,14 +2193,17 @@ components:
       title: UpdateRecordsRequest
       properties:
         DeviceId:
-          $ref: '#/components/schemas/DeviceId'
-          description: The unique ID generated for this device by Cognito.
+          allOf:
+            - $ref: '#/components/schemas/DeviceId'
+            - description: The unique ID generated for this device by Cognito.
         RecordPatches:
-          $ref: '#/components/schemas/RecordPatchList'
-          description: A list of patch operations.
+          allOf:
+            - $ref: '#/components/schemas/RecordPatchList'
+            - description: A list of patch operations.
         SyncSessionToken:
-          $ref: '#/components/schemas/SyncSessionToken'
-          description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
+          allOf:
+            - $ref: '#/components/schemas/SyncSessionToken'
+            - description: The SyncSessionToken returned by a previous call to ListRecords for this dataset and identity.
       description: A request to post updates to records or add and delete records for a dataset and user.
 security:
   - hmac: []

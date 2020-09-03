@@ -2405,36 +2405,45 @@ components:
       type: object
       properties:
         appSummary:
-          $ref: '#/components/schemas/AppSummary'
-          description: A summary description of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppSummary'
+            - description: A summary description of the application.
         serverGroups:
-          $ref: '#/components/schemas/ServerGroups'
-          description: The server groups included in the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroups'
+            - description: The server groups included in the application.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags associated with the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags associated with the application.
     CreateAppRequest:
       type: object
       title: CreateAppRequest
       properties:
         name:
-          $ref: '#/components/schemas/AppName'
-          description: The name of the new application.
+          allOf:
+            - $ref: '#/components/schemas/AppName'
+            - description: The name of the new application.
         description:
-          $ref: '#/components/schemas/AppDescription'
-          description: The description of the new application
+          allOf:
+            - $ref: '#/components/schemas/AppDescription'
+            - description: The description of the new application
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the service role in the customer's account to be used by AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the service role in the customer's account to be used by AWS SMS.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of application creation.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of application creation.'
         serverGroups:
-          $ref: '#/components/schemas/ServerGroups'
-          description: The server groups to include in the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroups'
+            - description: The server groups to include in the application.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags to be associated with the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags to be associated with the application.
     UnauthorizedOperationException: {}
     InvalidParameterException: {}
     MissingRequiredParameterException: {}
@@ -2444,8 +2453,9 @@ components:
       type: object
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The unique identifier of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The unique identifier of the replication job.
     CreateReplicationJobRequest:
       type: object
       required:
@@ -2454,35 +2464,45 @@ components:
       title: CreateReplicationJobRequest
       properties:
         serverId:
-          $ref: '#/components/schemas/ServerId'
-          description: The ID of the server.
+          allOf:
+            - $ref: '#/components/schemas/ServerId'
+            - description: The ID of the server.
         seedReplicationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The seed replication time.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The seed replication time.
         frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: 'The time between consecutive replication runs, in hours.'
+          allOf:
+            - $ref: '#/components/schemas/Frequency'
+            - description: 'The time between consecutive replication runs, in hours.'
         runOnce:
-          $ref: '#/components/schemas/RunOnce'
-          description: Indicates whether to run the replication job one time.
+          allOf:
+            - $ref: '#/components/schemas/RunOnce'
+            - description: Indicates whether to run the replication job one time.
         licenseType:
-          $ref: '#/components/schemas/LicenseType'
-          description: The license type to be used for the AMI created by a successful replication run.
+          allOf:
+            - $ref: '#/components/schemas/LicenseType'
+            - description: The license type to be used for the AMI created by a successful replication run.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the IAM role to be used by the AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the IAM role to be used by the AWS SMS.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication job.
         numberOfRecentAmisToKeep:
-          $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
-          description: The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
+          allOf:
+            - $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
+            - description: The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
         encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: Indicates whether the replication job produces encrypted AMIs.
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: Indicates whether the replication job produces encrypted AMIs.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used. </p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used. </p>'
     ServerCannotBeReplicatedException: {}
     ReplicationJobAlreadyExistsException: {}
     NoConnectorsAvailableException: {}
@@ -2495,14 +2515,17 @@ components:
       title: DeleteAppRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         forceStopAppReplication:
-          $ref: '#/components/schemas/ForceStopAppReplication'
-          description: Indicates whether to stop all replication jobs corresponding to the servers in the application while deleting the application.
+          allOf:
+            - $ref: '#/components/schemas/ForceStopAppReplication'
+            - description: Indicates whether to stop all replication jobs corresponding to the servers in the application while deleting the application.
         forceTerminateApp:
-          $ref: '#/components/schemas/ForceTerminateApp'
-          description: Indicates whether to terminate the stack corresponding to the application while deleting the application.
+          allOf:
+            - $ref: '#/components/schemas/ForceTerminateApp'
+            - description: Indicates whether to terminate the stack corresponding to the application while deleting the application.
     DeleteAppLaunchConfigurationResponse:
       type: object
       properties: {}
@@ -2511,8 +2534,9 @@ components:
       title: DeleteAppLaunchConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     DeleteAppReplicationConfigurationResponse:
       type: object
       properties: {}
@@ -2521,8 +2545,9 @@ components:
       title: DeleteAppReplicationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     DeleteAppValidationConfigurationResponse:
       type: object
       properties: {}
@@ -2533,8 +2558,9 @@ components:
       title: DeleteAppValidationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppIdWithValidation'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppIdWithValidation'
+            - description: The ID of the application.
     DeleteReplicationJobResponse:
       type: object
       properties: {}
@@ -2545,8 +2571,9 @@ components:
       title: DeleteReplicationJobRequest
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
     ReplicationJobNotFoundException: {}
     DeleteServerCatalogResponse:
       type: object
@@ -2565,103 +2592,123 @@ components:
       title: DisassociateConnectorRequest
       properties:
         connectorId:
-          $ref: '#/components/schemas/ConnectorId'
-          description: The ID of the connector.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorId'
+            - description: The ID of the connector.
     GenerateChangeSetResponse:
       type: object
       properties:
         s3Location:
-          $ref: '#/components/schemas/S3Location'
-          description: The location of the Amazon S3 object.
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The location of the Amazon S3 object.
     GenerateChangeSetRequest:
       type: object
       title: GenerateChangeSetRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application associated with the change set.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application associated with the change set.
         changesetFormat:
-          $ref: '#/components/schemas/OutputFormat'
-          description: The format for the change set.
+          allOf:
+            - $ref: '#/components/schemas/OutputFormat'
+            - description: The format for the change set.
     GenerateTemplateResponse:
       type: object
       properties:
         s3Location:
-          $ref: '#/components/schemas/S3Location'
-          description: The location of the Amazon S3 object.
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The location of the Amazon S3 object.
     GenerateTemplateRequest:
       type: object
       title: GenerateTemplateRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application associated with the AWS CloudFormation template.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application associated with the AWS CloudFormation template.
         templateFormat:
-          $ref: '#/components/schemas/OutputFormat'
-          description: The format for generating the AWS CloudFormation template.
+          allOf:
+            - $ref: '#/components/schemas/OutputFormat'
+            - description: The format for generating the AWS CloudFormation template.
     GetAppResponse:
       type: object
       properties:
         appSummary:
-          $ref: '#/components/schemas/AppSummary'
-          description: Information about the application.
+          allOf:
+            - $ref: '#/components/schemas/AppSummary'
+            - description: Information about the application.
         serverGroups:
-          $ref: '#/components/schemas/ServerGroups'
-          description: The server groups that belong to the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroups'
+            - description: The server groups that belong to the application.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags associated with the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags associated with the application.
     GetAppRequest:
       type: object
       title: GetAppRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     GetAppLaunchConfigurationResponse:
       type: object
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the service role in the customer's account that AWS CloudFormation uses to launch the application.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the service role in the customer's account that AWS CloudFormation uses to launch the application.
         autoLaunch:
-          $ref: '#/components/schemas/AutoLaunch'
-          description: Indicates whether the application is configured to launch automatically after replication is complete.
+          allOf:
+            - $ref: '#/components/schemas/AutoLaunch'
+            - description: Indicates whether the application is configured to launch automatically after replication is complete.
         serverGroupLaunchConfigurations:
-          $ref: '#/components/schemas/ServerGroupLaunchConfigurations'
-          description: The launch configurations for server groups in this application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupLaunchConfigurations'
+            - description: The launch configurations for server groups in this application.
     GetAppLaunchConfigurationRequest:
       type: object
       title: GetAppLaunchConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     GetAppReplicationConfigurationResponse:
       type: object
       properties:
         serverGroupReplicationConfigurations:
-          $ref: '#/components/schemas/ServerGroupReplicationConfigurations'
-          description: The replication configurations associated with server groups in this application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupReplicationConfigurations'
+            - description: The replication configurations associated with server groups in this application.
     GetAppReplicationConfigurationRequest:
       type: object
       title: GetAppReplicationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     GetAppValidationConfigurationResponse:
       type: object
       properties:
         appValidationConfigurations:
-          $ref: '#/components/schemas/AppValidationConfigurations'
-          description: The configuration for application validation.
+          allOf:
+            - $ref: '#/components/schemas/AppValidationConfigurations'
+            - description: The configuration for application validation.
         serverGroupValidationConfigurations:
-          $ref: '#/components/schemas/ServerGroupValidationConfigurations'
-          description: The configuration for instance validation.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupValidationConfigurations'
+            - description: The configuration for instance validation.
     GetAppValidationConfigurationRequest:
       type: object
       required:
@@ -2669,14 +2716,16 @@ components:
       title: GetAppValidationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppIdWithValidation'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppIdWithValidation'
+            - description: The ID of the application.
     GetAppValidationOutputResponse:
       type: object
       properties:
         validationOutputList:
-          $ref: '#/components/schemas/ValidationOutputList'
-          description: The validation output.
+          allOf:
+            - $ref: '#/components/schemas/ValidationOutputList'
+            - description: The validation output.
     GetAppValidationOutputRequest:
       type: object
       required:
@@ -2684,61 +2733,74 @@ components:
       title: GetAppValidationOutputRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppIdWithValidation'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppIdWithValidation'
+            - description: The ID of the application.
     GetConnectorsResponse:
       type: object
       properties:
         connectorList:
-          $ref: '#/components/schemas/ConnectorList'
-          description: Information about the registered connectors.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorList'
+            - description: Information about the registered connectors.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
     GetConnectorsRequest:
       type: object
       title: GetConnectorsRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
     GetReplicationJobsResponse:
       type: object
       properties:
         replicationJobList:
-          $ref: '#/components/schemas/ReplicationJobList'
-          description: Information about the replication jobs.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobList'
+            - description: Information about the replication jobs.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
     GetReplicationJobsRequest:
       type: object
       title: GetReplicationJobsRequest
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
     GetReplicationRunsResponse:
       type: object
       properties:
         replicationJob:
-          $ref: '#/components/schemas/ReplicationJob'
-          description: Information about the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJob'
+            - description: Information about the replication job.
         replicationRunList:
-          $ref: '#/components/schemas/ReplicationRunList'
-          description: Information about the replication runs.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunList'
+            - description: Information about the replication runs.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
     GetReplicationRunsRequest:
       type: object
       required:
@@ -2746,42 +2808,52 @@ components:
       title: GetReplicationRunsRequest
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
     GetServersResponse:
       type: object
       properties:
         lastModifiedOn:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time when the server was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the server was last modified.
         serverCatalogStatus:
-          $ref: '#/components/schemas/ServerCatalogStatus'
-          description: The status of the server catalog.
+          allOf:
+            - $ref: '#/components/schemas/ServerCatalogStatus'
+            - description: The status of the server catalog.
         serverList:
-          $ref: '#/components/schemas/ServerList'
-          description: Information about the servers.
+          allOf:
+            - $ref: '#/components/schemas/ServerList'
+            - description: Information about the servers.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
     GetServersRequest:
       type: object
       title: GetServersRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.'
         vmServerAddressList:
-          $ref: '#/components/schemas/VmServerAddressList'
-          description: The server addresses.
+          allOf:
+            - $ref: '#/components/schemas/VmServerAddressList'
+            - description: The server addresses.
     ImportAppCatalogResponse:
       type: object
       properties: {}
@@ -2790,8 +2862,9 @@ components:
       title: ImportAppCatalogRequest
       properties:
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: 'The name of the service role. If you omit this parameter, we create a service-linked role for AWS Migration Hub in your account. Otherwise, the role that you provide must have the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed">policy and trust policy</a> described in the <i>AWS Migration Hub User Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: 'The name of the service role. If you omit this parameter, we create a service-linked role for AWS Migration Hub in your account. Otherwise, the role that you provide must have the <a href="https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed">policy and trust policy</a> described in the <i>AWS Migration Hub User Guide</i>.'
     ImportServerCatalogResponse:
       type: object
       properties: {}
@@ -2807,30 +2880,36 @@ components:
       title: LaunchAppRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     ListAppsResponse:
       type: object
       properties:
         apps:
-          $ref: '#/components/schemas/Apps'
-          description: The application summaries.
+          allOf:
+            - $ref: '#/components/schemas/Apps'
+            - description: The application summaries.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token required to retrieve the next set of results. This value is null when there are no more results to return.
     ListAppsRequest:
       type: object
       title: ListAppsRequest
       properties:
         appIds:
-          $ref: '#/components/schemas/AppIds'
-          description: The unique application IDs.
+          allOf:
+            - $ref: '#/components/schemas/AppIds'
+            - description: The unique application IDs.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. The default value is 100. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. The default value is 100. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. '
     NotifyAppValidationOutputResponse:
       type: object
       properties: {}
@@ -2841,11 +2920,13 @@ components:
       title: NotifyAppValidationOutputRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppIdWithValidation'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppIdWithValidation'
+            - description: The ID of the application.
         notificationContext:
-          $ref: '#/components/schemas/NotificationContext'
-          description: The notification information.
+          allOf:
+            - $ref: '#/components/schemas/NotificationContext'
+            - description: The notification information.
     PutAppLaunchConfigurationResponse:
       type: object
       properties: {}
@@ -2854,17 +2935,21 @@ components:
       title: PutAppLaunchConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of service role in the customer's account that AWS CloudFormation uses to launch the application.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of service role in the customer's account that AWS CloudFormation uses to launch the application.
         autoLaunch:
-          $ref: '#/components/schemas/AutoLaunch'
-          description: Indicates whether the application is configured to launch automatically after replication is complete.
+          allOf:
+            - $ref: '#/components/schemas/AutoLaunch'
+            - description: Indicates whether the application is configured to launch automatically after replication is complete.
         serverGroupLaunchConfigurations:
-          $ref: '#/components/schemas/ServerGroupLaunchConfigurations'
-          description: Information about the launch configurations for server groups in the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupLaunchConfigurations'
+            - description: Information about the launch configurations for server groups in the application.
     PutAppReplicationConfigurationResponse:
       type: object
       properties: {}
@@ -2873,11 +2958,13 @@ components:
       title: PutAppReplicationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         serverGroupReplicationConfigurations:
-          $ref: '#/components/schemas/ServerGroupReplicationConfigurations'
-          description: Information about the replication configurations for server groups in the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupReplicationConfigurations'
+            - description: Information about the replication configurations for server groups in the application.
     PutAppValidationConfigurationResponse:
       type: object
       properties: {}
@@ -2888,14 +2975,17 @@ components:
       title: PutAppValidationConfigurationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppIdWithValidation'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppIdWithValidation'
+            - description: The ID of the application.
         appValidationConfigurations:
-          $ref: '#/components/schemas/AppValidationConfigurations'
-          description: The configuration for application validation.
+          allOf:
+            - $ref: '#/components/schemas/AppValidationConfigurations'
+            - description: The configuration for application validation.
         serverGroupValidationConfigurations:
-          $ref: '#/components/schemas/ServerGroupValidationConfigurations'
-          description: The configuration for instance validation.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupValidationConfigurations'
+            - description: The configuration for instance validation.
     StartAppReplicationResponse:
       type: object
       properties: {}
@@ -2904,8 +2994,9 @@ components:
       title: StartAppReplicationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     StartOnDemandAppReplicationResponse:
       type: object
       properties: {}
@@ -2916,17 +3007,20 @@ components:
       title: StartOnDemandAppReplicationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication run.
     StartOnDemandReplicationRunResponse:
       type: object
       properties:
         replicationRunId:
-          $ref: '#/components/schemas/ReplicationRunId'
-          description: The ID of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunId'
+            - description: The ID of the replication run.
     StartOnDemandReplicationRunRequest:
       type: object
       required:
@@ -2934,11 +3028,13 @@ components:
       title: StartOnDemandReplicationRunRequest
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication run.
     ReplicationRunLimitExceededException: {}
     DryRunOperationException: {}
     StopAppReplicationResponse:
@@ -2949,8 +3045,9 @@ components:
       title: StopAppReplicationRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     TerminateAppResponse:
       type: object
       properties: {}
@@ -2959,42 +3056,52 @@ components:
       title: TerminateAppRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
     UpdateAppResponse:
       type: object
       properties:
         appSummary:
-          $ref: '#/components/schemas/AppSummary'
-          description: A summary description of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppSummary'
+            - description: A summary description of the application.
         serverGroups:
-          $ref: '#/components/schemas/ServerGroups'
-          description: The updated server groups in the application.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroups'
+            - description: The updated server groups in the application.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags associated with the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags associated with the application.
     UpdateAppRequest:
       type: object
       title: UpdateAppRequest
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the application.
         name:
-          $ref: '#/components/schemas/AppName'
-          description: The new name of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppName'
+            - description: The new name of the application.
         description:
-          $ref: '#/components/schemas/AppDescription'
-          description: The new description of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppDescription'
+            - description: The new description of the application.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the service role in the customer's account used by AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the service role in the customer's account used by AWS SMS.
         serverGroups:
-          $ref: '#/components/schemas/ServerGroups'
-          description: The server groups in the application to update.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroups'
+            - description: The server groups in the application to update.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags to associate with the application.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags to associate with the application.
     UpdateReplicationJobResponse:
       type: object
       properties: {}
@@ -3005,32 +3112,41 @@ components:
       title: UpdateReplicationJobRequest
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: 'The time between consecutive replication runs, in hours.'
+          allOf:
+            - $ref: '#/components/schemas/Frequency'
+            - description: 'The time between consecutive replication runs, in hours.'
         nextReplicationRunStartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the next replication run.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the next replication run.
         licenseType:
-          $ref: '#/components/schemas/LicenseType'
-          description: The license type to be used for the AMI created by a successful replication run.
+          allOf:
+            - $ref: '#/components/schemas/LicenseType'
+            - description: The license type to be used for the AMI created by a successful replication run.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the IAM role to be used by AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the IAM role to be used by AWS SMS.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication job.
         numberOfRecentAmisToKeep:
-          $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
-          description: The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
+          allOf:
+            - $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
+            - description: The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
         encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: 'When true, the replication job produces encrypted AMIs. For more information, <code>KmsKeyId</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: 'When true, the replication job produces encrypted AMIs. For more information, <code>KmsKeyId</code>.'
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
     AmiId:
       type: string
     AppDescription:
@@ -3117,14 +3233,17 @@ components:
       type: object
       properties:
         latestLaunchTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The latest time that this application was launched successfully.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The latest time that this application was launched successfully.
         stackName:
-          $ref: '#/components/schemas/StackName'
-          description: The name of the latest stack launched for this application.
+          allOf:
+            - $ref: '#/components/schemas/StackName'
+            - description: The name of the latest stack launched for this application.
         stackId:
-          $ref: '#/components/schemas/StackId'
-          description: The ID of the latest stack launched for this application.
+          allOf:
+            - $ref: '#/components/schemas/StackId'
+            - description: The ID of the latest stack launched for this application.
       description: Details about the latest launch of an application.
     RoleName:
       type: string
@@ -3136,62 +3255,81 @@ components:
       type: object
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: The unique ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The unique ID of the application.
         importedAppId:
-          $ref: '#/components/schemas/ImportedAppId'
-          description: The ID of the application.
+          allOf:
+            - $ref: '#/components/schemas/ImportedAppId'
+            - description: The ID of the application.
         name:
-          $ref: '#/components/schemas/AppName'
-          description: The name of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppName'
+            - description: The name of the application.
         description:
-          $ref: '#/components/schemas/AppDescription'
-          description: The description of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppDescription'
+            - description: The description of the application.
         status:
-          $ref: '#/components/schemas/AppStatus'
-          description: Status of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppStatus'
+            - description: Status of the application.
         statusMessage:
-          $ref: '#/components/schemas/AppStatusMessage'
-          description: A message related to the status of the application
+          allOf:
+            - $ref: '#/components/schemas/AppStatusMessage'
+            - description: A message related to the status of the application
         replicationConfigurationStatus:
-          $ref: '#/components/schemas/AppReplicationConfigurationStatus'
-          description: Status of the replication configuration.
+          allOf:
+            - $ref: '#/components/schemas/AppReplicationConfigurationStatus'
+            - description: Status of the replication configuration.
         replicationStatus:
-          $ref: '#/components/schemas/AppReplicationStatus'
-          description: The replication status of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppReplicationStatus'
+            - description: The replication status of the application.
         replicationStatusMessage:
-          $ref: '#/components/schemas/AppReplicationStatusMessage'
-          description: A message related to the replication status of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppReplicationStatusMessage'
+            - description: A message related to the replication status of the application.
         latestReplicationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of the application's most recent successful replication.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the application's most recent successful replication.
         launchConfigurationStatus:
-          $ref: '#/components/schemas/AppLaunchConfigurationStatus'
-          description: Status of the launch configuration.
+          allOf:
+            - $ref: '#/components/schemas/AppLaunchConfigurationStatus'
+            - description: Status of the launch configuration.
         launchStatus:
-          $ref: '#/components/schemas/AppLaunchStatus'
-          description: The launch status of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppLaunchStatus'
+            - description: The launch status of the application.
         launchStatusMessage:
-          $ref: '#/components/schemas/AppLaunchStatusMessage'
-          description: A message related to the launch status of the application.
+          allOf:
+            - $ref: '#/components/schemas/AppLaunchStatusMessage'
+            - description: A message related to the launch status of the application.
         launchDetails:
-          $ref: '#/components/schemas/LaunchDetails'
-          description: Details about the latest launch of the application.
+          allOf:
+            - $ref: '#/components/schemas/LaunchDetails'
+            - description: Details about the latest launch of the application.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The creation time of the application.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the application.
         lastModified:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last modified time of the application.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last modified time of the application.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the service role in the customer's account used by AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the service role in the customer's account used by AWS SMS.
         totalServerGroups:
-          $ref: '#/components/schemas/TotalServerGroups'
-          description: The number of server groups present in the application.
+          allOf:
+            - $ref: '#/components/schemas/TotalServerGroups'
+            - description: The number of server groups present in the application.
         totalServers:
-          $ref: '#/components/schemas/TotalServers'
-          description: The number of servers present in the application.
+          allOf:
+            - $ref: '#/components/schemas/TotalServers'
+            - description: The number of servers present in the application.
       description: Information about the application.
     ValidationId:
       type: string
@@ -3209,39 +3347,49 @@ components:
       type: object
       properties:
         source:
-          $ref: '#/components/schemas/Source'
-          description: The location of the validation script.
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The location of the validation script.
         instanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: 'The ID of the instance. The instance must have the following tag: UserForSMSApplicationValidation=true.'
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: 'The ID of the instance. The instance must have the following tag: UserForSMSApplicationValidation=true.'
         scriptType:
-          $ref: '#/components/schemas/ScriptType'
-          description: The type of validation script.
+          allOf:
+            - $ref: '#/components/schemas/ScriptType'
+            - description: The type of validation script.
         command:
-          $ref: '#/components/schemas/Command'
-          description: The command to run the validation script
+          allOf:
+            - $ref: '#/components/schemas/Command'
+            - description: The command to run the validation script
         executionTimeoutSeconds:
-          $ref: '#/components/schemas/ExecutionTimeoutSeconds'
-          description: 'The timeout interval, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/ExecutionTimeoutSeconds'
+            - description: 'The timeout interval, in seconds.'
         outputS3BucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the S3 bucket for output.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the S3 bucket for output.
       description: Contains validation parameters.
     AppValidationConfiguration:
       type: object
       properties:
         validationId:
-          $ref: '#/components/schemas/ValidationId'
-          description: The ID of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationId'
+            - description: The ID of the validation.
         name:
-          $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
-          description: The name of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
+            - description: The name of the configuration.
         appValidationStrategy:
-          $ref: '#/components/schemas/AppValidationStrategy'
-          description: The validation strategy.
+          allOf:
+            - $ref: '#/components/schemas/AppValidationStrategy'
+            - description: The validation strategy.
         ssmValidationParameters:
-          $ref: '#/components/schemas/SSMValidationParameters'
-          description: The validation parameters.
+          allOf:
+            - $ref: '#/components/schemas/SSMValidationParameters'
+            - description: The validation parameters.
       description: Configuration for validating an application.
     AppValidationConfigurations:
       type: array
@@ -3257,8 +3405,9 @@ components:
       type: object
       properties:
         ssmOutput:
-          $ref: '#/components/schemas/SSMOutput'
-          description: Output from using SSM to validate the application.
+          allOf:
+            - $ref: '#/components/schemas/SSMOutput'
+            - description: Output from using SSM to validate the application.
       description: Output from validating an application.
     Apps:
       type: array
@@ -3307,35 +3456,45 @@ components:
       type: object
       properties:
         connectorId:
-          $ref: '#/components/schemas/ConnectorId'
-          description: The ID of the connector.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorId'
+            - description: The ID of the connector.
         version:
-          $ref: '#/components/schemas/ConnectorVersion'
-          description: The connector version.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorVersion'
+            - description: The connector version.
         status:
-          $ref: '#/components/schemas/ConnectorStatus'
-          description: The status of the connector.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorStatus'
+            - description: The status of the connector.
         capabilityList:
-          $ref: '#/components/schemas/ConnectorCapabilityList'
-          description: The capabilities of the connector.
+          allOf:
+            - $ref: '#/components/schemas/ConnectorCapabilityList'
+            - description: The capabilities of the connector.
         vmManagerName:
-          $ref: '#/components/schemas/VmManagerName'
-          description: The name of the VM manager.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerName'
+            - description: The name of the VM manager.
         vmManagerType:
-          $ref: '#/components/schemas/VmManagerType'
-          description: The VM management product.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerType'
+            - description: The VM management product.
         vmManagerId:
-          $ref: '#/components/schemas/VmManagerId'
-          description: The ID of the VM manager.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerId'
+            - description: The ID of the VM manager.
         ipAddress:
-          $ref: '#/components/schemas/IpAddress'
-          description: The IP address of the connector.
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address of the connector.
         macAddress:
-          $ref: '#/components/schemas/MacAddress'
-          description: The MAC address of the connector.
+          allOf:
+            - $ref: '#/components/schemas/MacAddress'
+            - description: The MAC address of the connector.
         associatedOn:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the connector was associated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the connector was associated.
       description: Represents a connector.
     ConnectorCapability:
       type: string
@@ -3397,11 +3556,13 @@ components:
       type: object
       properties:
         bucket:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The Amazon S3 bucket name.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The Amazon S3 bucket name.
         key:
-          $ref: '#/components/schemas/S3KeyName'
-          description: The Amazon S3 bucket key.
+          allOf:
+            - $ref: '#/components/schemas/S3KeyName'
+            - description: The Amazon S3 bucket key.
       description: Location of an Amazon S3 object.
     ServerGroupLaunchConfigurations:
       type: array
@@ -3431,59 +3592,77 @@ components:
       type: object
       properties:
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         serverId:
-          $ref: '#/components/schemas/ServerId'
-          description: The ID of the server.
+          allOf:
+            - $ref: '#/components/schemas/ServerId'
+            - description: The ID of the server.
         serverType:
-          $ref: '#/components/schemas/ServerType'
-          description: The type of server.
+          allOf:
+            - $ref: '#/components/schemas/ServerType'
+            - description: The type of server.
         vmServer:
-          $ref: '#/components/schemas/VmServer'
-          description: Information about the VM server.
+          allOf:
+            - $ref: '#/components/schemas/VmServer'
+            - description: Information about the VM server.
         seedReplicationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The seed replication time.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The seed replication time.
         frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: 'The time between consecutive replication runs, in hours.'
+          allOf:
+            - $ref: '#/components/schemas/Frequency'
+            - description: 'The time between consecutive replication runs, in hours.'
         runOnce:
-          $ref: '#/components/schemas/RunOnce'
-          description: Indicates whether to run the replication job one time.
+          allOf:
+            - $ref: '#/components/schemas/RunOnce'
+            - description: Indicates whether to run the replication job one time.
         nextReplicationRunStartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the next replication run.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the next replication run.
         licenseType:
-          $ref: '#/components/schemas/LicenseType'
-          description: The license type to be used for the AMI created by a successful replication run.
+          allOf:
+            - $ref: '#/components/schemas/LicenseType'
+            - description: The license type to be used for the AMI created by a successful replication run.
         roleName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the IAM role to be used by AWS SMS.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the IAM role to be used by AWS SMS.
         latestAmiId:
-          $ref: '#/components/schemas/AmiId'
-          description: The ID of the latest Amazon Machine Image (AMI).
+          allOf:
+            - $ref: '#/components/schemas/AmiId'
+            - description: The ID of the latest Amazon Machine Image (AMI).
         state:
-          $ref: '#/components/schemas/ReplicationJobState'
-          description: The state of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobState'
+            - description: The state of the replication job.
         statusMessage:
-          $ref: '#/components/schemas/ReplicationJobStatusMessage'
-          description: The description of the current status of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobStatusMessage'
+            - description: The description of the current status of the replication job.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication job.
         numberOfRecentAmisToKeep:
-          $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
-          description: 'The number of recent AMIs to keep in the customer''s account for a replication job. By default, the value is set to zero, meaning that all AMIs are kept.'
+          allOf:
+            - $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
+            - description: 'The number of recent AMIs to keep in the customer''s account for a replication job. By default, the value is set to zero, meaning that all AMIs are kept.'
         encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: Indicates whether the replication job should produce encrypted AMIs.
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: Indicates whether the replication job should produce encrypted AMIs.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
         replicationRunList:
-          $ref: '#/components/schemas/ReplicationRunList'
-          description: Information about the replication runs.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunList'
+            - description: Information about the replication runs.
       description: Represents a replication job.
     ReplicationRunList:
       type: array
@@ -3533,14 +3712,17 @@ components:
       type: object
       properties:
         validationId:
-          $ref: '#/components/schemas/ValidationId'
-          description: The ID of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationId'
+            - description: The ID of the validation.
         status:
-          $ref: '#/components/schemas/ValidationStatus'
-          description: The status of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationStatus'
+            - description: The status of the validation.
         statusMessage:
-          $ref: '#/components/schemas/ValidationStatusMessage'
-          description: The status message.
+          allOf:
+            - $ref: '#/components/schemas/ValidationStatusMessage'
+            - description: The status message.
       description: Contains the status of validating an application.
     ServerType:
       type: string
@@ -3550,20 +3732,25 @@ components:
       type: object
       properties:
         vmServerAddress:
-          $ref: '#/components/schemas/VmServerAddress'
-          description: The VM server location.
+          allOf:
+            - $ref: '#/components/schemas/VmServerAddress'
+            - description: The VM server location.
         vmName:
-          $ref: '#/components/schemas/VmName'
-          description: The name of the VM.
+          allOf:
+            - $ref: '#/components/schemas/VmName'
+            - description: The name of the VM.
         vmManagerName:
-          $ref: '#/components/schemas/VmManagerName'
-          description: The name of the VM manager.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerName'
+            - description: The name of the VM manager.
         vmManagerType:
-          $ref: '#/components/schemas/VmManagerType'
-          description: The type of VM management product.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerType'
+            - description: The type of VM management product.
         vmPath:
-          $ref: '#/components/schemas/VmPath'
-          description: The VM folder path in the vCenter Server virtual machine inventory tree.
+          allOf:
+            - $ref: '#/components/schemas/VmPath'
+            - description: The VM folder path in the vCenter Server virtual machine inventory tree.
       description: Represents a VM server.
     ReplicationJobState:
       type: string
@@ -3601,11 +3788,13 @@ components:
       type: object
       properties:
         stage:
-          $ref: '#/components/schemas/ReplicationRunStage'
-          description: The current stage of a replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunStage'
+            - description: The current stage of a replication run.
         stageProgress:
-          $ref: '#/components/schemas/ReplicationRunStageProgress'
-          description: The progress of the current stage of a replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunStageProgress'
+            - description: The progress of the current stage of a replication run.
       description: Details of the current stage of a replication run.
     ReplicationRunStatusMessage:
       type: string
@@ -3613,38 +3802,49 @@ components:
       type: object
       properties:
         replicationRunId:
-          $ref: '#/components/schemas/ReplicationRunId'
-          description: The ID of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunId'
+            - description: The ID of the replication run.
         state:
-          $ref: '#/components/schemas/ReplicationRunState'
-          description: The state of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunState'
+            - description: The state of the replication run.
         type:
-          $ref: '#/components/schemas/ReplicationRunType'
-          description: The type of replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunType'
+            - description: The type of replication run.
         stageDetails:
-          $ref: '#/components/schemas/ReplicationRunStageDetails'
-          description: Details about the current stage of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunStageDetails'
+            - description: Details about the current stage of the replication run.
         statusMessage:
-          $ref: '#/components/schemas/ReplicationRunStatusMessage'
-          description: The description of the current status of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRunStatusMessage'
+            - description: The description of the current status of the replication job.
         amiId:
-          $ref: '#/components/schemas/AmiId'
-          description: The ID of the Amazon Machine Image (AMI) from the replication run.
+          allOf:
+            - $ref: '#/components/schemas/AmiId'
+            - description: The ID of the Amazon Machine Image (AMI) from the replication run.
         scheduledStartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the next replication run.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the next replication run.
         completedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The completion time of the last replication run.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The completion time of the last replication run.
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the replication run.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the replication run.
         encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: Indicates whether the replication run should produce an encrypted AMI.
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: Indicates whether the replication run should produce an encrypted AMI.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used. </p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used. </p>'
       description: Represents a replication run.
     ReplicationRunStage:
       type: string
@@ -3674,20 +3874,25 @@ components:
       type: object
       properties:
         serverId:
-          $ref: '#/components/schemas/ServerId'
-          description: The ID of the server.
+          allOf:
+            - $ref: '#/components/schemas/ServerId'
+            - description: The ID of the server.
         serverType:
-          $ref: '#/components/schemas/ServerType'
-          description: The type of server.
+          allOf:
+            - $ref: '#/components/schemas/ServerType'
+            - description: The type of server.
         vmServer:
-          $ref: '#/components/schemas/VmServer'
-          description: Information about the VM server.
+          allOf:
+            - $ref: '#/components/schemas/VmServer'
+            - description: Information about the VM server.
         replicationJobId:
-          $ref: '#/components/schemas/ReplicationJobId'
-          description: The ID of the replication job.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobId'
+            - description: The ID of the replication job.
         replicationJobTerminated:
-          $ref: '#/components/schemas/ReplicationJobTerminated'
-          description: Indicates whether the replication job is deleted or failed.
+          allOf:
+            - $ref: '#/components/schemas/ReplicationJobTerminated'
+            - description: Indicates whether the replication job is deleted or failed.
       description: Represents a server.
     ServerGroupId:
       type: string
@@ -3697,14 +3902,17 @@ components:
       type: object
       properties:
         serverGroupId:
-          $ref: '#/components/schemas/ServerGroupId'
-          description: The ID of a server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupId'
+            - description: The ID of a server group.
         name:
-          $ref: '#/components/schemas/ServerGroupName'
-          description: The name of a server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupName'
+            - description: The name of a server group.
         serverList:
-          $ref: '#/components/schemas/ServerList'
-          description: The servers that belong to a server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerList'
+            - description: The servers that belong to a server group.
       description: Logical grouping of servers.
     ServerLaunchConfigurations:
       type: array
@@ -3714,14 +3922,17 @@ components:
       type: object
       properties:
         serverGroupId:
-          $ref: '#/components/schemas/ServerGroupId'
-          description: The ID of the server group with which the launch configuration is associated.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupId'
+            - description: The ID of the server group with which the launch configuration is associated.
         launchOrder:
-          $ref: '#/components/schemas/LaunchOrder'
-          description: The launch order of servers in the server group.
+          allOf:
+            - $ref: '#/components/schemas/LaunchOrder'
+            - description: The launch order of servers in the server group.
         serverLaunchConfigurations:
-          $ref: '#/components/schemas/ServerLaunchConfigurations'
-          description: The launch configuration for servers in the server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerLaunchConfigurations'
+            - description: The launch configuration for servers in the server group.
       description: Launch configuration for a server group.
     ServerReplicationConfigurations:
       type: array
@@ -3731,11 +3942,13 @@ components:
       type: object
       properties:
         serverGroupId:
-          $ref: '#/components/schemas/ServerGroupId'
-          description: The ID of the server group with which this replication configuration is associated.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupId'
+            - description: The ID of the server group with which this replication configuration is associated.
         serverReplicationConfigurations:
-          $ref: '#/components/schemas/ServerReplicationConfigurations'
-          description: The replication configuration for servers in the server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerReplicationConfigurations'
+            - description: The replication configuration for servers in the server group.
       description: Replication configuration for a server group.
     ServerValidationConfigurations:
       type: array
@@ -3745,11 +3958,13 @@ components:
       type: object
       properties:
         serverGroupId:
-          $ref: '#/components/schemas/ServerGroupId'
-          description: The ID of the server group.
+          allOf:
+            - $ref: '#/components/schemas/ServerGroupId'
+            - description: The ID of the server group.
         serverValidationConfigurations:
-          $ref: '#/components/schemas/ServerValidationConfigurations'
-          description: The validation configuration.
+          allOf:
+            - $ref: '#/components/schemas/ServerValidationConfigurations'
+            - description: The validation configuration.
       description: Configuration for validating an instance.
     VPC:
       type: string
@@ -3759,82 +3974,103 @@ components:
       type: object
       properties:
         s3Location:
-          $ref: '#/components/schemas/S3Location'
-          description: Amazon S3 location of the user-data script.
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: Amazon S3 location of the user-data script.
       description: A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.
     ServerLaunchConfiguration:
       type: object
       properties:
         server:
-          $ref: '#/components/schemas/Server'
-          description: The ID of the server with which the launch configuration is associated.
+          allOf:
+            - $ref: '#/components/schemas/Server'
+            - description: The ID of the server with which the launch configuration is associated.
         logicalId:
-          $ref: '#/components/schemas/LogicalId'
-          description: The logical ID of the server in the AWS CloudFormation template.
+          allOf:
+            - $ref: '#/components/schemas/LogicalId'
+            - description: The logical ID of the server in the AWS CloudFormation template.
         vpc:
-          $ref: '#/components/schemas/VPC'
-          description: The ID of the VPC into which the server should be launched.
+          allOf:
+            - $ref: '#/components/schemas/VPC'
+            - description: The ID of the VPC into which the server should be launched.
         subnet:
-          $ref: '#/components/schemas/Subnet'
-          description: The ID of the subnet the server should be launched into.
+          allOf:
+            - $ref: '#/components/schemas/Subnet'
+            - description: The ID of the subnet the server should be launched into.
         securityGroup:
-          $ref: '#/components/schemas/SecurityGroup'
-          description: The ID of the security group that applies to the launched server.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroup'
+            - description: The ID of the security group that applies to the launched server.
         ec2KeyName:
-          $ref: '#/components/schemas/EC2KeyName'
-          description: The name of the Amazon EC2 SSH key to be used for connecting to the launched server.
+          allOf:
+            - $ref: '#/components/schemas/EC2KeyName'
+            - description: The name of the Amazon EC2 SSH key to be used for connecting to the launched server.
         userData:
-          $ref: '#/components/schemas/UserData'
-          description: Location of the user-data script to be executed when launching the server.
+          allOf:
+            - $ref: '#/components/schemas/UserData'
+            - description: Location of the user-data script to be executed when launching the server.
         instanceType:
-          $ref: '#/components/schemas/InstanceType'
-          description: The instance type to use when launching the server.
+          allOf:
+            - $ref: '#/components/schemas/InstanceType'
+            - description: The instance type to use when launching the server.
         associatePublicIpAddress:
-          $ref: '#/components/schemas/AssociatePublicIpAddress'
-          description: Indicates whether a publicly accessible IP address is created when launching the server.
+          allOf:
+            - $ref: '#/components/schemas/AssociatePublicIpAddress'
+            - description: Indicates whether a publicly accessible IP address is created when launching the server.
         iamInstanceProfileName:
-          $ref: '#/components/schemas/RoleName'
-          description: The name of the IAM instance profile.
+          allOf:
+            - $ref: '#/components/schemas/RoleName'
+            - description: The name of the IAM instance profile.
         configureScript:
           $ref: '#/components/schemas/S3Location'
         configureScriptType:
-          $ref: '#/components/schemas/ScriptType'
-          description: The type of configuration script.
+          allOf:
+            - $ref: '#/components/schemas/ScriptType'
+            - description: The type of configuration script.
       description: Launch configuration for a server.
     ServerReplicationParameters:
       type: object
       properties:
         seedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The seed time for creating a replication job for the server.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The seed time for creating a replication job for the server.
         frequency:
-          $ref: '#/components/schemas/Frequency'
-          description: The frequency of creating replication jobs for the server.
+          allOf:
+            - $ref: '#/components/schemas/Frequency'
+            - description: The frequency of creating replication jobs for the server.
         runOnce:
-          $ref: '#/components/schemas/RunOnce'
-          description: Indicates whether to run the replication job one time.
+          allOf:
+            - $ref: '#/components/schemas/RunOnce'
+            - description: Indicates whether to run the replication job one time.
         licenseType:
-          $ref: '#/components/schemas/LicenseType'
-          description: The license type for creating a replication job for the server.
+          allOf:
+            - $ref: '#/components/schemas/LicenseType'
+            - description: The license type for creating a replication job for the server.
         numberOfRecentAmisToKeep:
-          $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
-          description: The number of recent AMIs to keep when creating a replication job for this server.
+          allOf:
+            - $ref: '#/components/schemas/NumberOfRecentAmisToKeep'
+            - description: The number of recent AMIs to keep when creating a replication job for this server.
         encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: Indicates whether the replication job produces encrypted AMIs.
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: Indicates whether the replication job produces encrypted AMIs.
         kmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer''s default KMS key for Amazon EBS is used.</p>'
       description: The replication parameters for replicating a server.
     ServerReplicationConfiguration:
       type: object
       properties:
         server:
-          $ref: '#/components/schemas/Server'
-          description: The ID of the server with which this replication configuration is associated.
+          allOf:
+            - $ref: '#/components/schemas/Server'
+            - description: The ID of the server with which this replication configuration is associated.
         serverReplicationParameters:
-          $ref: '#/components/schemas/ServerReplicationParameters'
-          description: The parameters for replicating the server.
+          allOf:
+            - $ref: '#/components/schemas/ServerReplicationParameters'
+            - description: The parameters for replicating the server.
       description: Replication configuration of a server.
     ServerValidationStrategy:
       type: string
@@ -3844,11 +4080,13 @@ components:
       type: object
       properties:
         source:
-          $ref: '#/components/schemas/Source'
-          description: The location of the validation script.
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The location of the validation script.
         scriptType:
-          $ref: '#/components/schemas/ScriptType'
-          description: The type of validation script.
+          allOf:
+            - $ref: '#/components/schemas/ScriptType'
+            - description: The type of validation script.
       description: Contains validation parameters.
     ServerValidationConfiguration:
       type: object
@@ -3856,17 +4094,21 @@ components:
         server:
           $ref: '#/components/schemas/Server'
         validationId:
-          $ref: '#/components/schemas/ValidationId'
-          description: The ID of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationId'
+            - description: The ID of the validation.
         name:
-          $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
-          description: The name of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
+            - description: The name of the configuration.
         serverValidationStrategy:
-          $ref: '#/components/schemas/ServerValidationStrategy'
-          description: The validation strategy.
+          allOf:
+            - $ref: '#/components/schemas/ServerValidationStrategy'
+            - description: The validation strategy.
         userDataValidationParameters:
-          $ref: '#/components/schemas/UserDataValidationParameters'
-          description: The validation parameters.
+          allOf:
+            - $ref: '#/components/schemas/UserDataValidationParameters'
+            - description: The validation parameters.
       description: Configuration for validating an instance.
     ServerValidationOutput:
       type: object
@@ -3882,36 +4124,45 @@ components:
       type: object
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The tag key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag key.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The tag value.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag value.
       description: Key/value pair that can be assigned to an application.
     ValidationOutput:
       type: object
       properties:
         validationId:
-          $ref: '#/components/schemas/ValidationId'
-          description: The ID of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationId'
+            - description: The ID of the validation.
         name:
-          $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
-          description: The name of the validation.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringWithMaxLen255'
+            - description: The name of the validation.
         status:
-          $ref: '#/components/schemas/ValidationStatus'
-          description: The status of the validation.
+          allOf:
+            - $ref: '#/components/schemas/ValidationStatus'
+            - description: The status of the validation.
         statusMessage:
-          $ref: '#/components/schemas/ValidationStatusMessage'
-          description: The status message.
+          allOf:
+            - $ref: '#/components/schemas/ValidationStatusMessage'
+            - description: The status message.
         latestValidationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The latest time that the validation was performed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The latest time that the validation was performed.
         appValidationOutput:
-          $ref: '#/components/schemas/AppValidationOutput'
-          description: The output from validating an application.
+          allOf:
+            - $ref: '#/components/schemas/AppValidationOutput'
+            - description: The output from validating an application.
         serverValidationOutput:
-          $ref: '#/components/schemas/ServerValidationOutput'
-          description: The output from validation an instance.
+          allOf:
+            - $ref: '#/components/schemas/ServerValidationOutput'
+            - description: The output from validation an instance.
       description: Contains validation output.
     VmId:
       type: string
@@ -3923,11 +4174,13 @@ components:
       type: object
       properties:
         vmManagerId:
-          $ref: '#/components/schemas/VmManagerId'
-          description: The ID of the VM manager.
+          allOf:
+            - $ref: '#/components/schemas/VmManagerId'
+            - description: The ID of the VM manager.
         vmId:
-          $ref: '#/components/schemas/VmId'
-          description: The ID of the VM.
+          allOf:
+            - $ref: '#/components/schemas/VmId'
+            - description: The ID of the VM.
       description: Represents a VM server location.
 security:
   - hmac: []

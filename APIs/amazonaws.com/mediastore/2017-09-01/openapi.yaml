@@ -1285,8 +1285,9 @@ components:
         - Container
       properties:
         Container:
-          $ref: '#/components/schemas/Container'
-          description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix time stamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Container'
+            - description: '<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN has the following format: arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt;. For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p> <p>ContainerName: The container name as specified in the request.</p> <p>CreationTime: Unix time stamp.</p> <p>Status: The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When an endpoint is available, the status changes to <code>ACTIVE</code>.</p> <p>The return value does not include the container''s endpoint. To make downstream requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>'
     CreateContainerInput:
       type: object
       required:
@@ -1294,11 +1295,13 @@ components:
       title: CreateContainerInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: 'The name for the container. The name must be from 1 to 255 characters. Container names must be unique to your AWS account within a specific region. As an example, you could create a container named <code>movies</code> in every region, as long as you don’t have an existing container with that name.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'An array of key:value pairs that you define. These values can be anything that you want. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'An array of key:value pairs that you define. These values can be anything that you want. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.'
     ContainerInUseException: {}
     LimitExceededException: {}
     InternalServerError: {}
@@ -1312,8 +1315,9 @@ components:
       title: DeleteContainerInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: 'The name of the container to delete. '
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: 'The name of the container to delete. '
     ContainerNotFoundException: {}
     DeleteContainerPolicyOutput:
       type: object
@@ -1325,8 +1329,9 @@ components:
       title: DeleteContainerPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that holds the policy.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that holds the policy.
     PolicyNotFoundException: {}
     DeleteCorsPolicyOutput:
       type: object
@@ -1338,8 +1343,9 @@ components:
       title: DeleteCorsPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container to remove the policy from.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container to remove the policy from.
     CorsPolicyNotFoundException: {}
     DeleteLifecyclePolicyOutput:
       type: object
@@ -1351,8 +1357,9 @@ components:
       title: DeleteLifecyclePolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that holds the object lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that holds the object lifecycle policy.
     DeleteMetricPolicyOutput:
       type: object
       properties: {}
@@ -1363,29 +1370,33 @@ components:
       title: DeleteMetricPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that is associated with the metric policy that you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that is associated with the metric policy that you want to delete.
     DescribeContainerOutput:
       type: object
       properties:
         Container:
-          $ref: '#/components/schemas/Container'
-          description: The name of the queried container.
+          allOf:
+            - $ref: '#/components/schemas/Container'
+            - description: The name of the queried container.
     DescribeContainerInput:
       type: object
       title: DescribeContainerInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container to query.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container to query.
     GetContainerPolicyOutput:
       type: object
       required:
         - Policy
       properties:
         Policy:
-          $ref: '#/components/schemas/ContainerPolicy'
-          description: The contents of the access policy.
+          allOf:
+            - $ref: '#/components/schemas/ContainerPolicy'
+            - description: The contents of the access policy.
     GetContainerPolicyInput:
       type: object
       required:
@@ -1393,16 +1404,18 @@ components:
       title: GetContainerPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: 'The name of the container. '
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: 'The name of the container. '
     GetCorsPolicyOutput:
       type: object
       required:
         - CorsPolicy
       properties:
         CorsPolicy:
-          $ref: '#/components/schemas/CorsPolicy'
-          description: The CORS policy assigned to the container.
+          allOf:
+            - $ref: '#/components/schemas/CorsPolicy'
+            - description: The CORS policy assigned to the container.
     GetCorsPolicyInput:
       type: object
       required:
@@ -1410,16 +1423,18 @@ components:
       title: GetCorsPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that the policy is assigned to.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that the policy is assigned to.
     GetLifecyclePolicyOutput:
       type: object
       required:
         - LifecyclePolicy
       properties:
         LifecyclePolicy:
-          $ref: '#/components/schemas/LifecyclePolicy'
-          description: The object lifecycle policy that is assigned to the container.
+          allOf:
+            - $ref: '#/components/schemas/LifecyclePolicy'
+            - description: The object lifecycle policy that is assigned to the container.
     GetLifecyclePolicyInput:
       type: object
       required:
@@ -1427,16 +1442,18 @@ components:
       title: GetLifecyclePolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that the object lifecycle policy is assigned to.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that the object lifecycle policy is assigned to.
     GetMetricPolicyOutput:
       type: object
       required:
         - MetricPolicy
       properties:
         MetricPolicy:
-          $ref: '#/components/schemas/MetricPolicy'
-          description: The metric policy that is associated with the specific container.
+          allOf:
+            - $ref: '#/components/schemas/MetricPolicy'
+            - description: The metric policy that is associated with the specific container.
     GetMetricPolicyInput:
       type: object
       required:
@@ -1444,35 +1461,41 @@ components:
       title: GetMetricPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that is associated with the metric policy.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that is associated with the metric policy.
     ListContainersOutput:
       type: object
       required:
         - Containers
       properties:
         Containers:
-          $ref: '#/components/schemas/ContainerList'
-          description: The names of the containers.
+          allOf:
+            - $ref: '#/components/schemas/ContainerList'
+            - description: The names of the containers.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>. This token is returned only if you included the <code>MaxResults</code> tag in the original command, and only if there are still containers to return. '
     ListContainersInput:
       type: object
       title: ListContainersInput
       properties:
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'Only if you used <code>MaxResults</code> in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'Only if you used <code>MaxResults</code> in the first command, enter the token (which was included in the previous response) to obtain the next set of containers. This token is included in a response only if there actually are more containers to list.'
         MaxResults:
-          $ref: '#/components/schemas/ContainerListLimit'
-          description: 'Enter the maximum number of containers in the response. Use from 1 to 255 characters. '
+          allOf:
+            - $ref: '#/components/schemas/ContainerListLimit'
+            - description: 'Enter the maximum number of containers in the response. Use from 1 to 255 characters. '
     ListTagsForResourceOutput:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'An array of key:value pairs that are assigned to the container.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'An array of key:value pairs that are assigned to the container.'
     ListTagsForResourceInput:
       type: object
       required:
@@ -1480,8 +1503,9 @@ components:
       title: ListTagsForResourceInput
       properties:
         Resource:
-          $ref: '#/components/schemas/ContainerARN'
-          description: The Amazon Resource Name (ARN) for the container.
+          allOf:
+            - $ref: '#/components/schemas/ContainerARN'
+            - description: The Amazon Resource Name (ARN) for the container.
     PutContainerPolicyOutput:
       type: object
       properties: {}
@@ -1493,11 +1517,13 @@ components:
       title: PutContainerPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container.
         Policy:
-          $ref: '#/components/schemas/ContainerPolicy'
-          description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ContainerPolicy'
+            - description: '<p>The contents of the policy, which includes the following: </p> <ul> <li> <p>One <code>Version</code> tag</p> </li> <li> <p>One <code>Statement</code> tag that contains the standard tags for the policy.</p> </li> </ul>'
     PutCorsPolicyOutput:
       type: object
       properties: {}
@@ -1509,11 +1535,13 @@ components:
       title: PutCorsPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that you want to assign the CORS policy to.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that you want to assign the CORS policy to.
         CorsPolicy:
-          $ref: '#/components/schemas/CorsPolicy'
-          description: 'The CORS policy to apply to the container. '
+          allOf:
+            - $ref: '#/components/schemas/CorsPolicy'
+            - description: 'The CORS policy to apply to the container. '
     PutLifecyclePolicyOutput:
       type: object
       properties: {}
@@ -1525,11 +1553,13 @@ components:
       title: PutLifecyclePolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that you want to assign the object lifecycle policy to.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that you want to assign the object lifecycle policy to.
         LifecyclePolicy:
-          $ref: '#/components/schemas/LifecyclePolicy'
-          description: The object lifecycle policy to apply to the container.
+          allOf:
+            - $ref: '#/components/schemas/LifecyclePolicy'
+            - description: The object lifecycle policy to apply to the container.
     PutMetricPolicyOutput:
       type: object
       properties: {}
@@ -1541,11 +1571,13 @@ components:
       title: PutMetricPolicyInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that you want to add the metric policy to.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that you want to add the metric policy to.
         MetricPolicy:
-          $ref: '#/components/schemas/MetricPolicy'
-          description: '<p>The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for. If you include rules in the policy, construct each rule with both of the following:</p> <ul> <li> <p>An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can''t have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.</p> </li> <li> <p>An object group name that allows you to refer to the object group. The name can''t have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/MetricPolicy'
+            - description: '<p>The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for. If you include rules in the policy, construct each rule with both of the following:</p> <ul> <li> <p>An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can''t have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.</p> </li> <li> <p>An object group name that allows you to refer to the object group. The name can''t have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).</p> </li> </ul>'
     StartAccessLoggingOutput:
       type: object
       properties: {}
@@ -1556,8 +1588,9 @@ components:
       title: StartAccessLoggingInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that you want to start access logging on.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that you want to start access logging on.
     StopAccessLoggingOutput:
       type: object
       properties: {}
@@ -1568,8 +1601,9 @@ components:
       title: StopAccessLoggingInput
       properties:
         ContainerName:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container that you want to stop access logging on.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container that you want to stop access logging on.
     TagResourceOutput:
       type: object
       properties: {}
@@ -1581,11 +1615,13 @@ components:
       title: TagResourceInput
       properties:
         Resource:
-          $ref: '#/components/schemas/ContainerARN'
-          description: 'The Amazon Resource Name (ARN) for the container. '
+          allOf:
+            - $ref: '#/components/schemas/ContainerARN'
+            - description: 'The Amazon Resource Name (ARN) for the container. '
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'An array of key:value pairs that you want to add to the container. You need to specify only the tags that you want to add or update. For example, suppose a container already has two tags (customer:CompanyA and priority:High). You want to change the priority tag and also add a third tag (type:Contract). For TagResource, you specify the following tags: priority:Medium, type:Contract. The result is that your container has three tags: customer:CompanyA, priority:Medium, and type:Contract.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'An array of key:value pairs that you want to add to the container. You need to specify only the tags that you want to add or update. For example, suppose a container already has two tags (customer:CompanyA and priority:High). You want to change the priority tag and also add a third tag (type:Contract). For TagResource, you specify the following tags: priority:Medium, type:Contract. The result is that your container has three tags: customer:CompanyA, priority:Medium, and type:Contract.'
     UntagResourceOutput:
       type: object
       properties: {}
@@ -1597,11 +1633,13 @@ components:
       title: UntagResourceInput
       properties:
         Resource:
-          $ref: '#/components/schemas/ContainerARN'
-          description: The Amazon Resource Name (ARN) for the container.
+          allOf:
+            - $ref: '#/components/schemas/ContainerARN'
+            - description: The Amazon Resource Name (ARN) for the container.
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: 'A comma-separated list of keys for tags that you want to remove from the container. For example, if your container has two tags (customer:CompanyA and priority:High) and you want to remove one of the tags (priority:High), you specify the key for the tag that you want to remove (priority).'
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: 'A comma-separated list of keys for tags that you want to remove from the container. For example, if your container has two tags (customer:CompanyA and priority:High) and you want to remove one of the tags (priority:High), you specify the key for the tag that you want to remove (priority).'
     Header:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
@@ -1669,23 +1707,29 @@ components:
       type: object
       properties:
         Endpoint:
-          $ref: '#/components/schemas/Endpoint'
-          description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: 'The DNS endpoint of the container. Use the endpoint to identify the specific container when sending requests to the data plane. The service assigns this value when the container is created. Once the value has been assigned, it does not change.'
         CreationTime:
-          $ref: '#/components/schemas/TimeStamp'
-          description: Unix timestamp.
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: Unix timestamp.
         ARN:
-          $ref: '#/components/schemas/ContainerARN'
-          description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
+          allOf:
+            - $ref: '#/components/schemas/ContainerARN'
+            - description: '<p>The Amazon Resource Name (ARN) of the container. The ARN has the following format:</p> <p>arn:aws:&lt;region&gt;:&lt;account that owns this container&gt;:container/&lt;name of container&gt; </p> <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>'
         Name:
-          $ref: '#/components/schemas/ContainerName'
-          description: The name of the container.
+          allOf:
+            - $ref: '#/components/schemas/ContainerName'
+            - description: The name of the container.
         Status:
-          $ref: '#/components/schemas/ContainerStatus'
-          description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ContainerStatus'
+            - description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
         AccessLoggingEnabled:
-          $ref: '#/components/schemas/ContainerAccessLoggingEnabled'
-          description: 'The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.'
+          allOf:
+            - $ref: '#/components/schemas/ContainerAccessLoggingEnabled'
+            - description: 'The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.'
       description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
     ContainerLevelMetrics:
       type: string
@@ -1712,20 +1756,25 @@ components:
         - AllowedHeaders
       properties:
         AllowedOrigins:
-          $ref: '#/components/schemas/AllowedOrigins'
-          description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
+          allOf:
+            - $ref: '#/components/schemas/AllowedOrigins'
+            - description: '<p>One or more response headers that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string value can include only one wildcard character (*), for example, http://*.example.com. Additionally, you can specify only one wildcard character to allow cross-origin access for all origins.</p>'
         AllowedMethods:
-          $ref: '#/components/schemas/AllowedMethods'
-          description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one <code>AllowedOrigins</code> element.</p>
+          allOf:
+            - $ref: '#/components/schemas/AllowedMethods'
+            - description: <p>Identifies an HTTP method that the origin that is specified in the rule is allowed to execute.</p> <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one <code>AllowedOrigins</code> element.</p>
         AllowedHeaders:
-          $ref: '#/components/schemas/AllowedHeaders'
-          description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
+          allOf:
+            - $ref: '#/components/schemas/AllowedHeaders'
+            - description: <p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request through the <code>Access-Control-Request-Headers</code> header. Each header name that is specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in the rule. Only the headers that were requested are sent back. </p> <p>This element can contain only one wildcard character (*).</p>
         MaxAgeSeconds:
-          $ref: '#/components/schemas/MaxAgeSeconds'
-          description: <p>The time in seconds that your browser caches the preflight response for the specified resource.</p> <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>
+          allOf:
+            - $ref: '#/components/schemas/MaxAgeSeconds'
+            - description: <p>The time in seconds that your browser caches the preflight response for the specified resource.</p> <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>
         ExposeHeaders:
-          $ref: '#/components/schemas/ExposeHeaders'
-          description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ExposeHeaders'
+            - description: '<p>One or more headers in the response that you want users to be able to access from their applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p> <p>This element is optional for each rule.</p>'
       description: 'A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.'
     CorsPolicy:
       type: array
@@ -1761,11 +1810,13 @@ components:
         - ContainerLevelMetrics
       properties:
         ContainerLevelMetrics:
-          $ref: '#/components/schemas/ContainerLevelMetrics'
-          description: A setting to enable or disable metrics at the container level.
+          allOf:
+            - $ref: '#/components/schemas/ContainerLevelMetrics'
+            - description: A setting to enable or disable metrics at the container level.
         MetricPolicyRules:
-          $ref: '#/components/schemas/MetricPolicyRules'
-          description: 'A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.'
+          allOf:
+            - $ref: '#/components/schemas/MetricPolicyRules'
+            - description: 'A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.'
       description: '<p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p> <p>To view examples of how to construct a metric policy for your use case, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html">Example Metric Policies</a>.</p>'
     PaginationToken:
       type: string
@@ -1795,11 +1846,13 @@ components:
         - ObjectGroupName
       properties:
         ObjectGroup:
-          $ref: '#/components/schemas/ObjectGroup'
-          description: A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.
+          allOf:
+            - $ref: '#/components/schemas/ObjectGroup'
+            - description: A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.
         ObjectGroupName:
-          $ref: '#/components/schemas/ObjectGroupName'
-          description: A name that allows you to refer to the object group.
+          allOf:
+            - $ref: '#/components/schemas/ObjectGroupName'
+            - description: A name that allows you to refer to the object group.
       description: 'A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href="https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas">request a quota increase</a> to allow up to 300 rules per policy.'
     TagKey:
       type: string
@@ -1817,11 +1870,13 @@ components:
         - Key
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: 'Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.'
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.'
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: 'Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.'
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: 'Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.'
       description: 'A collection of tags associated with a container. Each tag consists of a key:value pair, which can be anything you define. Typically, the tag key represents a category (such as "environment") and the tag value represents a specific value within that category (such as "test," "development," or "production"). You can add up to 50 tags to each container. For more information about tagging, including naming and usage conventions, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html">Tagging Resources in MediaStore</a>.'
     TagKeyList:
       type: array

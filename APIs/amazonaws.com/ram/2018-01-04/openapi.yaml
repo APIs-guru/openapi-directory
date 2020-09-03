@@ -2327,11 +2327,13 @@ components:
       type: object
       properties:
         resourceShareInvitation:
-          $ref: '#/components/schemas/ResourceShareInvitation'
-          description: Information about the invitation.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareInvitation'
+            - description: Information about the invitation.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     MalformedArnException: {}
     OperationNotPermittedException: {}
     ResourceShareInvitationArnNotFoundException: {}
@@ -2346,11 +2348,13 @@ components:
       type: object
       properties:
         resourceShareAssociations:
-          $ref: '#/components/schemas/ResourceShareAssociationList'
-          description: Information about the associations.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationList'
+            - description: Information about the associations.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     String:
       type: string
     UnknownResourceException: {}
@@ -2361,190 +2365,229 @@ components:
       type: object
       properties:
         returnValue:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the request succeeded.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the request succeeded.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     CreateResourceShareResponse:
       type: object
       properties:
         resourceShare:
-          $ref: '#/components/schemas/ResourceShare'
-          description: Information about the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShare'
+            - description: Information about the resource share.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     Tag:
       type: object
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: Information about a tag.
     TagPolicyViolationException: {}
     DeleteResourceShareResponse:
       type: object
       properties:
         returnValue:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the request succeeded.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the request succeeded.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     DisassociateResourceShareResponse:
       type: object
       properties:
         resourceShareAssociations:
-          $ref: '#/components/schemas/ResourceShareAssociationList'
-          description: Information about the associations.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationList'
+            - description: Information about the associations.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     DisassociateResourceSharePermissionResponse:
       type: object
       properties:
         returnValue:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the request succeeded.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the request succeeded.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     EnableSharingWithAwsOrganizationResponse:
       type: object
       properties:
         returnValue:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the request succeeded.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the request succeeded.
     GetPermissionResponse:
       type: object
       properties:
         permission:
-          $ref: '#/components/schemas/ResourceSharePermissionDetail'
-          description: Information about the permission.
+          allOf:
+            - $ref: '#/components/schemas/ResourceSharePermissionDetail'
+            - description: Information about the permission.
     GetResourcePoliciesResponse:
       type: object
       properties:
         policies:
-          $ref: '#/components/schemas/PolicyList'
-          description: 'A key policy document, in JSON format.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyList'
+            - description: 'A key policy document, in JSON format.'
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     InvalidNextTokenException: {}
     ResourceArnNotFoundException: {}
     GetResourceShareAssociationsResponse:
       type: object
       properties:
         resourceShareAssociations:
-          $ref: '#/components/schemas/ResourceShareAssociationList'
-          description: Information about the associations.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationList'
+            - description: Information about the associations.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     GetResourceShareInvitationsResponse:
       type: object
       properties:
         resourceShareInvitations:
-          $ref: '#/components/schemas/ResourceShareInvitationList'
-          description: Information about the invitations.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareInvitationList'
+            - description: Information about the invitations.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     InvalidMaxResultsException: {}
     GetResourceSharesResponse:
       type: object
       properties:
         resourceShares:
-          $ref: '#/components/schemas/ResourceShareList'
-          description: Information about the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareList'
+            - description: Information about the resource shares.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     TagFilter:
       type: object
       properties:
         tagKey:
-          $ref: '#/components/schemas/TagKey'
-          description: The tag key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag key.
         tagValues:
-          $ref: '#/components/schemas/TagValueList'
-          description: The tag values.
+          allOf:
+            - $ref: '#/components/schemas/TagValueList'
+            - description: The tag values.
       description: Used to filter information based on tags.
     ListPendingInvitationResourcesResponse:
       type: object
       properties:
         resources:
-          $ref: '#/components/schemas/ResourceList'
-          description: Information about the resources included the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceList'
+            - description: Information about the resources included the resource share.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     MissingRequiredParameterException: {}
     ListPermissionsResponse:
       type: object
       properties:
         permissions:
-          $ref: '#/components/schemas/ResourceSharePermissionList'
-          description: Information about the permissions.
+          allOf:
+            - $ref: '#/components/schemas/ResourceSharePermissionList'
+            - description: Information about the permissions.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListPrincipalsResponse:
       type: object
       properties:
         principals:
-          $ref: '#/components/schemas/PrincipalList'
-          description: The principals.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalList'
+            - description: The principals.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListResourceSharePermissionsResponse:
       type: object
       properties:
         permissions:
-          $ref: '#/components/schemas/ResourceSharePermissionList'
-          description: The permissions associated with the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceSharePermissionList'
+            - description: The permissions associated with the resource share.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListResourceTypesResponse:
       type: object
       properties:
         resourceTypes:
-          $ref: '#/components/schemas/ServiceNameAndResourceTypeList'
-          description: The shareable resource types supported by AWS RAM.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNameAndResourceTypeList'
+            - description: The shareable resource types supported by AWS RAM.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     ListResourcesResponse:
       type: object
       properties:
         resources:
-          $ref: '#/components/schemas/ResourceList'
-          description: Information about the resources.
+          allOf:
+            - $ref: '#/components/schemas/ResourceList'
+            - description: Information about the resources.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     InvalidResourceTypeException: {}
     PromoteResourceShareCreatedFromPolicyResponse:
       type: object
       properties:
         returnValue:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the request succeeded.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the request succeeded.
     RejectResourceShareInvitationResponse:
       type: object
       properties:
         resourceShareInvitation:
-          $ref: '#/components/schemas/ResourceShareInvitation'
-          description: Information about the invitation.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareInvitation'
+            - description: Information about the invitation.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     TagResourceResponse:
       type: object
       properties: {}
@@ -2558,11 +2601,13 @@ components:
       type: object
       properties:
         resourceShare:
-          $ref: '#/components/schemas/ResourceShare'
-          description: Information about the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShare'
+            - description: Information about the resource share.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     AcceptResourceShareInvitationRequest:
       type: object
       required:
@@ -2570,39 +2615,49 @@ components:
       title: AcceptResourceShareInvitationRequest
       properties:
         resourceShareInvitationArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the invitation.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ResourceShareInvitation:
       type: object
       properties:
         resourceShareInvitationArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the invitation.
         resourceShareName:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         senderAccountId:
-          $ref: '#/components/schemas/String'
-          description: The ID of the AWS account that sent the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the AWS account that sent the invitation.
         receiverAccountId:
-          $ref: '#/components/schemas/String'
-          description: The ID of the AWS account that received the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the AWS account that received the invitation.
         invitationTimestamp:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time when the invitation was sent.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the invitation was sent.
         status:
-          $ref: '#/components/schemas/ResourceShareInvitationStatus'
-          description: The status of the invitation.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareInvitationStatus'
+            - description: The status of the invitation.
         resourceShareAssociations:
-          deprecated: true
-          $ref: '#/components/schemas/ResourceShareAssociationList'
-          description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html"> ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationList'
+            - deprecated: true
+              description: 'To view the resources associated with a pending resource share invitation, use <a href="https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html"> ListPendingInvitationResources</a>.This member has been deprecated. Use ListPendingInvitationResources.'
       description: Describes an invitation to join a resource share.
     Boolean:
       type: boolean
@@ -2614,17 +2669,21 @@ components:
       title: AssociateResourceSharePermissionRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         permissionArn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the AWS RAM permission to associate with the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the AWS RAM permission to associate with the resource share.
         replace:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the permission should replace the permissions that are currently associated with the resource share. Use <code>true</code> to replace the current permissions. Use <code>false</code> to add the permission to the current permission.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ResourceArnList:
       type: array
       items:
@@ -2640,17 +2699,21 @@ components:
       title: AssociateResourceShareRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         resourceArns:
-          $ref: '#/components/schemas/ResourceArnList'
-          description: The Amazon Resource Names (ARN) of the resources.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnList'
+            - description: The Amazon Resource Names (ARN) of the resources.
         principals:
-          $ref: '#/components/schemas/PrincipalArnOrIdList'
-          description: The principals.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArnOrIdList'
+            - description: The principals.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ResourceShareAssociationList:
       type: array
       items:
@@ -2670,59 +2733,76 @@ components:
       title: CreateResourceShareRequest
       properties:
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         resourceArns:
-          $ref: '#/components/schemas/ResourceArnList'
-          description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnList'
+            - description: The Amazon Resource Names (ARN) of the resources to associate with the resource share.
         principals:
-          $ref: '#/components/schemas/PrincipalArnOrIdList'
-          description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArnOrIdList'
+            - description: 'The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags.
         allowExternalPrincipals:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         permissionArns:
-          $ref: '#/components/schemas/PermissionArnList'
-          description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
+          allOf:
+            - $ref: '#/components/schemas/PermissionArnList'
+            - description: 'The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.'
     ResourceShare:
       type: object
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         owningAccountId:
-          $ref: '#/components/schemas/String'
-          description: The ID of the AWS account that owns the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the AWS account that owns the resource share.
         allowExternalPrincipals:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
         status:
-          $ref: '#/components/schemas/ResourceShareStatus'
-          description: The status of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareStatus'
+            - description: The status of the resource share.
         statusMessage:
-          $ref: '#/components/schemas/String'
-          description: A message about the status of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message about the status of the resource share.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the resource share.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the resource share.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the resource share was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the resource share was created.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the resource share was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the resource share was last updated.
         featureSet:
-          $ref: '#/components/schemas/ResourceShareFeatureSet'
-          description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareFeatureSet'
+            - description: '<p>Indicates how the resource share was created. Possible values include:</p> <ul> <li> <p> <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM.</p> </li> <li> <p> <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p> </li> <li> <p> <code>STANDARD</code> - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM.</p> </li> </ul>'
       description: Describes a resource share.
     DateTime:
       type: string
@@ -2739,14 +2819,17 @@ components:
       title: DisassociateResourceSharePermissionRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         permissionArn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the permission to disassociate from the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the permission to disassociate from the resource share.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     DisassociateResourceShareRequest:
       type: object
       required:
@@ -2754,17 +2837,21 @@ components:
       title: DisassociateResourceShareRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         resourceArns:
-          $ref: '#/components/schemas/ResourceArnList'
-          description: The Amazon Resource Names (ARNs) of the resources.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnList'
+            - description: The Amazon Resource Names (ARNs) of the resources.
         principals:
-          $ref: '#/components/schemas/PrincipalArnOrIdList'
-          description: The principals.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArnOrIdList'
+            - description: The principals.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     EnableSharingWithAwsOrganizationRequest:
       type: object
       title: EnableSharingWithAwsOrganizationRequest
@@ -2778,38 +2865,48 @@ components:
       title: GetPermissionRequest
       properties:
         permissionArn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the permission.
         permissionVersion:
-          $ref: '#/components/schemas/Integer'
-          description: The identifier for the version of the permission.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The identifier for the version of the permission.
     ResourceSharePermissionDetail:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the permission.
         version:
-          $ref: '#/components/schemas/String'
-          description: The identifier for the version of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the version of the permission.
         defaultVersion:
-          $ref: '#/components/schemas/Boolean'
-          description: The identifier for the version of the permission that is set as the default version.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The identifier for the version of the permission that is set as the default version.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the permission.
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: The resource type to which the permission applies.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource type to which the permission applies.
         permission:
-          $ref: '#/components/schemas/String'
-          description: The permission's effect and actions in JSON format. The <code>effect</code> indicates whether the actions are allowed or denied. The <code>actions</code> list the API actions to which the principal is granted or denied access.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The permission's effect and actions in JSON format. The <code>effect</code> indicates whether the actions are allowed or denied. The <code>actions</code> list the API actions to which the principal is granted or denied access.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time when the permission was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the permission was created.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time when the permission was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the permission was last updated.
       description: Information about an AWS RAM permission.
     MaxResults:
       type: integer
@@ -2822,17 +2919,21 @@ components:
       title: GetResourcePoliciesRequest
       properties:
         resourceArns:
-          $ref: '#/components/schemas/ResourceArnList'
-          description: The Amazon Resource Names (ARN) of the resources.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnList'
+            - description: The Amazon Resource Names (ARN) of the resources.
         principal:
-          $ref: '#/components/schemas/String'
-          description: The principal.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The principal.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     PolicyList:
       type: array
       items:
@@ -2861,26 +2962,33 @@ components:
       title: GetResourceShareAssociationsRequest
       properties:
         associationType:
-          $ref: '#/components/schemas/ResourceShareAssociationType'
-          description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationType'
+            - description: The association type. Specify <code>PRINCIPAL</code> to list the principals that are associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources that are associated with the specified resource share.
         resourceShareArns:
-          $ref: '#/components/schemas/ResourceShareArnList'
-          description: The Amazon Resource Names (ARN) of the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareArnList'
+            - description: The Amazon Resource Names (ARN) of the resource shares.
         resourceArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.
         principal:
-          $ref: '#/components/schemas/String'
-          description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The principal. You cannot specify this parameter if the association type is <code>RESOURCE</code>.
         associationStatus:
-          $ref: '#/components/schemas/ResourceShareAssociationStatus'
-          description: The association status.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationStatus'
+            - description: The association status.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ResourceShareInvitationArnList:
       type: array
       items:
@@ -2890,17 +2998,21 @@ components:
       title: GetResourceShareInvitationsRequest
       properties:
         resourceShareInvitationArns:
-          $ref: '#/components/schemas/ResourceShareInvitationArnList'
-          description: The Amazon Resource Names (ARN) of the invitations.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareInvitationArnList'
+            - description: The Amazon Resource Names (ARN) of the invitations.
         resourceShareArns:
-          $ref: '#/components/schemas/ResourceShareArnList'
-          description: The Amazon Resource Names (ARN) of the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareArnList'
+            - description: The Amazon Resource Names (ARN) of the resource shares.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ResourceShareInvitationList:
       type: array
       items:
@@ -2929,26 +3041,33 @@ components:
       title: GetResourceSharesRequest
       properties:
         resourceShareArns:
-          $ref: '#/components/schemas/ResourceShareArnList'
-          description: The Amazon Resource Names (ARN) of the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareArnList'
+            - description: The Amazon Resource Names (ARN) of the resource shares.
         resourceShareStatus:
-          $ref: '#/components/schemas/ResourceShareStatus'
-          description: The status of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareStatus'
+            - description: The status of the resource share.
         resourceOwner:
-          $ref: '#/components/schemas/ResourceOwner'
-          description: The type of owner.
+          allOf:
+            - $ref: '#/components/schemas/ResourceOwner'
+            - description: The type of owner.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         tagFilters:
-          $ref: '#/components/schemas/TagFilters'
-          description: One or more tag filters.
+          allOf:
+            - $ref: '#/components/schemas/TagFilters'
+            - description: One or more tag filters.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ResourceShareList:
       type: array
       items:
@@ -2960,14 +3079,17 @@ components:
       title: ListPendingInvitationResourcesRequest
       properties:
         resourceShareInvitationArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the invitation.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ResourceList:
       type: array
       items:
@@ -2977,14 +3099,17 @@ components:
       title: ListPermissionsRequest
       properties:
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies the resource type for which to list permissions. For example, to list only permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.'
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ResourceSharePermissionList:
       type: array
       items:
@@ -2996,26 +3121,33 @@ components:
       title: ListPrincipalsRequest
       properties:
         resourceOwner:
-          $ref: '#/components/schemas/ResourceOwner'
-          description: The type of owner.
+          allOf:
+            - $ref: '#/components/schemas/ResourceOwner'
+            - description: The type of owner.
         resourceArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource.
         principals:
-          $ref: '#/components/schemas/PrincipalArnOrIdList'
-          description: The principals.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArnOrIdList'
+            - description: The principals.
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceShareArns:
-          $ref: '#/components/schemas/ResourceShareArnList'
-          description: The Amazon Resource Names (ARN) of the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareArnList'
+            - description: The Amazon Resource Names (ARN) of the resource shares.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     PrincipalList:
       type: array
       items:
@@ -3027,24 +3159,29 @@ components:
       title: ListResourceSharePermissionsRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ListResourceTypesRequest:
       type: object
       title: ListResourceTypesRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     ServiceNameAndResourceTypeList:
       type: array
       items:
@@ -3056,46 +3193,58 @@ components:
       title: ListResourcesRequest
       properties:
         resourceOwner:
-          $ref: '#/components/schemas/ResourceOwner'
-          description: The type of owner.
+          allOf:
+            - $ref: '#/components/schemas/ResourceOwner'
+            - description: The type of owner.
         principal:
-          $ref: '#/components/schemas/String'
-          description: The principal.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The principal.
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>'
         resourceArns:
-          $ref: '#/components/schemas/ResourceArnList'
-          description: The Amazon Resource Names (ARN) of the resources.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArnList'
+            - description: The Amazon Resource Names (ARN) of the resources.
         resourceShareArns:
-          $ref: '#/components/schemas/ResourceShareArnList'
-          description: The Amazon Resource Names (ARN) of the resource shares.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareArnList'
+            - description: The Amazon Resource Names (ARN) of the resource shares.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
     Policy:
       type: string
     Principal:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/String'
-          description: The ID of the principal.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the principal.
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the principal was associated with the resource share.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the principal was associated with the resource share.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the association was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the association was last updated.
         external:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
       description: Describes a principal for use with AWS Resource Access Manager.
     PromoteResourceShareCreatedFromPolicyRequest:
       type: object
@@ -3108,11 +3257,13 @@ components:
       title: RejectResourceShareInvitationRequest
       properties:
         resourceShareInvitationArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the invitation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the invitation.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ResourceStatus:
       type: string
       enum:
@@ -3125,29 +3276,37 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource.
         type:
-          $ref: '#/components/schemas/String'
-          description: The resource type.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource type.
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         resourceGroupArn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the resource group. This value is returned only if the resource is a resource group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the resource group. This value is returned only if the resource is a resource group.
         status:
-          $ref: '#/components/schemas/ResourceStatus'
-          description: The status of the resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceStatus'
+            - description: The status of the resource.
         statusMessage:
-          $ref: '#/components/schemas/String'
-          description: A message about the status of the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message about the status of the resource.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the resource was associated with the resource share.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the resource was associated with the resource share.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the association was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the association was last updated.
       description: Describes a resource associated with a resource share.
     ResourceShareFeatureSet:
       type: string
@@ -3159,32 +3318,41 @@ components:
       type: object
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         resourceShareName:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         associatedEntity:
-          $ref: '#/components/schemas/String'
-          description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.'
         associationType:
-          $ref: '#/components/schemas/ResourceShareAssociationType'
-          description: The association type.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationType'
+            - description: The association type.
         status:
-          $ref: '#/components/schemas/ResourceShareAssociationStatus'
-          description: The status of the association.
+          allOf:
+            - $ref: '#/components/schemas/ResourceShareAssociationStatus'
+            - description: The status of the association.
         statusMessage:
-          $ref: '#/components/schemas/String'
-          description: A message about the status of the association.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message about the status of the association.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the association was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the association was created.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the association was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the association was last updated.
         external:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
       description: Describes an association with a resource share.
     ResourceShareInvitationStatus:
       type: string
@@ -3197,39 +3365,49 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the permission.
         version:
-          $ref: '#/components/schemas/String'
-          description: The identifier for the version of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the version of the permission.
         defaultVersion:
-          $ref: '#/components/schemas/Boolean'
-          description: The identifier for the version of the permission that is set as the default version.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The identifier for the version of the permission that is set as the default version.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the permission.
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: The type of resource to which the permission applies.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of resource to which the permission applies.
         status:
-          $ref: '#/components/schemas/String'
-          description: The current status of the permission.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current status of the permission.
         creationTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time when the permission was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the permission was created.
         lastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time when the permission was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time when the permission was last updated.
       description: Information about a permission that is associated with a resource share.
     ServiceNameAndResourceType:
       type: object
       properties:
         resourceType:
-          $ref: '#/components/schemas/String'
-          description: The shareable resource types.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The shareable resource types.
         serviceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the AWS services to which the resources belong.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the AWS services to which the resources belong.
       description: Information about the shareable resource types and the AWS services to which they belong.
     TagValue:
       type: string
@@ -3249,11 +3427,13 @@ components:
       title: TagResourceRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags.
     UntagResourceRequest:
       type: object
       required:
@@ -3262,11 +3442,13 @@ components:
       title: UntagResourceRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         tagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The tag keys of the tags to remove.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys of the tags to remove.
     UpdateResourceShareRequest:
       type: object
       required:
@@ -3274,16 +3456,20 @@ components:
       title: UpdateResourceShareRequest
       properties:
         resourceShareArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource share.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the resource share.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the resource share.
         allowExternalPrincipals:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether principals outside your AWS organization can be associated with a resource share.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether principals outside your AWS organization can be associated with a resource share.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
 security:
   - hmac: []

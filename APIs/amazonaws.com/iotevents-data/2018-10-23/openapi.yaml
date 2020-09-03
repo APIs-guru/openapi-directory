@@ -436,8 +436,9 @@ components:
       type: object
       properties:
         BatchPutMessageErrorEntries:
-          $ref: '#/components/schemas/BatchPutMessageErrorEntries'
-          description: A list of any errors encountered when sending the messages.
+          allOf:
+            - $ref: '#/components/schemas/BatchPutMessageErrorEntries'
+            - description: A list of any errors encountered when sending the messages.
     Message:
       type: object
       required:
@@ -446,14 +447,17 @@ components:
         - payload
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: 'The ID to assign to the message. Within each batch sent, each <code>"messageId"</code> must be unique.'
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: 'The ID to assign to the message. Within each batch sent, each <code>"messageId"</code> must be unique.'
         inputName:
-          $ref: '#/components/schemas/InputName'
-          description: The name of the input into which the message payload is transformed.
+          allOf:
+            - $ref: '#/components/schemas/InputName'
+            - description: The name of the input into which the message payload is transformed.
         payload:
-          $ref: '#/components/schemas/Payload'
-          description: The payload of the message. This can be a JSON string or a Base-64-encoded string representing binary data (in which case you must decode it).
+          allOf:
+            - $ref: '#/components/schemas/Payload'
+            - description: The payload of the message. This can be a JSON string or a Base-64-encoded string representing binary data (in which case you must decode it).
       description: Information about a message.
     InvalidRequestException: {}
     InternalFailureException: {}
@@ -463,8 +467,9 @@ components:
       type: object
       properties:
         batchUpdateDetectorErrorEntries:
-          $ref: '#/components/schemas/BatchUpdateDetectorErrorEntries'
-          description: 'A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)'
+          allOf:
+            - $ref: '#/components/schemas/BatchUpdateDetectorErrorEntries'
+            - description: 'A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)'
     UpdateDetectorRequest:
       type: object
       required:
@@ -473,46 +478,56 @@ components:
         - state
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: The ID to assign to the detector update <code>"message"</code>. Each <code>"messageId"</code> must be unique within each batch sent.
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID to assign to the detector update <code>"message"</code>. Each <code>"messageId"</code> must be unique within each batch sent.
         detectorModelName:
-          $ref: '#/components/schemas/DetectorModelName'
-          description: The name of the detector model that created the detectors (instances).
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelName'
+            - description: The name of the detector model that created the detectors (instances).
         keyValue:
-          $ref: '#/components/schemas/KeyValue'
-          description: The value of the input key attribute (identifying the device or system) that caused the creation of this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/KeyValue'
+            - description: The value of the input key attribute (identifying the device or system) that caused the creation of this detector (instance).
         state:
-          $ref: '#/components/schemas/DetectorStateDefinition'
-          description: 'The new state, variable values, and timer settings of the detector (instance).'
+          allOf:
+            - $ref: '#/components/schemas/DetectorStateDefinition'
+            - description: 'The new state, variable values, and timer settings of the detector (instance).'
       description: Information used to update the detector (instance).
     DescribeDetectorResponse:
       type: object
       properties:
         detector:
-          $ref: '#/components/schemas/Detector'
-          description: Information about the detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/Detector'
+            - description: Information about the detector (instance).
     ResourceNotFoundException: {}
     ListDetectorsResponse:
       type: object
       properties:
         detectorSummaries:
-          $ref: '#/components/schemas/DetectorSummaries'
-          description: A list of summary information about the detectors (instances).
+          allOf:
+            - $ref: '#/components/schemas/DetectorSummaries'
+            - description: A list of summary information about the detectors (instances).
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'A token to retrieve the next set of results, or <code>null</code> if there are no additional results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token to retrieve the next set of results, or <code>null</code> if there are no additional results.'
     BatchPutMessageErrorEntry:
       type: object
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: The ID of the message that caused the error. (See the value corresponding to the <code>"messageId"</code> key in the <code>"message"</code> object.)
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID of the message that caused the error. (See the value corresponding to the <code>"messageId"</code> key in the <code>"message"</code> object.)
         errorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The code associated with the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The code associated with the error.
         errorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: More information about the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: More information about the error.
       description: Contains information about the errors encountered.
     BatchPutMessageErrorEntries:
       type: array
@@ -545,20 +560,24 @@ components:
       title: BatchPutMessageRequest
       properties:
         messages:
-          $ref: '#/components/schemas/Messages'
-          description: 'The list of messages to send. Each message has the following format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code> '
+          allOf:
+            - $ref: '#/components/schemas/Messages'
+            - description: 'The list of messages to send. Each message has the following format: <code>''{ "messageId": "string", "inputName": "string", "payload": "string"}''</code> '
     BatchUpdateDetectorErrorEntry:
       type: object
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: The <code>"messageId"</code> of the update request that caused the error. (The value of the <code>"messageId"</code> in the update request <code>"Detector"</code> object.)
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The <code>"messageId"</code> of the update request that caused the error. (The value of the <code>"messageId"</code> in the update request <code>"Detector"</code> object.)
         errorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The code of the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The code of the error.
         errorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: A message describing the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: A message describing the error.
       description: Information about the error that occured when attempting to update a detector.
     BatchUpdateDetectorErrorEntries:
       type: array
@@ -576,8 +595,9 @@ components:
       title: BatchUpdateDetectorRequest
       properties:
         detectors:
-          $ref: '#/components/schemas/UpdateDetectorRequests'
-          description: 'The list of detectors (instances) to update, along with the values to update.'
+          allOf:
+            - $ref: '#/components/schemas/UpdateDetectorRequests'
+            - description: 'The list of detectors (instances) to update, along with the values to update.'
     DetectorModelName:
       type: string
       pattern: '^[a-zA-Z0-9_-]+$'
@@ -596,23 +616,29 @@ components:
       type: object
       properties:
         detectorModelName:
-          $ref: '#/components/schemas/DetectorModelName'
-          description: The name of the detector model that created this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelName'
+            - description: The name of the detector model that created this detector (instance).
         keyValue:
-          $ref: '#/components/schemas/KeyValue'
-          description: The value of the key (identifying the device or system) that caused the creation of this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/KeyValue'
+            - description: The value of the key (identifying the device or system) that caused the creation of this detector (instance).
         detectorModelVersion:
-          $ref: '#/components/schemas/DetectorModelVersion'
-          description: The version of the detector model that created this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelVersion'
+            - description: The version of the detector model that created this detector (instance).
         state:
-          $ref: '#/components/schemas/DetectorState'
-          description: The current state of the detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorState'
+            - description: The current state of the detector (instance).
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the detector (instance) was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the detector (instance) was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the detector (instance) was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the detector (instance) was last updated.
       description: Information about the detector (instance).
     DetectorModelVersion:
       type: string
@@ -626,14 +652,17 @@ components:
         - timers
       properties:
         stateName:
-          $ref: '#/components/schemas/StateName'
-          description: The name of the state.
+          allOf:
+            - $ref: '#/components/schemas/StateName'
+            - description: The name of the state.
         variables:
-          $ref: '#/components/schemas/Variables'
-          description: The current values of the detector's variables.
+          allOf:
+            - $ref: '#/components/schemas/Variables'
+            - description: The current values of the detector's variables.
         timers:
-          $ref: '#/components/schemas/Timers'
-          description: The current state of the detector's timers.
+          allOf:
+            - $ref: '#/components/schemas/Timers'
+            - description: The current state of the detector's timers.
       description: Information about the current state of the detector instance.
     Timestamp:
       type: string
@@ -666,43 +695,53 @@ components:
         - timers
       properties:
         stateName:
-          $ref: '#/components/schemas/StateName'
-          description: The name of the new state of the detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/StateName'
+            - description: The name of the new state of the detector (instance).
         variables:
-          $ref: '#/components/schemas/VariableDefinitions'
-          description: The new values of the detector's variables. Any variable whose value isn't specified is cleared.
+          allOf:
+            - $ref: '#/components/schemas/VariableDefinitions'
+            - description: The new values of the detector's variables. Any variable whose value isn't specified is cleared.
         timers:
-          $ref: '#/components/schemas/TimerDefinitions'
-          description: 'The new values of the detector''s timers. Any timer whose value isn''t specified is cleared, and its timeout event won''t occur.'
+          allOf:
+            - $ref: '#/components/schemas/TimerDefinitions'
+            - description: 'The new values of the detector''s timers. Any timer whose value isn''t specified is cleared, and its timeout event won''t occur.'
       description: 'The new state, variable values, and timer settings of the detector (instance).'
     DetectorStateSummary:
       type: object
       properties:
         stateName:
-          $ref: '#/components/schemas/StateName'
-          description: The name of the state.
+          allOf:
+            - $ref: '#/components/schemas/StateName'
+            - description: The name of the state.
       description: Information about the detector state.
     DetectorSummary:
       type: object
       properties:
         detectorModelName:
-          $ref: '#/components/schemas/DetectorModelName'
-          description: The name of the detector model that created this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelName'
+            - description: The name of the detector model that created this detector (instance).
         keyValue:
-          $ref: '#/components/schemas/KeyValue'
-          description: The value of the key (identifying the device or system) that caused the creation of this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/KeyValue'
+            - description: The value of the key (identifying the device or system) that caused the creation of this detector (instance).
         detectorModelVersion:
-          $ref: '#/components/schemas/DetectorModelVersion'
-          description: The version of the detector model that created this detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorModelVersion'
+            - description: The version of the detector model that created this detector (instance).
         state:
-          $ref: '#/components/schemas/DetectorStateSummary'
-          description: The current state of the detector (instance).
+          allOf:
+            - $ref: '#/components/schemas/DetectorStateSummary'
+            - description: The current state of the detector (instance).
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the detector (instance) was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the detector (instance) was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the detector (instance) was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the detector (instance) was last updated.
       description: Information about the detector (instance).
     DetectorSummaries:
       type: array
@@ -738,11 +777,13 @@ components:
         - timestamp
       properties:
         name:
-          $ref: '#/components/schemas/TimerName'
-          description: The name of the timer.
+          allOf:
+            - $ref: '#/components/schemas/TimerName'
+            - description: The name of the timer.
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The number of seconds which have elapsed on the timer.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The number of seconds which have elapsed on the timer.
       description: The current state of a timer.
     TimerDefinition:
       type: object
@@ -751,11 +792,13 @@ components:
         - seconds
       properties:
         name:
-          $ref: '#/components/schemas/TimerName'
-          description: The name of the timer.
+          allOf:
+            - $ref: '#/components/schemas/TimerName'
+            - description: The name of the timer.
         seconds:
-          $ref: '#/components/schemas/Seconds'
-          description: The new setting of the timer (the number of seconds before the timer elapses).
+          allOf:
+            - $ref: '#/components/schemas/Seconds'
+            - description: The new setting of the timer (the number of seconds before the timer elapses).
       description: The new setting of a timer.
     VariableName:
       type: string
@@ -773,11 +816,13 @@ components:
         - value
       properties:
         name:
-          $ref: '#/components/schemas/VariableName'
-          description: The name of the variable.
+          allOf:
+            - $ref: '#/components/schemas/VariableName'
+            - description: The name of the variable.
         value:
-          $ref: '#/components/schemas/VariableValue'
-          description: The current value of the variable.
+          allOf:
+            - $ref: '#/components/schemas/VariableValue'
+            - description: The current value of the variable.
       description: The current state of the variable.
     VariableDefinition:
       type: object
@@ -786,11 +831,13 @@ components:
         - value
       properties:
         name:
-          $ref: '#/components/schemas/VariableName'
-          description: The name of the variable.
+          allOf:
+            - $ref: '#/components/schemas/VariableName'
+            - description: The name of the variable.
         value:
-          $ref: '#/components/schemas/VariableValue'
-          description: The new value of the variable.
+          allOf:
+            - $ref: '#/components/schemas/VariableValue'
+            - description: The new value of the variable.
       description: The new value of the variable.
 security:
   - hmac: []

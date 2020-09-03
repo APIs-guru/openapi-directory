@@ -318,21 +318,25 @@ paths:
                   type: object
                   properties:
                     serviceManagedS3:
-                      $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
-                      description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
+                        - description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
                     customerManagedS3:
-                      $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
-                      description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
+                      allOf:
+                        - $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
+                        - description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
                 retentionPeriod:
                   description: 'How long, in days, message data is kept.'
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
                 tags:
                   description: Metadata which can be used to manage the channel.
                   type: array
@@ -487,21 +491,25 @@ paths:
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
                 versioningConfiguration:
                   description: Information about the versioning of data set contents.
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedVersioning'
-                      description: 'If true, unlimited versions of data set contents will be kept.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedVersioning'
+                        - description: 'If true, unlimited versions of data set contents will be kept.'
                     maxVersions:
-                      $ref: '#/components/schemas/MaxVersions'
-                      description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/MaxVersions'
+                        - description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
                 tags:
                   description: Metadata which can be used to manage the data set.
                   type: array
@@ -805,21 +813,25 @@ paths:
                   type: object
                   properties:
                     serviceManagedS3:
-                      $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
-                      description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
+                        - description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
                     customerManagedS3:
-                      $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
-                      description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
+                      allOf:
+                        - $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
+                        - description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
                 retentionPeriod:
                   description: 'How long, in days, message data is kept.'
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
                 tags:
                   description: Metadata which can be used to manage the data store.
                   type: array
@@ -1188,21 +1200,25 @@ paths:
                   type: object
                   properties:
                     serviceManagedS3:
-                      $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
-                      description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
+                        - description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
                     customerManagedS3:
-                      $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
-                      description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
+                      allOf:
+                        - $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
+                        - description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
                 retentionPeriod:
                   description: 'How long, in days, message data is kept.'
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
   '/datasets/{datasetName}':
     delete:
       operationId: DeleteDataset
@@ -1389,21 +1405,25 @@ paths:
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
                 versioningConfiguration:
                   description: Information about the versioning of data set contents.
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedVersioning'
-                      description: 'If true, unlimited versions of data set contents will be kept.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedVersioning'
+                        - description: 'If true, unlimited versions of data set contents will be kept.'
                     maxVersions:
-                      $ref: '#/components/schemas/MaxVersions'
-                      description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/MaxVersions'
+                        - description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
   '/datastores/{datastoreName}':
     delete:
       operationId: DeleteDatastore
@@ -1573,21 +1593,25 @@ paths:
                   type: object
                   properties:
                     unlimited:
-                      $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-                      description: 'If true, message data is kept indefinitely.'
+                      allOf:
+                        - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+                        - description: 'If true, message data is kept indefinitely.'
                     numberOfDays:
-                      $ref: '#/components/schemas/RetentionPeriodInDays'
-                      description: The number of days that message data is kept. The "unlimited" parameter must be false.
+                      allOf:
+                        - $ref: '#/components/schemas/RetentionPeriodInDays'
+                        - description: The number of days that message data is kept. The "unlimited" parameter must be false.
                 datastoreStorage:
                   description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
                   type: object
                   properties:
                     serviceManagedS3:
-                      $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
-                      description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
+                        - description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
                     customerManagedS3:
-                      $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
-                      description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
+                      allOf:
+                        - $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
+                        - description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
   '/pipelines/{pipelineName}':
     delete:
       operationId: DeletePipeline
@@ -1856,14 +1880,17 @@ paths:
                   type: object
                   properties:
                     roleArn:
-                      $ref: '#/components/schemas/RoleArn'
-                      description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
+                      allOf:
+                        - $ref: '#/components/schemas/RoleArn'
+                        - description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
                     level:
-                      $ref: '#/components/schemas/LoggingLevel'
-                      description: 'The logging level. Currently, only "ERROR" is supported.'
+                      allOf:
+                        - $ref: '#/components/schemas/LoggingLevel'
+                        - description: 'The logging level. Currently, only "ERROR" is supported.'
                     enabled:
-                      $ref: '#/components/schemas/LoggingEnabled'
-                      description: 'If true, logging is enabled for AWS IoT Analytics.'
+                      allOf:
+                        - $ref: '#/components/schemas/LoggingEnabled'
+                        - description: 'If true, logging is enabled for AWS IoT Analytics.'
   '/datasets/{datasetName}/contents':
     get:
       operationId: ListDatasetContents
@@ -2137,35 +2164,45 @@ paths:
                   type: object
                   properties:
                     channel:
-                      $ref: '#/components/schemas/ChannelActivity'
-                      description: Determines the source of the messages to be processed.
+                      allOf:
+                        - $ref: '#/components/schemas/ChannelActivity'
+                        - description: Determines the source of the messages to be processed.
                     lambda:
-                      $ref: '#/components/schemas/LambdaActivity'
-                      description: Runs a Lambda function to modify the message.
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaActivity'
+                        - description: Runs a Lambda function to modify the message.
                     datastore:
-                      $ref: '#/components/schemas/DatastoreActivity'
-                      description: Specifies where to store the processed message data.
+                      allOf:
+                        - $ref: '#/components/schemas/DatastoreActivity'
+                        - description: Specifies where to store the processed message data.
                     addAttributes:
-                      $ref: '#/components/schemas/AddAttributesActivity'
-                      description: Adds other attributes based on existing attributes in the message.
+                      allOf:
+                        - $ref: '#/components/schemas/AddAttributesActivity'
+                        - description: Adds other attributes based on existing attributes in the message.
                     removeAttributes:
-                      $ref: '#/components/schemas/RemoveAttributesActivity'
-                      description: Removes attributes from a message.
+                      allOf:
+                        - $ref: '#/components/schemas/RemoveAttributesActivity'
+                        - description: Removes attributes from a message.
                     selectAttributes:
-                      $ref: '#/components/schemas/SelectAttributesActivity'
-                      description: 'Creates a new message using only the specified attributes from the original message. '
+                      allOf:
+                        - $ref: '#/components/schemas/SelectAttributesActivity'
+                        - description: 'Creates a new message using only the specified attributes from the original message. '
                     filter:
-                      $ref: '#/components/schemas/FilterActivity'
-                      description: Filters a message based on its attributes.
+                      allOf:
+                        - $ref: '#/components/schemas/FilterActivity'
+                        - description: Filters a message based on its attributes.
                     math:
-                      $ref: '#/components/schemas/MathActivity'
-                      description: Computes an arithmetic expression using the message's attributes and adds it to the message.
+                      allOf:
+                        - $ref: '#/components/schemas/MathActivity'
+                        - description: Computes an arithmetic expression using the message's attributes and adds it to the message.
                     deviceRegistryEnrich:
-                      $ref: '#/components/schemas/DeviceRegistryEnrichActivity'
-                      description: Adds data from the AWS IoT device registry to your message.
+                      allOf:
+                        - $ref: '#/components/schemas/DeviceRegistryEnrichActivity'
+                        - description: Adds data from the AWS IoT device registry to your message.
                     deviceShadowEnrich:
-                      $ref: '#/components/schemas/DeviceShadowEnrichActivity'
-                      description: Adds information from the AWS IoT Device Shadows service to a message.
+                      allOf:
+                        - $ref: '#/components/schemas/DeviceShadowEnrichActivity'
+                        - description: Adds information from the AWS IoT Device Shadows service to a message.
                 payloads:
                   description: The sample message payloads on which the pipeline activity is run.
                   type: array
@@ -2472,8 +2509,9 @@ components:
       type: object
       properties:
         batchPutMessageErrorEntries:
-          $ref: '#/components/schemas/BatchPutMessageErrorEntries'
-          description: A list of any errors encountered when sending the messages to the channel.
+          allOf:
+            - $ref: '#/components/schemas/BatchPutMessageErrorEntries'
+            - description: A list of any errors encountered when sending the messages to the channel.
     Message:
       type: object
       required:
@@ -2481,11 +2519,13 @@ components:
         - payload
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
         payload:
-          $ref: '#/components/schemas/MessagePayload'
-          description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
+          allOf:
+            - $ref: '#/components/schemas/MessagePayload'
+            - description: The payload of the message. This may be a JSON string or a Base64-encoded string representing binary data (in which case you must decode it by means of a pipeline activity).
       description: Information about a message.
     ResourceNotFoundException: {}
     InvalidRequestException: {}
@@ -2499,14 +2539,17 @@ components:
       type: object
       properties:
         channelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel.
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: The ARN of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: The ARN of the channel.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the channel.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the channel.'
     ServiceManagedChannelS3Storage:
       type: object
       properties: {}
@@ -2518,14 +2561,17 @@ components:
         - roleArn
       properties:
         bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the Amazon S3 bucket in which channel data is stored.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket in which channel data is stored.
         keyPrefix:
-          $ref: '#/components/schemas/S3KeyPrefix'
-          description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
+          allOf:
+            - $ref: '#/components/schemas/S3KeyPrefix'
+            - description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
       description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
     UnlimitedRetentionPeriod:
       type: boolean
@@ -2539,11 +2585,13 @@ components:
         - value
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The tag's key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag's key.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The tag's value.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag's value.
       description: A set of key/value pairs which are used to manage the resource.
     ResourceAlreadyExistsException: {}
     LimitExceededException: {}
@@ -2551,36 +2599,44 @@ components:
       type: object
       properties:
         datasetName:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set.
         datasetArn:
-          $ref: '#/components/schemas/DatasetArn'
-          description: The ARN of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The ARN of the data set.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, data set contents are kept for the data set.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, data set contents are kept for the data set.'
     DatasetAction:
       type: object
       properties:
         actionName:
-          $ref: '#/components/schemas/DatasetActionName'
-          description: The name of the data set action by which data set contents are automatically created.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActionName'
+            - description: The name of the data set action by which data set contents are automatically created.
         queryAction:
-          $ref: '#/components/schemas/SqlQueryDatasetAction'
-          description: An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
+          allOf:
+            - $ref: '#/components/schemas/SqlQueryDatasetAction'
+            - description: An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
         containerAction:
-          $ref: '#/components/schemas/ContainerDatasetAction'
-          description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
+          allOf:
+            - $ref: '#/components/schemas/ContainerDatasetAction'
+            - description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
       description: A "DatasetAction" object that specifies how data set contents are automatically created.
     DatasetTrigger:
       type: object
       properties:
         schedule:
-          $ref: '#/components/schemas/Schedule'
-          description: The "Schedule" when the trigger is initiated.
+          allOf:
+            - $ref: '#/components/schemas/Schedule'
+            - description: The "Schedule" when the trigger is initiated.
         dataset:
-          $ref: '#/components/schemas/TriggeringDataset'
-          description: The data set whose content creation triggers the creation of this data set's contents.
+          allOf:
+            - $ref: '#/components/schemas/TriggeringDataset'
+            - description: The data set whose content creation triggers the creation of this data set's contents.
       description: The "DatasetTrigger" that specifies when the data set is automatically updated.
     DatasetContentDeliveryRule:
       type: object
@@ -2588,11 +2644,13 @@ components:
         - destination
       properties:
         entryName:
-          $ref: '#/components/schemas/EntryName'
-          description: The name of the data set content delivery rules entry.
+          allOf:
+            - $ref: '#/components/schemas/EntryName'
+            - description: The name of the data set content delivery rules entry.
         destination:
-          $ref: '#/components/schemas/DatasetContentDeliveryDestination'
-          description: The destination to which data set contents are delivered.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentDeliveryDestination'
+            - description: The destination to which data set contents are delivered.
       description: When data set contents are created they are delivered to destination specified here.
     UnlimitedVersioning:
       type: boolean
@@ -2604,20 +2662,24 @@ components:
       type: object
       properties:
         versionId:
-          $ref: '#/components/schemas/DatasetContentVersion'
-          description: The version ID of the data set contents which are being created.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentVersion'
+            - description: The version ID of the data set contents which are being created.
     CreateDatastoreResponse:
       type: object
       properties:
         datastoreName:
-          $ref: '#/components/schemas/DatastoreName'
-          description: The name of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The name of the data store.
         datastoreArn:
-          $ref: '#/components/schemas/DatastoreArn'
-          description: The ARN of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreArn'
+            - description: The ARN of the data store.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the data store.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the data store.'
     ServiceManagedDatastoreS3Storage:
       type: object
       properties: {}
@@ -2629,157 +2691,193 @@ components:
         - roleArn
       properties:
         bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the Amazon S3 bucket in which data store data is stored.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket in which data store data is stored.
         keyPrefix:
-          $ref: '#/components/schemas/S3KeyPrefix'
-          description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
+          allOf:
+            - $ref: '#/components/schemas/S3KeyPrefix'
+            - description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
       description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
     CreatePipelineResponse:
       type: object
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline.
         pipelineArn:
-          $ref: '#/components/schemas/PipelineArn'
-          description: The ARN of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineArn'
+            - description: The ARN of the pipeline.
     PipelineActivity:
       type: object
       properties:
         channel:
-          $ref: '#/components/schemas/ChannelActivity'
-          description: Determines the source of the messages to be processed.
+          allOf:
+            - $ref: '#/components/schemas/ChannelActivity'
+            - description: Determines the source of the messages to be processed.
         lambda:
-          $ref: '#/components/schemas/LambdaActivity'
-          description: Runs a Lambda function to modify the message.
+          allOf:
+            - $ref: '#/components/schemas/LambdaActivity'
+            - description: Runs a Lambda function to modify the message.
         datastore:
-          $ref: '#/components/schemas/DatastoreActivity'
-          description: Specifies where to store the processed message data.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreActivity'
+            - description: Specifies where to store the processed message data.
         addAttributes:
-          $ref: '#/components/schemas/AddAttributesActivity'
-          description: Adds other attributes based on existing attributes in the message.
+          allOf:
+            - $ref: '#/components/schemas/AddAttributesActivity'
+            - description: Adds other attributes based on existing attributes in the message.
         removeAttributes:
-          $ref: '#/components/schemas/RemoveAttributesActivity'
-          description: Removes attributes from a message.
+          allOf:
+            - $ref: '#/components/schemas/RemoveAttributesActivity'
+            - description: Removes attributes from a message.
         selectAttributes:
-          $ref: '#/components/schemas/SelectAttributesActivity'
-          description: 'Creates a new message using only the specified attributes from the original message. '
+          allOf:
+            - $ref: '#/components/schemas/SelectAttributesActivity'
+            - description: 'Creates a new message using only the specified attributes from the original message. '
         filter:
-          $ref: '#/components/schemas/FilterActivity'
-          description: Filters a message based on its attributes.
+          allOf:
+            - $ref: '#/components/schemas/FilterActivity'
+            - description: Filters a message based on its attributes.
         math:
-          $ref: '#/components/schemas/MathActivity'
-          description: Computes an arithmetic expression using the message's attributes and adds it to the message.
+          allOf:
+            - $ref: '#/components/schemas/MathActivity'
+            - description: Computes an arithmetic expression using the message's attributes and adds it to the message.
         deviceRegistryEnrich:
-          $ref: '#/components/schemas/DeviceRegistryEnrichActivity'
-          description: Adds data from the AWS IoT device registry to your message.
+          allOf:
+            - $ref: '#/components/schemas/DeviceRegistryEnrichActivity'
+            - description: Adds data from the AWS IoT device registry to your message.
         deviceShadowEnrich:
-          $ref: '#/components/schemas/DeviceShadowEnrichActivity'
-          description: Adds information from the AWS IoT Device Shadows service to a message.
+          allOf:
+            - $ref: '#/components/schemas/DeviceShadowEnrichActivity'
+            - description: Adds information from the AWS IoT Device Shadows service to a message.
       description: An activity that performs a transformation on a message.
     DescribeChannelResponse:
       type: object
       properties:
         channel:
-          $ref: '#/components/schemas/Channel'
-          description: An object that contains information about the channel.
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: An object that contains information about the channel.
         statistics:
-          $ref: '#/components/schemas/ChannelStatistics'
-          description: Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
+          allOf:
+            - $ref: '#/components/schemas/ChannelStatistics'
+            - description: Statistics about the channel. Included if the 'includeStatistics' parameter is set to true in the request.
     DescribeDatasetResponse:
       type: object
       properties:
         dataset:
-          $ref: '#/components/schemas/Dataset'
-          description: An object that contains information about the data set.
+          allOf:
+            - $ref: '#/components/schemas/Dataset'
+            - description: An object that contains information about the data set.
     DescribeDatastoreResponse:
       type: object
       properties:
         datastore:
-          $ref: '#/components/schemas/Datastore'
-          description: Information about the data store.
+          allOf:
+            - $ref: '#/components/schemas/Datastore'
+            - description: Information about the data store.
         statistics:
-          $ref: '#/components/schemas/DatastoreStatistics'
-          description: Additional statistical information about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatistics'
+            - description: Additional statistical information about the data store. Included if the 'includeStatistics' parameter is set to true in the request.
     DescribeLoggingOptionsResponse:
       type: object
       properties:
         loggingOptions:
-          $ref: '#/components/schemas/LoggingOptions'
-          description: The current settings of the AWS IoT Analytics logging options.
+          allOf:
+            - $ref: '#/components/schemas/LoggingOptions'
+            - description: The current settings of the AWS IoT Analytics logging options.
     DescribePipelineResponse:
       type: object
       properties:
         pipeline:
-          $ref: '#/components/schemas/Pipeline'
-          description: A "Pipeline" object that contains information about the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/Pipeline'
+            - description: A "Pipeline" object that contains information about the pipeline.
     GetDatasetContentResponse:
       type: object
       properties:
         entries:
-          $ref: '#/components/schemas/DatasetEntries'
-          description: A list of "DatasetEntry" objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetEntries'
+            - description: A list of "DatasetEntry" objects.
         timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time when the request was made.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the request was made.
         status:
-          $ref: '#/components/schemas/DatasetContentStatus'
-          description: The status of the data set content.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentStatus'
+            - description: The status of the data set content.
     ListChannelsResponse:
       type: object
       properties:
         channelSummaries:
-          $ref: '#/components/schemas/ChannelSummaries'
-          description: A list of "ChannelSummary" objects.
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummaries'
+            - description: A list of "ChannelSummary" objects.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
     ListDatasetContentsResponse:
       type: object
       properties:
         datasetContentSummaries:
-          $ref: '#/components/schemas/DatasetContentSummaries'
-          description: Summary information about data set contents that have been created.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentSummaries'
+            - description: Summary information about data set contents that have been created.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
     ListDatasetsResponse:
       type: object
       properties:
         datasetSummaries:
-          $ref: '#/components/schemas/DatasetSummaries'
-          description: A list of "DatasetSummary" objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetSummaries'
+            - description: A list of "DatasetSummary" objects.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
     ListDatastoresResponse:
       type: object
       properties:
         datastoreSummaries:
-          $ref: '#/components/schemas/DatastoreSummaries'
-          description: A list of "DatastoreSummary" objects.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreSummaries'
+            - description: A list of "DatastoreSummary" objects.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
     ListPipelinesResponse:
       type: object
       properties:
         pipelineSummaries:
-          $ref: '#/components/schemas/PipelineSummaries'
-          description: A list of "PipelineSummary" objects.
+          allOf:
+            - $ref: '#/components/schemas/PipelineSummaries'
+            - description: A list of "PipelineSummary" objects.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token to retrieve the next set of results, or <code>null</code> if there are no more results.'
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags (metadata) which you have assigned to the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags (metadata) which you have assigned to the resource.
     RoleArn:
       type: string
       minLength: 20
@@ -2794,11 +2892,13 @@ components:
       type: object
       properties:
         payloads:
-          $ref: '#/components/schemas/MessagePayloads'
-          description: 'The enriched or transformed sample message payloads as base64-encoded strings. (The results of running the pipeline activity on each input sample message payload, encoded in base64.)'
+          allOf:
+            - $ref: '#/components/schemas/MessagePayloads'
+            - description: 'The enriched or transformed sample message payloads as base64-encoded strings. (The results of running the pipeline activity on each input sample message payload, encoded in base64.)'
         logResult:
-          $ref: '#/components/schemas/LogResult'
-          description: 'In case the pipeline activity fails, the log message that is generated.'
+          allOf:
+            - $ref: '#/components/schemas/LogResult'
+            - description: 'In case the pipeline activity fails, the log message that is generated.'
     ChannelActivity:
       type: object
       required:
@@ -2806,14 +2906,17 @@ components:
         - channelName
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'channel' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'channel' activity.
         channelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel from which the messages are processed.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel from which the messages are processed.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: The activity that determines the source of the messages to be processed.
     LambdaActivity:
       type: object
@@ -2823,17 +2926,21 @@ components:
         - batchSize
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'lambda' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'lambda' activity.
         lambdaName:
-          $ref: '#/components/schemas/LambdaName'
-          description: The name of the Lambda function that is run on the message.
+          allOf:
+            - $ref: '#/components/schemas/LambdaName'
+            - description: The name of the Lambda function that is run on the message.
         batchSize:
-          $ref: '#/components/schemas/ActivityBatchSize'
-          description: '<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ActivityBatchSize'
+            - description: '<p>The number of messages passed to the Lambda function for processing.</p> <p>The AWS Lambda function must be able to process all of these messages within five minutes, which is the maximum timeout duration for Lambda functions.</p>'
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that runs a Lambda function to modify the message.
     DatastoreActivity:
       type: object
@@ -2842,11 +2949,13 @@ components:
         - datastoreName
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'datastore' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'datastore' activity.
         datastoreName:
-          $ref: '#/components/schemas/DatastoreName'
-          description: The name of the data store where processed messages are stored.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The name of the data store where processed messages are stored.
       description: The 'datastore' activity that specifies where to store the processed data.
     AddAttributesActivity:
       type: object
@@ -2855,14 +2964,17 @@ components:
         - attributes
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'addAttributes' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'addAttributes' activity.
         attributes:
-          $ref: '#/components/schemas/AttributeNameMapping'
-          description: '<p>A list of 1-50 "AttributeNameMapping" objects that map an existing attribute to a new attribute.</p> <note> <p>The existing attributes remain in the message, so if you want to remove the originals, use "RemoveAttributeActivity".</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/AttributeNameMapping'
+            - description: '<p>A list of 1-50 "AttributeNameMapping" objects that map an existing attribute to a new attribute.</p> <note> <p>The existing attributes remain in the message, so if you want to remove the originals, use "RemoveAttributeActivity".</p> </note>'
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that adds other attributes based on existing attributes in the message.
     RemoveAttributesActivity:
       type: object
@@ -2871,14 +2983,17 @@ components:
         - attributes
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'removeAttributes' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'removeAttributes' activity.
         attributes:
-          $ref: '#/components/schemas/AttributeNames'
-          description: A list of 1-50 attributes to remove from the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeNames'
+            - description: A list of 1-50 attributes to remove from the message.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that removes attributes from a message.
     SelectAttributesActivity:
       type: object
@@ -2887,14 +3002,17 @@ components:
         - attributes
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'selectAttributes' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'selectAttributes' activity.
         attributes:
-          $ref: '#/components/schemas/AttributeNames'
-          description: A list of the attributes to select from the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeNames'
+            - description: A list of the attributes to select from the message.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: Creates a new message using only the specified attributes from the original message.
     FilterActivity:
       type: object
@@ -2903,14 +3021,17 @@ components:
         - filter
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'filter' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'filter' activity.
         filter:
-          $ref: '#/components/schemas/FilterExpression'
-          description: An expression that looks like a SQL WHERE clause that must return a Boolean value.
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: An expression that looks like a SQL WHERE clause that must return a Boolean value.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that filters a message based on its attributes.
     MathActivity:
       type: object
@@ -2920,17 +3041,21 @@ components:
         - math
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'math' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'math' activity.
         attribute:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute that contains the result of the math operation.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute that contains the result of the math operation.
         math:
-          $ref: '#/components/schemas/MathExpression'
-          description: An expression that uses one or more existing attributes and must return an integer value.
+          allOf:
+            - $ref: '#/components/schemas/MathExpression'
+            - description: An expression that uses one or more existing attributes and must return an integer value.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that computes an arithmetic expression using the message's attributes.
     DeviceRegistryEnrichActivity:
       type: object
@@ -2941,20 +3066,25 @@ components:
         - roleArn
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'deviceRegistryEnrich' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'deviceRegistryEnrich' activity.
         attribute:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute that is added to the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute that is added to the message.
         thingName:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the IoT device whose registry information is added to the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the IoT device whose registry information is added to the message.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role that allows access to the device's registry information.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role that allows access to the device's registry information.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that adds data from the AWS IoT device registry to your message.
     DeviceShadowEnrichActivity:
       type: object
@@ -2965,20 +3095,25 @@ components:
         - roleArn
       properties:
         name:
-          $ref: '#/components/schemas/ActivityName'
-          description: The name of the 'deviceShadowEnrich' activity.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The name of the 'deviceShadowEnrich' activity.
         attribute:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute that is added to the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute that is added to the message.
         thingName:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the IoT device whose shadow information is added to the message.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the IoT device whose shadow information is added to the message.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role that allows access to the device's shadow.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role that allows access to the device's shadow.
         next:
-          $ref: '#/components/schemas/ActivityName'
-          description: The next activity in the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActivityName'
+            - description: The next activity in the pipeline.
       description: An activity that adds information from the AWS IoT Device Shadows service to a message.
     MessagePayload:
       type: string
@@ -2986,14 +3121,16 @@ components:
       type: object
       properties:
         payloads:
-          $ref: '#/components/schemas/MessagePayloads'
-          description: The list of message samples. Each sample message is returned as a base64-encoded string.
+          allOf:
+            - $ref: '#/components/schemas/MessagePayloads'
+            - description: The list of message samples. Each sample message is returned as a base64-encoded string.
     StartPipelineReprocessingResponse:
       type: object
       properties:
         reprocessingId:
-          $ref: '#/components/schemas/ReprocessingId'
-          description: The ID of the pipeline reprocessing activity that was started.
+          allOf:
+            - $ref: '#/components/schemas/ReprocessingId'
+            - description: The ID of the pipeline reprocessing activity that was started.
     TagResourceResponse:
       type: object
       properties: {}
@@ -3032,14 +3169,17 @@ components:
       type: object
       properties:
         messageId:
-          $ref: '#/components/schemas/MessageId'
-          description: The ID of the message that caused the error. (See the value corresponding to the "messageId" key in the message object.)
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID of the message that caused the error. (See the value corresponding to the "messageId" key in the message object.)
         errorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The code associated with the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The code associated with the error.
         errorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: The message associated with the error.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The message associated with the error.
       description: Contains informations about errors.
     BatchPutMessageErrorEntries:
       type: array
@@ -3070,11 +3210,13 @@ components:
       title: BatchPutMessageRequest
       properties:
         channelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel where the messages are sent.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel where the messages are sent.
         messages:
-          $ref: '#/components/schemas/Messages'
-          description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
+          allOf:
+            - $ref: '#/components/schemas/Messages'
+            - description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
     BucketKeyExpression:
       type: string
       pattern: '^[a-zA-Z0-9!_.*''()/{}:-]*$'
@@ -3100,11 +3242,13 @@ components:
       type: object
       properties:
         serviceManagedS3:
-          $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
-          description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ServiceManagedChannelS3Storage'
+            - description: Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.
         customerManagedS3:
-          $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
-          description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedChannelS3Storage'
+            - description: 'Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the channel.'
       description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
     ChannelArn:
       type: string
@@ -3118,11 +3262,13 @@ components:
       type: object
       properties:
         unlimited:
-          $ref: '#/components/schemas/UnlimitedRetentionPeriod'
-          description: 'If true, message data is kept indefinitely.'
+          allOf:
+            - $ref: '#/components/schemas/UnlimitedRetentionPeriod'
+            - description: 'If true, message data is kept indefinitely.'
         numberOfDays:
-          $ref: '#/components/schemas/RetentionPeriodInDays'
-          description: The number of days that message data is kept. The "unlimited" parameter must be false.
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriodInDays'
+            - description: The number of days that message data is kept. The "unlimited" parameter must be false.
       description: 'How long, in days, message data is kept.'
     Timestamp:
       type: string
@@ -3131,43 +3277,53 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel.
         storage:
-          $ref: '#/components/schemas/ChannelStorage'
-          description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelStorage'
+            - description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: The ARN of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: The ARN of the channel.
         status:
-          $ref: '#/components/schemas/ChannelStatus'
-          description: The status of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelStatus'
+            - description: The status of the channel.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the channel.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the channel.'
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the channel was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the channel was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the channel was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the channel was last updated.
       description: 'A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.'
     EstimatedResourceSize:
       type: object
       properties:
         estimatedSizeInBytes:
-          $ref: '#/components/schemas/SizeInBytes'
-          description: The estimated size of the resource in bytes.
+          allOf:
+            - $ref: '#/components/schemas/SizeInBytes'
+            - description: The estimated size of the resource in bytes.
         estimatedOn:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time when the estimate of the size of the resource was made.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the estimate of the size of the resource was made.
       description: The estimated size of the resource.
     ChannelStatistics:
       type: object
       properties:
         size:
-          $ref: '#/components/schemas/EstimatedResourceSize'
-          description: The estimated size of the channel.
+          allOf:
+            - $ref: '#/components/schemas/EstimatedResourceSize'
+            - description: The estimated size of the channel.
       description: Statistics information about the channel.
     ServiceManagedChannelS3StorageSummary:
       type: object
@@ -3177,43 +3333,53 @@ components:
       type: object
       properties:
         bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the Amazon S3 bucket in which channel data is stored.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket in which channel data is stored.
         keyPrefix:
-          $ref: '#/components/schemas/S3KeyPrefix'
-          description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
+          allOf:
+            - $ref: '#/components/schemas/S3KeyPrefix'
+            - description: '[Optional] The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
       description: Used to store channel data in an S3 bucket that you manage.
     ChannelStorageSummary:
       type: object
       properties:
         serviceManagedS3:
-          $ref: '#/components/schemas/ServiceManagedChannelS3StorageSummary'
-          description: Used to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+          allOf:
+            - $ref: '#/components/schemas/ServiceManagedChannelS3StorageSummary'
+            - description: Used to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
         customerManagedS3:
-          $ref: '#/components/schemas/CustomerManagedChannelS3StorageSummary'
-          description: Used to store channel data in an S3 bucket that you manage.
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedChannelS3StorageSummary'
+            - description: Used to store channel data in an S3 bucket that you manage.
       description: Where channel data is stored.
     ChannelSummary:
       type: object
       properties:
         channelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel.
         channelStorage:
-          $ref: '#/components/schemas/ChannelStorageSummary'
-          description: Where channel data is stored.
+          allOf:
+            - $ref: '#/components/schemas/ChannelStorageSummary'
+            - description: Where channel data is stored.
         status:
-          $ref: '#/components/schemas/ChannelStatus'
-          description: The status of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelStatus'
+            - description: The status of the channel.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the channel was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the channel was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the channel was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the channel was updated.
       description: A summary of information about a channel.
     ChannelSummaries:
       type: array
@@ -3234,11 +3400,13 @@ components:
         - volumeSizeInGB
       properties:
         computeType:
-          $ref: '#/components/schemas/ComputeType'
-          description: 'The type of the compute resource used to execute the "containerAction". Possible values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).'
+          allOf:
+            - $ref: '#/components/schemas/ComputeType'
+            - description: 'The type of the compute resource used to execute the "containerAction". Possible values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).'
         volumeSizeInGB:
-          $ref: '#/components/schemas/VolumeSizeInGB'
-          description: 'The size (in GB) of the persistent storage available to the resource instance used to execute the "containerAction" (min: 1, max: 50).'
+          allOf:
+            - $ref: '#/components/schemas/VolumeSizeInGB'
+            - description: 'The size (in GB) of the persistent storage available to the resource instance used to execute the "containerAction" (min: 1, max: 50).'
       description: The configuration of the resource used to execute the "containerAction".
     Variables:
       type: array
@@ -3254,17 +3422,21 @@ components:
         - resourceConfiguration
       properties:
         image:
-          $ref: '#/components/schemas/Image'
-          description: The ARN of the Docker container stored in your account. The Docker container contains an application and needed support libraries and is used to generate data set contents.
+          allOf:
+            - $ref: '#/components/schemas/Image'
+            - description: The ARN of the Docker container stored in your account. The Docker container contains an application and needed support libraries and is used to generate data set contents.
         executionRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The ARN of the role which gives permission to the system to access needed resources in order to run the "containerAction". This includes, at minimum, permission to retrieve the data set contents which are the input to the containerized application.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The ARN of the role which gives permission to the system to access needed resources in order to run the "containerAction". This includes, at minimum, permission to retrieve the data set contents which are the input to the containerized application.'
         resourceConfiguration:
-          $ref: '#/components/schemas/ResourceConfiguration'
-          description: Configuration of the resource which executes the "containerAction".
+          allOf:
+            - $ref: '#/components/schemas/ResourceConfiguration'
+            - description: Configuration of the resource which executes the "containerAction".
         variables:
-          $ref: '#/components/schemas/Variables'
-          description: 'The values of variables used within the context of the execution of the containerized application (basically, parameters passed to the application). Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".'
+          allOf:
+            - $ref: '#/components/schemas/Variables'
+            - description: 'The values of variables used within the context of the execution of the containerized application (basically, parameters passed to the application). Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".'
       description: Information needed to run the "containerAction" to produce data set contents.
     TagList:
       type: array
@@ -3279,17 +3451,21 @@ components:
       title: CreateChannelRequest
       properties:
         channelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the channel.
         channelStorage:
-          $ref: '#/components/schemas/ChannelStorage'
-          description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelStorage'
+            - description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the channel. When "customerManagedS3" storage is selected, this parameter is ignored.'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Metadata which can be used to manage the channel.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Metadata which can be used to manage the channel.
     DatasetName:
       type: string
       pattern: '^[a-zA-Z0-9_]+$'
@@ -3325,11 +3501,13 @@ components:
       type: object
       properties:
         unlimited:
-          $ref: '#/components/schemas/UnlimitedVersioning'
-          description: 'If true, unlimited versions of data set contents will be kept.'
+          allOf:
+            - $ref: '#/components/schemas/UnlimitedVersioning'
+            - description: 'If true, unlimited versions of data set contents will be kept.'
         maxVersions:
-          $ref: '#/components/schemas/MaxVersions'
-          description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+          allOf:
+            - $ref: '#/components/schemas/MaxVersions'
+            - description: How many versions of data set contents will be kept. The "unlimited" parameter must be false.
       description: Information about the versioning of data set contents.
     CreateDatasetRequest:
       type: object
@@ -3339,26 +3517,33 @@ components:
       title: CreateDatasetRequest
       properties:
         datasetName:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set.
         actions:
-          $ref: '#/components/schemas/DatasetActions'
-          description: A list of actions that create the data set contents.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActions'
+            - description: A list of actions that create the data set contents.
         triggers:
-          $ref: '#/components/schemas/DatasetTriggers'
-          description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetTriggers'
+            - description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
         contentDeliveryRules:
-          $ref: '#/components/schemas/DatasetContentDeliveryRules'
-          description: When data set contents are created they are delivered to destinations specified here.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentDeliveryRules'
+            - description: When data set contents are created they are delivered to destinations specified here.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: '[Optional] How long, in days, versions of data set contents are kept for the data set. If not specified or set to null, versions of data set contents are retained for at most 90 days. The number of versions of data set contents retained is determined by the <code>versioningConfiguration</code> parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: '[Optional] How long, in days, versions of data set contents are kept for the data set. If not specified or set to null, versions of data set contents are retained for at most 90 days. The number of versions of data set contents retained is determined by the <code>versioningConfiguration</code> parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
         versioningConfiguration:
-          $ref: '#/components/schemas/VersioningConfiguration'
-          description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+          allOf:
+            - $ref: '#/components/schemas/VersioningConfiguration'
+            - description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Metadata which can be used to manage the data set.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Metadata which can be used to manage the data set.
     DatasetArn:
       type: string
     DatastoreName:
@@ -3370,11 +3555,13 @@ components:
       type: object
       properties:
         serviceManagedS3:
-          $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
-          description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
+          allOf:
+            - $ref: '#/components/schemas/ServiceManagedDatastoreS3Storage'
+            - description: Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
         customerManagedS3:
-          $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
-          description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
+            - description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the "retentionPeriod" parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
       description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
     CreateDatastoreRequest:
       type: object
@@ -3383,17 +3570,21 @@ components:
       title: CreateDatastoreRequest
       properties:
         datastoreName:
-          $ref: '#/components/schemas/DatastoreName'
-          description: The name of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The name of the data store.
         datastoreStorage:
-          $ref: '#/components/schemas/DatastoreStorage'
-          description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStorage'
+            - description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Metadata which can be used to manage the data store.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Metadata which can be used to manage the data store.
     DatastoreArn:
       type: string
     PipelineActivities:
@@ -3410,14 +3601,17 @@ components:
       title: CreatePipelineRequest
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline.
         pipelineActivities:
-          $ref: '#/components/schemas/PipelineActivities'
-          description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/PipelineActivities'
+            - description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Metadata which can be used to manage the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Metadata which can be used to manage the pipeline.
     PipelineArn:
       type: string
     S3KeyPrefix:
@@ -3429,14 +3623,17 @@ components:
       type: object
       properties:
         bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the Amazon S3 bucket in which data store data is stored.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket in which data store data is stored.
         keyPrefix:
-          $ref: '#/components/schemas/S3KeyPrefix'
-          description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
+          allOf:
+            - $ref: '#/components/schemas/S3KeyPrefix'
+            - description: '[Optional] The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a ''/''.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
       description: Used to store data store data in an S3 bucket that you manage.
     DatasetStatus:
       type: string
@@ -3448,35 +3645,45 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set.
         arn:
-          $ref: '#/components/schemas/DatasetArn'
-          description: The ARN of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The ARN of the data set.
         actions:
-          $ref: '#/components/schemas/DatasetActions'
-          description: The "DatasetAction" objects that automatically create the data set contents.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActions'
+            - description: The "DatasetAction" objects that automatically create the data set contents.
         triggers:
-          $ref: '#/components/schemas/DatasetTriggers'
-          description: The "DatasetTrigger" objects that specify when the data set is automatically updated.
+          allOf:
+            - $ref: '#/components/schemas/DatasetTriggers'
+            - description: The "DatasetTrigger" objects that specify when the data set is automatically updated.
         contentDeliveryRules:
-          $ref: '#/components/schemas/DatasetContentDeliveryRules'
-          description: When data set contents are created they are delivered to destinations specified here.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentDeliveryRules'
+            - description: When data set contents are created they are delivered to destinations specified here.
         status:
-          $ref: '#/components/schemas/DatasetStatus'
-          description: The status of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetStatus'
+            - description: The status of the data set.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the data set was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the data set was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the data set was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the data set was updated.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: '[Optional] How long, in days, message data is kept for the data set.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: '[Optional] How long, in days, message data is kept for the data set.'
         versioningConfiguration:
-          $ref: '#/components/schemas/VersioningConfiguration'
-          description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+          allOf:
+            - $ref: '#/components/schemas/VersioningConfiguration'
+            - description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
       description: Information about a data set.
     DatasetActionName:
       type: string
@@ -3489,21 +3696,25 @@ components:
         - sqlQuery
       properties:
         sqlQuery:
-          $ref: '#/components/schemas/SqlQuery'
-          description: A SQL query string.
+          allOf:
+            - $ref: '#/components/schemas/SqlQuery'
+            - description: A SQL query string.
         filters:
-          $ref: '#/components/schemas/QueryFilters'
-          description: Pre-filters applied to message data.
+          allOf:
+            - $ref: '#/components/schemas/QueryFilters'
+            - description: Pre-filters applied to message data.
       description: The SQL query to modify the message.
     DatasetActionSummary:
       type: object
       properties:
         actionName:
-          $ref: '#/components/schemas/DatasetActionName'
-          description: The name of the action which automatically creates the data set's contents.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActionName'
+            - description: The name of the action which automatically creates the data set's contents.
         actionType:
-          $ref: '#/components/schemas/DatasetActionType'
-          description: The type of action by which the data set's contents are automatically created.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActionType'
+            - description: The type of action by which the data set's contents are automatically created.
       description: Information about the action which automatically creates the data set's contents.
     DatasetActionSummaries:
       type: array
@@ -3523,11 +3734,13 @@ components:
         - roleArn
       properties:
         inputName:
-          $ref: '#/components/schemas/IotEventsInputName'
-          description: The name of the AWS IoT Events input to which data set contents are delivered.
+          allOf:
+            - $ref: '#/components/schemas/IotEventsInputName'
+            - description: The name of the AWS IoT Events input to which data set contents are delivered.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.
       description: Configuration information for delivery of data set contents to AWS IoT Events.
     S3DestinationConfiguration:
       type: object
@@ -3537,27 +3750,33 @@ components:
         - roleArn
       properties:
         bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the Amazon S3 bucket to which data set contents are delivered.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the Amazon S3 bucket to which data set contents are delivered.
         key:
-          $ref: '#/components/schemas/BucketKeyExpression'
-          description: 'The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). To produce a unique key, you can use "!{iotanalytics:scheduledTime}" to insert the time of the scheduled SQL query run, or "!{iotanalytics:versioned} to insert a unique hash identifying the data set, for example: "/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv".'
+          allOf:
+            - $ref: '#/components/schemas/BucketKeyExpression'
+            - description: 'The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). To produce a unique key, you can use "!{iotanalytics:scheduledTime}" to insert the time of the scheduled SQL query run, or "!{iotanalytics:versioned} to insert a unique hash identifying the data set, for example: "/DataSet/!{iotanalytics:scheduledTime}/!{iotanalytics:versioned}.csv".'
         glueConfiguration:
-          $ref: '#/components/schemas/GlueConfiguration'
-          description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
+          allOf:
+            - $ref: '#/components/schemas/GlueConfiguration'
+            - description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.
       description: Configuration information for delivery of data set contents to Amazon S3.
     DatasetContentDeliveryDestination:
       type: object
       properties:
         iotEventsDestinationConfiguration:
-          $ref: '#/components/schemas/IotEventsDestinationConfiguration'
-          description: Configuration information for delivery of data set contents to AWS IoT Events.
+          allOf:
+            - $ref: '#/components/schemas/IotEventsDestinationConfiguration'
+            - description: Configuration information for delivery of data set contents to AWS IoT Events.
         s3DestinationConfiguration:
-          $ref: '#/components/schemas/S3DestinationConfiguration'
-          description: Configuration information for delivery of data set contents to Amazon S3.
+          allOf:
+            - $ref: '#/components/schemas/S3DestinationConfiguration'
+            - description: Configuration information for delivery of data set contents to Amazon S3.
       description: The destination to which data set contents are delivered.
     EntryName:
       type: string
@@ -3573,30 +3792,37 @@ components:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/DatasetContentState'
-          description: 'The state of the data set contents. Can be one of "READY", "CREATING", "SUCCEEDED" or "FAILED".'
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentState'
+            - description: 'The state of the data set contents. Can be one of "READY", "CREATING", "SUCCEEDED" or "FAILED".'
         reason:
-          $ref: '#/components/schemas/Reason'
-          description: The reason the data set contents are in this state.
+          allOf:
+            - $ref: '#/components/schemas/Reason'
+            - description: The reason the data set contents are in this state.
       description: The state of the data set contents and the reason they are in this state.
     DatasetContentSummary:
       type: object
       properties:
         version:
-          $ref: '#/components/schemas/DatasetContentVersion'
-          description: The version of the data set contents.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentVersion'
+            - description: The version of the data set contents.
         status:
-          $ref: '#/components/schemas/DatasetContentStatus'
-          description: The status of the data set contents.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentStatus'
+            - description: The status of the data set contents.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The actual time the creation of the data set contents was started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The actual time the creation of the data set contents was started.
         scheduleTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the creation of the data set contents was scheduled to start.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the creation of the data set contents was scheduled to start.
         completionTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the dataset content status was updated to SUCCEEDED or FAILED.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the dataset content status was updated to SUCCEEDED or FAILED.
       description: Summary information about data set contents.
     DatasetContentSummaries:
       type: array
@@ -3608,18 +3834,21 @@ components:
         - datasetName
       properties:
         datasetName:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set whose latest contents are used as input to the notebook or application.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set whose latest contents are used as input to the notebook or application.
       description: The data set whose latest contents are used as input to the notebook or application.
     DatasetEntry:
       type: object
       properties:
         entryName:
-          $ref: '#/components/schemas/EntryName'
-          description: The name of the data set item.
+          allOf:
+            - $ref: '#/components/schemas/EntryName'
+            - description: The name of the data set item.
         dataURI:
-          $ref: '#/components/schemas/PresignedURI'
-          description: The pre-signed URI of the data set item.
+          allOf:
+            - $ref: '#/components/schemas/PresignedURI'
+            - description: The pre-signed URI of the data set item.
       description: The reference to a data set entry.
     DatasetEntries:
       type: array
@@ -3631,23 +3860,29 @@ components:
       type: object
       properties:
         datasetName:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set.
         status:
-          $ref: '#/components/schemas/DatasetStatus'
-          description: The status of the data set.
+          allOf:
+            - $ref: '#/components/schemas/DatasetStatus'
+            - description: The status of the data set.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the data set was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the data set was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the data set was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the data set was updated.
         triggers:
-          $ref: '#/components/schemas/DatasetTriggers'
-          description: A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
+          allOf:
+            - $ref: '#/components/schemas/DatasetTriggers'
+            - description: A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
         actions:
-          $ref: '#/components/schemas/DatasetActionSummaries'
-          description: A list of "DataActionSummary" objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActionSummaries'
+            - description: A list of "DataActionSummary" objects.
       description: A summary of information about a data set.
     DatasetSummaries:
       type: array
@@ -3657,8 +3892,9 @@ components:
       type: object
       properties:
         expression:
-          $ref: '#/components/schemas/ScheduleExpression'
-          description: 'The expression that defines when to trigger an update. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"> Schedule Expressions for Rules</a> in the Amazon CloudWatch Events User Guide.'
+          allOf:
+            - $ref: '#/components/schemas/ScheduleExpression'
+            - description: 'The expression that defines when to trigger an update. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html"> Schedule Expressions for Rules</a> in the Amazon CloudWatch Events User Guide.'
       description: The schedule for when to trigger an update.
     TriggeringDataset:
       type: object
@@ -3666,8 +3902,9 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/DatasetName'
-          description: The name of the data set whose content generation triggers the new data set content generation.
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the data set whose content generation triggers the new data set content generation.
       description: Information about the data set whose content generation triggers the new data set content generation.
     DatastoreStatus:
       type: string
@@ -3679,33 +3916,41 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/DatastoreName'
-          description: The name of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The name of the data store.
         storage:
-          $ref: '#/components/schemas/DatastoreStorage'
-          description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStorage'
+            - description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
         arn:
-          $ref: '#/components/schemas/DatastoreArn'
-          description: The ARN of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreArn'
+            - description: The ARN of the data store.
         status:
-          $ref: '#/components/schemas/DatastoreStatus'
-          description: '<p>The status of a data store:</p> <dl> <dt>CREATING</dt> <dd> <p>The data store is being created.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The data store has been created and can be used.</p> </dd> <dt>DELETING</dt> <dd> <p>The data store is being deleted.</p> </dd> </dl>'
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: '<p>The status of a data store:</p> <dl> <dt>CREATING</dt> <dd> <p>The data store is being created.</p> </dd> <dt>ACTIVE</dt> <dd> <p>The data store has been created and can be used.</p> </dd> <dt>DELETING</dt> <dd> <p>The data store is being deleted.</p> </dd> </dl>'
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the data store. When "customerManagedS3" storage is selected, this parameter is ignored.'
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the data store was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the data store was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the data store was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the data store was updated.
       description: Information about a data store.
     DatastoreStatistics:
       type: object
       properties:
         size:
-          $ref: '#/components/schemas/EstimatedResourceSize'
-          description: The estimated size of the data store.
+          allOf:
+            - $ref: '#/components/schemas/EstimatedResourceSize'
+            - description: The estimated size of the data store.
       description: Statistical information about the data store.
     ServiceManagedDatastoreS3StorageSummary:
       type: object
@@ -3715,30 +3960,37 @@ components:
       type: object
       properties:
         serviceManagedS3:
-          $ref: '#/components/schemas/ServiceManagedDatastoreS3StorageSummary'
-          description: Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+          allOf:
+            - $ref: '#/components/schemas/ServiceManagedDatastoreS3StorageSummary'
+            - description: Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
         customerManagedS3:
-          $ref: '#/components/schemas/CustomerManagedDatastoreS3StorageSummary'
-          description: Used to store data store data in an S3 bucket that you manage.
+          allOf:
+            - $ref: '#/components/schemas/CustomerManagedDatastoreS3StorageSummary'
+            - description: Used to store data store data in an S3 bucket that you manage.
       description: Where data store data is stored.
     DatastoreSummary:
       type: object
       properties:
         datastoreName:
-          $ref: '#/components/schemas/DatastoreName'
-          description: The name of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The name of the data store.
         datastoreStorage:
-          $ref: '#/components/schemas/DatastoreStorageSummary'
-          description: Where data store data is stored.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStorageSummary'
+            - description: Where data store data is stored.
         status:
-          $ref: '#/components/schemas/DatastoreStatus'
-          description: The status of the data store.
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: The status of the data store.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the data store was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the data store was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the data store was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the data store was updated.
       description: A summary of information about a data store.
     DatastoreSummaries:
       type: array
@@ -3775,11 +4027,13 @@ components:
         - timeExpression
       properties:
         offsetSeconds:
-          $ref: '#/components/schemas/OffsetSeconds'
-          description: 'The number of seconds of estimated "in flight" lag time of message data. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
+          allOf:
+            - $ref: '#/components/schemas/OffsetSeconds'
+            - description: 'The number of seconds of estimated "in flight" lag time of message data. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
         timeExpression:
-          $ref: '#/components/schemas/TimeExpression'
-          description: 'An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.'
+          allOf:
+            - $ref: '#/components/schemas/TimeExpression'
+            - description: 'An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.'
       description: Used to limit data to that which has arrived since the last execution of the action.
     IncludeStatisticsFlag:
       type: boolean
@@ -3807,14 +4061,17 @@ components:
         - enabled
       properties:
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
         level:
-          $ref: '#/components/schemas/LoggingLevel'
-          description: 'The logging level. Currently, only "ERROR" is supported.'
+          allOf:
+            - $ref: '#/components/schemas/LoggingLevel'
+            - description: 'The logging level. Currently, only "ERROR" is supported.'
         enabled:
-          $ref: '#/components/schemas/LoggingEnabled'
-          description: 'If true, logging is enabled for AWS IoT Analytics.'
+          allOf:
+            - $ref: '#/components/schemas/LoggingEnabled'
+            - description: 'If true, logging is enabled for AWS IoT Analytics.'
       description: Information about logging options.
     DescribePipelineRequest:
       type: object
@@ -3824,23 +4081,29 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline.
         arn:
-          $ref: '#/components/schemas/PipelineArn'
-          description: The ARN of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineArn'
+            - description: The ARN of the pipeline.
         activities:
-          $ref: '#/components/schemas/PipelineActivities'
-          description: The activities that perform transformations on the messages.
+          allOf:
+            - $ref: '#/components/schemas/PipelineActivities'
+            - description: The activities that perform transformations on the messages.
         reprocessingSummaries:
-          $ref: '#/components/schemas/ReprocessingSummaries'
-          description: A summary of information about the pipeline reprocessing.
+          allOf:
+            - $ref: '#/components/schemas/ReprocessingSummaries'
+            - description: A summary of information about the pipeline reprocessing.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the pipeline was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the pipeline was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time the pipeline was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time the pipeline was updated.
       description: Contains information about a pipeline.
     DoubleValue:
       type: number
@@ -3876,11 +4139,13 @@ components:
         - databaseName
       properties:
         tableName:
-          $ref: '#/components/schemas/GlueTableName'
-          description: 'The name of the table in your AWS Glue Data Catalog which is used to perform the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.)'
+          allOf:
+            - $ref: '#/components/schemas/GlueTableName'
+            - description: 'The name of the table in your AWS Glue Data Catalog which is used to perform the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.)'
         databaseName:
-          $ref: '#/components/schemas/GlueDatabaseName'
-          description: The name of the database in your AWS Glue Data Catalog in which the table is located. (An AWS Glue Data Catalog database contains Glue Data tables.)
+          allOf:
+            - $ref: '#/components/schemas/GlueDatabaseName'
+            - description: The name of the database in your AWS Glue Data Catalog in which the table is located. (An AWS Glue Data Catalog database contains Glue Data tables.)
       description: 'Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.'
     IotEventsInputName:
       type: string
@@ -3955,8 +4220,9 @@ components:
         - fileName
       properties:
         fileName:
-          $ref: '#/components/schemas/OutputFileName'
-          description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
+          allOf:
+            - $ref: '#/components/schemas/OutputFileName'
+            - description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
       description: The value of the variable as a structure that specifies an output file URI.
     ReprocessingSummaries:
       type: array
@@ -3966,17 +4232,21 @@ components:
       type: object
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline.
         reprocessingSummaries:
-          $ref: '#/components/schemas/ReprocessingSummaries'
-          description: A summary of information about the pipeline reprocessing.
+          allOf:
+            - $ref: '#/components/schemas/ReprocessingSummaries'
+            - description: A summary of information about the pipeline reprocessing.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the pipeline was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the pipeline was created.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the pipeline was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the pipeline was last updated.
       description: A summary of information about a pipeline.
     PutLoggingOptionsRequest:
       type: object
@@ -3985,14 +4255,16 @@ components:
       title: PutLoggingOptionsRequest
       properties:
         loggingOptions:
-          $ref: '#/components/schemas/LoggingOptions'
-          description: The new values of the AWS IoT Analytics logging options.
+          allOf:
+            - $ref: '#/components/schemas/LoggingOptions'
+            - description: The new values of the AWS IoT Analytics logging options.
     QueryFilter:
       type: object
       properties:
         deltaTime:
-          $ref: '#/components/schemas/DeltaTime'
-          description: Used to limit data to that which has arrived since the last execution of the action.
+          allOf:
+            - $ref: '#/components/schemas/DeltaTime'
+            - description: Used to limit data to that which has arrived since the last execution of the action.
       description: 'Information which is used to filter message data, to segregate it according to the time frame in which it arrives.'
     QueryFilters:
       type: array
@@ -4011,14 +4283,17 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/ReprocessingId'
-          description: The 'reprocessingId' returned by "StartPipelineReprocessing".
+          allOf:
+            - $ref: '#/components/schemas/ReprocessingId'
+            - description: The 'reprocessingId' returned by "StartPipelineReprocessing".
         status:
-          $ref: '#/components/schemas/ReprocessingStatus'
-          description: The status of the pipeline reprocessing.
+          allOf:
+            - $ref: '#/components/schemas/ReprocessingStatus'
+            - description: The status of the pipeline reprocessing.
         creationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time the pipeline reprocessing was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the pipeline reprocessing was created.
       description: Information about pipeline reprocessing.
     VolumeSizeInGB:
       type: integer
@@ -4032,11 +4307,13 @@ components:
       title: RunPipelineActivityRequest
       properties:
         pipelineActivity:
-          $ref: '#/components/schemas/PipelineActivity'
-          description: 'The pipeline activity that is run. This must not be a ''channel'' activity or a ''datastore'' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a ''lambda'' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.'
+          allOf:
+            - $ref: '#/components/schemas/PipelineActivity'
+            - description: 'The pipeline activity that is run. This must not be a ''channel'' activity or a ''datastore'' activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a ''lambda'' activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.'
         payloads:
-          $ref: '#/components/schemas/MessagePayloads'
-          description: The sample message payloads on which the pipeline activity is run.
+          allOf:
+            - $ref: '#/components/schemas/MessagePayloads'
+            - description: The sample message payloads on which the pipeline activity is run.
     StartTime:
       type: string
       format: date-time
@@ -4053,11 +4330,13 @@ components:
       title: StartPipelineReprocessingRequest
       properties:
         startTime:
-          $ref: '#/components/schemas/StartTime'
-          description: The start time (inclusive) of raw message data that is reprocessed.
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: The start time (inclusive) of raw message data that is reprocessed.
         endTime:
-          $ref: '#/components/schemas/EndTime'
-          description: The end time (exclusive) of raw message data that is reprocessed.
+          allOf:
+            - $ref: '#/components/schemas/EndTime'
+            - description: The end time (exclusive) of raw message data that is reprocessed.
     StringValue:
       type: string
       minLength: 0
@@ -4079,8 +4358,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The new or modified tags for the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The new or modified tags for the resource.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -4090,11 +4370,13 @@ components:
       title: UpdateChannelRequest
       properties:
         channelStorage:
-          $ref: '#/components/schemas/ChannelStorage'
-          description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelStorage'
+            - description: 'Where channel data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after creation of the channel.'
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel''s S3 storage is customer-managed.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel''s S3 storage is customer-managed.'
     UpdateDatasetRequest:
       type: object
       required:
@@ -4102,30 +4384,37 @@ components:
       title: UpdateDatasetRequest
       properties:
         actions:
-          $ref: '#/components/schemas/DatasetActions'
-          description: A list of "DatasetAction" objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetActions'
+            - description: A list of "DatasetAction" objects.
         triggers:
-          $ref: '#/components/schemas/DatasetTriggers'
-          description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
+          allOf:
+            - $ref: '#/components/schemas/DatasetTriggers'
+            - description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
         contentDeliveryRules:
-          $ref: '#/components/schemas/DatasetContentDeliveryRules'
-          description: When data set contents are created they are delivered to destinations specified here.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentDeliveryRules'
+            - description: When data set contents are created they are delivered to destinations specified here.
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, data set contents are kept for the data set.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, data set contents are kept for the data set.'
         versioningConfiguration:
-          $ref: '#/components/schemas/VersioningConfiguration'
-          description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
+          allOf:
+            - $ref: '#/components/schemas/VersioningConfiguration'
+            - description: '[Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)'
     UpdateDatastoreRequest:
       type: object
       title: UpdateDatastoreRequest
       properties:
         retentionPeriod:
-          $ref: '#/components/schemas/RetentionPeriod'
-          description: 'How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store''s S3 storage is customer-managed.'
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store''s S3 storage is customer-managed.'
         datastoreStorage:
-          $ref: '#/components/schemas/DatastoreStorage'
-          description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStorage'
+            - description: 'Where data store data is stored. You may choose one of "serviceManagedS3" or "customerManagedS3" storage. If not specified, the default is "serviceManagedS3". This cannot be changed after the data store is created.'
     UpdatePipelineRequest:
       type: object
       required:
@@ -4133,8 +4422,9 @@ components:
       title: UpdatePipelineRequest
       properties:
         pipelineActivities:
-          $ref: '#/components/schemas/PipelineActivities'
-          description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/PipelineActivities'
+            - description: '<p>A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <b>PipelineActivity</b> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity, for example:</p> <p> <code>pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ]</code> </p>'
     VariableName:
       type: string
       minLength: 1
@@ -4145,20 +4435,25 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/VariableName'
-          description: The name of the variable.
+          allOf:
+            - $ref: '#/components/schemas/VariableName'
+            - description: The name of the variable.
         stringValue:
-          $ref: '#/components/schemas/StringValue'
-          description: The value of the variable as a string.
+          allOf:
+            - $ref: '#/components/schemas/StringValue'
+            - description: The value of the variable as a string.
         doubleValue:
-          $ref: '#/components/schemas/DoubleValue'
-          description: The value of the variable as a double (numeric).
+          allOf:
+            - $ref: '#/components/schemas/DoubleValue'
+            - description: The value of the variable as a double (numeric).
         datasetContentVersionValue:
-          $ref: '#/components/schemas/DatasetContentVersionValue'
-          description: The value of the variable as a structure that specifies a data set content version.
+          allOf:
+            - $ref: '#/components/schemas/DatasetContentVersionValue'
+            - description: The value of the variable as a structure that specifies a data set content version.
         outputFileUriValue:
-          $ref: '#/components/schemas/OutputFileUriValue'
-          description: The value of the variable as a structure that specifies an output file URI.
+          allOf:
+            - $ref: '#/components/schemas/OutputFileUriValue'
+            - description: The value of the variable as a structure that specifies an output file URI.
       description: 'An instance of a variable to be passed to the "containerAction" execution. Each variable must have a name and a value given by one of "stringValue", "datasetContentVersionValue", or "outputFileUriValue".'
 security:
   - hmac: []

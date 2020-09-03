@@ -211,11 +211,13 @@ paths:
                   type: object
                   properties:
                     connectorProfileProperties:
-                      $ref: '#/components/schemas/ConnectorProfileProperties'
-                      description: ' The connector-specific properties of the profile configuration. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileProperties'
+                        - description: ' The connector-specific properties of the profile configuration. '
                     connectorProfileCredentials:
-                      $ref: '#/components/schemas/ConnectorProfileCredentials'
-                      description: ' The connector-specific credentials required by each connector. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileCredentials'
+                        - description: ' The connector-specific credentials required by each connector. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -312,24 +314,29 @@ paths:
                   type: object
                   properties:
                     triggerType:
-                      $ref: '#/components/schemas/TriggerType'
-                      description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
+                      allOf:
+                        - $ref: '#/components/schemas/TriggerType'
+                        - description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
                     triggerProperties:
-                      $ref: '#/components/schemas/TriggerProperties'
-                      description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
+                      allOf:
+                        - $ref: '#/components/schemas/TriggerProperties'
+                        - description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
                 sourceFlowConfig:
                   description: ' Contains information about the configuration of the source connector used in the flow. '
                   type: object
                   properties:
                     connectorType:
-                      $ref: '#/components/schemas/ConnectorType'
-                      description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorType'
+                        - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
                     connectorProfileName:
-                      $ref: '#/components/schemas/ConnectorProfileName'
-                      description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileName'
+                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
                     sourceConnectorProperties:
-                      $ref: '#/components/schemas/SourceConnectorProperties'
-                      description: ' Specifies the information that is required to query a particular source connector. '
+                      allOf:
+                        - $ref: '#/components/schemas/SourceConnectorProperties'
+                        - description: ' Specifies the information that is required to query a particular source connector. '
                 destinationFlowConfigList:
                   description: ' The configuration that controls how Amazon AppFlow places data in the destination connector. '
                   type: array
@@ -1310,11 +1317,13 @@ paths:
                   type: object
                   properties:
                     connectorProfileProperties:
-                      $ref: '#/components/schemas/ConnectorProfileProperties'
-                      description: ' The connector-specific properties of the profile configuration. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileProperties'
+                        - description: ' The connector-specific properties of the profile configuration. '
                     connectorProfileCredentials:
-                      $ref: '#/components/schemas/ConnectorProfileCredentials'
-                      description: ' The connector-specific credentials required by each connector. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileCredentials'
+                        - description: ' The connector-specific credentials required by each connector. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1404,24 +1413,29 @@ paths:
                   type: object
                   properties:
                     triggerType:
-                      $ref: '#/components/schemas/TriggerType'
-                      description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
+                      allOf:
+                        - $ref: '#/components/schemas/TriggerType'
+                        - description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
                     triggerProperties:
-                      $ref: '#/components/schemas/TriggerProperties'
-                      description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
+                      allOf:
+                        - $ref: '#/components/schemas/TriggerProperties'
+                        - description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
                 sourceFlowConfig:
                   description: ' Contains information about the configuration of the source connector used in the flow. '
                   type: object
                   properties:
                     connectorType:
-                      $ref: '#/components/schemas/ConnectorType'
-                      description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorType'
+                        - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
                     connectorProfileName:
-                      $ref: '#/components/schemas/ConnectorProfileName'
-                      description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+                      allOf:
+                        - $ref: '#/components/schemas/ConnectorProfileName'
+                        - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
                     sourceConnectorProperties:
-                      $ref: '#/components/schemas/SourceConnectorProperties'
-                      description: ' Specifies the information that is required to query a particular source connector. '
+                      allOf:
+                        - $ref: '#/components/schemas/SourceConnectorProperties'
+                        - description: ' Specifies the information that is required to query a particular source connector. '
                 destinationFlowConfigList:
                   description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
                   type: array
@@ -1496,105 +1510,136 @@ components:
       type: object
       properties:
         connectorProfileArn:
-          $ref: '#/components/schemas/ConnectorProfileArn'
-          description: ' The Amazon Resource Name (ARN) of the connector profile. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileArn'
+            - description: ' The Amazon Resource Name (ARN) of the connector profile. '
     ConnectorProfileProperties:
       type: object
       properties:
         Amplitude:
-          $ref: '#/components/schemas/AmplitudeConnectorProfileProperties'
-          description: ' The connector-specific properties required by Amplitude. '
+          allOf:
+            - $ref: '#/components/schemas/AmplitudeConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Amplitude. '
         Datadog:
-          $ref: '#/components/schemas/DatadogConnectorProfileProperties'
-          description: ' The connector-specific properties required by Datadog. '
+          allOf:
+            - $ref: '#/components/schemas/DatadogConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Datadog. '
         Dynatrace:
-          $ref: '#/components/schemas/DynatraceConnectorProfileProperties'
-          description: ' The connector-specific properties required by Dynatrace. '
+          allOf:
+            - $ref: '#/components/schemas/DynatraceConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Dynatrace. '
         GoogleAnalytics:
-          $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileProperties'
-          description: ' The connector-specific properties required Google Analytics. '
+          allOf:
+            - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileProperties'
+            - description: ' The connector-specific properties required Google Analytics. '
         InforNexus:
-          $ref: '#/components/schemas/InforNexusConnectorProfileProperties'
-          description: ' The connector-specific properties required by Infor Nexus. '
+          allOf:
+            - $ref: '#/components/schemas/InforNexusConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Infor Nexus. '
         Marketo:
-          $ref: '#/components/schemas/MarketoConnectorProfileProperties'
-          description: ' The connector-specific properties required by Marketo. '
+          allOf:
+            - $ref: '#/components/schemas/MarketoConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Marketo. '
         Redshift:
-          $ref: '#/components/schemas/RedshiftConnectorProfileProperties'
-          description: ' The connector-specific properties required by Amazon Redshift. '
+          allOf:
+            - $ref: '#/components/schemas/RedshiftConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Amazon Redshift. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceConnectorProfileProperties'
-          description: ' The connector-specific properties required by Salesforce. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Salesforce. '
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowConnectorProfileProperties'
-          description: ' The connector-specific properties required by serviceNow. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowConnectorProfileProperties'
+            - description: ' The connector-specific properties required by serviceNow. '
         Singular:
-          $ref: '#/components/schemas/SingularConnectorProfileProperties'
-          description: ' The connector-specific properties required by Singular. '
+          allOf:
+            - $ref: '#/components/schemas/SingularConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Singular. '
         Slack:
-          $ref: '#/components/schemas/SlackConnectorProfileProperties'
-          description: ' The connector-specific properties required by Slack. '
+          allOf:
+            - $ref: '#/components/schemas/SlackConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Slack. '
         Snowflake:
-          $ref: '#/components/schemas/SnowflakeConnectorProfileProperties'
-          description: ' The connector-specific properties required by Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Snowflake. '
         Trendmicro:
-          $ref: '#/components/schemas/TrendmicroConnectorProfileProperties'
-          description: ' The connector-specific properties required by Trend Micro. '
+          allOf:
+            - $ref: '#/components/schemas/TrendmicroConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Trend Micro. '
         Veeva:
-          $ref: '#/components/schemas/VeevaConnectorProfileProperties'
-          description: ' The connector-specific properties required by Veeva. '
+          allOf:
+            - $ref: '#/components/schemas/VeevaConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Veeva. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskConnectorProfileProperties'
-          description: ' The connector-specific properties required by Zendesk. '
+          allOf:
+            - $ref: '#/components/schemas/ZendeskConnectorProfileProperties'
+            - description: ' The connector-specific properties required by Zendesk. '
       description: ' The connector-specific profile properties required by each connector. '
     ConnectorProfileCredentials:
       type: object
       properties:
         Amplitude:
-          $ref: '#/components/schemas/AmplitudeConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Amplitude. '
+          allOf:
+            - $ref: '#/components/schemas/AmplitudeConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Amplitude. '
         Datadog:
-          $ref: '#/components/schemas/DatadogConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Datadog. '
+          allOf:
+            - $ref: '#/components/schemas/DatadogConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Datadog. '
         Dynatrace:
-          $ref: '#/components/schemas/DynatraceConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Dynatrace. '
+          allOf:
+            - $ref: '#/components/schemas/DynatraceConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Dynatrace. '
         GoogleAnalytics:
-          $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Google Analytics. '
+          allOf:
+            - $ref: '#/components/schemas/GoogleAnalyticsConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Google Analytics. '
         InforNexus:
-          $ref: '#/components/schemas/InforNexusConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Infor Nexus. '
+          allOf:
+            - $ref: '#/components/schemas/InforNexusConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Infor Nexus. '
         Marketo:
-          $ref: '#/components/schemas/MarketoConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Marketo. '
+          allOf:
+            - $ref: '#/components/schemas/MarketoConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Marketo. '
         Redshift:
-          $ref: '#/components/schemas/RedshiftConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Amazon Redshift. '
+          allOf:
+            - $ref: '#/components/schemas/RedshiftConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Amazon Redshift. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Salesforce. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Salesforce. '
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using ServiceNow. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using ServiceNow. '
         Singular:
-          $ref: '#/components/schemas/SingularConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Singular. '
+          allOf:
+            - $ref: '#/components/schemas/SingularConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Singular. '
         Slack:
-          $ref: '#/components/schemas/SlackConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Slack. '
+          allOf:
+            - $ref: '#/components/schemas/SlackConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Slack. '
         Snowflake:
-          $ref: '#/components/schemas/SnowflakeConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Snowflake. '
         Trendmicro:
-          $ref: '#/components/schemas/TrendmicroConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Trend Micro. '
+          allOf:
+            - $ref: '#/components/schemas/TrendmicroConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Trend Micro. '
         Veeva:
-          $ref: '#/components/schemas/VeevaConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Veeva. '
+          allOf:
+            - $ref: '#/components/schemas/VeevaConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Veeva. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskConnectorProfileCredentials'
-          description: ' The connector-specific credentials required when using Zendesk. '
+          allOf:
+            - $ref: '#/components/schemas/ZendeskConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required when using Zendesk. '
       description: ' The connector-specific credentials required by a connector. '
     ValidationException: {}
     ConflictException: {}
@@ -1605,11 +1650,13 @@ components:
       type: object
       properties:
         flowArn:
-          $ref: '#/components/schemas/FlowArn'
-          description: ' The flow''s Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/FlowArn'
+            - description: ' The flow''s Amazon Resource Name (ARN). '
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: ' Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: ' Indicates the current status of the flow. '
     TriggerType:
       type: string
       enum:
@@ -1620,8 +1667,9 @@ components:
       type: object
       properties:
         Scheduled:
-          $ref: '#/components/schemas/ScheduledTriggerProperties'
-          description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. '
+          allOf:
+            - $ref: '#/components/schemas/ScheduledTriggerProperties'
+            - description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. '
       description: ' Specifies the configuration details that control the trigger for a flow. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ConnectorType:
       type: string
@@ -1651,47 +1699,61 @@ components:
       type: object
       properties:
         Amplitude:
-          $ref: '#/components/schemas/AmplitudeSourceProperties'
-          description: ' Specifies the information that is required for querying Amplitude. '
+          allOf:
+            - $ref: '#/components/schemas/AmplitudeSourceProperties'
+            - description: ' Specifies the information that is required for querying Amplitude. '
         Datadog:
-          $ref: '#/components/schemas/DatadogSourceProperties'
-          description: ' Specifies the information that is required for querying Datadog. '
+          allOf:
+            - $ref: '#/components/schemas/DatadogSourceProperties'
+            - description: ' Specifies the information that is required for querying Datadog. '
         Dynatrace:
-          $ref: '#/components/schemas/DynatraceSourceProperties'
-          description: ' Specifies the information that is required for querying Dynatrace. '
+          allOf:
+            - $ref: '#/components/schemas/DynatraceSourceProperties'
+            - description: ' Specifies the information that is required for querying Dynatrace. '
         GoogleAnalytics:
-          $ref: '#/components/schemas/GoogleAnalyticsSourceProperties'
-          description: ' Specifies the information that is required for querying Google Analytics. '
+          allOf:
+            - $ref: '#/components/schemas/GoogleAnalyticsSourceProperties'
+            - description: ' Specifies the information that is required for querying Google Analytics. '
         InforNexus:
-          $ref: '#/components/schemas/InforNexusSourceProperties'
-          description: ' Specifies the information that is required for querying Infor Nexus. '
+          allOf:
+            - $ref: '#/components/schemas/InforNexusSourceProperties'
+            - description: ' Specifies the information that is required for querying Infor Nexus. '
         Marketo:
-          $ref: '#/components/schemas/MarketoSourceProperties'
-          description: ' Specifies the information that is required for querying Marketo. '
+          allOf:
+            - $ref: '#/components/schemas/MarketoSourceProperties'
+            - description: ' Specifies the information that is required for querying Marketo. '
         S3:
-          $ref: '#/components/schemas/S3SourceProperties'
-          description: ' Specifies the information that is required for querying Amazon S3. '
+          allOf:
+            - $ref: '#/components/schemas/S3SourceProperties'
+            - description: ' Specifies the information that is required for querying Amazon S3. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceSourceProperties'
-          description: ' Specifies the information that is required for querying Salesforce. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceSourceProperties'
+            - description: ' Specifies the information that is required for querying Salesforce. '
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowSourceProperties'
-          description: ' Specifies the information that is required for querying ServiceNow. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowSourceProperties'
+            - description: ' Specifies the information that is required for querying ServiceNow. '
         Singular:
-          $ref: '#/components/schemas/SingularSourceProperties'
-          description: ' Specifies the information that is required for querying Singular. '
+          allOf:
+            - $ref: '#/components/schemas/SingularSourceProperties'
+            - description: ' Specifies the information that is required for querying Singular. '
         Slack:
-          $ref: '#/components/schemas/SlackSourceProperties'
-          description: ' Specifies the information that is required for querying Slack. '
+          allOf:
+            - $ref: '#/components/schemas/SlackSourceProperties'
+            - description: ' Specifies the information that is required for querying Slack. '
         Trendmicro:
-          $ref: '#/components/schemas/TrendmicroSourceProperties'
-          description: ' Specifies the information that is required for querying Trend Micro. '
+          allOf:
+            - $ref: '#/components/schemas/TrendmicroSourceProperties'
+            - description: ' Specifies the information that is required for querying Trend Micro. '
         Veeva:
-          $ref: '#/components/schemas/VeevaSourceProperties'
-          description: ' Specifies the information that is required for querying Veeva. '
+          allOf:
+            - $ref: '#/components/schemas/VeevaSourceProperties'
+            - description: ' Specifies the information that is required for querying Veeva. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskSourceProperties'
-          description: ' Specifies the information that is required for querying Zendesk. '
+          allOf:
+            - $ref: '#/components/schemas/ZendeskSourceProperties'
+            - description: ' Specifies the information that is required for querying Zendesk. '
       description: ' Specifies the information that is required to query a particular connector. '
     DestinationFlowConfig:
       type: object
@@ -1700,14 +1762,17 @@ components:
         - destinationConnectorProperties
       properties:
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
         destinationConnectorProperties:
-          $ref: '#/components/schemas/DestinationConnectorProperties'
-          description: ' This stores the information that is required to query a particular connector. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationConnectorProperties'
+            - description: ' This stores the information that is required to query a particular connector. '
       description: ' Contains information about the configuration of destination connectors present in the flow. '
     Task:
       type: object
@@ -1716,20 +1781,25 @@ components:
         - taskType
       properties:
         sourceFields:
-          $ref: '#/components/schemas/SourceFields'
-          description: ' The source fields to which a particular task is applied. '
+          allOf:
+            - $ref: '#/components/schemas/SourceFields'
+            - description: ' The source fields to which a particular task is applied. '
         connectorOperator:
-          $ref: '#/components/schemas/ConnectorOperator'
-          description: ' The operation to be performed on the provided source fields. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOperator'
+            - description: ' The operation to be performed on the provided source fields. '
         destinationField:
-          $ref: '#/components/schemas/DestinationField'
-          description: ' A field in a destination connector, or a field value against which Amazon AppFlow validates a source field. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationField'
+            - description: ' A field in a destination connector, or a field value against which Amazon AppFlow validates a source field. '
         taskType:
-          $ref: '#/components/schemas/TaskType'
-          description: ' Specifies the particular task implementation that Amazon AppFlow performs. '
+          allOf:
+            - $ref: '#/components/schemas/TaskType'
+            - description: ' Specifies the particular task implementation that Amazon AppFlow performs. '
         taskProperties:
-          $ref: '#/components/schemas/TaskPropertiesMap'
-          description: ' A map used to store task-related information. The execution service looks for particular information based on the <code>TaskType</code>. '
+          allOf:
+            - $ref: '#/components/schemas/TaskPropertiesMap'
+            - description: ' A map used to store task-related information. The execution service looks for particular information based on the <code>TaskType</code>. '
       description: ' A class for modeling different type of tasks. Task implementation varies based on the <code>TaskType</code>. '
     TagValue:
       type: string
@@ -1749,127 +1819,158 @@ components:
         - connectorEntityFields
       properties:
         connectorEntityFields:
-          $ref: '#/components/schemas/ConnectorEntityFieldList'
-          description: ' Describes the fields for that connector entity. For example, for an <i>account</i> entity, the fields would be <i>account name</i>, <i>account ID</i>, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorEntityFieldList'
+            - description: ' Describes the fields for that connector entity. For example, for an <i>account</i> entity, the fields would be <i>account name</i>, <i>account ID</i>, and so on. '
     DescribeConnectorProfilesResponse:
       type: object
       properties:
         connectorProfileDetails:
-          $ref: '#/components/schemas/ConnectorProfileDetailList'
-          description: ' Returns information about the connector profiles associated with the flow. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileDetailList'
+            - description: ' Returns information about the connector profiles associated with the flow. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. If <code>nextToken=null</code>, this means that all records have been fetched. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. If <code>nextToken=null</code>, this means that all records have been fetched. '
     DescribeConnectorsResponse:
       type: object
       properties:
         connectorConfigurations:
-          $ref: '#/components/schemas/ConnectorConfigurationsMap'
-          description: ' The configuration that is applied to the connectors used in the flow. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorConfigurationsMap'
+            - description: ' The configuration that is applied to the connectors used in the flow. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. '
     DescribeFlowResponse:
       type: object
       properties:
         flowArn:
-          $ref: '#/components/schemas/FlowArn'
-          description: ' The flow''s Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/FlowArn'
+            - description: ' The flow''s Amazon Resource Name (ARN). '
         description:
-          $ref: '#/components/schemas/FlowDescription'
-          description: ' A description of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: ' A description of the flow. '
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         kmsArn:
-          $ref: '#/components/schemas/KMSArn'
-          description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
+          allOf:
+            - $ref: '#/components/schemas/KMSArn'
+            - description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: ' Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: ' Indicates the current status of the flow. '
         flowStatusMessage:
-          $ref: '#/components/schemas/FlowStatusMessage'
-          description: ' Contains an error message if the flow status is in a suspended or error state. This applies only to scheduled or event-triggered flows. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatusMessage'
+            - description: ' Contains an error message if the flow status is in a suspended or error state. This applies only to scheduled or event-triggered flows. '
         sourceFlowConfig:
-          $ref: '#/components/schemas/SourceFlowConfig'
-          description: ' The configuration that controls how Amazon AppFlow retrieves data from the source connector. '
+          allOf:
+            - $ref: '#/components/schemas/SourceFlowConfig'
+            - description: ' The configuration that controls how Amazon AppFlow retrieves data from the source connector. '
         destinationFlowConfigList:
-          $ref: '#/components/schemas/DestinationFlowConfigList'
-          description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationFlowConfigList'
+            - description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
         lastRunExecutionDetails:
-          $ref: '#/components/schemas/ExecutionDetails'
-          description: ' Describes the details of the most recent flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionDetails'
+            - description: ' Describes the details of the most recent flow run. '
         triggerConfig:
-          $ref: '#/components/schemas/TriggerConfig'
-          description: ' The trigger settings that determine how and when the flow runs. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerConfig'
+            - description: ' The trigger settings that determine how and when the flow runs. '
         tasks:
-          $ref: '#/components/schemas/Tasks'
-          description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Tasks'
+            - description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
         createdAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the flow was created. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the flow was created. '
         lastUpdatedAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the flow was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the flow was last updated. '
         createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-          description: ' The ARN of the user who created the flow. '
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: ' The ARN of the user who created the flow. '
         lastUpdatedBy:
-          $ref: '#/components/schemas/UpdatedBy'
-          description: ' Specifies the user name of the account that performed the most recent update. '
+          allOf:
+            - $ref: '#/components/schemas/UpdatedBy'
+            - description: ' Specifies the user name of the account that performed the most recent update. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to organize, track, or control access for your flow. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to organize, track, or control access for your flow. '
     DescribeFlowExecutionRecordsResponse:
       type: object
       properties:
         flowExecutions:
-          $ref: '#/components/schemas/FlowExecutionList'
-          description: ' Returns a list of all instances when this flow was run. '
+          allOf:
+            - $ref: '#/components/schemas/FlowExecutionList'
+            - description: ' Returns a list of all instances when this flow was run. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. '
     ListConnectorEntitiesResponse:
       type: object
       required:
         - connectorEntityMap
       properties:
         connectorEntityMap:
-          $ref: '#/components/schemas/ConnectorEntityMap'
-          description: ' The response of <code>ListConnectorEntities</code> lists entities grouped by category. This map''s key represents the group name, and its value contains the list of entities belonging to that group. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorEntityMap'
+            - description: ' The response of <code>ListConnectorEntities</code> lists entities grouped by category. This map''s key represents the group name, and its value contains the list of entities belonging to that group. '
     ListFlowsResponse:
       type: object
       properties:
         flows:
-          $ref: '#/components/schemas/FlowList'
-          description: ' The list of flows associated with your account. '
+          allOf:
+            - $ref: '#/components/schemas/FlowList'
+            - description: ' The list of flows associated with your account. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for next page of data. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to organize, track, or control access for your flow. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to organize, track, or control access for your flow. '
     StartFlowResponse:
       type: object
       properties:
         flowArn:
-          $ref: '#/components/schemas/FlowArn'
-          description: ' The flow''s Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/FlowArn'
+            - description: ' The flow''s Amazon Resource Name (ARN). '
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: ' Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: ' Indicates the current status of the flow. '
     StopFlowResponse:
       type: object
       properties:
         flowArn:
-          $ref: '#/components/schemas/FlowArn'
-          description: ' The flow''s Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/FlowArn'
+            - description: ' The flow''s Amazon Resource Name (ARN). '
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: ' Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: ' Indicates the current status of the flow. '
     UnsupportedOperationException: {}
     TagResourceResponse:
       type: object
@@ -1886,14 +1987,16 @@ components:
       type: object
       properties:
         connectorProfileArn:
-          $ref: '#/components/schemas/ConnectorProfileArn'
-          description: ' The Amazon Resource Name (ARN) of the connector profile. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileArn'
+            - description: ' The Amazon Resource Name (ARN) of the connector profile. '
     UpdateFlowResponse:
       type: object
       properties:
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: 'Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: 'Indicates the current status of the flow. '
     ARN:
       type: string
       pattern: 'arn:aws:.*:.*:[0-9]+:.*'
@@ -1921,8 +2024,9 @@ components:
       type: object
       properties:
         aggregationType:
-          $ref: '#/components/schemas/AggregationType'
-          description: ' Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. '
+          allOf:
+            - $ref: '#/components/schemas/AggregationType'
+            - description: ' Specifies whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. '
       description: ' The aggregation settings that you can use to customize the output format of your flow data. '
     AmplitudeConnectorOperator:
       type: string
@@ -1944,11 +2048,13 @@ components:
         - secretKey
       properties:
         apiKey:
-          $ref: '#/components/schemas/ApiKey'
-          description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
+          allOf:
+            - $ref: '#/components/schemas/ApiKey'
+            - description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
         secretKey:
-          $ref: '#/components/schemas/SecretKey'
-          description: ' The Secret Access Key portion of the credentials. '
+          allOf:
+            - $ref: '#/components/schemas/SecretKey'
+            - description: ' The Secret Access Key portion of the credentials. '
       description: ' The connector-specific credentials required when using Amplitude. '
     AmplitudeConnectorProfileProperties:
       type: object
@@ -1968,8 +2074,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Amplitude flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Amplitude flow source. '
       description: ' The properties that are applied when Amplitude is being used as a source. '
     ApiSecretKey:
       type: string
@@ -2031,84 +2138,109 @@ components:
       type: object
       properties:
         Amplitude:
-          $ref: '#/components/schemas/AmplitudeMetadata'
-          description: ' The connector metadata specific to Amplitude. '
+          allOf:
+            - $ref: '#/components/schemas/AmplitudeMetadata'
+            - description: ' The connector metadata specific to Amplitude. '
         Datadog:
-          $ref: '#/components/schemas/DatadogMetadata'
-          description: ' The connector metadata specific to Datadog. '
+          allOf:
+            - $ref: '#/components/schemas/DatadogMetadata'
+            - description: ' The connector metadata specific to Datadog. '
         Dynatrace:
-          $ref: '#/components/schemas/DynatraceMetadata'
-          description: ' The connector metadata specific to Dynatrace. '
+          allOf:
+            - $ref: '#/components/schemas/DynatraceMetadata'
+            - description: ' The connector metadata specific to Dynatrace. '
         GoogleAnalytics:
-          $ref: '#/components/schemas/GoogleAnalyticsMetadata'
-          description: ' The connector metadata specific to Google Analytics. '
+          allOf:
+            - $ref: '#/components/schemas/GoogleAnalyticsMetadata'
+            - description: ' The connector metadata specific to Google Analytics. '
         InforNexus:
-          $ref: '#/components/schemas/InforNexusMetadata'
-          description: ' The connector metadata specific to Infor Nexus. '
+          allOf:
+            - $ref: '#/components/schemas/InforNexusMetadata'
+            - description: ' The connector metadata specific to Infor Nexus. '
         Marketo:
-          $ref: '#/components/schemas/MarketoMetadata'
-          description: ' The connector metadata specific to Marketo. '
+          allOf:
+            - $ref: '#/components/schemas/MarketoMetadata'
+            - description: ' The connector metadata specific to Marketo. '
         Redshift:
-          $ref: '#/components/schemas/RedshiftMetadata'
-          description: ' The connector metadata specific to Amazon Redshift. '
+          allOf:
+            - $ref: '#/components/schemas/RedshiftMetadata'
+            - description: ' The connector metadata specific to Amazon Redshift. '
         S3:
-          $ref: '#/components/schemas/S3Metadata'
-          description: ' The connector metadata specific to Amazon S3. '
+          allOf:
+            - $ref: '#/components/schemas/S3Metadata'
+            - description: ' The connector metadata specific to Amazon S3. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceMetadata'
-          description: ' The connector metadata specific to Salesforce. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceMetadata'
+            - description: ' The connector metadata specific to Salesforce. '
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowMetadata'
-          description: ' The connector metadata specific to ServiceNow. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowMetadata'
+            - description: ' The connector metadata specific to ServiceNow. '
         Singular:
-          $ref: '#/components/schemas/SingularMetadata'
-          description: ' The connector metadata specific to Singular. '
+          allOf:
+            - $ref: '#/components/schemas/SingularMetadata'
+            - description: ' The connector metadata specific to Singular. '
         Slack:
-          $ref: '#/components/schemas/SlackMetadata'
-          description: ' The connector metadata specific to Slack. '
+          allOf:
+            - $ref: '#/components/schemas/SlackMetadata'
+            - description: ' The connector metadata specific to Slack. '
         Snowflake:
-          $ref: '#/components/schemas/SnowflakeMetadata'
-          description: ' The connector metadata specific to Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeMetadata'
+            - description: ' The connector metadata specific to Snowflake. '
         Trendmicro:
-          $ref: '#/components/schemas/TrendmicroMetadata'
-          description: ' The connector metadata specific to Trend Micro. '
+          allOf:
+            - $ref: '#/components/schemas/TrendmicroMetadata'
+            - description: ' The connector metadata specific to Trend Micro. '
         Veeva:
-          $ref: '#/components/schemas/VeevaMetadata'
-          description: ' The connector metadata specific to Veeva. '
+          allOf:
+            - $ref: '#/components/schemas/VeevaMetadata'
+            - description: ' The connector metadata specific to Veeva. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskMetadata'
-          description: ' The connector metadata specific to Zendesk. '
+          allOf:
+            - $ref: '#/components/schemas/ZendeskMetadata'
+            - description: ' The connector metadata specific to Zendesk. '
         EventBridge:
-          $ref: '#/components/schemas/EventBridgeMetadata'
-          description: ' The connector metadata specific to Amazon EventBridge. '
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeMetadata'
+            - description: ' The connector metadata specific to Amazon EventBridge. '
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
     ConnectorConfiguration:
       type: object
       properties:
         canUseAsSource:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies whether the connector can be used as a source. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether the connector can be used as a source. '
         canUseAsDestination:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies whether the connector can be used as a destination. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether the connector can be used as a destination. '
         supportedDestinationConnectors:
-          $ref: '#/components/schemas/ConnectorTypeList'
-          description: ' Lists the connectors that are available for use as destinations. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTypeList'
+            - description: ' Lists the connectors that are available for use as destinations. '
         supportedSchedulingFrequencies:
-          $ref: '#/components/schemas/SchedulingFrequencyTypeList'
-          description: ' Specifies the supported flow frequency for that connector. '
+          allOf:
+            - $ref: '#/components/schemas/SchedulingFrequencyTypeList'
+            - description: ' Specifies the supported flow frequency for that connector. '
         isPrivateLinkEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if PrivateLink is enabled for that connector. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if PrivateLink is enabled for that connector. '
         isPrivateLinkEndpointUrlRequired:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if a PrivateLink endpoint URL is required. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if a PrivateLink endpoint URL is required. '
         supportedTriggerTypes:
-          $ref: '#/components/schemas/TriggerTypeList'
-          description: ' Specifies the supported trigger types for the flow. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerTypeList'
+            - description: ' Specifies the supported trigger types for the flow. '
         connectorMetadata:
-          $ref: '#/components/schemas/ConnectorMetadata'
-          description: ' Specifies connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorMetadata'
+            - description: ' Specifies connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
       description: ' The configuration settings related to a given connector. '
     ConnectorConfigurationsMap:
       type: object
@@ -2128,14 +2260,17 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name of the connector entity. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name of the connector entity. '
         label:
-          $ref: '#/components/schemas/Label'
-          description: ' The label applied to the connector entity. '
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: ' The label applied to the connector entity. '
         hasNestedEntities:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies whether the connector entity is a parent or a category and has more entities nested underneath it. If another call is made with <code>entitiesPath = "the_current_entity_name_with_hasNestedEntities_true"</code>, then it returns the nested entities underneath it. This provides a way to retrieve all supported entities in a recursive fashion. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether the connector entity is a parent or a category and has more entities nested underneath it. If another call is made with <code>entitiesPath = "the_current_entity_name_with_hasNestedEntities_true"</code>, then it returns the nested entities underneath it. This provides a way to retrieve all supported entities in a recursive fashion. '
       description: ' The high-level entity that can be queried in Amazon AppFlow. For example, a Salesforce entity might be an <i>Account</i> or <i>Opportunity</i>, whereas a ServiceNow entity might be an <i>Incident</i>. '
     Identifier:
       type: string
@@ -2147,8 +2282,9 @@ components:
         - v1
       properties:
         v1:
-          $ref: '#/components/schemas/FieldTypeDetails'
-          description: ' The initial supported version for <code>fieldType</code>. If this is later changed to a different version, v2 will be introduced. '
+          allOf:
+            - $ref: '#/components/schemas/FieldTypeDetails'
+            - description: ' The initial supported version for <code>fieldType</code>. If this is later changed to a different version, v2 will be introduced. '
       description: ' Contains details regarding all the supported <code>FieldTypes</code> and their corresponding <code>filterOperators</code> and <code>supportedValues</code>. '
     Description:
       type: string
@@ -2158,24 +2294,29 @@ components:
       type: object
       properties:
         isRetrievable:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates whether the field can be returned in a search result. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether the field can be returned in a search result. '
         isQueryable:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates if the field can be queried. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates if the field can be queried. '
       description: ' The properties that can be applied to a field when the connector is being used as a source. '
     DestinationFieldProperties:
       type: object
       properties:
         isCreatable:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if the destination field can be created by the current user. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if the destination field can be created by the current user. '
         isNullable:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if the destination field can have a null value. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if the destination field can have a null value. '
         isUpsertable:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. '
       description: ' The properties that can be applied to a field when connector is being used as a destination. '
     ConnectorEntityField:
       type: object
@@ -2183,23 +2324,29 @@ components:
         - identifier
       properties:
         identifier:
-          $ref: '#/components/schemas/Identifier'
-          description: ' The unique identifier of the connector field. '
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
+            - description: ' The unique identifier of the connector field. '
         label:
-          $ref: '#/components/schemas/Label'
-          description: ' The label applied to a connector entity field. '
+          allOf:
+            - $ref: '#/components/schemas/Label'
+            - description: ' The label applied to a connector entity field. '
         supportedFieldTypeDetails:
-          $ref: '#/components/schemas/SupportedFieldTypeDetails'
-          description: ' Contains details regarding the supported <code>FieldType</code>, including the corresponding <code>filterOperators</code> and <code>supportedValues</code>. '
+          allOf:
+            - $ref: '#/components/schemas/SupportedFieldTypeDetails'
+            - description: ' Contains details regarding the supported <code>FieldType</code>, including the corresponding <code>filterOperators</code> and <code>supportedValues</code>. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' A description of the connector entity field. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' A description of the connector entity field. '
         sourceProperties:
-          $ref: '#/components/schemas/SourceFieldProperties'
-          description: ' The properties that can be applied to a field when the connector is being used as a source. '
+          allOf:
+            - $ref: '#/components/schemas/SourceFieldProperties'
+            - description: ' The properties that can be applied to a field when the connector is being used as a source. '
         destinationProperties:
-          $ref: '#/components/schemas/DestinationFieldProperties'
-          description: ' The properties applied to a field when the connector is being used as a destination. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationFieldProperties'
+            - description: ' The properties applied to a field when the connector is being used as a destination. '
       description: ' Describes the data model of a connector field. For example, for an <i>account</i> entity, the fields would be <i>account name</i>, <i>account ID</i>, and so on. '
     ConnectorEntityFieldList:
       type: array
@@ -2225,8 +2372,9 @@ components:
       type: object
       properties:
         oAuthScopes:
-          $ref: '#/components/schemas/OAuthScopeList'
-          description: ' The desired authorization scope for the Google Analytics account. '
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The desired authorization scope for the Google Analytics account. '
       description: ' The connector metadata specific to Google Analytics. '
     InforNexusMetadata:
       type: object
@@ -2248,8 +2396,9 @@ components:
       type: object
       properties:
         oAuthScopes:
-          $ref: '#/components/schemas/OAuthScopeList'
-          description: ' The desired authorization scope for the Salesforce account. '
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The desired authorization scope for the Salesforce account. '
       description: ' The connector metadata specific to Salesforce. '
     ServiceNowMetadata:
       type: object
@@ -2263,15 +2412,17 @@ components:
       type: object
       properties:
         oAuthScopes:
-          $ref: '#/components/schemas/OAuthScopeList'
-          description: ' The desired authorization scope for the Slack account. '
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The desired authorization scope for the Slack account. '
       description: ' The connector metadata specific to Slack. '
     SnowflakeMetadata:
       type: object
       properties:
         supportedRegions:
-          $ref: '#/components/schemas/RegionList'
-          description: ' Specifies the supported AWS Regions when using Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/RegionList'
+            - description: ' Specifies the supported AWS Regions when using Snowflake. '
       description: ' The connector metadata specific to Snowflake. '
     TrendmicroMetadata:
       type: object
@@ -2285,8 +2436,9 @@ components:
       type: object
       properties:
         oAuthScopes:
-          $ref: '#/components/schemas/OAuthScopeList'
-          description: ' The desired authorization scope for the Zendesk account. '
+          allOf:
+            - $ref: '#/components/schemas/OAuthScopeList'
+            - description: ' The desired authorization scope for the Zendesk account. '
       description: ' The connector metadata specific to Zendesk. '
     EventBridgeMetadata:
       type: object
@@ -2300,11 +2452,13 @@ components:
       type: object
       properties:
         authCode:
-          $ref: '#/components/schemas/AuthCode'
-          description: ' The code provided by the connector when it has been authenticated via the connected app. '
+          allOf:
+            - $ref: '#/components/schemas/AuthCode'
+            - description: ' The code provided by the connector when it has been authenticated via the connected app. '
         redirectUri:
-          $ref: '#/components/schemas/RedirectUri'
-          description: ' The URL to which the authentication server redirects the browser after authorization has been granted. '
+          allOf:
+            - $ref: '#/components/schemas/RedirectUri'
+            - description: ' The URL to which the authentication server redirects the browser after authorization has been granted. '
       description: ' Used by select connectors for which the OAuth workflow is supported, such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack. '
     DatadogConnectorOperator:
       type: string
@@ -2556,47 +2710,61 @@ components:
       type: object
       properties:
         Amplitude:
-          $ref: '#/components/schemas/AmplitudeConnectorOperator'
-          description: ' The operation to be performed on the provided Amplitude source fields. '
+          allOf:
+            - $ref: '#/components/schemas/AmplitudeConnectorOperator'
+            - description: ' The operation to be performed on the provided Amplitude source fields. '
         Datadog:
-          $ref: '#/components/schemas/DatadogConnectorOperator'
-          description: ' The operation to be performed on the provided Datadog source fields. '
+          allOf:
+            - $ref: '#/components/schemas/DatadogConnectorOperator'
+            - description: ' The operation to be performed on the provided Datadog source fields. '
         Dynatrace:
-          $ref: '#/components/schemas/DynatraceConnectorOperator'
-          description: ' The operation to be performed on the provided Dynatrace source fields. '
+          allOf:
+            - $ref: '#/components/schemas/DynatraceConnectorOperator'
+            - description: ' The operation to be performed on the provided Dynatrace source fields. '
         GoogleAnalytics:
-          $ref: '#/components/schemas/GoogleAnalyticsConnectorOperator'
-          description: ' The operation to be performed on the provided Google Analytics source fields. '
+          allOf:
+            - $ref: '#/components/schemas/GoogleAnalyticsConnectorOperator'
+            - description: ' The operation to be performed on the provided Google Analytics source fields. '
         InforNexus:
-          $ref: '#/components/schemas/InforNexusConnectorOperator'
-          description: ' The operation to be performed on the provided Infor Nexus source fields. '
+          allOf:
+            - $ref: '#/components/schemas/InforNexusConnectorOperator'
+            - description: ' The operation to be performed on the provided Infor Nexus source fields. '
         Marketo:
-          $ref: '#/components/schemas/MarketoConnectorOperator'
-          description: ' The operation to be performed on the provided Marketo source fields. '
+          allOf:
+            - $ref: '#/components/schemas/MarketoConnectorOperator'
+            - description: ' The operation to be performed on the provided Marketo source fields. '
         S3:
-          $ref: '#/components/schemas/S3ConnectorOperator'
-          description: ' The operation to be performed on the provided Amazon S3 source fields. '
+          allOf:
+            - $ref: '#/components/schemas/S3ConnectorOperator'
+            - description: ' The operation to be performed on the provided Amazon S3 source fields. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceConnectorOperator'
-          description: ' The operation to be performed on the provided Salesforce source fields. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceConnectorOperator'
+            - description: ' The operation to be performed on the provided Salesforce source fields. '
         ServiceNow:
-          $ref: '#/components/schemas/ServiceNowConnectorOperator'
-          description: ' The operation to be performed on the provided ServiceNow source fields. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowConnectorOperator'
+            - description: ' The operation to be performed on the provided ServiceNow source fields. '
         Singular:
-          $ref: '#/components/schemas/SingularConnectorOperator'
-          description: ' The operation to be performed on the provided Singular source fields. '
+          allOf:
+            - $ref: '#/components/schemas/SingularConnectorOperator'
+            - description: ' The operation to be performed on the provided Singular source fields. '
         Slack:
-          $ref: '#/components/schemas/SlackConnectorOperator'
-          description: ' The operation to be performed on the provided Slack source fields. '
+          allOf:
+            - $ref: '#/components/schemas/SlackConnectorOperator'
+            - description: ' The operation to be performed on the provided Slack source fields. '
         Trendmicro:
-          $ref: '#/components/schemas/TrendmicroConnectorOperator'
-          description: ' The operation to be performed on the provided Trend Micro source fields. '
+          allOf:
+            - $ref: '#/components/schemas/TrendmicroConnectorOperator'
+            - description: ' The operation to be performed on the provided Trend Micro source fields. '
         Veeva:
-          $ref: '#/components/schemas/VeevaConnectorOperator'
-          description: ' The operation to be performed on the provided Veeva source fields. '
+          allOf:
+            - $ref: '#/components/schemas/VeevaConnectorOperator'
+            - description: ' The operation to be performed on the provided Veeva source fields. '
         Zendesk:
-          $ref: '#/components/schemas/ZendeskConnectorOperator'
-          description: ' The operation to be performed on the provided Zendesk source fields. '
+          allOf:
+            - $ref: '#/components/schemas/ZendeskConnectorOperator'
+            - description: ' The operation to be performed on the provided Zendesk source fields. '
       description: ' The operation to be performed on the provided source fields. '
     ConnectorProfileArn:
       type: string
@@ -2609,29 +2777,37 @@ components:
       type: object
       properties:
         connectorProfileArn:
-          $ref: '#/components/schemas/ConnectorProfileArn'
-          description: ' The Amazon Resource Name (ARN) of the connector profile. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileArn'
+            - description: ' The Amazon Resource Name (ARN) of the connector profile. '
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         connectionMode:
-          $ref: '#/components/schemas/ConnectionMode'
-          description: ' Indicates the connection mode and if it is public or private. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionMode'
+            - description: ' Indicates the connection mode and if it is public or private. '
         credentialsArn:
-          $ref: '#/components/schemas/ARN'
-          description: ' The Amazon Resource Name (ARN) of the connector profile credentials. '
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: ' The Amazon Resource Name (ARN) of the connector profile credentials. '
         connectorProfileProperties:
-          $ref: '#/components/schemas/ConnectorProfileProperties'
-          description: ' The connector-specific properties of the profile configuration. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileProperties'
+            - description: ' The connector-specific properties of the profile configuration. '
         createdAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the connector profile was created. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the connector profile was created. '
         lastUpdatedAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the connector profile was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the connector profile was last updated. '
       description: ' Describes an instance of a connector. This includes the provided name, credentials ARN, connection-mode, and so on. To keep the API intuitive and extensible, the fields that are common to all types of connector profiles are explicitly specified at the top level. The rest of the connector-specific properties are available via the <code>connectorProfileProperties</code> field. '
     ConnectorProfileConfig:
       type: object
@@ -2640,11 +2816,13 @@ components:
         - connectorProfileCredentials
       properties:
         connectorProfileProperties:
-          $ref: '#/components/schemas/ConnectorProfileProperties'
-          description: ' The connector-specific properties of the profile configuration. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileProperties'
+            - description: ' The connector-specific properties of the profile configuration. '
         connectorProfileCredentials:
-          $ref: '#/components/schemas/ConnectorProfileCredentials'
-          description: ' The connector-specific credentials required by each connector. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileCredentials'
+            - description: ' The connector-specific credentials required by each connector. '
       description: ' Defines the connector-specific configuration and credentials for the connector profile. '
     DatadogConnectorProfileCredentials:
       type: object
@@ -2653,11 +2831,13 @@ components:
         - applicationKey
       properties:
         apiKey:
-          $ref: '#/components/schemas/ApiKey'
-          description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
+          allOf:
+            - $ref: '#/components/schemas/ApiKey'
+            - description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
         applicationKey:
-          $ref: '#/components/schemas/ApplicationKey'
-          description: ' Application keys, in conjunction with your API key, give you full access to Datadog’s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API. '
+          allOf:
+            - $ref: '#/components/schemas/ApplicationKey'
+            - description: ' Application keys, in conjunction with your API key, give you full access to Datadog’s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API. '
       description: ' The connector-specific credentials required by Datadog. '
     DynatraceConnectorProfileCredentials:
       type: object
@@ -2665,8 +2845,9 @@ components:
         - apiToken
       properties:
         apiToken:
-          $ref: '#/components/schemas/ApiToken'
-          description: ' The API tokens used by Dynatrace API to authenticate various API calls. '
+          allOf:
+            - $ref: '#/components/schemas/ApiToken'
+            - description: ' The API tokens used by Dynatrace API to authenticate various API calls. '
       description: ' The connector-specific profile credentials required by Dynatrace. '
     GoogleAnalyticsConnectorProfileCredentials:
       type: object
@@ -2675,20 +2856,25 @@ components:
         - clientSecret
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: ' The identifier for the desired client. '
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: ' The identifier for the desired client. '
         clientSecret:
-          $ref: '#/components/schemas/ClientSecret'
-          description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The credentials used to access protected Google Analytics resources. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Google Analytics resources. '
         refreshToken:
-          $ref: '#/components/schemas/RefreshToken'
-          description: ' The credentials used to acquire new access tokens. This is required only for OAuth2 access tokens, and is not required for OAuth1 access tokens. '
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: ' The credentials used to acquire new access tokens. This is required only for OAuth2 access tokens, and is not required for OAuth1 access tokens. '
         oAuthRequest:
-          $ref: '#/components/schemas/ConnectorOAuthRequest'
-          description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required by Google Analytics. '
     InforNexusConnectorProfileCredentials:
       type: object
@@ -2699,17 +2885,21 @@ components:
         - datakey
       properties:
         accessKeyId:
-          $ref: '#/components/schemas/AccessKeyId'
-          description: ' The Access Key portion of the credentials. '
+          allOf:
+            - $ref: '#/components/schemas/AccessKeyId'
+            - description: ' The Access Key portion of the credentials. '
         userId:
-          $ref: '#/components/schemas/Username'
-          description: ' The identifier for the user. '
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The identifier for the user. '
         secretAccessKey:
-          $ref: '#/components/schemas/Key'
-          description: ' The secret key used to sign requests. '
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: ' The secret key used to sign requests. '
         datakey:
-          $ref: '#/components/schemas/Key'
-          description: ' The encryption keys used to encrypt data. '
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: ' The encryption keys used to encrypt data. '
       description: ' The connector-specific profile credentials required by Infor Nexus. '
     MarketoConnectorProfileCredentials:
       type: object
@@ -2718,17 +2908,21 @@ components:
         - clientSecret
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: ' The identifier for the desired client. '
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: ' The identifier for the desired client. '
         clientSecret:
-          $ref: '#/components/schemas/ClientSecret'
-          description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The credentials used to access protected Marketo resources. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Marketo resources. '
         oAuthRequest:
-          $ref: '#/components/schemas/ConnectorOAuthRequest'
-          description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required by Marketo. '
     RedshiftConnectorProfileCredentials:
       type: object
@@ -2737,24 +2931,29 @@ components:
         - password
       properties:
         username:
-          $ref: '#/components/schemas/Username'
-          description: ' The name of the user. '
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The name of the user. '
         password:
-          $ref: '#/components/schemas/Password'
-          description: ' The password that corresponds to the user name. '
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: ' The password that corresponds to the user name. '
       description: ' The connector-specific profile credentials required when using Amazon Redshift. '
     SalesforceConnectorProfileCredentials:
       type: object
       properties:
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The credentials used to access protected Salesforce resources. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Salesforce resources. '
         refreshToken:
-          $ref: '#/components/schemas/RefreshToken'
-          description: ' The credentials used to acquire new access tokens. '
+          allOf:
+            - $ref: '#/components/schemas/RefreshToken'
+            - description: ' The credentials used to acquire new access tokens. '
         oAuthRequest:
-          $ref: '#/components/schemas/ConnectorOAuthRequest'
-          description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Salesforce. '
     ServiceNowConnectorProfileCredentials:
       type: object
@@ -2763,11 +2962,13 @@ components:
         - password
       properties:
         username:
-          $ref: '#/components/schemas/Username'
-          description: ' The name of the user. '
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The name of the user. '
         password:
-          $ref: '#/components/schemas/Password'
-          description: ' The password that corresponds to the user name. '
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: ' The password that corresponds to the user name. '
       description: ' The connector-specific profile credentials required when using ServiceNow. '
     SingularConnectorProfileCredentials:
       type: object
@@ -2775,8 +2976,9 @@ components:
         - apiKey
       properties:
         apiKey:
-          $ref: '#/components/schemas/ApiKey'
-          description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
+          allOf:
+            - $ref: '#/components/schemas/ApiKey'
+            - description: ' A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. '
       description: ' The connector-specific profile credentials required when using Singular. '
     SlackConnectorProfileCredentials:
       type: object
@@ -2785,17 +2987,21 @@ components:
         - clientSecret
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: ' The identifier for the client. '
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: ' The identifier for the client. '
         clientSecret:
-          $ref: '#/components/schemas/ClientSecret'
-          description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The credentials used to access protected Slack resources. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Slack resources. '
         oAuthRequest:
-          $ref: '#/components/schemas/ConnectorOAuthRequest'
-          description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Slack. '
     SnowflakeConnectorProfileCredentials:
       type: object
@@ -2804,11 +3010,13 @@ components:
         - password
       properties:
         username:
-          $ref: '#/components/schemas/Username'
-          description: ' The name of the user. '
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The name of the user. '
         password:
-          $ref: '#/components/schemas/Password'
-          description: ' The password that corresponds to the user name. '
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: ' The password that corresponds to the user name. '
       description: ' The connector-specific profile credentials required when using Snowflake. '
     TrendmicroConnectorProfileCredentials:
       type: object
@@ -2816,8 +3024,9 @@ components:
         - apiSecretKey
       properties:
         apiSecretKey:
-          $ref: '#/components/schemas/ApiSecretKey'
-          description: ' The Secret Access Key portion of the credentials. '
+          allOf:
+            - $ref: '#/components/schemas/ApiSecretKey'
+            - description: ' The Secret Access Key portion of the credentials. '
       description: ' The connector-specific profile credentials required when using Trend Micro. '
     VeevaConnectorProfileCredentials:
       type: object
@@ -2826,11 +3035,13 @@ components:
         - password
       properties:
         username:
-          $ref: '#/components/schemas/Username'
-          description: ' The name of the user. '
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: ' The name of the user. '
         password:
-          $ref: '#/components/schemas/Password'
-          description: ' The password that corresponds to the user name. '
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: ' The password that corresponds to the user name. '
       description: ' The connector-specific profile credentials required when using Veeva. '
     ZendeskConnectorProfileCredentials:
       type: object
@@ -2839,17 +3050,21 @@ components:
         - clientSecret
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: ' The identifier for the desired client. '
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: ' The identifier for the desired client. '
         clientSecret:
-          $ref: '#/components/schemas/ClientSecret'
-          description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+          allOf:
+            - $ref: '#/components/schemas/ClientSecret'
+            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The credentials used to access protected Zendesk resources. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The credentials used to access protected Zendesk resources. '
         oAuthRequest:
-          $ref: '#/components/schemas/ConnectorOAuthRequest'
-          description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorOAuthRequest'
+            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Zendesk. '
     ConnectorProfileDetailList:
       type: array
@@ -2867,8 +3082,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Datadog resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Datadog resource. '
       description: ' The connector-specific profile properties required by Datadog. '
     DynatraceConnectorProfileProperties:
       type: object
@@ -2876,8 +3092,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Dynatrace resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Dynatrace resource. '
       description: ' The connector-specific profile properties required by Dynatrace. '
     GoogleAnalyticsConnectorProfileProperties:
       type: object
@@ -2889,8 +3106,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Infor Nexus resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Infor Nexus resource. '
       description: ' The connector-specific profile properties required by Infor Nexus. '
     MarketoConnectorProfileProperties:
       type: object
@@ -2898,8 +3116,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Marketo resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Marketo resource. '
       description: ' The connector-specific profile properties required when using Marketo. '
     RedshiftConnectorProfileProperties:
       type: object
@@ -2909,27 +3128,33 @@ components:
         - roleArn
       properties:
         databaseUrl:
-          $ref: '#/components/schemas/DatabaseUrl'
-          description: ' The JDBC URL of the Amazon Redshift cluster. '
+          allOf:
+            - $ref: '#/components/schemas/DatabaseUrl'
+            - description: ' The JDBC URL of the Amazon Redshift cluster. '
         bucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' A name for the associated Amazon S3 bucket. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' A name for the associated Amazon S3 bucket. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: ' The Amazon Resource Name (ARN) of the IAM role. '
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ' The Amazon Resource Name (ARN) of the IAM role. '
       description: ' The connector-specific profile properties when using Amazon Redshift. '
     SalesforceConnectorProfileProperties:
       type: object
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Salesforce resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Salesforce resource. '
         isSandboxEnvironment:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates whether the connector profile applies to a sandbox or production environment. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether the connector profile applies to a sandbox or production environment. '
       description: ' The connector-specific profile properties required when using Salesforce. '
     ServiceNowConnectorProfileProperties:
       type: object
@@ -2937,8 +3162,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the ServiceNow resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the ServiceNow resource. '
       description: ' The connector-specific profile properties required when using ServiceNow. '
     SingularConnectorProfileProperties:
       type: object
@@ -2950,8 +3176,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Slack resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Slack resource. '
       description: ' The connector-specific profile properties required when using Slack. '
     SnowflakeConnectorProfileProperties:
       type: object
@@ -2961,26 +3188,33 @@ components:
         - bucketName
       properties:
         warehouse:
-          $ref: '#/components/schemas/Warehouse'
-          description: ' The name of the Snowflake warehouse. '
+          allOf:
+            - $ref: '#/components/schemas/Warehouse'
+            - description: ' The name of the Snowflake warehouse. '
         stage:
-          $ref: '#/components/schemas/Stage'
-          description: ' The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the Snowflake account. This is written in the following format: &lt; Database&gt;&lt; Schema&gt;&lt;Stage Name&gt;. '
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: ' The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the Snowflake account. This is written in the following format: &lt; Database&gt;&lt; Schema&gt;&lt;Stage Name&gt;. '
         bucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' The name of the Amazon S3 bucket associated with Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' The name of the Amazon S3 bucket associated with Snowflake. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The bucket path that refers to the Amazon S3 bucket associated with Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The bucket path that refers to the Amazon S3 bucket associated with Snowflake. '
         privateLinkServiceName:
-          $ref: '#/components/schemas/PrivateLinkServiceName'
-          description: ' The Snowflake Private Link service name to be used for private data transfers. '
+          allOf:
+            - $ref: '#/components/schemas/PrivateLinkServiceName'
+            - description: ' The Snowflake Private Link service name to be used for private data transfers. '
         accountName:
-          $ref: '#/components/schemas/AccountName'
-          description: ' The name of the account. '
+          allOf:
+            - $ref: '#/components/schemas/AccountName'
+            - description: ' The name of the account. '
         region:
-          $ref: '#/components/schemas/Region'
-          description: ' The AWS Region of the Snowflake account. '
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: ' The AWS Region of the Snowflake account. '
       description: ' The connector-specific profile properties required when using Snowflake. '
     TrendmicroConnectorProfileProperties:
       type: object
@@ -2992,8 +3226,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Veeva resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Veeva resource. '
       description: ' The connector-specific profile properties required when using Veeva. '
     ZendeskConnectorProfileProperties:
       type: object
@@ -3001,8 +3236,9 @@ components:
         - instanceUrl
       properties:
         instanceUrl:
-          $ref: '#/components/schemas/InstanceUrl'
-          description: ' The location of the Zendesk resource. '
+          allOf:
+            - $ref: '#/components/schemas/InstanceUrl'
+            - description: ' The location of the Zendesk resource. '
       description: ' The connector-specific profile properties required when using Zendesk. '
     KMSArn:
       type: string
@@ -3019,20 +3255,25 @@ components:
       title: CreateConnectorProfileRequest
       properties:
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your AWS account. '
         kmsArn:
-          $ref: '#/components/schemas/KMSArn'
-          description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
+          allOf:
+            - $ref: '#/components/schemas/KMSArn'
+            - description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         connectionMode:
-          $ref: '#/components/schemas/ConnectionMode'
-          description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionMode'
+            - description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
         connectorProfileConfig:
-          $ref: '#/components/schemas/ConnectorProfileConfig'
-          description: ' Defines the connector-specific configuration and credentials. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileConfig'
+            - description: ' Defines the connector-specific configuration and credentials. '
     FlowName:
       type: string
       pattern: '[a-zA-Z0-9][\w!@#.-]+'
@@ -3047,11 +3288,13 @@ components:
         - triggerType
       properties:
         triggerType:
-          $ref: '#/components/schemas/TriggerType'
-          description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerType'
+            - description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
         triggerProperties:
-          $ref: '#/components/schemas/TriggerProperties'
-          description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerProperties'
+            - description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
       description: ' The trigger settings that determine how and when Amazon AppFlow runs the specified flow. '
     SourceFlowConfig:
       type: object
@@ -3060,14 +3303,17 @@ components:
         - sourceConnectorProperties
       properties:
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. This name must be unique for each connector profile in the AWS account. '
         sourceConnectorProperties:
-          $ref: '#/components/schemas/SourceConnectorProperties'
-          description: ' Specifies the information that is required to query a particular source connector. '
+          allOf:
+            - $ref: '#/components/schemas/SourceConnectorProperties'
+            - description: ' Specifies the information that is required to query a particular source connector. '
       description: ' Contains information about the configuration of the source connector used in the flow. '
     DestinationFlowConfigList:
       type: array
@@ -3094,29 +3340,37 @@ components:
       title: CreateFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         description:
-          $ref: '#/components/schemas/FlowDescription'
-          description: ' A description of the flow you want to create. '
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: ' A description of the flow you want to create. '
         kmsArn:
-          $ref: '#/components/schemas/KMSArn'
-          description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
+          allOf:
+            - $ref: '#/components/schemas/KMSArn'
+            - description: ' The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don''t provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key. '
         triggerConfig:
-          $ref: '#/components/schemas/TriggerConfig'
-          description: ' The trigger settings that determine how and when the flow runs. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerConfig'
+            - description: ' The trigger settings that determine how and when the flow runs. '
         sourceFlowConfig:
-          $ref: '#/components/schemas/SourceFlowConfig'
-          description: ' The configuration that controls how Amazon AppFlow retrieves data from the source connector. '
+          allOf:
+            - $ref: '#/components/schemas/SourceFlowConfig'
+            - description: ' The configuration that controls how Amazon AppFlow retrieves data from the source connector. '
         destinationFlowConfigList:
-          $ref: '#/components/schemas/DestinationFlowConfigList'
-          description: ' The configuration that controls how Amazon AppFlow places data in the destination connector. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationFlowConfigList'
+            - description: ' The configuration that controls how Amazon AppFlow places data in the destination connector. '
         tasks:
-          $ref: '#/components/schemas/Tasks'
-          description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Tasks'
+            - description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to organize, track, or control access for your flow. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to organize, track, or control access for your flow. '
     FlowArn:
       type: string
       pattern: 'arn:aws:appflow:.*:[0-9]+:.*'
@@ -3153,8 +3407,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Datadog flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Datadog flow source. '
       description: ' The properties that are applied when Datadog is being used as a source. '
     DeleteConnectorProfileRequest:
       type: object
@@ -3163,11 +3418,13 @@ components:
       title: DeleteConnectorProfileRequest
       properties:
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your account. '
         forceDelete:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether Amazon AppFlow should delete the profile, even if it is currently in use in one or more flows. '
     DeleteFlowRequest:
       type: object
       required:
@@ -3175,11 +3432,13 @@ components:
       title: DeleteFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         forceDelete:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether Amazon AppFlow should delete the flow, even if it is currently in use. '
     DescribeConnectorEntityRequest:
       type: object
       required:
@@ -3187,14 +3446,17 @@ components:
       title: DescribeConnectorEntityRequest
       properties:
         connectorEntityName:
-          $ref: '#/components/schemas/Name'
-          description: ' The entity name for that connector. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The entity name for that connector. '
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector application, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector application, such as Salesforce, Amplitude, and so on. '
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
     MaxResults:
       type: integer
       minimum: 1
@@ -3208,27 +3470,33 @@ components:
       title: DescribeConnectorProfilesRequest
       properties:
         connectorProfileNames:
-          $ref: '#/components/schemas/ConnectorProfileNameList'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileNameList'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. '
     DescribeConnectorsRequest:
       type: object
       title: DescribeConnectorsRequest
       properties:
         connectorTypes:
-          $ref: '#/components/schemas/ConnectorTypeList'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorTypeList'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. '
     DescribeFlowExecutionRecordsRequest:
       type: object
       required:
@@ -3236,14 +3504,17 @@ components:
       title: DescribeFlowExecutionRecordsRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for the next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for the next page of data. '
     FlowExecutionList:
       type: array
       items:
@@ -3255,8 +3526,9 @@ components:
       title: DescribeFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
     FlowStatusMessage:
       type: string
       pattern: '[\s\w/!@#+=.-]*'
@@ -3265,14 +3537,17 @@ components:
       type: object
       properties:
         mostRecentExecutionMessage:
-          $ref: '#/components/schemas/MostRecentExecutionMessage'
-          description: ' Describes the details of the most recent flow run. '
+          allOf:
+            - $ref: '#/components/schemas/MostRecentExecutionMessage'
+            - description: ' Describes the details of the most recent flow run. '
         mostRecentExecutionTime:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies the time of the most recent flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the time of the most recent flow run. '
         mostRecentExecutionStatus:
-          $ref: '#/components/schemas/ExecutionStatus'
-          description: ' Specifies the status of the most recent flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: ' Specifies the status of the most recent flow run. '
       description: ' Describes the details of the flow run, including the timestamp, status, and message. '
     UpdatedBy:
       type: string
@@ -3285,17 +3560,21 @@ components:
         - intermediateBucketName
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Amazon Redshift flow destination. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Amazon Redshift flow destination. '
         intermediateBucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' The intermediate bucket that Amazon AppFlow uses when moving data into Amazon Redshift. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The object key for the bucket in which Amazon AppFlow places the destination files. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the bucket in which Amazon AppFlow places the destination files. '
         errorHandlingConfig:
-          $ref: '#/components/schemas/ErrorHandlingConfig'
-          description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Amazon Redshift destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorHandlingConfig'
+            - description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Amazon Redshift destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
       description: ' The properties that are applied when Amazon Redshift is being used as a destination. '
     S3DestinationProperties:
       type: object
@@ -3303,11 +3582,13 @@ components:
         - bucketName
       properties:
         bucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' The Amazon S3 bucket name in which Amazon AppFlow places the transferred data. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' The Amazon S3 bucket name in which Amazon AppFlow places the transferred data. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
         s3OutputFormatConfig:
           $ref: '#/components/schemas/S3OutputFormatConfig'
       description: ' The properties that are applied when Amazon S3 is used as a destination. '
@@ -3317,11 +3598,13 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Salesforce flow destination. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Salesforce flow destination. '
         errorHandlingConfig:
-          $ref: '#/components/schemas/ErrorHandlingConfig'
-          description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorHandlingConfig'
+            - description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
       description: ' The properties that are applied when Salesforce is being used as a destination. '
     SnowflakeDestinationProperties:
       type: object
@@ -3330,17 +3613,21 @@ components:
         - intermediateBucketName
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Snowflake flow destination. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Snowflake flow destination. '
         intermediateBucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' The intermediate bucket that Amazon AppFlow uses when moving data into Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' The intermediate bucket that Amazon AppFlow uses when moving data into Snowflake. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the destination bucket in which Amazon AppFlow places the files. '
         errorHandlingConfig:
-          $ref: '#/components/schemas/ErrorHandlingConfig'
-          description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Snowflake destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorHandlingConfig'
+            - description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Snowflake destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
       description: ' The properties that are applied when Snowflake is being used as a destination. '
     EventBridgeDestinationProperties:
       type: object
@@ -3348,8 +3635,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Amazon EventBridge flow destination. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Amazon EventBridge flow destination. '
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
       description: ' The properties that are applied when Amazon EventBridge is being used as a destination. '
@@ -3357,20 +3645,25 @@ components:
       type: object
       properties:
         Redshift:
-          $ref: '#/components/schemas/RedshiftDestinationProperties'
-          description: ' The properties required to query Amazon Redshift. '
+          allOf:
+            - $ref: '#/components/schemas/RedshiftDestinationProperties'
+            - description: ' The properties required to query Amazon Redshift. '
         S3:
-          $ref: '#/components/schemas/S3DestinationProperties'
-          description: ' The properties required to query Amazon S3. '
+          allOf:
+            - $ref: '#/components/schemas/S3DestinationProperties'
+            - description: ' The properties required to query Amazon S3. '
         Salesforce:
-          $ref: '#/components/schemas/SalesforceDestinationProperties'
-          description: ' The properties required to query Salesforce. '
+          allOf:
+            - $ref: '#/components/schemas/SalesforceDestinationProperties'
+            - description: ' The properties required to query Salesforce. '
         Snowflake:
-          $ref: '#/components/schemas/SnowflakeDestinationProperties'
-          description: ' The properties required to query Snowflake. '
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeDestinationProperties'
+            - description: ' The properties required to query Snowflake. '
         EventBridge:
-          $ref: '#/components/schemas/EventBridgeDestinationProperties'
-          description: ' The properties required to query Amazon EventBridge. '
+          allOf:
+            - $ref: '#/components/schemas/EventBridgeDestinationProperties'
+            - description: ' The properties required to query Amazon EventBridge. '
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
@@ -3382,8 +3675,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Dynatrace flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Dynatrace flow source. '
       description: ' The properties that are applied when Dynatrace is being used as a source. '
     EntitiesPath:
       type: string
@@ -3393,14 +3687,17 @@ components:
       type: object
       properties:
         failOnFirstDestinationError:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies if the flow should fail after the first instance of a failure when attempting to place data in the destination. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' Specifies the Amazon S3 bucket prefix. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' Specifies the Amazon S3 bucket prefix. '
         bucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' Specifies the name of the Amazon S3 bucket. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' Specifies the name of the Amazon S3 bucket. '
       description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
     Long:
       type: integer
@@ -3412,11 +3709,13 @@ components:
       type: object
       properties:
         putFailuresCount:
-          $ref: '#/components/schemas/Long'
-          description: ' Specifies the failure count for the attempted flow. '
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' Specifies the failure count for the attempted flow. '
         executionMessage:
-          $ref: '#/components/schemas/ExecutionMessage'
-          description: ' Specifies the error message that appears if a flow fails. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionMessage'
+            - description: ' Specifies the error message that appears if a flow fails. '
       description: ' Provides details in the event of a failed flow, including the failure count and the related error messages. '
     MostRecentExecutionMessage:
       type: string
@@ -3436,36 +3735,45 @@ components:
       type: object
       properties:
         errorInfo:
-          $ref: '#/components/schemas/ErrorInfo'
-          description: ' Provides any error message information related to the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorInfo'
+            - description: ' Provides any error message information related to the flow run. '
         bytesProcessed:
-          $ref: '#/components/schemas/Long'
-          description: ' The total number of bytes processed by the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The total number of bytes processed by the flow run. '
         bytesWritten:
-          $ref: '#/components/schemas/Long'
-          description: ' The total number of bytes written as a result of the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The total number of bytes written as a result of the flow run. '
         recordsProcessed:
-          $ref: '#/components/schemas/Long'
-          description: ' The number of records processed in the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The number of records processed in the flow run. '
       description: ' Specifies the end result of the flow run. '
     ExecutionRecord:
       type: object
       properties:
         executionId:
-          $ref: '#/components/schemas/ExecutionId'
-          description: ' Specifies the identifier of the given flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: ' Specifies the identifier of the given flow run. '
         executionStatus:
-          $ref: '#/components/schemas/ExecutionStatus'
-          description: ' Specifies the flow run status and whether it is in progress, has completed successfully, or has failed. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionStatus'
+            - description: ' Specifies the flow run status and whether it is in progress, has completed successfully, or has failed. '
         executionResult:
-          $ref: '#/components/schemas/ExecutionResult'
-          description: ' Describes the result of the given flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionResult'
+            - description: ' Describes the result of the given flow run. '
         startedAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies the start time of the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the start time of the flow run. '
         lastUpdatedAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies the time of the most recent update. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the time of the most recent update. '
       description: ' Specifies information about the past flow run instances for a given flow. '
     FieldType:
       type: string
@@ -3484,14 +3792,17 @@ components:
         - filterOperators
       properties:
         fieldType:
-          $ref: '#/components/schemas/FieldType'
-          description: ' The type of field, such as string, integer, date, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/FieldType'
+            - description: ' The type of field, such as string, integer, date, and so on. '
         filterOperators:
-          $ref: '#/components/schemas/FilterOperatorList'
-          description: ' The list of operators supported by a field. '
+          allOf:
+            - $ref: '#/components/schemas/FilterOperatorList'
+            - description: ' The list of operators supported by a field. '
         supportedValues:
-          $ref: '#/components/schemas/SupportedValueList'
-          description: ' The list of values that a field can contain. For example, a Boolean <code>fieldType</code> can have two values: "true" and "false". '
+          allOf:
+            - $ref: '#/components/schemas/SupportedValueList'
+            - description: ' The list of values that a field can contain. For example, a Boolean <code>fieldType</code> can have two values: "true" and "false". '
       description: ' Contains details regarding the supported field type and the operators that can be applied for filtering. '
     FileType:
       type: string
@@ -3527,44 +3838,57 @@ components:
       type: object
       properties:
         flowArn:
-          $ref: '#/components/schemas/FlowArn'
-          description: ' The flow''s Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/FlowArn'
+            - description: ' The flow''s Amazon Resource Name (ARN). '
         description:
-          $ref: '#/components/schemas/FlowDescription'
-          description: ' A user-entered description of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: ' A user-entered description of the flow. '
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         flowStatus:
-          $ref: '#/components/schemas/FlowStatus'
-          description: ' Indicates the current status of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowStatus'
+            - description: ' Indicates the current status of the flow. '
         sourceConnectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' Specifies the source connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
         destinationConnectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' Specifies the destination connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' Specifies the destination connector type, such as Salesforce, Amazon S3, Amplitude, and so on. '
         triggerType:
-          $ref: '#/components/schemas/TriggerType'
-          description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerType'
+            - description: ' Specifies the type of flow trigger. This can be <code>OnDemand</code>, <code>Scheduled</code>, or <code>Event</code>. '
         createdAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the flow was created. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the flow was created. '
         lastUpdatedAt:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies when the flow was last updated. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies when the flow was last updated. '
         createdBy:
-          $ref: '#/components/schemas/CreatedBy'
-          description: ' The ARN of the user who created the flow. '
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: ' The ARN of the user who created the flow. '
         lastUpdatedBy:
-          $ref: '#/components/schemas/UpdatedBy'
-          description: ' Specifies the account user name that most recently updated the flow. '
+          allOf:
+            - $ref: '#/components/schemas/UpdatedBy'
+            - description: ' Specifies the account user name that most recently updated the flow. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to organize, track, or control access for your flow. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to organize, track, or control access for your flow. '
         lastRunExecutionDetails:
-          $ref: '#/components/schemas/ExecutionDetails'
-          description: ' Describes the details of the most recent flow run. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionDetails'
+            - description: ' Describes the details of the most recent flow run. '
       description: ' The properties of the flow, such as its source, destination, trigger type, and so on. '
     FlowList:
       type: array
@@ -3584,8 +3908,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Google Analytics flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Google Analytics flow source. '
       description: ' The properties that are applied when Google Analytics is being used as a source. '
     Group:
       type: string
@@ -3605,32 +3930,38 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Infor Nexus flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Infor Nexus flow source. '
       description: ' The properties that are applied when Infor Nexus is being used as a source. '
     ListConnectorEntitiesRequest:
       type: object
       title: ListConnectorEntitiesRequest
       properties:
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account, and is used to query the downstream connector. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account, and is used to query the downstream connector. '
         connectorType:
-          $ref: '#/components/schemas/ConnectorType'
-          description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: ' The type of connector, such as Salesforce, Amplitude, and so on. '
         entitiesPath:
-          $ref: '#/components/schemas/EntitiesPath'
-          description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
+          allOf:
+            - $ref: '#/components/schemas/EntitiesPath'
+            - description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
     ListFlowsRequest:
       type: object
       title: ListFlowsRequest
       properties:
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: ' Specifies the maximum number of items that should be returned in the result set. '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' Specifies the maximum number of items that should be returned in the result set. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' The pagination token for next page of data. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The pagination token for next page of data. '
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -3641,8 +3972,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Marketo flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Marketo flow source. '
       description: ' The properties that are applied when Marketo is being used as a source. '
     OAuthScope:
       type: string
@@ -3688,11 +4020,13 @@ components:
       type: object
       properties:
         prefixType:
-          $ref: '#/components/schemas/PrefixType'
-          description: ' Determines the level of granularity that''s included in the prefix. '
+          allOf:
+            - $ref: '#/components/schemas/PrefixType'
+            - description: ' Determines the level of granularity that''s included in the prefix. '
         prefixFormat:
-          $ref: '#/components/schemas/PrefixFormat'
-          description: ' Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
+          allOf:
+            - $ref: '#/components/schemas/PrefixFormat'
+            - description: ' Determines the format of the prefix, and whether it applies to the file name, file path, or both. '
       description: ' Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. '
     PrivateLinkServiceName:
       type: string
@@ -3718,11 +4052,13 @@ components:
       type: object
       properties:
         fileType:
-          $ref: '#/components/schemas/FileType'
-          description: ' Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. '
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+            - description: ' Indicates the file type that Amazon AppFlow places in the Amazon S3 bucket. '
         prefixConfig:
-          $ref: '#/components/schemas/PrefixConfig'
-          description: ' Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. '
+          allOf:
+            - $ref: '#/components/schemas/PrefixConfig'
+            - description: ' Determines the prefix that Amazon AppFlow applies to the folder name in the Amazon S3 bucket. You can name folders according to the flow frequency and date. '
         aggregationConfig:
           $ref: '#/components/schemas/AggregationConfig'
       description: ' The configuration that determines how Amazon AppFlow should format the flow output data when Amazon S3 is used as the destination. '
@@ -3732,11 +4068,13 @@ components:
         - bucketName
       properties:
         bucketName:
-          $ref: '#/components/schemas/BucketName'
-          description: ' The Amazon S3 bucket name where the source files are stored. '
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: ' The Amazon S3 bucket name where the source files are stored. '
         bucketPrefix:
-          $ref: '#/components/schemas/BucketPrefix'
-          description: ' The object key for the Amazon S3 bucket in which the source files are stored. '
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the Amazon S3 bucket in which the source files are stored. '
       description: ' The properties that are applied when Amazon S3 is being used as the flow source. '
     SalesforceSourceProperties:
       type: object
@@ -3744,14 +4082,17 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Salesforce flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Salesforce flow source. '
         enableDynamicFieldUpdate:
-          $ref: '#/components/schemas/Boolean'
-          description: ' The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow. '
         includeDeletedRecords:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Indicates whether Amazon AppFlow includes deleted files in the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether Amazon AppFlow includes deleted files in the flow run. '
       description: ' The properties that are applied when Salesforce is being used as a source. '
     ScheduleExpression:
       type: string
@@ -3775,20 +4116,25 @@ components:
         - scheduleExpression
       properties:
         scheduleExpression:
-          $ref: '#/components/schemas/ScheduleExpression'
-          description: ' The scheduling expression that determines when and how often the rule runs. '
+          allOf:
+            - $ref: '#/components/schemas/ScheduleExpression'
+            - description: ' The scheduling expression that determines when and how often the rule runs. '
         dataPullMode:
-          $ref: '#/components/schemas/DataPullMode'
-          description: ' Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run. '
+          allOf:
+            - $ref: '#/components/schemas/DataPullMode'
+            - description: ' Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run. '
         scheduleStartTime:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies the scheduled start time for a schedule-triggered flow. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the scheduled start time for a schedule-triggered flow. '
         scheduleEndTime:
-          $ref: '#/components/schemas/Date'
-          description: ' Specifies the scheduled end time for a schedule-triggered flow. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Specifies the scheduled end time for a schedule-triggered flow. '
         timezone:
-          $ref: '#/components/schemas/Timezone'
-          description: ' Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. '
+          allOf:
+            - $ref: '#/components/schemas/Timezone'
+            - description: ' Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. '
       description: ' Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. '
     ServiceNowSourceProperties:
       type: object
@@ -3796,8 +4142,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the ServiceNow flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the ServiceNow flow source. '
       description: ' The properties that are applied when ServiceNow is being used as a source. '
     SingularSourceProperties:
       type: object
@@ -3805,8 +4152,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Singular flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Singular flow source. '
       description: ' The properties that are applied when Singular is being used as a source. '
     SlackSourceProperties:
       type: object
@@ -3814,8 +4162,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Slack flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Slack flow source. '
       description: ' The properties that are applied when Slack is being used as a source. '
     Warehouse:
       type: string
@@ -3831,8 +4180,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Trend Micro flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Trend Micro flow source. '
       description: ' The properties that are applied when using Trend Micro as a flow source. '
     VeevaSourceProperties:
       type: object
@@ -3840,8 +4190,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Veeva flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Veeva flow source. '
       description: ' The properties that are applied when using Veeva as a flow source. '
     ZendeskSourceProperties:
       type: object
@@ -3849,8 +4200,9 @@ components:
         - object
       properties:
         object:
-          $ref: '#/components/schemas/Object'
-          description: ' The object specified in the Zendesk flow source. '
+          allOf:
+            - $ref: '#/components/schemas/Object'
+            - description: ' The object specified in the Zendesk flow source. '
       description: ' The properties that are applied when using Zendesk as a flow source. '
     String:
       type: string
@@ -3867,8 +4219,9 @@ components:
       title: StartFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
     StopFlowRequest:
       type: object
       required:
@@ -3876,8 +4229,9 @@ components:
       title: StopFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
     Value:
       type: string
       pattern: \S+
@@ -3895,8 +4249,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to organize, track, or control access for your flow. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to organize, track, or control access for your flow. '
     TaskType:
       type: string
       enum:
@@ -3924,14 +4279,17 @@ components:
       title: UpdateConnectorProfileRequest
       properties:
         connectorProfileName:
-          $ref: '#/components/schemas/ConnectorProfileName'
-          description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the AWS Account. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: ' The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the AWS Account. '
         connectionMode:
-          $ref: '#/components/schemas/ConnectionMode'
-          description: ' Indicates the connection mode and if it is public or private. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectionMode'
+            - description: ' Indicates the connection mode and if it is public or private. '
         connectorProfileConfig:
-          $ref: '#/components/schemas/ConnectorProfileConfig'
-          description: ' Defines the connector-specific profile configuration and credentials. '
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileConfig'
+            - description: ' Defines the connector-specific profile configuration and credentials. '
     UpdateFlowRequest:
       type: object
       required:
@@ -3942,21 +4300,26 @@ components:
       title: UpdateFlowRequest
       properties:
         flowName:
-          $ref: '#/components/schemas/FlowName'
-          description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: ' The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. '
         description:
-          $ref: '#/components/schemas/FlowDescription'
-          description: ' A description of the flow. '
+          allOf:
+            - $ref: '#/components/schemas/FlowDescription'
+            - description: ' A description of the flow. '
         triggerConfig:
-          $ref: '#/components/schemas/TriggerConfig'
-          description: ' The trigger settings that determine how and when the flow runs. '
+          allOf:
+            - $ref: '#/components/schemas/TriggerConfig'
+            - description: ' The trigger settings that determine how and when the flow runs. '
         sourceFlowConfig:
           $ref: '#/components/schemas/SourceFlowConfig'
         destinationFlowConfigList:
-          $ref: '#/components/schemas/DestinationFlowConfigList'
-          description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
+          allOf:
+            - $ref: '#/components/schemas/DestinationFlowConfigList'
+            - description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
         tasks:
-          $ref: '#/components/schemas/Tasks'
-          description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
+          allOf:
+            - $ref: '#/components/schemas/Tasks'
+            - description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
 security:
   - hmac: []

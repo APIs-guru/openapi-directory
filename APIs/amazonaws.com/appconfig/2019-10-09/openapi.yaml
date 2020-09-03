@@ -2179,14 +2179,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/Id'
-          description: The application ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The application ID.
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The application name.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The application name.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the application.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the application.
     TagValue:
       type: string
       maxLength: 256
@@ -2196,26 +2199,33 @@ components:
       type: object
       properties:
         ApplicationId:
-          $ref: '#/components/schemas/Id'
-          description: The application ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The application ID.
         Id:
-          $ref: '#/components/schemas/Id'
-          description: The configuration profile ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The configuration profile ID.
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the configuration profile.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The configuration profile description.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The configuration profile description.
         LocationUri:
-          $ref: '#/components/schemas/Uri'
-          description: The URI location of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: The URI location of the configuration.
         RetrievalRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
-          $ref: '#/components/schemas/ValidatorList'
-          description: A list of methods for validating the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ValidatorList'
+            - description: A list of methods for validating the configuration.
     Validator:
       type: object
       required:
@@ -2223,77 +2233,96 @@ components:
         - Content
       properties:
         Type:
-          $ref: '#/components/schemas/ValidatorType'
-          description: 'AppConfig supports validators of type <code>JSON_SCHEMA</code> and <code>LAMBDA</code> '
+          allOf:
+            - $ref: '#/components/schemas/ValidatorType'
+            - description: 'AppConfig supports validators of type <code>JSON_SCHEMA</code> and <code>LAMBDA</code> '
         Content:
-          $ref: '#/components/schemas/StringWithLengthBetween0And32768'
-          description: Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/StringWithLengthBetween0And32768'
+            - description: Either the JSON Schema content or the Amazon Resource Name (ARN) of an AWS Lambda function.
       description: 'A validator provides a syntactic or semantic check to ensure the configuration you want to deploy functions as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.'
     ResourceNotFoundException: {}
     DeploymentStrategy:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/Id'
-          description: The deployment strategy ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The deployment strategy ID.
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the deployment strategy.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the deployment strategy.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the deployment strategy.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the deployment strategy.
         DeploymentDurationInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: Total amount of time the deployment lasted.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: Total amount of time the deployment lasted.
         GrowthType:
-          $ref: '#/components/schemas/GrowthType'
-          description: The algorithm used to define how percentage grew over time.
+          allOf:
+            - $ref: '#/components/schemas/GrowthType'
+            - description: The algorithm used to define how percentage grew over time.
         GrowthFactor:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of targets that received a deployed configuration during each interval.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of targets that received a deployed configuration during each interval.
         FinalBakeTimeInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
         ReplicateTo:
-          $ref: '#/components/schemas/ReplicateTo'
-          description: Save the deployment strategy to a Systems Manager (SSM) document.
+          allOf:
+            - $ref: '#/components/schemas/ReplicateTo'
+            - description: Save the deployment strategy to a Systems Manager (SSM) document.
     Environment:
       type: object
       properties:
         ApplicationId:
-          $ref: '#/components/schemas/Id'
-          description: The application ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The application ID.
         Id:
-          $ref: '#/components/schemas/Id'
-          description: The environment ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The environment ID.
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the environment.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the environment.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the environment.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the environment.
         State:
-          $ref: '#/components/schemas/EnvironmentState'
-          description: 'The state of the environment. An environment can be in one of the following states: <code>READY_FOR_DEPLOYMENT</code>, <code>DEPLOYING</code>, <code>ROLLING_BACK</code>, or <code>ROLLED_BACK</code> '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: 'The state of the environment. An environment can be in one of the following states: <code>READY_FOR_DEPLOYMENT</code>, <code>DEPLOYING</code>, <code>ROLLING_BACK</code>, or <code>ROLLED_BACK</code> '
         Monitors:
-          $ref: '#/components/schemas/MonitorList'
-          description: Amazon CloudWatch alarms monitored during the deployment.
+          allOf:
+            - $ref: '#/components/schemas/MonitorList'
+            - description: Amazon CloudWatch alarms monitored during the deployment.
     Monitor:
       type: object
       properties:
         AlarmArn:
-          $ref: '#/components/schemas/Arn'
-          description: ARN of the Amazon CloudWatch alarm.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ARN of the Amazon CloudWatch alarm.
         AlarmRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.
       description: Amazon CloudWatch alarms to monitor during the deployment process.
     HostedConfigurationVersion:
       type: object
       properties:
         Content:
-          $ref: '#/components/schemas/Blob'
-          description: The content of the configuration or the configuration data.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: The content of the configuration or the configuration data.
     ServiceQuotaExceededException: {}
     ConflictException: {}
     PayloadTooLargeException: {}
@@ -2301,125 +2330,157 @@ components:
       type: object
       properties:
         Content:
-          $ref: '#/components/schemas/Blob'
-          description: The content of the configuration or the configuration data.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: The content of the configuration or the configuration data.
     Deployment:
       type: object
       properties:
         ApplicationId:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the application that was deployed.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the application that was deployed.
         EnvironmentId:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the environment that was deployed.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the environment that was deployed.
         DeploymentStrategyId:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the deployment strategy that was deployed.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the deployment strategy that was deployed.
         ConfigurationProfileId:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the configuration profile that was deployed.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the configuration profile that was deployed.
         DeploymentNumber:
-          $ref: '#/components/schemas/Integer'
-          description: The sequence number of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The sequence number of the deployment.
         ConfigurationName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the configuration.
         ConfigurationLocationUri:
-          $ref: '#/components/schemas/Uri'
-          description: Information about the source location of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: Information about the source location of the configuration.
         ConfigurationVersion:
-          $ref: '#/components/schemas/Version'
-          description: The configuration version that was deployed.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The configuration version that was deployed.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the deployment.
         DeploymentDurationInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: Total amount of time the deployment lasted.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: Total amount of time the deployment lasted.
         GrowthType:
-          $ref: '#/components/schemas/GrowthType'
-          description: The algorithm used to define how percentage grew over time.
+          allOf:
+            - $ref: '#/components/schemas/GrowthType'
+            - description: The algorithm used to define how percentage grew over time.
         GrowthFactor:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of targets to receive a deployed configuration during each interval.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of targets to receive a deployed configuration during each interval.
         FinalBakeTimeInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: The amount of time AppConfig monitored for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
         State:
-          $ref: '#/components/schemas/DeploymentState'
-          description: The state of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The state of the deployment.
         EventLog:
-          $ref: '#/components/schemas/DeploymentEvents'
-          description: A list containing all events related to a deployment. The most recent events are displayed first.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentEvents'
+            - description: A list containing all events related to a deployment. The most recent events are displayed first.
         PercentageComplete:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of targets for which the deployment is available.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of targets for which the deployment is available.
         StartedAt:
-          $ref: '#/components/schemas/Iso8601DateTime'
-          description: The time the deployment started.
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: The time the deployment started.
         CompletedAt:
-          $ref: '#/components/schemas/Iso8601DateTime'
-          description: 'The time the deployment completed. '
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: 'The time the deployment completed. '
     Applications:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/ApplicationList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/ApplicationList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     ConfigurationProfiles:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/ConfigurationProfileSummaryList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationProfileSummaryList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     DeploymentStrategies:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/DeploymentStrategyList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentStrategyList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     Deployments:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/DeploymentList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     Environments:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/EnvironmentList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     HostedConfigurationVersions:
       type: object
       properties:
         Items:
-          $ref: '#/components/schemas/HostedConfigurationVersionSummaryList'
-          description: The elements from this collection.
+          allOf:
+            - $ref: '#/components/schemas/HostedConfigurationVersionSummaryList'
+            - description: The elements from this collection.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of items to return. Use this token to get the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
     ResourceTags:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     TagKey:
       type: string
       minLength: 1
@@ -2482,20 +2543,25 @@ components:
       type: object
       properties:
         ApplicationId:
-          $ref: '#/components/schemas/Id'
-          description: The application ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The application ID.
         Id:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the configuration profile.
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the configuration profile.
         LocationUri:
-          $ref: '#/components/schemas/Uri'
-          description: The URI location of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: The URI location of the configuration.
         ValidatorTypes:
-          $ref: '#/components/schemas/ValidatorTypeList'
-          description: The types of validators in the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/ValidatorTypeList'
+            - description: The types of validators in the configuration profile.
       description: A summary of a configuration profile.
     ConfigurationProfileSummaryList:
       type: array
@@ -2514,14 +2580,17 @@ components:
       title: CreateApplicationRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: A name for the application.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name for the application.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the application.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the application.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to the application. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to the application. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     CreateConfigurationProfileRequest:
       type: object
       required:
@@ -2530,23 +2599,29 @@ components:
       title: CreateConfigurationProfileRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: A name for the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name for the configuration profile.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the configuration profile.
         LocationUri:
-          $ref: '#/components/schemas/Uri'
-          description: 'A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document_name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object, specify the URI in the following format: <code>s3://&lt;bucket&gt;/&lt;objectKey&gt; </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json'
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: 'A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document_name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object, specify the URI in the following format: <code>s3://&lt;bucket&gt;/&lt;objectKey&gt; </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json'
         RetrievalRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
-          $ref: '#/components/schemas/ValidatorList'
-          description: A list of methods for validating the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ValidatorList'
+            - description: A list of methods for validating the configuration.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to the configuration profile. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     MinutesBetween0And24Hours:
       type: integer
       minimum: 0
@@ -2576,29 +2651,37 @@ components:
       title: CreateDeploymentStrategyRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: A name for the deployment strategy.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name for the deployment strategy.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the deployment strategy.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the deployment strategy.
         DeploymentDurationInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: Total amount of time for a deployment to last.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: Total amount of time for a deployment to last.
         FinalBakeTimeInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
         GrowthFactor:
-          $ref: '#/components/schemas/GrowthFactor'
-          description: The percentage of targets to receive a deployed configuration during each interval.
+          allOf:
+            - $ref: '#/components/schemas/GrowthFactor'
+            - description: The percentage of targets to receive a deployed configuration during each interval.
         GrowthType:
-          $ref: '#/components/schemas/GrowthType'
-          description: '<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:</p> <p> <b>Linear</b>: For this type, AppConfig processes the deployment by dividing the total number of targets by the value specified for <code>Step percentage</code>. For example, a linear deployment that uses a <code>Step percentage</code> of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.</p> <p> <b>Exponential</b>: For this type, AppConfig processes the deployment exponentially using the following formula: <code>G*(2^N)</code>. In this formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:</p> <p> <code>2*(2^0)</code> </p> <p> <code>2*(2^1)</code> </p> <p> <code>2*(2^2)</code> </p> <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GrowthType'
+            - description: '<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:</p> <p> <b>Linear</b>: For this type, AppConfig processes the deployment by dividing the total number of targets by the value specified for <code>Step percentage</code>. For example, a linear deployment that uses a <code>Step percentage</code> of 10 deploys the configuration to 10 percent of the hosts. After those deployments are complete, the system deploys the configuration to the next 10 percent. This continues until 100% of the targets have successfully received the configuration.</p> <p> <b>Exponential</b>: For this type, AppConfig processes the deployment exponentially using the following formula: <code>G*(2^N)</code>. In this formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:</p> <p> <code>2*(2^0)</code> </p> <p> <code>2*(2^1)</code> </p> <p> <code>2*(2^2)</code> </p> <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.</p>'
         ReplicateTo:
-          $ref: '#/components/schemas/ReplicateTo'
-          description: Save the deployment strategy to a Systems Manager (SSM) document.
+          allOf:
+            - $ref: '#/components/schemas/ReplicateTo'
+            - description: Save the deployment strategy to a Systems Manager (SSM) document.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to the deployment strategy. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to the deployment strategy. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     MonitorList:
       type: array
       items:
@@ -2612,17 +2695,21 @@ components:
       title: CreateEnvironmentRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: A name for the environment.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: A name for the environment.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the environment.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the environment.
         Monitors:
-          $ref: '#/components/schemas/MonitorList'
-          description: Amazon CloudWatch alarms to monitor during the deployment process.
+          allOf:
+            - $ref: '#/components/schemas/MonitorList'
+            - description: Amazon CloudWatch alarms to monitor during the deployment process.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to the environment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     StringWithLengthBetween1And255:
       type: string
       minLength: 1
@@ -2636,8 +2723,9 @@ components:
       title: CreateHostedConfigurationVersionRequest
       properties:
         Content:
-          $ref: '#/components/schemas/Blob'
-          description: The content of the configuration or the configuration data.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: The content of the configuration or the configuration data.
     DeleteApplicationRequest:
       type: object
       title: DeleteApplicationRequest
@@ -2702,54 +2790,69 @@ components:
       type: object
       properties:
         EventType:
-          $ref: '#/components/schemas/DeploymentEventType'
-          description: 'The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.'
+          allOf:
+            - $ref: '#/components/schemas/DeploymentEventType'
+            - description: 'The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.'
         TriggeredBy:
-          $ref: '#/components/schemas/TriggeredBy'
-          description: 'The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.'
+          allOf:
+            - $ref: '#/components/schemas/TriggeredBy'
+            - description: 'The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: 'A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.'
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: 'A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.'
         OccurredAt:
-          $ref: '#/components/schemas/Iso8601DateTime'
-          description: The date and time the event occurred.
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: The date and time the event occurred.
       description: An object that describes a deployment event.
     DeploymentSummary:
       type: object
       properties:
         DeploymentNumber:
-          $ref: '#/components/schemas/Integer'
-          description: The sequence number of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The sequence number of the deployment.
         ConfigurationName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the configuration.
         ConfigurationVersion:
-          $ref: '#/components/schemas/Version'
-          description: The version of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the configuration.
         DeploymentDurationInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: Total amount of time the deployment lasted.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: Total amount of time the deployment lasted.
         GrowthType:
-          $ref: '#/components/schemas/GrowthType'
-          description: The algorithm used to define how percentage grows over time.
+          allOf:
+            - $ref: '#/components/schemas/GrowthType'
+            - description: The algorithm used to define how percentage grows over time.
         GrowthFactor:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of targets to receive a deployed configuration during each interval.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of targets to receive a deployed configuration during each interval.
         FinalBakeTimeInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
         State:
-          $ref: '#/components/schemas/DeploymentState'
-          description: The state of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The state of the deployment.
         PercentageComplete:
-          $ref: '#/components/schemas/Percentage'
-          description: The percentage of targets for which the deployment is available.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The percentage of targets for which the deployment is available.
         StartedAt:
-          $ref: '#/components/schemas/Iso8601DateTime'
-          description: Time the deployment started.
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: Time the deployment started.
         CompletedAt:
-          $ref: '#/components/schemas/Iso8601DateTime'
-          description: Time the deployment completed.
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: Time the deployment completed.
       description: Information about the deployment.
     DeploymentList:
       type: array
@@ -2806,20 +2909,25 @@ components:
       type: object
       properties:
         ApplicationId:
-          $ref: '#/components/schemas/Id'
-          description: The application ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The application ID.
         ConfigurationProfileId:
-          $ref: '#/components/schemas/Id'
-          description: The configuration profile ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The configuration profile ID.
         VersionNumber:
-          $ref: '#/components/schemas/Integer'
-          description: The configuration version.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The configuration version.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the configuration.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the configuration.
         ContentType:
-          $ref: '#/components/schemas/StringWithLengthBetween1And255'
-          description: 'A standard MIME type describing the format of the configuration content. For more information, see <a href="https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a>.'
+          allOf:
+            - $ref: '#/components/schemas/StringWithLengthBetween1And255'
+            - description: 'A standard MIME type describing the format of the configuration content. For more information, see <a href="https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">Content-Type</a>.'
       description: Information about the configuration.
     HostedConfigurationVersionSummaryList:
       type: array
@@ -2866,20 +2974,25 @@ components:
       title: StartDeploymentRequest
       properties:
         DeploymentStrategyId:
-          $ref: '#/components/schemas/DeploymentStrategyId'
-          description: The deployment strategy ID.
+          allOf:
+            - $ref: '#/components/schemas/DeploymentStrategyId'
+            - description: The deployment strategy ID.
         ConfigurationProfileId:
-          $ref: '#/components/schemas/Id'
-          description: The configuration profile ID.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The configuration profile ID.
         ConfigurationVersion:
-          $ref: '#/components/schemas/Version'
-          description: The configuration version to deploy.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The configuration version to deploy.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the deployment.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the deployment.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'Metadata to assign to the deployment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Metadata to assign to the deployment. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.'
     StopDeploymentRequest:
       type: object
       title: StopDeploymentRequest
@@ -2902,8 +3015,9 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The key-value string map. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.'
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -2913,59 +3027,73 @@ components:
       title: UpdateApplicationRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the application.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the application.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the application.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the application.
     UpdateConfigurationProfileRequest:
       type: object
       title: UpdateConfigurationProfileRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the configuration profile.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the configuration profile.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the configuration profile.
         RetrievalRoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
         Validators:
-          $ref: '#/components/schemas/ValidatorList'
-          description: A list of methods for validating the configuration.
+          allOf:
+            - $ref: '#/components/schemas/ValidatorList'
+            - description: A list of methods for validating the configuration.
     UpdateDeploymentStrategyRequest:
       type: object
       title: UpdateDeploymentStrategyRequest
       properties:
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the deployment strategy.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the deployment strategy.
         DeploymentDurationInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: Total amount of time for a deployment to last.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: Total amount of time for a deployment to last.
         FinalBakeTimeInMinutes:
-          $ref: '#/components/schemas/MinutesBetween0And24Hours'
-          description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
+          allOf:
+            - $ref: '#/components/schemas/MinutesBetween0And24Hours'
+            - description: The amount of time AppConfig monitors for alarms before considering the deployment to be complete and no longer eligible for automatic roll back.
         GrowthFactor:
-          $ref: '#/components/schemas/GrowthFactor'
-          description: The percentage of targets to receive a deployed configuration during each interval.
+          allOf:
+            - $ref: '#/components/schemas/GrowthFactor'
+            - description: The percentage of targets to receive a deployed configuration during each interval.
         GrowthType:
-          $ref: '#/components/schemas/GrowthType'
-          description: '<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:</p> <p> <b>Linear</b>: For this type, AppConfig processes the deployment by increments of the growth factor evenly distributed over the deployment time. For example, a linear deployment that uses a growth factor of 20 initially makes the configuration available to 20 percent of the targets. After 1/5th of the deployment time has passed, the system updates the percentage to 40 percent. This continues until 100% of the targets are set to receive the deployed configuration.</p> <p> <b>Exponential</b>: For this type, AppConfig processes the deployment exponentially using the following formula: <code>G*(2^N)</code>. In this formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:</p> <p> <code>2*(2^0)</code> </p> <p> <code>2*(2^1)</code> </p> <p> <code>2*(2^2)</code> </p> <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GrowthType'
+            - description: '<p>The algorithm used to define how percentage grows over time. AWS AppConfig supports the following growth types:</p> <p> <b>Linear</b>: For this type, AppConfig processes the deployment by increments of the growth factor evenly distributed over the deployment time. For example, a linear deployment that uses a growth factor of 20 initially makes the configuration available to 20 percent of the targets. After 1/5th of the deployment time has passed, the system updates the percentage to 40 percent. This continues until 100% of the targets are set to receive the deployed configuration.</p> <p> <b>Exponential</b>: For this type, AppConfig processes the deployment exponentially using the following formula: <code>G*(2^N)</code>. In this formula, <code>G</code> is the growth factor specified by the user and <code>N</code> is the number of steps until the configuration is deployed to all targets. For example, if you specify a growth factor of 2, then the system rolls out the configuration as follows:</p> <p> <code>2*(2^0)</code> </p> <p> <code>2*(2^1)</code> </p> <p> <code>2*(2^2)</code> </p> <p>Expressed numerically, the deployment rolls out as follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues until the configuration has been deployed to all targets.</p>'
     UpdateEnvironmentRequest:
       type: object
       title: UpdateEnvironmentRequest
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the environment.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the environment.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the environment.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the environment.
         Monitors:
-          $ref: '#/components/schemas/MonitorList'
-          description: Amazon CloudWatch alarms to monitor during the deployment process.
+          allOf:
+            - $ref: '#/components/schemas/MonitorList'
+            - description: Amazon CloudWatch alarms to monitor during the deployment process.
     ValidateConfigurationRequest:
       type: object
       title: ValidateConfigurationRequest

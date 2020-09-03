@@ -2412,11 +2412,13 @@ components:
       title: AssociateIpGroupsRequest
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
         GroupIds:
-          $ref: '#/components/schemas/IpGroupIdList'
-          description: The identifiers of one or more IP access control groups.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupIdList'
+            - description: The identifiers of one or more IP access control groups.
     InvalidParameterValuesException: {}
     ResourceNotFoundException: {}
     ResourceLimitExceededException: {}
@@ -2434,17 +2436,20 @@ components:
       title: AuthorizeIpRulesRequest
       properties:
         GroupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the group.
         UserRules:
-          $ref: '#/components/schemas/IpRuleList'
-          description: The rules to add to the group.
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The rules to add to the group.
     CopyWorkspaceImageResult:
       type: object
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
     CopyWorkspaceImageRequest:
       type: object
       required:
@@ -2454,28 +2459,34 @@ components:
       title: CopyWorkspaceImageRequest
       properties:
         Name:
-          $ref: '#/components/schemas/WorkspaceImageName'
-          description: The name of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the image.
         Description:
-          $ref: '#/components/schemas/WorkspaceImageDescription'
-          description: A description of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: A description of the image.
         SourceImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the source image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the source image.
         SourceRegion:
-          $ref: '#/components/schemas/Region'
-          description: The identifier of the source Region.
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The identifier of the source Region.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the image.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the image.
     ResourceAlreadyExistsException: {}
     ResourceUnavailableException: {}
     CreateIpGroupResult:
       type: object
       properties:
         GroupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the group.
     CreateIpGroupRequest:
       type: object
       required:
@@ -2483,17 +2494,21 @@ components:
       title: CreateIpGroupRequest
       properties:
         GroupName:
-          $ref: '#/components/schemas/IpGroupName'
-          description: The name of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupName'
+            - description: The name of the group.
         GroupDesc:
-          $ref: '#/components/schemas/IpGroupDesc'
-          description: The description of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupDesc'
+            - description: The description of the group.
         UserRules:
-          $ref: '#/components/schemas/IpRuleList'
-          description: The rules to add to the group.
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The rules to add to the group.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     ResourceCreationFailedException: {}
     CreateTagsResult:
       type: object
@@ -2506,20 +2521,24 @@ components:
       title: CreateTagsRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to add new tags to a set of existing tags, you must submit all of the existing tags along with the new ones.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to add new tags to a set of existing tags, you must submit all of the existing tags along with the new ones.'
     CreateWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedCreateWorkspaceRequests'
-          description: Information about the WorkSpaces that could not be created.
+          allOf:
+            - $ref: '#/components/schemas/FailedCreateWorkspaceRequests'
+            - description: Information about the WorkSpaces that could not be created.
         PendingRequests:
-          $ref: '#/components/schemas/WorkspaceList'
-          description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceList'
+            - description: '<p>Information about the WorkSpaces that were created.</p> <p>Because this operation is asynchronous, the identifier returned is not immediately available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned can be incomplete.</p>'
     CreateWorkspacesRequest:
       type: object
       required:
@@ -2527,8 +2546,9 @@ components:
       title: CreateWorkspacesRequest
       properties:
         Workspaces:
-          $ref: '#/components/schemas/WorkspaceRequestList'
-          description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceRequestList'
+            - description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
     DeleteIpGroupResult:
       type: object
       properties: {}
@@ -2539,8 +2559,9 @@ components:
       title: DeleteIpGroupRequest
       properties:
         GroupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the IP access control group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the IP access control group.
     ResourceAssociatedException: {}
     DeleteTagsResult:
       type: object
@@ -2553,11 +2574,13 @@ components:
       title: DeleteTagsRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The tag keys.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys.
     DeleteWorkspaceImageResult:
       type: object
       properties: {}
@@ -2568,8 +2591,9 @@ components:
       title: DeleteWorkspaceImageRequest
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
     DeregisterWorkspaceDirectoryResult:
       type: object
       properties: {}
@@ -2580,17 +2604,20 @@ components:
       title: DeregisterWorkspaceDirectoryRequest
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: 'The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.'
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.'
     DescribeAccountResult:
       type: object
       properties:
         DedicatedTenancySupport:
-          $ref: '#/components/schemas/DedicatedTenancySupportResultEnum'
-          description: The status of BYOL (whether BYOL is enabled or disabled).
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancySupportResultEnum'
+            - description: The status of BYOL (whether BYOL is enabled or disabled).
         DedicatedTenancyManagementCidrRange:
-          $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
-          description: '<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
+            - description: '<p>The IP address range, specified as an IPv4 CIDR block, used for the management network interface.</p> <p>The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>'
     DescribeAccountRequest:
       type: object
       title: DescribeAccountRequest
@@ -2599,24 +2626,28 @@ components:
       type: object
       properties:
         AccountModifications:
-          $ref: '#/components/schemas/AccountModificationList'
-          description: The list of modifications to the configuration of BYOL.
+          allOf:
+            - $ref: '#/components/schemas/AccountModificationList'
+            - description: The list of modifications to the configuration of BYOL.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeAccountModificationsRequest:
       type: object
       title: DescribeAccountModificationsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
     DescribeClientPropertiesResult:
       type: object
       properties:
         ClientPropertiesList:
-          $ref: '#/components/schemas/ClientPropertiesList'
-          description: Information about the specified Amazon WorkSpaces clients.
+          allOf:
+            - $ref: '#/components/schemas/ClientPropertiesList'
+            - description: Information about the specified Amazon WorkSpaces clients.
     DescribeClientPropertiesRequest:
       type: object
       required:
@@ -2624,36 +2655,43 @@ components:
       title: DescribeClientPropertiesRequest
       properties:
         ResourceIds:
-          $ref: '#/components/schemas/ResourceIdList'
-          description: 'The resource identifier, in the form of directory IDs.'
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdList'
+            - description: 'The resource identifier, in the form of directory IDs.'
     DescribeIpGroupsResult:
       type: object
       properties:
         Result:
-          $ref: '#/components/schemas/WorkspacesIpGroupsList'
-          description: Information about the IP access control groups.
+          allOf:
+            - $ref: '#/components/schemas/WorkspacesIpGroupsList'
+            - description: Information about the IP access control groups.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeIpGroupsRequest:
       type: object
       title: DescribeIpGroupsRequest
       properties:
         GroupIds:
-          $ref: '#/components/schemas/IpGroupIdList'
-          description: The identifiers of one or more IP access control groups.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupIdList'
+            - description: The identifiers of one or more IP access control groups.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
         MaxResults:
-          $ref: '#/components/schemas/Limit'
-          description: The maximum number of items to return.
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of items to return.
     DescribeTagsResult:
       type: object
       properties:
         TagList:
-          $ref: '#/components/schemas/TagList'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags.
     DescribeTagsRequest:
       type: object
       required:
@@ -2661,64 +2699,78 @@ components:
       title: DescribeTagsRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
     DescribeWorkspaceBundlesResult:
       type: object
       properties:
         Bundles:
-          $ref: '#/components/schemas/BundleList'
-          description: Information about the bundles.
+          allOf:
+            - $ref: '#/components/schemas/BundleList'
+            - description: Information about the bundles.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.'
     DescribeWorkspaceBundlesRequest:
       type: object
       title: DescribeWorkspaceBundlesRequest
       properties:
         BundleIds:
-          $ref: '#/components/schemas/BundleIdList'
-          description: The identifiers of the bundles. You cannot combine this parameter with any other filter.
+          allOf:
+            - $ref: '#/components/schemas/BundleIdList'
+            - description: The identifiers of the bundles. You cannot combine this parameter with any other filter.
         Owner:
-          $ref: '#/components/schemas/BundleOwner'
-          description: <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
+          allOf:
+            - $ref: '#/components/schemas/BundleOwner'
+            - description: <p>The owner of the bundles. You cannot combine this parameter with any other filter.</p> <p>Specify <code>AMAZON</code> to describe the bundles provided by AWS or null to describe the bundles that belong to your account.</p>
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token for the next set of results. (You received this token from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next set of results. (You received this token from a previous call.)
     DescribeWorkspaceDirectoriesResult:
       type: object
       properties:
         Directories:
-          $ref: '#/components/schemas/DirectoryList'
-          description: Information about the directories.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryList'
+            - description: Information about the directories.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeWorkspaceDirectoriesRequest:
       type: object
       title: DescribeWorkspaceDirectoriesRequest
       properties:
         DirectoryIds:
-          $ref: '#/components/schemas/DirectoryIdList'
-          description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
+          allOf:
+            - $ref: '#/components/schemas/DirectoryIdList'
+            - description: 'The identifiers of the directories. If the value is null, all directories are retrieved.'
         Limit:
-          $ref: '#/components/schemas/Limit'
-          description: The maximum number of directories to return.
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of directories to return.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
     DescribeWorkspaceImagePermissionsResult:
       type: object
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
         ImagePermissions:
-          $ref: '#/components/schemas/ImagePermissions'
-          description: The identifiers of the AWS accounts that the image has been shared with.
+          allOf:
+            - $ref: '#/components/schemas/ImagePermissions'
+            - description: The identifiers of the AWS accounts that the image has been shared with.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeWorkspaceImagePermissionsRequest:
       type: object
       required:
@@ -2726,48 +2778,59 @@ components:
       title: DescribeWorkspaceImagePermissionsRequest
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
         MaxResults:
-          $ref: '#/components/schemas/Limit'
-          description: The maximum number of items to return.
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of items to return.
     DescribeWorkspaceImagesResult:
       type: object
       properties:
         Images:
-          $ref: '#/components/schemas/WorkspaceImageList'
-          description: Information about the images.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageList'
+            - description: Information about the images.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeWorkspaceImagesRequest:
       type: object
       title: DescribeWorkspaceImagesRequest
       properties:
         ImageIds:
-          $ref: '#/components/schemas/WorkspaceImageIdList'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageIdList'
+            - description: The identifier of the image.
         ImageType:
-          $ref: '#/components/schemas/ImageType'
-          description: The type (owned or shared) of the image.
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: The type (owned or shared) of the image.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
         MaxResults:
-          $ref: '#/components/schemas/Limit'
-          description: The maximum number of items to return.
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of items to return.
     DescribeWorkspaceSnapshotsResult:
       type: object
       properties:
         RebuildSnapshots:
-          $ref: '#/components/schemas/SnapshotList'
-          description: Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the user volume.
+          allOf:
+            - $ref: '#/components/schemas/SnapshotList'
+            - description: Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include the user volume.
         RestoreSnapshots:
-          $ref: '#/components/schemas/SnapshotList'
-          description: Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.
+          allOf:
+            - $ref: '#/components/schemas/SnapshotList'
+            - description: Information about the snapshots that can be used to restore a WorkSpace. These snapshots include both the root volume and the user volume.
     DescribeWorkspaceSnapshotsRequest:
       type: object
       required:
@@ -2775,58 +2838,71 @@ components:
       title: DescribeWorkspaceSnapshotsRequest
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
     DescribeWorkspacesResult:
       type: object
       properties:
         Workspaces:
-          $ref: '#/components/schemas/WorkspaceList'
-          description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceList'
+            - description: '<p>Information about the WorkSpaces.</p> <p>Because <a>CreateWorkspaces</a> is an asynchronous operation, some of the returned information could be incomplete.</p>'
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeWorkspacesRequest:
       type: object
       title: DescribeWorkspacesRequest
       properties:
         WorkspaceIds:
-          $ref: '#/components/schemas/WorkspaceIdList'
-          description: '<p>The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceIdList'
+            - description: '<p>The identifiers of the WorkSpaces. You cannot combine this parameter with any other filter.</p> <p>Because the <a>CreateWorkspaces</a> operation is asynchronous, the identifier it returns is not immediately available. If you immediately call <a>DescribeWorkspaces</a> with this identifier, no information is returned.</p>'
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: 'The identifier of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). You cannot combine this parameter with any other filter.'
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'The identifier of the directory. In addition, you can optionally specify a specific directory user (see <code>UserName</code>). You cannot combine this parameter with any other filter.'
         UserName:
-          $ref: '#/components/schemas/UserName'
-          description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the directory user. You must specify this parameter with <code>DirectoryId</code>.
         BundleId:
-          $ref: '#/components/schemas/BundleId'
-          description: The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the bundle. All WorkSpaces that are created from this bundle are retrieved. You cannot combine this parameter with any other filter.
         Limit:
-          $ref: '#/components/schemas/Limit'
-          description: The maximum number of items to return.
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of items to return.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
     DescribeWorkspacesConnectionStatusResult:
       type: object
       properties:
         WorkspacesConnectionStatus:
-          $ref: '#/components/schemas/WorkspaceConnectionStatusList'
-          description: Information about the connection status of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceConnectionStatusList'
+            - description: Information about the connection status of the WorkSpace.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     DescribeWorkspacesConnectionStatusRequest:
       type: object
       title: DescribeWorkspacesConnectionStatusRequest
       properties:
         WorkspaceIds:
-          $ref: '#/components/schemas/WorkspaceIdList'
-          description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceIdList'
+            - description: The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
     DisassociateIpGroupsResult:
       type: object
       properties: {}
@@ -2838,17 +2914,20 @@ components:
       title: DisassociateIpGroupsRequest
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
         GroupIds:
-          $ref: '#/components/schemas/IpGroupIdList'
-          description: The identifiers of one or more IP access control groups.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupIdList'
+            - description: The identifiers of one or more IP access control groups.
     ImportWorkspaceImageResult:
       type: object
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the WorkSpace image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the WorkSpace image.
     ImportWorkspaceImageRequest:
       type: object
       required:
@@ -2859,29 +2938,36 @@ components:
       title: ImportWorkspaceImageRequest
       properties:
         Ec2ImageId:
-          $ref: '#/components/schemas/Ec2ImageId'
-          description: The identifier of the EC2 image.
+          allOf:
+            - $ref: '#/components/schemas/Ec2ImageId'
+            - description: The identifier of the EC2 image.
         IngestionProcess:
-          $ref: '#/components/schemas/WorkspaceImageIngestionProcess'
-          description: The ingestion process to be used when importing the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageIngestionProcess'
+            - description: The ingestion process to be used when importing the image.
         ImageName:
-          $ref: '#/components/schemas/WorkspaceImageName'
-          description: The name of the WorkSpace image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the WorkSpace image.
         ImageDescription:
-          $ref: '#/components/schemas/WorkspaceImageDescription'
-          description: The description of the WorkSpace image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: The description of the WorkSpace image.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags. Each WorkSpaces resource can have a maximum of 50 tags.
     ListAvailableManagementCidrRangesResult:
       type: object
       properties:
         ManagementCidrRanges:
-          $ref: '#/components/schemas/DedicatedTenancyCidrRangeList'
-          description: 'The list of available IP address ranges, specified as IPv4 CIDR blocks.'
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancyCidrRangeList'
+            - description: 'The list of available IP address ranges, specified as IPv4 CIDR blocks.'
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
     ListAvailableManagementCidrRangesRequest:
       type: object
       required:
@@ -2889,23 +2975,28 @@ components:
       title: ListAvailableManagementCidrRangesRequest
       properties:
         ManagementCidrRangeConstraint:
-          $ref: '#/components/schemas/ManagementCidrRangeConstraint'
-          description: 'The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).'
+          allOf:
+            - $ref: '#/components/schemas/ManagementCidrRangeConstraint'
+            - description: 'The IP address range to search. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block).'
         MaxResults:
-          $ref: '#/components/schemas/ManagementCidrRangeMaxResults'
-          description: The maximum number of items to return.
+          allOf:
+            - $ref: '#/components/schemas/ManagementCidrRangeMaxResults'
+            - description: The maximum number of items to return.
         NextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
     MigrateWorkspaceResult:
       type: object
       properties:
         SourceWorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The original identifier of the WorkSpace that is being migrated.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The original identifier of the WorkSpace that is being migrated.
         TargetWorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: 'The new identifier of the WorkSpace that is being migrated. If the migration does not succeed, the target WorkSpace ID will not be used, and the WorkSpace will still have the original WorkSpace ID.'
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: 'The new identifier of the WorkSpace that is being migrated. If the migration does not succeed, the target WorkSpace ID will not be used, and the WorkSpace will still have the original WorkSpace ID.'
     MigrateWorkspaceRequest:
       type: object
       required:
@@ -2914,11 +3005,13 @@ components:
       title: MigrateWorkspaceRequest
       properties:
         SourceWorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace to migrate from.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace to migrate from.
         BundleId:
-          $ref: '#/components/schemas/BundleId'
-          description: The identifier of the target bundle type to migrate the WorkSpace to.
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the target bundle type to migrate the WorkSpace to.
     OperationInProgressException: {}
     ModifyAccountResult:
       type: object
@@ -2928,11 +3021,13 @@ components:
       title: ModifyAccountRequest
       properties:
         DedicatedTenancySupport:
-          $ref: '#/components/schemas/DedicatedTenancySupportEnum'
-          description: The status of BYOL.
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancySupportEnum'
+            - description: The status of BYOL.
         DedicatedTenancyManagementCidrRange:
-          $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
-          description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
+            - description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface. Specify an IP address range that is compatible with your network and in CIDR notation (that is, specify the range as an IPv4 CIDR block). The CIDR block size must be /16 (for example, 203.0.113.25/16). It must also be specified as available by the <code>ListAvailableManagementCidrRanges</code> operation.'
     ModifyClientPropertiesResult:
       type: object
       properties: {}
@@ -2944,11 +3039,13 @@ components:
       title: ModifyClientPropertiesRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The resource identifiers, in the form of directory IDs.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The resource identifiers, in the form of directory IDs.'
         ClientProperties:
-          $ref: '#/components/schemas/ClientProperties'
-          description: Information about the Amazon WorkSpaces client.
+          allOf:
+            - $ref: '#/components/schemas/ClientProperties'
+            - description: Information about the Amazon WorkSpaces client.
     ModifySelfservicePermissionsResult:
       type: object
       properties: {}
@@ -2960,11 +3057,13 @@ components:
       title: ModifySelfservicePermissionsRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
         SelfservicePermissions:
-          $ref: '#/components/schemas/SelfservicePermissions'
-          description: The permissions to enable or disable self-service capabilities.
+          allOf:
+            - $ref: '#/components/schemas/SelfservicePermissions'
+            - description: The permissions to enable or disable self-service capabilities.
     ModifyWorkspaceAccessPropertiesResult:
       type: object
       properties: {}
@@ -2976,11 +3075,13 @@ components:
       title: ModifyWorkspaceAccessPropertiesRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
         WorkspaceAccessProperties:
-          $ref: '#/components/schemas/WorkspaceAccessProperties'
-          description: The device types and operating systems to enable or disable for access.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceAccessProperties'
+            - description: The device types and operating systems to enable or disable for access.
     ModifyWorkspaceCreationPropertiesResult:
       type: object
       properties: {}
@@ -2992,11 +3093,13 @@ components:
       title: ModifyWorkspaceCreationPropertiesRequest
       properties:
         ResourceId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
         WorkspaceCreationProperties:
-          $ref: '#/components/schemas/WorkspaceCreationProperties'
-          description: The default properties for creating WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceCreationProperties'
+            - description: The default properties for creating WorkSpaces.
     ModifyWorkspacePropertiesResult:
       type: object
       properties: {}
@@ -3008,11 +3111,13 @@ components:
       title: ModifyWorkspacePropertiesRequest
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
         WorkspaceProperties:
-          $ref: '#/components/schemas/WorkspaceProperties'
-          description: The properties of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceProperties'
+            - description: The properties of the WorkSpace.
     UnsupportedWorkspaceConfigurationException: {}
     ModifyWorkspaceStateResult:
       type: object
@@ -3025,17 +3130,20 @@ components:
       title: ModifyWorkspaceStateRequest
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
         WorkspaceState:
-          $ref: '#/components/schemas/TargetWorkspaceState'
-          description: The WorkSpace state.
+          allOf:
+            - $ref: '#/components/schemas/TargetWorkspaceState'
+            - description: The WorkSpace state.
     RebootWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedRebootWorkspaceRequests'
-          description: Information about the WorkSpaces that could not be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/FailedRebootWorkspaceRequests'
+            - description: Information about the WorkSpaces that could not be rebooted.
     RebootWorkspacesRequest:
       type: object
       required:
@@ -3043,14 +3151,16 @@ components:
       title: RebootWorkspacesRequest
       properties:
         RebootWorkspaceRequests:
-          $ref: '#/components/schemas/RebootWorkspaceRequests'
-          description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/RebootWorkspaceRequests'
+            - description: The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
     RebuildWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedRebuildWorkspaceRequests'
-          description: Information about the WorkSpace that could not be rebuilt.
+          allOf:
+            - $ref: '#/components/schemas/FailedRebuildWorkspaceRequests'
+            - description: Information about the WorkSpace that could not be rebuilt.
     RebuildWorkspacesRequest:
       type: object
       required:
@@ -3058,8 +3168,9 @@ components:
       title: RebuildWorkspacesRequest
       properties:
         RebuildWorkspaceRequests:
-          $ref: '#/components/schemas/RebuildWorkspaceRequests'
-          description: The WorkSpace to rebuild. You can specify a single WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/RebuildWorkspaceRequests'
+            - description: The WorkSpace to rebuild. You can specify a single WorkSpace.
     RegisterWorkspaceDirectoryResult:
       type: object
       properties: {}
@@ -3071,23 +3182,29 @@ components:
       title: RegisterWorkspaceDirectoryRequest
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: 'The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.'
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'The identifier of the directory. You cannot register a directory if it does not have a status of Active. If the directory does not have a status of Active, you will receive an InvalidResourceStateException error. If you have already registered the maximum number of directories that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. Deregister directories that you are not using for WorkSpaces, and try again.'
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIds'
-          description: 'The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.'
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: 'The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these conditions are not met, you will receive an OperationNotSupportedException error.'
         EnableWorkDocs:
-          $ref: '#/components/schemas/BooleanObject'
-          description: 'Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try again.'
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: 'Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try again.'
         EnableSelfService:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether self-service capabilities are enabled or disabled.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether self-service capabilities are enabled or disabled.
         Tenancy:
-          $ref: '#/components/schemas/Tenancy'
-          description: 'Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Tenancy'
+            - description: 'Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be enabled for BYOL. If your account has not been enabled for BYOL, you will receive an InvalidParameterValuesException error. For more information about BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags associated with the directory.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with the directory.
     WorkspacesDefaultRoleNotFoundException: {}
     UnsupportedNetworkConfigurationException: {}
     RestoreWorkspaceResult:
@@ -3100,8 +3217,9 @@ components:
       title: RestoreWorkspaceRequest
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
     RevokeIpRulesResult:
       type: object
       properties: {}
@@ -3113,17 +3231,20 @@ components:
       title: RevokeIpRulesRequest
       properties:
         GroupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the group.
         UserRules:
-          $ref: '#/components/schemas/IpRevokedRuleList'
-          description: The rules to remove from the group.
+          allOf:
+            - $ref: '#/components/schemas/IpRevokedRuleList'
+            - description: The rules to remove from the group.
     StartWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedStartWorkspaceRequests'
-          description: Information about the WorkSpaces that could not be started.
+          allOf:
+            - $ref: '#/components/schemas/FailedStartWorkspaceRequests'
+            - description: Information about the WorkSpaces that could not be started.
     StartWorkspacesRequest:
       type: object
       required:
@@ -3131,14 +3252,16 @@ components:
       title: StartWorkspacesRequest
       properties:
         StartWorkspaceRequests:
-          $ref: '#/components/schemas/StartWorkspaceRequests'
-          description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/StartWorkspaceRequests'
+            - description: The WorkSpaces to start. You can specify up to 25 WorkSpaces.
     StopWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedStopWorkspaceRequests'
-          description: Information about the WorkSpaces that could not be stopped.
+          allOf:
+            - $ref: '#/components/schemas/FailedStopWorkspaceRequests'
+            - description: Information about the WorkSpaces that could not be stopped.
     StopWorkspacesRequest:
       type: object
       required:
@@ -3146,14 +3269,16 @@ components:
       title: StopWorkspacesRequest
       properties:
         StopWorkspaceRequests:
-          $ref: '#/components/schemas/StopWorkspaceRequests'
-          description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/StopWorkspaceRequests'
+            - description: The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
     TerminateWorkspacesResult:
       type: object
       properties:
         FailedRequests:
-          $ref: '#/components/schemas/FailedTerminateWorkspaceRequests'
-          description: Information about the WorkSpaces that could not be terminated.
+          allOf:
+            - $ref: '#/components/schemas/FailedTerminateWorkspaceRequests'
+            - description: Information about the WorkSpaces that could not be terminated.
     TerminateWorkspacesRequest:
       type: object
       required:
@@ -3161,8 +3286,9 @@ components:
       title: TerminateWorkspacesRequest
       properties:
         TerminateWorkspaceRequests:
-          $ref: '#/components/schemas/TerminateWorkspaceRequests'
-          description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/TerminateWorkspaceRequests'
+            - description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
     UpdateRulesOfIpGroupResult:
       type: object
       properties: {}
@@ -3174,11 +3300,13 @@ components:
       title: UpdateRulesOfIpGroupRequest
       properties:
         GroupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the group.
         UserRules:
-          $ref: '#/components/schemas/IpRuleList'
-          description: One or more rules.
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: One or more rules.
     UpdateWorkspaceImagePermissionResult:
       type: object
       properties: {}
@@ -3191,14 +3319,17 @@ components:
       title: UpdateWorkspaceImagePermissionRequest
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
         AllowCopyImage:
-          $ref: '#/components/schemas/BooleanObject'
-          description: The permission to copy the image. This permission can be revoked only after an image has been shared.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: The permission to copy the image. This permission can be revoked only after an image has been shared.
         SharedAccountId:
-          $ref: '#/components/schemas/AwsAccount'
-          description: The identifier of the AWS account to share or unshare the image with.
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account to share or unshare the image with.
     ARN:
       type: string
       pattern: '^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$'
@@ -3232,23 +3363,29 @@ components:
       type: object
       properties:
         ModificationState:
-          $ref: '#/components/schemas/DedicatedTenancyModificationStateEnum'
-          description: The state of the modification to the configuration of BYOL.
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancyModificationStateEnum'
+            - description: The state of the modification to the configuration of BYOL.
         DedicatedTenancySupport:
-          $ref: '#/components/schemas/DedicatedTenancySupportResultEnum'
-          description: The status of BYOL (whether BYOL is being enabled or disabled).
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancySupportResultEnum'
+            - description: The status of BYOL (whether BYOL is being enabled or disabled).
         DedicatedTenancyManagementCidrRange:
-          $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
-          description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.'
+          allOf:
+            - $ref: '#/components/schemas/DedicatedTenancyManagementCidrRange'
+            - description: 'The IP address range, specified as an IPv4 CIDR block, for the management network interface used for the account.'
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp when the modification of the BYOL configuration was started.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp when the modification of the BYOL configuration was started.
         ErrorCode:
-          $ref: '#/components/schemas/WorkspaceErrorCode'
-          description: The error code that is returned if the configuration of BYOL cannot be modified.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceErrorCode'
+            - description: The error code that is returned if the configuration of BYOL cannot be modified.
         ErrorMessage:
-          $ref: '#/components/schemas/Description'
-          description: The text of the error message that is returned if the configuration of BYOL cannot be modified.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned if the configuration of BYOL cannot be modified.
       description: 'Describes a modification to the configuration of Bring Your Own License (BYOL) for the specified account. '
     AccountModificationList:
       type: array
@@ -3290,32 +3427,41 @@ components:
       type: object
       properties:
         BundleId:
-          $ref: '#/components/schemas/BundleId'
-          description: The bundle identifier.
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The bundle identifier.
         Name:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The name of the bundle.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the bundle.
         Owner:
-          $ref: '#/components/schemas/BundleOwner'
-          description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
+          allOf:
+            - $ref: '#/components/schemas/BundleOwner'
+            - description: 'The owner of the bundle. This is the account identifier of the owner, or <code>AMAZON</code> if the bundle is provided by AWS.'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description.
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The image identifier of the bundle.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The image identifier of the bundle.
         RootStorage:
-          $ref: '#/components/schemas/RootStorage'
-          description: The size of the root volume.
+          allOf:
+            - $ref: '#/components/schemas/RootStorage'
+            - description: The size of the root volume.
         UserStorage:
-          $ref: '#/components/schemas/UserStorage'
-          description: The size of the user storage.
+          allOf:
+            - $ref: '#/components/schemas/UserStorage'
+            - description: The size of the user storage.
         ComputeType:
-          $ref: '#/components/schemas/ComputeType'
-          description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+          allOf:
+            - $ref: '#/components/schemas/ComputeType'
+            - description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
         LastUpdatedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last time that the bundle was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last time that the bundle was updated.
       description: Describes a WorkSpace bundle.
     BundleList:
       type: array
@@ -3332,18 +3478,21 @@ components:
       type: object
       properties:
         ReconnectEnabled:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: 'Specifies whether users can cache their credentials on the Amazon WorkSpaces client. When enabled, users can choose to reconnect to their WorkSpaces without re-entering their credentials. '
       description: Describes an Amazon WorkSpaces client.
     ClientPropertiesResult:
       type: object
       properties:
         ResourceId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The resource identifier, in the form of a directory ID.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The resource identifier, in the form of a directory ID.'
         ClientProperties:
-          $ref: '#/components/schemas/ClientProperties'
-          description: Information about the Amazon WorkSpaces client.
+          allOf:
+            - $ref: '#/components/schemas/ClientProperties'
+            - description: Information about the Amazon WorkSpaces client.
       description: Information about the Amazon WorkSpaces client.
     ClientPropertiesList:
       type: array
@@ -3366,8 +3515,9 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/Compute'
-          description: The compute type.
+          allOf:
+            - $ref: '#/components/schemas/Compute'
+            - description: The compute type.
       description: Describes the compute type.
     ComputerName:
       type: string
@@ -3436,23 +3586,29 @@ components:
       type: object
       properties:
         EnableWorkDocs:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Specifies whether the directory is enabled for Amazon WorkDocs.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Specifies whether the directory is enabled for Amazon WorkDocs.
         EnableInternetAccess:
-          $ref: '#/components/schemas/BooleanObject'
-          description: 'Specifies whether to automatically assign an Elastic public IP address to WorkSpaces in this directory by default. If enabled, the Elastic public IP address allows outbound internet access from your WorkSpaces when you’re using an internet gateway in the Amazon VPC in which your WorkSpaces are located. If you''re using a Network Address Translation (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in public subnets and you manually assign them Elastic IP addresses, you should disable this setting. This setting applies to new WorkSpaces that you launch or to existing WorkSpaces that you rebuild. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html"> Configure a VPC for Amazon WorkSpaces</a>.'
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: 'Specifies whether to automatically assign an Elastic public IP address to WorkSpaces in this directory by default. If enabled, the Elastic public IP address allows outbound internet access from your WorkSpaces when you’re using an internet gateway in the Amazon VPC in which your WorkSpaces are located. If you''re using a Network Address Translation (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in public subnets and you manually assign them Elastic IP addresses, you should disable this setting. This setting applies to new WorkSpaces that you launch or to existing WorkSpaces that you rebuild. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html"> Configure a VPC for Amazon WorkSpaces</a>.'
         DefaultOu:
-          $ref: '#/components/schemas/DefaultOu'
-          description: The organizational unit (OU) in the directory for the WorkSpace machine accounts.
+          allOf:
+            - $ref: '#/components/schemas/DefaultOu'
+            - description: The organizational unit (OU) in the directory for the WorkSpace machine accounts.
         CustomSecurityGroupId:
-          $ref: '#/components/schemas/SecurityGroupId'
-          description: 'The identifier of the default security group to apply to WorkSpaces when they are created. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html"> Security Groups for Your WorkSpaces</a>.'
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupId'
+            - description: 'The identifier of the default security group to apply to WorkSpaces when they are created. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html"> Security Groups for Your WorkSpaces</a>.'
         UserEnabledAsLocalAdministrator:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Specifies whether WorkSpace users are local administrators on their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Specifies whether WorkSpace users are local administrators on their WorkSpaces.
         EnableMaintenanceMode:
-          $ref: '#/components/schemas/BooleanObject'
-          description: 'Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>.'
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: 'Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>.'
       description: 'Describes the default values that are used to create WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html">Update Directory Details for Your WorkSpaces</a>.'
     TagKeyList:
       type: array
@@ -3530,53 +3686,69 @@ components:
       type: object
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The directory identifier.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The directory identifier.
         Alias:
-          $ref: '#/components/schemas/Alias'
-          description: The directory alias.
+          allOf:
+            - $ref: '#/components/schemas/Alias'
+            - description: The directory alias.
         DirectoryName:
-          $ref: '#/components/schemas/DirectoryName'
-          description: The name of the directory.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryName'
+            - description: The name of the directory.
         RegistrationCode:
-          $ref: '#/components/schemas/RegistrationCode'
-          description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
+          allOf:
+            - $ref: '#/components/schemas/RegistrationCode'
+            - description: The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIds'
-          description: The identifiers of the subnets used with the directory.
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The identifiers of the subnets used with the directory.
         DnsIpAddresses:
-          $ref: '#/components/schemas/DnsIpAddresses'
-          description: The IP addresses of the DNS servers for the directory.
+          allOf:
+            - $ref: '#/components/schemas/DnsIpAddresses'
+            - description: The IP addresses of the DNS servers for the directory.
         CustomerUserName:
-          $ref: '#/components/schemas/UserName'
-          description: The user name for the service account.
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The user name for the service account.
         IamRoleId:
-          $ref: '#/components/schemas/ARN'
-          description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The identifier of the IAM role. This is the role that allows Amazon WorkSpaces to make calls to other services, such as Amazon EC2, on your behalf.'
         DirectoryType:
-          $ref: '#/components/schemas/WorkspaceDirectoryType'
-          description: The directory type.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDirectoryType'
+            - description: The directory type.
         WorkspaceSecurityGroupId:
-          $ref: '#/components/schemas/SecurityGroupId'
-          description: The identifier of the security group that is assigned to new WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupId'
+            - description: The identifier of the security group that is assigned to new WorkSpaces.
         State:
-          $ref: '#/components/schemas/WorkspaceDirectoryState'
-          description: The state of the directory's registration with Amazon WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceDirectoryState'
+            - description: The state of the directory's registration with Amazon WorkSpaces.
         WorkspaceCreationProperties:
-          $ref: '#/components/schemas/DefaultWorkspaceCreationProperties'
-          description: The default creation properties for all WorkSpaces in the directory.
+          allOf:
+            - $ref: '#/components/schemas/DefaultWorkspaceCreationProperties'
+            - description: The default creation properties for all WorkSpaces in the directory.
         ipGroupIds:
-          $ref: '#/components/schemas/IpGroupIdList'
-          description: The identifiers of the IP access control groups associated with the directory.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupIdList'
+            - description: The identifiers of the IP access control groups associated with the directory.
         WorkspaceAccessProperties:
-          $ref: '#/components/schemas/WorkspaceAccessProperties'
-          description: The devices and operating systems that users can use to access WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceAccessProperties'
+            - description: The devices and operating systems that users can use to access WorkSpaces.
         Tenancy:
-          $ref: '#/components/schemas/Tenancy'
-          description: 'Specifies whether the directory is dedicated or shared. To use Bring Your Own License (BYOL), this value must be set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Tenancy'
+            - description: 'Specifies whether the directory is dedicated or shared. To use Bring Your Own License (BYOL), this value must be set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
         SelfservicePermissions:
-          $ref: '#/components/schemas/SelfservicePermissions'
-          description: The default self-service permissions for WorkSpaces in the directory.
+          allOf:
+            - $ref: '#/components/schemas/SelfservicePermissions'
+            - description: The default self-service permissions for WorkSpaces in the directory.
       description: Describes a directory that is used with Amazon WorkSpaces.
     DirectoryName:
       type: string
@@ -3599,55 +3771,69 @@ components:
         - BundleId
       properties:
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the AWS Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.
         UserName:
-          $ref: '#/components/schemas/UserName'
-          description: The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The user name of the user for the WorkSpace. This user name must exist in the AWS Directory Service directory for the WorkSpace.
         BundleId:
-          $ref: '#/components/schemas/BundleId'
-          description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the bundle for the WorkSpace. You can use <a>DescribeWorkspaceBundles</a> to list the available bundles.
         VolumeEncryptionKey:
-          $ref: '#/components/schemas/VolumeEncryptionKey'
-          description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+          allOf:
+            - $ref: '#/components/schemas/VolumeEncryptionKey'
+            - description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
         UserVolumeEncryptionEnabled:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether the data stored on the user volume is encrypted.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether the data stored on the user volume is encrypted.
         RootVolumeEncryptionEnabled:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether the data stored on the root volume is encrypted.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether the data stored on the root volume is encrypted.
         WorkspaceProperties:
-          $ref: '#/components/schemas/WorkspaceProperties'
-          description: The WorkSpace properties.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceProperties'
+            - description: The WorkSpace properties.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the WorkSpace.
       description: Describes the information used to create a WorkSpace.
     FailedCreateWorkspaceRequest:
       type: object
       properties:
         WorkspaceRequest:
-          $ref: '#/components/schemas/WorkspaceRequest'
-          description: Information about the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceRequest'
+            - description: Information about the WorkSpace.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorType'
-          description: The error code that is returned if the WorkSpace cannot be created.
+          allOf:
+            - $ref: '#/components/schemas/ErrorType'
+            - description: The error code that is returned if the WorkSpace cannot be created.
         ErrorMessage:
-          $ref: '#/components/schemas/Description'
-          description: The text of the error message that is returned if the WorkSpace cannot be created.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned if the WorkSpace cannot be created.
       description: Describes a WorkSpace that cannot be created.
     FailedWorkspaceChangeRequest:
       type: object
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorType'
-          description: The error code that is returned if the WorkSpace cannot be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/ErrorType'
+            - description: The error code that is returned if the WorkSpace cannot be rebooted.
         ErrorMessage:
-          $ref: '#/components/schemas/Description'
-          description: The text of the error message that is returned if the WorkSpace cannot be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned if the WorkSpace cannot be rebooted.
       description: 'Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).'
     FailedRebootWorkspaceRequests:
       type: array
@@ -3673,8 +3859,9 @@ components:
       type: object
       properties:
         SharedAccountId:
-          $ref: '#/components/schemas/AwsAccount'
-          description: The identifier of the AWS account that an image has been shared with.
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account that an image has been shared with.
       description: Describes the AWS accounts that have been granted permission to use a shared image.
     WorkspaceImageIngestionProcess:
       type: string
@@ -3694,11 +3881,13 @@ components:
       type: object
       properties:
         ipRule:
-          $ref: '#/components/schemas/IpRule'
-          description: 'The IP address range, in CIDR notation.'
+          allOf:
+            - $ref: '#/components/schemas/IpRule'
+            - description: 'The IP address range, in CIDR notation.'
         ruleDesc:
-          $ref: '#/components/schemas/IpRuleDesc'
-          description: The description.
+          allOf:
+            - $ref: '#/components/schemas/IpRuleDesc'
+            - description: The description.
       description: Describes a rule for an IP access control group.
     ManagementCidrRangeConstraint:
       type: string
@@ -3722,11 +3911,13 @@ components:
       type: object
       properties:
         Resource:
-          $ref: '#/components/schemas/ModificationResourceEnum'
-          description: The resource.
+          allOf:
+            - $ref: '#/components/schemas/ModificationResourceEnum'
+            - description: The resource.
         State:
-          $ref: '#/components/schemas/ModificationStateEnum'
-          description: The modification state.
+          allOf:
+            - $ref: '#/components/schemas/ModificationStateEnum'
+            - description: The modification state.
       description: Describes a WorkSpace modification.
     ModificationStateList:
       type: array
@@ -3736,86 +3927,109 @@ components:
       type: object
       properties:
         RestartWorkspace:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: Specifies whether users can restart their WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: Specifies whether users can restart their WorkSpace.
         IncreaseVolumeSize:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: Specifies whether users can increase the volume size of the drives on their WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: Specifies whether users can increase the volume size of the drives on their WorkSpace.
         ChangeComputeType:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: Specifies whether users can change the compute type (bundle) for their WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: Specifies whether users can change the compute type (bundle) for their WorkSpace.
         SwitchRunningMode:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: Specifies whether users can switch the running mode of their WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: Specifies whether users can switch the running mode of their WorkSpace.
         RebuildWorkspace:
-          $ref: '#/components/schemas/ReconnectEnum'
-          description: Specifies whether users can rebuild the operating system of a WorkSpace to its original state.
+          allOf:
+            - $ref: '#/components/schemas/ReconnectEnum'
+            - description: Specifies whether users can rebuild the operating system of a WorkSpace to its original state.
       description: 'Describes the self-service permissions for a directory. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html">Enable Self-Service WorkSpace Management Capabilities for Your Users</a>.'
     WorkspaceAccessProperties:
       type: object
       properties:
         DeviceTypeWindows:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: 'Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: 'Indicates whether users can use Windows clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
         DeviceTypeOsx:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: 'Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: 'Indicates whether users can use macOS clients to access their WorkSpaces. To restrict WorkSpaces access to trusted devices (also known as managed devices) with valid certificates, specify a value of <code>TRUST</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html">Restrict WorkSpaces Access to Trusted Devices</a>. '
         DeviceTypeWeb:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: Indicates whether users can access their WorkSpaces through a web browser.
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: Indicates whether users can access their WorkSpaces through a web browser.
         DeviceTypeIos:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: Indicates whether users can use iOS devices to access their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: Indicates whether users can use iOS devices to access their WorkSpaces.
         DeviceTypeAndroid:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: Indicates whether users can use Android devices to access their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: Indicates whether users can use Android devices to access their WorkSpaces.
         DeviceTypeChromeOs:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: Indicates whether users can use Chromebooks to access their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: Indicates whether users can use Chromebooks to access their WorkSpaces.
         DeviceTypeZeroClient:
-          $ref: '#/components/schemas/AccessPropertyValue'
-          description: Indicates whether users can use zero client devices to access their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/AccessPropertyValue'
+            - description: Indicates whether users can use zero client devices to access their WorkSpaces.
       description: 'The device types and operating systems that can be used to access a WorkSpace. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html">Amazon WorkSpaces Client Network Requirements</a>.'
     WorkspaceCreationProperties:
       type: object
       properties:
         EnableWorkDocs:
-          $ref: '#/components/schemas/BooleanObject'
-          description: '<p>Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.</p> <note> <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs remains enabled for any existing WorkSpaces, unless you either disable users'' access to WorkDocs or you delete the WorkDocs site. To disable users'' access to WorkDocs, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html">Disabling Users</a> in the <i>Amazon WorkDocs Administration Guide</i>. To delete a WorkDocs site, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html">Deleting a Site</a> in the <i>Amazon WorkDocs Administration Guide</i>.</p> <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are launched in the directory will have WorkDocs enabled.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: '<p>Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.</p> <note> <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs remains enabled for any existing WorkSpaces, unless you either disable users'' access to WorkDocs or you delete the WorkDocs site. To disable users'' access to WorkDocs, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html">Disabling Users</a> in the <i>Amazon WorkDocs Administration Guide</i>. To delete a WorkDocs site, see <a href="https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html">Deleting a Site</a> in the <i>Amazon WorkDocs Administration Guide</i>.</p> <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are launched in the directory will have WorkDocs enabled.</p> </note>'
         EnableInternetAccess:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether internet access is enabled for your WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether internet access is enabled for your WorkSpaces.
         DefaultOu:
-          $ref: '#/components/schemas/DefaultOu'
-          description: The default organizational unit (OU) for your WorkSpace directories.
+          allOf:
+            - $ref: '#/components/schemas/DefaultOu'
+            - description: The default organizational unit (OU) for your WorkSpace directories.
         CustomSecurityGroupId:
-          $ref: '#/components/schemas/SecurityGroupId'
-          description: The identifier of your custom security group.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupId'
+            - description: The identifier of your custom security group.
         UserEnabledAsLocalAdministrator:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether users are local administrators of their WorkSpaces.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether users are local administrators of their WorkSpaces.
         EnableMaintenanceMode:
-          $ref: '#/components/schemas/BooleanObject'
-          description: 'Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>. '
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: 'Indicates whether maintenance mode is enabled for your WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html">WorkSpace Maintenance</a>. '
       description: 'Describes the default properties that are used for creating WorkSpaces. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html">Update Directory Details for Your WorkSpaces</a>. '
     WorkspaceProperties:
       type: object
       properties:
         RunningMode:
-          $ref: '#/components/schemas/RunningMode'
-          description: 'The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
+          allOf:
+            - $ref: '#/components/schemas/RunningMode'
+            - description: 'The running mode. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html">Manage the WorkSpace Running Mode</a>.'
         RunningModeAutoStopTimeoutInMinutes:
-          $ref: '#/components/schemas/RunningModeAutoStopTimeoutInMinutes'
-          description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.
+          allOf:
+            - $ref: '#/components/schemas/RunningModeAutoStopTimeoutInMinutes'
+            - description: The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.
         RootVolumeSizeGib:
-          $ref: '#/components/schemas/RootVolumeSizeGib'
-          description: 'The size of the root volume. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
+          allOf:
+            - $ref: '#/components/schemas/RootVolumeSizeGib'
+            - description: 'The size of the root volume. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
         UserVolumeSizeGib:
-          $ref: '#/components/schemas/UserVolumeSizeGib'
-          description: 'The size of the user storage. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
+          allOf:
+            - $ref: '#/components/schemas/UserVolumeSizeGib'
+            - description: 'The size of the user storage. For important information about how to modify the size of the root and user volumes, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html">Modify a WorkSpace</a>.'
         ComputeTypeName:
-          $ref: '#/components/schemas/Compute'
-          description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Compute'
+            - description: 'The compute type. For more information, see <a href="http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles">Amazon WorkSpaces Bundles</a>.'
       description: Describes a WorkSpace.
     TargetWorkspaceState:
       type: string
@@ -3831,8 +4045,9 @@ components:
       type: object
       properties:
         Type:
-          $ref: '#/components/schemas/OperatingSystemType'
-          description: The operating system.
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystemType'
+            - description: The operating system.
       description: The operating system that the image is running.
     RebootRequest:
       type: object
@@ -3840,8 +4055,9 @@ components:
         - WorkspaceId
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
       description: Describes the information used to reboot a WorkSpace.
     RebootWorkspaceRequests:
       type: array
@@ -3855,8 +4071,9 @@ components:
         - WorkspaceId
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
       description: Describes the information used to rebuild a WorkSpace.
     RebuildWorkspaceRequests:
       type: array
@@ -3882,8 +4099,9 @@ components:
       type: object
       properties:
         Capacity:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The size of the root volume.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The size of the root volume.
       description: Describes the root volume for a WorkSpace bundle.
     RootVolumeSizeGib:
       type: integer
@@ -3898,15 +4116,17 @@ components:
       type: object
       properties:
         SnapshotTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time when the snapshot was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the snapshot was created.
       description: Describes a snapshot.
     StartRequest:
       type: object
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
       description: Information used to start a WorkSpace.
     StartWorkspaceRequests:
       type: array
@@ -3918,8 +4138,9 @@ components:
       type: object
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
       description: Describes the information used to stop a WorkSpace.
     StopWorkspaceRequests:
       type: array
@@ -3945,11 +4166,13 @@ components:
         - Key
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: Describes a tag.
     TerminateRequest:
       type: object
@@ -3957,8 +4180,9 @@ components:
         - WorkspaceId
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
       description: Describes the information used to terminate a WorkSpace.
     TerminateWorkspaceRequests:
       type: array
@@ -3970,8 +4194,9 @@ components:
       type: object
       properties:
         Capacity:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The size of the user storage.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The size of the user storage.
       description: Describes the user storage for a WorkSpace bundle.
     UserVolumeSizeGib:
       type: integer
@@ -4001,66 +4226,85 @@ components:
       type: object
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
         DirectoryId:
-          $ref: '#/components/schemas/DirectoryId'
-          description: The identifier of the AWS Directory Service directory for the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the AWS Directory Service directory for the WorkSpace.
         UserName:
-          $ref: '#/components/schemas/UserName'
-          description: The user for the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The user for the WorkSpace.
         IpAddress:
-          $ref: '#/components/schemas/IpAddress'
-          description: The IP address of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address of the WorkSpace.
         State:
-          $ref: '#/components/schemas/WorkspaceState'
-          description: The operational state of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceState'
+            - description: The operational state of the WorkSpace.
         BundleId:
-          $ref: '#/components/schemas/BundleId'
-          description: The identifier of the bundle used to create the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/BundleId'
+            - description: The identifier of the bundle used to create the WorkSpace.
         SubnetId:
-          $ref: '#/components/schemas/SubnetId'
-          description: The identifier of the subnet for the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - description: The identifier of the subnet for the WorkSpace.
         ErrorMessage:
-          $ref: '#/components/schemas/Description'
-          description: The text of the error message that is returned if the WorkSpace cannot be created.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned if the WorkSpace cannot be created.
         ErrorCode:
-          $ref: '#/components/schemas/WorkspaceErrorCode'
-          description: The error code that is returned if the WorkSpace cannot be created.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceErrorCode'
+            - description: The error code that is returned if the WorkSpace cannot be created.
         ComputerName:
-          $ref: '#/components/schemas/ComputerName'
-          description: 'The name of the WorkSpace, as seen by the operating system. The format of this name varies. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html"> Launch a WorkSpace</a>. '
+          allOf:
+            - $ref: '#/components/schemas/ComputerName'
+            - description: 'The name of the WorkSpace, as seen by the operating system. The format of this name varies. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html"> Launch a WorkSpace</a>. '
         VolumeEncryptionKey:
-          $ref: '#/components/schemas/VolumeEncryptionKey'
-          description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+          allOf:
+            - $ref: '#/components/schemas/VolumeEncryptionKey'
+            - description: The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
         UserVolumeEncryptionEnabled:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether the data stored on the user volume is encrypted.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether the data stored on the user volume is encrypted.
         RootVolumeEncryptionEnabled:
-          $ref: '#/components/schemas/BooleanObject'
-          description: Indicates whether the data stored on the root volume is encrypted.
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether the data stored on the root volume is encrypted.
         WorkspaceProperties:
-          $ref: '#/components/schemas/WorkspaceProperties'
-          description: The properties of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceProperties'
+            - description: The properties of the WorkSpace.
         ModificationStates:
-          $ref: '#/components/schemas/ModificationStateList'
-          description: The modification states of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/ModificationStateList'
+            - description: The modification states of the WorkSpace.
       description: Describes a WorkSpace.
     WorkspaceConnectionStatus:
       type: object
       properties:
         WorkspaceId:
-          $ref: '#/components/schemas/WorkspaceId'
-          description: The identifier of the WorkSpace.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The identifier of the WorkSpace.
         ConnectionState:
-          $ref: '#/components/schemas/ConnectionState'
-          description: The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionState'
+            - description: The connection state of the WorkSpace. The connection state is unknown if the WorkSpace is stopped.
         ConnectionStateCheckTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of the connection status check.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the connection status check.
         LastKnownUserConnectionTimestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of the last known user connection.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last known user connection.
       description: Describes the connection status of a WorkSpace.
     WorkspaceDirectoryType:
       type: string
@@ -4092,51 +4336,65 @@ components:
       type: object
       properties:
         ImageId:
-          $ref: '#/components/schemas/WorkspaceImageId'
-          description: The identifier of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageId'
+            - description: The identifier of the image.
         Name:
-          $ref: '#/components/schemas/WorkspaceImageName'
-          description: The name of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageName'
+            - description: The name of the image.
         Description:
-          $ref: '#/components/schemas/WorkspaceImageDescription'
-          description: The description of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageDescription'
+            - description: The description of the image.
         OperatingSystem:
-          $ref: '#/components/schemas/OperatingSystem'
-          description: 'The operating system that the image is running. '
+          allOf:
+            - $ref: '#/components/schemas/OperatingSystem'
+            - description: 'The operating system that the image is running. '
         State:
-          $ref: '#/components/schemas/WorkspaceImageState'
-          description: The status of the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageState'
+            - description: The status of the image.
         RequiredTenancy:
-          $ref: '#/components/schemas/WorkspaceImageRequiredTenancy'
-          description: 'Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageRequiredTenancy'
+            - description: 'Specifies whether the image is running on dedicated hardware. When Bring Your Own License (BYOL) is enabled, this value is set to <code>DEDICATED</code>. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html">Bring Your Own Windows Desktop Images</a>.'
         ErrorCode:
-          $ref: '#/components/schemas/WorkspaceImageErrorCode'
-          description: The error code that is returned for the image.
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceImageErrorCode'
+            - description: The error code that is returned for the image.
         ErrorMessage:
-          $ref: '#/components/schemas/Description'
-          description: The text of the error message that is returned for the image.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The text of the error message that is returned for the image.
         Created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.'
         OwnerAccountId:
-          $ref: '#/components/schemas/AwsAccount'
-          description: The identifier of the AWS account that owns the image.
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account that owns the image.
       description: Describes a WorkSpace image.
     WorkspacesIpGroup:
       type: object
       properties:
         groupId:
-          $ref: '#/components/schemas/IpGroupId'
-          description: The identifier of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupId'
+            - description: The identifier of the group.
         groupName:
-          $ref: '#/components/schemas/IpGroupName'
-          description: The name of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupName'
+            - description: The name of the group.
         groupDesc:
-          $ref: '#/components/schemas/IpGroupDesc'
-          description: The description of the group.
+          allOf:
+            - $ref: '#/components/schemas/IpGroupDesc'
+            - description: The description of the group.
         userRules:
-          $ref: '#/components/schemas/IpRuleList'
-          description: The rules.
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The rules.
       description: Describes an IP access control group.
 security:
   - hmac: []

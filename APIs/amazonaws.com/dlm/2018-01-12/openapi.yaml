@@ -179,20 +179,25 @@ paths:
                   type: object
                   properties:
                     PolicyType:
-                      $ref: '#/components/schemas/PolicyTypeValues'
-                      description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
+                      allOf:
+                        - $ref: '#/components/schemas/PolicyTypeValues'
+                        - description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                     ResourceTypes:
-                      $ref: '#/components/schemas/ResourceTypeValuesList'
-                      description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceTypeValuesList'
+                        - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
                     TargetTags:
-                      $ref: '#/components/schemas/TargetTagList'
-                      description: The single tag that identifies targeted resources for this policy.
+                      allOf:
+                        - $ref: '#/components/schemas/TargetTagList'
+                        - description: The single tag that identifies targeted resources for this policy.
                     Schedules:
-                      $ref: '#/components/schemas/ScheduleList'
-                      description: The schedule of policy-defined actions.
+                      allOf:
+                        - $ref: '#/components/schemas/ScheduleList'
+                        - description: The schedule of policy-defined actions.
                     Parameters:
-                      $ref: '#/components/schemas/Parameters'
-                      description: 'A set of optional parameters for the policy. '
+                      allOf:
+                        - $ref: '#/components/schemas/Parameters'
+                        - description: 'A set of optional parameters for the policy. '
                 Tags:
                   description: The tags to apply to the lifecycle policy during creation.
                   type: object
@@ -609,20 +614,25 @@ paths:
                   type: object
                   properties:
                     PolicyType:
-                      $ref: '#/components/schemas/PolicyTypeValues'
-                      description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
+                      allOf:
+                        - $ref: '#/components/schemas/PolicyTypeValues'
+                        - description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
                     ResourceTypes:
-                      $ref: '#/components/schemas/ResourceTypeValuesList'
-                      description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceTypeValuesList'
+                        - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
                     TargetTags:
-                      $ref: '#/components/schemas/TargetTagList'
-                      description: The single tag that identifies targeted resources for this policy.
+                      allOf:
+                        - $ref: '#/components/schemas/TargetTagList'
+                        - description: The single tag that identifies targeted resources for this policy.
                     Schedules:
-                      $ref: '#/components/schemas/ScheduleList'
-                      description: The schedule of policy-defined actions.
+                      allOf:
+                        - $ref: '#/components/schemas/ScheduleList'
+                        - description: The schedule of policy-defined actions.
                     Parameters:
-                      $ref: '#/components/schemas/Parameters'
-                      description: 'A set of optional parameters for the policy. '
+                      allOf:
+                        - $ref: '#/components/schemas/Parameters'
+                        - description: 'A set of optional parameters for the policy. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -687,8 +697,9 @@ components:
       type: object
       properties:
         PolicyId:
-          $ref: '#/components/schemas/PolicyId'
-          description: The identifier of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The identifier of the lifecycle policy.
     PolicyTypeValues:
       type: string
       enum:
@@ -715,8 +726,9 @@ components:
       type: object
       properties:
         ExcludeBootVolume:
-          $ref: '#/components/schemas/ExcludeBootVolume'
-          description: '[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html">CreateSnapshots</a>. The default is false.'
+          allOf:
+            - $ref: '#/components/schemas/ExcludeBootVolume'
+            - description: '[EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html">CreateSnapshots</a>. The default is false.'
       description: Specifies optional parameters to add to a policy. The set of valid parameters depends on the combination of policy type and resource type.
     TagValue:
       type: string
@@ -733,8 +745,9 @@ components:
       type: object
       properties:
         Policies:
-          $ref: '#/components/schemas/LifecyclePolicySummaryList'
-          description: Summary information about the lifecycle policies.
+          allOf:
+            - $ref: '#/components/schemas/LifecyclePolicySummaryList'
+            - description: Summary information about the lifecycle policies.
     PolicyId:
       type: string
       pattern: 'policy-[A-Za-z0-9]+'
@@ -754,14 +767,16 @@ components:
       type: object
       properties:
         Policy:
-          $ref: '#/components/schemas/LifecyclePolicy'
-          description: Detailed information about the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/LifecyclePolicy'
+            - description: Detailed information about the lifecycle policy.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: Information about the tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Information about the tags.
     TagResourceResponse:
       type: object
       properties: {}
@@ -819,20 +834,25 @@ components:
       type: object
       properties:
         PolicyType:
-          $ref: '#/components/schemas/PolicyTypeValues'
-          description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeValues'
+            - description: The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
         ResourceTypes:
-          $ref: '#/components/schemas/ResourceTypeValuesList'
-          description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+          allOf:
+            - $ref: '#/components/schemas/ResourceTypeValuesList'
+            - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
         TargetTags:
-          $ref: '#/components/schemas/TargetTagList'
-          description: The single tag that identifies targeted resources for this policy.
+          allOf:
+            - $ref: '#/components/schemas/TargetTagList'
+            - description: The single tag that identifies targeted resources for this policy.
         Schedules:
-          $ref: '#/components/schemas/ScheduleList'
-          description: The schedule of policy-defined actions.
+          allOf:
+            - $ref: '#/components/schemas/ScheduleList'
+            - description: The schedule of policy-defined actions.
         Parameters:
-          $ref: '#/components/schemas/Parameters'
-          description: 'A set of optional parameters for the policy. '
+          allOf:
+            - $ref: '#/components/schemas/Parameters'
+            - description: 'A set of optional parameters for the policy. '
       description: Specifies the configuration of a lifecycle policy.
     TagMap:
       type: object
@@ -850,20 +870,25 @@ components:
       title: CreateLifecyclePolicyRequest
       properties:
         ExecutionRoleArn:
-          $ref: '#/components/schemas/ExecutionRoleArn'
-          description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionRoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
         Description:
-          $ref: '#/components/schemas/PolicyDescription'
-          description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: 'A description of the lifecycle policy. The characters ^[0-9A-Za-z _-]+$ are supported.'
         State:
-          $ref: '#/components/schemas/SettablePolicyStateValues'
-          description: The desired activation state of the lifecycle policy after creation.
+          allOf:
+            - $ref: '#/components/schemas/SettablePolicyStateValues'
+            - description: The desired activation state of the lifecycle policy after creation.
         PolicyDetails:
-          $ref: '#/components/schemas/PolicyDetails'
-          description: The configuration details of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDetails'
+            - description: The configuration details of the lifecycle policy.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags to apply to the lifecycle policy during creation.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to apply to the lifecycle policy during creation.
     Interval:
       type: integer
       minimum: 1
@@ -885,17 +910,21 @@ components:
       type: object
       properties:
         Interval:
-          $ref: '#/components/schemas/Interval'
-          description: 'The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.'
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.'
         IntervalUnit:
-          $ref: '#/components/schemas/IntervalUnitValues'
-          description: The interval unit.
+          allOf:
+            - $ref: '#/components/schemas/IntervalUnitValues'
+            - description: The interval unit.
         Times:
-          $ref: '#/components/schemas/TimesList'
-          description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TimesList'
+            - description: '<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.</p>'
         CronExpression:
-          $ref: '#/components/schemas/CronExpression'
-          description: 'The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron expressions</a> in the <i>Amazon CloudWatch User Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: 'The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron expressions</a> in the <i>Amazon CloudWatch User Guide</i>.'
       description: '<p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>'
     RetentionIntervalUnitValues:
       type: string
@@ -908,11 +937,13 @@ components:
       type: object
       properties:
         Interval:
-          $ref: '#/components/schemas/Interval'
-          description: 'The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
         IntervalUnit:
-          $ref: '#/components/schemas/RetentionIntervalUnitValues'
-          description: The unit of time for time-based retention.
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time for time-based retention.
       description: Specifies the retention rule for cross-Region snapshot copies.
     TargetRegion:
       type: string
@@ -928,20 +959,25 @@ components:
         - Encrypted
       properties:
         TargetRegion:
-          $ref: '#/components/schemas/TargetRegion'
-          description: The target Region.
+          allOf:
+            - $ref: '#/components/schemas/TargetRegion'
+            - description: The target Region.
         Encrypted:
-          $ref: '#/components/schemas/Encrypted'
-          description: 'To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.'
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: 'To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.'
         CmkArn:
-          $ref: '#/components/schemas/CmkArn'
-          description: 'The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.'
+          allOf:
+            - $ref: '#/components/schemas/CmkArn'
+            - description: 'The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.'
         CopyTags:
-          $ref: '#/components/schemas/CopyTagsNullable'
-          description: Copy all user-defined tags from the source snapshot to the copied snapshot.
+          allOf:
+            - $ref: '#/components/schemas/CopyTagsNullable'
+            - description: Copy all user-defined tags from the source snapshot to the copied snapshot.
         RetainRule:
-          $ref: '#/components/schemas/CrossRegionCopyRetainRule'
-          description: The retention rule.
+          allOf:
+            - $ref: '#/components/schemas/CrossRegionCopyRetainRule'
+            - description: The retention rule.
       description: Specifies a rule for cross-Region snapshot copies.
     CrossRegionCopyRules:
       type: array
@@ -961,17 +997,21 @@ components:
         - AvailabilityZones
       properties:
         Count:
-          $ref: '#/components/schemas/Count'
-          description: The number of snapshots to be enabled with fast snapshot restore.
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The number of snapshots to be enabled with fast snapshot restore.
         Interval:
-          $ref: '#/components/schemas/Interval'
-          description: 'The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
         IntervalUnit:
-          $ref: '#/components/schemas/RetentionIntervalUnitValues'
-          description: The unit of time for enabling fast snapshot restore.
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time for enabling fast snapshot restore.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZoneList'
-          description: The Availability Zones in which to enable fast snapshot restore.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneList'
+            - description: The Availability Zones in which to enable fast snapshot restore.
       description: Specifies a rule for enabling fast snapshot restore. You can enable fast snapshot restore based on either a count or a time interval.
     PolicyIdList:
       type: array
@@ -1011,35 +1051,45 @@ components:
       type: object
       properties:
         PolicyId:
-          $ref: '#/components/schemas/PolicyId'
-          description: The identifier of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The identifier of the lifecycle policy.
         Description:
-          $ref: '#/components/schemas/PolicyDescription'
-          description: The description of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the lifecycle policy.
         State:
-          $ref: '#/components/schemas/GettablePolicyStateValues'
-          description: The activation state of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/GettablePolicyStateValues'
+            - description: The activation state of the lifecycle policy.
         StatusMessage:
-          $ref: '#/components/schemas/StatusMessage'
-          description: The description of the status.
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: The description of the status.
         ExecutionRoleArn:
-          $ref: '#/components/schemas/ExecutionRoleArn'
-          description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionRoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
         DateCreated:
-          $ref: '#/components/schemas/Timestamp'
-          description: The local date and time when the lifecycle policy was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The local date and time when the lifecycle policy was created.
         DateModified:
-          $ref: '#/components/schemas/Timestamp'
-          description: The local date and time when the lifecycle policy was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The local date and time when the lifecycle policy was last modified.
         PolicyDetails:
-          $ref: '#/components/schemas/PolicyDetails'
-          description: The configuration of the lifecycle policy
+          allOf:
+            - $ref: '#/components/schemas/PolicyDetails'
+            - description: The configuration of the lifecycle policy
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags.
         PolicyArn:
-          $ref: '#/components/schemas/PolicyArn'
-          description: The Amazon Resource Name (ARN) of the policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyArn'
+            - description: The Amazon Resource Name (ARN) of the policy.
       description: Detailed information about a lifecycle policy.
     StatusMessage:
       type: string
@@ -1058,17 +1108,21 @@ components:
       type: object
       properties:
         PolicyId:
-          $ref: '#/components/schemas/PolicyId'
-          description: The identifier of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The identifier of the lifecycle policy.
         Description:
-          $ref: '#/components/schemas/PolicyDescription'
-          description: The description of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: The description of the lifecycle policy.
         State:
-          $ref: '#/components/schemas/GettablePolicyStateValues'
-          description: The activation state of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/GettablePolicyStateValues'
+            - description: The activation state of the lifecycle policy.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags.
       description: Summary information about a lifecycle policy.
     ListTagsForResourceRequest:
       type: object
@@ -1078,14 +1132,17 @@ components:
       type: object
       properties:
         Count:
-          $ref: '#/components/schemas/Count'
-          description: 'The number of snapshots to retain for each volume, up to a maximum of 1000.'
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: 'The number of snapshots to retain for each volume, up to a maximum of 1000.'
         Interval:
-          $ref: '#/components/schemas/Interval'
-          description: 'The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: 'The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.'
         IntervalUnit:
-          $ref: '#/components/schemas/RetentionIntervalUnitValues'
-          description: The unit of time for time-based retention.
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time for time-based retention.
       description: Specifies the retention rule for a lifecycle policy. You can retain snapshots based on either a count or a time interval.
     ScheduleName:
       type: string
@@ -1108,29 +1165,37 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/ScheduleName'
-          description: The name of the schedule.
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule.
         CopyTags:
-          $ref: '#/components/schemas/CopyTags'
-          description: Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+          allOf:
+            - $ref: '#/components/schemas/CopyTags'
+            - description: Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
         TagsToAdd:
-          $ref: '#/components/schemas/TagsToAddList'
-          description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
+          allOf:
+            - $ref: '#/components/schemas/TagsToAddList'
+            - description: The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
         VariableTags:
-          $ref: '#/components/schemas/VariableTagsList'
-          description: 'A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.'
+          allOf:
+            - $ref: '#/components/schemas/VariableTagsList'
+            - description: 'A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.'
         CreateRule:
-          $ref: '#/components/schemas/CreateRule'
-          description: The creation rule.
+          allOf:
+            - $ref: '#/components/schemas/CreateRule'
+            - description: The creation rule.
         RetainRule:
-          $ref: '#/components/schemas/RetainRule'
-          description: The retention rule.
+          allOf:
+            - $ref: '#/components/schemas/RetainRule'
+            - description: The retention rule.
         FastRestoreRule:
-          $ref: '#/components/schemas/FastRestoreRule'
-          description: The rule for enabling fast snapshot restore.
+          allOf:
+            - $ref: '#/components/schemas/FastRestoreRule'
+            - description: The rule for enabling fast snapshot restore.
         CrossRegionCopyRules:
-          $ref: '#/components/schemas/CrossRegionCopyRules'
-          description: The rule for cross-Region snapshot copies.
+          allOf:
+            - $ref: '#/components/schemas/CrossRegionCopyRules'
+            - description: The rule for cross-Region snapshot copies.
       description: Specifies a backup schedule.
     String:
       type: string
@@ -1144,11 +1209,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/String'
-          description: The tag key.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The tag key.
         Value:
-          $ref: '#/components/schemas/String'
-          description: The tag value.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The tag value.
       description: Specifies a tag for a resource.
     TagKeyList:
       type: array
@@ -1163,8 +1230,9 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
     Time:
       type: string
       pattern: '^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
@@ -1179,16 +1247,20 @@ components:
       title: UpdateLifecyclePolicyRequest
       properties:
         ExecutionRoleArn:
-          $ref: '#/components/schemas/ExecutionRoleArn'
-          description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionRoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
         State:
-          $ref: '#/components/schemas/SettablePolicyStateValues'
-          description: The desired activation state of the lifecycle policy after creation.
+          allOf:
+            - $ref: '#/components/schemas/SettablePolicyStateValues'
+            - description: The desired activation state of the lifecycle policy after creation.
         Description:
-          $ref: '#/components/schemas/PolicyDescription'
-          description: A description of the lifecycle policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescription'
+            - description: A description of the lifecycle policy.
         PolicyDetails:
-          $ref: '#/components/schemas/PolicyDetails'
-          description: The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDetails'
+            - description: The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
 security:
   - hmac: []

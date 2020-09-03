@@ -186,8 +186,9 @@ paths:
                   type: object
                   properties:
                     MessageTtlSeconds:
-                      $ref: '#/components/schemas/MessageTtlSeconds'
-                      description: The period of time a signaling channel retains underlivered messages before they are discarded.
+                      allOf:
+                        - $ref: '#/components/schemas/MessageTtlSeconds'
+                        - description: The period of time a signaling channel retains underlivered messages before they are discarded.
                 Tags:
                   description: A set of tags (key-value pairs) that you want to associate with this channel.
                   type: array
@@ -727,11 +728,13 @@ paths:
                   type: object
                   properties:
                     Protocols:
-                      $ref: '#/components/schemas/ListOfProtocols'
-                      description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
+                      allOf:
+                        - $ref: '#/components/schemas/ListOfProtocols'
+                        - description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
                     Role:
-                      $ref: '#/components/schemas/ChannelRole'
-                      description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
+                      allOf:
+                        - $ref: '#/components/schemas/ChannelRole'
+                        - description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -805,11 +808,13 @@ paths:
                   type: object
                   properties:
                     ComparisonOperator:
-                      $ref: '#/components/schemas/ComparisonOperator'
-                      description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
+                      allOf:
+                        - $ref: '#/components/schemas/ComparisonOperator'
+                        - description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
                     ComparisonValue:
-                      $ref: '#/components/schemas/ChannelName'
-                      description: A value to compare.
+                      allOf:
+                        - $ref: '#/components/schemas/ChannelName'
+                        - description: A value to compare.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -877,11 +882,13 @@ paths:
                   type: object
                   properties:
                     ComparisonOperator:
-                      $ref: '#/components/schemas/ComparisonOperator'
-                      description: 'A comparison operator. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix.'
+                      allOf:
+                        - $ref: '#/components/schemas/ComparisonOperator'
+                        - description: 'A comparison operator. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix.'
                     ComparisonValue:
-                      $ref: '#/components/schemas/StreamName'
-                      description: A value to compare.
+                      allOf:
+                        - $ref: '#/components/schemas/StreamName'
+                        - description: A value to compare.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1502,8 +1509,9 @@ paths:
                   type: object
                   properties:
                     MessageTtlSeconds:
-                      $ref: '#/components/schemas/MessageTtlSeconds'
-                      description: The period of time a signaling channel retains underlivered messages before they are discarded.
+                      allOf:
+                        - $ref: '#/components/schemas/MessageTtlSeconds'
+                        - description: The period of time a signaling channel retains underlivered messages before they are discarded.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1663,8 +1671,9 @@ components:
       type: object
       properties:
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the created channel.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the created channel.
     MessageTtlSeconds:
       type: integer
       minimum: 5
@@ -1676,11 +1685,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag that is associated with the specified signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag that is associated with the specified signaling channel.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag that is associated with the specified signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag that is associated with the specified signaling channel.
       description: A key and value pair that is associated with the specified signaling channel.
     InvalidArgumentException: {}
     ClientLimitExceededException: {}
@@ -1692,8 +1703,9 @@ components:
       type: object
       properties:
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
     TagValue:
       type: string
       pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
@@ -1715,26 +1727,30 @@ components:
       type: object
       properties:
         ChannelInfo:
-          $ref: '#/components/schemas/ChannelInfo'
-          description: A structure that encapsulates the specified signaling channel's metadata and properties.
+          allOf:
+            - $ref: '#/components/schemas/ChannelInfo'
+            - description: A structure that encapsulates the specified signaling channel's metadata and properties.
     DescribeStreamOutput:
       type: object
       properties:
         StreamInfo:
-          $ref: '#/components/schemas/StreamInfo'
-          description: An object that describes the stream.
+          allOf:
+            - $ref: '#/components/schemas/StreamInfo'
+            - description: An object that describes the stream.
     GetDataEndpointOutput:
       type: object
       properties:
         DataEndpoint:
-          $ref: '#/components/schemas/DataEndpoint'
-          description: 'The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.'
+          allOf:
+            - $ref: '#/components/schemas/DataEndpoint'
+            - description: 'The endpoint value. To read data from the stream or to write data to it, specify this endpoint in your application.'
     GetSignalingChannelEndpointOutput:
       type: object
       properties:
         ResourceEndpointList:
-          $ref: '#/components/schemas/ResourceEndpointList'
-          description: A list of endpoints for the specified signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/ResourceEndpointList'
+            - description: A list of endpoints for the specified signaling channel.
     ListOfProtocols:
       type: array
       items:
@@ -1750,11 +1766,13 @@ components:
       type: object
       properties:
         ChannelInfoList:
-          $ref: '#/components/schemas/ChannelInfoList'
-          description: An array of <code>ChannelInfo</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/ChannelInfoList'
+            - description: An array of <code>ChannelInfo</code> objects.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request.'
     ComparisonOperator:
       type: string
       enum:
@@ -1768,11 +1786,13 @@ components:
       type: object
       properties:
         StreamInfoList:
-          $ref: '#/components/schemas/StreamInfoList'
-          description: An array of <code>StreamInfo</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/StreamInfoList'
+            - description: An array of <code>StreamInfo</code> objects.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, the call returns this element with a token. To get the next batch of streams, use this token in your next request. '
     StreamName:
       type: string
       pattern: '[a-zA-Z0-9_.-]+'
@@ -1782,20 +1802,24 @@ components:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags. '
         Tags:
-          $ref: '#/components/schemas/ResourceTags'
-          description: A map of tag keys and values associated with the specified signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/ResourceTags'
+            - description: A map of tag keys and values associated with the specified signaling channel.
     ListTagsForStreamOutput:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a <code>ListTags</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter and the result of a <code>ListTags</code> call is truncated, the response includes a token that you can use in the next request to fetch the next set of tags.'
         Tags:
-          $ref: '#/components/schemas/ResourceTags'
-          description: A map of tag keys and values associated with the specified stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceTags'
+            - description: A map of tag keys and values associated with the specified stream.
     InvalidResourceFormatException: {}
     TagResourceOutput:
       type: object
@@ -1856,8 +1880,9 @@ components:
       type: object
       properties:
         MessageTtlSeconds:
-          $ref: '#/components/schemas/MessageTtlSeconds'
-          description: The period of time a signaling channel retains underlivered messages before they are discarded.
+          allOf:
+            - $ref: '#/components/schemas/MessageTtlSeconds'
+            - description: The period of time a signaling channel retains underlivered messages before they are discarded.
       description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
     Version:
       type: string
@@ -1868,26 +1893,33 @@ components:
       type: object
       properties:
         ChannelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the signaling channel.
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel.
         ChannelType:
-          $ref: '#/components/schemas/ChannelType'
-          description: The type of the signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: The type of the signaling channel.
         ChannelStatus:
-          $ref: '#/components/schemas/Status'
-          description: Current status of the signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: Current status of the signaling channel.
         CreationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the signaling channel was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the signaling channel was created.
         SingleMasterConfiguration:
-          $ref: '#/components/schemas/SingleMasterConfiguration'
-          description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
+          allOf:
+            - $ref: '#/components/schemas/SingleMasterConfiguration'
+            - description: A structure that contains the configuration for the <code>SINGLE_MASTER</code> channel type.
         Version:
-          $ref: '#/components/schemas/Version'
-          description: The current version of the signaling channel.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The current version of the signaling channel.
       description: A structure that encapsulates a signaling channel's metadata and properties.
     ChannelInfoList:
       type: array
@@ -1897,11 +1929,13 @@ components:
       type: object
       properties:
         ComparisonOperator:
-          $ref: '#/components/schemas/ComparisonOperator'
-          description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+            - description: 'A comparison operator. Currently, you can only specify the <code>BEGINS_WITH</code> operator, which finds signaling channels whose names begin with a given prefix.'
         ComparisonValue:
-          $ref: '#/components/schemas/ChannelName'
-          description: A value to compare.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: A value to compare.
       description: 'An optional input parameter for the <code>ListSignalingChannels</code> API. When this parameter is specified while invoking <code>ListSignalingChannels</code>, the API returns only the channels that satisfy a condition specified in <code>ChannelNameCondition</code>.'
     ChannelProtocol:
       type: string
@@ -1921,17 +1955,21 @@ components:
       title: CreateSignalingChannelInput
       properties:
         ChannelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
         ChannelType:
-          $ref: '#/components/schemas/ChannelType'
-          description: 'A type of the signaling channel that you are creating. Currently, <code>SINGLE_MASTER</code> is the only supported channel type. '
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: 'A type of the signaling channel that you are creating. Currently, <code>SINGLE_MASTER</code> is the only supported channel type. '
         SingleMasterConfiguration:
-          $ref: '#/components/schemas/SingleMasterConfiguration'
-          description: 'A structure containing the configuration for the <code>SINGLE_MASTER</code> channel type. '
+          allOf:
+            - $ref: '#/components/schemas/SingleMasterConfiguration'
+            - description: 'A structure containing the configuration for the <code>SINGLE_MASTER</code> channel type. '
         Tags:
-          $ref: '#/components/schemas/TagOnCreateList'
-          description: A set of tags (key-value pairs) that you want to associate with this channel.
+          allOf:
+            - $ref: '#/components/schemas/TagOnCreateList'
+            - description: A set of tags (key-value pairs) that you want to associate with this channel.
     DeviceName:
       type: string
       pattern: '[a-zA-Z0-9_.-]+'
@@ -1963,23 +2001,29 @@ components:
       title: CreateStreamInput
       properties:
         DeviceName:
-          $ref: '#/components/schemas/DeviceName'
-          description: '<p>The name of the device that is writing to the stream. </p> <note> <p>In the current implementation, Kinesis Video Streams does not use this name.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/DeviceName'
+            - description: '<p>The name of the device that is writing to the stream. </p> <note> <p>In the current implementation, Kinesis Video Streams does not use this name.</p> </note>'
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: '<p>A name for the stream that you are creating.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: '<p>A name for the stream that you are creating.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
         MediaType:
-          $ref: '#/components/schemas/MediaType'
-          description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>Example valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
+          allOf:
+            - $ref: '#/components/schemas/MediaType'
+            - description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>Example valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
         KmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
         DataRetentionInHours:
-          $ref: '#/components/schemas/DataRetentionInHours'
-          description: '<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p> <p>The default value is 0, indicating that the stream does not persist data.</p> <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DataRetentionInHours'
+            - description: '<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p> <p>The default value is 0, indicating that the stream does not persist data.</p> <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.</p>'
         Tags:
-          $ref: '#/components/schemas/ResourceTags'
-          description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+          allOf:
+            - $ref: '#/components/schemas/ResourceTags'
+            - description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
     DataEndpoint:
       type: string
     DataRetentionChangeInHours:
@@ -1992,11 +2036,13 @@ components:
       title: DeleteSignalingChannelInput
       properties:
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
         CurrentVersion:
-          $ref: '#/components/schemas/Version'
-          description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> API operations.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the <code>DescribeSignalingChannel</code> or <code>ListSignalingChannels</code> API operations.
     DeleteStreamInput:
       type: object
       required:
@@ -2004,61 +2050,76 @@ components:
       title: DeleteStreamInput
       properties:
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: 'The Amazon Resource Name (ARN) of the stream that you want to delete. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The Amazon Resource Name (ARN) of the stream that you want to delete. '
         CurrentVersion:
-          $ref: '#/components/schemas/Version'
-          description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
     DescribeSignalingChannelInput:
       type: object
       title: DescribeSignalingChannelInput
       properties:
         ChannelName:
-          $ref: '#/components/schemas/ChannelName'
-          description: The name of the signaling channel that you want to describe.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: The name of the signaling channel that you want to describe.
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the signaling channel that you want to describe.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The ARN of the signaling channel that you want to describe.
     DescribeStreamInput:
       type: object
       title: DescribeStreamInput
       properties:
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream.
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
     StreamInfo:
       type: object
       properties:
         DeviceName:
-          $ref: '#/components/schemas/DeviceName'
-          description: The name of the device that is associated with the stream.
+          allOf:
+            - $ref: '#/components/schemas/DeviceName'
+            - description: The name of the device that is associated with the stream.
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream.
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
         MediaType:
-          $ref: '#/components/schemas/MediaType'
-          description: 'The <code>MediaType</code> of the stream. '
+          allOf:
+            - $ref: '#/components/schemas/MediaType'
+            - description: 'The <code>MediaType</code> of the stream. '
         KmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video Streams uses to encrypt data on the stream.
         Version:
-          $ref: '#/components/schemas/Version'
-          description: The version of the stream.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the stream.
         Status:
-          $ref: '#/components/schemas/Status'
-          description: The status of the stream.
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of the stream.
         CreationTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: A time stamp that indicates when the stream was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp that indicates when the stream was created.
         DataRetentionInHours:
-          $ref: '#/components/schemas/DataRetentionInHours'
-          description: 'How long the stream retains data, in hours.'
+          allOf:
+            - $ref: '#/components/schemas/DataRetentionInHours'
+            - description: 'How long the stream retains data, in hours.'
       description: An object describing a Kinesis video stream.
     GetDataEndpointInput:
       type: object
@@ -2067,23 +2128,28 @@ components:
       title: GetDataEndpointInput
       properties:
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream that you want to get the endpoint for. You must specify either this parameter or a <code>StreamARN</code> in the request.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream that you want to get the endpoint for. You must specify either this parameter or a <code>StreamARN</code> in the request.
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: 'The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a <code>StreamName</code> in the request. '
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: 'The Amazon Resource Name (ARN) of the stream that you want to get the endpoint for. You must specify either this parameter or a <code>StreamName</code> in the request. '
         APIName:
-          $ref: '#/components/schemas/APIName'
-          description: The name of the API action for which to get an endpoint.
+          allOf:
+            - $ref: '#/components/schemas/APIName'
+            - description: The name of the API action for which to get an endpoint.
     SingleMasterChannelEndpointConfiguration:
       type: object
       properties:
         Protocols:
-          $ref: '#/components/schemas/ListOfProtocols'
-          description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
+          allOf:
+            - $ref: '#/components/schemas/ListOfProtocols'
+            - description: 'This property is used to determine the nature of communication over this <code>SINGLE_MASTER</code> signaling channel. If <code>WSS</code> is specified, this API returns a websocket endpoint. If <code>HTTPS</code> is specified, this API returns an <code>HTTPS</code> endpoint.'
         Role:
-          $ref: '#/components/schemas/ChannelRole'
-          description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
+          allOf:
+            - $ref: '#/components/schemas/ChannelRole'
+            - description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
       description: 'An object that contains the endpoint configuration for the <code>SINGLE_MASTER</code> channel type. '
     GetSignalingChannelEndpointInput:
       type: object
@@ -2092,11 +2158,13 @@ components:
       title: GetSignalingChannelEndpointInput
       properties:
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
         SingleMasterChannelEndpointConfiguration:
-          $ref: '#/components/schemas/SingleMasterChannelEndpointConfiguration'
-          description: A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code> channel type.
+          allOf:
+            - $ref: '#/components/schemas/SingleMasterChannelEndpointConfiguration'
+            - description: A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code> channel type.
     ResourceEndpointList:
       type: array
       items:
@@ -2115,37 +2183,45 @@ components:
       title: ListSignalingChannelsInput
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListStreamsInputLimit'
-          description: The maximum number of channels to return in the response. The default is 500.
+          allOf:
+            - $ref: '#/components/schemas/ListStreamsInputLimit'
+            - description: The maximum number of channels to return in the response. The default is 500.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter, when the result of a <code>ListSignalingChannels</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of channels, provide this token in your next request.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter, when the result of a <code>ListSignalingChannels</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of channels, provide this token in your next request.'
         ChannelNameCondition:
-          $ref: '#/components/schemas/ChannelNameCondition'
-          description: 'Optional: Returns only the channels that satisfy a specific condition.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelNameCondition'
+            - description: 'Optional: Returns only the channels that satisfy a specific condition.'
     StreamNameCondition:
       type: object
       properties:
         ComparisonOperator:
-          $ref: '#/components/schemas/ComparisonOperator'
-          description: 'A comparison operator. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix.'
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+            - description: 'A comparison operator. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix.'
         ComparisonValue:
-          $ref: '#/components/schemas/StreamName'
-          description: A value to compare.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: A value to compare.
       description: 'Specifies the condition that streams must satisfy to be returned when you list streams (see the <code>ListStreams</code> API). A condition has a comparison operation and a value. Currently, you can specify only the <code>BEGINS_WITH</code> operator, which finds streams whose names start with a given prefix. '
     ListStreamsInput:
       type: object
       title: ListStreamsInput
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListStreamsInputLimit'
-          description: 'The maximum number of streams to return in the response. The default is 10,000.'
+          allOf:
+            - $ref: '#/components/schemas/ListStreamsInputLimit'
+            - description: 'The maximum number of streams to return in the response. The default is 10,000.'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter, when the result of a <code>ListStreams</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of streams, provide this token in your next request.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter, when the result of a <code>ListStreams</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of streams, provide this token in your next request.'
         StreamNameCondition:
-          $ref: '#/components/schemas/StreamNameCondition'
-          description: 'Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition. '
+          allOf:
+            - $ref: '#/components/schemas/StreamNameCondition'
+            - description: 'Optional: Returns only streams that satisfy a specific condition. Currently, you can specify only the prefix of a stream name as a condition. '
     StreamInfoList:
       type: array
       items:
@@ -2157,35 +2233,42 @@ components:
       title: ListTagsForResourceInput
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter and the result of a <code>ListTagsForResource</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags. '
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
     ListTagsForStreamInput:
       type: object
       title: ListTagsForStreamInput
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If you specify this parameter and the result of a <code>ListTagsForStream</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter and the result of a <code>ListTagsForStream</code> call is truncated, the response includes a token that you can use in the next request to fetch the next batch of tags.'
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream that you want to list tags for.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream that you want to list tags for.
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream that you want to list tags for.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream that you want to list tags for.
     ResourceEndpoint:
       type: string
     ResourceEndpointListItem:
       type: object
       properties:
         Protocol:
-          $ref: '#/components/schemas/ChannelProtocol'
-          description: The protocol of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+          allOf:
+            - $ref: '#/components/schemas/ChannelProtocol'
+            - description: The protocol of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
         ResourceEndpoint:
-          $ref: '#/components/schemas/ResourceEndpoint'
-          description: The endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+          allOf:
+            - $ref: '#/components/schemas/ResourceEndpoint'
+            - description: The endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
       description: An object that describes the endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
     TagKeyList:
       type: array
@@ -2207,11 +2290,13 @@ components:
       title: TagResourceInput
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags to associate with the specified signaling channel. Each tag is a key-value pair.
     TagStreamInput:
       type: object
       required:
@@ -2219,14 +2304,17 @@ components:
       title: TagStreamInput
       properties:
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the resource that you want to add the tag or tags to.
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream that you want to add the tag or tags to.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream that you want to add the tag or tags to.
         Tags:
-          $ref: '#/components/schemas/ResourceTags'
-          description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+          allOf:
+            - $ref: '#/components/schemas/ResourceTags'
+            - description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
     UntagResourceInput:
       type: object
       required:
@@ -2235,11 +2323,13 @@ components:
       title: UntagResourceInput
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
         TagKeyList:
-          $ref: '#/components/schemas/TagKeyList'
-          description: A list of the keys of the tags that you want to remove.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: A list of the keys of the tags that you want to remove.
     UntagStreamInput:
       type: object
       required:
@@ -2247,14 +2337,17 @@ components:
       title: UntagStreamInput
       properties:
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream that you want to remove tags from.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream that you want to remove tags from.
         TagKeyList:
-          $ref: '#/components/schemas/TagKeyList'
-          description: A list of the keys of the tags that you want to remove.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: A list of the keys of the tags that you want to remove.
     UpdateDataRetentionOperation:
       type: string
       enum:
@@ -2269,20 +2362,25 @@ components:
       title: UpdateDataRetentionInput
       properties:
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: The name of the stream whose retention period you want to change.
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream whose retention period you want to change.
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream whose retention period you want to change.
         CurrentVersion:
-          $ref: '#/components/schemas/Version'
-          description: 'The version of the stream whose retention period you want to change. To get the version, call either the <code>DescribeStream</code> or the <code>ListStreams</code> API.'
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: 'The version of the stream whose retention period you want to change. To get the version, call either the <code>DescribeStream</code> or the <code>ListStreams</code> API.'
         Operation:
-          $ref: '#/components/schemas/UpdateDataRetentionOperation'
-          description: Indicates whether you want to increase or decrease the retention period.
+          allOf:
+            - $ref: '#/components/schemas/UpdateDataRetentionOperation'
+            - description: Indicates whether you want to increase or decrease the retention period.
         DataRetentionChangeInHours:
-          $ref: '#/components/schemas/DataRetentionChangeInHours'
-          description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
+          allOf:
+            - $ref: '#/components/schemas/DataRetentionChangeInHours'
+            - description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
     UpdateSignalingChannelInput:
       type: object
       required:
@@ -2291,14 +2389,17 @@ components:
       title: UpdateSignalingChannelInput
       properties:
         ChannelARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of the signaling channel that you want to update.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the signaling channel that you want to update.
         CurrentVersion:
-          $ref: '#/components/schemas/Version'
-          description: The current version of the signaling channel that you want to update.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The current version of the signaling channel that you want to update.
         SingleMasterConfiguration:
-          $ref: '#/components/schemas/SingleMasterConfiguration'
-          description: 'The structure containing the configuration for the <code>SINGLE_MASTER</code> type of the signaling channel that you want to update. '
+          allOf:
+            - $ref: '#/components/schemas/SingleMasterConfiguration'
+            - description: 'The structure containing the configuration for the <code>SINGLE_MASTER</code> type of the signaling channel that you want to update. '
     UpdateStreamInput:
       type: object
       required:
@@ -2306,19 +2407,24 @@ components:
       title: UpdateStreamInput
       properties:
         StreamName:
-          $ref: '#/components/schemas/StreamName'
-          description: '<p>The name of the stream whose metadata you want to update.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: '<p>The name of the stream whose metadata you want to update.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
         StreamARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The ARN of the stream whose metadata you want to update.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The ARN of the stream whose metadata you want to update.
         CurrentVersion:
-          $ref: '#/components/schemas/Version'
-          description: The version of the stream whose metadata you want to update.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the stream whose metadata you want to update.
         DeviceName:
-          $ref: '#/components/schemas/DeviceName'
-          description: '<p>The name of the device that is writing to the stream. </p> <note> <p> In the current implementation, Kinesis Video Streams does not use this name. </p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/DeviceName'
+            - description: '<p>The name of the device that is writing to the stream. </p> <note> <p> In the current implementation, Kinesis Video Streams does not use this name. </p> </note>'
         MediaType:
-          $ref: '#/components/schemas/MediaType'
-          description: '<p>The stream''s media type. Use <code>MediaType</code> to specify the type of content that the stream contains to the consumers of the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a>.</p> <p>To play video on the console, you must specify the correct video type. For example, if the video in the stream is H.264, specify <code>video/h264</code> as the <code>MediaType</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/MediaType'
+            - description: '<p>The stream''s media type. Use <code>MediaType</code> to specify the type of content that the stream contains to the consumers of the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a>.</p> <p>To play video on the console, you must specify the correct video type. For example, if the video in the stream is H.264, specify <code>video/h264</code> as the <code>MediaType</code>.</p>'
 security:
   - hmac: []

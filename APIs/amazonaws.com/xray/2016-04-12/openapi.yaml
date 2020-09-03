@@ -268,44 +268,57 @@ paths:
                   type: object
                   properties:
                     RuleName:
-                      $ref: '#/components/schemas/RuleName'
-                      description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                      allOf:
+                        - $ref: '#/components/schemas/RuleName'
+                        - description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
                     RuleARN:
-                      $ref: '#/components/schemas/String'
-                      description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
                     ResourceARN:
-                      $ref: '#/components/schemas/ResourceARN'
-                      description: Matches the ARN of the AWS resource on which the service runs.
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceARN'
+                        - description: Matches the ARN of the AWS resource on which the service runs.
                     Priority:
-                      $ref: '#/components/schemas/Priority'
-                      description: The priority of the sampling rule.
+                      allOf:
+                        - $ref: '#/components/schemas/Priority'
+                        - description: The priority of the sampling rule.
                     FixedRate:
-                      $ref: '#/components/schemas/FixedRate'
-                      description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+                      allOf:
+                        - $ref: '#/components/schemas/FixedRate'
+                        - description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
                     ReservoirSize:
-                      $ref: '#/components/schemas/ReservoirSize'
-                      description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+                      allOf:
+                        - $ref: '#/components/schemas/ReservoirSize'
+                        - description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
                     ServiceName:
-                      $ref: '#/components/schemas/ServiceName'
-                      description: Matches the <code>name</code> that the service uses to identify itself in segments.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceName'
+                        - description: Matches the <code>name</code> that the service uses to identify itself in segments.
                     ServiceType:
-                      $ref: '#/components/schemas/ServiceType'
-                      description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceType'
+                        - description: Matches the <code>origin</code> that the service uses to identify its type in segments.
                     Host:
-                      $ref: '#/components/schemas/Host'
-                      description: Matches the hostname from a request URL.
+                      allOf:
+                        - $ref: '#/components/schemas/Host'
+                        - description: Matches the hostname from a request URL.
                     HTTPMethod:
-                      $ref: '#/components/schemas/HTTPMethod'
-                      description: Matches the HTTP method of a request.
+                      allOf:
+                        - $ref: '#/components/schemas/HTTPMethod'
+                        - description: Matches the HTTP method of a request.
                     URLPath:
-                      $ref: '#/components/schemas/URLPath'
-                      description: Matches the path from a request URL.
+                      allOf:
+                        - $ref: '#/components/schemas/URLPath'
+                        - description: Matches the path from a request URL.
                     Version:
-                      $ref: '#/components/schemas/Version'
-                      description: The version of the sampling rule format (<code>1</code>).
+                      allOf:
+                        - $ref: '#/components/schemas/Version'
+                        - description: The version of the sampling rule format (<code>1</code>).
                     Attributes:
-                      $ref: '#/components/schemas/AttributeMap'
-                      description: Matches attributes derived from the request.
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeMap'
+                        - description: Matches attributes derived from the request.
                 Tags:
                   description: ''
                   type: array
@@ -952,11 +965,13 @@ paths:
                   type: object
                   properties:
                     Name:
-                      $ref: '#/components/schemas/SamplingStrategyName'
-                      description: The name of a sampling rule.
+                      allOf:
+                        - $ref: '#/components/schemas/SamplingStrategyName'
+                        - description: The name of a sampling rule.
                     Value:
-                      $ref: '#/components/schemas/NullableDouble'
-                      description: The value of a sampling rule.
+                      allOf:
+                        - $ref: '#/components/schemas/NullableDouble'
+                        - description: The value of a sampling rule.
                 FilterExpression:
                   description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
                   type: string
@@ -1398,41 +1413,53 @@ paths:
                   type: object
                   properties:
                     RuleName:
-                      $ref: '#/components/schemas/RuleName'
-                      description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                      allOf:
+                        - $ref: '#/components/schemas/RuleName'
+                        - description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
                     RuleARN:
-                      $ref: '#/components/schemas/String'
-                      description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
                     ResourceARN:
-                      $ref: '#/components/schemas/ResourceARN'
-                      description: Matches the ARN of the AWS resource on which the service runs.
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceARN'
+                        - description: Matches the ARN of the AWS resource on which the service runs.
                     Priority:
-                      $ref: '#/components/schemas/NullableInteger'
-                      description: The priority of the sampling rule.
+                      allOf:
+                        - $ref: '#/components/schemas/NullableInteger'
+                        - description: The priority of the sampling rule.
                     FixedRate:
-                      $ref: '#/components/schemas/NullableDouble'
-                      description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+                      allOf:
+                        - $ref: '#/components/schemas/NullableDouble'
+                        - description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
                     ReservoirSize:
-                      $ref: '#/components/schemas/NullableInteger'
-                      description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+                      allOf:
+                        - $ref: '#/components/schemas/NullableInteger'
+                        - description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
                     Host:
-                      $ref: '#/components/schemas/Host'
-                      description: Matches the hostname from a request URL.
+                      allOf:
+                        - $ref: '#/components/schemas/Host'
+                        - description: Matches the hostname from a request URL.
                     ServiceName:
-                      $ref: '#/components/schemas/ServiceName'
-                      description: Matches the <code>name</code> that the service uses to identify itself in segments.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceName'
+                        - description: Matches the <code>name</code> that the service uses to identify itself in segments.
                     ServiceType:
-                      $ref: '#/components/schemas/ServiceType'
-                      description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceType'
+                        - description: Matches the <code>origin</code> that the service uses to identify its type in segments.
                     HTTPMethod:
-                      $ref: '#/components/schemas/HTTPMethod'
-                      description: Matches the HTTP method of a request.
+                      allOf:
+                        - $ref: '#/components/schemas/HTTPMethod'
+                        - description: Matches the HTTP method of a request.
                     URLPath:
-                      $ref: '#/components/schemas/URLPath'
-                      description: Matches the path from a request URL.
+                      allOf:
+                        - $ref: '#/components/schemas/URLPath'
+                        - description: Matches the path from a request URL.
                     Attributes:
-                      $ref: '#/components/schemas/AttributeMap'
-                      description: Matches attributes derived from the request.
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeMap'
+                        - description: Matches attributes derived from the request.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1497,14 +1524,17 @@ components:
       type: object
       properties:
         Traces:
-          $ref: '#/components/schemas/TraceList'
-          description: Full traces for the specified requests.
+          allOf:
+            - $ref: '#/components/schemas/TraceList'
+            - description: Full traces for the specified requests.
         UnprocessedTraceIds:
-          $ref: '#/components/schemas/UnprocessedTraceIdList'
-          description: Trace IDs of requests that haven't been processed.
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedTraceIdList'
+            - description: Trace IDs of requests that haven't been processed.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     TraceId:
       type: string
       minLength: 1
@@ -1515,8 +1545,9 @@ components:
       type: object
       properties:
         Group:
-          $ref: '#/components/schemas/Group'
-          description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
+          allOf:
+            - $ref: '#/components/schemas/Group'
+            - description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
     Tag:
       type: object
       required:
@@ -1531,8 +1562,9 @@ components:
       type: object
       properties:
         SamplingRuleRecord:
-          $ref: '#/components/schemas/SamplingRuleRecord'
-          description: The saved rule definition and metadata.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRuleRecord'
+            - description: The saved rule definition and metadata.
     RuleName:
       type: string
       minLength: 1
@@ -1585,59 +1617,71 @@ components:
       type: object
       properties:
         SamplingRuleRecord:
-          $ref: '#/components/schemas/SamplingRuleRecord'
-          description: The deleted rule definition and metadata.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRuleRecord'
+            - description: The deleted rule definition and metadata.
     GetEncryptionConfigResult:
       type: object
       properties:
         EncryptionConfig:
-          $ref: '#/components/schemas/EncryptionConfig'
-          description: The encryption configuration document.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: The encryption configuration document.
     GetGroupResult:
       type: object
       properties:
         Group:
-          $ref: '#/components/schemas/Group'
-          description: 'The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.'
+          allOf:
+            - $ref: '#/components/schemas/Group'
+            - description: 'The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.'
     GetGroupsResult:
       type: object
       properties:
         Groups:
-          $ref: '#/components/schemas/GroupSummaryList'
-          description: The collection of all active groups.
+          allOf:
+            - $ref: '#/components/schemas/GroupSummaryList'
+            - description: The collection of all active groups.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetSamplingRulesResult:
       type: object
       properties:
         SamplingRuleRecords:
-          $ref: '#/components/schemas/SamplingRuleRecordList'
-          description: Rule definitions and metadata.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRuleRecordList'
+            - description: Rule definitions and metadata.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetSamplingStatisticSummariesResult:
       type: object
       properties:
         SamplingStatisticSummaries:
-          $ref: '#/components/schemas/SamplingStatisticSummaryList'
-          description: Information about the number of requests instrumented for each sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/SamplingStatisticSummaryList'
+            - description: Information about the number of requests instrumented for each sampling rule.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetSamplingTargetsResult:
       type: object
       properties:
         SamplingTargetDocuments:
-          $ref: '#/components/schemas/SamplingTargetDocumentList'
-          description: Updated rules that the service should use to sample requests.
+          allOf:
+            - $ref: '#/components/schemas/SamplingTargetDocumentList'
+            - description: Updated rules that the service should use to sample requests.
         LastRuleModification:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The last time a user changed the sampling rule configuration. If the sampling rule configuration changed since the service last retrieved it, the service should call <a>GetSamplingRules</a> to get the latest version.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The last time a user changed the sampling rule configuration. If the sampling rule configuration changed since the service last retrieved it, the service should call <a>GetSamplingRules</a> to get the latest version.'
         UnprocessedStatistics:
-          $ref: '#/components/schemas/UnprocessedStatisticsList'
-          description: Information about <a>SamplingStatisticsDocument</a> that X-Ray could not process.
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedStatisticsList'
+            - description: Information about <a>SamplingStatisticsDocument</a> that X-Ray could not process.
     SamplingStatisticsDocument:
       type: object
       required:
@@ -1648,78 +1692,98 @@ components:
         - SampledCount
       properties:
         RuleName:
-          $ref: '#/components/schemas/RuleName'
-          description: The name of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: The name of the sampling rule.
         ClientID:
-          $ref: '#/components/schemas/ClientID'
-          description: A unique identifier for the service in hexadecimal.
+          allOf:
+            - $ref: '#/components/schemas/ClientID'
+            - description: A unique identifier for the service in hexadecimal.
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The current time.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The current time.
         RequestCount:
-          $ref: '#/components/schemas/RequestCount'
-          description: The number of requests that matched the rule.
+          allOf:
+            - $ref: '#/components/schemas/RequestCount'
+            - description: The number of requests that matched the rule.
         SampledCount:
-          $ref: '#/components/schemas/SampledCount'
-          description: The number of requests recorded.
+          allOf:
+            - $ref: '#/components/schemas/SampledCount'
+            - description: The number of requests recorded.
         BorrowCount:
-          $ref: '#/components/schemas/BorrowCount'
-          description: The number of requests recorded with borrowed reservoir quota.
+          allOf:
+            - $ref: '#/components/schemas/BorrowCount'
+            - description: The number of requests recorded with borrowed reservoir quota.
       description: Request sampling results for a single rule from a service. Results are for the last 10 seconds unless the service has been assigned a longer reporting interval after a previous call to <a>GetSamplingTargets</a>.
     GetServiceGraphResult:
       type: object
       properties:
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start of the time frame for which the graph was generated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start of the time frame for which the graph was generated.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end of the time frame for which the graph was generated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end of the time frame for which the graph was generated.
         Services:
-          $ref: '#/components/schemas/ServiceList'
-          description: The services that have processed a traced request during the specified time frame.
+          allOf:
+            - $ref: '#/components/schemas/ServiceList'
+            - description: The services that have processed a traced request during the specified time frame.
         ContainsOldGroupVersions:
-          $ref: '#/components/schemas/Boolean'
-          description: 'A flag indicating whether the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A flag indicating whether the group''s filter expression has been consistent, or if the returned service graph may show traces from an older version of the group''s filter expression.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetTimeSeriesServiceStatisticsResult:
       type: object
       properties:
         TimeSeriesServiceStatistics:
-          $ref: '#/components/schemas/TimeSeriesServiceStatisticsList'
-          description: The collection of statistics.
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesServiceStatisticsList'
+            - description: The collection of statistics.
         ContainsOldGroupVersions:
-          $ref: '#/components/schemas/Boolean'
-          description: 'A flag indicating whether or not a group''s filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group''s filter expression.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A flag indicating whether or not a group''s filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group''s filter expression.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetTraceGraphResult:
       type: object
       properties:
         Services:
-          $ref: '#/components/schemas/ServiceList'
-          description: The services that have processed one of the specified requests.
+          allOf:
+            - $ref: '#/components/schemas/ServiceList'
+            - description: The services that have processed one of the specified requests.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     GetTraceSummariesResult:
       type: object
       properties:
         TraceSummaries:
-          $ref: '#/components/schemas/TraceSummaryList'
-          description: Trace IDs and annotations for traces that were found in the specified time frame.
+          allOf:
+            - $ref: '#/components/schemas/TraceSummaryList'
+            - description: Trace IDs and annotations for traces that were found in the specified time frame.
         ApproximateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of this page of results.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of this page of results.
         TracesProcessedCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: 'The total number of traces processed, including traces that did not match the specified filter expression.'
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: 'The total number of traces processed, including traces that did not match the specified filter expression.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.'
     SamplingStrategyName:
       type: string
       enum:
@@ -1740,8 +1804,9 @@ components:
       type: object
       properties:
         EncryptionConfig:
-          $ref: '#/components/schemas/EncryptionConfig'
-          description: The new encryption configuration.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: The new encryption configuration.
     PutTelemetryRecordsResult:
       type: object
       properties: {}
@@ -1751,30 +1816,37 @@ components:
         - Timestamp
       properties:
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: <p/>
         SegmentsReceivedCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         SegmentsSentCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         SegmentsSpilloverCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         SegmentsRejectedCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         BackendConnectionErrors:
-          $ref: '#/components/schemas/BackendConnectionErrors'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/BackendConnectionErrors'
+            - description: <p/>
       description: <p/>
     PutTraceSegmentsResult:
       type: object
       properties:
         UnprocessedTraceSegments:
-          $ref: '#/components/schemas/UnprocessedTraceSegmentList'
-          description: Segments that failed processing.
+          allOf:
+            - $ref: '#/components/schemas/UnprocessedTraceSegmentList'
+            - description: Segments that failed processing.
     TraceSegmentDocument:
       type: string
     TagResourceResponse:
@@ -1792,14 +1864,16 @@ components:
       type: object
       properties:
         Group:
-          $ref: '#/components/schemas/Group'
-          description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.'
+          allOf:
+            - $ref: '#/components/schemas/Group'
+            - description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.'
     UpdateSamplingRuleResult:
       type: object
       properties:
         SamplingRuleRecord:
-          $ref: '#/components/schemas/SamplingRuleRecord'
-          description: The updated rule definition and metadata.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRuleRecord'
+            - description: The updated rule definition and metadata.
     NullableInteger:
       type: integer
     AliasNames:
@@ -1810,14 +1884,17 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The canonical name of the alias.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The canonical name of the alias.
         Names:
-          $ref: '#/components/schemas/AliasNames'
-          description: 'A list of names for the alias, including the canonical name.'
+          allOf:
+            - $ref: '#/components/schemas/AliasNames'
+            - description: 'A list of names for the alias, including the canonical name.'
         Type:
-          $ref: '#/components/schemas/String'
-          description: The type of the alias.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of the alias.
       description: An alias for an edge.
     AliasList:
       type: array
@@ -1835,14 +1912,17 @@ components:
       type: object
       properties:
         NumberValue:
-          $ref: '#/components/schemas/NullableDouble'
-          description: Value for a Number annotation.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: Value for a Number annotation.
         BooleanValue:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Value for a Boolean annotation.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Value for a Boolean annotation.
         StringValue:
-          $ref: '#/components/schemas/String'
-          description: Value for a String annotation.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Value for a String annotation.
       description: 'Value of a segment annotation. Has one of three value types: Number, Boolean or String.'
     ValuesWithServiceIds:
       type: array
@@ -1864,30 +1944,37 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of a corresponding availability zone.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a corresponding availability zone.
       description: A list of availability zones corresponding to the segments in a trace.
     BackendConnectionErrors:
       type: object
       properties:
         TimeoutCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         ConnectionRefusedCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         HTTPCode4XXCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         HTTPCode5XXCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         UnknownHostCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
         OtherCount:
-          $ref: '#/components/schemas/NullableInteger'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: <p/>
       description: <p/>
     TraceIdList:
       type: array
@@ -1900,11 +1987,13 @@ components:
       title: BatchGetTracesRequest
       properties:
         TraceIds:
-          $ref: '#/components/schemas/TraceIdList'
-          description: Specify the trace IDs of requests for which to retrieve segments.
+          allOf:
+            - $ref: '#/components/schemas/TraceIdList'
+            - description: Specify the trace IDs of requests for which to retrieve segments.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     TraceList:
       type: array
       items:
@@ -1941,25 +2030,30 @@ components:
       title: CreateGroupRequest
       properties:
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The case-sensitive name of the new group. Default is a reserved name and names must be unique.
         FilterExpression:
-          $ref: '#/components/schemas/FilterExpression'
-          description: The filter expression defining criteria by which to group traces.
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: The filter expression defining criteria by which to group traces.
         Tags:
           $ref: '#/components/schemas/TagList'
     Group:
       type: object
       properties:
         GroupName:
-          $ref: '#/components/schemas/String'
-          description: The unique case-sensitive name of the group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique case-sensitive name of the group.
         GroupARN:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the group generated based on the GroupName.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the group generated based on the GroupName.
         FilterExpression:
-          $ref: '#/components/schemas/String'
-          description: The filter expression defining the parameters to include traces.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The filter expression defining the parameters to include traces.
       description: Details and metadata for a group.
     SamplingRule:
       type: object
@@ -1976,44 +2070,57 @@ components:
         - Version
       properties:
         RuleName:
-          $ref: '#/components/schemas/RuleName'
-          description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
         RuleARN:
-          $ref: '#/components/schemas/String'
-          description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Matches the ARN of the AWS resource on which the service runs.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Matches the ARN of the AWS resource on which the service runs.
         Priority:
-          $ref: '#/components/schemas/Priority'
-          description: The priority of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: The priority of the sampling rule.
         FixedRate:
-          $ref: '#/components/schemas/FixedRate'
-          description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+          allOf:
+            - $ref: '#/components/schemas/FixedRate'
+            - description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
         ReservoirSize:
-          $ref: '#/components/schemas/ReservoirSize'
-          description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+          allOf:
+            - $ref: '#/components/schemas/ReservoirSize'
+            - description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: Matches the <code>name</code> that the service uses to identify itself in segments.
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: Matches the <code>name</code> that the service uses to identify itself in segments.
         ServiceType:
-          $ref: '#/components/schemas/ServiceType'
-          description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+          allOf:
+            - $ref: '#/components/schemas/ServiceType'
+            - description: Matches the <code>origin</code> that the service uses to identify its type in segments.
         Host:
-          $ref: '#/components/schemas/Host'
-          description: Matches the hostname from a request URL.
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: Matches the hostname from a request URL.
         HTTPMethod:
-          $ref: '#/components/schemas/HTTPMethod'
-          description: Matches the HTTP method of a request.
+          allOf:
+            - $ref: '#/components/schemas/HTTPMethod'
+            - description: Matches the HTTP method of a request.
         URLPath:
-          $ref: '#/components/schemas/URLPath'
-          description: Matches the path from a request URL.
+          allOf:
+            - $ref: '#/components/schemas/URLPath'
+            - description: Matches the path from a request URL.
         Version:
-          $ref: '#/components/schemas/Version'
-          description: The version of the sampling rule format (<code>1</code>).
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the sampling rule format (<code>1</code>).
         Attributes:
-          $ref: '#/components/schemas/AttributeMap'
-          description: Matches attributes derived from the request.
+          allOf:
+            - $ref: '#/components/schemas/AttributeMap'
+            - description: Matches attributes derived from the request.
       description: 'A sampling rule that services use to decide whether to instrument a request. Rule fields can match properties of the service, or properties of a request. The service can ignore rules that don''t match its properties.'
     CreateSamplingRuleRequest:
       type: object
@@ -2022,22 +2129,26 @@ components:
       title: CreateSamplingRuleRequest
       properties:
         SamplingRule:
-          $ref: '#/components/schemas/SamplingRule'
-          description: The rule definition.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRule'
+            - description: The rule definition.
         Tags:
           $ref: '#/components/schemas/TagList'
     SamplingRuleRecord:
       type: object
       properties:
         SamplingRule:
-          $ref: '#/components/schemas/SamplingRule'
-          description: The sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRule'
+            - description: The sampling rule.
         CreatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the rule was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the rule was created.
         ModifiedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the rule was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the rule was last modified.
       description: A <a>SamplingRule</a> and its metadata.
     GroupARN:
       type: string
@@ -2048,21 +2159,25 @@ components:
       title: DeleteGroupRequest
       properties:
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The case-sensitive name of the group.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The case-sensitive name of the group.
         GroupARN:
-          $ref: '#/components/schemas/GroupARN'
-          description: The ARN of the group that was generated on creation.
+          allOf:
+            - $ref: '#/components/schemas/GroupARN'
+            - description: The ARN of the group that was generated on creation.
     DeleteSamplingRuleRequest:
       type: object
       title: DeleteSamplingRuleRequest
       properties:
         RuleName:
-          $ref: '#/components/schemas/String'
-          description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
         RuleARN:
-          $ref: '#/components/schemas/String'
-          description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
     Double:
       type: number
       format: double
@@ -2076,20 +2191,25 @@ components:
       type: object
       properties:
         OkCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The number of requests that completed with a 2xx Success status code.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The number of requests that completed with a 2xx Success status code.
         ErrorStatistics:
-          $ref: '#/components/schemas/ErrorStatistics'
-          description: Information about requests that failed with a 4xx Client Error status code.
+          allOf:
+            - $ref: '#/components/schemas/ErrorStatistics'
+            - description: Information about requests that failed with a 4xx Client Error status code.
         FaultStatistics:
-          $ref: '#/components/schemas/FaultStatistics'
-          description: Information about requests that failed with a 5xx Server Error status code.
+          allOf:
+            - $ref: '#/components/schemas/FaultStatistics'
+            - description: Information about requests that failed with a 5xx Server Error status code.
         TotalCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The total number of completed requests.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The total number of completed requests.
         TotalResponseTime:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The aggregate response time of completed requests.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The aggregate response time of completed requests.
       description: Response statistics for an edge.
     Histogram:
       type: array
@@ -2099,23 +2219,29 @@ components:
       type: object
       properties:
         ReferenceId:
-          $ref: '#/components/schemas/NullableInteger'
-          description: Identifier of the edge. Unique within a service map.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: Identifier of the edge. Unique within a service map.
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the first segment on the edge.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the first segment on the edge.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end time of the last segment on the edge.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time of the last segment on the edge.
         SummaryStatistics:
-          $ref: '#/components/schemas/EdgeStatistics'
-          description: Response statistics for segments on the edge.
+          allOf:
+            - $ref: '#/components/schemas/EdgeStatistics'
+            - description: Response statistics for segments on the edge.
         ResponseTimeHistogram:
-          $ref: '#/components/schemas/Histogram'
-          description: A histogram that maps the spread of client response times on an edge.
+          allOf:
+            - $ref: '#/components/schemas/Histogram'
+            - description: A histogram that maps the spread of client response times on an edge.
         Aliases:
-          $ref: '#/components/schemas/AliasList'
-          description: Aliases for the edge.
+          allOf:
+            - $ref: '#/components/schemas/AliasList'
+            - description: Aliases for the edge.
       description: Information about a connection between two services.
     EdgeList:
       type: array
@@ -2127,24 +2253,29 @@ components:
       type: object
       properties:
         ThrottleCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The number of requests that failed with a 419 throttling status code.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The number of requests that failed with a 419 throttling status code.
         OtherCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The number of requests that failed with untracked 4xx Client Error status codes.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The number of requests that failed with untracked 4xx Client Error status codes.
         TotalCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The total number of requests that failed with a 4xx Client Error status code.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The total number of requests that failed with a 4xx Client Error status code.
       description: Information about requests that failed with a 4xx Client Error status code.
     FaultStatistics:
       type: object
       properties:
         OtherCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The number of requests that failed with untracked 5xx Server Error status codes.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The number of requests that failed with untracked 5xx Server Error status codes.
         TotalCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The total number of requests that failed with a 5xx Server Error status code.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The total number of requests that failed with a 5xx Server Error status code.
       description: Information about requests that failed with a 5xx Server Error status code.
     EncryptionStatus:
       type: string
@@ -2160,14 +2291,17 @@ components:
       type: object
       properties:
         KeyId:
-          $ref: '#/components/schemas/String'
-          description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ID of the customer master key (CMK) used for encryption, if applicable.'
         Status:
-          $ref: '#/components/schemas/EncryptionStatus'
-          description: 'The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionStatus'
+            - description: 'The encryption status. While the status is <code>UPDATING</code>, X-Ray may encrypt data with a combination of the new and old settings.'
         Type:
-          $ref: '#/components/schemas/EncryptionType'
-          description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for default encryption.
       description: A configuration document that specifies encryption configuration settings.
     EncryptionKeyId:
       type: string
@@ -2185,11 +2319,13 @@ components:
       type: object
       properties:
         Services:
-          $ref: '#/components/schemas/ErrorRootCauseServices'
-          description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+          allOf:
+            - $ref: '#/components/schemas/ErrorRootCauseServices'
+            - description: 'A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
         ClientImpacting:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes that the root cause impacts the trace client.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause of a trace summary error.
     RootCauseExceptions:
       type: array
@@ -2199,14 +2335,17 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of the entity.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the entity.
         Exceptions:
-          $ref: '#/components/schemas/RootCauseExceptions'
-          description: The types and messages of the exceptions.
+          allOf:
+            - $ref: '#/components/schemas/RootCauseExceptions'
+            - description: The types and messages of the exceptions.
         Remote:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes a remote subsegment.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes a remote subsegment.
       description: A collection of segments and corresponding subsegments associated to a trace summary error.
     ErrorRootCauseEntityPath:
       type: array
@@ -2220,23 +2359,29 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The service name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The service name.
         Names:
-          $ref: '#/components/schemas/ServiceNames'
-          description: A collection of associated service names.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: A collection of associated service names.
         Type:
-          $ref: '#/components/schemas/String'
-          description: The type associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type associated to the service.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: The account ID associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The account ID associated to the service.
         EntityPath:
-          $ref: '#/components/schemas/ErrorRootCauseEntityPath'
-          description: 'The path of root cause entities found on the service. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorRootCauseEntityPath'
+            - description: 'The path of root cause entities found on the service. '
         Inferred:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A Boolean value indicating if the service is inferred from the trace.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value indicating if the service is inferred from the trace.
       description: A collection of fields identifying the services in a trace summary error.
     ErrorRootCauses:
       type: array
@@ -2250,24 +2395,29 @@ components:
       type: object
       properties:
         Services:
-          $ref: '#/components/schemas/FaultRootCauseServices'
-          description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
+          allOf:
+            - $ref: '#/components/schemas/FaultRootCauseServices'
+            - description: 'A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.'
         ClientImpacting:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes that the root cause impacts the trace client.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause information for a trace summary fault.
     FaultRootCauseEntity:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of the entity.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the entity.
         Exceptions:
-          $ref: '#/components/schemas/RootCauseExceptions'
-          description: The types and messages of the exceptions.
+          allOf:
+            - $ref: '#/components/schemas/RootCauseExceptions'
+            - description: The types and messages of the exceptions.
         Remote:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes a remote subsegment.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes a remote subsegment.
       description: A collection of segments and corresponding subsegments associated to a trace summary fault error.
     FaultRootCauseEntityPath:
       type: array
@@ -2277,23 +2427,29 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The service name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The service name.
         Names:
-          $ref: '#/components/schemas/ServiceNames'
-          description: A collection of associated service names.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: A collection of associated service names.
         Type:
-          $ref: '#/components/schemas/String'
-          description: The type associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type associated to the service.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: The account ID associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The account ID associated to the service.
         EntityPath:
-          $ref: '#/components/schemas/FaultRootCauseEntityPath'
-          description: 'The path of root cause entities found on the service. '
+          allOf:
+            - $ref: '#/components/schemas/FaultRootCauseEntityPath'
+            - description: 'The path of root cause entities found on the service. '
         Inferred:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A Boolean value indicating if the service is inferred from the trace.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value indicating if the service is inferred from the trace.
       description: A collection of fields identifying the services in a trace summary fault.
     FaultRootCauses:
       type: array
@@ -2308,11 +2464,13 @@ components:
       title: GetGroupRequest
       properties:
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The case-sensitive name of the group.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The case-sensitive name of the group.
         GroupARN:
-          $ref: '#/components/schemas/GroupARN'
-          description: The ARN of the group that was generated on creation.
+          allOf:
+            - $ref: '#/components/schemas/GroupARN'
+            - description: The ARN of the group that was generated on creation.
     GetGroupsNextToken:
       type: string
       minLength: 1
@@ -2322,8 +2480,9 @@ components:
       title: GetGroupsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/GetGroupsNextToken'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/GetGroupsNextToken'
+            - description: Pagination token.
     GroupSummaryList:
       type: array
       items:
@@ -2333,8 +2492,9 @@ components:
       title: GetSamplingRulesRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     SamplingRuleRecordList:
       type: array
       items:
@@ -2344,8 +2504,9 @@ components:
       title: GetSamplingStatisticSummariesRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     SamplingStatisticSummaryList:
       type: array
       items:
@@ -2362,8 +2523,9 @@ components:
       title: GetSamplingTargetsRequest
       properties:
         SamplingStatisticsDocuments:
-          $ref: '#/components/schemas/SamplingStatisticsDocumentList'
-          description: Information about rules that the service is using to sample requests.
+          allOf:
+            - $ref: '#/components/schemas/SamplingStatisticsDocumentList'
+            - description: Information about rules that the service is using to sample requests.
     SamplingTargetDocumentList:
       type: array
       items:
@@ -2380,20 +2542,25 @@ components:
       title: GetServiceGraphRequest
       properties:
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start of the time frame for which to generate a graph.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start of the time frame for which to generate a graph.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end of the timeframe for which to generate a graph.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end of the timeframe for which to generate a graph.
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The name of a group to generate a graph based on.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The name of a group to generate a graph based on.
         GroupARN:
-          $ref: '#/components/schemas/GroupARN'
-          description: The ARN of a group to generate a graph based on.
+          allOf:
+            - $ref: '#/components/schemas/GroupARN'
+            - description: The ARN of a group to generate a graph based on.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     ServiceList:
       type: array
       items:
@@ -2406,26 +2573,33 @@ components:
       title: GetTimeSeriesServiceStatisticsRequest
       properties:
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start of the time frame for which to aggregate statistics.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start of the time frame for which to aggregate statistics.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end of the time frame for which to aggregate statistics.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end of the time frame for which to aggregate statistics.
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The case-sensitive name of the group for which to pull statistics from.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The case-sensitive name of the group for which to pull statistics from.
         GroupARN:
-          $ref: '#/components/schemas/GroupARN'
-          description: The ARN of the group for which to pull statistics from.
+          allOf:
+            - $ref: '#/components/schemas/GroupARN'
+            - description: The ARN of the group for which to pull statistics from.
         EntitySelectorExpression:
-          $ref: '#/components/schemas/EntitySelectorExpression'
-          description: 'A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. '
+          allOf:
+            - $ref: '#/components/schemas/EntitySelectorExpression'
+            - description: 'A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. '
         Period:
-          $ref: '#/components/schemas/NullableInteger'
-          description: Aggregation period in seconds.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: Aggregation period in seconds.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     TimeSeriesServiceStatisticsList:
       type: array
       items:
@@ -2437,11 +2611,13 @@ components:
       title: GetTraceGraphRequest
       properties:
         TraceIds:
-          $ref: '#/components/schemas/TraceIdList'
-          description: Trace IDs of requests for which to generate a service graph.
+          allOf:
+            - $ref: '#/components/schemas/TraceIdList'
+            - description: Trace IDs of requests for which to generate a service graph.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token.
     TimeRangeType:
       type: string
       enum:
@@ -2451,11 +2627,13 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/SamplingStrategyName'
-          description: The name of a sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/SamplingStrategyName'
+            - description: The name of a sampling rule.
         Value:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The value of a sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The value of a sampling rule.
       description: The name and value of a sampling rule to apply to a trace summary.
     GetTraceSummariesRequest:
       type: object
@@ -2465,26 +2643,33 @@ components:
       title: GetTraceSummariesRequest
       properties:
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start of the time frame for which to retrieve traces.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start of the time frame for which to retrieve traces.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end of the time frame for which to retrieve traces.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end of the time frame for which to retrieve traces.
         TimeRangeType:
-          $ref: '#/components/schemas/TimeRangeType'
-          description: A parameter to indicate whether to query trace summaries by TraceId or Event time.
+          allOf:
+            - $ref: '#/components/schemas/TimeRangeType'
+            - description: A parameter to indicate whether to query trace summaries by TraceId or Event time.
         Sampling:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Set to <code>true</code> to get summaries for only a subset of available traces.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Set to <code>true</code> to get summaries for only a subset of available traces.
         SamplingStrategy:
-          $ref: '#/components/schemas/SamplingStrategy'
-          description: A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
+          allOf:
+            - $ref: '#/components/schemas/SamplingStrategy'
+            - description: A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
         FilterExpression:
-          $ref: '#/components/schemas/FilterExpression'
-          description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Specify the pagination token returned by a previous request to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specify the pagination token returned by a previous request to retrieve the next page of results.
     TraceSummaryList:
       type: array
       items:
@@ -2493,24 +2678,29 @@ components:
       type: object
       properties:
         GroupName:
-          $ref: '#/components/schemas/String'
-          description: The unique case-sensitive name of the group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique case-sensitive name of the group.
         GroupARN:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the group generated based on the GroupName.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the group generated based on the GroupName.
         FilterExpression:
-          $ref: '#/components/schemas/String'
-          description: The filter expression defining the parameters to include traces.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The filter expression defining the parameters to include traces.
       description: Details for a group without metadata.
     HistogramEntry:
       type: object
       properties:
         Value:
-          $ref: '#/components/schemas/Double'
-          description: The value of the entry.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The value of the entry.
         Count:
-          $ref: '#/components/schemas/Integer'
-          description: The prevalence of the entry.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The prevalence of the entry.
       description: 'An entry in a histogram for a statistic. A histogram maps the range of observed values on the X axis, and the prevalence of each value on the Y axis.'
     Integer:
       type: integer
@@ -2521,27 +2711,33 @@ components:
       type: object
       properties:
         HttpURL:
-          $ref: '#/components/schemas/String'
-          description: The request URL.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request URL.
         HttpStatus:
-          $ref: '#/components/schemas/NullableInteger'
-          description: The response status.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: The response status.
         HttpMethod:
-          $ref: '#/components/schemas/String'
-          description: The request method.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request method.
         UserAgent:
-          $ref: '#/components/schemas/String'
-          description: The request's user agent string.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The request's user agent string.
         ClientIp:
-          $ref: '#/components/schemas/String'
-          description: The IP address of the requestor.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The IP address of the requestor.
       description: Information about an HTTP request.
     InstanceIdDetail:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/String'
-          description: The ID of a corresponding EC2 instance.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of a corresponding EC2 instance.
       description: 'A list of EC2 instance IDs corresponding to the segments in a trace. '
     ListTagsForResourceRequest:
       type: object
@@ -2560,11 +2756,13 @@ components:
       title: PutEncryptionConfigRequest
       properties:
         KeyId:
-          $ref: '#/components/schemas/EncryptionKeyId'
-          description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyId'
+            - description: '<p>An AWS KMS customer master key (CMK) in one of the following formats:</p> <ul> <li> <p> <b>Alias</b> - The name of the key. For example, <code>alias/MyKey</code>.</p> </li> <li> <p> <b>Key ID</b> - The KMS key ID of the key. For example, <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p> </li> <li> <p> <b>ARN</b> - The full Amazon Resource Name of the key ID or alias. For example, <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Use this format to specify a key in a different account.</p> </li> </ul> <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>'
         Type:
-          $ref: '#/components/schemas/EncryptionType'
-          description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption. Set to <code>KMS</code> to use your own key for encryption. Set to <code>NONE</code> for default encryption.
     TelemetryRecordList:
       type: array
       items:
@@ -2576,17 +2774,21 @@ components:
       title: PutTelemetryRecordsRequest
       properties:
         TelemetryRecords:
-          $ref: '#/components/schemas/TelemetryRecordList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TelemetryRecordList'
+            - description: <p/>
         EC2InstanceId:
-          $ref: '#/components/schemas/EC2InstanceId'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/EC2InstanceId'
+            - description: <p/>
         Hostname:
-          $ref: '#/components/schemas/Hostname'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/Hostname'
+            - description: <p/>
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: <p/>
     TraceSegmentDocumentList:
       type: array
       items:
@@ -2598,8 +2800,9 @@ components:
       title: PutTraceSegmentsRequest
       properties:
         TraceSegmentDocuments:
-          $ref: '#/components/schemas/TraceSegmentDocumentList'
-          description: A string containing a JSON document defining one or more segments or subsegments.
+          allOf:
+            - $ref: '#/components/schemas/TraceSegmentDocumentList'
+            - description: A string containing a JSON document defining one or more segments or subsegments.
     UnprocessedTraceSegmentList:
       type: array
       items:
@@ -2611,8 +2814,9 @@ components:
       type: object
       properties:
         ARN:
-          $ref: '#/components/schemas/String'
-          description: The ARN of a corresponding resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of a corresponding resource.
       description: A list of resources ARNs corresponding to the segments in a trace.
     ResponseTimeRootCauseServices:
       type: array
@@ -2622,24 +2826,29 @@ components:
       type: object
       properties:
         Services:
-          $ref: '#/components/schemas/ResponseTimeRootCauseServices'
-          description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
+          allOf:
+            - $ref: '#/components/schemas/ResponseTimeRootCauseServices'
+            - description: 'A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.'
         ClientImpacting:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes that the root cause impacts the trace client.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes that the root cause impacts the trace client.
       description: The root cause information for a response time warning.
     ResponseTimeRootCauseEntity:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of the entity.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the entity.
         Coverage:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The types and messages of the exceptions.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The types and messages of the exceptions.
         Remote:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A flag that denotes a remote subsegment.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that denotes a remote subsegment.
       description: A collection of segments and corresponding subsegments associated to a response time warning.
     ResponseTimeRootCauseEntityPath:
       type: array
@@ -2649,23 +2858,29 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The service name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The service name.
         Names:
-          $ref: '#/components/schemas/ServiceNames'
-          description: A collection of associated service names.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: A collection of associated service names.
         Type:
-          $ref: '#/components/schemas/String'
-          description: The type associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type associated to the service.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: The account ID associated to the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The account ID associated to the service.
         EntityPath:
-          $ref: '#/components/schemas/ResponseTimeRootCauseEntityPath'
-          description: 'The path of root cause entities found on the service. '
+          allOf:
+            - $ref: '#/components/schemas/ResponseTimeRootCauseEntityPath'
+            - description: 'The path of root cause entities found on the service. '
         Inferred:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: A Boolean value indicating if the service is inferred from the trace.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value indicating if the service is inferred from the trace.
       description: A collection of fields identifying the service in a response time warning.
     ResponseTimeRootCauses:
       type: array
@@ -2675,11 +2890,13 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of the exception.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the exception.
         Message:
-          $ref: '#/components/schemas/String'
-          description: The message of the exception.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message of the exception.
       description: The exception associated with a root cause.
     SampledCount:
       type: integer
@@ -2688,79 +2905,101 @@ components:
       type: object
       properties:
         RuleName:
-          $ref: '#/components/schemas/RuleName'
-          description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/RuleName'
+            - description: 'The name of the sampling rule. Specify a rule by either name or ARN, but not both.'
         RuleARN:
-          $ref: '#/components/schemas/String'
-          description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.'
         ResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: Matches the ARN of the AWS resource on which the service runs.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: Matches the ARN of the AWS resource on which the service runs.
         Priority:
-          $ref: '#/components/schemas/NullableInteger'
-          description: The priority of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: The priority of the sampling rule.
         FixedRate:
-          $ref: '#/components/schemas/NullableDouble'
-          description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
         ReservoirSize:
-          $ref: '#/components/schemas/NullableInteger'
-          description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: 'A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.'
         Host:
-          $ref: '#/components/schemas/Host'
-          description: Matches the hostname from a request URL.
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: Matches the hostname from a request URL.
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: Matches the <code>name</code> that the service uses to identify itself in segments.
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: Matches the <code>name</code> that the service uses to identify itself in segments.
         ServiceType:
-          $ref: '#/components/schemas/ServiceType'
-          description: Matches the <code>origin</code> that the service uses to identify its type in segments.
+          allOf:
+            - $ref: '#/components/schemas/ServiceType'
+            - description: Matches the <code>origin</code> that the service uses to identify its type in segments.
         HTTPMethod:
-          $ref: '#/components/schemas/HTTPMethod'
-          description: Matches the HTTP method of a request.
+          allOf:
+            - $ref: '#/components/schemas/HTTPMethod'
+            - description: Matches the HTTP method of a request.
         URLPath:
-          $ref: '#/components/schemas/URLPath'
-          description: Matches the path from a request URL.
+          allOf:
+            - $ref: '#/components/schemas/URLPath'
+            - description: Matches the path from a request URL.
         Attributes:
-          $ref: '#/components/schemas/AttributeMap'
-          description: Matches attributes derived from the request.
+          allOf:
+            - $ref: '#/components/schemas/AttributeMap'
+            - description: Matches attributes derived from the request.
       description: A document specifying changes to a sampling rule's configuration.
     SamplingStatisticSummary:
       type: object
       properties:
         RuleName:
-          $ref: '#/components/schemas/String'
-          description: The name of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the sampling rule.
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the reporting window.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the reporting window.
         RequestCount:
-          $ref: '#/components/schemas/Integer'
-          description: The number of requests that matched the rule.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of requests that matched the rule.
         BorrowCount:
-          $ref: '#/components/schemas/Integer'
-          description: The number of requests recorded with borrowed reservoir quota.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of requests recorded with borrowed reservoir quota.
         SampledCount:
-          $ref: '#/components/schemas/Integer'
-          description: The number of requests recorded.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of requests recorded.
       description: Aggregated request sampling data for a sampling rule across all services for a 10 second window.
     SamplingTargetDocument:
       type: object
       properties:
         RuleName:
-          $ref: '#/components/schemas/String'
-          description: The name of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the sampling rule.
         FixedRate:
-          $ref: '#/components/schemas/Double'
-          description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'The percentage of matching requests to instrument, after the reservoir is exhausted.'
         ReservoirQuota:
-          $ref: '#/components/schemas/NullableInteger'
-          description: The number of requests per second that X-Ray allocated this service.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: The number of requests per second that X-Ray allocated this service.
         ReservoirQuotaTTL:
-          $ref: '#/components/schemas/Timestamp'
-          description: When the reservoir quota expires.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the reservoir quota expires.
         Interval:
-          $ref: '#/components/schemas/NullableInteger'
-          description: The number of seconds for the service to wait before getting sampling targets again.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: The number of seconds for the service to wait before getting sampling targets again.
       description: 'Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray calculates a new reservoir for each service based on the recent sampling results of all services that called <a>GetSamplingTargets</a>.'
     SegmentId:
       type: string
@@ -2771,11 +3010,13 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/SegmentId'
-          description: The segment's ID.
+          allOf:
+            - $ref: '#/components/schemas/SegmentId'
+            - description: The segment's ID.
         Document:
-          $ref: '#/components/schemas/SegmentDocument'
-          description: The segment document.
+          allOf:
+            - $ref: '#/components/schemas/SegmentDocument'
+            - description: The segment document.
       description: '<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be compiled from documents uploaded with <a>PutTraceSegments</a>, or an <code>inferred</code> segment for a downstream service, generated from a subsegment sent by the service that called it.</p> <p>For the full segment document schema, see <a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html">AWS X-Ray Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>'
     SegmentList:
       type: array
@@ -2785,79 +3026,101 @@ components:
       type: object
       properties:
         OkCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The number of requests that completed with a 2xx Success status code.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The number of requests that completed with a 2xx Success status code.
         ErrorStatistics:
-          $ref: '#/components/schemas/ErrorStatistics'
-          description: Information about requests that failed with a 4xx Client Error status code.
+          allOf:
+            - $ref: '#/components/schemas/ErrorStatistics'
+            - description: Information about requests that failed with a 4xx Client Error status code.
         FaultStatistics:
-          $ref: '#/components/schemas/FaultStatistics'
-          description: Information about requests that failed with a 5xx Server Error status code.
+          allOf:
+            - $ref: '#/components/schemas/FaultStatistics'
+            - description: Information about requests that failed with a 5xx Server Error status code.
         TotalCount:
-          $ref: '#/components/schemas/NullableLong'
-          description: The total number of completed requests.
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: The total number of completed requests.
         TotalResponseTime:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The aggregate response time of completed requests.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The aggregate response time of completed requests.
       description: Response statistics for a service.
     Service:
       type: object
       properties:
         ReferenceId:
-          $ref: '#/components/schemas/NullableInteger'
-          description: Identifier for the service. Unique within the service map.
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: Identifier for the service. Unique within the service map.
         Name:
-          $ref: '#/components/schemas/String'
-          description: The canonical name of the service.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The canonical name of the service.
         Names:
-          $ref: '#/components/schemas/ServiceNames'
-          description: 'A list of names for the service, including the canonical name.'
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: 'A list of names for the service, including the canonical name.'
         Root:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Indicates that the service was the first service to process a request.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Indicates that the service was the first service to process a request.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: Identifier of the AWS account in which the service runs.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifier of the AWS account in which the service runs.
         Type:
-          $ref: '#/components/schemas/String'
-          description: '<p>The type of service.</p> <ul> <li> <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for a application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the application used.</p> </li> <li> <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code> for downstream calls to Amazon DynamoDB that didn''t target a specific table.</p> </li> <li> <p> <code>client</code> - Represents the clients that sent requests to a root service.</p> </li> <li> <p> <code>remote</code> - A downstream service of indeterminate type.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The type of service.</p> <ul> <li> <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for a application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the application used.</p> </li> <li> <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code> for downstream calls to Amazon DynamoDB that didn''t target a specific table.</p> </li> <li> <p> <code>client</code> - Represents the clients that sent requests to a root service.</p> </li> <li> <p> <code>remote</code> - A downstream service of indeterminate type.</p> </li> </ul>'
         State:
-          $ref: '#/components/schemas/String'
-          description: The service's state.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The service's state.
         StartTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the first segment that the service generated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the first segment that the service generated.
         EndTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The end time of the last segment that the service generated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time of the last segment that the service generated.
         Edges:
-          $ref: '#/components/schemas/EdgeList'
-          description: Connections to downstream services.
+          allOf:
+            - $ref: '#/components/schemas/EdgeList'
+            - description: Connections to downstream services.
         SummaryStatistics:
-          $ref: '#/components/schemas/ServiceStatistics'
-          description: Aggregated statistics for the service.
+          allOf:
+            - $ref: '#/components/schemas/ServiceStatistics'
+            - description: Aggregated statistics for the service.
         DurationHistogram:
-          $ref: '#/components/schemas/Histogram'
-          description: A histogram that maps the spread of service durations.
+          allOf:
+            - $ref: '#/components/schemas/Histogram'
+            - description: A histogram that maps the spread of service durations.
         ResponseTimeHistogram:
-          $ref: '#/components/schemas/Histogram'
-          description: A histogram that maps the spread of service response times.
+          allOf:
+            - $ref: '#/components/schemas/Histogram'
+            - description: A histogram that maps the spread of service response times.
       description: 'Information about an application that processed requests, users that made requests, or downstream services, resources and applications that an application used.'
     ServiceId:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
         Names:
-          $ref: '#/components/schemas/ServiceNames'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: <p/>
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
         Type:
-          $ref: '#/components/schemas/String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p/>
       description: <p/>
     ServiceIds:
       type: array
@@ -2888,28 +3151,33 @@ components:
       type: object
       properties:
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: Timestamp of the window for which statistics are aggregated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of the window for which statistics are aggregated.
         EdgeSummaryStatistics:
           $ref: '#/components/schemas/EdgeStatistics'
         ServiceSummaryStatistics:
           $ref: '#/components/schemas/ServiceStatistics'
         ResponseTimeHistogram:
-          $ref: '#/components/schemas/Histogram'
-          description: The response time histogram for the selected entities.
+          allOf:
+            - $ref: '#/components/schemas/Histogram'
+            - description: The response time histogram for the selected entities.
       description: A list of TimeSeriesStatistic structures.
     Trace:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/TraceId'
-          description: The unique identifier for the request that generated the trace's segments and subsegments.
+          allOf:
+            - $ref: '#/components/schemas/TraceId'
+            - description: The unique identifier for the request that generated the trace's segments and subsegments.
         Duration:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
         Segments:
-          $ref: '#/components/schemas/SegmentList'
-          description: Segment documents for the segments and subsegments that comprise the trace.
+          allOf:
+            - $ref: '#/components/schemas/SegmentList'
+            - description: Segment documents for the segments and subsegments that comprise the trace.
       description: A collection of segment documents with matching trace IDs.
     TraceAvailabilityZones:
       type: array
@@ -2931,101 +3199,129 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/TraceId'
-          description: The unique identifier for the request that generated the trace's segments and subsegments.
+          allOf:
+            - $ref: '#/components/schemas/TraceId'
+            - description: The unique identifier for the request that generated the trace's segments and subsegments.
         Duration:
-          $ref: '#/components/schemas/NullableDouble'
-          description: The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
         ResponseTime:
-          $ref: '#/components/schemas/NullableDouble'
-          description: 'The length of time in seconds between the start and end times of the root segment. If the service performs work asynchronously, the response time measures the time before the response is sent to the user, while the duration measures the amount of time before the last traced activity completes.'
+          allOf:
+            - $ref: '#/components/schemas/NullableDouble'
+            - description: 'The length of time in seconds between the start and end times of the root segment. If the service performs work asynchronously, the response time measures the time before the response is sent to the user, while the duration measures the amount of time before the last traced activity completes.'
         HasFault:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: The root segment document has a 500 series error.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: The root segment document has a 500 series error.
         HasError:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: The root segment document has a 400 series error.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: The root segment document has a 400 series error.
         HasThrottle:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: One or more of the segment documents has a 429 throttling error.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: One or more of the segment documents has a 429 throttling error.
         IsPartial:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: One or more of the segment documents is in progress.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: One or more of the segment documents is in progress.
         Http:
-          $ref: '#/components/schemas/Http'
-          description: Information about the HTTP request served by the trace.
+          allOf:
+            - $ref: '#/components/schemas/Http'
+            - description: Information about the HTTP request served by the trace.
         Annotations:
-          $ref: '#/components/schemas/Annotations'
-          description: Annotations from the trace's segment documents.
+          allOf:
+            - $ref: '#/components/schemas/Annotations'
+            - description: Annotations from the trace's segment documents.
         Users:
-          $ref: '#/components/schemas/TraceUsers'
-          description: Users from the trace's segment documents.
+          allOf:
+            - $ref: '#/components/schemas/TraceUsers'
+            - description: Users from the trace's segment documents.
         ServiceIds:
-          $ref: '#/components/schemas/ServiceIds'
-          description: Service IDs from the trace's segment documents.
+          allOf:
+            - $ref: '#/components/schemas/ServiceIds'
+            - description: Service IDs from the trace's segment documents.
         ResourceARNs:
-          $ref: '#/components/schemas/TraceResourceARNs'
-          description: A list of resource ARNs for any resource corresponding to the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/TraceResourceARNs'
+            - description: A list of resource ARNs for any resource corresponding to the trace segments.
         InstanceIds:
-          $ref: '#/components/schemas/TraceInstanceIds'
-          description: A list of EC2 instance IDs for any instance corresponding to the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/TraceInstanceIds'
+            - description: A list of EC2 instance IDs for any instance corresponding to the trace segments.
         AvailabilityZones:
-          $ref: '#/components/schemas/TraceAvailabilityZones'
-          description: A list of availability zones for any zone corresponding to the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/TraceAvailabilityZones'
+            - description: A list of availability zones for any zone corresponding to the trace segments.
         EntryPoint:
-          $ref: '#/components/schemas/ServiceId'
-          description: The root of a trace.
+          allOf:
+            - $ref: '#/components/schemas/ServiceId'
+            - description: The root of a trace.
         FaultRootCauses:
-          $ref: '#/components/schemas/FaultRootCauses'
-          description: A collection of FaultRootCause structures corresponding to the the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/FaultRootCauses'
+            - description: A collection of FaultRootCause structures corresponding to the the trace segments.
         ErrorRootCauses:
-          $ref: '#/components/schemas/ErrorRootCauses'
-          description: A collection of ErrorRootCause structures corresponding to the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/ErrorRootCauses'
+            - description: A collection of ErrorRootCause structures corresponding to the trace segments.
         ResponseTimeRootCauses:
-          $ref: '#/components/schemas/ResponseTimeRootCauses'
-          description: A collection of ResponseTimeRootCause structures corresponding to the trace segments.
+          allOf:
+            - $ref: '#/components/schemas/ResponseTimeRootCauses'
+            - description: A collection of ResponseTimeRootCause structures corresponding to the trace segments.
         Revision:
-          $ref: '#/components/schemas/Integer'
-          description: The revision number of a trace.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The revision number of a trace.
         MatchedEventTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The matched time stamp of a defined event.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The matched time stamp of a defined event.
       description: Metadata generated from the segment documents in a trace.
     TraceUser:
       type: object
       properties:
         UserName:
-          $ref: '#/components/schemas/String'
-          description: The user's name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user's name.
         ServiceIds:
-          $ref: '#/components/schemas/ServiceIds'
-          description: Services that the user's request hit.
+          allOf:
+            - $ref: '#/components/schemas/ServiceIds'
+            - description: Services that the user's request hit.
       description: Information about a user recorded in segment documents.
     UnprocessedStatistics:
       type: object
       properties:
         RuleName:
-          $ref: '#/components/schemas/String'
-          description: The name of the sampling rule.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the sampling rule.
         ErrorCode:
-          $ref: '#/components/schemas/String'
-          description: The error code.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code.
         Message:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: Sampling statistics from a call to <a>GetSamplingTargets</a> that X-Ray could not process.
     UnprocessedTraceSegment:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/String'
-          description: The segment's ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The segment's ID.
         ErrorCode:
-          $ref: '#/components/schemas/String'
-          description: The error that caused processing to fail.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error that caused processing to fail.
         Message:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: Information about a segment that failed processing.
     UntagResourceRequest:
       type: object
@@ -3043,14 +3339,17 @@ components:
       title: UpdateGroupRequest
       properties:
         GroupName:
-          $ref: '#/components/schemas/GroupName'
-          description: The case-sensitive name of the group.
+          allOf:
+            - $ref: '#/components/schemas/GroupName'
+            - description: The case-sensitive name of the group.
         GroupARN:
-          $ref: '#/components/schemas/GroupARN'
-          description: The ARN that was generated upon creation.
+          allOf:
+            - $ref: '#/components/schemas/GroupARN'
+            - description: The ARN that was generated upon creation.
         FilterExpression:
-          $ref: '#/components/schemas/FilterExpression'
-          description: The updated filter expression defining criteria by which to group traces.
+          allOf:
+            - $ref: '#/components/schemas/FilterExpression'
+            - description: The updated filter expression defining criteria by which to group traces.
     UpdateSamplingRuleRequest:
       type: object
       required:
@@ -3058,17 +3357,20 @@ components:
       title: UpdateSamplingRuleRequest
       properties:
         SamplingRuleUpdate:
-          $ref: '#/components/schemas/SamplingRuleUpdate'
-          description: The rule and fields to change.
+          allOf:
+            - $ref: '#/components/schemas/SamplingRuleUpdate'
+            - description: The rule and fields to change.
     ValueWithServiceIds:
       type: object
       properties:
         AnnotationValue:
-          $ref: '#/components/schemas/AnnotationValue'
-          description: Values of the annotation.
+          allOf:
+            - $ref: '#/components/schemas/AnnotationValue'
+            - description: Values of the annotation.
         ServiceIds:
-          $ref: '#/components/schemas/ServiceIds'
-          description: Services to which the annotation applies.
+          allOf:
+            - $ref: '#/components/schemas/ServiceIds'
+            - description: Services to which the annotation applies.
       description: Information about a segment annotation.
 security:
   - hmac: []

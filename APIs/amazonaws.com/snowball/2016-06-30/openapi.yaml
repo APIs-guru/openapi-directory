@@ -1097,8 +1097,9 @@ components:
       title: CancelClusterRequest
       properties:
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: 'The 39-character ID for the cluster that you want to cancel, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: 'The 39-character ID for the cluster that you want to cancel, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
     KMSRequestFailedException: {}
     InvalidJobStateException: {}
     InvalidResourceException: {}
@@ -1112,16 +1113,18 @@ components:
       title: CancelJobRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The 39-character job ID for the job that you want to cancel, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The 39-character job ID for the job that you want to cancel, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     CreateAddressResult:
       type: object
       example:
         AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
       properties:
         AddressId:
-          $ref: '#/components/schemas/String'
-          description: The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snowball for that job shipped to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snowball for that job shipped to.
     CreateAddressRequest:
       type: object
       required:
@@ -1129,8 +1132,9 @@ components:
       title: CreateAddressRequest
       properties:
         Address:
-          $ref: '#/components/schemas/Address'
-          description: The address that you want the Snowball shipped to.
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The address that you want the Snowball shipped to.
     InvalidAddressException: {}
     UnsupportedAddressException: {}
     CreateClusterResult:
@@ -1139,8 +1143,9 @@ components:
         ClusterId: CID123e4567-e89b-12d3-a456-426655440000
       properties:
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: The automatically generated ID for a cluster.
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: The automatically generated ID for a cluster.
     CreateClusterRequest:
       type: object
       required:
@@ -1152,38 +1157,49 @@ components:
       title: CreateClusterRequest
       properties:
         JobType:
-          $ref: '#/components/schemas/JobType'
-          description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: 'The resources associated with the cluster job. These resources include Amazon S3 buckets and optional AWS Lambda functions written in the Python language. '
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: 'The resources associated with the cluster job. These resources include Amazon S3 buckets and optional AWS Lambda functions written in the Python language. '
         Description:
-          $ref: '#/components/schemas/String'
-          description: 'An optional description of this specific cluster, for example <code>Environmental Data Cluster-01</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional description of this specific cluster, for example <code>Environmental Data Cluster-01</code>.'
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The ID for the address that you want the cluster shipped to.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The ID for the address that you want the cluster shipped to.
         KmsKeyARN:
-          $ref: '#/components/schemas/KmsKeyARN'
-          description: 'The <code>KmsKeyARN</code> value that you want to associate with this cluster. <code>KmsKeyARN</code> values are created by using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS). '
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyARN'
+            - description: 'The <code>KmsKeyARN</code> value that you want to associate with this cluster. <code>KmsKeyARN</code> values are created by using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS). '
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The <code>RoleARN</code> that you want to associate with this cluster. <code>RoleArn</code> values are created by using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
         SnowballType:
-          $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SnowballType'
+            - description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The forwarding address ID for a cluster. This field is not supported in most regions.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The forwarding address ID for a cluster. This field is not supported in most regions.
         TaxDocuments:
-          $ref: '#/components/schemas/TaxDocuments'
-          description: The tax documents required in your AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/TaxDocuments'
+            - description: The tax documents required in your AWS Region.
     InvalidInputCombinationException: {}
     Ec2RequestFailedException: {}
     CreateJobResult:
@@ -1192,54 +1208,69 @@ components:
         JobId: JID123e4567-e89b-12d3-a456-426655440000
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     CreateJobRequest:
       type: object
       title: CreateJobRequest
       properties:
         JobType:
-          $ref: '#/components/schemas/JobType'
-          description: 'Defines the type of job that you''re creating. '
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: 'Defines the type of job that you''re creating. '
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: '<p>Defines the Amazon S3 buckets associated with this job.</p> <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If you choose to export a range, you define the length of the range by providing either an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both. Ranges are UTF-8 binary sorted.</p>'
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: '<p>Defines the Amazon S3 buckets associated with this job.</p> <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If you choose to export a range, you define the length of the range by providing either an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both. Ranges are UTF-8 binary sorted.</p>'
         Description:
-          $ref: '#/components/schemas/String'
-          description: 'Defines an optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Defines an optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The ID for the address that you want the Snowball shipped to.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The ID for the address that you want the Snowball shipped to.
         KmsKeyARN:
-          $ref: '#/components/schemas/KmsKeyARN'
-          description: 'The <code>KmsKeyARN</code> that you want to associate with this job. <code>KmsKeyARN</code>s are created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> AWS Key Management Service (KMS) API action.'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyARN'
+            - description: 'The <code>KmsKeyARN</code> that you want to associate with this job. <code>KmsKeyARN</code>s are created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> AWS Key Management Service (KMS) API action.'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The <code>RoleARN</code> that you want to associate with this job. <code>RoleArn</code>s are created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> AWS Identity and Access Management (IAM) API action.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The <code>RoleARN</code> that you want to associate with this job. <code>RoleArn</code>s are created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> AWS Identity and Access Management (IAM) API action.'
         SnowballCapacityPreference:
-          $ref: '#/components/schemas/SnowballCapacity'
-          description: 'If your job is being created in one of the US regions, you have the option of specifying what size Snowball you''d like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.'
+          allOf:
+            - $ref: '#/components/schemas/SnowballCapacity'
+            - description: 'If your job is being created in one of the US regions, you have the option of specifying what size Snowball you''d like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.'
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: '<p>The shipping speed for this job. This speed doesn''t dictate how soon you''ll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: '<p>The shipping speed for this job. This speed doesn''t dictate how soon you''ll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: Defines the Amazon Simple Notification Service (Amazon SNS) notification settings for this job.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: Defines the Amazon Simple Notification Service (Amazon SNS) notification settings for this job.
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: 'The ID of a cluster. If you''re creating a job for a node in a cluster, you need to provide only this <code>clusterId</code> value. The other job attributes are inherited from the cluster.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: 'The ID of a cluster. If you''re creating a job for a node in a cluster, you need to provide only this <code>clusterId</code> value. The other job attributes are inherited from the cluster.'
         SnowballType:
-          $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this job. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SnowballType'
+            - description: '<p>The type of AWS Snowball device to use for this job. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>'
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The forwarding address ID for a job. This field is not supported in most regions.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The forwarding address ID for a job. This field is not supported in most regions.
         TaxDocuments:
-          $ref: '#/components/schemas/TaxDocuments'
-          description: The tax documents required in your AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/TaxDocuments'
+            - description: The tax documents required in your AWS Region.
         DeviceConfiguration:
-          $ref: '#/components/schemas/DeviceConfiguration'
-          description: Defines the device configuration for an AWS Snowcone job.
+          allOf:
+            - $ref: '#/components/schemas/DeviceConfiguration'
+            - description: Defines the device configuration for an AWS Snowcone job.
     ClusterLimitExceededException: {}
     DescribeAddressResult:
       type: object
@@ -1256,8 +1287,9 @@ components:
           Street1: 123 Main Street
       properties:
         Address:
-          $ref: '#/components/schemas/Address'
-          description: The address that you want the Snowball or Snowballs associated with a specific job to be shipped to.
+          allOf:
+            - $ref: '#/components/schemas/Address'
+            - description: The address that you want the Snowball or Snowballs associated with a specific job to be shipped to.
     DescribeAddressRequest:
       type: object
       required:
@@ -1265,8 +1297,9 @@ components:
       title: DescribeAddressRequest
       properties:
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The automatically generated ID for a specific address.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The automatically generated ID for a specific address.
     DescribeAddressesResult:
       type: object
       example:
@@ -1282,21 +1315,25 @@ components:
             Street1: 123 Main Street
       properties:
         Addresses:
-          $ref: '#/components/schemas/AddressList'
-          description: The Snowball shipping addresses that were created for this account.
+          allOf:
+            - $ref: '#/components/schemas/AddressList'
+            - description: The Snowball shipping addresses that were created for this account.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>DescribeAddresses</code> call, your list of returned addresses will start from this point in the array.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>DescribeAddresses</code> call, your list of returned addresses will start from this point in the array.'
     DescribeAddressesRequest:
       type: object
       title: DescribeAddressesRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListLimit'
-          description: The number of <code>ADDRESS</code> objects to return.
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: The number of <code>ADDRESS</code> objects to return.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ADDRESS</code> objects, you have the option of specifying a value for <code>NextToken</code> as the starting point for your list of returned addresses.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ADDRESS</code> objects, you have the option of specifying a value for <code>NextToken</code> as the starting point for your list of returned addresses.'
     InvalidNextTokenException: {}
     DescribeClusterResult:
       type: object
@@ -1320,8 +1357,9 @@ components:
           ShippingOption: SECOND_DAY
       properties:
         ClusterMetadata:
-          $ref: '#/components/schemas/ClusterMetadata'
-          description: 'Information about a specific cluster, including shipping information, cluster status, and other important metadata.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterMetadata'
+            - description: 'Information about a specific cluster, including shipping information, cluster status, and other important metadata.'
     DescribeClusterRequest:
       type: object
       required:
@@ -1329,8 +1367,9 @@ components:
       title: DescribeClusterRequest
       properties:
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: The automatically generated ID for a cluster.
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: The automatically generated ID for a cluster.
     DescribeJobResult:
       type: object
       example:
@@ -1356,11 +1395,13 @@ components:
           SnowballType: STANDARD
       properties:
         JobMetadata:
-          $ref: '#/components/schemas/JobMetadata'
-          description: 'Information about a specific job, including shipping information, job status, and other important metadata.'
+          allOf:
+            - $ref: '#/components/schemas/JobMetadata'
+            - description: 'Information about a specific job, including shipping information, job status, and other important metadata.'
         SubJobMetadata:
-          $ref: '#/components/schemas/JobMetadataList'
-          description: 'Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.'
+          allOf:
+            - $ref: '#/components/schemas/JobMetadataList'
+            - description: 'Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.'
     DescribeJobRequest:
       type: object
       required:
@@ -1368,16 +1409,18 @@ components:
       title: DescribeJobRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     GetJobManifestResult:
       type: object
       example:
         ManifestURI: 'https://awsie-frosty-manifests-prod.s3.amazonaws.com/JID123e4567-e89b-12d3-a456-426655440000_manifest.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20161224T005115Z&X-Amz-SignedHeaders=...'
       properties:
         ManifestURI:
-          $ref: '#/components/schemas/String'
-          description: The Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value.
     GetJobManifestRequest:
       type: object
       required:
@@ -1385,16 +1428,18 @@ components:
       title: GetJobManifestRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The ID for a job that you want to get the manifest file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The ID for a job that you want to get the manifest file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     GetJobUnlockCodeResult:
       type: object
       example:
         UnlockCode: 12345-abcde-56789-fghij-01234
       properties:
         UnlockCode:
-          $ref: '#/components/schemas/String'
-          description: The <code>UnlockCode</code> value for the specified job. The <code>UnlockCode</code> value can be accessed for up to 90 days after the job has been created.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The <code>UnlockCode</code> value for the specified job. The <code>UnlockCode</code> value can be accessed for up to 90 days after the job has been created.
     GetJobUnlockCodeRequest:
       type: object
       required:
@@ -1402,8 +1447,9 @@ components:
       title: GetJobUnlockCodeRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The ID for the job that you want to get the <code>UnlockCode</code> value for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The ID for the job that you want to get the <code>UnlockCode</code> value for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     GetSnowballUsageResult:
       type: object
       example:
@@ -1411,11 +1457,13 @@ components:
         SnowballsInUse: 0
       properties:
         SnowballLimit:
-          $ref: '#/components/schemas/Integer'
-          description: The service limit for number of Snowballs this account can have at once. The default service limit is 1 (one).
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The service limit for number of Snowballs this account can have at once. The default service limit is 1 (one).
         SnowballsInUse:
-          $ref: '#/components/schemas/Integer'
-          description: The number of Snowballs that this account is currently using.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of Snowballs that this account is currently using.
     GetSnowballUsageRequest:
       type: object
       title: GetSnowballUsageRequest
@@ -1424,8 +1472,9 @@ components:
       type: object
       properties:
         UpdatesURI:
-          $ref: '#/components/schemas/String'
-          description: 'The Amazon S3 presigned URL for the update file associated with the specified <code>JobId</code> value. The software update will be available for 2 days after this request is made. To access an update after the 2 days have passed, you''ll have to make another call to <code>GetSoftwareUpdates</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon S3 presigned URL for the update file associated with the specified <code>JobId</code> value. The software update will be available for 2 days after this request is made. To access an update after the 2 days have passed, you''ll have to make another call to <code>GetSoftwareUpdates</code>.'
     GetSoftwareUpdatesRequest:
       type: object
       required:
@@ -1433,8 +1482,9 @@ components:
       title: GetSoftwareUpdatesRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The ID for a job that you want to get the software update file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The ID for a job that you want to get the software update file for, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
     ListClusterJobsResult:
       type: object
       example:
@@ -1476,11 +1526,13 @@ components:
             SnowballType: EDGE
       properties:
         JobListEntries:
-          $ref: '#/components/schemas/JobListEntryList'
-          description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
+          allOf:
+            - $ref: '#/components/schemas/JobListEntryList'
+            - description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ListClusterJobsResult</code> call, your list of returned jobs will start from this point in the array.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ListClusterJobsResult</code> call, your list of returned jobs will start from this point in the array.'
     ListClusterJobsRequest:
       type: object
       required:
@@ -1488,14 +1540,17 @@ components:
       title: ListClusterJobsRequest
       properties:
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
         MaxResults:
-          $ref: '#/components/schemas/ListLimit'
-          description: The number of <code>JobListEntry</code> objects to return.
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: The number of <code>JobListEntry</code> objects to return.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
     ListClustersResult:
       type: object
       example:
@@ -1506,40 +1561,48 @@ components:
             Description: MyCluster
       properties:
         ClusterListEntries:
-          $ref: '#/components/schemas/ClusterListEntryList'
-          description: 'Each <code>ClusterListEntry</code> object contains a cluster''s state, a cluster''s ID, and other important status information.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterListEntryList'
+            - description: 'Each <code>ClusterListEntry</code> object contains a cluster''s state, a cluster''s ID, and other important status information.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of returned clusters will start from this point in the array.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. If you use the automatically generated <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of returned clusters will start from this point in the array.'
     ListClustersRequest:
       type: object
       title: ListClustersRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListLimit'
-          description: The number of <code>ClusterListEntry</code> objects to return.
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: The number of <code>ClusterListEntry</code> objects to return.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ClusterListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ClusterListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
     ListCompatibleImagesResult:
       type: object
       properties:
         CompatibleImages:
-          $ref: '#/components/schemas/CompatibleImageList'
-          description: 'A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.'
+          allOf:
+            - $ref: '#/components/schemas/CompatibleImageList'
+            - description: 'A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'Because HTTP requests are stateless, this is the starting point for your next list of returned images.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Because HTTP requests are stateless, this is the starting point for your next list of returned images.'
     ListCompatibleImagesRequest:
       type: object
       title: ListCompatibleImagesRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListLimit'
-          description: 'The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.'
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: 'The maximum number of results for the list of compatible images. Currently, a Snowball Edge device can store 10 AMIs.'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for <code>NextToken</code> as the starting point for your list of returned images.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of compatible images, you can specify a value for <code>NextToken</code> as the starting point for your list of returned images.'
     ListJobsResult:
       type: object
       example:
@@ -1553,21 +1616,25 @@ components:
             SnowballType: STANDARD
       properties:
         JobListEntries:
-          $ref: '#/components/schemas/JobListEntryList'
-          description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
+          allOf:
+            - $ref: '#/components/schemas/JobListEntryList'
+            - description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of export jobs. '
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. If you use this automatically generated <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned <code>JobListEntry</code> objects will start from this point in the array.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. If you use this automatically generated <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned <code>JobListEntry</code> objects will start from this point in the array.'
     ListJobsRequest:
       type: object
       title: ListJobsRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/ListLimit'
-          description: The number of <code>JobListEntry</code> objects to return.
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: The number of <code>JobListEntry</code> objects to return.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
     UpdateClusterResult:
       type: object
       properties: {}
@@ -1578,29 +1645,37 @@ components:
       title: UpdateClusterRequest
       properties:
         ClusterId:
-          $ref: '#/components/schemas/ClusterId'
-          description: 'The cluster ID of the cluster that you want to update, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: 'The cluster ID of the cluster that you want to update, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The new role Amazon Resource Name (ARN) that you want to associate with this cluster. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
         Description:
-          $ref: '#/components/schemas/String'
-          description: The updated description of this cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The updated description of this cluster.
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: The updated arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: The updated arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The ID of the updated <a>Address</a> object.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The ID of the updated <a>Address</a> object.
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: The updated shipping option value of this cluster's <a>ShippingDetails</a> object.
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: The updated shipping option value of this cluster's <a>ShippingDetails</a> object.
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: The new or updated <a>Notification</a> object.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: The new or updated <a>Notification</a> object.
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The updated ID for the forwarding address for a cluster. This field is not supported in most regions.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The updated ID for the forwarding address for a cluster. This field is not supported in most regions.
     UpdateJobResult:
       type: object
       properties: {}
@@ -1611,32 +1686,41 @@ components:
       title: UpdateJobRequest
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: 'The job ID of the job that you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'The job ID of the job that you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The new role Amazon Resource Name (ARN) that you want to associate with this job. To create a role ARN, use the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a>AWS Identity and Access Management (IAM) API action.'
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: The new or updated <a>Notification</a> object.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: The new or updated <a>Notification</a> object.
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: 'The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. '
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: 'The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. '
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The ID of the updated <a>Address</a> object.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The ID of the updated <a>Address</a> object.
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: The updated shipping option value of this job's <a>ShippingDetails</a> object.
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: The updated shipping option value of this job's <a>ShippingDetails</a> object.
         Description:
-          $ref: '#/components/schemas/String'
-          description: The updated description of this job's <a>JobMetadata</a> object.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The updated description of this job's <a>JobMetadata</a> object.
         SnowballCapacityPreference:
-          $ref: '#/components/schemas/SnowballCapacity'
-          description: The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US regions.
+          allOf:
+            - $ref: '#/components/schemas/SnowballCapacity'
+            - description: The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US regions.
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
     AddressId:
       type: string
       pattern: 'ADID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
@@ -1651,47 +1735,61 @@ components:
       type: object
       properties:
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The unique ID for an address.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The unique ID for an address.
         Name:
-          $ref: '#/components/schemas/String'
-          description: The name of a person to receive a Snowball at an address.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a person to receive a Snowball at an address.
         Company:
-          $ref: '#/components/schemas/String'
-          description: The name of the company to receive a Snowball at an address.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the company to receive a Snowball at an address.
         Street1:
-          $ref: '#/components/schemas/String'
-          description: The first line in a street address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The first line in a street address that a Snowball is to be delivered to.
         Street2:
-          $ref: '#/components/schemas/String'
-          description: The second line in a street address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The second line in a street address that a Snowball is to be delivered to.
         Street3:
-          $ref: '#/components/schemas/String'
-          description: The third line in a street address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The third line in a street address that a Snowball is to be delivered to.
         City:
-          $ref: '#/components/schemas/String'
-          description: The city in an address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The city in an address that a Snowball is to be delivered to.
         StateOrProvince:
-          $ref: '#/components/schemas/String'
-          description: The state or province in an address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state or province in an address that a Snowball is to be delivered to.
         PrefectureOrDistrict:
-          $ref: '#/components/schemas/String'
-          description: This field is no longer used and the value is ignored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: This field is no longer used and the value is ignored.
         Landmark:
-          $ref: '#/components/schemas/String'
-          description: This field is no longer used and the value is ignored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: This field is no longer used and the value is ignored.
         Country:
-          $ref: '#/components/schemas/String'
-          description: The country in an address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The country in an address that a Snowball is to be delivered to.
         PostalCode:
-          $ref: '#/components/schemas/String'
-          description: The postal code in an address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The postal code in an address that a Snowball is to be delivered to.
         PhoneNumber:
-          $ref: '#/components/schemas/String'
-          description: The phone number associated with an address that a Snowball is to be delivered to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The phone number associated with an address that a Snowball is to be delivered to.
         IsRestricted:
-          $ref: '#/components/schemas/Boolean'
-          description: 'If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.'
       description: 'The address that you want the Snowball or Snowballs associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.'
     AddressList:
       type: array
@@ -1727,17 +1825,21 @@ components:
       type: object
       properties:
         ClusterId:
-          $ref: '#/components/schemas/String'
-          description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The 39-character ID for the cluster that you want to list, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
         ClusterState:
-          $ref: '#/components/schemas/ClusterState'
-          description: 'The current state of this cluster. For information about the state of a specific node, see <a>JobListEntry$JobState</a>.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterState'
+            - description: 'The current state of this cluster. For information about the state of a specific node, see <a>JobListEntry$JobState</a>.'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The creation date for this cluster.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date for this cluster.
         Description:
-          $ref: '#/components/schemas/String'
-          description: 'Defines an optional description of the cluster, for example <code>Environmental Data Cluster-01</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Defines an optional description of the cluster, for example <code>Environmental Data Cluster-01</code>.'
       description: 'Contains a cluster''s state, a cluster''s ID, and other important information.'
     ClusterListEntryList:
       type: array
@@ -1770,14 +1872,17 @@ components:
       type: object
       properties:
         S3Resources:
-          $ref: '#/components/schemas/S3ResourceList'
-          description: An array of <code>S3Resource</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/S3ResourceList'
+            - description: An array of <code>S3Resource</code> objects.
         LambdaResources:
-          $ref: '#/components/schemas/LambdaResourceList'
-          description: The Python-language Lambda functions for this job.
+          allOf:
+            - $ref: '#/components/schemas/LambdaResourceList'
+            - description: The Python-language Lambda functions for this job.
         Ec2AmiResources:
-          $ref: '#/components/schemas/Ec2AmiResourceList'
-          description: The Amazon Machine Images (AMIs) associated with this job.
+          allOf:
+            - $ref: '#/components/schemas/Ec2AmiResourceList'
+            - description: The Amazon Machine Images (AMIs) associated with this job.
       description: 'Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is associated with a particular job.'
     ShippingOption:
       type: string
@@ -1790,14 +1895,17 @@ components:
       type: object
       properties:
         SnsTopicARN:
-          $ref: '#/components/schemas/SnsTopicARN'
-          description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicARN'
+            - description: '<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>'
         JobStatesToNotify:
-          $ref: '#/components/schemas/JobStateList'
-          description: The list of job states that will trigger a notification for this job.
+          allOf:
+            - $ref: '#/components/schemas/JobStateList'
+            - description: The list of job states that will trigger a notification for this job.
         NotifyAll:
-          $ref: '#/components/schemas/Boolean'
-          description: Any change in job state will trigger a notification for this job.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Any change in job state will trigger a notification for this job.
       description: '<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>'
     TaxDocuments:
       type: object
@@ -1809,57 +1917,73 @@ components:
       type: object
       properties:
         ClusterId:
-          $ref: '#/components/schemas/String'
-          description: The automatically generated ID for a cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The automatically generated ID for a cluster.
         Description:
-          $ref: '#/components/schemas/String'
-          description: The optional description of the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The optional description of the cluster.
         KmsKeyARN:
-          $ref: '#/components/schemas/KmsKeyARN'
-          description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyARN'
+            - description: 'The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS Key Management Service (AWS KMS).'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The role ARN associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The role ARN associated with this cluster. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
         ClusterState:
-          $ref: '#/components/schemas/ClusterState'
-          description: The current status of the cluster.
+          allOf:
+            - $ref: '#/components/schemas/ClusterState'
+            - description: The current status of the cluster.
         JobType:
-          $ref: '#/components/schemas/JobType'
-          description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: 'The type of job for this cluster. Currently, the only job type supported for clusters is <code>LOCAL_USE</code>.'
         SnowballType:
-          $ref: '#/components/schemas/SnowballType'
-          description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SnowballType'
+            - description: '<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>'
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The creation date for this cluster.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date for this cluster.
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: The arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: The arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The automatically generated ID for a specific address.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The automatically generated ID for a specific address.
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: '<p>The shipping speed for each node in this cluster. This speed doesn''t dictate how soon you''ll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: The Amazon Simple Notification Service (Amazon SNS) notification settings for this cluster.
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: 'The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: 'The ID of the address that you want a cluster shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
         TaxDocuments:
-          $ref: '#/components/schemas/TaxDocuments'
-          description: The tax documents required in your AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/TaxDocuments'
+            - description: The tax documents required in your AWS Region.
       description: Contains metadata about a specific cluster.
     CompatibleImage:
       type: object
       properties:
         AmiId:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for an individual Snowball Edge AMI.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for an individual Snowball Edge AMI.
         Name:
-          $ref: '#/components/schemas/String'
-          description: The optional name of a compatible image.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The optional name of a compatible image.
       description: 'A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device''s physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.'
     CompatibleImageList:
       type: array
@@ -1879,8 +2003,9 @@ components:
       type: object
       properties:
         SnowconeDeviceConfiguration:
-          $ref: '#/components/schemas/SnowconeDeviceConfiguration'
-          description: Returns information about the device configuration for an AWS Snowcone job.
+          allOf:
+            - $ref: '#/components/schemas/SnowconeDeviceConfiguration'
+            - description: Returns information about the device configuration for an AWS Snowcone job.
       description: 'The container for <code>SnowconeDeviceConfiguration</code>. '
     Long:
       type: integer
@@ -1888,17 +2013,21 @@ components:
       type: object
       properties:
         BytesTransferred:
-          $ref: '#/components/schemas/Long'
-          description: The number of bytes transferred between a Snowball and Amazon S3.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of bytes transferred between a Snowball and Amazon S3.
         ObjectsTransferred:
-          $ref: '#/components/schemas/Long'
-          description: The number of objects transferred between a Snowball and Amazon S3.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of objects transferred between a Snowball and Amazon S3.
         TotalBytes:
-          $ref: '#/components/schemas/Long'
-          description: The total bytes of data for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total bytes of data for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
         TotalObjects:
-          $ref: '#/components/schemas/Long'
-          description: The total number of objects for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total number of objects for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.
       description: 'Defines the real-time status of a Snowball''s data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.'
     ListLimit:
       type: integer
@@ -1908,59 +2037,77 @@ components:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/String'
-          description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
         JobState:
-          $ref: '#/components/schemas/JobState'
-          description: The current status of the jobs.
+          allOf:
+            - $ref: '#/components/schemas/JobState'
+            - description: The current status of the jobs.
         JobType:
-          $ref: '#/components/schemas/JobType'
-          description: The type of job.
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: The type of job.
         SnowballType:
-          $ref: '#/components/schemas/SnowballType'
-          description: The type of device used with this job.
+          allOf:
+            - $ref: '#/components/schemas/SnowballType'
+            - description: The type of device used with this job.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The creation date for this job.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date for this job.
         Resources:
-          $ref: '#/components/schemas/JobResource'
-          description: An array of <code>S3Resource</code> objects. Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into.
+          allOf:
+            - $ref: '#/components/schemas/JobResource'
+            - description: An array of <code>S3Resource</code> objects. Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into.
         Description:
-          $ref: '#/components/schemas/String'
-          description: 'The description of the job, provided at job creation.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The description of the job, provided at job creation.'
         KmsKeyARN:
-          $ref: '#/components/schemas/KmsKeyARN'
-          description: 'The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS KMS.'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyARN'
+            - description: 'The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html">CreateKey</a> API action in AWS KMS.'
         RoleARN:
-          $ref: '#/components/schemas/RoleARN'
-          description: 'The role ARN associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
+          allOf:
+            - $ref: '#/components/schemas/RoleARN'
+            - description: 'The role ARN associated with this job. This ARN was created using the <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html">CreateRole</a> API action in AWS Identity and Access Management (IAM).'
         AddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: The ID for the address that you want the Snowball shipped to.
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: The ID for the address that you want the Snowball shipped to.
         ShippingDetails:
-          $ref: '#/components/schemas/ShippingDetails'
-          description: 'A job''s shipping information, including inbound and outbound tracking numbers and shipping speed options.'
+          allOf:
+            - $ref: '#/components/schemas/ShippingDetails'
+            - description: 'A job''s shipping information, including inbound and outbound tracking numbers and shipping speed options.'
         SnowballCapacityPreference:
-          $ref: '#/components/schemas/SnowballCapacity'
-          description: 'The Snowball capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs.'
+          allOf:
+            - $ref: '#/components/schemas/SnowballCapacity'
+            - description: 'The Snowball capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs.'
         Notification:
-          $ref: '#/components/schemas/Notification'
-          description: The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.
+          allOf:
+            - $ref: '#/components/schemas/Notification'
+            - description: The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.
         DataTransferProgress:
-          $ref: '#/components/schemas/DataTransfer'
-          description: 'A value that defines the real-time status of a Snowball''s data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.'
+          allOf:
+            - $ref: '#/components/schemas/DataTransfer'
+            - description: 'A value that defines the real-time status of a Snowball''s data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.'
         JobLogInfo:
-          $ref: '#/components/schemas/JobLogs'
-          description: 'Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.'
+          allOf:
+            - $ref: '#/components/schemas/JobLogs'
+            - description: 'Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.'
         ClusterId:
-          $ref: '#/components/schemas/String'
-          description: 'The 39-character ID for the cluster, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The 39-character ID for the cluster, for example <code>CID123e4567-e89b-12d3-a456-426655440000</code>.'
         ForwardingAddressId:
-          $ref: '#/components/schemas/AddressId'
-          description: 'The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
+          allOf:
+            - $ref: '#/components/schemas/AddressId'
+            - description: 'The ID of the address that you want a job shipped to, after it will be shipped to its primary address. This field is not supported in most regions.'
         TaxDocuments:
-          $ref: '#/components/schemas/TaxDocuments'
-          description: The metadata associated with the tax documents required in your AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/TaxDocuments'
+            - description: The metadata associated with the tax documents required in your AWS Region.
         DeviceConfiguration:
           $ref: '#/components/schemas/DeviceConfiguration'
       description: 'Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.'
@@ -1972,8 +2119,9 @@ components:
       type: object
       properties:
         WirelessConnection:
-          $ref: '#/components/schemas/WirelessConnection'
-          description: Configures the wireless connection for the AWS Snowcone device.
+          allOf:
+            - $ref: '#/components/schemas/WirelessConnection'
+            - description: Configures the wireless connection for the AWS Snowcone device.
       description: 'Specifies the device configuration for an AWS Snowcone job. '
     Ec2AmiResource:
       type: object
@@ -1981,11 +2129,13 @@ components:
         - AmiId
       properties:
         AmiId:
-          $ref: '#/components/schemas/AmiId'
-          description: The ID of the AMI in Amazon EC2.
+          allOf:
+            - $ref: '#/components/schemas/AmiId'
+            - description: The ID of the AMI in Amazon EC2.
         SnowballAmiId:
-          $ref: '#/components/schemas/String'
-          description: The ID of the AMI on the Snowball Edge device.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the AMI on the Snowball Edge device.
       description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.'
     Ec2AmiResourceList:
       type: array
@@ -1998,8 +2148,9 @@ components:
       type: object
       properties:
         EventResourceARN:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda function's event trigger associated with this job.
       description: The container for the <a>EventTriggerDefinition$EventResourceARN</a>.
     EventTriggerDefinitionList:
       type: array
@@ -2014,8 +2165,9 @@ components:
       type: object
       properties:
         GSTIN:
-          $ref: '#/components/schemas/GSTIN'
-          description: The Goods and Services Tax (GST) documents required in AWS Regions in India.
+          allOf:
+            - $ref: '#/components/schemas/GSTIN'
+            - description: The Goods and Services Tax (GST) documents required in AWS Regions in India.
       description: The tax documents required in AWS Regions in India.
     JobState:
       type: string
@@ -2037,26 +2189,33 @@ components:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/String'
-          description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.'
         JobState:
-          $ref: '#/components/schemas/JobState'
-          description: The current state of this job.
+          allOf:
+            - $ref: '#/components/schemas/JobState'
+            - description: The current state of this job.
         IsMaster:
-          $ref: '#/components/schemas/Boolean'
-          description: 'A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren''t associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren''t associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.'
         JobType:
-          $ref: '#/components/schemas/JobType'
-          description: The type of job.
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: The type of job.
         SnowballType:
-          $ref: '#/components/schemas/SnowballType'
-          description: The type of device used with this job.
+          allOf:
+            - $ref: '#/components/schemas/SnowballType'
+            - description: The type of device used with this job.
         CreationDate:
-          $ref: '#/components/schemas/Timestamp'
-          description: The creation date for this job.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date for this job.
         Description:
-          $ref: '#/components/schemas/String'
-          description: 'The optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The optional description of this specific job, for example <code>Important Photos 2016-08-11</code>.'
       description: 'Each <code>JobListEntry</code> object contains a job''s state, a job''s ID, and a value that indicates whether the job is a job part, in the case of an export job.'
     JobListEntryList:
       type: array
@@ -2066,27 +2225,33 @@ components:
       type: object
       properties:
         JobCompletionReportURI:
-          $ref: '#/components/schemas/String'
-          description: A link to an Amazon S3 presigned URL where the job completion report is located.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A link to an Amazon S3 presigned URL where the job completion report is located.
         JobSuccessLogURI:
-          $ref: '#/components/schemas/String'
-          description: A link to an Amazon S3 presigned URL where the job success log is located.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A link to an Amazon S3 presigned URL where the job success log is located.
         JobFailureLogURI:
-          $ref: '#/components/schemas/String'
-          description: A link to an Amazon S3 presigned URL where the job failure log is located.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A link to an Amazon S3 presigned URL where the job failure log is located.
       description: '<p>Contains job logs. Whenever Snowball is used to import data into or export data out of Amazon S3, you''ll have the option of downloading a PDF job report. Job logs are returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after this request has been made. To access any of the job logs after 60 minutes have passed, you''ll have to make another call to the <code>DescribeJob</code> action.</p> <p>For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.</p> <p>The job report provides you insight into the state of your Amazon S3 data transfer. The report includes details about your job or job part for your records.</p> <p>For deeper visibility into the status of your transferred objects, you can look at the two associated logs: a success log and a failure log. The logs are saved in comma-separated value (CSV) format, and the name of each log includes the ID of the job or job part that the log describes.</p>'
     ShippingDetails:
       type: object
       properties:
         ShippingOption:
-          $ref: '#/components/schemas/ShippingOption'
-          description: '<p>The shipping speed for a particular job. This speed doesn''t dictate how soon you''ll get the Snowball from the job''s creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ShippingOption'
+            - description: '<p>The shipping speed for a particular job. This speed doesn''t dictate how soon you''ll get the Snowball from the job''s creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>'
         InboundShipment:
-          $ref: '#/components/schemas/Shipment'
-          description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.
+          allOf:
+            - $ref: '#/components/schemas/Shipment'
+            - description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.
         OutboundShipment:
-          $ref: '#/components/schemas/Shipment'
-          description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.
+          allOf:
+            - $ref: '#/components/schemas/Shipment'
+            - description: The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.
       description: 'A job''s shipping information, including inbound and outbound tracking numbers and shipping speed options.'
     S3ResourceList:
       type: array
@@ -2104,21 +2269,25 @@ components:
       type: object
       properties:
         BeginMarker:
-          $ref: '#/components/schemas/String'
-          description: The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
         EndMarker:
-          $ref: '#/components/schemas/String'
-          description: The key that ends an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The key that ends an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
       description: 'Contains a key range. For export jobs, a <code>S3Resource</code> object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
     LambdaResource:
       type: object
       properties:
         LambdaArn:
-          $ref: '#/components/schemas/ResourceARN'
-          description: An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by PUT object actions on the associated local Amazon S3 resource.
         EventTriggers:
-          $ref: '#/components/schemas/EventTriggerDefinitionList'
-          description: The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.
+          allOf:
+            - $ref: '#/components/schemas/EventTriggerDefinitionList'
+            - description: The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.
       description: 'Identifies '
     SnsTopicARN:
       type: string
@@ -2128,28 +2297,33 @@ components:
       type: object
       properties:
         BucketArn:
-          $ref: '#/components/schemas/ResourceARN'
-          description: The Amazon Resource Name (ARN) of an Amazon S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of an Amazon S3 bucket.
         KeyRange:
-          $ref: '#/components/schemas/KeyRange'
-          description: 'For export jobs, you can provide an optional <code>KeyRange</code> within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
+          allOf:
+            - $ref: '#/components/schemas/KeyRange'
+            - description: 'For export jobs, you can provide an optional <code>KeyRange</code> within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
       description: 'Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into. For export jobs, this object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.'
     Shipment:
       type: object
       properties:
         Status:
-          $ref: '#/components/schemas/String'
-          description: Status information for a shipment.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Status information for a shipment.
         TrackingNumber:
-          $ref: '#/components/schemas/String'
-          description: '<p>The tracking number for this job. Using this tracking number with your region''s carrier''s website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The tracking number for this job. Using this tracking number with your region''s carrier''s website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>'
       description: The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.
     WirelessConnection:
       type: object
       properties:
         IsWifiEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Enables the Wi-Fi adapter on an AWS Snowcone device.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables the Wi-Fi adapter on an AWS Snowcone device.
       description: Configures the wireless connection on an AWS Snowcone device.
 security:
   - hmac: []

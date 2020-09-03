@@ -406,8 +406,9 @@ paths:
                   type: object
                   properties:
                     httpRoute:
-                      $ref: '#/components/schemas/HttpRoute'
-                      description: The HTTP routing information for the route.
+                      allOf:
+                        - $ref: '#/components/schemas/HttpRoute'
+                        - description: The HTTP routing information for the route.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -612,14 +613,17 @@ paths:
                   type: object
                   properties:
                     backends:
-                      $ref: '#/components/schemas/Backends'
-                      description: The backends to which the virtual node is expected to send outbound traffic.
+                      allOf:
+                        - $ref: '#/components/schemas/Backends'
+                        - description: The backends to which the virtual node is expected to send outbound traffic.
                     listeners:
-                      $ref: '#/components/schemas/Listeners'
-                      description: The listeners from which the virtual node is expected to receive inbound traffic.
+                      allOf:
+                        - $ref: '#/components/schemas/Listeners'
+                        - description: The listeners from which the virtual node is expected to receive inbound traffic.
                     serviceDiscovery:
-                      $ref: '#/components/schemas/ServiceDiscovery'
-                      description: The service discovery information for the virtual node.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceDiscovery'
+                        - description: The service discovery information for the virtual node.
                 virtualNodeName:
                   description: The name to use for the virtual node.
                   type: string
@@ -806,8 +810,9 @@ paths:
                   type: object
                   properties:
                     serviceNames:
-                      $ref: '#/components/schemas/ServiceNames'
-                      description: The service mesh service names to associate with the virtual router.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceNames'
+                        - description: The service mesh service names to associate with the virtual router.
                 virtualRouterName:
                   description: The name to use for the virtual router.
                   type: string
@@ -1289,8 +1294,9 @@ paths:
                   type: object
                   properties:
                     httpRoute:
-                      $ref: '#/components/schemas/HttpRoute'
-                      description: The HTTP routing information for the route.
+                      allOf:
+                        - $ref: '#/components/schemas/HttpRoute'
+                        - description: The HTTP routing information for the route.
   '/meshes/{meshName}/virtualNodes/{virtualNodeName}':
     delete:
       operationId: DeleteVirtualNode
@@ -1526,14 +1532,17 @@ paths:
                   type: object
                   properties:
                     backends:
-                      $ref: '#/components/schemas/Backends'
-                      description: The backends to which the virtual node is expected to send outbound traffic.
+                      allOf:
+                        - $ref: '#/components/schemas/Backends'
+                        - description: The backends to which the virtual node is expected to send outbound traffic.
                     listeners:
-                      $ref: '#/components/schemas/Listeners'
-                      description: The listeners from which the virtual node is expected to receive inbound traffic.
+                      allOf:
+                        - $ref: '#/components/schemas/Listeners'
+                        - description: The listeners from which the virtual node is expected to receive inbound traffic.
                     serviceDiscovery:
-                      $ref: '#/components/schemas/ServiceDiscovery'
-                      description: The service discovery information for the virtual node.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceDiscovery'
+                        - description: The service discovery information for the virtual node.
   '/meshes/{meshName}/virtualRouters/{virtualRouterName}':
     delete:
       operationId: DeleteVirtualRouter
@@ -1772,8 +1781,9 @@ paths:
                   type: object
                   properties:
                     serviceNames:
-                      $ref: '#/components/schemas/ServiceNames'
-                      description: The service mesh service names to associate with the virtual router.
+                      allOf:
+                        - $ref: '#/components/schemas/ServiceNames'
+                        - description: The service mesh service names to associate with the virtual router.
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1830,8 +1840,9 @@ components:
       type: object
       properties:
         mesh:
-          $ref: '#/components/schemas/MeshData'
-          description: The full description of your service mesh following the create call.
+          allOf:
+            - $ref: '#/components/schemas/MeshData'
+            - description: The full description of your service mesh following the create call.
       description: ''
     BadRequestException: {}
     ConflictException: {}
@@ -1845,25 +1856,29 @@ components:
       type: object
       properties:
         route:
-          $ref: '#/components/schemas/RouteData'
-          description: The full description of your mesh following the create call.
+          allOf:
+            - $ref: '#/components/schemas/RouteData'
+            - description: The full description of your mesh following the create call.
       description: ''
     HttpRoute:
       type: object
       properties:
         action:
-          $ref: '#/components/schemas/HttpRouteAction'
-          description: The action to take if a match is determined.
+          allOf:
+            - $ref: '#/components/schemas/HttpRouteAction'
+            - description: The action to take if a match is determined.
         match:
-          $ref: '#/components/schemas/HttpRouteMatch'
-          description: The criteria for determining an HTTP request match.
+          allOf:
+            - $ref: '#/components/schemas/HttpRouteMatch'
+            - description: The criteria for determining an HTTP request match.
       description: An object representing the HTTP routing specification for a route.
     CreateVirtualNodeOutput:
       type: object
       properties:
         virtualNode:
-          $ref: '#/components/schemas/VirtualNodeData'
-          description: The full description of your virtual node following the create call.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeData'
+            - description: The full description of your virtual node following the create call.
       description: ''
     Backends:
       type: array
@@ -1877,15 +1892,17 @@ components:
       type: object
       properties:
         dns:
-          $ref: '#/components/schemas/DnsServiceDiscovery'
-          description: Specifies the DNS service name for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/DnsServiceDiscovery'
+            - description: Specifies the DNS service name for the virtual node.
       description: An object representing the service discovery information for a virtual node.
     CreateVirtualRouterOutput:
       type: object
       properties:
         virtualRouter:
-          $ref: '#/components/schemas/VirtualRouterData'
-          description: The full description of your virtual router following the create call.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterData'
+            - description: The full description of your virtual router following the create call.
       description: ''
     ServiceNames:
       type: array
@@ -1896,58 +1913,66 @@ components:
       type: object
       properties:
         mesh:
-          $ref: '#/components/schemas/MeshData'
-          description: The service mesh that was deleted.
+          allOf:
+            - $ref: '#/components/schemas/MeshData'
+            - description: The service mesh that was deleted.
       description: ''
     ResourceInUseException: {}
     DeleteRouteOutput:
       type: object
       properties:
         route:
-          $ref: '#/components/schemas/RouteData'
-          description: The route that was deleted.
+          allOf:
+            - $ref: '#/components/schemas/RouteData'
+            - description: The route that was deleted.
       description: ''
     DeleteVirtualNodeOutput:
       type: object
       properties:
         virtualNode:
-          $ref: '#/components/schemas/VirtualNodeData'
-          description: The virtual node that was deleted.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeData'
+            - description: The virtual node that was deleted.
       description: ''
     DeleteVirtualRouterOutput:
       type: object
       properties:
         virtualRouter:
-          $ref: '#/components/schemas/VirtualRouterData'
-          description: The virtual router that was deleted.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterData'
+            - description: The virtual router that was deleted.
       description: ''
     DescribeMeshOutput:
       type: object
       properties:
         mesh:
-          $ref: '#/components/schemas/MeshData'
-          description: The full description of your service mesh.
+          allOf:
+            - $ref: '#/components/schemas/MeshData'
+            - description: The full description of your service mesh.
       description: ''
     DescribeRouteOutput:
       type: object
       properties:
         route:
-          $ref: '#/components/schemas/RouteData'
-          description: The full description of your route.
+          allOf:
+            - $ref: '#/components/schemas/RouteData'
+            - description: The full description of your route.
       description: ''
     DescribeVirtualNodeOutput:
       type: object
       properties:
         virtualNode:
-          $ref: '#/components/schemas/VirtualNodeData'
-          description: The full description of your virtual node.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeData'
+            - description: The full description of your virtual node.
       description: ''
     DescribeVirtualRouterOutput:
       type: object
       properties:
         virtualRouter:
-          $ref: '#/components/schemas/VirtualRouterData'
-          description: The full description of your virtual router.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterData'
+            - description: The full description of your virtual router.
       description: ''
     ListMeshesOutput:
       type: object
@@ -1955,16 +1980,18 @@ components:
         - meshes
       properties:
         meshes:
-          $ref: '#/components/schemas/MeshList'
-          description: The list of existing service meshes.
+          allOf:
+            - $ref: '#/components/schemas/MeshList'
+            - description: The list of existing service meshes.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The <code>nextToken</code> value to include in a future <code>ListMeshes</code>
-                     request. When the results of a <code>ListMeshes</code> request exceed
-                     <code>limit</code>, this value can be used to retrieve the next page of
-                     results. This value is <code>null</code> when there are no more results to
-                     return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                The <code>nextToken</code> value to include in a future <code>ListMeshes</code>
+                         request. When the results of a <code>ListMeshes</code> request exceed
+                         <code>limit</code>, this value can be used to retrieve the next page of
+                         results. This value is <code>null</code> when there are no more results to
+                         return.
       description: ''
     ListRoutesOutput:
       type: object
@@ -1972,16 +1999,18 @@ components:
         - routes
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The <code>nextToken</code> value to include in a future <code>ListRoutes</code>
-                     request. When the results of a <code>ListRoutes</code> request exceed
-                     <code>limit</code>, this value can be used to retrieve the next page of
-                     results. This value is <code>null</code> when there are no more results to
-                     return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                The <code>nextToken</code> value to include in a future <code>ListRoutes</code>
+                         request. When the results of a <code>ListRoutes</code> request exceed
+                         <code>limit</code>, this value can be used to retrieve the next page of
+                         results. This value is <code>null</code> when there are no more results to
+                         return.
         routes:
-          $ref: '#/components/schemas/RouteList'
-          description: The list of existing routes for the specified service mesh and virtual router.
+          allOf:
+            - $ref: '#/components/schemas/RouteList'
+            - description: The list of existing routes for the specified service mesh and virtual router.
       description: ''
     ListVirtualNodesOutput:
       type: object
@@ -1989,16 +2018,18 @@ components:
         - virtualNodes
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The <code>nextToken</code> value to include in a future <code>ListVirtualNodes</code>
-                     request. When the results of a <code>ListVirtualNodes</code> request exceed
-                     <code>limit</code>, this value can be used to retrieve the next page of
-                     results. This value is <code>null</code> when there are no more results to
-                     return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                The <code>nextToken</code> value to include in a future <code>ListVirtualNodes</code>
+                         request. When the results of a <code>ListVirtualNodes</code> request exceed
+                         <code>limit</code>, this value can be used to retrieve the next page of
+                         results. This value is <code>null</code> when there are no more results to
+                         return.
         virtualNodes:
-          $ref: '#/components/schemas/VirtualNodeList'
-          description: The list of existing virtual nodes for the specified service mesh.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeList'
+            - description: The list of existing virtual nodes for the specified service mesh.
       description: ''
     ListVirtualRoutersOutput:
       type: object
@@ -2006,37 +2037,42 @@ components:
         - virtualRouters
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The <code>nextToken</code> value to include in a future <code>ListVirtualRouters</code>
-                     request. When the results of a <code>ListVirtualRouters</code> request exceed
-                     <code>limit</code>, this value can be used to retrieve the next page of
-                     results. This value is <code>null</code> when there are no more results to
-                     return.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                The <code>nextToken</code> value to include in a future <code>ListVirtualRouters</code>
+                         request. When the results of a <code>ListVirtualRouters</code> request exceed
+                         <code>limit</code>, this value can be used to retrieve the next page of
+                         results. This value is <code>null</code> when there are no more results to
+                         return.
         virtualRouters:
-          $ref: '#/components/schemas/VirtualRouterList'
-          description: The list of existing virtual routers for the specified service mesh.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterList'
+            - description: The list of existing virtual routers for the specified service mesh.
       description: ''
     UpdateRouteOutput:
       type: object
       properties:
         route:
-          $ref: '#/components/schemas/RouteData'
-          description: A full description of the route that was updated.
+          allOf:
+            - $ref: '#/components/schemas/RouteData'
+            - description: A full description of the route that was updated.
       description: ''
     UpdateVirtualNodeOutput:
       type: object
       properties:
         virtualNode:
-          $ref: '#/components/schemas/VirtualNodeData'
-          description: A full description of the virtual node that was updated.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeData'
+            - description: A full description of the virtual node that was updated.
       description: ''
     UpdateVirtualRouterOutput:
       type: object
       properties:
         virtualRouter:
-          $ref: '#/components/schemas/VirtualRouterData'
-          description: A full description of the virtual router that was updated.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterData'
+            - description: A full description of the virtual router that was updated.
       description: ''
     ServiceName:
       type: string
@@ -2051,14 +2087,17 @@ components:
         - metadata
       properties:
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh.
         metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/ResourceMetadata'
+            - description: The associated metadata for the service mesh.
         status:
-          $ref: '#/components/schemas/MeshStatus'
-          description: The status of the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/MeshStatus'
+            - description: The status of the service mesh.
       description: An object representing a service mesh returned by a describe operation.
     Long:
       type: integer
@@ -2069,20 +2108,25 @@ components:
         - virtualRouterName
       properties:
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the virtual router resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the virtual router resides.
         metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/ResourceMetadata'
+            - description: The associated metadata for the virtual router.
         spec:
-          $ref: '#/components/schemas/VirtualRouterSpec'
-          description: The specifications of the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterSpec'
+            - description: The specifications of the virtual router.
         status:
-          $ref: '#/components/schemas/VirtualRouterStatus'
-          description: The current status of the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterStatus'
+            - description: The current status of the virtual router.
         virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the virtual router.
       description: An object representing a virtual router returned by a describe operation.
     MeshStatusCode:
       type: string
@@ -2106,11 +2150,13 @@ components:
       type: object
       properties:
         virtualNode:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual node to associate with the weighted target.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The virtual node to associate with the weighted target.
         weight:
-          $ref: '#/components/schemas/PercentInt'
-          description: The relative weight of the weighted target.
+          allOf:
+            - $ref: '#/components/schemas/PercentInt'
+            - description: The relative weight of the weighted target.
       description: |-
         An object representing a target and its relative weight. Traffic is distributed across
                  targets according to their relative weight. For example, a weighted target with a relative
@@ -2120,14 +2166,17 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The full Amazon Resource Name (ARN) for the virtual node.
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the virtual node resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the virtual node resides.
         virtualNodeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the virtual node.
       description: An object representing a virtual node returned by a list operation.
     VirtualNodeList:
       type: array
@@ -2141,39 +2190,49 @@ components:
         - virtualRouterName
       properties:
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the route resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the route resides.
         metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the route.
+          allOf:
+            - $ref: '#/components/schemas/ResourceMetadata'
+            - description: The associated metadata for the route.
         routeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the route.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the route.
         spec:
-          $ref: '#/components/schemas/RouteSpec'
-          description: The specifications of the route.
+          allOf:
+            - $ref: '#/components/schemas/RouteSpec'
+            - description: The specifications of the route.
         status:
-          $ref: '#/components/schemas/RouteStatus'
-          description: The status of the route.
+          allOf:
+            - $ref: '#/components/schemas/RouteStatus'
+            - description: The status of the route.
         virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual router with which the route is associated.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The virtual router with which the route is associated.
       description: An object representing a route returned by a describe operation.
     RouteRef:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) for the route.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The full Amazon Resource Name (ARN) for the route.
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the route resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the route resides.
         routeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the route.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the route.
         virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The virtual router with which the route is associated.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The virtual router with which the route is associated.
       description: An object representing a route returned by a list operation.
     RouteList:
       type: array
@@ -2192,8 +2251,9 @@ components:
       type: object
       properties:
         serviceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: The DNS service name for your virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: The DNS service name for your virtual node.
       description: The DNS service discovery information for your virtual node.
     HealthCheckIntervalMillis:
       type: integer
@@ -2205,61 +2265,71 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/MeshStatusCode'
-          description: The current mesh status.
+          allOf:
+            - $ref: '#/components/schemas/MeshStatusCode'
+            - description: The current mesh status.
       description: An object representing the status of a service mesh.
     ResourceMetadata:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: |-
-            <p>The full Amazon Resource Name (ARN) for the resource.</p>
-                     <note>
-                        <p>After you create a virtual node, set this value (either the full ARN or the
-                        truncated resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>,
-                        as the <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's
-                        Envoy proxy container in your task definition or pod spec. This is then mapped to the
-                           <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>
-                        <p>If you require your Envoy stats or tracing to use a different name, you can override
-                        the <code>node.cluster</code> value that is set by
-                           <code>APPMESH_VIRTUAL_NODE_NAME</code> with the
-                           <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
-                     </note>
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: |-
+                <p>The full Amazon Resource Name (ARN) for the resource.</p>
+                         <note>
+                            <p>After you create a virtual node, set this value (either the full ARN or the
+                            truncated resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>,
+                            as the <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's
+                            Envoy proxy container in your task definition or pod spec. This is then mapped to the
+                               <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>
+                            <p>If you require your Envoy stats or tracing to use a different name, you can override
+                            the <code>node.cluster</code> value that is set by
+                               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the
+                               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>
+                         </note>
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix epoch timestamp in seconds for when the resource was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix epoch timestamp in seconds for when the resource was created.
         lastUpdatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The Unix epoch timestamp in seconds for when the resource was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix epoch timestamp in seconds for when the resource was last updated.
         uid:
-          $ref: '#/components/schemas/String'
-          description: The unique identifier for the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier for the resource.
         version:
-          $ref: '#/components/schemas/Long'
-          description: |-
-            The version of the resource. Resources are created at version 1, and this version is
-                     incremented each time they are updated.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: |-
+                The version of the resource. Resources are created at version 1, and this version is
+                         incremented each time they are updated.
       description: An object representing metadata for a resource.
     VirtualNodeSpec:
       type: object
       properties:
         backends:
-          $ref: '#/components/schemas/Backends'
-          description: The backends to which the virtual node is expected to send outbound traffic.
+          allOf:
+            - $ref: '#/components/schemas/Backends'
+            - description: The backends to which the virtual node is expected to send outbound traffic.
         listeners:
-          $ref: '#/components/schemas/Listeners'
-          description: The listeners from which the virtual node is expected to receive inbound traffic.
+          allOf:
+            - $ref: '#/components/schemas/Listeners'
+            - description: The listeners from which the virtual node is expected to receive inbound traffic.
         serviceDiscovery:
-          $ref: '#/components/schemas/ServiceDiscovery'
-          description: The service discovery information for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ServiceDiscovery'
+            - description: The service discovery information for the virtual node.
       description: An object representing the specification of a virtual node.
     VirtualNodeStatus:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/VirtualNodeStatusCode'
-          description: The current status of the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeStatusCode'
+            - description: The current status of the virtual node.
       description: An object representing the current status of the virtual node.
     VirtualNodeData:
       type: object
@@ -2268,30 +2338,37 @@ components:
         - virtualNodeName
       properties:
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the virtual node resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the virtual node resides.
         metadata:
-          $ref: '#/components/schemas/ResourceMetadata'
-          description: The associated metadata for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceMetadata'
+            - description: The associated metadata for the virtual node.
         spec:
-          $ref: '#/components/schemas/VirtualNodeSpec'
-          description: The specifications of the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeSpec'
+            - description: The specifications of the virtual node.
         status:
-          $ref: '#/components/schemas/VirtualNodeStatus'
-          description: The current status for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeStatus'
+            - description: The current status for the virtual node.
         virtualNodeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the virtual node.
       description: An object representing a virtual node returned by a describe operation.
     MeshRef:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) of the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The full Amazon Resource Name (ARN) of the service mesh.
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh.
       description: An object representing a service mesh returned by a list operation.
     DescribeVirtualRouterInput:
       type: object
@@ -2306,10 +2383,11 @@ components:
       type: object
       properties:
         weightedTargets:
-          $ref: '#/components/schemas/WeightedTargets'
-          description: |-
-            The targets that traffic is routed to when a request matches the route. You can specify
-                     one or more targets and their relative weights with which to distribute traffic.
+          allOf:
+            - $ref: '#/components/schemas/WeightedTargets'
+            - description: |-
+                The targets that traffic is routed to when a request matches the route. You can specify
+                         one or more targets and their relative weights with which to distribute traffic.
       description: |-
         An object representing the traffic distribution requirements for matched HTTP
                  requests.
@@ -2323,8 +2401,9 @@ components:
       type: object
       properties:
         serviceNames:
-          $ref: '#/components/schemas/ServiceNames'
-          description: The service mesh service names to associate with the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/ServiceNames'
+            - description: The service mesh service names to associate with the virtual router.
       description: An object representing the specification of a virtual router.
     CreateVirtualRouterInput:
       type: object
@@ -2334,16 +2413,19 @@ components:
       title: CreateVirtualRouterInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         spec:
-          $ref: '#/components/schemas/VirtualRouterSpec'
-          description: The virtual router specification to apply.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterSpec'
+            - description: The virtual router specification to apply.
         virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name to use for the virtual router.
       description: ''
     RouteStatusCode:
       type: string
@@ -2355,8 +2437,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/RouteStatusCode'
-          description: The current status for the route.
+          allOf:
+            - $ref: '#/components/schemas/RouteStatusCode'
+            - description: The current status for the route.
       description: An object representing the current status of a route.
     ListMeshesLimit:
       type: integer
@@ -2377,8 +2460,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/VirtualRouterStatusCode'
-          description: The current status of the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterStatusCode'
+            - description: The current status of the virtual router.
       description: 'An object representing the status of a virtual router. '
     MeshList:
       type: array
@@ -2388,8 +2472,9 @@ components:
       type: object
       properties:
         httpRoute:
-          $ref: '#/components/schemas/HttpRoute'
-          description: The HTTP routing information for the route.
+          allOf:
+            - $ref: '#/components/schemas/HttpRoute'
+            - description: The HTTP routing information for the route.
       description: An object representing the specification of a route.
     UpdateVirtualNodeInput:
       type: object
@@ -2398,13 +2483,15 @@ components:
       title: UpdateVirtualNodeInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         spec:
-          $ref: '#/components/schemas/VirtualNodeSpec'
-          description: The new virtual node specification to apply. This overwrites the existing data.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeSpec'
+            - description: The new virtual node specification to apply. This overwrites the existing data.
       description: ''
     DeleteRouteInput:
       type: object
@@ -2415,11 +2502,13 @@ components:
       type: object
       properties:
         healthCheck:
-          $ref: '#/components/schemas/HealthCheckPolicy'
-          description: The health check information for the listener.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckPolicy'
+            - description: The health check information for the listener.
         portMapping:
-          $ref: '#/components/schemas/PortMapping'
-          description: The port mapping information for the listener.
+          allOf:
+            - $ref: '#/components/schemas/PortMapping'
+            - description: The port mapping information for the listener.
       description: An object representing a listener for a virtual node.
     ListRoutesLimit:
       type: integer
@@ -2434,14 +2523,15 @@ components:
       type: object
       properties:
         prefix:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Specifies the path with which to match requests. This parameter must always start with
-                        <code>/</code>, which by itself matches all requests to the virtual router service name.
-                     You can also match for path-based routing of requests. For example, if your virtual router
-                     service name is <code>my-service.local</code>, and you want the route to match requests to
-                        <code>my-service.local/metrics</code>, then your prefix should be
-                     <code>/metrics</code>.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Specifies the path with which to match requests. This parameter must always start with
+                            <code>/</code>, which by itself matches all requests to the virtual router service name.
+                         You can also match for path-based routing of requests. For example, if your virtual router
+                         service name is <code>my-service.local</code>, and you want the route to match requests to
+                            <code>my-service.local/metrics</code>, then your prefix should be
+                         <code>/metrics</code>.
       description: |-
         An object representing the requirements for a route to match HTTP requests for a virtual
                  router.
@@ -2457,14 +2547,17 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: The full Amazon Resource Name (ARN) for the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The full Amazon Resource Name (ARN) for the virtual router.
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the service mesh in which the virtual router resides.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service mesh in which the virtual router resides.
         virtualRouterName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name of the virtual router.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the virtual router.
       description: An object representing a virtual router returned by a list operation.
     UpdateVirtualRouterInput:
       type: object
@@ -2473,13 +2566,15 @@ components:
       title: UpdateVirtualRouterInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         spec:
-          $ref: '#/components/schemas/VirtualRouterSpec'
-          description: The new virtual router specification to apply. This overwrites the existing data.
+          allOf:
+            - $ref: '#/components/schemas/VirtualRouterSpec'
+            - description: The new virtual router specification to apply. This overwrites the existing data.
       description: ''
     DescribeRouteInput:
       type: object
@@ -2502,23 +2597,27 @@ components:
       title: CreateMeshInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         meshName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the service mesh.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name to use for the service mesh.
       description: ''
     PortMapping:
       type: object
       properties:
         port:
-          $ref: '#/components/schemas/PortNumber'
-          description: The port used for the port mapping.
+          allOf:
+            - $ref: '#/components/schemas/PortNumber'
+            - description: The port used for the port mapping.
         protocol:
-          $ref: '#/components/schemas/PortProtocol'
-          description: The protocol used for the port mapping.
+          allOf:
+            - $ref: '#/components/schemas/PortProtocol'
+            - description: The protocol used for the port mapping.
       description: An object representing a virtual node listener port mapping.
     VirtualNodeStatusCode:
       type: string
@@ -2538,13 +2637,15 @@ components:
       title: UpdateRouteInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         spec:
-          $ref: '#/components/schemas/RouteSpec'
-          description: The new route specification to apply. This overwrites the existing data.
+          allOf:
+            - $ref: '#/components/schemas/RouteSpec'
+            - description: The new route specification to apply. This overwrites the existing data.
       description: ''
     DescribeMeshInput:
       type: object
@@ -2561,36 +2662,43 @@ components:
         - unhealthyThreshold
       properties:
         healthyThreshold:
-          $ref: '#/components/schemas/HealthCheckThreshold'
-          description: |-
-            The number of consecutive successful health checks that must occur before declaring
-                     listener healthy.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckThreshold'
+            - description: |-
+                The number of consecutive successful health checks that must occur before declaring
+                         listener healthy.
         intervalMillis:
-          $ref: '#/components/schemas/HealthCheckIntervalMillis'
-          description: The time period in milliseconds between each health check execution.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckIntervalMillis'
+            - description: The time period in milliseconds between each health check execution.
         path:
-          $ref: '#/components/schemas/String'
-          description: |-
-            The destination path for the health check request. This is only required if the
-                     specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                The destination path for the health check request. This is only required if the
+                         specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.
         port:
-          $ref: '#/components/schemas/PortNumber'
-          description: |-
-            The destination port for the health check request. This port must match the port defined
-                     in the <a>PortMapping</a> for the listener.
+          allOf:
+            - $ref: '#/components/schemas/PortNumber'
+            - description: |-
+                The destination port for the health check request. This port must match the port defined
+                         in the <a>PortMapping</a> for the listener.
         protocol:
-          $ref: '#/components/schemas/PortProtocol'
-          description: The protocol for the health check request.
+          allOf:
+            - $ref: '#/components/schemas/PortProtocol'
+            - description: The protocol for the health check request.
         timeoutMillis:
-          $ref: '#/components/schemas/HealthCheckTimeoutMillis'
-          description: |-
-            The amount of time to wait when receiving a response from the health check, in
-                     milliseconds.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckTimeoutMillis'
+            - description: |-
+                The amount of time to wait when receiving a response from the health check, in
+                         milliseconds.
         unhealthyThreshold:
-          $ref: '#/components/schemas/HealthCheckThreshold'
-          description: |-
-            The number of consecutive failed health checks that must occur before declaring a
-                     virtual node unhealthy. 
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckThreshold'
+            - description: |-
+                The number of consecutive failed health checks that must occur before declaring a
+                         virtual node unhealthy. 
       description: An object representing the health check policy for a virtual node's listener.
     ListVirtualRoutersInput:
       type: object
@@ -2605,16 +2713,19 @@ components:
       title: CreateVirtualNodeInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         spec:
-          $ref: '#/components/schemas/VirtualNodeSpec'
-          description: The virtual node specification to apply.
+          allOf:
+            - $ref: '#/components/schemas/VirtualNodeSpec'
+            - description: The virtual node specification to apply.
         virtualNodeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the virtual node.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name to use for the virtual node.
       description: ''
     ListVirtualNodesLimit:
       type: integer
@@ -2633,16 +2744,19 @@ components:
       title: CreateRouteInput
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: |-
-            Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-            request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: |-
+                Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+                request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
         routeName:
-          $ref: '#/components/schemas/ResourceName'
-          description: The name to use for the route.
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name to use for the route.
         spec:
-          $ref: '#/components/schemas/RouteSpec'
-          description: The route specification to apply.
+          allOf:
+            - $ref: '#/components/schemas/RouteSpec'
+            - description: The route specification to apply.
       description: ''
     ListVirtualNodesInput:
       type: object

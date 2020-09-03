@@ -1810,11 +1810,13 @@ paths:
                   type: object
                   properties:
                     SnsTopicArn:
-                      $ref: '#/components/schemas/Arn'
-                      description: The SNS topic ARN.
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The SNS topic ARN.
                     SqsQueueArn:
-                      $ref: '#/components/schemas/Arn'
-                      description: The SQS queue ARN.
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The SQS queue ARN.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2000,11 +2002,13 @@ paths:
                   type: object
                   properties:
                     SnsTopicArn:
-                      $ref: '#/components/schemas/Arn'
-                      description: The SNS topic ARN.
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The SNS topic ARN.
                     SqsQueueArn:
-                      $ref: '#/components/schemas/Arn'
-                      description: The SQS queue ARN.
+                      allOf:
+                        - $ref: '#/components/schemas/Arn'
+                        - description: The SQS queue ARN.
                 Attendees:
                   description: The request containing the attendees to create.
                   type: array
@@ -2293,11 +2297,13 @@ paths:
                   type: object
                   properties:
                     Country:
-                      $ref: '#/components/schemas/Country'
-                      description: The country.
+                      allOf:
+                        - $ref: '#/components/schemas/Country'
+                        - description: The country.
                     AreaCode:
-                      $ref: '#/components/schemas/AreaCode'
-                      description: The area code.
+                      allOf:
+                        - $ref: '#/components/schemas/AreaCode'
+                        - description: The area code.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5134,8 +5140,9 @@ paths:
                   type: object
                   properties:
                     DNIS:
-                      $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
-                      description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
+                      allOf:
+                        - $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
+                        - description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
   '/voice-connector-groups/{voiceConnectorGroupId}':
     delete:
       operationId: DeleteVoiceConnectorGroup
@@ -5552,11 +5559,13 @@ paths:
                   type: object
                   properties:
                     Routes:
-                      $ref: '#/components/schemas/OriginationRouteList'
-                      description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
+                      allOf:
+                        - $ref: '#/components/schemas/OriginationRouteList'
+                        - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
                     Disabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
   '/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy':
     delete:
       operationId: DeleteVoiceConnectorProxy
@@ -5981,14 +5990,17 @@ paths:
                   type: object
                   properties:
                     DataRetentionInHours:
-                      $ref: '#/components/schemas/DataRetentionInHours'
-                      description: 'The retention period, in hours, for the Amazon Kinesis data.'
+                      allOf:
+                        - $ref: '#/components/schemas/DataRetentionInHours'
+                        - description: 'The retention period, in hours, for the Amazon Kinesis data.'
                     Disabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'When true, media streaming to Amazon Kinesis is turned off.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When true, media streaming to Amazon Kinesis is turned off.'
                     StreamingNotificationTargets:
-                      $ref: '#/components/schemas/StreamingNotificationTargetList'
-                      description: The streaming notification targets.
+                      allOf:
+                        - $ref: '#/components/schemas/StreamingNotificationTargetList'
+                        - description: The streaming notification targets.
   '/voice-connectors/{voiceConnectorId}/termination':
     delete:
       operationId: DeleteVoiceConnectorTermination
@@ -6194,20 +6206,25 @@ paths:
                   type: object
                   properties:
                     CpsLimit:
-                      $ref: '#/components/schemas/CpsLimit'
-                      description: The limit on calls per second. Max value based on account service quota. Default value of 1.
+                      allOf:
+                        - $ref: '#/components/schemas/CpsLimit'
+                        - description: The limit on calls per second. Max value based on account service quota. Default value of 1.
                     DefaultPhoneNumber:
-                      $ref: '#/components/schemas/E164PhoneNumber'
-                      description: The default caller ID phone number.
+                      allOf:
+                        - $ref: '#/components/schemas/E164PhoneNumber'
+                        - description: The default caller ID phone number.
                     CallingRegions:
-                      $ref: '#/components/schemas/CallingRegionList'
-                      description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
+                      allOf:
+                        - $ref: '#/components/schemas/CallingRegionList'
+                        - description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
                     CidrAllowedList:
-                      $ref: '#/components/schemas/StringList'
-                      description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
                     Disabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'When termination settings are disabled, outbound calls can not be made.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When termination settings are disabled, outbound calls can not be made.'
   '/voice-connectors/{voiceConnectorId}/termination/credentials#operation=delete':
     post:
       operationId: DeleteVoiceConnectorTerminationCredentials
@@ -6795,11 +6812,13 @@ paths:
                   type: object
                   properties:
                     DisableRemoteControl:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Setting that stops or starts remote control of shared screens during meetings.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Setting that stops or starts remote control of shared screens during meetings.
                     EnableDialOut:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
   '/accounts/{accountId}/bots/{botId}':
     get:
       operationId: GetBot
@@ -7066,15 +7085,17 @@ paths:
                   type: object
                   properties:
                     CdrBucket:
-                      $ref: '#/components/schemas/String'
-                      description: The Amazon S3 bucket designated for call detail record storage.
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon S3 bucket designated for call detail record storage.
                 VoiceConnector:
                   description: The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.
                   type: object
                   properties:
                     CdrBucket:
-                      $ref: '#/components/schemas/String'
-                      description: The Amazon S3 bucket designated for call detail record storage.
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon S3 bucket designated for call detail record storage.
   '/phone-number-orders/{phoneNumberOrderId}':
     get:
       operationId: GetPhoneNumberOrder
@@ -7405,11 +7426,13 @@ paths:
                   type: object
                   properties:
                     RoomRetentionSettings:
-                      $ref: '#/components/schemas/RoomRetentionSettings'
-                      description: The chat room retention settings.
+                      allOf:
+                        - $ref: '#/components/schemas/RoomRetentionSettings'
+                        - description: The chat room retention settings.
                     ConversationRetentionSettings:
-                      $ref: '#/components/schemas/ConversationRetentionSettings'
-                      description: The chat conversation retention settings.
+                      allOf:
+                        - $ref: '#/components/schemas/ConversationRetentionSettings'
+                        - description: The chat conversation retention settings.
   '/accounts/{accountId}/users/{userId}':
     get:
       operationId: GetUser
@@ -7579,11 +7602,13 @@ paths:
                   type: object
                   properties:
                     IsAlexaForBusinessEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Starts or stops Alexa for Business.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Starts or stops Alexa for Business.
                     AlexaForBusinessRoomArn:
-                      $ref: '#/components/schemas/SensitiveString'
-                      description: The ARN of the room resource.
+                      allOf:
+                        - $ref: '#/components/schemas/SensitiveString'
+                        - description: The ARN of the room resource.
   '/accounts/{accountId}/users/{userId}/settings':
     get:
       operationId: GetUserSettings
@@ -7733,8 +7758,9 @@ paths:
                   type: object
                   properties:
                     Telephony:
-                      $ref: '#/components/schemas/TelephonySettings'
-                      description: The telephony settings associated with the user.
+                      allOf:
+                        - $ref: '#/components/schemas/TelephonySettings'
+                        - description: The telephony settings associated with the user.
   '/voice-connectors/{voiceConnectorId}/logging-configuration':
     get:
       operationId: GetVoiceConnectorLoggingConfiguration
@@ -7878,8 +7904,9 @@ paths:
                   type: object
                   properties:
                     EnableSIPLogs:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
       operationId: GetVoiceConnectorTerminationHealth
@@ -9771,8 +9798,9 @@ components:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     E164PhoneNumber:
       type: string
       pattern: '^\+?[1-9]\d{1,14}$'
@@ -9781,8 +9809,9 @@ components:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     AssociateSigninDelegateGroupsWithAccountResponse:
       type: object
       properties: {}
@@ -9790,61 +9819,71 @@ components:
       type: object
       properties:
         GroupName:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The group name.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The group name.
       description: An Active Directory (AD) group whose members are granted permission to act as delegates.
     BatchCreateAttendeeResponse:
       type: object
       properties:
         Attendees:
-          $ref: '#/components/schemas/AttendeeList'
-          description: 'The attendee information, including attendees IDs and join tokens.'
+          allOf:
+            - $ref: '#/components/schemas/AttendeeList'
+            - description: 'The attendee information, including attendees IDs and join tokens.'
         Errors:
-          $ref: '#/components/schemas/BatchCreateAttendeeErrorList'
-          description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/BatchCreateAttendeeErrorList'
+            - description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
     CreateAttendeeRequestItem:
       type: object
       required:
         - ExternalUserId
       properties:
         ExternalUserId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
         Tags:
-          $ref: '#/components/schemas/AttendeeTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/AttendeeTagList'
+            - description: The tag key-value pairs.
       description: 'The Amazon Chime SDK attendee fields to create, used with the BatchCreateAttendee action.'
     ResourceLimitExceededException: {}
     BatchCreateRoomMembershipResponse:
       type: object
       properties:
         Errors:
-          $ref: '#/components/schemas/MemberErrorList'
-          description: 'If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/MemberErrorList'
+            - description: 'If the action fails for one or more of the member IDs in the request, a list of the member IDs is returned, along with error codes and error messages.'
     MembershipItem:
       type: object
       properties:
         MemberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The member ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The member ID.
         Role:
-          $ref: '#/components/schemas/RoomMembershipRole'
-          description: The member role.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembershipRole'
+            - description: The member role.
       description: 'Membership details, such as member ID and member role.'
     BatchDeletePhoneNumberResponse:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     String:
       type: string
     BatchSuspendUserResponse:
       type: object
       properties:
         UserErrors:
-          $ref: '#/components/schemas/UserErrorList'
-          description: 'If the <a>BatchSuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/UserErrorList'
+            - description: 'If the <a>BatchSuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
     NonEmptyString:
       type: string
       pattern: .*\S.*
@@ -9852,65 +9891,77 @@ components:
       type: object
       properties:
         UserErrors:
-          $ref: '#/components/schemas/UserErrorList'
-          description: 'If the <a>BatchUnsuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/UserErrorList'
+            - description: 'If the <a>BatchUnsuspendUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
     BatchUpdatePhoneNumberResponse:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     UpdatePhoneNumberRequestItem:
       type: object
       required:
         - PhoneNumberId
       properties:
         PhoneNumberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The phone number ID to update.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The phone number ID to update.
         ProductType:
-          $ref: '#/components/schemas/PhoneNumberProductType'
-          description: The product type to update.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberProductType'
+            - description: The product type to update.
         CallingName:
-          $ref: '#/components/schemas/CallingName'
-          description: The outbound calling name to update.
+          allOf:
+            - $ref: '#/components/schemas/CallingName'
+            - description: The outbound calling name to update.
       description: 'The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.'
     BatchUpdateUserResponse:
       type: object
       properties:
         UserErrors:
-          $ref: '#/components/schemas/UserErrorList'
-          description: 'If the <a>BatchUpdateUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/UserErrorList'
+            - description: 'If the <a>BatchUpdateUser</a> action fails for one or more of the user IDs in the request, a list of the user IDs is returned, along with error codes and error messages.'
     UpdateUserRequestItem:
       type: object
       required:
         - UserId
       properties:
         UserId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The user ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The user ID.
         LicenseType:
-          $ref: '#/components/schemas/License'
-          description: The user license type.
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: The user license type.
         UserType:
-          $ref: '#/components/schemas/UserType'
-          description: The user type.
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The user type.
         AlexaForBusinessMetadata:
-          $ref: '#/components/schemas/AlexaForBusinessMetadata'
-          description: The Alexa for Business metadata.
+          allOf:
+            - $ref: '#/components/schemas/AlexaForBusinessMetadata'
+            - description: The Alexa for Business metadata.
       description: 'The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.'
     CreateAccountResponse:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
-          description: The Amazon Chime account details.
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The Amazon Chime account details.
     CreateAttendeeResponse:
       type: object
       properties:
         Attendee:
-          $ref: '#/components/schemas/Attendee'
-          description: 'The attendee information, including attendee ID and join token.'
+          allOf:
+            - $ref: '#/components/schemas/Attendee'
+            - description: 'The attendee information, including attendee ID and join token.'
     Tag:
       type: object
       required:
@@ -9918,24 +9969,28 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: Describes a tag applied to a resource.
     CreateBotResponse:
       type: object
       properties:
         Bot:
-          $ref: '#/components/schemas/Bot'
-          description: The bot details.
+          allOf:
+            - $ref: '#/components/schemas/Bot'
+            - description: The bot details.
     CreateMeetingResponse:
       type: object
       properties:
         Meeting:
-          $ref: '#/components/schemas/Meeting'
-          description: 'The meeting information, including the meeting ID and <code>MediaPlacement</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Meeting'
+            - description: 'The meeting information, including the meeting ID and <code>MediaPlacement</code>.'
     Arn:
       type: string
       pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
@@ -9948,23 +10003,27 @@ components:
         Meeting:
           $ref: '#/components/schemas/Meeting'
         Attendees:
-          $ref: '#/components/schemas/AttendeeList'
-          description: 'The attendee information, including attendees IDs and join tokens.'
+          allOf:
+            - $ref: '#/components/schemas/AttendeeList'
+            - description: 'The attendee information, including attendees IDs and join tokens.'
         Errors:
-          $ref: '#/components/schemas/BatchCreateAttendeeErrorList'
-          description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/BatchCreateAttendeeErrorList'
+            - description: 'If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.'
     CreatePhoneNumberOrderResponse:
       type: object
       properties:
         PhoneNumberOrder:
-          $ref: '#/components/schemas/PhoneNumberOrder'
-          description: The phone number order details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberOrder'
+            - description: The phone number order details.
     CreateProxySessionResponse:
       type: object
       properties:
         ProxySession:
-          $ref: '#/components/schemas/ProxySession'
-          description: The proxy session details.
+          allOf:
+            - $ref: '#/components/schemas/ProxySession'
+            - description: The proxy session details.
     Capability:
       type: string
       enum:
@@ -9980,14 +10039,16 @@ components:
       type: object
       properties:
         Room:
-          $ref: '#/components/schemas/Room'
-          description: The room details.
+          allOf:
+            - $ref: '#/components/schemas/Room'
+            - description: The room details.
     CreateRoomMembershipResponse:
       type: object
       properties:
         RoomMembership:
-          $ref: '#/components/schemas/RoomMembership'
-          description: The room membership details.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembership'
+            - description: The room membership details.
     ConflictException: {}
     CreateUserResponse:
       type: object
@@ -9998,14 +10059,16 @@ components:
       type: object
       properties:
         VoiceConnector:
-          $ref: '#/components/schemas/VoiceConnector'
-          description: The Amazon Chime Voice Connector details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnector'
+            - description: The Amazon Chime Voice Connector details.
     CreateVoiceConnectorGroupResponse:
       type: object
       properties:
         VoiceConnectorGroup:
-          $ref: '#/components/schemas/VoiceConnectorGroup'
-          description: The Amazon Chime Voice Connector group details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroup'
+            - description: The Amazon Chime Voice Connector group details.
     VoiceConnectorItem:
       type: object
       required:
@@ -10013,11 +10076,13 @@ components:
         - Priority
       properties:
         VoiceConnectorId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime Voice Connector ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime Voice Connector ID.
         Priority:
-          $ref: '#/components/schemas/VoiceConnectorItemPriority'
-          description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. '
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorItemPriority'
+            - description: 'The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. '
       description: 'For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.'
     DeleteAccountResponse:
       type: object
@@ -10033,14 +10098,16 @@ components:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse:
       type: object
       properties:
         PhoneNumberErrors:
-          $ref: '#/components/schemas/PhoneNumberErrorList'
-          description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberErrorList'
+            - description: 'If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     DisassociateSigninDelegateGroupsFromAccountResponse:
       type: object
       properties: {}
@@ -10048,161 +10115,189 @@ components:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
-          description: The Amazon Chime account details.
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The Amazon Chime account details.
     GetAccountSettingsResponse:
       type: object
       properties:
         AccountSettings:
-          $ref: '#/components/schemas/AccountSettings'
-          description: The Amazon Chime account settings.
+          allOf:
+            - $ref: '#/components/schemas/AccountSettings'
+            - description: The Amazon Chime account settings.
     GetAttendeeResponse:
       type: object
       properties:
         Attendee:
-          $ref: '#/components/schemas/Attendee'
-          description: The Amazon Chime SDK attendee information.
+          allOf:
+            - $ref: '#/components/schemas/Attendee'
+            - description: The Amazon Chime SDK attendee information.
     GetBotResponse:
       type: object
       properties:
         Bot:
-          $ref: '#/components/schemas/Bot'
-          description: The chat bot details.
+          allOf:
+            - $ref: '#/components/schemas/Bot'
+            - description: The chat bot details.
     GetEventsConfigurationResponse:
       type: object
       properties:
         EventsConfiguration:
-          $ref: '#/components/schemas/EventsConfiguration'
-          description: The events configuration details.
+          allOf:
+            - $ref: '#/components/schemas/EventsConfiguration'
+            - description: The events configuration details.
     GetGlobalSettingsResponse:
       type: object
       properties:
         BusinessCalling:
-          $ref: '#/components/schemas/BusinessCallingSettings'
-          description: The Amazon Chime Business Calling settings.
+          allOf:
+            - $ref: '#/components/schemas/BusinessCallingSettings'
+            - description: The Amazon Chime Business Calling settings.
         VoiceConnector:
-          $ref: '#/components/schemas/VoiceConnectorSettings'
-          description: The Amazon Chime Voice Connector settings.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorSettings'
+            - description: The Amazon Chime Voice Connector settings.
     GetMeetingResponse:
       type: object
       properties:
         Meeting:
-          $ref: '#/components/schemas/Meeting'
-          description: The Amazon Chime SDK meeting information.
+          allOf:
+            - $ref: '#/components/schemas/Meeting'
+            - description: The Amazon Chime SDK meeting information.
     GetPhoneNumberResponse:
       type: object
       properties:
         PhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The phone number details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number details.
     GetPhoneNumberOrderResponse:
       type: object
       properties:
         PhoneNumberOrder:
-          $ref: '#/components/schemas/PhoneNumberOrder'
-          description: The phone number order details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberOrder'
+            - description: The phone number order details.
     GetPhoneNumberSettingsResponse:
       type: object
       properties:
         CallingName:
-          $ref: '#/components/schemas/CallingName'
-          description: The default outbound calling name for the account.
+          allOf:
+            - $ref: '#/components/schemas/CallingName'
+            - description: The default outbound calling name for the account.
         CallingNameUpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated outbound calling name timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated outbound calling name timestamp, in ISO 8601 format.'
     GetProxySessionResponse:
       type: object
       properties:
         ProxySession:
-          $ref: '#/components/schemas/ProxySession'
-          description: The proxy session details.
+          allOf:
+            - $ref: '#/components/schemas/ProxySession'
+            - description: The proxy session details.
     GetRetentionSettingsResponse:
       type: object
       properties:
         RetentionSettings:
-          $ref: '#/components/schemas/RetentionSettings'
-          description: The retention settings.
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettings'
+            - description: The retention settings.
         InitiateDeletionTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.'
     GetRoomResponse:
       type: object
       properties:
         Room:
-          $ref: '#/components/schemas/Room'
-          description: The room details.
+          allOf:
+            - $ref: '#/components/schemas/Room'
+            - description: The room details.
     GetUserResponse:
       type: object
       properties:
         User:
-          $ref: '#/components/schemas/User'
-          description: The user details.
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The user details.
     GetUserSettingsResponse:
       type: object
       properties:
         UserSettings:
-          $ref: '#/components/schemas/UserSettings'
-          description: The user settings.
+          allOf:
+            - $ref: '#/components/schemas/UserSettings'
+            - description: The user settings.
     GetVoiceConnectorResponse:
       type: object
       properties:
         VoiceConnector:
-          $ref: '#/components/schemas/VoiceConnector'
-          description: The Amazon Chime Voice Connector details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnector'
+            - description: The Amazon Chime Voice Connector details.
     GetVoiceConnectorEmergencyCallingConfigurationResponse:
       type: object
       properties:
         EmergencyCallingConfiguration:
-          $ref: '#/components/schemas/EmergencyCallingConfiguration'
-          description: The emergency calling configuration details.
+          allOf:
+            - $ref: '#/components/schemas/EmergencyCallingConfiguration'
+            - description: The emergency calling configuration details.
     GetVoiceConnectorGroupResponse:
       type: object
       properties:
         VoiceConnectorGroup:
-          $ref: '#/components/schemas/VoiceConnectorGroup'
-          description: The Amazon Chime Voice Connector group details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroup'
+            - description: The Amazon Chime Voice Connector group details.
     GetVoiceConnectorLoggingConfigurationResponse:
       type: object
       properties:
         LoggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-          description: The logging configuration details.
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfiguration'
+            - description: The logging configuration details.
     GetVoiceConnectorOriginationResponse:
       type: object
       properties:
         Origination:
-          $ref: '#/components/schemas/Origination'
-          description: The origination setting details.
+          allOf:
+            - $ref: '#/components/schemas/Origination'
+            - description: The origination setting details.
     GetVoiceConnectorProxyResponse:
       type: object
       properties:
         Proxy:
-          $ref: '#/components/schemas/Proxy'
-          description: The proxy configuration details.
+          allOf:
+            - $ref: '#/components/schemas/Proxy'
+            - description: The proxy configuration details.
     GetVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
         StreamingConfiguration:
-          $ref: '#/components/schemas/StreamingConfiguration'
-          description: The streaming configuration details.
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfiguration'
+            - description: The streaming configuration details.
     GetVoiceConnectorTerminationResponse:
       type: object
       properties:
         Termination:
-          $ref: '#/components/schemas/Termination'
-          description: The termination setting details.
+          allOf:
+            - $ref: '#/components/schemas/Termination'
+            - description: The termination setting details.
     GetVoiceConnectorTerminationHealthResponse:
       type: object
       properties:
         TerminationHealth:
-          $ref: '#/components/schemas/TerminationHealth'
-          description: The termination health details.
+          allOf:
+            - $ref: '#/components/schemas/TerminationHealth'
+            - description: The termination health details.
     InviteUsersResponse:
       type: object
       properties:
         Invites:
-          $ref: '#/components/schemas/InviteList'
-          description: The email invitation details.
+          allOf:
+            - $ref: '#/components/schemas/InviteList'
+            - description: The email invitation details.
     EmailAddress:
       type: string
       pattern: .+@.+\..+
@@ -10211,134 +10306,162 @@ components:
       type: object
       properties:
         Accounts:
-          $ref: '#/components/schemas/AccountList'
-          description: List of Amazon Chime accounts and account details.
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: List of Amazon Chime accounts and account details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListAttendeeTagsResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tag key-value pairs.
     ListAttendeesResponse:
       type: object
       properties:
         Attendees:
-          $ref: '#/components/schemas/AttendeeList'
-          description: The Amazon Chime SDK attendee information.
+          allOf:
+            - $ref: '#/components/schemas/AttendeeList'
+            - description: The Amazon Chime SDK attendee information.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListBotsResponse:
       type: object
       properties:
         Bots:
-          $ref: '#/components/schemas/BotList'
-          description: List of bots and bot details.
+          allOf:
+            - $ref: '#/components/schemas/BotList'
+            - description: List of bots and bot details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListMeetingTagsResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tag key-value pairs.
     ListMeetingsResponse:
       type: object
       properties:
         Meetings:
-          $ref: '#/components/schemas/MeetingList'
-          description: The Amazon Chime SDK meeting information.
+          allOf:
+            - $ref: '#/components/schemas/MeetingList'
+            - description: The Amazon Chime SDK meeting information.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListPhoneNumberOrdersResponse:
       type: object
       properties:
         PhoneNumberOrders:
-          $ref: '#/components/schemas/PhoneNumberOrderList'
-          description: The phone number order details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberOrderList'
+            - description: The phone number order details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListPhoneNumbersResponse:
       type: object
       properties:
         PhoneNumbers:
-          $ref: '#/components/schemas/PhoneNumberList'
-          description: The phone number details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberList'
+            - description: The phone number details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListProxySessionsResponse:
       type: object
       properties:
         ProxySessions:
-          $ref: '#/components/schemas/ProxySessions'
-          description: The proxy session details.
+          allOf:
+            - $ref: '#/components/schemas/ProxySessions'
+            - description: The proxy session details.
         NextToken:
-          $ref: '#/components/schemas/NextTokenString'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/NextTokenString'
+            - description: The token to use to retrieve the next page of results.
     ListRoomMembershipsResponse:
       type: object
       properties:
         RoomMemberships:
-          $ref: '#/components/schemas/RoomMembershipList'
-          description: The room membership details.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembershipList'
+            - description: The room membership details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListRoomsResponse:
       type: object
       properties:
         Rooms:
-          $ref: '#/components/schemas/RoomList'
-          description: The room details.
+          allOf:
+            - $ref: '#/components/schemas/RoomList'
+            - description: The room details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tag-key value pairs.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tag-key value pairs.
     ListUsersResponse:
       type: object
       properties:
         Users:
-          $ref: '#/components/schemas/UserList'
-          description: List of users and user details.
+          allOf:
+            - $ref: '#/components/schemas/UserList'
+            - description: List of users and user details.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListVoiceConnectorGroupsResponse:
       type: object
       properties:
         VoiceConnectorGroups:
-          $ref: '#/components/schemas/VoiceConnectorGroupList'
-          description: The details of the Amazon Chime Voice Connector groups.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroupList'
+            - description: The details of the Amazon Chime Voice Connector groups.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     ListVoiceConnectorTerminationCredentialsResponse:
       type: object
       properties:
         Usernames:
-          $ref: '#/components/schemas/SensitiveStringList'
-          description: A list of user names.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveStringList'
+            - description: A list of user names.
     ListVoiceConnectorsResponse:
       type: object
       properties:
         VoiceConnectors:
-          $ref: '#/components/schemas/VoiceConnectorList'
-          description: The details of the Amazon Chime Voice Connectors.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorList'
+            - description: The details of the Amazon Chime Voice Connectors.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: The token to use to retrieve the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use to retrieve the next page of results.
     LogoutUserResponse:
       type: object
       properties: {}
@@ -10351,31 +10474,36 @@ components:
       type: object
       properties:
         RetentionSettings:
-          $ref: '#/components/schemas/RetentionSettings'
-          description: The retention settings.
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettings'
+            - description: The retention settings.
         InitiateDeletionTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.'
     RoomRetentionSettings:
       type: object
       properties:
         RetentionDays:
-          $ref: '#/components/schemas/RetentionDays'
-          description: The number of days for which to retain chat room messages.
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The number of days for which to retain chat room messages.
       description: The retention settings that determine how long to retain chat room messages for an Amazon Chime Enterprise account.
     ConversationRetentionSettings:
       type: object
       properties:
         RetentionDays:
-          $ref: '#/components/schemas/RetentionDays'
-          description: The number of days for which to retain chat conversation messages.
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The number of days for which to retain chat conversation messages.
       description: The retention settings that determine how long to retain chat conversation messages for an Amazon Chime Enterprise account.
     PutVoiceConnectorEmergencyCallingConfigurationResponse:
       type: object
       properties:
         EmergencyCallingConfiguration:
-          $ref: '#/components/schemas/EmergencyCallingConfiguration'
-          description: The emergency calling configuration details.
+          allOf:
+            - $ref: '#/components/schemas/EmergencyCallingConfiguration'
+            - description: The emergency calling configuration details.
     DNISEmergencyCallingConfigurationList:
       type: array
       items:
@@ -10384,16 +10512,18 @@ components:
       type: object
       properties:
         LoggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-          description: The updated logging configuration details.
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfiguration'
+            - description: The updated logging configuration details.
     Boolean:
       type: boolean
     PutVoiceConnectorOriginationResponse:
       type: object
       properties:
         Origination:
-          $ref: '#/components/schemas/Origination'
-          description: The updated origination setting details.
+          allOf:
+            - $ref: '#/components/schemas/Origination'
+            - description: The updated origination setting details.
     OriginationRouteList:
       type: array
       items:
@@ -10402,14 +10532,16 @@ components:
       type: object
       properties:
         Proxy:
-          $ref: '#/components/schemas/Proxy'
-          description: The proxy configuration details.
+          allOf:
+            - $ref: '#/components/schemas/Proxy'
+            - description: The proxy configuration details.
     PutVoiceConnectorStreamingConfigurationResponse:
       type: object
       properties:
         StreamingConfiguration:
-          $ref: '#/components/schemas/StreamingConfiguration'
-          description: The updated streaming configuration details.
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfiguration'
+            - description: The updated streaming configuration details.
     DataRetentionInHours:
       type: integer
       minimum: 0
@@ -10423,8 +10555,9 @@ components:
       type: object
       properties:
         Termination:
-          $ref: '#/components/schemas/Termination'
-          description: The updated termination setting details.
+          allOf:
+            - $ref: '#/components/schemas/Termination'
+            - description: The updated termination setting details.
     CpsLimit:
       type: integer
       minimum: 1
@@ -10440,11 +10573,13 @@ components:
       type: object
       properties:
         Username:
-          $ref: '#/components/schemas/SensitiveString'
-          description: 'The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII format.'
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: 'The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII format.'
         Password:
-          $ref: '#/components/schemas/SensitiveString'
-          description: 'The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.'
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: 'The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.'
       description: The SIP credentials used to authenticate requests to your Amazon Chime Voice Connector.
     RedactConversationMessageResponse:
       type: object
@@ -10461,20 +10596,23 @@ components:
       type: object
       properties:
         User:
-          $ref: '#/components/schemas/User'
-          description: The user details and new personal meeting PIN.
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The user details and new personal meeting PIN.
     RestorePhoneNumberResponse:
       type: object
       properties:
         PhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The phone number details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number details.
     SearchAvailablePhoneNumbersResponse:
       type: object
       properties:
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
     TagKey:
       type: string
       minLength: 1
@@ -10484,8 +10622,9 @@ components:
       type: object
       properties:
         Account:
-          $ref: '#/components/schemas/Account'
-          description: The updated Amazon Chime account details.
+          allOf:
+            - $ref: '#/components/schemas/Account'
+            - description: The updated Amazon Chime account details.
     UpdateAccountSettingsResponse:
       type: object
       properties: {}
@@ -10493,38 +10632,44 @@ components:
       type: object
       properties:
         Bot:
-          $ref: '#/components/schemas/Bot'
-          description: The updated bot details.
+          allOf:
+            - $ref: '#/components/schemas/Bot'
+            - description: The updated bot details.
     UpdatePhoneNumberResponse:
       type: object
       properties:
         PhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The updated phone number details.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The updated phone number details.
     UpdateProxySessionResponse:
       type: object
       properties:
         ProxySession:
-          $ref: '#/components/schemas/ProxySession'
-          description: The proxy session details.
+          allOf:
+            - $ref: '#/components/schemas/ProxySession'
+            - description: The proxy session details.
     UpdateRoomResponse:
       type: object
       properties:
         Room:
-          $ref: '#/components/schemas/Room'
-          description: The room details.
+          allOf:
+            - $ref: '#/components/schemas/Room'
+            - description: The room details.
     UpdateRoomMembershipResponse:
       type: object
       properties:
         RoomMembership:
-          $ref: '#/components/schemas/RoomMembership'
-          description: The room membership details.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembership'
+            - description: The room membership details.
     UpdateUserResponse:
       type: object
       properties:
         User:
-          $ref: '#/components/schemas/User'
-          description: The updated user details.
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: The updated user details.
     TelephonySettings:
       type: object
       required:
@@ -10533,27 +10678,32 @@ components:
         - SMS
       properties:
         InboundCalling:
-          $ref: '#/components/schemas/Boolean'
-          description: Allows or denies inbound calling.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Allows or denies inbound calling.
         OutboundCalling:
-          $ref: '#/components/schemas/Boolean'
-          description: Allows or denies outbound calling.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Allows or denies outbound calling.
         SMS:
-          $ref: '#/components/schemas/Boolean'
-          description: Allows or denies SMS messaging.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Allows or denies SMS messaging.
       description: 'Settings that allow management of telephony permissions for an Amazon Chime user, such as inbound and outbound calling and text messaging.'
     UpdateVoiceConnectorResponse:
       type: object
       properties:
         VoiceConnector:
-          $ref: '#/components/schemas/VoiceConnector'
-          description: The updated Amazon Chime Voice Connector details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnector'
+            - description: The updated Amazon Chime Voice Connector details.
     UpdateVoiceConnectorGroupResponse:
       type: object
       properties:
         VoiceConnectorGroup:
-          $ref: '#/components/schemas/VoiceConnectorGroup'
-          description: The updated Amazon Chime Voice Connector group details.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroup'
+            - description: The updated Amazon Chime Voice Connector group details.
     AccountType:
       type: string
       enum:
@@ -10587,29 +10737,37 @@ components:
         - Name
       properties:
         AwsAccountId:
-          $ref: '#/components/schemas/String'
-          description: The AWS account ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Chime account ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Chime account ID.
         Name:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Chime account name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Chime account name.
         AccountType:
-          $ref: '#/components/schemas/AccountType'
-          description: 'The Amazon Chime account type. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/AccountType'
+            - description: 'The Amazon Chime account type. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.'
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The Amazon Chime account creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The Amazon Chime account creation timestamp, in ISO 8601 format.'
         DefaultLicense:
-          $ref: '#/components/schemas/License'
-          description: The default license for the Amazon Chime account.
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: The default license for the Amazon Chime account.
         SupportedLicenses:
-          $ref: '#/components/schemas/LicenseList'
-          description: Supported licenses for the Amazon Chime account.
+          allOf:
+            - $ref: '#/components/schemas/LicenseList'
+            - description: Supported licenses for the Amazon Chime account.
         SigninDelegateGroups:
-          $ref: '#/components/schemas/SigninDelegateGroupList'
-          description: The sign-in delegate groups associated with the account.
+          allOf:
+            - $ref: '#/components/schemas/SigninDelegateGroupList'
+            - description: The sign-in delegate groups associated with the account.
       description: The Amazon Chime account details. An AWS account can have multiple Amazon Chime accounts.
     AccountList:
       type: array
@@ -10624,21 +10782,25 @@ components:
       type: object
       properties:
         DisableRemoteControl:
-          $ref: '#/components/schemas/Boolean'
-          description: Setting that stops or starts remote control of shared screens during meetings.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Setting that stops or starts remote control of shared screens during meetings.
         EnableDialOut:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
       description: 'Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href="https://docs.aws.amazon.com/chime/latest/ag/policies.html">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.'
     AlexaForBusinessMetadata:
       type: object
       properties:
         IsAlexaForBusinessEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Starts or stops Alexa for Business.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Starts or stops Alexa for Business.
         AlexaForBusinessRoomArn:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The ARN of the room resource.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The ARN of the room resource.
       description: 'The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.'
     Alpha2CountryCode:
       type: string
@@ -10650,8 +10812,9 @@ components:
       title: AssociatePhoneNumberWithUserRequest
       properties:
         E164PhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: 'The phone number, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: 'The phone number, in E.164 format.'
     E164PhoneNumberList:
       type: array
       items:
@@ -10665,11 +10828,13 @@ components:
       title: AssociatePhoneNumbersWithVoiceConnectorGroupRequest
       properties:
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
         ForceAssociate:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
     PhoneNumberErrorList:
       type: array
       items:
@@ -10681,11 +10846,13 @@ components:
       title: AssociatePhoneNumbersWithVoiceConnectorRequest
       properties:
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
         ForceAssociate:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.'
     AssociateSigninDelegateGroupsWithAccountRequest:
       type: object
       required:
@@ -10693,8 +10860,9 @@ components:
       title: AssociateSigninDelegateGroupsWithAccountRequest
       properties:
         SigninDelegateGroups:
-          $ref: '#/components/schemas/SigninDelegateGroupList'
-          description: The sign-in delegate groups.
+          allOf:
+            - $ref: '#/components/schemas/SigninDelegateGroupList'
+            - description: The sign-in delegate groups.
     ExternalUserIdType:
       type: string
       minLength: 2
@@ -10712,14 +10880,17 @@ components:
       type: object
       properties:
         ExternalUserId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
         AttendeeId:
-          $ref: '#/components/schemas/GuidString'
-          description: The Amazon Chime SDK attendee ID.
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The Amazon Chime SDK attendee ID.
         JoinToken:
-          $ref: '#/components/schemas/JoinTokenString'
-          description: The join token used by the Amazon Chime SDK attendee.
+          allOf:
+            - $ref: '#/components/schemas/JoinTokenString'
+            - description: The join token used by the Amazon Chime SDK attendee.
       description: '<p>An Amazon Chime SDK meeting attendee. Includes a unique <code>AttendeeId</code> and <code>JoinToken</code>. The <code>JoinToken</code> allows a client to authenticate and join as the specified attendee. The <code>JoinToken</code> expires when the meeting ends or when <a>DeleteAttendee</a> is called. After that, the attendee is unable to join the meeting.</p> <p>We recommend securely transferring each <code>JoinToken</code> from your server application to the client so that no other client has access to the token except for the one authorized to represent the attendee.</p>'
     AttendeeList:
       type: array
@@ -10741,14 +10912,17 @@ components:
       type: object
       properties:
         ExternalUserId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
         ErrorCode:
-          $ref: '#/components/schemas/String'
-          description: The error code.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code.
         ErrorMessage:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: 'The list of errors returned when errors are encountered during the BatchCreateAttendee and CreateAttendee actions. This includes external user IDs, error codes, and error messages.'
     BatchCreateAttendeeErrorList:
       type: array
@@ -10765,8 +10939,9 @@ components:
       title: BatchCreateAttendeeRequest
       properties:
         Attendees:
-          $ref: '#/components/schemas/CreateAttendeeRequestItemList'
-          description: The request containing the attendees to create.
+          allOf:
+            - $ref: '#/components/schemas/CreateAttendeeRequestItemList'
+            - description: The request containing the attendees to create.
     MembershipItemList:
       type: array
       items:
@@ -10779,8 +10954,9 @@ components:
       title: BatchCreateRoomMembershipRequest
       properties:
         MembershipItemList:
-          $ref: '#/components/schemas/MembershipItemList'
-          description: The list of membership items.
+          allOf:
+            - $ref: '#/components/schemas/MembershipItemList'
+            - description: The list of membership items.
     MemberErrorList:
       type: array
       items:
@@ -10797,8 +10973,9 @@ components:
       title: BatchDeletePhoneNumberRequest
       properties:
         PhoneNumberIds:
-          $ref: '#/components/schemas/NonEmptyStringList'
-          description: List of phone number IDs.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: List of phone number IDs.
     UserIdList:
       type: array
       items:
@@ -10811,8 +10988,9 @@ components:
       title: BatchSuspendUserRequest
       properties:
         UserIdList:
-          $ref: '#/components/schemas/UserIdList'
-          description: The request containing the user IDs to suspend.
+          allOf:
+            - $ref: '#/components/schemas/UserIdList'
+            - description: The request containing the user IDs to suspend.
     UserErrorList:
       type: array
       items:
@@ -10824,8 +11002,9 @@ components:
       title: BatchUnsuspendUserRequest
       properties:
         UserIdList:
-          $ref: '#/components/schemas/UserIdList'
-          description: The request containing the user IDs to unsuspend.
+          allOf:
+            - $ref: '#/components/schemas/UserIdList'
+            - description: The request containing the user IDs to unsuspend.
     UpdatePhoneNumberRequestItemList:
       type: array
       items:
@@ -10837,8 +11016,9 @@ components:
       title: BatchUpdatePhoneNumberRequest
       properties:
         UpdatePhoneNumberRequestItems:
-          $ref: '#/components/schemas/UpdatePhoneNumberRequestItemList'
-          description: The request containing the phone number IDs and product types or calling names to update.
+          allOf:
+            - $ref: '#/components/schemas/UpdatePhoneNumberRequestItemList'
+            - description: The request containing the phone number IDs and product types or calling names to update.
     UpdateUserRequestItemList:
       type: array
       items:
@@ -10851,8 +11031,9 @@ components:
       title: BatchUpdateUserRequest
       properties:
         UpdateUserRequestItems:
-          $ref: '#/components/schemas/UpdateUserRequestItemList'
-          description: The request containing the user IDs and details to update.
+          allOf:
+            - $ref: '#/components/schemas/UpdateUserRequestItemList'
+            - description: The request containing the user IDs and details to update.
     BotType:
       type: string
       enum:
@@ -10861,32 +11042,41 @@ components:
       type: object
       properties:
         BotId:
-          $ref: '#/components/schemas/String'
-          description: The bot ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The bot ID.
         UserId:
-          $ref: '#/components/schemas/String'
-          description: The unique ID for the bot user.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID for the bot user.
         DisplayName:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The bot display name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The bot display name.
         BotType:
-          $ref: '#/components/schemas/BotType'
-          description: The bot type.
+          allOf:
+            - $ref: '#/components/schemas/BotType'
+            - description: The bot type.
         Disabled:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: 'When true, the bot is stopped from running in your account.'
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'When true, the bot is stopped from running in your account.'
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The bot creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The bot creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated bot timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated bot timestamp, in ISO 8601 format.'
         BotEmail:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The bot email address.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The bot email address.
         SecurityToken:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The security token used to authenticate Amazon Chime with the outgoing event endpoint.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The security token used to authenticate Amazon Chime with the outgoing event endpoint.
       description: A resource that allows Enterprise account administrators to configure an interface to receive events from Amazon Chime.
     BotList:
       type: array
@@ -10896,8 +11086,9 @@ components:
       type: object
       properties:
         CdrBucket:
-          $ref: '#/components/schemas/String'
-          description: The Amazon S3 bucket designated for call detail record storage.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 bucket designated for call detail record storage.
       description: The Amazon Chime Business Calling settings for the administrator's AWS account. Includes any Amazon S3 buckets designated for storing call detail records.
     CallingName:
       type: string
@@ -10939,8 +11130,9 @@ components:
       title: CreateAccountRequest
       properties:
         Name:
-          $ref: '#/components/schemas/AccountName'
-          description: The name of the Amazon Chime account.
+          allOf:
+            - $ref: '#/components/schemas/AccountName'
+            - description: The name of the Amazon Chime account.
     CreateAttendeeRequest:
       type: object
       required:
@@ -10948,11 +11140,13 @@ components:
       title: CreateAttendeeRequest
       properties:
         ExternalUserId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
         Tags:
-          $ref: '#/components/schemas/AttendeeTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/AttendeeTagList'
+            - description: The tag key-value pairs.
     CreateBotRequest:
       type: object
       required:
@@ -10960,11 +11154,13 @@ components:
       title: CreateBotRequest
       properties:
         DisplayName:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The bot display name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The bot display name.
         Domain:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The domain of the Amazon Chime Enterprise account.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The domain of the Amazon Chime Enterprise account.
     ExternalMeetingIdType:
       type: string
       minLength: 2
@@ -10980,11 +11176,13 @@ components:
       type: object
       properties:
         SnsTopicArn:
-          $ref: '#/components/schemas/Arn'
-          description: The SNS topic ARN.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The SNS topic ARN.
         SqsQueueArn:
-          $ref: '#/components/schemas/Arn'
-          description: The SQS queue ARN.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The SQS queue ARN.
       description: The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).
     CreateMeetingRequest:
       type: object
@@ -10993,38 +11191,48 @@ components:
       title: CreateMeetingRequest
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: The unique identifier for the client request. Use a different token for different meetings.
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the client request. Use a different token for different meetings.
         ExternalMeetingId:
-          $ref: '#/components/schemas/ExternalMeetingIdType'
-          description: The external meeting ID.
+          allOf:
+            - $ref: '#/components/schemas/ExternalMeetingIdType'
+            - description: The external meeting ID.
         MeetingHostId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: Reserved.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: Reserved.
         MediaRegion:
-          $ref: '#/components/schemas/String'
-          description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
         Tags:
-          $ref: '#/components/schemas/MeetingTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/MeetingTagList'
+            - description: The tag key-value pairs.
         NotificationsConfiguration:
-          $ref: '#/components/schemas/MeetingNotificationConfiguration'
-          description: The configuration for resource targets to receive notifications when meeting and attendee events occur.
+          allOf:
+            - $ref: '#/components/schemas/MeetingNotificationConfiguration'
+            - description: The configuration for resource targets to receive notifications when meeting and attendee events occur.
     Meeting:
       type: object
       properties:
         MeetingId:
-          $ref: '#/components/schemas/GuidString'
-          description: The Amazon Chime SDK meeting ID.
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The Amazon Chime SDK meeting ID.
         ExternalMeetingId:
-          $ref: '#/components/schemas/ExternalMeetingIdType'
-          description: The external meeting ID.
+          allOf:
+            - $ref: '#/components/schemas/ExternalMeetingIdType'
+            - description: The external meeting ID.
         MediaPlacement:
-          $ref: '#/components/schemas/MediaPlacement'
-          description: The media placement for the meeting.
+          allOf:
+            - $ref: '#/components/schemas/MediaPlacement'
+            - description: The media placement for the meeting.
         MediaRegion:
-          $ref: '#/components/schemas/String'
-          description: 'The Region in which to create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Region in which to create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.'
       description: A meeting created using the Amazon Chime SDK.
     CreateMeetingWithAttendeesRequestItemList:
       type: array
@@ -11039,25 +11247,31 @@ components:
       title: CreateMeetingWithAttendeesRequest
       properties:
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: The unique identifier for the client request. Use a different token for different meetings.
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The unique identifier for the client request. Use a different token for different meetings.
         ExternalMeetingId:
-          $ref: '#/components/schemas/ExternalMeetingIdType'
-          description: The external meeting ID.
+          allOf:
+            - $ref: '#/components/schemas/ExternalMeetingIdType'
+            - description: The external meeting ID.
         MeetingHostId:
-          $ref: '#/components/schemas/ExternalUserIdType'
-          description: Reserved.
+          allOf:
+            - $ref: '#/components/schemas/ExternalUserIdType'
+            - description: Reserved.
         MediaRegion:
-          $ref: '#/components/schemas/String'
-          description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>'
         Tags:
-          $ref: '#/components/schemas/MeetingTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/MeetingTagList'
+            - description: The tag key-value pairs.
         NotificationsConfiguration:
           $ref: '#/components/schemas/MeetingNotificationConfiguration'
         Attendees:
-          $ref: '#/components/schemas/CreateMeetingWithAttendeesRequestItemList'
-          description: The request containing the attendees to create.
+          allOf:
+            - $ref: '#/components/schemas/CreateMeetingWithAttendeesRequestItemList'
+            - description: The request containing the attendees to create.
     PhoneNumberProductType:
       type: string
       enum:
@@ -11071,32 +11285,40 @@ components:
       title: CreatePhoneNumberOrderRequest
       properties:
         ProductType:
-          $ref: '#/components/schemas/PhoneNumberProductType'
-          description: The phone number product type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberProductType'
+            - description: The phone number product type.
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
     PhoneNumberOrder:
       type: object
       properties:
         PhoneNumberOrderId:
-          $ref: '#/components/schemas/GuidString'
-          description: The phone number order ID.
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The phone number order ID.
         ProductType:
-          $ref: '#/components/schemas/PhoneNumberProductType'
-          description: The phone number order product type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberProductType'
+            - description: The phone number order product type.
         Status:
-          $ref: '#/components/schemas/PhoneNumberOrderStatus'
-          description: The status of the phone number order.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberOrderStatus'
+            - description: The status of the phone number order.
         OrderedPhoneNumbers:
-          $ref: '#/components/schemas/OrderedPhoneNumberList'
-          description: 'The ordered phone number details, such as the phone number in E.164 format and the phone number status.'
+          allOf:
+            - $ref: '#/components/schemas/OrderedPhoneNumberList'
+            - description: 'The ordered phone number details, such as the phone number in E.164 format and the phone number status.'
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The phone number order creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The phone number order creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated phone number order timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated phone number order timestamp, in ISO 8601 format.'
       description: The details of a phone number order created for Amazon Chime.
     NonEmptyString128:
       type: string
@@ -11133,11 +11355,13 @@ components:
         - AreaCode
       properties:
         Country:
-          $ref: '#/components/schemas/Country'
-          description: The country.
+          allOf:
+            - $ref: '#/components/schemas/Country'
+            - description: The country.
         AreaCode:
-          $ref: '#/components/schemas/AreaCode'
-          description: The area code.
+          allOf:
+            - $ref: '#/components/schemas/AreaCode'
+            - description: The area code.
       description: The country and area code for a proxy phone number in a proxy phone session.
     CreateProxySessionRequest:
       type: object
@@ -11147,68 +11371,88 @@ components:
       title: CreateProxySessionRequest
       properties:
         ParticipantPhoneNumbers:
-          $ref: '#/components/schemas/ParticipantPhoneNumberList'
-          description: The participant phone numbers.
+          allOf:
+            - $ref: '#/components/schemas/ParticipantPhoneNumberList'
+            - description: The participant phone numbers.
         Name:
-          $ref: '#/components/schemas/ProxySessionNameString'
-          description: The name of the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/ProxySessionNameString'
+            - description: The name of the proxy session.
         ExpiryMinutes:
-          $ref: '#/components/schemas/PositiveInteger'
-          description: The number of minutes allowed for the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: The number of minutes allowed for the proxy session.
         Capabilities:
-          $ref: '#/components/schemas/CapabilityList'
-          description: The proxy session capabilities.
+          allOf:
+            - $ref: '#/components/schemas/CapabilityList'
+            - description: The proxy session capabilities.
         NumberSelectionBehavior:
-          $ref: '#/components/schemas/NumberSelectionBehavior'
-          description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
+          allOf:
+            - $ref: '#/components/schemas/NumberSelectionBehavior'
+            - description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
         GeoMatchLevel:
-          $ref: '#/components/schemas/GeoMatchLevel'
-          description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
+          allOf:
+            - $ref: '#/components/schemas/GeoMatchLevel'
+            - description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
         GeoMatchParams:
-          $ref: '#/components/schemas/GeoMatchParams'
-          description: The country and area code for the proxy phone number.
+          allOf:
+            - $ref: '#/components/schemas/GeoMatchParams'
+            - description: The country and area code for the proxy phone number.
     ProxySession:
       type: object
       properties:
         VoiceConnectorId:
-          $ref: '#/components/schemas/NonEmptyString128'
-          description: The Amazon Chime voice connector ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString128'
+            - description: The Amazon Chime voice connector ID.
         ProxySessionId:
-          $ref: '#/components/schemas/NonEmptyString128'
-          description: The proxy session ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString128'
+            - description: The proxy session ID.
         Name:
-          $ref: '#/components/schemas/String128'
-          description: The name of the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/String128'
+            - description: The name of the proxy session.
         Status:
-          $ref: '#/components/schemas/ProxySessionStatus'
-          description: The status of the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/ProxySessionStatus'
+            - description: The status of the proxy session.
         ExpiryMinutes:
-          $ref: '#/components/schemas/PositiveInteger'
-          description: The number of minutes allowed for the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: The number of minutes allowed for the proxy session.
         Capabilities:
-          $ref: '#/components/schemas/CapabilityList'
-          description: The proxy session capabilities.
+          allOf:
+            - $ref: '#/components/schemas/CapabilityList'
+            - description: The proxy session capabilities.
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The created timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The created timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated timestamp, in ISO 8601 format.'
         EndedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The ended timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The ended timestamp, in ISO 8601 format.'
         Participants:
-          $ref: '#/components/schemas/Participants'
-          description: The proxy session participants.
+          allOf:
+            - $ref: '#/components/schemas/Participants'
+            - description: The proxy session participants.
         NumberSelectionBehavior:
-          $ref: '#/components/schemas/NumberSelectionBehavior'
-          description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
+          allOf:
+            - $ref: '#/components/schemas/NumberSelectionBehavior'
+            - description: 'The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.'
         GeoMatchLevel:
-          $ref: '#/components/schemas/GeoMatchLevel'
-          description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
+          allOf:
+            - $ref: '#/components/schemas/GeoMatchLevel'
+            - description: The preference for matching the country or area code of the proxy phone number with that of the first participant.
         GeoMatchParams:
-          $ref: '#/components/schemas/GeoMatchParams'
-          description: The country and area code for the proxy phone number.
+          allOf:
+            - $ref: '#/components/schemas/GeoMatchParams'
+            - description: The country and area code for the proxy phone number.
       description: The proxy session for an Amazon Chime Voice Connector.
     RoomMembershipRole:
       type: string
@@ -11222,28 +11466,34 @@ components:
       title: CreateRoomMembershipRequest
       properties:
         MemberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime member ID (user ID or bot ID).
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime member ID (user ID or bot ID).
         Role:
-          $ref: '#/components/schemas/RoomMembershipRole'
-          description: The role of the member.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembershipRole'
+            - description: The role of the member.
     RoomMembership:
       type: object
       properties:
         RoomId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The room ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The room ID.
         Member:
           $ref: '#/components/schemas/Member'
         Role:
-          $ref: '#/components/schemas/RoomMembershipRole'
-          description: The membership role.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembershipRole'
+            - description: The membership role.
         InvitedBy:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The identifier of the user that invited the room member.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the user that invited the room member.
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The room membership update timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The room membership update timestamp, in ISO 8601 format.'
       description: The room membership details.
     CreateRoomRequest:
       type: object
@@ -11252,32 +11502,40 @@ components:
       title: CreateRoomRequest
       properties:
         Name:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The room name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The room name.
         ClientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: The idempotency token for the request.
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The idempotency token for the request.
     Room:
       type: object
       properties:
         RoomId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The room ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The room ID.
         Name:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The room name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The room name.
         AccountId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime account ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime account ID.
         CreatedBy:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The identifier of the room creator.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the room creator.
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The room creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The room creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The room update timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The room update timestamp, in ISO 8601 format.'
       description: The Amazon Chime chat room details.
     UserType:
       type: string
@@ -11289,58 +11547,74 @@ components:
       title: CreateUserRequest
       properties:
         Username:
-          $ref: '#/components/schemas/String'
-          description: The user name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name.
         Email:
-          $ref: '#/components/schemas/EmailAddress'
-          description: The user's email address.
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: The user's email address.
         UserType:
-          $ref: '#/components/schemas/UserType'
-          description: The user type.
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The user type.
     User:
       type: object
       required:
         - UserId
       properties:
         UserId:
-          $ref: '#/components/schemas/String'
-          description: The user ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user ID.
         AccountId:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Chime account ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Chime account ID.
         PrimaryEmail:
-          $ref: '#/components/schemas/EmailAddress'
-          description: The primary email address of the user.
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: The primary email address of the user.
         PrimaryProvisionedNumber:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The primary phone number associated with the user.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The primary phone number associated with the user.
         DisplayName:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The display name of the user.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The display name of the user.
         LicenseType:
-          $ref: '#/components/schemas/License'
-          description: The license type for the user.
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: The license type for the user.
         UserType:
-          $ref: '#/components/schemas/UserType'
-          description: The user type.
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The user type.
         UserRegistrationStatus:
-          $ref: '#/components/schemas/RegistrationStatus'
-          description: The user registration status.
+          allOf:
+            - $ref: '#/components/schemas/RegistrationStatus'
+            - description: The user registration status.
         UserInvitationStatus:
-          $ref: '#/components/schemas/InviteStatus'
-          description: The user invite status.
+          allOf:
+            - $ref: '#/components/schemas/InviteStatus'
+            - description: The user invite status.
         RegisteredOn:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'Date and time when the user is registered, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'Date and time when the user is registered, in ISO 8601 format.'
         InvitedOn:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'Date and time when the user is invited to the Amazon Chime account, in ISO 8601 format.'
         AlexaForBusinessMetadata:
-          $ref: '#/components/schemas/AlexaForBusinessMetadata'
-          description: The Alexa for Business metadata.
+          allOf:
+            - $ref: '#/components/schemas/AlexaForBusinessMetadata'
+            - description: The Alexa for Business metadata.
         PersonalPIN:
-          $ref: '#/components/schemas/String'
-          description: The user's personal meeting PIN.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user's personal meeting PIN.
       description: The user on the Amazon Chime account.
     VoiceConnectorGroupName:
       type: string
@@ -11357,29 +11631,36 @@ components:
       title: CreateVoiceConnectorGroupRequest
       properties:
         Name:
-          $ref: '#/components/schemas/VoiceConnectorGroupName'
-          description: The name of the Amazon Chime Voice Connector group.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroupName'
+            - description: The name of the Amazon Chime Voice Connector group.
         VoiceConnectorItems:
-          $ref: '#/components/schemas/VoiceConnectorItemList'
-          description: The Amazon Chime Voice Connectors to route inbound calls to.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorItemList'
+            - description: The Amazon Chime Voice Connectors to route inbound calls to.
     VoiceConnectorGroup:
       type: object
       properties:
         VoiceConnectorGroupId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime Voice Connector group ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime Voice Connector group ID.
         Name:
-          $ref: '#/components/schemas/VoiceConnectorGroupName'
-          description: The name of the Amazon Chime Voice Connector group.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroupName'
+            - description: The name of the Amazon Chime Voice Connector group.
         VoiceConnectorItems:
-          $ref: '#/components/schemas/VoiceConnectorItemList'
-          description: The Amazon Chime Voice Connectors to which to route inbound calls.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorItemList'
+            - description: The Amazon Chime Voice Connectors to which to route inbound calls.
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.'
       description: 'The Amazon Chime Voice Connector group configuration, including associated Amazon Chime Voice Connectors. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.'
     VoiceConnectorName:
       type: string
@@ -11398,38 +11679,48 @@ components:
       title: CreateVoiceConnectorRequest
       properties:
         Name:
-          $ref: '#/components/schemas/VoiceConnectorName'
-          description: The name of the Amazon Chime Voice Connector.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorName'
+            - description: The name of the Amazon Chime Voice Connector.
         AwsRegion:
-          $ref: '#/components/schemas/VoiceConnectorAwsRegion'
-          description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorAwsRegion'
+            - description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default value: <code>us-east-1</code>.'
         RequireEncryption:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
     VoiceConnector:
       type: object
       properties:
         VoiceConnectorId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime Voice Connector ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime Voice Connector ID.
         AwsRegion:
-          $ref: '#/components/schemas/VoiceConnectorAwsRegion'
-          description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>.'
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorAwsRegion'
+            - description: 'The AWS Region in which the Amazon Chime Voice Connector is created. Default: <code>us-east-1</code>.'
         Name:
-          $ref: '#/components/schemas/VoiceConnectorName'
-          description: The name of the Amazon Chime Voice Connector.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorName'
+            - description: The name of the Amazon Chime Voice Connector.
         OutboundHostName:
-          $ref: '#/components/schemas/String'
-          description: The outbound host name for the Amazon Chime Voice Connector.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The outbound host name for the Amazon Chime Voice Connector.
         RequireEncryption:
-          $ref: '#/components/schemas/Boolean'
-          description: Designates whether encryption is required for the Amazon Chime Voice Connector.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Designates whether encryption is required for the Amazon Chime Voice Connector.
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The Amazon Chime Voice Connector creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.'
       description: 'The Amazon Chime Voice Connector configuration, including outbound host name and encryption settings.'
     CredentialList:
       type: array
@@ -11442,14 +11733,17 @@ components:
         - CallingCountry
       properties:
         EmergencyPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: 'The DNIS phone number to route emergency calls to, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: 'The DNIS phone number to route emergency calls to, in E.164 format.'
         TestPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: 'The DNIS phone number to route test emergency calls to, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: 'The DNIS phone number to route test emergency calls to, in E.164 format.'
         CallingCountry:
-          $ref: '#/components/schemas/Alpha2CountryCode'
-          description: 'The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.'
+          allOf:
+            - $ref: '#/components/schemas/Alpha2CountryCode'
+            - description: 'The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.'
       description: The Dialed Number Identification Service (DNIS) emergency calling configuration details associated with an Amazon Chime Voice Connector's emergency calling configuration.
     DeleteAccountRequest:
       type: object
@@ -11518,8 +11812,9 @@ components:
       title: DeleteVoiceConnectorTerminationCredentialsRequest
       properties:
         Usernames:
-          $ref: '#/components/schemas/SensitiveStringList'
-          description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
+          allOf:
+            - $ref: '#/components/schemas/SensitiveStringList'
+            - description: 'The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.'
     DeleteVoiceConnectorTerminationRequest:
       type: object
       title: DeleteVoiceConnectorTerminationRequest
@@ -11535,8 +11830,9 @@ components:
       title: DisassociatePhoneNumbersFromVoiceConnectorGroupRequest
       properties:
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
     DisassociatePhoneNumbersFromVoiceConnectorRequest:
       type: object
       required:
@@ -11544,8 +11840,9 @@ components:
       title: DisassociatePhoneNumbersFromVoiceConnectorRequest
       properties:
         E164PhoneNumbers:
-          $ref: '#/components/schemas/E164PhoneNumberList'
-          description: 'List of phone numbers, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumberList'
+            - description: 'List of phone numbers, in E.164 format.'
     DisassociateSigninDelegateGroupsFromAccountRequest:
       type: object
       required:
@@ -11553,8 +11850,9 @@ components:
       title: DisassociateSigninDelegateGroupsFromAccountRequest
       properties:
         GroupNames:
-          $ref: '#/components/schemas/NonEmptyStringList'
-          description: The sign-in delegate group names.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The sign-in delegate group names.
     EmailStatus:
       type: string
       enum:
@@ -11565,8 +11863,9 @@ components:
       type: object
       properties:
         DNIS:
-          $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
-          description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
+          allOf:
+            - $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
+            - description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
       description: The emergency calling configuration details associated with an Amazon Chime Voice Connector.
     ErrorCode:
       type: string
@@ -11590,14 +11889,17 @@ components:
       type: object
       properties:
         BotId:
-          $ref: '#/components/schemas/String'
-          description: The bot ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The bot ID.
         OutboundEventsHTTPSEndpoint:
-          $ref: '#/components/schemas/SensitiveString'
-          description: HTTPS endpoint that allows a bot to receive outgoing events.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: HTTPS endpoint that allows a bot to receive outgoing events.
         LambdaFunctionArn:
-          $ref: '#/components/schemas/SensitiveString'
-          description: Lambda function ARN that allows a bot to receive outgoing events.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: Lambda function ARN that allows a bot to receive outgoing events.
       description: The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.
     GetAccountRequest:
       type: object
@@ -11623,8 +11925,9 @@ components:
       type: object
       properties:
         CdrBucket:
-          $ref: '#/components/schemas/String'
-          description: The Amazon S3 bucket designated for call detail record storage.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 bucket designated for call detail record storage.
       description: The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.
     GetMeetingRequest:
       type: object
@@ -11642,41 +11945,53 @@ components:
       type: object
       properties:
         PhoneNumberId:
-          $ref: '#/components/schemas/String'
-          description: The phone number ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The phone number ID.
         E164PhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: 'The phone number, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: 'The phone number, in E.164 format.'
         Type:
-          $ref: '#/components/schemas/PhoneNumberType'
-          description: The phone number type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberType'
+            - description: The phone number type.
         ProductType:
-          $ref: '#/components/schemas/PhoneNumberProductType'
-          description: The phone number product type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberProductType'
+            - description: The phone number product type.
         Status:
-          $ref: '#/components/schemas/PhoneNumberStatus'
-          description: The phone number status.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberStatus'
+            - description: The phone number status.
         Capabilities:
-          $ref: '#/components/schemas/PhoneNumberCapabilities'
-          description: The phone number capabilities.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberCapabilities'
+            - description: The phone number capabilities.
         Associations:
-          $ref: '#/components/schemas/PhoneNumberAssociationList'
-          description: The phone number associations.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberAssociationList'
+            - description: The phone number associations.
         CallingName:
-          $ref: '#/components/schemas/CallingName'
-          description: The outbound calling name associated with the phone number.
+          allOf:
+            - $ref: '#/components/schemas/CallingName'
+            - description: The outbound calling name associated with the phone number.
         CallingNameStatus:
-          $ref: '#/components/schemas/CallingNameStatus'
-          description: The outbound calling name status.
+          allOf:
+            - $ref: '#/components/schemas/CallingNameStatus'
+            - description: The outbound calling name status.
         CreatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The phone number creation timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The phone number creation timestamp, in ISO 8601 format.'
         UpdatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The updated phone number timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The updated phone number timestamp, in ISO 8601 format.'
         DeletionTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The deleted phone number timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The deleted phone number timestamp, in ISO 8601 format.'
       description: A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice Connector.
     GetProxySessionRequest:
       type: object
@@ -11690,11 +12005,13 @@ components:
       type: object
       properties:
         RoomRetentionSettings:
-          $ref: '#/components/schemas/RoomRetentionSettings'
-          description: The chat room retention settings.
+          allOf:
+            - $ref: '#/components/schemas/RoomRetentionSettings'
+            - description: The chat room retention settings.
         ConversationRetentionSettings:
-          $ref: '#/components/schemas/ConversationRetentionSettings'
-          description: The chat conversation retention settings.
+          allOf:
+            - $ref: '#/components/schemas/ConversationRetentionSettings'
+            - description: The chat conversation retention settings.
       description: The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat room messages and chat conversation messages.
     GetRoomRequest:
       type: object
@@ -11714,8 +12031,9 @@ components:
         - Telephony
       properties:
         Telephony:
-          $ref: '#/components/schemas/TelephonySettings'
-          description: The telephony settings associated with the user.
+          allOf:
+            - $ref: '#/components/schemas/TelephonySettings'
+            - description: The telephony settings associated with the user.
       description: 'Settings associated with an Amazon Chime user, including inbound and outbound calling and text messaging.'
     GetVoiceConnectorEmergencyCallingConfigurationRequest:
       type: object
@@ -11733,8 +12051,9 @@ components:
       type: object
       properties:
         EnableSIPLogs:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When true, enables SIP message logs for sending to Amazon CloudWatch Logs.'
       description: The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
     GetVoiceConnectorOriginationRequest:
       type: object
@@ -11744,11 +12063,13 @@ components:
       type: object
       properties:
         Routes:
-          $ref: '#/components/schemas/OriginationRouteList'
-          description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
+          allOf:
+            - $ref: '#/components/schemas/OriginationRouteList'
+            - description: 'The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.'
         Disabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.'
       description: Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.
     GetVoiceConnectorProxyRequest:
       type: object
@@ -11758,17 +12079,21 @@ components:
       type: object
       properties:
         DefaultSessionExpiryMinutes:
-          $ref: '#/components/schemas/Integer'
-          description: The default number of minutes allowed for proxy sessions.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The default number of minutes allowed for proxy sessions.
         Disabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
         FallBackPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: The phone number to route calls to after a proxy session expires.
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The phone number to route calls to after a proxy session expires.
         PhoneNumberCountries:
-          $ref: '#/components/schemas/StringList'
-          description: The countries for proxy phone numbers to be selected from.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The countries for proxy phone numbers to be selected from.
       description: The proxy configuration for an Amazon Chime Voice Connector.
     GetVoiceConnectorRequest:
       type: object
@@ -11784,14 +12109,17 @@ components:
         - DataRetentionInHours
       properties:
         DataRetentionInHours:
-          $ref: '#/components/schemas/DataRetentionInHours'
-          description: 'The retention period, in hours, for the Amazon Kinesis data.'
+          allOf:
+            - $ref: '#/components/schemas/DataRetentionInHours'
+            - description: 'The retention period, in hours, for the Amazon Kinesis data.'
         Disabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When true, media streaming to Amazon Kinesis is turned off.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When true, media streaming to Amazon Kinesis is turned off.'
         StreamingNotificationTargets:
-          $ref: '#/components/schemas/StreamingNotificationTargetList'
-          description: The streaming notification targets.
+          allOf:
+            - $ref: '#/components/schemas/StreamingNotificationTargetList'
+            - description: The streaming notification targets.
       description: 'The streaming configuration associated with an Amazon Chime Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.'
     GetVoiceConnectorTerminationHealthRequest:
       type: object
@@ -11801,11 +12129,13 @@ components:
       type: object
       properties:
         Timestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The timestamp, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The timestamp, in ISO 8601 format.'
         Source:
-          $ref: '#/components/schemas/String'
-          description: The source IP address.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The source IP address.
       description: 'The termination health details, including the source IP address and timestamp of the last successful SIP <code>OPTIONS</code> message from your SIP infrastructure.'
     GetVoiceConnectorTerminationRequest:
       type: object
@@ -11815,20 +12145,25 @@ components:
       type: object
       properties:
         CpsLimit:
-          $ref: '#/components/schemas/CpsLimit'
-          description: The limit on calls per second. Max value based on account service quota. Default value of 1.
+          allOf:
+            - $ref: '#/components/schemas/CpsLimit'
+            - description: The limit on calls per second. Max value based on account service quota. Default value of 1.
         DefaultPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: The default caller ID phone number.
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The default caller ID phone number.
         CallingRegions:
-          $ref: '#/components/schemas/CallingRegionList'
-          description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
+          allOf:
+            - $ref: '#/components/schemas/CallingRegionList'
+            - description: 'The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.'
         CidrAllowedList:
-          $ref: '#/components/schemas/StringList'
-          description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'The IP addresses allowed to make calls, in CIDR format. Required.'
         Disabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When termination settings are disabled, outbound calls can not be made.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When termination settings are disabled, outbound calls can not be made.'
       description: Termination settings enable your SIP hosts to make outbound calls using your Amazon Chime Voice Connector.
     Integer:
       type: integer
@@ -11842,17 +12177,21 @@ components:
       type: object
       properties:
         InviteId:
-          $ref: '#/components/schemas/String'
-          description: The invite ID.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The invite ID.
         Status:
-          $ref: '#/components/schemas/InviteStatus'
-          description: The status of the invite.
+          allOf:
+            - $ref: '#/components/schemas/InviteStatus'
+            - description: The status of the invite.
         EmailAddress:
-          $ref: '#/components/schemas/EmailAddress'
-          description: The email address to which the invite is sent.
+          allOf:
+            - $ref: '#/components/schemas/EmailAddress'
+            - description: The email address to which the invite is sent.
         EmailStatus:
-          $ref: '#/components/schemas/EmailStatus'
-          description: The status of the invite email.
+          allOf:
+            - $ref: '#/components/schemas/EmailStatus'
+            - description: The status of the invite email.
       description: Invitation object returned after emailing users to invite them to join the Amazon Chime <code>Team</code> account.
     InviteList:
       type: array
@@ -11870,11 +12209,13 @@ components:
       title: InviteUsersRequest
       properties:
         UserEmailList:
-          $ref: '#/components/schemas/UserEmailList'
-          description: The user email addresses to which to send the email invitation.
+          allOf:
+            - $ref: '#/components/schemas/UserEmailList'
+            - description: The user email addresses to which to send the email invitation.
         UserType:
-          $ref: '#/components/schemas/UserType'
-          description: The user type.
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The user type.
     ProfileServiceMaxResults:
       type: integer
       minimum: 1
@@ -12027,26 +12368,33 @@ components:
       type: object
       properties:
         AudioHostUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The audio host URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The audio host URL.
         AudioFallbackUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The audio fallback URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The audio fallback URL.
         ScreenDataUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The screen data URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The screen data URL.
         ScreenSharingUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The screen sharing URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The screen sharing URL.
         ScreenViewingUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The screen viewing URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The screen viewing URL.
         SignalingUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The signaling URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The signaling URL.
         TurnControlUrl:
-          $ref: '#/components/schemas/UriType'
-          description: The turn control URL.
+          allOf:
+            - $ref: '#/components/schemas/UriType'
+            - description: The turn control URL.
       description: A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.
     MeetingTagKeyList:
       type: array
@@ -12064,33 +12412,41 @@ components:
       type: object
       properties:
         MemberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The member ID (user ID or bot ID).
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The member ID (user ID or bot ID).
         MemberType:
-          $ref: '#/components/schemas/MemberType'
-          description: The member type.
+          allOf:
+            - $ref: '#/components/schemas/MemberType'
+            - description: The member type.
         Email:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The member email address.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The member email address.
         FullName:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The member name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The member name.
         AccountId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The Amazon Chime account ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Chime account ID.
       description: 'The member details, such as email address, name, member ID, and member type.'
     MemberError:
       type: object
       properties:
         MemberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The member ID.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The member ID.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The error code.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
         ErrorMessage:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: The list of errors returned when a member action results in an error.
     NotificationTarget:
       type: string
@@ -12108,11 +12464,13 @@ components:
       type: object
       properties:
         E164PhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: 'The phone number, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: 'The phone number, in E.164 format.'
         Status:
-          $ref: '#/components/schemas/OrderedPhoneNumberStatus'
-          description: The phone number status.
+          allOf:
+            - $ref: '#/components/schemas/OrderedPhoneNumberStatus'
+            - description: The phone number status.
       description: A phone number for which an order has been placed.
     OrderedPhoneNumberList:
       type: array
@@ -12139,30 +12497,37 @@ components:
       type: object
       properties:
         Host:
-          $ref: '#/components/schemas/String'
-          description: The FQDN or IP address to contact for origination traffic.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The FQDN or IP address to contact for origination traffic.
         Port:
-          $ref: '#/components/schemas/Port'
-          description: The designated origination route port. Defaults to 5060.
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - description: The designated origination route port. Defaults to 5060.
         Protocol:
-          $ref: '#/components/schemas/OriginationRouteProtocol'
-          description: The protocol to use for the origination route. Encryption-enabled Amazon Chime Voice Connectors use TCP protocol by default.
+          allOf:
+            - $ref: '#/components/schemas/OriginationRouteProtocol'
+            - description: The protocol to use for the origination route. Encryption-enabled Amazon Chime Voice Connectors use TCP protocol by default.
         Priority:
-          $ref: '#/components/schemas/OriginationRoutePriority'
-          description: 'The priority associated with the host, with 1 being the highest priority. Higher priority hosts are attempted first.'
+          allOf:
+            - $ref: '#/components/schemas/OriginationRoutePriority'
+            - description: 'The priority associated with the host, with 1 being the highest priority. Higher priority hosts are attempted first.'
         Weight:
-          $ref: '#/components/schemas/OriginationRouteWeight'
-          description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
+          allOf:
+            - $ref: '#/components/schemas/OriginationRouteWeight'
+            - description: 'The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.'
       description: 'Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.'
     Participant:
       type: object
       properties:
         PhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: The participant's phone number.
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The participant's phone number.
         ProxyPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: The participant's proxy phone number.
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The participant's proxy phone number.
       description: The phone number and proxy phone number for a participant in an Amazon Chime Voice Connector proxy session.
     Participants:
       type: array
@@ -12177,23 +12542,29 @@ components:
       type: object
       properties:
         InboundCall:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies inbound calling for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies inbound calling for the specified phone number.
         OutboundCall:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies outbound calling for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies outbound calling for the specified phone number.
         InboundSMS:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies inbound SMS messaging for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies inbound SMS messaging for the specified phone number.
         OutboundSMS:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies outbound SMS messaging for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies outbound SMS messaging for the specified phone number.
         InboundMMS:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies inbound MMS messaging for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies inbound MMS messaging for the specified phone number.
         OutboundMMS:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: Allows or denies outbound MMS messaging for the specified phone number.
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Allows or denies outbound MMS messaging for the specified phone number.
       description: 'The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled inbound and outbound calling and text messaging.'
     PhoneNumberAssociationList:
       type: array
@@ -12203,27 +12574,33 @@ components:
       type: object
       properties:
         Value:
-          $ref: '#/components/schemas/String'
-          description: Contains the ID for the entity specified in Name.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Contains the ID for the entity specified in Name.
         Name:
-          $ref: '#/components/schemas/PhoneNumberAssociationName'
-          description: 'Defines the association with an Amazon Chime account ID, user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberAssociationName'
+            - description: 'Defines the association with an Amazon Chime account ID, user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
         AssociatedTimestamp:
-          $ref: '#/components/schemas/Iso8601Timestamp'
-          description: 'The timestamp of the phone number association, in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The timestamp of the phone number association, in ISO 8601 format.'
       description: 'The phone number associations, such as Amazon Chime account ID, Amazon Chime user ID, Amazon Chime Voice Connector ID, or Amazon Chime Voice Connector group ID.'
     PhoneNumberError:
       type: object
       properties:
         PhoneNumberId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The phone number ID for which the action failed.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The phone number ID for which the action failed.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The error code.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
         ErrorMessage:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: 'If the phone number action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.'
     PhoneNumberMaxResults:
       type: integer
@@ -12244,11 +12621,13 @@ components:
       title: PutEventsConfigurationRequest
       properties:
         OutboundEventsHTTPSEndpoint:
-          $ref: '#/components/schemas/SensitiveString'
-          description: HTTPS endpoint that allows the bot to receive outgoing events.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: HTTPS endpoint that allows the bot to receive outgoing events.
         LambdaFunctionArn:
-          $ref: '#/components/schemas/SensitiveString'
-          description: Lambda function ARN that allows the bot to receive outgoing events.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: Lambda function ARN that allows the bot to receive outgoing events.
     PutRetentionSettingsRequest:
       type: object
       required:
@@ -12256,8 +12635,9 @@ components:
       title: PutRetentionSettingsRequest
       properties:
         RetentionSettings:
-          $ref: '#/components/schemas/RetentionSettings'
-          description: The retention settings.
+          allOf:
+            - $ref: '#/components/schemas/RetentionSettings'
+            - description: The retention settings.
     PutVoiceConnectorEmergencyCallingConfigurationRequest:
       type: object
       required:
@@ -12265,8 +12645,9 @@ components:
       title: PutVoiceConnectorEmergencyCallingConfigurationRequest
       properties:
         EmergencyCallingConfiguration:
-          $ref: '#/components/schemas/EmergencyCallingConfiguration'
-          description: The emergency calling configuration details.
+          allOf:
+            - $ref: '#/components/schemas/EmergencyCallingConfiguration'
+            - description: The emergency calling configuration details.
     PutVoiceConnectorLoggingConfigurationRequest:
       type: object
       required:
@@ -12274,8 +12655,9 @@ components:
       title: PutVoiceConnectorLoggingConfigurationRequest
       properties:
         LoggingConfiguration:
-          $ref: '#/components/schemas/LoggingConfiguration'
-          description: The logging configuration details to add.
+          allOf:
+            - $ref: '#/components/schemas/LoggingConfiguration'
+            - description: The logging configuration details to add.
     PutVoiceConnectorOriginationRequest:
       type: object
       required:
@@ -12283,8 +12665,9 @@ components:
       title: PutVoiceConnectorOriginationRequest
       properties:
         Origination:
-          $ref: '#/components/schemas/Origination'
-          description: The origination setting details to add.
+          allOf:
+            - $ref: '#/components/schemas/Origination'
+            - description: The origination setting details to add.
     PutVoiceConnectorProxyRequest:
       type: object
       required:
@@ -12293,17 +12676,21 @@ components:
       title: PutVoiceConnectorProxyRequest
       properties:
         DefaultSessionExpiryMinutes:
-          $ref: '#/components/schemas/Integer'
-          description: The default number of minutes allowed for proxy sessions.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The default number of minutes allowed for proxy sessions.
         PhoneNumberPoolCountries:
-          $ref: '#/components/schemas/CountryList'
-          description: The countries for proxy phone numbers to be selected from.
+          allOf:
+            - $ref: '#/components/schemas/CountryList'
+            - description: The countries for proxy phone numbers to be selected from.
         FallBackPhoneNumber:
-          $ref: '#/components/schemas/E164PhoneNumber'
-          description: The phone number to route calls to after a proxy session expires.
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The phone number to route calls to after a proxy session expires.
         Disabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.'
     PutVoiceConnectorStreamingConfigurationRequest:
       type: object
       required:
@@ -12311,15 +12698,17 @@ components:
       title: PutVoiceConnectorStreamingConfigurationRequest
       properties:
         StreamingConfiguration:
-          $ref: '#/components/schemas/StreamingConfiguration'
-          description: The streaming configuration details to add.
+          allOf:
+            - $ref: '#/components/schemas/StreamingConfiguration'
+            - description: The streaming configuration details to add.
     PutVoiceConnectorTerminationCredentialsRequest:
       type: object
       title: PutVoiceConnectorTerminationCredentialsRequest
       properties:
         Credentials:
-          $ref: '#/components/schemas/CredentialList'
-          description: The termination SIP credentials.
+          allOf:
+            - $ref: '#/components/schemas/CredentialList'
+            - description: The termination SIP credentials.
     PutVoiceConnectorTerminationRequest:
       type: object
       required:
@@ -12327,8 +12716,9 @@ components:
       title: PutVoiceConnectorTerminationRequest
       properties:
         Termination:
-          $ref: '#/components/schemas/Termination'
-          description: The termination setting details to add.
+          allOf:
+            - $ref: '#/components/schemas/Termination'
+            - description: The termination setting details to add.
     RedactConversationMessageRequest:
       type: object
       title: RedactConversationMessageRequest
@@ -12370,8 +12760,9 @@ components:
         - NotificationTarget
       properties:
         NotificationTarget:
-          $ref: '#/components/schemas/NotificationTarget'
-          description: The streaming notification target.
+          allOf:
+            - $ref: '#/components/schemas/NotificationTarget'
+            - description: The streaming notification target.
       description: The targeted recipient for a streaming configuration notification.
     TagValue:
       type: string
@@ -12385,8 +12776,9 @@ components:
       title: TagAttendeeRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/AttendeeTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/AttendeeTagList'
+            - description: The tag key-value pairs.
     TagKeyList:
       type: array
       items:
@@ -12400,8 +12792,9 @@ components:
       title: TagMeetingRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/MeetingTagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/MeetingTagList'
+            - description: The tag key-value pairs.
     TagResourceRequest:
       type: object
       required:
@@ -12410,11 +12803,13 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/Arn'
-          description: The resource ARN.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The resource ARN.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tag key-value pairs.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag key-value pairs.
     UntagAttendeeRequest:
       type: object
       required:
@@ -12422,8 +12817,9 @@ components:
       title: UntagAttendeeRequest
       properties:
         TagKeys:
-          $ref: '#/components/schemas/AttendeeTagKeyList'
-          description: The tag keys.
+          allOf:
+            - $ref: '#/components/schemas/AttendeeTagKeyList'
+            - description: The tag keys.
     UntagMeetingRequest:
       type: object
       required:
@@ -12431,8 +12827,9 @@ components:
       title: UntagMeetingRequest
       properties:
         TagKeys:
-          $ref: '#/components/schemas/MeetingTagKeyList'
-          description: The tag keys.
+          allOf:
+            - $ref: '#/components/schemas/MeetingTagKeyList'
+            - description: The tag keys.
     UntagResourceRequest:
       type: object
       required:
@@ -12441,18 +12838,21 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/Arn'
-          description: The resource ARN.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The resource ARN.
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The tag keys.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys.
     UpdateAccountRequest:
       type: object
       title: UpdateAccountRequest
       properties:
         Name:
-          $ref: '#/components/schemas/AccountName'
-          description: The new name for the specified Amazon Chime account.
+          allOf:
+            - $ref: '#/components/schemas/AccountName'
+            - description: The new name for the specified Amazon Chime account.
     UpdateAccountSettingsRequest:
       type: object
       required:
@@ -12460,15 +12860,17 @@ components:
       title: UpdateAccountSettingsRequest
       properties:
         AccountSettings:
-          $ref: '#/components/schemas/AccountSettings'
-          description: The Amazon Chime account settings to update.
+          allOf:
+            - $ref: '#/components/schemas/AccountSettings'
+            - description: The Amazon Chime account settings to update.
     UpdateBotRequest:
       type: object
       title: UpdateBotRequest
       properties:
         Disabled:
-          $ref: '#/components/schemas/NullableBoolean'
-          description: 'When true, stops the specified bot from running in your account.'
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'When true, stops the specified bot from running in your account.'
     UpdateGlobalSettingsRequest:
       type: object
       required:
@@ -12477,21 +12879,25 @@ components:
       title: UpdateGlobalSettingsRequest
       properties:
         BusinessCalling:
-          $ref: '#/components/schemas/BusinessCallingSettings'
-          description: The Amazon Chime Business Calling settings.
+          allOf:
+            - $ref: '#/components/schemas/BusinessCallingSettings'
+            - description: The Amazon Chime Business Calling settings.
         VoiceConnector:
-          $ref: '#/components/schemas/VoiceConnectorSettings'
-          description: The Amazon Chime Voice Connector settings.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorSettings'
+            - description: The Amazon Chime Voice Connector settings.
     UpdatePhoneNumberRequest:
       type: object
       title: UpdatePhoneNumberRequest
       properties:
         ProductType:
-          $ref: '#/components/schemas/PhoneNumberProductType'
-          description: The product type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberProductType'
+            - description: The product type.
         CallingName:
-          $ref: '#/components/schemas/CallingName'
-          description: The outbound calling name associated with the phone number.
+          allOf:
+            - $ref: '#/components/schemas/CallingName'
+            - description: The outbound calling name associated with the phone number.
     UpdatePhoneNumberSettingsRequest:
       type: object
       required:
@@ -12499,8 +12905,9 @@ components:
       title: UpdatePhoneNumberSettingsRequest
       properties:
         CallingName:
-          $ref: '#/components/schemas/CallingName'
-          description: The default outbound calling name for the account.
+          allOf:
+            - $ref: '#/components/schemas/CallingName'
+            - description: The default outbound calling name for the account.
     UpdateProxySessionRequest:
       type: object
       required:
@@ -12508,38 +12915,45 @@ components:
       title: UpdateProxySessionRequest
       properties:
         Capabilities:
-          $ref: '#/components/schemas/CapabilityList'
-          description: The proxy session capabilities.
+          allOf:
+            - $ref: '#/components/schemas/CapabilityList'
+            - description: The proxy session capabilities.
         ExpiryMinutes:
-          $ref: '#/components/schemas/PositiveInteger'
-          description: The number of minutes allowed for the proxy session.
+          allOf:
+            - $ref: '#/components/schemas/PositiveInteger'
+            - description: The number of minutes allowed for the proxy session.
     UpdateRoomMembershipRequest:
       type: object
       title: UpdateRoomMembershipRequest
       properties:
         Role:
-          $ref: '#/components/schemas/RoomMembershipRole'
-          description: The role of the member.
+          allOf:
+            - $ref: '#/components/schemas/RoomMembershipRole'
+            - description: The role of the member.
     UpdateRoomRequest:
       type: object
       title: UpdateRoomRequest
       properties:
         Name:
-          $ref: '#/components/schemas/SensitiveString'
-          description: The room name.
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The room name.
     UpdateUserRequest:
       type: object
       title: UpdateUserRequest
       properties:
         LicenseType:
-          $ref: '#/components/schemas/License'
-          description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: The user license type to update. This must be a supported license type for the Amazon Chime account that the user belongs to.
         UserType:
-          $ref: '#/components/schemas/UserType'
-          description: The user type.
+          allOf:
+            - $ref: '#/components/schemas/UserType'
+            - description: The user type.
         AlexaForBusinessMetadata:
-          $ref: '#/components/schemas/AlexaForBusinessMetadata'
-          description: The Alexa for Business metadata.
+          allOf:
+            - $ref: '#/components/schemas/AlexaForBusinessMetadata'
+            - description: The Alexa for Business metadata.
     UpdateUserSettingsRequest:
       type: object
       required:
@@ -12547,8 +12961,9 @@ components:
       title: UpdateUserSettingsRequest
       properties:
         UserSettings:
-          $ref: '#/components/schemas/UserSettings'
-          description: The user settings to update.
+          allOf:
+            - $ref: '#/components/schemas/UserSettings'
+            - description: The user settings to update.
     UpdateVoiceConnectorGroupRequest:
       type: object
       required:
@@ -12557,11 +12972,13 @@ components:
       title: UpdateVoiceConnectorGroupRequest
       properties:
         Name:
-          $ref: '#/components/schemas/VoiceConnectorGroupName'
-          description: The name of the Amazon Chime Voice Connector group.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorGroupName'
+            - description: The name of the Amazon Chime Voice Connector group.
         VoiceConnectorItems:
-          $ref: '#/components/schemas/VoiceConnectorItemList'
-          description: The <code>VoiceConnectorItems</code> to associate with the group.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorItemList'
+            - description: The <code>VoiceConnectorItems</code> to associate with the group.
     UpdateVoiceConnectorRequest:
       type: object
       required:
@@ -12570,23 +12987,28 @@ components:
       title: UpdateVoiceConnectorRequest
       properties:
         Name:
-          $ref: '#/components/schemas/VoiceConnectorName'
-          description: The name of the Amazon Chime Voice Connector.
+          allOf:
+            - $ref: '#/components/schemas/VoiceConnectorName'
+            - description: The name of the Amazon Chime Voice Connector.
         RequireEncryption:
-          $ref: '#/components/schemas/Boolean'
-          description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When enabled, requires encryption for the Amazon Chime Voice Connector.'
     UserError:
       type: object
       properties:
         UserId:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The user ID for which the action failed.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The user ID for which the action failed.
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: The error code.
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
         ErrorMessage:
-          $ref: '#/components/schemas/String'
-          description: The error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
       description: 'The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.'
     VoiceConnectorItemPriority:
       type: integer

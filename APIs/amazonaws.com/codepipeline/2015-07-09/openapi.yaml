@@ -2223,8 +2223,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/JobStatus'
-          description: Whether the job worker has received the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: Whether the job worker has received the specified job.
       description: Represents the output of an AcknowledgeJob action.
     AcknowledgeJobInput:
       type: object
@@ -2234,11 +2235,13 @@ components:
       title: AcknowledgeJobInput
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID of the job for which you want to confirm receipt.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID of the job for which you want to confirm receipt.
         nonce:
-          $ref: '#/components/schemas/Nonce'
-          description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the <a>PollForJobs</a> request that returned this job.
+          allOf:
+            - $ref: '#/components/schemas/Nonce'
+            - description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response of the <a>PollForJobs</a> request that returned this job.
       description: Represents the input of an AcknowledgeJob action.
     ValidationException: {}
     InvalidNonceException: {}
@@ -2247,8 +2250,9 @@ components:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/JobStatus'
-          description: 'The status information for the third party job, if any.'
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: 'The status information for the third party job, if any.'
       description: Represents the output of an AcknowledgeThirdPartyJob action.
     AcknowledgeThirdPartyJobInput:
       type: object
@@ -2259,14 +2263,17 @@ components:
       title: AcknowledgeThirdPartyJobInput
       properties:
         jobId:
-          $ref: '#/components/schemas/ThirdPartyJobId'
-          description: The unique system-generated ID of the job.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobId'
+            - description: The unique system-generated ID of the job.
         nonce:
-          $ref: '#/components/schemas/Nonce'
-          description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a <a>GetThirdPartyJobDetails</a> request.
+          allOf:
+            - $ref: '#/components/schemas/Nonce'
+            - description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Get this number from the response to a <a>GetThirdPartyJobDetails</a> request.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       description: Represents the input of an AcknowledgeThirdPartyJob action.
     InvalidClientTokenException: {}
     CreateCustomActionTypeOutput:
@@ -2275,11 +2282,13 @@ components:
         - actionType
       properties:
         actionType:
-          $ref: '#/components/schemas/ActionType'
-          description: Returns information about the details of an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: Returns information about the details of an action type.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Specifies the tags applied to the custom action.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Specifies the tags applied to the custom action.
       description: Represents the output of a <code>CreateCustomActionType</code> operation.
     CreateCustomActionTypeInput:
       type: object
@@ -2292,29 +2301,37 @@ components:
       title: CreateCustomActionTypeInput
       properties:
         category:
-          $ref: '#/components/schemas/ActionCategory'
-          description: '<p>The category of the custom action, such as a build action or a test action.</p> <note> <p>Although <code>Source</code> and <code>Approval</code> are listed as valid values, they are not currently functional. These values are reserved for future use.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: '<p>The category of the custom action, such as a build action or a test action.</p> <note> <p>Although <code>Source</code> and <code>Approval</code> are listed as valid values, they are not currently functional. These values are reserved for future use.</p> </note>'
         provider:
-          $ref: '#/components/schemas/ActionProvider'
-          description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
+          allOf:
+            - $ref: '#/components/schemas/ActionProvider'
+            - description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
         version:
-          $ref: '#/components/schemas/Version'
-          description: The version identifier of the custom action.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version identifier of the custom action.
         settings:
-          $ref: '#/components/schemas/ActionTypeSettings'
-          description: URLs that provide users information about this custom action.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeSettings'
+            - description: URLs that provide users information about this custom action.
         configurationProperties:
-          $ref: '#/components/schemas/ActionConfigurationPropertyList'
-          description: '<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html">Create a Custom Action for a Pipeline</a>.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationPropertyList'
+            - description: '<p>The configuration properties for the custom action.</p> <note> <p>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of {Config:name}, as long as the configuration property is both required and not secret. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html">Create a Custom Action for a Pipeline</a>.</p> </note>'
         inputArtifactDetails:
-          $ref: '#/components/schemas/ArtifactDetails'
-          description: 'The details of the input artifact for the action, such as its commit ID.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetails'
+            - description: 'The details of the input artifact for the action, such as its commit ID.'
         outputArtifactDetails:
-          $ref: '#/components/schemas/ArtifactDetails'
-          description: 'The details of the output artifact of the action, such as its commit ID.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetails'
+            - description: 'The details of the output artifact of the action, such as its commit ID.'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the custom action.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the custom action.
       description: Represents the input of a CreateCustomActionType operation.
     LimitExceededException: {}
     TooManyTagsException: {}
@@ -2324,11 +2341,13 @@ components:
       type: object
       properties:
         pipeline:
-          $ref: '#/components/schemas/PipelineDeclaration'
-          description: 'Represents the structure of actions and stages to be performed in the pipeline. '
+          allOf:
+            - $ref: '#/components/schemas/PipelineDeclaration'
+            - description: 'Represents the structure of actions and stages to be performed in the pipeline. '
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Specifies the tags applied to the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Specifies the tags applied to the pipeline.
       description: Represents the output of a <code>CreatePipeline</code> action.
     CreatePipelineInput:
       type: object
@@ -2337,11 +2356,13 @@ components:
       title: CreatePipelineInput
       properties:
         pipeline:
-          $ref: '#/components/schemas/PipelineDeclaration'
-          description: 'Represents the structure of actions and stages to be performed in the pipeline. '
+          allOf:
+            - $ref: '#/components/schemas/PipelineDeclaration'
+            - description: 'Represents the structure of actions and stages to be performed in the pipeline. '
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the pipeline.
       description: Represents the input of a <code>CreatePipeline</code> action.
     PipelineNameInUseException: {}
     InvalidStageDeclarationException: {}
@@ -2357,14 +2378,17 @@ components:
       title: DeleteCustomActionTypeInput
       properties:
         category:
-          $ref: '#/components/schemas/ActionCategory'
-          description: 'The category of the custom action that you want to delete, such as source or deploy.'
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: 'The category of the custom action that you want to delete, such as source or deploy.'
         provider:
-          $ref: '#/components/schemas/ActionProvider'
-          description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
+          allOf:
+            - $ref: '#/components/schemas/ActionProvider'
+            - description: 'The provider of the service used in the custom action, such as AWS CodeDeploy.'
         version:
-          $ref: '#/components/schemas/Version'
-          description: The version of the custom action to delete.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: The version of the custom action to delete.
       description: Represents the input of a <code>DeleteCustomActionType</code> operation. The custom action will be marked as deleted.
     DeletePipelineInput:
       type: object
@@ -2373,8 +2397,9 @@ components:
       title: DeletePipelineInput
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline to be deleted.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline to be deleted.
       description: Represents the input of a <code>DeletePipeline</code> action.
     DeleteWebhookOutput:
       type: object
@@ -2386,8 +2411,9 @@ components:
       title: DeleteWebhookInput
       properties:
         name:
-          $ref: '#/components/schemas/WebhookName'
-          description: The name of the webhook you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/WebhookName'
+            - description: The name of the webhook you want to delete.
     DeregisterWebhookWithThirdPartyOutput:
       type: object
       properties: {}
@@ -2396,8 +2422,9 @@ components:
       title: DeregisterWebhookWithThirdPartyInput
       properties:
         webhookName:
-          $ref: '#/components/schemas/WebhookName'
-          description: The name of the webhook you want to deregister.
+          allOf:
+            - $ref: '#/components/schemas/WebhookName'
+            - description: The name of the webhook you want to deregister.
     WebhookNotFoundException: {}
     DisableStageTransitionInput:
       type: object
@@ -2409,17 +2436,21 @@ components:
       title: DisableStageTransitionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline in which you want to disable the flow of artifacts from one stage to another.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline in which you want to disable the flow of artifacts from one stage to another.
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage where you want to disable the inbound or outbound transition of artifacts.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage where you want to disable the inbound or outbound transition of artifacts.
         transitionType:
-          $ref: '#/components/schemas/StageTransitionType'
-          description: 'Specifies whether artifacts are prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).'
+          allOf:
+            - $ref: '#/components/schemas/StageTransitionType'
+            - description: 'Specifies whether artifacts are prevented from transitioning into the stage and being processed by the actions in that stage (inbound), or prevented from transitioning from the stage after they have been processed by the actions in that stage (outbound).'
         reason:
-          $ref: '#/components/schemas/DisabledReason'
-          description: 'The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
+          allOf:
+            - $ref: '#/components/schemas/DisabledReason'
+            - description: 'The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.'
       description: Represents the input of a <code>DisableStageTransition</code> action.
     PipelineNotFoundException: {}
     StageNotFoundException: {}
@@ -2432,21 +2463,25 @@ components:
       title: EnableStageTransitionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline in which you want to enable the flow of artifacts from one stage to another.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline in which you want to enable the flow of artifacts from one stage to another.
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: 'The name of the stage where you want to enable the transition of artifacts, either into the stage (inbound) or from that stage to the next stage (outbound).'
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: 'The name of the stage where you want to enable the transition of artifacts, either into the stage (inbound) or from that stage to the next stage (outbound).'
         transitionType:
-          $ref: '#/components/schemas/StageTransitionType'
-          description: Specifies whether artifacts are allowed to enter the stage and be processed by the actions in that stage (inbound) or whether already processed artifacts are allowed to transition to the next stage (outbound).
+          allOf:
+            - $ref: '#/components/schemas/StageTransitionType'
+            - description: Specifies whether artifacts are allowed to enter the stage and be processed by the actions in that stage (inbound) or whether already processed artifacts are allowed to transition to the next stage (outbound).
       description: Represents the input of an <code>EnableStageTransition</code> action.
     GetJobDetailsOutput:
       type: object
       properties:
         jobDetails:
-          $ref: '#/components/schemas/JobDetails'
-          description: '<p>The details of the job.</p> <note> <p>If AWSSessionCredentials is used, a long-running job can call <code>GetJobDetails</code> again to obtain new credentials.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/JobDetails'
+            - description: '<p>The details of the job.</p> <note> <p>If AWSSessionCredentials is used, a long-running job can call <code>GetJobDetails</code> again to obtain new credentials.</p> </note>'
       description: Represents the output of a <code>GetJobDetails</code> action.
     GetJobDetailsInput:
       type: object
@@ -2455,18 +2490,21 @@ components:
       title: GetJobDetailsInput
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID for the job.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID for the job.
       description: Represents the input of a <code>GetJobDetails</code> action.
     GetPipelineOutput:
       type: object
       properties:
         pipeline:
-          $ref: '#/components/schemas/PipelineDeclaration'
-          description: 'Represents the structure of actions and stages to be performed in the pipeline. '
+          allOf:
+            - $ref: '#/components/schemas/PipelineDeclaration'
+            - description: 'Represents the structure of actions and stages to be performed in the pipeline. '
         metadata:
-          $ref: '#/components/schemas/PipelineMetadata'
-          description: Represents the pipeline metadata information returned as part of the output of a <code>GetPipeline</code> action.
+          allOf:
+            - $ref: '#/components/schemas/PipelineMetadata'
+            - description: Represents the pipeline metadata information returned as part of the output of a <code>GetPipeline</code> action.
       description: Represents the output of a <code>GetPipeline</code> action.
     GetPipelineInput:
       type: object
@@ -2475,19 +2513,22 @@ components:
       title: GetPipelineInput
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline for which you want to get information. Pipeline names must be unique under an AWS user account.
         version:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: 'The version number of the pipeline. If you do not specify a version, defaults to the current version.'
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: 'The version number of the pipeline. If you do not specify a version, defaults to the current version.'
       description: Represents the input of a <code>GetPipeline</code> action.
     PipelineVersionNotFoundException: {}
     GetPipelineExecutionOutput:
       type: object
       properties:
         pipelineExecution:
-          $ref: '#/components/schemas/PipelineExecution'
-          description: Represents information about the execution of a pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecution'
+            - description: Represents information about the execution of a pipeline.
       description: Represents the output of a <code>GetPipelineExecution</code> action.
     GetPipelineExecutionInput:
       type: object
@@ -2497,31 +2538,38 @@ components:
       title: GetPipelineExecutionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline about which you want to get execution details.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline about which you want to get execution details.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution about which you want to get execution details.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution about which you want to get execution details.
       description: Represents the input of a <code>GetPipelineExecution</code> action.
     PipelineExecutionNotFoundException: {}
     GetPipelineStateOutput:
       type: object
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline for which you want to get the state.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline for which you want to get the state.
         pipelineVersion:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: <p>The version number of the pipeline.</p> <note> <p>A newly created pipeline is always assigned a version number of <code>1</code>.</p> </note>
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: <p>The version number of the pipeline.</p> <note> <p>A newly created pipeline is always assigned a version number of <code>1</code>.</p> </note>
         stageStates:
-          $ref: '#/components/schemas/StageStateList'
-          description: 'A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.'
+          allOf:
+            - $ref: '#/components/schemas/StageStateList'
+            - description: 'A list of the pipeline stage output information, including stage name, state, most recent run details, whether the stage is disabled, and other data.'
         created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the pipeline was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the pipeline was created, in timestamp format.'
         updated:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the pipeline was last updated, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the pipeline was last updated, in timestamp format.'
       description: Represents the output of a <code>GetPipelineState</code> action.
     GetPipelineStateInput:
       type: object
@@ -2530,15 +2578,17 @@ components:
       title: GetPipelineStateInput
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline about which you want to get information.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline about which you want to get information.
       description: Represents the input of a <code>GetPipelineState</code> action.
     GetThirdPartyJobDetailsOutput:
       type: object
       properties:
         jobDetails:
-          $ref: '#/components/schemas/ThirdPartyJobDetails'
-          description: 'The details of the job, including any protected values defined for the job.'
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobDetails'
+            - description: 'The details of the job, including any protected values defined for the job.'
       description: Represents the output of a <code>GetThirdPartyJobDetails</code> action.
     GetThirdPartyJobDetailsInput:
       type: object
@@ -2548,22 +2598,26 @@ components:
       title: GetThirdPartyJobDetailsInput
       properties:
         jobId:
-          $ref: '#/components/schemas/ThirdPartyJobId'
-          description: The unique system-generated ID used for identifying the job.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobId'
+            - description: The unique system-generated ID used for identifying the job.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
       description: Represents the input of a <code>GetThirdPartyJobDetails</code> action.
     InvalidJobException: {}
     ListActionExecutionsOutput:
       type: object
       properties:
         actionExecutionDetails:
-          $ref: '#/components/schemas/ActionExecutionDetailList'
-          description: 'The details for a list of recent executions, such as action execution ID.'
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionDetailList'
+            - description: 'The details for a list of recent executions, such as action execution ID.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent <code>ListActionExecutions</code> call to return the next set of action executions in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent <code>ListActionExecutions</code> call to return the next set of action executions in the list.'
     ListActionExecutionsInput:
       type: object
       required:
@@ -2571,17 +2625,21 @@ components:
       title: ListActionExecutionsInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: ' The name of the pipeline for which you want to list action execution history.'
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: ' The name of the pipeline for which you want to list action execution history.'
         filter:
-          $ref: '#/components/schemas/ActionExecutionFilter'
-          description: Input information used to filter action execution history.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionFilter'
+            - description: Input information used to filter action execution history.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100. </p> <note> <p>Detailed execution history is available for executions run on or after February 21, 2019.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100. </p> <note> <p>Detailed execution history is available for executions run on or after February 21, 2019.</p> </note>'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token that was returned from the previous <code>ListActionExecutions</code> call, which can be used to return the next set of action executions in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that was returned from the previous <code>ListActionExecutions</code> call, which can be used to return the next set of action executions in the list.'
     InvalidNextTokenException: {}
     ListActionTypesOutput:
       type: object
@@ -2589,32 +2647,38 @@ components:
         - actionTypes
       properties:
         actionTypes:
-          $ref: '#/components/schemas/ActionTypeList'
-          description: Provides details of the action types.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeList'
+            - description: Provides details of the action types.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list action types call to return the next set of action types in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list action types call to return the next set of action types in the list.'
       description: Represents the output of a <code>ListActionTypes</code> action.
     ListActionTypesInput:
       type: object
       title: ListActionTypesInput
       properties:
         actionOwnerFilter:
-          $ref: '#/components/schemas/ActionOwner'
-          description: Filters the list of action types to those created by a specified entity.
+          allOf:
+            - $ref: '#/components/schemas/ActionOwner'
+            - description: Filters the list of action types to those created by a specified entity.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'An identifier that was returned from the previous list action types call, which can be used to return the next set of action types in the list.'
       description: Represents the input of a <code>ListActionTypes</code> action.
     ListPipelineExecutionsOutput:
       type: object
       properties:
         pipelineExecutionSummaries:
-          $ref: '#/components/schemas/PipelineExecutionSummaryList'
-          description: A list of executions in the history of a pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionSummaryList'
+            - description: A list of executions in the history of a pipeline.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'A token that can be used in the next <code>ListPipelineExecutions</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that can be used in the next <code>ListPipelineExecutions</code> call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.'
       description: Represents the output of a <code>ListPipelineExecutions</code> action.
     ListPipelineExecutionsInput:
       type: object
@@ -2623,42 +2687,50 @@ components:
       title: ListPipelineExecutionsInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline for which you want to get execution summary information.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline for which you want to get execution summary information.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Pipeline history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Pipeline history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.'
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token that was returned from the previous <code>ListPipelineExecutions</code> call, which can be used to return the next set of pipeline executions in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that was returned from the previous <code>ListPipelineExecutions</code> call, which can be used to return the next set of pipeline executions in the list.'
       description: Represents the input of a <code>ListPipelineExecutions</code> action.
     ListPipelinesOutput:
       type: object
       properties:
         pipelines:
-          $ref: '#/components/schemas/PipelineList'
-          description: The list of pipelines.
+          allOf:
+            - $ref: '#/components/schemas/PipelineList'
+            - description: The list of pipelines.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list pipelines call to return the next set of pipelines in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the amount of returned information is significantly large, an identifier is also returned. It can be used in a subsequent list pipelines call to return the next set of pipelines in the list.'
       description: Represents the output of a <code>ListPipelines</code> action.
     ListPipelinesInput:
       type: object
       title: ListPipelinesInput
       properties:
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: An identifier that was returned from the previous list pipelines call. It can be used to return the next set of pipelines in the list.
       description: Represents the input of a <code>ListPipelines</code> action.
     ListTagsForResourceOutput:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the resource.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
     ListTagsForResourceInput:
       type: object
       required:
@@ -2666,41 +2738,49 @@ components:
       title: ListTagsForResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the resource to get tags for.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource to get tags for.
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token that was returned from the previous API call, which would be used to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that was returned from the previous API call, which would be used to return the next page of the list. The ListTagsforResource call lists all available tags in one call and does not use pagination.'
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to return in a single call.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a single call.
     ResourceNotFoundException: {}
     InvalidArnException: {}
     ListWebhooksOutput:
       type: object
       properties:
         webhooks:
-          $ref: '#/components/schemas/WebhookList'
-          description: The JSON detail returned for each webhook in the list output for the ListWebhooks call.
+          allOf:
+            - $ref: '#/components/schemas/WebhookList'
+            - description: The JSON detail returned for each webhook in the list output for the ListWebhooks call.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListWebhooks call to return the next set of webhooks in the list. '
     ListWebhooksInput:
       type: object
       title: ListWebhooksInput
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The token that was returned from the previous ListWebhooks call, which can be used to return the next set of webhooks in the list.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token that was returned from the previous ListWebhooks call, which can be used to return the next set of webhooks in the list.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.'
     PollForJobsOutput:
       type: object
       properties:
         jobs:
-          $ref: '#/components/schemas/JobList'
-          description: Information about the jobs to take action on.
+          allOf:
+            - $ref: '#/components/schemas/JobList'
+            - description: Information about the jobs to take action on.
       description: Represents the output of a <code>PollForJobs</code> action.
     PollForJobsInput:
       type: object
@@ -2709,22 +2789,26 @@ components:
       title: PollForJobsInput
       properties:
         actionTypeId:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Represents information about an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Represents information about an action type.
         maxBatchSize:
-          $ref: '#/components/schemas/MaxBatchSize'
-          description: The maximum number of jobs to return in a poll for jobs call.
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum number of jobs to return in a poll for jobs call.
         queryParam:
-          $ref: '#/components/schemas/QueryParamMap'
-          description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value are returned.'
+          allOf:
+            - $ref: '#/components/schemas/QueryParamMap'
+            - description: 'A map of property names and values. For an action type with no queryable properties, this value must be null or an empty map. For an action type with a queryable property, you must supply that property as a key in the map. Only jobs whose action configuration matches the mapped value are returned.'
       description: Represents the input of a <code>PollForJobs</code> action.
     ActionTypeNotFoundException: {}
     PollForThirdPartyJobsOutput:
       type: object
       properties:
         jobs:
-          $ref: '#/components/schemas/ThirdPartyJobList'
-          description: Information about the jobs to take action on.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobList'
+            - description: Information about the jobs to take action on.
       description: Represents the output of a <code>PollForThirdPartyJobs</code> action.
     PollForThirdPartyJobsInput:
       type: object
@@ -2733,21 +2817,25 @@ components:
       title: PollForThirdPartyJobsInput
       properties:
         actionTypeId:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Represents information about an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Represents information about an action type.
         maxBatchSize:
-          $ref: '#/components/schemas/MaxBatchSize'
-          description: The maximum number of jobs to return in a poll for jobs call.
+          allOf:
+            - $ref: '#/components/schemas/MaxBatchSize'
+            - description: The maximum number of jobs to return in a poll for jobs call.
       description: Represents the input of a <code>PollForThirdPartyJobs</code> action.
     PutActionRevisionOutput:
       type: object
       properties:
         newRevision:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the artifact revision was previously used in an execution of the specified pipeline.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the artifact revision was previously used in an execution of the specified pipeline.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the current workflow state of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the current workflow state of the pipeline.
       description: Represents the output of a <code>PutActionRevision</code> action.
     PutActionRevisionInput:
       type: object
@@ -2759,25 +2847,30 @@ components:
       title: PutActionRevisionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline that starts processing the revision to the source.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline that starts processing the revision to the source.
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage that contains the action that acts on the revision.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage that contains the action that acts on the revision.
         actionName:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action that processes the revision.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action that processes the revision.
         actionRevision:
-          $ref: '#/components/schemas/ActionRevision'
-          description: Represents information about the version (or revision) of an action.
+          allOf:
+            - $ref: '#/components/schemas/ActionRevision'
+            - description: Represents information about the version (or revision) of an action.
       description: Represents the input of a <code>PutActionRevision</code> action.
     ActionNotFoundException: {}
     PutApprovalResultOutput:
       type: object
       properties:
         approvedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp showing when the approval or rejection was submitted.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp showing when the approval or rejection was submitted.
       description: Represents the output of a <code>PutApprovalResult</code> action.
     PutApprovalResultInput:
       type: object
@@ -2790,20 +2883,25 @@ components:
       title: PutApprovalResultInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: 'The name of the pipeline that contains the action. '
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: 'The name of the pipeline that contains the action. '
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage that contains the action.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage that contains the action.
         actionName:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action for which approval is requested.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action for which approval is requested.
         result:
-          $ref: '#/components/schemas/ApprovalResult'
-          description: Represents information about the result of the approval request.
+          allOf:
+            - $ref: '#/components/schemas/ApprovalResult'
+            - description: Represents information about the result of the approval request.
         token:
-          $ref: '#/components/schemas/ApprovalToken'
-          description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action. It is used to validate that the approval request corresponding to this token is still valid.
+          allOf:
+            - $ref: '#/components/schemas/ApprovalToken'
+            - description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <a>GetPipelineState</a> action. It is used to validate that the approval request corresponding to this token is still valid.
       description: Represents the input of a <code>PutApprovalResult</code> action.
     InvalidApprovalTokenException: {}
     ApprovalAlreadyCompletedException: {}
@@ -2815,11 +2913,13 @@ components:
       title: PutJobFailureResultInput
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID of the job that failed. This is the same ID returned from <code>PollForJobs</code>.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID of the job that failed. This is the same ID returned from <code>PollForJobs</code>.
         failureDetails:
-          $ref: '#/components/schemas/FailureDetails'
-          description: The details about the failure of a job.
+          allOf:
+            - $ref: '#/components/schemas/FailureDetails'
+            - description: The details about the failure of a job.
       description: Represents the input of a <code>PutJobFailureResult</code> action.
     InvalidJobStateException: {}
     PutJobSuccessResultInput:
@@ -2829,20 +2929,25 @@ components:
       title: PutJobSuccessResultInput
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID of the job that succeeded. This is the same ID returned from <code>PollForJobs</code>.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID of the job that succeeded. This is the same ID returned from <code>PollForJobs</code>.
         currentRevision:
-          $ref: '#/components/schemas/CurrentRevision'
-          description: The ID of the current revision of the artifact successfully worked on by the job.
+          allOf:
+            - $ref: '#/components/schemas/CurrentRevision'
+            - description: The ID of the current revision of the artifact successfully worked on by the job.
         continuationToken:
-          $ref: '#/components/schemas/ContinuationToken'
-          description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the custom action. When the action is complete, no continuation token should be supplied.'
+          allOf:
+            - $ref: '#/components/schemas/ContinuationToken'
+            - description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a custom action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the custom action. When the action is complete, no continuation token should be supplied.'
         executionDetails:
-          $ref: '#/components/schemas/ExecutionDetails'
-          description: 'The execution details of the successful job, such as the actions taken by the job worker.'
+          allOf:
+            - $ref: '#/components/schemas/ExecutionDetails'
+            - description: 'The execution details of the successful job, such as the actions taken by the job worker.'
         outputVariables:
-          $ref: '#/components/schemas/OutputVariablesMap'
-          description: Key-value pairs produced as output by a job worker that can be made available to a downstream action configuration. <code>outputVariables</code> can be included only when there is no continuation token on the request.
+          allOf:
+            - $ref: '#/components/schemas/OutputVariablesMap'
+            - description: Key-value pairs produced as output by a job worker that can be made available to a downstream action configuration. <code>outputVariables</code> can be included only when there is no continuation token on the request.
       description: Represents the input of a <code>PutJobSuccessResult</code> action.
     OutputVariablesSizeExceededException: {}
     PutThirdPartyJobFailureResultInput:
@@ -2854,14 +2959,17 @@ components:
       title: PutThirdPartyJobFailureResultInput
       properties:
         jobId:
-          $ref: '#/components/schemas/ThirdPartyJobId'
-          description: The ID of the job that failed. This is the same ID returned from <code>PollForThirdPartyJobs</code>.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobId'
+            - description: The ID of the job that failed. This is the same ID returned from <code>PollForThirdPartyJobs</code>.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
         failureDetails:
-          $ref: '#/components/schemas/FailureDetails'
-          description: Represents information about failure details.
+          allOf:
+            - $ref: '#/components/schemas/FailureDetails'
+            - description: Represents information about failure details.
       description: Represents the input of a <code>PutThirdPartyJobFailureResult</code> action.
     PutThirdPartyJobSuccessResultInput:
       type: object
@@ -2871,27 +2979,33 @@ components:
       title: PutThirdPartyJobSuccessResultInput
       properties:
         jobId:
-          $ref: '#/components/schemas/ThirdPartyJobId'
-          description: The ID of the job that successfully completed. This is the same ID returned from <code>PollForThirdPartyJobs</code>.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobId'
+            - description: The ID of the job that successfully completed. This is the same ID returned from <code>PollForThirdPartyJobs</code>.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
         currentRevision:
-          $ref: '#/components/schemas/CurrentRevision'
-          description: Represents information about a current revision.
+          allOf:
+            - $ref: '#/components/schemas/CurrentRevision'
+            - description: Represents information about a current revision.
         continuationToken:
-          $ref: '#/components/schemas/ContinuationToken'
-          description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
+          allOf:
+            - $ref: '#/components/schemas/ContinuationToken'
+            - description: 'A token generated by a job worker, such as an AWS CodeDeploy deployment ID, that a successful job provides to identify a partner action in progress. Future jobs use this token to identify the running instance of the action. It can be reused to return more information about the progress of the partner action. When the action is complete, no continuation token should be supplied.'
         executionDetails:
-          $ref: '#/components/schemas/ExecutionDetails'
-          description: 'The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. '
+          allOf:
+            - $ref: '#/components/schemas/ExecutionDetails'
+            - description: 'The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline. '
       description: Represents the input of a <code>PutThirdPartyJobSuccessResult</code> action.
     PutWebhookOutput:
       type: object
       properties:
         webhook:
-          $ref: '#/components/schemas/ListWebhookItem'
-          description: 'The detail returned from creating the webhook, such as the webhook name, webhook URL, and webhook ARN.'
+          allOf:
+            - $ref: '#/components/schemas/ListWebhookItem'
+            - description: 'The detail returned from creating the webhook, such as the webhook name, webhook URL, and webhook ARN.'
     PutWebhookInput:
       type: object
       required:
@@ -2899,11 +3013,13 @@ components:
       title: PutWebhookInput
       properties:
         webhook:
-          $ref: '#/components/schemas/WebhookDefinition'
-          description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name that helps you identify it. You might name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookDefinition'
+            - description: 'The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name that helps you identify it. You might name the webhook after the pipeline and action it targets so that you can easily recognize what it''s used for later.'
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags for the webhook.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the webhook.
     InvalidWebhookFilterPatternException: {}
     InvalidWebhookAuthenticationParametersException: {}
     RegisterWebhookWithThirdPartyOutput:
@@ -2914,14 +3030,16 @@ components:
       title: RegisterWebhookWithThirdPartyInput
       properties:
         webhookName:
-          $ref: '#/components/schemas/WebhookName'
-          description: 'The name of an existing webhook created with PutWebhook to register with a supported third party. '
+          allOf:
+            - $ref: '#/components/schemas/WebhookName'
+            - description: 'The name of an existing webhook created with PutWebhook to register with a supported third party. '
     RetryStageExecutionOutput:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the current workflow execution in the failed stage.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the current workflow execution in the failed stage.
       description: Represents the output of a <code>RetryStageExecution</code> action.
     RetryStageExecutionInput:
       type: object
@@ -2933,17 +3051,21 @@ components:
       title: RetryStageExecutionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline that contains the failed stage.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline that contains the failed stage.
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the failed stage to be retried.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the failed stage to be retried.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution in the failed stage to be retried. Use the <a>GetPipelineState</a> action to retrieve the current pipelineExecutionId of the failed stage
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution in the failed stage to be retried. Use the <a>GetPipelineState</a> action to retrieve the current pipelineExecutionId of the failed stage
         retryMode:
-          $ref: '#/components/schemas/StageRetryMode'
-          description: 'The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.'
+          allOf:
+            - $ref: '#/components/schemas/StageRetryMode'
+            - description: 'The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.'
       description: Represents the input of a <code>RetryStageExecution</code> action.
     StageNotRetryableException: {}
     NotLatestPipelineExecutionException: {}
@@ -2951,8 +3073,9 @@ components:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The unique system-generated ID of the pipeline execution that was started.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The unique system-generated ID of the pipeline execution that was started.
       description: Represents the output of a <code>StartPipelineExecution</code> action.
     StartPipelineExecutionInput:
       type: object
@@ -2961,18 +3084,21 @@ components:
       title: StartPipelineExecutionInput
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline to start.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline to start.
         clientRequestToken:
-          $ref: '#/components/schemas/ClientRequestToken'
-          description: The system-generated unique ID used to identify a unique execution request.
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The system-generated unique ID used to identify a unique execution request.
       description: Represents the input of a <code>StartPipelineExecution</code> action.
     StopPipelineExecutionOutput:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The unique system-generated ID of the pipeline execution that was stopped.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The unique system-generated ID of the pipeline execution that was stopped.
     StopPipelineExecutionInput:
       type: object
       required:
@@ -2981,17 +3107,21 @@ components:
       title: StopPipelineExecutionInput
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline to stop.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline to stop.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution to be stopped in the current stage. Use the <code>GetPipelineState</code> action to retrieve the current pipelineExecutionId.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution to be stopped in the current stage. Use the <code>GetPipelineState</code> action to retrieve the current pipelineExecutionId.
         abandon:
-          $ref: '#/components/schemas/Boolean'
-          description: '<p>Use this option to stop the pipeline execution by abandoning, rather than finishing, in-progress actions.</p> <note> <p>This option can lead to failed or out-of-sequence tasks.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Use this option to stop the pipeline execution by abandoning, rather than finishing, in-progress actions.</p> <note> <p>This option can lead to failed or out-of-sequence tasks.</p> </note>'
         reason:
-          $ref: '#/components/schemas/StopPipelineExecutionReason'
-          description: 'Use this option to enter comments, such as the reason the pipeline was stopped.'
+          allOf:
+            - $ref: '#/components/schemas/StopPipelineExecutionReason'
+            - description: 'Use this option to enter comments, such as the reason the pipeline was stopped.'
     PipelineExecutionNotStoppableException: {}
     DuplicatedStopRequestException: {}
     TagResourceOutput:
@@ -3005,11 +3135,13 @@ components:
       title: TagResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the resource you want to add tags to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource you want to add tags to.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags you want to modify or add to the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags you want to modify or add to the resource.
     UntagResourceOutput:
       type: object
       properties: {}
@@ -3021,17 +3153,20 @@ components:
       title: UntagResourceInput
       properties:
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: ' The Amazon Resource Name (ARN) of the resource to remove tags from.'
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: ' The Amazon Resource Name (ARN) of the resource to remove tags from.'
         tagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The list of keys for the tags to be removed from the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The list of keys for the tags to be removed from the resource.
     UpdatePipelineOutput:
       type: object
       properties:
         pipeline:
-          $ref: '#/components/schemas/PipelineDeclaration'
-          description: The structure of the updated pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineDeclaration'
+            - description: The structure of the updated pipeline.
       description: Represents the output of an <code>UpdatePipeline</code> action.
     UpdatePipelineInput:
       type: object
@@ -3040,8 +3175,9 @@ components:
       title: UpdatePipelineInput
       properties:
         pipeline:
-          $ref: '#/components/schemas/PipelineDeclaration'
-          description: The name of the pipeline to be updated.
+          allOf:
+            - $ref: '#/components/schemas/PipelineDeclaration'
+            - description: The name of the pipeline to be updated.
       description: Represents the input of an <code>UpdatePipeline</code> action.
     AWSRegionName:
       type: string
@@ -3061,14 +3197,17 @@ components:
         - sessionToken
       properties:
         accessKeyId:
-          $ref: '#/components/schemas/AccessKeyId'
-          description: The access key for the session.
+          allOf:
+            - $ref: '#/components/schemas/AccessKeyId'
+            - description: The access key for the session.
         secretAccessKey:
-          $ref: '#/components/schemas/SecretAccessKey'
-          description: The secret access key for the session.
+          allOf:
+            - $ref: '#/components/schemas/SecretAccessKey'
+            - description: The secret access key for the session.
         sessionToken:
-          $ref: '#/components/schemas/SessionToken'
-          description: The token for the session.
+          allOf:
+            - $ref: '#/components/schemas/SessionToken'
+            - description: The token for the session.
       description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
     AccountId:
       type: string
@@ -3115,8 +3254,9 @@ components:
       type: object
       properties:
         configuration:
-          $ref: '#/components/schemas/ActionConfigurationMap'
-          description: The configuration data for the action.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationMap'
+            - description: The configuration data for the action.
       description: Represents information about an action configuration.
     ActionConfigurationKey:
       type: string
@@ -3147,26 +3287,33 @@ components:
         - secret
       properties:
         name:
-          $ref: '#/components/schemas/ActionConfigurationKey'
-          description: The name of the action configuration property.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationKey'
+            - description: The name of the action configuration property.
         required:
-          $ref: '#/components/schemas/Boolean'
-          description: Whether the configuration property is a required value.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the configuration property is a required value.
         key:
-          $ref: '#/components/schemas/Boolean'
-          description: Whether the configuration property is a key.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the configuration property is a key.
         secret:
-          $ref: '#/components/schemas/Boolean'
-          description: '<p>Whether the configuration property is secret. Secrets are hidden from all calls except for <code>GetJobDetails</code>, <code>GetThirdPartyJobDetails</code>, <code>PollForJobs</code>, and <code>PollForThirdPartyJobs</code>.</p> <p>When updating a pipeline, passing * * * * * without changing any other values of the action preserves the previous value of the secret.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether the configuration property is secret. Secrets are hidden from all calls except for <code>GetJobDetails</code>, <code>GetThirdPartyJobDetails</code>, <code>PollForJobs</code>, and <code>PollForThirdPartyJobs</code>.</p> <p>When updating a pipeline, passing * * * * * without changing any other values of the action preserves the previous value of the secret.</p>'
         queryable:
-          $ref: '#/components/schemas/Boolean'
-          description: '<p>Indicates that the property is used with <code>PollForJobs</code>. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.</p> <p>If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Indicates that the property is used with <code>PollForJobs</code>. When creating a custom action, an action can have up to one queryable property. If it has one, that property must be both required and not secret.</p> <p>If you create a pipeline with a custom action type, and that custom action contains a queryable property, the value for that configuration property is subject to other restrictions. The value must be less than or equal to twenty (20) characters. The value can contain only alphanumeric characters, underscores, and hyphens.</p>'
         description:
-          $ref: '#/components/schemas/Description'
-          description: The description of the action configuration property that is displayed to users.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the action configuration property that is displayed to users.
         type:
-          $ref: '#/components/schemas/ActionConfigurationPropertyType'
-          description: The type of the configuration property.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationPropertyType'
+            - description: The type of the configuration property.
       description: Represents information about an action configuration property.
     ActionConfigurationPropertyList:
       type: array
@@ -3189,11 +3336,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action in the context of a job.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action in the context of a job.
         actionExecutionId:
-          $ref: '#/components/schemas/ActionExecutionId'
-          description: The system-generated unique ID that corresponds to an action's execution.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionId'
+            - description: The system-generated unique ID that corresponds to an action's execution.
       description: Represents the context of an action in the stage of a pipeline to a job worker.
     ActionTypeId:
       type: object
@@ -3204,17 +3353,21 @@ components:
         - version
       properties:
         category:
-          $ref: '#/components/schemas/ActionCategory'
-          description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. '
+          allOf:
+            - $ref: '#/components/schemas/ActionCategory'
+            - description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. '
         owner:
-          $ref: '#/components/schemas/ActionOwner'
-          description: The creator of the action being called.
+          allOf:
+            - $ref: '#/components/schemas/ActionOwner'
+            - description: The creator of the action being called.
         provider:
-          $ref: '#/components/schemas/ActionProvider'
-          description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers">Valid Action Types and Providers in CodePipeline</a>.'
+          allOf:
+            - $ref: '#/components/schemas/ActionProvider'
+            - description: 'The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers">Valid Action Types and Providers in CodePipeline</a>.'
         version:
-          $ref: '#/components/schemas/Version'
-          description: A string that describes the action version.
+          allOf:
+            - $ref: '#/components/schemas/Version'
+            - description: A string that describes the action version.
       description: Represents information about an action type.
     ActionRunOrder:
       type: integer
@@ -3244,32 +3397,41 @@ components:
         - actionTypeId
       properties:
         name:
-          $ref: '#/components/schemas/ActionName'
-          description: The action declaration's name.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The action declaration's name.
         actionTypeId:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Specifies the action type and the provider of the action.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Specifies the action type and the provider of the action.
         runOrder:
-          $ref: '#/components/schemas/ActionRunOrder'
-          description: The order in which actions are run.
+          allOf:
+            - $ref: '#/components/schemas/ActionRunOrder'
+            - description: The order in which actions are run.
         configuration:
-          $ref: '#/components/schemas/ActionConfigurationMap'
-          description: '<p>The action''s configuration. These are key-value pairs that specify input values for an action. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Action Structure Requirements in CodePipeline</a>. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html">Configuration Properties Reference</a> in the <i>AWS CloudFormation User Guide</i>. For template snippets with examples, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html">Using Parameter Override Functions with CodePipeline Pipelines</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows: </p> <p> <i>JSON:</i> </p> <p> <code>"Configuration" : { Key : Value },</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationMap'
+            - description: '<p>The action''s configuration. These are key-value pairs that specify input values for an action. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Action Structure Requirements in CodePipeline</a>. For the list of configuration properties for the AWS CloudFormation action type in CodePipeline, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html">Configuration Properties Reference</a> in the <i>AWS CloudFormation User Guide</i>. For template snippets with examples, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html">Using Parameter Override Functions with CodePipeline Pipelines</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>The values can be represented in either JSON or YAML format. For example, the JSON configuration item format is as follows: </p> <p> <i>JSON:</i> </p> <p> <code>"Configuration" : { Key : Value },</code> </p>'
         outputArtifacts:
-          $ref: '#/components/schemas/OutputArtifactList'
-          description: 'The name or ID of the result of the action declaration, such as a test or build artifact.'
+          allOf:
+            - $ref: '#/components/schemas/OutputArtifactList'
+            - description: 'The name or ID of the result of the action declaration, such as a test or build artifact.'
         inputArtifacts:
-          $ref: '#/components/schemas/InputArtifactList'
-          description: 'The name or ID of the artifact consumed by the action, such as a test or build artifact.'
+          allOf:
+            - $ref: '#/components/schemas/InputArtifactList'
+            - description: 'The name or ID of the artifact consumed by the action, such as a test or build artifact.'
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.
         region:
-          $ref: '#/components/schemas/AWSRegionName'
-          description: 'The action declaration''s AWS Region, such as us-east-1.'
+          allOf:
+            - $ref: '#/components/schemas/AWSRegionName'
+            - description: 'The action declaration''s AWS Region, such as us-east-1.'
         namespace:
-          $ref: '#/components/schemas/ActionNamespace'
-          description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
+          allOf:
+            - $ref: '#/components/schemas/ActionNamespace'
+            - description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
       description: Represents information about an action declaration.
     ActionExecutionStatus:
       type: string
@@ -3305,42 +3467,53 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/Code'
-          description: The system ID or number code of the error.
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: The system ID or number code of the error.
         message:
-          $ref: '#/components/schemas/Message'
-          description: The text of the error message.
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The text of the error message.
       description: Represents information about an error in AWS CodePipeline.
     ActionExecution:
       type: object
       properties:
         status:
-          $ref: '#/components/schemas/ActionExecutionStatus'
-          description: 'The status of the action, or for a completed action, the last status of the action.'
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionStatus'
+            - description: 'The status of the action, or for a completed action, the last status of the action.'
         summary:
-          $ref: '#/components/schemas/ExecutionSummary'
-          description: A summary of the run of the action.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionSummary'
+            - description: A summary of the run of the action.
         lastStatusChange:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last status change of the action.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last status change of the action.
         token:
-          $ref: '#/components/schemas/ActionExecutionToken'
-          description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <code>GetPipelineState</code> command. It is used to validate that the approval request corresponding to this token is still valid.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionToken'
+            - description: The system-generated token used to identify a unique approval request. The token for each open approval request can be obtained using the <code>GetPipelineState</code> command. It is used to validate that the approval request corresponding to this token is still valid.
         lastUpdatedBy:
-          $ref: '#/components/schemas/LastUpdatedBy'
-          description: The ARN of the user who last changed the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/LastUpdatedBy'
+            - description: The ARN of the user who last changed the pipeline.
         externalExecutionId:
-          $ref: '#/components/schemas/ExecutionId'
-          description: The external ID of the run of the action.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: The external ID of the run of the action.
         externalExecutionUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'The URL of a resource external to AWS that is used when running the action (for example, an external repository URL).'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'The URL of a resource external to AWS that is used when running the action (for example, an external repository URL).'
         percentComplete:
-          $ref: '#/components/schemas/Percentage'
-          description: A percentage of completeness of the action as it runs.
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: A percentage of completeness of the action as it runs.
         errorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: The details of an error returned by a URL external to AWS.
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: The details of an error returned by a URL external to AWS.
       description: Represents information about the run of an action.
     PipelineExecutionId:
       type: string
@@ -3359,70 +3532,89 @@ components:
         actionTypeId:
           $ref: '#/components/schemas/ActionTypeId'
         configuration:
-          $ref: '#/components/schemas/ActionConfigurationMap'
-          description: Configuration data for an action execution.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationMap'
+            - description: Configuration data for an action execution.
         resolvedConfiguration:
-          $ref: '#/components/schemas/ResolvedActionConfigurationMap'
-          description: Configuration data for an action execution with all variable references replaced with their real values for the execution.
+          allOf:
+            - $ref: '#/components/schemas/ResolvedActionConfigurationMap'
+            - description: Configuration data for an action execution with all variable references replaced with their real values for the execution.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. '
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. '
         region:
-          $ref: '#/components/schemas/AWSRegionName'
-          description: 'The AWS Region for the action, such as us-east-1.'
+          allOf:
+            - $ref: '#/components/schemas/AWSRegionName'
+            - description: 'The AWS Region for the action, such as us-east-1.'
         inputArtifacts:
-          $ref: '#/components/schemas/ArtifactDetailList'
-          description: Details of input artifacts of the action that correspond to the action execution.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetailList'
+            - description: Details of input artifacts of the action that correspond to the action execution.
         namespace:
-          $ref: '#/components/schemas/ActionNamespace'
-          description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
+          allOf:
+            - $ref: '#/components/schemas/ActionNamespace'
+            - description: The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.
       description: Input information used for an action execution.
     ActionExecutionOutput:
       type: object
       properties:
         outputArtifacts:
-          $ref: '#/components/schemas/ArtifactDetailList'
-          description: Details of output artifacts of the action that correspond to the action execution.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetailList'
+            - description: Details of output artifacts of the action that correspond to the action execution.
         executionResult:
-          $ref: '#/components/schemas/ActionExecutionResult'
-          description: Execution result information listed in the output details for an action execution.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionResult'
+            - description: Execution result information listed in the output details for an action execution.
         outputVariables:
-          $ref: '#/components/schemas/OutputVariablesMap'
-          description: The outputVariables field shows the key-value pairs that were output as part of that execution.
+          allOf:
+            - $ref: '#/components/schemas/OutputVariablesMap'
+            - description: The outputVariables field shows the key-value pairs that were output as part of that execution.
       description: 'Output details listed for an action execution, such as the action execution result.'
     ActionExecutionDetail:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The pipeline execution ID for the action execution.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The pipeline execution ID for the action execution.
         actionExecutionId:
-          $ref: '#/components/schemas/ActionExecutionId'
-          description: The action execution ID.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionId'
+            - description: The action execution ID.
         pipelineVersion:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: The version of the pipeline where the action was run.
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: The version of the pipeline where the action was run.
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage that contains the action.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage that contains the action.
         actionName:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action.
         startTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The start time of the action execution.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time of the action execution.
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The last update time of the action execution.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last update time of the action execution.
         status:
-          $ref: '#/components/schemas/ActionExecutionStatus'
-          description: ' The status of the action execution. Status categories are <code>InProgress</code>, <code>Succeeded</code>, and <code>Failed</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionStatus'
+            - description: ' The status of the action execution. Status categories are <code>InProgress</code>, <code>Succeeded</code>, and <code>Failed</code>.'
         input:
-          $ref: '#/components/schemas/ActionExecutionInput'
-          description: 'Input details for the action execution, such as role ARN, Region, and input artifacts.'
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionInput'
+            - description: 'Input details for the action execution, such as role ARN, Region, and input artifacts.'
         output:
-          $ref: '#/components/schemas/ActionExecutionOutput'
-          description: 'Output details for the action execution, such as the action execution result.'
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionOutput'
+            - description: 'Output details for the action execution, such as the action execution result.'
       description: 'Returns information about an execution of an action, including the action execution ID, and the name, version, and timing of the action. '
     ActionExecutionDetailList:
       type: array
@@ -3432,8 +3624,9 @@ components:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The pipeline execution ID used to filter action execution history.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The pipeline execution ID used to filter action execution history.
       description: Filter values for the action execution.
     ResolvedActionConfigurationMap:
       type: object
@@ -3447,14 +3640,17 @@ components:
       type: object
       properties:
         externalExecutionId:
-          $ref: '#/components/schemas/ExternalExecutionId'
-          description: The action provider's external ID for the action execution.
+          allOf:
+            - $ref: '#/components/schemas/ExternalExecutionId'
+            - description: The action provider's external ID for the action execution.
         externalExecutionSummary:
-          $ref: '#/components/schemas/ExternalExecutionSummary'
-          description: The action provider's summary for the action execution.
+          allOf:
+            - $ref: '#/components/schemas/ExternalExecutionSummary'
+            - description: The action provider's summary for the action execution.
         externalExecutionUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.'
       description: 'Execution result information, such as the external execution ID.'
     OutputVariablesMap:
       type: object
@@ -3491,33 +3687,41 @@ components:
         - created
       properties:
         revisionId:
-          $ref: '#/components/schemas/Revision'
-          description: The system-generated unique ID that identifies the revision number of the action.
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: The system-generated unique ID that identifies the revision number of the action.
         revisionChangeId:
-          $ref: '#/components/schemas/RevisionChangeIdentifier'
-          description: 'The unique identifier of the change that set the state to this revision (for example, a deployment ID or timestamp).'
+          allOf:
+            - $ref: '#/components/schemas/RevisionChangeIdentifier'
+            - description: 'The unique identifier of the change that set the state to this revision (for example, a deployment ID or timestamp).'
         created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time when the most recent version of the action was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time when the most recent version of the action was created, in timestamp format.'
       description: Represents information about the version (or revision) of an action.
     ActionState:
       type: object
       properties:
         actionName:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action.
         currentRevision:
-          $ref: '#/components/schemas/ActionRevision'
-          description: Represents information about the version (or revision) of an action.
+          allOf:
+            - $ref: '#/components/schemas/ActionRevision'
+            - description: Represents information about the version (or revision) of an action.
         latestExecution:
-          $ref: '#/components/schemas/ActionExecution'
-          description: Represents information about the run of an action.
+          allOf:
+            - $ref: '#/components/schemas/ActionExecution'
+            - description: Represents information about the run of an action.
         entityUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'A URL link for more information about the state of the action, such as a deployment group details page.'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'A URL link for more information about the state of the action, such as a deployment group details page.'
         revisionUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'A URL link for more information about the revision, such as a commit details page.'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'A URL link for more information about the revision, such as a commit details page.'
       description: Represents information about the state of an action.
     ActionStateList:
       type: array
@@ -3527,17 +3731,21 @@ components:
       type: object
       properties:
         thirdPartyConfigurationUrl:
-          $ref: '#/components/schemas/Url'
-          description: The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The URL of a sign-up page where users can sign up for an external service and perform initial configuration of the action provided by that service.
         entityUrlTemplate:
-          $ref: '#/components/schemas/UrlTemplate'
-          description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.'
+          allOf:
+            - $ref: '#/components/schemas/UrlTemplate'
+            - description: 'The URL returned to the AWS CodePipeline console that provides a deep link to the resources of the external system, such as the configuration page for an AWS CodeDeploy deployment group. This link is provided as part of the action display in the pipeline.'
         executionUrlTemplate:
-          $ref: '#/components/schemas/UrlTemplate'
-          description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
+          allOf:
+            - $ref: '#/components/schemas/UrlTemplate'
+            - description: 'The URL returned to the AWS CodePipeline console that contains a link to the top-level landing page for the external system, such as the console page for AWS CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline console and provides a link to the execution entity of the external action.'
         revisionUrlTemplate:
-          $ref: '#/components/schemas/UrlTemplate'
-          description: The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
+          allOf:
+            - $ref: '#/components/schemas/UrlTemplate'
+            - description: The URL returned to the AWS CodePipeline console that contains a link to the page where customers can update or change the configuration of the external action.
       description: Returns information about the settings for an action type.
     ArtifactDetails:
       type: object
@@ -3546,11 +3754,13 @@ components:
         - maximumCount
       properties:
         minimumCount:
-          $ref: '#/components/schemas/MinimumArtifactCount'
-          description: The minimum number of artifacts allowed for the action type.
+          allOf:
+            - $ref: '#/components/schemas/MinimumArtifactCount'
+            - description: The minimum number of artifacts allowed for the action type.
         maximumCount:
-          $ref: '#/components/schemas/MaximumArtifactCount'
-          description: The maximum number of artifacts allowed for the action type.
+          allOf:
+            - $ref: '#/components/schemas/MaximumArtifactCount'
+            - description: The maximum number of artifacts allowed for the action type.
       description: Returns information about the details of an artifact.
     ActionType:
       type: object
@@ -3560,20 +3770,25 @@ components:
         - outputArtifactDetails
       properties:
         id:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Represents information about an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Represents information about an action type.
         settings:
-          $ref: '#/components/schemas/ActionTypeSettings'
-          description: The settings for the action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeSettings'
+            - description: The settings for the action type.
         actionConfigurationProperties:
-          $ref: '#/components/schemas/ActionConfigurationPropertyList'
-          description: The configuration properties for the action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfigurationPropertyList'
+            - description: The configuration properties for the action type.
         inputArtifactDetails:
-          $ref: '#/components/schemas/ArtifactDetails'
-          description: 'The details of the input artifact for the action, such as its commit ID.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetails'
+            - description: 'The details of the input artifact for the action, such as its commit ID.'
         outputArtifactDetails:
-          $ref: '#/components/schemas/ArtifactDetails'
-          description: 'The details of the output artifact of the action, such as its commit ID.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactDetails'
+            - description: 'The details of the output artifact of the action, such as its commit ID.'
       description: Returns information about the details of an action type.
     Version:
       type: string
@@ -3604,11 +3819,13 @@ components:
         - status
       properties:
         summary:
-          $ref: '#/components/schemas/ApprovalSummary'
-          description: The summary of the current status of the approval request.
+          allOf:
+            - $ref: '#/components/schemas/ApprovalSummary'
+            - description: The summary of the current status of the approval request.
         status:
-          $ref: '#/components/schemas/ApprovalStatus'
-          description: The response submitted by a reviewer assigned to an approval action request.
+          allOf:
+            - $ref: '#/components/schemas/ApprovalStatus'
+            - description: The response submitted by a reviewer assigned to an approval action request.
       description: Represents information about the result of an approval request.
     ApprovalToken:
       type: string
@@ -3622,44 +3839,53 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ArtifactLocationType'
-          description: The type of artifact in the location.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactLocationType'
+            - description: The type of artifact in the location.
         s3Location:
-          $ref: '#/components/schemas/S3ArtifactLocation'
-          description: The S3 bucket that contains the artifact.
+          allOf:
+            - $ref: '#/components/schemas/S3ArtifactLocation'
+            - description: The S3 bucket that contains the artifact.
       description: Represents information about the location of an artifact.
     Artifact:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ArtifactName'
-          description: The artifact's name.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactName'
+            - description: The artifact's name.
         revision:
-          $ref: '#/components/schemas/Revision'
-          description: 'The artifact''s revision ID. Depending on the type of object, this could be a commit ID (GitHub) or a revision ID (Amazon S3).'
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: 'The artifact''s revision ID. Depending on the type of object, this could be a commit ID (GitHub) or a revision ID (Amazon S3).'
         location:
-          $ref: '#/components/schemas/ArtifactLocation'
-          description: The location of an artifact.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactLocation'
+            - description: The location of an artifact.
       description: Represents information about an artifact that is worked on by actions in the pipeline.
     S3Location:
       type: object
       properties:
         bucket:
-          $ref: '#/components/schemas/S3Bucket'
-          description: The Amazon S3 artifact bucket for an action's artifacts.
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The Amazon S3 artifact bucket for an action's artifacts.
         key:
-          $ref: '#/components/schemas/S3Key'
-          description: The artifact name.
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: The artifact name.
       description: The Amazon S3 artifact location for an action's artifacts.
     ArtifactDetail:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ArtifactName'
-          description: The artifact object name for the action execution.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactName'
+            - description: The artifact object name for the action execution.
         s3location:
-          $ref: '#/components/schemas/S3Location'
-          description: The Amazon S3 artifact location for the action execution.
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The Amazon S3 artifact location for the action execution.
       description: 'Artifact details for the action execution, such as the artifact location.'
     MinimumArtifactCount:
       type: integer
@@ -3684,11 +3910,13 @@ components:
         - objectKey
       properties:
         bucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The name of the S3 bucket.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket.
         objectKey:
-          $ref: '#/components/schemas/S3ObjectKey'
-          description: 'The key of the object in the S3 bucket, which uniquely identifies the object in the bucket.'
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: 'The key of the object in the S3 bucket, which uniquely identifies the object in the bucket.'
       description: The location of the S3 bucket that contains a revision.
     RevisionSummary:
       type: string
@@ -3698,23 +3926,29 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ArtifactName'
-          description: 'The name of an artifact. This name might be system-generated, such as "MyApp", or defined by the user when an action is created.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactName'
+            - description: 'The name of an artifact. This name might be system-generated, such as "MyApp", or defined by the user when an action is created.'
         revisionId:
-          $ref: '#/components/schemas/Revision'
-          description: The revision ID of the artifact.
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: The revision ID of the artifact.
         revisionChangeIdentifier:
-          $ref: '#/components/schemas/RevisionChangeIdentifier'
-          description: 'An additional identifier for a revision, such as a commit date or, for artifacts stored in Amazon S3 buckets, the ETag value.'
+          allOf:
+            - $ref: '#/components/schemas/RevisionChangeIdentifier'
+            - description: 'An additional identifier for a revision, such as a commit date or, for artifacts stored in Amazon S3 buckets, the ETag value.'
         revisionSummary:
-          $ref: '#/components/schemas/RevisionSummary'
-          description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
+          allOf:
+            - $ref: '#/components/schemas/RevisionSummary'
+            - description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
         created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
         revisionUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
       description: 'Represents revision details of an artifact. '
     ArtifactRevisionList:
       type: array
@@ -3736,11 +3970,13 @@ components:
         - type
       properties:
         id:
-          $ref: '#/components/schemas/EncryptionKeyId'
-          description: '<p>The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.</p> <note> <p>Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyId'
+            - description: '<p>The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.</p> <note> <p>Aliases are recognized only in the account that created the customer master key (CMK). For cross-account actions, you can only use the key ID or key ARN to identify the key.</p> </note>'
         type:
-          $ref: '#/components/schemas/EncryptionKeyType'
-          description: 'The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to ''KMS''.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyType'
+            - description: 'The type of encryption key, such as an AWS Key Management Service (AWS KMS) key. When creating or updating a pipeline, the value must be set to ''KMS''.'
       description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key.'
     ArtifactStore:
       type: object
@@ -3749,14 +3985,17 @@ components:
         - location
       properties:
         type:
-          $ref: '#/components/schemas/ArtifactStoreType'
-          description: 'The type of the artifact store, such as S3.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactStoreType'
+            - description: 'The type of the artifact store, such as S3.'
         location:
-          $ref: '#/components/schemas/ArtifactStoreLocation'
-          description: The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactStoreLocation'
+            - description: The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
         encryptionKey:
-          $ref: '#/components/schemas/EncryptionKey'
-          description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKey'
+            - description: 'The encryption key used to encrypt the data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. If this is undefined, the default key for Amazon S3 is used.'
       description: '<p>The S3 bucket where artifacts for the pipeline are stored.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
     ArtifactStoreMap:
       type: object
@@ -3777,11 +4016,13 @@ components:
         - type
       properties:
         name:
-          $ref: '#/components/schemas/BlockerName'
-          description: Reserved for future use.
+          allOf:
+            - $ref: '#/components/schemas/BlockerName'
+            - description: Reserved for future use.
         type:
-          $ref: '#/components/schemas/BlockerType'
-          description: Reserved for future use.
+          allOf:
+            - $ref: '#/components/schemas/BlockerType'
+            - description: Reserved for future use.
       description: Reserved for future use.
     ClientId:
       type: string
@@ -3809,23 +4050,29 @@ components:
         - stages
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the action to be performed.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the action to be performed.
         roleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no <code>actionRoleArn</code>, or to use to assume roles for actions with an <code>actionRoleArn</code>.'
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no <code>actionRoleArn</code>, or to use to assume roles for actions with an <code>actionRoleArn</code>.'
         artifactStore:
-          $ref: '#/components/schemas/ArtifactStore'
-          description: '<p>Represents information about the S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactStore'
+            - description: '<p>Represents information about the S3 bucket where artifacts are stored for the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
         artifactStores:
-          $ref: '#/components/schemas/ArtifactStoreMap'
-          description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactStoreMap'
+            - description: '<p>A mapping of <code>artifactStore</code> objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.</p> <note> <p>You must include either <code>artifactStore</code> or <code>artifactStores</code> in your pipeline, but you cannot use both. If you create a cross-region action in your pipeline, you must use <code>artifactStores</code>.</p> </note>'
         stages:
-          $ref: '#/components/schemas/PipelineStageDeclarationList'
-          description: The stage in which to perform the action.
+          allOf:
+            - $ref: '#/components/schemas/PipelineStageDeclarationList'
+            - description: The stage in which to perform the action.
         version:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is incremented when a pipeline is updated.
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: The version number of the pipeline. A new pipeline always has a version number of 1. This number is incremented when a pipeline is updated.
       description: Represents the structure of actions and stages to be performed in the pipeline.
     Time:
       type: string
@@ -3837,17 +4084,21 @@ components:
         - changeIdentifier
       properties:
         revision:
-          $ref: '#/components/schemas/Revision'
-          description: The revision ID of the current version of an artifact.
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: The revision ID of the current version of an artifact.
         changeIdentifier:
-          $ref: '#/components/schemas/RevisionChangeIdentifier'
-          description: The change identifier for the current revision.
+          allOf:
+            - $ref: '#/components/schemas/RevisionChangeIdentifier'
+            - description: The change identifier for the current revision.
         created:
-          $ref: '#/components/schemas/Time'
-          description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: 'The date and time when the most recent revision of the artifact was created, in timestamp format.'
         revisionSummary:
-          $ref: '#/components/schemas/RevisionSummary'
-          description: The summary of the most recent revision of the artifact.
+          allOf:
+            - $ref: '#/components/schemas/RevisionSummary'
+            - description: The summary of the most recent revision of the artifact.
       description: Represents information about a current revision.
     PipelineName:
       type: string
@@ -3887,14 +4138,17 @@ components:
       type: object
       properties:
         summary:
-          $ref: '#/components/schemas/ExecutionSummary'
-          description: The summary of the current status of the actions.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionSummary'
+            - description: The summary of the current status of the actions.
         externalExecutionId:
-          $ref: '#/components/schemas/ExecutionId'
-          description: 'The system-generated unique ID of this action used to identify this job worker in any external systems, such as AWS CodeDeploy.'
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: 'The system-generated unique ID of this action used to identify this job worker in any external systems, such as AWS CodeDeploy.'
         percentComplete:
-          $ref: '#/components/schemas/Percentage'
-          description: 'The percentage of work completed on the action, represented on a scale of 0 to 100 percent.'
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: 'The percentage of work completed on the action, represented on a scale of 0 to 100 percent.'
       description: The details of the actions taken and results produced on an artifact as it passes through stages in the pipeline.
     TriggerType:
       type: string
@@ -3913,11 +4167,13 @@ components:
       type: object
       properties:
         triggerType:
-          $ref: '#/components/schemas/TriggerType'
-          description: 'The type of change-detection method, command, or user interaction that started a pipeline execution.'
+          allOf:
+            - $ref: '#/components/schemas/TriggerType'
+            - description: 'The type of change-detection method, command, or user interaction that started a pipeline execution.'
         triggerDetail:
-          $ref: '#/components/schemas/TriggerDetail'
-          description: 'Detail related to the event that started a pipeline execution, such as the webhook ARN of the webhook that triggered the pipeline execution or the user ARN for a user-initiated <code>start-pipeline-execution</code> CLI command.'
+          allOf:
+            - $ref: '#/components/schemas/TriggerDetail'
+            - description: 'Detail related to the event that started a pipeline execution, such as the webhook ARN of the webhook that triggered the pipeline execution or the user ARN for a user-initiated <code>start-pipeline-execution</code> CLI command.'
       description: The interaction or event that started a pipeline execution.
     FailureType:
       type: string
@@ -3935,59 +4191,73 @@ components:
         - message
       properties:
         type:
-          $ref: '#/components/schemas/FailureType'
-          description: The type of the failure.
+          allOf:
+            - $ref: '#/components/schemas/FailureType'
+            - description: The type of the failure.
         message:
-          $ref: '#/components/schemas/Message'
-          description: The message about the failure.
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The message about the failure.
         externalExecutionId:
-          $ref: '#/components/schemas/ExecutionId'
-          description: The external ID of the run of the action that failed.
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: The external ID of the run of the action that failed.
       description: Represents information about failure details.
     JobDetails:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID of the job.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID of the job.
         data:
-          $ref: '#/components/schemas/JobData'
-          description: 'Represents other information about a job required for a job worker to complete the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobData'
+            - description: 'Represents other information about a job required for a job worker to complete the job. '
         accountId:
-          $ref: '#/components/schemas/AccountId'
-          description: The AWS account ID associated with the job.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID associated with the job.
       description: Represents information about the details of a job.
     PipelineExecution:
       type: object
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline with the specified pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline with the specified pipeline execution.
         pipelineVersion:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: The version number of the pipeline with the specified pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: The version number of the pipeline with the specified pipeline execution.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution.
         status:
-          $ref: '#/components/schemas/PipelineExecutionStatus'
-          description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionStatus'
+            - description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
         artifactRevisions:
-          $ref: '#/components/schemas/ArtifactRevisionList'
-          description: A list of <code>ArtifactRevision</code> objects included in a pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactRevisionList'
+            - description: A list of <code>ArtifactRevision</code> objects included in a pipeline execution.
       description: Represents information about an execution of a pipeline.
     PipelineMetadata:
       type: object
       properties:
         pipelineArn:
-          $ref: '#/components/schemas/PipelineArn'
-          description: The Amazon Resource Name (ARN) of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline.
         created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the pipeline was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the pipeline was created, in timestamp format.'
         updated:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the pipeline was last updated, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the pipeline was last updated, in timestamp format.'
       description: Information about a pipeline.
     StageStateList:
       type: array
@@ -3997,14 +4267,17 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/ThirdPartyJobId'
-          description: The identifier used to identify the job details in AWS CodePipeline.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobId'
+            - description: The identifier used to identify the job details in AWS CodePipeline.
         data:
-          $ref: '#/components/schemas/ThirdPartyJobData'
-          description: The data to be returned by the third party job worker.
+          allOf:
+            - $ref: '#/components/schemas/ThirdPartyJobData'
+            - description: The data to be returned by the third party job worker.
         nonce:
-          $ref: '#/components/schemas/Nonce'
-          description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeThirdPartyJob</a> request.
+          allOf:
+            - $ref: '#/components/schemas/Nonce'
+            - description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeThirdPartyJob</a> request.
       description: The details of a job sent in response to a <code>GetThirdPartyJobDetails</code> request.
     InputArtifact:
       type: object
@@ -4012,71 +4285,89 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/ArtifactName'
-          description: '<p>The name of the artifact to be worked on (for example, "My App").</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactName'
+            - description: '<p>The name of the artifact to be worked on (for example, "My App").</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p>'
       description: 'Represents information about an artifact to be worked on, such as a test or build artifact.'
     JobData:
       type: object
       properties:
         actionTypeId:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Represents information about an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Represents information about an action type.
         actionConfiguration:
-          $ref: '#/components/schemas/ActionConfiguration'
-          description: Represents information about an action configuration.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfiguration'
+            - description: Represents information about an action configuration.
         pipelineContext:
-          $ref: '#/components/schemas/PipelineContext'
-          description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Includes <code>pipelineArn</code> and <code>pipelineExecutionId</code> for custom jobs.</p> </note>
+          allOf:
+            - $ref: '#/components/schemas/PipelineContext'
+            - description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Includes <code>pipelineArn</code> and <code>pipelineExecutionId</code> for custom jobs.</p> </note>
         inputArtifacts:
-          $ref: '#/components/schemas/ArtifactList'
-          description: The artifact supplied to the job.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactList'
+            - description: The artifact supplied to the job.
         outputArtifacts:
-          $ref: '#/components/schemas/ArtifactList'
-          description: The output of the job.
+          allOf:
+            - $ref: '#/components/schemas/ArtifactList'
+            - description: The output of the job.
         artifactCredentials:
-          $ref: '#/components/schemas/AWSSessionCredentials'
-          description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
+          allOf:
+            - $ref: '#/components/schemas/AWSSessionCredentials'
+            - description: Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
         continuationToken:
-          $ref: '#/components/schemas/ContinuationToken'
-          description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, required by a job to continue the job asynchronously.'
+          allOf:
+            - $ref: '#/components/schemas/ContinuationToken'
+            - description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, required by a job to continue the job asynchronously.'
         encryptionKey:
-          $ref: '#/components/schemas/EncryptionKey'
-          description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKey'
+            - description: 'Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key. '
       description: Represents other information about a job required for a job worker to complete the job.
     Job:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/JobId'
-          description: The unique system-generated ID of the job.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The unique system-generated ID of the job.
         data:
-          $ref: '#/components/schemas/JobData'
-          description: Other data about a job.
+          allOf:
+            - $ref: '#/components/schemas/JobData'
+            - description: Other data about a job.
         nonce:
-          $ref: '#/components/schemas/Nonce'
-          description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeJob</a> request.
+          allOf:
+            - $ref: '#/components/schemas/Nonce'
+            - description: A system-generated random number that AWS CodePipeline uses to ensure that the job is being worked on by only one job worker. Use this number in an <a>AcknowledgeJob</a> request.
         accountId:
-          $ref: '#/components/schemas/AccountId'
-          description: The ID of the AWS account to use when performing the job.
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the AWS account to use when performing the job.
       description: Represents information about a job.
     PipelineContext:
       type: object
       properties:
         pipelineName:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline. This is a user-specified value. Pipeline names must be unique across all pipeline names under an Amazon Web Services account.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline. This is a user-specified value. Pipeline names must be unique across all pipeline names under an Amazon Web Services account.
         stage:
-          $ref: '#/components/schemas/StageContext'
-          description: The stage of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/StageContext'
+            - description: The stage of the pipeline.
         action:
-          $ref: '#/components/schemas/ActionContext'
-          description: The context of an action to a job worker in the stage of a pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActionContext'
+            - description: The context of an action to a job worker in the stage of a pipeline.
         pipelineArn:
-          $ref: '#/components/schemas/PipelineArn'
-          description: The Amazon Resource Name (ARN) of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineArn'
+            - description: The Amazon Resource Name (ARN) of the pipeline.
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The execution ID of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The execution ID of the pipeline.
       description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>PipelineContext contains <code>pipelineArn</code> and <code>pipelineExecutionId</code> for custom action jobs. The <code>pipelineArn</code> and <code>pipelineExecutionId</code> fields are not populated for ThirdParty action jobs.</p> </note>
     JobList:
       type: array
@@ -4121,23 +4412,29 @@ components:
         - authenticationConfiguration
       properties:
         name:
-          $ref: '#/components/schemas/WebhookName'
-          description: The name of the webhook.
+          allOf:
+            - $ref: '#/components/schemas/WebhookName'
+            - description: The name of the webhook.
         targetPipeline:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline you want to connect to the webhook.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline you want to connect to the webhook.
         targetAction:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
         filters:
-          $ref: '#/components/schemas/WebhookFilters'
-          description: A list of rules applied to the body/payload sent in the POST request to a webhook URL. All defined rules must pass for the request to be accepted and the pipeline started.
+          allOf:
+            - $ref: '#/components/schemas/WebhookFilters'
+            - description: A list of rules applied to the body/payload sent in the POST request to a webhook URL. All defined rules must pass for the request to be accepted and the pipeline started.
         authentication:
-          $ref: '#/components/schemas/WebhookAuthenticationType'
-          description: '<p>Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.</p> <ul> <li> <p>For information about the authentication scheme implemented by GITHUB_HMAC, see <a href="https://developer.github.com/webhooks/securing/">Securing your webhooks</a> on the GitHub Developer website.</p> </li> <li> <p> IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/WebhookAuthenticationType'
+            - description: '<p>Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.</p> <ul> <li> <p>For information about the authentication scheme implemented by GITHUB_HMAC, see <a href="https://developer.github.com/webhooks/securing/">Securing your webhooks</a> on the GitHub Developer website.</p> </li> <li> <p> IP rejects webhooks trigger requests unless they originate from an IP address in the IP range whitelisted in the authentication configuration.</p> </li> <li> <p> UNAUTHENTICATED accepts all webhook trigger requests regardless of origin.</p> </li> </ul>'
         authenticationConfiguration:
-          $ref: '#/components/schemas/WebhookAuthConfiguration'
-          description: 'Properties that configure the authentication applied to incoming webhook trigger requests. The required properties depend on the authentication type. For GITHUB_HMAC, only the <code>SecretToken </code>property must be set. For IP, only the <code>AllowedIPRange </code>property must be set to a valid CIDR range. For UNAUTHENTICATED, no properties can be set.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookAuthConfiguration'
+            - description: 'Properties that configure the authentication applied to incoming webhook trigger requests. The required properties depend on the authentication type. For GITHUB_HMAC, only the <code>SecretToken </code>property must be set. For IP, only the <code>AllowedIPRange </code>property must be set to a valid CIDR range. For UNAUTHENTICATED, no properties can be set.'
       description: Represents information about a webhook and its definition.
     WebhookUrl:
       type: string
@@ -4159,26 +4456,33 @@ components:
         - url
       properties:
         definition:
-          $ref: '#/components/schemas/WebhookDefinition'
-          description: 'The detail returned for each webhook, such as the webhook authentication type and filter rules.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookDefinition'
+            - description: 'The detail returned for each webhook, such as the webhook authentication type and filter rules.'
         url:
-          $ref: '#/components/schemas/WebhookUrl'
-          description: 'A unique URL generated by CodePipeline. When a POST request is made to this URL, the defined pipeline is started as long as the body of the post request satisfies the defined authentication and filtering conditions. Deleting and re-creating a webhook makes the old URL invalid and generates a new one.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookUrl'
+            - description: 'A unique URL generated by CodePipeline. When a POST request is made to this URL, the defined pipeline is started as long as the body of the post request satisfies the defined authentication and filtering conditions. Deleting and re-creating a webhook makes the old URL invalid and generates a new one.'
         errorMessage:
-          $ref: '#/components/schemas/WebhookErrorMessage'
-          description: The text of the error message about the webhook.
+          allOf:
+            - $ref: '#/components/schemas/WebhookErrorMessage'
+            - description: The text of the error message about the webhook.
         errorCode:
-          $ref: '#/components/schemas/WebhookErrorCode'
-          description: The number code of the error.
+          allOf:
+            - $ref: '#/components/schemas/WebhookErrorCode'
+            - description: The number code of the error.
         lastTriggered:
-          $ref: '#/components/schemas/WebhookLastTriggered'
-          description: 'The date and time a webhook was last successfully triggered, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookLastTriggered'
+            - description: 'The date and time a webhook was last successfully triggered, in timestamp format.'
         arn:
-          $ref: '#/components/schemas/WebhookArn'
-          description: The Amazon Resource Name (ARN) of the webhook.
+          allOf:
+            - $ref: '#/components/schemas/WebhookArn'
+            - description: The Amazon Resource Name (ARN) of the webhook.
         tags:
-          $ref: '#/components/schemas/TagList'
-          description: Specifies the tags applied to the webhook.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Specifies the tags applied to the webhook.
       description: 'The detail returned for each webhook after listing webhooks, such as the webhook URL, the webhook name, and the webhook ARN.'
     WebhookList:
       type: array
@@ -4197,8 +4501,9 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/ArtifactName'
-          description: '<p>The name of the output of an artifact, such as "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactName'
+            - description: '<p>The name of the output of an artifact, such as "My App".</p> <p>The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.</p> <p>Output artifact names must be unique within a pipeline.</p>'
       description: Represents information about the output of an action.
     OutputVariablesKey:
       type: string
@@ -4212,8 +4517,9 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
       description: Represents information about a stage to a job worker.
     PipelineStageDeclarationList:
       type: array
@@ -4236,49 +4542,61 @@ components:
       type: object
       properties:
         reason:
-          $ref: '#/components/schemas/StopPipelineExecutionReason'
-          description: The user-specified reason the pipeline was stopped.
+          allOf:
+            - $ref: '#/components/schemas/StopPipelineExecutionReason'
+            - description: The user-specified reason the pipeline was stopped.
       description: The interaction that stopped a pipeline execution.
     PipelineExecutionSummary:
       type: object
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution.
         status:
-          $ref: '#/components/schemas/PipelineExecutionStatus'
-          description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionStatus'
+            - description: '<p>The status of the pipeline execution.</p> <ul> <li> <p>InProgress: The pipeline execution is currently running.</p> </li> <li> <p>Stopped: The pipeline execution was manually stopped. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Stopping: The pipeline execution received a request to be manually stopped. Depending on the selected stop mode, the execution is either completing or abandoning in-progress actions. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped">Stopped Executions</a>.</p> </li> <li> <p>Succeeded: The pipeline execution was completed successfully. </p> </li> <li> <p>Superseded: While this pipeline execution was waiting for the next stage to be completed, a newer pipeline execution advanced and continued through the pipeline instead. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded">Superseded Executions</a>.</p> </li> <li> <p>Failed: The pipeline execution was not completed successfully.</p> </li> </ul>'
         startTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time when the pipeline execution began, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time when the pipeline execution began, in timestamp format.'
         lastUpdateTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time of the last change to the pipeline execution, in timestamp format.'
         sourceRevisions:
-          $ref: '#/components/schemas/SourceRevisionList'
-          description: A list of the source artifact revisions that initiated a pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/SourceRevisionList'
+            - description: A list of the source artifact revisions that initiated a pipeline execution.
         trigger:
-          $ref: '#/components/schemas/ExecutionTrigger'
-          description: 'The interaction or event that started a pipeline execution, such as automated change detection or a <code>StartPipelineExecution</code> API call.'
+          allOf:
+            - $ref: '#/components/schemas/ExecutionTrigger'
+            - description: 'The interaction or event that started a pipeline execution, such as automated change detection or a <code>StartPipelineExecution</code> API call.'
         stopTrigger:
-          $ref: '#/components/schemas/StopExecutionTrigger'
-          description: The interaction that stopped a pipeline execution.
+          allOf:
+            - $ref: '#/components/schemas/StopExecutionTrigger'
+            - description: The interaction that stopped a pipeline execution.
       description: Summary information about a pipeline execution.
     PipelineSummary:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/PipelineName'
-          description: The name of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineName'
+            - description: The name of the pipeline.
         version:
-          $ref: '#/components/schemas/PipelineVersion'
-          description: The version number of the pipeline.
+          allOf:
+            - $ref: '#/components/schemas/PipelineVersion'
+            - description: The version number of the pipeline.
         created:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time the pipeline was created, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time the pipeline was created, in timestamp format.'
         updated:
-          $ref: '#/components/schemas/Timestamp'
-          description: 'The date and time of the last update to the pipeline, in timestamp format.'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time of the last update to the pipeline, in timestamp format.'
       description: Returns a summary of a pipeline.
     StageDeclaration:
       type: object
@@ -4287,14 +4605,17 @@ components:
         - actions
       properties:
         name:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
         blockers:
-          $ref: '#/components/schemas/StageBlockerDeclarationList'
-          description: Reserved for future use.
+          allOf:
+            - $ref: '#/components/schemas/StageBlockerDeclarationList'
+            - description: Reserved for future use.
         actions:
-          $ref: '#/components/schemas/StageActionDeclarationList'
-          description: The actions included in a stage.
+          allOf:
+            - $ref: '#/components/schemas/StageActionDeclarationList'
+            - description: The actions included in a stage.
       description: Represents information about a stage and its definition.
     QueryParamMap:
       type: object
@@ -4330,17 +4651,21 @@ components:
         - actionName
       properties:
         actionName:
-          $ref: '#/components/schemas/ActionName'
-          description: The name of the action that processed the revision to the source artifact.
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: The name of the action that processed the revision to the source artifact.
         revisionId:
-          $ref: '#/components/schemas/Revision'
-          description: The system-generated unique ID that identifies the revision number of the artifact.
+          allOf:
+            - $ref: '#/components/schemas/Revision'
+            - description: The system-generated unique ID that identifies the revision number of the artifact.
         revisionSummary:
-          $ref: '#/components/schemas/RevisionSummary'
-          description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
+          allOf:
+            - $ref: '#/components/schemas/RevisionSummary'
+            - description: 'Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a <code>codepipeline-artifact-revision-summary</code> key specified in the object metadata.'
         revisionUrl:
-          $ref: '#/components/schemas/Url'
-          description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: 'The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.'
       description: Information about the version (or revision) of a source artifact that initiated a pipeline execution.
     StageActionDeclarationList:
       type: array
@@ -4365,43 +4690,53 @@ components:
         - status
       properties:
         pipelineExecutionId:
-          $ref: '#/components/schemas/PipelineExecutionId'
-          description: The ID of the pipeline execution associated with the stage.
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionId'
+            - description: The ID of the pipeline execution associated with the stage.
         status:
-          $ref: '#/components/schemas/StageExecutionStatus'
-          description: 'The status of the stage, or for a completed stage, the last status of the stage.'
+          allOf:
+            - $ref: '#/components/schemas/StageExecutionStatus'
+            - description: 'The status of the stage, or for a completed stage, the last status of the stage.'
       description: Represents information about the run of a stage.
     TransitionState:
       type: object
       properties:
         enabled:
-          $ref: '#/components/schemas/Enabled'
-          description: Whether the transition between stages is enabled (true) or disabled (false).
+          allOf:
+            - $ref: '#/components/schemas/Enabled'
+            - description: Whether the transition between stages is enabled (true) or disabled (false).
         lastChangedBy:
-          $ref: '#/components/schemas/LastChangedBy'
-          description: The ID of the user who last changed the transition state.
+          allOf:
+            - $ref: '#/components/schemas/LastChangedBy'
+            - description: The ID of the user who last changed the transition state.
         lastChangedAt:
-          $ref: '#/components/schemas/LastChangedAt'
-          description: The timestamp when the transition state was last changed.
+          allOf:
+            - $ref: '#/components/schemas/LastChangedAt'
+            - description: The timestamp when the transition state was last changed.
         disabledReason:
-          $ref: '#/components/schemas/DisabledReason'
-          description: The user-specified reason why the transition between two stages of a pipeline was disabled.
+          allOf:
+            - $ref: '#/components/schemas/DisabledReason'
+            - description: The user-specified reason why the transition between two stages of a pipeline was disabled.
       description: Represents information about the state of transitions between one stage and another stage.
     StageState:
       type: object
       properties:
         stageName:
-          $ref: '#/components/schemas/StageName'
-          description: The name of the stage.
+          allOf:
+            - $ref: '#/components/schemas/StageName'
+            - description: The name of the stage.
         inboundTransitionState:
-          $ref: '#/components/schemas/TransitionState'
-          description: 'The state of the inbound transition, which is either enabled or disabled.'
+          allOf:
+            - $ref: '#/components/schemas/TransitionState'
+            - description: 'The state of the inbound transition, which is either enabled or disabled.'
         actionStates:
-          $ref: '#/components/schemas/ActionStateList'
-          description: The state of the stage.
+          allOf:
+            - $ref: '#/components/schemas/ActionStateList'
+            - description: The state of the stage.
         latestExecution:
-          $ref: '#/components/schemas/StageExecution'
-          description: 'Information about the latest execution in the stage, including its ID and status.'
+          allOf:
+            - $ref: '#/components/schemas/StageExecution'
+            - description: 'Information about the latest execution in the stage, including its ID and status.'
       description: Represents information about the state of the stage.
     StopPipelineExecutionReason:
       type: string
@@ -4421,11 +4756,13 @@ components:
         - value
       properties:
         key:
-          $ref: '#/components/schemas/TagKey'
-          description: The tag's key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The tag's key.
         value:
-          $ref: '#/components/schemas/TagValue'
-          description: The tag's value.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The tag's value.
       description: A tag is a key-value pair that is used to manage the resource.
     TagKeyList:
       type: array
@@ -4435,39 +4772,49 @@ components:
       type: object
       properties:
         clientId:
-          $ref: '#/components/schemas/ClientId'
-          description: The <code>clientToken</code> portion of the <code>clientId</code> and <code>clientToken</code> pair used to verify that the calling entity is allowed access to the job and its details.
+          allOf:
+            - $ref: '#/components/schemas/ClientId'
+            - description: The <code>clientToken</code> portion of the <code>clientId</code> and <code>clientToken</code> pair used to verify that the calling entity is allowed access to the job and its details.
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: The identifier used to identify the job in AWS CodePipeline.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier used to identify the job in AWS CodePipeline.
       description: A response to a <code>PollForThirdPartyJobs</code> request returned by AWS CodePipeline when there is a job to be worked on by a partner action.
     ThirdPartyJobData:
       type: object
       properties:
         actionTypeId:
-          $ref: '#/components/schemas/ActionTypeId'
-          description: Represents information about an action type.
+          allOf:
+            - $ref: '#/components/schemas/ActionTypeId'
+            - description: Represents information about an action type.
         actionConfiguration:
-          $ref: '#/components/schemas/ActionConfiguration'
-          description: Represents information about an action configuration.
+          allOf:
+            - $ref: '#/components/schemas/ActionConfiguration'
+            - description: Represents information about an action configuration.
         pipelineContext:
-          $ref: '#/components/schemas/PipelineContext'
-          description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Does not include <code>pipelineArn</code> and <code>pipelineExecutionId</code> for ThirdParty jobs.</p> </note>
+          allOf:
+            - $ref: '#/components/schemas/PipelineContext'
+            - description: <p>Represents information about a pipeline to a job worker.</p> <note> <p>Does not include <code>pipelineArn</code> and <code>pipelineExecutionId</code> for ThirdParty jobs.</p> </note>
         inputArtifacts:
-          $ref: '#/components/schemas/ArtifactList'
-          description: 'The name of the artifact that is worked on by the action, if any. This name might be system-generated, such as "MyApp", or it might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactList'
+            - description: 'The name of the artifact that is worked on by the action, if any. This name might be system-generated, such as "MyApp", or it might be defined by the user when the action is created. The input artifact name must match the name of an output artifact generated by an action in an earlier action or stage of the pipeline.'
         outputArtifacts:
-          $ref: '#/components/schemas/ArtifactList'
-          description: 'The name of the artifact that is the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or it might be defined by the user when the action is created.'
+          allOf:
+            - $ref: '#/components/schemas/ArtifactList'
+            - description: 'The name of the artifact that is the result of the action, if any. This name might be system-generated, such as "MyBuiltApp", or it might be defined by the user when the action is created.'
         artifactCredentials:
-          $ref: '#/components/schemas/AWSSessionCredentials'
-          description: 'Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in AWS CodePipeline. '
+          allOf:
+            - $ref: '#/components/schemas/AWSSessionCredentials'
+            - description: 'Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the S3 bucket used to store artifact for the pipeline in AWS CodePipeline. '
         continuationToken:
-          $ref: '#/components/schemas/ContinuationToken'
-          description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires to continue the job asynchronously.'
+          allOf:
+            - $ref: '#/components/schemas/ContinuationToken'
+            - description: 'A system-generated token, such as a AWS CodeDeploy deployment ID, that a job requires to continue the job asynchronously.'
         encryptionKey:
-          $ref: '#/components/schemas/EncryptionKey'
-          description: 'The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is optional and might not be present.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKey'
+            - description: 'The encryption key used to encrypt and decrypt data in the artifact store for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is optional and might not be present.'
       description: Represents information about the job data for a partner action.
     WebhookAuthConfigurationAllowedIPRange:
       type: string
@@ -4481,11 +4828,13 @@ components:
       type: object
       properties:
         AllowedIPRange:
-          $ref: '#/components/schemas/WebhookAuthConfigurationAllowedIPRange'
-          description: 'The property used to configure acceptance of webhooks in an IP address range. For IP, only the <code>AllowedIPRange</code> property must be set. This property must be set to a valid CIDR range.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookAuthConfigurationAllowedIPRange'
+            - description: 'The property used to configure acceptance of webhooks in an IP address range. For IP, only the <code>AllowedIPRange</code> property must be set. This property must be set to a valid CIDR range.'
         SecretToken:
-          $ref: '#/components/schemas/WebhookAuthConfigurationSecretToken'
-          description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the <code>SecretToken</code> property must be set.'
+          allOf:
+            - $ref: '#/components/schemas/WebhookAuthConfigurationSecretToken'
+            - description: 'The property used to configure GitHub authentication. For GITHUB_HMAC, only the <code>SecretToken</code> property must be set.'
       description: The authentication applied to incoming webhook trigger requests.
     WebhookAuthenticationType:
       type: string
@@ -4504,11 +4853,13 @@ components:
         - jsonPath
       properties:
         jsonPath:
-          $ref: '#/components/schemas/JsonPath'
-          description: 'A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the <code>MatchEquals</code> field. Otherwise, the request is ignored. For more information, see <a href="https://github.com/json-path/JsonPath">Java JsonPath implementation</a> in GitHub.'
+          allOf:
+            - $ref: '#/components/schemas/JsonPath'
+            - description: 'A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the <code>MatchEquals</code> field. Otherwise, the request is ignored. For more information, see <a href="https://github.com/json-path/JsonPath">Java JsonPath implementation</a> in GitHub.'
         matchEquals:
-          $ref: '#/components/schemas/MatchEquals'
-          description: 'The value selected by the <code>JsonPath</code> expression must match what is supplied in the <code>MatchEquals</code> field. Otherwise, the request is ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly brackets. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the <code>MatchEquals</code> value is evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.'
+          allOf:
+            - $ref: '#/components/schemas/MatchEquals'
+            - description: 'The value selected by the <code>JsonPath</code> expression must match what is supplied in the <code>MatchEquals</code> field. Otherwise, the request is ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly brackets. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the <code>MatchEquals</code> value is evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements">Pipeline Structure Reference Action Requirements</a>.'
       description: The event criteria that specify when a webhook notification is sent to your URL.
 security:
   - hmac: []

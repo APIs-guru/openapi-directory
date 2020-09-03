@@ -794,8 +794,9 @@ components:
       type: object
       properties:
         details:
-          $ref: '#/components/schemas/ProjectDetails'
-          description: ' Detailed information about the created AWS Mobile Hub project. '
+          allOf:
+            - $ref: '#/components/schemas/ProjectDetails'
+            - description: ' Detailed information about the created AWS Mobile Hub project. '
       description: ' Result structure used in response to a request to create a project. '
     InternalFailureException:
       type: object
@@ -843,18 +844,21 @@ components:
       type: object
       properties:
         deletedResources:
-          $ref: '#/components/schemas/Resources'
-          description: ' Resources which were deleted. '
+          allOf:
+            - $ref: '#/components/schemas/Resources'
+            - description: ' Resources which were deleted. '
         orphanedResources:
-          $ref: '#/components/schemas/Resources'
-          description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
+          allOf:
+            - $ref: '#/components/schemas/Resources'
+            - description: ' Resources which were not deleted, due to a risk of losing potentially important data or files. '
       description: ' Result structure used in response to request to delete a project. '
     DescribeBundleResult:
       type: object
       properties:
         details:
-          $ref: '#/components/schemas/BundleDetails'
-          description: ' The details of the bundle. '
+          allOf:
+            - $ref: '#/components/schemas/BundleDetails'
+            - description: ' The details of the bundle. '
       description: ' Result structure contains the details of the bundle. '
     DescribeProjectResult:
       type: object
@@ -866,31 +870,37 @@ components:
       type: object
       properties:
         downloadUrl:
-          $ref: '#/components/schemas/DownloadUrl'
-          description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
+          allOf:
+            - $ref: '#/components/schemas/DownloadUrl'
+            - description: ' URL which contains the custom-generated SDK and tool packages used to integrate the client mobile app or web app with the AWS resources created by the AWS Mobile Hub project. '
       description: ' Result structure which contains link to download custom-generated SDK and tool packages used to integrate mobile web or app clients with backed AWS resources. '
     ExportProjectResult:
       type: object
       properties:
         downloadUrl:
-          $ref: '#/components/schemas/DownloadUrl'
-          description: ' URL which can be used to download the exported project configuation file(s). '
+          allOf:
+            - $ref: '#/components/schemas/DownloadUrl'
+            - description: ' URL which can be used to download the exported project configuation file(s). '
         shareUrl:
-          $ref: '#/components/schemas/ShareUrl'
-          description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
+          allOf:
+            - $ref: '#/components/schemas/ShareUrl'
+            - description: ' URL which can be shared to allow other AWS users to create their own project in AWS Mobile Hub with the same configuration as the specified project. This URL pertains to a snapshot in time of the project configuration that is created when this API is called. If you want to share additional changes to your project configuration, then you will need to create and share a new snapshot by calling this method again. '
         snapshotId:
-          $ref: '#/components/schemas/SnapshotId'
-          description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
+          allOf:
+            - $ref: '#/components/schemas/SnapshotId'
+            - description: ' Unique identifier for the exported snapshot of the project configuration. This snapshot identifier is included in the share URL. '
       description: ' Result structure used for requests to export project configuration details. '
     ListBundlesResult:
       type: object
       properties:
         bundleList:
-          $ref: '#/components/schemas/BundleList'
-          description: ' A list of bundles. '
+          allOf:
+            - $ref: '#/components/schemas/BundleList'
+            - description: ' A list of bundles. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. '
       description: ' Result structure contains a list of all available bundles with details. '
     ListProjectsResult:
       type: object
@@ -904,8 +914,9 @@ components:
       type: object
       properties:
         details:
-          $ref: '#/components/schemas/ProjectDetails'
-          description: ' Detailed information about the updated AWS Mobile Hub project. '
+          allOf:
+            - $ref: '#/components/schemas/ProjectDetails'
+            - description: ' Detailed information about the updated AWS Mobile Hub project. '
       description: ' Result structure used for requests to updated project configuration. '
     AccountActionRequiredException:
       type: object
@@ -989,8 +1000,9 @@ components:
       title: CreateProjectRequest
       properties:
         contents:
-          $ref: '#/components/schemas/Contents'
-          description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
+          allOf:
+            - $ref: '#/components/schemas/Contents'
+            - description: ' ZIP or YAML file which contains configuration settings to be used when creating the project. This may be the contents of the file downloaded from the URL provided in an export project operation. '
       description: ' Request structure used to request a project be created. '
     ProjectDetails:
       type: object
@@ -1004,14 +1016,17 @@ components:
         state:
           $ref: '#/components/schemas/ProjectState'
         createdDate:
-          $ref: '#/components/schemas/Date'
-          description: ' Date the project was created. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Date the project was created. '
         lastUpdatedDate:
-          $ref: '#/components/schemas/Date'
-          description: ' Date of the last modification of the project. '
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: ' Date of the last modification of the project. '
         consoleUrl:
-          $ref: '#/components/schemas/ConsoleUrl'
-          description: ' Website URL for this project in the AWS Mobile Hub console. '
+          allOf:
+            - $ref: '#/components/schemas/ConsoleUrl'
+            - description: ' Website URL for this project in the AWS Mobile Hub console. '
         resources:
           $ref: '#/components/schemas/Resources'
       description: ' Detailed information about an AWS Mobile Hub project. '
@@ -1103,11 +1118,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ProjectName'
-          description: ' Name of the project. '
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: ' Name of the project. '
         projectId:
-          $ref: '#/components/schemas/ProjectId'
-          description: ' Unique project identifier. '
+          allOf:
+            - $ref: '#/components/schemas/ProjectId'
+            - description: ' Unique project identifier. '
       description: ' Summary information about an AWS Mobile Hub project. '
     ResourceType:
       type: string
@@ -1137,8 +1154,9 @@ components:
       title: UpdateProjectRequest
       properties:
         contents:
-          $ref: '#/components/schemas/Contents'
-          description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
+          allOf:
+            - $ref: '#/components/schemas/Contents'
+            - description: ' ZIP or YAML file which contains project configuration to be updated. This should be the contents of the file downloaded from the URL provided in an export project operation. '
       description: ' Request structure used for requests to update project configuration. '
 security:
   - hmac: []

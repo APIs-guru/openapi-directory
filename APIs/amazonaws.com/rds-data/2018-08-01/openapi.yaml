@@ -531,8 +531,9 @@ paths:
                   type: object
                   properties:
                     decimalReturnType:
-                      $ref: '#/components/schemas/DecimalReturnType'
-                      description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
+                      allOf:
+                        - $ref: '#/components/schemas/DecimalReturnType'
+                        - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
                 schema:
                   description: The name of the database schema.
                   type: string
@@ -699,8 +700,9 @@ components:
       type: object
       properties:
         updateResults:
-          $ref: '#/components/schemas/UpdateResults'
-          description: The execution results of each batch entry.
+          allOf:
+            - $ref: '#/components/schemas/UpdateResults'
+            - description: The execution results of each batch entry.
       description: The response elements represent the output of a SQL statement over an array of data.
     SqlParametersList:
       type: array
@@ -715,52 +717,62 @@ components:
       type: object
       properties:
         transactionId:
-          $ref: '#/components/schemas/Id'
-          description: The transaction ID of the transaction started by the call.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The transaction ID of the transaction started by the call.
       description: The response elements represent the output of a request to start a SQL transaction.
     CommitTransactionResponse:
       type: object
       properties:
         transactionStatus:
-          $ref: '#/components/schemas/TransactionStatus'
-          description: The status of the commit operation.
+          allOf:
+            - $ref: '#/components/schemas/TransactionStatus'
+            - description: The status of the commit operation.
       description: The response elements represent the output of a commit transaction request.
     NotFoundException: {}
     ExecuteSqlResponse:
       type: object
       properties:
         sqlStatementResults:
-          $ref: '#/components/schemas/SqlStatementResults'
-          description: The results of the SQL statement or statements.
+          allOf:
+            - $ref: '#/components/schemas/SqlStatementResults'
+            - description: The results of the SQL statement or statements.
       description: The response elements represent the output of a request to run one or more SQL statements.
     ExecuteStatementResponse:
       type: object
       properties:
         columnMetadata:
-          $ref: '#/components/schemas/Metadata'
-          description: Metadata for the columns included in the results.
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: Metadata for the columns included in the results.
         generatedFields:
-          $ref: '#/components/schemas/FieldList'
-          description: '<p>Values for fields generated during the request.</p> <pre><code> &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn''t supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; </code></pre>'
+          allOf:
+            - $ref: '#/components/schemas/FieldList'
+            - description: '<p>Values for fields generated during the request.</p> <pre><code> &lt;note&gt; &lt;p&gt;The &lt;code&gt;generatedFields&lt;/code&gt; data isn''t supported by Aurora PostgreSQL. To get the values of generated fields, use the &lt;code&gt;RETURNING&lt;/code&gt; clause. For more information, see &lt;a href=&quot;https://www.postgresql.org/docs/10/dml-returning.html&quot;&gt;Returning Data From Modified Rows&lt;/a&gt; in the PostgreSQL documentation.&lt;/p&gt; &lt;/note&gt; </code></pre>'
         numberOfRecordsUpdated:
-          $ref: '#/components/schemas/RecordsUpdated'
-          description: The number of records updated by the request.
+          allOf:
+            - $ref: '#/components/schemas/RecordsUpdated'
+            - description: The number of records updated by the request.
         records:
-          $ref: '#/components/schemas/SqlRecords'
-          description: The records returned by the SQL statement.
+          allOf:
+            - $ref: '#/components/schemas/SqlRecords'
+            - description: The records returned by the SQL statement.
       description: The response elements represent the output of a request to run a SQL statement against a database.
     SqlParameter:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/ParameterName'
-          description: The name of the parameter.
+          allOf:
+            - $ref: '#/components/schemas/ParameterName'
+            - description: The name of the parameter.
         typeHint:
-          $ref: '#/components/schemas/TypeHint'
-          description: '<p>A hint that specifies the correct object type for data type mapping.</p> <p> <b>Values:</b> </p> <ul> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/TypeHint'
+            - description: '<p>A hint that specifies the correct object type for data type mapping.</p> <p> <b>Values:</b> </p> <ul> <li> <p> <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DECIMAL</code> type to the database.</p> </li> <li> <p> <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p> </li> <li> <p> <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p> </li> </ul>'
         value:
-          $ref: '#/components/schemas/Field'
-          description: The value of the parameter.
+          allOf:
+            - $ref: '#/components/schemas/Field'
+            - description: The value of the parameter.
       description: A parameter used in a SQL statement.
     DecimalReturnType:
       type: string
@@ -771,8 +783,9 @@ components:
       type: object
       properties:
         transactionStatus:
-          $ref: '#/components/schemas/TransactionStatus'
-          description: The status of the rollback operation.
+          allOf:
+            - $ref: '#/components/schemas/TransactionStatus'
+            - description: The status of the rollback operation.
       description: The response elements represent the output of a request to perform a rollback of a transaction.
     Arn:
       type: string
@@ -782,20 +795,25 @@ components:
       type: object
       properties:
         arrayValues:
-          $ref: '#/components/schemas/ArrayOfArray'
-          description: An array of arrays.
+          allOf:
+            - $ref: '#/components/schemas/ArrayOfArray'
+            - description: An array of arrays.
         booleanValues:
-          $ref: '#/components/schemas/BooleanArray'
-          description: An array of Boolean values.
+          allOf:
+            - $ref: '#/components/schemas/BooleanArray'
+            - description: An array of Boolean values.
         doubleValues:
-          $ref: '#/components/schemas/DoubleArray'
-          description: An array of integers.
+          allOf:
+            - $ref: '#/components/schemas/DoubleArray'
+            - description: An array of integers.
         longValues:
-          $ref: '#/components/schemas/LongArray'
-          description: An array of floating point numbers.
+          allOf:
+            - $ref: '#/components/schemas/LongArray'
+            - description: An array of floating point numbers.
         stringValues:
-          $ref: '#/components/schemas/StringArray'
-          description: An array of strings.
+          allOf:
+            - $ref: '#/components/schemas/StringArray'
+            - description: An array of strings.
       description: Contains an array.
     ArrayOfArray:
       type: array
@@ -826,35 +844,45 @@ components:
       type: object
       properties:
         arrayValues:
-          $ref: '#/components/schemas/ArrayValueList'
-          description: An array of column values.
+          allOf:
+            - $ref: '#/components/schemas/ArrayValueList'
+            - description: An array of column values.
         bigIntValue:
-          $ref: '#/components/schemas/BoxedLong'
-          description: A value for a column of big integer data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedLong'
+            - description: A value for a column of big integer data type.
         bitValue:
-          $ref: '#/components/schemas/BoxedBoolean'
-          description: A value for a column of BIT data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A value for a column of BIT data type.
         blobValue:
-          $ref: '#/components/schemas/Blob'
-          description: A value for a column of BLOB data type.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: A value for a column of BLOB data type.
         doubleValue:
-          $ref: '#/components/schemas/BoxedDouble'
-          description: A value for a column of double data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedDouble'
+            - description: A value for a column of double data type.
         intValue:
-          $ref: '#/components/schemas/BoxedInteger'
-          description: A value for a column of integer data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedInteger'
+            - description: A value for a column of integer data type.
         isNull:
-          $ref: '#/components/schemas/BoxedBoolean'
-          description: A NULL value.
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A NULL value.
         realValue:
-          $ref: '#/components/schemas/BoxedFloat'
-          description: A value for a column of real data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedFloat'
+            - description: A value for a column of real data type.
         stringValue:
-          $ref: '#/components/schemas/String'
-          description: A value for a column of string data type.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value for a column of string data type.
         structValue:
-          $ref: '#/components/schemas/StructValue'
-          description: A value for a column of STRUCT data type.
+          allOf:
+            - $ref: '#/components/schemas/StructValue'
+            - description: A value for a column of STRUCT data type.
       description: <p>Contains the value of a column.</p> <pre><code> &lt;important&gt; &lt;p&gt;This data type is deprecated.&lt;/p&gt; &lt;/important&gt; </code></pre>
     ArrayValueList:
       type: array
@@ -885,26 +913,33 @@ components:
       title: BatchExecuteStatementRequest
       properties:
         database:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
         parameterSets:
-          $ref: '#/components/schemas/SqlParameterSets'
-          description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/SqlParameterSets'
+            - description: '<p>The parameter set for the batch operation.</p> <p>The SQL statement is executed as many times as the number of parameter sets provided. To execute a SQL statement with no parameters, use one of the following options:</p> <ul> <li> <p>Specify one or more empty parameter sets.</p> </li> <li> <p>Use the <code>ExecuteStatement</code> operation instead of the <code>BatchExecuteStatement</code> operation.</p> </li> </ul> <note> <p>Array parameters are not supported.</p> </note>'
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
         schema:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database schema.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
         secretArn:
-          $ref: '#/components/schemas/Arn'
-          description: The name or ARN of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The name or ARN of the secret that enables access to the DB cluster.
         sql:
-          $ref: '#/components/schemas/SqlStatement'
-          description: The SQL statement to run.
+          allOf:
+            - $ref: '#/components/schemas/SqlStatement'
+            - description: The SQL statement to run.
         transactionId:
-          $ref: '#/components/schemas/Id'
-          description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
       description: The request parameters represent the input of a SQL statement over an array of data.
     UpdateResults:
       type: array
@@ -918,17 +953,21 @@ components:
       title: BeginTransactionRequest
       properties:
         database:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
         schema:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database schema.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
         secretArn:
-          $ref: '#/components/schemas/Arn'
-          description: The name or ARN of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The name or ARN of the secret that enables access to the DB cluster.
       description: The request parameters represent the input of a request to start a SQL transaction.
     Blob:
       type: string
@@ -954,47 +993,61 @@ components:
       type: object
       properties:
         arrayBaseColumnType:
-          $ref: '#/components/schemas/Integer'
-          description: The type of the column.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The type of the column.
         isAutoIncrement:
-          $ref: '#/components/schemas/Boolean'
-          description: A value that indicates whether the column increments automatically.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column increments automatically.
         isCaseSensitive:
-          $ref: '#/components/schemas/Boolean'
-          description: A value that indicates whether the column is case-sensitive.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column is case-sensitive.
         isCurrency:
-          $ref: '#/components/schemas/Boolean'
-          description: A value that indicates whether the column contains currency values.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the column contains currency values.
         isSigned:
-          $ref: '#/components/schemas/Boolean'
-          description: A value that indicates whether an integer column is signed.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether an integer column is signed.
         label:
-          $ref: '#/components/schemas/String'
-          description: The label for the column.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The label for the column.
         name:
-          $ref: '#/components/schemas/String'
-          description: The name of the column.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the column.
         nullable:
-          $ref: '#/components/schemas/Integer'
-          description: A value that indicates whether the column is nullable.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: A value that indicates whether the column is nullable.
         precision:
-          $ref: '#/components/schemas/Integer'
-          description: The precision value of a decimal number column.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The precision value of a decimal number column.
         scale:
-          $ref: '#/components/schemas/Integer'
-          description: The scale value of a decimal number column.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The scale value of a decimal number column.
         schemaName:
-          $ref: '#/components/schemas/String'
-          description: The name of the schema that owns the table that includes the column.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the schema that owns the table that includes the column.
         tableName:
-          $ref: '#/components/schemas/String'
-          description: The name of the table that includes the column.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the table that includes the column.
         type:
-          $ref: '#/components/schemas/Integer'
-          description: The type of the column.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The type of the column.
         typeName:
-          $ref: '#/components/schemas/String'
-          description: The database-specific data type of the column.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database-specific data type of the column.
       description: Contains the metadata for a column.
     CommitTransactionRequest:
       type: object
@@ -1005,14 +1058,17 @@ components:
       title: CommitTransactionRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
         secretArn:
-          $ref: '#/components/schemas/Arn'
-          description: The name or ARN of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The name or ARN of the secret that enables access to the DB cluster.
         transactionId:
-          $ref: '#/components/schemas/Id'
-          description: The identifier of the transaction to end and commit.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the transaction to end and commit.
       description: The request parameters represent the input of a commit transaction request.
     TransactionStatus:
       type: string
@@ -1027,20 +1083,25 @@ components:
       title: ExecuteSqlRequest
       properties:
         awsSecretStoreArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.
         database:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
         dbClusterOrInstanceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The ARN of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the Aurora Serverless DB cluster.
         schema:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database schema.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
         sqlStatements:
-          $ref: '#/components/schemas/SqlStatement'
-          description: '<p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>'
+          allOf:
+            - $ref: '#/components/schemas/SqlStatement'
+            - description: '<p>One or more SQL statements to run on the DB cluster.</p> <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL statement is permitted, including data definition, data manipulation, and commit statements. </p>'
       description: The request parameters represent the input of a request to run one or more SQL statements.
     SqlStatementResults:
       type: array
@@ -1050,8 +1111,9 @@ components:
       type: object
       properties:
         decimalReturnType:
-          $ref: '#/components/schemas/DecimalReturnType'
-          description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
+          allOf:
+            - $ref: '#/components/schemas/DecimalReturnType'
+            - description: '<p>A value that indicates how a field of <code>DECIMAL</code> type is represented in the response. The value of <code>STRING</code>, the default, specifies that it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code> specifies that it is converted to a Long value if its scale is 0, or to a Double value otherwise.</p> <important> <p>Conversion to Double or Long can result in roundoff errors due to precision loss. We recommend converting to String, especially when working with currency values.</p> </important>'
       description: Options that control how the result set is returned.
     ExecuteStatementRequest:
       type: object
@@ -1062,35 +1124,45 @@ components:
       title: ExecuteStatementRequest
       properties:
         continueAfterTimeout:
-          $ref: '#/components/schemas/Boolean'
-          description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <important> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </important>'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>A value that indicates whether to continue running the statement after the call times out. By default, the statement stops running when the call times out.</p> <important> <p>For DDL statements, we recommend continuing to run the statement after the call times out. When a DDL statement terminates before it is finished running, it can result in errors and possibly corrupted data structures.</p> </important>'
         database:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database.
         includeResultMetadata:
-          $ref: '#/components/schemas/Boolean'
-          description: A value that indicates whether to include metadata in the results.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether to include metadata in the results.
         parameters:
-          $ref: '#/components/schemas/SqlParametersList'
-          description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
+          allOf:
+            - $ref: '#/components/schemas/SqlParametersList'
+            - description: <p>The parameters for the SQL statement.</p> <note> <p>Array parameters are not supported.</p> </note>
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
         resultSetOptions:
-          $ref: '#/components/schemas/ResultSetOptions'
-          description: Options that control how the result set is returned.
+          allOf:
+            - $ref: '#/components/schemas/ResultSetOptions'
+            - description: Options that control how the result set is returned.
         schema:
-          $ref: '#/components/schemas/DbName'
-          description: The name of the database schema.
+          allOf:
+            - $ref: '#/components/schemas/DbName'
+            - description: The name of the database schema.
         secretArn:
-          $ref: '#/components/schemas/Arn'
-          description: The name or ARN of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The name or ARN of the secret that enables access to the DB cluster.
         sql:
-          $ref: '#/components/schemas/SqlStatement'
-          description: The SQL statement to run.
+          allOf:
+            - $ref: '#/components/schemas/SqlStatement'
+            - description: The SQL statement to run.
         transactionId:
-          $ref: '#/components/schemas/Id'
-          description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: '<p>The identifier of a transaction that was started by using the <code>BeginTransaction</code> operation. Specify the transaction ID of the transaction that you want to include the SQL statement in.</p> <p>If the SQL statement is not part of a transaction, don''t set this parameter.</p>'
       description: The request parameters represent the input of a request to run a SQL statement against a database.
     Metadata:
       type: array
@@ -1110,26 +1182,33 @@ components:
       type: object
       properties:
         arrayValue:
-          $ref: '#/components/schemas/ArrayValue'
-          description: An array of values.
+          allOf:
+            - $ref: '#/components/schemas/ArrayValue'
+            - description: An array of values.
         blobValue:
-          $ref: '#/components/schemas/Blob'
-          description: A value of BLOB data type.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: A value of BLOB data type.
         booleanValue:
-          $ref: '#/components/schemas/BoxedBoolean'
-          description: A value of Boolean data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A value of Boolean data type.
         doubleValue:
-          $ref: '#/components/schemas/BoxedDouble'
-          description: A value of double data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedDouble'
+            - description: A value of double data type.
         isNull:
-          $ref: '#/components/schemas/BoxedBoolean'
-          description: A NULL value.
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: A NULL value.
         longValue:
-          $ref: '#/components/schemas/BoxedLong'
-          description: A value of long data type.
+          allOf:
+            - $ref: '#/components/schemas/BoxedLong'
+            - description: A value of long data type.
         stringValue:
-          $ref: '#/components/schemas/String'
-          description: A value of string data type.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value of string data type.
       description: Contains a value.
     Long:
       type: integer
@@ -1143,8 +1222,9 @@ components:
       type: object
       properties:
         values:
-          $ref: '#/components/schemas/Row'
-          description: The values returned in the record.
+          allOf:
+            - $ref: '#/components/schemas/Row'
+            - description: The values returned in the record.
       description: A record returned by a call.
     Records:
       type: array
@@ -1154,21 +1234,25 @@ components:
       type: object
       properties:
         columnCount:
-          $ref: '#/components/schemas/Long'
-          description: The number of columns in the result set.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of columns in the result set.
         columnMetadata:
-          $ref: '#/components/schemas/Metadata'
-          description: The metadata of the columns in the result set.
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the columns in the result set.
       description: The metadata of the result set returned by a SQL statement.
     ResultFrame:
       type: object
       properties:
         records:
-          $ref: '#/components/schemas/Records'
-          description: The records in the result set.
+          allOf:
+            - $ref: '#/components/schemas/Records'
+            - description: The records in the result set.
         resultSetMetadata:
-          $ref: '#/components/schemas/ResultSetMetadata'
-          description: The result-set metadata in the result set.
+          allOf:
+            - $ref: '#/components/schemas/ResultSetMetadata'
+            - description: The result-set metadata in the result set.
       description: The result set returned by a SQL statement.
     RollbackTransactionRequest:
       type: object
@@ -1179,14 +1263,17 @@ components:
       title: RollbackTransactionRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
         secretArn:
-          $ref: '#/components/schemas/Arn'
-          description: The name or ARN of the secret that enables access to the DB cluster.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The name or ARN of the secret that enables access to the DB cluster.
         transactionId:
-          $ref: '#/components/schemas/Id'
-          description: The identifier of the transaction to roll back.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the transaction to roll back.
       description: The request parameters represent the input of a request to perform a rollback of a transaction.
     TypeHint:
       type: string
@@ -1199,25 +1286,29 @@ components:
       type: object
       properties:
         numberOfRecordsUpdated:
-          $ref: '#/components/schemas/RecordsUpdated'
-          description: The number of records updated by a SQL statement.
+          allOf:
+            - $ref: '#/components/schemas/RecordsUpdated'
+            - description: The number of records updated by a SQL statement.
         resultFrame:
-          $ref: '#/components/schemas/ResultFrame'
-          description: The result set of the SQL statement.
+          allOf:
+            - $ref: '#/components/schemas/ResultFrame'
+            - description: The result set of the SQL statement.
       description: <p>The result of a SQL statement.</p> <pre><code> &lt;important&gt; &lt;p&gt;This data type is deprecated.&lt;/p&gt; &lt;/important&gt; </code></pre>
     StructValue:
       type: object
       properties:
         attributes:
-          $ref: '#/components/schemas/ArrayValueList'
-          description: The attributes returned in the record.
+          allOf:
+            - $ref: '#/components/schemas/ArrayValueList'
+            - description: The attributes returned in the record.
       description: A structure value returned by a call.
     UpdateResult:
       type: object
       properties:
         generatedFields:
-          $ref: '#/components/schemas/FieldList'
-          description: Values for fields generated during the request.
+          allOf:
+            - $ref: '#/components/schemas/FieldList'
+            - description: Values for fields generated during the request.
       description: The response elements represent the results of an update.
 security:
   - hmac: []

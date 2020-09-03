@@ -1522,8 +1522,9 @@ components:
         channels:
           $ref: '#/components/schemas/Channels'
         errors:
-          $ref: '#/components/schemas/BatchErrors'
-          description: Each error object is related to a specific ARN in the request.
+          allOf:
+            - $ref: '#/components/schemas/BatchErrors'
+            - description: Each error object is related to a specific ARN in the request.
     ChannelArn:
       type: string
       pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$'
@@ -1559,8 +1560,9 @@ components:
       type: object
       properties:
         streamKey:
-          $ref: '#/components/schemas/StreamKey'
-          description: Stream key used to authenticate an RTMPS stream for ingestion.
+          allOf:
+            - $ref: '#/components/schemas/StreamKey'
+            - description: Stream key used to authenticate an RTMPS stream for ingestion.
     ResourceNotFoundException: {}
     ConflictException: {}
     DeletePlaybackKeyPairResponse:
@@ -1598,44 +1600,52 @@ components:
         - channels
       properties:
         channels:
-          $ref: '#/components/schemas/ChannelList'
-          description: List of the matching channels.
+          allOf:
+            - $ref: '#/components/schemas/ChannelList'
+            - description: List of the matching channels.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
     ListPlaybackKeyPairsResponse:
       type: object
       required:
         - keyPairs
       properties:
         keyPairs:
-          $ref: '#/components/schemas/PlaybackKeyPairList'
-          description: List of key pairs.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairList'
+            - description: List of key pairs.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If there are more key pairs than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more key pairs than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
     ListStreamKeysResponse:
       type: object
       required:
         - streamKeys
       properties:
         streamKeys:
-          $ref: '#/components/schemas/StreamKeyList'
-          description: List of stream keys.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyList'
+            - description: List of stream keys.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
     ListStreamsResponse:
       type: object
       required:
         - streams
       properties:
         streams:
-          $ref: '#/components/schemas/StreamList'
-          description: List of streams.
+          allOf:
+            - $ref: '#/components/schemas/StreamList'
+            - description: List of streams.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: 'If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
     ListTagsForResourceResponse:
       type: object
       required:
@@ -1644,8 +1654,9 @@ components:
         tags:
           $ref: '#/components/schemas/Tags'
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: 'If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
     InternalServerException: {}
     ThrottlingException: {}
     StopStreamResponse:
@@ -1680,14 +1691,17 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: Channel ARN.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: Channel ARN.
         code:
-          $ref: '#/components/schemas/errorCode'
-          description: Error code.
+          allOf:
+            - $ref: '#/components/schemas/errorCode'
+            - description: Error code.
         message:
-          $ref: '#/components/schemas/errorMessage'
-          description: 'Error message, determined by the application.'
+          allOf:
+            - $ref: '#/components/schemas/errorMessage'
+            - description: 'Error message, determined by the application.'
       description: 'Error related to a specific channel, specified by its ARN.'
     BatchErrors:
       type: array
@@ -1706,8 +1720,9 @@ components:
       title: BatchGetChannelRequest
       properties:
         arns:
-          $ref: '#/components/schemas/ChannelArnList'
-          description: 'Array of ARNs, one per channel.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelArnList'
+            - description: 'Array of ARNs, one per channel.'
     Channels:
       type: array
       items:
@@ -1725,8 +1740,9 @@ components:
       title: BatchGetStreamKeyRequest
       properties:
         arns:
-          $ref: '#/components/schemas/StreamKeyArnList'
-          description: 'Array of ARNs, one per channel.'
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyArnList'
+            - description: 'Array of ARNs, one per channel.'
     StreamKeys:
       type: array
       items:
@@ -1764,48 +1780,61 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN.
         name:
-          $ref: '#/components/schemas/ChannelName'
-          description: Channel name.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         latencyMode:
-          $ref: '#/components/schemas/ChannelLatencyMode'
-          description: 'Channel latency mode. Default: <code>LOW</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Default: <code>LOW</code>.'
         type:
-          $ref: '#/components/schemas/ChannelType'
-          description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
         ingestEndpoint:
-          $ref: '#/components/schemas/IngestEndpoint'
-          description: 'Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.'
+          allOf:
+            - $ref: '#/components/schemas/IngestEndpoint'
+            - description: 'Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.'
         playbackUrl:
-          $ref: '#/components/schemas/PlaybackURL'
-          description: Channel playback URL.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackURL'
+            - description: Channel playback URL.
         authorized:
-          $ref: '#/components/schemas/IsAuthorized'
-          description: Whether the channel is authorized.
+          allOf:
+            - $ref: '#/components/schemas/IsAuthorized'
+            - description: Whether the channel is authorized.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
       description: Object specifying a channel.
     ChannelSummary:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN.
         name:
-          $ref: '#/components/schemas/ChannelName'
-          description: Channel name.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         latencyMode:
-          $ref: '#/components/schemas/ChannelLatencyMode'
-          description: 'Channel latency mode. Default: <code>LOW</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Default: <code>LOW</code>.'
         authorized:
-          $ref: '#/components/schemas/IsAuthorized'
-          description: Whether the channel is authorized.
+          allOf:
+            - $ref: '#/components/schemas/IsAuthorized'
+            - description: Whether the channel is authorized.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
       description: Summary information about a channel.
     ChannelList:
       type: array
@@ -1816,35 +1845,44 @@ components:
       title: CreateChannelRequest
       properties:
         name:
-          $ref: '#/components/schemas/ChannelName'
-          description: Channel name.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         latencyMode:
-          $ref: '#/components/schemas/ChannelLatencyMode'
-          description: 'Channel latency mode. Default: <code>LOW</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Default: <code>LOW</code>.'
         type:
-          $ref: '#/components/schemas/ChannelType'
-          description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
         authorized:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Whether the channel is authorized. Default: <code>false</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether the channel is authorized. Default: <code>false</code>.'
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: See <a>Channel$tags</a>.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: See <a>Channel$tags</a>.
     StreamKey:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/StreamKeyArn'
-          description: Stream-key ARN.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyArn'
+            - description: Stream-key ARN.
         value:
-          $ref: '#/components/schemas/StreamKeyValue'
-          description: Stream-key value.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyValue'
+            - description: Stream-key value.
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN for the stream.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN for the stream.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
       description: Object specifying a stream key.
     CreateStreamKeyRequest:
       type: object
@@ -1853,11 +1891,13 @@ components:
       title: CreateStreamKeyRequest
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel for which to create the stream key.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel for which to create the stream key.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: See <a>Channel$tags</a>.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: See <a>Channel$tags</a>.
     DeleteChannelRequest:
       type: object
       required:
@@ -1865,8 +1905,9 @@ components:
       title: DeleteChannelRequest
       properties:
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel to be deleted.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel to be deleted.
     PlaybackKeyPairArn:
       type: string
       pattern: '^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:playback-key/[a-zA-Z0-9-]+$'
@@ -1879,8 +1920,9 @@ components:
       title: DeletePlaybackKeyPairRequest
       properties:
         arn:
-          $ref: '#/components/schemas/PlaybackKeyPairArn'
-          description: ARN of the key pair to be deleted.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairArn'
+            - description: ARN of the key pair to be deleted.
     DeleteStreamKeyRequest:
       type: object
       required:
@@ -1888,8 +1930,9 @@ components:
       title: DeleteStreamKeyRequest
       properties:
         arn:
-          $ref: '#/components/schemas/StreamKeyArn'
-          description: ARN of the stream key to be deleted.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyArn'
+            - description: ARN of the stream key to be deleted.
     GetChannelRequest:
       type: object
       required:
@@ -1897,8 +1940,9 @@ components:
       title: GetChannelRequest
       properties:
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel for which the configuration is to be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel for which the configuration is to be retrieved.
     GetPlaybackKeyPairRequest:
       type: object
       required:
@@ -1906,23 +1950,28 @@ components:
       title: GetPlaybackKeyPairRequest
       properties:
         arn:
-          $ref: '#/components/schemas/PlaybackKeyPairArn'
-          description: ARN of the key pair to be returned.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairArn'
+            - description: ARN of the key pair to be returned.
     PlaybackKeyPair:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/PlaybackKeyPairArn'
-          description: Key-pair ARN.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairArn'
+            - description: Key-pair ARN.
         name:
-          $ref: '#/components/schemas/PlaybackKeyPairName'
-          description: Key-pair name.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairName'
+            - description: Key-pair name.
         fingerprint:
-          $ref: '#/components/schemas/PlaybackKeyPairFingerprint'
-          description: Key-pair identifier.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairFingerprint'
+            - description: Key-pair identifier.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
       description: A key pair used to sign and validate a playback authorization token.
     GetStreamKeyRequest:
       type: object
@@ -1931,8 +1980,9 @@ components:
       title: GetStreamKeyRequest
       properties:
         arn:
-          $ref: '#/components/schemas/StreamKeyArn'
-          description: ARN for the stream key to be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyArn'
+            - description: ARN for the stream key to be retrieved.
     GetStreamRequest:
       type: object
       required:
@@ -1940,29 +1990,36 @@ components:
       title: GetStreamRequest
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN for stream to be accessed.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN for stream to be accessed.
     Stream:
       type: object
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN for the stream.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN for the stream.
         playbackUrl:
-          $ref: '#/components/schemas/PlaybackURL'
-          description: 'URL of the video master manifest, required by the video player to play the HLS stream.'
+          allOf:
+            - $ref: '#/components/schemas/PlaybackURL'
+            - description: 'URL of the video master manifest, required by the video player to play the HLS stream.'
         startTime:
-          $ref: '#/components/schemas/StreamStartTime'
-          description: ISO-8601 formatted timestamp of the stream’s start.
+          allOf:
+            - $ref: '#/components/schemas/StreamStartTime'
+            - description: ISO-8601 formatted timestamp of the stream’s start.
         state:
-          $ref: '#/components/schemas/StreamState'
-          description: The stream’s state.
+          allOf:
+            - $ref: '#/components/schemas/StreamState'
+            - description: The stream’s state.
         health:
-          $ref: '#/components/schemas/StreamHealth'
-          description: The stream’s health.
+          allOf:
+            - $ref: '#/components/schemas/StreamHealth'
+            - description: The stream’s health.
         viewerCount:
-          $ref: '#/components/schemas/StreamViewerCount'
-          description: Number of current viewers of the stream.
+          allOf:
+            - $ref: '#/components/schemas/StreamViewerCount'
+            - description: Number of current viewers of the stream.
       description: Specifies a live video stream that has been ingested and distributed.
     PlaybackPublicKeyMaterial:
       type: string
@@ -1978,14 +2035,17 @@ components:
       title: ImportPlaybackKeyPairRequest
       properties:
         publicKeyMaterial:
-          $ref: '#/components/schemas/PlaybackPublicKeyMaterial'
-          description: The public portion of a customer-generated key pair.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackPublicKeyMaterial'
+            - description: The public portion of a customer-generated key pair.
         name:
-          $ref: '#/components/schemas/PlaybackKeyPairName'
-          description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairName'
+            - description: An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Any tags provided with the request are added to the playback key pair tags.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Any tags provided with the request are added to the playback key pair tags.
     PaginationToken:
       type: string
       minLength: 0
@@ -1999,14 +2059,17 @@ components:
       title: ListChannelsRequest
       properties:
         filterByName:
-          $ref: '#/components/schemas/ChannelName'
-          description: Filters the channel list to match the specified name.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Filters the channel list to match the specified name.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first channel to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
         maxResults:
-          $ref: '#/components/schemas/MaxChannelResults'
-          description: Maximum number of channels to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxChannelResults'
+            - description: Maximum number of channels to return.
     MaxPlaybackKeyPairResults:
       type: integer
       minimum: 1
@@ -2016,11 +2079,13 @@ components:
       title: ListPlaybackKeyPairsRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: Maximum number of key pairs to return.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Maximum number of key pairs to return.
         maxResults:
-          $ref: '#/components/schemas/MaxPlaybackKeyPairResults'
-          description: The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+          allOf:
+            - $ref: '#/components/schemas/MaxPlaybackKeyPairResults'
+            - description: The first key pair to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
     PlaybackKeyPairList:
       type: array
       items:
@@ -2036,14 +2101,17 @@ components:
       title: ListStreamKeysRequest
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN used to filter the list.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN used to filter the list.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first stream key to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
         maxResults:
-          $ref: '#/components/schemas/MaxStreamKeyResults'
-          description: Maximum number of streamKeys to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxStreamKeyResults'
+            - description: Maximum number of streamKeys to return.
     StreamKeyList:
       type: array
       items:
@@ -2057,11 +2125,13 @@ components:
       title: ListStreamsRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first stream to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
         maxResults:
-          $ref: '#/components/schemas/MaxStreamResults'
-          description: Maximum number of streams to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxStreamResults'
+            - description: Maximum number of streams to return.
     StreamList:
       type: array
       items:
@@ -2077,25 +2147,30 @@ components:
       title: ListTagsForResourceRequest
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: The first tag to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The first tag to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
         maxResults:
-          $ref: '#/components/schemas/MaxTagResults'
-          description: Maximum number of tags to return.
+          allOf:
+            - $ref: '#/components/schemas/MaxTagResults'
+            - description: Maximum number of tags to return.
     PlaybackKeyPairFingerprint:
       type: string
     PlaybackKeyPairSummary:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/PlaybackKeyPairArn'
-          description: Key-pair ARN.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairArn'
+            - description: Key-pair ARN.
         name:
-          $ref: '#/components/schemas/PlaybackKeyPairName'
-          description: Key-pair name.
+          allOf:
+            - $ref: '#/components/schemas/PlaybackKeyPairName'
+            - description: Key-pair name.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code> '
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code> '
       description: Summary information about a playback key pair.
     StreamMetadata:
       type: string
@@ -2107,11 +2182,13 @@ components:
       title: PutMetadataRequest
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel into which metadata is inserted. This channel must have an active stream.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel into which metadata is inserted. This channel must have an active stream.
         metadata:
-          $ref: '#/components/schemas/StreamMetadata'
-          description: 'Metadata to insert into the stream. Maximum: 1 KB per request.'
+          allOf:
+            - $ref: '#/components/schemas/StreamMetadata'
+            - description: 'Metadata to insert into the stream. Maximum: 1 KB per request.'
     StopStreamRequest:
       type: object
       required:
@@ -2119,8 +2196,9 @@ components:
       title: StopStreamRequest
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel for which the stream is to be stopped.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel for which the stream is to be stopped.
     StreamStartTime:
       type: string
       format: date-time
@@ -2143,33 +2221,41 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/StreamKeyArn'
-          description: Stream-key ARN.
+          allOf:
+            - $ref: '#/components/schemas/StreamKeyArn'
+            - description: Stream-key ARN.
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN for the stream.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN for the stream.
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.'
       description: Summary information about a stream key.
     StreamSummary:
       type: object
       properties:
         channelArn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: Channel ARN for the stream.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: Channel ARN for the stream.
         state:
-          $ref: '#/components/schemas/StreamState'
-          description: The stream’s state.
+          allOf:
+            - $ref: '#/components/schemas/StreamState'
+            - description: The stream’s state.
         health:
-          $ref: '#/components/schemas/StreamHealth'
-          description: The stream’s health.
+          allOf:
+            - $ref: '#/components/schemas/StreamHealth'
+            - description: The stream’s health.
         viewerCount:
-          $ref: '#/components/schemas/StreamViewerCount'
-          description: Number of current viewers of the stream.
+          allOf:
+            - $ref: '#/components/schemas/StreamViewerCount'
+            - description: Number of current viewers of the stream.
         startTime:
-          $ref: '#/components/schemas/StreamStartTime'
-          description: ISO-8601 formatted timestamp of the stream’s start.
+          allOf:
+            - $ref: '#/components/schemas/StreamStartTime'
+            - description: ISO-8601 formatted timestamp of the stream’s start.
       description: Summary information about a stream.
     TagKeyList:
       type: array
@@ -2184,8 +2270,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/Tags'
-          description: Array of tags to be added or updated.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Array of tags to be added or updated.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -2197,19 +2284,24 @@ components:
       title: UpdateChannelRequest
       properties:
         arn:
-          $ref: '#/components/schemas/ChannelArn'
-          description: ARN of the channel to be updated.
+          allOf:
+            - $ref: '#/components/schemas/ChannelArn'
+            - description: ARN of the channel to be updated.
         name:
-          $ref: '#/components/schemas/ChannelName'
-          description: Channel name.
+          allOf:
+            - $ref: '#/components/schemas/ChannelName'
+            - description: Channel name.
         latencyMode:
-          $ref: '#/components/schemas/ChannelLatencyMode'
-          description: 'Channel latency mode. Default: <code>LOW</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ChannelLatencyMode'
+            - description: 'Channel latency mode. Default: <code>LOW</code>.'
         type:
-          $ref: '#/components/schemas/ChannelType'
-          description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ChannelType'
+            - description: '<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.</i> Valid values:</p> <ul> <li> <p> <code>STANDARD</code>: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p> </li> <li> <p> <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.</p> </li> </ul> <p>Default: <code>STANDARD</code>.</p>'
         authorized:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Whether the channel is authorized. Default: <code>false</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether the channel is authorized. Default: <code>false</code>.'
 security:
   - hmac: []

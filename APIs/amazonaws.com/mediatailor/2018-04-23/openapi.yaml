@@ -289,51 +289,61 @@ paths:
                   type: object
                   properties:
                     Mode:
-                      description: 'Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.'
-                      $ref: '#/components/schemas/Mode'
+                      allOf:
+                        - $ref: '#/components/schemas/Mode'
+                        - description: 'Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.'
                     Value:
-                      description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
                 Bumper:
                   description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
                   type: object
                   properties:
                     EndUrl:
-                      description: 'The URL for the end bumper asset. '
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The URL for the end bumper asset. '
                     StartUrl:
-                      description: 'The URL for the start bumper asset. '
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The URL for the start bumper asset. '
                 CdnConfiguration:
                   description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
                   type: object
                   properties:
                     AdSegmentUrlPrefix:
-                      description: 'A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule''s name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.'
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule''s name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.'
                     ContentSegmentUrlPrefix:
-                      description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
                 DashConfiguration:
                   description: 'The configuration for DASH PUT operations. '
                   type: object
                   properties:
                     MpdLocation:
-                      description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
                     OriginManifestType:
-                      description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
-                      $ref: '#/components/schemas/OriginManifestType'
+                      allOf:
+                        - $ref: '#/components/schemas/OriginManifestType'
+                        - description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
                 LivePreRollConfiguration:
                   description: The configuration for pre-roll ad insertion.
                   type: object
                   properties:
                     AdDecisionServerUrl:
-                      $ref: '#/components/schemas/__string'
-                      description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
                     MaxDurationSeconds:
-                      $ref: '#/components/schemas/__integer'
-                      description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
                 Name:
                   description: The identifier for the playback configuration.
                   type: string
@@ -458,132 +468,167 @@ components:
       type: object
       properties:
         AdDecisionServerUrl:
-          description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
         AvailSuppression:
-          $ref: '#/components/schemas/AvailSuppression'
-          description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+          allOf:
+            - $ref: '#/components/schemas/AvailSuppression'
+            - description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
         Bumper:
-          $ref: '#/components/schemas/Bumper'
-          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
+          allOf:
+            - $ref: '#/components/schemas/Bumper'
+            - description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
-          description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
-          $ref: '#/components/schemas/CdnConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/CdnConfiguration'
+            - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
         DashConfiguration:
-          description: 'The configuration for DASH content. '
-          $ref: '#/components/schemas/DashConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/DashConfiguration'
+            - description: 'The configuration for DASH content. '
         HlsConfiguration:
-          description: 'The configuration for HLS content. '
-          $ref: '#/components/schemas/HlsConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/HlsConfiguration'
+            - description: 'The configuration for HLS content. '
         LivePreRollConfiguration:
-          $ref: '#/components/schemas/LivePreRollConfiguration'
-          description: The configuration for pre-roll ad insertion.
+          allOf:
+            - $ref: '#/components/schemas/LivePreRollConfiguration'
+            - description: The configuration for pre-roll ad insertion.
         Name:
-          description: The identifier for the playback configuration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The identifier for the playback configuration.
         PersonalizationThresholdSeconds:
-          description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-          $ref: '#/components/schemas/__integerMin1'
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
         PlaybackConfigurationArn:
-          description: 'The Amazon Resource Name (ARN) for the playback configuration. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The Amazon Resource Name (ARN) for the playback configuration. '
         PlaybackEndpointPrefix:
-          description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
         SessionInitializationEndpointPrefix:
-          description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
         SlateAdUrl:
-          description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
         Tags:
-          xml:
-            name: tags
-          description: 'The tags assigned to the playback configuration. '
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: 'The tags assigned to the playback configuration. '
         TranscodeProfileName:
-          description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
         VideoContentSourceUrl:
-          description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
     ListPlaybackConfigurationsResponse:
       type: object
       properties:
         Items:
-          description: 'Array of playback configurations. This might be all the available configurations or a subset, depending on the settings that you provide and the total number of configurations stored. '
-          $ref: '#/components/schemas/__listOfPlaybackConfigurations'
+          allOf:
+            - $ref: '#/components/schemas/__listOfPlaybackConfigurations'
+            - description: 'Array of playback configurations. This might be all the available configurations or a subset, depending on the settings that you provide and the total number of configurations stored. '
         NextToken:
-          description: Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          xml:
-            name: tags
-          description: |-
-            A comma-separated list of tag key:value pairs. For example: 
-             {
-             "Key1": "Value1",
-             "Key2": "Value2"
-             }
-             
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: |-
+                A comma-separated list of tag key:value pairs. For example: 
+                 {
+                 "Key1": "Value1",
+                 "Key2": "Value2"
+                 }
+                 
     BadRequestException: {}
     PutPlaybackConfigurationResponse:
       type: object
       properties:
         AdDecisionServerUrl:
-          description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
         AvailSuppression:
-          $ref: '#/components/schemas/AvailSuppression'
-          description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+          allOf:
+            - $ref: '#/components/schemas/AvailSuppression'
+            - description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
         Bumper:
-          $ref: '#/components/schemas/Bumper'
-          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
+          allOf:
+            - $ref: '#/components/schemas/Bumper'
+            - description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
-          description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
-          $ref: '#/components/schemas/CdnConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/CdnConfiguration'
+            - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
         DashConfiguration:
-          description: 'The configuration for DASH content. '
-          $ref: '#/components/schemas/DashConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/DashConfiguration'
+            - description: 'The configuration for DASH content. '
         HlsConfiguration:
-          description: 'The configuration for HLS content. '
-          $ref: '#/components/schemas/HlsConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/HlsConfiguration'
+            - description: 'The configuration for HLS content. '
         LivePreRollConfiguration:
-          $ref: '#/components/schemas/LivePreRollConfiguration'
-          description: The configuration for pre-roll ad insertion.
+          allOf:
+            - $ref: '#/components/schemas/LivePreRollConfiguration'
+            - description: The configuration for pre-roll ad insertion.
         Name:
-          description: The identifier for the playback configuration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The identifier for the playback configuration.
         PersonalizationThresholdSeconds:
-          description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-          $ref: '#/components/schemas/__integerMin1'
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
         PlaybackConfigurationArn:
-          description: 'The Amazon Resource Name (ARN) for the playback configuration. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The Amazon Resource Name (ARN) for the playback configuration. '
         PlaybackEndpointPrefix:
-          description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
         SessionInitializationEndpointPrefix:
-          description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
         SlateAdUrl:
-          description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
         Tags:
-          xml:
-            name: tags
-          description: 'The tags assigned to the playback configuration. '
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: 'The tags assigned to the playback configuration. '
         TranscodeProfileName:
-          description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
         VideoContentSourceUrl:
-          description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
     Mode:
       enum:
         - 'OFF'
@@ -602,54 +647,65 @@ components:
       type: object
       properties:
         Mode:
-          description: 'Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.'
-          $ref: '#/components/schemas/Mode'
+          allOf:
+            - $ref: '#/components/schemas/Mode'
+            - description: 'Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.'
         Value:
-          description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won''t fill ad breaks on or behind this time in the manifest lookback window. '
       description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
     Bumper:
       type: object
       properties:
         EndUrl:
-          description: 'The URL for the end bumper asset. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the end bumper asset. '
         StartUrl:
-          description: 'The URL for the start bumper asset. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the start bumper asset. '
       description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
     CdnConfiguration:
       type: object
       properties:
         AdSegmentUrlPrefix:
-          description: 'A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule''s name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule''s name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.'
         ContentSegmentUrlPrefix:
-          description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule''s name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.'
       description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
     DashConfiguration:
       type: object
       properties:
         ManifestEndpointPrefix:
-          description: 'The URL generated by MediaTailor to initiate a playback session. The session uses server-side reporting. This setting is ignored in PUT operations. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL generated by MediaTailor to initiate a playback session. The session uses server-side reporting. This setting is ignored in PUT operations. '
         MpdLocation:
-          description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
         OriginManifestType:
-          description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
-          $ref: '#/components/schemas/OriginManifestType'
+          allOf:
+            - $ref: '#/components/schemas/OriginManifestType'
+            - description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
       description: 'The configuration for DASH content. '
     DashConfigurationForPut:
       type: object
       properties:
         MpdLocation:
-          description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don''t support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests, and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. '
         OriginManifestType:
-          description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
-          $ref: '#/components/schemas/OriginManifestType'
+          allOf:
+            - $ref: '#/components/schemas/OriginManifestType'
+            - description: 'The setting that controls whether MediaTailor handles manifests from the origin server as multi-period manifests or single-period manifests. If your origin server produces single-period manifests, set this to SINGLE_PERIOD. The default setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it to MULTI_PERIOD. '
       description: 'The configuration for DASH PUT operations. '
     DeletePlaybackConfigurationRequest:
       type: object
@@ -663,18 +719,21 @@ components:
       type: object
       properties:
         ManifestEndpointPrefix:
-          description: The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.
       description: 'The configuration for HLS content. '
     LivePreRollConfiguration:
       type: object
       properties:
         AdDecisionServerUrl:
-          $ref: '#/components/schemas/__string'
-          description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the ad decision server (ADS) for pre-roll ads. This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
         MaxDurationSeconds:
-          $ref: '#/components/schemas/__integer'
-          description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
       description: The configuration for pre-roll ad insertion.
     __integerMin1:
       type: integer
@@ -703,95 +762,122 @@ components:
       type: object
       properties:
         AdDecisionServerUrl:
-          description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.'
         AvailSuppression:
-          description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
-          $ref: '#/components/schemas/AvailSuppression'
+          allOf:
+            - $ref: '#/components/schemas/AvailSuppression'
+            - description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
         Bumper:
-          $ref: '#/components/schemas/Bumper'
-          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
+          allOf:
+            - $ref: '#/components/schemas/Bumper'
+            - description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
-          description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
-          $ref: '#/components/schemas/CdnConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/CdnConfiguration'
+            - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
         DashConfiguration:
-          description: 'The configuration for DASH content. '
-          $ref: '#/components/schemas/DashConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/DashConfiguration'
+            - description: 'The configuration for DASH content. '
         HlsConfiguration:
-          description: 'The configuration for HLS content. '
-          $ref: '#/components/schemas/HlsConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/HlsConfiguration'
+            - description: 'The configuration for HLS content. '
         Name:
-          description: The identifier for the playback configuration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The identifier for the playback configuration.
         PlaybackConfigurationArn:
-          description: 'The Amazon Resource Name (ARN) for the playback configuration. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The Amazon Resource Name (ARN) for the playback configuration. '
         PlaybackEndpointPrefix:
-          description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. '
         SessionInitializationEndpointPrefix:
-          description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL that the player uses to initialize a session that uses client-side reporting. '
         SlateAdUrl:
-          description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
         Tags:
-          xml:
-            name: tags
-          description: 'The tags assigned to the playback configuration. '
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: 'The tags assigned to the playback configuration. '
         TranscodeProfileName:
-          description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
         PersonalizationThresholdSeconds:
-          description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-          $ref: '#/components/schemas/__integerMin1'
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
         VideoContentSourceUrl:
-          description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
       description: The AWSMediaTailor configuration.
     PutPlaybackConfigurationRequest:
       type: object
       title: PutPlaybackConfigurationRequest
       properties:
         AdDecisionServerUrl:
-          description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.'
         AvailSuppression:
-          $ref: '#/components/schemas/AvailSuppression'
-          description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
+          allOf:
+            - $ref: '#/components/schemas/AvailSuppression'
+            - description: 'The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.'
         Bumper:
-          $ref: '#/components/schemas/Bumper'
-          description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
+          allOf:
+            - $ref: '#/components/schemas/Bumper'
+            - description: 'The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. '
         CdnConfiguration:
-          description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
-          $ref: '#/components/schemas/CdnConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/CdnConfiguration'
+            - description: 'The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. '
         DashConfiguration:
-          description: 'The configuration for DASH content. '
-          $ref: '#/components/schemas/DashConfigurationForPut'
+          allOf:
+            - $ref: '#/components/schemas/DashConfigurationForPut'
+            - description: 'The configuration for DASH content. '
         LivePreRollConfiguration:
-          $ref: '#/components/schemas/LivePreRollConfiguration'
-          description: The configuration for pre-roll ad insertion.
+          allOf:
+            - $ref: '#/components/schemas/LivePreRollConfiguration'
+            - description: The configuration for pre-roll ad insertion.
         Name:
-          description: The identifier for the playback configuration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The identifier for the playback configuration.
         PersonalizationThresholdSeconds:
-          description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-          $ref: '#/components/schemas/__integerMin1'
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - description: The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
         SlateAdUrl:
-          description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL for a high-quality video asset to transcode and use to fill in time that''s not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. '
         Tags:
-          xml:
-            name: tags
-          description: 'The tags to assign to the playback configuration. '
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: 'The tags to assign to the playback configuration. '
         TranscodeProfileName:
-          description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.
         VideoContentSourceUrl:
-          description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.'
     TagResourceRequest:
       required:
         - Tags
@@ -799,16 +885,17 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          xml:
-            name: tags
-          description: |-
-            A comma-separated list of tag key:value pairs. For example: 
-             {
-             "Key1": "Value1",
-             "Key2": "Value2"
-             }
-             
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: |-
+                A comma-separated list of tag key:value pairs. For example: 
+                 {
+                 "Key1": "Value1",
+                 "Key2": "Value2"
+                 }
+                 
     __listOf__string:
       type: array
       items:

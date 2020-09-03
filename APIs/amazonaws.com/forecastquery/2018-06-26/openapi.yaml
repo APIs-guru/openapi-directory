@@ -232,8 +232,9 @@ components:
       type: object
       properties:
         Forecast:
-          $ref: '#/components/schemas/Forecast'
-          description: The forecast.
+          allOf:
+            - $ref: '#/components/schemas/Forecast'
+            - description: The forecast.
     QueryForecastRequest:
       type: object
       required:
@@ -242,20 +243,25 @@ components:
       title: QueryForecastRequest
       properties:
         ForecastArn:
-          $ref: '#/components/schemas/Arn'
-          description: The Amazon Resource Name (ARN) of the forecast to query.
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the forecast to query.
         StartDate:
-          $ref: '#/components/schemas/DateTime'
-          description: 'The start date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.'
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The start date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.'
         EndDate:
-          $ref: '#/components/schemas/DateTime'
-          description: 'The end date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss (ISO 8601 format). For example, 2015-01-01T20:00:00. '
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The end date for the forecast. Specify the date using this format: yyyy-MM-dd''T''HH:mm:ss (ISO 8601 format). For example, 2015-01-01T20:00:00. '
         Filters:
-          $ref: '#/components/schemas/Filters'
-          description: '<p>The filtering criteria to apply when retrieving the forecast. For example, to get the forecast for <code>client_21</code> in the electricity usage dataset, specify the following:</p> <p> <code>{"item_id" : "client_21"}</code> </p> <p>To get the full forecast, use the <a href="https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html">CreateForecastExportJob</a> operation.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Filters'
+            - description: '<p>The filtering criteria to apply when retrieving the forecast. For example, to get the forecast for <code>client_21</code> in the electricity usage dataset, specify the following:</p> <p> <code>{"item_id" : "client_21"}</code> </p> <p>To get the full forecast, use the <a href="https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html">CreateForecastExportJob</a> operation.</p>'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.'
     ResourceNotFoundException: {}
     ResourceInUseException: {}
     InvalidInputException: {}
@@ -281,11 +287,13 @@ components:
       type: object
       properties:
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of the specific forecast.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the specific forecast.
         Value:
-          $ref: '#/components/schemas/Double'
-          description: The forecast value.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The forecast value.
       description: The forecast value for a specific date. Part of the <a>Forecast</a> object.
     DateTime:
       type: string
@@ -303,8 +311,9 @@ components:
       type: object
       properties:
         Predictions:
-          $ref: '#/components/schemas/Predictions'
-          description: '<p>The forecast.</p> <p>The <i>string</i> of the string-to-array map is one of the following values:</p> <ul> <li> <p>p10</p> </li> <li> <p>p50</p> </li> <li> <p>p90</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/Predictions'
+            - description: '<p>The forecast.</p> <p>The <i>string</i> of the string-to-array map is one of the following values:</p> <ul> <li> <p>p10</p> </li> <li> <p>p50</p> </li> <li> <p>p90</p> </li> </ul>'
       description: Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.
     NextToken:
       type: string

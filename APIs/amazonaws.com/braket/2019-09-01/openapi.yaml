@@ -628,11 +628,13 @@ components:
         - quantumTaskArn
       properties:
         cancellationStatus:
-          $ref: '#/components/schemas/CancellationStatus'
-          description: The status of the cancellation request.
+          allOf:
+            - $ref: '#/components/schemas/CancellationStatus'
+            - description: The status of the cancellation request.
         quantumTaskArn:
-          $ref: '#/components/schemas/QuantumTaskArn'
-          description: The ARN of the task.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskArn'
+            - description: The ARN of the task.
     ResourceNotFoundException: {}
     AccessDeniedException: {}
     ConflictException: {}
@@ -645,8 +647,9 @@ components:
         - quantumTaskArn
       properties:
         quantumTaskArn:
-          $ref: '#/components/schemas/QuantumTaskArn'
-          description: The ARN of the task created by the request.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskArn'
+            - description: The ARN of the task created by the request.
     DeviceOfflineException: {}
     ServiceQuotaExceededException: {}
     GetDeviceResponse:
@@ -660,23 +663,29 @@ components:
         - providerName
       properties:
         deviceArn:
-          $ref: '#/components/schemas/DeviceArn'
-          description: The ARN of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The ARN of the device.
         deviceCapabilities:
-          $ref: '#/components/schemas/JsonValue'
-          description: Details about the capabilities of the device.
+          allOf:
+            - $ref: '#/components/schemas/JsonValue'
+            - description: Details about the capabilities of the device.
         deviceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the device.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the device.
         deviceStatus:
-          $ref: '#/components/schemas/DeviceStatus'
-          description: The status of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceStatus'
+            - description: The status of the device.
         deviceType:
-          $ref: '#/components/schemas/DeviceType'
-          description: The type of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceType'
+            - description: The type of the device.
         providerName:
-          $ref: '#/components/schemas/String'
-          description: The name of the partner company for the device.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the partner company for the device.
     GetQuantumTaskResponse:
       type: object
       required:
@@ -690,46 +699,58 @@ components:
         - status
       properties:
         createdAt:
-          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          description: The time at which the task was created.
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time at which the task was created.
         deviceArn:
-          $ref: '#/components/schemas/DeviceArn'
-          description: The ARN of the device the task was run on.
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The ARN of the device the task was run on.
         deviceParameters:
-          $ref: '#/components/schemas/JsonValue'
-          description: The parameters for the device on which the task ran.
+          allOf:
+            - $ref: '#/components/schemas/JsonValue'
+            - description: The parameters for the device on which the task ran.
         endedAt:
-          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          description: The time at which the task ended.
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time at which the task ended.
         failureReason:
-          $ref: '#/components/schemas/String'
-          description: The reason that a task failed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The reason that a task failed.
         outputS3Bucket:
-          $ref: '#/components/schemas/String'
-          description: The S3 bucket where task results are stored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The S3 bucket where task results are stored.
         outputS3Directory:
-          $ref: '#/components/schemas/String'
-          description: The folder in the S3 bucket where task results are stored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The folder in the S3 bucket where task results are stored.
         quantumTaskArn:
-          $ref: '#/components/schemas/QuantumTaskArn'
-          description: The ARN of the task.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskArn'
+            - description: The ARN of the task.
         shots:
-          $ref: '#/components/schemas/Long'
-          description: The number of shots used in the task.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of shots used in the task.
         status:
-          $ref: '#/components/schemas/QuantumTaskStatus'
-          description: The status of the task.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskStatus'
+            - description: The status of the task.
     SearchDevicesResponse:
       type: object
       required:
         - devices
       properties:
         devices:
-          $ref: '#/components/schemas/DeviceSummaryList'
-          description: An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.
+          allOf:
+            - $ref: '#/components/schemas/DeviceSummaryList'
+            - description: An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
     SearchDevicesFilter:
       type: object
       required:
@@ -737,11 +758,13 @@ components:
         - values
       properties:
         name:
-          $ref: '#/components/schemas/SearchDevicesFilternameString'
-          description: The name to use to filter results.
+          allOf:
+            - $ref: '#/components/schemas/SearchDevicesFilternameString'
+            - description: The name to use to filter results.
         values:
-          $ref: '#/components/schemas/SearchDevicesFiltervaluesString256List'
-          description: The values to use to filter results.
+          allOf:
+            - $ref: '#/components/schemas/SearchDevicesFiltervaluesString256List'
+            - description: The values to use to filter results.
       description: The filter to use for searching devices.
     SearchQuantumTasksResponse:
       type: object
@@ -749,11 +772,13 @@ components:
         - quantumTasks
       properties:
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.'
         quantumTasks:
-          $ref: '#/components/schemas/QuantumTaskSummaryList'
-          description: An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified filters.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskSummaryList'
+            - description: An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified filters.
     SearchQuantumTasksFilter:
       type: object
       required:
@@ -762,14 +787,17 @@ components:
         - values
       properties:
         name:
-          $ref: '#/components/schemas/String64'
-          description: The name of the device used for the task.
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: The name of the device used for the task.
         operator:
-          $ref: '#/components/schemas/SearchQuantumTasksFilterOperator'
-          description: An operator to use in the filter.
+          allOf:
+            - $ref: '#/components/schemas/SearchQuantumTasksFilterOperator'
+            - description: An operator to use in the filter.
         values:
-          $ref: '#/components/schemas/SearchQuantumTasksFiltervaluesString256List'
-          description: The values to use for the filter.
+          allOf:
+            - $ref: '#/components/schemas/SearchQuantumTasksFiltervaluesString256List'
+            - description: The values to use for the filter.
       description: A filter to use to search for tasks.
     String64:
       type: string
@@ -786,8 +814,9 @@ components:
       title: CancelQuantumTaskRequest
       properties:
         clientToken:
-          $ref: '#/components/schemas/String64'
-          description: The client token associated with the request.
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: The client token associated with the request.
     CancellationStatus:
       type: string
       enum:
@@ -826,26 +855,33 @@ components:
       title: CreateQuantumTaskRequest
       properties:
         action:
-          $ref: '#/components/schemas/JsonValue'
-          description: The action associated with the task.
+          allOf:
+            - $ref: '#/components/schemas/JsonValue'
+            - description: The action associated with the task.
         clientToken:
-          $ref: '#/components/schemas/String64'
-          description: The client token associated with the request.
+          allOf:
+            - $ref: '#/components/schemas/String64'
+            - description: The client token associated with the request.
         deviceArn:
-          $ref: '#/components/schemas/DeviceArn'
-          description: The ARN of the device to run the task on.
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The ARN of the device to run the task on.
         deviceParameters:
-          $ref: '#/components/schemas/CreateQuantumTaskRequestdeviceParametersJsonValue'
-          description: The parameters for the device to run the task on.
+          allOf:
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestdeviceParametersJsonValue'
+            - description: The parameters for the device to run the task on.
         outputS3Bucket:
-          $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3BucketString'
-          description: The S3 bucket to store task result files in.
+          allOf:
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3BucketString'
+            - description: The S3 bucket to store task result files in.
         outputS3KeyPrefix:
-          $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3KeyPrefixString'
-          description: The key prefix for the location in the S3 bucket to store task results in.
+          allOf:
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3KeyPrefixString'
+            - description: The key prefix for the location in the S3 bucket to store task results in.
         shots:
-          $ref: '#/components/schemas/CreateQuantumTaskRequestshotsLong'
-          description: The number of shots to use for the task.
+          allOf:
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestshotsLong'
+            - description: The number of shots to use for the task.
     DeviceStatus:
       type: string
       enum:
@@ -868,20 +904,25 @@ components:
         - providerName
       properties:
         deviceArn:
-          $ref: '#/components/schemas/DeviceArn'
-          description: The ARN of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The ARN of the device.
         deviceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the device.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the device.
         deviceStatus:
-          $ref: '#/components/schemas/DeviceStatus'
-          description: The status of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceStatus'
+            - description: The status of the device.
         deviceType:
-          $ref: '#/components/schemas/DeviceType'
-          description: The type of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceType'
+            - description: The type of the device.
         providerName:
-          $ref: '#/components/schemas/String'
-          description: The provider of the device.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The provider of the device.
       description: Includes information about the device.
     DeviceSummaryList:
       type: array
@@ -922,29 +963,37 @@ components:
         - status
       properties:
         createdAt:
-          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          description: The time at which the task was created.
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time at which the task was created.
         deviceArn:
-          $ref: '#/components/schemas/DeviceArn'
-          description: The ARN of the device the task ran on.
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The ARN of the device the task ran on.
         endedAt:
-          $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-          description: The time at which the task finished.
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time at which the task finished.
         outputS3Bucket:
-          $ref: '#/components/schemas/String'
-          description: The S3 bucket where the task result file is stored..
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The S3 bucket where the task result file is stored..
         outputS3Directory:
-          $ref: '#/components/schemas/String'
-          description: The folder in the S3 bucket where the task result file is stored.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The folder in the S3 bucket where the task result file is stored.
         quantumTaskArn:
-          $ref: '#/components/schemas/QuantumTaskArn'
-          description: The ARN of the task.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskArn'
+            - description: The ARN of the task.
         shots:
-          $ref: '#/components/schemas/Long'
-          description: The shots used for the task.
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The shots used for the task.
         status:
-          $ref: '#/components/schemas/QuantumTaskStatus'
-          description: The status of the task.
+          allOf:
+            - $ref: '#/components/schemas/QuantumTaskStatus'
+            - description: The status of the task.
       description: Includes information about a quantum task.
     QuantumTaskSummaryList:
       type: array
@@ -981,14 +1030,17 @@ components:
       title: SearchDevicesRequest
       properties:
         filters:
-          $ref: '#/components/schemas/SearchDevicesRequestfiltersSearchDevicesFilterList'
-          description: The filter values to use to search for a device.
+          allOf:
+            - $ref: '#/components/schemas/SearchDevicesRequestfiltersSearchDevicesFilterList'
+            - description: The filter values to use to search for a device.
         maxResults:
-          $ref: '#/components/schemas/SearchDevicesRequestmaxResultsInteger'
-          description: The maximum number of results to return in the response.
+          allOf:
+            - $ref: '#/components/schemas/SearchDevicesRequestmaxResultsInteger'
+            - description: The maximum number of results to return in the response.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
     SearchQuantumTasksFilterOperator:
       type: string
       enum:
@@ -1021,13 +1073,16 @@ components:
       title: SearchQuantumTasksRequest
       properties:
         filters:
-          $ref: '#/components/schemas/SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList'
-          description: Array of <code>SearchQuantumTasksFilter</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList'
+            - description: Array of <code>SearchQuantumTasksFilter</code> objects.
         maxResults:
-          $ref: '#/components/schemas/SearchQuantumTasksRequestmaxResultsInteger'
-          description: Maximum number of results to return in the response.
+          allOf:
+            - $ref: '#/components/schemas/SearchQuantumTasksRequestmaxResultsInteger'
+            - description: Maximum number of results to return in the response.
         nextToken:
-          $ref: '#/components/schemas/String'
-          description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
 security:
   - hmac: []

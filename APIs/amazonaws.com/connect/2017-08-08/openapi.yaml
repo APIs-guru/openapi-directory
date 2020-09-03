@@ -202,30 +202,37 @@ paths:
                   type: object
                   properties:
                     FirstName:
-                      $ref: '#/components/schemas/AgentFirstName'
-                      description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
+                      allOf:
+                        - $ref: '#/components/schemas/AgentFirstName'
+                        - description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
                     LastName:
-                      $ref: '#/components/schemas/AgentLastName'
-                      description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
+                      allOf:
+                        - $ref: '#/components/schemas/AgentLastName'
+                        - description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
                     Email:
-                      $ref: '#/components/schemas/Email'
-                      description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
+                      allOf:
+                        - $ref: '#/components/schemas/Email'
+                        - description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
                 PhoneConfig:
                   description: Contains information about the phone configuration settings for a user.
                   type: object
                   properties:
                     PhoneType:
-                      $ref: '#/components/schemas/PhoneType'
-                      description: The phone type.
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneType'
+                        - description: The phone type.
                     AutoAccept:
-                      $ref: '#/components/schemas/AutoAccept'
-                      description: The Auto accept setting.
+                      allOf:
+                        - $ref: '#/components/schemas/AutoAccept'
+                        - description: The Auto accept setting.
                     AfterContactWorkTimeLimit:
-                      $ref: '#/components/schemas/AfterContactWorkTimeLimit'
-                      description: 'The After Call Work (ACW) timeout setting, in seconds.'
+                      allOf:
+                        - $ref: '#/components/schemas/AfterContactWorkTimeLimit'
+                        - description: 'The After Call Work (ACW) timeout setting, in seconds.'
                     DeskPhoneNumber:
-                      $ref: '#/components/schemas/PhoneNumber'
-                      description: The phone number for the user's desk phone.
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneNumber'
+                        - description: The phone number for the user's desk phone.
                 DirectoryUserId:
                   description: '<p>The identifier of the user account in the directory used for identity management. If Amazon Connect cannot access the directory, you can specify this identifier to authenticate users. If you include the identifier, we assume that Amazon Connect cannot access the directory. Otherwise, the identity information is used to authenticate users from your directory.</p> <p>This parameter is required if you are using an existing directory for identity management in Amazon Connect when Amazon Connect cannot access your directory to authenticate users. If you are using SAML for identity management and include this parameter, an error is returned.</p>'
                   type: string
@@ -625,11 +632,13 @@ paths:
                   type: object
                   properties:
                     Queues:
-                      $ref: '#/components/schemas/Queues'
-                      description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
+                      allOf:
+                        - $ref: '#/components/schemas/Queues'
+                        - description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
                     Channels:
-                      $ref: '#/components/schemas/Channels'
-                      description: The channel to use to filter the metrics.
+                      allOf:
+                        - $ref: '#/components/schemas/Channels'
+                        - description: The channel to use to filter the metrics.
                 Groupings:
                   description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
                   type: array
@@ -808,11 +817,13 @@ paths:
                   type: object
                   properties:
                     Queues:
-                      $ref: '#/components/schemas/Queues'
-                      description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
+                      allOf:
+                        - $ref: '#/components/schemas/Queues'
+                        - description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
                     Channels:
-                      $ref: '#/components/schemas/Channels'
-                      description: The channel to use to filter the metrics.
+                      allOf:
+                        - $ref: '#/components/schemas/Channels'
+                        - description: The channel to use to filter the metrics.
                 Groupings:
                   description: '<p>The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues.</p> <p>The only supported grouping is <code>QUEUE</code>.</p> <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>'
                   type: array
@@ -1799,18 +1810,21 @@ paths:
                   type: object
                   properties:
                     DisplayName:
-                      $ref: '#/components/schemas/DisplayName'
-                      description: Display name of the participant.
+                      allOf:
+                        - $ref: '#/components/schemas/DisplayName'
+                        - description: Display name of the participant.
                 InitialMessage:
                   description: A chat message.
                   type: object
                   properties:
                     ContentType:
-                      $ref: '#/components/schemas/ChatContentType'
-                      description: The type of the content. Supported types are text/plain.
+                      allOf:
+                        - $ref: '#/components/schemas/ChatContentType'
+                        - description: The type of the content. Supported types are text/plain.
                     Content:
-                      $ref: '#/components/schemas/ChatContent'
-                      description: The content of the chat message.
+                      allOf:
+                        - $ref: '#/components/schemas/ChatContent'
+                        - description: The content of the chat message.
                 ClientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -1891,8 +1905,9 @@ paths:
                   type: object
                   properties:
                     VoiceRecordingTrack:
-                      $ref: '#/components/schemas/VoiceRecordingTrack'
-                      description: Identifies which track is being recorded.
+                      allOf:
+                        - $ref: '#/components/schemas/VoiceRecordingTrack'
+                        - description: Identifies which track is being recorded.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2467,14 +2482,17 @@ paths:
                   type: object
                   properties:
                     FirstName:
-                      $ref: '#/components/schemas/AgentFirstName'
-                      description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
+                      allOf:
+                        - $ref: '#/components/schemas/AgentFirstName'
+                        - description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
                     LastName:
-                      $ref: '#/components/schemas/AgentLastName'
-                      description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
+                      allOf:
+                        - $ref: '#/components/schemas/AgentLastName'
+                        - description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
                     Email:
-                      $ref: '#/components/schemas/Email'
-                      description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
+                      allOf:
+                        - $ref: '#/components/schemas/Email'
+                        - description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2549,17 +2567,21 @@ paths:
                   type: object
                   properties:
                     PhoneType:
-                      $ref: '#/components/schemas/PhoneType'
-                      description: The phone type.
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneType'
+                        - description: The phone type.
                     AutoAccept:
-                      $ref: '#/components/schemas/AutoAccept'
-                      description: The Auto accept setting.
+                      allOf:
+                        - $ref: '#/components/schemas/AutoAccept'
+                        - description: The Auto accept setting.
                     AfterContactWorkTimeLimit:
-                      $ref: '#/components/schemas/AfterContactWorkTimeLimit'
-                      description: 'The After Call Work (ACW) timeout setting, in seconds.'
+                      allOf:
+                        - $ref: '#/components/schemas/AfterContactWorkTimeLimit'
+                        - description: 'The After Call Work (ACW) timeout setting, in seconds.'
                     DeskPhoneNumber:
-                      $ref: '#/components/schemas/PhoneNumber'
-                      description: The phone number for the user's desk phone.
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneNumber'
+                        - description: The phone number for the user's desk phone.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2772,11 +2794,13 @@ components:
       type: object
       properties:
         UserId:
-          $ref: '#/components/schemas/UserId'
-          description: The identifier of the user account.
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The identifier of the user account.
         UserArn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the user account.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the user account.
     AgentFirstName:
       type: string
       minLength: 1
@@ -2815,38 +2839,45 @@ components:
       type: object
       properties:
         User:
-          $ref: '#/components/schemas/User'
-          description: Information about the user account and configuration settings.
+          allOf:
+            - $ref: '#/components/schemas/User'
+            - description: Information about the user account and configuration settings.
     DescribeUserHierarchyGroupResponse:
       type: object
       properties:
         HierarchyGroup:
-          $ref: '#/components/schemas/HierarchyGroup'
-          description: Information about the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroup'
+            - description: Information about the hierarchy group.
     DescribeUserHierarchyStructureResponse:
       type: object
       properties:
         HierarchyStructure:
-          $ref: '#/components/schemas/HierarchyStructure'
-          description: Information about the hierarchy structure.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyStructure'
+            - description: Information about the hierarchy structure.
     GetContactAttributesResponse:
       type: object
       properties:
         Attributes:
-          $ref: '#/components/schemas/Attributes'
-          description: Information about the attributes.
+          allOf:
+            - $ref: '#/components/schemas/Attributes'
+            - description: Information about the attributes.
     GetCurrentMetricDataResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '<p>If there are additional results, this is the token for the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If there are additional results, this is the token for the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>'
         MetricResults:
-          $ref: '#/components/schemas/CurrentMetricResults'
-          description: Information about the real-time metrics.
+          allOf:
+            - $ref: '#/components/schemas/CurrentMetricResults'
+            - description: Information about the real-time metrics.
         DataSnapshotTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The time at which the metrics were retrieved and cached for pagination.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The time at which the metrics were retrieved and cached for pagination.
     Queues:
       type: array
       items:
@@ -2867,53 +2898,64 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/CurrentMetricName'
-          description: The name of the metric.
+          allOf:
+            - $ref: '#/components/schemas/CurrentMetricName'
+            - description: The name of the metric.
         Unit:
-          $ref: '#/components/schemas/Unit'
-          description: The unit for the metric.
+          allOf:
+            - $ref: '#/components/schemas/Unit'
+            - description: The unit for the metric.
       description: 'Contains information about a real-time metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.'
     GetFederationTokenResponse:
       type: object
       properties:
         Credentials:
-          $ref: '#/components/schemas/Credentials'
-          description: The credentials to use for federation.
+          allOf:
+            - $ref: '#/components/schemas/Credentials'
+            - description: The credentials to use for federation.
     UserNotFoundException: {}
     GetMetricDataResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '<p>If there are additional results, this is the token for the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If there are additional results, this is the token for the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>'
         MetricResults:
-          $ref: '#/components/schemas/HistoricalMetricResults'
-          description: '<p>Information about the historical metrics.</p> <p>If no grouping is specified, a summary of metric data is returned.</p>'
+          allOf:
+            - $ref: '#/components/schemas/HistoricalMetricResults'
+            - description: '<p>Information about the historical metrics.</p> <p>If no grouping is specified, a summary of metric data is returned.</p>'
     HistoricalMetric:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/HistoricalMetricName'
-          description: The name of the metric.
+          allOf:
+            - $ref: '#/components/schemas/HistoricalMetricName'
+            - description: The name of the metric.
         Threshold:
-          $ref: '#/components/schemas/Threshold'
-          description: 'The threshold for the metric, used with service level metrics.'
+          allOf:
+            - $ref: '#/components/schemas/Threshold'
+            - description: 'The threshold for the metric, used with service level metrics.'
         Statistic:
-          $ref: '#/components/schemas/Statistic'
-          description: The statistic for the metric.
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The statistic for the metric.
         Unit:
-          $ref: '#/components/schemas/Unit'
-          description: The unit for the metric.
+          allOf:
+            - $ref: '#/components/schemas/Unit'
+            - description: The unit for the metric.
       description: 'Contains information about a historical metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.'
     ListContactFlowsResponse:
       type: object
       properties:
         ContactFlowSummaryList:
-          $ref: '#/components/schemas/ContactFlowSummaryList'
-          description: Information about the contact flows.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowSummaryList'
+            - description: Information about the contact flows.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ContactFlowType:
       type: string
       enum:
@@ -2930,20 +2972,24 @@ components:
       type: object
       properties:
         HoursOfOperationSummaryList:
-          $ref: '#/components/schemas/HoursOfOperationSummaryList'
-          description: Information about the hours of operation.
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationSummaryList'
+            - description: Information about the hours of operation.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListPhoneNumbersResponse:
       type: object
       properties:
         PhoneNumberSummaryList:
-          $ref: '#/components/schemas/PhoneNumberSummaryList'
-          description: Information about the phone numbers.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberSummaryList'
+            - description: Information about the phone numbers.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     PhoneNumberType:
       type: string
       enum:
@@ -3193,11 +3239,13 @@ components:
       type: object
       properties:
         QueueSummaryList:
-          $ref: '#/components/schemas/QueueSummaryList'
-          description: Information about the queues.
+          allOf:
+            - $ref: '#/components/schemas/QueueSummaryList'
+            - description: Information about the queues.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     QueueType:
       type: string
       enum:
@@ -3207,44 +3255,53 @@ components:
       type: object
       properties:
         RoutingProfileSummaryList:
-          $ref: '#/components/schemas/RoutingProfileSummaryList'
-          description: Information about the routing profiles.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileSummaryList'
+            - description: Information about the routing profiles.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListSecurityProfilesResponse:
       type: object
       properties:
         SecurityProfileSummaryList:
-          $ref: '#/components/schemas/SecurityProfileSummaryList'
-          description: Information about the security profiles.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileSummaryList'
+            - description: Information about the security profiles.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: Information about the tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Information about the tags.
     ListUserHierarchyGroupsResponse:
       type: object
       properties:
         UserHierarchyGroupSummaryList:
-          $ref: '#/components/schemas/HierarchyGroupSummaryList'
-          description: Information about the hierarchy groups.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummaryList'
+            - description: Information about the hierarchy groups.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListUsersResponse:
       type: object
       properties:
         UserSummaryList:
-          $ref: '#/components/schemas/UserSummaryList'
-          description: Information about the users.
+          allOf:
+            - $ref: '#/components/schemas/UserSummaryList'
+            - description: Information about the users.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If there are additional results, this is the token for the next set of results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ResumeContactRecordingResponse:
       type: object
       properties: {}
@@ -3252,14 +3309,17 @@ components:
       type: object
       properties:
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: 'The identifier of this contact within the Amazon Connect instance. '
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: 'The identifier of this contact within the Amazon Connect instance. '
         ParticipantId:
-          $ref: '#/components/schemas/ParticipantId'
-          description: The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.
         ParticipantToken:
-          $ref: '#/components/schemas/ParticipantToken'
-          description: 'The token used by the chat participant to call <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant.'
+          allOf:
+            - $ref: '#/components/schemas/ParticipantToken'
+            - description: 'The token used by the chat participant to call <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant.'
     AttributeValue:
       type: string
       minLength: 0
@@ -3289,8 +3349,9 @@ components:
       type: object
       properties:
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of this contact within the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of this contact within the Amazon Connect instance.
     DestinationNotAllowedException: {}
     OutboundContactNotPermittedException: {}
     StopContactResponse:
@@ -3337,11 +3398,13 @@ components:
         - Content
       properties:
         ContentType:
-          $ref: '#/components/schemas/ChatContentType'
-          description: The type of the content. Supported types are text/plain.
+          allOf:
+            - $ref: '#/components/schemas/ChatContentType'
+            - description: The type of the content. Supported types are text/plain.
         Content:
-          $ref: '#/components/schemas/ChatContent'
-          description: The content of the chat message.
+          allOf:
+            - $ref: '#/components/schemas/ChatContent'
+            - description: The content of the chat message.
       description: A chat message.
     ClientToken:
       type: string
@@ -3359,17 +3422,21 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ContactFlowId'
-          description: The identifier of the contact flow.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the contact flow.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the contact flow.
         Name:
-          $ref: '#/components/schemas/ContactFlowName'
-          description: The name of the contact flow.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowName'
+            - description: The name of the contact flow.
         ContactFlowType:
-          $ref: '#/components/schemas/ContactFlowType'
-          description: The type of contact flow.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowType'
+            - description: The type of contact flow.
       description: Contains summary information about a contact flow.
     ContactFlowSummaryList:
       type: array
@@ -3391,14 +3458,17 @@ components:
       type: object
       properties:
         FirstName:
-          $ref: '#/components/schemas/AgentFirstName'
-          description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
+          allOf:
+            - $ref: '#/components/schemas/AgentFirstName'
+            - description: The first name. This is required if you are using Amazon Connect or SAML for identity management.
         LastName:
-          $ref: '#/components/schemas/AgentLastName'
-          description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
+          allOf:
+            - $ref: '#/components/schemas/AgentLastName'
+            - description: The last name. This is required if you are using Amazon Connect or SAML for identity management.
         Email:
-          $ref: '#/components/schemas/Email'
-          description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
+          allOf:
+            - $ref: '#/components/schemas/Email'
+            - description: 'The email address. If you are using SAML for identity management and include this parameter, an error is returned.'
       description: Contains information about the identity of a user.
     UserPhoneConfig:
       type: object
@@ -3406,17 +3476,21 @@ components:
         - PhoneType
       properties:
         PhoneType:
-          $ref: '#/components/schemas/PhoneType'
-          description: The phone type.
+          allOf:
+            - $ref: '#/components/schemas/PhoneType'
+            - description: The phone type.
         AutoAccept:
-          $ref: '#/components/schemas/AutoAccept'
-          description: The Auto accept setting.
+          allOf:
+            - $ref: '#/components/schemas/AutoAccept'
+            - description: The Auto accept setting.
         AfterContactWorkTimeLimit:
-          $ref: '#/components/schemas/AfterContactWorkTimeLimit'
-          description: 'The After Call Work (ACW) timeout setting, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/AfterContactWorkTimeLimit'
+            - description: 'The After Call Work (ACW) timeout setting, in seconds.'
         DeskPhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The phone number for the user's desk phone.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number for the user's desk phone.
       description: Contains information about the phone configuration settings for a user.
     DirectoryUserId:
       type: string
@@ -3450,32 +3524,41 @@ components:
       title: CreateUserRequest
       properties:
         Username:
-          $ref: '#/components/schemas/AgentUsername'
-          description: 'The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.'
+          allOf:
+            - $ref: '#/components/schemas/AgentUsername'
+            - description: 'The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.'
         Password:
-          $ref: '#/components/schemas/Password'
-          description: 'The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.'
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: 'The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.'
         IdentityInfo:
-          $ref: '#/components/schemas/UserIdentityInfo'
-          description: The information about the identity of the user.
+          allOf:
+            - $ref: '#/components/schemas/UserIdentityInfo'
+            - description: The information about the identity of the user.
         PhoneConfig:
-          $ref: '#/components/schemas/UserPhoneConfig'
-          description: The phone settings for the user.
+          allOf:
+            - $ref: '#/components/schemas/UserPhoneConfig'
+            - description: The phone settings for the user.
         DirectoryUserId:
-          $ref: '#/components/schemas/DirectoryUserId'
-          description: '<p>The identifier of the user account in the directory used for identity management. If Amazon Connect cannot access the directory, you can specify this identifier to authenticate users. If you include the identifier, we assume that Amazon Connect cannot access the directory. Otherwise, the identity information is used to authenticate users from your directory.</p> <p>This parameter is required if you are using an existing directory for identity management in Amazon Connect when Amazon Connect cannot access your directory to authenticate users. If you are using SAML for identity management and include this parameter, an error is returned.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DirectoryUserId'
+            - description: '<p>The identifier of the user account in the directory used for identity management. If Amazon Connect cannot access the directory, you can specify this identifier to authenticate users. If you include the identifier, we assume that Amazon Connect cannot access the directory. Otherwise, the identity information is used to authenticate users from your directory.</p> <p>This parameter is required if you are using an existing directory for identity management in Amazon Connect when Amazon Connect cannot access your directory to authenticate users. If you are using SAML for identity management and include this parameter, an error is returned.</p>'
         SecurityProfileIds:
-          $ref: '#/components/schemas/SecurityProfileIds'
-          description: The identifier of the security profile for the user.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileIds'
+            - description: The identifier of the security profile for the user.
         RoutingProfileId:
-          $ref: '#/components/schemas/RoutingProfileId'
-          description: The identifier of the routing profile for the user.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile for the user.
         HierarchyGroupId:
-          $ref: '#/components/schemas/HierarchyGroupId'
-          description: The identifier of the hierarchy group for the user.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group for the user.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
     UserId:
       type: string
     SecurityToken:
@@ -3488,17 +3571,21 @@ components:
       type: object
       properties:
         AccessToken:
-          $ref: '#/components/schemas/SecurityToken'
-          description: An access token generated for a federated user to access Amazon Connect.
+          allOf:
+            - $ref: '#/components/schemas/SecurityToken'
+            - description: An access token generated for a federated user to access Amazon Connect.
         AccessTokenExpiration:
-          $ref: '#/components/schemas/timestamp'
-          description: A token generated with an expiration time for the session a user is logged in to Amazon Connect.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: A token generated with an expiration time for the session a user is logged in to Amazon Connect.
         RefreshToken:
-          $ref: '#/components/schemas/SecurityToken'
-          description: Renews a token generated for a user to access the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/SecurityToken'
+            - description: Renews a token generated for a user to access the Amazon Connect instance.
         RefreshTokenExpiration:
-          $ref: '#/components/schemas/timestamp'
-          description: Renews the expiration timer for a generated token.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: Renews the expiration timer for a generated token.
       description: Contains credentials to use for federation.
     CurrentMetricName:
       type: string
@@ -3530,11 +3617,13 @@ components:
       type: object
       properties:
         Metric:
-          $ref: '#/components/schemas/CurrentMetric'
-          description: Information about the metric.
+          allOf:
+            - $ref: '#/components/schemas/CurrentMetric'
+            - description: Information about the metric.
         Value:
-          $ref: '#/components/schemas/Value'
-          description: The value of the metric.
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: The value of the metric.
       description: Contains the data for a real-time metric.
     CurrentMetricDataCollections:
       type: array
@@ -3544,21 +3633,25 @@ components:
       type: object
       properties:
         Queue:
-          $ref: '#/components/schemas/QueueReference'
-          description: Information about the queue for which metrics are returned.
+          allOf:
+            - $ref: '#/components/schemas/QueueReference'
+            - description: Information about the queue for which metrics are returned.
         Channel:
-          $ref: '#/components/schemas/Channel'
-          description: The channel used for grouping and filters.
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The channel used for grouping and filters.
       description: Contains information about the dimensions for a set of metrics.
     CurrentMetricResult:
       type: object
       properties:
         Dimensions:
-          $ref: '#/components/schemas/Dimensions'
-          description: The dimensions for the metrics.
+          allOf:
+            - $ref: '#/components/schemas/Dimensions'
+            - description: The dimensions for the metrics.
         Collections:
-          $ref: '#/components/schemas/CurrentMetricDataCollections'
-          description: The set of metrics.
+          allOf:
+            - $ref: '#/components/schemas/CurrentMetricDataCollections'
+            - description: The set of metrics.
       description: Contains information about a set of real-time metrics.
     CurrentMetricResults:
       type: array
@@ -3580,20 +3673,25 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/HierarchyGroupId'
-          description: The identifier of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the hierarchy group.
         Name:
-          $ref: '#/components/schemas/HierarchyGroupName'
-          description: The name of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupName'
+            - description: The name of the hierarchy group.
         LevelId:
-          $ref: '#/components/schemas/HierarchyLevelId'
-          description: The identifier of the level in the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelId'
+            - description: The identifier of the level in the hierarchy group.
         HierarchyPath:
-          $ref: '#/components/schemas/HierarchyPath'
-          description: Information about the levels in the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyPath'
+            - description: Information about the levels in the hierarchy group.
       description: Contains information about a hierarchy group.
     DescribeUserHierarchyStructureRequest:
       type: object
@@ -3603,20 +3701,25 @@ components:
       type: object
       properties:
         LevelOne:
-          $ref: '#/components/schemas/HierarchyLevel'
-          description: Information about level one.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevel'
+            - description: Information about level one.
         LevelTwo:
-          $ref: '#/components/schemas/HierarchyLevel'
-          description: Information about level two.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevel'
+            - description: Information about level two.
         LevelThree:
-          $ref: '#/components/schemas/HierarchyLevel'
-          description: Information about level three.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevel'
+            - description: Information about level three.
         LevelFour:
-          $ref: '#/components/schemas/HierarchyLevel'
-          description: Information about level four.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevel'
+            - description: Information about level four.
         LevelFive:
-          $ref: '#/components/schemas/HierarchyLevel'
-          description: Information about level five.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevel'
+            - description: Information about level five.
       description: Contains information about a hierarchy structure.
     DescribeUserRequest:
       type: object
@@ -3626,55 +3729,69 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/UserId'
-          description: The identifier of the user account.
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The identifier of the user account.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the user account.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the user account.
         Username:
-          $ref: '#/components/schemas/AgentUsername'
-          description: The user name assigned to the user account.
+          allOf:
+            - $ref: '#/components/schemas/AgentUsername'
+            - description: The user name assigned to the user account.
         IdentityInfo:
-          $ref: '#/components/schemas/UserIdentityInfo'
-          description: Information about the user identity.
+          allOf:
+            - $ref: '#/components/schemas/UserIdentityInfo'
+            - description: Information about the user identity.
         PhoneConfig:
-          $ref: '#/components/schemas/UserPhoneConfig'
-          description: Information about the phone configuration for the user.
+          allOf:
+            - $ref: '#/components/schemas/UserPhoneConfig'
+            - description: Information about the phone configuration for the user.
         DirectoryUserId:
-          $ref: '#/components/schemas/DirectoryUserId'
-          description: The identifier of the user account in the directory used for identity management.
+          allOf:
+            - $ref: '#/components/schemas/DirectoryUserId'
+            - description: The identifier of the user account in the directory used for identity management.
         SecurityProfileIds:
-          $ref: '#/components/schemas/SecurityProfileIds'
-          description: The identifiers of the security profiles for the user.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileIds'
+            - description: The identifiers of the security profiles for the user.
         RoutingProfileId:
-          $ref: '#/components/schemas/RoutingProfileId'
-          description: The identifier of the routing profile for the user.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile for the user.
         HierarchyGroupId:
-          $ref: '#/components/schemas/HierarchyGroupId'
-          description: The identifier of the hierarchy group for the user.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group for the user.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags.
       description: Contains information about a user account for a Amazon Connect instance.
     QueueReference:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/QueueId'
-          description: The identifier of the queue.
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the queue.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the queue.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the queue.
       description: Contains information about a queue resource for which metrics are returned.
     Filters:
       type: object
       properties:
         Queues:
-          $ref: '#/components/schemas/Queues'
-          description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
+          allOf:
+            - $ref: '#/components/schemas/Queues'
+            - description: The queues to use to filter the metrics. You can specify up to 100 queues per request.
         Channels:
-          $ref: '#/components/schemas/Channels'
-          description: The channel to use to filter the metrics.
+          allOf:
+            - $ref: '#/components/schemas/Channels'
+            - description: The channel to use to filter the metrics.
       description: Contains the filter to apply when retrieving metrics.
     GetContactAttributesRequest:
       type: object
@@ -3699,20 +3816,25 @@ components:
       title: GetCurrentMetricDataRequest
       properties:
         Filters:
-          $ref: '#/components/schemas/Filters'
-          description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Filters'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
         Groupings:
-          $ref: '#/components/schemas/Groupings'
-          description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Groupings'
+            - description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
         CurrentMetrics:
-          $ref: '#/components/schemas/CurrentMetrics'
-          description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>'
+          allOf:
+            - $ref: '#/components/schemas/CurrentMetrics'
+            - description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p> <p>The token expires after 5 minutes from the time it is created. Subsequent requests that use the token must use the same request parameters as the request that generated the token.</p>
         MaxResults:
-          $ref: '#/components/schemas/MaxResult100'
-          description: The maximimum number of results to return per page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResult100'
+            - description: The maximimum number of results to return per page.
     GetFederationTokenRequest:
       type: object
       title: GetFederationTokenRequest
@@ -3731,26 +3853,33 @@ components:
       title: GetMetricDataRequest
       properties:
         StartTime:
-          $ref: '#/components/schemas/timestamp'
-          description: '<p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be specified using a multiple of 5 minutes, such as 10:05, 10:10, 10:15.</p> <p>The start time cannot be earlier than 24 hours before the time of the request. Historical metrics are available only for 24 hours.</p>'
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: '<p>The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be specified using a multiple of 5 minutes, such as 10:05, 10:10, 10:15.</p> <p>The start time cannot be earlier than 24 hours before the time of the request. Historical metrics are available only for 24 hours.</p>'
         EndTime:
-          $ref: '#/components/schemas/timestamp'
-          description: '<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the retrieval of historical metrics data. The time must be specified using an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be later than the start time timestamp.</p> <p>The time range between the start and end time must be less than 24 hours.</p>'
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: '<p>The timestamp, in UNIX Epoch time format, at which to end the reporting interval for the retrieval of historical metrics data. The time must be specified using an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be later than the start time timestamp.</p> <p>The time range between the start and end time must be less than 24 hours.</p>'
         Filters:
-          $ref: '#/components/schemas/Filters'
-          description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Filters'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
         Groupings:
-          $ref: '#/components/schemas/Groupings'
-          description: '<p>The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues.</p> <p>The only supported grouping is <code>QUEUE</code>.</p> <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Groupings'
+            - description: '<p>The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues.</p> <p>The only supported grouping is <code>QUEUE</code>.</p> <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>'
         HistoricalMetrics:
-          $ref: '#/components/schemas/HistoricalMetrics'
-          description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: Only "Less than" comparisons are supported, with the following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120, 180, 240, 300, 600</p> </dd> </dl>'
+          allOf:
+            - $ref: '#/components/schemas/HistoricalMetrics'
+            - description: '<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>ABANDON_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>AFTER_CONTACT_WORK_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>API_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CALLBACK_CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_ABANDONED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_CONSULTED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_INCOMING</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HANDLED_OUTBOUND</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_HOLD_ABANDONS</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_MISSED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_QUEUED</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Statistic: SUM</p> </dd> <dt>HANDLE_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_AND_HOLD_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>INTERACTION_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>OCCUPANCY</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> </dd> <dt>QUEUE_ANSWER_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: AVG</p> </dd> <dt>QUEUED_TIME</dt> <dd> <p>Unit: SECONDS</p> <p>Statistic: MAX</p> </dd> <dt>SERVICE_LEVEL</dt> <dd> <p>Unit: PERCENT</p> <p>Statistic: AVG</p> <p>Threshold: Only "Less than" comparisons are supported, with the following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120, 180, 240, 300, 600</p> </dd> </dl>'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
         MaxResults:
-          $ref: '#/components/schemas/MaxResult100'
-          description: The maximimum number of results to return per page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResult100'
+            - description: The maximimum number of results to return per page.
     HistoricalMetricResults:
       type: array
       items:
@@ -3763,33 +3892,41 @@ components:
       type: object
       properties:
         LevelOne:
-          $ref: '#/components/schemas/HierarchyGroupSummary'
-          description: Information about level one.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummary'
+            - description: Information about level one.
         LevelTwo:
-          $ref: '#/components/schemas/HierarchyGroupSummary'
-          description: Information about level two.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummary'
+            - description: Information about level two.
         LevelThree:
-          $ref: '#/components/schemas/HierarchyGroupSummary'
-          description: Information about level three.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummary'
+            - description: Information about level three.
         LevelFour:
-          $ref: '#/components/schemas/HierarchyGroupSummary'
-          description: Information about level four.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummary'
+            - description: Information about level four.
         LevelFive:
-          $ref: '#/components/schemas/HierarchyGroupSummary'
-          description: Information about level five.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupSummary'
+            - description: Information about level five.
       description: Contains information about the levels of a hierarchy group.
     HierarchyGroupSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/HierarchyGroupId'
-          description: The identifier of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the hierarchy group.
         Name:
-          $ref: '#/components/schemas/HierarchyGroupName'
-          description: The name of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupName'
+            - description: The name of the hierarchy group.
       description: Contains summary information about a hierarchy group.
     HierarchyGroupSummaryList:
       type: array
@@ -3801,14 +3938,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/HierarchyLevelId'
-          description: The identifier of the hierarchy level.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelId'
+            - description: The identifier of the hierarchy level.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the hierarchy level.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the hierarchy level.
         Name:
-          $ref: '#/components/schemas/HierarchyLevelName'
-          description: The name of the hierarchy level.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelName'
+            - description: The name of the hierarchy level.
       description: Contains information about a hierarchy level.
     HistoricalMetricName:
       type: string
@@ -3843,11 +3983,13 @@ components:
       type: object
       properties:
         Comparison:
-          $ref: '#/components/schemas/Comparison'
-          description: The type of comparison. Only "less than" (LT) comparisons are supported.
+          allOf:
+            - $ref: '#/components/schemas/Comparison'
+            - description: The type of comparison. Only "less than" (LT) comparisons are supported.
         ThresholdValue:
-          $ref: '#/components/schemas/ThresholdValue'
-          description: The threshold value to compare.
+          allOf:
+            - $ref: '#/components/schemas/ThresholdValue'
+            - description: The threshold value to compare.
       description: Contains information about the threshold for service level metrics.
     Statistic:
       type: string
@@ -3859,11 +4001,13 @@ components:
       type: object
       properties:
         Metric:
-          $ref: '#/components/schemas/HistoricalMetric'
-          description: Information about the metric.
+          allOf:
+            - $ref: '#/components/schemas/HistoricalMetric'
+            - description: Information about the metric.
         Value:
-          $ref: '#/components/schemas/Value'
-          description: The value of the metric.
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: The value of the metric.
       description: Contains the data for a historical metric.
     HistoricalMetricDataCollections:
       type: array
@@ -3873,11 +4017,13 @@ components:
       type: object
       properties:
         Dimensions:
-          $ref: '#/components/schemas/Dimensions'
-          description: The dimension for the metrics.
+          allOf:
+            - $ref: '#/components/schemas/Dimensions'
+            - description: The dimension for the metrics.
         Collections:
-          $ref: '#/components/schemas/HistoricalMetricDataCollections'
-          description: The set of metrics.
+          allOf:
+            - $ref: '#/components/schemas/HistoricalMetricDataCollections'
+            - description: The set of metrics.
       description: Contains information about the historical metrics retrieved.
     HoursOfOperationId:
       type: string
@@ -3887,14 +4033,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/HoursOfOperationId'
-          description: The identifier of the hours of operation.
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationId'
+            - description: The identifier of the hours of operation.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the hours of operation.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the hours of operation.
         Name:
-          $ref: '#/components/schemas/HoursOfOperationName'
-          description: The name of the hours of operation.
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationName'
+            - description: The name of the hours of operation.
       description: Contains summary information about hours of operation for a contact center.
     HoursOfOperationSummaryList:
       type: array
@@ -3981,8 +4130,9 @@ components:
         - DisplayName
       properties:
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: Display name of the participant.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: Display name of the participant.
       description: The customer's details.
     ParticipantId:
       type: string
@@ -3998,20 +4148,25 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/PhoneNumberId'
-          description: The identifier of the phone number.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberId'
+            - description: The identifier of the phone number.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the phone number.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the phone number.
         PhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: The phone number.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number.
         PhoneNumberType:
-          $ref: '#/components/schemas/PhoneNumberType'
-          description: The type of phone number.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberType'
+            - description: The type of phone number.
         PhoneNumberCountryCode:
-          $ref: '#/components/schemas/PhoneNumberCountryCode'
-          description: The ISO country code.
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberCountryCode'
+            - description: The ISO country code.
       description: Contains summary information about a phone number for a contact center.
     QueueId:
       type: string
@@ -4023,17 +4178,21 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/QueueId'
-          description: The identifier of the queue.
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the queue.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the queue.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the queue.
         Name:
-          $ref: '#/components/schemas/QueueName'
-          description: The name of the queue.
+          allOf:
+            - $ref: '#/components/schemas/QueueName'
+            - description: The name of the queue.
         QueueType:
-          $ref: '#/components/schemas/QueueType'
-          description: The type of queue.
+          allOf:
+            - $ref: '#/components/schemas/QueueType'
+            - description: The type of queue.
       description: Contains summary information about a queue.
     ResumeContactRecordingRequest:
       type: object
@@ -4044,14 +4203,17 @@ components:
       title: ResumeContactRecordingRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact.
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
     RoutingProfileName:
       type: string
       minLength: 1
@@ -4060,14 +4222,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/RoutingProfileId'
-          description: The identifier of the routing profile.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the routing profile.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the routing profile.
         Name:
-          $ref: '#/components/schemas/RoutingProfileName'
-          description: The name of the routing profile.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileName'
+            - description: The name of the routing profile.
       description: Contains summary information about a routing profile.
     SecurityProfileName:
       type: string
@@ -4075,14 +4240,17 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/SecurityProfileId'
-          description: The identifier of the security profile.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileId'
+            - description: The identifier of the security profile.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the security profile.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the security profile.
         Name:
-          $ref: '#/components/schemas/SecurityProfileName'
-          description: The name of the security profile.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileName'
+            - description: The name of the security profile.
       description: Contains information about a security profile.
     StartChatContactRequest:
       type: object
@@ -4093,29 +4261,36 @@ components:
       title: StartChatContactRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ContactFlowId:
-          $ref: '#/components/schemas/ContactFlowId'
-          description: The identifier of the contact flow for the chat.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow for the chat.
         Attributes:
-          $ref: '#/components/schemas/Attributes'
-          description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. </p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Attributes'
+            - description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. </p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
         ParticipantDetails:
-          $ref: '#/components/schemas/ParticipantDetails'
-          description: Information identifying the participant.
+          allOf:
+            - $ref: '#/components/schemas/ParticipantDetails'
+            - description: Information identifying the participant.
         InitialMessage:
-          $ref: '#/components/schemas/ChatMessage'
-          description: The initial message to be sent to the newly created chat.
+          allOf:
+            - $ref: '#/components/schemas/ChatMessage'
+            - description: The initial message to be sent to the newly created chat.
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     VoiceRecordingConfiguration:
       type: object
       properties:
         VoiceRecordingTrack:
-          $ref: '#/components/schemas/VoiceRecordingTrack'
-          description: Identifies which track is being recorded.
+          allOf:
+            - $ref: '#/components/schemas/VoiceRecordingTrack'
+            - description: Identifies which track is being recorded.
       description: Contains information about the recording configuration settings.
     StartContactRecordingRequest:
       type: object
@@ -4127,17 +4302,21 @@ components:
       title: StartContactRecordingRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact.
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
         VoiceRecordingConfiguration:
-          $ref: '#/components/schemas/VoiceRecordingConfiguration'
-          description: Who is being recorded.
+          allOf:
+            - $ref: '#/components/schemas/VoiceRecordingConfiguration'
+            - description: Who is being recorded.
     StartOutboundVoiceContactRequest:
       type: object
       required:
@@ -4147,26 +4326,33 @@ components:
       title: StartOutboundVoiceContactRequest
       properties:
         DestinationPhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: 'The phone number of the customer, in E.164 format.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: 'The phone number of the customer, in E.164 format.'
         ContactFlowId:
-          $ref: '#/components/schemas/ContactFlowId'
-          description: The identifier of the contact flow for the outbound call.
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow for the outbound call.
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. If the contact is disconnected, a new contact is started.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. If the contact is disconnected, a new contact is started.'
         SourcePhoneNumber:
-          $ref: '#/components/schemas/PhoneNumber'
-          description: 'The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.'
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: 'The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.'
         QueueId:
-          $ref: '#/components/schemas/QueueId'
-          description: 'The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.'
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: 'The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.'
         Attributes:
-          $ref: '#/components/schemas/Attributes'
-          description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Attributes'
+            - description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
     StopContactRecordingRequest:
       type: object
       required:
@@ -4176,14 +4362,17 @@ components:
       title: StopContactRecordingRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact.
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
     StopContactRequest:
       type: object
       required:
@@ -4192,11 +4381,13 @@ components:
       title: StopContactRequest
       properties:
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The ID of the contact.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The ID of the contact.
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
     SuspendContactRecordingRequest:
       type: object
       required:
@@ -4206,14 +4397,17 @@ components:
       title: SuspendContactRecordingRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact.
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
     TagKeyList:
       type: array
       items:
@@ -4227,8 +4421,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     ThresholdValue:
       type: number
       format: double
@@ -4245,21 +4440,25 @@ components:
       title: UpdateContactAttributesRequest
       properties:
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The identifier of the Amazon Connect instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
         Attributes:
-          $ref: '#/components/schemas/Attributes'
-          description: '<p>The Amazon Connect attributes. These attributes can be accessed in contact flows just like any other contact attributes.</p> <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Attributes'
+            - description: '<p>The Amazon Connect attributes. These attributes can be accessed in contact flows just like any other contact attributes.</p> <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
     UpdateUserHierarchyRequest:
       type: object
       title: UpdateUserHierarchyRequest
       properties:
         HierarchyGroupId:
-          $ref: '#/components/schemas/HierarchyGroupId'
-          description: The identifier of the hierarchy group.
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group.
     UpdateUserIdentityInfoRequest:
       type: object
       required:
@@ -4267,8 +4466,9 @@ components:
       title: UpdateUserIdentityInfoRequest
       properties:
         IdentityInfo:
-          $ref: '#/components/schemas/UserIdentityInfo'
-          description: The identity information for the user.
+          allOf:
+            - $ref: '#/components/schemas/UserIdentityInfo'
+            - description: The identity information for the user.
     UpdateUserPhoneConfigRequest:
       type: object
       required:
@@ -4276,8 +4476,9 @@ components:
       title: UpdateUserPhoneConfigRequest
       properties:
         PhoneConfig:
-          $ref: '#/components/schemas/UserPhoneConfig'
-          description: Information about phone configuration settings for the user.
+          allOf:
+            - $ref: '#/components/schemas/UserPhoneConfig'
+            - description: Information about phone configuration settings for the user.
     UpdateUserRoutingProfileRequest:
       type: object
       required:
@@ -4285,8 +4486,9 @@ components:
       title: UpdateUserRoutingProfileRequest
       properties:
         RoutingProfileId:
-          $ref: '#/components/schemas/RoutingProfileId'
-          description: The identifier of the routing profile for the user.
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile for the user.
     UpdateUserSecurityProfilesRequest:
       type: object
       required:
@@ -4294,20 +4496,24 @@ components:
       title: UpdateUserSecurityProfilesRequest
       properties:
         SecurityProfileIds:
-          $ref: '#/components/schemas/SecurityProfileIds'
-          description: The identifiers of the security profiles for the user.
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileIds'
+            - description: The identifiers of the security profiles for the user.
     UserSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/UserId'
-          description: The identifier of the user account.
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The identifier of the user account.
         Arn:
-          $ref: '#/components/schemas/ARN'
-          description: The Amazon Resource Name (ARN) of the user account.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the user account.
         Username:
-          $ref: '#/components/schemas/AgentUsername'
-          description: The Amazon Connect user name of the user account.
+          allOf:
+            - $ref: '#/components/schemas/AgentUsername'
+            - description: The Amazon Connect user name of the user account.
       description: Contains summary information about a user.
 security:
   - hmac: []

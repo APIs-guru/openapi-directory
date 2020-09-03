@@ -156,24 +156,29 @@ paths:
                   type: object
                   properties:
                     VpcId:
-                      $ref: '#/components/schemas/VpcId'
-                      description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+                      allOf:
+                        - $ref: '#/components/schemas/VpcId'
+                        - description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
                 PublicAccessBlockConfiguration:
                   description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
                   type: object
                   properties:
                     BlockPublicAcls:
-                      $ref: '#/components/schemas/Setting'
-                      description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
                     IgnorePublicAcls:
-                      $ref: '#/components/schemas/Setting'
-                      description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
                     BlockPublicPolicy:
-                      $ref: '#/components/schemas/Setting'
-                      description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
                     RestrictPublicBuckets:
-                      $ref: '#/components/schemas/Setting'
-                      description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -298,20 +303,25 @@ paths:
                   type: object
                   properties:
                     LambdaInvoke:
-                      $ref: '#/components/schemas/LambdaInvokeOperation'
-                      description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/LambdaInvokeOperation'
+                        - description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
                     S3PutObjectCopy:
-                      $ref: '#/components/schemas/S3CopyObjectOperation'
-                      description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/S3CopyObjectOperation'
+                        - description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
                     S3PutObjectAcl:
-                      $ref: '#/components/schemas/S3SetObjectAclOperation'
-                      description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/S3SetObjectAclOperation'
+                        - description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
                     S3PutObjectTagging:
-                      $ref: '#/components/schemas/S3SetObjectTaggingOperation'
-                      description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/S3SetObjectTaggingOperation'
+                        - description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
                     S3InitiateRestoreObject:
-                      $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
-                      description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
+                        - description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
                     S3PutObjectLegalHold:
                       $ref: '#/components/schemas/S3SetObjectLegalHoldOperation'
                     S3PutObjectRetention:
@@ -321,20 +331,25 @@ paths:
                   type: object
                   properties:
                     Bucket:
-                      $ref: '#/components/schemas/S3BucketArnString'
-                      description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
+                      allOf:
+                        - $ref: '#/components/schemas/S3BucketArnString'
+                        - description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
                     Format:
-                      $ref: '#/components/schemas/JobReportFormat'
-                      description: The format of the specified job-completion report.
+                      allOf:
+                        - $ref: '#/components/schemas/JobReportFormat'
+                        - description: The format of the specified job-completion report.
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Indicates whether the specified job will generate a job-completion report.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Indicates whether the specified job will generate a job-completion report.
                     Prefix:
-                      $ref: '#/components/schemas/ReportPrefixString'
-                      description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
+                      allOf:
+                        - $ref: '#/components/schemas/ReportPrefixString'
+                        - description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
                     ReportScope:
-                      $ref: '#/components/schemas/JobReportScope'
-                      description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+                      allOf:
+                        - $ref: '#/components/schemas/JobReportScope'
+                        - description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
                 ClientRequestToken:
                   description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
                   type: string
@@ -345,11 +360,13 @@ paths:
                   type: object
                   properties:
                     Spec:
-                      $ref: '#/components/schemas/JobManifestSpec'
-                      description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+                      allOf:
+                        - $ref: '#/components/schemas/JobManifestSpec'
+                        - description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
                     Location:
-                      $ref: '#/components/schemas/JobManifestLocation'
-                      description: Contains the information required to locate the specified job's manifest.
+                      allOf:
+                        - $ref: '#/components/schemas/JobManifestLocation'
+                        - description: Contains the information required to locate the specified job's manifest.
                 Description:
                   description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
                   type: string
@@ -792,17 +809,21 @@ paths:
                   type: object
                   properties:
                     BlockPublicAcls:
-                      $ref: '#/components/schemas/Setting'
-                      description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
                     IgnorePublicAcls:
-                      $ref: '#/components/schemas/Setting'
-                      description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
                     BlockPublicPolicy:
-                      $ref: '#/components/schemas/Setting'
-                      description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
                     RestrictPublicBuckets:
-                      $ref: '#/components/schemas/Setting'
-                      description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/Setting'
+                        - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
   '/v20180820/jobs/{id}#x-amz-account-id':
     get:
       operationId: DescribeJob
@@ -1179,90 +1200,112 @@ components:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: The ID for this job. Amazon S3 generates this ID automatically and returns it after a successful <code>Create Job</code> request.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID for this job. Amazon S3 generates this ID automatically and returns it after a successful <code>Create Job</code> request.
     LambdaInvokeOperation:
       type: object
       properties:
         FunctionArn:
-          $ref: '#/components/schemas/FunctionArnString'
-          description: The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/FunctionArnString'
+            - description: The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.
       description: Contains the configuration parameters for a <code>Lambda Invoke</code> operation.
     S3CopyObjectOperation:
       type: object
       properties:
         TargetResource:
-          $ref: '#/components/schemas/S3BucketArnString'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArnString'
+            - description: <p/>
         CannedAccessControlList:
-          $ref: '#/components/schemas/S3CannedAccessControlList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3CannedAccessControlList'
+            - description: <p/>
         AccessControlGrants:
-          $ref: '#/components/schemas/S3GrantList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3GrantList'
+            - description: <p/>
         MetadataDirective:
-          $ref: '#/components/schemas/S3MetadataDirective'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3MetadataDirective'
+            - description: <p/>
         ModifiedSinceConstraint:
-          $ref: '#/components/schemas/TimeStamp'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: <p/>
         NewObjectMetadata:
-          $ref: '#/components/schemas/S3ObjectMetadata'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectMetadata'
+            - description: <p/>
         NewObjectTagging:
-          $ref: '#/components/schemas/S3TagSet'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3TagSet'
+            - description: <p/>
         RedirectLocation:
-          $ref: '#/components/schemas/NonEmptyMaxLength2048String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength2048String'
+            - description: <p/>
         RequesterPays:
-          $ref: '#/components/schemas/Boolean'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p/>
         StorageClass:
-          $ref: '#/components/schemas/S3StorageClass'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3StorageClass'
+            - description: <p/>
         UnModifiedSinceConstraint:
-          $ref: '#/components/schemas/TimeStamp'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: <p/>
         SSEAwsKmsKeyId:
-          $ref: '#/components/schemas/KmsKeyArnString'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArnString'
+            - description: <p/>
         TargetKeyPrefix:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         ObjectLockLegalHoldStatus:
-          $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
-          description: The Legal Hold status to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
+            - description: The Legal Hold status to be applied to all objects in the Batch Operations job.
         ObjectLockMode:
-          $ref: '#/components/schemas/S3ObjectLockMode'
-          description: The Retention mode to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectLockMode'
+            - description: The Retention mode to be applied to all objects in the Batch Operations job.
         ObjectLockRetainUntilDate:
-          $ref: '#/components/schemas/TimeStamp'
-          description: The date when the applied Object Retention configuration will expire on all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: The date when the applied Object Retention configuration will expire on all objects in the Batch Operations job.
       description: 'Contains the configuration parameters for a PUT Copy object operation. Amazon S3 Batch Operations passes each value through to the underlying PUT Copy object API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html">PUT Object - Copy</a>.'
     S3SetObjectAclOperation:
       type: object
       properties:
         AccessControlPolicy:
-          $ref: '#/components/schemas/S3AccessControlPolicy'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3AccessControlPolicy'
+            - description: <p/>
       description: 'Contains the configuration parameters for a Set Object ACL operation. Amazon S3 Batch Operations passes each value through to the underlying PUT Object acl API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html">PUT Object acl</a>.'
     S3SetObjectTaggingOperation:
       type: object
       properties:
         TagSet:
-          $ref: '#/components/schemas/S3TagSet'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3TagSet'
+            - description: <p/>
       description: 'Contains the configuration parameters for a Set Object Tagging operation. Amazon S3 Batch Operations passes each value through to the underlying PUT Object tagging API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html">PUT Object tagging</a>.'
     S3InitiateRestoreObjectOperation:
       type: object
       properties:
         ExpirationInDays:
-          $ref: '#/components/schemas/S3ExpirationInDays'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3ExpirationInDays'
+            - description: <p/>
         GlacierJobTier:
-          $ref: '#/components/schemas/S3GlacierJobTier'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3GlacierJobTier'
+            - description: <p/>
       description: 'Contains the configuration parameters for an Initiate Glacier Restore job. Amazon S3 Batch Operations passes each value through to the underlying POST Object restore API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request">Restoring Archives</a>.'
     S3SetObjectLegalHoldOperation:
       type: object
@@ -1270,8 +1313,9 @@ components:
         - LegalHold
       properties:
         LegalHold:
-          $ref: '#/components/schemas/S3ObjectLockLegalHold'
-          description: The Legal Hold contains the status to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectLockLegalHold'
+            - description: The Legal Hold contains the status to be applied to all objects in the Batch Operations job.
       description: 'Contains the configuration parameters for a Set Object Legal Hold operation. Amazon S3 Batch Operations passes each value through to the underlying PUT Object Legal Hold API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.htmll#object-lock-legal-holds">PUT Object Legal Hold</a>.'
     S3SetObjectRetentionOperation:
       type: object
@@ -1279,11 +1323,13 @@ components:
         - Retention
       properties:
         BypassGovernanceRetention:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates if the operation should be applied to objects in the Batch Operations job even if they have Governance-type Object Lock in place.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates if the operation should be applied to objects in the Batch Operations job even if they have Governance-type Object Lock in place.
         Retention:
-          $ref: '#/components/schemas/S3Retention'
-          description: Amazon S3 object lock Retention contains the retention mode to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3Retention'
+            - description: Amazon S3 object lock Retention contains the retention mode to be applied to all objects in the Batch Operations job.
       description: 'Contains the configuration parameters for a Set Object Retention operation. Amazon S3 Batch Operations passes each value through to the underlying PUT Object Retention API. For more information about the parameters for this operation, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html#object-lock-retention-modes">PUT Object Retention</a>.'
     S3BucketArnString:
       type: string
@@ -1311,11 +1357,13 @@ components:
         - Format
       properties:
         Format:
-          $ref: '#/components/schemas/JobManifestFormat'
-          description: Indicates which of the available formats the specified manifest uses.
+          allOf:
+            - $ref: '#/components/schemas/JobManifestFormat'
+            - description: Indicates which of the available formats the specified manifest uses.
         Fields:
-          $ref: '#/components/schemas/JobManifestFieldList'
-          description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
+          allOf:
+            - $ref: '#/components/schemas/JobManifestFieldList'
+            - description: 'If the specified manifest object is in the <code>S3BatchOperations_CSV_20180820</code> format, this element describes which columns contain the required data.'
       description: 'Describes the format of a manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
     JobManifestLocation:
       type: object
@@ -1324,14 +1372,17 @@ components:
         - ETag
       properties:
         ObjectArn:
-          $ref: '#/components/schemas/S3KeyArnString'
-          description: The Amazon Resource Name (ARN) for a manifest object.
+          allOf:
+            - $ref: '#/components/schemas/S3KeyArnString'
+            - description: The Amazon Resource Name (ARN) for a manifest object.
         ObjectVersionId:
-          $ref: '#/components/schemas/S3ObjectVersionId'
-          description: The optional version ID to identify a specific version of the manifest object.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectVersionId'
+            - description: The optional version ID to identify a specific version of the manifest object.
         ETag:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: The ETag for the specified manifest object.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: The ETag for the specified manifest object.
       description: Contains the information required to locate a manifest object.
     S3Tag:
       type: object
@@ -1340,11 +1391,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKeyString'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TagKeyString'
+            - description: <p/>
         Value:
-          $ref: '#/components/schemas/TagValueString'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TagValueString'
+            - description: <p/>
       description: <p/>
     TooManyRequestsException: {}
     BadRequestException: {}
@@ -1358,71 +1411,85 @@ components:
       type: object
       properties:
         Job:
-          $ref: '#/components/schemas/JobDescriptor'
-          description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
+          allOf:
+            - $ref: '#/components/schemas/JobDescriptor'
+            - description: Contains the configuration parameters and status for the job specified in the <code>Describe Job</code> request.
     GetAccessPointResult:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the specified access point.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the specified access point.
         Bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the bucket associated with the specified access point.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the bucket associated with the specified access point.
         NetworkOrigin:
-          $ref: '#/components/schemas/NetworkOrigin'
-          description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
+          allOf:
+            - $ref: '#/components/schemas/NetworkOrigin'
+            - description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
         VpcConfiguration:
-          $ref: '#/components/schemas/VpcConfiguration'
-          description: Contains the virtual private cloud (VPC) configuration for the specified access point.
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: Contains the virtual private cloud (VPC) configuration for the specified access point.
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
         CreationDate:
-          $ref: '#/components/schemas/CreationDate'
-          description: The date and time when the specified access point was created.
+          allOf:
+            - $ref: '#/components/schemas/CreationDate'
+            - description: The date and time when the specified access point was created.
     GetAccessPointPolicyResult:
       type: object
       properties:
         Policy:
-          $ref: '#/components/schemas/Policy'
-          description: The access point policy associated with the specified access point.
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The access point policy associated with the specified access point.
     GetAccessPointPolicyStatusResult:
       type: object
       properties:
         PolicyStatus:
-          $ref: '#/components/schemas/PolicyStatus'
-          description: Indicates the current policy status of the specified access point.
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatus'
+            - description: Indicates the current policy status of the specified access point.
     GetJobTaggingResult:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/S3TagSet'
-          description: The set of tags associated with the Amazon S3 Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3TagSet'
+            - description: The set of tags associated with the Amazon S3 Batch Operations job.
     GetPublicAccessBlockOutput:
       type: object
       properties:
         PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-          description: The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.
+          allOf:
+            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            - description: The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.
     NoSuchPublicAccessBlockConfiguration: {}
     ListAccessPointsResult:
       type: object
       properties:
         AccessPointList:
-          $ref: '#/components/schemas/AccessPointList'
-          description: Contains identification and configuration information for one or more access points associated with the specified bucket.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointList'
+            - description: Contains identification and configuration information for one or more access points associated with the specified bucket.
         NextToken:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: 'If the specified bucket has more access points than can be returned in one call to this API, then this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: 'If the specified bucket has more access points than can be returned in one call to this API, then this field contains a continuation token that you can provide in subsequent calls to this API to retrieve additional access points.'
     ListJobsResult:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/StringForNextToken'
-          description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
+          allOf:
+            - $ref: '#/components/schemas/StringForNextToken'
+            - description: 'If the <code>List Jobs</code> request produced more than the maximum number of results, you can pass this value into a subsequent <code>List Jobs</code> request in order to retrieve the next page of results.'
         Jobs:
-          $ref: '#/components/schemas/JobListDescriptorList'
-          description: The list of current jobs and jobs that have ended within the last 30 days.
+          allOf:
+            - $ref: '#/components/schemas/JobListDescriptorList'
+            - description: The list of current jobs and jobs that have ended within the last 30 days.
     JobStatus:
       type: string
       enum:
@@ -1452,23 +1519,28 @@ components:
         - Priority
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: The ID for the job whose priority Amazon S3 updated.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID for the job whose priority Amazon S3 updated.
         Priority:
-          $ref: '#/components/schemas/JobPriority'
-          description: The new priority assigned to the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobPriority'
+            - description: The new priority assigned to the specified job.
     UpdateJobStatusResult:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: The ID for the job whose status was updated.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID for the job whose status was updated.
         Status:
-          $ref: '#/components/schemas/JobStatus'
-          description: The current status for the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The current status for the specified job.
         StatusUpdateReason:
-          $ref: '#/components/schemas/JobStatusUpdateReason'
-          description: The reason that the specified job's status was updated.
+          allOf:
+            - $ref: '#/components/schemas/JobStatusUpdateReason'
+            - description: The reason that the specified job's status was updated.
     JobStatusException: {}
     AccessPointName:
       type: string
@@ -1485,8 +1557,9 @@ components:
         - VpcId
       properties:
         VpcId:
-          $ref: '#/components/schemas/VpcId'
-          description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: 'If this field is specified, this access point will only allow connections from the specified VPC ID.'
       description: The virtual private cloud (VPC) configuration for an access point.
     BucketName:
       type: string
@@ -1500,24 +1573,29 @@ components:
         - Bucket
       properties:
         Name:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of this access point.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of this access point.
         NetworkOrigin:
-          $ref: '#/components/schemas/NetworkOrigin'
-          description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
+          allOf:
+            - $ref: '#/components/schemas/NetworkOrigin'
+            - description: 'Indicates whether this access point allows access from the public internet. If <code>VpcConfiguration</code> is specified for this access point, then <code>NetworkOrigin</code> is <code>VPC</code>, and the access point doesn''t allow access from the public internet. Otherwise, <code>NetworkOrigin</code> is <code>Internet</code>, and the access point allows access from the public internet, subject to the access point and bucket access policies.'
         VpcConfiguration:
-          $ref: '#/components/schemas/VpcConfiguration'
-          description: 'The virtual private cloud (VPC) configuration for this access point, if one exists.'
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: 'The virtual private cloud (VPC) configuration for this access point, if one exists.'
         Bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the bucket associated with this access point.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the bucket associated with this access point.
       description: An access point used to access a bucket.
     AccessPointList:
       type: array
       items:
-        xml:
-          name: AccessPoint
-        $ref: '#/components/schemas/AccessPoint'
+        allOf:
+          - $ref: '#/components/schemas/AccessPoint'
+          - xml:
+              name: AccessPoint
     AccountId:
       type: string
       pattern: '^\d{12}$'
@@ -1528,17 +1606,21 @@ components:
       type: object
       properties:
         BlockPublicAcls:
-          $ref: '#/components/schemas/Setting'
-          description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: '<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to <code>TRUE</code> causes the following behavior:</p> <ul> <li> <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.</p> </li> <li> <p>PUT Object calls fail if the request includes a public ACL.</p> </li> <li> <p>PUT Bucket calls fail if the request includes a public ACL.</p> </li> </ul> <p>Enabling this setting doesn''t affect existing policies or ACLs.</p>'
         IgnorePublicAcls:
-          $ref: '#/components/schemas/Setting'
-          description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: <p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. </p> <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.</p>
         BlockPublicPolicy:
-          $ref: '#/components/schemas/Setting'
-          description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: <p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. </p> <p>Enabling this setting doesn't affect existing bucket policies.</p>
         RestrictPublicBuckets:
-          $ref: '#/components/schemas/Setting'
-          description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Setting'
+            - description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this account. Setting this element to <code>TRUE</code> restricts access to buckets with public policies to only AWS services and authorized users within this account.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
       description: 'The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3 bucket. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the Amazon Simple Storage Service Developer Guide.'
     CreateAccessPointRequest:
       type: object
@@ -1547,31 +1629,38 @@ components:
       title: CreateAccessPointRequest
       properties:
         Bucket:
-          $ref: '#/components/schemas/BucketName'
-          description: The name of the bucket that you want to associate this access point with.
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The name of the bucket that you want to associate this access point with.
         VpcConfiguration:
-          $ref: '#/components/schemas/VpcConfiguration'
-          description: 'If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).'
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: 'If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).'
         PublicAccessBlockConfiguration:
           $ref: '#/components/schemas/PublicAccessBlockConfiguration'
     JobOperation:
       type: object
       properties:
         LambdaInvoke:
-          $ref: '#/components/schemas/LambdaInvokeOperation'
-          description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/LambdaInvokeOperation'
+            - description: Directs the specified job to invoke an AWS Lambda function on each object in the manifest.
         S3PutObjectCopy:
-          $ref: '#/components/schemas/S3CopyObjectOperation'
-          description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/S3CopyObjectOperation'
+            - description: Directs the specified job to execute a PUT Copy object call on each object in the manifest.
         S3PutObjectAcl:
-          $ref: '#/components/schemas/S3SetObjectAclOperation'
-          description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/S3SetObjectAclOperation'
+            - description: Directs the specified job to execute a PUT Object acl call on each object in the manifest.
         S3PutObjectTagging:
-          $ref: '#/components/schemas/S3SetObjectTaggingOperation'
-          description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/S3SetObjectTaggingOperation'
+            - description: Directs the specified job to execute a PUT Object tagging call on each object in the manifest.
         S3InitiateRestoreObject:
-          $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
-          description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/S3InitiateRestoreObjectOperation'
+            - description: Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
         S3PutObjectLegalHold:
           $ref: '#/components/schemas/S3SetObjectLegalHoldOperation'
         S3PutObjectRetention:
@@ -1583,20 +1672,25 @@ components:
         - Enabled
       properties:
         Bucket:
-          $ref: '#/components/schemas/S3BucketArnString'
-          description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArnString'
+            - description: The Amazon Resource Name (ARN) for the bucket where specified job-completion report will be stored.
         Format:
-          $ref: '#/components/schemas/JobReportFormat'
-          description: The format of the specified job-completion report.
+          allOf:
+            - $ref: '#/components/schemas/JobReportFormat'
+            - description: The format of the specified job-completion report.
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the specified job will generate a job-completion report.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the specified job will generate a job-completion report.
         Prefix:
-          $ref: '#/components/schemas/ReportPrefixString'
-          description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
+          allOf:
+            - $ref: '#/components/schemas/ReportPrefixString'
+            - description: An optional prefix to describe where in the specified bucket the job-completion report will be stored. Amazon S3 will store the job-completion report at &lt;prefix&gt;/job-&lt;job-id&gt;/report.json.
         ReportScope:
-          $ref: '#/components/schemas/JobReportScope'
-          description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
+          allOf:
+            - $ref: '#/components/schemas/JobReportScope'
+            - description: Indicates whether the job-completion report will include details of all tasks or only failed tasks.
       description: Contains the configuration parameters for a job-completion report.
     NonEmptyMaxLength64String:
       type: string
@@ -1609,11 +1703,13 @@ components:
         - Location
       properties:
         Spec:
-          $ref: '#/components/schemas/JobManifestSpec'
-          description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
+          allOf:
+            - $ref: '#/components/schemas/JobManifestSpec'
+            - description: 'Describes the format of the specified job''s manifest. If the manifest is in CSV format, also describes the columns contained within the manifest.'
         Location:
-          $ref: '#/components/schemas/JobManifestLocation'
-          description: Contains the information required to locate the specified job's manifest.
+          allOf:
+            - $ref: '#/components/schemas/JobManifestLocation'
+            - description: Contains the information required to locate the specified job's manifest.
       description: Contains the configuration information for a job's manifest.
     NonEmptyMaxLength256String:
       type: string
@@ -1644,32 +1740,41 @@ components:
       title: CreateJobRequest
       properties:
         ConfirmationRequired:
-          $ref: '#/components/schemas/ConfirmationRequired'
-          description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
+          allOf:
+            - $ref: '#/components/schemas/ConfirmationRequired'
+            - description: Indicates whether confirmation is required before Amazon S3 runs the job. Confirmation is only required for jobs created through the Amazon S3 console.
         Operation:
-          $ref: '#/components/schemas/JobOperation'
-          description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/JobOperation'
+            - description: 'The operation that you want this job to perform on each object listed in the manifest. For more information about the available operations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html">Available Operations</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
         Report:
-          $ref: '#/components/schemas/JobReport'
-          description: Configuration parameters for the optional job-completion report.
+          allOf:
+            - $ref: '#/components/schemas/JobReport'
+            - description: Configuration parameters for the optional job-completion report.
         ClientRequestToken:
-          $ref: '#/components/schemas/NonEmptyMaxLength64String'
-          description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength64String'
+            - description: An idempotency token to ensure that you don't accidentally submit the same request twice. You can use any string up to the maximum length.
         Manifest:
-          $ref: '#/components/schemas/JobManifest'
-          description: Configuration parameters for the manifest.
+          allOf:
+            - $ref: '#/components/schemas/JobManifest'
+            - description: Configuration parameters for the manifest.
         Description:
-          $ref: '#/components/schemas/NonEmptyMaxLength256String'
-          description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
+            - description: A description for this job. You can use any string within the permitted length. Descriptions don't need to be unique and can be used for multiple jobs.
         Priority:
-          $ref: '#/components/schemas/JobPriority'
-          description: The numerical priority for this job. Higher numbers indicate higher priority.
+          allOf:
+            - $ref: '#/components/schemas/JobPriority'
+            - description: The numerical priority for this job. Higher numbers indicate higher priority.
         RoleArn:
-          $ref: '#/components/schemas/IAMRoleArn'
-          description: The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that Batch Operations will use to execute this job's operation on each object in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that Batch Operations will use to execute this job's operation on each object in the manifest.
         Tags:
-          $ref: '#/components/schemas/S3TagSet'
-          description: 'A set of tags to associate with the Amazon S3 Batch Operations job. This is an optional parameter. '
+          allOf:
+            - $ref: '#/components/schemas/S3TagSet'
+            - description: 'A set of tags to associate with the Amazon S3 Batch Operations job. This is an optional parameter. '
     JobId:
       type: string
       pattern: '[a-zA-Z0-9\-\_]+'
@@ -1702,56 +1807,73 @@ components:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: The ID for the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID for the specified job.
         ConfirmationRequired:
-          $ref: '#/components/schemas/ConfirmationRequired'
-          description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
+          allOf:
+            - $ref: '#/components/schemas/ConfirmationRequired'
+            - description: Indicates whether confirmation is required before Amazon S3 begins running the specified job. Confirmation is required only for jobs created through the Amazon S3 console.
         Description:
-          $ref: '#/components/schemas/NonEmptyMaxLength256String'
-          description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
+            - description: 'The description for this job, if one was provided in this job''s <code>Create Job</code> request.'
         JobArn:
-          $ref: '#/components/schemas/JobArn'
-          description: The Amazon Resource Name (ARN) for this job.
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: The Amazon Resource Name (ARN) for this job.
         Status:
-          $ref: '#/components/schemas/JobStatus'
-          description: The current status of the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The current status of the specified job.
         Manifest:
-          $ref: '#/components/schemas/JobManifest'
-          description: The configuration information for the specified job's manifest object.
+          allOf:
+            - $ref: '#/components/schemas/JobManifest'
+            - description: The configuration information for the specified job's manifest object.
         Operation:
-          $ref: '#/components/schemas/JobOperation'
-          description: The operation that the specified job is configured to execute on the objects listed in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/JobOperation'
+            - description: The operation that the specified job is configured to execute on the objects listed in the manifest.
         Priority:
-          $ref: '#/components/schemas/JobPriority'
-          description: The priority of the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobPriority'
+            - description: The priority of the specified job.
         ProgressSummary:
-          $ref: '#/components/schemas/JobProgressSummary'
-          description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
+          allOf:
+            - $ref: '#/components/schemas/JobProgressSummary'
+            - description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
         StatusUpdateReason:
-          $ref: '#/components/schemas/JobStatusUpdateReason'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/JobStatusUpdateReason'
+            - description: <p/>
         FailureReasons:
-          $ref: '#/components/schemas/JobFailureList'
-          description: 'If the specified job failed, this field contains information describing the failure.'
+          allOf:
+            - $ref: '#/components/schemas/JobFailureList'
+            - description: 'If the specified job failed, this field contains information describing the failure.'
         Report:
-          $ref: '#/components/schemas/JobReport'
-          description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
+          allOf:
+            - $ref: '#/components/schemas/JobReport'
+            - description: Contains the configuration information for the job-completion report if you requested one in the <code>Create Job</code> request.
         CreationTime:
-          $ref: '#/components/schemas/JobCreationTime'
-          description: A timestamp indicating when this job was created.
+          allOf:
+            - $ref: '#/components/schemas/JobCreationTime'
+            - description: A timestamp indicating when this job was created.
         TerminationDate:
-          $ref: '#/components/schemas/JobTerminationDate'
-          description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
+          allOf:
+            - $ref: '#/components/schemas/JobTerminationDate'
+            - description: 'A timestamp indicating when this job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
         RoleArn:
-          $ref: '#/components/schemas/IAMRoleArn'
-          description: The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role assigned to execute the tasks for this job.
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role assigned to execute the tasks for this job.
         SuspendedDate:
-          $ref: '#/components/schemas/SuspendedDate'
-          description: 'The timestamp when this job was suspended, if it has been suspended.'
+          allOf:
+            - $ref: '#/components/schemas/SuspendedDate'
+            - description: 'The timestamp when this job was suspended, if it has been suspended.'
         SuspendedCause:
-          $ref: '#/components/schemas/SuspendedCause'
-          description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
+          allOf:
+            - $ref: '#/components/schemas/SuspendedCause'
+            - description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
       description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
     FunctionArnString:
       type: string
@@ -1772,8 +1894,9 @@ components:
       type: object
       properties:
         IsPublic:
-          $ref: '#/components/schemas/IsPublic'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/IsPublic'
+            - description: <p/>
       description: 'Indicates whether this access point policy is public. For more information about how Amazon S3 evaluates policies to determine whether they are public, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status">The Meaning of "Public"</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. '
     GetAccessPointRequest:
       type: object
@@ -1801,14 +1924,17 @@ components:
       type: object
       properties:
         TotalNumberOfTasks:
-          $ref: '#/components/schemas/JobTotalNumberOfTasks'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/JobTotalNumberOfTasks'
+            - description: <p/>
         NumberOfTasksSucceeded:
-          $ref: '#/components/schemas/JobNumberOfTasksSucceeded'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/JobNumberOfTasksSucceeded'
+            - description: <p/>
         NumberOfTasksFailed:
-          $ref: '#/components/schemas/JobNumberOfTasksFailed'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/JobNumberOfTasksFailed'
+            - description: <p/>
       description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
     JobStatusUpdateReason:
       type: string
@@ -1840,11 +1966,13 @@ components:
       type: object
       properties:
         FailureCode:
-          $ref: '#/components/schemas/JobFailureCode'
-          description: 'The failure code, if any, for the specified job.'
+          allOf:
+            - $ref: '#/components/schemas/JobFailureCode'
+            - description: 'The failure code, if any, for the specified job.'
         FailureReason:
-          $ref: '#/components/schemas/JobFailureReason'
-          description: 'The failure reason, if any, for the specified job.'
+          allOf:
+            - $ref: '#/components/schemas/JobFailureReason'
+            - description: 'The failure reason, if any, for the specified job.'
       description: 'If this job failed, this element indicates why the job failed.'
     OperationName:
       type: string
@@ -1860,29 +1988,37 @@ components:
       type: object
       properties:
         JobId:
-          $ref: '#/components/schemas/JobId'
-          description: The ID for the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID for the specified job.
         Description:
-          $ref: '#/components/schemas/NonEmptyMaxLength256String'
-          description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength256String'
+            - description: The user-specified description that was included in the specified job's <code>Create Job</code> request.
         Operation:
-          $ref: '#/components/schemas/OperationName'
-          description: The operation that the specified job is configured to run on each object listed in the manifest.
+          allOf:
+            - $ref: '#/components/schemas/OperationName'
+            - description: The operation that the specified job is configured to run on each object listed in the manifest.
         Priority:
-          $ref: '#/components/schemas/JobPriority'
-          description: The current priority for the specified job.
+          allOf:
+            - $ref: '#/components/schemas/JobPriority'
+            - description: The current priority for the specified job.
         Status:
-          $ref: '#/components/schemas/JobStatus'
-          description: The specified job's current status.
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The specified job's current status.
         CreationTime:
-          $ref: '#/components/schemas/JobCreationTime'
-          description: A timestamp indicating when the specified job was created.
+          allOf:
+            - $ref: '#/components/schemas/JobCreationTime'
+            - description: A timestamp indicating when the specified job was created.
         TerminationDate:
-          $ref: '#/components/schemas/JobTerminationDate'
-          description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
+          allOf:
+            - $ref: '#/components/schemas/JobTerminationDate'
+            - description: 'A timestamp indicating when the specified job terminated. A job''s termination date is the date and time when it succeeded, failed, or was canceled.'
         ProgressSummary:
-          $ref: '#/components/schemas/JobProgressSummary'
-          description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
+          allOf:
+            - $ref: '#/components/schemas/JobProgressSummary'
+            - description: 'Describes the total number of tasks that the specified job has executed, the number of tasks that succeeded, and the number of tasks that failed.'
       description: Contains the configuration and status information for a single job retrieved as part of a job list.
     JobListDescriptorList:
       type: array
@@ -1965,8 +2101,9 @@ components:
       title: PutAccessPointPolicyRequest
       properties:
         Policy:
-          $ref: '#/components/schemas/Policy'
-          description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: 'The policy that you want to apply to the specified access point. For more information about access point policies, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html">Managing Data Access with Amazon S3 Access Points</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
     PutJobTaggingRequest:
       type: object
       required:
@@ -1974,8 +2111,9 @@ components:
       title: PutJobTaggingRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/S3TagSet'
-          description: The set of tags to associate with the Amazon S3 Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3TagSet'
+            - description: The set of tags to associate with the Amazon S3 Batch Operations job.
     PutPublicAccessBlockRequest:
       type: object
       required:
@@ -1983,8 +2121,9 @@ components:
       title: PutPublicAccessBlockRequest
       properties:
         PublicAccessBlockConfiguration:
-          $ref: '#/components/schemas/PublicAccessBlockConfiguration'
-          description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.
+          allOf:
+            - $ref: '#/components/schemas/PublicAccessBlockConfiguration'
+            - description: The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.
       xml:
         namespace: 'http://awss3control.amazonaws.com/doc/2018-08-20/'
     RequestedJobStatus:
@@ -1996,11 +2135,13 @@ components:
       type: object
       properties:
         ID:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         DisplayName:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
       description: <p/>
     S3GrantList:
       type: array
@@ -2012,11 +2153,13 @@ components:
         - Owner
       properties:
         Owner:
-          $ref: '#/components/schemas/S3ObjectOwner'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectOwner'
+            - description: <p/>
         Grants:
-          $ref: '#/components/schemas/S3GrantList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3GrantList'
+            - description: <p/>
       description: <p/>
     S3CannedAccessControlList:
       type: string
@@ -2032,11 +2175,13 @@ components:
       type: object
       properties:
         AccessControlList:
-          $ref: '#/components/schemas/S3AccessControlList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3AccessControlList'
+            - description: <p/>
         CannedAccessControlList:
-          $ref: '#/components/schemas/S3CannedAccessControlList'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3CannedAccessControlList'
+            - description: <p/>
       description: <p/>
     S3ContentLength:
       type: integer
@@ -2053,38 +2198,49 @@ components:
       type: object
       properties:
         CacheControl:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         ContentDisposition:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         ContentEncoding:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         ContentLanguage:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         UserMetadata:
-          $ref: '#/components/schemas/S3UserMetadata'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3UserMetadata'
+            - description: <p/>
         ContentLength:
-          $ref: '#/components/schemas/S3ContentLength'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3ContentLength'
+            - description: <p/>
         ContentMD5:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         ContentType:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         HttpExpiresDate:
-          $ref: '#/components/schemas/TimeStamp'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: <p/>
         RequesterCharged:
-          $ref: '#/components/schemas/Boolean'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p/>
         SSEAlgorithm:
-          $ref: '#/components/schemas/S3SSEAlgorithm'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3SSEAlgorithm'
+            - description: <p/>
       description: <p/>
     S3StorageClass:
       type: string
@@ -2117,14 +2273,17 @@ components:
       type: object
       properties:
         TypeIdentifier:
-          $ref: '#/components/schemas/S3GranteeTypeIdentifier'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3GranteeTypeIdentifier'
+            - description: <p/>
         Identifier:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
         DisplayName:
-          $ref: '#/components/schemas/NonEmptyMaxLength1024String'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyMaxLength1024String'
+            - description: <p/>
       description: <p/>
     S3Permission:
       type: string
@@ -2138,11 +2297,13 @@ components:
       type: object
       properties:
         Grantee:
-          $ref: '#/components/schemas/S3Grantee'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3Grantee'
+            - description: <p/>
         Permission:
-          $ref: '#/components/schemas/S3Permission'
-          description: <p/>
+          allOf:
+            - $ref: '#/components/schemas/S3Permission'
+            - description: <p/>
       description: <p/>
     S3GranteeTypeIdentifier:
       type: string
@@ -2156,8 +2317,9 @@ components:
         - Status
       properties:
         Status:
-          $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
-          description: The Legal Hold status to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectLockLegalHoldStatus'
+            - description: The Legal Hold status to be applied to all objects in the Batch Operations job.
       description: <p/>
     S3ObjectLockRetentionMode:
       type: string
@@ -2178,11 +2340,13 @@ components:
       type: object
       properties:
         RetainUntilDate:
-          $ref: '#/components/schemas/TimeStamp'
-          description: The date when the applied Object Retention will expire on all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: The date when the applied Object Retention will expire on all objects in the Batch Operations job.
         Mode:
-          $ref: '#/components/schemas/S3ObjectLockRetentionMode'
-          description: The Retention mode to be applied to all objects in the Batch Operations job.
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectLockRetentionMode'
+            - description: The Retention mode to be applied to all objects in the Batch Operations job.
       description: <p/>
     TagKeyString:
       type: string

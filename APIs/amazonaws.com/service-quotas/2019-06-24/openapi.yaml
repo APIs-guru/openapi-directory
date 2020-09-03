@@ -1471,14 +1471,17 @@ components:
       title: DeleteServiceQuotaIncreaseRequestFromTemplateRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the code for the service that you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the code for the service that you want to delete.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the code for the quota that you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the code for the quota that you want to delete.
         AwsRegion:
-          $ref: '#/components/schemas/AwsRegion'
-          description: Specifies the AWS Region for the quota that you want to delete.
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Specifies the AWS Region for the quota that you want to delete.
     NoSuchResourceException: {}
     IllegalArgumentException: {}
     DisassociateServiceQuotaTemplateResponse:
@@ -1493,8 +1496,9 @@ components:
       type: object
       properties:
         Quota:
-          $ref: '#/components/schemas/ServiceQuota'
-          description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuota'
+            - description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
     GetAWSDefaultServiceQuotaRequest:
       type: object
       required:
@@ -1503,17 +1507,20 @@ components:
       title: GetAWSDefaultServiceQuotaRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Identifies the service quota you want to select.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Identifies the service quota you want to select.
     GetAssociationForServiceQuotaTemplateResponse:
       type: object
       properties:
         ServiceQuotaTemplateAssociationStatus:
-          $ref: '#/components/schemas/ServiceQuotaTemplateAssociationStatus'
-          description: 'Specifies whether the template is <code>ASSOCIATED</code> or <code>DISASSOCIATED</code>. If the template is <code>ASSOCIATED</code>, then it requests service quota increases for all new accounts created in your organization. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaTemplateAssociationStatus'
+            - description: 'Specifies whether the template is <code>ASSOCIATED</code> or <code>DISASSOCIATED</code>. If the template is <code>ASSOCIATED</code>, then it requests service quota increases for all new accounts created in your organization. '
     GetAssociationForServiceQuotaTemplateRequest:
       type: object
       title: GetAssociationForServiceQuotaTemplateRequest
@@ -1522,8 +1529,9 @@ components:
       type: object
       properties:
         RequestedQuota:
-          $ref: '#/components/schemas/RequestedServiceQuotaChange'
-          description: Returns the <code>RequestedServiceQuotaChange</code> object for the specific increase request.
+          allOf:
+            - $ref: '#/components/schemas/RequestedServiceQuotaChange'
+            - description: Returns the <code>RequestedServiceQuotaChange</code> object for the specific increase request.
     GetRequestedServiceQuotaChangeRequest:
       type: object
       required:
@@ -1531,14 +1539,16 @@ components:
       title: GetRequestedServiceQuotaChangeRequest
       properties:
         RequestId:
-          $ref: '#/components/schemas/RequestId'
-          description: Identifies the quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/RequestId'
+            - description: Identifies the quota increase request.
     GetServiceQuotaResponse:
       type: object
       properties:
         Quota:
-          $ref: '#/components/schemas/ServiceQuota'
-          description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuota'
+            - description: Returns the <a>ServiceQuota</a> object which contains all values for a quota.
     GetServiceQuotaRequest:
       type: object
       required:
@@ -1547,17 +1557,20 @@ components:
       title: GetServiceQuotaRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Identifies the service quota you want to select.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Identifies the service quota you want to select.
     GetServiceQuotaIncreaseRequestFromTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplate:
-          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
-          description: This object contains the details about the quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
+            - description: This object contains the details about the quota increase request.
     GetServiceQuotaIncreaseRequestFromTemplateRequest:
       type: object
       required:
@@ -1567,23 +1580,28 @@ components:
       title: GetServiceQuotaIncreaseRequestFromTemplateRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the quota you want.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the quota you want.
         AwsRegion:
-          $ref: '#/components/schemas/AwsRegion'
-          description: Specifies the AWS Region for the quota that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Specifies the AWS Region for the quota that you want to use.
     ListAWSDefaultServiceQuotasResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         Quotas:
-          $ref: '#/components/schemas/ServiceQuotaListDefinition'
-          description: 'A list of the quotas in the account with the AWS default values. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaListDefinition'
+            - description: 'A list of the quotas in the account with the AWS default values. '
     ListAWSDefaultServiceQuotasRequest:
       type: object
       required:
@@ -1591,49 +1609,60 @@ components:
       title: ListAWSDefaultServiceQuotasRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     InvalidPaginationTokenException: {}
     ListRequestedServiceQuotaChangeHistoryResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
         RequestedQuotas:
-          $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
-          description: Returns a list of service quota requests.
+          allOf:
+            - $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
+            - description: Returns a list of service quota requests.
     ListRequestedServiceQuotaChangeHistoryRequest:
       type: object
       title: ListRequestedServiceQuotaChangeHistoryRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         Status:
-          $ref: '#/components/schemas/RequestStatus'
-          description: Specifies the status value of the quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/RequestStatus'
+            - description: Specifies the status value of the quota increase request.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListRequestedServiceQuotaChangeHistoryByQuotaResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
         RequestedQuotas:
-          $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
-          description: Returns a list of service quota requests.
+          allOf:
+            - $ref: '#/components/schemas/RequestedServiceQuotaChangeHistoryListDefinition'
+            - description: Returns a list of service quota requests.
     ListRequestedServiceQuotaChangeHistoryByQuotaRequest:
       type: object
       required:
@@ -1642,54 +1671,67 @@ components:
       title: ListRequestedServiceQuotaChangeHistoryByQuotaRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the service quota that you want to use
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the service quota that you want to use
         Status:
-          $ref: '#/components/schemas/RequestStatus'
-          description: Specifies the status value of the quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/RequestStatus'
+            - description: Specifies the status value of the quota increase request.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListServiceQuotaIncreaseRequestsInTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplateList:
-          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplateList'
-          description: Returns the list of values of the quota increase request in the template.
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplateList'
+            - description: Returns the list of values of the quota increase request in the template.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
     ListServiceQuotaIncreaseRequestsInTemplateRequest:
       type: object
       title: ListServiceQuotaIncreaseRequestsInTemplateRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
         AwsRegion:
-          $ref: '#/components/schemas/AwsRegion'
-          description: Specifies the AWS Region for the quota that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Specifies the AWS Region for the quota that you want to use.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListServiceQuotasResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
         Quotas:
-          $ref: '#/components/schemas/ServiceQuotaListDefinition'
-          description: 'The response information for a quota lists all attribute information for the quota. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaListDefinition'
+            - description: 'The response information for a quota lists all attribute information for the quota. '
     ListServiceQuotasRequest:
       type: object
       required:
@@ -1697,39 +1739,47 @@ components:
       title: ListServiceQuotasRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: 'The identifier for a service. When performing an operation, use the <code>ServiceCode</code> to specify a particular service. '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     ListServicesResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present in the response, this value indicates there''s more output available that what''s included in the current response. This can occur even when the response includes no values at all, such as when you ask for a filtered view of a very long list. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to continue processing and get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back empty (as <code>null</code>).'
         Services:
-          $ref: '#/components/schemas/ServiceInfoListDefinition'
-          description: 'Returns a list of services. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceInfoListDefinition'
+            - description: 'Returns a list of services. '
     ListServicesRequest:
       type: object
       title: ListServicesRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '(Optional) Use this parameter in a request if you receive a <code>NextToken</code> response in a previous request that indicates that there''s more output available. In a subsequent call, set it to the value of the previous call''s <code>NextToken</code> response to indicate where the output should continue from.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '(Optional) Limits the number of results that you want to include in the response. If you don''t include this parameter, the response defaults to a value that''s specific to the operation. If additional items exist beyond the specified maximum, the <code>NextToken</code> element is present and has a value (isn''t null). Include that value as the <code>NextToken</code> request parameter in the call to the operation to get the next part of the results. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
     PutServiceQuotaIncreaseRequestIntoTemplateResponse:
       type: object
       properties:
         ServiceQuotaIncreaseRequestInTemplate:
-          $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
-          description: A structure that contains information about one service quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/ServiceQuotaIncreaseRequestInTemplate'
+            - description: A structure that contains information about one service quota increase request.
     PutServiceQuotaIncreaseRequestIntoTemplateRequest:
       type: object
       required:
@@ -1740,24 +1790,29 @@ components:
       title: PutServiceQuotaIncreaseRequestIntoTemplateRequest
       properties:
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the service quota that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the service quota that you want to use.
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         AwsRegion:
-          $ref: '#/components/schemas/AwsRegion'
-          description: 'Specifies the AWS Region for the quota. '
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: 'Specifies the AWS Region for the quota. '
         DesiredValue:
-          $ref: '#/components/schemas/QuotaValue'
-          description: 'Specifies the new, increased value for the quota. '
+          allOf:
+            - $ref: '#/components/schemas/QuotaValue'
+            - description: 'Specifies the new, increased value for the quota. '
     QuotaExceededException: {}
     RequestServiceQuotaIncreaseResponse:
       type: object
       properties:
         RequestedQuota:
-          $ref: '#/components/schemas/RequestedServiceQuotaChange'
-          description: Returns a list of service quota requests.
+          allOf:
+            - $ref: '#/components/schemas/RequestedServiceQuotaChange'
+            - description: Returns a list of service quota requests.
     RequestServiceQuotaIncreaseRequest:
       type: object
       required:
@@ -1767,14 +1822,17 @@ components:
       title: RequestServiceQuotaIncreaseRequest
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the service quota that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the service quota that you want to use.
         DesiredValue:
-          $ref: '#/components/schemas/QuotaValue'
-          description: 'Specifies the value submitted in the service quota increase request. '
+          allOf:
+            - $ref: '#/components/schemas/QuotaValue'
+            - description: 'Specifies the value submitted in the service quota increase request. '
     ResourceAlreadyExistsException: {}
     InvalidResourceStateException: {}
     AwsRegion:
@@ -1810,51 +1868,65 @@ components:
       type: object
       properties:
         ErrorCode:
-          $ref: '#/components/schemas/ErrorCode'
-          description: '<p>Service Quotas returns the following error values. </p> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> is returned when the caller does not have permission to call the service or service quota. To resolve the error, you need permission to access the service or service quota.</p> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> is returned when the service being called is throttling Service Quotas.</p> <p> <code>DEPENDENCY_SERVICE_ERROR</code> is returned when the service being called has availability issues.</p> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> is returned when there was an error in Service Quotas.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: '<p>Service Quotas returns the following error values. </p> <p> <code>DEPENDENCY_ACCESS_DENIED_ERROR</code> is returned when the caller does not have permission to call the service or service quota. To resolve the error, you need permission to access the service or service quota.</p> <p> <code>DEPENDENCY_THROTTLING_ERROR</code> is returned when the service being called is throttling Service Quotas.</p> <p> <code>DEPENDENCY_SERVICE_ERROR</code> is returned when the service being called has availability issues.</p> <p> <code>SERVICE_QUOTA_NOT_AVAILABLE_ERROR</code> is returned when there was an error in Service Quotas.</p>'
         ErrorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: The error message that provides more detail.
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The error message that provides more detail.
       description: Returns an error that explains why the action did not succeed.
     ServiceQuota:
       type: object
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: 'The name of the AWS service specified in the increase request. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: 'The name of the AWS service specified in the increase request. '
         QuotaArn:
-          $ref: '#/components/schemas/QuotaArn'
-          description: The Amazon Resource Name (ARN) of the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaArn'
+            - description: The Amazon Resource Name (ARN) of the service quota.
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: The code identifier for the service quota specified.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: The code identifier for the service quota specified.
         QuotaName:
-          $ref: '#/components/schemas/QuotaName'
-          description: The name identifier of the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaName'
+            - description: The name identifier of the service quota.
         Value:
-          $ref: '#/components/schemas/QuotaValue'
-          description: The value of service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaValue'
+            - description: The value of service quota.
         Unit:
-          $ref: '#/components/schemas/QuotaUnit'
-          description: The unit of measurement for the value of the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaUnit'
+            - description: The unit of measurement for the value of the service quota.
         Adjustable:
-          $ref: '#/components/schemas/QuotaAdjustable'
-          description: Specifies if the quota value can be increased.
+          allOf:
+            - $ref: '#/components/schemas/QuotaAdjustable'
+            - description: Specifies if the quota value can be increased.
         GlobalQuota:
-          $ref: '#/components/schemas/GlobalQuota'
-          description: Specifies if the quota is global.
+          allOf:
+            - $ref: '#/components/schemas/GlobalQuota'
+            - description: Specifies if the quota is global.
         UsageMetric:
-          $ref: '#/components/schemas/MetricInfo'
-          description: 'Specifies the details about the measurement. '
+          allOf:
+            - $ref: '#/components/schemas/MetricInfo'
+            - description: 'Specifies the details about the measurement. '
         Period:
-          $ref: '#/components/schemas/QuotaPeriod'
-          description: Identifies the unit and value of how time is measured.
+          allOf:
+            - $ref: '#/components/schemas/QuotaPeriod'
+            - description: Identifies the unit and value of how time is measured.
         ErrorReason:
-          $ref: '#/components/schemas/ErrorReason'
-          description: Specifies the <code>ErrorCode</code> and <code>ErrorMessage</code> when success isn't achieved.
+          allOf:
+            - $ref: '#/components/schemas/ErrorReason'
+            - description: Specifies the <code>ErrorCode</code> and <code>ErrorMessage</code> when success isn't achieved.
       description: A structure that contains the full set of details that define the service quota.
     ServiceQuotaTemplateAssociationStatus:
       type: string
@@ -1870,75 +1942,97 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/RequestId'
-          description: The unique identifier of a requested service quota change.
+          allOf:
+            - $ref: '#/components/schemas/RequestId'
+            - description: The unique identifier of a requested service quota change.
         CaseId:
-          $ref: '#/components/schemas/CustomerServiceEngagementId'
-          description: The case Id for the service quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/CustomerServiceEngagementId'
+            - description: The case Id for the service quota increase request.
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: 'The name of the AWS service specified in the increase request. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: 'The name of the AWS service specified in the increase request. '
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: Specifies the service quota that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: Specifies the service quota that you want to use.
         QuotaName:
-          $ref: '#/components/schemas/QuotaName'
-          description: Name of the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaName'
+            - description: Name of the service quota.
         DesiredValue:
-          $ref: '#/components/schemas/QuotaValue'
-          description: New increased value for the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaValue'
+            - description: New increased value for the service quota.
         Status:
-          $ref: '#/components/schemas/RequestStatus'
-          description: State of the service quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/RequestStatus'
+            - description: State of the service quota increase request.
         Created:
-          $ref: '#/components/schemas/DateTime'
-          description: 'The date and time when the service quota increase request was received and the case Id was created. '
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The date and time when the service quota increase request was received and the case Id was created. '
         LastUpdated:
-          $ref: '#/components/schemas/DateTime'
-          description: The date and time of the most recent change in the service quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time of the most recent change in the service quota increase request.
         Requester:
-          $ref: '#/components/schemas/Requester'
-          description: The IAM identity who submitted the service quota increase request.
+          allOf:
+            - $ref: '#/components/schemas/Requester'
+            - description: The IAM identity who submitted the service quota increase request.
         QuotaArn:
-          $ref: '#/components/schemas/QuotaArn'
-          description: The Amazon Resource Name (ARN) of the service quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaArn'
+            - description: The Amazon Resource Name (ARN) of the service quota.
         GlobalQuota:
-          $ref: '#/components/schemas/GlobalQuota'
-          description: Identifies if the quota is global.
+          allOf:
+            - $ref: '#/components/schemas/GlobalQuota'
+            - description: Identifies if the quota is global.
         Unit:
-          $ref: '#/components/schemas/QuotaUnit'
-          description: Specifies the unit used for the quota.
+          allOf:
+            - $ref: '#/components/schemas/QuotaUnit'
+            - description: Specifies the unit used for the quota.
       description: A structure that contains information about a requested change for a quota.
     ServiceQuotaIncreaseRequestInTemplate:
       type: object
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: The code identifier for the AWS service specified in the increase request.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: The code identifier for the AWS service specified in the increase request.
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: 'The name of the AWS service specified in the increase request. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: 'The name of the AWS service specified in the increase request. '
         QuotaCode:
-          $ref: '#/components/schemas/QuotaCode'
-          description: The code identifier for the service quota specified in the increase request.
+          allOf:
+            - $ref: '#/components/schemas/QuotaCode'
+            - description: The code identifier for the service quota specified in the increase request.
         QuotaName:
-          $ref: '#/components/schemas/QuotaName'
-          description: The name of the service quota in the increase request.
+          allOf:
+            - $ref: '#/components/schemas/QuotaName'
+            - description: The name of the service quota in the increase request.
         DesiredValue:
-          $ref: '#/components/schemas/QuotaValue'
-          description: 'Identifies the new, increased value of the service quota in the increase request. '
+          allOf:
+            - $ref: '#/components/schemas/QuotaValue'
+            - description: 'Identifies the new, increased value of the service quota in the increase request. '
         AwsRegion:
-          $ref: '#/components/schemas/AwsRegion'
-          description: The AWS Region where the increase request occurs.
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: The AWS Region where the increase request occurs.
         Unit:
-          $ref: '#/components/schemas/QuotaUnit'
-          description: The unit of measure for the increase request.
+          allOf:
+            - $ref: '#/components/schemas/QuotaUnit'
+            - description: The unit of measure for the increase request.
         GlobalQuota:
-          $ref: '#/components/schemas/GlobalQuota'
-          description: Specifies if the quota is a global quota.
+          allOf:
+            - $ref: '#/components/schemas/GlobalQuota'
+            - description: Specifies if the quota is a global quota.
       description: A structure that contains information about one service quota increase request.
     GlobalQuota:
       type: boolean
@@ -1996,17 +2090,21 @@ components:
       type: object
       properties:
         MetricNamespace:
-          $ref: '#/components/schemas/QuotaMetricNamespace'
-          description: The namespace of the metric. The namespace is a container for CloudWatch metrics. You can specify a name for the namespace when you create a metric.
+          allOf:
+            - $ref: '#/components/schemas/QuotaMetricNamespace'
+            - description: The namespace of the metric. The namespace is a container for CloudWatch metrics. You can specify a name for the namespace when you create a metric.
         MetricName:
-          $ref: '#/components/schemas/QuotaMetricName'
-          description: The name of the CloudWatch metric that measures usage of a service quota. This is a required field.
+          allOf:
+            - $ref: '#/components/schemas/QuotaMetricName'
+            - description: The name of the CloudWatch metric that measures usage of a service quota. This is a required field.
         MetricDimensions:
-          $ref: '#/components/schemas/MetricDimensionsMapDefinition'
-          description: 'A dimension is a name/value pair that is part of the identity of a metric. Every metric has specific characteristics that describe it, and you can think of dimensions as categories for those characteristics. These dimensions are part of the CloudWatch Metric Identity that measures usage against a particular service quota.'
+          allOf:
+            - $ref: '#/components/schemas/MetricDimensionsMapDefinition'
+            - description: 'A dimension is a name/value pair that is part of the identity of a metric. Every metric has specific characteristics that describe it, and you can think of dimensions as categories for those characteristics. These dimensions are part of the CloudWatch Metric Identity that measures usage against a particular service quota.'
         MetricStatisticRecommendation:
-          $ref: '#/components/schemas/Statistic'
-          description: Statistics are metric data aggregations over specified periods of time. This is the recommended statistic to use when comparing usage in the CloudWatch Metric against your Service Quota.
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: Statistics are metric data aggregations over specified periods of time. This is the recommended statistic to use when comparing usage in the CloudWatch Metric against your Service Quota.
       description: A structure that uses CloudWatch metrics to gather data about the service quota.
     PeriodUnit:
       type: string
@@ -2035,11 +2133,13 @@ components:
       type: object
       properties:
         PeriodValue:
-          $ref: '#/components/schemas/PeriodValue'
-          description: The value of a period.
+          allOf:
+            - $ref: '#/components/schemas/PeriodValue'
+            - description: The value of a period.
         PeriodUnit:
-          $ref: '#/components/schemas/PeriodUnit'
-          description: The time unit of a period.
+          allOf:
+            - $ref: '#/components/schemas/PeriodUnit'
+            - description: The time unit of a period.
       description: A structure that contains information about the quota period.
     QuotaUnit:
       type: string
@@ -2051,11 +2151,13 @@ components:
       type: object
       properties:
         ServiceCode:
-          $ref: '#/components/schemas/ServiceCode'
-          description: Specifies the service that you want to use.
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: Specifies the service that you want to use.
         ServiceName:
-          $ref: '#/components/schemas/ServiceName'
-          description: 'The name of the AWS service specified in the increase request. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceName'
+            - description: 'The name of the AWS service specified in the increase request. '
       description: 'A structure that contains the <code>ServiceName</code> and <code>ServiceCode</code>. It does not include all details of the service quota. To get those values, use the <a>ListServiceQuotas</a> operation. '
 security:
   - hmac: []

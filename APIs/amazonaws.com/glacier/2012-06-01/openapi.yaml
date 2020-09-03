@@ -541,8 +541,9 @@ paths:
                   type: object
                   properties:
                     Policy:
-                      $ref: '#/components/schemas/string'
-                      description: The vault lock policy.
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The vault lock policy.
   '/{accountId}/vaults/{vaultName}/tags#operation=add':
     post:
       operationId: AddTagsToVault
@@ -1036,8 +1037,9 @@ paths:
                   type: object
                   properties:
                     Policy:
-                      $ref: '#/components/schemas/string'
-                      description: The vault access policy.
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The vault access policy.
   '/{accountId}/vaults/{vaultName}/notification-configuration':
     delete:
       operationId: DeleteVaultNotifications
@@ -1192,11 +1194,13 @@ paths:
                   type: object
                   properties:
                     SNSTopic:
-                      $ref: '#/components/schemas/string'
-                      description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
                     Events:
-                      $ref: '#/components/schemas/NotificationEventList'
-                      description: A list of one or more events for which Amazon S3 Glacier will send a notification to the specified Amazon SNS topic.
+                      allOf:
+                        - $ref: '#/components/schemas/NotificationEventList'
+                        - description: A list of one or more events for which Amazon S3 Glacier will send a notification to the specified Amazon SNS topic.
   '/{accountId}/vaults/{vaultName}/jobs/{jobId}':
     get:
       operationId: DescribeJob
@@ -1346,8 +1350,9 @@ paths:
                   type: object
                   properties:
                     Rules:
-                      $ref: '#/components/schemas/DataRetrievalRulesList'
-                      description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
+                      allOf:
+                        - $ref: '#/components/schemas/DataRetrievalRulesList'
+                        - description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
   '/{accountId}/vaults/{vaultName}/jobs/{jobId}/output':
     get:
       operationId: GetJobOutput
@@ -1488,35 +1493,45 @@ paths:
                   type: object
                   properties:
                     Format:
-                      $ref: '#/components/schemas/string'
-                      description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
                     Type:
-                      $ref: '#/components/schemas/string'
-                      description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
                     ArchiveId:
-                      $ref: '#/components/schemas/string'
-                      description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
                     Description:
-                      $ref: '#/components/schemas/string'
-                      description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
                     SNSTopic:
-                      $ref: '#/components/schemas/string'
-                      description: The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
                     RetrievalByteRange:
-                      $ref: '#/components/schemas/string'
-                      description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
                     Tier:
-                      $ref: '#/components/schemas/string'
-                      description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
                     InventoryRetrievalParameters:
-                      $ref: '#/components/schemas/InventoryRetrievalJobInput'
-                      description: Input parameters used for range inventory retrieval.
+                      allOf:
+                        - $ref: '#/components/schemas/InventoryRetrievalJobInput'
+                        - description: Input parameters used for range inventory retrieval.
                     SelectParameters:
-                      $ref: '#/components/schemas/SelectParameters'
-                      description: Contains the parameters that define a job.
+                      allOf:
+                        - $ref: '#/components/schemas/SelectParameters'
+                        - description: Contains the parameters that define a job.
                     OutputLocation:
-                      $ref: '#/components/schemas/OutputLocation'
-                      description: Contains information about the location where the select job results are stored.
+                      allOf:
+                        - $ref: '#/components/schemas/OutputLocation'
+                        - description: Contains information about the location where the select job results are stored.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2167,68 +2182,89 @@ components:
         VaultARN: 'arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault'
       properties:
         JobId:
-          $ref: '#/components/schemas/string'
-          description: An opaque string that identifies an Amazon S3 Glacier job.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: An opaque string that identifies an Amazon S3 Glacier job.
         JobDescription:
-          $ref: '#/components/schemas/string'
-          description: The job description provided when initiating the job.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The job description provided when initiating the job.
         Action:
-          $ref: '#/components/schemas/ActionCode'
-          description: 'The job type. This value is either <code>ArchiveRetrieval</code>, <code>InventoryRetrieval</code>, or <code>Select</code>. '
+          allOf:
+            - $ref: '#/components/schemas/ActionCode'
+            - description: 'The job type. This value is either <code>ArchiveRetrieval</code>, <code>InventoryRetrieval</code>, or <code>Select</code>. '
         ArchiveId:
-          $ref: '#/components/schemas/string'
-          description: 'The archive ID requested for a select job or archive retrieval. Otherwise, this field is null.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The archive ID requested for a select job or archive retrieval. Otherwise, this field is null.'
         VaultARN:
-          $ref: '#/components/schemas/string'
-          description: The Amazon Resource Name (ARN) of the vault from which an archive retrieval was requested.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Resource Name (ARN) of the vault from which an archive retrieval was requested.
         CreationDate:
-          $ref: '#/components/schemas/string'
-          description: 'The UTC date when the job was created. This value is a string representation of ISO 8601 date format, for example <code>"2012-03-20T17:03:43.221Z"</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The UTC date when the job was created. This value is a string representation of ISO 8601 date format, for example <code>"2012-03-20T17:03:43.221Z"</code>.'
         Completed:
-          $ref: '#/components/schemas/boolean'
-          description: 'The job status. When a job is completed, you get the job''s output using Get Job Output (GET output).'
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: 'The job status. When a job is completed, you get the job''s output using Get Job Output (GET output).'
         StatusCode:
-          $ref: '#/components/schemas/StatusCode'
-          description: 'The status code can be <code>InProgress</code>, <code>Succeeded</code>, or <code>Failed</code>, and indicates the status of the job.'
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: 'The status code can be <code>InProgress</code>, <code>Succeeded</code>, or <code>Failed</code>, and indicates the status of the job.'
         StatusMessage:
-          $ref: '#/components/schemas/string'
-          description: A friendly message that describes the job status.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A friendly message that describes the job status.
         ArchiveSizeInBytes:
-          $ref: '#/components/schemas/Size'
-          description: 'For an archive retrieval job, this value is the size in bytes of the archive being requested for download. For an inventory retrieval or select job, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/Size'
+            - description: 'For an archive retrieval job, this value is the size in bytes of the archive being requested for download. For an inventory retrieval or select job, this value is null.'
         InventorySizeInBytes:
-          $ref: '#/components/schemas/Size'
-          description: 'For an inventory retrieval job, this value is the size in bytes of the inventory requested for download. For an archive retrieval or select job, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/Size'
+            - description: 'For an inventory retrieval job, this value is the size in bytes of the inventory requested for download. For an archive retrieval or select job, this value is null.'
         SNSTopic:
-          $ref: '#/components/schemas/string'
-          description: An Amazon SNS topic that receives notification.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: An Amazon SNS topic that receives notification.
         CompletionDate:
-          $ref: '#/components/schemas/string'
-          description: 'The UTC time that the job request completed. While the job is in progress, the value is null.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The UTC time that the job request completed. While the job is in progress, the value is null.'
         SHA256TreeHash:
-          $ref: '#/components/schemas/string'
-          description: '<p>For an archive retrieval job, this value is the checksum of the archive. Otherwise, this value is null.</p> <p>The SHA256 tree hash value for the requested range of an archive. If the <b>InitiateJob</b> request for an archive specified a tree-hash aligned range, then this field returns a value.</p> <p>If the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value.</p> <p>This field is null for the following:</p> <ul> <li> <p>Archive retrieval jobs that specify a range that is not tree-hash aligned</p> </li> </ul> <ul> <li> <p>Archival jobs that specify a range that is equal to the whole archive, when the job status is <code>InProgress</code> </p> </li> </ul> <ul> <li> <p>Inventory jobs</p> </li> <li> <p>Select jobs</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>For an archive retrieval job, this value is the checksum of the archive. Otherwise, this value is null.</p> <p>The SHA256 tree hash value for the requested range of an archive. If the <b>InitiateJob</b> request for an archive specified a tree-hash aligned range, then this field returns a value.</p> <p>If the whole archive is retrieved, this value is the same as the ArchiveSHA256TreeHash value.</p> <p>This field is null for the following:</p> <ul> <li> <p>Archive retrieval jobs that specify a range that is not tree-hash aligned</p> </li> </ul> <ul> <li> <p>Archival jobs that specify a range that is equal to the whole archive, when the job status is <code>InProgress</code> </p> </li> </ul> <ul> <li> <p>Inventory jobs</p> </li> <li> <p>Select jobs</p> </li> </ul>'
         ArchiveSHA256TreeHash:
-          $ref: '#/components/schemas/string'
-          description: 'The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval or select jobs, this field is null.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The SHA256 tree hash of the entire archive for an archive retrieval. For inventory retrieval or select jobs, this field is null.'
         RetrievalByteRange:
-          $ref: '#/components/schemas/string'
-          description: 'The retrieved byte range for archive retrieval jobs in the form <i>StartByteValue</i>-<i>EndByteValue</i>. If no range was specified in the archive retrieval, then the whole archive is retrieved. In this case, <i>StartByteValue</i> equals 0 and <i>EndByteValue</i> equals the size of the archive minus 1. For inventory retrieval or select jobs, this field is null. '
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The retrieved byte range for archive retrieval jobs in the form <i>StartByteValue</i>-<i>EndByteValue</i>. If no range was specified in the archive retrieval, then the whole archive is retrieved. In this case, <i>StartByteValue</i> equals 0 and <i>EndByteValue</i> equals the size of the archive minus 1. For inventory retrieval or select jobs, this field is null. '
         Tier:
-          $ref: '#/components/schemas/string'
-          description: 'The tier to use for a select or an archive retrieval. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The tier to use for a select or an archive retrieval. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
         InventoryRetrievalParameters:
-          $ref: '#/components/schemas/InventoryRetrievalJobDescription'
-          description: Parameters used for range inventory retrieval.
+          allOf:
+            - $ref: '#/components/schemas/InventoryRetrievalJobDescription'
+            - description: Parameters used for range inventory retrieval.
         JobOutputPath:
-          $ref: '#/components/schemas/string'
-          description: Contains the job output location.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Contains the job output location.
         SelectParameters:
-          $ref: '#/components/schemas/SelectParameters'
-          description: Contains the parameters used for a select.
+          allOf:
+            - $ref: '#/components/schemas/SelectParameters'
+            - description: Contains the parameters used for a select.
         OutputLocation:
-          $ref: '#/components/schemas/OutputLocation'
-          description: Contains the location where the data from the select job is stored.
+          allOf:
+            - $ref: '#/components/schemas/OutputLocation'
+            - description: Contains the location where the data from the select job is stored.
       description: Contains the description of an Amazon S3 Glacier job.
     DescribeVaultOutput:
       type: object
@@ -2240,23 +2276,29 @@ components:
         VaultName: my-vault
       properties:
         VaultARN:
-          $ref: '#/components/schemas/string'
-          description: The Amazon Resource Name (ARN) of the vault.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Resource Name (ARN) of the vault.
         VaultName:
-          $ref: '#/components/schemas/string'
-          description: The name of the vault.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the vault.
         CreationDate:
-          $ref: '#/components/schemas/string'
-          description: 'The Universal Coordinated Time (UTC) date when the vault was created. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The Universal Coordinated Time (UTC) date when the vault was created. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
         LastInventoryDate:
-          $ref: '#/components/schemas/string'
-          description: 'The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the last vault inventory. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the last vault inventory. This value should be a string in the ISO 8601 date format, for example <code>2012-03-20T17:03:43.221Z</code>.'
         NumberOfArchives:
-          $ref: '#/components/schemas/long'
-          description: 'The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example if you just created the vault.'
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: 'The number of archives in the vault as of the last inventory date. This field will return <code>null</code> if an inventory has not yet run on the vault, for example if you just created the vault.'
         SizeInBytes:
-          $ref: '#/components/schemas/long'
-          description: 'Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example if you just created the vault.'
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: 'Total size, in bytes, of the archives in the vault as of the last inventory date. This field will return null if an inventory has not yet run on the vault, for example if you just created the vault.'
       description: Contains the Amazon S3 Glacier response to your request.
     GetDataRetrievalPolicyOutput:
       type: object
@@ -2267,8 +2309,9 @@ components:
               Strategy: BytesPerHour
       properties:
         Policy:
-          $ref: '#/components/schemas/DataRetrievalPolicy'
-          description: Contains the returned data retrieval policy in JSON format.
+          allOf:
+            - $ref: '#/components/schemas/DataRetrievalPolicy'
+            - description: Contains the returned data retrieval policy in JSON format.
       description: Contains the Amazon S3 Glacier response to the <code>GetDataRetrievalPolicy</code> request.
     GetJobOutputOutput:
       type: object
@@ -2279,11 +2322,13 @@ components:
         status: 200
       properties:
         body:
-          $ref: '#/components/schemas/Stream'
-          description: 'The job data, either archive data or inventory data.'
+          allOf:
+            - $ref: '#/components/schemas/Stream'
+            - description: 'The job data, either archive data or inventory data.'
         status:
-          $ref: '#/components/schemas/httpstatus'
-          description: The HTTP response code for a job output request. The value depends on whether a range was specified in the request.
+          allOf:
+            - $ref: '#/components/schemas/httpstatus'
+            - description: The HTTP response code for a job output request. The value depends on whether a range was specified in the request.
       description: Contains the Amazon S3 Glacier response to your request.
     GetVaultAccessPolicyOutput:
       type: object
@@ -2292,8 +2337,9 @@ components:
           Policy: '{"Version":"2012-10-17","Statement":[{"Sid":"Define-owner-access-rights","Effect":"Allow","Principal":{"AWS":"arn:aws:iam::999999999999:root"},"Action":"glacier:DeleteArchive","Resource":"arn:aws:glacier:us-west-2:999999999999:vaults/examplevault"}]}'
       properties:
         policy:
-          $ref: '#/components/schemas/VaultAccessPolicy'
-          description: Contains the returned vault access policy as a JSON string.
+          allOf:
+            - $ref: '#/components/schemas/VaultAccessPolicy'
+            - description: Contains the returned vault access policy as a JSON string.
       description: Output for GetVaultAccessPolicy.
     GetVaultLockOutput:
       type: object
@@ -2304,17 +2350,21 @@ components:
         State: InProgress
       properties:
         Policy:
-          $ref: '#/components/schemas/string'
-          description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
         State:
-          $ref: '#/components/schemas/string'
-          description: The state of the vault lock. <code>InProgress</code> or <code>Locked</code>.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The state of the vault lock. <code>InProgress</code> or <code>Locked</code>.
         ExpirationDate:
-          $ref: '#/components/schemas/string'
-          description: The UTC date and time at which the lock ID expires. This value can be <code>null</code> if the vault lock is in a <code>Locked</code> state.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The UTC date and time at which the lock ID expires. This value can be <code>null</code> if the vault lock is in a <code>Locked</code> state.
         CreationDate:
-          $ref: '#/components/schemas/string'
-          description: The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The UTC date and time at which the vault lock was put into the <code>InProgress</code> state.
       description: Contains the Amazon S3 Glacier response to your request.
     GetVaultNotificationsOutput:
       type: object
@@ -2326,8 +2376,9 @@ components:
           SNSTopic: 'arn:aws:sns:us-west-2:0123456789012:my-vault'
       properties:
         vaultNotificationConfig:
-          $ref: '#/components/schemas/VaultNotificationConfig'
-          description: Returns the notification configuration set on the vault.
+          allOf:
+            - $ref: '#/components/schemas/VaultNotificationConfig'
+            - description: Returns the notification configuration set on the vault.
       description: Contains the Amazon S3 Glacier response to your request.
     InitiateJobOutput:
       type: object
@@ -2342,40 +2393,49 @@ components:
       type: object
       properties:
         StartDate:
-          $ref: '#/components/schemas/string'
-          description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The start of the date range in UTC for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
         EndDate:
-          $ref: '#/components/schemas/string'
-          description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
         Limit:
-          $ref: '#/components/schemas/string'
-          description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Specifies the maximum number of inventory items returned per vault inventory retrieval request. Valid values are greater than or equal to 1.
         Marker:
-          $ref: '#/components/schemas/string'
-          description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>.'
       description: Provides options for specifying a range inventory retrieval job.
     SelectParameters:
       type: object
       properties:
         InputSerialization:
-          $ref: '#/components/schemas/InputSerialization'
-          description: Describes the serialization format of the object.
+          allOf:
+            - $ref: '#/components/schemas/InputSerialization'
+            - description: Describes the serialization format of the object.
         ExpressionType:
-          $ref: '#/components/schemas/ExpressionType'
-          description: 'The type of the provided expression, for example <code>SQL</code>.'
+          allOf:
+            - $ref: '#/components/schemas/ExpressionType'
+            - description: 'The type of the provided expression, for example <code>SQL</code>.'
         Expression:
-          $ref: '#/components/schemas/string'
-          description: The expression that is used to select the object.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The expression that is used to select the object.
         OutputSerialization:
-          $ref: '#/components/schemas/OutputSerialization'
-          description: Describes how the results of the select job are serialized.
+          allOf:
+            - $ref: '#/components/schemas/OutputSerialization'
+            - description: Describes how the results of the select job are serialized.
       description: Contains information about the parameters used for a select.
     OutputLocation:
       type: object
       properties:
         S3:
-          $ref: '#/components/schemas/S3Location'
-          description: Describes an S3 location that will receive the results of the job request.
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: Describes an S3 location that will receive the results of the job request.
       description: Contains information about the location where the select job results are stored.
     PolicyEnforcedException: {}
     InsufficientCapacityException: {}
@@ -2419,11 +2479,13 @@ components:
             VaultARN: 'arn:aws:glacier:us-west-2:0123456789012:vaults/my-vault'
       properties:
         JobList:
-          $ref: '#/components/schemas/JobList'
-          description: A list of job objects. Each job object contains metadata describing the job.
+          allOf:
+            - $ref: '#/components/schemas/JobList'
+            - description: A list of job objects. Each job object contains metadata describing the job.
         Marker:
-          $ref: '#/components/schemas/string'
-          description: ' An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the <code>marker</code> value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request. '
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: ' An opaque string used for pagination that specifies the job at which the listing of jobs should begin. You get the <code>marker</code> value from a previous List Jobs response. You only need to include the marker if you are continuing the pagination of the results started in a previous List Jobs request. '
       description: Contains the Amazon S3 Glacier response to your request.
     ListMultipartUploadsOutput:
       type: object
@@ -2447,11 +2509,13 @@ components:
             VaultARN: 'arn:aws:glacier:us-west-2:012345678901:vaults/examplevault'
       properties:
         UploadsList:
-          $ref: '#/components/schemas/UploadsList'
-          description: A list of in-progress multipart uploads.
+          allOf:
+            - $ref: '#/components/schemas/UploadsList'
+            - description: A list of in-progress multipart uploads.
         Marker:
-          $ref: '#/components/schemas/string'
-          description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Multipart Uploads request to obtain more uploads in the list. If there are no more uploads, this value is <code>null</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Multipart Uploads request to obtain more uploads in the list. If there are no more uploads, this value is <code>null</code>.'
       description: Contains the Amazon S3 Glacier response to your request.
     ListPartsOutput:
       type: object
@@ -2469,26 +2533,33 @@ components:
         VaultARN: 'arn:aws:glacier:us-west-2:012345678901:vaults/demo1-vault'
       properties:
         MultipartUploadId:
-          $ref: '#/components/schemas/string'
-          description: The ID of the upload to which the parts are associated.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of the upload to which the parts are associated.
         VaultARN:
-          $ref: '#/components/schemas/string'
-          description: The Amazon Resource Name (ARN) of the vault to which the multipart upload was initiated.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Resource Name (ARN) of the vault to which the multipart upload was initiated.
         ArchiveDescription:
-          $ref: '#/components/schemas/string'
-          description: The description of the archive that was specified in the Initiate Multipart Upload request.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The description of the archive that was specified in the Initiate Multipart Upload request.
         PartSizeInBytes:
-          $ref: '#/components/schemas/long'
-          description: The part size in bytes. This is the same value that you specified in the Initiate Multipart Upload request.
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: The part size in bytes. This is the same value that you specified in the Initiate Multipart Upload request.
         CreationDate:
-          $ref: '#/components/schemas/string'
-          description: The UTC time at which the multipart upload was initiated.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The UTC time at which the multipart upload was initiated.
         Parts:
-          $ref: '#/components/schemas/PartList'
-          description: A list of the part sizes of the multipart upload. Each object in the array contains a <code>RangeBytes</code> and <code>sha256-tree-hash</code> name/value pair.
+          allOf:
+            - $ref: '#/components/schemas/PartList'
+            - description: A list of the part sizes of the multipart upload. Each object in the array contains a <code>RangeBytes</code> and <code>sha256-tree-hash</code> name/value pair.
         Marker:
-          $ref: '#/components/schemas/string'
-          description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Parts request to obtain more jobs in the list. If there are no more parts, this value is <code>null</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An opaque string that represents where to continue pagination of the results. You use the marker in a new List Parts request to obtain more jobs in the list. If there are no more parts, this value is <code>null</code>.'
       description: Contains the Amazon S3 Glacier response to your request.
     ListProvisionedCapacityOutput:
       type: object
@@ -2502,8 +2573,9 @@ components:
             StartDate: '2016-12-13T20:11:51.095Z'
       properties:
         ProvisionedCapacityList:
-          $ref: '#/components/schemas/ProvisionedCapacityList'
-          description: The response body contains the following JSON fields.
+          allOf:
+            - $ref: '#/components/schemas/ProvisionedCapacityList'
+            - description: The response body contains the following JSON fields.
     ListTagsForVaultOutput:
       type: object
       example:
@@ -2512,8 +2584,9 @@ components:
           id: '1234'
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags attached to the vault. Each tag is composed of a key and a value.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags attached to the vault. Each tag is composed of a key and a value.
       description: Contains the Amazon S3 Glacier response to your request.
     ListVaultsOutput:
       type: object
@@ -2527,11 +2600,13 @@ components:
             VaultName: my-vault
       properties:
         VaultList:
-          $ref: '#/components/schemas/VaultList'
-          description: List of vaults.
+          allOf:
+            - $ref: '#/components/schemas/VaultList'
+            - description: List of vaults.
         Marker:
-          $ref: '#/components/schemas/string'
-          description: The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The vault ARN at which to continue pagination of the results. You use the marker in another List Vaults request to obtain more vaults in the list.
       description: Contains the Amazon S3 Glacier response to your request.
     PurchaseProvisionedCapacityOutput:
       type: object
@@ -2567,11 +2642,13 @@ components:
       type: object
       properties:
         Grantee:
-          $ref: '#/components/schemas/Grantee'
-          description: The grantee.
+          allOf:
+            - $ref: '#/components/schemas/Grantee'
+            - description: The grantee.
         Permission:
-          $ref: '#/components/schemas/Permission'
-          description: 'Specifies the permission given to the grantee. '
+          allOf:
+            - $ref: '#/components/schemas/Permission'
+            - description: 'Specifies the permission given to the grantee. '
       description: Contains information about a grant.
     AccessControlPolicyList:
       type: array
@@ -2592,8 +2669,9 @@ components:
       title: AddTagsToVaultInput
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the vault. Each tag is composed of a key and a value. The value can be an empty string.
       description: The input values for <code>AddTagsToVault</code>.
     FileHeaderInfo:
       type: string
@@ -2605,23 +2683,29 @@ components:
       type: object
       properties:
         FileHeaderInfo:
-          $ref: '#/components/schemas/FileHeaderInfo'
-          description: 'Describes the first line of input. Valid values are <code>None</code>, <code>Ignore</code>, and <code>Use</code>.'
+          allOf:
+            - $ref: '#/components/schemas/FileHeaderInfo'
+            - description: 'Describes the first line of input. Valid values are <code>None</code>, <code>Ignore</code>, and <code>Use</code>.'
         Comments:
-          $ref: '#/components/schemas/string'
-          description: A single character used to indicate that a row should be ignored when the character is present at the start of that row.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A single character used to indicate that a row should be ignored when the character is present at the start of that row.
         QuoteEscapeCharacter:
-          $ref: '#/components/schemas/string'
-          description: A single character used for escaping the quotation-mark character inside an already escaped value.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A single character used for escaping the quotation-mark character inside an already escaped value.
         RecordDelimiter:
-          $ref: '#/components/schemas/string'
-          description: A value used to separate individual records from each other.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used to separate individual records from each other.
         FieldDelimiter:
-          $ref: '#/components/schemas/string'
-          description: A value used to separate individual fields from each other within a record.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used to separate individual fields from each other within a record.
         QuoteCharacter:
-          $ref: '#/components/schemas/string'
-          description: A value used as an escape character where the field delimiter is part of the value.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used as an escape character where the field delimiter is part of the value.
       description: Contains information about the comma-separated value (CSV) file to select from.
     QuoteFields:
       type: string
@@ -2632,20 +2716,25 @@ components:
       type: object
       properties:
         QuoteFields:
-          $ref: '#/components/schemas/QuoteFields'
-          description: A value that indicates whether all output fields should be contained within quotation marks.
+          allOf:
+            - $ref: '#/components/schemas/QuoteFields'
+            - description: A value that indicates whether all output fields should be contained within quotation marks.
         QuoteEscapeCharacter:
-          $ref: '#/components/schemas/string'
-          description: A single character used for escaping the quotation-mark character inside an already escaped value.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A single character used for escaping the quotation-mark character inside an already escaped value.
         RecordDelimiter:
-          $ref: '#/components/schemas/string'
-          description: A value used to separate individual records from each other.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used to separate individual records from each other.
         FieldDelimiter:
-          $ref: '#/components/schemas/string'
-          description: A value used to separate individual fields from each other within a record.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used to separate individual fields from each other within a record.
         QuoteCharacter:
-          $ref: '#/components/schemas/string'
-          description: A value used as an escape character where the field delimiter is part of the value.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A value used as an escape character where the field delimiter is part of the value.
       description: Contains information about the comma-separated value (CSV) file that the job results are stored in.
     CannedACL:
       type: string
@@ -2676,8 +2765,9 @@ components:
       type: object
       properties:
         Rules:
-          $ref: '#/components/schemas/DataRetrievalRulesList'
-          description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
+          allOf:
+            - $ref: '#/components/schemas/DataRetrievalRulesList'
+            - description: 'The policy rule. Although this is a list type, currently there must be only one rule, which contains a Strategy field and optionally a BytesPerHour field.'
       description: Data retrieval policy.
     NullableLong:
       type: integer
@@ -2685,11 +2775,13 @@ components:
       type: object
       properties:
         Strategy:
-          $ref: '#/components/schemas/string'
-          description: '<p>The type of data retrieval policy to set.</p> <p>Valid values: BytesPerHour|FreeTier|None</p>'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The type of data retrieval policy to set.</p> <p>Valid values: BytesPerHour|FreeTier|None</p>'
         BytesPerHour:
-          $ref: '#/components/schemas/NullableLong'
-          description: <p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>
+          allOf:
+            - $ref: '#/components/schemas/NullableLong'
+            - description: <p>The maximum number of bytes that can be retrieved in an hour.</p> <p>This field is required only if the value of the Strategy field is <code>BytesPerHour</code>. Your PUT operation will be rejected if the Strategy field is not set to <code>BytesPerHour</code> and you set this field.</p>
       description: Data retrieval policy rule.
     DateTime:
       type: string
@@ -2734,14 +2826,17 @@ components:
       type: object
       properties:
         EncryptionType:
-          $ref: '#/components/schemas/EncryptionType'
-          description: 'The server-side encryption algorithm used when storing job results in Amazon S3, for example <code>AES256</code> or <code>aws:kms</code>.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: 'The server-side encryption algorithm used when storing job results in Amazon S3, for example <code>AES256</code> or <code>aws:kms</code>.'
         KMSKeyId:
-          $ref: '#/components/schemas/string'
-          description: 'The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. '
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL) or Signature Version 4. '
         KMSContext:
-          $ref: '#/components/schemas/string'
-          description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'Optional. If the encryption type is <code>aws:kms</code>, you can use this value to specify the encryption context for the job results.'
       description: 'Contains information about the encryption used to store the job results in Amazon S3. '
     ExpressionType:
       type: string
@@ -2770,8 +2865,9 @@ components:
       type: object
       properties:
         Policy:
-          $ref: '#/components/schemas/string'
-          description: The vault access policy.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The vault access policy.
       description: Contains the vault access policy.
     GetVaultLockInput:
       type: object
@@ -2787,11 +2883,13 @@ components:
       type: object
       properties:
         SNSTopic:
-          $ref: '#/components/schemas/string'
-          description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name (ARN).
         Events:
-          $ref: '#/components/schemas/NotificationEventList'
-          description: A list of one or more events for which Amazon S3 Glacier will send a notification to the specified Amazon SNS topic.
+          allOf:
+            - $ref: '#/components/schemas/NotificationEventList'
+            - description: A list of one or more events for which Amazon S3 Glacier will send a notification to the specified Amazon SNS topic.
       description: Represents a vault's notification configuration.
     boolean:
       type: boolean
@@ -2807,20 +2905,25 @@ components:
       type: object
       properties:
         Format:
-          $ref: '#/components/schemas/string'
-          description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The output format for the vault inventory list, which is set by the <b>InitiateJob</b> request when initiating a job to retrieve a vault inventory. Valid values are <code>CSV</code> and <code>JSON</code>.'
         StartDate:
-          $ref: '#/components/schemas/DateTime'
-          description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The start of the date range in Universal Coordinated Time (UTC) for vault inventory retrieval that includes archives created on or after this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
         EndDate:
-          $ref: '#/components/schemas/DateTime'
-          description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The end of the date range in UTC for vault inventory retrieval that includes archives created before this date. This value should be a string in the ISO 8601 date format, for example <code>2013-03-20T17:03:43Z</code>.'
         Limit:
-          $ref: '#/components/schemas/string'
-          description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The maximum number of inventory items returned per vault inventory retrieval request. This limit is set when initiating the job with the a <b>InitiateJob</b> request. '
         Marker:
-          $ref: '#/components/schemas/string'
-          description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'An opaque string that represents where to continue pagination of the vault inventory retrieval results. You use the marker in a new <b>InitiateJob</b> request to obtain additional inventory items. If there are no more inventory items, this value is <code>null</code>. For more information, see <a href="https://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html#api-initiate-job-post-vault-inventory-list-filtering"> Range Inventory Retrieval</a>.'
       description: Describes the options for a range inventory retrieval job.
     Grantee:
       type: object
@@ -2828,20 +2931,25 @@ components:
         - Type
       properties:
         Type:
-          $ref: '#/components/schemas/Type'
-          description: Type of grantee
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: Type of grantee
         DisplayName:
-          $ref: '#/components/schemas/string'
-          description: Screen name of the grantee.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Screen name of the grantee.
         URI:
-          $ref: '#/components/schemas/string'
-          description: URI of the grantee group.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: URI of the grantee group.
         ID:
-          $ref: '#/components/schemas/string'
-          description: The canonical user ID of the grantee.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The canonical user ID of the grantee.
         EmailAddress:
-          $ref: '#/components/schemas/string'
-          description: Email address of the grantee.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Email address of the grantee.
       description: Contains information about the grantee.
     Permission:
       type: string
@@ -2861,43 +2969,54 @@ components:
       type: object
       properties:
         Format:
-          $ref: '#/components/schemas/string'
-          description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'When initiating a job to retrieve a vault inventory, you can optionally add this parameter to your request to specify the output format. If you are initiating an inventory job and do not specify a Format field, JSON is the default format. Valid values are "CSV" and "JSON".'
         Type:
-          $ref: '#/components/schemas/string'
-          description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The job type. You can initiate a job to perform a select query on an archive, retrieve an archive, or get an inventory of a vault. Valid values are "select", "archive-retrieval" and "inventory-retrieval".'
         ArchiveId:
-          $ref: '#/components/schemas/string'
-          description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The ID of the archive that you want to retrieve. This field is required only if <code>Type</code> is set to <code>select</code> or <code>archive-retrieval</code>code&gt;. An error occurs if you specify this request parameter for an inventory retrieval job request. '
         Description:
-          $ref: '#/components/schemas/string'
-          description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The optional description for the job. The description must be less than or equal to 1,024 bytes. The allowable characters are 7-bit ASCII without control codes-specifically, ASCII values 32-126 decimal or 0x20-0x7E hexadecimal.'
         SNSTopic:
-          $ref: '#/components/schemas/string'
-          description: The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon SNS topic ARN to which Amazon S3 Glacier sends a notification when the job is completed and the output is ready for you to download. The specified topic publishes the notification to its subscribers. The SNS topic must exist.
         RetrievalByteRange:
-          $ref: '#/components/schemas/string'
-          description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The byte range to retrieve for an archive retrieval. in the form "<i>StartByteValue</i>-<i>EndByteValue</i>" If not specified, the whole archive is retrieved. If specified, the byte range must be megabyte (1024*1024) aligned which means that <i>StartByteValue</i> must be divisible by 1 MB and <i>EndByteValue</i> plus 1 must be divisible by 1 MB or be the end of the archive specified as the archive byte size value minus 1. If RetrievalByteRange is not megabyte aligned, this operation returns a 400 response. </p> <p>An error occurs if you specify this field for an inventory retrieval job request.</p>'
         Tier:
-          $ref: '#/components/schemas/string'
-          description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The tier to use for a select or an archive retrieval job. Valid values are <code>Expedited</code>, <code>Standard</code>, or <code>Bulk</code>. <code>Standard</code> is the default.'
         InventoryRetrievalParameters:
-          $ref: '#/components/schemas/InventoryRetrievalJobInput'
-          description: Input parameters used for range inventory retrieval.
+          allOf:
+            - $ref: '#/components/schemas/InventoryRetrievalJobInput'
+            - description: Input parameters used for range inventory retrieval.
         SelectParameters:
-          $ref: '#/components/schemas/SelectParameters'
-          description: Contains the parameters that define a job.
+          allOf:
+            - $ref: '#/components/schemas/SelectParameters'
+            - description: Contains the parameters that define a job.
         OutputLocation:
-          $ref: '#/components/schemas/OutputLocation'
-          description: Contains information about the location where the select job results are stored.
+          allOf:
+            - $ref: '#/components/schemas/OutputLocation'
+            - description: Contains information about the location where the select job results are stored.
       description: Provides options for defining a job.
     InitiateJobInput:
       type: object
       title: InitiateJobInput
       properties:
         jobParameters:
-          $ref: '#/components/schemas/JobParameters'
-          description: Provides options for specifying job information.
+          allOf:
+            - $ref: '#/components/schemas/JobParameters'
+            - description: Provides options for specifying job information.
       description: Provides options for initiating an Amazon S3 Glacier job.
     InitiateMultipartUploadInput:
       type: object
@@ -2908,23 +3027,26 @@ components:
       type: object
       properties:
         Policy:
-          $ref: '#/components/schemas/string'
-          description: The vault lock policy.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The vault lock policy.
       description: Contains the vault lock policy.
     InitiateVaultLockInput:
       type: object
       title: InitiateVaultLockInput
       properties:
         policy:
-          $ref: '#/components/schemas/VaultLockPolicy'
-          description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
+          allOf:
+            - $ref: '#/components/schemas/VaultLockPolicy'
+            - description: 'The vault lock policy as a JSON string, which uses "\" as an escape character.'
       description: The input values for <code>InitiateVaultLock</code>.
     InputSerialization:
       type: object
       properties:
         csv:
-          $ref: '#/components/schemas/CSVInput'
-          description: Describes the serialization of a CSV-encoded object.
+          allOf:
+            - $ref: '#/components/schemas/CSVInput'
+            - description: Describes the serialization of a CSV-encoded object.
       description: Describes how the archive is serialized.
     JobList:
       type: array
@@ -2979,59 +3101,73 @@ components:
       type: object
       properties:
         BucketName:
-          $ref: '#/components/schemas/string'
-          description: The name of the Amazon S3 bucket where the job results are stored.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the Amazon S3 bucket where the job results are stored.
         Prefix:
-          $ref: '#/components/schemas/string'
-          description: The prefix that is prepended to the results for this request.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The prefix that is prepended to the results for this request.
         Encryption:
-          $ref: '#/components/schemas/Encryption'
-          description: Contains information about the encryption used to store the job results in Amazon S3.
+          allOf:
+            - $ref: '#/components/schemas/Encryption'
+            - description: Contains information about the encryption used to store the job results in Amazon S3.
         CannedACL:
-          $ref: '#/components/schemas/CannedACL'
-          description: The canned access control list (ACL) to apply to the job results.
+          allOf:
+            - $ref: '#/components/schemas/CannedACL'
+            - description: The canned access control list (ACL) to apply to the job results.
         AccessControlList:
-          $ref: '#/components/schemas/AccessControlPolicyList'
-          description: A list of grants that control access to the staged results.
+          allOf:
+            - $ref: '#/components/schemas/AccessControlPolicyList'
+            - description: A list of grants that control access to the staged results.
         Tagging:
-          $ref: '#/components/schemas/hashmap'
-          description: The tag-set that is applied to the job results.
+          allOf:
+            - $ref: '#/components/schemas/hashmap'
+            - description: The tag-set that is applied to the job results.
         UserMetadata:
-          $ref: '#/components/schemas/hashmap'
-          description: A map of metadata to store with the job results in Amazon S3.
+          allOf:
+            - $ref: '#/components/schemas/hashmap'
+            - description: A map of metadata to store with the job results in Amazon S3.
         StorageClass:
-          $ref: '#/components/schemas/StorageClass'
-          description: The storage class used to store the job results.
+          allOf:
+            - $ref: '#/components/schemas/StorageClass'
+            - description: The storage class used to store the job results.
       description: Contains information about the location in Amazon S3 where the select job results are stored.
     OutputSerialization:
       type: object
       properties:
         csv:
-          $ref: '#/components/schemas/CSVOutput'
-          description: Describes the serialization of CSV-encoded query results.
+          allOf:
+            - $ref: '#/components/schemas/CSVOutput'
+            - description: Describes the serialization of CSV-encoded query results.
       description: Describes how the select output is serialized.
     PartListElement:
       type: object
       properties:
         RangeInBytes:
-          $ref: '#/components/schemas/string'
-          description: 'The byte range of a part, inclusive of the upper value of the range.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The byte range of a part, inclusive of the upper value of the range.'
         SHA256TreeHash:
-          $ref: '#/components/schemas/string'
-          description: The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This field is never <code>null</code>.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This field is never <code>null</code>.
       description: A list of the part sizes of the multipart upload.
     ProvisionedCapacityDescription:
       type: object
       properties:
         CapacityId:
-          $ref: '#/components/schemas/string'
-          description: The ID that identifies the provisioned capacity unit.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID that identifies the provisioned capacity unit.
         StartDate:
-          $ref: '#/components/schemas/string'
-          description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The date that the provisioned capacity unit was purchased, in Universal Coordinated Time (UTC).'
         ExpirationDate:
-          $ref: '#/components/schemas/string'
-          description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The date that the provisioned capacity unit expires, in Universal Coordinated Time (UTC).'
       description: The definition for a provisioned capacity unit.
     PurchaseProvisionedCapacityInput:
       type: object
@@ -3046,8 +3182,9 @@ components:
       title: RemoveTagsFromVaultInput
       properties:
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: A list of tag keys. Each corresponding tag is removed from the vault.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: A list of tag keys. Each corresponding tag is removed from the vault.
       description: The input value for <code>RemoveTagsFromVaultInput</code>.
     hashmap:
       type: object
@@ -3064,24 +3201,27 @@ components:
       title: SetDataRetrievalPolicyInput
       properties:
         Policy:
-          $ref: '#/components/schemas/DataRetrievalPolicy'
-          description: The data retrieval policy in JSON format.
+          allOf:
+            - $ref: '#/components/schemas/DataRetrievalPolicy'
+            - description: The data retrieval policy in JSON format.
       description: SetDataRetrievalPolicy input.
     SetVaultAccessPolicyInput:
       type: object
       title: SetVaultAccessPolicyInput
       properties:
         policy:
-          $ref: '#/components/schemas/VaultAccessPolicy'
-          description: The vault access policy as a JSON string.
+          allOf:
+            - $ref: '#/components/schemas/VaultAccessPolicy'
+            - description: The vault access policy as a JSON string.
       description: SetVaultAccessPolicy input.
     SetVaultNotificationsInput:
       type: object
       title: SetVaultNotificationsInput
       properties:
         vaultNotificationConfig:
-          $ref: '#/components/schemas/VaultNotificationConfig'
-          description: Provides options for specifying notification configuration.
+          allOf:
+            - $ref: '#/components/schemas/VaultNotificationConfig'
+            - description: Provides options for specifying notification configuration.
       description: Provides options to configure notifications that will be sent when specific events happen to a vault.
     TagKey:
       type: string
@@ -3090,35 +3230,42 @@ components:
       title: UploadArchiveInput
       properties:
         body:
-          $ref: '#/components/schemas/Stream'
-          description: The data to upload.
+          allOf:
+            - $ref: '#/components/schemas/Stream'
+            - description: The data to upload.
       description: Provides options to add an archive to a vault.
     UploadListElement:
       type: object
       properties:
         MultipartUploadId:
-          $ref: '#/components/schemas/string'
-          description: The ID of a multipart upload.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of a multipart upload.
         VaultARN:
-          $ref: '#/components/schemas/string'
-          description: The Amazon Resource Name (ARN) of the vault that contains the archive.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The Amazon Resource Name (ARN) of the vault that contains the archive.
         ArchiveDescription:
-          $ref: '#/components/schemas/string'
-          description: The description of the archive that was specified in the Initiate Multipart Upload request.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The description of the archive that was specified in the Initiate Multipart Upload request.
         PartSizeInBytes:
-          $ref: '#/components/schemas/long'
-          description: 'The part size, in bytes, specified in the Initiate Multipart Upload request. This is the size of all the parts in the upload except the last part, which may be smaller than this size.'
+          allOf:
+            - $ref: '#/components/schemas/long'
+            - description: 'The part size, in bytes, specified in the Initiate Multipart Upload request. This is the size of all the parts in the upload except the last part, which may be smaller than this size.'
         CreationDate:
-          $ref: '#/components/schemas/string'
-          description: The UTC time at which the multipart upload was initiated.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The UTC time at which the multipart upload was initiated.
       description: A list of in-progress multipart uploads for a vault.
     UploadMultipartPartInput:
       type: object
       title: UploadMultipartPartInput
       properties:
         body:
-          $ref: '#/components/schemas/Stream'
-          description: The data to upload.
+          allOf:
+            - $ref: '#/components/schemas/Stream'
+            - description: The data to upload.
       description: Provides options to upload a part of an archive in a multipart upload operation.
 security:
   - hmac: []

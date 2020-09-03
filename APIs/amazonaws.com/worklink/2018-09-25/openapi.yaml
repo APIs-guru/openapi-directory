@@ -2508,20 +2508,23 @@ components:
       type: object
       properties:
         AuthorizationProviderId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the authorization provider.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the authorization provider.
     AssociateWebsiteCertificateAuthorityResponse:
       type: object
       properties:
         WebsiteCaId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the CA.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the CA.
     CreateFleetResponse:
       type: object
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The Amazon Resource Name (ARN) of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The Amazon Resource Name (ARN) of the fleet.
     TagValue:
       type: string
       maxLength: 256
@@ -2532,125 +2535,158 @@ components:
       type: object
       properties:
         AuditStreamArn:
-          $ref: '#/components/schemas/AuditStreamArn'
-          description: The ARN of the Amazon Kinesis data stream that will receive the audit events.
+          allOf:
+            - $ref: '#/components/schemas/AuditStreamArn'
+            - description: The ARN of the Amazon Kinesis data stream that will receive the audit events.
     DescribeCompanyNetworkConfigurationResponse:
       type: object
       properties:
         VpcId:
-          $ref: '#/components/schemas/VpcId'
-          description: The VPC with connectivity to associated websites.
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The VPC with connectivity to associated websites.
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIds'
-          description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
         SecurityGroupIds:
-          $ref: '#/components/schemas/SecurityGroupIds'
-          description: The security groups associated with access to the provided subnets.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: The security groups associated with access to the provided subnets.
     DescribeDeviceResponse:
       type: object
       properties:
         Status:
-          $ref: '#/components/schemas/DeviceStatus'
-          description: The current state of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceStatus'
+            - description: The current state of the device.
         Model:
-          $ref: '#/components/schemas/DeviceModel'
-          description: The model of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceModel'
+            - description: The model of the device.
         Manufacturer:
-          $ref: '#/components/schemas/DeviceManufacturer'
-          description: The manufacturer of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceManufacturer'
+            - description: The manufacturer of the device.
         OperatingSystem:
-          $ref: '#/components/schemas/DeviceOperatingSystemName'
-          description: The operating system of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceOperatingSystemName'
+            - description: The operating system of the device.
         OperatingSystemVersion:
-          $ref: '#/components/schemas/DeviceOperatingSystemVersion'
-          description: The operating system version of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceOperatingSystemVersion'
+            - description: The operating system version of the device.
         PatchLevel:
-          $ref: '#/components/schemas/DevicePatchLevel'
-          description: The operating system patch level of the device.
+          allOf:
+            - $ref: '#/components/schemas/DevicePatchLevel'
+            - description: The operating system patch level of the device.
         FirstAccessedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date that the device first signed in to Amazon WorkLink.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date that the device first signed in to Amazon WorkLink.
         LastAccessedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The date that the device last accessed Amazon WorkLink.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date that the device last accessed Amazon WorkLink.
         Username:
-          $ref: '#/components/schemas/Username'
-          description: The user name associated with the device.
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: The user name associated with the device.
     DescribeDevicePolicyConfigurationResponse:
       type: object
       properties:
         DeviceCaCertificate:
-          $ref: '#/components/schemas/Certificate'
-          description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
     DescribeDomainResponse:
       type: object
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time that the domain was added.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the domain was added.
         DomainStatus:
-          $ref: '#/components/schemas/DomainStatus'
-          description: The current state for the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: The current state for the domain.
         AcmCertificateArn:
-          $ref: '#/components/schemas/AcmCertificateArn'
-          description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+          allOf:
+            - $ref: '#/components/schemas/AcmCertificateArn'
+            - description: The ARN of an issued ACM certificate that is valid for the domain being associated.
     DescribeFleetMetadataResponse:
       type: object
       properties:
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time that the fleet was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the fleet was created.
         LastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time that the fleet was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the fleet was last updated.
         FleetName:
-          $ref: '#/components/schemas/FleetName'
-          description: The name of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetName'
+            - description: The name of the fleet.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
         OptimizeForEndUserLocation:
-          $ref: '#/components/schemas/Boolean'
-          description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
         CompanyCode:
-          $ref: '#/components/schemas/CompanyCode'
-          description: The identifier used by users to sign in to the Amazon WorkLink app.
+          allOf:
+            - $ref: '#/components/schemas/CompanyCode'
+            - description: The identifier used by users to sign in to the Amazon WorkLink app.
         FleetStatus:
-          $ref: '#/components/schemas/FleetStatus'
-          description: The current state of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetStatus'
+            - description: The current state of the fleet.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags attached to the resource. A tag is a key-value pair.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags attached to the resource. A tag is a key-value pair.
     DescribeIdentityProviderConfigurationResponse:
       type: object
       properties:
         IdentityProviderType:
-          $ref: '#/components/schemas/IdentityProviderType'
-          description: The type of identity provider.
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderType'
+            - description: The type of identity provider.
         ServiceProviderSamlMetadata:
-          $ref: '#/components/schemas/SamlMetadata'
-          description: The SAML metadata document uploaded to the user’s identity provider.
+          allOf:
+            - $ref: '#/components/schemas/SamlMetadata'
+            - description: The SAML metadata document uploaded to the user’s identity provider.
         IdentityProviderSamlMetadata:
-          $ref: '#/components/schemas/SamlMetadata'
-          description: The SAML metadata document provided by the user’s identity provider.
+          allOf:
+            - $ref: '#/components/schemas/SamlMetadata'
+            - description: The SAML metadata document provided by the user’s identity provider.
     DescribeWebsiteCertificateAuthorityResponse:
       type: object
       properties:
         Certificate:
-          $ref: '#/components/schemas/Certificate'
-          description: The root certificate of the certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The root certificate of the certificate authority.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time that the certificate authority was added.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the certificate authority was added.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The certificate name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The certificate name to display.
     DisassociateDomainResponse:
       type: object
       properties: {}
@@ -2664,53 +2700,64 @@ components:
       type: object
       properties:
         Devices:
-          $ref: '#/components/schemas/DeviceSummaryList'
-          description: Information about the devices.
+          allOf:
+            - $ref: '#/components/schemas/DeviceSummaryList'
+            - description: Information about the devices.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListDomainsResponse:
       type: object
       properties:
         Domains:
-          $ref: '#/components/schemas/DomainSummaryList'
-          description: Information about the domains.
+          allOf:
+            - $ref: '#/components/schemas/DomainSummaryList'
+            - description: Information about the domains.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListFleetsResponse:
       type: object
       properties:
         FleetSummaryList:
-          $ref: '#/components/schemas/FleetSummaryList'
-          description: The summary list of the fleets.
+          allOf:
+            - $ref: '#/components/schemas/FleetSummaryList'
+            - description: The summary list of the fleets.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags attached to the resource. A tag is a key-value pair.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags attached to the resource. A tag is a key-value pair.
     ListWebsiteAuthorizationProvidersResponse:
       type: object
       properties:
         WebsiteAuthorizationProviders:
-          $ref: '#/components/schemas/WebsiteAuthorizationProvidersSummaryList'
-          description: The website authorization providers.
+          allOf:
+            - $ref: '#/components/schemas/WebsiteAuthorizationProvidersSummaryList'
+            - description: The website authorization providers.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     ListWebsiteCertificateAuthoritiesResponse:
       type: object
       properties:
         WebsiteCertificateAuthorities:
-          $ref: '#/components/schemas/WebsiteCaSummaryList'
-          description: Information about the certificates.
+          allOf:
+            - $ref: '#/components/schemas/WebsiteCaSummaryList'
+            - description: Information about the certificates.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     RestoreDomainAccessResponse:
       type: object
       properties: {}
@@ -2779,17 +2826,21 @@ components:
       title: AssociateDomainRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The Amazon Resource Name (ARN) of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The Amazon Resource Name (ARN) of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The fully qualified domain name (FQDN).
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The fully qualified domain name (FQDN).
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
         AcmCertificateArn:
-          $ref: '#/components/schemas/AcmCertificateArn'
-          description: The ARN of an issued ACM certificate that is valid for the domain being associated.
+          allOf:
+            - $ref: '#/components/schemas/AcmCertificateArn'
+            - description: The ARN of an issued ACM certificate that is valid for the domain being associated.
     AuthorizationProviderType:
       type: string
       enum:
@@ -2802,14 +2853,17 @@ components:
       title: AssociateWebsiteAuthorizationProviderRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         AuthorizationProviderType:
-          $ref: '#/components/schemas/AuthorizationProviderType'
-          description: The authorization provider type.
+          allOf:
+            - $ref: '#/components/schemas/AuthorizationProviderType'
+            - description: The authorization provider type.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
     Id:
       type: string
       minLength: 1
@@ -2827,14 +2881,17 @@ components:
       title: AssociateWebsiteCertificateAuthorityRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         Certificate:
-          $ref: '#/components/schemas/Certificate'
-          description: The root certificate of the CA.
+          allOf:
+            - $ref: '#/components/schemas/Certificate'
+            - description: The root certificate of the CA.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The certificate name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The certificate name to display.
     AuditStreamArn:
       type: string
       pattern: '^arn:aws:kinesis:.+:[0-9]{12}:stream/AmazonWorkLink-.*$'
@@ -2867,17 +2924,21 @@ components:
       title: CreateFleetRequest
       properties:
         FleetName:
-          $ref: '#/components/schemas/FleetName'
-          description: A unique name for the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetName'
+            - description: A unique name for the fleet.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The fleet name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The fleet name to display.
         OptimizeForEndUserLocation:
-          $ref: '#/components/schemas/Boolean'
-          description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags to add to the resource. A tag is a key-value pair.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags to add to the resource. A tag is a key-value pair.'
     DateTime:
       type: string
       format: date-time
@@ -2888,8 +2949,9 @@ components:
       title: DeleteFleetRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
     DescribeAuditStreamConfigurationRequest:
       type: object
       required:
@@ -2897,8 +2959,9 @@ components:
       title: DescribeAuditStreamConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
     DescribeCompanyNetworkConfigurationRequest:
       type: object
       required:
@@ -2906,8 +2969,9 @@ components:
       title: DescribeCompanyNetworkConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
     VpcId:
       type: string
       pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
@@ -2927,8 +2991,9 @@ components:
       title: DescribeDevicePolicyConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
     DescribeDeviceRequest:
       type: object
       required:
@@ -2937,11 +3002,13 @@ components:
       title: DescribeDeviceRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DeviceId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for a registered user's device.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for a registered user's device.
     DeviceStatus:
       type: string
       enum:
@@ -2979,11 +3046,13 @@ components:
       title: DescribeDomainRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
     DomainStatus:
       type: string
       enum:
@@ -3002,8 +3071,9 @@ components:
       title: DescribeFleetMetadataRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The Amazon Resource Name (ARN) of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The Amazon Resource Name (ARN) of the fleet.
     FleetStatus:
       type: string
       enum:
@@ -3020,8 +3090,9 @@ components:
       title: DescribeIdentityProviderConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
     IdentityProviderType:
       type: string
       enum:
@@ -3038,20 +3109,24 @@ components:
       title: DescribeWebsiteCertificateAuthorityRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         WebsiteCaId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the certificate authority.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the certificate authority.
     DeviceSummary:
       type: object
       properties:
         DeviceId:
-          $ref: '#/components/schemas/Id'
-          description: The ID of the device.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The ID of the device.
         DeviceStatus:
-          $ref: '#/components/schemas/DeviceStatus'
-          description: The status of the device.
+          allOf:
+            - $ref: '#/components/schemas/DeviceStatus'
+            - description: The status of the device.
       description: The summary of devices.
     DeviceSummaryList:
       type: array
@@ -3065,11 +3140,13 @@ components:
       title: DisassociateDomainRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
     DisassociateWebsiteAuthorizationProviderRequest:
       type: object
       required:
@@ -3078,11 +3155,13 @@ components:
       title: DisassociateWebsiteAuthorizationProviderRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         AuthorizationProviderId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the authorization provider.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the authorization provider.
     DisassociateWebsiteCertificateAuthorityRequest:
       type: object
       required:
@@ -3091,11 +3170,13 @@ components:
       title: DisassociateWebsiteCertificateAuthorityRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         WebsiteCaId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the CA.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the CA.
     DomainSummary:
       type: object
       required:
@@ -3104,17 +3185,21 @@ components:
         - DomainStatus
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time that the domain was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the domain was created.
         DomainStatus:
-          $ref: '#/components/schemas/DomainStatus'
-          description: The status of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: The status of the domain.
       description: The summary of the domain.
     DomainSummaryList:
       type: array
@@ -3124,29 +3209,37 @@ components:
       type: object
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The Amazon Resource Name (ARN) of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The Amazon Resource Name (ARN) of the fleet.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the fleet was created.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the fleet was created.
         LastUpdatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the fleet was last updated.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the fleet was last updated.
         FleetName:
-          $ref: '#/components/schemas/FleetName'
-          description: The name of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetName'
+            - description: The name of the fleet.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name of the fleet to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name of the fleet to display.
         CompanyCode:
-          $ref: '#/components/schemas/CompanyCode'
-          description: The identifier used by users to sign into the Amazon WorkLink app.
+          allOf:
+            - $ref: '#/components/schemas/CompanyCode'
+            - description: The identifier used by users to sign into the Amazon WorkLink app.
         FleetStatus:
-          $ref: '#/components/schemas/FleetStatus'
-          description: The status of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetStatus'
+            - description: The status of the fleet.
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags attached to the resource. A tag is a key-value pair.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags attached to the resource. A tag is a key-value pair.
       description: The summary of the fleet.
     FleetSummaryList:
       type: array
@@ -3167,14 +3260,17 @@ components:
       title: ListDevicesRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to be included in the next page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be included in the next page.
     ListDomainsRequest:
       type: object
       required:
@@ -3182,24 +3278,29 @@ components:
       title: ListDomainsRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to be included in the next page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be included in the next page.
     ListFleetsRequest:
       type: object
       title: ListFleetsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to be included in the next page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be included in the next page.
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -3211,14 +3312,17 @@ components:
       title: ListWebsiteAuthorizationProvidersRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to be included in the next page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be included in the next page.
     WebsiteAuthorizationProvidersSummaryList:
       type: array
       items:
@@ -3230,14 +3334,17 @@ components:
       title: ListWebsiteCertificateAuthoritiesRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The maximum number of results to be included in the next page.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to be included in the next page.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     WebsiteCaSummaryList:
       type: array
       items:
@@ -3250,11 +3357,13 @@ components:
       title: RestoreDomainAccessRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
     RevokeDomainAccessRequest:
       type: object
       required:
@@ -3263,11 +3372,13 @@ components:
       title: RevokeDomainAccessRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
     SignOutUserRequest:
       type: object
       required:
@@ -3276,11 +3387,13 @@ components:
       title: SignOutUserRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         Username:
-          $ref: '#/components/schemas/Username'
-          description: The name of the user.
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: The name of the user.
     TagKeyList:
       type: array
       items:
@@ -3294,8 +3407,9 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          $ref: '#/components/schemas/TagMap'
-          description: The tags to add to the resource. A tag is a key-value pair.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the resource. A tag is a key-value pair.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -3307,11 +3421,13 @@ components:
       title: UpdateAuditStreamConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         AuditStreamArn:
-          $ref: '#/components/schemas/AuditStreamArn'
-          description: The ARN of the Amazon Kinesis data stream that receives the audit events.
+          allOf:
+            - $ref: '#/components/schemas/AuditStreamArn'
+            - description: The ARN of the Amazon Kinesis data stream that receives the audit events.
     UpdateCompanyNetworkConfigurationRequest:
       type: object
       required:
@@ -3322,17 +3438,21 @@ components:
       title: UpdateCompanyNetworkConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         VpcId:
-          $ref: '#/components/schemas/VpcId'
-          description: The VPC with connectivity to associated websites.
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The VPC with connectivity to associated websites.
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIds'
-          description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
         SecurityGroupIds:
-          $ref: '#/components/schemas/SecurityGroupIds'
-          description: The security groups associated with access to the provided subnets.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: The security groups associated with access to the provided subnets.
     UpdateDevicePolicyConfigurationRequest:
       type: object
       required:
@@ -3340,11 +3460,13 @@ components:
       title: UpdateDevicePolicyConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DeviceCaCertificate:
-          $ref: '#/components/schemas/CertificateChain'
-          description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+          allOf:
+            - $ref: '#/components/schemas/CertificateChain'
+            - description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
     UpdateDomainMetadataRequest:
       type: object
       required:
@@ -3353,14 +3475,17 @@ components:
       title: UpdateDomainMetadataRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
     UpdateFleetMetadataRequest:
       type: object
       required:
@@ -3368,14 +3493,17 @@ components:
       title: UpdateFleetMetadataRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The fleet name to display. The existing DisplayName is unset if null is passed.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The fleet name to display. The existing DisplayName is unset if null is passed.
         OptimizeForEndUserLocation:
-          $ref: '#/components/schemas/Boolean'
-          description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
     UpdateIdentityProviderConfigurationRequest:
       type: object
       required:
@@ -3384,44 +3512,54 @@ components:
       title: UpdateIdentityProviderConfigurationRequest
       properties:
         FleetArn:
-          $ref: '#/components/schemas/FleetArn'
-          description: The ARN of the fleet.
+          allOf:
+            - $ref: '#/components/schemas/FleetArn'
+            - description: The ARN of the fleet.
         IdentityProviderType:
-          $ref: '#/components/schemas/IdentityProviderType'
-          description: The type of identity provider.
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderType'
+            - description: The type of identity provider.
         IdentityProviderSamlMetadata:
-          $ref: '#/components/schemas/SamlMetadata'
-          description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
+          allOf:
+            - $ref: '#/components/schemas/SamlMetadata'
+            - description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
     WebsiteAuthorizationProviderSummary:
       type: object
       required:
         - AuthorizationProviderType
       properties:
         AuthorizationProviderId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the authorization provider.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the authorization provider.
         AuthorizationProviderType:
-          $ref: '#/components/schemas/AuthorizationProviderType'
-          description: The authorization provider type.
+          allOf:
+            - $ref: '#/components/schemas/AuthorizationProviderType'
+            - description: The authorization provider type.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The domain name of the authorization provider. This applies only to SAML-based authorization providers.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time of creation.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time of creation.
       description: The summary of the website authorization provider.
     WebsiteCaSummary:
       type: object
       properties:
         WebsiteCaId:
-          $ref: '#/components/schemas/Id'
-          description: A unique identifier for the CA.
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: A unique identifier for the CA.
         CreatedTime:
-          $ref: '#/components/schemas/DateTime'
-          description: The time when the CA was added.
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time when the CA was added.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The name to display.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name to display.
       description: The summary of the certificate authority (CA).
 security:
   - hmac: []

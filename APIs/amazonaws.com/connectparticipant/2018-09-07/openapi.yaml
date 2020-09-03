@@ -338,14 +338,17 @@ paths:
                   type: object
                   properties:
                     Id:
-                      $ref: '#/components/schemas/ChatItemId'
-                      description: 'The ID of the message or event where to start. '
+                      allOf:
+                        - $ref: '#/components/schemas/ChatItemId'
+                        - description: 'The ID of the message or event where to start. '
                     AbsoluteTime:
-                      $ref: '#/components/schemas/Instant'
-                      description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+                      allOf:
+                        - $ref: '#/components/schemas/Instant'
+                        - description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
                     MostRecent:
-                      $ref: '#/components/schemas/MostRecent'
-                      description: 'The start position of the most recent message where you want to start. '
+                      allOf:
+                        - $ref: '#/components/schemas/MostRecent'
+                        - description: 'The start position of the most recent message where you want to start. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -561,11 +564,13 @@ components:
       type: object
       properties:
         Websocket:
-          $ref: '#/components/schemas/Websocket'
-          description: Creates the participant's websocket connection.
+          allOf:
+            - $ref: '#/components/schemas/Websocket'
+            - description: Creates the participant's websocket connection.
         ConnectionCredentials:
-          $ref: '#/components/schemas/ConnectionCredentials'
-          description: Creates the participant's connection credentials. The authentication token associated with the participant's connection.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionCredentials'
+            - description: Creates the participant's connection credentials. The authentication token associated with the participant's connection.
     ConnectionType:
       type: string
       enum:
@@ -582,14 +587,17 @@ components:
       type: object
       properties:
         InitialContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: 'The initial contact ID for the contact. '
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: 'The initial contact ID for the contact. '
         Transcript:
-          $ref: '#/components/schemas/Transcript'
-          description: The list of messages in the session.
+          allOf:
+            - $ref: '#/components/schemas/Transcript'
+            - description: The list of messages in the session.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
     ChatItemId:
       type: string
       minLength: 1
@@ -606,20 +614,24 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ChatItemId'
-          description: The ID of the response.
+          allOf:
+            - $ref: '#/components/schemas/ChatItemId'
+            - description: The ID of the response.
         AbsoluteTime:
-          $ref: '#/components/schemas/Instant'
-          description: '<p>The time when the event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Instant'
+            - description: '<p>The time when the event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
     SendMessageResponse:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ChatItemId'
-          description: The ID of the message.
+          allOf:
+            - $ref: '#/components/schemas/ChatItemId'
+            - description: The ID of the message.
         AbsoluteTime:
-          $ref: '#/components/schemas/Instant'
-          description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Instant'
+            - description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
     ChatContent:
       type: string
       minLength: 1
@@ -647,11 +659,13 @@ components:
       type: object
       properties:
         ConnectionToken:
-          $ref: '#/components/schemas/ParticipantToken'
-          description: The connection token.
+          allOf:
+            - $ref: '#/components/schemas/ParticipantToken'
+            - description: The connection token.
         Expiry:
-          $ref: '#/components/schemas/ISO8601Datetime'
-          description: '<p>The expiration of the token.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Datetime'
+            - description: '<p>The expiration of the token.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
       description: 'Connection credentials. '
     ConnectionTypeList:
       type: array
@@ -669,25 +683,29 @@ components:
       title: CreateParticipantConnectionRequest
       properties:
         Type:
-          $ref: '#/components/schemas/ConnectionTypeList'
-          description: Type of connection information required.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionTypeList'
+            - description: Type of connection information required.
     Websocket:
       type: object
       properties:
         Url:
-          $ref: '#/components/schemas/PreSignedConnectionUrl'
-          description: The URL of the websocket.
+          allOf:
+            - $ref: '#/components/schemas/PreSignedConnectionUrl'
+            - description: The URL of the websocket.
         ConnectionExpiry:
-          $ref: '#/components/schemas/ISO8601Datetime'
-          description: '<p>The URL expiration timestamp in ISO date format.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Datetime'
+            - description: '<p>The URL expiration timestamp in ISO date format.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
       description: The websocket for the participant's connection.
     DisconnectParticipantRequest:
       type: object
       title: DisconnectParticipantRequest
       properties:
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     DisplayName:
       type: string
       minLength: 1
@@ -714,37 +732,46 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/ChatItemId'
-          description: 'The ID of the message or event where to start. '
+          allOf:
+            - $ref: '#/components/schemas/ChatItemId'
+            - description: 'The ID of the message or event where to start. '
         AbsoluteTime:
-          $ref: '#/components/schemas/Instant'
-          description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Instant'
+            - description: '<p>The time in ISO format where to start.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
         MostRecent:
-          $ref: '#/components/schemas/MostRecent'
-          description: 'The start position of the most recent message where you want to start. '
+          allOf:
+            - $ref: '#/components/schemas/MostRecent'
+            - description: 'The start position of the most recent message where you want to start. '
       description: 'A filtering option for where to start. For example, if you sent 100 messages, start with message 50. '
     GetTranscriptRequest:
       type: object
       title: GetTranscriptRequest
       properties:
         ContactId:
-          $ref: '#/components/schemas/ContactId'
-          description: The contactId from the current contact chain for which transcript is needed.
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The contactId from the current contact chain for which transcript is needed.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return in the page. Default: 10. '
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in the page. Default: 10. '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token. Use the value returned previously in the next subsequent request to retrieve the next set of results.
         ScanDirection:
-          $ref: '#/components/schemas/ScanDirection'
-          description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
+          allOf:
+            - $ref: '#/components/schemas/ScanDirection'
+            - description: 'The direction from StartPosition from which to retrieve message. Default: BACKWARD when no StartPosition is provided, FORWARD with StartPosition. '
         SortOrder:
-          $ref: '#/components/schemas/SortKey'
-          description: 'The sort order for the records. Default: DESCENDING.'
+          allOf:
+            - $ref: '#/components/schemas/SortKey'
+            - description: 'The sort order for the records. Default: DESCENDING.'
         StartPosition:
-          $ref: '#/components/schemas/StartPosition'
-          description: A filtering option for where to start.
+          allOf:
+            - $ref: '#/components/schemas/StartPosition'
+            - description: A filtering option for where to start.
     Transcript:
       type: array
       items:
@@ -763,29 +790,37 @@ components:
       type: object
       properties:
         AbsoluteTime:
-          $ref: '#/components/schemas/Instant'
-          description: '<p>The time when the message or event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Instant'
+            - description: '<p>The time when the message or event was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
         Content:
-          $ref: '#/components/schemas/ChatContent'
-          description: The content of the message or event.
+          allOf:
+            - $ref: '#/components/schemas/ChatContent'
+            - description: The content of the message or event.
         ContentType:
-          $ref: '#/components/schemas/ChatContentType'
-          description: The type of content of the item.
+          allOf:
+            - $ref: '#/components/schemas/ChatContentType'
+            - description: The type of content of the item.
         Id:
-          $ref: '#/components/schemas/ChatItemId'
-          description: The ID of the item.
+          allOf:
+            - $ref: '#/components/schemas/ChatItemId'
+            - description: The ID of the item.
         Type:
-          $ref: '#/components/schemas/ChatItemType'
-          description: 'Type of the item: message or event. '
+          allOf:
+            - $ref: '#/components/schemas/ChatItemType'
+            - description: 'Type of the item: message or event. '
         ParticipantId:
-          $ref: '#/components/schemas/ParticipantId'
-          description: The ID of the sender in the session.
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: The ID of the sender in the session.
         DisplayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: The chat display name of the sender.
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The chat display name of the sender.
         ParticipantRole:
-          $ref: '#/components/schemas/ParticipantRole'
-          description: 'The role of the sender. For example, is it a customer, agent, or system.'
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: 'The role of the sender. For example, is it a customer, agent, or system.'
       description: 'An item - message or event - that has been sent. '
     PreSignedConnectionUrl:
       type: string
@@ -798,14 +833,17 @@ components:
       title: SendEventRequest
       properties:
         ContentType:
-          $ref: '#/components/schemas/ChatContentType'
-          description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/ChatContentType'
+            - description: '<p>The content type of the request. Supported types are:</p> <ul> <li> <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li> <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li> </ul>'
         Content:
-          $ref: '#/components/schemas/ChatContent'
-          description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
+          allOf:
+            - $ref: '#/components/schemas/ChatContent'
+            - description: 'The content of the event to be sent (for example, message text). This is not yet supported.'
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     SendMessageRequest:
       type: object
       required:
@@ -814,13 +852,16 @@ components:
       title: SendMessageRequest
       properties:
         ContentType:
-          $ref: '#/components/schemas/ChatContentType'
-          description: The type of the content. Supported types are text/plain.
+          allOf:
+            - $ref: '#/components/schemas/ChatContentType'
+            - description: The type of the content. Supported types are text/plain.
         Content:
-          $ref: '#/components/schemas/ChatContent'
-          description: The content of the message.
+          allOf:
+            - $ref: '#/components/schemas/ChatContent'
+            - description: The content of the message.
         ClientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
 security:
   - hmac: []

@@ -227,29 +227,37 @@ components:
         - sentAt
       properties:
         eventId:
-          $ref: '#/components/schemas/StringType'
-          description: 'An ID associated with the event. If an event ID is not provided, Amazon Personalize generates a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses the event ID to distinquish unique events. Any subsequent events after the first with the same event ID are not used in model training.'
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: 'An ID associated with the event. If an event ID is not provided, Amazon Personalize generates a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses the event ID to distinquish unique events. Any subsequent events after the first with the same event ID are not used in model training.'
         eventType:
-          $ref: '#/components/schemas/StringType'
-          description: The type of event. This property corresponds to the <code>EVENT_TYPE</code> field of the Interactions schema.
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: The type of event. This property corresponds to the <code>EVENT_TYPE</code> field of the Interactions schema.
         eventValue:
-          $ref: '#/components/schemas/FloatType'
-          description: The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.
+          allOf:
+            - $ref: '#/components/schemas/FloatType'
+            - description: The event value that corresponds to the <code>EVENT_VALUE</code> field of the Interactions schema.
         itemId:
-          $ref: '#/components/schemas/ItemId'
-          description: The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.
+          allOf:
+            - $ref: '#/components/schemas/ItemId'
+            - description: The item ID key that corresponds to the <code>ITEM_ID</code> field of the Interactions schema.
         properties:
-          $ref: '#/components/schemas/EventPropertiesJSON'
-          description: '<p>A string map of event-specific data that you might choose to record. For example, if a user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>) , you might also send the number of movie ratings made by the user.</p> <p>Each item in the map consists of a key-value pair. For example,</p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Interactions schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Interactions schema.</p>'
+          allOf:
+            - $ref: '#/components/schemas/EventPropertiesJSON'
+            - description: '<p>A string map of event-specific data that you might choose to record. For example, if a user rates a movie on your site, other than movie ID (<code>itemId</code>) and rating (<code>eventValue</code>) , you might also send the number of movie ratings made by the user.</p> <p>Each item in the map consists of a key-value pair. For example,</p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Interactions schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Interactions schema.</p>'
         sentAt:
-          $ref: '#/components/schemas/Date'
-          description: The timestamp (in Unix time) on the client side when the event occurred.
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp (in Unix time) on the client side when the event occurred.
         recommendationId:
-          $ref: '#/components/schemas/RecommendationId'
-          description: The ID of the recommendation.
+          allOf:
+            - $ref: '#/components/schemas/RecommendationId'
+            - description: The ID of the recommendation.
         impression:
-          $ref: '#/components/schemas/Impression'
-          description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
+          allOf:
+            - $ref: '#/components/schemas/Impression'
+            - description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
       description: Represents user interaction event information sent using the <code>PutEvents</code> API.
     InvalidInputException: {}
     Date:
@@ -299,16 +307,20 @@ components:
       title: PutEventsRequest
       properties:
         trackingId:
-          $ref: '#/components/schemas/StringType'
-          description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: 'The tracking ID for the event. The ID is generated by a call to the <a href="https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html">CreateEventTracker</a> API.'
         userId:
-          $ref: '#/components/schemas/UserId'
-          description: The user associated with the event.
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The user associated with the event.
         sessionId:
-          $ref: '#/components/schemas/StringType'
-          description: The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: The session ID associated with the user's visit. Your application generates the sessionId when a user first visits your website or uses your application. Amazon Personalize uses the sessionId to associate events with the user before they log in. For more information see <a>event-record-api</a>.
         eventList:
-          $ref: '#/components/schemas/EventList'
-          description: A list of event data from the session.
+          allOf:
+            - $ref: '#/components/schemas/EventList'
+            - description: A list of event data from the session.
 security:
   - hmac: []

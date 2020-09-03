@@ -3342,8 +3342,9 @@ components:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' Information about the connected repository after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' Information about the connected repository after processing the request. '
     AccessDeniedException: {}
     ConflictException: {}
     InternalServerException: {}
@@ -3355,11 +3356,13 @@ components:
       type: object
       properties:
         successfulVersions:
-          $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
-          description: ' A list of the package versions that were successfully copied to your repository. '
+          allOf:
+            - $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
+            - description: ' A list of the package versions that were successfully copied to your repository. '
         failedVersions:
-          $ref: '#/components/schemas/PackageVersionErrorMap'
-          description: '<p> A map of package versions that failed to copy and their error codes. The possible error codes are in the <code>PackageVersionError</code> data type. They are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorMap'
+            - description: '<p> A map of package versions that failed to copy and their error codes. The possible error codes are in the <code>PackageVersionError</code> data type. They are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
     PackageVersion:
       type: string
       pattern: '[^!#/\s]+'
@@ -3374,56 +3377,65 @@ components:
       type: object
       properties:
         domain:
-          $ref: '#/components/schemas/DomainDescription'
-          description: ' Contains information about the created domain after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/DomainDescription'
+            - description: ' Contains information about the created domain after processing the request. '
     CreateRepositoryResult:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' Information about the created repository after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' Information about the created repository after processing the request. '
     UpstreamRepository:
       type: object
       required:
         - repositoryName
       properties:
         repositoryName:
-          $ref: '#/components/schemas/RepositoryName'
-          description: ' The name of an upstream repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: ' The name of an upstream repository. '
       description: ' Information about an upstream repository. A list of <code>UpstreamRepository</code> objects is an input parameter to <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html"> <code>CreateRepository</code> </a> and <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html"> <code>UpdateRepository</code> </a>. '
     DeleteDomainResult:
       type: object
       properties:
         domain:
-          $ref: '#/components/schemas/DomainDescription'
-          description: ' Contains information about the deleted domain after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/DomainDescription'
+            - description: ' Contains information about the deleted domain after processing the request. '
     DeleteDomainPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' Information about the deleted resource policy after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' Information about the deleted resource policy after processing the request. '
     DeletePackageVersionsResult:
       type: object
       properties:
         successfulVersions:
-          $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
-          description: ' A list of the package versions that were successfully deleted. '
+          allOf:
+            - $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
+            - description: ' A list of the package versions that were successfully deleted. '
         failedVersions:
-          $ref: '#/components/schemas/PackageVersionErrorMap'
-          description: '<p> A <code>PackageVersionError</code> object that contains a map of errors codes for the deleted package that failed. The possible error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorMap'
+            - description: '<p> A <code>PackageVersionError</code> object that contains a map of errors codes for the deleted package that failed. The possible error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
     DeleteRepositoryResult:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' Information about the deleted repository after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' Information about the deleted repository after processing the request. '
     DeleteRepositoryPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' Information about the deleted policy after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' Information about the deleted policy after processing the request. '
     DescribeDomainResult:
       type: object
       properties:
@@ -3435,215 +3447,265 @@ components:
         - packageVersion
       properties:
         packageVersion:
-          $ref: '#/components/schemas/PackageVersionDescription'
-          description: ' A <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a> </code> object that contains information about the requested package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionDescription'
+            - description: ' A <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html">PackageVersionDescription</a> </code> object that contains information about the requested package version. '
     DescribeRepositoryResult:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' A <code>RepositoryDescription</code> object that contains the requested repository information. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' A <code>RepositoryDescription</code> object that contains the requested repository information. '
     DisassociateExternalConnectionResult:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' The repository associated with the removed external connection. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' The repository associated with the removed external connection. '
     DisposePackageVersionsResult:
       type: object
       properties:
         successfulVersions:
-          $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
-          description: ' A list of the package versions that were successfully disposed. '
+          allOf:
+            - $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
+            - description: ' A list of the package versions that were successfully disposed. '
         failedVersions:
-          $ref: '#/components/schemas/PackageVersionErrorMap'
-          description: '<p> A <code>PackageVersionError</code> object that contains a map of errors codes for the disposed package versions that failed. The possible error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorMap'
+            - description: '<p> A <code>PackageVersionError</code> object that contains a map of errors codes for the disposed package versions that failed. The possible error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
     GetAuthorizationTokenResult:
       type: object
       properties:
         authorizationToken:
-          $ref: '#/components/schemas/String'
-          description: ' The returned authentication token. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The returned authentication token. '
         expiration:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' A timestamp that specifies the date and time the authorization token expires. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A timestamp that specifies the date and time the authorization token expires. '
     GetDomainPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' The returned resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' The returned resource policy. '
     GetPackageVersionAssetResult:
       type: object
       properties:
         asset:
-          $ref: '#/components/schemas/Asset'
-          description: ' The binary file, or asset, that is downloaded.'
+          allOf:
+            - $ref: '#/components/schemas/Asset'
+            - description: ' The binary file, or asset, that is downloaded.'
     GetPackageVersionReadmeResult:
       type: object
       properties:
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> The format of the package with the requested readme file. Valid format types are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> The format of the package with the requested readme file. Valid format types are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package that contains the returned readme file. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package that contains the returned readme file. '
         version:
-          $ref: '#/components/schemas/PackageVersion'
-          description: ' The version of the package with the requested readme file. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: ' The version of the package with the requested readme file. '
         versionRevision:
-          $ref: '#/components/schemas/PackageVersionRevision'
-          description: ' The current revision associated with the package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevision'
+            - description: ' The current revision associated with the package version. '
         readme:
-          $ref: '#/components/schemas/String'
-          description: ' The text of the returned readme file. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The text of the returned readme file. '
     GetRepositoryEndpointResult:
       type: object
       properties:
         repositoryEndpoint:
-          $ref: '#/components/schemas/String'
-          description: ' A string that specifies the URL of the returned endpoint. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' A string that specifies the URL of the returned endpoint. '
     GetRepositoryPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' The returned resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' The returned resource policy. '
     ListDomainsResult:
       type: object
       properties:
         domains:
-          $ref: '#/components/schemas/DomainSummaryList'
-          description: ' The returned list of <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html">DomainSummary</a> </code> objects. '
+          allOf:
+            - $ref: '#/components/schemas/DomainSummaryList'
+            - description: ' The returned list of <code> <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html">DomainSummary</a> </code> objects. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
     ListPackageVersionAssetsResult:
       type: object
       properties:
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: ' The format of the package that contains the returned package version assets. '
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: ' The format of the package that contains the returned package version assets. '
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package that contains the returned package version assets. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package that contains the returned package version assets. '
         version:
-          $ref: '#/components/schemas/PackageVersion'
-          description: ' The version of the package associated with the returned assets. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: ' The version of the package associated with the returned assets. '
         versionRevision:
-          $ref: '#/components/schemas/PackageVersionRevision'
-          description: ' The current revision associated with the package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevision'
+            - description: ' The current revision associated with the package version. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' If there are additional results, this is the token for the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' If there are additional results, this is the token for the next set of results. '
         assets:
-          $ref: '#/components/schemas/AssetSummaryList'
-          description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html"> <code>AssetSummary</code> </a> objects. '
+          allOf:
+            - $ref: '#/components/schemas/AssetSummaryList'
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html"> <code>AssetSummary</code> </a> objects. '
     ListPackageVersionDependenciesResult:
       type: object
       properties:
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> A format that specifies the type of the package that contains the returned dependencies. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> A format that specifies the type of the package that contains the returned dependencies. The valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package that contains the returned package versions dependencies. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package that contains the returned package versions dependencies. '
         version:
-          $ref: '#/components/schemas/PackageVersion'
-          description: ' The version of the package that is specified in the request. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: ' The version of the package that is specified in the request. '
         versionRevision:
-          $ref: '#/components/schemas/PackageVersionRevision'
-          description: ' The current revision associated with the package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevision'
+            - description: ' The current revision associated with the package version. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
         dependencies:
-          $ref: '#/components/schemas/PackageDependencyList'
-          description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html"> <code>PackageDependency</code> </a> objects. '
+          allOf:
+            - $ref: '#/components/schemas/PackageDependencyList'
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html"> <code>PackageDependency</code> </a> objects. '
     ListPackageVersionsResult:
       type: object
       properties:
         defaultDisplayVersion:
-          $ref: '#/components/schemas/PackageVersion'
-          description: '<p> The default package version to display. This depends on the package format: </p> <ul> <li> <p> For Maven and PyPI packages, it''s the most recently published package version. </p> </li> <li> <p> For npm packages, it''s the version referenced by the <code>latest</code> tag. If the <code>latest</code> tag is not set, it''s the most recently published package version. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: '<p> The default package version to display. This depends on the package format: </p> <ul> <li> <p> For Maven and PyPI packages, it''s the most recently published package version. </p> </li> <li> <p> For npm packages, it''s the version referenced by the <code>latest</code> tag. If the <code>latest</code> tag is not set, it''s the most recently published package version. </p> </li> </ul>'
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> A format of the package. Valid package format values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> A format of the package. Valid package format values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package. '
         versions:
-          $ref: '#/components/schemas/PackageVersionSummaryList'
-          description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html"> <code>PackageVersionSummary</code> </a> objects. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionSummaryList'
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html"> <code>PackageVersionSummary</code> </a> objects. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' If there are additional results, this is the token for the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' If there are additional results, this is the token for the next set of results. '
     ListPackagesResult:
       type: object
       properties:
         packages:
-          $ref: '#/components/schemas/PackageSummaryList'
-          description: ' The list of returned <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html"> <code>PackageSummary</code> </a> objects. '
+          allOf:
+            - $ref: '#/components/schemas/PackageSummaryList'
+            - description: ' The list of returned <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html"> <code>PackageSummary</code> </a> objects. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' If there are additional results, this is the token for the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' If there are additional results, this is the token for the next set of results. '
     ListRepositoriesResult:
       type: object
       properties:
         repositories:
-          $ref: '#/components/schemas/RepositorySummaryList'
-          description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. '
+          allOf:
+            - $ref: '#/components/schemas/RepositorySummaryList'
+            - description: ' The returned list of <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html"> <code>RepositorySummary</code> </a> objects. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' If there are additional results, this is the token for the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' If there are additional results, this is the token for the next set of results. '
     ListRepositoriesInDomainResult:
       type: object
       properties:
         repositories:
-          $ref: '#/components/schemas/RepositorySummaryList'
-          description: ' The returned list of repositories. '
+          allOf:
+            - $ref: '#/components/schemas/RepositorySummaryList'
+            - description: ' The returned list of repositories. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' If there are additional results, this is the token for the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' If there are additional results, this is the token for the next set of results. '
     PutDomainPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' The resource policy that was set after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' The resource policy that was set after processing the request. '
     PutRepositoryPermissionsPolicyResult:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/ResourcePolicy'
-          description: ' The resource policy that was set after processing the request. '
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicy'
+            - description: ' The resource policy that was set after processing the request. '
     UpdatePackageVersionsStatusResult:
       type: object
       properties:
         successfulVersions:
-          $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
-          description: ' A list of <code>PackageVersionError</code> objects, one for each package version with a status that failed to update. '
+          allOf:
+            - $ref: '#/components/schemas/SuccessfulPackageVersionInfoMap'
+            - description: ' A list of <code>PackageVersionError</code> objects, one for each package version with a status that failed to update. '
         failedVersions:
-          $ref: '#/components/schemas/PackageVersionErrorMap'
-          description: ' A list of <code>SuccessfulPackageVersionInfo</code> objects, one for each package version with a status that successfully updated. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorMap'
+            - description: ' A list of <code>SuccessfulPackageVersionInfo</code> objects, one for each package version with a status that successfully updated. '
     UpdateRepositoryResult:
       type: object
       properties:
         repository:
-          $ref: '#/components/schemas/RepositoryDescription'
-          description: ' The updated repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryDescription'
+            - description: ' The updated repository. '
     AccountId:
       type: string
       pattern: '[0-9]{12}'
@@ -3678,14 +3740,17 @@ components:
         - name
       properties:
         name:
-          $ref: '#/components/schemas/AssetName'
-          description: ' The name of the asset. '
+          allOf:
+            - $ref: '#/components/schemas/AssetName'
+            - description: ' The name of the asset. '
         size:
-          $ref: '#/components/schemas/LongOptional'
-          description: ' The size of the asset. '
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: ' The size of the asset. '
         hashes:
-          $ref: '#/components/schemas/AssetHashes'
-          description: ' The hashes of the asset. '
+          allOf:
+            - $ref: '#/components/schemas/AssetHashes'
+            - description: ' The hashes of the asset. '
       description: ' Contains details about a package version asset. '
     AssetSummaryList:
       type: array
@@ -3712,29 +3777,37 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/RepositoryName'
-          description: ' The name of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: ' The name of the repository. '
         administratorAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The 12-digit account number of the AWS account that manages the repository. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The 12-digit account number of the AWS account that manages the repository. '
         domainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain that contains the repository. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain that contains the repository. '
         domainOwner:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The 12-digit account number of the AWS account that owns the domain that contains the repository. It does not include dashes or spaces. '
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The Amazon Resource Name (ARN) of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The Amazon Resource Name (ARN) of the repository. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' A text description of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' A text description of the repository. '
         upstreams:
-          $ref: '#/components/schemas/UpstreamRepositoryInfoList'
-          description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+          allOf:
+            - $ref: '#/components/schemas/UpstreamRepositoryInfoList'
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
         externalConnections:
-          $ref: '#/components/schemas/RepositoryExternalConnectionInfoList'
-          description: ' An array of external connections associated with the repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryExternalConnectionInfoList'
+            - description: ' An array of external connections associated with the repository. '
       description: ' The details of a repository stored in AWS CodeArtifact. A CodeArtifact repository contains a set of package versions, each of which maps to a set of assets. Repositories are polyglot—a single repository can contain packages of any supported type. Each repository exposes endpoints for fetching and publishing packages using tools like the <code>npm</code> CLI, the Maven CLI (<code>mvn</code>), and <code>pip</code>. You can create up to 100 repositories per AWS account. '
     AuthorizationTokenDurationSeconds:
       type: integer
@@ -3771,17 +3844,21 @@ components:
       title: CopyPackageVersionsRequest
       properties:
         versions:
-          $ref: '#/components/schemas/PackageVersionList'
-          description: <p> The versions of the package to copy. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionList'
+            - description: <p> The versions of the package to copy. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
         versionRevisions:
-          $ref: '#/components/schemas/PackageVersionRevisionMap'
-          description: <p> A list of key-value pairs. The keys are package versions and the values are package version revisions. A <code>CopyPackageVersion</code> operation succeeds if the specified versions in the source repository match the specified package version revision. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevisionMap'
+            - description: <p> A list of key-value pairs. The keys are package versions and the values are package version revisions. A <code>CopyPackageVersion</code> operation succeeds if the specified versions in the source repository match the specified package version revision. </p> <note> <p> You must specify <code>versions</code> or <code>versionRevisions</code>. You cannot specify both. </p> </note>
         allowOverwrite:
-          $ref: '#/components/schemas/BooleanOptional'
-          description: ' Set to true to overwrite a package version that already exists in the destination repository. If set to false and the package version already exists in the destination repository, the package version is returned in the <code>failedVersions</code> field of the response with an <code>ALREADY_EXISTS</code> error code. '
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: ' Set to true to overwrite a package version that already exists in the destination repository. If set to false and the package version already exists in the destination repository, the package version is returned in the <code>failedVersions</code> field of the response with an <code>ALREADY_EXISTS</code> error code. '
         includeFromUpstream:
-          $ref: '#/components/schemas/BooleanOptional'
-          description: ' Set to true to copy packages from repositories that are upstream from the source repository to the destination repository. The default setting is false. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: ' Set to true to copy packages from repositories that are upstream from the source repository to the destination repository. The default setting is false. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
     SuccessfulPackageVersionInfoMap:
       type: object
       additionalProperties:
@@ -3795,35 +3872,44 @@ components:
       title: CreateDomainRequest
       properties:
         encryptionKey:
-          $ref: '#/components/schemas/Arn'
-          description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">AWS KMS API Permissions Reference</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> </important>'
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p> The encryption key for the domain. This is used to encrypt content stored in a domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a key alias, or a key alias ARN. To specify an <code>encryptionKey</code>, your IAM role must have <code>kms:DescribeKey</code> and <code>kms:CreateGrant</code> permissions on the encryption key that is used. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax">DescribeKey</a> in the <i>AWS Key Management Service API Reference</i> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">AWS KMS API Permissions Reference</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> <important> <p> CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">Using symmetric and asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>. </p> </important>'
     DomainDescription:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain. '
         owner:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The AWS account ID that owns the domain. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The AWS account ID that owns the domain. '
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The Amazon Resource Name (ARN) of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The Amazon Resource Name (ARN) of the domain. '
         status:
-          $ref: '#/components/schemas/DomainStatus'
-          description: <p> The current status of a domain. The valid values are </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: <p> The current status of a domain. The valid values are </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>
         createdTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' A timestamp that represents the date and time the domain was created. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A timestamp that represents the date and time the domain was created. '
         encryptionKey:
-          $ref: '#/components/schemas/Arn'
-          description: ' The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The ARN of an AWS Key Management Service (AWS KMS) key associated with a domain. '
         repositoryCount:
-          $ref: '#/components/schemas/Integer'
-          description: ' The number of repositories in the domain. '
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of repositories in the domain. '
         assetSizeBytes:
-          $ref: '#/components/schemas/Long'
-          description: ' The total size of all assets in the domain. '
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The total size of all assets in the domain. '
       description: ' Information about a domain. A domain is a container for repositories. When you create a domain, it is empty until you add one or more repositories. '
     Description:
       type: string
@@ -3838,11 +3924,13 @@ components:
       title: CreateRepositoryRequest
       properties:
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' A description of the created repository. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' A description of the created repository. '
         upstreams:
-          $ref: '#/components/schemas/UpstreamRepositoryList'
-          description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+          allOf:
+            - $ref: '#/components/schemas/UpstreamRepositoryList'
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
     PolicyRevision:
       type: string
       pattern: \S+
@@ -3856,14 +3944,17 @@ components:
       type: object
       properties:
         resourceArn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The ARN of the resource associated with the resource policy '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The ARN of the resource associated with the resource policy '
         revision:
-          $ref: '#/components/schemas/PolicyRevision'
-          description: ' The current revision of the resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevision'
+            - description: ' The current revision of the resource policy. '
         document:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: ' The resource policy formatted in JSON. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: ' The resource policy formatted in JSON. '
       description: ' An AWS CodeArtifact resource policy that contains a resource ARN, document details, and a revision. '
     DeleteDomainRequest:
       type: object
@@ -3885,11 +3976,13 @@ components:
       title: DeletePackageVersionsRequest
       properties:
         versions:
-          $ref: '#/components/schemas/PackageVersionList'
-          description: ' An array of strings that specify the versions of the package to delete. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionList'
+            - description: ' An array of strings that specify the versions of the package to delete. '
         expectedStatus:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: '<p> The expected status of the package version to delete. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: '<p> The expected status of the package version to delete. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
     DeleteRepositoryPermissionsPolicyRequest:
       type: object
       title: DeleteRepositoryPermissionsPolicyRequest
@@ -3910,41 +4003,53 @@ components:
       type: object
       properties:
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> The format of the package version. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> The format of the package version. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         packageName:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the requested package. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the requested package. '
         displayName:
-          $ref: '#/components/schemas/String255'
-          description: ' The name of the package that is displayed. The <code>displayName</code> varies depending on the package version''s format. For example, if an npm package is named <code>ui</code>, is in the namespace <code>vue</code>, and has the format <code>npm</code>, then the <code>displayName</code> is <code>@vue/ui</code>. '
+          allOf:
+            - $ref: '#/components/schemas/String255'
+            - description: ' The name of the package that is displayed. The <code>displayName</code> varies depending on the package version''s format. For example, if an npm package is named <code>ui</code>, is in the namespace <code>vue</code>, and has the format <code>npm</code>, then the <code>displayName</code> is <code>@vue/ui</code>. '
         version:
-          $ref: '#/components/schemas/PackageVersion'
-          description: ' The version of the package. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: ' The version of the package. '
         summary:
-          $ref: '#/components/schemas/String'
-          description: ' A summary of the package version. The summary is extracted from the package. The information in and detail level of the summary depends on the package version''s format. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' A summary of the package version. The summary is extracted from the package. The information in and detail level of the summary depends on the package version''s format. '
         homePage:
-          $ref: '#/components/schemas/String'
-          description: ' The homepage associated with the package. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The homepage associated with the package. '
         sourceCodeRepository:
-          $ref: '#/components/schemas/String'
-          description: ' The repository for the source code in the package version, or the source code used to build it. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The repository for the source code in the package version, or the source code used to build it. '
         publishedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' A timestamp that contains the date and time the package version was published. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A timestamp that contains the date and time the package version was published. '
         licenses:
-          $ref: '#/components/schemas/LicenseInfoList'
-          description: ' Information about licenses associated with the package version. '
+          allOf:
+            - $ref: '#/components/schemas/LicenseInfoList'
+            - description: ' Information about licenses associated with the package version. '
         revision:
-          $ref: '#/components/schemas/PackageVersionRevision'
-          description: ' The revision of the package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevision'
+            - description: ' The revision of the package version. '
         status:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
       description: ' Details about a package version. '
     DescribeRepositoryRequest:
       type: object
@@ -3961,14 +4066,17 @@ components:
       title: DisposePackageVersionsRequest
       properties:
         versions:
-          $ref: '#/components/schemas/PackageVersionList'
-          description: ' The versions of the package you want to dispose. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionList'
+            - description: ' The versions of the package you want to dispose. '
         versionRevisions:
-          $ref: '#/components/schemas/PackageVersionRevisionMap'
-          description: ' The revisions of the package versions you want to dispose. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevisionMap'
+            - description: ' The revisions of the package versions you want to dispose. '
         expectedStatus:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: '<p> The expected status of the package version to dispose. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: '<p> The expected status of the package version to dispose. Valid values are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
     DomainStatus:
       type: string
       enum:
@@ -3985,23 +4093,29 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain. '
         owner:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The ARN of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The ARN of the domain. '
         status:
-          $ref: '#/components/schemas/DomainStatus'
-          description: '<p> A string that contains the status of the domain. The valid values are: </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: '<p> A string that contains the status of the domain. The valid values are: </p> <ul> <li> <p> <code>Active</code> </p> </li> <li> <p> <code>Deleted</code> </p> </li> </ul>'
         createdTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: ' A timestamp that contains the date and time the domain was created. '
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A timestamp that contains the date and time the domain was created. '
         encryptionKey:
-          $ref: '#/components/schemas/Arn'
-          description: ' The key used to encrypt the domain. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The key used to encrypt the domain. '
       description: ' Information about a domain, including its name, Amazon Resource Name (ARN), and status. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html"> <code>ListDomains</code> </a> operation returns a list of <code>DomainSummary</code> objects. '
     DomainSummaryList:
       type: array
@@ -4050,11 +4164,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/String'
-          description: ' Name of the license. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' Name of the license. '
         url:
-          $ref: '#/components/schemas/String'
-          description: ' The URL for license data. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The URL for license data. '
       description: ' Details of the license data. '
     LicenseInfoList:
       type: array
@@ -4074,11 +4190,13 @@ components:
       title: ListDomainsRequest
       properties:
         maxResults:
-          $ref: '#/components/schemas/ListDomainsMaxResults'
-          description: ' The maximum number of results to return per page. '
+          allOf:
+            - $ref: '#/components/schemas/ListDomainsMaxResults'
+            - description: ' The maximum number of results to return per page. '
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: ' The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results. '
     ListPackageVersionAssetsMaxResults:
       type: integer
       minimum: 1
@@ -4147,30 +4265,37 @@ components:
       type: object
       properties:
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package that this package depends on. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package that this package depends on. '
         dependencyType:
-          $ref: '#/components/schemas/String'
-          description: ' The type of a package dependency. The possible values depend on the package type. Example types are <code>compile</code>, <code>runtime</code>, and <code>test</code> for Maven packages, and <code>dev</code>, <code>prod</code>, and <code>optional</code> for npm packages. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The type of a package dependency. The possible values depend on the package type. Example types are <code>compile</code>, <code>runtime</code>, and <code>test</code> for Maven packages, and <code>dev</code>, <code>prod</code>, and <code>optional</code> for npm packages. '
         versionRequirement:
-          $ref: '#/components/schemas/String'
-          description: ' The required version, or version range, of the package that this package depends on. The version format is specific to the package type. For example, the following are possible valid required versions: <code>1.2.3</code>, <code>^2.3.4</code>, or <code>4.x</code>. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The required version, or version range, of the package that this package depends on. The version format is specific to the package type. For example, the following are possible valid required versions: <code>1.2.3</code>, <code>^2.3.4</code>, or <code>4.x</code>. '
       description: ' Details about a package dependency. '
     PackageSummary:
       type: object
       properties:
         format:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> The format of the package. Valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> The format of the package. Valid values are: </p> <ul> <li> <p> <code>npm</code> </p> </li> <li> <p> <code>pypi</code> </p> </li> <li> <p> <code>maven</code> </p> </li> </ul>'
         namespace:
-          $ref: '#/components/schemas/PackageNamespace'
-          description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageNamespace'
+            - description: '<p> The namespace of the package. The package component that specifies its namespace depends on its type. For example: </p> <ul> <li> <p> The namespace of a Maven package is its <code>groupId</code>. </p> </li> <li> <p> The namespace of an npm package is its <code>scope</code>. </p> </li> <li> <p> A Python package does not contain a corresponding component, so Python packages do not have a namespace. </p> </li> </ul>'
         package:
-          $ref: '#/components/schemas/PackageName'
-          description: ' The name of the package. '
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: ' The name of the package. '
       description: ' Details about a package, including its format, namespace, and name. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html"> <code>ListPackages</code> </a> operation returns a list of <code>PackageSummary</code> objects. '
     String255:
       type: string
@@ -4189,11 +4314,13 @@ components:
       type: object
       properties:
         errorCode:
-          $ref: '#/components/schemas/PackageVersionErrorCode'
-          description: '<p> The error code associated with the error. Valid error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorCode'
+            - description: '<p> The error code associated with the error. Valid error codes are: </p> <ul> <li> <p> <code>ALREADY_EXISTS</code> </p> </li> <li> <p> <code>MISMATCHED_REVISION</code> </p> </li> <li> <p> <code>MISMATCHED_STATUS</code> </p> </li> <li> <p> <code>NOT_ALLOWED</code> </p> </li> <li> <p> <code>NOT_FOUND</code> </p> </li> <li> <p> <code>SKIPPED</code> </p> </li> </ul>'
         errorMessage:
-          $ref: '#/components/schemas/ErrorMessage'
-          description: ' The error message associated with the error. '
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: ' The error message associated with the error. '
       description: ' An error associated with package. '
     PackageVersionSummary:
       type: object
@@ -4202,14 +4329,17 @@ components:
         - status
       properties:
         version:
-          $ref: '#/components/schemas/PackageVersion'
-          description: ' Information about a package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: ' Information about a package version. '
         revision:
-          $ref: '#/components/schemas/PackageVersionRevision'
-          description: ' The revision associated with a package version. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevision'
+            - description: ' The revision associated with a package version. '
         status:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: '<p> A string that contains the status of the package version. It can be one of the following: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
       description: ' Details about a package version, including its status, version, and revision. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html"> <code>ListPackageVersions</code> </a> operation returns a list of <code>PackageVersionSummary</code> objects. '
     PolicyDocument:
       type: string
@@ -4223,17 +4353,21 @@ components:
       title: PutDomainPermissionsPolicyRequest
       properties:
         domain:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain on which to set the resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain on which to set the resource policy. '
         domainOwner:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
         policyRevision:
-          $ref: '#/components/schemas/PolicyRevision'
-          description: ' The current revision of the resource policy to be set. This revision is used for optimistic locking, which prevents others from overwriting your changes to the domain''s resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevision'
+            - description: ' The current revision of the resource policy to be set. This revision is used for optimistic locking, which prevents others from overwriting your changes to the domain''s resource policy. '
         policyDocument:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided domain. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided domain. '
     PutRepositoryPermissionsPolicyRequest:
       type: object
       required:
@@ -4241,11 +4375,13 @@ components:
       title: PutRepositoryPermissionsPolicyRequest
       properties:
         policyRevision:
-          $ref: '#/components/schemas/PolicyRevision'
-          description: ' Sets the revision of the resource policy that specifies permissions to access the repository. This revision is used for optimistic locking, which prevents others from overwriting your changes to the repository''s resource policy. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevision'
+            - description: ' Sets the revision of the resource policy that specifies permissions to access the repository. This revision is used for optimistic locking, which prevents others from overwriting your changes to the repository''s resource policy. '
         policyDocument:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided repository. '
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: ' A valid displayable JSON Aspen policy string to be set as the access control resource policy on the provided repository. '
     UpstreamRepositoryInfoList:
       type: array
       items:
@@ -4258,46 +4394,57 @@ components:
       type: object
       properties:
         externalConnectionName:
-          $ref: '#/components/schemas/ExternalConnectionName'
-          description: ' The name of the external connection associated with a repository. '
+          allOf:
+            - $ref: '#/components/schemas/ExternalConnectionName'
+            - description: ' The name of the external connection associated with a repository. '
         packageFormat:
-          $ref: '#/components/schemas/PackageFormat'
-          description: '<p> The package format associated with a repository''s external connection. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageFormat'
+            - description: '<p> The package format associated with a repository''s external connection. The valid package formats are: </p> <ul> <li> <p> <code>npm</code>: A Node Package Manager (npm) package. </p> </li> <li> <p> <code>pypi</code>: A Python Package Index (PyPI) package. </p> </li> <li> <p> <code>maven</code>: A Maven package that contains compiled code in a distributable format, such as a JAR file. </p> </li> </ul>'
         status:
-          $ref: '#/components/schemas/ExternalConnectionStatus'
-          description: ' The status of the external connection of a repository. There is one valid value, <code>Available</code>. '
+          allOf:
+            - $ref: '#/components/schemas/ExternalConnectionStatus'
+            - description: ' The status of the external connection of a repository. There is one valid value, <code>Available</code>. '
       description: ' Contains information about the external connection of a repository. '
     RepositorySummary:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/RepositoryName'
-          description: ' The name of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: ' The name of the repository. '
         administratorAccount:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The AWS account ID that manages the repository. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The AWS account ID that manages the repository. '
         domainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain that contains the repository. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain that contains the repository. '
         domainOwner:
-          $ref: '#/components/schemas/AccountId'
-          description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: ' The 12-digit account number of the AWS account that owns the domain. It does not include dashes or spaces. '
         arn:
-          $ref: '#/components/schemas/Arn'
-          description: ' The ARN of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: ' The ARN of the repository. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description of the repository. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description of the repository. '
       description: ' Details about a repository, including its Amazon Resource Name (ARN), description, and domain information. The <a href="https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html"> <code>ListRepositories</code> </a> operation returns a list of <code>RepositorySummary</code> objects. '
     SuccessfulPackageVersionInfo:
       type: object
       properties:
         revision:
-          $ref: '#/components/schemas/String'
-          description: ' The revision of a package version. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The revision of a package version. '
         status:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: '<p> The status of a package version. Valid statuses are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: '<p> The status of a package version. Valid statuses are: </p> <ul> <li> <p> <code>Published</code> </p> </li> <li> <p> <code>Unfinished</code> </p> </li> <li> <p> <code>Unlisted</code> </p> </li> <li> <p> <code>Archived</code> </p> </li> <li> <p> <code>Disposed</code> </p> </li> </ul>'
       description: ' Contains the revision and status of a package version. '
     UpdatePackageVersionsStatusRequest:
       type: object
@@ -4307,33 +4454,40 @@ components:
       title: UpdatePackageVersionsStatusRequest
       properties:
         versions:
-          $ref: '#/components/schemas/PackageVersionList'
-          description: ' An array of strings that specify the versions of the package with the statuses to update. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionList'
+            - description: ' An array of strings that specify the versions of the package with the statuses to update. '
         versionRevisions:
-          $ref: '#/components/schemas/PackageVersionRevisionMap'
-          description: ' A map of package versions and package version revisions. The map <code>key</code> is the package version (for example, <code>3.5.2</code>), and the map <code>value</code> is the package version revision. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionRevisionMap'
+            - description: ' A map of package versions and package version revisions. The map <code>key</code> is the package version (for example, <code>3.5.2</code>), and the map <code>value</code> is the package version revision. '
         expectedStatus:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: ' The package version’s expected status before it is updated. If <code>expectedStatus</code> is provided, the package version''s status is updated only if its status at the time <code>UpdatePackageVersionsStatus</code> is called matches <code>expectedStatus</code>. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: ' The package version’s expected status before it is updated. If <code>expectedStatus</code> is provided, the package version''s status is updated only if its status at the time <code>UpdatePackageVersionsStatus</code> is called matches <code>expectedStatus</code>. '
         targetStatus:
-          $ref: '#/components/schemas/PackageVersionStatus'
-          description: ' The status you want to change the package version status to. '
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: ' The status you want to change the package version status to. '
     UpdateRepositoryRequest:
       type: object
       title: UpdateRepositoryRequest
       properties:
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' An updated repository description. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' An updated repository description. '
         upstreams:
-          $ref: '#/components/schemas/UpstreamRepositoryList'
-          description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
+          allOf:
+            - $ref: '#/components/schemas/UpstreamRepositoryList'
+            - description: ' A list of upstream repositories to associate with the repository. The order of the upstream repositories in the list determines their priority order when AWS CodeArtifact looks for a requested package version. For more information, see <a href="https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html">Working with upstream repositories</a>. '
     UpstreamRepositoryInfo:
       type: object
       properties:
         repositoryName:
-          $ref: '#/components/schemas/RepositoryName'
-          description: ' The name of an upstream repository. '
+          allOf:
+            - $ref: '#/components/schemas/RepositoryName'
+            - description: ' The name of an upstream repository. '
       description: ' Information about an upstream repository. '
 security:
   - hmac: []

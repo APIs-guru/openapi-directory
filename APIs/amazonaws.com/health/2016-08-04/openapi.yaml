@@ -696,14 +696,17 @@ components:
       type: object
       properties:
         affectedAccounts:
-          $ref: '#/components/schemas/affectedAccountsList'
-          description: A JSON set of elements of the affected accounts.
+          allOf:
+            - $ref: '#/components/schemas/affectedAccountsList'
+            - description: A JSON set of elements of the affected accounts.
         eventScopeCode:
-          $ref: '#/components/schemas/eventScopeCode'
-          description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/eventScopeCode'
+            - description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeAffectedAccountsForOrganizationRequest:
       type: object
       required:
@@ -711,24 +714,29 @@ components:
       title: DescribeAffectedAccountsForOrganizationRequest
       properties:
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
     InvalidPaginationToken: {}
     DescribeAffectedEntitiesResponse:
       type: object
       properties:
         entities:
-          $ref: '#/components/schemas/EntityList'
-          description: The entities that match the filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/EntityList'
+            - description: The entities that match the filter criteria.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeAffectedEntitiesRequest:
       type: object
       required:
@@ -736,30 +744,37 @@ components:
       title: DescribeAffectedEntitiesRequest
       properties:
         filter:
-          $ref: '#/components/schemas/EntityFilter'
-          description: Values to narrow the results returned. At least one event ARN is required.
+          allOf:
+            - $ref: '#/components/schemas/EntityFilter'
+            - description: Values to narrow the results returned. At least one event ARN is required.
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
     UnsupportedLocale: {}
     DescribeAffectedEntitiesForOrganizationResponse:
       type: object
       properties:
         entities:
-          $ref: '#/components/schemas/EntityList'
-          description: 'A JSON set of elements including the <code>awsAccountId</code> and its <code>entityArn</code>, <code>entityValue</code> and its <code>entityArn</code>, <code>lastUpdatedTime</code>, and <code>statusCode</code>.'
+          allOf:
+            - $ref: '#/components/schemas/EntityList'
+            - description: 'A JSON set of elements including the <code>awsAccountId</code> and its <code>entityArn</code>, <code>entityValue</code> and its <code>entityArn</code>, <code>lastUpdatedTime</code>, and <code>statusCode</code>.'
         failedSet:
-          $ref: '#/components/schemas/DescribeAffectedEntitiesForOrganizationFailedSet'
-          description: 'A JSON set of elements of the failed response, including the <code>awsAccountId</code>, <code>errorMessage</code>, <code>errorName</code>, and <code>eventArn</code>.'
+          allOf:
+            - $ref: '#/components/schemas/DescribeAffectedEntitiesForOrganizationFailedSet'
+            - description: 'A JSON set of elements of the failed response, including the <code>awsAccountId</code>, <code>errorMessage</code>, <code>errorName</code>, and <code>eventArn</code>.'
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeAffectedEntitiesForOrganizationRequest:
       type: object
       required:
@@ -767,39 +782,47 @@ components:
       title: DescribeAffectedEntitiesForOrganizationRequest
       properties:
         organizationEntityFilters:
-          $ref: '#/components/schemas/OrganizationEntityFiltersList'
-          description: A JSON set of elements including the <code>awsAccountId</code> and the <code>eventArn</code>.
+          allOf:
+            - $ref: '#/components/schemas/OrganizationEntityFiltersList'
+            - description: A JSON set of elements including the <code>awsAccountId</code> and the <code>eventArn</code>.
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
     DescribeEntityAggregatesResponse:
       type: object
       properties:
         entityAggregates:
-          $ref: '#/components/schemas/EntityAggregateList'
-          description: The number of entities that are affected by each of the specified events.
+          allOf:
+            - $ref: '#/components/schemas/EntityAggregateList'
+            - description: The number of entities that are affected by each of the specified events.
     DescribeEntityAggregatesRequest:
       type: object
       title: DescribeEntityAggregatesRequest
       properties:
         eventArns:
-          $ref: '#/components/schemas/EventArnsList'
-          description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
+          allOf:
+            - $ref: '#/components/schemas/EventArnsList'
+            - description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
     DescribeEventAggregatesResponse:
       type: object
       properties:
         eventAggregates:
-          $ref: '#/components/schemas/EventAggregateList'
-          description: The number of events in each category that meet the optional filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/EventAggregateList'
+            - description: The number of events in each category that meet the optional filter criteria.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeEventAggregatesRequest:
       type: object
       required:
@@ -807,26 +830,32 @@ components:
       title: DescribeEventAggregatesRequest
       properties:
         filter:
-          $ref: '#/components/schemas/EventFilter'
-          description: Values to narrow the results returned.
+          allOf:
+            - $ref: '#/components/schemas/EventFilter'
+            - description: Values to narrow the results returned.
         aggregateField:
-          $ref: '#/components/schemas/eventAggregateField'
-          description: The only currently supported value is <code>eventTypeCategory</code>.
+          allOf:
+            - $ref: '#/components/schemas/eventAggregateField'
+            - description: The only currently supported value is <code>eventTypeCategory</code>.
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeEventDetailsResponse:
       type: object
       properties:
         successfulSet:
-          $ref: '#/components/schemas/DescribeEventDetailsSuccessfulSet'
-          description: Information about the events that could be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/DescribeEventDetailsSuccessfulSet'
+            - description: Information about the events that could be retrieved.
         failedSet:
-          $ref: '#/components/schemas/DescribeEventDetailsFailedSet'
-          description: Error messages for any events that could not be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/DescribeEventDetailsFailedSet'
+            - description: Error messages for any events that could not be retrieved.
     DescribeEventDetailsRequest:
       type: object
       required:
@@ -834,20 +863,24 @@ components:
       title: DescribeEventDetailsRequest
       properties:
         eventArns:
-          $ref: '#/components/schemas/eventArnList'
-          description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArnList'
+            - description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
     DescribeEventDetailsForOrganizationResponse:
       type: object
       properties:
         successfulSet:
-          $ref: '#/components/schemas/DescribeEventDetailsForOrganizationSuccessfulSet'
-          description: Information about the events that could be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/DescribeEventDetailsForOrganizationSuccessfulSet'
+            - description: Information about the events that could be retrieved.
         failedSet:
-          $ref: '#/components/schemas/DescribeEventDetailsForOrganizationFailedSet'
-          description: Error messages for any events that could not be retrieved.
+          allOf:
+            - $ref: '#/components/schemas/DescribeEventDetailsForOrganizationFailedSet'
+            - description: Error messages for any events that could not be retrieved.
     DescribeEventDetailsForOrganizationRequest:
       type: object
       required:
@@ -855,92 +888,113 @@ components:
       title: DescribeEventDetailsForOrganizationRequest
       properties:
         organizationEventDetailFilters:
-          $ref: '#/components/schemas/OrganizationEventDetailFiltersList'
-          description: A set of JSON elements that includes the <code>awsAccountId</code> and the <code>eventArn</code>.
+          allOf:
+            - $ref: '#/components/schemas/OrganizationEventDetailFiltersList'
+            - description: A set of JSON elements that includes the <code>awsAccountId</code> and the <code>eventArn</code>.
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
     DescribeEventTypesResponse:
       type: object
       properties:
         eventTypes:
-          $ref: '#/components/schemas/EventTypeList'
-          description: 'A list of event types that match the filter criteria. Event types have a category (<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>), a service (for example, <code>EC2</code>, <code>RDS</code>, <code>DATAPIPELINE</code>, <code>BILLING</code>), and a code (in the format <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).'
+          allOf:
+            - $ref: '#/components/schemas/EventTypeList'
+            - description: 'A list of event types that match the filter criteria. Event types have a category (<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>), a service (for example, <code>EC2</code>, <code>RDS</code>, <code>DATAPIPELINE</code>, <code>BILLING</code>), and a code (in the format <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).'
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeEventTypesRequest:
       type: object
       title: DescribeEventTypesRequest
       properties:
         filter:
-          $ref: '#/components/schemas/EventTypeFilter'
-          description: Values to narrow the results returned.
+          allOf:
+            - $ref: '#/components/schemas/EventTypeFilter'
+            - description: Values to narrow the results returned.
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
     DescribeEventsResponse:
       type: object
       properties:
         events:
-          $ref: '#/components/schemas/EventList'
-          description: The events that match the specified filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/EventList'
+            - description: The events that match the specified filter criteria.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeEventsRequest:
       type: object
       title: DescribeEventsRequest
       properties:
         filter:
-          $ref: '#/components/schemas/EventFilter'
-          description: Values to narrow the results returned.
+          allOf:
+            - $ref: '#/components/schemas/EventFilter'
+            - description: Values to narrow the results returned.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
     DescribeEventsForOrganizationResponse:
       type: object
       properties:
         events:
-          $ref: '#/components/schemas/OrganizationEventList'
-          description: The events that match the specified filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/OrganizationEventList'
+            - description: The events that match the specified filter criteria.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
     DescribeEventsForOrganizationRequest:
       type: object
       title: DescribeEventsForOrganizationRequest
       properties:
         filter:
-          $ref: '#/components/schemas/OrganizationEventFilter'
-          description: Values to narrow the results returned.
+          allOf:
+            - $ref: '#/components/schemas/OrganizationEventFilter'
+            - description: Values to narrow the results returned.
         nextToken:
-          $ref: '#/components/schemas/nextToken'
-          description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
+          allOf:
+            - $ref: '#/components/schemas/nextToken'
+            - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
-          $ref: '#/components/schemas/maxResults'
-          description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/maxResults'
+            - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
         locale:
-          $ref: '#/components/schemas/locale'
-          description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
+          allOf:
+            - $ref: '#/components/schemas/locale'
+            - description: The locale (language) to return information in. English (en) is the default and the only supported value at this time.
     DescribeHealthServiceStatusForOrganizationResponse:
       type: object
       properties:
         healthServiceAccessStatusForOrganization:
-          $ref: '#/components/schemas/healthServiceAccessStatusForOrganization'
-          description: <p>Information about the status of enabling or disabling AWS Health Organizational View in your organization.</p> <p>Valid values are <code>ENABLED | DISABLED | PENDING</code>. </p>
+          allOf:
+            - $ref: '#/components/schemas/healthServiceAccessStatusForOrganization'
+            - description: <p>Information about the status of enabling or disabling AWS Health Organizational View in your organization.</p> <p>Valid values are <code>ENABLED | DISABLED | PENDING</code>. </p>
     ConcurrentModificationException: {}
     entityArn:
       type: string
@@ -978,39 +1032,49 @@ components:
       type: object
       properties:
         entityArn:
-          $ref: '#/components/schemas/entityArn'
-          description: 'The unique identifier for the entity. Format: <code>arn:aws:health:<i>entity-region</i>:<i>aws-account</i>:entity/<i>entity-id</i> </code>. Example: <code>arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K</code> '
+          allOf:
+            - $ref: '#/components/schemas/entityArn'
+            - description: 'The unique identifier for the entity. Format: <code>arn:aws:health:<i>entity-region</i>:<i>aws-account</i>:entity/<i>entity-id</i> </code>. Example: <code>arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K</code> '
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         entityValue:
-          $ref: '#/components/schemas/entityValue'
-          description: The ID of the affected entity.
+          allOf:
+            - $ref: '#/components/schemas/entityValue'
+            - description: The ID of the affected entity.
         entityUrl:
-          $ref: '#/components/schemas/entityUrl'
-          description: The URL of the affected entity.
+          allOf:
+            - $ref: '#/components/schemas/entityUrl'
+            - description: The URL of the affected entity.
         awsAccountId:
-          $ref: '#/components/schemas/accountId'
-          description: The 12-digit AWS account number that contains the affected entity.
+          allOf:
+            - $ref: '#/components/schemas/accountId'
+            - description: The 12-digit AWS account number that contains the affected entity.
         lastUpdatedTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The most recent time that the entity was updated.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The most recent time that the entity was updated.
         statusCode:
-          $ref: '#/components/schemas/entityStatusCode'
-          description: 'The most recent status of the entity affected by the event. The possible values are <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.'
+          allOf:
+            - $ref: '#/components/schemas/entityStatusCode'
+            - description: 'The most recent status of the entity affected by the event. The possible values are <code>IMPAIRED</code>, <code>UNIMPAIRED</code>, and <code>UNKNOWN</code>.'
         tags:
-          $ref: '#/components/schemas/tagSet'
-          description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/tagSet'
+            - description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
       description: Information about an entity that is affected by a Health event.
     DateTimeRange:
       type: object
       properties:
         from:
-          $ref: '#/components/schemas/timestamp'
-          description: The starting date and time of a time range.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The starting date and time of a time range.
         to:
-          $ref: '#/components/schemas/timestamp'
-          description: The ending date and time of a time range.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The ending date and time of a time range.
       description: 'A range of dates and times that is used by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html">EventFilter</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html">EntityFilter</a> objects. If <code>from</code> is set and <code>to</code> is set: match items where the timestamp (<code>startTime</code>, <code>endTime</code>, or <code>lastUpdatedTime</code>) is between <code>from</code> and <code>to</code> inclusive. If <code>from</code> is set and <code>to</code> is not set: match items where the timestamp value is equal to or after <code>from</code>. If <code>from</code> is not set and <code>to</code> is set: match items where the timestamp value is equal to or before <code>to</code>.'
     nextToken:
       type: string
@@ -1035,17 +1099,21 @@ components:
       type: object
       properties:
         awsAccountId:
-          $ref: '#/components/schemas/accountId'
-          description: The 12-digit AWS account numbers that contains the affected entities.
+          allOf:
+            - $ref: '#/components/schemas/accountId'
+            - description: The 12-digit AWS account numbers that contains the affected entities.
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         errorName:
-          $ref: '#/components/schemas/string'
-          description: The name of the error.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the error.
         errorMessage:
-          $ref: '#/components/schemas/string'
-          description: 'The unique identifier for the event type. The format is <code>AWS_SERVICE_DESCRIPTION</code>. For example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The unique identifier for the event type. The format is <code>AWS_SERVICE_DESCRIPTION</code>. For example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
       description: 'Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a> operation cannot find or process a specific entity.'
     DescribeAffectedEntitiesForOrganizationFailedSet:
       type: array
@@ -1072,23 +1140,29 @@ components:
         - eventArns
       properties:
         eventArns:
-          $ref: '#/components/schemas/eventArnList'
-          description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArnList'
+            - description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
         entityArns:
-          $ref: '#/components/schemas/entityArnList'
-          description: A list of entity ARNs (unique identifiers).
+          allOf:
+            - $ref: '#/components/schemas/entityArnList'
+            - description: A list of entity ARNs (unique identifiers).
         entityValues:
-          $ref: '#/components/schemas/entityValueList'
-          description: A list of IDs for affected entities.
+          allOf:
+            - $ref: '#/components/schemas/entityValueList'
+            - description: A list of IDs for affected entities.
         lastUpdatedTimes:
-          $ref: '#/components/schemas/dateTimeRangeList'
-          description: A list of the most recent dates and times that the entity was updated.
+          allOf:
+            - $ref: '#/components/schemas/dateTimeRangeList'
+            - description: A list of the most recent dates and times that the entity was updated.
         tags:
-          $ref: '#/components/schemas/tagFilter'
-          description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/tagFilter'
+            - description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
         statusCodes:
-          $ref: '#/components/schemas/entityStatusCodeList'
-          description: 'A list of entity status codes (<code>IMPAIRED</code>, <code>UNIMPAIRED</code>, or <code>UNKNOWN</code>).'
+          allOf:
+            - $ref: '#/components/schemas/entityStatusCodeList'
+            - description: 'A list of entity status codes (<code>IMPAIRED</code>, <code>UNIMPAIRED</code>, or <code>UNKNOWN</code>).'
       description: 'The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html">EntityFilter</a> operation.'
     EventArnsList:
       type: array
@@ -1104,44 +1178,57 @@ components:
       type: object
       properties:
         eventArns:
-          $ref: '#/components/schemas/eventArnList'
-          description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArnList'
+            - description: 'A list of event ARNs (unique identifiers). For example: <code>"arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101"</code> '
         eventTypeCodes:
-          $ref: '#/components/schemas/eventTypeList'
-          description: 'A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventTypeList'
+            - description: 'A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".</code> '
         services:
-          $ref: '#/components/schemas/serviceList'
-          description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/serviceList'
+            - description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
         regions:
-          $ref: '#/components/schemas/regionList'
-          description: A list of AWS regions.
+          allOf:
+            - $ref: '#/components/schemas/regionList'
+            - description: A list of AWS regions.
         availabilityZones:
-          $ref: '#/components/schemas/availabilityZones'
-          description: A list of AWS availability zones.
+          allOf:
+            - $ref: '#/components/schemas/availabilityZones'
+            - description: A list of AWS availability zones.
         startTimes:
-          $ref: '#/components/schemas/dateTimeRangeList'
-          description: A list of dates and times that the event began.
+          allOf:
+            - $ref: '#/components/schemas/dateTimeRangeList'
+            - description: A list of dates and times that the event began.
         endTimes:
-          $ref: '#/components/schemas/dateTimeRangeList'
-          description: A list of dates and times that the event ended.
+          allOf:
+            - $ref: '#/components/schemas/dateTimeRangeList'
+            - description: A list of dates and times that the event ended.
         lastUpdatedTimes:
-          $ref: '#/components/schemas/dateTimeRangeList'
-          description: A list of dates and times that the event was last updated.
+          allOf:
+            - $ref: '#/components/schemas/dateTimeRangeList'
+            - description: A list of dates and times that the event was last updated.
         entityArns:
-          $ref: '#/components/schemas/entityArnList'
-          description: A list of entity ARNs (unique identifiers).
+          allOf:
+            - $ref: '#/components/schemas/entityArnList'
+            - description: A list of entity ARNs (unique identifiers).
         entityValues:
-          $ref: '#/components/schemas/entityValueList'
-          description: 'A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or EBS volumes (<code>vol-426ab23e</code>).'
+          allOf:
+            - $ref: '#/components/schemas/entityValueList'
+            - description: 'A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or EBS volumes (<code>vol-426ab23e</code>).'
         eventTypeCategories:
-          $ref: '#/components/schemas/eventTypeCategoryList'
-          description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCategoryList'
+            - description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
         tags:
-          $ref: '#/components/schemas/tagFilter'
-          description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/tagFilter'
+            - description: '<p>A map of entity tags attached to the affected entity.</p> <note> <p>Currently, the <code>tags</code> property isn''t supported.</p> </note>'
         eventStatusCodes:
-          $ref: '#/components/schemas/eventStatusCodeList'
-          description: A list of event status codes.
+          allOf:
+            - $ref: '#/components/schemas/eventStatusCodeList'
+            - description: A list of event status codes.
       description: 'The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEvents.html">DescribeEvents</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html">DescribeEventAggregates</a> operations.'
     eventAggregateField:
       type: string
@@ -1155,14 +1242,17 @@ components:
       type: object
       properties:
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         errorName:
-          $ref: '#/components/schemas/string'
-          description: The name of the error.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the error.
         errorMessage:
-          $ref: '#/components/schemas/string'
-          description: A message that describes the error.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A message that describes the error.
       description: 'Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html">DescribeEventDetails</a> operation cannot find a specified event.'
     DescribeEventDetailsFailedSet:
       type: array
@@ -1172,17 +1262,21 @@ components:
       type: object
       properties:
         awsAccountId:
-          $ref: '#/components/schemas/accountId'
-          description: 'Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> operation cannot find a specified event.'
+          allOf:
+            - $ref: '#/components/schemas/accountId'
+            - description: 'Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> operation cannot find a specified event.'
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         errorName:
-          $ref: '#/components/schemas/string'
-          description: The name of the error.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the error.
         errorMessage:
-          $ref: '#/components/schemas/string'
-          description: A message that describes the error.
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A message that describes the error.
       description: 'Error information returned when a <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> operation cannot find a specified event.'
     DescribeEventDetailsForOrganizationFailedSet:
       type: array
@@ -1202,15 +1296,17 @@ components:
       type: object
       properties:
         awsAccountId:
-          $ref: '#/components/schemas/accountId'
-          description: The 12-digit AWS account numbers that contains the affected entities.
+          allOf:
+            - $ref: '#/components/schemas/accountId'
+            - description: The 12-digit AWS account numbers that contains the affected entities.
         event:
           $ref: '#/components/schemas/Event'
         eventDescription:
           $ref: '#/components/schemas/EventDescription'
         eventMetadata:
-          $ref: '#/components/schemas/eventMetadata'
-          description: Additional metadata about the event.
+          allOf:
+            - $ref: '#/components/schemas/eventMetadata'
+            - description: Additional metadata about the event.
       description: 'Detailed information about an event. A combination of an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a> object, an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html">EventDescription</a> object, and additional metadata about the event. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> operation.'
     eventArnList:
       type: array
@@ -1226,27 +1322,33 @@ components:
       type: object
       properties:
         event:
-          $ref: '#/components/schemas/Event'
-          description: Summary information about the event.
+          allOf:
+            - $ref: '#/components/schemas/Event'
+            - description: Summary information about the event.
         eventDescription:
-          $ref: '#/components/schemas/EventDescription'
-          description: The most recent description of the event.
+          allOf:
+            - $ref: '#/components/schemas/EventDescription'
+            - description: The most recent description of the event.
         eventMetadata:
-          $ref: '#/components/schemas/eventMetadata'
-          description: Additional metadata about the event.
+          allOf:
+            - $ref: '#/components/schemas/eventMetadata'
+            - description: Additional metadata about the event.
       description: 'Detailed information about an event. A combination of an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html">Event</a> object, an <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_EventDescription.html">EventDescription</a> object, and additional metadata about the event. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html">DescribeEventDetails</a> operation.'
     EventTypeFilter:
       type: object
       properties:
         eventTypeCodes:
-          $ref: '#/components/schemas/EventTypeCodeList'
-          description: A list of event type codes.
+          allOf:
+            - $ref: '#/components/schemas/EventTypeCodeList'
+            - description: A list of event type codes.
         services:
-          $ref: '#/components/schemas/serviceList'
-          description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/serviceList'
+            - description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
         eventTypeCategories:
-          $ref: '#/components/schemas/EventTypeCategoryList'
-          description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
+          allOf:
+            - $ref: '#/components/schemas/EventTypeCategoryList'
+            - description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
       description: 'The values to use to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html">DescribeEventTypes</a> operation.'
     EventTypeList:
       type: array
@@ -1256,17 +1358,21 @@ components:
       type: object
       properties:
         eventTypeCodes:
-          $ref: '#/components/schemas/eventTypeList'
-          description: 'A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventTypeList'
+            - description: 'A list of unique identifiers for event types. For example, <code>"AWS_EC2_SYSTEM_MAINTENANCE_EVENT","AWS_RDS_MAINTENANCE_SCHEDULED".</code> '
         awsAccountIds:
-          $ref: '#/components/schemas/awsAccountIdsList'
-          description: A list of 12-digit AWS account numbers that contains the affected entities.
+          allOf:
+            - $ref: '#/components/schemas/awsAccountIdsList'
+            - description: A list of 12-digit AWS account numbers that contains the affected entities.
         services:
-          $ref: '#/components/schemas/serviceList'
-          description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/serviceList'
+            - description: 'The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.'
         regions:
-          $ref: '#/components/schemas/regionList'
-          description: A list of AWS Regions.
+          allOf:
+            - $ref: '#/components/schemas/regionList'
+            - description: A list of AWS Regions.
         startTime:
           $ref: '#/components/schemas/DateTimeRange'
         endTime:
@@ -1274,17 +1380,21 @@ components:
         lastUpdatedTime:
           $ref: '#/components/schemas/DateTimeRange'
         entityArns:
-          $ref: '#/components/schemas/entityArnList'
-          description: A list of entity ARNs (unique identifiers).
+          allOf:
+            - $ref: '#/components/schemas/entityArnList'
+            - description: A list of entity ARNs (unique identifiers).
         entityValues:
-          $ref: '#/components/schemas/entityValueList'
-          description: 'A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS volumes (vol-426ab23e).'
+          allOf:
+            - $ref: '#/components/schemas/entityValueList'
+            - description: 'A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS volumes (vol-426ab23e).'
         eventTypeCategories:
-          $ref: '#/components/schemas/eventTypeCategoryList'
-          description: 'A list of event type category codes (issue, scheduledChange, or accountNotification).'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCategoryList'
+            - description: 'A list of event type category codes (issue, scheduledChange, or accountNotification).'
         eventStatusCodes:
-          $ref: '#/components/schemas/eventStatusCodeList'
-          description: A list of event status codes.
+          allOf:
+            - $ref: '#/components/schemas/eventStatusCodeList'
+            - description: A list of event status codes.
       description: 'The values to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html">DescribeEventsForOrganization</a> operation.'
     OrganizationEventList:
       type: array
@@ -1302,11 +1412,13 @@ components:
       type: object
       properties:
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         count:
-          $ref: '#/components/schemas/count'
-          description: The number of entities that match the criteria for the specified events.
+          allOf:
+            - $ref: '#/components/schemas/count'
+            - description: The number of entities that match the criteria for the specified events.
       description: 'The number of entities that are affected by one or more events. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEntityAggregates.html">DescribeEntityAggregates</a> operation.'
     entityArnList:
       type: array
@@ -1376,38 +1488,49 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         service:
-          $ref: '#/components/schemas/service'
-          description: 'The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/service'
+            - description: 'The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.'
         eventTypeCode:
-          $ref: '#/components/schemas/eventTypeCode'
-          description: 'The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCode'
+            - description: 'The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
         eventTypeCategory:
-          $ref: '#/components/schemas/eventTypeCategory'
-          description: 'The category of the event. Possible values are <code>issue</code>, <code>scheduledChange</code>, and <code>accountNotification</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCategory'
+            - description: 'The category of the event. Possible values are <code>issue</code>, <code>scheduledChange</code>, and <code>accountNotification</code>.'
         region:
-          $ref: '#/components/schemas/region'
-          description: The AWS region name of the event.
+          allOf:
+            - $ref: '#/components/schemas/region'
+            - description: The AWS region name of the event.
         availabilityZone:
-          $ref: '#/components/schemas/availabilityZone'
-          description: 'The AWS Availability Zone of the event. For example, us-east-1a.'
+          allOf:
+            - $ref: '#/components/schemas/availabilityZone'
+            - description: 'The AWS Availability Zone of the event. For example, us-east-1a.'
         startTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The date and time that the event began.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time that the event began.
         endTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The date and time that the event ended.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time that the event ended.
         lastUpdatedTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The most recent date and time that the event was updated.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The most recent date and time that the event was updated.
         statusCode:
-          $ref: '#/components/schemas/eventStatusCode'
-          description: 'The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventStatusCode'
+            - description: 'The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.'
         eventScopeCode:
-          $ref: '#/components/schemas/eventScopeCode'
-          description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/eventScopeCode'
+            - description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
       description: '<p>Summary information about an AWS Health event.</p> <p>AWS Health events can be public or account-specific:</p> <ul> <li> <p> <i>Public events</i> might be service events that are not specific to an AWS account. For example, if there is an issue with an AWS Region, AWS Health provides information about the event, even if you don''t use services or resources in that Region.</p> </li> <li> <p> <i>Account-specific</i> events are specific to either your AWS account or an account in your organization. For example, if there''s an issue with Amazon Elastic Compute Cloud in a Region that you use, AWS Health provides information about the event and the affected resources in the account.</p> </li> </ul> <p>You can determine if an event is public or account-specific by using the <code>eventScopeCode</code> parameter. For more information, see <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode">eventScopeCode</a>.</p>'
     EventAccountFilter:
       type: object
@@ -1415,11 +1538,13 @@ components:
         - eventArn
       properties:
         eventArn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         awsAccountId:
-          $ref: '#/components/schemas/accountId'
-          description: The 12-digit AWS account numbers that contains the affected entities.
+          allOf:
+            - $ref: '#/components/schemas/accountId'
+            - description: The 12-digit AWS account numbers that contains the affected entities.
       description: 'The values used to filter results from the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html">DescribeEventDetailsForOrganization</a> and <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html">DescribeAffectedEntitiesForOrganization</a> operations.'
     aggregateValue:
       type: string
@@ -1427,11 +1552,13 @@ components:
       type: object
       properties:
         aggregateValue:
-          $ref: '#/components/schemas/aggregateValue'
-          description: The issue type for the associated count.
+          allOf:
+            - $ref: '#/components/schemas/aggregateValue'
+            - description: The issue type for the associated count.
         count:
-          $ref: '#/components/schemas/count'
-          description: The number of events of the associated issue type.
+          allOf:
+            - $ref: '#/components/schemas/count'
+            - description: The number of events of the associated issue type.
       description: 'The number of events of each issue type. Returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html">DescribeEventAggregates</a> operation.'
     eventDescription:
       type: string
@@ -1439,8 +1566,9 @@ components:
       type: object
       properties:
         latestDescription:
-          $ref: '#/components/schemas/eventDescription'
-          description: The most recent description of the event.
+          allOf:
+            - $ref: '#/components/schemas/eventDescription'
+            - description: The most recent description of the event.
       description: 'The detailed description of the event. Included in the information returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html">DescribeEventDetails</a> operation.'
     eventMetadata:
       type: object
@@ -1486,14 +1614,17 @@ components:
       type: object
       properties:
         service:
-          $ref: '#/components/schemas/service'
-          description: 'The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.'
+          allOf:
+            - $ref: '#/components/schemas/service'
+            - description: 'The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.'
         code:
-          $ref: '#/components/schemas/eventTypeCode'
-          description: 'The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCode'
+            - description: 'The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i> </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
         category:
-          $ref: '#/components/schemas/eventTypeCategory'
-          description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCategory'
+            - description: 'A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>, or <code>accountNotification</code>).'
       description: 'Metadata about a type of event that is reported by AWS Health. Data consists of the category (for example, <code>issue</code>), the service (for example, <code>EC2</code>), and the event type code (for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>).'
     EventTypeCategoryList:
       type: array
@@ -1511,35 +1642,45 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/eventArn'
-          description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
+          allOf:
+            - $ref: '#/components/schemas/eventArn'
+            - description: 'The unique identifier for the event. Format: <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i> </code>. Example: <code>Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code> '
         service:
-          $ref: '#/components/schemas/service'
-          description: 'The AWS service that is affected by the event. For example, EC2, RDS.'
+          allOf:
+            - $ref: '#/components/schemas/service'
+            - description: 'The AWS service that is affected by the event. For example, EC2, RDS.'
         eventTypeCode:
-          $ref: '#/components/schemas/eventTypeCode'
-          description: 'The unique identifier for the event type. The format is <code>AWS_SERVICE_DESCRIPTION</code>. For example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCode'
+            - description: 'The unique identifier for the event type. The format is <code>AWS_SERVICE_DESCRIPTION</code>. For example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.'
         eventTypeCategory:
-          $ref: '#/components/schemas/eventTypeCategory'
-          description: The category of the event type.
+          allOf:
+            - $ref: '#/components/schemas/eventTypeCategory'
+            - description: The category of the event type.
         eventScopeCode:
-          $ref: '#/components/schemas/eventScopeCode'
-          description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/eventScopeCode'
+            - description: '<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p> <ul> <li> <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the <code>affectedAccounts</code> value is always empty.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then the <code>affectedAccounts</code> value lists the affected AWS accounts in your organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you have AWS accounts that use that service, those account IDs appear in the response.</p> </li> <li> <p>If the <code>eventScopeCode</code> value is <code>NONE</code>, then the <code>eventArn</code> that you specified in the request is invalid or doesn''t exist.</p> </li> </ul>'
         region:
-          $ref: '#/components/schemas/region'
-          description: The AWS Region name of the event.
+          allOf:
+            - $ref: '#/components/schemas/region'
+            - description: The AWS Region name of the event.
         startTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The date and time that the event began.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time that the event began.
         endTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The date and time that the event ended.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time that the event ended.
         lastUpdatedTime:
-          $ref: '#/components/schemas/timestamp'
-          description: The most recent date and time that the event was updated.
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The most recent date and time that the event was updated.
         statusCode:
-          $ref: '#/components/schemas/eventStatusCode'
-          description: 'The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.'
+          allOf:
+            - $ref: '#/components/schemas/eventStatusCode'
+            - description: 'The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.'
       description: 'Summary information about an event, returned by the <a href="https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventsForOrganization.html">DescribeEventsForOrganization</a> operation.'
     awsAccountIdsList:
       type: array

@@ -735,8 +735,9 @@ components:
       type: object
       properties:
         savingsPlanId:
-          $ref: '#/components/schemas/SavingsPlanId'
-          description: The ID of the Savings Plan.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanId'
+            - description: The ID of the Savings Plan.
     TagValue:
       type: string
     ResourceNotFoundException: {}
@@ -747,33 +748,40 @@ components:
       type: object
       properties:
         savingsPlanId:
-          $ref: '#/components/schemas/SavingsPlanId'
-          description: The ID of the Savings Plan.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanId'
+            - description: The ID of the Savings Plan.
         searchResults:
-          $ref: '#/components/schemas/SavingsPlanRateList'
-          description: Information about the Savings Plans rates.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateList'
+            - description: Information about the Savings Plans rates.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     SavingsPlanRateFilter:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlanRateFilterName'
-          description: The filter name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateFilterName'
+            - description: The filter name.
         values:
-          $ref: '#/components/schemas/ListOfStrings'
-          description: The filter values.
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: The filter values.
       description: Information about a filter.
     DescribeSavingsPlansResponse:
       type: object
       properties:
         savingsPlans:
-          $ref: '#/components/schemas/SavingsPlanList'
-          description: Information about the Savings Plans.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanList'
+            - description: Information about the Savings Plans.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     SavingsPlanArn:
       type: string
       pattern: 'arn:aws:[a-z]+:([a-z]{2}-[a-z]+-\d{1}|):(\d{12}):savingsplan\/([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$'
@@ -790,21 +798,25 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlansFilterName'
-          description: The filter name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlansFilterName'
+            - description: The filter name.
         values:
-          $ref: '#/components/schemas/ListOfStrings'
-          description: The filter value.
+          allOf:
+            - $ref: '#/components/schemas/ListOfStrings'
+            - description: The filter value.
       description: Information about a filter.
     DescribeSavingsPlansOfferingRatesResponse:
       type: object
       properties:
         searchResults:
-          $ref: '#/components/schemas/SavingsPlanOfferingRatesList'
-          description: Information about the Savings Plans offering rates.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingRatesList'
+            - description: Information about the Savings Plans offering rates.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     UUID:
       type: string
       pattern: '^(([0-9a-f]+)(-?))+$'
@@ -844,21 +856,25 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlanRateFilterAttribute'
-          description: The filter name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateFilterAttribute'
+            - description: The filter name.
         values:
-          $ref: '#/components/schemas/FilterValuesList'
-          description: The filter values.
+          allOf:
+            - $ref: '#/components/schemas/FilterValuesList'
+            - description: The filter values.
       description: Information about a filter.
     DescribeSavingsPlansOfferingsResponse:
       type: object
       properties:
         searchResults:
-          $ref: '#/components/schemas/SavingsPlanOfferingsList'
-          description: Information about the Savings Plans offerings.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingsList'
+            - description: Information about the Savings Plans offerings.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     SavingsPlansDuration:
       type: integer
       minimum: 0
@@ -886,18 +902,21 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlanOfferingFilterAttribute'
-          description: The filter name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingFilterAttribute'
+            - description: The filter name.
         values:
-          $ref: '#/components/schemas/FilterValuesList'
-          description: The filter values.
+          allOf:
+            - $ref: '#/components/schemas/FilterValuesList'
+            - description: The filter values.
       description: Information about a filter.
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: Information about the tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Information about the tags.
     TagResourceResponse:
       type: object
       properties: {}
@@ -924,20 +943,25 @@ components:
       title: CreateSavingsPlanRequest
       properties:
         savingsPlanOfferingId:
-          $ref: '#/components/schemas/SavingsPlanOfferingId'
-          description: The ID of the offering.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingId'
+            - description: The ID of the offering.
         commitment:
-          $ref: '#/components/schemas/Amount'
-          description: 'The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more than three digits after the decimal point.'
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: 'The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more than three digits after the decimal point.'
         upfrontPaymentAmount:
-          $ref: '#/components/schemas/Amount'
-          description: The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is <code>Partial Upfront</code>.
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is <code>Partial Upfront</code>.
         clientToken:
-          $ref: '#/components/schemas/ClientToken'
-          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
     CurrencyList:
       type: array
       items:
@@ -961,17 +985,21 @@ components:
       title: DescribeSavingsPlanRatesRequest
       properties:
         savingsPlanId:
-          $ref: '#/components/schemas/SavingsPlanId'
-          description: The ID of the Savings Plan.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanId'
+            - description: The ID of the Savings Plan.
         filters:
-          $ref: '#/components/schemas/SavingsPlanRateFilterList'
-          description: The filters.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateFilterList'
+            - description: The filters.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
     SavingsPlanRateList:
       type: array
       items:
@@ -1017,35 +1045,45 @@ components:
       title: DescribeSavingsPlansOfferingRatesRequest
       properties:
         savingsPlanOfferingIds:
-          $ref: '#/components/schemas/UUIDs'
-          description: The IDs of the offerings.
+          allOf:
+            - $ref: '#/components/schemas/UUIDs'
+            - description: The IDs of the offerings.
         savingsPlanPaymentOptions:
-          $ref: '#/components/schemas/SavingsPlanPaymentOptionList'
-          description: The payment options.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanPaymentOptionList'
+            - description: The payment options.
         savingsPlanTypes:
-          $ref: '#/components/schemas/SavingsPlanTypeList'
-          description: The plan types.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanTypeList'
+            - description: The plan types.
         products:
-          $ref: '#/components/schemas/SavingsPlanProductTypeList'
-          description: The AWS products.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductTypeList'
+            - description: The AWS products.
         serviceCodes:
-          $ref: '#/components/schemas/SavingsPlanRateServiceCodeList'
-          description: The services.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateServiceCodeList'
+            - description: The services.
         usageTypes:
-          $ref: '#/components/schemas/SavingsPlanRateUsageTypeList'
-          description: The usage details of the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateUsageTypeList'
+            - description: The usage details of the line item in the billing report.
         operations:
-          $ref: '#/components/schemas/SavingsPlanRateOperationList'
-          description: The specific AWS operation for the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateOperationList'
+            - description: The specific AWS operation for the line item in the billing report.
         filters:
-          $ref: '#/components/schemas/SavingsPlanOfferingRateFiltersList'
-          description: The filters.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingRateFiltersList'
+            - description: The filters.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
     SavingsPlanOfferingRatesList:
       type: array
       items:
@@ -1079,44 +1117,57 @@ components:
       title: DescribeSavingsPlansOfferingsRequest
       properties:
         offeringIds:
-          $ref: '#/components/schemas/UUIDs'
-          description: The IDs of the offerings.
+          allOf:
+            - $ref: '#/components/schemas/UUIDs'
+            - description: The IDs of the offerings.
         paymentOptions:
-          $ref: '#/components/schemas/SavingsPlanPaymentOptionList'
-          description: The payment options.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanPaymentOptionList'
+            - description: The payment options.
         productType:
-          $ref: '#/components/schemas/SavingsPlanProductType'
-          description: The product type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductType'
+            - description: The product type.
         planTypes:
-          $ref: '#/components/schemas/SavingsPlanTypeList'
-          description: The plan type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanTypeList'
+            - description: The plan type.
         durations:
-          $ref: '#/components/schemas/DurationsList'
-          description: 'The durations, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/DurationsList'
+            - description: 'The durations, in seconds.'
         currencies:
-          $ref: '#/components/schemas/CurrencyList'
-          description: The currencies.
+          allOf:
+            - $ref: '#/components/schemas/CurrencyList'
+            - description: The currencies.
         descriptions:
-          $ref: '#/components/schemas/SavingsPlanDescriptionsList'
-          description: The descriptions.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanDescriptionsList'
+            - description: The descriptions.
         serviceCodes:
-          $ref: '#/components/schemas/SavingsPlanServiceCodeList'
-          description: The services.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanServiceCodeList'
+            - description: The services.
         usageTypes:
-          $ref: '#/components/schemas/SavingsPlanUsageTypeList'
-          description: The usage details of the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanUsageTypeList'
+            - description: The usage details of the line item in the billing report.
         operations:
-          $ref: '#/components/schemas/SavingsPlanOperationList'
-          description: The specific AWS operation for the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOperationList'
+            - description: The specific AWS operation for the line item in the billing report.
         filters:
-          $ref: '#/components/schemas/SavingsPlanOfferingFiltersList'
-          description: The filters.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingFiltersList'
+            - description: The filters.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/PageSize'
-          description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
     SavingsPlanOfferingsList:
       type: array
       items:
@@ -1143,23 +1194,29 @@ components:
       title: DescribeSavingsPlansRequest
       properties:
         savingsPlanArns:
-          $ref: '#/components/schemas/SavingsPlanArnList'
-          description: The Amazon Resource Names (ARN) of the Savings Plans.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanArnList'
+            - description: The Amazon Resource Names (ARN) of the Savings Plans.
         savingsPlanIds:
-          $ref: '#/components/schemas/SavingsPlanIdList'
-          description: The IDs of the Savings Plans.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanIdList'
+            - description: The IDs of the Savings Plans.
         nextToken:
-          $ref: '#/components/schemas/PaginationToken'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token for the next page of results.
         maxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve additional results, make another call with the returned token value.'
         states:
-          $ref: '#/components/schemas/SavingsPlanStateList'
-          description: The states.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanStateList'
+            - description: The states.
         filters:
-          $ref: '#/components/schemas/SavingsPlanFilterList'
-          description: The filters.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanFilterList'
+            - description: The filters.
     SavingsPlanList:
       type: array
       items:
@@ -1186,29 +1243,36 @@ components:
       title: ListTagsForResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/SavingsPlanArn'
-          description: The Amazon Resource Name (ARN) of the resource.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanArn'
+            - description: The Amazon Resource Name (ARN) of the resource.
     ParentSavingsPlanOffering:
       type: object
       properties:
         offeringId:
-          $ref: '#/components/schemas/UUID'
-          description: The ID of the offering.
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The ID of the offering.
         paymentOption:
-          $ref: '#/components/schemas/SavingsPlanPaymentOption'
-          description: The payment option.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanPaymentOption'
+            - description: The payment option.
         planType:
-          $ref: '#/components/schemas/SavingsPlanType'
-          description: The plan type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanType'
+            - description: The plan type.
         durationSeconds:
-          $ref: '#/components/schemas/SavingsPlansDuration'
-          description: 'The duration, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlansDuration'
+            - description: 'The duration, in seconds.'
         currency:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: The currency.
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: The currency.
         planDescription:
-          $ref: '#/components/schemas/SavingsPlanDescription'
-          description: The description.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanDescription'
+            - description: The description.
       description: Information about a Savings Plan offering.
     Region:
       type: string
@@ -1218,59 +1282,77 @@ components:
       type: object
       properties:
         offeringId:
-          $ref: '#/components/schemas/SavingsPlanOfferingId'
-          description: The ID of the offering.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingId'
+            - description: The ID of the offering.
         savingsPlanId:
-          $ref: '#/components/schemas/SavingsPlanId'
-          description: The ID of the Savings Plan.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanId'
+            - description: The ID of the Savings Plan.
         savingsPlanArn:
-          $ref: '#/components/schemas/SavingsPlanArn'
-          description: The Amazon Resource Name (ARN) of the Savings Plan.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanArn'
+            - description: The Amazon Resource Name (ARN) of the Savings Plan.
         description:
-          $ref: '#/components/schemas/String'
-          description: The description.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description.
         start:
-          $ref: '#/components/schemas/String'
-          description: The start time.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The start time.
         end:
-          $ref: '#/components/schemas/String'
-          description: The end time.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The end time.
         state:
-          $ref: '#/components/schemas/SavingsPlanState'
-          description: The state.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanState'
+            - description: The state.
         region:
-          $ref: '#/components/schemas/Region'
-          description: The AWS Region.
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: The AWS Region.
         ec2InstanceFamily:
-          $ref: '#/components/schemas/EC2InstanceFamily'
-          description: The EC2 instance family.
+          allOf:
+            - $ref: '#/components/schemas/EC2InstanceFamily'
+            - description: The EC2 instance family.
         savingsPlanType:
-          $ref: '#/components/schemas/SavingsPlanType'
-          description: The plan type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanType'
+            - description: The plan type.
         paymentOption:
-          $ref: '#/components/schemas/SavingsPlanPaymentOption'
-          description: The payment option.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanPaymentOption'
+            - description: The payment option.
         productTypes:
-          $ref: '#/components/schemas/SavingsPlanProductTypeList'
-          description: The product types.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductTypeList'
+            - description: The product types.
         currency:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: The currency.
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: The currency.
         commitment:
-          $ref: '#/components/schemas/Amount'
-          description: 'The hourly commitment, in USD.'
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: 'The hourly commitment, in USD.'
         upfrontPaymentAmount:
-          $ref: '#/components/schemas/Amount'
-          description: The up-front payment amount.
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: The up-front payment amount.
         recurringPaymentAmount:
-          $ref: '#/components/schemas/Amount'
-          description: The recurring payment amount.
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: The recurring payment amount.
         termDurationInSeconds:
-          $ref: '#/components/schemas/TermDurationInSeconds'
-          description: 'The duration of the term, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/TermDurationInSeconds'
+            - description: 'The duration of the term, in seconds.'
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: One or more tags.
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
       description: Information about a Savings Plan.
     SavingsPlansFilterName:
       type: string
@@ -1292,38 +1374,49 @@ components:
       type: object
       properties:
         offeringId:
-          $ref: '#/components/schemas/UUID'
-          description: The ID of the offering.
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The ID of the offering.
         productTypes:
-          $ref: '#/components/schemas/SavingsPlanProductTypeList'
-          description: The product type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductTypeList'
+            - description: The product type.
         planType:
-          $ref: '#/components/schemas/SavingsPlanType'
-          description: The plan type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanType'
+            - description: The plan type.
         description:
-          $ref: '#/components/schemas/SavingsPlanDescription'
-          description: The description.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanDescription'
+            - description: The description.
         paymentOption:
-          $ref: '#/components/schemas/SavingsPlanPaymentOption'
-          description: The payment option.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanPaymentOption'
+            - description: The payment option.
         durationSeconds:
-          $ref: '#/components/schemas/SavingsPlansDuration'
-          description: 'The duration, in seconds.'
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlansDuration'
+            - description: 'The duration, in seconds.'
         currency:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: The currency.
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: The currency.
         serviceCode:
-          $ref: '#/components/schemas/SavingsPlanServiceCode'
-          description: The service.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanServiceCode'
+            - description: The service.
         usageType:
-          $ref: '#/components/schemas/SavingsPlanUsageType'
-          description: The usage details of the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanUsageType'
+            - description: The usage details of the line item in the billing report.
         operation:
-          $ref: '#/components/schemas/SavingsPlanOperation'
-          description: The specific AWS operation for the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOperation'
+            - description: The specific AWS operation for the line item in the billing report.
         properties:
-          $ref: '#/components/schemas/SavingsPlanOfferingPropertyList'
-          description: The properties.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingPropertyList'
+            - description: The properties.
       description: Information about a Savings Plan offering.
     SavingsPlanOfferingFilterAttribute:
       type: string
@@ -1339,11 +1432,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlanOfferingPropertyKey'
-          description: The property name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingPropertyKey'
+            - description: The property name.
         value:
-          $ref: '#/components/schemas/JsonSafeFilterValueString'
-          description: The property value.
+          allOf:
+            - $ref: '#/components/schemas/JsonSafeFilterValueString'
+            - description: The property value.
       description: Information about a property.
     SavingsPlanRatePricePerUnit:
       type: string
@@ -1361,29 +1456,37 @@ components:
       type: object
       properties:
         savingsPlanOffering:
-          $ref: '#/components/schemas/ParentSavingsPlanOffering'
-          description: The Savings Plan offering.
+          allOf:
+            - $ref: '#/components/schemas/ParentSavingsPlanOffering'
+            - description: The Savings Plan offering.
         rate:
-          $ref: '#/components/schemas/SavingsPlanRatePricePerUnit'
-          description: The Savings Plan rate.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRatePricePerUnit'
+            - description: The Savings Plan rate.
         unit:
-          $ref: '#/components/schemas/SavingsPlanRateUnit'
-          description: The unit.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateUnit'
+            - description: The unit.
         productType:
-          $ref: '#/components/schemas/SavingsPlanProductType'
-          description: The product type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductType'
+            - description: The product type.
         serviceCode:
-          $ref: '#/components/schemas/SavingsPlanRateServiceCode'
-          description: The service.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateServiceCode'
+            - description: The service.
         usageType:
-          $ref: '#/components/schemas/SavingsPlanRateUsageType'
-          description: The usage details of the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateUsageType'
+            - description: The usage details of the line item in the billing report.
         operation:
-          $ref: '#/components/schemas/SavingsPlanRateOperation'
-          description: The specific AWS operation for the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateOperation'
+            - description: The specific AWS operation for the line item in the billing report.
         properties:
-          $ref: '#/components/schemas/SavingsPlanOfferingRatePropertyList'
-          description: The properties.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanOfferingRatePropertyList'
+            - description: The properties.
       description: Information about a Savings Plan offering rate.
     SavingsPlanRateFilterAttribute:
       type: string
@@ -1398,11 +1501,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/JsonSafeFilterValueString'
-          description: The property name.
+          allOf:
+            - $ref: '#/components/schemas/JsonSafeFilterValueString'
+            - description: The property name.
         value:
-          $ref: '#/components/schemas/JsonSafeFilterValueString'
-          description: The property value.
+          allOf:
+            - $ref: '#/components/schemas/JsonSafeFilterValueString'
+            - description: The property value.
       description: Information about a property.
     SavingsPlanRatePropertyList:
       type: array
@@ -1412,29 +1517,37 @@ components:
       type: object
       properties:
         rate:
-          $ref: '#/components/schemas/Amount'
-          description: The rate.
+          allOf:
+            - $ref: '#/components/schemas/Amount'
+            - description: The rate.
         currency:
-          $ref: '#/components/schemas/CurrencyCode'
-          description: The currency.
+          allOf:
+            - $ref: '#/components/schemas/CurrencyCode'
+            - description: The currency.
         unit:
-          $ref: '#/components/schemas/SavingsPlanRateUnit'
-          description: The unit.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateUnit'
+            - description: The unit.
         productType:
-          $ref: '#/components/schemas/SavingsPlanProductType'
-          description: The product type.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanProductType'
+            - description: The product type.
         serviceCode:
-          $ref: '#/components/schemas/SavingsPlanRateServiceCode'
-          description: The service.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateServiceCode'
+            - description: The service.
         usageType:
-          $ref: '#/components/schemas/SavingsPlanRateUsageType'
-          description: The usage details of the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateUsageType'
+            - description: The usage details of the line item in the billing report.
         operation:
-          $ref: '#/components/schemas/SavingsPlanRateOperation'
-          description: The specific AWS operation for the line item in the billing report.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRateOperation'
+            - description: The specific AWS operation for the line item in the billing report.
         properties:
-          $ref: '#/components/schemas/SavingsPlanRatePropertyList'
-          description: The properties.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRatePropertyList'
+            - description: The properties.
       description: Information about a Savings Plan rate.
     SavingsPlanRateFilterName:
       type: string
@@ -1459,11 +1572,13 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/SavingsPlanRatePropertyKey'
-          description: The property name.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanRatePropertyKey'
+            - description: The property name.
         value:
-          $ref: '#/components/schemas/JsonSafeFilterValueString'
-          description: The property value.
+          allOf:
+            - $ref: '#/components/schemas/JsonSafeFilterValueString'
+            - description: The property value.
       description: Information about a property.
     TagKeyList:
       type: array
@@ -1477,11 +1592,13 @@ components:
       title: TagResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/SavingsPlanArn'
-          description: The Amazon Resource Name (ARN) of the resource.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanArn'
+            - description: The Amazon Resource Name (ARN) of the resource.
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     UntagResourceRequest:
       type: object
       required:
@@ -1490,10 +1607,12 @@ components:
       title: UntagResourceRequest
       properties:
         resourceArn:
-          $ref: '#/components/schemas/SavingsPlanArn'
-          description: The Amazon Resource Name (ARN) of the resource.
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanArn'
+            - description: The Amazon Resource Name (ARN) of the resource.
         tagKeys:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The tag keys.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The tag keys.
 security:
   - hmac: []

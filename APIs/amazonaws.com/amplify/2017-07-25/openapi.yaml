@@ -248,32 +248,41 @@ paths:
                   type: object
                   properties:
                     stage:
-                      $ref: '#/components/schemas/Stage'
-                      description: ' Describes the current stage for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/Stage'
+                        - description: ' Describes the current stage for the autocreated branch. '
                     framework:
-                      $ref: '#/components/schemas/Framework'
-                      description: ' The framework for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/Framework'
+                        - description: ' The framework for the autocreated branch. '
                     enableAutoBuild:
-                      $ref: '#/components/schemas/EnableAutoBuild'
-                      description: ' Enables auto building for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnableAutoBuild'
+                        - description: ' Enables auto building for the autocreated branch. '
                     environmentVariables:
-                      $ref: '#/components/schemas/EnvironmentVariables'
-                      description: ' The environment variables for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnvironmentVariables'
+                        - description: ' The environment variables for the autocreated branch. '
                     basicAuthCredentials:
-                      $ref: '#/components/schemas/BasicAuthCredentials'
-                      description: ' The basic authorization credentials for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/BasicAuthCredentials'
+                        - description: ' The basic authorization credentials for the autocreated branch. '
                     enableBasicAuth:
-                      $ref: '#/components/schemas/EnableBasicAuth'
-                      description: ' Enables basic authorization for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnableBasicAuth'
+                        - description: ' Enables basic authorization for the autocreated branch. '
                     buildSpec:
-                      $ref: '#/components/schemas/BuildSpec'
-                      description: ' The build specification (build spec) for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/BuildSpec'
+                        - description: ' The build specification (build spec) for the autocreated branch. '
                     enablePullRequestPreview:
-                      $ref: '#/components/schemas/EnablePullRequestPreview'
-                      description: ' Enables pull request preview for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnablePullRequestPreview'
+                        - description: ' Enables pull request preview for the autocreated branch. '
                     pullRequestEnvironmentName:
-                      $ref: '#/components/schemas/PullRequestEnvironmentName'
-                      description: ' The Amplify environment name for the pull request. '
+                      allOf:
+                        - $ref: '#/components/schemas/PullRequestEnvironmentName'
+                        - description: ' The Amplify environment name for the pull request. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1238,32 +1247,41 @@ paths:
                   type: object
                   properties:
                     stage:
-                      $ref: '#/components/schemas/Stage'
-                      description: ' Describes the current stage for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/Stage'
+                        - description: ' Describes the current stage for the autocreated branch. '
                     framework:
-                      $ref: '#/components/schemas/Framework'
-                      description: ' The framework for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/Framework'
+                        - description: ' The framework for the autocreated branch. '
                     enableAutoBuild:
-                      $ref: '#/components/schemas/EnableAutoBuild'
-                      description: ' Enables auto building for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnableAutoBuild'
+                        - description: ' Enables auto building for the autocreated branch. '
                     environmentVariables:
-                      $ref: '#/components/schemas/EnvironmentVariables'
-                      description: ' The environment variables for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnvironmentVariables'
+                        - description: ' The environment variables for the autocreated branch. '
                     basicAuthCredentials:
-                      $ref: '#/components/schemas/BasicAuthCredentials'
-                      description: ' The basic authorization credentials for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/BasicAuthCredentials'
+                        - description: ' The basic authorization credentials for the autocreated branch. '
                     enableBasicAuth:
-                      $ref: '#/components/schemas/EnableBasicAuth'
-                      description: ' Enables basic authorization for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnableBasicAuth'
+                        - description: ' Enables basic authorization for the autocreated branch. '
                     buildSpec:
-                      $ref: '#/components/schemas/BuildSpec'
-                      description: ' The build specification (build spec) for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/BuildSpec'
+                        - description: ' The build specification (build spec) for the autocreated branch. '
                     enablePullRequestPreview:
-                      $ref: '#/components/schemas/EnablePullRequestPreview'
-                      description: ' Enables pull request preview for the autocreated branch. '
+                      allOf:
+                        - $ref: '#/components/schemas/EnablePullRequestPreview'
+                        - description: ' Enables pull request preview for the autocreated branch. '
                     pullRequestEnvironmentName:
-                      $ref: '#/components/schemas/PullRequestEnvironmentName'
-                      description: ' The Amplify environment name for the pull request. '
+                      allOf:
+                        - $ref: '#/components/schemas/PullRequestEnvironmentName'
+                        - description: ' The Amplify environment name for the pull request. '
                 repository:
                   description: ' The name of the repository for an Amplify app '
                   type: string
@@ -2899,17 +2917,21 @@ components:
         - target
       properties:
         source:
-          $ref: '#/components/schemas/Source'
-          description: ' The source pattern for a URL rewrite or redirect rule. '
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: ' The source pattern for a URL rewrite or redirect rule. '
         target:
-          $ref: '#/components/schemas/Target'
-          description: ' The target pattern for a URL rewrite or redirect rule. '
+          allOf:
+            - $ref: '#/components/schemas/Target'
+            - description: ' The target pattern for a URL rewrite or redirect rule. '
         status:
-          $ref: '#/components/schemas/Status'
-          description: ' The status code for a URL rewrite or redirect rule. '
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: ' The status code for a URL rewrite or redirect rule. '
         condition:
-          $ref: '#/components/schemas/Condition'
-          description: ' The condition for a URL rewrite or redirect rule, such as a country code. '
+          allOf:
+            - $ref: '#/components/schemas/Condition'
+            - description: ' The condition for a URL rewrite or redirect rule, such as a country code. '
       description: ' Describes a custom rewrite or redirect rule. '
     TagValue:
       type: string
@@ -2962,8 +2984,9 @@ components:
         - backendEnvironment
       properties:
         backendEnvironment:
-          $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Describes the backend environment for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironment'
+            - description: ' Describes the backend environment for an Amplify app. '
       description: ' The result structure for the create backend environment request. '
     NotFoundException: {}
     CreateBranchResult:
@@ -2972,8 +2995,9 @@ components:
         - branch
       properties:
         branch:
-          $ref: '#/components/schemas/Branch'
-          description: ' Describes the branch for an Amplify app, which maps to a third-party repository branch. '
+          allOf:
+            - $ref: '#/components/schemas/Branch'
+            - description: ' Describes the branch for an Amplify app, which maps to a third-party repository branch. '
       description: ' The result structure for create branch request. '
     CreateDeploymentResult:
       type: object
@@ -2982,14 +3006,17 @@ components:
         - zipUploadUrl
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: ' The job ID for this deployment. will supply to start deployment api. '
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: ' The job ID for this deployment. will supply to start deployment api. '
         fileUploadUrls:
-          $ref: '#/components/schemas/FileUploadUrls'
-          description: ' When the <code>fileMap</code> argument is provided in the request, <code>fileUploadUrls</code> will contain a map of file names to upload URLs. '
+          allOf:
+            - $ref: '#/components/schemas/FileUploadUrls'
+            - description: ' When the <code>fileMap</code> argument is provided in the request, <code>fileUploadUrls</code> will contain a map of file names to upload URLs. '
         zipUploadUrl:
-          $ref: '#/components/schemas/UploadUrl'
-          description: ' When the <code>fileMap</code> argument is not provided in the request, this <code>zipUploadUrl</code> is returned. '
+          allOf:
+            - $ref: '#/components/schemas/UploadUrl'
+            - description: ' When the <code>fileMap</code> argument is not provided in the request, this <code>zipUploadUrl</code> is returned. '
       description: ' The result structure for the create a new deployment request. '
     MD5Hash:
       type: string
@@ -3000,8 +3027,9 @@ components:
         - domainAssociation
       properties:
         domainAssociation:
-          $ref: '#/components/schemas/DomainAssociation'
-          description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/DomainAssociation'
+            - description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
       description: ' The result structure for the create domain association request. '
     SubDomainSetting:
       type: object
@@ -3010,11 +3038,13 @@ components:
         - branchName
       properties:
         prefix:
-          $ref: '#/components/schemas/DomainPrefix'
-          description: ' The prefix setting for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/DomainPrefix'
+            - description: ' The prefix setting for the subdomain. '
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The branch name setting for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The branch name setting for the subdomain. '
       description: ' Describes the settings for the subdomain. '
     AutoSubDomainCreationPattern:
       type: string
@@ -3026,8 +3056,9 @@ components:
         - webhook
       properties:
         webhook:
-          $ref: '#/components/schemas/Webhook'
-          description: ' Describes a webhook that connects repository events to an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Webhook'
+            - description: ' Describes a webhook that connects repository events to an Amplify app. '
       description: ' The result structure for the create webhook request. '
     DeleteAppResult:
       type: object
@@ -3043,8 +3074,9 @@ components:
         - backendEnvironment
       properties:
         backendEnvironment:
-          $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Describes the backend environment for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironment'
+            - description: ' Describes the backend environment for an Amplify app. '
       description: ' The result structure of the delete backend environment result. '
     DeleteBranchResult:
       type: object
@@ -3052,8 +3084,9 @@ components:
         - branch
       properties:
         branch:
-          $ref: '#/components/schemas/Branch'
-          description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
+          allOf:
+            - $ref: '#/components/schemas/Branch'
+            - description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
       description: ' The result structure for the delete branch request. '
     DeleteDomainAssociationResult:
       type: object
@@ -3076,15 +3109,17 @@ components:
         - webhook
       properties:
         webhook:
-          $ref: '#/components/schemas/Webhook'
-          description: ' Describes a webhook that connects repository events to an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Webhook'
+            - description: ' Describes a webhook that connects repository events to an Amplify app. '
       description: ' The result structure for the delete webhook request. '
     GenerateAccessLogsResult:
       type: object
       properties:
         logUrl:
-          $ref: '#/components/schemas/LogUrl'
-          description: ' The pre-signed URL for the requested access logs. '
+          allOf:
+            - $ref: '#/components/schemas/LogUrl'
+            - description: ' The pre-signed URL for the requested access logs. '
       description: ' The result structure for the generate access logs request. '
     GetAppResult:
       type: object
@@ -3100,11 +3135,13 @@ components:
         - artifactUrl
       properties:
         artifactId:
-          $ref: '#/components/schemas/ArtifactId'
-          description: ' The unique ID for an artifact. '
+          allOf:
+            - $ref: '#/components/schemas/ArtifactId'
+            - description: ' The unique ID for an artifact. '
         artifactUrl:
-          $ref: '#/components/schemas/ArtifactUrl'
-          description: ' The presigned URL for the artifact. '
+          allOf:
+            - $ref: '#/components/schemas/ArtifactUrl'
+            - description: ' The presigned URL for the artifact. '
       description: ' Returns the result structure for the get artifact request. '
     GetBackendEnvironmentResult:
       type: object
@@ -3112,8 +3149,9 @@ components:
         - backendEnvironment
       properties:
         backendEnvironment:
-          $ref: '#/components/schemas/BackendEnvironment'
-          description: ' Describes the backend environment for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironment'
+            - description: ' Describes the backend environment for an Amplify app. '
       description: ' The result structure for the get backend environment result. '
     GetBranchResult:
       type: object
@@ -3128,8 +3166,9 @@ components:
         - domainAssociation
       properties:
         domainAssociation:
-          $ref: '#/components/schemas/DomainAssociation'
-          description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/DomainAssociation'
+            - description: ' Describes the structure of a domain association, which associates a custom domain with an Amplify app. '
       description: ' The result structure for the get domain association request. '
     GetJobResult:
       type: object
@@ -3144,8 +3183,9 @@ components:
         - webhook
       properties:
         webhook:
-          $ref: '#/components/schemas/Webhook'
-          description: ' Describes the structure of a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/Webhook'
+            - description: ' Describes the structure of a webhook. '
       description: ' The result structure for the get webhook request. '
     ListAppsResult:
       type: object
@@ -3153,11 +3193,13 @@ components:
         - apps
       properties:
         apps:
-          $ref: '#/components/schemas/Apps'
-          description: ' A list of Amplify apps. '
+          allOf:
+            - $ref: '#/components/schemas/Apps'
+            - description: ' A list of Amplify apps. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. '
       description: ' The result structure for an Amplify app list request. '
     ListArtifactsResult:
       type: object
@@ -3165,11 +3207,13 @@ components:
         - artifacts
       properties:
         artifacts:
-          $ref: '#/components/schemas/Artifacts'
-          description: ' A list of artifacts. '
+          allOf:
+            - $ref: '#/components/schemas/Artifacts'
+            - description: ' A list of artifacts. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
       description: ' The result structure for the list artifacts request. '
     ListBackendEnvironmentsResult:
       type: object
@@ -3177,11 +3221,13 @@ components:
         - backendEnvironments
       properties:
         backendEnvironments:
-          $ref: '#/components/schemas/BackendEnvironments'
-          description: ' The list of backend environments for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironments'
+            - description: ' The list of backend environments for an Amplify app. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
       description: ' The result structure for the list backend environments result. '
     ListBranchesResult:
       type: object
@@ -3189,11 +3235,13 @@ components:
         - branches
       properties:
         branches:
-          $ref: '#/components/schemas/Branches'
-          description: ' A list of branches for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Branches'
+            - description: ' A list of branches for an Amplify app. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. '
       description: ' The result structure for the list branches request. '
     ListDomainAssociationsResult:
       type: object
@@ -3201,11 +3249,13 @@ components:
         - domainAssociations
       properties:
         domainAssociations:
-          $ref: '#/components/schemas/DomainAssociations'
-          description: ' A list of domain associations. '
+          allOf:
+            - $ref: '#/components/schemas/DomainAssociations'
+            - description: ' A list of domain associations. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If non-null, a pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If non-null, a pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
       description: ' The result structure for the list domain association request. '
     ListJobsResult:
       type: object
@@ -3213,18 +3263,21 @@ components:
         - jobSummaries
       properties:
         jobSummaries:
-          $ref: '#/components/schemas/JobSummaries'
-          description: ' The result structure for the list job result request. '
+          allOf:
+            - $ref: '#/components/schemas/JobSummaries'
+            - description: ' The result structure for the list job result request. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
       description: ' The maximum number of records to list in a single response. '
     ListTagsForResourceResponse:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' A list of tags for the specified The Amazon Resource Name (ARN). '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' A list of tags for the specified The Amazon Resource Name (ARN). '
       description: ' The response for the list tags for resource request. '
     ResourceNotFoundException: {}
     ListWebhooksResult:
@@ -3233,11 +3286,13 @@ components:
         - webhooks
       properties:
         webhooks:
-          $ref: '#/components/schemas/Webhooks'
-          description: ' A list of webhooks. '
+          allOf:
+            - $ref: '#/components/schemas/Webhooks'
+            - description: ' A list of webhooks. '
         nextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. '
       description: ' The result structure for the list webhooks request. '
     StartDeploymentResult:
       type: object
@@ -3245,8 +3300,9 @@ components:
         - jobSummary
       properties:
         jobSummary:
-          $ref: '#/components/schemas/JobSummary'
-          description: ' The summary for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobSummary'
+            - description: ' The summary for the job. '
       description: ' The result structure for the start a deployment request. '
     StartJobResult:
       type: object
@@ -3254,8 +3310,9 @@ components:
         - jobSummary
       properties:
         jobSummary:
-          $ref: '#/components/schemas/JobSummary'
-          description: ' The summary for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobSummary'
+            - description: ' The summary for the job. '
       description: ' The result structure for the run job request. '
     StopJobResult:
       type: object
@@ -3263,8 +3320,9 @@ components:
         - jobSummary
       properties:
         jobSummary:
-          $ref: '#/components/schemas/JobSummary'
-          description: ' The summary for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobSummary'
+            - description: ' The summary for the job. '
       description: ' The result structure for the stop job request. '
     TagResourceResponse:
       type: object
@@ -3285,8 +3343,9 @@ components:
         - app
       properties:
         app:
-          $ref: '#/components/schemas/App'
-          description: ' Represents the updated Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/App'
+            - description: ' Represents the updated Amplify app. '
       description: ' The result structure for an Amplify app update request. '
     UpdateBranchResult:
       type: object
@@ -3294,8 +3353,9 @@ components:
         - branch
       properties:
         branch:
-          $ref: '#/components/schemas/Branch'
-          description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
+          allOf:
+            - $ref: '#/components/schemas/Branch'
+            - description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
       description: ' The result structure for the update branch request. '
     UpdateDomainAssociationResult:
       type: object
@@ -3303,8 +3363,9 @@ components:
         - domainAssociation
       properties:
         domainAssociation:
-          $ref: '#/components/schemas/DomainAssociation'
-          description: ' Describes a domain association, which associates a custom domain with an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/DomainAssociation'
+            - description: ' Describes a domain association, which associates a custom domain with an Amplify app. '
       description: ' The result structure for the update domain association request. '
     UpdateWebhookResult:
       type: object
@@ -3312,8 +3373,9 @@ components:
         - webhook
       properties:
         webhook:
-          $ref: '#/components/schemas/Webhook'
-          description: ' Describes a webhook that connects repository events to an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Webhook'
+            - description: ' Describes a webhook that connects repository events to an Amplify app. '
       description: ' The result structure for the update webhook request. '
     AccessToken:
       type: string
@@ -3376,17 +3438,21 @@ components:
       type: object
       properties:
         lastDeployTime:
-          $ref: '#/components/schemas/LastDeployTime'
-          description: ' The last deploy time of the production branch. '
+          allOf:
+            - $ref: '#/components/schemas/LastDeployTime'
+            - description: ' The last deploy time of the production branch. '
         status:
-          $ref: '#/components/schemas/Status'
-          description: ' The status of the production branch. '
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: ' The status of the production branch. '
         thumbnailUrl:
-          $ref: '#/components/schemas/ThumbnailUrl'
-          description: ' The thumbnail URL for the production branch. '
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailUrl'
+            - description: ' The thumbnail URL for the production branch. '
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The branch name for the production branch. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The branch name for the production branch. '
       description: ' Describes the information about a production branch for an Amplify app. '
     EnableAutoBranchCreation:
       type: boolean
@@ -3398,32 +3464,41 @@ components:
       type: object
       properties:
         stage:
-          $ref: '#/components/schemas/Stage'
-          description: ' Describes the current stage for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: ' Describes the current stage for the autocreated branch. '
         framework:
-          $ref: '#/components/schemas/Framework'
-          description: ' The framework for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: ' The framework for the autocreated branch. '
         enableAutoBuild:
-          $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto building for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBuild'
+            - description: ' Enables auto building for the autocreated branch. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables for the autocreated branch. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for the autocreated branch. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for the autocreated branch. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) for the autocreated branch. '
         enablePullRequestPreview:
-          $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables pull request preview for the autocreated branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnablePullRequestPreview'
+            - description: ' Enables pull request preview for the autocreated branch. '
         pullRequestEnvironmentName:
-          $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify environment name for the pull request. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestEnvironmentName'
+            - description: ' The Amplify environment name for the pull request. '
       description: ' Describes the automated branch creation configuration. '
     App:
       type: object
@@ -3442,71 +3517,93 @@ components:
         - enableBasicAuth
       properties:
         appId:
-          $ref: '#/components/schemas/AppId'
-          description: ' The unique ID of the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: ' The unique ID of the Amplify app. '
         appArn:
-          $ref: '#/components/schemas/AppArn'
-          description: ' The Amazon Resource Name (ARN) of the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AppArn'
+            - description: ' The Amazon Resource Name (ARN) of the Amplify app. '
         name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name for the Amplify app. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tag for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tag for the Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for the Amplify app. '
         repository:
-          $ref: '#/components/schemas/Repository'
-          description: ' The repository for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Repository'
+            - description: ' The repository for the Amplify app. '
         platform:
-          $ref: '#/components/schemas/Platform'
-          description: ' The platform for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: ' The platform for the Amplify app. '
         createTime:
-          $ref: '#/components/schemas/CreateTime'
-          description: ' Creates a date and time for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CreateTime'
+            - description: ' Creates a date and time for the Amplify app. '
         updateTime:
-          $ref: '#/components/schemas/UpdateTime'
-          description: ' Updates the date and time for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/UpdateTime'
+            - description: ' Updates the date and time for the Amplify app. '
         iamServiceRoleArn:
-          $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceRoleArn'
+            - description: ' The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables for the Amplify app. '
         defaultDomain:
-          $ref: '#/components/schemas/DefaultDomain'
-          description: ' The default domain for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/DefaultDomain'
+            - description: ' The default domain for the Amplify app. '
         enableBranchAutoBuild:
-          $ref: '#/components/schemas/EnableBranchAutoBuild'
-          description: ' Enables the auto-building of branches for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBranchAutoBuild'
+            - description: ' Enables the auto-building of branches for the Amplify app. '
         enableBranchAutoDeletion:
-          $ref: '#/components/schemas/EnableBranchAutoDeletion'
-          description: ' Automatically disconnect a branch in the Amplify Console when you delete a branch from your Git repository. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBranchAutoDeletion'
+            - description: ' Automatically disconnect a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for the Amplify app''s branches. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for the Amplify app''s branches. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for branches for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for branches for the Amplify app. '
         customRules:
-          $ref: '#/components/schemas/CustomRules'
-          description: ' Describes the custom redirect and rewrite rules for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CustomRules'
+            - description: ' Describes the custom redirect and rewrite rules for the Amplify app. '
         productionBranch:
-          $ref: '#/components/schemas/ProductionBranch'
-          description: ' Describes the information about a production branch of the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ProductionBranch'
+            - description: ' Describes the information about a production branch of the Amplify app. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' Describes the content of the build specification (build spec) for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' Describes the content of the build specification (build spec) for the Amplify app. '
         enableAutoBranchCreation:
-          $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBranchCreation'
+            - description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
-          $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' Describes the automated branch creation glob patterns for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationPatterns'
+            - description: ' Describes the automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
-          $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' Describes the automated branch creation configuration for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationConfig'
+            - description: ' Describes the automated branch creation configuration for the Amplify app. '
       description: ' Represents the different branches of a repository for building, deploying, and hosting an Amplify app. '
     Apps:
       type: array
@@ -3525,11 +3622,13 @@ components:
         - artifactId
       properties:
         artifactFileName:
-          $ref: '#/components/schemas/ArtifactFileName'
-          description: ' The file name for the artifact. '
+          allOf:
+            - $ref: '#/components/schemas/ArtifactFileName'
+            - description: ' The file name for the artifact. '
         artifactId:
-          $ref: '#/components/schemas/ArtifactId'
-          description: ' The unique ID for the artifact. '
+          allOf:
+            - $ref: '#/components/schemas/ArtifactId'
+            - description: ' The unique ID for the artifact. '
       description: ' Describes an artifact. '
     ArtifactUrl:
       type: string
@@ -3582,23 +3681,29 @@ components:
         - updateTime
       properties:
         backendEnvironmentArn:
-          $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironmentArn'
+            - description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
         environmentName:
-          $ref: '#/components/schemas/EnvironmentName'
-          description: ' The name for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: ' The name for a backend environment that is part of an Amplify app. '
         stackName:
-          $ref: '#/components/schemas/StackName'
-          description: ' The AWS CloudFormation stack name of a backend environment. '
+          allOf:
+            - $ref: '#/components/schemas/StackName'
+            - description: ' The AWS CloudFormation stack name of a backend environment. '
         deploymentArtifacts:
-          $ref: '#/components/schemas/DeploymentArtifacts'
-          description: ' The name of deployment artifacts. '
+          allOf:
+            - $ref: '#/components/schemas/DeploymentArtifacts'
+            - description: ' The name of deployment artifacts. '
         createTime:
-          $ref: '#/components/schemas/CreateTime'
-          description: ' The creation date and time for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CreateTime'
+            - description: ' The creation date and time for a backend environment that is part of an Amplify app. '
         updateTime:
-          $ref: '#/components/schemas/UpdateTime'
-          description: ' The last updated date and time for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/UpdateTime'
+            - description: ' The last updated date and time for a backend environment that is part of an Amplify app. '
       description: ' Describes the backend environment for an Amplify app. '
     BackendEnvironments:
       type: array
@@ -3653,83 +3758,109 @@ components:
         - enablePullRequestPreview
       properties:
         branchArn:
-          $ref: '#/components/schemas/BranchArn'
-          description: ' The Amazon Resource Name (ARN) for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BranchArn'
+            - description: ' The Amazon Resource Name (ARN) for a branch that is part of an Amplify app. '
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name for the branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name for the branch that is part of an Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for the branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for the branch that is part of an Amplify app. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tag for the branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tag for the branch of an Amplify app. '
         stage:
-          $ref: '#/components/schemas/Stage'
-          description: ' The current stage for the branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: ' The current stage for the branch that is part of an Amplify app. '
         displayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: ' The display name for the branch. This is used as the default domain prefix. '
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: ' The display name for the branch. This is used as the default domain prefix. '
         enableNotification:
-          $ref: '#/components/schemas/EnableNotification'
-          description: ' Enables notifications for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableNotification'
+            - description: ' Enables notifications for a branch that is part of an Amplify app. '
         createTime:
-          $ref: '#/components/schemas/CreateTime'
-          description: ' The creation date and time for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CreateTime'
+            - description: ' The creation date and time for a branch that is part of an Amplify app. '
         updateTime:
-          $ref: '#/components/schemas/UpdateTime'
-          description: ' The last updated date and time for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/UpdateTime'
+            - description: ' The last updated date and time for a branch that is part of an Amplify app. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables specific to a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables specific to a branch of an Amplify app. '
         enableAutoBuild:
-          $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto-building on push for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBuild'
+            - description: ' Enables auto-building on push for a branch of an Amplify app. '
         customDomains:
-          $ref: '#/components/schemas/CustomDomains'
-          description: ' The custom domains for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CustomDomains'
+            - description: ' The custom domains for a branch of an Amplify app. '
         framework:
-          $ref: '#/components/schemas/Framework'
-          description: ' The framework for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: ' The framework for a branch of an Amplify app. '
         activeJobId:
-          $ref: '#/components/schemas/ActiveJobId'
-          description: ' The ID of the active job for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ActiveJobId'
+            - description: ' The ID of the active job for a branch of an Amplify app. '
         totalNumberOfJobs:
-          $ref: '#/components/schemas/TotalNumberOfJobs'
-          description: ' The total number of jobs that are part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/TotalNumberOfJobs'
+            - description: ' The total number of jobs that are part of an Amplify app. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for a branch of an Amplify app. '
         thumbnailUrl:
-          $ref: '#/components/schemas/ThumbnailUrl'
-          description: ' The thumbnail URL for the branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailUrl'
+            - description: ' The thumbnail URL for the branch of an Amplify app. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for a branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for a branch of an Amplify app. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) content for the branch of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) content for the branch of an Amplify app. '
         ttl:
-          $ref: '#/components/schemas/TTL'
-          description: ' The content Time to Live (TTL) for the website in seconds. '
+          allOf:
+            - $ref: '#/components/schemas/TTL'
+            - description: ' The content Time to Live (TTL) for the website in seconds. '
         associatedResources:
-          $ref: '#/components/schemas/AssociatedResources'
-          description: ' A list of custom resources that are linked to this branch. '
+          allOf:
+            - $ref: '#/components/schemas/AssociatedResources'
+            - description: ' A list of custom resources that are linked to this branch. '
         enablePullRequestPreview:
-          $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables pull request preview for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnablePullRequestPreview'
+            - description: ' Enables pull request preview for the branch. '
         pullRequestEnvironmentName:
-          $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify environment name for the pull request. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestEnvironmentName'
+            - description: ' The Amplify environment name for the pull request. '
         destinationBranch:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The destination branch if the branch is a pull request branch. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The destination branch if the branch is a pull request branch. '
         sourceBranch:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The source branch if the branch is a pull request branch. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The source branch if the branch is a pull request branch. '
         backendEnvironmentArn:
-          $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironmentArn'
+            - description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
       description: ' The branch for an Amplify app, which maps to a third-party repository branch. '
     Branches:
       type: array
@@ -3765,59 +3896,77 @@ components:
       title: CreateAppRequest
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name for the Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for an Amplify app. '
         repository:
-          $ref: '#/components/schemas/Repository'
-          description: ' The repository for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Repository'
+            - description: ' The repository for an Amplify app. '
         platform:
-          $ref: '#/components/schemas/Platform'
-          description: ' The platform or framework for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: ' The platform or framework for an Amplify app. '
         iamServiceRoleArn:
-          $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceRoleArn'
+            - description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
         oauthToken:
-          $ref: '#/components/schemas/OauthToken'
-          description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+          allOf:
+            - $ref: '#/components/schemas/OauthToken'
+            - description: ' The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables map for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables map for an Amplify app. '
         enableBranchAutoBuild:
-          $ref: '#/components/schemas/EnableBranchAutoBuild'
-          description: ' Enables the auto building of branches for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBranchAutoBuild'
+            - description: ' Enables the auto building of branches for an Amplify app. '
         enableBranchAutoDeletion:
-          $ref: '#/components/schemas/EnableBranchAutoDeletion'
-          description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBranchAutoDeletion'
+            - description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The credentials for basic authorization for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The credentials for basic authorization for an Amplify app. '
         customRules:
-          $ref: '#/components/schemas/CustomRules'
-          description: ' The custom rewrite and redirect rules for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CustomRules'
+            - description: ' The custom rewrite and redirect rules for an Amplify app. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tag for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tag for an Amplify app. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) for an Amplify app. '
         enableAutoBranchCreation:
-          $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBranchCreation'
+            - description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
-          $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' The automated branch creation glob patterns for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationPatterns'
+            - description: ' The automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
-          $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' The automated branch creation configuration for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationConfig'
+            - description: ' The automated branch creation configuration for the Amplify app. '
       description: ' The request structure used to create apps in Amplify. '
     CreateBackendEnvironmentRequest:
       type: object
@@ -3826,14 +3975,17 @@ components:
       title: CreateBackendEnvironmentRequest
       properties:
         environmentName:
-          $ref: '#/components/schemas/EnvironmentName'
-          description: ' The name for the backend environment. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentName'
+            - description: ' The name for the backend environment. '
         stackName:
-          $ref: '#/components/schemas/StackName'
-          description: ' The AWS CloudFormation stack name of a backend environment. '
+          allOf:
+            - $ref: '#/components/schemas/StackName'
+            - description: ' The AWS CloudFormation stack name of a backend environment. '
         deploymentArtifacts:
-          $ref: '#/components/schemas/DeploymentArtifacts'
-          description: ' The name of deployment artifacts. '
+          allOf:
+            - $ref: '#/components/schemas/DeploymentArtifacts'
+            - description: ' The name of deployment artifacts. '
       description: ' The request structure for the backend environment create request. '
     CreateBranchRequest:
       type: object
@@ -3842,53 +3994,69 @@ components:
       title: CreateBranchRequest
       properties:
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name for the branch. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for the branch. '
         stage:
-          $ref: '#/components/schemas/Stage'
-          description: ' Describes the current stage for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: ' Describes the current stage for the branch. '
         framework:
-          $ref: '#/components/schemas/Framework'
-          description: ' The framework for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: ' The framework for the branch. '
         enableNotification:
-          $ref: '#/components/schemas/EnableNotification'
-          description: ' Enables notifications for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableNotification'
+            - description: ' Enables notifications for the branch. '
         enableAutoBuild:
-          $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto building for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBuild'
+            - description: ' Enables auto building for the branch. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables for the branch. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for the branch. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for the branch. '
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tag for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tag for the branch. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) for the branch. '
         ttl:
-          $ref: '#/components/schemas/TTL'
-          description: ' The content Time To Live (TTL) for the website in seconds. '
+          allOf:
+            - $ref: '#/components/schemas/TTL'
+            - description: ' The content Time To Live (TTL) for the website in seconds. '
         displayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: ' The display name for a branch. This is used as the default domain prefix. '
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: ' The display name for a branch. This is used as the default domain prefix. '
         enablePullRequestPreview:
-          $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables pull request preview for this branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnablePullRequestPreview'
+            - description: ' Enables pull request preview for this branch. '
         pullRequestEnvironmentName:
-          $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify environment name for the pull request. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestEnvironmentName'
+            - description: ' The Amplify environment name for the pull request. '
         backendEnvironmentArn:
-          $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironmentArn'
+            - description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
       description: ' The request structure for the create branch request. '
     FileMap:
       type: object
@@ -3899,8 +4067,9 @@ components:
       title: CreateDeploymentRequest
       properties:
         fileMap:
-          $ref: '#/components/schemas/FileMap'
-          description: ' An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files. '
+          allOf:
+            - $ref: '#/components/schemas/FileMap'
+            - description: ' An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files. '
       description: ' The request structure for the create a new deployment request. '
     JobId:
       type: string
@@ -3930,20 +4099,25 @@ components:
       title: CreateDomainAssociationRequest
       properties:
         domainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The domain name for the domain association. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The domain name for the domain association. '
         enableAutoSubDomain:
-          $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables the automated creation of subdomains for branches. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoSubDomain'
+            - description: ' Enables the automated creation of subdomains for branches. '
         subDomainSettings:
-          $ref: '#/components/schemas/SubDomainSettings'
-          description: ' The setting for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/SubDomainSettings'
+            - description: ' The setting for the subdomain. '
         autoSubDomainCreationPatterns:
-          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
-          description: ' Sets the branch patterns for automatic subdomain creation. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+            - description: ' Sets the branch patterns for automatic subdomain creation. '
         autoSubDomainIAMRole:
-          $ref: '#/components/schemas/AutoSubDomainIAMRole'
-          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainIAMRole'
+            - description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
       description: ' The request structure for the create domain association request. '
     DomainAssociation:
       type: object
@@ -3956,32 +4130,41 @@ components:
         - subDomains
       properties:
         domainAssociationArn:
-          $ref: '#/components/schemas/DomainAssociationArn'
-          description: ' The Amazon Resource Name (ARN) for the domain association. '
+          allOf:
+            - $ref: '#/components/schemas/DomainAssociationArn'
+            - description: ' The Amazon Resource Name (ARN) for the domain association. '
         domainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain. '
         enableAutoSubDomain:
-          $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables the automated creation of subdomains for branches. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoSubDomain'
+            - description: ' Enables the automated creation of subdomains for branches. '
         autoSubDomainCreationPatterns:
-          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
-          description: ' Sets branch patterns for automatic subdomain creation. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+            - description: ' Sets branch patterns for automatic subdomain creation. '
         autoSubDomainIAMRole:
-          $ref: '#/components/schemas/AutoSubDomainIAMRole'
-          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainIAMRole'
+            - description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
         domainStatus:
-          $ref: '#/components/schemas/DomainStatus'
-          description: ' The current status of the domain association. '
+          allOf:
+            - $ref: '#/components/schemas/DomainStatus'
+            - description: ' The current status of the domain association. '
         statusReason:
-          $ref: '#/components/schemas/StatusReason'
-          description: ' The reason for the current status of the domain association. '
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: ' The reason for the current status of the domain association. '
         certificateVerificationDNSRecord:
-          $ref: '#/components/schemas/CertificateVerificationDNSRecord'
-          description: ' The DNS record for certificate verification. '
+          allOf:
+            - $ref: '#/components/schemas/CertificateVerificationDNSRecord'
+            - description: ' The DNS record for certificate verification. '
         subDomains:
-          $ref: '#/components/schemas/SubDomains'
-          description: ' The subdomains for the domain association. '
+          allOf:
+            - $ref: '#/components/schemas/SubDomains'
+            - description: ' The subdomains for the domain association. '
       description: ' Describes a domain association that associates a custom domain with an Amplify app. '
     CreateWebhookRequest:
       type: object
@@ -3990,11 +4173,13 @@ components:
       title: CreateWebhookRequest
       properties:
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name for a branch that is part of an Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for a webhook. '
       description: ' The request structure for the create webhook request. '
     Webhook:
       type: object
@@ -4008,26 +4193,33 @@ components:
         - updateTime
       properties:
         webhookArn:
-          $ref: '#/components/schemas/WebhookArn'
-          description: ' The Amazon Resource Name (ARN) for the webhook. '
+          allOf:
+            - $ref: '#/components/schemas/WebhookArn'
+            - description: ' The Amazon Resource Name (ARN) for the webhook. '
         webhookId:
-          $ref: '#/components/schemas/WebhookId'
-          description: ' The ID of the webhook. '
+          allOf:
+            - $ref: '#/components/schemas/WebhookId'
+            - description: ' The ID of the webhook. '
         webhookUrl:
-          $ref: '#/components/schemas/WebhookUrl'
-          description: ' The URL of the webhook. '
+          allOf:
+            - $ref: '#/components/schemas/WebhookUrl'
+            - description: ' The URL of the webhook. '
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name for a branch that is part of an Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for a webhook. '
         createTime:
-          $ref: '#/components/schemas/CreateTime'
-          description: ' The create date and time for a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/CreateTime'
+            - description: ' The create date and time for a webhook. '
         updateTime:
-          $ref: '#/components/schemas/UpdateTime'
-          description: ' Updates the date and time for a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/UpdateTime'
+            - description: ' Updates the date and time for a webhook. '
       description: ' Describes a webhook that connects repository events to an Amplify app. '
     CustomDomain:
       type: string
@@ -4085,32 +4277,41 @@ components:
         - jobType
       properties:
         jobArn:
-          $ref: '#/components/schemas/JobArn'
-          description: ' The Amazon Resource Name (ARN) for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobArn'
+            - description: ' The Amazon Resource Name (ARN) for the job. '
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: ' The unique ID for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: ' The unique ID for the job. '
         commitId:
-          $ref: '#/components/schemas/CommitId'
-          description: ' The commit ID from a third-party repository provider for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitId'
+            - description: ' The commit ID from a third-party repository provider for the job. '
         commitMessage:
-          $ref: '#/components/schemas/CommitMessage'
-          description: ' The commit message from a third-party repository provider for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitMessage'
+            - description: ' The commit message from a third-party repository provider for the job. '
         commitTime:
-          $ref: '#/components/schemas/CommitTime'
-          description: ' The commit date and time for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitTime'
+            - description: ' The commit date and time for the job. '
         startTime:
-          $ref: '#/components/schemas/StartTime'
-          description: ' The start date and time for the job. '
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: ' The start date and time for the job. '
         status:
-          $ref: '#/components/schemas/JobStatus'
-          description: ' The current status for the job. '
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: ' The current status for the job. '
         endTime:
-          $ref: '#/components/schemas/EndTime'
-          description: ' The end date and time for the job. '
+          allOf:
+            - $ref: '#/components/schemas/EndTime'
+            - description: ' The end date and time for the job. '
         jobType:
-          $ref: '#/components/schemas/JobType'
-          description: ' The type for the job. If the value is <code>RELEASE</code>, the job was manually released from its source by using the <code>StartJob</code> API. If the value is <code>RETRY</code>, the job was manually retried using the <code>StartJob</code> API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by webhooks. '
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: ' The type for the job. If the value is <code>RELEASE</code>, the job was manually released from its source by using the <code>StartJob</code> API. If the value is <code>RETRY</code>, the job was manually retried using the <code>StartJob</code> API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by webhooks. '
       description: ' Describes the summary for an execution job for an Amplify app. '
     WebhookId:
       type: string
@@ -4169,14 +4370,17 @@ components:
       title: GenerateAccessLogsRequest
       properties:
         startTime:
-          $ref: '#/components/schemas/StartTime'
-          description: ' The time at which the logs should start. The time range specified is inclusive of the start time. '
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: ' The time at which the logs should start. The time range specified is inclusive of the start time. '
         endTime:
-          $ref: '#/components/schemas/EndTime'
-          description: ' The time at which the logs should end. The time range specified is inclusive of the end time. '
+          allOf:
+            - $ref: '#/components/schemas/EndTime'
+            - description: ' The time at which the logs should end. The time range specified is inclusive of the end time. '
         domainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' The name of the domain. '
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' The name of the domain. '
       description: ' The request structure for the generate access logs request. '
     LogUrl:
       type: string
@@ -4218,11 +4422,13 @@ components:
         - steps
       properties:
         summary:
-          $ref: '#/components/schemas/JobSummary'
-          description: ' Describes the summary for an execution job for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/JobSummary'
+            - description: ' Describes the summary for an execution job for an Amplify app. '
         steps:
-          $ref: '#/components/schemas/Steps'
-          description: ' The execution steps for an execution job, for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Steps'
+            - description: ' The execution steps for an execution job, for an Amplify app. '
       description: ' Describes an execution job for an Amplify app. '
     GetWebhookRequest:
       type: object
@@ -4330,11 +4536,13 @@ components:
       title: StartDeploymentRequest
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: ' The job ID for this deployment, generated by the create deployment request. '
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: ' The job ID for this deployment, generated by the create deployment request. '
         sourceUrl:
-          $ref: '#/components/schemas/SourceUrl'
-          description: ' The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. '
+          allOf:
+            - $ref: '#/components/schemas/SourceUrl'
+            - description: ' The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. '
       description: ' The request structure for the start a deployment request. '
     StartJobRequest:
       type: object
@@ -4343,23 +4551,29 @@ components:
       title: StartJobRequest
       properties:
         jobId:
-          $ref: '#/components/schemas/JobId'
-          description: ' The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. '
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: ' The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. '
         jobType:
-          $ref: '#/components/schemas/JobType'
-          description: ' Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. '
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: ' Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. '
         jobReason:
-          $ref: '#/components/schemas/JobReason'
-          description: ' A descriptive reason for starting this job. '
+          allOf:
+            - $ref: '#/components/schemas/JobReason'
+            - description: ' A descriptive reason for starting this job. '
         commitId:
-          $ref: '#/components/schemas/CommitId'
-          description: ' The commit ID from a third-party repository provider for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitId'
+            - description: ' The commit ID from a third-party repository provider for the job. '
         commitMessage:
-          $ref: '#/components/schemas/CommitMessage'
-          description: ' The commit message from a third-party repository provider for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitMessage'
+            - description: ' The commit message from a third-party repository provider for the job. '
         commitTime:
-          $ref: '#/components/schemas/CommitTime'
-          description: ' The commit date and time for the job. '
+          allOf:
+            - $ref: '#/components/schemas/CommitTime'
+            - description: ' The commit date and time for the job. '
       description: ' The request structure for the start job request. '
     StepName:
       type: string
@@ -4379,38 +4593,49 @@ components:
         - endTime
       properties:
         stepName:
-          $ref: '#/components/schemas/StepName'
-          description: ' The name of the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/StepName'
+            - description: ' The name of the execution step. '
         startTime:
-          $ref: '#/components/schemas/StartTime'
-          description: ' The start date and time of the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: ' The start date and time of the execution step. '
         status:
-          $ref: '#/components/schemas/JobStatus'
-          description: ' The status of the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: ' The status of the execution step. '
         endTime:
-          $ref: '#/components/schemas/EndTime'
-          description: ' The end date and time of the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/EndTime'
+            - description: ' The end date and time of the execution step. '
         logUrl:
-          $ref: '#/components/schemas/LogUrl'
-          description: ' The URL to the logs for the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/LogUrl'
+            - description: ' The URL to the logs for the execution step. '
         artifactsUrl:
-          $ref: '#/components/schemas/ArtifactsUrl'
-          description: ' The URL to the artifact for the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/ArtifactsUrl'
+            - description: ' The URL to the artifact for the execution step. '
         testArtifactsUrl:
-          $ref: '#/components/schemas/TestArtifactsUrl'
-          description: ' The URL to the test artifact for the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/TestArtifactsUrl'
+            - description: ' The URL to the test artifact for the execution step. '
         testConfigUrl:
-          $ref: '#/components/schemas/TestConfigUrl'
-          description: ' The URL to the test configuration for the execution step. '
+          allOf:
+            - $ref: '#/components/schemas/TestConfigUrl'
+            - description: ' The URL to the test configuration for the execution step. '
         screenshots:
-          $ref: '#/components/schemas/Screenshots'
-          description: ' The list of screenshot URLs for the execution step, if relevant. '
+          allOf:
+            - $ref: '#/components/schemas/Screenshots'
+            - description: ' The list of screenshot URLs for the execution step, if relevant. '
         statusReason:
-          $ref: '#/components/schemas/StatusReason'
-          description: ' The reason for the current step status. '
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: ' The reason for the current step status. '
         context:
-          $ref: '#/components/schemas/Context'
-          description: ' The context for the current step. Includes a build image if the step is build. '
+          allOf:
+            - $ref: '#/components/schemas/Context'
+            - description: ' The context for the current step. Includes a build image if the step is build. '
       description: ' Describes an execution step, for an execution job, for an Amplify app. '
     StopJobRequest:
       type: object
@@ -4427,14 +4652,17 @@ components:
         - dnsRecord
       properties:
         subDomainSetting:
-          $ref: '#/components/schemas/SubDomainSetting'
-          description: ' Describes the settings for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/SubDomainSetting'
+            - description: ' Describes the settings for the subdomain. '
         verified:
-          $ref: '#/components/schemas/Verified'
-          description: ' The verified status of the subdomain '
+          allOf:
+            - $ref: '#/components/schemas/Verified'
+            - description: ' The verified status of the subdomain '
         dnsRecord:
-          $ref: '#/components/schemas/DNSRecord'
-          description: ' The DNS record for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/DNSRecord'
+            - description: ' The DNS record for the subdomain. '
       description: ' The subdomain for the domain association. '
     TagKeyList:
       type: array
@@ -4449,8 +4677,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagMap'
-          description: ' The tags used to tag the resource. '
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: ' The tags used to tag the resource. '
       description: ' The request structure to tag a resource with a tag key and value. '
     ThumbnailName:
       type: string
@@ -4465,103 +4694,134 @@ components:
       title: UpdateAppRequest
       properties:
         name:
-          $ref: '#/components/schemas/Name'
-          description: ' The name for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: ' The name for an Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for an Amplify app. '
         platform:
-          $ref: '#/components/schemas/Platform'
-          description: ' The platform for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: ' The platform for an Amplify app. '
         iamServiceRoleArn:
-          $ref: '#/components/schemas/ServiceRoleArn'
-          description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/ServiceRoleArn'
+            - description: ' The AWS Identity and Access Management (IAM) service role for an Amplify app. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables for an Amplify app. '
         enableBranchAutoBuild:
-          $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables branch auto-building for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBuild'
+            - description: ' Enables branch auto-building for an Amplify app. '
         enableBranchAutoDeletion:
-          $ref: '#/components/schemas/EnableBranchAutoDeletion'
-          description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBranchAutoDeletion'
+            - description: ' Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for an Amplify app. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for an Amplify app. '
         customRules:
-          $ref: '#/components/schemas/CustomRules'
-          description: ' The custom redirect and rewrite rules for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/CustomRules'
+            - description: ' The custom redirect and rewrite rules for an Amplify app. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) for an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) for an Amplify app. '
         enableAutoBranchCreation:
-          $ref: '#/components/schemas/EnableAutoBranchCreation'
-          description: ' Enables automated branch creation for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBranchCreation'
+            - description: ' Enables automated branch creation for the Amplify app. '
         autoBranchCreationPatterns:
-          $ref: '#/components/schemas/AutoBranchCreationPatterns'
-          description: ' Describes the automated branch creation glob patterns for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationPatterns'
+            - description: ' Describes the automated branch creation glob patterns for the Amplify app. '
         autoBranchCreationConfig:
-          $ref: '#/components/schemas/AutoBranchCreationConfig'
-          description: ' The automated branch creation configuration for the Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/AutoBranchCreationConfig'
+            - description: ' The automated branch creation configuration for the Amplify app. '
         repository:
-          $ref: '#/components/schemas/Repository'
-          description: ' The name of the repository for an Amplify app '
+          allOf:
+            - $ref: '#/components/schemas/Repository'
+            - description: ' The name of the repository for an Amplify app '
         oauthToken:
-          $ref: '#/components/schemas/OauthToken'
-          description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
+          allOf:
+            - $ref: '#/components/schemas/OauthToken'
+            - description: ' The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. '
         accessToken:
-          $ref: '#/components/schemas/AccessToken'
-          description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
+          allOf:
+            - $ref: '#/components/schemas/AccessToken'
+            - description: ' The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. '
       description: ' The request structure for the update app request. '
     UpdateBranchRequest:
       type: object
       title: UpdateBranchRequest
       properties:
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for the branch. '
         framework:
-          $ref: '#/components/schemas/Framework'
-          description: ' The framework for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Framework'
+            - description: ' The framework for the branch. '
         stage:
-          $ref: '#/components/schemas/Stage'
-          description: ' Describes the current stage for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/Stage'
+            - description: ' Describes the current stage for the branch. '
         enableNotification:
-          $ref: '#/components/schemas/EnableNotification'
-          description: ' Enables notifications for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableNotification'
+            - description: ' Enables notifications for the branch. '
         enableAutoBuild:
-          $ref: '#/components/schemas/EnableAutoBuild'
-          description: ' Enables auto building for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoBuild'
+            - description: ' Enables auto building for the branch. '
         environmentVariables:
-          $ref: '#/components/schemas/EnvironmentVariables'
-          description: ' The environment variables for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariables'
+            - description: ' The environment variables for the branch. '
         basicAuthCredentials:
-          $ref: '#/components/schemas/BasicAuthCredentials'
-          description: ' The basic authorization credentials for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/BasicAuthCredentials'
+            - description: ' The basic authorization credentials for the branch. '
         enableBasicAuth:
-          $ref: '#/components/schemas/EnableBasicAuth'
-          description: ' Enables basic authorization for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnableBasicAuth'
+            - description: ' Enables basic authorization for the branch. '
         buildSpec:
-          $ref: '#/components/schemas/BuildSpec'
-          description: ' The build specification (build spec) for the branch. '
+          allOf:
+            - $ref: '#/components/schemas/BuildSpec'
+            - description: ' The build specification (build spec) for the branch. '
         ttl:
-          $ref: '#/components/schemas/TTL'
-          description: ' The content Time to Live (TTL) for the website in seconds. '
+          allOf:
+            - $ref: '#/components/schemas/TTL'
+            - description: ' The content Time to Live (TTL) for the website in seconds. '
         displayName:
-          $ref: '#/components/schemas/DisplayName'
-          description: ' The display name for a branch. This is used as the default domain prefix. '
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: ' The display name for a branch. This is used as the default domain prefix. '
         enablePullRequestPreview:
-          $ref: '#/components/schemas/EnablePullRequestPreview'
-          description: ' Enables pull request preview for this branch. '
+          allOf:
+            - $ref: '#/components/schemas/EnablePullRequestPreview'
+            - description: ' Enables pull request preview for this branch. '
         pullRequestEnvironmentName:
-          $ref: '#/components/schemas/PullRequestEnvironmentName'
-          description: ' The Amplify environment name for the pull request. '
+          allOf:
+            - $ref: '#/components/schemas/PullRequestEnvironmentName'
+            - description: ' The Amplify environment name for the pull request. '
         backendEnvironmentArn:
-          $ref: '#/components/schemas/BackendEnvironmentArn'
-          description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BackendEnvironmentArn'
+            - description: ' The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. '
       description: ' The request structure for the update branch request. '
     UpdateDomainAssociationRequest:
       type: object
@@ -4570,28 +4830,34 @@ components:
       title: UpdateDomainAssociationRequest
       properties:
         enableAutoSubDomain:
-          $ref: '#/components/schemas/EnableAutoSubDomain'
-          description: ' Enables the automated creation of subdomains for branches. '
+          allOf:
+            - $ref: '#/components/schemas/EnableAutoSubDomain'
+            - description: ' Enables the automated creation of subdomains for branches. '
         subDomainSettings:
-          $ref: '#/components/schemas/SubDomainSettings'
-          description: ' Describes the settings for the subdomain. '
+          allOf:
+            - $ref: '#/components/schemas/SubDomainSettings'
+            - description: ' Describes the settings for the subdomain. '
         autoSubDomainCreationPatterns:
-          $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
-          description: ' Sets the branch patterns for automatic subdomain creation. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainCreationPatterns'
+            - description: ' Sets the branch patterns for automatic subdomain creation. '
         autoSubDomainIAMRole:
-          $ref: '#/components/schemas/AutoSubDomainIAMRole'
-          description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
+          allOf:
+            - $ref: '#/components/schemas/AutoSubDomainIAMRole'
+            - description: ' The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. '
       description: ' The request structure for the update domain association request. '
     UpdateWebhookRequest:
       type: object
       title: UpdateWebhookRequest
       properties:
         branchName:
-          $ref: '#/components/schemas/BranchName'
-          description: ' The name for a branch that is part of an Amplify app. '
+          allOf:
+            - $ref: '#/components/schemas/BranchName'
+            - description: ' The name for a branch that is part of an Amplify app. '
         description:
-          $ref: '#/components/schemas/Description'
-          description: ' The description for a webhook. '
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: ' The description for a webhook. '
       description: ' The request structure for the update webhook request. '
     WebhookArn:
       type: string

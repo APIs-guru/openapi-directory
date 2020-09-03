@@ -279,8 +279,9 @@ components:
         - Body
       properties:
         Body:
-          $ref: '#/components/schemas/BodyBlob'
-          description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/BodyBlob'
+            - description: '<p>Includes the inference provided by the model.</p> <p>For information about the format of the response body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
     InternalFailure: {}
     ServiceUnavailable: {}
     ValidationError: {}
@@ -318,7 +319,8 @@ components:
       title: InvokeEndpointInput
       properties:
         Body:
-          $ref: '#/components/schemas/BodyBlob'
-          description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/BodyBlob'
+            - description: '<p>Provides input data, in the format specified in the <code>ContentType</code> request header. Amazon SageMaker passes all of the data in the body to the model. </p> <p>For information about the format of the request body, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html">Common Data Formats-Inference</a>.</p>'
 security:
   - hmac: []

@@ -1559,8 +1559,9 @@ components:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: A description of the DAX cluster that you have created.
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: A description of the DAX cluster that you have created.
     CreateClusterRequest:
       type: object
       required:
@@ -1571,44 +1572,57 @@ components:
       title: CreateClusterRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: '<p>The cluster identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The cluster identifier. This parameter is stored as a lowercase string.</p> <p> <b>Constraints:</b> </p> <ul> <li> <p>A name must contain from 1 to 20 alphanumeric characters or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>A name cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
         NodeType:
-          $ref: '#/components/schemas/String'
-          description: The compute and memory capacity of the nodes in the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The compute and memory capacity of the nodes in the cluster.
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the cluster.
         ReplicationFactor:
-          $ref: '#/components/schemas/Integer'
-          description: '<p>The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p> <note> <p>AWS recommends that you have at least two read replicas per cluster.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The number of nodes in the DAX cluster. A replication factor of 1 will create a single-node cluster, without any read replicas. For additional fault tolerance, you can create a multiple node cluster with one or more read replicas. To do this, set <code>ReplicationFactor</code> to a number between 3 (one primary and two read replicas) and 10 (one primary and nine read replicas). <code>If the AvailabilityZones</code> parameter is provided, its length must equal the <code>ReplicationFactor</code>.</p> <note> <p>AWS recommends that you have at least two read replicas per cluster.</p> </note>'
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZoneList'
-          description: 'The Availability Zones (AZs) in which the cluster nodes will reside after the cluster has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.'
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneList'
+            - description: 'The Availability Zones (AZs) in which the cluster nodes will reside after the cluster has been created or updated. If provided, the length of this list must equal the <code>ReplicationFactor</code> parameter. If you omit this parameter, DAX will spread the nodes across Availability Zones for the highest availability.'
         SubnetGroupName:
-          $ref: '#/components/schemas/String'
-          description: <p>The name of the subnet group to be used for the replication group.</p> <important> <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets that you specify in a subnet group must exist in the same VPC.</p> </important>
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p>The name of the subnet group to be used for the replication group.</p> <important> <p>DAX clusters can only run in an Amazon VPC environment. All of the subnets that you specify in a subnet group must exist in the same VPC.</p> </important>
         SecurityGroupIds:
-          $ref: '#/components/schemas/SecurityGroupIdentifierList'
-          description: '<p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the security group ID is system-generated.)</p> <p>If this parameter is not specified, DAX assigns the default VPC security group to each node.</p>'
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdentifierList'
+            - description: '<p>A list of security group IDs to be assigned to each node in the DAX cluster. (Each of the security group ID is system-generated.)</p> <p>If this parameter is not specified, DAX assigns the default VPC security group to each node.</p>'
         PreferredMaintenanceWindow:
-          $ref: '#/components/schemas/String'
-          description: '<p>Specifies the weekly time range during which maintenance on the DAX cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code> </p> <note> <p>If you don''t specify a preferred maintenance window when you create or modify a cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day of the week.</p> </note>'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the weekly time range during which maintenance on the DAX cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code> are:</p> <ul> <li> <p> <code>sun</code> </p> </li> <li> <p> <code>mon</code> </p> </li> <li> <p> <code>tue</code> </p> </li> <li> <p> <code>wed</code> </p> </li> <li> <p> <code>thu</code> </p> </li> <li> <p> <code>fri</code> </p> </li> <li> <p> <code>sat</code> </p> </li> </ul> <p>Example: <code>sun:05:00-sun:09:00</code> </p> <note> <p>If you don''t specify a preferred maintenance window when you create or modify a cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected day of the week.</p> </note>'
         NotificationTopicArn:
-          $ref: '#/components/schemas/String'
-          description: <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p> <note> <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p> </note>
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications will be sent.</p> <note> <p>The Amazon SNS topic owner must be same as the DAX cluster owner.</p> </note>
         IamRoleArn:
-          $ref: '#/components/schemas/String'
-          description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The parameter group to be associated with the DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The parameter group to be associated with the DAX cluster.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'A set of tags to associate with the DAX cluster. '
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A set of tags to associate with the DAX cluster. '
         SSESpecification:
-          $ref: '#/components/schemas/SSESpecification'
-          description: Represents the settings used to enable server-side encryption on the cluster.
+          allOf:
+            - $ref: '#/components/schemas/SSESpecification'
+            - description: Represents the settings used to enable server-side encryption on the cluster.
     ClusterAlreadyExistsFault: {}
     InvalidClusterStateFault: {}
     InsufficientClusterCapacityFault: {}
@@ -1627,8 +1641,9 @@ components:
       type: object
       properties:
         ParameterGroup:
-          $ref: '#/components/schemas/ParameterGroup'
-          description: Represents the output of a <i>CreateParameterGroup</i> action.
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: Represents the output of a <i>CreateParameterGroup</i> action.
     CreateParameterGroupRequest:
       type: object
       required:
@@ -1636,19 +1651,22 @@ components:
       title: CreateParameterGroupRequest
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group to apply to all of the clusters in this replication group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to apply to all of the clusters in this replication group.
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the parameter group.
     ParameterGroupQuotaExceededFault: {}
     ParameterGroupAlreadyExistsFault: {}
     CreateSubnetGroupResponse:
       type: object
       properties:
         SubnetGroup:
-          $ref: '#/components/schemas/SubnetGroup'
-          description: Represents the output of a <i>CreateSubnetGroup</i> operation.
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroup'
+            - description: Represents the output of a <i>CreateSubnetGroup</i> operation.
     CreateSubnetGroupRequest:
       type: object
       required:
@@ -1657,14 +1675,17 @@ components:
       title: CreateSubnetGroupRequest
       properties:
         SubnetGroupName:
-          $ref: '#/components/schemas/String'
-          description: 'A name for the subnet group. This value is stored as a lowercase string. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A name for the subnet group. This value is stored as a lowercase string. '
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description for the subnet group
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description for the subnet group
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIdentifierList'
-          description: A list of VPC subnet IDs for the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdentifierList'
+            - description: A list of VPC subnet IDs for the subnet group.
     SubnetGroupAlreadyExistsFault: {}
     SubnetGroupQuotaExceededFault: {}
     SubnetQuotaExceededFault: {}
@@ -1673,8 +1694,9 @@ components:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: 'A description of the DAX cluster, after you have decreased its replication factor.'
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: 'A description of the DAX cluster, after you have decreased its replication factor.'
     DecreaseReplicationFactorRequest:
       type: object
       required:
@@ -1683,25 +1705,30 @@ components:
       title: DecreaseReplicationFactorRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX cluster from which you want to remove nodes.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX cluster from which you want to remove nodes.
         NewReplicationFactor:
-          $ref: '#/components/schemas/Integer'
-          description: The new number of nodes for the DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The new number of nodes for the DAX cluster.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZoneList'
-          description: The Availability Zone(s) from which to remove nodes.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneList'
+            - description: The Availability Zone(s) from which to remove nodes.
         NodeIdsToRemove:
-          $ref: '#/components/schemas/NodeIdentifierList'
-          description: The unique identifiers of the nodes to be removed from the cluster.
+          allOf:
+            - $ref: '#/components/schemas/NodeIdentifierList'
+            - description: The unique identifiers of the nodes to be removed from the cluster.
     ClusterNotFoundFault: {}
     NodeNotFoundFault: {}
     DeleteClusterResponse:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: A description of the DAX cluster that is being deleted.
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: A description of the DAX cluster that is being deleted.
     DeleteClusterRequest:
       type: object
       required:
@@ -1709,14 +1736,16 @@ components:
       title: DeleteClusterRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the cluster to be deleted.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the cluster to be deleted.
     DeleteParameterGroupResponse:
       type: object
       properties:
         DeletionMessage:
-          $ref: '#/components/schemas/String'
-          description: 'A user-specified message for this action (i.e., a reason for deleting the parameter group).'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A user-specified message for this action (i.e., a reason for deleting the parameter group).'
     DeleteParameterGroupRequest:
       type: object
       required:
@@ -1724,14 +1753,16 @@ components:
       title: DeleteParameterGroupRequest
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group to delete.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group to delete.
     DeleteSubnetGroupResponse:
       type: object
       properties:
         DeletionMessage:
-          $ref: '#/components/schemas/String'
-          description: 'A user-specified message for this action (i.e., a reason for deleting the subnet group).'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A user-specified message for this action (i.e., a reason for deleting the subnet group).'
     DeleteSubnetGroupRequest:
       type: object
       required:
@@ -1739,115 +1770,141 @@ components:
       title: DeleteSubnetGroupRequest
       properties:
         SubnetGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the subnet group to delete.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group to delete.
     SubnetGroupInUseFault: {}
     DescribeClustersResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         Clusters:
-          $ref: '#/components/schemas/ClusterList'
-          description: 'The descriptions of your DAX clusters, in response to a <i>DescribeClusters</i> request.'
+          allOf:
+            - $ref: '#/components/schemas/ClusterList'
+            - description: 'The descriptions of your DAX clusters, in response to a <i>DescribeClusters</i> request.'
     DescribeClustersRequest:
       type: object
       title: DescribeClustersRequest
       properties:
         ClusterNames:
-          $ref: '#/components/schemas/ClusterNameList'
-          description: The names of the DAX clusters being described.
+          allOf:
+            - $ref: '#/components/schemas/ClusterNameList'
+            - description: The names of the DAX clusters being described.
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     DescribeDefaultParametersResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         Parameters:
-          $ref: '#/components/schemas/ParameterList'
-          description: A list of parameters. Each element in the list represents one parameter.
+          allOf:
+            - $ref: '#/components/schemas/ParameterList'
+            - description: A list of parameters. Each element in the list represents one parameter.
     DescribeDefaultParametersRequest:
       type: object
       title: DescribeDefaultParametersRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     DescribeEventsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         Events:
-          $ref: '#/components/schemas/EventList'
-          description: An array of events. Each element in the array represents one event.
+          allOf:
+            - $ref: '#/components/schemas/EventList'
+            - description: An array of events. Each element in the array represents one event.
     DescribeEventsRequest:
       type: object
       title: DescribeEventsRequest
       properties:
         SourceName:
-          $ref: '#/components/schemas/String'
-          description: 'The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the event source for which events will be returned. If not specified, then all sources are included in the response.'
         SourceType:
-          $ref: '#/components/schemas/SourceType'
-          description: 'The event source to retrieve events for. If no value is specified, all events are returned.'
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: 'The event source to retrieve events for. If no value is specified, all events are returned.'
         StartTime:
-          $ref: '#/components/schemas/TStamp'
-          description: 'The beginning of the time interval to retrieve events for, specified in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The beginning of the time interval to retrieve events for, specified in ISO 8601 format.'
         EndTime:
-          $ref: '#/components/schemas/TStamp'
-          description: 'The end of the time interval for which to retrieve events, specified in ISO 8601 format.'
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The end of the time interval for which to retrieve events, specified in ISO 8601 format.'
         Duration:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: The number of minutes' worth of events to retrieve.
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of minutes' worth of events to retrieve.
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     DescribeParameterGroupsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         ParameterGroups:
-          $ref: '#/components/schemas/ParameterGroupList'
-          description: An array of parameter groups. Each element in the array represents one parameter group.
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroupList'
+            - description: An array of parameter groups. Each element in the array represents one parameter group.
     DescribeParameterGroupsRequest:
       type: object
       title: DescribeParameterGroupsRequest
       properties:
         ParameterGroupNames:
-          $ref: '#/components/schemas/ParameterGroupNameList'
-          description: The names of the parameter groups.
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroupNameList'
+            - description: The names of the parameter groups.
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     DescribeParametersResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         Parameters:
-          $ref: '#/components/schemas/ParameterList'
-          description: A list of parameters within a parameter group. Each element in the list represents one parameter.
+          allOf:
+            - $ref: '#/components/schemas/ParameterList'
+            - description: A list of parameters within a parameter group. Each element in the list represents one parameter.
     DescribeParametersRequest:
       type: object
       required:
@@ -1855,45 +1912,55 @@ components:
       title: DescribeParametersRequest
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group.
         Source:
-          $ref: '#/components/schemas/String'
-          description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     DescribeSubnetGroupsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         SubnetGroups:
-          $ref: '#/components/schemas/SubnetGroupList'
-          description: An array of subnet groups. Each element in the array represents a single subnet group.
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroupList'
+            - description: An array of subnet groups. Each element in the array represents a single subnet group.
     DescribeSubnetGroupsRequest:
       type: object
       title: DescribeSubnetGroupsRequest
       properties:
         SubnetGroupNames:
-          $ref: '#/components/schemas/SubnetGroupNameList'
-          description: The name of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroupNameList'
+            - description: The name of the subnet group.
         MaxResults:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p> <p>The value for <code>MaxResults</code> must be between 20 and 100.</p>'
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.'
     IncreaseReplicationFactorResponse:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: A description of the DAX cluster. with its new replication factor.
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: A description of the DAX cluster. with its new replication factor.
     IncreaseReplicationFactorRequest:
       type: object
       required:
@@ -1902,23 +1969,28 @@ components:
       title: IncreaseReplicationFactorRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX cluster that will receive additional nodes.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX cluster that will receive additional nodes.
         NewReplicationFactor:
-          $ref: '#/components/schemas/Integer'
-          description: The new number of nodes for the DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The new number of nodes for the DAX cluster.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZoneList'
-          description: The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneList'
+            - description: The Availability Zones (AZs) in which the cluster nodes will be created. All nodes belonging to the cluster are placed in these Availability Zones. Use this parameter if you want to distribute the nodes across multiple AZs.
     ListTagsResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: A list of tags currently associated with the DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags currently associated with the DAX cluster.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'If this value is present, there are additional results to be displayed. To retrieve them, call <code>ListTags</code> again, with <code>NextToken</code> set to this value.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If this value is present, there are additional results to be displayed. To retrieve them, call <code>ListTags</code> again, with <code>NextToken</code> set to this value.'
     ListTagsRequest:
       type: object
       required:
@@ -1926,18 +1998,21 @@ components:
       title: ListTagsRequest
       properties:
         ResourceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX resource to which the tags belong.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX resource to which the tags belong.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token.'
     InvalidARNFault: {}
     RebootNodeResponse:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: A description of the DAX cluster after a node has been rebooted.
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: A description of the DAX cluster after a node has been rebooted.
     RebootNodeRequest:
       type: object
       required:
@@ -1946,17 +2021,20 @@ components:
       title: RebootNodeRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX cluster containing the node to be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX cluster containing the node to be rebooted.
         NodeId:
-          $ref: '#/components/schemas/String'
-          description: The system-assigned ID of the node to be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-assigned ID of the node to be rebooted.
     TagResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The list of tags that are associated with the DAX resource.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The list of tags that are associated with the DAX resource.
     TagResourceRequest:
       type: object
       required:
@@ -1965,17 +2043,20 @@ components:
       title: TagResourceRequest
       properties:
         ResourceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX resource to which tags should be added.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX resource to which tags should be added.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: 'The tags to be assigned to the DAX resource. '
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags to be assigned to the DAX resource. '
     UntagResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tag keys that have been removed from the cluster.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tag keys that have been removed from the cluster.
     UntagResourceRequest:
       type: object
       required:
@@ -1984,18 +2065,21 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX resource from which the tags should be removed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX resource from which the tags should be removed.
         TagKeys:
-          $ref: '#/components/schemas/KeyList'
-          description: 'A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.'
+          allOf:
+            - $ref: '#/components/schemas/KeyList'
+            - description: 'A list of tag keys. If the DAX cluster has any tags with these keys, then the tags are removed from the cluster.'
     TagNotFoundFault: {}
     UpdateClusterResponse:
       type: object
       properties:
         Cluster:
-          $ref: '#/components/schemas/Cluster'
-          description: 'A description of the DAX cluster, after it has been modified.'
+          allOf:
+            - $ref: '#/components/schemas/Cluster'
+            - description: 'A description of the DAX cluster, after it has been modified.'
     UpdateClusterRequest:
       type: object
       required:
@@ -2003,32 +2087,40 @@ components:
       title: UpdateClusterRequest
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX cluster to be modified.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX cluster to be modified.
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the changes being made to the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the changes being made to the cluster.
         PreferredMaintenanceWindow:
-          $ref: '#/components/schemas/String'
-          description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
         NotificationTopicArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) that identifies the topic.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) that identifies the topic.
         NotificationTopicStatus:
-          $ref: '#/components/schemas/String'
-          description: The current state of the topic.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current state of the topic.
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of a parameter group for this cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of a parameter group for this cluster.
         SecurityGroupIds:
-          $ref: '#/components/schemas/SecurityGroupIdentifierList'
-          description: 'A list of user-specified security group IDs to be assigned to each node in the DAX cluster. If this parameter is not specified, DAX assigns the default VPC security group to each node.'
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdentifierList'
+            - description: 'A list of user-specified security group IDs to be assigned to each node in the DAX cluster. If this parameter is not specified, DAX assigns the default VPC security group to each node.'
     UpdateParameterGroupResponse:
       type: object
       properties:
         ParameterGroup:
-          $ref: '#/components/schemas/ParameterGroup'
-          description: The parameter group that has been modified.
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroup'
+            - description: The parameter group that has been modified.
     UpdateParameterGroupRequest:
       type: object
       required:
@@ -2037,17 +2129,20 @@ components:
       title: UpdateParameterGroupRequest
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group.
         ParameterNameValues:
-          $ref: '#/components/schemas/ParameterNameValueList'
-          description: An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
+          allOf:
+            - $ref: '#/components/schemas/ParameterNameValueList'
+            - description: An array of name-value pairs for the parameters in the group. Each element in the array represents a single parameter.
     UpdateSubnetGroupResponse:
       type: object
       properties:
         SubnetGroup:
-          $ref: '#/components/schemas/SubnetGroup'
-          description: The subnet group that has been modified.
+          allOf:
+            - $ref: '#/components/schemas/SubnetGroup'
+            - description: The subnet group that has been modified.
     UpdateSubnetGroupRequest:
       type: object
       required:
@@ -2055,14 +2150,17 @@ components:
       title: UpdateSubnetGroupRequest
       properties:
         SubnetGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group.
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the subnet group.
         SubnetIds:
-          $ref: '#/components/schemas/SubnetIdentifierList'
-          description: A list of subnet IDs in the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdentifierList'
+            - description: A list of subnet IDs in the subnet group.
     SubnetInUse: {}
     String:
       type: string
@@ -2081,11 +2179,13 @@ components:
       type: object
       properties:
         Address:
-          $ref: '#/components/schemas/String'
-          description: The DNS hostname of the endpoint.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS hostname of the endpoint.
         Port:
-          $ref: '#/components/schemas/Integer'
-          description: The port number that applications should use to connect to the endpoint.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port number that applications should use to connect to the endpoint.
       description: 'Represents the information required for client programs to connect to the configuration endpoint for a DAX cluster, or to an individual node within the cluster.'
     NodeIdentifierList:
       type: array
@@ -2099,11 +2199,13 @@ components:
       type: object
       properties:
         TopicArn:
-          $ref: '#/components/schemas/String'
-          description: 'The Amazon Resource Name (ARN) that identifies the topic. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) that identifies the topic. '
         TopicStatus:
-          $ref: '#/components/schemas/String'
-          description: The current state of the topic.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current state of the topic.
       description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
     SecurityGroupMembershipList:
       type: array
@@ -2113,76 +2215,97 @@ components:
       type: object
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group.
         ParameterApplyStatus:
-          $ref: '#/components/schemas/String'
-          description: 'The status of parameter updates. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of parameter updates. '
         NodeIdsToReboot:
-          $ref: '#/components/schemas/NodeIdentifierList'
-          description: The node IDs of one or more nodes to be rebooted.
+          allOf:
+            - $ref: '#/components/schemas/NodeIdentifierList'
+            - description: The node IDs of one or more nodes to be rebooted.
       description: The status of a parameter group.
     SSEDescription:
       type: object
       properties:
         Status:
-          $ref: '#/components/schemas/SSEStatus'
-          description: '<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/SSEStatus'
+            - description: '<p>The current state of server-side encryption:</p> <ul> <li> <p> <code>ENABLING</code> - Server-side encryption is being enabled.</p> </li> <li> <p> <code>ENABLED</code> - Server-side encryption is enabled.</p> </li> <li> <p> <code>DISABLING</code> - Server-side encryption is being disabled.</p> </li> <li> <p> <code>DISABLED</code> - Server-side encryption is disabled.</p> </li> </ul>'
       description: The description of the server-side encryption status on the specified DAX cluster.
     Cluster:
       type: object
       properties:
         ClusterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the DAX cluster.
         Description:
-          $ref: '#/components/schemas/String'
-          description: The description of the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the cluster.
         ClusterArn:
-          $ref: '#/components/schemas/String'
-          description: 'The Amazon Resource Name (ARN) that uniquely identifies the cluster. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) that uniquely identifies the cluster. '
         TotalNodes:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: The total number of nodes in the cluster.
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The total number of nodes in the cluster.
         ActiveNodes:
-          $ref: '#/components/schemas/IntegerOptional'
-          description: 'The number of nodes in the cluster that are active (i.e., capable of serving requests).'
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The number of nodes in the cluster that are active (i.e., capable of serving requests).'
         NodeType:
-          $ref: '#/components/schemas/String'
-          description: The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The node type for the nodes in the cluster. (All nodes in a DAX cluster are of the same type.)
         Status:
-          $ref: '#/components/schemas/String'
-          description: The current status of the cluster.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current status of the cluster.
         ClusterDiscoveryEndpoint:
-          $ref: '#/components/schemas/Endpoint'
-          description: 'The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: 'The configuration endpoint for this DAX cluster, consisting of a DNS name and a port number. Client applications can specify this endpoint, rather than an individual node endpoint, and allow the DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
         NodeIdsToRemove:
-          $ref: '#/components/schemas/NodeIdentifierList'
-          description: A list of nodes to be removed from the cluster.
+          allOf:
+            - $ref: '#/components/schemas/NodeIdentifierList'
+            - description: A list of nodes to be removed from the cluster.
         Nodes:
-          $ref: '#/components/schemas/NodeList'
-          description: A list of nodes that are currently in the cluster.
+          allOf:
+            - $ref: '#/components/schemas/NodeList'
+            - description: A list of nodes that are currently in the cluster.
         PreferredMaintenanceWindow:
-          $ref: '#/components/schemas/String'
-          description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A range of time when maintenance of DAX cluster software will be performed. For example: <code>sun:01:00-sun:09:00</code>. Cluster maintenance normally takes less than 30 minutes, and is performed automatically within the maintenance window.'
         NotificationConfiguration:
-          $ref: '#/components/schemas/NotificationConfiguration'
-          description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
+          allOf:
+            - $ref: '#/components/schemas/NotificationConfiguration'
+            - description: Describes a notification topic and its status. Notification topics are used for publishing DAX events to subscribers using Amazon Simple Notification Service (SNS).
         SubnetGroup:
-          $ref: '#/components/schemas/String'
-          description: The subnet group where the DAX cluster is running.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The subnet group where the DAX cluster is running.
         SecurityGroups:
-          $ref: '#/components/schemas/SecurityGroupMembershipList'
-          description: 'A list of security groups, and the status of each, for the nodes in the cluster.'
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupMembershipList'
+            - description: 'A list of security groups, and the status of each, for the nodes in the cluster.'
         IamRoleArn:
-          $ref: '#/components/schemas/String'
-          description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A valid Amazon Resource Name (ARN) that identifies an IAM role. At runtime, DAX will assume this role and use the role''s permissions to access DynamoDB on your behalf.'
         ParameterGroup:
-          $ref: '#/components/schemas/ParameterGroupStatus'
-          description: The parameter group being used by nodes in the cluster.
+          allOf:
+            - $ref: '#/components/schemas/ParameterGroupStatus'
+            - description: The parameter group being used by nodes in the cluster.
         SSEDescription:
-          $ref: '#/components/schemas/SSEDescription'
-          description: The description of the server-side encryption status on the specified DAX cluster.
+          allOf:
+            - $ref: '#/components/schemas/SSEDescription'
+            - description: The description of the server-side encryption status on the specified DAX cluster.
       description: Contains all of the attributes of a specific DAX cluster.
     ClusterList:
       type: array
@@ -2208,18 +2331,21 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/SSEEnabled'
-          description: Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.
+          allOf:
+            - $ref: '#/components/schemas/SSEEnabled'
+            - description: Indicates whether server-side encryption is enabled (true) or disabled (false) on the cluster.
       description: Represents the settings used to enable server-side encryption.
     ParameterGroup:
       type: object
       properties:
         ParameterGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter group.
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the parameter group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the parameter group.
       description: A named set of parameters that are applied to all of the nodes in a DAX cluster.
     SubnetIdentifierList:
       type: array
@@ -2229,17 +2355,21 @@ components:
       type: object
       properties:
         SubnetGroupName:
-          $ref: '#/components/schemas/String'
-          description: The name of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the subnet group.
         Description:
-          $ref: '#/components/schemas/String'
-          description: The description of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the subnet group.
         VpcId:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
         Subnets:
-          $ref: '#/components/schemas/SubnetList'
-          description: 'A list of subnets associated with the subnet group. '
+          allOf:
+            - $ref: '#/components/schemas/SubnetList'
+            - description: 'A list of subnets associated with the subnet group. '
       description: '<p>Represents the output of one of the following actions:</p> <ul> <li> <p> <i>CreateSubnetGroup</i> </p> </li> <li> <p> <i>ModifySubnetGroup</i> </p> </li> </ul>'
     ParameterList:
       type: array
@@ -2278,17 +2408,21 @@ components:
       type: object
       properties:
         SourceName:
-          $ref: '#/components/schemas/String'
-          description: 'The source of the event. For example, if the event occurred at the node level, the source would be the node ID.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The source of the event. For example, if the event occurred at the node level, the source would be the node ID.'
         SourceType:
-          $ref: '#/components/schemas/SourceType'
-          description: 'Specifies the origin of this event - a cluster, a parameter group, a node ID, etc.'
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: 'Specifies the origin of this event - a cluster, a parameter group, a node ID, etc.'
         Message:
-          $ref: '#/components/schemas/String'
-          description: A user-defined message associated with the event.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-defined message associated with the event.
         Date:
-          $ref: '#/components/schemas/TStamp'
-          description: The date and time when the event occurred.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time when the event occurred.
       description: 'Represents a single occurrence of something interesting within the system. Some examples of events are creating a DAX cluster, adding or removing a node, or rebooting a node.'
     IsModifiable:
       type: string
@@ -2304,33 +2438,41 @@ components:
       type: object
       properties:
         NodeId:
-          $ref: '#/components/schemas/String'
-          description: A system-generated identifier for the node.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A system-generated identifier for the node.
         Endpoint:
-          $ref: '#/components/schemas/Endpoint'
-          description: 'The endpoint for the node, consisting of a DNS name and a port number. Client applications can connect directly to a node endpoint, if desired (as an alternative to allowing DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
+          allOf:
+            - $ref: '#/components/schemas/Endpoint'
+            - description: 'The endpoint for the node, consisting of a DNS name and a port number. Client applications can connect directly to a node endpoint, if desired (as an alternative to allowing DAX client software to intelligently route requests and responses to nodes in the DAX cluster.'
         NodeCreateTime:
-          $ref: '#/components/schemas/TStamp'
-          description: The date and time (in UNIX epoch format) when the node was launched.
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date and time (in UNIX epoch format) when the node was launched.
         AvailabilityZone:
-          $ref: '#/components/schemas/String'
-          description: The Availability Zone (AZ) in which the node has been deployed.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone (AZ) in which the node has been deployed.
         NodeStatus:
-          $ref: '#/components/schemas/String'
-          description: 'The current status of the node. For example: <code>available</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current status of the node. For example: <code>available</code>.'
         ParameterGroupStatus:
-          $ref: '#/components/schemas/String'
-          description: 'The status of the parameter group associated with this node. For example, <code>in-sync</code>.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The status of the parameter group associated with this node. For example, <code>in-sync</code>.'
       description: Represents an individual node within a DAX cluster.
     NodeTypeSpecificValue:
       type: object
       properties:
         NodeType:
-          $ref: '#/components/schemas/String'
-          description: A node type to which the parameter value applies.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A node type to which the parameter value applies.
         Value:
-          $ref: '#/components/schemas/String'
-          description: The parameter value for this node type.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The parameter value for this node type.
       description: Represents a parameter value that is applicable to a particular node type.
     NodeTypeSpecificValueList:
       type: array
@@ -2345,45 +2487,57 @@ components:
       type: object
       properties:
         ParameterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter.
         ParameterType:
-          $ref: '#/components/schemas/ParameterType'
-          description: 'Determines whether the parameter can be applied to any nodes, or only nodes of a particular type.'
+          allOf:
+            - $ref: '#/components/schemas/ParameterType'
+            - description: 'Determines whether the parameter can be applied to any nodes, or only nodes of a particular type.'
         ParameterValue:
-          $ref: '#/components/schemas/String'
-          description: The value for the parameter.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value for the parameter.
         NodeTypeSpecificValues:
-          $ref: '#/components/schemas/NodeTypeSpecificValueList'
-          description: 'A list of node types, and specific parameter values for each node.'
+          allOf:
+            - $ref: '#/components/schemas/NodeTypeSpecificValueList'
+            - description: 'A list of node types, and specific parameter values for each node.'
         Description:
-          $ref: '#/components/schemas/String'
-          description: A description of the parameter
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the parameter
         Source:
-          $ref: '#/components/schemas/String'
-          description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'How the parameter is defined. For example, <code>system</code> denotes a system-defined parameter.'
         DataType:
-          $ref: '#/components/schemas/String'
-          description: 'The data type of the parameter. For example, <code>integer</code>:'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The data type of the parameter. For example, <code>integer</code>:'
         AllowedValues:
-          $ref: '#/components/schemas/String'
-          description: A range of values within which the parameter can be set.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A range of values within which the parameter can be set.
         IsModifiable:
-          $ref: '#/components/schemas/IsModifiable'
-          description: Whether the customer is allowed to modify the parameter.
+          allOf:
+            - $ref: '#/components/schemas/IsModifiable'
+            - description: Whether the customer is allowed to modify the parameter.
         ChangeType:
-          $ref: '#/components/schemas/ChangeType'
-          description: 'The conditions under which changes to this parameter can be applied. For example, <code>requires-reboot</code> indicates that a new value for this parameter will only take effect if a node is rebooted.'
+          allOf:
+            - $ref: '#/components/schemas/ChangeType'
+            - description: 'The conditions under which changes to this parameter can be applied. For example, <code>requires-reboot</code> indicates that a new value for this parameter will only take effect if a node is rebooted.'
       description: Describes an individual setting that controls some aspect of DAX behavior.
     ParameterNameValue:
       type: object
       properties:
         ParameterName:
-          $ref: '#/components/schemas/String'
-          description: The name of the parameter.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the parameter.
         ParameterValue:
-          $ref: '#/components/schemas/String'
-          description: The value of the parameter.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the parameter.
       description: An individual DAX parameter.
     ParameterNameValueList:
       type: array
@@ -2402,21 +2556,25 @@ components:
       type: object
       properties:
         SecurityGroupIdentifier:
-          $ref: '#/components/schemas/String'
-          description: The unique ID for this security group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique ID for this security group.
         Status:
-          $ref: '#/components/schemas/String'
-          description: The status of this security group.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status of this security group.
       description: An individual VPC security group and its status.
     Subnet:
       type: object
       properties:
         SubnetIdentifier:
-          $ref: '#/components/schemas/String'
-          description: The system-assigned identifier for the subnet.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-assigned identifier for the subnet.
         SubnetAvailabilityZone:
-          $ref: '#/components/schemas/String'
-          description: The Availability Zone (AZ) for the subnet.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone (AZ) for the subnet.
       description: Represents the subnet associated with a DAX cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with DAX.
     SubnetList:
       type: array
@@ -2426,11 +2584,13 @@ components:
       type: object
       properties:
         Key:
-          $ref: '#/components/schemas/String'
-          description: 'The key for the tag. Tag keys are case sensitive. Every DAX cluster can only have one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The key for the tag. Tag keys are case sensitive. Every DAX cluster can only have one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.'
         Value:
-          $ref: '#/components/schemas/String'
-          description: 'The value of the tag. Tag values are case-sensitive and can be null. '
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The value of the tag. Tag values are case-sensitive and can be null. '
       description: '<p>A description of a tag. Every tag is a key-value pair. You can add up to 50 tags to a single DAX cluster.</p> <p>AWS-assigned tag names and values are automatically assigned the <code>aws:</code> prefix, which the user cannot assign. AWS-assigned tag names do not count towards the tag limit of 50. User-assigned tag names have the prefix <code>user:</code>.</p> <p>You cannot backdate the application of a tag.</p>'
 security:
   - hmac: []

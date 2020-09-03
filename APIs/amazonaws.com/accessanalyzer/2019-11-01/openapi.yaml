@@ -1021,11 +1021,13 @@ paths:
                   type: object
                   properties:
                     attributeName:
-                      $ref: '#/components/schemas/String'
-                      description: The name of the attribute to sort on.
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The name of the attribute to sort on.
                     orderBy:
-                      $ref: '#/components/schemas/OrderBy'
-                      description: 'The sort order, ascending or descending.'
+                      allOf:
+                        - $ref: '#/components/schemas/OrderBy'
+                        - description: 'The sort order, ascending or descending.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1404,8 +1406,9 @@ components:
       type: object
       properties:
         arn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer that was created by the request.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer that was created by the request.
       description: The response to the request to create an analyzer.
     InlineArchiveRule:
       type: object
@@ -1414,11 +1417,13 @@ components:
         - ruleName
       properties:
         filter:
-          $ref: '#/components/schemas/FilterCriteriaMap'
-          description: The condition and values for a criterion.
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: The condition and values for a criterion.
         ruleName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the rule.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule.
       description: An criterion statement in an archive rule. Each archive rule may have multiple criteria.
     String:
       type: string
@@ -1432,25 +1437,30 @@ components:
       type: object
       properties:
         contains:
-          $ref: '#/components/schemas/ValueList'
-          description: A "contains" operator to match for the filter used to create the rule.
+          allOf:
+            - $ref: '#/components/schemas/ValueList'
+            - description: A "contains" operator to match for the filter used to create the rule.
         eq:
-          $ref: '#/components/schemas/ValueList'
-          description: An "equals" operator to match for the filter used to create the rule.
+          allOf:
+            - $ref: '#/components/schemas/ValueList'
+            - description: An "equals" operator to match for the filter used to create the rule.
         exists:
-          $ref: '#/components/schemas/Boolean'
-          description: 'An "exists" operator to match for the filter used to create the rule. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'An "exists" operator to match for the filter used to create the rule. '
         neq:
-          $ref: '#/components/schemas/ValueList'
-          description: A "not equals" operator to match for the filter used to create the rule.
+          allOf:
+            - $ref: '#/components/schemas/ValueList'
+            - description: A "not equals" operator to match for the filter used to create the rule.
       description: The criteria to use in the filter that defines the archive rule.
     ResourceNotFoundException: {}
     GetAnalyzedResourceResponse:
       type: object
       properties:
         resource:
-          $ref: '#/components/schemas/AnalyzedResource'
-          description: An <code>AnalyedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzedResource'
+            - description: An <code>AnalyedResource</code> object that contains information that Access Analyzer found when it analyzed the resource.
       description: The response to the request.
     GetAnalyzerResponse:
       type: object
@@ -1458,8 +1468,9 @@ components:
         - analyzer
       properties:
         analyzer:
-          $ref: '#/components/schemas/AnalyzerSummary'
-          description: An <code>AnalyzerSummary</code> object that contains information about the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerSummary'
+            - description: An <code>AnalyzerSummary</code> object that contains information about the analyzer.
       description: The response to the request.
     GetArchiveRuleResponse:
       type: object
@@ -1473,8 +1484,9 @@ components:
       type: object
       properties:
         finding:
-          $ref: '#/components/schemas/Finding'
-          description: A <code>finding</code> object that contains finding details.
+          allOf:
+            - $ref: '#/components/schemas/Finding'
+            - description: A <code>finding</code> object that contains finding details.
       description: The response to the request.
     ListAnalyzedResourcesResponse:
       type: object
@@ -1482,11 +1494,13 @@ components:
         - analyzedResources
       properties:
         analyzedResources:
-          $ref: '#/components/schemas/AnalyzedResourcesList'
-          description: A list of resources that were analyzed.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzedResourcesList'
+            - description: A list of resources that were analyzed.
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
       description: The response to the request.
     ListAnalyzersResponse:
       type: object
@@ -1494,11 +1508,13 @@ components:
         - analyzers
       properties:
         analyzers:
-          $ref: '#/components/schemas/AnalyzersList'
-          description: The analyzers retrieved.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzersList'
+            - description: The analyzers retrieved.
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
       description: The response to the request.
     ListArchiveRulesResponse:
       type: object
@@ -1506,11 +1522,13 @@ components:
         - archiveRules
       properties:
         archiveRules:
-          $ref: '#/components/schemas/ArchiveRulesList'
-          description: A list of archive rules created for the specified analyzer.
+          allOf:
+            - $ref: '#/components/schemas/ArchiveRulesList'
+            - description: A list of archive rules created for the specified analyzer.
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
       description: The response to the request.
     ListFindingsResponse:
       type: object
@@ -1518,11 +1536,13 @@ components:
         - findings
       properties:
         findings:
-          $ref: '#/components/schemas/FindingsList'
-          description: 'A list of findings retrieved from the analyzer that match the filter criteria specified, if any.'
+          allOf:
+            - $ref: '#/components/schemas/FindingsList'
+            - description: 'A list of findings retrieved from the analyzer that match the filter criteria specified, if any.'
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
       description: The response to the request.
     OrderBy:
       type: string
@@ -1533,8 +1553,9 @@ components:
       type: object
       properties:
         tags:
-          $ref: '#/components/schemas/TagsMap'
-          description: The tags that are applied to the specified resource.
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags that are applied to the specified resource.
       description: The response to the request.
     TagResourceResponse:
       type: object
@@ -1589,38 +1610,49 @@ components:
         - updatedAt
       properties:
         actions:
-          $ref: '#/components/schemas/ActionList'
-          description: The actions that an external principal is granted permission to use by the policy that generated the finding.
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: The actions that an external principal is granted permission to use by the policy that generated the finding.
         analyzedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the resource was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the resource was analyzed.
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was created.
         error:
-          $ref: '#/components/schemas/String'
-          description: An error message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error message.
         isPublic:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the policy that generated the finding grants public access to the resource.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the policy that generated the finding grants public access to the resource.
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The ARN of the resource that was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the resource that was analyzed.
         resourceOwnerAccount:
-          $ref: '#/components/schemas/String'
-          description: The AWS account ID that owns the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID that owns the resource.
         resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource that was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of the resource that was analyzed.
         sharedVia:
-          $ref: '#/components/schemas/SharedViaList'
-          description: Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+          allOf:
+            - $ref: '#/components/schemas/SharedViaList'
+            - description: Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
         status:
-          $ref: '#/components/schemas/FindingStatus'
-          description: The current status of the finding generated from the analyzed resource.
+          allOf:
+            - $ref: '#/components/schemas/FindingStatus'
+            - description: The current status of the finding generated from the analyzed resource.
         updatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was updated.
       description: Contains details about the analyzed resource.
     AnalyzedResourceSummary:
       type: object
@@ -1630,14 +1662,17 @@ components:
         - resourceType
       properties:
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The ARN of the analyzed resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the analyzed resource.
         resourceOwnerAccount:
-          $ref: '#/components/schemas/String'
-          description: The AWS account ID that owns the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID that owns the resource.
         resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: The type of resource that was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of resource that was analyzed.
       description: Contains the ARN of the analyzed resource.
     AnalyzedResourcesList:
       type: array
@@ -1664,8 +1699,9 @@ components:
         - code
       properties:
         code:
-          $ref: '#/components/schemas/ReasonCode'
-          description: The reason code for the current status of the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/ReasonCode'
+            - description: The reason code for the current status of the analyzer.
       description: 'Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
     TagsMap:
       type: object
@@ -1686,32 +1722,41 @@ components:
         - type
       properties:
         arn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer.
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: A timestamp for the time at which the analyzer was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp for the time at which the analyzer was created.
         lastResourceAnalyzed:
-          $ref: '#/components/schemas/String'
-          description: The resource that was most recently analyzed by the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource that was most recently analyzed by the analyzer.
         lastResourceAnalyzedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the most recently analyzed resource was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the most recently analyzed resource was analyzed.
         name:
-          $ref: '#/components/schemas/Name'
-          description: The name of the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the analyzer.
         status:
-          $ref: '#/components/schemas/AnalyzerStatus'
-          description: 'The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. '
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerStatus'
+            - description: 'The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. '
         statusReason:
-          $ref: '#/components/schemas/StatusReason'
-          description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
+          allOf:
+            - $ref: '#/components/schemas/StatusReason'
+            - description: 'The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.'
         tags:
-          $ref: '#/components/schemas/TagsMap'
-          description: The tags added to the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags added to the analyzer.
         type:
-          $ref: '#/components/schemas/Type'
-          description: 'The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.'
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: 'The type of analyzer, which corresponds to the zone of trust chosen for the analyzer.'
       description: Contains information about the analyzer.
     AnalyzersList:
       type: array
@@ -1730,17 +1775,21 @@ components:
         - updatedAt
       properties:
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the archive rule was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the archive rule was created.
         filter:
-          $ref: '#/components/schemas/FilterCriteriaMap'
-          description: A filter used to define the archive rule.
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: A filter used to define the archive rule.
         ruleName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the archive rule.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the archive rule.
         updatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the archive rule was last updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the archive rule was last updated.
       description: Contains information about an archive rule.
     ArchiveRulesList:
       type: array
@@ -1762,20 +1811,25 @@ components:
       title: CreateAnalyzerRequest
       properties:
         analyzerName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the analyzer to create.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the analyzer to create.
         archiveRules:
-          $ref: '#/components/schemas/InlineArchiveRulesList'
-          description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
+          allOf:
+            - $ref: '#/components/schemas/InlineArchiveRulesList'
+            - description: Specifies the archive rules to add for the analyzer. Archive rules automatically archive findings that meet the criteria you define for the rule.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: A client token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
         tags:
-          $ref: '#/components/schemas/TagsMap'
-          description: The tags to apply to the analyzer.
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags to apply to the analyzer.
         type:
-          $ref: '#/components/schemas/Type'
-          description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create only one analyzer per account per Region.
       description: Creates an analyzer.
     CreateArchiveRuleRequest:
       type: object
@@ -1785,14 +1839,17 @@ components:
       title: CreateArchiveRuleRequest
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: A client token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
         filter:
-          $ref: '#/components/schemas/FilterCriteriaMap'
-          description: The criteria for the rule.
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: The criteria for the rule.
         ruleName:
-          $ref: '#/components/schemas/Name'
-          description: The name of the rule to create.
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule to create.
       description: Creates an archive rule.
     ValueList:
       type: array
@@ -1831,47 +1888,61 @@ components:
         - updatedAt
       properties:
         action:
-          $ref: '#/components/schemas/ActionList'
-          description: The action in the analyzed policy statement that an external principal has permission to use.
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: The action in the analyzed policy statement that an external principal has permission to use.
         analyzedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the resource was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the resource was analyzed.
         condition:
-          $ref: '#/components/schemas/ConditionKeyMap'
-          description: The condition in the analyzed policy statement that resulted in a finding.
+          allOf:
+            - $ref: '#/components/schemas/ConditionKeyMap'
+            - description: The condition in the analyzed policy statement that resulted in a finding.
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was generated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was generated.
         error:
-          $ref: '#/components/schemas/String'
-          description: An error.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error.
         id:
-          $ref: '#/components/schemas/FindingId'
-          description: The ID of the finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingId'
+            - description: The ID of the finding.
         isPublic:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the policy that generated the finding allows public access to the resource.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the policy that generated the finding allows public access to the resource.
         principal:
-          $ref: '#/components/schemas/PrincipalMap'
-          description: The external principal that access to a resource within the zone of trust.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalMap'
+            - description: The external principal that access to a resource within the zone of trust.
         resource:
-          $ref: '#/components/schemas/String'
-          description: The resource that an external principal has access to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource that an external principal has access to.
         resourceOwnerAccount:
-          $ref: '#/components/schemas/String'
-          description: The AWS account ID that owns the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID that owns the resource.
         resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource reported in the finding.
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of the resource reported in the finding.
         sources:
-          $ref: '#/components/schemas/FindingSourceList'
-          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+          allOf:
+            - $ref: '#/components/schemas/FindingSourceList'
+            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
-          $ref: '#/components/schemas/FindingStatus'
-          description: The current status of the finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingStatus'
+            - description: The current status of the finding.
         updatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was updated.
       description: Contains information about a finding.
     FindingIdList:
       type: array
@@ -1881,8 +1952,9 @@ components:
       type: object
       properties:
         accessPointArn:
-          $ref: '#/components/schemas/String'
-          description: The ARN of the access point that generated the finding.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the access point that generated the finding.
       description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
     FindingSourceType:
       type: string
@@ -1896,11 +1968,13 @@ components:
         - type
       properties:
         detail:
-          $ref: '#/components/schemas/FindingSourceDetail'
-          description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+          allOf:
+            - $ref: '#/components/schemas/FindingSourceDetail'
+            - description: Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
         type:
-          $ref: '#/components/schemas/FindingSourceType'
-          description: Indicates the type of access that generated the finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingSourceType'
+            - description: Indicates the type of access that generated the finding.
       description: The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
     FindingStatusUpdate:
       type: string
@@ -1920,47 +1994,61 @@ components:
         - updatedAt
       properties:
         action:
-          $ref: '#/components/schemas/ActionList'
-          description: The action in the analyzed policy statement that an external principal has permission to use.
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: The action in the analyzed policy statement that an external principal has permission to use.
         analyzedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the resource-based policy that generated the finding was analyzed.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the resource-based policy that generated the finding was analyzed.
         condition:
-          $ref: '#/components/schemas/ConditionKeyMap'
-          description: The condition in the analyzed policy statement that resulted in a finding.
+          allOf:
+            - $ref: '#/components/schemas/ConditionKeyMap'
+            - description: The condition in the analyzed policy statement that resulted in a finding.
         createdAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was created.
         error:
-          $ref: '#/components/schemas/String'
-          description: The error that resulted in an Error finding.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error that resulted in an Error finding.
         id:
-          $ref: '#/components/schemas/FindingId'
-          description: The ID of the finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingId'
+            - description: The ID of the finding.
         isPublic:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the finding reports a resource that has a policy that allows public access.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the finding reports a resource that has a policy that allows public access.
         principal:
-          $ref: '#/components/schemas/PrincipalMap'
-          description: The external principal that has access to a resource within the zone of trust.
+          allOf:
+            - $ref: '#/components/schemas/PrincipalMap'
+            - description: The external principal that has access to a resource within the zone of trust.
         resource:
-          $ref: '#/components/schemas/String'
-          description: The resource that the external principal has access to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource that the external principal has access to.
         resourceOwnerAccount:
-          $ref: '#/components/schemas/String'
-          description: The AWS account ID that owns the resource.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS account ID that owns the resource.
         resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: The type of the resource that the external principal has access to.
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of the resource that the external principal has access to.
         sources:
-          $ref: '#/components/schemas/FindingSourceList'
-          description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+          allOf:
+            - $ref: '#/components/schemas/FindingSourceList'
+            - description: The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
         status:
-          $ref: '#/components/schemas/FindingStatus'
-          description: The status of the finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingStatus'
+            - description: The status of the finding.
         updatedAt:
-          $ref: '#/components/schemas/Timestamp'
-          description: The time at which the finding was most recently updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the finding was most recently updated.
       description: Contains information about a finding.
     FindingsList:
       type: array
@@ -1997,17 +2085,21 @@ components:
       title: ListAnalyzedResourcesRequest
       properties:
         analyzerArn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer to retrieve a list of analyzed resources from.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer to retrieve a list of analyzed resources from.
         maxResults:
-          $ref: '#/components/schemas/Integer'
-          description: The maximum number of results to return in the response.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of results to return in the response.
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
         resourceType:
-          $ref: '#/components/schemas/ResourceType'
-          description: The type of resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The type of resource.
       description: Retrieves a list of resources that have been analyzed.
     ListAnalyzersRequest:
       type: object
@@ -2023,11 +2115,13 @@ components:
       type: object
       properties:
         attributeName:
-          $ref: '#/components/schemas/String'
-          description: The name of the attribute to sort on.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the attribute to sort on.
         orderBy:
-          $ref: '#/components/schemas/OrderBy'
-          description: 'The sort order, ascending or descending.'
+          allOf:
+            - $ref: '#/components/schemas/OrderBy'
+            - description: 'The sort order, ascending or descending.'
       description: The criteria used to sort.
     ListFindingsRequest:
       type: object
@@ -2036,20 +2130,25 @@ components:
       title: ListFindingsRequest
       properties:
         analyzerArn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer to retrieve findings from.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer to retrieve findings from.
         filter:
-          $ref: '#/components/schemas/FilterCriteriaMap'
-          description: A filter to match for the findings to return.
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: A filter to match for the findings to return.
         maxResults:
-          $ref: '#/components/schemas/Integer'
-          description: The maximum number of results to return in the response.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of results to return in the response.
         nextToken:
-          $ref: '#/components/schemas/Token'
-          description: A token used for pagination of results returned.
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token used for pagination of results returned.
         sort:
-          $ref: '#/components/schemas/SortCriteria'
-          description: The sort order for the findings returned.
+          allOf:
+            - $ref: '#/components/schemas/SortCriteria'
+            - description: The sort order for the findings returned.
       description: Retrieves a list of findings generated by the specified analyzer.
     ListTagsForResourceRequest:
       type: object
@@ -2071,11 +2170,13 @@ components:
       title: StartResourceScanRequest
       properties:
         analyzerArn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer to use to scan the policies applied to the specified resource.
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The ARN of the resource to scan.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the resource to scan.
       description: Starts a scan of the policies applied to the specified resource.
     TagKeys:
       type: array
@@ -2088,8 +2189,9 @@ components:
       title: TagResourceRequest
       properties:
         tags:
-          $ref: '#/components/schemas/TagsMap'
-          description: The tags to add to the resource.
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags to add to the resource.
       description: Adds a tag to the specified resource.
     UntagResourceRequest:
       type: object
@@ -2103,11 +2205,13 @@ components:
       title: UpdateArchiveRuleRequest
       properties:
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: A client token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
         filter:
-          $ref: '#/components/schemas/FilterCriteriaMap'
-          description: A filter to match for the rules to update. Only rules that match the filter are updated.
+          allOf:
+            - $ref: '#/components/schemas/FilterCriteriaMap'
+            - description: A filter to match for the rules to update. Only rules that match the filter are updated.
       description: Updates the specified archive rule.
     UpdateFindingsRequest:
       type: object
@@ -2117,20 +2221,25 @@ components:
       title: UpdateFindingsRequest
       properties:
         analyzerArn:
-          $ref: '#/components/schemas/AnalyzerArn'
-          description: The ARN of the analyzer that generated the findings to update.
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The ARN of the analyzer that generated the findings to update.
         clientToken:
-          $ref: '#/components/schemas/String'
-          description: A client token.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
         ids:
-          $ref: '#/components/schemas/FindingIdList'
-          description: The IDs of the findings to update.
+          allOf:
+            - $ref: '#/components/schemas/FindingIdList'
+            - description: The IDs of the findings to update.
         resourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The ARN of the resource identified in the finding.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the resource identified in the finding.
         status:
-          $ref: '#/components/schemas/FindingStatusUpdate'
-          description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
+          allOf:
+            - $ref: '#/components/schemas/FindingStatusUpdate'
+            - description: The state represents the action to take to update the finding Status. Use <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use <code>ACTIVE</code> to change an Archived finding to an Active finding.
       description: Updates findings with the new values provided in the request.
 security:
   - hmac: []

@@ -282,8 +282,9 @@ paths:
                     CloudWatchLogsDestination:
                       $ref: '#/components/schemas/CloudWatchLogsDestination'
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
                     KinesisFirehoseDestination:
                       $ref: '#/components/schemas/KinesisFirehoseDestination'
                     MatchingEventTypes:
@@ -509,8 +510,9 @@ paths:
                     CloudWatchLogsDestination:
                       $ref: '#/components/schemas/CloudWatchLogsDestination'
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
                     KinesisFirehoseDestination:
                       $ref: '#/components/schemas/KinesisFirehoseDestination'
                     MatchingEventTypes:
@@ -653,11 +655,13 @@ components:
       type: object
       properties:
         IamRoleArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM) role that is able to write event data to an Amazon CloudWatch destination.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM) role that is able to write event data to an Amazon CloudWatch destination.
         LogGroupArn:
-          $ref: '#/components/schemas/String'
-          description: The name of the Amazon CloudWatch Log Group that you want to record events in.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Amazon CloudWatch Log Group that you want to record events in.
       description: An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
     Boolean:
       type: boolean
@@ -665,11 +669,13 @@ components:
       type: object
       properties:
         DeliveryStreamArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of an IAM role that can write data to an Amazon Kinesis Data Firehose stream.
         IamRoleArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination that you want to use in the event destination.
       description: An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.
     EventTypes:
       type: array
@@ -680,8 +686,9 @@ components:
       type: object
       properties:
         TopicArn:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.
       description: An object that contains information about an event destination that sends data to Amazon SNS.
     NotFoundException: {}
     DeleteConfigurationSetResponse:
@@ -702,51 +709,61 @@ components:
       type: object
       properties:
         ConfigurationSets:
-          $ref: '#/components/schemas/ConfigurationSets'
-          description: An object that contains a list of configuration sets for your account in the current region.
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationSets'
+            - description: An object that contains a list of configuration sets for your account in the current region.
         NextToken:
-          $ref: '#/components/schemas/NextTokenString'
-          description: A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
+          allOf:
+            - $ref: '#/components/schemas/NextTokenString'
+            - description: A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
       description: An object that contains information about the configuration sets for your account in the current region.
     SendVoiceMessageResponse:
       type: object
       properties:
         MessageId:
-          $ref: '#/components/schemas/String'
-          description: A unique identifier for the voice message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for the voice message.
       description: An object that that contains the Message ID of a Voice message that was sent successfully.
     CallInstructionsMessageType:
       type: object
       properties:
         Text:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
       description: An object that defines a message that contains text formatted using Amazon Pinpoint Voice Instructions markup.
     PlainTextMessageType:
       type: object
       properties:
         LanguageCode:
-          $ref: '#/components/schemas/String'
-          description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
         Text:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The plain (not SSML-formatted) text to deliver to the recipient.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The plain (not SSML-formatted) text to deliver to the recipient.
         VoiceId:
-          $ref: '#/components/schemas/String'
-          description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
       description: An object that defines a message that contains unformatted text.
     SSMLMessageType:
       type: object
       properties:
         LanguageCode:
-          $ref: '#/components/schemas/String'
-          description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The language to use when delivering the message. For a complete list of supported languages, see the Amazon Polly Developer Guide.'
         Text:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The SSML-formatted text to deliver to the recipient.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The SSML-formatted text to deliver to the recipient.
         VoiceId:
-          $ref: '#/components/schemas/String'
-          description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the voice that you want to use to deliver the message. For a complete list of supported voices, see the Amazon Polly Developer Guide.'
       description: An object that defines a message that contains SSML-formatted text.
     UpdateConfigurationSetEventDestinationResponse:
       type: object
@@ -771,8 +788,9 @@ components:
         CloudWatchLogsDestination:
           $ref: '#/components/schemas/CloudWatchLogsDestination'
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
         KinesisFirehoseDestination:
           $ref: '#/components/schemas/KinesisFirehoseDestination'
         MatchingEventTypes:
@@ -787,16 +805,18 @@ components:
         EventDestination:
           $ref: '#/components/schemas/EventDestinationDefinition'
         EventDestinationName:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: A name that identifies the event destination.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A name that identifies the event destination.
       description: Create a new event destination in a configuration set.
     CreateConfigurationSetRequest:
       type: object
       title: CreateConfigurationSetRequest
       properties:
         ConfigurationSetName:
-          $ref: '#/components/schemas/WordCharactersWithDelimiters'
-          description: The name that you want to give the configuration set.
+          allOf:
+            - $ref: '#/components/schemas/WordCharactersWithDelimiters'
+            - description: The name that you want to give the configuration set.
       description: A request to create a new configuration set.
     DeleteConfigurationSetEventDestinationRequest:
       type: object
@@ -812,15 +832,17 @@ components:
         CloudWatchLogsDestination:
           $ref: '#/components/schemas/CloudWatchLogsDestination'
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination.'
         KinesisFirehoseDestination:
           $ref: '#/components/schemas/KinesisFirehoseDestination'
         MatchingEventTypes:
           $ref: '#/components/schemas/EventTypes'
         Name:
-          $ref: '#/components/schemas/String'
-          description: A name that identifies the event destination configuration.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A name that identifies the event destination configuration.
         SnsDestination:
           $ref: '#/components/schemas/SnsDestination'
       description: An object that defines an event destination.
@@ -865,19 +887,23 @@ components:
       title: SendVoiceMessageRequest
       properties:
         CallerId:
-          $ref: '#/components/schemas/String'
-          description: The phone number that appears on recipients' devices when they receive the message.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The phone number that appears on recipients' devices when they receive the message.
         ConfigurationSetName:
-          $ref: '#/components/schemas/WordCharactersWithDelimiters'
-          description: The name of the configuration set that you want to use to send the message.
+          allOf:
+            - $ref: '#/components/schemas/WordCharactersWithDelimiters'
+            - description: The name of the configuration set that you want to use to send the message.
         Content:
           $ref: '#/components/schemas/VoiceMessageContent'
         DestinationPhoneNumber:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: The phone number that you want to send the voice message to.
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The phone number that you want to send the voice message to.
         OriginationPhoneNumber:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: 'The phone number that Amazon Pinpoint should use to send the voice message. This isn''t necessarily the phone number that appears on recipients'' devices when they receive the message, because you can specify a CallerId parameter in the request.'
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The phone number that Amazon Pinpoint should use to send the voice message. This isn''t necessarily the phone number that appears on recipients'' devices when they receive the message, because you can specify a CallerId parameter in the request.'
       description: SendVoiceMessageRequest
     UpdateConfigurationSetEventDestinationRequest:
       type: object

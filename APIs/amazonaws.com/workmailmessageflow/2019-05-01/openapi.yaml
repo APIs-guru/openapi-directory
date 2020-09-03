@@ -206,8 +206,9 @@ components:
         - messageContent
       properties:
         messageContent:
-          $ref: '#/components/schemas/messageContentBlob'
-          description: 'The raw content of the email message, in MIME format.'
+          allOf:
+            - $ref: '#/components/schemas/messageContentBlob'
+            - description: 'The raw content of the email message, in MIME format.'
     ResourceNotFoundException: {}
     messageIdType:
       type: string

@@ -423,51 +423,65 @@ paths:
                   type: object
                   properties:
                     InstanceType:
-                      $ref: '#/components/schemas/ESPartitionInstanceType'
-                      description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
+                      allOf:
+                        - $ref: '#/components/schemas/ESPartitionInstanceType'
+                        - description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
                     InstanceCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: The number of instances in the specified domain cluster.
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: The number of instances in the specified domain cluster.
                     DedicatedMasterEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
                     ZoneAwarenessEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
                     ZoneAwarenessConfig:
-                      $ref: '#/components/schemas/ZoneAwarenessConfig'
-                      description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/ZoneAwarenessConfig'
+                        - description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
                     DedicatedMasterType:
-                      $ref: '#/components/schemas/ESPartitionInstanceType'
-                      description: The instance type for a dedicated master node.
+                      allOf:
+                        - $ref: '#/components/schemas/ESPartitionInstanceType'
+                        - description: The instance type for a dedicated master node.
                     DedicatedMasterCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
                     WarmEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True to enable warm storage.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True to enable warm storage.
                     WarmType:
-                      $ref: '#/components/schemas/ESWarmPartitionInstanceType'
-                      description: The instance type for the Elasticsearch cluster's warm nodes.
+                      allOf:
+                        - $ref: '#/components/schemas/ESWarmPartitionInstanceType'
+                        - description: The instance type for the Elasticsearch cluster's warm nodes.
                     WarmCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: The number of warm nodes in the cluster.
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: The number of warm nodes in the cluster.
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
                   properties:
                     EBSEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specifies whether EBS-based storage is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies whether EBS-based storage is enabled.
                     VolumeType:
-                      $ref: '#/components/schemas/VolumeType'
-                      description: ' Specifies the volume type for EBS-based storage.'
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: ' Specifies the volume type for EBS-based storage.'
                     VolumeSize:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: ' Integer to specify the size of an EBS volume.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: ' Integer to specify the size of an EBS volume.'
                     Iops:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
                 AccessPolicies:
                   description: 'Access policy rules for an Elasticsearch domain service endpoints. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank">Configuring Access Policies</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>. The maximum size of a policy document is 100 KB.'
                   type: string
@@ -476,51 +490,61 @@ paths:
                   type: object
                   properties:
                     AutomatedSnapshotStartHour:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
                 VPCOptions:
                   description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
                   type: object
                   properties:
                     SubnetIds:
-                      $ref: '#/components/schemas/StringList'
-                      description: Specifies the subnets for VPC endpoint.
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: Specifies the subnets for VPC endpoint.
                     SecurityGroupIds:
-                      $ref: '#/components/schemas/StringList'
-                      description: Specifies the security groups for VPC endpoint.
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: Specifies the security groups for VPC endpoint.
                 CognitoOptions:
                   description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specifies the option to enable Cognito for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies the option to enable Cognito for Kibana authentication.
                     UserPoolId:
-                      $ref: '#/components/schemas/UserPoolId'
-                      description: Specifies the Cognito user pool ID for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/UserPoolId'
+                        - description: Specifies the Cognito user pool ID for Kibana authentication.
                     IdentityPoolId:
-                      $ref: '#/components/schemas/IdentityPoolId'
-                      description: Specifies the Cognito identity pool ID for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/IdentityPoolId'
+                        - description: Specifies the Cognito identity pool ID for Kibana authentication.
                     RoleArn:
-                      $ref: '#/components/schemas/RoleArn'
-                      description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+                      allOf:
+                        - $ref: '#/components/schemas/RoleArn'
+                        - description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
                 EncryptionAtRestOptions:
                   description: Specifies the Encryption At Rest Options.
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specifies the option to enable Encryption At Rest.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies the option to enable Encryption At Rest.
                     KmsKeyId:
-                      $ref: '#/components/schemas/KmsKeyId'
-                      description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+                      allOf:
+                        - $ref: '#/components/schemas/KmsKeyId'
+                        - description: ' Specifies the KMS Key ID for Encryption At Rest options.'
                 NodeToNodeEncryptionOptions:
                   description: Specifies the node-to-node encryption options.
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specify true to enable node-to-node encryption.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify true to enable node-to-node encryption.
                 AdvancedOptions:
                   description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
                   type: object
@@ -536,24 +560,29 @@ paths:
                   type: object
                   properties:
                     EnforceHTTPS:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
                     TLSSecurityPolicy:
-                      $ref: '#/components/schemas/TLSSecurityPolicy'
-                      description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+                      allOf:
+                        - $ref: '#/components/schemas/TLSSecurityPolicy'
+                        - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
                 AdvancedSecurityOptions:
                   description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True if advanced security is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True if advanced security is enabled.
                     InternalUserDatabaseEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True if the internal user database is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True if the internal user database is enabled.
                     MasterUserOptions:
-                      $ref: '#/components/schemas/MasterUserOptions'
-                      description: 'Credentials for the master user: username and password, ARN, or both.'
+                      allOf:
+                        - $ref: '#/components/schemas/MasterUserOptions'
+                        - description: 'Credentials for the master user: username and password, ARN, or both.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -726,11 +755,13 @@ paths:
                   type: object
                   properties:
                     S3BucketName:
-                      $ref: '#/components/schemas/S3BucketName'
-                      description: Name of the bucket containing the package.
+                      allOf:
+                        - $ref: '#/components/schemas/S3BucketName'
+                        - description: Name of the bucket containing the package.
                     S3Key:
-                      $ref: '#/components/schemas/S3Key'
-                      description: Key (file name) of the package.
+                      allOf:
+                        - $ref: '#/components/schemas/S3Key'
+                        - description: Key (file name) of the package.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1132,84 +1163,105 @@ paths:
                   type: object
                   properties:
                     InstanceType:
-                      $ref: '#/components/schemas/ESPartitionInstanceType'
-                      description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
+                      allOf:
+                        - $ref: '#/components/schemas/ESPartitionInstanceType'
+                        - description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
                     InstanceCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: The number of instances in the specified domain cluster.
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: The number of instances in the specified domain cluster.
                     DedicatedMasterEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
                     ZoneAwarenessEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
                     ZoneAwarenessConfig:
-                      $ref: '#/components/schemas/ZoneAwarenessConfig'
-                      description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/ZoneAwarenessConfig'
+                        - description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
                     DedicatedMasterType:
-                      $ref: '#/components/schemas/ESPartitionInstanceType'
-                      description: The instance type for a dedicated master node.
+                      allOf:
+                        - $ref: '#/components/schemas/ESPartitionInstanceType'
+                        - description: The instance type for a dedicated master node.
                     DedicatedMasterCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
                     WarmEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True to enable warm storage.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True to enable warm storage.
                     WarmType:
-                      $ref: '#/components/schemas/ESWarmPartitionInstanceType'
-                      description: The instance type for the Elasticsearch cluster's warm nodes.
+                      allOf:
+                        - $ref: '#/components/schemas/ESWarmPartitionInstanceType'
+                        - description: The instance type for the Elasticsearch cluster's warm nodes.
                     WarmCount:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: The number of warm nodes in the cluster.
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: The number of warm nodes in the cluster.
                 EBSOptions:
                   description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
                   type: object
                   properties:
                     EBSEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specifies whether EBS-based storage is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies whether EBS-based storage is enabled.
                     VolumeType:
-                      $ref: '#/components/schemas/VolumeType'
-                      description: ' Specifies the volume type for EBS-based storage.'
+                      allOf:
+                        - $ref: '#/components/schemas/VolumeType'
+                        - description: ' Specifies the volume type for EBS-based storage.'
                     VolumeSize:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: ' Integer to specify the size of an EBS volume.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: ' Integer to specify the size of an EBS volume.'
                     Iops:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
                 SnapshotOptions:
                   description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
                   type: object
                   properties:
                     AutomatedSnapshotStartHour:
-                      $ref: '#/components/schemas/IntegerClass'
-                      description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+                      allOf:
+                        - $ref: '#/components/schemas/IntegerClass'
+                        - description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
                 VPCOptions:
                   description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
                   type: object
                   properties:
                     SubnetIds:
-                      $ref: '#/components/schemas/StringList'
-                      description: Specifies the subnets for VPC endpoint.
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: Specifies the subnets for VPC endpoint.
                     SecurityGroupIds:
-                      $ref: '#/components/schemas/StringList'
-                      description: Specifies the security groups for VPC endpoint.
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: Specifies the security groups for VPC endpoint.
                 CognitoOptions:
                   description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specifies the option to enable Cognito for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies the option to enable Cognito for Kibana authentication.
                     UserPoolId:
-                      $ref: '#/components/schemas/UserPoolId'
-                      description: Specifies the Cognito user pool ID for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/UserPoolId'
+                        - description: Specifies the Cognito user pool ID for Kibana authentication.
                     IdentityPoolId:
-                      $ref: '#/components/schemas/IdentityPoolId'
-                      description: Specifies the Cognito identity pool ID for Kibana authentication.
+                      allOf:
+                        - $ref: '#/components/schemas/IdentityPoolId'
+                        - description: Specifies the Cognito identity pool ID for Kibana authentication.
                     RoleArn:
-                      $ref: '#/components/schemas/RoleArn'
-                      description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+                      allOf:
+                        - $ref: '#/components/schemas/RoleArn'
+                        - description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
                 AdvancedOptions:
                   description: '<p> Exposes select native Elasticsearch configuration values from <code>elasticsearch.yml</code>. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
                   type: object
@@ -1228,24 +1280,29 @@ paths:
                   type: object
                   properties:
                     EnforceHTTPS:
-                      $ref: '#/components/schemas/Boolean'
-                      description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
                     TLSSecurityPolicy:
-                      $ref: '#/components/schemas/TLSSecurityPolicy'
-                      description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+                      allOf:
+                        - $ref: '#/components/schemas/TLSSecurityPolicy'
+                        - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
                 AdvancedSecurityOptions:
                   description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
                   type: object
                   properties:
                     Enabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True if advanced security is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True if advanced security is enabled.
                     InternalUserDatabaseEnabled:
-                      $ref: '#/components/schemas/Boolean'
-                      description: True if the internal user database is enabled.
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: True if the internal user database is enabled.
                     MasterUserOptions:
-                      $ref: '#/components/schemas/MasterUserOptions'
-                      description: 'Credentials for the master user: username and password, ARN, or both.'
+                      allOf:
+                        - $ref: '#/components/schemas/MasterUserOptions'
+                        - description: 'Credentials for the master user: username and password, ARN, or both.'
   /2015-01-01/es/domain-info:
     post:
       operationId: DescribeElasticsearchDomains
@@ -2849,8 +2906,9 @@ components:
       type: object
       properties:
         CrossClusterSearchConnection:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
-          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of accepted inbound connection. '
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+            - description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of accepted inbound connection. '
       description: The result of a <code><a>AcceptInboundCrossClusterSearchConnection</a></code> operation. Contains details of accepted inbound connection.
     ResourceNotFoundException: {}
     LimitExceededException: {}
@@ -2862,11 +2920,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: 'Specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.'
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'Specifies the <code>TagKey</code>, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.'
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: 'Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and do not have to be unique in a tag set. For example, you can have a key value pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code>'
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: 'Specifies the <code>TagValue</code>, the value assigned to the corresponding tag key. Tag values can be null and do not have to be unique in a tag set. For example, you can have a key value pair in a tag set of <code>project : Trinity</code> and <code>cost-center : Trinity</code>'
       description: Specifies a key value pair for a resource tag.
     BaseException: {}
     ValidationException: {}
@@ -2875,8 +2935,9 @@ components:
       type: object
       properties:
         DomainPackageDetails:
-          $ref: '#/components/schemas/DomainPackageDetails'
-          description: <code>DomainPackageDetails</code>
+          allOf:
+            - $ref: '#/components/schemas/DomainPackageDetails'
+            - description: <code>DomainPackageDetails</code>
       description: ' Container for response returned by <code> <a>AssociatePackage</a> </code> operation. '
     AccessDeniedException: {}
     ConflictException: {}
@@ -2884,15 +2945,17 @@ components:
       type: object
       properties:
         ServiceSoftwareOptions:
-          $ref: '#/components/schemas/ServiceSoftwareOptions'
-          description: The current status of the Elasticsearch service software update.
+          allOf:
+            - $ref: '#/components/schemas/ServiceSoftwareOptions'
+            - description: The current status of the Elasticsearch service software update.
       description: The result of a <code>CancelElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
     CreateElasticsearchDomainResponse:
       type: object
       properties:
         DomainStatus:
-          $ref: '#/components/schemas/ElasticsearchDomainStatus'
-          description: 'The status of the newly created Elasticsearch domain. '
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainStatus'
+            - description: 'The status of the newly created Elasticsearch domain. '
       description: The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.
     ESPartitionInstanceType:
       type: string
@@ -2963,8 +3026,9 @@ components:
       type: object
       properties:
         AvailabilityZoneCount:
-          $ref: '#/components/schemas/IntegerClass'
-          description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
       description: 'Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.'
     ESWarmPartitionInstanceType:
       type: string
@@ -3008,8 +3072,9 @@ components:
         CloudWatchLogsLogGroupArn:
           $ref: '#/components/schemas/CloudWatchLogsLogGroupArn'
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: ' Specifies whether given log publishing option is enabled or not.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether given log publishing option is enabled or not.'
       description: 'Log Publishing option that is set for given domain. <br/>Attributes and their details: <ul> <li>CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log needs to be published.</li> <li>Enabled: Whether the log publishing for given log type is enabled or not</li> </ul> '
     TLSSecurityPolicy:
       type: string
@@ -3020,14 +3085,17 @@ components:
       type: object
       properties:
         MasterUserARN:
-          $ref: '#/components/schemas/ARN'
-          description: ARN for the master user (if IAM is enabled).
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: ARN for the master user (if IAM is enabled).
         MasterUserName:
-          $ref: '#/components/schemas/Username'
-          description: 'The master user''s username, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
+          allOf:
+            - $ref: '#/components/schemas/Username'
+            - description: 'The master user''s username, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
         MasterUserPassword:
-          $ref: '#/components/schemas/Password'
-          description: 'The master user''s password, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: 'The master user''s password, which is stored in the Amazon Elasticsearch Service domain''s internal database.'
       description: 'Credentials for the master user: username and password, ARN, or both.'
     InvalidTypeException: {}
     ResourceAlreadyExistsException: {}
@@ -3035,20 +3103,25 @@ components:
       type: object
       properties:
         SourceDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
         DestinationDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
         ConnectionAlias:
-          $ref: '#/components/schemas/ConnectionAlias'
-          description: Specifies the connection alias provided during the create connection request.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAlias'
+            - description: Specifies the connection alias provided during the create connection request.
         ConnectionStatus:
-          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
-          description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the newly created connection.
+          allOf:
+            - $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
+            - description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the newly created connection.
         CrossClusterSearchConnectionId:
-          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
-          description: 'Unique id for the created outbound connection, which is used for subsequent operations on connection.'
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+            - description: 'Unique id for the created outbound connection, which is used for subsequent operations on connection.'
       description: The result of a <code><a>CreateOutboundCrossClusterSearchConnection</a></code> request. Contains the details of the newly created cross-cluster search connection.
     OwnerId:
       type: string
@@ -3066,8 +3139,9 @@ components:
       type: object
       properties:
         PackageDetails:
-          $ref: '#/components/schemas/PackageDetails'
-          description: Information about the package <code>PackageDetails</code>.
+          allOf:
+            - $ref: '#/components/schemas/PackageDetails'
+            - description: Information about the package <code>PackageDetails</code>.
       description: ' Container for response returned by <code> <a>CreatePackage</a> </code> operation. '
     S3BucketName:
       type: string
@@ -3079,29 +3153,33 @@ components:
       type: object
       properties:
         DomainStatus:
-          $ref: '#/components/schemas/ElasticsearchDomainStatus'
-          description: The status of the Elasticsearch domain being deleted.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainStatus'
+            - description: The status of the Elasticsearch domain being deleted.
       description: 'The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.'
     DeleteInboundCrossClusterSearchConnectionResponse:
       type: object
       properties:
         CrossClusterSearchConnection:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
-          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of deleted inbound connection. '
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+            - description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of deleted inbound connection. '
       description: The result of a <code><a>DeleteInboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted inbound connection.
     DeleteOutboundCrossClusterSearchConnectionResponse:
       type: object
       properties:
         CrossClusterSearchConnection:
-          $ref: '#/components/schemas/OutboundCrossClusterSearchConnection'
-          description: 'Specifies the <code><a>OutboundCrossClusterSearchConnection</a></code> of deleted outbound connection. '
+          allOf:
+            - $ref: '#/components/schemas/OutboundCrossClusterSearchConnection'
+            - description: 'Specifies the <code><a>OutboundCrossClusterSearchConnection</a></code> of deleted outbound connection. '
       description: The result of a <code><a>DeleteOutboundCrossClusterSearchConnection</a></code> operation. Contains details of deleted outbound connection.
     DeletePackageResponse:
       type: object
       properties:
         PackageDetails:
-          $ref: '#/components/schemas/PackageDetails'
-          description: <code>PackageDetails</code>
+          allOf:
+            - $ref: '#/components/schemas/PackageDetails'
+            - description: <code>PackageDetails</code>
       description: ' Container for response parameters to <code> <a>DeletePackage</a> </code> operation. '
     DescribeElasticsearchDomainResponse:
       type: object
@@ -3109,8 +3187,9 @@ components:
         - DomainStatus
       properties:
         DomainStatus:
-          $ref: '#/components/schemas/ElasticsearchDomainStatus'
-          description: The current status of the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainStatus'
+            - description: The current status of the Elasticsearch domain.
       description: The result of a <code>DescribeElasticsearchDomain</code> request. Contains the status of the domain specified in the request.
     DescribeElasticsearchDomainConfigResponse:
       type: object
@@ -3118,8 +3197,9 @@ components:
         - DomainConfig
       properties:
         DomainConfig:
-          $ref: '#/components/schemas/ElasticsearchDomainConfig'
-          description: The configuration information of the domain requested in the <code>DescribeElasticsearchDomainConfig</code> request.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainConfig'
+            - description: The configuration information of the domain requested in the <code>DescribeElasticsearchDomainConfig</code> request.
       description: The result of a <code>DescribeElasticsearchDomainConfig</code> request. Contains the configuration information of the requested domain.
     DescribeElasticsearchDomainsResponse:
       type: object
@@ -3127,8 +3207,9 @@ components:
         - DomainStatusList
       properties:
         DomainStatusList:
-          $ref: '#/components/schemas/ElasticsearchDomainStatusList'
-          description: The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainStatusList'
+            - description: The status of the domains requested in the <code>DescribeElasticsearchDomains</code> request.
       description: The result of a <code>DescribeElasticsearchDomains</code> request. Contains the status of the specified domains or all domains owned by the account.
     DescribeElasticsearchInstanceTypeLimitsResponse:
       type: object
@@ -3140,39 +3221,46 @@ components:
       type: object
       properties:
         CrossClusterSearchConnections:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnections'
-          description: Consists of list of <code><a>InboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnections'
+            - description: Consists of list of <code><a>InboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
       description: The result of a <code><a>DescribeInboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.
     Filter:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/NonEmptyString'
-          description: ' Specifies the name of the filter. '
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Specifies the name of the filter. '
         Values:
-          $ref: '#/components/schemas/ValueStringList'
-          description: ' Contains one or more values for the filter. '
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - description: ' Contains one or more values for the filter. '
       description: ' A filter used to limit results when describing inbound or outbound cross-cluster search connections. Multiple values can be specified per filter. A cross-cluster search connection must match at least one of the specified values for it to be returned from an operation. '
     InvalidPaginationTokenException: {}
     DescribeOutboundCrossClusterSearchConnectionsResponse:
       type: object
       properties:
         CrossClusterSearchConnections:
-          $ref: '#/components/schemas/OutboundCrossClusterSearchConnections'
-          description: Consists of list of <code><a>OutboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
+          allOf:
+            - $ref: '#/components/schemas/OutboundCrossClusterSearchConnections'
+            - description: Consists of list of <code><a>OutboundCrossClusterSearchConnection</a></code> matching the specified filter criteria.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. '
       description: The result of a <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> request. Contains the list of connections matching the filter criteria.
     DescribePackagesResponse:
       type: object
       properties:
         PackageDetailsList:
-          $ref: '#/components/schemas/PackageDetailsList'
-          description: List of <code>PackageDetails</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/PackageDetailsList'
+            - description: List of <code>PackageDetails</code> objects.
         NextToken:
           $ref: '#/components/schemas/String'
       description: ' Container for response returned by <code> <a>DescribePackages</a> </code> operation. '
@@ -3180,82 +3268,97 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/DescribePackagesFilterName'
-          description: Any field from <code>PackageDetails</code>.
+          allOf:
+            - $ref: '#/components/schemas/DescribePackagesFilterName'
+            - description: Any field from <code>PackageDetails</code>.
         Value:
-          $ref: '#/components/schemas/DescribePackagesFilterValues'
-          description: A list of values for the specified field.
+          allOf:
+            - $ref: '#/components/schemas/DescribePackagesFilterValues'
+            - description: A list of values for the specified field.
       description: Filter to apply in <code>DescribePackage</code> response.
     DescribeReservedElasticsearchInstanceOfferingsResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Provides an identifier to allow retrieval of paginated results.
         ReservedElasticsearchInstanceOfferings:
-          $ref: '#/components/schemas/ReservedElasticsearchInstanceOfferingList'
-          description: List of reserved Elasticsearch instance offerings
+          allOf:
+            - $ref: '#/components/schemas/ReservedElasticsearchInstanceOfferingList'
+            - description: List of reserved Elasticsearch instance offerings
       description: Container for results from <code>DescribeReservedElasticsearchInstanceOfferings</code>
     DescribeReservedElasticsearchInstancesResponse:
       type: object
       properties:
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Provides an identifier to allow retrieval of paginated results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Provides an identifier to allow retrieval of paginated results.
         ReservedElasticsearchInstances:
-          $ref: '#/components/schemas/ReservedElasticsearchInstanceList'
-          description: List of reserved Elasticsearch instances.
+          allOf:
+            - $ref: '#/components/schemas/ReservedElasticsearchInstanceList'
+            - description: List of reserved Elasticsearch instances.
       description: Container for results from <code>DescribeReservedElasticsearchInstances</code>
     DissociatePackageResponse:
       type: object
       properties:
         DomainPackageDetails:
-          $ref: '#/components/schemas/DomainPackageDetails'
-          description: <code>DomainPackageDetails</code>
+          allOf:
+            - $ref: '#/components/schemas/DomainPackageDetails'
+            - description: <code>DomainPackageDetails</code>
       description: ' Container for response returned by <code> <a>DissociatePackage</a> </code> operation. '
     GetCompatibleElasticsearchVersionsResponse:
       type: object
       properties:
         CompatibleElasticsearchVersions:
-          $ref: '#/components/schemas/CompatibleElasticsearchVersionsList'
-          description: ' A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+          allOf:
+            - $ref: '#/components/schemas/CompatibleElasticsearchVersionsList'
+            - description: ' A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
       description: ' Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
     GetUpgradeHistoryResponse:
       type: object
       properties:
         UpgradeHistories:
-          $ref: '#/components/schemas/UpgradeHistoryList'
-          description: ' A list of <code> <a>UpgradeHistory</a> </code> objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of <code> <a>GetUpgradeHistoryResponse</a> </code> object. '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeHistoryList'
+            - description: ' A list of <code> <a>UpgradeHistory</a> </code> objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of <code> <a>GetUpgradeHistoryResponse</a> </code> object. '
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token that needs to be supplied to the next call to get the next page of results
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token that needs to be supplied to the next call to get the next page of results
       description: ' Container for response returned by <code> <a>GetUpgradeHistory</a> </code> operation. '
     GetUpgradeStatusResponse:
       type: object
       properties:
         UpgradeStep:
-          $ref: '#/components/schemas/UpgradeStep'
-          description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStep'
+            - description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
         StepStatus:
-          $ref: '#/components/schemas/UpgradeStatus'
-          description: ' One of 4 statuses that a step can go through returned as part of the <code> <a>GetUpgradeStatusResponse</a> </code> object. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStatus'
+            - description: ' One of 4 statuses that a step can go through returned as part of the <code> <a>GetUpgradeStatusResponse</a> </code> object. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
         UpgradeName:
-          $ref: '#/components/schemas/UpgradeName'
-          description: A string that describes the update briefly
+          allOf:
+            - $ref: '#/components/schemas/UpgradeName'
+            - description: A string that describes the update briefly
       description: ' Container for response returned by <code> <a>GetUpgradeStatus</a> </code> operation. '
     ListDomainNamesResponse:
       type: object
       properties:
         DomainNames:
-          $ref: '#/components/schemas/DomainInfoList'
-          description: List of Elasticsearch domain names.
+          allOf:
+            - $ref: '#/components/schemas/DomainInfoList'
+            - description: List of Elasticsearch domain names.
       description: The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.
     ListDomainsForPackageResponse:
       type: object
       properties:
         DomainPackageDetailsList:
-          $ref: '#/components/schemas/DomainPackageDetailsList'
-          description: List of <code>DomainPackageDetails</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/DomainPackageDetailsList'
+            - description: List of <code>DomainPackageDetails</code> objects.
         NextToken:
           $ref: '#/components/schemas/String'
       description: ' Container for response parameters to <code> <a>ListDomainsForPackage</a> </code> operation. '
@@ -3263,11 +3366,13 @@ components:
       type: object
       properties:
         ElasticsearchInstanceTypes:
-          $ref: '#/components/schemas/ElasticsearchInstanceTypeList'
-          description: ' List of instance types supported by Amazon Elasticsearch service for given <code> <a>ElasticsearchVersion</a> </code> '
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchInstanceTypeList'
+            - description: ' List of instance types supported by Amazon Elasticsearch service for given <code> <a>ElasticsearchVersion</a> </code> '
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'In case if there are more results available NextToken would be present, make further request to the same API with received NextToken to paginate remaining results. '
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'In case if there are more results available NextToken would be present, make further request to the same API with received NextToken to paginate remaining results. '
       description: ' Container for the parameters returned by <code> <a>ListElasticsearchInstanceTypes</a> </code> operation. '
     ListElasticsearchVersionsResponse:
       type: object
@@ -3281,42 +3386,49 @@ components:
       type: object
       properties:
         DomainPackageDetailsList:
-          $ref: '#/components/schemas/DomainPackageDetailsList'
-          description: List of <code>DomainPackageDetails</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/DomainPackageDetailsList'
+            - description: List of <code>DomainPackageDetails</code> objects.
         NextToken:
-          $ref: '#/components/schemas/String'
-          description: Pagination token that needs to be supplied to the next call to get the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Pagination token that needs to be supplied to the next call to get the next page of results.
       description: ' Container for response parameters to <code> <a>ListPackagesForDomain</a> </code> operation. '
     ListTagsResponse:
       type: object
       properties:
         TagList:
-          $ref: '#/components/schemas/TagList'
-          description: ' List of <code>Tag</code> for the requested Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: ' List of <code>Tag</code> for the requested Elasticsearch domain.'
       description: The result of a <code>ListTags</code> operation. Contains tags for all requested Elasticsearch domains.
     PurchaseReservedElasticsearchInstanceOfferingResponse:
       type: object
       properties:
         ReservedElasticsearchInstanceId:
-          $ref: '#/components/schemas/GUID'
-          description: Details of the reserved Elasticsearch instance which was purchased.
+          allOf:
+            - $ref: '#/components/schemas/GUID'
+            - description: Details of the reserved Elasticsearch instance which was purchased.
         ReservationName:
-          $ref: '#/components/schemas/ReservationToken'
-          description: The customer-specified identifier used to track this reservation.
+          allOf:
+            - $ref: '#/components/schemas/ReservationToken'
+            - description: The customer-specified identifier used to track this reservation.
       description: Represents the output of a <code>PurchaseReservedElasticsearchInstanceOffering</code> operation.
     RejectInboundCrossClusterSearchConnectionResponse:
       type: object
       properties:
         CrossClusterSearchConnection:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
-          description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of rejected inbound connection. '
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnection'
+            - description: 'Specifies the <code><a>InboundCrossClusterSearchConnection</a></code> of rejected inbound connection. '
       description: The result of a <code><a>RejectInboundCrossClusterSearchConnection</a></code> operation. Contains details of rejected inbound connection.
     StartElasticsearchServiceSoftwareUpdateResponse:
       type: object
       properties:
         ServiceSoftwareOptions:
-          $ref: '#/components/schemas/ServiceSoftwareOptions'
-          description: The current status of the Elasticsearch service software update.
+          allOf:
+            - $ref: '#/components/schemas/ServiceSoftwareOptions'
+            - description: The current status of the Elasticsearch service software update.
       description: The result of a <code>StartElasticsearchServiceSoftwareUpdate</code> operation. Contains the status of the update.
     UpdateElasticsearchDomainConfigResponse:
       type: object
@@ -3324,8 +3436,9 @@ components:
         - DomainConfig
       properties:
         DomainConfig:
-          $ref: '#/components/schemas/ElasticsearchDomainConfig'
-          description: 'The status of the updated Elasticsearch domain. '
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchDomainConfig'
+            - description: 'The status of the updated Elasticsearch domain. '
       description: The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.
     UpgradeElasticsearchDomainResponse:
       type: object
@@ -3333,11 +3446,13 @@ components:
         DomainName:
           $ref: '#/components/schemas/DomainName'
         TargetVersion:
-          $ref: '#/components/schemas/ElasticsearchVersionString'
-          description: The version of Elasticsearch that you intend to upgrade the domain to.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionString'
+            - description: The version of Elasticsearch that you intend to upgrade the domain to.
         PerformCheckOnly:
-          $ref: '#/components/schemas/Boolean'
-          description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
       description: ' Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
     ARN:
       type: string
@@ -3353,17 +3468,21 @@ components:
       type: object
       properties:
         SourceDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
         DestinationDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
         CrossClusterSearchConnectionId:
-          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
-          description: Specifies the connection id for the inbound cross-cluster search connection.
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+            - description: Specifies the connection id for the inbound cross-cluster search connection.
         ConnectionStatus:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatus'
-          description: Specifies the <code><a>InboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatus'
+            - description: Specifies the <code><a>InboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
       description: Specifies details of an inbound connection.
     PolicyDocument:
       type: string
@@ -3376,20 +3495,25 @@ components:
         - State
       properties:
         CreationDate:
-          $ref: '#/components/schemas/UpdateTimestamp'
-          description: Timestamp which tells the creation date for the entity.
+          allOf:
+            - $ref: '#/components/schemas/UpdateTimestamp'
+            - description: Timestamp which tells the creation date for the entity.
         UpdateDate:
-          $ref: '#/components/schemas/UpdateTimestamp'
-          description: Timestamp which tells the last updated time for the entity.
+          allOf:
+            - $ref: '#/components/schemas/UpdateTimestamp'
+            - description: Timestamp which tells the last updated time for the entity.
         UpdateVersion:
-          $ref: '#/components/schemas/UIntValue'
-          description: Specifies the latest version for the entity.
+          allOf:
+            - $ref: '#/components/schemas/UIntValue'
+            - description: Specifies the latest version for the entity.
         State:
-          $ref: '#/components/schemas/OptionState'
-          description: Provides the <code>OptionState</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/OptionState'
+            - description: Provides the <code>OptionState</code> for the Elasticsearch domain.
         PendingDeletion:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the Elasticsearch domain is being deleted.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the Elasticsearch domain is being deleted.
       description: Provides the current status of the entity.
     AccessPoliciesStatus:
       type: object
@@ -3398,11 +3522,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: 'The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank"> Configuring Access Policies</a>for more information.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: 'The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies" target="_blank"> Configuring Access Policies</a>for more information.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: 'The status of the access policy for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: 'The status of the access policy for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
       description: 'The configured access rules for the domain''s document and search endpoints, and the current status of those rules.'
     TagList:
       type: array
@@ -3417,11 +3543,13 @@ components:
       title: AddTagsRequest
       properties:
         ARN:
-          $ref: '#/components/schemas/ARN'
-          description: ' Specify the <code>ARN</code> for which you want to add the tags.'
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: ' Specify the <code>ARN</code> for which you want to add the tags.'
         TagList:
-          $ref: '#/components/schemas/TagList'
-          description: ' List of <code>Tag</code> that need to be added for the Elasticsearch domain. '
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: ' List of <code>Tag</code> that need to be added for the Elasticsearch domain. '
       description: Container for the parameters to the <code><a>AddTags</a></code> operation. Specify the tags that you want to attach to the Elasticsearch domain.
     LimitName:
       type: string
@@ -3433,11 +3561,13 @@ components:
       type: object
       properties:
         LimitName:
-          $ref: '#/components/schemas/LimitName'
-          description: ' Name of Additional Limit is specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> etc. <br/> Attributes and their details: <br/> <ul> <li>MaximumNumberOfDataNodesSupported</li> This attribute will be present in Master node only to specify how much data nodes upto which given <code> <a>ESPartitionInstanceType</a> </code> can support as master node. <li>MaximumNumberOfDataNodesWithoutMasterNode</li> This attribute will be present in Data node only to specify how much data nodes of given <code> <a>ESPartitionInstanceType</a> </code> upto which you don''t need any master nodes to govern them. </ul> '
+          allOf:
+            - $ref: '#/components/schemas/LimitName'
+            - description: ' Name of Additional Limit is specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> etc. <br/> Attributes and their details: <br/> <ul> <li>MaximumNumberOfDataNodesSupported</li> This attribute will be present in Master node only to specify how much data nodes upto which given <code> <a>ESPartitionInstanceType</a> </code> can support as master node. <li>MaximumNumberOfDataNodesWithoutMasterNode</li> This attribute will be present in Data node only to specify how much data nodes of given <code> <a>ESPartitionInstanceType</a> </code> upto which you don''t need any master nodes to govern them. </ul> '
         LimitValues:
-          $ref: '#/components/schemas/LimitValueList'
-          description: ' Value for given <code> <a>AdditionalLimit$LimitName</a> </code> . '
+          allOf:
+            - $ref: '#/components/schemas/LimitValueList'
+            - description: ' Value for given <code> <a>AdditionalLimit$LimitName</a> </code> . '
       description: ' List of limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
     AdditionalLimitList:
       type: array
@@ -3455,34 +3585,41 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/AdvancedOptions'
-          description: ' Specifies the status of advanced options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/AdvancedOptions'
+            - description: ' Specifies the status of advanced options for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of <code>OptionStatus</code> for advanced options for the specified Elasticsearch domain.'
       description: '<p> Status of the advanced options for the specified Elasticsearch domain. Currently, the following advanced options are available:</p> <ul> <li>Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.</li> <li>Option to specify the percentage of heap space that is allocated to field data. By default, this setting is unbounded.</li> </ul> <p>For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options">Configuring Advanced Options</a>.</p>'
     AdvancedSecurityOptions:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: True if advanced security is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True if advanced security is enabled.
         InternalUserDatabaseEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: True if the internal user database is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True if the internal user database is enabled.
       description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.'
     AdvancedSecurityOptionsInput:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: True if advanced security is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True if advanced security is enabled.
         InternalUserDatabaseEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: True if the internal user database is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True if the internal user database is enabled.
         MasterUserOptions:
-          $ref: '#/components/schemas/MasterUserOptions'
-          description: 'Credentials for the master user: username and password, ARN, or both.'
+          allOf:
+            - $ref: '#/components/schemas/MasterUserOptions'
+            - description: 'Credentials for the master user: username and password, ARN, or both.'
       description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
     AdvancedSecurityOptionsStatus:
       type: object
@@ -3491,11 +3628,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/AdvancedSecurityOptions'
-          description: ' Specifies advanced security options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/AdvancedSecurityOptions'
+            - description: ' Specifies advanced security options for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Status of the advanced security options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Status of the advanced security options for the specified Elasticsearch domain.'
       description: ' Specifies the status of advanced security options for the specified Elasticsearch domain.'
     PackageID:
       type: string
@@ -3508,29 +3647,37 @@ components:
       type: object
       properties:
         PackageID:
-          $ref: '#/components/schemas/PackageID'
-          description: Internal ID of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageID'
+            - description: Internal ID of the package.
         PackageName:
-          $ref: '#/components/schemas/PackageName'
-          description: User specified name of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: User specified name of the package.
         PackageType:
-          $ref: '#/components/schemas/PackageType'
-          description: Currently supports only TXT-DICTIONARY.
+          allOf:
+            - $ref: '#/components/schemas/PackageType'
+            - description: Currently supports only TXT-DICTIONARY.
         LastUpdated:
-          $ref: '#/components/schemas/LastUpdated'
-          description: Timestamp of the most-recent update to the association status.
+          allOf:
+            - $ref: '#/components/schemas/LastUpdated'
+            - description: Timestamp of the most-recent update to the association status.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: Name of the domain you've associated a package with.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: Name of the domain you've associated a package with.
         DomainPackageStatus:
-          $ref: '#/components/schemas/DomainPackageStatus'
-          description: State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+          allOf:
+            - $ref: '#/components/schemas/DomainPackageStatus'
+            - description: State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
         ReferencePath:
-          $ref: '#/components/schemas/ReferencePath'
-          description: 'The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.'
+          allOf:
+            - $ref: '#/components/schemas/ReferencePath'
+            - description: 'The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.'
         ErrorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: Additional information if the package is in an error state. Null otherwise.
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Additional information if the package is in an error state. Null otherwise.
       description: Information on a package that is associated with a domain.
     CancelElasticsearchServiceSoftwareUpdateRequest:
       type: object
@@ -3539,36 +3686,45 @@ components:
       title: CancelElasticsearchServiceSoftwareUpdateRequest
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain that you want to stop the latest service software update on.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain that you want to stop the latest service software update on.
       description: Container for the parameters to the <code><a>CancelElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to cancel a service software update on.
     ServiceSoftwareOptions:
       type: object
       properties:
         CurrentVersion:
-          $ref: '#/components/schemas/String'
-          description: The current service software version that is present on the domain.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current service software version that is present on the domain.
         NewVersion:
-          $ref: '#/components/schemas/String'
-          description: The new service software version if one is available.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The new service software version if one is available.
         UpdateAvailable:
-          $ref: '#/components/schemas/Boolean'
-          description: '<code>True</code> if you are able to update you service software version. <code>False</code> if you are not able to update your service software version. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<code>True</code> if you are able to update you service software version. <code>False</code> if you are not able to update your service software version. '
         Cancellable:
-          $ref: '#/components/schemas/Boolean'
-          description: '<code>True</code> if you are able to cancel your service software version update. <code>False</code> if you are not able to cancel your service software version. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<code>True</code> if you are able to cancel your service software version update. <code>False</code> if you are not able to cancel your service software version. '
         UpdateStatus:
-          $ref: '#/components/schemas/DeploymentStatus'
-          description: 'The status of your service software update. This field can take the following values: <code>ELIGIBLE</code>, <code>PENDING_UPDATE</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>NOT_ELIGIBLE</code>.'
+          allOf:
+            - $ref: '#/components/schemas/DeploymentStatus'
+            - description: 'The status of your service software update. This field can take the following values: <code>ELIGIBLE</code>, <code>PENDING_UPDATE</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>NOT_ELIGIBLE</code>.'
         Description:
-          $ref: '#/components/schemas/String'
-          description: The description of the <code>UpdateStatus</code>.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the <code>UpdateStatus</code>.
         AutomatedUpdateDate:
-          $ref: '#/components/schemas/DeploymentCloseDateTimeStamp'
-          description: 'Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.'
+          allOf:
+            - $ref: '#/components/schemas/DeploymentCloseDateTimeStamp'
+            - description: 'Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.'
         OptionalDeployment:
-          $ref: '#/components/schemas/Boolean'
-          description: '<code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>. '
       description: The current options of an Elasticsearch domain service software options.
     CloudWatchLogsLogGroupArn:
       type: string
@@ -3577,17 +3733,21 @@ components:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Specifies the option to enable Cognito for Kibana authentication.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies the option to enable Cognito for Kibana authentication.
         UserPoolId:
-          $ref: '#/components/schemas/UserPoolId'
-          description: Specifies the Cognito user pool ID for Kibana authentication.
+          allOf:
+            - $ref: '#/components/schemas/UserPoolId'
+            - description: Specifies the Cognito user pool ID for Kibana authentication.
         IdentityPoolId:
-          $ref: '#/components/schemas/IdentityPoolId'
-          description: Specifies the Cognito identity pool ID for Kibana authentication.
+          allOf:
+            - $ref: '#/components/schemas/IdentityPoolId'
+            - description: Specifies the Cognito identity pool ID for Kibana authentication.
         RoleArn:
-          $ref: '#/components/schemas/RoleArn'
-          description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: Specifies the role ARN that provides Elasticsearch permissions for accessing Cognito resources.
       description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
     CognitoOptionsStatus:
       type: object
@@ -3596,18 +3756,21 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/CognitoOptions'
-          description: Specifies the Cognito options for the specified Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/CognitoOptions'
+            - description: Specifies the Cognito options for the specified Elasticsearch domain.
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: Specifies the status of the Cognito options for the specified Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: Specifies the status of the Cognito options for the specified Elasticsearch domain.
       description: Status of the Cognito options for the specified Elasticsearch domain.
     CompatibleVersionsMap:
       type: object
       properties:
         SourceVersion:
-          $ref: '#/components/schemas/ElasticsearchVersionString'
-          description: The current version of Elasticsearch on which a domain is.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionString'
+            - description: The current version of Elasticsearch on which a domain is.
         TargetVersions:
           $ref: '#/components/schemas/ElasticsearchVersionList'
       description: ' A map from an <code> <a>ElasticsearchVersion</a> </code> to a list of compatible <code> <a>ElasticsearchVersion</a> </code> s to which the domain can be upgraded. '
@@ -3629,85 +3792,105 @@ components:
       type: object
       properties:
         InstanceType:
-          $ref: '#/components/schemas/ESPartitionInstanceType'
-          description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
+          allOf:
+            - $ref: '#/components/schemas/ESPartitionInstanceType'
+            - description: The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
         InstanceCount:
-          $ref: '#/components/schemas/IntegerClass'
-          description: The number of instances in the specified domain cluster.
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: The number of instances in the specified domain cluster.
         DedicatedMasterEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A boolean value to indicate whether a dedicated master node is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes" target="_blank">About Dedicated Master Nodes</a> for more information.'
         ZoneAwarenessEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
         ZoneAwarenessConfig:
-          $ref: '#/components/schemas/ZoneAwarenessConfig'
-          description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+          allOf:
+            - $ref: '#/components/schemas/ZoneAwarenessConfig'
+            - description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
         DedicatedMasterType:
-          $ref: '#/components/schemas/ESPartitionInstanceType'
-          description: The instance type for a dedicated master node.
+          allOf:
+            - $ref: '#/components/schemas/ESPartitionInstanceType'
+            - description: The instance type for a dedicated master node.
         DedicatedMasterCount:
-          $ref: '#/components/schemas/IntegerClass'
-          description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: 'Total number of dedicated master nodes, active and on standby, for the cluster.'
         WarmEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: True to enable warm storage.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: True to enable warm storage.
         WarmType:
-          $ref: '#/components/schemas/ESWarmPartitionInstanceType'
-          description: The instance type for the Elasticsearch cluster's warm nodes.
+          allOf:
+            - $ref: '#/components/schemas/ESWarmPartitionInstanceType'
+            - description: The instance type for the Elasticsearch cluster's warm nodes.
         WarmCount:
-          $ref: '#/components/schemas/IntegerClass'
-          description: The number of warm nodes in the cluster.
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: The number of warm nodes in the cluster.
       description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
     EBSOptions:
       type: object
       properties:
         EBSEnabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Specifies whether EBS-based storage is enabled.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether EBS-based storage is enabled.
         VolumeType:
-          $ref: '#/components/schemas/VolumeType'
-          description: ' Specifies the volume type for EBS-based storage.'
+          allOf:
+            - $ref: '#/components/schemas/VolumeType'
+            - description: ' Specifies the volume type for EBS-based storage.'
         VolumeSize:
-          $ref: '#/components/schemas/IntegerClass'
-          description: ' Integer to specify the size of an EBS volume.'
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: ' Integer to specify the size of an EBS volume.'
         Iops:
-          $ref: '#/components/schemas/IntegerClass'
-          description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
       description: 'Options to enable, disable, and specify the properties of EBS storage volumes. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank"> Configuring EBS-based Storage</a>.'
     SnapshotOptions:
       type: object
       properties:
         AutomatedSnapshotStartHour:
-          $ref: '#/components/schemas/IntegerClass'
-          description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
+          allOf:
+            - $ref: '#/components/schemas/IntegerClass'
+            - description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
       description: 'Specifies the time, in UTC format, when the service takes a daily automated snapshot of the specified Elasticsearch domain. Default value is <code>0</code> hours.'
     VPCOptions:
       type: object
       properties:
         SubnetIds:
-          $ref: '#/components/schemas/StringList'
-          description: Specifies the subnets for VPC endpoint.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the subnets for VPC endpoint.
         SecurityGroupIds:
-          $ref: '#/components/schemas/StringList'
-          description: Specifies the security groups for VPC endpoint.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the security groups for VPC endpoint.
       description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
     EncryptionAtRestOptions:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Specifies the option to enable Encryption At Rest.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies the option to enable Encryption At Rest.
         KmsKeyId:
-          $ref: '#/components/schemas/KmsKeyId'
-          description: ' Specifies the KMS Key ID for Encryption At Rest options.'
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: ' Specifies the KMS Key ID for Encryption At Rest options.'
       description: Specifies the Encryption At Rest Options.
     NodeToNodeEncryptionOptions:
       type: object
       properties:
         Enabled:
-          $ref: '#/components/schemas/Boolean'
-          description: Specify true to enable node-to-node encryption.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specify true to enable node-to-node encryption.
       description: Specifies the node-to-node encryption options.
     LogPublishingOptions:
       type: object
@@ -3717,11 +3900,13 @@ components:
       type: object
       properties:
         EnforceHTTPS:
-          $ref: '#/components/schemas/Boolean'
-          description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
         TLSSecurityPolicy:
-          $ref: '#/components/schemas/TLSSecurityPolicy'
-          description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/TLSSecurityPolicy'
+            - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
       description: Options to configure endpoint for the Elasticsearch domain.
     CreateElasticsearchDomainRequest:
       type: object
@@ -3730,47 +3915,61 @@ components:
       title: CreateElasticsearchDomainRequest
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: 'The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
         ElasticsearchVersion:
-          $ref: '#/components/schemas/ElasticsearchVersionString'
-          description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionString'
+            - description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
         ElasticsearchClusterConfig:
-          $ref: '#/components/schemas/ElasticsearchClusterConfig'
-          description: 'Configuration options for an Elasticsearch domain. Specifies the instance type and number of instances in the domain cluster. '
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchClusterConfig'
+            - description: 'Configuration options for an Elasticsearch domain. Specifies the instance type and number of instances in the domain cluster. '
         EBSOptions:
-          $ref: '#/components/schemas/EBSOptions'
-          description: 'Options to enable, disable and specify the type and size of EBS storage volumes. '
+          allOf:
+            - $ref: '#/components/schemas/EBSOptions'
+            - description: 'Options to enable, disable and specify the type and size of EBS storage volumes. '
         AccessPolicies:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: ' IAM access policy as a JSON-formatted string.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: ' IAM access policy as a JSON-formatted string.'
         SnapshotOptions:
-          $ref: '#/components/schemas/SnapshotOptions'
-          description: 'Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. '
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOptions'
+            - description: 'Option to set time, in UTC format, of the daily automated snapshot. Default value is 0 hours. '
         VPCOptions:
-          $ref: '#/components/schemas/VPCOptions'
-          description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+          allOf:
+            - $ref: '#/components/schemas/VPCOptions'
+            - description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
         CognitoOptions:
-          $ref: '#/components/schemas/CognitoOptions'
-          description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+          allOf:
+            - $ref: '#/components/schemas/CognitoOptions'
+            - description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
         EncryptionAtRestOptions:
-          $ref: '#/components/schemas/EncryptionAtRestOptions'
-          description: Specifies the Encryption At Rest Options.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionAtRestOptions'
+            - description: Specifies the Encryption At Rest Options.
         NodeToNodeEncryptionOptions:
-          $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
-          description: Specifies the NodeToNodeEncryptionOptions.
+          allOf:
+            - $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
+            - description: Specifies the NodeToNodeEncryptionOptions.
         AdvancedOptions:
-          $ref: '#/components/schemas/AdvancedOptions'
-          description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/AdvancedOptions'
+            - description: ' Option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
         LogPublishingOptions:
-          $ref: '#/components/schemas/LogPublishingOptions'
-          description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+          allOf:
+            - $ref: '#/components/schemas/LogPublishingOptions'
+            - description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
         DomainEndpointOptions:
-          $ref: '#/components/schemas/DomainEndpointOptions'
-          description: Options to specify configuration that will be applied to the domain endpoint.
+          allOf:
+            - $ref: '#/components/schemas/DomainEndpointOptions'
+            - description: Options to specify configuration that will be applied to the domain endpoint.
         AdvancedSecurityOptions:
-          $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
-          description: Specifies advanced security options.
+          allOf:
+            - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
+            - description: Specifies advanced security options.
     ElasticsearchDomainStatus:
       type: object
       required:
@@ -3780,73 +3979,95 @@ components:
         - ElasticsearchClusterConfig
       properties:
         DomainId:
-          $ref: '#/components/schemas/DomainId'
-          description: The unique identifier for the specified Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainId'
+            - description: The unique identifier for the specified Elasticsearch domain.
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: 'The name of an Elasticsearch domain. Domain names are unique across the domains owned by an account within an AWS region. Domain names start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).'
         ARN:
-          $ref: '#/components/schemas/ARN'
-          description: 'The Amazon resource name (ARN) of an Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The Amazon resource name (ARN) of an Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
         Created:
-          $ref: '#/components/schemas/Boolean'
-          description: The domain creation status. <code>True</code> if the creation of an Elasticsearch domain is complete. <code>False</code> if domain creation is still in progress.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The domain creation status. <code>True</code> if the creation of an Elasticsearch domain is complete. <code>False</code> if domain creation is still in progress.
         Deleted:
-          $ref: '#/components/schemas/Boolean'
-          description: 'The domain deletion status. <code>True</code> if a delete request has been received for the domain but resource cleanup is still in progress. <code>False</code> if the domain has not been deleted. Once domain deletion is complete, the status of the domain is no longer returned.'
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'The domain deletion status. <code>True</code> if a delete request has been received for the domain but resource cleanup is still in progress. <code>False</code> if the domain has not been deleted. Once domain deletion is complete, the status of the domain is no longer returned.'
         Endpoint:
-          $ref: '#/components/schemas/ServiceUrl'
-          description: The Elasticsearch domain endpoint that you use to submit index and search requests.
+          allOf:
+            - $ref: '#/components/schemas/ServiceUrl'
+            - description: The Elasticsearch domain endpoint that you use to submit index and search requests.
         Endpoints:
-          $ref: '#/components/schemas/EndpointsMap'
-          description: 'Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example <code>key, value</code>: <code>''vpc'',''vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com''</code>.'
+          allOf:
+            - $ref: '#/components/schemas/EndpointsMap'
+            - description: 'Map containing the Elasticsearch domain endpoints used to submit index and search requests. Example <code>key, value</code>: <code>''vpc'',''vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com''</code>.'
         Processing:
-          $ref: '#/components/schemas/Boolean'
-          description: The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The status of the Elasticsearch domain configuration. <code>True</code> if Amazon Elasticsearch Service is processing configuration changes. <code>False</code> if the configuration is active.
         UpgradeProcessing:
-          $ref: '#/components/schemas/Boolean'
-          description: The status of an Elasticsearch domain version upgrade. <code>True</code> if Amazon Elasticsearch Service is undergoing a version upgrade. <code>False</code> if the configuration is active.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The status of an Elasticsearch domain version upgrade. <code>True</code> if Amazon Elasticsearch Service is undergoing a version upgrade. <code>False</code> if the configuration is active.
         ElasticsearchVersion:
           $ref: '#/components/schemas/ElasticsearchVersionString'
         ElasticsearchClusterConfig:
-          $ref: '#/components/schemas/ElasticsearchClusterConfig'
-          description: The type and number of instances in the domain cluster.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchClusterConfig'
+            - description: The type and number of instances in the domain cluster.
         EBSOptions:
-          $ref: '#/components/schemas/EBSOptions'
-          description: 'The <code>EBSOptions</code> for the specified domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/EBSOptions'
+            - description: 'The <code>EBSOptions</code> for the specified domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs" target="_blank">Configuring EBS-based Storage</a> for more information.'
         AccessPolicies:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: ' IAM access policy as a JSON-formatted string.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: ' IAM access policy as a JSON-formatted string.'
         SnapshotOptions:
-          $ref: '#/components/schemas/SnapshotOptions'
-          description: Specifies the status of the <code>SnapshotOptions</code>
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOptions'
+            - description: Specifies the status of the <code>SnapshotOptions</code>
         VPCOptions:
-          $ref: '#/components/schemas/VPCDerivedInfo'
-          description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+          allOf:
+            - $ref: '#/components/schemas/VPCDerivedInfo'
+            - description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
         CognitoOptions:
-          $ref: '#/components/schemas/CognitoOptions'
-          description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+          allOf:
+            - $ref: '#/components/schemas/CognitoOptions'
+            - description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
         EncryptionAtRestOptions:
-          $ref: '#/components/schemas/EncryptionAtRestOptions'
-          description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionAtRestOptions'
+            - description: ' Specifies the status of the <code>EncryptionAtRestOptions</code>.'
         NodeToNodeEncryptionOptions:
-          $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
-          description: Specifies the status of the <code>NodeToNodeEncryptionOptions</code>.
+          allOf:
+            - $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
+            - description: Specifies the status of the <code>NodeToNodeEncryptionOptions</code>.
         AdvancedOptions:
-          $ref: '#/components/schemas/AdvancedOptions'
-          description: Specifies the status of the <code>AdvancedOptions</code>
+          allOf:
+            - $ref: '#/components/schemas/AdvancedOptions'
+            - description: Specifies the status of the <code>AdvancedOptions</code>
         LogPublishingOptions:
-          $ref: '#/components/schemas/LogPublishingOptions'
-          description: Log publishing options for the given domain.
+          allOf:
+            - $ref: '#/components/schemas/LogPublishingOptions'
+            - description: Log publishing options for the given domain.
         ServiceSoftwareOptions:
-          $ref: '#/components/schemas/ServiceSoftwareOptions'
-          description: The current status of the Elasticsearch domain's service software.
+          allOf:
+            - $ref: '#/components/schemas/ServiceSoftwareOptions'
+            - description: The current status of the Elasticsearch domain's service software.
         DomainEndpointOptions:
-          $ref: '#/components/schemas/DomainEndpointOptions'
-          description: The current status of the Elasticsearch domain's endpoint options.
+          allOf:
+            - $ref: '#/components/schemas/DomainEndpointOptions'
+            - description: The current status of the Elasticsearch domain's endpoint options.
         AdvancedSecurityOptions:
-          $ref: '#/components/schemas/AdvancedSecurityOptions'
-          description: The current status of the Elasticsearch domain's advanced security options.
+          allOf:
+            - $ref: '#/components/schemas/AdvancedSecurityOptions'
+            - description: The current status of the Elasticsearch domain's advanced security options.
       description: The current status of an Elasticsearch domain.
     DomainInformation:
       type: object
@@ -3868,24 +4089,29 @@ components:
       title: CreateOutboundCrossClusterSearchConnectionRequest
       properties:
         SourceDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
         DestinationDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
         ConnectionAlias:
-          $ref: '#/components/schemas/ConnectionAlias'
-          description: Specifies the connection alias that will be used by the customer for this connection.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAlias'
+            - description: Specifies the connection alias that will be used by the customer for this connection.
       description: Container for the parameters to the <code><a>CreateOutboundCrossClusterSearchConnection</a></code> operation.
     OutboundCrossClusterSearchConnectionStatus:
       type: object
       properties:
         StatusCode:
-          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatusCode'
-          description: '<p>The state code for outbound connection. This can be one of the following:</p> <ul> <li>VALIDATING: The outbound connection request is being validated.</li> <li>VALIDATION_FAILED: Validation failed for the connection request.</li> <li>PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by destination domain owner.</li> <li>PROVISIONING: Outbound connection request is in process.</li> <li>ACTIVE: Outbound connection is active and ready to use.</li> <li>REJECTED: Outbound connection request is rejected by destination domain owner.</li> <li>DELETING: Outbound connection deletion is in progress.</li> <li>DELETED: Outbound connection is deleted and cannot be used further.</li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatusCode'
+            - description: '<p>The state code for outbound connection. This can be one of the following:</p> <ul> <li>VALIDATING: The outbound connection request is being validated.</li> <li>VALIDATION_FAILED: Validation failed for the connection request.</li> <li>PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by destination domain owner.</li> <li>PROVISIONING: Outbound connection request is in process.</li> <li>ACTIVE: Outbound connection is active and ready to use.</li> <li>REJECTED: Outbound connection request is rejected by destination domain owner.</li> <li>DELETING: Outbound connection deletion is in progress.</li> <li>DELETED: Outbound connection is deleted and cannot be used further.</li> </ul>'
         Message:
-          $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
-          description: Specifies verbose information for the outbound connection status.
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
+            - description: Specifies verbose information for the outbound connection status.
       description: Specifies the connection status of an outbound cross-cluster search connection.
     PackageName:
       type: string
@@ -3903,11 +4129,13 @@ components:
       type: object
       properties:
         S3BucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: Name of the bucket containing the package.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: Name of the bucket containing the package.
         S3Key:
-          $ref: '#/components/schemas/S3Key'
-          description: Key (file name) of the package.
+          allOf:
+            - $ref: '#/components/schemas/S3Key'
+            - description: Key (file name) of the package.
       description: The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code>
     CreatePackageRequest:
       type: object
@@ -3918,42 +4146,53 @@ components:
       title: CreatePackageRequest
       properties:
         PackageName:
-          $ref: '#/components/schemas/PackageName'
-          description: Unique identifier for the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: Unique identifier for the package.
         PackageType:
-          $ref: '#/components/schemas/PackageType'
-          description: Type of package. Currently supports only TXT-DICTIONARY.
+          allOf:
+            - $ref: '#/components/schemas/PackageType'
+            - description: Type of package. Currently supports only TXT-DICTIONARY.
         PackageDescription:
-          $ref: '#/components/schemas/PackageDescription'
-          description: Description of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageDescription'
+            - description: Description of the package.
         PackageSource:
-          $ref: '#/components/schemas/PackageSource'
-          description: The customer S3 location <code>PackageSource</code> for importing the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageSource'
+            - description: The customer S3 location <code>PackageSource</code> for importing the package.
       description: ' Container for request parameters to <code> <a>CreatePackage</a> </code> operation. '
     PackageDetails:
       type: object
       properties:
         PackageID:
-          $ref: '#/components/schemas/PackageID'
-          description: Internal ID of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageID'
+            - description: Internal ID of the package.
         PackageName:
-          $ref: '#/components/schemas/PackageName'
-          description: User specified name of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: User specified name of the package.
         PackageType:
-          $ref: '#/components/schemas/PackageType'
-          description: Currently supports only TXT-DICTIONARY.
+          allOf:
+            - $ref: '#/components/schemas/PackageType'
+            - description: Currently supports only TXT-DICTIONARY.
         PackageDescription:
-          $ref: '#/components/schemas/PackageDescription'
-          description: User-specified description of the package.
+          allOf:
+            - $ref: '#/components/schemas/PackageDescription'
+            - description: User-specified description of the package.
         PackageStatus:
-          $ref: '#/components/schemas/PackageStatus'
-          description: Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
+          allOf:
+            - $ref: '#/components/schemas/PackageStatus'
+            - description: Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
         CreatedAt:
-          $ref: '#/components/schemas/CreatedAt'
-          description: Timestamp which tells creation date of the package.
+          allOf:
+            - $ref: '#/components/schemas/CreatedAt'
+            - description: Timestamp which tells creation date of the package.
         ErrorDetails:
-          $ref: '#/components/schemas/ErrorDetails'
-          description: Additional information if the package is in an error state. Null otherwise.
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: Additional information if the package is in an error state. Null otherwise.
       description: Basic information about a package.
     CreatedAt:
       type: string
@@ -3979,20 +4218,25 @@ components:
       type: object
       properties:
         SourceDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the source Elasticsearch domain.
         DestinationDomainInfo:
-          $ref: '#/components/schemas/DomainInformation'
-          description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainInformation'
+            - description: Specifies the <code><a>DomainInformation</a></code> for the destination Elasticsearch domain.
         CrossClusterSearchConnectionId:
-          $ref: '#/components/schemas/CrossClusterSearchConnectionId'
-          description: Specifies the connection id for the outbound cross-cluster search connection.
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionId'
+            - description: Specifies the connection id for the outbound cross-cluster search connection.
         ConnectionAlias:
-          $ref: '#/components/schemas/ConnectionAlias'
-          description: Specifies the connection alias for the outbound cross-cluster search connection.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAlias'
+            - description: Specifies the connection alias for the outbound cross-cluster search connection.
         ConnectionStatus:
-          $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
-          description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
+          allOf:
+            - $ref: '#/components/schemas/OutboundCrossClusterSearchConnectionStatus'
+            - description: Specifies the <code><a>OutboundCrossClusterSearchConnectionStatus</a></code> for the outbound connection.
       description: Specifies details of an outbound connection.
     DeletePackageRequest:
       type: object
@@ -4019,44 +4263,57 @@ components:
       type: object
       properties:
         ElasticsearchVersion:
-          $ref: '#/components/schemas/ElasticsearchVersionStatus'
-          description: String of format X.Y to specify version for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionStatus'
+            - description: String of format X.Y to specify version for the Elasticsearch domain.
         ElasticsearchClusterConfig:
-          $ref: '#/components/schemas/ElasticsearchClusterConfigStatus'
-          description: Specifies the <code>ElasticsearchClusterConfig</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchClusterConfigStatus'
+            - description: Specifies the <code>ElasticsearchClusterConfig</code> for the Elasticsearch domain.
         EBSOptions:
-          $ref: '#/components/schemas/EBSOptionsStatus'
-          description: Specifies the <code>EBSOptions</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/EBSOptionsStatus'
+            - description: Specifies the <code>EBSOptions</code> for the Elasticsearch domain.
         AccessPolicies:
-          $ref: '#/components/schemas/AccessPoliciesStatus'
-          description: IAM access policy as a JSON-formatted string.
+          allOf:
+            - $ref: '#/components/schemas/AccessPoliciesStatus'
+            - description: IAM access policy as a JSON-formatted string.
         SnapshotOptions:
-          $ref: '#/components/schemas/SnapshotOptionsStatus'
-          description: Specifies the <code>SnapshotOptions</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOptionsStatus'
+            - description: Specifies the <code>SnapshotOptions</code> for the Elasticsearch domain.
         VPCOptions:
-          $ref: '#/components/schemas/VPCDerivedInfoStatus'
-          description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
+          allOf:
+            - $ref: '#/components/schemas/VPCDerivedInfoStatus'
+            - description: 'The <code>VPCOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank">VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
         CognitoOptions:
-          $ref: '#/components/schemas/CognitoOptionsStatus'
-          description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+          allOf:
+            - $ref: '#/components/schemas/CognitoOptionsStatus'
+            - description: 'The <code>CognitoOptions</code> for the specified domain. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
         EncryptionAtRestOptions:
-          $ref: '#/components/schemas/EncryptionAtRestOptionsStatus'
-          description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/EncryptionAtRestOptionsStatus'
+            - description: Specifies the <code>EncryptionAtRestOptions</code> for the Elasticsearch domain.
         NodeToNodeEncryptionOptions:
-          $ref: '#/components/schemas/NodeToNodeEncryptionOptionsStatus'
-          description: Specifies the <code>NodeToNodeEncryptionOptions</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/NodeToNodeEncryptionOptionsStatus'
+            - description: Specifies the <code>NodeToNodeEncryptionOptions</code> for the Elasticsearch domain.
         AdvancedOptions:
-          $ref: '#/components/schemas/AdvancedOptionsStatus'
-          description: 'Specifies the <code>AdvancedOptions</code> for the domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/AdvancedOptionsStatus'
+            - description: 'Specifies the <code>AdvancedOptions</code> for the domain. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuring Advanced Options</a> for more information.'
         LogPublishingOptions:
-          $ref: '#/components/schemas/LogPublishingOptionsStatus'
-          description: Log publishing options for the given domain.
+          allOf:
+            - $ref: '#/components/schemas/LogPublishingOptionsStatus'
+            - description: Log publishing options for the given domain.
         DomainEndpointOptions:
-          $ref: '#/components/schemas/DomainEndpointOptionsStatus'
-          description: Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainEndpointOptionsStatus'
+            - description: Specifies the <code>DomainEndpointOptions</code> for the Elasticsearch domain.
         AdvancedSecurityOptions:
-          $ref: '#/components/schemas/AdvancedSecurityOptionsStatus'
-          description: 'Specifies <code>AdvancedSecurityOptions</code> for the domain. '
+          allOf:
+            - $ref: '#/components/schemas/AdvancedSecurityOptionsStatus'
+            - description: 'Specifies <code>AdvancedSecurityOptions</code> for the domain. '
       description: The configuration of an Elasticsearch domain.
     DescribeElasticsearchDomainRequest:
       type: object
@@ -4075,8 +4332,9 @@ components:
       title: DescribeElasticsearchDomainsRequest
       properties:
         DomainNames:
-          $ref: '#/components/schemas/DomainNameList'
-          description: The Elasticsearch domains for which you want information.
+          allOf:
+            - $ref: '#/components/schemas/DomainNameList'
+            - description: The Elasticsearch domains for which you want information.
       description: 'Container for the parameters to the <code><a>DescribeElasticsearchDomains</a></code> operation. By default, the API returns the status of all Elasticsearch domains.'
     ElasticsearchDomainStatusList:
       type: array
@@ -4109,14 +4367,17 @@ components:
       title: DescribeInboundCrossClusterSearchConnectionsRequest
       properties:
         Filters:
-          $ref: '#/components/schemas/FilterList'
-          description: ' A list of filters used to match properties for inbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>source-domain-info.domain-name</li> <li>source-domain-info.owner-id</li> <li>source-domain-info.region</li> <li>destination-domain-info.domain-name</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: ' A list of filters used to match properties for inbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>source-domain-info.domain-name</li> <li>source-domain-info.owner-id</li> <li>source-domain-info.region</li> <li>destination-domain-info.domain-name</li> </ul> '
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
       description: Container for the parameters to the <code><a>DescribeInboundCrossClusterSearchConnections</a></code> operation.
     InboundCrossClusterSearchConnections:
       type: array
@@ -4127,14 +4388,17 @@ components:
       title: DescribeOutboundCrossClusterSearchConnectionsRequest
       properties:
         Filters:
-          $ref: '#/components/schemas/FilterList'
-          description: ' A list of filters used to match properties for outbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>destination-domain-info.domain-name</li> <li>destination-domain-info.owner-id</li> <li>destination-domain-info.region</li> <li>source-domain-info.domain-name</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: ' A list of filters used to match properties for outbound cross-cluster search connection. Available <code><a>Filter</a></code> names for this operation are: <ul> <li>cross-cluster-search-connection-id</li> <li>destination-domain-info.domain-name</li> <li>destination-domain-info.owner-id</li> <li>destination-domain-info.region</li> <li>source-domain-info.domain-name</li> </ul> '
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Set this value to limit the number of results returned. If not specified, defaults to 100.'
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.'
       description: Container for the parameters to the <code><a>DescribeOutboundCrossClusterSearchConnections</a></code> operation.
     OutboundCrossClusterSearchConnections:
       type: array
@@ -4163,14 +4427,17 @@ components:
       title: DescribePackagesRequest
       properties:
         Filters:
-          $ref: '#/components/schemas/DescribePackagesFilterList'
-          description: Only returns packages that match the <code>DescribePackagesFilterList</code> values.
+          allOf:
+            - $ref: '#/components/schemas/DescribePackagesFilterList'
+            - description: Only returns packages that match the <code>DescribePackagesFilterList</code> values.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: Limits results to a maximum number of packages.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: Limits results to a maximum number of packages.
         NextToken:
-          $ref: '#/components/schemas/NextToken'
-          description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
       description: ' Container for request parameters to <code> <a>DescribePackage</a> </code> operation. '
     PackageDetailsList:
       type: array
@@ -4209,11 +4476,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/DomainEndpointOptions'
-          description: Options to configure endpoint for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/DomainEndpointOptions'
+            - description: Options to configure endpoint for the Elasticsearch domain.
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: 'The status of the endpoint options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: 'The status of the endpoint options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
       description: The configured endpoint options for the domain and their current status.
     DomainId:
       type: string
@@ -4224,8 +4493,9 @@ components:
       type: object
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: ' Specifies the <code>DomainName</code>.'
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: ' Specifies the <code>DomainName</code>.'
     DomainInfoList:
       type: array
       description: ' Contains the list of Elasticsearch domain information.'
@@ -4265,11 +4535,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/EBSOptions'
-          description: ' Specifies the EBS options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/EBSOptions'
+            - description: ' Specifies the EBS options for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of the EBS options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of the EBS options for the specified Elasticsearch domain.'
       description: ' Status of the EBS options for the specified Elasticsearch domain.'
     ElasticsearchClusterConfigStatus:
       type: object
@@ -4278,11 +4550,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/ElasticsearchClusterConfig'
-          description: ' Specifies the cluster configuration for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchClusterConfig'
+            - description: ' Specifies the cluster configuration for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of the configuration for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of the configuration for the specified Elasticsearch domain.'
       description: ' Specifies the configuration status for the specified Elasticsearch domain.'
     ElasticsearchVersionStatus:
       type: object
@@ -4291,11 +4565,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/ElasticsearchVersionString'
-          description: ' Specifies the Elasticsearch version for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionString'
+            - description: ' Specifies the Elasticsearch version for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of the Elasticsearch version options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of the Elasticsearch version options for the specified Elasticsearch domain.'
       description: ' Status of the Elasticsearch version options for the specified Elasticsearch domain.'
     SnapshotOptionsStatus:
       type: object
@@ -4304,11 +4580,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/SnapshotOptions'
-          description: Specifies the daily snapshot options specified for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOptions'
+            - description: Specifies the daily snapshot options specified for the Elasticsearch domain.
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: Specifies the status of a daily automated snapshot.
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: Specifies the status of a daily automated snapshot.
       description: Status of a daily automated snapshot.
     VPCDerivedInfoStatus:
       type: object
@@ -4317,11 +4595,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/VPCDerivedInfo'
-          description: ' Specifies the VPC options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/VPCDerivedInfo'
+            - description: ' Specifies the VPC options for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of the VPC options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of the VPC options for the specified Elasticsearch domain.'
       description: ' Status of the VPC options for the specified Elasticsearch domain.'
     EncryptionAtRestOptionsStatus:
       type: object
@@ -4330,11 +4610,13 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/EncryptionAtRestOptions'
-          description: ' Specifies the Encryption At Rest options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionAtRestOptions'
+            - description: ' Specifies the Encryption At Rest options for the specified Elasticsearch domain.'
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: ' Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.'
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: ' Specifies the status of the Encryption At Rest options for the specified Elasticsearch domain.'
       description: ' Status of the Encryption At Rest options for the specified Elasticsearch domain.'
     NodeToNodeEncryptionOptionsStatus:
       type: object
@@ -4343,21 +4625,25 @@ components:
         - Status
       properties:
         Options:
-          $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
-          description: Specifies the node-to-node encryption options for the specified Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/NodeToNodeEncryptionOptions'
+            - description: Specifies the node-to-node encryption options for the specified Elasticsearch domain.
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.
       description: Status of the node-to-node encryption options for the specified Elasticsearch domain.
     LogPublishingOptionsStatus:
       type: object
       properties:
         Options:
-          $ref: '#/components/schemas/LogPublishingOptions'
-          description: The log publishing options configured for the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/LogPublishingOptions'
+            - description: The log publishing options configured for the Elasticsearch domain.
         Status:
-          $ref: '#/components/schemas/OptionStatus'
-          description: 'The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
+          allOf:
+            - $ref: '#/components/schemas/OptionStatus'
+            - description: 'The status of the log publishing options for the Elasticsearch domain. See <code>OptionStatus</code> for the status information that''s included. '
       description: The configured log publishing options for the domain and their current status.
     ServiceUrl:
       type: string
@@ -4370,17 +4656,21 @@ components:
       type: object
       properties:
         VPCId:
-          $ref: '#/components/schemas/String'
-          description: The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
         SubnetIds:
-          $ref: '#/components/schemas/StringList'
-          description: Specifies the subnets for VPC endpoint.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the subnets for VPC endpoint.
         AvailabilityZones:
-          $ref: '#/components/schemas/StringList'
-          description: The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The availability zones for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
         SecurityGroupIds:
-          $ref: '#/components/schemas/StringList'
-          description: Specifies the security groups for VPC endpoint.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the security groups for VPC endpoint.
       description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html" target="_blank"> VPC Endpoints for Amazon Elasticsearch Service Domains</a>.'
     ElasticsearchInstanceTypeList:
       type: array
@@ -4437,11 +4727,13 @@ components:
       type: object
       properties:
         StatusCode:
-          $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatusCode'
-          description: '<p>The state code for inbound connection. This can be one of the following:</p> <ul> <li>PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain owner.</li> <li>APPROVED: Inbound connection is pending acceptance by destination domain owner.</li> <li>REJECTING: Inbound connection rejection is in process.</li> <li>REJECTED: Inbound connection is rejected.</li> <li>DELETING: Inbound connection deletion is in progress.</li> <li>DELETED: Inbound connection is deleted and cannot be used further.</li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/InboundCrossClusterSearchConnectionStatusCode'
+            - description: '<p>The state code for inbound connection. This can be one of the following:</p> <ul> <li>PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain owner.</li> <li>APPROVED: Inbound connection is pending acceptance by destination domain owner.</li> <li>REJECTING: Inbound connection rejection is in process.</li> <li>REJECTED: Inbound connection is rejected.</li> <li>DELETING: Inbound connection deletion is in progress.</li> <li>DELETED: Inbound connection is deleted and cannot be used further.</li> </ul>'
         Message:
-          $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
-          description: Specifies verbose information for the inbound connection status.
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionStatusMessage'
+            - description: Specifies verbose information for the inbound connection status.
       description: Specifies the coonection status of an inbound cross-cluster search connection.
     InboundCrossClusterSearchConnectionStatusCode:
       type: string
@@ -4496,13 +4788,15 @@ components:
       type: object
       properties:
         StorageTypes:
-          $ref: '#/components/schemas/StorageTypeList'
-          description: 'StorageType represents the list of storage related types and attributes that are available for given InstanceType. '
+          allOf:
+            - $ref: '#/components/schemas/StorageTypeList'
+            - description: 'StorageType represents the list of storage related types and attributes that are available for given InstanceType. '
         InstanceLimits:
           $ref: '#/components/schemas/InstanceLimits'
         AdditionalLimits:
-          $ref: '#/components/schemas/AdditionalLimitList'
-          description: ' List of additional limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
+          allOf:
+            - $ref: '#/components/schemas/AdditionalLimitList'
+            - description: ' List of additional limits that are specific to a given InstanceType and for each of it''s <code> <a>InstanceRole</a> </code> . '
       description: ' Limits for given InstanceType and for each of it''s role. <br/> Limits contains following <code> <a>StorageTypes,</a> </code> <code> <a>InstanceLimits</a> </code> and <code> <a>AdditionalLimits</a> </code> '
     ListDomainsForPackageRequest:
       type: object
@@ -4591,24 +4885,29 @@ components:
       title: PurchaseReservedElasticsearchInstanceOfferingRequest
       properties:
         ReservedElasticsearchInstanceOfferingId:
-          $ref: '#/components/schemas/GUID'
-          description: The ID of the reserved Elasticsearch instance offering to purchase.
+          allOf:
+            - $ref: '#/components/schemas/GUID'
+            - description: The ID of the reserved Elasticsearch instance offering to purchase.
         ReservationName:
-          $ref: '#/components/schemas/ReservationToken'
-          description: A customer-specified identifier to track this reservation.
+          allOf:
+            - $ref: '#/components/schemas/ReservationToken'
+            - description: A customer-specified identifier to track this reservation.
         InstanceCount:
-          $ref: '#/components/schemas/InstanceCount'
-          description: The number of Elasticsearch instances to reserve.
+          allOf:
+            - $ref: '#/components/schemas/InstanceCount'
+            - description: The number of Elasticsearch instances to reserve.
       description: Container for parameters to <code>PurchaseReservedElasticsearchInstanceOffering</code>
     RecurringCharge:
       type: object
       properties:
         RecurringChargeAmount:
-          $ref: '#/components/schemas/Double'
-          description: The monetary amount of the recurring charge.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The monetary amount of the recurring charge.
         RecurringChargeFrequency:
-          $ref: '#/components/schemas/String'
-          description: The frequency of the recurring charge.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The frequency of the recurring charge.
       description: 'Contains the specific price and frequency of a recurring charges for a reserved Elasticsearch instance, or for a reserved Elasticsearch instance offering.'
     RecurringChargeList:
       type: array
@@ -4627,11 +4926,13 @@ components:
       title: RemoveTagsRequest
       properties:
         ARN:
-          $ref: '#/components/schemas/ARN'
-          description: Specifies the <code>ARN</code> for the Elasticsearch domain from which you want to delete the specified tags.
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Specifies the <code>ARN</code> for the Elasticsearch domain from which you want to delete the specified tags.
         TagKeys:
-          $ref: '#/components/schemas/StringList'
-          description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the <code>TagKey</code> list which you want to remove from the Elasticsearch domain.
       description: Container for the parameters to the <code><a>RemoveTags</a></code> operation. Specify the <code>ARN</code> for the Elasticsearch domain from which you want to remove the specified <code>TagKey</code>.
     ReservedElasticsearchInstancePaymentOption:
       type: string
@@ -4643,72 +4944,93 @@ components:
       type: object
       properties:
         ReservationName:
-          $ref: '#/components/schemas/ReservationToken'
-          description: The customer-specified identifier to track this reservation.
+          allOf:
+            - $ref: '#/components/schemas/ReservationToken'
+            - description: The customer-specified identifier to track this reservation.
         ReservedElasticsearchInstanceId:
-          $ref: '#/components/schemas/GUID'
-          description: The unique identifier for the reservation.
+          allOf:
+            - $ref: '#/components/schemas/GUID'
+            - description: The unique identifier for the reservation.
         ReservedElasticsearchInstanceOfferingId:
-          $ref: '#/components/schemas/String'
-          description: The offering identifier.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The offering identifier.
         ElasticsearchInstanceType:
-          $ref: '#/components/schemas/ESPartitionInstanceType'
-          description: The Elasticsearch instance type offered by the reserved instance offering.
+          allOf:
+            - $ref: '#/components/schemas/ESPartitionInstanceType'
+            - description: The Elasticsearch instance type offered by the reserved instance offering.
         StartTime:
-          $ref: '#/components/schemas/UpdateTimestamp'
-          description: The time the reservation started.
+          allOf:
+            - $ref: '#/components/schemas/UpdateTimestamp'
+            - description: The time the reservation started.
         Duration:
-          $ref: '#/components/schemas/Integer'
-          description: 'The duration, in seconds, for which the Elasticsearch instance is reserved.'
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration, in seconds, for which the Elasticsearch instance is reserved.'
         FixedPrice:
-          $ref: '#/components/schemas/Double'
-          description: 'The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. '
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'The upfront fixed charge you will paid to purchase the specific reserved Elasticsearch instance offering. '
         UsagePrice:
-          $ref: '#/components/schemas/Double'
-          description: The rate you are charged for each hour for the domain that is using this reserved instance.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The rate you are charged for each hour for the domain that is using this reserved instance.
         CurrencyCode:
-          $ref: '#/components/schemas/String'
-          description: The currency code for the reserved Elasticsearch instance offering.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The currency code for the reserved Elasticsearch instance offering.
         ElasticsearchInstanceCount:
-          $ref: '#/components/schemas/Integer'
-          description: The number of Elasticsearch instances that have been reserved.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of Elasticsearch instances that have been reserved.
         State:
-          $ref: '#/components/schemas/String'
-          description: The state of the reserved Elasticsearch instance.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state of the reserved Elasticsearch instance.
         PaymentOption:
-          $ref: '#/components/schemas/ReservedElasticsearchInstancePaymentOption'
-          description: The payment option as defined in the reserved Elasticsearch instance offering.
+          allOf:
+            - $ref: '#/components/schemas/ReservedElasticsearchInstancePaymentOption'
+            - description: The payment option as defined in the reserved Elasticsearch instance offering.
         RecurringCharges:
-          $ref: '#/components/schemas/RecurringChargeList'
-          description: The charge to your account regardless of whether you are creating any domains using the instance offering.
+          allOf:
+            - $ref: '#/components/schemas/RecurringChargeList'
+            - description: The charge to your account regardless of whether you are creating any domains using the instance offering.
       description: Details of a reserved Elasticsearch instance.
     ReservedElasticsearchInstanceOffering:
       type: object
       properties:
         ReservedElasticsearchInstanceOfferingId:
-          $ref: '#/components/schemas/GUID'
-          description: The Elasticsearch reserved instance offering identifier.
+          allOf:
+            - $ref: '#/components/schemas/GUID'
+            - description: The Elasticsearch reserved instance offering identifier.
         ElasticsearchInstanceType:
-          $ref: '#/components/schemas/ESPartitionInstanceType'
-          description: The Elasticsearch instance type offered by the reserved instance offering.
+          allOf:
+            - $ref: '#/components/schemas/ESPartitionInstanceType'
+            - description: The Elasticsearch instance type offered by the reserved instance offering.
         Duration:
-          $ref: '#/components/schemas/Integer'
-          description: 'The duration, in seconds, for which the offering will reserve the Elasticsearch instance.'
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The duration, in seconds, for which the offering will reserve the Elasticsearch instance.'
         FixedPrice:
-          $ref: '#/components/schemas/Double'
-          description: 'The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. '
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch instance offering. '
         UsagePrice:
-          $ref: '#/components/schemas/Double'
-          description: The rate you are charged for each hour the domain that is using the offering is running.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The rate you are charged for each hour the domain that is using the offering is running.
         CurrencyCode:
-          $ref: '#/components/schemas/String'
-          description: The currency code for the reserved Elasticsearch instance offering.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The currency code for the reserved Elasticsearch instance offering.
         PaymentOption:
-          $ref: '#/components/schemas/ReservedElasticsearchInstancePaymentOption'
-          description: Payment option for the reserved Elasticsearch instance offering
+          allOf:
+            - $ref: '#/components/schemas/ReservedElasticsearchInstancePaymentOption'
+            - description: Payment option for the reserved Elasticsearch instance offering
         RecurringCharges:
-          $ref: '#/components/schemas/RecurringChargeList'
-          description: The charge to your account regardless of whether you are creating any domains using the instance offering.
+          allOf:
+            - $ref: '#/components/schemas/RecurringChargeList'
+            - description: The charge to your account regardless of whether you are creating any domains using the instance offering.
       description: Details of a reserved Elasticsearch instance offering.
     StartElasticsearchServiceSoftwareUpdateRequest:
       type: object
@@ -4717,8 +5039,9 @@ components:
       title: StartElasticsearchServiceSoftwareUpdateRequest
       properties:
         DomainName:
-          $ref: '#/components/schemas/DomainName'
-          description: The name of the domain that you want to update to the latest service software.
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The name of the domain that you want to update to the latest service software.
       description: Container for the parameters to the <code><a>StartElasticsearchServiceSoftwareUpdate</a></code> operation. Specifies the name of the Elasticsearch domain that you wish to schedule a service software update on.
     StartTimestamp:
       type: string
@@ -4741,18 +5064,21 @@ components:
         StorageSubTypeName:
           $ref: '#/components/schemas/StorageSubTypeName'
         StorageTypeLimits:
-          $ref: '#/components/schemas/StorageTypeLimitList'
-          description: 'List of limits that are applicable for given storage type. '
+          allOf:
+            - $ref: '#/components/schemas/StorageTypeLimitList'
+            - description: 'List of limits that are applicable for given storage type. '
       description: 'StorageTypes represents the list of storage related types and their attributes that are available for given InstanceType. '
     StorageTypeLimit:
       type: object
       properties:
         LimitName:
-          $ref: '#/components/schemas/LimitName'
-          description: ' Name of storage limits that are applicable for given storage type. If <code> <a>StorageType</a> </code> is ebs, following storage options are applicable <ol> <li>MinimumVolumeSize</li> Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumVolumeSize</li> Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumIops</li> Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumIops</li> Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. </ol> '
+          allOf:
+            - $ref: '#/components/schemas/LimitName'
+            - description: ' Name of storage limits that are applicable for given storage type. If <code> <a>StorageType</a> </code> is ebs, following storage options are applicable <ol> <li>MinimumVolumeSize</li> Minimum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumVolumeSize</li> Maximum amount of volume size that is applicable for given storage type.It can be empty if it is not applicable. <li>MaximumIops</li> Maximum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. <li>MinimumIops</li> Minimum amount of Iops that is applicable for given storage type.It can be empty if it is not applicable. </ol> '
         LimitValues:
-          $ref: '#/components/schemas/LimitValueList'
-          description: ' Values for the <code> <a>StorageTypeLimit$LimitName</a> </code> . '
+          allOf:
+            - $ref: '#/components/schemas/LimitValueList'
+            - description: ' Values for the <code> <a>StorageTypeLimit$LimitName</a> </code> . '
       description: 'Limits that are applicable for given storage type. '
     TagKey:
       type: string
@@ -4769,35 +5095,45 @@ components:
       title: UpdateElasticsearchDomainConfigRequest
       properties:
         ElasticsearchClusterConfig:
-          $ref: '#/components/schemas/ElasticsearchClusterConfig'
-          description: The type and number of instances to instantiate for the domain cluster.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchClusterConfig'
+            - description: The type and number of instances to instantiate for the domain cluster.
         EBSOptions:
-          $ref: '#/components/schemas/EBSOptions'
-          description: 'Specify the type and size of the EBS volume that you want to use. '
+          allOf:
+            - $ref: '#/components/schemas/EBSOptions'
+            - description: 'Specify the type and size of the EBS volume that you want to use. '
         SnapshotOptions:
-          $ref: '#/components/schemas/SnapshotOptions'
-          description: 'Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. '
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOptions'
+            - description: 'Option to set the time, in UTC format, for the daily automated snapshot. Default value is <code>0</code> hours. '
         VPCOptions:
-          $ref: '#/components/schemas/VPCOptions'
-          description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
+          allOf:
+            - $ref: '#/components/schemas/VPCOptions'
+            - description: 'Options to specify the subnets and security groups for VPC endpoint. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc" target="_blank">Creating a VPC</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>'
         CognitoOptions:
-          $ref: '#/components/schemas/CognitoOptions'
-          description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
+          allOf:
+            - $ref: '#/components/schemas/CognitoOptions'
+            - description: 'Options to specify the Cognito user and identity pools for Kibana authentication. For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html" target="_blank">Amazon Cognito Authentication for Kibana</a>.'
         AdvancedOptions:
-          $ref: '#/components/schemas/AdvancedOptions'
-          description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
+          allOf:
+            - $ref: '#/components/schemas/AdvancedOptions'
+            - description: 'Modifies the advanced option to allow references to indices in an HTTP request body. Must be <code>false</code> when configuring access to individual sub-resources. By default, the value is <code>true</code>. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options" target="_blank">Configuration Advanced Options</a> for more information.'
         AccessPolicies:
-          $ref: '#/components/schemas/PolicyDocument'
-          description: IAM access policy as a JSON-formatted string.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDocument'
+            - description: IAM access policy as a JSON-formatted string.
         LogPublishingOptions:
-          $ref: '#/components/schemas/LogPublishingOptions'
-          description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
+          allOf:
+            - $ref: '#/components/schemas/LogPublishingOptions'
+            - description: 'Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.'
         DomainEndpointOptions:
-          $ref: '#/components/schemas/DomainEndpointOptions'
-          description: Options to specify configuration that will be applied to the domain endpoint.
+          allOf:
+            - $ref: '#/components/schemas/DomainEndpointOptions'
+            - description: Options to specify configuration that will be applied to the domain endpoint.
         AdvancedSecurityOptions:
-          $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
-          description: Specifies advanced security options.
+          allOf:
+            - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
+            - description: Specifies advanced security options.
       description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
     UpgradeElasticsearchDomainRequest:
       type: object
@@ -4809,11 +5145,13 @@ components:
         DomainName:
           $ref: '#/components/schemas/DomainName'
         TargetVersion:
-          $ref: '#/components/schemas/ElasticsearchVersionString'
-          description: The version of Elasticsearch that you intend to upgrade the domain to.
+          allOf:
+            - $ref: '#/components/schemas/ElasticsearchVersionString'
+            - description: The version of Elasticsearch that you intend to upgrade the domain to.
         PerformCheckOnly:
-          $ref: '#/components/schemas/Boolean'
-          description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
       description: ' Container for request parameters to <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
     UpgradeStepsList:
       type: array
@@ -4823,33 +5161,41 @@ components:
       type: object
       properties:
         UpgradeName:
-          $ref: '#/components/schemas/UpgradeName'
-          description: A string that describes the update briefly
+          allOf:
+            - $ref: '#/components/schemas/UpgradeName'
+            - description: A string that describes the update briefly
         StartTimestamp:
-          $ref: '#/components/schemas/StartTimestamp'
-          description: 'UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.'
+          allOf:
+            - $ref: '#/components/schemas/StartTimestamp'
+            - description: 'UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.'
         UpgradeStatus:
-          $ref: '#/components/schemas/UpgradeStatus'
-          description: ' The overall status of the update. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStatus'
+            - description: ' The overall status of the update. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
         StepsList:
-          $ref: '#/components/schemas/UpgradeStepsList'
-          description: ' A list of <code> <a>UpgradeStepItem</a> </code> s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStepsList'
+            - description: ' A list of <code> <a>UpgradeStepItem</a> </code> s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. '
       description: History of the last 10 Upgrades and Upgrade Eligibility Checks.
     UpgradeStepItem:
       type: object
       properties:
         UpgradeStep:
-          $ref: '#/components/schemas/UpgradeStep'
-          description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStep'
+            - description: ' Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through: <ul> <li>PreUpgradeCheck</li> <li>Snapshot</li> <li>Upgrade</li> </ul> '
         UpgradeStepStatus:
-          $ref: '#/components/schemas/UpgradeStatus'
-          description: ' The status of a particular step during an upgrade. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
+          allOf:
+            - $ref: '#/components/schemas/UpgradeStatus'
+            - description: ' The status of a particular step during an upgrade. The status can take one of the following values: <ul> <li>In Progress</li> <li>Succeeded</li> <li>Succeeded with Issues</li> <li>Failed</li> </ul> '
         Issues:
-          $ref: '#/components/schemas/Issues'
-          description: A list of strings containing detailed information about the errors encountered in a particular step.
+          allOf:
+            - $ref: '#/components/schemas/Issues'
+            - description: A list of strings containing detailed information about the errors encountered in a particular step.
         ProgressPercent:
-          $ref: '#/components/schemas/Double'
-          description: The Floating point value representing progress percentage of a particular step.
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The Floating point value representing progress percentage of a particular step.
       description: Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.
 security:
   - hmac: []

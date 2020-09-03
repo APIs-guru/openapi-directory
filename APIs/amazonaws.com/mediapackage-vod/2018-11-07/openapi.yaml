@@ -344,80 +344,92 @@ paths:
                   type: object
                   properties:
                     Encryption:
-                      xml:
-                        name: encryption
-                      $ref: '#/components/schemas/CmafEncryption'
+                      allOf:
+                        - $ref: '#/components/schemas/CmafEncryption'
+                        - xml:
+                            name: encryption
                     HlsManifests:
-                      xml:
-                        name: hlsManifests
-                      description: A list of HLS manifest configurations.
-                      $ref: '#/components/schemas/__listOfHlsManifest'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfHlsManifest'
+                        - xml:
+                            name: hlsManifests
+                          description: A list of HLS manifest configurations.
                     SegmentDurationSeconds:
-                      xml:
-                        name: segmentDurationSeconds
-                      description: |
-                        Duration (in seconds) of each fragment. Actual fragments will be
-                        rounded to the nearest multiple of the source fragment duration.
-                      $ref: '#/components/schemas/__integer'
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: segmentDurationSeconds
+                          description: |
+                            Duration (in seconds) of each fragment. Actual fragments will be
+                            rounded to the nearest multiple of the source fragment duration.
                 dashPackage:
                   description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
                   type: object
                   properties:
                     DashManifests:
-                      xml:
-                        name: dashManifests
-                      description: A list of DASH manifest configurations.
-                      $ref: '#/components/schemas/__listOfDashManifest'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfDashManifest'
+                        - xml:
+                            name: dashManifests
+                          description: A list of DASH manifest configurations.
                     Encryption:
-                      xml:
-                        name: encryption
-                      $ref: '#/components/schemas/DashEncryption'
+                      allOf:
+                        - $ref: '#/components/schemas/DashEncryption'
+                        - xml:
+                            name: encryption
                     PeriodTriggers:
-                      xml:
-                        name: periodTriggers
-                      description: |
-                        A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
-                        Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
-                        be partitioned into more than one period. If the list contains "ADS", new periods will be created where
-                        the Asset contains SCTE-35 ad markers.
-                      $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+                        - xml:
+                            name: periodTriggers
+                          description: |
+                            A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+                            Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+                            be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+                            the Asset contains SCTE-35 ad markers.
                     SegmentDurationSeconds:
-                      xml:
-                        name: segmentDurationSeconds
-                      description: |
-                        Duration (in seconds) of each segment. Actual segments will be
-                        rounded to the nearest multiple of the source segment duration.
-                      $ref: '#/components/schemas/__integer'
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: segmentDurationSeconds
+                          description: |
+                            Duration (in seconds) of each segment. Actual segments will be
+                            rounded to the nearest multiple of the source segment duration.
                     SegmentTemplateFormat:
-                      xml:
-                        name: segmentTemplateFormat
-                      description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
-                      $ref: '#/components/schemas/SegmentTemplateFormat'
+                      allOf:
+                        - $ref: '#/components/schemas/SegmentTemplateFormat'
+                        - xml:
+                            name: segmentTemplateFormat
+                          description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
                 hlsPackage:
                   description: An HTTP Live Streaming (HLS) packaging configuration.
                   type: object
                   properties:
                     Encryption:
-                      xml:
-                        name: encryption
-                      $ref: '#/components/schemas/HlsEncryption'
+                      allOf:
+                        - $ref: '#/components/schemas/HlsEncryption'
+                        - xml:
+                            name: encryption
                     HlsManifests:
-                      xml:
-                        name: hlsManifests
-                      description: A list of HLS manifest configurations.
-                      $ref: '#/components/schemas/__listOfHlsManifest'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfHlsManifest'
+                        - xml:
+                            name: hlsManifests
+                          description: A list of HLS manifest configurations.
                     SegmentDurationSeconds:
-                      xml:
-                        name: segmentDurationSeconds
-                      description: |
-                        Duration (in seconds) of each fragment. Actual fragments will be
-                        rounded to the nearest multiple of the source fragment duration.
-                      $ref: '#/components/schemas/__integer'
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: segmentDurationSeconds
+                          description: |
+                            Duration (in seconds) of each fragment. Actual fragments will be
+                            rounded to the nearest multiple of the source fragment duration.
                     UseAudioRenditionGroup:
-                      xml:
-                        name: useAudioRenditionGroup
-                      description: 'When enabled, audio streams will be placed in rendition groups in the output.'
-                      $ref: '#/components/schemas/__boolean'
+                      allOf:
+                        - $ref: '#/components/schemas/__boolean'
+                        - xml:
+                            name: useAudioRenditionGroup
+                          description: 'When enabled, audio streams will be placed in rendition groups in the output.'
                 id:
                   description: The ID of the PackagingConfiguration.
                   type: string
@@ -426,19 +438,22 @@ paths:
                   type: object
                   properties:
                     Encryption:
-                      xml:
-                        name: encryption
-                      $ref: '#/components/schemas/MssEncryption'
+                      allOf:
+                        - $ref: '#/components/schemas/MssEncryption'
+                        - xml:
+                            name: encryption
                     MssManifests:
-                      xml:
-                        name: mssManifests
-                      description: A list of MSS manifest configurations.
-                      $ref: '#/components/schemas/__listOfMssManifest'
+                      allOf:
+                        - $ref: '#/components/schemas/__listOfMssManifest'
+                        - xml:
+                            name: mssManifests
+                          description: A list of MSS manifest configurations.
                     SegmentDurationSeconds:
-                      xml:
-                        name: segmentDurationSeconds
-                      description: The duration (in seconds) of each segment.
-                      $ref: '#/components/schemas/__integer'
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: segmentDurationSeconds
+                          description: The duration (in seconds) of each segment.
                 packagingGroupId:
                   description: The ID of a PackagingGroup.
                   type: string
@@ -596,15 +611,17 @@ paths:
                   type: object
                   properties:
                     CdnIdentifierSecret:
-                      xml:
-                        name: cdnIdentifierSecret
-                      description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: cdnIdentifierSecret
+                          description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
                     SecretsRoleArn:
-                      xml:
-                        name: secretsRoleArn
-                      description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: secretsRoleArn
+                          description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
                 id:
                   description: The ID of the PackagingGroup.
                   type: string
@@ -1104,15 +1121,17 @@ paths:
                   type: object
                   properties:
                     CdnIdentifierSecret:
-                      xml:
-                        name: cdnIdentifierSecret
-                      description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: cdnIdentifierSecret
+                          description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
                     SecretsRoleArn:
-                      xml:
-                        name: secretsRoleArn
-                      description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
-                      $ref: '#/components/schemas/__string'
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: secretsRoleArn
+                          description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
   '/tags/{resource-arn}':
     get:
       operationId: ListTagsForResource
@@ -1252,49 +1271,58 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the Asset.
         CreatedAt:
-          xml:
-            name: createdAt
-          description: The time the Asset was initially submitted for Ingest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The time the Asset was initially submitted for Ingest.
         EgressEndpoints:
-          xml:
-            name: egressEndpoints
-          description: The list of egress endpoints available for the Asset.
-          $ref: '#/components/schemas/__listOfEgressEndpoint'
+          allOf:
+            - $ref: '#/components/schemas/__listOfEgressEndpoint'
+            - xml:
+                name: egressEndpoints
+              description: The list of egress endpoints available for the Asset.
         Id:
-          xml:
-            name: id
-          description: The unique identifier for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The unique identifier for the Asset.
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of the PackagingGroup for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of the PackagingGroup for the Asset.
         ResourceId:
-          xml:
-            name: resourceId
-          description: The resource ID to include in SPEKE key requests.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceId
+              description: The resource ID to include in SPEKE key requests.
         SourceArn:
-          xml:
-            name: sourceArn
-          description: ARN of the source object in S3.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceArn
+              description: ARN of the source object in S3.
         SourceRoleArn:
-          xml:
-            name: sourceRoleArn
-          description: The IAM role_arn used to access the source S3 bucket.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceRoleArn
+              description: The IAM role_arn used to access the source S3 bucket.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     __string:
       type: string
     UnprocessableEntityException: {}
@@ -1307,49 +1335,58 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingConfiguration.
         CmafPackage:
-          xml:
-            name: cmafPackage
-          $ref: '#/components/schemas/CmafPackage'
+          allOf:
+            - $ref: '#/components/schemas/CmafPackage'
+            - xml:
+                name: cmafPackage
         DashPackage:
-          xml:
-            name: dashPackage
-          $ref: '#/components/schemas/DashPackage'
+          allOf:
+            - $ref: '#/components/schemas/DashPackage'
+            - xml:
+                name: dashPackage
         HlsPackage:
-          xml:
-            name: hlsPackage
-          $ref: '#/components/schemas/HlsPackage'
+          allOf:
+            - $ref: '#/components/schemas/HlsPackage'
+            - xml:
+                name: hlsPackage
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingConfiguration.
         MssPackage:
-          xml:
-            name: mssPackage
-          $ref: '#/components/schemas/MssPackage'
+          allOf:
+            - $ref: '#/components/schemas/MssPackage'
+            - xml:
+                name: mssPackage
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of a PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of a PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     CmafEncryption:
       required:
         - SpekeKeyProvider
       type: object
       properties:
         SpekeKeyProvider:
-          xml:
-            name: spekeKeyProvider
-          $ref: '#/components/schemas/SpekeKeyProvider'
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProvider'
+            - xml:
+                name: spekeKeyProvider
       description: A CMAF encryption configuration.
     __listOfHlsManifest:
       type: array
@@ -1367,9 +1404,10 @@ components:
       type: object
       properties:
         SpekeKeyProvider:
-          xml:
-            name: spekeKeyProvider
-          $ref: '#/components/schemas/SpekeKeyProvider'
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProvider'
+            - xml:
+                name: spekeKeyProvider
       description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
     __listOf__PeriodTriggersElement:
       type: array
@@ -1387,21 +1425,24 @@ components:
       type: object
       properties:
         ConstantInitializationVector:
-          xml:
-            name: constantInitializationVector
-          description: |
-            A constant initialization vector for encryption (optional).
-            When not specified the initialization vector will be periodically rotated.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: constantInitializationVector
+              description: |
+                A constant initialization vector for encryption (optional).
+                When not specified the initialization vector will be periodically rotated.
         EncryptionMethod:
-          xml:
-            name: encryptionMethod
-          description: The encryption method to use.
-          $ref: '#/components/schemas/EncryptionMethod'
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMethod'
+            - xml:
+                name: encryptionMethod
+              description: The encryption method to use.
         SpekeKeyProvider:
-          xml:
-            name: spekeKeyProvider
-          $ref: '#/components/schemas/SpekeKeyProvider'
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProvider'
+            - xml:
+                name: spekeKeyProvider
       description: An HTTP Live Streaming (HLS) encryption configuration.
     __boolean:
       type: boolean
@@ -1411,9 +1452,10 @@ components:
       type: object
       properties:
         SpekeKeyProvider:
-          xml:
-            name: spekeKeyProvider
-          $ref: '#/components/schemas/SpekeKeyProvider'
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProvider'
+            - xml:
+                name: spekeKeyProvider
       description: A Microsoft Smooth Streaming (MSS) encryption configuration.
     __listOfMssManifest:
       type: array
@@ -1423,28 +1465,33 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingGroup.
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
         DomainName:
-          xml:
-            name: domainName
-          description: The fully qualified domain name for Assets in the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The fully qualified domain name for Assets in the PackagingGroup.
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     DeleteAssetResponse:
       type: object
       properties: {}
@@ -1458,186 +1505,220 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the Asset.
         CreatedAt:
-          xml:
-            name: createdAt
-          description: The time the Asset was initially submitted for Ingest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The time the Asset was initially submitted for Ingest.
         EgressEndpoints:
-          xml:
-            name: egressEndpoints
-          description: The list of egress endpoints available for the Asset.
-          $ref: '#/components/schemas/__listOfEgressEndpoint'
+          allOf:
+            - $ref: '#/components/schemas/__listOfEgressEndpoint'
+            - xml:
+                name: egressEndpoints
+              description: The list of egress endpoints available for the Asset.
         Id:
-          xml:
-            name: id
-          description: The unique identifier for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The unique identifier for the Asset.
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of the PackagingGroup for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of the PackagingGroup for the Asset.
         ResourceId:
-          xml:
-            name: resourceId
-          description: The resource ID to include in SPEKE key requests.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceId
+              description: The resource ID to include in SPEKE key requests.
         SourceArn:
-          xml:
-            name: sourceArn
-          description: ARN of the source object in S3.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceArn
+              description: ARN of the source object in S3.
         SourceRoleArn:
-          xml:
-            name: sourceRoleArn
-          description: The IAM role_arn used to access the source S3 bucket.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceRoleArn
+              description: The IAM role_arn used to access the source S3 bucket.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     DescribePackagingConfigurationResponse:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingConfiguration.
         CmafPackage:
-          xml:
-            name: cmafPackage
-          $ref: '#/components/schemas/CmafPackage'
+          allOf:
+            - $ref: '#/components/schemas/CmafPackage'
+            - xml:
+                name: cmafPackage
         DashPackage:
-          xml:
-            name: dashPackage
-          $ref: '#/components/schemas/DashPackage'
+          allOf:
+            - $ref: '#/components/schemas/DashPackage'
+            - xml:
+                name: dashPackage
         HlsPackage:
-          xml:
-            name: hlsPackage
-          $ref: '#/components/schemas/HlsPackage'
+          allOf:
+            - $ref: '#/components/schemas/HlsPackage'
+            - xml:
+                name: hlsPackage
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingConfiguration.
         MssPackage:
-          xml:
-            name: mssPackage
-          $ref: '#/components/schemas/MssPackage'
+          allOf:
+            - $ref: '#/components/schemas/MssPackage'
+            - xml:
+                name: mssPackage
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of a PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of a PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     DescribePackagingGroupResponse:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingGroup.
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
         DomainName:
-          xml:
-            name: domainName
-          description: The fully qualified domain name for Assets in the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The fully qualified domain name for Assets in the PackagingGroup.
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     ListAssetsResponse:
       type: object
       properties:
         Assets:
-          xml:
-            name: assets
-          description: A list of MediaPackage VOD Asset resources.
-          $ref: '#/components/schemas/__listOfAssetShallow'
+          allOf:
+            - $ref: '#/components/schemas/__listOfAssetShallow'
+            - xml:
+                name: assets
+              description: A list of MediaPackage VOD Asset resources.
         NextToken:
-          xml:
-            name: nextToken
-          description: A token that can be used to resume pagination from the end of the collection.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
     ListPackagingConfigurationsResponse:
       type: object
       properties:
         NextToken:
-          xml:
-            name: nextToken
-          description: A token that can be used to resume pagination from the end of the collection.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
         PackagingConfigurations:
-          xml:
-            name: packagingConfigurations
-          description: A list of MediaPackage VOD PackagingConfiguration resources.
-          $ref: '#/components/schemas/__listOfPackagingConfiguration'
+          allOf:
+            - $ref: '#/components/schemas/__listOfPackagingConfiguration'
+            - xml:
+                name: packagingConfigurations
+              description: A list of MediaPackage VOD PackagingConfiguration resources.
     ListPackagingGroupsResponse:
       type: object
       properties:
         NextToken:
-          xml:
-            name: nextToken
-          description: A token that can be used to resume pagination from the end of the collection.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
         PackagingGroups:
-          xml:
-            name: packagingGroups
-          description: A list of MediaPackage VOD PackagingGroup resources.
-          $ref: '#/components/schemas/__listOfPackagingGroup'
+          allOf:
+            - $ref: '#/components/schemas/__listOfPackagingGroup'
+            - xml:
+                name: packagingGroups
+              description: A list of MediaPackage VOD PackagingGroup resources.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          xml:
-            name: tags
-          description: A collection of tags associated with a resource
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: A collection of tags associated with a resource
     UpdatePackagingGroupResponse:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingGroup.
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
         DomainName:
-          xml:
-            name: domainName
-          description: The fully qualified domain name for Assets in the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The fully qualified domain name for Assets in the PackagingGroup.
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
     AdMarkers:
       enum:
         - NONE
@@ -1653,44 +1734,52 @@ components:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the Asset.
         CreatedAt:
-          xml:
-            name: createdAt
-          description: The time the Asset was initially submitted for Ingest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: createdAt
+              description: The time the Asset was initially submitted for Ingest.
         Id:
-          xml:
-            name: id
-          description: The unique identifier for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The unique identifier for the Asset.
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of the PackagingGroup for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of the PackagingGroup for the Asset.
         ResourceId:
-          xml:
-            name: resourceId
-          description: The resource ID to include in SPEKE key requests.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceId
+              description: The resource ID to include in SPEKE key requests.
         SourceArn:
-          xml:
-            name: sourceArn
-          description: ARN of the source object in S3.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceArn
+              description: ARN of the source object in S3.
         SourceRoleArn:
-          xml:
-            name: sourceRoleArn
-          description: The IAM role ARN used to access the source S3 bucket.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceRoleArn
+              description: The IAM role ARN used to access the source S3 bucket.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A MediaPackage VOD Asset resource.
     Authorization:
       required:
@@ -1699,15 +1788,17 @@ components:
       type: object
       properties:
         CdnIdentifierSecret:
-          xml:
-            name: cdnIdentifierSecret
-          description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: cdnIdentifierSecret
+              description: The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
         SecretsRoleArn:
-          xml:
-            name: secretsRoleArn
-          description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: secretsRoleArn
+              description: The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
       description: CDN Authorization credentials
     SpekeKeyProvider:
       required:
@@ -1717,22 +1808,25 @@ components:
       type: object
       properties:
         RoleArn:
-          xml:
-            name: roleArn
-          description: |
-            An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
-            MediaPackage will assume when accessing the key provider service.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: roleArn
+              description: |
+                An Amazon Resource Name (ARN) of an IAM role that AWS Elemental
+                MediaPackage will assume when accessing the key provider service.
         SystemIds:
-          xml:
-            name: systemIds
-          description: The system IDs to include in key requests.
-          $ref: '#/components/schemas/__listOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: systemIds
+              description: The system IDs to include in key requests.
         Url:
-          xml:
-            name: url
-          description: The URL of the external key provider service.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: url
+              description: The URL of the external key provider service.
       description: A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.
     CmafPackage:
       required:
@@ -1740,21 +1834,24 @@ components:
       type: object
       properties:
         Encryption:
-          xml:
-            name: encryption
-          $ref: '#/components/schemas/CmafEncryption'
+          allOf:
+            - $ref: '#/components/schemas/CmafEncryption'
+            - xml:
+                name: encryption
         HlsManifests:
-          xml:
-            name: hlsManifests
-          description: A list of HLS manifest configurations.
-          $ref: '#/components/schemas/__listOfHlsManifest'
+          allOf:
+            - $ref: '#/components/schemas/__listOfHlsManifest'
+            - xml:
+                name: hlsManifests
+              description: A list of HLS manifest configurations.
         SegmentDurationSeconds:
-          xml:
-            name: segmentDurationSeconds
-          description: |
-            Duration (in seconds) of each fragment. Actual fragments will be
-            rounded to the nearest multiple of the source fragment duration.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: segmentDurationSeconds
+              description: |
+                Duration (in seconds) of each fragment. Actual fragments will be
+                rounded to the nearest multiple of the source fragment duration.
       description: A CMAF packaging configuration.
     CreateAssetRequest:
       required:
@@ -1766,34 +1863,40 @@ components:
       title: CreateAssetRequest
       properties:
         Id:
-          xml:
-            name: id
-          description: The unique identifier for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The unique identifier for the Asset.
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of the PackagingGroup for the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of the PackagingGroup for the Asset.
         ResourceId:
-          xml:
-            name: resourceId
-          description: The resource ID to include in SPEKE key requests.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceId
+              description: The resource ID to include in SPEKE key requests.
         SourceArn:
-          xml:
-            name: sourceArn
-          description: ARN of the source object in S3.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceArn
+              description: ARN of the source object in S3.
         SourceRoleArn:
-          xml:
-            name: sourceRoleArn
-          description: The IAM role ARN used to access the source S3 bucket.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceRoleArn
+              description: The IAM role ARN used to access the source S3 bucket.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A new MediaPackage VOD Asset configuration.
     __listOfEgressEndpoint:
       type: array
@@ -1805,35 +1908,40 @@ components:
       type: object
       properties:
         DashManifests:
-          xml:
-            name: dashManifests
-          description: A list of DASH manifest configurations.
-          $ref: '#/components/schemas/__listOfDashManifest'
+          allOf:
+            - $ref: '#/components/schemas/__listOfDashManifest'
+            - xml:
+                name: dashManifests
+              description: A list of DASH manifest configurations.
         Encryption:
-          xml:
-            name: encryption
-          $ref: '#/components/schemas/DashEncryption'
+          allOf:
+            - $ref: '#/components/schemas/DashEncryption'
+            - xml:
+                name: encryption
         PeriodTriggers:
-          xml:
-            name: periodTriggers
-          description: |
-            A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
-            Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
-            be partitioned into more than one period. If the list contains "ADS", new periods will be created where
-            the Asset contains SCTE-35 ad markers.
-          $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+          allOf:
+            - $ref: '#/components/schemas/__listOf__PeriodTriggersElement'
+            - xml:
+                name: periodTriggers
+              description: |
+                A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+                Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+                be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+                the Asset contains SCTE-35 ad markers.
         SegmentDurationSeconds:
-          xml:
-            name: segmentDurationSeconds
-          description: |
-            Duration (in seconds) of each segment. Actual segments will be
-            rounded to the nearest multiple of the source segment duration.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: segmentDurationSeconds
+              description: |
+                Duration (in seconds) of each segment. Actual segments will be
+                rounded to the nearest multiple of the source segment duration.
         SegmentTemplateFormat:
-          xml:
-            name: segmentTemplateFormat
-          description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
-          $ref: '#/components/schemas/SegmentTemplateFormat'
+          allOf:
+            - $ref: '#/components/schemas/SegmentTemplateFormat'
+            - xml:
+                name: segmentTemplateFormat
+              description: 'Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.'
       description: A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
     HlsPackage:
       required:
@@ -1841,26 +1949,30 @@ components:
       type: object
       properties:
         Encryption:
-          xml:
-            name: encryption
-          $ref: '#/components/schemas/HlsEncryption'
+          allOf:
+            - $ref: '#/components/schemas/HlsEncryption'
+            - xml:
+                name: encryption
         HlsManifests:
-          xml:
-            name: hlsManifests
-          description: A list of HLS manifest configurations.
-          $ref: '#/components/schemas/__listOfHlsManifest'
+          allOf:
+            - $ref: '#/components/schemas/__listOfHlsManifest'
+            - xml:
+                name: hlsManifests
+              description: A list of HLS manifest configurations.
         SegmentDurationSeconds:
-          xml:
-            name: segmentDurationSeconds
-          description: |
-            Duration (in seconds) of each fragment. Actual fragments will be
-            rounded to the nearest multiple of the source fragment duration.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: segmentDurationSeconds
+              description: |
+                Duration (in seconds) of each fragment. Actual fragments will be
+                rounded to the nearest multiple of the source fragment duration.
         UseAudioRenditionGroup:
-          xml:
-            name: useAudioRenditionGroup
-          description: 'When enabled, audio streams will be placed in rendition groups in the output.'
-          $ref: '#/components/schemas/__boolean'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: useAudioRenditionGroup
+              description: 'When enabled, audio streams will be placed in rendition groups in the output.'
       description: An HTTP Live Streaming (HLS) packaging configuration.
     MssPackage:
       required:
@@ -1868,19 +1980,22 @@ components:
       type: object
       properties:
         Encryption:
-          xml:
-            name: encryption
-          $ref: '#/components/schemas/MssEncryption'
+          allOf:
+            - $ref: '#/components/schemas/MssEncryption'
+            - xml:
+                name: encryption
         MssManifests:
-          xml:
-            name: mssManifests
-          description: A list of MSS manifest configurations.
-          $ref: '#/components/schemas/__listOfMssManifest'
+          allOf:
+            - $ref: '#/components/schemas/__listOfMssManifest'
+            - xml:
+                name: mssManifests
+              description: A list of MSS manifest configurations.
         SegmentDurationSeconds:
-          xml:
-            name: segmentDurationSeconds
-          description: The duration (in seconds) of each segment.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: segmentDurationSeconds
+              description: The duration (in seconds) of each segment.
       description: A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
     CreatePackagingConfigurationRequest:
       required:
@@ -1890,35 +2005,42 @@ components:
       title: CreatePackagingConfigurationRequest
       properties:
         CmafPackage:
-          xml:
-            name: cmafPackage
-          $ref: '#/components/schemas/CmafPackage'
+          allOf:
+            - $ref: '#/components/schemas/CmafPackage'
+            - xml:
+                name: cmafPackage
         DashPackage:
-          xml:
-            name: dashPackage
-          $ref: '#/components/schemas/DashPackage'
+          allOf:
+            - $ref: '#/components/schemas/DashPackage'
+            - xml:
+                name: dashPackage
         HlsPackage:
-          xml:
-            name: hlsPackage
-          $ref: '#/components/schemas/HlsPackage'
+          allOf:
+            - $ref: '#/components/schemas/HlsPackage'
+            - xml:
+                name: hlsPackage
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingConfiguration.
         MssPackage:
-          xml:
-            name: mssPackage
-          $ref: '#/components/schemas/MssPackage'
+          allOf:
+            - $ref: '#/components/schemas/MssPackage'
+            - xml:
+                name: mssPackage
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of a PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of a PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A new MediaPackage VOD PackagingConfiguration resource configuration.
     CreatePackagingGroupRequest:
       required:
@@ -1927,18 +2049,21 @@ components:
       title: CreatePackagingGroupRequest
       properties:
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A new MediaPackage VOD PackagingGroup resource configuration.
     ManifestLayout:
       enum:
@@ -1954,48 +2079,56 @@ components:
       type: object
       properties:
         MaxVideoBitsPerSecond:
-          xml:
-            name: maxVideoBitsPerSecond
-          description: The maximum video bitrate (bps) to include in output.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxVideoBitsPerSecond
+              description: The maximum video bitrate (bps) to include in output.
         MinVideoBitsPerSecond:
-          xml:
-            name: minVideoBitsPerSecond
-          description: The minimum video bitrate (bps) to include in output.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minVideoBitsPerSecond
+              description: The minimum video bitrate (bps) to include in output.
         StreamOrder:
-          xml:
-            name: streamOrder
-          description: A directive that determines the order of streams in the output.
-          $ref: '#/components/schemas/StreamOrder'
+          allOf:
+            - $ref: '#/components/schemas/StreamOrder'
+            - xml:
+                name: streamOrder
+              description: A directive that determines the order of streams in the output.
       description: A StreamSelection configuration.
     DashManifest:
       type: object
       properties:
         ManifestLayout:
-          xml:
-            name: manifestLayout
-          description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
-          $ref: '#/components/schemas/ManifestLayout'
+          allOf:
+            - $ref: '#/components/schemas/ManifestLayout'
+            - xml:
+                name: manifestLayout
+              description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
         ManifestName:
-          xml:
-            name: manifestName
-          description: An optional string to include in the name of the manifest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: manifestName
+              description: An optional string to include in the name of the manifest.
         MinBufferTimeSeconds:
-          xml:
-            name: minBufferTimeSeconds
-          description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: minBufferTimeSeconds
+              description: Minimum duration (in seconds) that a player will buffer media before starting the presentation.
         Profile:
-          xml:
-            name: profile
-          description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
-          $ref: '#/components/schemas/Profile'
+          allOf:
+            - $ref: '#/components/schemas/Profile'
+            - xml:
+                name: profile
+              description: 'The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.'
         StreamSelection:
-          xml:
-            name: streamSelection
-          $ref: '#/components/schemas/StreamSelection'
+          allOf:
+            - $ref: '#/components/schemas/StreamSelection'
+            - xml:
+                name: streamSelection
       description: A DASH manifest configuration.
     DeleteAssetRequest:
       type: object
@@ -2025,15 +2158,17 @@ components:
       type: object
       properties:
         PackagingConfigurationId:
-          xml:
-            name: packagingConfigurationId
-          description: The ID of the PackagingConfiguration being applied to the Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingConfigurationId
+              description: The ID of the PackagingConfiguration being applied to the Asset.
         Url:
-          xml:
-            name: url
-          description: The URL of the parent manifest for the repackaged Asset.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: url
+              description: The URL of the parent manifest for the repackaged Asset.
       description: The endpoint URL used to access an Asset using one PackagingConfiguration.
     EncryptionMethod:
       enum:
@@ -2044,49 +2179,55 @@ components:
       type: object
       properties:
         AdMarkers:
-          xml:
-            name: adMarkers
-          description: |
-            This setting controls how ad markers are included in the packaged OriginEndpoint.
-            "NONE" will omit all SCTE-35 ad markers from the output.
-            "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
-            markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
-            "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
-            messages in the input source.
-          $ref: '#/components/schemas/AdMarkers'
+          allOf:
+            - $ref: '#/components/schemas/AdMarkers'
+            - xml:
+                name: adMarkers
+              description: |
+                This setting controls how ad markers are included in the packaged OriginEndpoint.
+                "NONE" will omit all SCTE-35 ad markers from the output.
+                "PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+                markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+                "SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+                messages in the input source.
         IncludeIframeOnlyStream:
-          xml:
-            name: includeIframeOnlyStream
-          description: 'When enabled, an I-Frame only stream will be included in the output.'
-          $ref: '#/components/schemas/__boolean'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: includeIframeOnlyStream
+              description: 'When enabled, an I-Frame only stream will be included in the output.'
         ManifestName:
-          xml:
-            name: manifestName
-          description: An optional string to include in the name of the manifest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: manifestName
+              description: An optional string to include in the name of the manifest.
         ProgramDateTimeIntervalSeconds:
-          xml:
-            name: programDateTimeIntervalSeconds
-          description: |
-            The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
-            inserted into manifests. Additionally, when an interval is specified
-            ID3Timed Metadata messages will be generated every 5 seconds using the
-            ingest time of the content.
-            If the interval is not specified, or set to 0, then
-            no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
-            ID3Timed Metadata messages will be generated. Note that irrespective
-            of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
-            it will be passed through to HLS output.
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: programDateTimeIntervalSeconds
+              description: |
+                The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+                inserted into manifests. Additionally, when an interval is specified
+                ID3Timed Metadata messages will be generated every 5 seconds using the
+                ingest time of the content.
+                If the interval is not specified, or set to 0, then
+                no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+                ID3Timed Metadata messages will be generated. Note that irrespective
+                of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+                it will be passed through to HLS output.
         RepeatExtXKey:
-          xml:
-            name: repeatExtXKey
-          description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
-          $ref: '#/components/schemas/__boolean'
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: repeatExtXKey
+              description: 'When enabled, the EXT-X-KEY tag will be repeated in output manifests.'
         StreamSelection:
-          xml:
-            name: streamSelection
-          $ref: '#/components/schemas/StreamSelection'
+          allOf:
+            - $ref: '#/components/schemas/StreamSelection'
+            - xml:
+                name: streamSelection
       description: An HTTP Live Streaming (HLS) manifest configuration.
     MaxResults:
       type: integer
@@ -2128,80 +2269,95 @@ components:
       type: object
       properties:
         ManifestName:
-          xml:
-            name: manifestName
-          description: An optional string to include in the name of the manifest.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: manifestName
+              description: An optional string to include in the name of the manifest.
         StreamSelection:
-          xml:
-            name: streamSelection
-          $ref: '#/components/schemas/StreamSelection'
+          allOf:
+            - $ref: '#/components/schemas/StreamSelection'
+            - xml:
+                name: streamSelection
       description: A Microsoft Smooth Streaming (MSS) manifest configuration.
     PackagingConfiguration:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingConfiguration.
         CmafPackage:
-          xml:
-            name: cmafPackage
-          $ref: '#/components/schemas/CmafPackage'
+          allOf:
+            - $ref: '#/components/schemas/CmafPackage'
+            - xml:
+                name: cmafPackage
         DashPackage:
-          xml:
-            name: dashPackage
-          $ref: '#/components/schemas/DashPackage'
+          allOf:
+            - $ref: '#/components/schemas/DashPackage'
+            - xml:
+                name: dashPackage
         HlsPackage:
-          xml:
-            name: hlsPackage
-          $ref: '#/components/schemas/HlsPackage'
+          allOf:
+            - $ref: '#/components/schemas/HlsPackage'
+            - xml:
+                name: hlsPackage
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingConfiguration.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingConfiguration.
         MssPackage:
-          xml:
-            name: mssPackage
-          $ref: '#/components/schemas/MssPackage'
+          allOf:
+            - $ref: '#/components/schemas/MssPackage'
+            - xml:
+                name: mssPackage
         PackagingGroupId:
-          xml:
-            name: packagingGroupId
-          description: The ID of a PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: packagingGroupId
+              description: The ID of a PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A MediaPackage VOD PackagingConfiguration resource.
     PackagingGroup:
       type: object
       properties:
         Arn:
-          xml:
-            name: arn
-          description: The ARN of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The ARN of the PackagingGroup.
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
         DomainName:
-          xml:
-            name: domainName
-          description: The fully qualified domain name for Assets in the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The fully qualified domain name for Assets in the PackagingGroup.
         Id:
-          xml:
-            name: id
-          description: The ID of the PackagingGroup.
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the PackagingGroup.
         Tags:
-          xml:
-            name: tags
-          $ref: '#/components/schemas/Tags'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
       description: A MediaPackage VOD PackagingGroup resource.
     __listOf__string:
       type: array
@@ -2220,10 +2376,11 @@ components:
       title: TagResourceRequest
       properties:
         Tags:
-          xml:
-            name: tags
-          description: A collection of tags associated with a resource
-          $ref: '#/components/schemas/__mapOf__string'
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: A collection of tags associated with a resource
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -2233,9 +2390,10 @@ components:
       title: UpdatePackagingGroupRequest
       properties:
         Authorization:
-          xml:
-            name: authorization
-          $ref: '#/components/schemas/Authorization'
+          allOf:
+            - $ref: '#/components/schemas/Authorization'
+            - xml:
+                name: authorization
       description: A MediaPackage VOD PackagingGroup resource configuration.
     __PeriodTriggersElement:
       enum:

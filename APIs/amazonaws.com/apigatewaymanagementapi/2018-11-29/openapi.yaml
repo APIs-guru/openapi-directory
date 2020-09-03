@@ -297,19 +297,22 @@ components:
       type: object
       properties:
         ConnectedAt:
-          xml:
-            name: connectedAt
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: The time in ISO 8601 format for when the connection was established.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: connectedAt
+              description: The time in ISO 8601 format for when the connection was established.
         Identity:
-          xml:
-            name: identity
-          $ref: '#/components/schemas/Identity'
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - xml:
+                name: identity
         LastActiveAt:
-          xml:
-            name: lastActiveAt
-          $ref: '#/components/schemas/__timestampIso8601'
-          description: The time in ISO 8601 format for when the connection was last active.
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: lastActiveAt
+              description: The time in ISO 8601 format for when the connection was last active.
     PayloadTooLargeException: {}
     Data:
       type: string
@@ -335,15 +338,17 @@ components:
         - UserAgent
       properties:
         SourceIp:
-          xml:
-            name: sourceIp
-          $ref: '#/components/schemas/__string'
-          description: The source IP address of the TCP connection making the request to API Gateway.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: sourceIp
+              description: The source IP address of the TCP connection making the request to API Gateway.
         UserAgent:
-          xml:
-            name: userAgent
-          $ref: '#/components/schemas/__string'
-          description: The User Agent of the API caller.
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: userAgent
+              description: The User Agent of the API caller.
     PostToConnectionRequest:
       type: object
       required:
@@ -351,7 +356,8 @@ components:
       title: PostToConnectionRequest
       properties:
         Data:
-          $ref: '#/components/schemas/Data'
-          description: The data to be sent to the client specified by its connection id.
+          allOf:
+            - $ref: '#/components/schemas/Data'
+            - description: The data to be sent to the client specified by its connection id.
 security:
   - hmac: []

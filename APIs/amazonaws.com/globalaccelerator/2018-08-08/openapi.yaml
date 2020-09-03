@@ -1583,8 +1583,9 @@ components:
       type: object
       properties:
         ByoipCidr:
-          $ref: '#/components/schemas/ByoipCidr'
-          description: Information about the address range.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidr'
+            - description: Information about the address range.
     AdvertiseByoipCidrRequest:
       type: object
       required:
@@ -1592,8 +1593,9 @@ components:
       title: AdvertiseByoipCidrRequest
       properties:
         Cidr:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The address range, in CIDR notation. This must be the exact range that you provisioned. You can''t advertise only a portion of the provisioned range.'
     InternalServiceErrorException: {}
     InvalidArgumentException: {}
     AccessDeniedException: {}
@@ -1603,8 +1605,9 @@ components:
       type: object
       properties:
         Accelerator:
-          $ref: '#/components/schemas/Accelerator'
-          description: The accelerator that is created by specifying a listener and the supported IP address types.
+          allOf:
+            - $ref: '#/components/schemas/Accelerator'
+            - description: The accelerator that is created by specifying a listener and the supported IP address types.
     CreateAcceleratorRequest:
       type: object
       required:
@@ -1613,30 +1616,37 @@ components:
       title: CreateAcceleratorRequest
       properties:
         Name:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The name of an accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
         IpAddressType:
-          $ref: '#/components/schemas/IpAddressType'
-          description: 'The value for the address type must be IPv4. '
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: 'The value for the address type must be IPv4. '
         IpAddresses:
-          $ref: '#/components/schemas/IpAddresses'
-          description: '<p>Optionally, if you''ve added your own IP address pool to Global Accelerator, you can choose IP addresses from your own pool to use for the accelerator''s static IP addresses. You can specify one or two addresses, separated by a comma. Do not include the /32 suffix.</p> <p>If you specify only one IP address from your IP address range, Global Accelerator assigns a second static IP address for the accelerator from the AWS IP address pool.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/IpAddresses'
+            - description: '<p>Optionally, if you''ve added your own IP address pool to Global Accelerator, you can choose IP addresses from your own pool to use for the accelerator''s static IP addresses. You can specify one or two addresses, separated by a comma. Do not include the /32 suffix.</p> <p>If you specify only one IP address from your IP address range, Global Accelerator assigns a second static IP address for the accelerator from the AWS IP address pool.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
         Enabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, an accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
         IdempotencyToken:
-          $ref: '#/components/schemas/IdempotencyToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of an accelerator.'
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of an accelerator.'
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: '<p>Create tags for an accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: '<p>Create tags for an accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html">Tagging in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
     LimitExceededException: {}
     CreateEndpointGroupResponse:
       type: object
       properties:
         EndpointGroup:
-          $ref: '#/components/schemas/EndpointGroup'
-          description: The information about the endpoint group that was created.
+          allOf:
+            - $ref: '#/components/schemas/EndpointGroup'
+            - description: The information about the endpoint group that was created.
     CreateEndpointGroupRequest:
       type: object
       required:
@@ -1646,35 +1656,45 @@ components:
       title: CreateEndpointGroupRequest
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener.
         EndpointGroupRegion:
-          $ref: '#/components/schemas/GenericString'
-          description: The name of the AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The name of the AWS Region where the endpoint group is located. A listener can have only one endpoint group in a specific Region.
         EndpointConfigurations:
-          $ref: '#/components/schemas/EndpointConfigurations'
-          description: The list of endpoint objects.
+          allOf:
+            - $ref: '#/components/schemas/EndpointConfigurations'
+            - description: The list of endpoint objects.
         TrafficDialPercentage:
-          $ref: '#/components/schemas/TrafficDialPercentage'
-          description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
+          allOf:
+            - $ref: '#/components/schemas/TrafficDialPercentage'
+            - description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
         HealthCheckPort:
-          $ref: '#/components/schemas/HealthCheckPort'
-          description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckPort'
+            - description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If listener port is a list of ports, Global Accelerator uses the first port in the list.'
         HealthCheckProtocol:
-          $ref: '#/components/schemas/HealthCheckProtocol'
-          description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckProtocol'
+            - description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
         HealthCheckPath:
-          $ref: '#/components/schemas/GenericString'
-          description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
         HealthCheckIntervalSeconds:
-          $ref: '#/components/schemas/HealthCheckIntervalSeconds'
-          description: The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckIntervalSeconds'
+            - description: The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
         ThresholdCount:
-          $ref: '#/components/schemas/ThresholdCount'
-          description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
+          allOf:
+            - $ref: '#/components/schemas/ThresholdCount'
+            - description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
         IdempotencyToken:
-          $ref: '#/components/schemas/IdempotencyToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
     AcceleratorNotFoundException: {}
     EndpointGroupAlreadyExistsException: {}
     ListenerNotFoundException: {}
@@ -1682,8 +1702,9 @@ components:
       type: object
       properties:
         Listener:
-          $ref: '#/components/schemas/Listener'
-          description: The listener that you've created.
+          allOf:
+            - $ref: '#/components/schemas/Listener'
+            - description: The listener that you've created.
     CreateListenerRequest:
       type: object
       required:
@@ -1694,20 +1715,25 @@ components:
       title: CreateListenerRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of your accelerator.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of your accelerator.
         PortRanges:
-          $ref: '#/components/schemas/PortRanges'
-          description: The list of port ranges to support for connections from clients to your accelerator.
+          allOf:
+            - $ref: '#/components/schemas/PortRanges'
+            - description: The list of port ranges to support for connections from clients to your accelerator.
         Protocol:
-          $ref: '#/components/schemas/Protocol'
-          description: The protocol for connections from clients to your accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: The protocol for connections from clients to your accelerator.
         ClientAffinity:
-          $ref: '#/components/schemas/ClientAffinity'
-          description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ClientAffinity'
+            - description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
         IdempotencyToken:
-          $ref: '#/components/schemas/IdempotencyToken'
-          description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.'
     InvalidPortRangeException: {}
     DeleteAcceleratorRequest:
       type: object
@@ -1716,8 +1742,9 @@ components:
       title: DeleteAcceleratorRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of an accelerator.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of an accelerator.
     AcceleratorNotDisabledException: {}
     AssociatedListenerFoundException: {}
     DeleteEndpointGroupRequest:
@@ -1727,8 +1754,9 @@ components:
       title: DeleteEndpointGroupRequest
       properties:
         EndpointGroupArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the endpoint group to delete.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the endpoint group to delete.
     EndpointGroupNotFoundException: {}
     DeleteListenerRequest:
       type: object
@@ -1737,15 +1765,17 @@ components:
       title: DeleteListenerRequest
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener.
     AssociatedEndpointGroupFoundException: {}
     DeprovisionByoipCidrResponse:
       type: object
       properties:
         ByoipCidr:
-          $ref: '#/components/schemas/ByoipCidr'
-          description: Information about the address range.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidr'
+            - description: Information about the address range.
     DeprovisionByoipCidrRequest:
       type: object
       required:
@@ -1753,14 +1783,16 @@ components:
       title: DeprovisionByoipCidrRequest
       properties:
         Cidr:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The address range, in CIDR notation. The prefix must be the same prefix that you specified when you provisioned the address range.'
     DescribeAcceleratorResponse:
       type: object
       properties:
         Accelerator:
-          $ref: '#/components/schemas/Accelerator'
-          description: The description of the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Accelerator'
+            - description: The description of the accelerator.
     DescribeAcceleratorRequest:
       type: object
       required:
@@ -1768,14 +1800,16 @@ components:
       title: DescribeAcceleratorRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator to describe.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator to describe.
     DescribeAcceleratorAttributesResponse:
       type: object
       properties:
         AcceleratorAttributes:
-          $ref: '#/components/schemas/AcceleratorAttributes'
-          description: The attributes of the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorAttributes'
+            - description: The attributes of the accelerator.
     DescribeAcceleratorAttributesRequest:
       type: object
       required:
@@ -1783,14 +1817,16 @@ components:
       title: DescribeAcceleratorAttributesRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator with the attributes that you want to describe.
     DescribeEndpointGroupResponse:
       type: object
       properties:
         EndpointGroup:
-          $ref: '#/components/schemas/EndpointGroup'
-          description: The description of an endpoint group.
+          allOf:
+            - $ref: '#/components/schemas/EndpointGroup'
+            - description: The description of an endpoint group.
     DescribeEndpointGroupRequest:
       type: object
       required:
@@ -1798,14 +1834,16 @@ components:
       title: DescribeEndpointGroupRequest
       properties:
         EndpointGroupArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the endpoint group to describe.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the endpoint group to describe.
     DescribeListenerResponse:
       type: object
       properties:
         Listener:
-          $ref: '#/components/schemas/Listener'
-          description: The description of a listener.
+          allOf:
+            - $ref: '#/components/schemas/Listener'
+            - description: The description of a listener.
     DescribeListenerRequest:
       type: object
       required:
@@ -1813,56 +1851,67 @@ components:
       title: DescribeListenerRequest
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener to describe.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener to describe.
     ListAcceleratorsResponse:
       type: object
       properties:
         Accelerators:
-          $ref: '#/components/schemas/Accelerators'
-          description: The list of accelerators for a customer account.
+          allOf:
+            - $ref: '#/components/schemas/Accelerators'
+            - description: The list of accelerators for a customer account.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     ListAcceleratorsRequest:
       type: object
       title: ListAcceleratorsRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The number of Global Accelerator objects that you want to return with this call. The default value is 10.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The number of Global Accelerator objects that you want to return with this call. The default value is 10.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     InvalidNextTokenException: {}
     ListByoipCidrsResponse:
       type: object
       properties:
         ByoipCidrs:
-          $ref: '#/components/schemas/ByoipCidrs'
-          description: Information about your address ranges.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidrs'
+            - description: Information about your address ranges.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next page of results.
     ListByoipCidrsRequest:
       type: object
       title: ListByoipCidrsRequest
       properties:
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next page of results.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next page of results.
     ListEndpointGroupsResponse:
       type: object
       properties:
         EndpointGroups:
-          $ref: '#/components/schemas/EndpointGroups'
-          description: The list of the endpoint groups associated with a listener.
+          allOf:
+            - $ref: '#/components/schemas/EndpointGroups'
+            - description: The list of the endpoint groups associated with a listener.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     ListEndpointGroupsRequest:
       type: object
       required:
@@ -1870,23 +1919,28 @@ components:
       title: ListEndpointGroupsRequest
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The number of endpoint group objects that you want to return with this call. The default value is 10.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The number of endpoint group objects that you want to return with this call. The default value is 10.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     ListListenersResponse:
       type: object
       properties:
         Listeners:
-          $ref: '#/components/schemas/Listeners'
-          description: The list of listeners for an accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Listeners'
+            - description: The list of listeners for an accelerator.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     ListListenersRequest:
       type: object
       required:
@@ -1894,20 +1948,24 @@ components:
       title: ListListenersRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator for which you want to list listener objects.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator for which you want to list listener objects.
         MaxResults:
-          $ref: '#/components/schemas/MaxResults'
-          description: The number of listener objects that you want to return with this call. The default value is 10.
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The number of listener objects that you want to return with this call. The default value is 10.
         NextToken:
-          $ref: '#/components/schemas/GenericString'
-          description: The token for the next set of results. You receive this token from a previous call.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The token for the next set of results. You receive this token from a previous call.
     ListTagsForResourceResponse:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: Root level tag for the Tags parameters.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: Root level tag for the Tags parameters.
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1915,14 +1973,16 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the accelerator to list tags for. An ARN uniquely identifies an accelerator.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the accelerator to list tags for. An ARN uniquely identifies an accelerator.
     ProvisionByoipCidrResponse:
       type: object
       properties:
         ByoipCidr:
-          $ref: '#/components/schemas/ByoipCidr'
-          description: Information about the address range.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidr'
+            - description: Information about the address range.
     ProvisionByoipCidrRequest:
       type: object
       required:
@@ -1931,11 +1991,13 @@ components:
       title: ProvisionByoipCidrRequest
       properties:
         Cidr:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can specify is /24. The address range cannot overlap with another address range that you''ve brought to this or another Region.'
         CidrAuthorizationContext:
-          $ref: '#/components/schemas/CidrAuthorizationContext'
-          description: 'A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. '
+          allOf:
+            - $ref: '#/components/schemas/CidrAuthorizationContext'
+            - description: 'A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -1947,11 +2009,13 @@ components:
       title: TagResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to. An ARN uniquely identifies a resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the Global Accelerator resource to add tags to. An ARN uniquely identifies a resource.
         Tags:
-          $ref: '#/components/schemas/Tags'
-          description: The tags to add to a resource. A tag consists of a key and a value that you define.
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: The tags to add to a resource. A tag consists of a key and a value that you define.
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1963,17 +2027,20 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceArn:
-          $ref: '#/components/schemas/ResourceArn'
-          description: The Amazon Resource Name (ARN) of the Global Accelerator resource to remove tags from. An ARN uniquely identifies a resource.
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the Global Accelerator resource to remove tags from. An ARN uniquely identifies a resource.
         TagKeys:
-          $ref: '#/components/schemas/TagKeys'
-          description: The tag key pairs that you want to remove from the specified resources.
+          allOf:
+            - $ref: '#/components/schemas/TagKeys'
+            - description: The tag key pairs that you want to remove from the specified resources.
     UpdateAcceleratorResponse:
       type: object
       properties:
         Accelerator:
-          $ref: '#/components/schemas/Accelerator'
-          description: Information about the updated accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Accelerator'
+            - description: Information about the updated accelerator.
     UpdateAcceleratorRequest:
       type: object
       required:
@@ -1981,23 +2048,28 @@ components:
       title: UpdateAcceleratorRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator to update.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator to update.
         Name:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The name of the accelerator. The name can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
         IpAddressType:
-          $ref: '#/components/schemas/IpAddressType'
-          description: 'The value for the address type must be IPv4. '
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: 'The value for the address type must be IPv4. '
         Enabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether an accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, the accelerator can be deleted.</p>'
     UpdateAcceleratorAttributesResponse:
       type: object
       properties:
         AcceleratorAttributes:
-          $ref: '#/components/schemas/AcceleratorAttributes'
-          description: Updated attributes for the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorAttributes'
+            - description: Updated attributes for the accelerator.
     UpdateAcceleratorAttributesRequest:
       type: object
       required:
@@ -2005,23 +2077,28 @@ components:
       title: UpdateAcceleratorAttributesRequest
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator that you want to update.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator that you want to update.
         FlowLogsEnabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Update whether flow logs are enabled. The default value is false. If the value is true, <code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html">Flow Logs</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Update whether flow logs are enabled. The default value is false. If the value is true, <code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html">Flow Logs</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
         FlowLogsS3Bucket:
-          $ref: '#/components/schemas/GenericString'
-          description: The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
         FlowLogsS3Prefix:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. </p> <p>If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p> <p>s3-bucket_name//AWSLogs/aws_account_id</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>Update the prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. </p> <p>If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p> <p>s3-bucket_name//AWSLogs/aws_account_id</p>'
     UpdateEndpointGroupResponse:
       type: object
       properties:
         EndpointGroup:
-          $ref: '#/components/schemas/EndpointGroup'
-          description: The information about the endpoint group that was updated.
+          allOf:
+            - $ref: '#/components/schemas/EndpointGroup'
+            - description: The information about the endpoint group that was updated.
     UpdateEndpointGroupRequest:
       type: object
       required:
@@ -2029,35 +2106,44 @@ components:
       title: UpdateEndpointGroupRequest
       properties:
         EndpointGroupArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the endpoint group.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the endpoint group.
         EndpointConfigurations:
-          $ref: '#/components/schemas/EndpointConfigurations'
-          description: The list of endpoint objects.
+          allOf:
+            - $ref: '#/components/schemas/EndpointConfigurations'
+            - description: The list of endpoint objects.
         TrafficDialPercentage:
-          $ref: '#/components/schemas/TrafficDialPercentage'
-          description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
+          allOf:
+            - $ref: '#/components/schemas/TrafficDialPercentage'
+            - description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
         HealthCheckPort:
-          $ref: '#/components/schemas/HealthCheckPort'
-          description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses the first port in the list.'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckPort'
+            - description: 'The port that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default port is the listener port that this endpoint group is associated with. If the listener port is a list of ports, Global Accelerator uses the first port in the list.'
         HealthCheckProtocol:
-          $ref: '#/components/schemas/HealthCheckProtocol'
-          description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckProtocol'
+            - description: The protocol that AWS Global Accelerator uses to check the health of endpoints that are part of this endpoint group. The default value is TCP.
         HealthCheckPath:
-          $ref: '#/components/schemas/GenericString'
-          description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'If the protocol is HTTP/S, then this specifies the path that is the destination for health check targets. The default value is slash (/).'
         HealthCheckIntervalSeconds:
-          $ref: '#/components/schemas/HealthCheckIntervalSeconds'
-          description: The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckIntervalSeconds'
+            - description: The time—10 seconds or 30 seconds—between each health check for an endpoint. The default value is 30.
         ThresholdCount:
-          $ref: '#/components/schemas/ThresholdCount'
-          description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
+          allOf:
+            - $ref: '#/components/schemas/ThresholdCount'
+            - description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
     UpdateListenerResponse:
       type: object
       properties:
         Listener:
-          $ref: '#/components/schemas/Listener'
-          description: Information for the updated listener.
+          allOf:
+            - $ref: '#/components/schemas/Listener'
+            - description: Information for the updated listener.
     UpdateListenerRequest:
       type: object
       required:
@@ -2065,23 +2151,28 @@ components:
       title: UpdateListenerRequest
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener to update.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener to update.
         PortRanges:
-          $ref: '#/components/schemas/PortRanges'
-          description: The updated list of port ranges for the connections from clients to the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/PortRanges'
+            - description: The updated list of port ranges for the connections from clients to the accelerator.
         Protocol:
-          $ref: '#/components/schemas/Protocol'
-          description: The updated protocol for the connections from clients to the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: The updated protocol for the connections from clients to the accelerator.
         ClientAffinity:
-          $ref: '#/components/schemas/ClientAffinity'
-          description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ClientAffinity'
+            - description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
     WithdrawByoipCidrResponse:
       type: object
       properties:
         ByoipCidr:
-          $ref: '#/components/schemas/ByoipCidr'
-          description: Information about the address pool.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidr'
+            - description: Information about the address pool.
     WithdrawByoipCidrRequest:
       type: object
       required:
@@ -2089,8 +2180,9 @@ components:
       title: WithdrawByoipCidrRequest
       properties:
         Cidr:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The address range, in CIDR notation.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The address range, in CIDR notation.'
     GenericString:
       type: string
       maxLength: 255
@@ -2116,45 +2208,57 @@ components:
       type: object
       properties:
         AcceleratorArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the accelerator.
         Name:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The name of the accelerator. The name must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The name of the accelerator. The name must contain only alphanumeric characters or hyphens (-), and must not begin or end with a hyphen.'
         IpAddressType:
-          $ref: '#/components/schemas/IpAddressType'
-          description: 'The value for the address type must be IPv4. '
+          allOf:
+            - $ref: '#/components/schemas/IpAddressType'
+            - description: 'The value for the address type must be IPv4. '
         Enabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether the accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether the accelerator is enabled. The value is true or false. The default value is true. </p> <p>If the value is set to true, the accelerator cannot be deleted. If set to false, accelerator can be deleted.</p>'
         IpSets:
-          $ref: '#/components/schemas/IpSets'
-          description: The static IP addresses that Global Accelerator associates with the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/IpSets'
+            - description: The static IP addresses that Global Accelerator associates with the accelerator.
         DnsName:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator''s static IP addresses. </p> <p>The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com.</p> <p>For more information about the default DNS name, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing"> Support for DNS Addressing in Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator''s static IP addresses. </p> <p>The naming convention for the DNS name is the following: A lowercase letter a, followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com. For example: a1234567890abcdef.awsglobalaccelerator.com.</p> <p>For more information about the default DNS name, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-accelerators.html#about-accelerators.dns-addressing"> Support for DNS Addressing in Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
         Status:
-          $ref: '#/components/schemas/AcceleratorStatus'
-          description: Describes the deployment status of the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/AcceleratorStatus'
+            - description: Describes the deployment status of the accelerator.
         CreatedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the accelerator was created.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the accelerator was created.
         LastModifiedTime:
-          $ref: '#/components/schemas/Timestamp'
-          description: The date and time that the accelerator was last modified.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the accelerator was last modified.
       description: 'An accelerator is a complex type that includes one or more listeners that process inbound connections and then direct traffic to one or more endpoint groups, each of which includes endpoints, such as load balancers.'
     AcceleratorAttributes:
       type: object
       properties:
         FlowLogsEnabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether flow logs are enabled. The default value is false. If the value is true, <code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html">Flow Logs</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether flow logs are enabled. The default value is false. If the value is true, <code>FlowLogsS3Bucket</code> and <code>FlowLogsS3Prefix</code> must be specified.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html">Flow Logs</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
         FlowLogsS3Bucket:
-          $ref: '#/components/schemas/GenericString'
-          description: The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The name of the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>. The bucket must exist and have a bucket policy that grants AWS Global Accelerator permission to write to the bucket.
         FlowLogsS3Prefix:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>.</p> <p>If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p> <p>s3-bucket_name//AWSLogs/aws_account_id</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute is required if <code>FlowLogsEnabled</code> is <code>true</code>.</p> <p>If you don’t specify a prefix, the flow logs are stored in the root of the bucket. If you specify slash (/) for the S3 bucket prefix, the log file bucket folder structure will include a double slash (//), like the following:</p> <p>s3-bucket_name//AWSLogs/aws_account_id</p>'
       description: Attributes of an accelerator.
     Accelerators:
       type: array
@@ -2164,14 +2268,17 @@ components:
       type: object
       properties:
         Cidr:
-          $ref: '#/components/schemas/GenericString'
-          description: 'The address range, in CIDR notation.'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The address range, in CIDR notation.'
         State:
-          $ref: '#/components/schemas/ByoipCidrState'
-          description: The state of the address pool.
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidrState'
+            - description: The state of the address pool.
         Events:
-          $ref: '#/components/schemas/ByoipCidrEvents'
-          description: A history of status changes for an IP address range that that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+          allOf:
+            - $ref: '#/components/schemas/ByoipCidrEvents'
+            - description: A history of status changes for an IP address range that that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
       description: '<p>Information about an IP address range that is provisioned for use with your AWS resources through bring your own IP address (BYOIP).</p> <p>The following describes each BYOIP <code>State</code> that your IP address range can be in.</p> <ul> <li> <p> <b>PENDING_PROVISIONING</b> — You’ve submitted a request to provision an IP address range but it is not yet provisioned with AWS Global Accelerator.</p> </li> <li> <p> <b>READY</b> — The address range is provisioned with AWS Global Accelerator and can be advertised.</p> </li> <li> <p> <b>PENDING_ADVERTISING</b> — You’ve submitted a request for AWS Global Accelerator to advertise an address range but it is not yet being advertised.</p> </li> <li> <p> <b>ADVERTISING</b> — The address range is being advertised by AWS Global Accelerator.</p> </li> <li> <p> <b>PENDING_WITHDRAWING</b> — You’ve submitted a request to withdraw an address range from being advertised but it is still being advertised by AWS Global Accelerator.</p> </li> <li> <p> <b>PENDING_DEPROVISIONING</b> — You’ve submitted a request to deprovision an address range from AWS Global Accelerator but it is still provisioned.</p> </li> <li> <p> <b>DEPROVISIONED</b> — The address range is deprovisioned from AWS Global Accelerator.</p> </li> <li> <p> <b>FAILED_PROVISION </b> — The request to provision the address range from AWS Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact AWS support.</p> </li> <li> <p> <b>FAILED_ADVERTISING</b> — The request for AWS Global Accelerator to advertise the address range was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact AWS support.</p> </li> <li> <p> <b>FAILED_WITHDRAW</b> — The request to withdraw the address range from advertising by AWS Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact AWS support.</p> </li> <li> <p> <b>FAILED_DEPROVISION </b> — The request to deprovision the address range from AWS Global Accelerator was not successful. Please make sure that you provide all of the correct information, and try again. If the request fails a second time, contact AWS support.</p> </li> </ul>'
     ByoipCidrState:
       type: string
@@ -2195,11 +2302,13 @@ components:
       type: object
       properties:
         Message:
-          $ref: '#/components/schemas/GenericString'
-          description: A string that contains an <code>Event</code> message describing changes that you make in the status of an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: A string that contains an <code>Event</code> message describing changes that you make in the status of an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
         Timestamp:
-          $ref: '#/components/schemas/Timestamp'
-          description: A timestamp when you make a status change for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp when you make a status change for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
       description: A complex type that contains a <code>Message</code> and a <code>Timestamp</code> value for changes that you make in the status an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
     ByoipCidrs:
       type: array
@@ -2212,11 +2321,13 @@ components:
         - Signature
       properties:
         Message:
-          $ref: '#/components/schemas/GenericString'
-          description: The plain-text authorization message for the prefix and account.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The plain-text authorization message for the prefix and account.
         Signature:
-          $ref: '#/components/schemas/GenericString'
-          description: The signed authorization message for the prefix and account.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The signed authorization message for the prefix and account.
       description: '<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). </p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html">Bring Your Own IP Addresses (BYOIP)</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
     ClientAffinity:
       type: string
@@ -2269,32 +2380,41 @@ components:
       type: object
       properties:
         EndpointGroupArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the endpoint group.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the endpoint group.
         EndpointGroupRegion:
-          $ref: '#/components/schemas/GenericString'
-          description: The AWS Region that this endpoint group belongs.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The AWS Region that this endpoint group belongs.
         EndpointDescriptions:
-          $ref: '#/components/schemas/EndpointDescriptions'
-          description: The list of endpoint objects.
+          allOf:
+            - $ref: '#/components/schemas/EndpointDescriptions'
+            - description: The list of endpoint objects.
         TrafficDialPercentage:
-          $ref: '#/components/schemas/TrafficDialPercentage'
-          description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
+          allOf:
+            - $ref: '#/components/schemas/TrafficDialPercentage'
+            - description: <p>The percentage of traffic to send to an AWS Region. Additional traffic is distributed to other endpoint groups for this listener. </p> <p>Use this action to increase (dial up) or decrease (dial down) traffic to a specific Region. The percentage is applied to the traffic that would otherwise have been routed to the Region based on optimal routing.</p> <p>The default value is 100.</p>
         HealthCheckPort:
-          $ref: '#/components/schemas/HealthCheckPort'
-          description: '<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p> <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a list, Global Accelerator uses the first specified port in the list of ports.</p>'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckPort'
+            - description: '<p>The port that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. </p> <p>The default port is the port for the listener that this endpoint group is associated with. If the listener port is a list, Global Accelerator uses the first specified port in the list of ports.</p>'
         HealthCheckProtocol:
-          $ref: '#/components/schemas/HealthCheckProtocol'
-          description: The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default value is TCP.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckProtocol'
+            - description: The protocol that Global Accelerator uses to perform health checks on endpoints that are part of this endpoint group. The default value is TCP.
         HealthCheckPath:
-          $ref: '#/components/schemas/GenericString'
-          description: 'If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the endpoints for health checks. The default is slash (/).'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'If the protocol is HTTP/S, then this value provides the ping path that Global Accelerator uses for the destination on the endpoints for health checks. The default is slash (/).'
         HealthCheckIntervalSeconds:
-          $ref: '#/components/schemas/HealthCheckIntervalSeconds'
-          description: The time—10 seconds or 30 seconds—between health checks for each endpoint. The default value is 30.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckIntervalSeconds'
+            - description: The time—10 seconds or 30 seconds—between health checks for each endpoint. The default value is 30.
         ThresholdCount:
-          $ref: '#/components/schemas/ThresholdCount'
-          description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
+          allOf:
+            - $ref: '#/components/schemas/ThresholdCount'
+            - description: 'The number of consecutive health checks required to set the state of a healthy endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default value is 3.'
       description: 'A complex type for the endpoint group. An AWS Region can have only one endpoint group for a specific listener. '
     PortRanges:
       type: array
@@ -2311,17 +2431,21 @@ components:
       type: object
       properties:
         ListenerArn:
-          $ref: '#/components/schemas/GenericString'
-          description: The Amazon Resource Name (ARN) of the listener.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Amazon Resource Name (ARN) of the listener.
         PortRanges:
-          $ref: '#/components/schemas/PortRanges'
-          description: The list of port ranges for the connections from clients to the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/PortRanges'
+            - description: The list of port ranges for the connections from clients to the accelerator.
         Protocol:
-          $ref: '#/components/schemas/Protocol'
-          description: The protocol for the connections from clients to the accelerator.
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: The protocol for the connections from clients to the accelerator.
         ClientAffinity:
-          $ref: '#/components/schemas/ClientAffinity'
-          description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ClientAffinity'
+            - description: '<p>Client affinity lets you direct all requests from a user to the same endpoint, if you have stateful applications, regardless of the port and protocol of the client request. Clienty affinity gives you control over whether to always route each client to the same specific endpoint.</p> <p>AWS Global Accelerator uses a consistent-flow hashing algorithm to choose the optimal endpoint for a connection. If client affinity is <code>NONE</code>, Global Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source port, destination IP address, destination port, and protocol—to select the hash value, and then chooses the best endpoint. However, with this setting, if someone uses different ports to connect to Global Accelerator, their connections might not be always routed to the same endpoint because the hash value changes. </p> <p>If you want a given client to always be routed to the same endpoint, set client affinity to <code>SOURCE_IP</code> instead. When you use the <code>SOURCE_IP</code> setting, Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP address and destination IP address—to select the hash value.</p> <p>The default value is <code>NONE</code>.</p>'
       description: A complex type for a listener.
     EndpointWeight:
       type: integer
@@ -2331,14 +2455,17 @@ components:
       type: object
       properties:
         EndpointId:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p> <p>An Application Load Balancer can be either internal or internet-facing.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p> <p>An Application Load Balancer can be either internal or internet-facing.</p>'
         Weight:
-          $ref: '#/components/schemas/EndpointWeight'
-          description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
+          allOf:
+            - $ref: '#/components/schemas/EndpointWeight'
+            - description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>.'
         ClientIPPreservationEnabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client''s IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html"> Preserve Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client''s IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html"> Preserve Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
       description: A complex type for endpoints.
     HealthState:
       type: string
@@ -2350,20 +2477,25 @@ components:
       type: object
       properties:
         EndpointId:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p> <p>An Application Load Balancer can be either internal or internet-facing.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon Resource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address allocation ID. For EC2 instances, this is the EC2 instance ID. </p> <p>An Application Load Balancer can be either internal or internet-facing.</p>'
         Weight:
-          $ref: '#/components/schemas/EndpointWeight'
-          description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
+          allOf:
+            - $ref: '#/components/schemas/EndpointWeight'
+            - description: 'The weight associated with the endpoint. When you add weights to endpoints, you configure AWS Global Accelerator to route traffic based on proportions that you specify. For example, you might specify endpoint weights of 4, 5, 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is routed to the first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20 is routed to the last endpoint. For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html">Endpoint Weights</a> in the <i>AWS Global Accelerator Developer Guide</i>. '
         HealthState:
-          $ref: '#/components/schemas/HealthState'
-          description: The health status of the endpoint.
+          allOf:
+            - $ref: '#/components/schemas/HealthState'
+            - description: The health status of the endpoint.
         HealthReason:
-          $ref: '#/components/schemas/GenericString'
-          description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: '<p>The reason code associated with why the endpoint is not healthy. If the endpoint state is healthy, a reason code is not provided.</p> <p>If the endpoint state is <b>unhealthy</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>Timeout</b>: The health check requests to the endpoint are timing out before returning a status.</p> </li> <li> <p> <b>Failed</b>: The health check failed, for example because the endpoint response was invalid (malformed).</p> </li> </ul> <p>If the endpoint state is <b>initial</b>, the reason code can be one of the following values:</p> <ul> <li> <p> <b>ProvisioningInProgress</b>: The endpoint is in the process of being provisioned.</p> </li> <li> <p> <b>InitialHealthChecking</b>: Global Accelerator is still setting up the minimum number of health checks for the endpoint that are required to determine its health status.</p> </li> </ul>'
         ClientIPPreservationEnabled:
-          $ref: '#/components/schemas/GenericBoolean'
-          description: '<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client''s IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/GenericBoolean'
+            - description: '<p>Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators. </p> <p>If the value is set to true, the client''s IP address is preserved in the <code>X-Forwarded-For</code> request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works-client-ip.html"> Viewing Client IP Addresses in AWS Global Accelerator</a> in the <i>AWS Global Accelerator Developer Guide</i>.</p>'
       description: 'A complex type for an endpoint. Each endpoint group can include one or more endpoints, such as load balancers.'
     EndpointDescriptions:
       type: array
@@ -2379,11 +2511,13 @@ components:
       type: object
       properties:
         IpFamily:
-          $ref: '#/components/schemas/GenericString'
-          description: The types of IP addresses included in this IP set.
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The types of IP addresses included in this IP set.
         IpAddresses:
-          $ref: '#/components/schemas/IpAddresses'
-          description: The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
+          allOf:
+            - $ref: '#/components/schemas/IpAddresses'
+            - description: The array of IP addresses in the IP address set. An IP address set can have a maximum of two IP addresses.
       description: A complex type for the set of IP addresses for an accelerator.
     MaxResults:
       type: integer
@@ -2405,11 +2539,13 @@ components:
       type: object
       properties:
         FromPort:
-          $ref: '#/components/schemas/PortNumber'
-          description: 'The first port in the range of ports, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/PortNumber'
+            - description: 'The first port in the range of ports, inclusive.'
         ToPort:
-          $ref: '#/components/schemas/PortNumber'
-          description: 'The last port in the range of ports, inclusive.'
+          allOf:
+            - $ref: '#/components/schemas/PortNumber'
+            - description: 'The last port in the range of ports, inclusive.'
       description: A complex type for a range of ports for a listener.
     TagKey:
       type: string
@@ -2426,11 +2562,13 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: A string that contains a <code>Tag</code> key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: A string that contains a <code>Tag</code> key.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: A string that contains a <code>Tag</code> value.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: A string that contains a <code>Tag</code> value.
       description: A complex type that contains a <code>Tag</code> key and <code>Tag</code> value.
     TagKeys:
       type: array

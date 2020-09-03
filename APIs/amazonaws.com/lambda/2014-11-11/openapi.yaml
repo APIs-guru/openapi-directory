@@ -792,32 +792,41 @@ components:
       type: object
       properties:
         UUID:
-          $ref: '#/components/schemas/String'
-          description: The AWS Lambda assigned opaque identifier for the mapping.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS Lambda assigned opaque identifier for the mapping.
         BatchSize:
-          $ref: '#/components/schemas/Integer'
-          description: The largest number of records that AWS Lambda will POST in the invocation request to your function.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The largest number of records that AWS Lambda will POST in the invocation request to your function.
         EventSource:
-          $ref: '#/components/schemas/String'
-          description: The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the source of events.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the source of events.
         FunctionName:
-          $ref: '#/components/schemas/FunctionName'
-          description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
         Parameters:
-          $ref: '#/components/schemas/Map'
-          description: The map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source.
+          allOf:
+            - $ref: '#/components/schemas/Map'
+            - description: The map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source.
         Role:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
         LastModified:
-          $ref: '#/components/schemas/Timestamp'
-          description: The UTC time string indicating the last time the event mapping was updated.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The UTC time string indicating the last time the event mapping was updated.
         IsActive:
-          $ref: '#/components/schemas/Boolean'
-          description: Indicates whether the event source mapping is currently honored. Events are only processes if IsActive is true.
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the event source mapping is currently honored. Events are only processes if IsActive is true.
         Status:
-          $ref: '#/components/schemas/String'
-          description: 'The description of the health of the event source mapping. Valid values are: "PENDING", "OK", and "PROBLEM:<i>message</i>". Initially this staus is "PENDING". When AWS Lambda begins processing events, it changes the status to "OK".'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The description of the health of the event source mapping. Valid values are: "PENDING", "OK", and "PROBLEM:<i>message</i>". Initially this staus is "PENDING". When AWS Lambda begins processing events, it changes the status to "OK".'
       description: Describes mapping between an Amazon Kinesis stream and a Lambda function.
     String:
       type: string
@@ -857,48 +866,61 @@ components:
       type: object
       properties:
         FunctionName:
-          $ref: '#/components/schemas/FunctionName'
-          description: The name of the function.
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: The name of the function.
         FunctionARN:
-          $ref: '#/components/schemas/FunctionArn'
-          description: The Amazon Resource Name (ARN) assigned to the function.
+          allOf:
+            - $ref: '#/components/schemas/FunctionArn'
+            - description: The Amazon Resource Name (ARN) assigned to the function.
         ConfigurationId:
-          $ref: '#/components/schemas/String'
-          description: A Lambda-assigned unique identifier for the current function code and related configuration.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A Lambda-assigned unique identifier for the current function code and related configuration.
         Runtime:
-          $ref: '#/components/schemas/Runtime'
-          description: The runtime environment for the Lambda function.
+          allOf:
+            - $ref: '#/components/schemas/Runtime'
+            - description: The runtime environment for the Lambda function.
         Role:
-          $ref: '#/components/schemas/RoleArn'
-          description: The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it executes your function to access any other Amazon Web Services (AWS) resources.
         Handler:
-          $ref: '#/components/schemas/Handler'
-          description: The function Lambda calls to begin executing your function.
+          allOf:
+            - $ref: '#/components/schemas/Handler'
+            - description: The function Lambda calls to begin executing your function.
         Mode:
-          $ref: '#/components/schemas/Mode'
-          description: 'The type of the Lambda function you uploaded. '
+          allOf:
+            - $ref: '#/components/schemas/Mode'
+            - description: 'The type of the Lambda function you uploaded. '
         CodeSize:
-          $ref: '#/components/schemas/Long'
-          description: 'The size, in bytes, of the function .zip file you uploaded.'
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The size, in bytes, of the function .zip file you uploaded.'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: The user-provided description.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The user-provided description.
         Timeout:
-          $ref: '#/components/schemas/Timeout'
-          description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. '
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: 'The function execution time at which Lambda should terminate the function. Because the execution time has cost implications, we recommend you set this value based on your expected execution time. The default is 3 seconds. '
         MemorySize:
-          $ref: '#/components/schemas/MemorySize'
-          description: 'The memory size, in MB, you configured for the function. Must be a multiple of 64 MB.'
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: 'The memory size, in MB, you configured for the function. Must be a multiple of 64 MB.'
         LastModified:
-          $ref: '#/components/schemas/Timestamp'
-          description: The timestamp of the last time you updated the function.
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last time you updated the function.
       description: A complex type that describes function metadata.
     InvokeAsyncResponse:
       type: object
       properties:
         Status:
-          $ref: '#/components/schemas/HttpStatus'
-          description: It will be 202 upon success.
+          allOf:
+            - $ref: '#/components/schemas/HttpStatus'
+            - description: It will be 202 upon success.
       description: 'Upon success, it returns empty response. Otherwise, throws an exception.'
     InvalidRequestContentException:
       type: object
@@ -912,21 +934,25 @@ components:
       type: object
       properties:
         NextMarker:
-          $ref: '#/components/schemas/String'
-          description: 'A string, present if there are more event source mappings.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A string, present if there are more event source mappings.'
         EventSources:
-          $ref: '#/components/schemas/EventSourceList'
-          description: An arrary of <code>EventSourceConfiguration</code> objects.
+          allOf:
+            - $ref: '#/components/schemas/EventSourceList'
+            - description: An arrary of <code>EventSourceConfiguration</code> objects.
       description: Contains a list of event sources (see <a>API_EventSourceConfiguration</a>)
     ListFunctionsResponse:
       type: object
       properties:
         NextMarker:
-          $ref: '#/components/schemas/String'
-          description: 'A string, present if there are more functions.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A string, present if there are more functions.'
         Functions:
-          $ref: '#/components/schemas/FunctionList'
-          description: A list of Lambda functions.
+          allOf:
+            - $ref: '#/components/schemas/FunctionList'
+            - description: A list of Lambda functions.
       description: Contains a list of AWS Lambda function configurations (see <a>API_FunctionConfiguration</a>.
     FunctionName:
       type: string
@@ -951,20 +977,25 @@ components:
       title: AddEventSourceRequest
       properties:
         EventSource:
-          $ref: '#/components/schemas/String'
-          description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the event source. Any record added to this stream causes AWS Lambda to invoke your Lambda function. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the Amazon Kinesis stream that is the event source. Any record added to this stream causes AWS Lambda to invoke your Lambda function. AWS Lambda POSTs the Amazon Kinesis event, containing records, to your Lambda function as JSON.'
         FunctionName:
-          $ref: '#/components/schemas/FunctionName'
-          description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: The Lambda function to invoke when AWS Lambda detects an event on the stream.
         Role:
-          $ref: '#/components/schemas/RoleArn'
-          description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the IAM role (invocation role) that AWS Lambda can assume to read from the stream and invoke the function.
         BatchSize:
-          $ref: '#/components/schemas/Integer'
-          description: The largest number of records that AWS Lambda will give to your function in a single event. The default is 100 records.
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The largest number of records that AWS Lambda will give to your function in a single event. The default is 100 records.
         Parameters:
-          $ref: '#/components/schemas/Map'
-          description: 'A map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source. Currently, AWS Lambda supports only the <code>InitialPositionInStream</code> key. The valid values are: "TRIM_HORIZON" and "LATEST". The default value is "TRIM_HORIZON". For more information, go to <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the Amazon Kinesis Service API Reference. '
+          allOf:
+            - $ref: '#/components/schemas/Map'
+            - description: 'A map (key-value pairs) defining the configuration for AWS Lambda to use when reading the event source. Currently, AWS Lambda supports only the <code>InitialPositionInStream</code> key. The valid values are: "TRIM_HORIZON" and "LATEST". The default value is "TRIM_HORIZON". For more information, go to <a href="http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType">ShardIteratorType</a> in the Amazon Kinesis Service API Reference. '
     Blob:
       type: string
     DeleteFunctionRequest:
@@ -991,11 +1022,13 @@ components:
       type: object
       properties:
         RepositoryType:
-          $ref: '#/components/schemas/String'
-          description: The repository from which you can download the function.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The repository from which you can download the function.
         Location:
-          $ref: '#/components/schemas/String'
-          description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The presigned URL you can use to download the function's .zip file that you previously uploaded. The URL is valid for up to 10 minutes.
       description: The object for the Lambda function location.
     Runtime:
       type: string
@@ -1043,8 +1076,9 @@ components:
       title: InvokeAsyncRequest
       properties:
         InvokeArgs:
-          $ref: '#/components/schemas/Blob'
-          description: JSON that you want to provide to your Lambda function as input.
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: JSON that you want to provide to your Lambda function as input.
     MaxListItems:
       type: integer
       minimum: 1
@@ -1072,7 +1106,8 @@ components:
       title: UploadFunctionRequest
       properties:
         FunctionZip:
-          $ref: '#/components/schemas/Blob'
-          description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: 'A .zip file containing your packaged source code. For more information about creating a .zip file, go to <a href="http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html">AWS LambdaL How it Works</a> in the AWS Lambda Developer Guide. '
 security:
   - hmac: []

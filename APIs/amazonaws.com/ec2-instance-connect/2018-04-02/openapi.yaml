@@ -235,11 +235,13 @@ components:
         Success: true
       properties:
         RequestId:
-          $ref: '#/components/schemas/RequestId'
-          description: The request ID as logged by EC2 Connect. Please provide this when contacting AWS Support.
+          allOf:
+            - $ref: '#/components/schemas/RequestId'
+            - description: The request ID as logged by EC2 Connect. Please provide this when contacting AWS Support.
         Success:
-          $ref: '#/components/schemas/Success'
-          description: Indicates request success.
+          allOf:
+            - $ref: '#/components/schemas/Success'
+            - description: Indicates request success.
     SendSSHPublicKeyRequest:
       type: object
       required:
@@ -250,17 +252,21 @@ components:
       title: SendSSHPublicKeyRequest
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The EC2 instance you wish to publish the SSH key to.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The EC2 instance you wish to publish the SSH key to.
         InstanceOSUser:
-          $ref: '#/components/schemas/InstanceOSUser'
-          description: The OS user on the EC2 instance whom the key may be used to authenticate as.
+          allOf:
+            - $ref: '#/components/schemas/InstanceOSUser'
+            - description: The OS user on the EC2 instance whom the key may be used to authenticate as.
         SSHPublicKey:
-          $ref: '#/components/schemas/SSHPublicKey'
-          description: The public key to be published to the instance. To use it after publication you must have the matching private key.
+          allOf:
+            - $ref: '#/components/schemas/SSHPublicKey'
+            - description: The public key to be published to the instance. To use it after publication you must have the matching private key.
         AvailabilityZone:
-          $ref: '#/components/schemas/AvailabilityZone'
-          description: The availability zone the EC2 instance was launched in.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: The availability zone the EC2 instance was launched in.
     AuthException: {}
     InvalidArgsException: {}
     ServiceException: {}

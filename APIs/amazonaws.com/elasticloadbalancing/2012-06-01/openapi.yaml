@@ -522,20 +522,25 @@ paths:
               - HealthyThreshold
             properties:
               Target:
-                $ref: '#/components/schemas/HealthCheckTarget'
-                description: '<p>The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The range of valid ports is one (1) through 65535.</p> <p>TCP is the default, specified as a TCP: port pair, for example "TCP:5000". In this case, a health check simply attempts to open a TCP connection to the instance on the specified port. Failure to connect within the configured timeout is considered unhealthy.</p> <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p> <p>For HTTP/HTTPS, you must include a ping path in the string. HTTP is specified as a HTTP:port;/;PathToPing; grouping, for example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request is issued to the instance on the given port and path. Any answer other than "200 OK" within the timeout period is considered unhealthy.</p> <p>The total length of the HTTP ping target must be 1024 16-bit Unicode characters or less.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/HealthCheckTarget'
+                  - description: '<p>The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The range of valid ports is one (1) through 65535.</p> <p>TCP is the default, specified as a TCP: port pair, for example "TCP:5000". In this case, a health check simply attempts to open a TCP connection to the instance on the specified port. Failure to connect within the configured timeout is considered unhealthy.</p> <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p> <p>For HTTP/HTTPS, you must include a ping path in the string. HTTP is specified as a HTTP:port;/;PathToPing; grouping, for example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request is issued to the instance on the given port and path. Any answer other than "200 OK" within the timeout period is considered unhealthy.</p> <p>The total length of the HTTP ping target must be 1024 16-bit Unicode characters or less.</p>'
               Interval:
-                $ref: '#/components/schemas/HealthCheckInterval'
-                description: 'The approximate interval, in seconds, between health checks of an individual instance.'
+                allOf:
+                  - $ref: '#/components/schemas/HealthCheckInterval'
+                  - description: 'The approximate interval, in seconds, between health checks of an individual instance.'
               Timeout:
-                $ref: '#/components/schemas/HealthCheckTimeout'
-                description: '<p>The amount of time, in seconds, during which no response means a failed health check.</p> <p>This value must be less than the <code>Interval</code> value.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/HealthCheckTimeout'
+                  - description: '<p>The amount of time, in seconds, during which no response means a failed health check.</p> <p>This value must be less than the <code>Interval</code> value.</p>'
               UnhealthyThreshold:
-                $ref: '#/components/schemas/UnhealthyThreshold'
-                description: The number of consecutive health check failures required before moving the instance to the <code>Unhealthy</code> state.
+                allOf:
+                  - $ref: '#/components/schemas/UnhealthyThreshold'
+                  - description: The number of consecutive health check failures required before moving the instance to the <code>Unhealthy</code> state.
               HealthyThreshold:
-                $ref: '#/components/schemas/HealthyThreshold'
-                description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
+                allOf:
+                  - $ref: '#/components/schemas/HealthyThreshold'
+                  - description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
             description: Information about a health check.
         - name: Action
           in: query
@@ -2806,20 +2811,25 @@ paths:
             type: object
             properties:
               CrossZoneLoadBalancing:
-                $ref: '#/components/schemas/CrossZoneLoadBalancing'
-                description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/CrossZoneLoadBalancing'
+                  - description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
               AccessLog:
-                $ref: '#/components/schemas/AccessLog'
-                description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/AccessLog'
+                  - description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
               ConnectionDraining:
-                $ref: '#/components/schemas/ConnectionDraining'
-                description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/ConnectionDraining'
+                  - description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
               ConnectionSettings:
-                $ref: '#/components/schemas/ConnectionSettings'
-                description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+                allOf:
+                  - $ref: '#/components/schemas/ConnectionSettings'
+                  - description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
               AdditionalAttributes:
-                $ref: '#/components/schemas/AdditionalAttributes'
-                description: Any additional attributes.
+                allOf:
+                  - $ref: '#/components/schemas/AdditionalAttributes'
+                  - description: Any additional attributes.
             description: The attributes for a load balancer.
         - name: Action
           in: query
@@ -3555,11 +3565,13 @@ components:
         - Key
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The key of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
         Value:
-          $ref: '#/components/schemas/TagValue'
-          description: The value of the tag.
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
       description: Information about a tag.
     AccessPointNotFoundException: {}
     TooManyTagsException: {}
@@ -3571,8 +3583,9 @@ components:
           - sg-fc448899
       properties:
         SecurityGroups:
-          $ref: '#/components/schemas/SecurityGroups'
-          description: The IDs of the security groups associated with the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroups'
+            - description: The IDs of the security groups associated with the load balancer.
       description: Contains the output of ApplySecurityGroupsToLoadBalancer.
     SecurityGroupId:
       type: string
@@ -3586,8 +3599,9 @@ components:
           - subnet-0ecac448
       properties:
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the subnets attached to the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the subnets attached to the load balancer.
       description: Contains the output of AttachLoadBalancerToSubnets.
     SubnetId:
       type: string
@@ -3604,8 +3618,9 @@ components:
           UnhealthyThreshold: 2
       properties:
         HealthCheck:
-          $ref: '#/components/schemas/HealthCheck'
-          description: The updated health check.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheck'
+            - description: The updated health check.
       description: Contains the output of ConfigureHealthCheck.
     HealthCheckTarget:
       type: string
@@ -3641,8 +3656,9 @@ components:
         DNSName: internal-my-load-balancer-123456789.us-west-2.elb.amazonaws.com
       properties:
         DNSName:
-          $ref: '#/components/schemas/DNSName'
-          description: The DNS name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/DNSName'
+            - description: The DNS name of the load balancer.
       description: Contains the output for CreateLoadBalancer.
     Listener:
       type: object
@@ -3652,20 +3668,25 @@ components:
         - InstancePort
       properties:
         Protocol:
-          $ref: '#/components/schemas/Protocol'
-          description: 'The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or SSL.'
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: 'The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or SSL.'
         LoadBalancerPort:
-          $ref: '#/components/schemas/AccessPointPort'
-          description: 'The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.'
+          allOf:
+            - $ref: '#/components/schemas/AccessPointPort'
+            - description: 'The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.'
         InstanceProtocol:
-          $ref: '#/components/schemas/Protocol'
-          description: '<p>The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.</p> <p>If the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS.</p> <p>If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure, (HTTPS or SSL), the listener''s <code>InstanceProtocol</code> must also be secure.</p> <p>If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP, the listener''s <code>InstanceProtocol</code> must be HTTP or TCP.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: '<p>The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.</p> <p>If the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS.</p> <p>If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is secure, (HTTPS or SSL), the listener''s <code>InstanceProtocol</code> must also be secure.</p> <p>If there is another listener with the same <code>InstancePort</code> whose <code>InstanceProtocol</code> is HTTP or TCP, the listener''s <code>InstanceProtocol</code> must be HTTP or TCP.</p>'
         InstancePort:
-          $ref: '#/components/schemas/InstancePort'
-          description: The port on which the instance is listening.
+          allOf:
+            - $ref: '#/components/schemas/InstancePort'
+            - description: The port on which the instance is listening.
         SSLCertificateId:
-          $ref: '#/components/schemas/SSLCertificateId'
-          description: The Amazon Resource Name (ARN) of the server certificate.
+          allOf:
+            - $ref: '#/components/schemas/SSLCertificateId'
+            - description: The Amazon Resource Name (ARN) of the server certificate.
       description: '<p>Information about a listener.</p> <p>For information about the protocols and the ports supported by Elastic Load Balancing, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
     AvailabilityZone:
       type: string
@@ -3688,11 +3709,13 @@ components:
       type: object
       properties:
         AttributeName:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute.
         AttributeValue:
-          $ref: '#/components/schemas/AttributeValue'
-          description: The value of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AttributeValue'
+            - description: The value of the attribute.
       description: Information about a policy attribute.
     PolicyTypeNotFoundException: {}
     DeleteAccessPointOutput:
@@ -3717,26 +3740,30 @@ components:
           - InstanceId: i-afefb49b
       properties:
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The remaining instances registered with the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The remaining instances registered with the load balancer.
       description: Contains the output of DeregisterInstancesFromLoadBalancer.
     Instance:
       type: object
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The instance ID.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The instance ID.
       description: The ID of an EC2 instance.
     InvalidEndPointException: {}
     DescribeAccountLimitsOutput:
       type: object
       properties:
         Limits:
-          $ref: '#/components/schemas/Limits'
-          description: Information about the limits.
+          allOf:
+            - $ref: '#/components/schemas/Limits'
+            - description: Information about the limits.
         NextMarker:
-          $ref: '#/components/schemas/Marker'
-          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
     DescribeEndPointStateOutput:
       type: object
       example:
@@ -3751,8 +3778,9 @@ components:
             State: InService
       properties:
         InstanceStates:
-          $ref: '#/components/schemas/InstanceStates'
-          description: Information about the health of the instances.
+          allOf:
+            - $ref: '#/components/schemas/InstanceStates'
+            - description: Information about the health of the instances.
       description: Contains the output for DescribeInstanceHealth.
     DescribeLoadBalancerAttributesOutput:
       type: object
@@ -3769,8 +3797,9 @@ components:
             Enabled: false
       properties:
         LoadBalancerAttributes:
-          $ref: '#/components/schemas/LoadBalancerAttributes'
-          description: Information about the load balancer attributes.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerAttributes'
+            - description: Information about the load balancer attributes.
       description: Contains the output of DescribeLoadBalancerAttributes.
     LoadBalancerAttributeNotFoundException: {}
     DescribeLoadBalancerPoliciesOutput:
@@ -3784,8 +3813,9 @@ components:
             PolicyTypeName: BackendServerAuthenticationPolicyType
       properties:
         PolicyDescriptions:
-          $ref: '#/components/schemas/PolicyDescriptions'
-          description: Information about the policies.
+          allOf:
+            - $ref: '#/components/schemas/PolicyDescriptions'
+            - description: Information about the policies.
       description: Contains the output of DescribeLoadBalancerPolicies.
     PolicyName:
       type: string
@@ -3802,8 +3832,9 @@ components:
             PolicyTypeName: ProxyProtocolPolicyType
       properties:
         PolicyTypeDescriptions:
-          $ref: '#/components/schemas/PolicyTypeDescriptions'
-          description: Information about the policy types.
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeDescriptions'
+            - description: Information about the policy types.
       description: Contains the output of DescribeLoadBalancerPolicyTypes.
     PolicyTypeName:
       type: string
@@ -3868,11 +3899,13 @@ components:
             VPCId: vpc-a01106c2
       properties:
         LoadBalancerDescriptions:
-          $ref: '#/components/schemas/LoadBalancerDescriptions'
-          description: Information about the load balancers.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerDescriptions'
+            - description: Information about the load balancers.
         NextMarker:
-          $ref: '#/components/schemas/Marker'
-          description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: 'The marker to use when requesting the next set of results. If there are no additional results, the string is empty.'
       description: Contains the parameters for DescribeLoadBalancers.
     DependencyThrottleException: {}
     DescribeTagsOutput:
@@ -3887,8 +3920,9 @@ components:
                 Value: digital-media
       properties:
         TagDescriptions:
-          $ref: '#/components/schemas/TagDescriptions'
-          description: Information about the tags.
+          allOf:
+            - $ref: '#/components/schemas/TagDescriptions'
+            - description: Information about the tags.
       description: Contains the output for DescribeTags.
     DetachLoadBalancerFromSubnetsOutput:
       type: object
@@ -3897,8 +3931,9 @@ components:
           - subnet-15aaab61
       properties:
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the remaining subnets for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the remaining subnets for the load balancer.
       description: Contains the output of DetachLoadBalancerFromSubnets.
     RemoveAvailabilityZonesOutput:
       type: object
@@ -3907,8 +3942,9 @@ components:
           - us-west-2b
       properties:
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: The remaining Availability Zones for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The remaining Availability Zones for the load balancer.
       description: Contains the output for DisableAvailabilityZonesForLoadBalancer.
     AddAvailabilityZonesOutput:
       type: object
@@ -3918,8 +3954,9 @@ components:
           - us-west-2b
       properties:
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: The updated list of Availability Zones for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The updated list of Availability Zones for the load balancer.
       description: Contains the output of EnableAvailabilityZonesForLoadBalancer.
     ModifyLoadBalancerAttributesOutput:
       type: object
@@ -3931,11 +3968,13 @@ components:
         LoadBalancerName: my-load-balancer
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         LoadBalancerAttributes:
-          $ref: '#/components/schemas/LoadBalancerAttributes'
-          description: Information about the load balancer attributes.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerAttributes'
+            - description: Information about the load balancer attributes.
       description: Contains the output of ModifyLoadBalancerAttributes.
     CrossZoneLoadBalancing:
       type: object
@@ -3943,8 +3982,9 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/CrossZoneLoadBalancingEnabled'
-          description: Specifies whether cross-zone load balancing is enabled for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/CrossZoneLoadBalancingEnabled'
+            - description: Specifies whether cross-zone load balancing is enabled for the load balancer.
       description: Information about the <code>CrossZoneLoadBalancing</code> attribute.
     AccessLog:
       type: object
@@ -3952,17 +3992,21 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/AccessLogEnabled'
-          description: Specifies whether access logs are enabled for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessLogEnabled'
+            - description: Specifies whether access logs are enabled for the load balancer.
         S3BucketName:
-          $ref: '#/components/schemas/S3BucketName'
-          description: The name of the Amazon S3 bucket where the access logs are stored.
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the Amazon S3 bucket where the access logs are stored.
         EmitInterval:
-          $ref: '#/components/schemas/AccessLogInterval'
-          description: '<p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p> <p>Default: 60 minutes</p>'
+          allOf:
+            - $ref: '#/components/schemas/AccessLogInterval'
+            - description: '<p>The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.</p> <p>Default: 60 minutes</p>'
         S3BucketPrefix:
-          $ref: '#/components/schemas/AccessLogPrefix'
-          description: 'The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>. If the prefix is not provided, the log is placed at the root level of the bucket.'
+          allOf:
+            - $ref: '#/components/schemas/AccessLogPrefix'
+            - description: 'The logical hierarchy you created for your Amazon S3 bucket, for example <code>my-bucket-prefix/prod</code>. If the prefix is not provided, the log is placed at the root level of the bucket.'
       description: Information about the <code>AccessLog</code> attribute.
     ConnectionDraining:
       type: object
@@ -3970,11 +4014,13 @@ components:
         - Enabled
       properties:
         Enabled:
-          $ref: '#/components/schemas/ConnectionDrainingEnabled'
-          description: Specifies whether connection draining is enabled for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/ConnectionDrainingEnabled'
+            - description: Specifies whether connection draining is enabled for the load balancer.
         Timeout:
-          $ref: '#/components/schemas/ConnectionDrainingTimeout'
-          description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
+          allOf:
+            - $ref: '#/components/schemas/ConnectionDrainingTimeout'
+            - description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
       description: Information about the <code>ConnectionDraining</code> attribute.
     ConnectionSettings:
       type: object
@@ -3982,8 +4028,9 @@ components:
         - IdleTimeout
       properties:
         IdleTimeout:
-          $ref: '#/components/schemas/IdleTimeout'
-          description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
+          allOf:
+            - $ref: '#/components/schemas/IdleTimeout'
+            - description: 'The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.'
       description: Information about the <code>ConnectionSettings</code> attribute.
     AdditionalAttributes:
       type: array
@@ -3999,8 +4046,9 @@ components:
           - InstanceId: i-afefb49b
       properties:
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The updated list of instances for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The updated list of instances for the load balancer.
       description: Contains the output of RegisterInstancesWithLoadBalancer.
     RemoveTagsOutput:
       type: object
@@ -4010,8 +4058,9 @@ components:
       type: object
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
-          description: The name of the key.
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The name of the key.
       description: The key of a tag.
     SetLoadBalancerListenerSSLCertificateOutput:
       type: object
@@ -4046,11 +4095,13 @@ components:
       title: AddAvailabilityZonesInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: The Availability Zones. These must be in the same region as the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The Availability Zones. These must be in the same region as the load balancer.
       description: Contains the parameters for EnableAvailabilityZonesForLoadBalancer.
     LoadBalancerNames:
       type: array
@@ -4069,11 +4120,13 @@ components:
       title: AddTagsInput
       properties:
         LoadBalancerNames:
-          $ref: '#/components/schemas/LoadBalancerNames'
-          description: The name of the load balancer. You can specify one load balancer only.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerNames'
+            - description: The name of the load balancer. You can specify one load balancer only.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags.
       description: Contains the parameters for AddTags.
     AdditionalAttributeKey:
       type: string
@@ -4087,21 +4140,25 @@ components:
       type: object
       properties:
         Key:
-          $ref: '#/components/schemas/AdditionalAttributeKey'
-          description: '<p>The name of the attribute.</p> <p>The following attribute is supported.</p> <ul> <li> <p> <code>elb.http.desyncmitigationmode</code> - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default is <code>defensive</code>.</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/AdditionalAttributeKey'
+            - description: '<p>The name of the attribute.</p> <p>The following attribute is supported.</p> <ul> <li> <p> <code>elb.http.desyncmitigationmode</code> - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are <code>monitor</code>, <code>defensive</code>, and <code>strictest</code>. The default is <code>defensive</code>.</p> </li> </ul>'
         Value:
-          $ref: '#/components/schemas/AdditionalAttributeValue'
-          description: This value of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalAttributeValue'
+            - description: This value of the attribute.
       description: Information about additional load balancer attributes.
     AppCookieStickinessPolicy:
       type: object
       properties:
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.
         CookieName:
-          $ref: '#/components/schemas/CookieName'
-          description: The name of the application cookie used for stickiness.
+          allOf:
+            - $ref: '#/components/schemas/CookieName'
+            - description: The name of the application cookie used for stickiness.
       description: Information about a policy for application-controlled session stickiness.
     AppCookieStickinessPolicies:
       type: array
@@ -4121,11 +4178,13 @@ components:
       title: ApplySecurityGroupsToLoadBalancerInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         SecurityGroups:
-          $ref: '#/components/schemas/SecurityGroups'
-          description: The IDs of the security groups to associate with the load balancer. Note that you cannot specify the name of the security group.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroups'
+            - description: The IDs of the security groups to associate with the load balancer. Note that you cannot specify the name of the security group.
       description: Contains the parameters for ApplySecurityGroupsToLoadBalancer.
     Subnets:
       type: array
@@ -4139,11 +4198,13 @@ components:
       title: AttachLoadBalancerToSubnetsInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the subnets to add. You can add only one subnet per Availability Zone.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the subnets to add. You can add only one subnet per Availability Zone.
       description: Contains the parameters for AttachLoaBalancerToSubnets.
     AttributeName:
       type: string
@@ -4163,11 +4224,13 @@ components:
       type: object
       properties:
         InstancePort:
-          $ref: '#/components/schemas/InstancePort'
-          description: The port on which the EC2 instance is listening.
+          allOf:
+            - $ref: '#/components/schemas/InstancePort'
+            - description: The port on which the EC2 instance is listening.
         PolicyNames:
-          $ref: '#/components/schemas/PolicyNames'
-          description: The names of the policies enabled for the EC2 instance.
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: The names of the policies enabled for the EC2 instance.
       description: Information about the configuration of an EC2 instance.
     BackendServerDescriptions:
       type: array
@@ -4185,20 +4248,25 @@ components:
         - HealthyThreshold
       properties:
         Target:
-          $ref: '#/components/schemas/HealthCheckTarget'
-          description: '<p>The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The range of valid ports is one (1) through 65535.</p> <p>TCP is the default, specified as a TCP: port pair, for example "TCP:5000". In this case, a health check simply attempts to open a TCP connection to the instance on the specified port. Failure to connect within the configured timeout is considered unhealthy.</p> <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p> <p>For HTTP/HTTPS, you must include a ping path in the string. HTTP is specified as a HTTP:port;/;PathToPing; grouping, for example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request is issued to the instance on the given port and path. Any answer other than "200 OK" within the timeout period is considered unhealthy.</p> <p>The total length of the HTTP ping target must be 1024 16-bit Unicode characters or less.</p>'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckTarget'
+            - description: '<p>The instance being checked. The protocol is either TCP, HTTP, HTTPS, or SSL. The range of valid ports is one (1) through 65535.</p> <p>TCP is the default, specified as a TCP: port pair, for example "TCP:5000". In this case, a health check simply attempts to open a TCP connection to the instance on the specified port. Failure to connect within the configured timeout is considered unhealthy.</p> <p>SSL is also specified as SSL: port pair, for example, SSL:5000.</p> <p>For HTTP/HTTPS, you must include a ping path in the string. HTTP is specified as a HTTP:port;/;PathToPing; grouping, for example "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request is issued to the instance on the given port and path. Any answer other than "200 OK" within the timeout period is considered unhealthy.</p> <p>The total length of the HTTP ping target must be 1024 16-bit Unicode characters or less.</p>'
         Interval:
-          $ref: '#/components/schemas/HealthCheckInterval'
-          description: 'The approximate interval, in seconds, between health checks of an individual instance.'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckInterval'
+            - description: 'The approximate interval, in seconds, between health checks of an individual instance.'
         Timeout:
-          $ref: '#/components/schemas/HealthCheckTimeout'
-          description: '<p>The amount of time, in seconds, during which no response means a failed health check.</p> <p>This value must be less than the <code>Interval</code> value.</p>'
+          allOf:
+            - $ref: '#/components/schemas/HealthCheckTimeout'
+            - description: '<p>The amount of time, in seconds, during which no response means a failed health check.</p> <p>This value must be less than the <code>Interval</code> value.</p>'
         UnhealthyThreshold:
-          $ref: '#/components/schemas/UnhealthyThreshold'
-          description: The number of consecutive health check failures required before moving the instance to the <code>Unhealthy</code> state.
+          allOf:
+            - $ref: '#/components/schemas/UnhealthyThreshold'
+            - description: The number of consecutive health check failures required before moving the instance to the <code>Unhealthy</code> state.
         HealthyThreshold:
-          $ref: '#/components/schemas/HealthyThreshold'
-          description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
+          allOf:
+            - $ref: '#/components/schemas/HealthyThreshold'
+            - description: The number of consecutive health checks successes required before moving the instance to the <code>Healthy</code> state.
       description: Information about a health check.
     ConfigureHealthCheckInput:
       type: object
@@ -4208,11 +4276,13 @@ components:
       title: ConfigureHealthCheckInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         HealthCheck:
-          $ref: '#/components/schemas/HealthCheck'
-          description: The configuration information.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheck'
+            - description: The configuration information.
       description: Contains the parameters for ConfigureHealthCheck.
     ConnectionDrainingEnabled:
       type: boolean
@@ -4238,26 +4308,33 @@ components:
       title: CreateAccessPointInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: '<p>The name of the load balancer.</p> <p>This name must be unique within your set of load balancers for the region, must have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.</p>'
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: '<p>The name of the load balancer.</p> <p>This name must be unique within your set of load balancers for the region, must have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.</p>'
         Listeners:
-          $ref: '#/components/schemas/Listeners'
-          description: '<p>The listeners.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/Listeners'
+            - description: '<p>The listeners.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html">Listeners for Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: <p>One or more Availability Zones from the same region as the load balancer.</p> <p>You must specify at least one Availability Zone.</p> <p>You can add more Availability Zones after you create the load balancer using <a>EnableAvailabilityZonesForLoadBalancer</a>.</p>
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: <p>One or more Availability Zones from the same region as the load balancer.</p> <p>You must specify at least one Availability Zone.</p> <p>You can add more Availability Zones after you create the load balancer using <a>EnableAvailabilityZonesForLoadBalancer</a>.</p>
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the subnets in your VPC to attach to the load balancer. Specify one subnet per Availability Zone specified in <code>AvailabilityZones</code>.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the subnets in your VPC to attach to the load balancer. Specify one subnet per Availability Zone specified in <code>AvailabilityZones</code>.
         SecurityGroups:
-          $ref: '#/components/schemas/SecurityGroups'
-          description: The IDs of the security groups to assign to the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroups'
+            - description: The IDs of the security groups to assign to the load balancer.
         Scheme:
-          $ref: '#/components/schemas/LoadBalancerScheme'
-          description: '<p>The type of a load balancer. Valid only for load balancers in a VPC.</p> <p>By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme">Load Balancer Scheme</a> in the <i>Elastic Load Balancing User Guide</i>.</p> <p>Specify <code>internal</code> to create a load balancer with a DNS name that resolves to private IP addresses.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerScheme'
+            - description: '<p>The type of a load balancer. Valid only for load balancers in a VPC.</p> <p>By default, Elastic Load Balancing creates an Internet-facing load balancer with a DNS name that resolves to public IP addresses. For more information about Internet-facing and Internal load balancers, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme">Load Balancer Scheme</a> in the <i>Elastic Load Balancing User Guide</i>.</p> <p>Specify <code>internal</code> to create a load balancer with a DNS name that resolves to private IP addresses.</p>'
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: '<p>A list of tags to assign to the load balancer.</p> <p>For more information about tagging your load balancer, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>A list of tags to assign to the load balancer.</p> <p>For more information about tagging your load balancer, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html">Tag Your Classic Load Balancer</a> in the <i>Classic Load Balancers Guide</i>.</p>'
       description: Contains the parameters for CreateLoadBalancer.
     DNSName:
       type: string
@@ -4270,14 +4347,17 @@ components:
       title: CreateAppCookieStickinessPolicyInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
         CookieName:
-          $ref: '#/components/schemas/CookieName'
-          description: The name of the application cookie used for stickiness.
+          allOf:
+            - $ref: '#/components/schemas/CookieName'
+            - description: The name of the application cookie used for stickiness.
       description: Contains the parameters for CreateAppCookieStickinessPolicy.
     CreateLBCookieStickinessPolicyInput:
       type: object
@@ -4287,14 +4367,17 @@ components:
       title: CreateLBCookieStickinessPolicyInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy being created. Policy names must consist of alphanumeric characters and dashes (-). This name must be unique within the set of policies for this load balancer.
         CookieExpirationPeriod:
-          $ref: '#/components/schemas/CookieExpirationPeriod'
-          description: 'The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.'
+          allOf:
+            - $ref: '#/components/schemas/CookieExpirationPeriod'
+            - description: 'The time period, in seconds, after which the cookie should be considered stale. If you do not specify this parameter, the default value is 0, which indicates that the sticky session should last for the duration of the browser session.'
       description: Contains the parameters for CreateLBCookieStickinessPolicy.
     CreateLoadBalancerListenerInput:
       type: object
@@ -4304,11 +4387,13 @@ components:
       title: CreateLoadBalancerListenerInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Listeners:
-          $ref: '#/components/schemas/Listeners'
-          description: The listeners.
+          allOf:
+            - $ref: '#/components/schemas/Listeners'
+            - description: The listeners.
       description: Contains the parameters for CreateLoadBalancerListeners.
     PolicyAttributes:
       type: array
@@ -4323,17 +4408,21 @@ components:
       title: CreateLoadBalancerPolicyInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the load balancer policy to be created. This name must be unique within the set of policies for this load balancer.
         PolicyTypeName:
-          $ref: '#/components/schemas/PolicyTypeName'
-          description: 'The name of the base policy type. To get the list of policy types, use <a>DescribeLoadBalancerPolicyTypes</a>.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeName'
+            - description: 'The name of the base policy type. To get the list of policy types, use <a>DescribeLoadBalancerPolicyTypes</a>.'
         PolicyAttributes:
-          $ref: '#/components/schemas/PolicyAttributes'
-          description: The policy attributes.
+          allOf:
+            - $ref: '#/components/schemas/PolicyAttributes'
+            - description: The policy attributes.
       description: Contains the parameters for CreateLoadBalancerPolicy.
     CreatedTime:
       type: string
@@ -4349,8 +4438,9 @@ components:
       title: DeleteAccessPointInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
       description: Contains the parameters for DeleteLoadBalancer.
     Ports:
       type: array
@@ -4364,11 +4454,13 @@ components:
       title: DeleteLoadBalancerListenerInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         LoadBalancerPorts:
-          $ref: '#/components/schemas/Ports'
-          description: The client port numbers of the listeners.
+          allOf:
+            - $ref: '#/components/schemas/Ports'
+            - description: The client port numbers of the listeners.
       description: Contains the parameters for DeleteLoadBalancerListeners.
     DeleteLoadBalancerPolicyInput:
       type: object
@@ -4378,11 +4470,13 @@ components:
       title: DeleteLoadBalancerPolicyInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
       description: Contains the parameters for DeleteLoadBalancerPolicy.
     Instances:
       type: array
@@ -4396,11 +4490,13 @@ components:
       title: DeregisterEndPointsInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The IDs of the instances.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The IDs of the instances.
       description: Contains the parameters for DeregisterInstancesFromLoadBalancer.
     Marker:
       type: string
@@ -4413,14 +4509,17 @@ components:
       title: DescribeAccessPointsInput
       properties:
         LoadBalancerNames:
-          $ref: '#/components/schemas/LoadBalancerNames'
-          description: The names of the load balancers.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerNames'
+            - description: The names of the load balancers.
         Marker:
-          $ref: '#/components/schemas/Marker'
-          description: The marker for the next set of results. (You received this marker from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The marker for the next set of results. (You received this marker from a previous call.)
         PageSize:
-          $ref: '#/components/schemas/PageSize'
-          description: The maximum number of results to return with this call (a number from 1 to 400). The default is 400.
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: The maximum number of results to return with this call (a number from 1 to 400). The default is 400.
       description: Contains the parameters for DescribeLoadBalancers.
     LoadBalancerDescriptions:
       type: array
@@ -4431,11 +4530,13 @@ components:
       title: DescribeAccountLimitsInput
       properties:
         Marker:
-          $ref: '#/components/schemas/Marker'
-          description: The marker for the next set of results. (You received this marker from a previous call.)
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The marker for the next set of results. (You received this marker from a previous call.)
         PageSize:
-          $ref: '#/components/schemas/PageSize'
-          description: The maximum number of results to return with this call.
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: The maximum number of results to return with this call.
     Limits:
       type: array
       items:
@@ -4447,11 +4548,13 @@ components:
       title: DescribeEndPointStateInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The IDs of the instances.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The IDs of the instances.
       description: Contains the parameters for DescribeInstanceHealth.
     InstanceStates:
       type: array
@@ -4464,38 +4567,46 @@ components:
       title: DescribeLoadBalancerAttributesInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
       description: Contains the parameters for DescribeLoadBalancerAttributes.
     LoadBalancerAttributes:
       type: object
       properties:
         CrossZoneLoadBalancing:
-          $ref: '#/components/schemas/CrossZoneLoadBalancing'
-          description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/CrossZoneLoadBalancing'
+            - description: '<p>If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html">Configure Cross-Zone Load Balancing</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         AccessLog:
-          $ref: '#/components/schemas/AccessLog'
-          description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/AccessLog'
+            - description: '<p>If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html">Enable Access Logs</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         ConnectionDraining:
-          $ref: '#/components/schemas/ConnectionDraining'
-          description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ConnectionDraining'
+            - description: '<p>If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html">Configure Connection Draining</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         ConnectionSettings:
-          $ref: '#/components/schemas/ConnectionSettings'
-          description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/ConnectionSettings'
+            - description: '<p>If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.</p> <p>By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html">Configure Idle Connection Timeout</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         AdditionalAttributes:
-          $ref: '#/components/schemas/AdditionalAttributes'
-          description: Any additional attributes.
+          allOf:
+            - $ref: '#/components/schemas/AdditionalAttributes'
+            - description: Any additional attributes.
       description: The attributes for a load balancer.
     DescribeLoadBalancerPoliciesInput:
       type: object
       title: DescribeLoadBalancerPoliciesInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         PolicyNames:
-          $ref: '#/components/schemas/PolicyNames'
-          description: The names of the policies.
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: The names of the policies.
       description: Contains the parameters for DescribeLoadBalancerPolicies.
     PolicyDescriptions:
       type: array
@@ -4510,8 +4621,9 @@ components:
       title: DescribeLoadBalancerPolicyTypesInput
       properties:
         PolicyTypeNames:
-          $ref: '#/components/schemas/PolicyTypeNames'
-          description: 'The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeNames'
+            - description: 'The names of the policy types. If no names are specified, describes all policy types defined by Elastic Load Balancing.'
       description: Contains the parameters for DescribeLoadBalancerPolicyTypes.
     PolicyTypeDescriptions:
       type: array
@@ -4530,8 +4642,9 @@ components:
       title: DescribeTagsInput
       properties:
         LoadBalancerNames:
-          $ref: '#/components/schemas/LoadBalancerNamesMax20'
-          description: The names of the load balancers.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerNamesMax20'
+            - description: The names of the load balancers.
       description: Contains the parameters for DescribeTags.
     TagDescriptions:
       type: array
@@ -4547,11 +4660,13 @@ components:
       title: DetachLoadBalancerFromSubnetsInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the subnets.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the subnets.
       description: Contains the parameters for DetachLoadBalancerFromSubnets.
     EndPointPort:
       type: integer
@@ -4565,27 +4680,33 @@ components:
       type: object
       properties:
         InstanceId:
-          $ref: '#/components/schemas/InstanceId'
-          description: The ID of the instance.
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The ID of the instance.
         State:
-          $ref: '#/components/schemas/State'
-          description: '<p>The current state of the instance.</p> <p>Valid values: <code>InService</code> | <code>OutOfService</code> | <code>Unknown</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/State'
+            - description: '<p>The current state of the instance.</p> <p>Valid values: <code>InService</code> | <code>OutOfService</code> | <code>Unknown</code> </p>'
         ReasonCode:
-          $ref: '#/components/schemas/ReasonCode'
-          description: '<p>Information about the cause of <code>OutOfService</code> instances. Specifically, whether the cause is Elastic Load Balancing or the instance.</p> <p>Valid values: <code>ELB</code> | <code>Instance</code> | <code>N/A</code> </p>'
+          allOf:
+            - $ref: '#/components/schemas/ReasonCode'
+            - description: '<p>Information about the cause of <code>OutOfService</code> instances. Specifically, whether the cause is Elastic Load Balancing or the instance.</p> <p>Valid values: <code>ELB</code> | <code>Instance</code> | <code>N/A</code> </p>'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: <p>A description of the instance state. This string can contain one or more of the following messages.</p> <ul> <li> <p> <code>N/A</code> </p> </li> <li> <p> <code>A transient error occurred. Please try again later.</code> </p> </li> <li> <p> <code>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance has not passed the configured HealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance registration is still in progress.</code> </p> </li> <li> <p> <code>Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.</code> </p> </li> <li> <p> <code>Instance is not currently registered with the LoadBalancer.</code> </p> </li> <li> <p> <code>Instance deregistration currently in progress.</code> </p> </li> <li> <p> <code>Disable Availability Zone is currently in progress.</code> </p> </li> <li> <p> <code>Instance is in pending state.</code> </p> </li> <li> <p> <code>Instance is in stopped state.</code> </p> </li> <li> <p> <code>Instance is in terminated state.</code> </p> </li> </ul>
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: <p>A description of the instance state. This string can contain one or more of the following messages.</p> <ul> <li> <p> <code>N/A</code> </p> </li> <li> <p> <code>A transient error occurred. Please try again later.</code> </p> </li> <li> <p> <code>Instance has failed at least the UnhealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance has not passed the configured HealthyThreshold number of health checks consecutively.</code> </p> </li> <li> <p> <code>Instance registration is still in progress.</code> </p> </li> <li> <p> <code>Instance is in the EC2 Availability Zone for which LoadBalancer is not configured to route traffic to.</code> </p> </li> <li> <p> <code>Instance is not currently registered with the LoadBalancer.</code> </p> </li> <li> <p> <code>Instance deregistration currently in progress.</code> </p> </li> <li> <p> <code>Disable Availability Zone is currently in progress.</code> </p> </li> <li> <p> <code>Instance is in pending state.</code> </p> </li> <li> <p> <code>Instance is in stopped state.</code> </p> </li> <li> <p> <code>Instance is in terminated state.</code> </p> </li> </ul>
       description: Information about the state of an EC2 instance.
     LBCookieStickinessPolicy:
       type: object
       properties:
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy. This name must be unique within the set of policies for this load balancer.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy. This name must be unique within the set of policies for this load balancer.
         CookieExpirationPeriod:
-          $ref: '#/components/schemas/CookieExpirationPeriod'
-          description: 'The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.'
+          allOf:
+            - $ref: '#/components/schemas/CookieExpirationPeriod'
+            - description: 'The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.'
       description: Information about a policy for duration-based session stickiness.
     LBCookieStickinessPolicies:
       type: array
@@ -4599,11 +4720,13 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/Name'
-          description: '<p>The name of the limit. The possible values are:</p> <ul> <li> <p>classic-listeners</p> </li> <li> <p>classic-load-balancers</p> </li> <li> <p>classic-registered-instances</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: '<p>The name of the limit. The possible values are:</p> <ul> <li> <p>classic-listeners</p> </li> <li> <p>classic-load-balancers</p> </li> <li> <p>classic-registered-instances</p> </li> </ul>'
         Max:
-          $ref: '#/components/schemas/Max'
-          description: The maximum value of the limit.
+          allOf:
+            - $ref: '#/components/schemas/Max'
+            - description: The maximum value of the limit.
       description: Information about an Elastic Load Balancing resource limit for your AWS account.
     Protocol:
       type: string
@@ -4613,11 +4736,13 @@ components:
       type: object
       properties:
         Listener:
-          $ref: '#/components/schemas/Listener'
-          description: The listener.
+          allOf:
+            - $ref: '#/components/schemas/Listener'
+            - description: The listener.
         PolicyNames:
-          $ref: '#/components/schemas/PolicyNames'
-          description: 'The policies. If there are no policies enabled, the list is empty.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: 'The policies. If there are no policies enabled, the list is empty.'
       description: The policies enabled for a listener.
     ListenerDescriptions:
       type: array
@@ -4627,14 +4752,17 @@ components:
       type: object
       properties:
         AppCookieStickinessPolicies:
-          $ref: '#/components/schemas/AppCookieStickinessPolicies'
-          description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
+          allOf:
+            - $ref: '#/components/schemas/AppCookieStickinessPolicies'
+            - description: The stickiness policies created using <a>CreateAppCookieStickinessPolicy</a>.
         LBCookieStickinessPolicies:
-          $ref: '#/components/schemas/LBCookieStickinessPolicies'
-          description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
+          allOf:
+            - $ref: '#/components/schemas/LBCookieStickinessPolicies'
+            - description: The stickiness policies created using <a>CreateLBCookieStickinessPolicy</a>.
         OtherPolicies:
-          $ref: '#/components/schemas/PolicyNames'
-          description: The policies other than the stickiness policies.
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: The policies other than the stickiness policies.
       description: The policies for a load balancer.
     VPCId:
       type: string
@@ -4642,63 +4770,81 @@ components:
       type: object
       properties:
         OwnerAlias:
-          $ref: '#/components/schemas/SecurityGroupOwnerAlias'
-          description: The owner of the security group.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupOwnerAlias'
+            - description: The owner of the security group.
         GroupName:
-          $ref: '#/components/schemas/SecurityGroupName'
-          description: The name of the security group.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupName'
+            - description: The name of the security group.
       description: Information about a source security group.
     LoadBalancerDescription:
       type: object
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         DNSName:
-          $ref: '#/components/schemas/DNSName'
-          description: The DNS name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/DNSName'
+            - description: The DNS name of the load balancer.
         CanonicalHostedZoneName:
-          $ref: '#/components/schemas/DNSName'
-          description: '<p>The DNS name of the load balancer.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html">Configure a Custom Domain Name</a> in the <i>Classic Load Balancers Guide</i>.</p>'
+          allOf:
+            - $ref: '#/components/schemas/DNSName'
+            - description: '<p>The DNS name of the load balancer.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/using-domain-names-with-elb.html">Configure a Custom Domain Name</a> in the <i>Classic Load Balancers Guide</i>.</p>'
         CanonicalHostedZoneNameID:
-          $ref: '#/components/schemas/DNSName'
-          description: The ID of the Amazon Route 53 hosted zone for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/DNSName'
+            - description: The ID of the Amazon Route 53 hosted zone for the load balancer.
         ListenerDescriptions:
-          $ref: '#/components/schemas/ListenerDescriptions'
-          description: The listeners for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/ListenerDescriptions'
+            - description: The listeners for the load balancer.
         Policies:
-          $ref: '#/components/schemas/Policies'
-          description: The policies defined for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Policies'
+            - description: The policies defined for the load balancer.
         BackendServerDescriptions:
-          $ref: '#/components/schemas/BackendServerDescriptions'
-          description: Information about your EC2 instances.
+          allOf:
+            - $ref: '#/components/schemas/BackendServerDescriptions'
+            - description: Information about your EC2 instances.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: The Availability Zones for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The Availability Zones for the load balancer.
         Subnets:
-          $ref: '#/components/schemas/Subnets'
-          description: The IDs of the subnets for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Subnets'
+            - description: The IDs of the subnets for the load balancer.
         VPCId:
-          $ref: '#/components/schemas/VPCId'
-          description: The ID of the VPC for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/VPCId'
+            - description: The ID of the VPC for the load balancer.
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The IDs of the instances for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The IDs of the instances for the load balancer.
         HealthCheck:
-          $ref: '#/components/schemas/HealthCheck'
-          description: Information about the health checks conducted on the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/HealthCheck'
+            - description: Information about the health checks conducted on the load balancer.
         SourceSecurityGroup:
-          $ref: '#/components/schemas/SourceSecurityGroup'
-          description: 'The security group for the load balancer, which you can use as part of your inbound rules for your registered instances. To only allow traffic from load balancers, add a security group rule that specifies this source security group as the inbound source.'
+          allOf:
+            - $ref: '#/components/schemas/SourceSecurityGroup'
+            - description: 'The security group for the load balancer, which you can use as part of your inbound rules for your registered instances. To only allow traffic from load balancers, add a security group rule that specifies this source security group as the inbound source.'
         SecurityGroups:
-          $ref: '#/components/schemas/SecurityGroups'
-          description: The security groups for the load balancer. Valid only for load balancers in a VPC.
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroups'
+            - description: The security groups for the load balancer. Valid only for load balancers in a VPC.
         CreatedTime:
-          $ref: '#/components/schemas/CreatedTime'
-          description: The date and time the load balancer was created.
+          allOf:
+            - $ref: '#/components/schemas/CreatedTime'
+            - description: The date and time the load balancer was created.
         Scheme:
-          $ref: '#/components/schemas/LoadBalancerScheme'
-          description: '<p>The type of load balancer. Valid only for load balancers in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>'
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerScheme'
+            - description: '<p>The type of load balancer. Valid only for load balancers in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>'
       description: Information about a load balancer.
     ModifyLoadBalancerAttributesInput:
       type: object
@@ -4708,21 +4854,25 @@ components:
       title: ModifyLoadBalancerAttributesInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         LoadBalancerAttributes:
-          $ref: '#/components/schemas/LoadBalancerAttributes'
-          description: The attributes for the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerAttributes'
+            - description: The attributes for the load balancer.
       description: Contains the parameters for ModifyLoadBalancerAttributes.
     PolicyAttributeDescription:
       type: object
       properties:
         AttributeName:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute.
         AttributeValue:
-          $ref: '#/components/schemas/AttributeValue'
-          description: The value of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AttributeValue'
+            - description: The value of the attribute.
       description: Information about a policy attribute.
     PolicyAttributeDescriptions:
       type: array
@@ -4732,20 +4882,25 @@ components:
       type: object
       properties:
         AttributeName:
-          $ref: '#/components/schemas/AttributeName'
-          description: The name of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: The name of the attribute.
         AttributeType:
-          $ref: '#/components/schemas/AttributeType'
-          description: 'The type of the attribute. For example, <code>Boolean</code> or <code>Integer</code>.'
+          allOf:
+            - $ref: '#/components/schemas/AttributeType'
+            - description: 'The type of the attribute. For example, <code>Boolean</code> or <code>Integer</code>.'
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the attribute.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the attribute.
         DefaultValue:
-          $ref: '#/components/schemas/DefaultValue'
-          description: 'The default value of the attribute, if applicable.'
+          allOf:
+            - $ref: '#/components/schemas/DefaultValue'
+            - description: 'The default value of the attribute, if applicable.'
         Cardinality:
-          $ref: '#/components/schemas/Cardinality'
-          description: '<p>The cardinality of the attribute.</p> <p>Valid values:</p> <ul> <li> <p>ONE(1) : Single value required</p> </li> <li> <p>ZERO_OR_ONE(0..1) : Up to one value is allowed</p> </li> <li> <p>ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed</p> </li> <li> <p>ONE_OR_MORE(1..*0) : Required. Multiple values are allowed</p> </li> </ul>'
+          allOf:
+            - $ref: '#/components/schemas/Cardinality'
+            - description: '<p>The cardinality of the attribute.</p> <p>Valid values:</p> <ul> <li> <p>ONE(1) : Single value required</p> </li> <li> <p>ZERO_OR_ONE(0..1) : Up to one value is allowed</p> </li> <li> <p>ZERO_OR_MORE(0..*) : Optional. Multiple values are allowed</p> </li> <li> <p>ONE_OR_MORE(1..*0) : Required. Multiple values are allowed</p> </li> </ul>'
       description: Information about a policy attribute type.
     PolicyAttributeTypeDescriptions:
       type: array
@@ -4755,27 +4910,33 @@ components:
       type: object
       properties:
         PolicyName:
-          $ref: '#/components/schemas/PolicyName'
-          description: The name of the policy.
+          allOf:
+            - $ref: '#/components/schemas/PolicyName'
+            - description: The name of the policy.
         PolicyTypeName:
-          $ref: '#/components/schemas/PolicyTypeName'
-          description: The name of the policy type.
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeName'
+            - description: The name of the policy type.
         PolicyAttributeDescriptions:
-          $ref: '#/components/schemas/PolicyAttributeDescriptions'
-          description: The policy attributes.
+          allOf:
+            - $ref: '#/components/schemas/PolicyAttributeDescriptions'
+            - description: The policy attributes.
       description: Information about a policy.
     PolicyTypeDescription:
       type: object
       properties:
         PolicyTypeName:
-          $ref: '#/components/schemas/PolicyTypeName'
-          description: The name of the policy type.
+          allOf:
+            - $ref: '#/components/schemas/PolicyTypeName'
+            - description: The name of the policy type.
         Description:
-          $ref: '#/components/schemas/Description'
-          description: A description of the policy type.
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the policy type.
         PolicyAttributeTypeDescriptions:
-          $ref: '#/components/schemas/PolicyAttributeTypeDescriptions'
-          description: The description of the policy attributes associated with the policies defined by Elastic Load Balancing.
+          allOf:
+            - $ref: '#/components/schemas/PolicyAttributeTypeDescriptions'
+            - description: The description of the policy attributes associated with the policies defined by Elastic Load Balancing.
       description: Information about a policy type.
     RegisterEndPointsInput:
       type: object
@@ -4785,11 +4946,13 @@ components:
       title: RegisterEndPointsInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Instances:
-          $ref: '#/components/schemas/Instances'
-          description: The IDs of the instances.
+          allOf:
+            - $ref: '#/components/schemas/Instances'
+            - description: The IDs of the instances.
       description: Contains the parameters for RegisterInstancesWithLoadBalancer.
     RemoveAvailabilityZonesInput:
       type: object
@@ -4799,11 +4962,13 @@ components:
       title: RemoveAvailabilityZonesInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         AvailabilityZones:
-          $ref: '#/components/schemas/AvailabilityZones'
-          description: The Availability Zones.
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: The Availability Zones.
       description: Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
     TagKeyList:
       type: array
@@ -4818,11 +4983,13 @@ components:
       title: RemoveTagsInput
       properties:
         LoadBalancerNames:
-          $ref: '#/components/schemas/LoadBalancerNames'
-          description: The name of the load balancer. You can specify a maximum of one load balancer name.
+          allOf:
+            - $ref: '#/components/schemas/LoadBalancerNames'
+            - description: The name of the load balancer. You can specify a maximum of one load balancer name.
         Tags:
-          $ref: '#/components/schemas/TagKeyList'
-          description: The list of tag keys to remove.
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: The list of tag keys to remove.
       description: Contains the parameters for RemoveTags.
     SecurityGroupName:
       type: string
@@ -4837,14 +5004,17 @@ components:
       title: SetLoadBalancerListenerSSLCertificateInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         LoadBalancerPort:
-          $ref: '#/components/schemas/AccessPointPort'
-          description: The port that uses the specified SSL certificate.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointPort'
+            - description: The port that uses the specified SSL certificate.
         SSLCertificateId:
-          $ref: '#/components/schemas/SSLCertificateId'
-          description: The Amazon Resource Name (ARN) of the SSL certificate.
+          allOf:
+            - $ref: '#/components/schemas/SSLCertificateId'
+            - description: The Amazon Resource Name (ARN) of the SSL certificate.
       description: Contains the parameters for SetLoadBalancerListenerSSLCertificate.
     SetLoadBalancerPoliciesForBackendServerInput:
       type: object
@@ -4855,14 +5025,17 @@ components:
       title: SetLoadBalancerPoliciesForBackendServerInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         InstancePort:
-          $ref: '#/components/schemas/EndPointPort'
-          description: The port number associated with the EC2 instance.
+          allOf:
+            - $ref: '#/components/schemas/EndPointPort'
+            - description: The port number associated with the EC2 instance.
         PolicyNames:
-          $ref: '#/components/schemas/PolicyNames'
-          description: 'The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: 'The names of the policies. If the list is empty, then all current polices are removed from the EC2 instance.'
       description: Contains the parameters for SetLoadBalancerPoliciesForBackendServer.
     SetLoadBalancerPoliciesOfListenerInput:
       type: object
@@ -4873,14 +5046,17 @@ components:
       title: SetLoadBalancerPoliciesOfListenerInput
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         LoadBalancerPort:
-          $ref: '#/components/schemas/AccessPointPort'
-          description: The external port of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointPort'
+            - description: The external port of the load balancer.
         PolicyNames:
-          $ref: '#/components/schemas/PolicyNames'
-          description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
+          allOf:
+            - $ref: '#/components/schemas/PolicyNames'
+            - description: 'The names of the policies. This list must include all policies to be enabled. If you omit a policy that is currently enabled, it is disabled. If the list is empty, all current policies are disabled.'
       description: Contains the parameters for SetLoadBalancePoliciesOfListener.
     TagKey:
       type: string
@@ -4896,11 +5072,13 @@ components:
       type: object
       properties:
         LoadBalancerName:
-          $ref: '#/components/schemas/AccessPointName'
-          description: The name of the load balancer.
+          allOf:
+            - $ref: '#/components/schemas/AccessPointName'
+            - description: The name of the load balancer.
         Tags:
-          $ref: '#/components/schemas/TagList'
-          description: The tags.
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags.
       description: The tags associated with a load balancer.
 security:
   - hmac: []
