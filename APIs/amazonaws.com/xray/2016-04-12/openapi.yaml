@@ -209,8 +209,16 @@ paths:
                 FilterExpression:
                   description: The filter expression defining criteria by which to group traces.
                   type: string
+                InsightsConfiguration:
+                  description: The structure containing configurations related to insights.
+                  type: object
+                  properties:
+                    InsightsEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: Set the InsightsEnabled value to true to enable insights or false to disable insights.
                 Tags:
-                  description: ''
+                  description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use.</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -320,7 +328,7 @@ paths:
                         - $ref: '#/components/schemas/AttributeMap'
                         - description: Matches attributes derived from the request.
                 Tags:
-                  description: ''
+                  description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use.</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -989,7 +997,7 @@ paths:
   /ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: ''
+      description: Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
       responses:
         '200':
           description: Success
@@ -1026,12 +1034,12 @@ paths:
                 - ResourceARN
               properties:
                 ResourceARN:
-                  description: ''
+                  description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
                   type: string
                   minLength: 1
                   maxLength: 1011
                 NextToken:
-                  description: ''
+                  description: 'A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with the current page of results as the value of this parameter to get the next page of results.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1200,7 +1208,7 @@ paths:
   /TagResource:
     post:
       operationId: TagResource
-      description: ''
+      description: Applies tags to an existing AWS X-Ray group or sampling rule.
       responses:
         '200':
           description: Success
@@ -1244,12 +1252,12 @@ paths:
                 - Tags
               properties:
                 ResourceARN:
-                  description: ''
+                  description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
                   type: string
                   minLength: 1
                   maxLength: 1011
                 Tags:
-                  description: ''
+                  description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use. You cannot edit or delete system tags.</p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
@@ -1266,7 +1274,7 @@ paths:
   /UntagResource:
     post:
       operationId: UntagResource
-      description: ''
+      description: 'Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an <code>aws:</code> prefix).'
       responses:
         '200':
           description: Success
@@ -1304,12 +1312,12 @@ paths:
                 - TagKeys
               properties:
                 ResourceARN:
-                  description: ''
+                  description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
                   type: string
                   minLength: 1
                   maxLength: 1011
                 TagKeys:
-                  description: ''
+                  description: Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
                   type: array
                   items:
                     $ref: '#/components/schemas/TagKey'
@@ -1367,6 +1375,14 @@ paths:
                 FilterExpression:
                   description: The updated filter expression defining criteria by which to group traces.
                   type: string
+                InsightsConfiguration:
+                  description: The structure containing configurations related to insights.
+                  type: object
+                  properties:
+                    InsightsEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: Set the InsightsEnabled value to true to enable insights or false to disable insights.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1547,7 +1563,9 @@ components:
         Group:
           allOf:
             - $ref: '#/components/schemas/Group'
-            - description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.'
+            - description: 'The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, the filter expression, and the insight configuration that was assigned to the group.'
+    NullableBoolean:
+      type: boolean
     Tag:
       type: object
       required:
@@ -1555,9 +1573,14 @@ components:
         - Value
       properties:
         Key:
-          $ref: '#/components/schemas/TagKey'
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: 'A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The key can be a maximum of 128 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
         Value:
-          $ref: '#/components/schemas/TagValue'
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: 'An optional tag value, such as <code>Production</code> or <code>test-only</code>. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code> '
+      description: '<p>A map that contains tag keys and tag values to attach to an AWS X-Ray group or sampling rule. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use. You cannot edit or delete system tags.</p> </li> </ul>'
     CreateSamplingRuleResult:
       type: object
       properties:
@@ -1796,9 +1819,13 @@ components:
       type: object
       properties:
         Tags:
-          $ref: '#/components/schemas/TagList'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags, as key and value pairs, that is associated with the specified X-Ray group or sampling rule.'
         NextToken:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with the current page of results to get the next page of results.'
     ResourceNotFoundException: {}
     PutEncryptionConfigResult:
       type: object
@@ -1866,7 +1893,7 @@ components:
         Group:
           allOf:
             - $ref: '#/components/schemas/Group'
-            - description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.'
+            - description: 'The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, the updated filter expression, and the updated insight configuration assigned to the group.'
     UpdateSamplingRuleResult:
       type: object
       properties:
@@ -1906,8 +1933,6 @@ components:
       maxLength: 1011
     AnnotationKey:
       type: string
-    NullableBoolean:
-      type: boolean
     AnnotationValue:
       type: object
       properties:
@@ -2017,6 +2042,14 @@ components:
       maxLength: 32
     FilterExpression:
       type: string
+    InsightsConfiguration:
+      type: object
+      properties:
+        InsightsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Set the InsightsEnabled value to true to enable insights or false to disable insights.
+      description: The structure containing configurations related to insights.
     TagList:
       type: array
       items:
@@ -2037,8 +2070,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterExpression'
             - description: The filter expression defining criteria by which to group traces.
+        InsightsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InsightsConfiguration'
+            - description: The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use.</p> </li> </ul>'
     Group:
       type: object
       properties:
@@ -2054,6 +2093,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The filter expression defining the parameters to include traces.
+        InsightsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InsightsConfiguration'
+            - description: The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.
       description: Details and metadata for a group.
     SamplingRule:
       type: object
@@ -2133,7 +2176,9 @@ components:
             - $ref: '#/components/schemas/SamplingRule'
             - description: The rule definition.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use.</p> </li> </ul>'
     SamplingRuleRecord:
       type: object
       properties:
@@ -2689,6 +2734,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The filter expression defining the parameters to include traces.
+        InsightsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InsightsConfiguration'
+            - description: The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the groups or false to disable insights for the groups.
       description: Details for a group without metadata.
     HistogramEntry:
       type: object
@@ -2746,9 +2795,13 @@ components:
       title: ListTagsForResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
         NextToken:
-          $ref: '#/components/schemas/String'
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A pagination token. If multiple pages of results are returned, use the <code>NextToken</code> value returned with the current page of results as the value of this parameter to get the next page of results.'
     PutEncryptionConfigRequest:
       type: object
       required:
@@ -3144,9 +3197,13 @@ components:
       title: TagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
         Tags:
-          $ref: '#/components/schemas/TagList'
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference</i>.</p> <p>The following restrictions apply to tags:</p> <ul> <li> <p>Maximum number of user-applied tags per resource: 50</p> </li> <li> <p>Maximum tag key length: 128 Unicode characters</p> </li> <li> <p>Maximum tag value length: 256 Unicode characters</p> </li> <li> <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Don''t use <code>aws:</code> as a prefix for keys; it''s reserved for AWS use. You cannot edit or delete system tags.</p> </li> </ul>'
     TimeSeriesServiceStatistics:
       type: object
       properties:
@@ -3331,9 +3388,13 @@ components:
       title: UntagResourceRequest
       properties:
         ResourceARN:
-          $ref: '#/components/schemas/AmazonResourceName'
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
         TagKeys:
-          $ref: '#/components/schemas/TagKeyList'
+          allOf:
+            - $ref: '#/components/schemas/TagKeyList'
+            - description: Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
     UpdateGroupRequest:
       type: object
       title: UpdateGroupRequest
@@ -3350,6 +3411,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterExpression'
             - description: The updated filter expression defining criteria by which to group traces.
+        InsightsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InsightsConfiguration'
+            - description: The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.
     UpdateSamplingRuleRequest:
       type: object
       required:
