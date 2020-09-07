@@ -36,6 +36,12 @@ tags:
   - name: Authorization
     x-box-priority: true
     x-box-tag: authorization
+  - name: Classifications
+    x-box-tag: classifications
+  - name: Classifications on files
+    x-box-tag: file_classifications
+  - name: Classifications on folders
+    x-box-tag: folder_classifications
   - name: Collaborations
     x-box-tag: user_collaborations
   - name: Collaborations (List)
@@ -3625,9 +3631,11 @@ paths:
   "/files/{file_id}/collaborations":
     get:
       description: >-
-        Retrieves a list of collaborations for a file. This
+        Retrieves a list of pending and active collaborations for a
 
-        returns all the users that have access to the file.
+        file. This returns all the users that have access to the file
+
+        or have been invited to the file.
       operationId: get_files_id_collaborations
       parameters:
         - description: >-
@@ -3710,6 +3718,13 @@ paths:
             Returns a collection of collaboration objects. If there are no
 
             collaborations on this file an empty collection will be returned.
+
+
+            This list includes pending collaborations, for which the `status`
+
+            is set to `pending`, indicating invitations that have been sent but not
+
+            yet accepted.
         default:
           content:
             application/json:
@@ -4348,6 +4363,409 @@ paths:
         - Metadata instances (Files)
       x-box-sanitized: true
       x-box-tag: file_metadata
+  "/files/{file_id}/metadata/enterprise/securityClassification-6VMVochwUWo":
+    delete:
+      description: >-
+        Removes any classifications from a file.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/files/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: delete_files_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a file.
+
+
+            The ID for any file can be determined
+
+            by visiting a file in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/files/123`
+
+            the `file_id` is `123`.
+          example: "12345"
+          in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: >-
+            Returns an empty response when the classification is
+
+            successfully deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the file does not have any classification applied
+
+            to it, or when the user does not have access to the
+
+            file.
+
+
+            * `instance_not_found` - An instance of the classification metadata
+
+            template with the was not found on this file.
+
+            * `not_found` - The file was not found, or the user does not have access
+
+            to the file.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the method was not allowed.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Remove classification from file
+      tags:
+        - Classifications on files
+      x-box-sanitized: true
+      x-box-tag: file_classifications
+    get:
+      description: >-
+        Retrieves the classification metadata instance that
+
+        has been applied to a file.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/files/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: get_files_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a file.
+
+
+            The ID for any file can be determined
+
+            by visiting a file in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/files/123`
+
+            the `file_id` is `123`.
+          example: "12345"
+          in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: >-
+            Returns an instance of the `securityClassification` metadata
+
+            template, which contains a `Box__Security__Classification__Key`
+
+            field that lists all the classifications available to this
+
+            enterprise.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the metadata template specified
+
+            was not applied to this file or the user does not have access to the
+
+            file.
+
+
+            * `instance_not_found` - The metadata template was not applied to the
+
+            file.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the method was not allowed.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get classification on file
+      tags:
+        - Classifications on files
+      x-box-sanitized: true
+      x-box-tag: file_classifications
+    post:
+      description: >-
+        Adds a classification to a file by specifying the label of the
+
+        classification to add.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/files/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: post_files_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a file.
+
+
+            The ID for any file can be determined
+
+            by visiting a file in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/files/123`
+
+            the `file_id` is `123`.
+          example: "12345"
+          in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                Box__Security__Classification__Key:
+                  description: >-
+                    The name of the classification to apply to this file.
+
+
+                    To list the available classifications in an enterprise,
+
+                    use the classification API to retrieve the
+
+                    [classification template][e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema]
+
+                    which lists all available classification keys.
+                  example: Sensitive
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: >-
+            Returns the classification template instance
+
+            that was applied to the file.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request body is not valid.
+
+
+            * `schema_validation_failed` - The request body contains a value for a for
+
+            a field that either does not exist, or for which the value or type does
+
+            not match the expected field type. An example might be an unknown option
+
+            for an `enum` or `multiSelect` field.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the file or metadata template could not be found.
+
+
+            * `not_found` - The file could not be found, or the user does not have
+
+            access to the file.
+
+            * `instance_tuple_not_found` - The metadata template could not be found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when an instance of this metadata template is already
+
+            present on the file.
+
+
+            * `tuple_already_exists` - An instance of them metadata template already
+
+            exists on the file.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Add classification to file
+      tags:
+        - Classifications on files
+      x-box-sanitized: true
+      x-box-tag: file_classifications
+    put:
+      description: >-
+        Updates a classification on a file.
+
+
+        The classification can only be updated if a classification has already been
+
+        applied to the file before. When editing classifications, only values are
+
+        defined for the enterprise will be accepted.
+      operationId: put_files_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a file.
+
+
+            The ID for any file can be determined
+
+            by visiting a file in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/files/123`
+
+            the `file_id` is `123`.
+          example: "12345"
+          in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              description: >-
+                A list containing the one change to make, to
+
+                update the classification label.
+              items:
+                description: >-
+                  The operation to perform on the classification
+
+                  metadata template instance. In this case, it use
+
+                  used to replace the value stored for the
+
+                  `Box__Security__Classification__Key` field with a new
+
+                  value.
+                properties:
+                  op:
+                    description: "`replace`"
+                    enum:
+                      - replace
+                    example: replace
+                    type: string
+                  path:
+                    description: "`/Box__Security__Classification__Key`"
+                    enum:
+                      - /Box__Security__Classification__Key
+                    example: /Box__Security__Classification__Key
+                    type: string
+                  value:
+                    description: >-
+                      The name of the classification to apply to this file.
+
+
+                      To list the available classifications in an enterprise,
+
+                      use the classification API to retrieve the
+
+                      [classification template][e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema]
+
+                      which lists all available classification keys.
+                    example: Sensitive
+                    type: string
+                type: object
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: Returns the updated classification metadata template instance.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request body is not valid.
+
+
+            * `bad_request` - The request body format is not an array of valid JSON
+
+            Patch operations.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error in some edge cases when the request body is not a valid
+
+            array of JSON Patch items.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Update classification on file
+      tags:
+        - Classifications on files
+      x-box-sanitized: true
+      x-box-tag: file_classifications
   "/files/{file_id}/metadata/global/boxSkillsCards":
     delete:
       description: Removes any Box Skills cards metadata from a file.
@@ -7533,9 +7951,11 @@ paths:
   "/folders/{folder_id}/collaborations":
     get:
       description: >-
-        Retrieves a list of collaborations for a folder. This
+        Retrieves a list of pending and active collaborations for a
 
-        returns all the users that have access to the folder.
+        folder. This returns all the users that have access to the folder
+
+        or have been invited to the folder.
       operationId: get_folders_id_collaborations
       parameters:
         - description: >-
@@ -7602,6 +8022,13 @@ paths:
             Returns a collection of collaboration objects. If there are no
 
             collaborations on this folder an empty collection will be returned.
+
+
+            This list includes pending collaborations, for which the `status`
+
+            is set to `pending`, indicating invitations that have been sent but not
+
+            yet accepted.
         default:
           content:
             application/json:
@@ -8101,6 +8528,433 @@ paths:
         - Metadata instances (Folders)
       x-box-sanitized: true
       x-box-tag: folder_metadata
+  "/folders/{folder_id}/metadata/enterprise/securityClassification-6VMVochwUWo":
+    delete:
+      description: >-
+        Removes any classifications from a folder.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: delete_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a folder.
+
+
+            The ID for any folder can be determined
+
+            by visiting this folder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/folder/123`
+
+            the `folder_id` is `123`.
+
+
+            The root folder of a Box account is
+
+            always represented by the ID `0`.
+          example: "0"
+          in: path
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      responses:
+        "204":
+          description: >-
+            Returns an empty response when the classification is
+
+            successfully deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the folder does not have any classification applied
+
+            to it, or when the user does not have access to the
+
+            folder.
+
+
+            * `instance_not_found` - An instance of the classification metadata
+
+            template with the was not found on this folder.
+
+            * `not_found` - The folder was not found, or the user does not have access
+
+            to the folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the method was not allowed.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Remove classification from folder
+      tags:
+        - Classifications on folders
+      x-box-sanitized: true
+      x-box-tag: folder_classifications
+    get:
+      description: >-
+        Retrieves the classification metadata instance that
+
+        has been applied to a folder.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: get_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a folder.
+
+
+            The ID for any folder can be determined
+
+            by visiting this folder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/folder/123`
+
+            the `folder_id` is `123`.
+
+
+            The root folder of a Box account is
+
+            always represented by the ID `0`.
+          example: "0"
+          in: path
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: >-
+            Returns an instance of the `securityClassification` metadata
+
+            template, which contains a `Box__Security__Classification__Key`
+
+            field that lists all the classifications available to this
+
+            enterprise.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the metadata template specified
+
+            was not applied to this folder or the user does not have access to the
+
+            folder.
+
+
+            * `instance_not_found` - The metadata template was not applied to the
+
+            folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned when the method was not allowed.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get classification on folder
+      tags:
+        - Classifications on folders
+      x-box-sanitized: true
+      x-box-tag: folder_classifications
+    post:
+      description: >-
+        Adds a classification to a folder by specifying the label of the
+
+        classification to add.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/folders/:id//enterprise_12345/securityClassification-6VMVochwUWo`.
+      operationId: post_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a folder.
+
+
+            The ID for any folder can be determined
+
+            by visiting this folder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/folder/123`
+
+            the `folder_id` is `123`.
+
+
+            The root folder of a Box account is
+
+            always represented by the ID `0`.
+          example: "0"
+          in: path
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                Box__Security__Classification__Key:
+                  description: >-
+                    The name of the classification to apply to this folder.
+
+
+                    To list the available classifications in an enterprise,
+
+                    use the classification API to retrieve the
+
+                    [classification template][e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema]
+
+                    which lists all available classification keys.
+                  example: Sensitive
+                  type: string
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: >-
+            Returns the classification template instance
+
+            that was applied to the folder.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request body is not valid.
+
+
+            * `schema_validation_failed` - The request body contains a value for a for
+
+            a field that either does not exist, or for which the value or type does
+
+            not match the expected field type. An example might be an unknown option
+
+            for an `enum` or `multiSelect` field.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the folder or metadata template could not be found.
+
+
+            * `not_found` - The folder could not be found, or the user does not have
+
+            access to the folder.
+
+            * `instance_tuple_not_found` - The metadata template could not be found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when an instance of this metadata template is already
+
+            present on the folder.
+
+
+            * `tuple_already_exists` - An instance of them metadata template already
+
+            exists on the folder.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Add classification to folder
+      tags:
+        - Classifications on folders
+      x-box-sanitized: true
+      x-box-tag: folder_classifications
+    put:
+      description: >-
+        Updates a classification on a folder.
+
+
+        The classification can only be updated if a classification has already been
+
+        applied to the folder before. When editing classifications, only values are
+
+        defined for the enterprise will be accepted.
+      operationId: put_folders_id_metadata_enterprise_securityClassification-6VMVochwUWo
+      parameters:
+        - description: >-
+            The unique identifier that represent a folder.
+
+
+            The ID for any folder can be determined
+
+            by visiting this folder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/folder/123`
+
+            the `folder_id` is `123`.
+
+
+            The root folder of a Box account is
+
+            always represented by the ID `0`.
+          example: "0"
+          in: path
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              description: >-
+                A list containing the one change to make, to
+
+                update the classification label.
+              items:
+                description: >-
+                  The operation to perform on the classification
+
+                  metadata template instance. In this case, it use
+
+                  used to replace the value stored for the
+
+                  `Box__Security__Classification__Key` field with a new
+
+                  value.
+                properties:
+                  op:
+                    description: "`replace`"
+                    enum:
+                      - replace
+                    example: replace
+                    type: string
+                  path:
+                    description: "`/Box__Security__Classification__Key`"
+                    enum:
+                      - /Box__Security__Classification__Key
+                    example: /Box__Security__Classification__Key
+                    type: string
+                  value:
+                    description: >-
+                      The name of the classification to apply to this folder.
+
+
+                      To list the available classifications in an enterprise,
+
+                      use the classification API to retrieve the
+
+                      [classification template][e://get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema]
+
+                      which lists all available classification keys.
+                    example: Sensitive
+                    type: string
+                type: object
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Classification"
+          description: Returns the updated classification metadata template instance.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request body is not valid.
+
+
+            * `bad_request` - The request body format is not an array of valid JSON
+
+            Patch operations.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error in some edge cases when the request body is not a valid
+
+            array of JSON Patch items.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Update classification on folder
+      tags:
+        - Classifications on folders
+      x-box-sanitized: true
+      x-box-tag: folder_classifications
   "/folders/{folder_id}/metadata/{scope}/{template_key}":
     delete:
       description: Deletes a piece of folder metadata.
@@ -11454,6 +12308,421 @@ paths:
         - Metadata templates
       x-box-sanitized: true
       x-box-tag: metadata_templates
+  /metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema:
+    delete:
+      description: >-
+        Delete all classifications by deleting the classification
+
+        metadata template.
+      operationId: delete_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema
+      responses:
+        "204":
+          description: >-
+            Returns an empty response when the metadata
+
+            template for classifications is successfully deleted.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Delete all classifications
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
+    get:
+      description: >-
+        Retrieves the classification metadata template and lists all the
+
+        classifications available to this enterprise.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/metadata_templates/enterprise_12345/securityClassification-6VMVochwUWo/schema`.
+      operationId: get_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationTemplate"
+          description: >-
+            Returns the `securityClassification` metadata template, which contains
+
+            a `Box__Security__Classification__Key` field that lists all the
+
+            classifications available to this enterprise.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if any of the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when a template name is not correct. Please make sure
+
+            the URL for the request is correct.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: List all classifications
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
+  /metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#add:
+    put:
+      description: >-
+        Adds one or more new classifications to the list of classifications
+
+        available to the enterprise.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/metadata_templates/enterprise_12345/securityClassification-6VMVochwUWo/schema`.
+      operationId: put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#add
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              description: >-
+                An array that contains one or more classifications to add to
+
+                the enterprise's list of classifications.
+              items:
+                description: A single classification to add to the enterprise.
+                properties:
+                  data:
+                    description: The details of the classification to add.
+                    properties:
+                      classification:
+                        description: Additional details for the classification.
+                        properties:
+                          classificationDefinition:
+                            description: A longer description of the classification.
+                            example: Sensitive information that must not be shared.
+                            type: string
+                          colorID:
+                            description: >-
+                              An internal Box identifier used to assign a color to
+
+                              a classification label.
+
+
+                              Mapping between a `colorID` and a color may change
+
+                              without notice. Currently, the color mappings are as
+
+                              follows.
+
+
+                              * `0`: Yellow
+
+                              * `1`: Orange
+
+                              * `2`: Watermelon red
+
+                              * `3`: Purple rain
+
+                              * `4`: Light blue
+
+                              * `5`: Dark blue
+
+                              * `6`: Light green
+
+                              * `7`: Gray
+                            example: 4
+                            type: number
+                        type: object
+                      key:
+                        description: >-
+                          The label of the classification as shown in the web and
+
+                          mobile interfaces. This is the only field required to
+
+                          add a classification.
+                        example: Sensitive
+                        type: string
+                    required:
+                      - key
+                    type: object
+                  fieldKey:
+                    description: "`Box__Security__Classification__Key`"
+                    example: Box__Security__Classification__Key
+                    type: string
+                  op:
+                    description: "`addEnumOption`"
+                    example: addEnumOption
+                    type: string
+                required:
+                  - op
+                  - fieldKey
+                  - data
+                type: object
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationTemplate"
+          description: >-
+            Returns the updated `securityClassification` metadata template, which
+
+            contains a `Box__Security__Classification__Key` field that lists all
+
+            the classifications available to this enterprise.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if any of the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when a template name is not correct. Please make sure
+
+            the URL for the request is correct.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Add classification
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
+  /metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#delete:
+    put:
+      description: >-
+        Removes a classification from the list of classifications
+
+        available to the enterprise.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/metadata_templates/enterprise_12345/securityClassification-6VMVochwUWo/schema`.
+      operationId: put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#delete
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              description: An array that contains one or more classifications to remove.
+              items:
+                description: A single classification to remove.
+                properties:
+                  enumOptionKey:
+                    description: The label of the classification to remove.
+                    example: Sensitive
+                    type: string
+                  fieldKey:
+                    description: "`Box__Security__Classification__Key`"
+                    example: Box__Security__Classification__Key
+                    type: string
+                  op:
+                    description: "`removeEnumOption`"
+                    example: removeEnumOption
+                    type: string
+                required:
+                  - op
+                  - fieldKey
+                  - enumOptionKey
+                type: object
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationTemplate"
+          description: >-
+            Returns the updated `securityClassification` metadata template, which
+
+            contains a `Box__Security__Classification__Key` field that lists all
+
+            the classifications available to this enterprise.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if any of the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when a template name is not correct. Please make sure
+
+            the URL for the request is correct.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Delete classification
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
+  /metadata_templates/enterprise/securityClassification-6VMVochwUWo/schema#update:
+    put:
+      description: >-
+        Updates the labels and descriptions of one or more classifications
+
+        available to the enterprise.
+
+
+        This API can also be called by including the enterprise ID in the
+
+        URL explicitly, for example
+
+        `/metadata_templates/enterprise_12345/securityClassification-6VMVochwUWo/schema`.
+      operationId: put_metadata_templates_enterprise_securityClassification-6VMVochwUWo_schema#update
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              description: An array that contains one or more classifications to update.
+              items:
+                description: A single classification to update.
+                properties:
+                  data:
+                    description: The details of the updated classification.
+                    properties:
+                      classification:
+                        description: Additional details for the classification.
+                        properties:
+                          classificationDefinition:
+                            description: A longer description of the classification.
+                            example: Sensitive information that must not be shared.
+                            type: string
+                          colorID:
+                            description: >-
+                              An internal Box identifier used to assign a color to
+
+                              a classification label.
+
+
+                              Mapping between a `colorID` and a color may change
+
+                              without notice. Currently, the color mappings are as
+
+                              follows.
+
+
+                              * `0`: Yellow
+
+                              * `1`: Orange
+
+                              * `2`: Watermelon red
+
+                              * `3`: Purple rain
+
+                              * `4`: Light blue
+
+                              * `5`: Dark blue
+
+                              * `6`: Light green
+
+                              * `7`: Gray
+                            example: 4
+                            type: number
+                        type: object
+                      key:
+                        description: >-
+                          A new label for the classification, as it will be
+
+                          shown in the web and mobile interfaces.
+                        example: Very Sensitive
+                        type: string
+                    required:
+                      - key
+                    type: object
+                  enumOptionKey:
+                    description: The original label of the classification to change.
+                    example: Sensitive
+                    type: string
+                  fieldKey:
+                    description: "`Box__Security__Classification__Key`"
+                    example: Box__Security__Classification__Key
+                    type: string
+                  op:
+                    description: "`editEnumOption`"
+                    example: editEnumOption
+                    type: string
+                required:
+                  - op
+                  - fieldKey
+                  - enumOptionKey
+                  - data
+                type: object
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationTemplate"
+          description: >-
+            Returns the updated `securityClassification` metadata template, which
+
+            contains a `Box__Security__Classification__Key` field that lists all
+
+            the classifications available to this enterprise.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if any of the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when a template name is not correct. Please make sure
+
+            the URL for the request is correct.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Update classification
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
   /metadata_templates/global:
     get:
       description: >-
@@ -11722,6 +12991,195 @@ paths:
       x-box-requires-admin: true
       x-box-sanitized: true
       x-box-tag: metadata_templates
+  /metadata_templates/schema#classifications:
+    post:
+      description: >-
+        When an enterprise does not yet have any classifications, this API call
+
+        initializes the classification template with an initial set of
+
+        classifications.
+
+
+        If an enterprise already has a classification, the template will already
+
+        exist and instead an API call should be made to add additional
+
+        classifications.
+      operationId: post_metadata_templates_schema#classifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                copyInstanceOnItemCopy:
+                  description: "`false`"
+                  example: false
+                  type: boolean
+                displayName:
+                  description: "`Classification`"
+                  enum:
+                    - Classification
+                  example: Classification
+                  type: string
+                fields:
+                  description: >-
+                    The classification template holds one field, which holds
+
+                    all the valid classification values.
+                  items:
+                    description: >-
+                      The `enum` field which holds all the valid classification
+
+                      values.
+                    properties:
+                      displayName:
+                        description: "`Classification`"
+                        enum:
+                          - Classification
+                        example: Classification
+                        type: string
+                      hidden:
+                        description: "`false`"
+                        example: false
+                        type: boolean
+                      key:
+                        description: "`Box__Security__Classification__Key`"
+                        enum:
+                          - Box__Security__Classification__Key
+                        example: Box__Security__Classification__Key
+                        type: string
+                      options:
+                        description: >-
+                          The actual list of classifications that are present on
+
+                          this template.
+                        items:
+                          description: An individual classification.
+                          properties:
+                            key:
+                              description: >-
+                                The display name and key this classification. This
+
+                                will be show in the Box UI.
+                              example: Sensitive
+                              type: string
+                            staticConfig:
+                              description: Additional information about the classification.
+                              properties:
+                                classification:
+                                  description: Additional information about the classification.
+                                  properties:
+                                    classificationDefinition:
+                                      description: A longer description of the classification.
+                                      example: Sensitive information
+                                      type: string
+                                    colorID:
+                                      description: >-
+                                        An identifier used to assign a color to
+
+                                        a classification label.
+
+
+                                        Mapping between a `colorID` and a color may
+
+                                        change without notice. Currently, the color
+
+                                        mappings are as follows.
+
+
+                                        * `0`: Yellow
+
+                                        * `1`: Orange
+
+                                        * `2`: Watermelon red
+
+                                        * `3`: Purple rain
+
+                                        * `4`: Light blue
+
+                                        * `5`: Dark blue
+
+                                        * `6`: Light green
+
+                                        * `7`: Gray
+                                      example: 4
+                                      type: number
+                                  type: object
+                              type: object
+                          type: object
+                        type: array
+                      type:
+                        description: "`enum`"
+                        enum:
+                          - enum
+                        example: enum
+                        type: string
+                    type: object
+                  type: array
+                hidden:
+                  description: "`false`"
+                  example: false
+                  type: boolean
+                scope:
+                  description: >-
+                    The scope in which to create the classifications. This should
+
+                    be `enterprise` or `enterprise_{id}` where `id` is the unique
+
+                    ID of the enterprise.
+                  enum:
+                    - enterprise
+                  example: enterprise
+                  type: string
+                templateKey:
+                  description: "`securityClassification-6VMVochwUWo`"
+                  enum:
+                    - securityClassification-6VMVochwUWo
+                  example: securityClassification-6VMVochwUWo
+                  type: string
+              required:
+                - scope
+                - displayName
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationTemplate"
+          description: >-
+            Returns a new `securityClassification` metadata template, which
+
+            contains a `Box__Security__Classification__Key` field that lists all
+
+            the classifications available to this enterprise.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if any of the request parameters are not valid.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when a template name is not correct. Please make sure
+
+            the URL for the request is correct.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Add initial classifications
+      tags:
+        - Classifications
+      x-box-sanitized: true
+      x-box-tag: classifications
   "/metadata_templates/{scope}/{template_key}/schema":
     delete:
       description: >-
@@ -14735,7 +16193,7 @@ paths:
           schema:
             type: string
         - description: >-
-            Limits the results to the kind  of user specified.
+            Limits the results to the kind of user specified.
 
 
             * `all` returns every kind of user for whom the
@@ -14757,6 +16215,25 @@ paths:
               - all
               - managed
               - external
+            type: string
+        - description: >-
+            Limits the results to app users with the given
+
+            `external_app_user_id` value.
+
+
+            When creating an app user, an
+
+            `external_app_user_id` value can be set. This value can
+
+            then be used in this endpoint to find any users that
+
+            match that `external_app_user_id` value.
+          example: my-user-1234
+          in: query
+          name: external_app_user_id
+          required: false
+          schema:
             type: string
         - description: >-
             A comma-separated list of attributes to include in the
@@ -16675,11 +18152,11 @@ paths:
                     expires_at: 2020-07-22T11:26:08Z
                     name_conflicts:
                       - - download_name: 3aa6a7.pdf
-                          id: 12345
+                          id: "12345"
                           original_name: Report.pdf
                           type: file
                         - download_name: 5d53f2.pdf
-                          id: 34325
+                          id: "34325"
                           original_name: Report.pdf
                           type: file
                     status_url: https://api.box.com/2.0/zip_downloads/29l00nfxDyHOt7RphI9zT_w==nDnZEDjY2S8iEWWCHEEiptFxwoWojjlibZjJ6geuE5xnXENDTPxzgbks_yY=/status
@@ -17000,6 +18477,242 @@ components:
       type: object
       x-box-resource-id: access_token
       x-box-tag: authorization
+    Classification:
+      description: >-
+        An instance of the classification metadata template, containing
+
+        the classification applied to the file or folder.
+
+
+        To get more details about the classification applied to an item,
+
+        request the classification metadata template.
+      properties:
+        $canEdit:
+          description: Whether an end user can change the classification.
+          example: true
+          type: boolean
+        $parent:
+          description: >-
+            The identifier of the item that this metadata instance
+
+            has been attached to. This combines the `type` and the `id`
+
+            of the parent in the form `{type}_{id}`.
+          example: folder_59449484661,
+          type: string
+        $scope:
+          description: >-
+            The scope of the enterprise that this classification has been
+
+            applied for.
+
+
+            This will be in the format `enterprise_{enterprise_id}`.
+          example: enterprise_27335
+          type: string
+        $template:
+          description: "`securityClassification-6VMVochwUWo`"
+          enum:
+            - securityClassification-6VMVochwUWo
+          example: securityClassification-6VMVochwUWo
+          type: string
+        $type:
+          description: >-
+            The unique ID of this classification instance. This will be include
+
+            the name of the classification template and a unique ID.
+          example: securityClassification-6VMVochwUWo-fd31537a-0f95-4d86-9f2b-5974a29978f8
+          type: string
+        $typeVersion:
+          description: >-
+            The version of the metadata template. This version starts at 0 and
+
+            increases every time the template is updated. This is mostly for internal
+
+            use.
+          example: 5
+          type: number
+        $version:
+          description: >-
+            The version of the metadata instance. This version starts at 0 and
+
+            increases every time a classification is updated.
+          example: 1
+          type: integer
+        Box__Security__Classification__Key:
+          description: The name of the classification applied to the item.
+          example: Sensitive
+          type: string
+      title: Classification
+      type: object
+      x-box-resource-id: classification
+      x-box-tag: classifications
+    ClassificationTemplate:
+      description: >-
+        A metadata template that holds the security classifications
+
+        defined by an enterprise.
+      properties:
+        copyInstanceOnItemCopy:
+          description: >-
+            Classifications are always copied along when the file or folder is
+
+            copied.
+          example: true
+          type: boolean
+        displayName:
+          description: The name of this template as shown in web and mobile interfaces.
+          enum:
+            - Classification
+          example: Classification
+          type: string
+        fields:
+          description: >-
+            A list of fields for this classification template. This includes
+
+            only one field, the `Box__Security__Classification__Key`, which defines
+
+            the different classifications available in this enterprise.
+          items:
+            description: >-
+              The metadata template field that represents the available
+
+              classifications.
+            properties:
+              displayName:
+                description: "`Classification`"
+                enum:
+                  - Classification
+                example: Classification
+                type: string
+              hidden:
+                description: Classifications are always visible to web and mobile users.
+                example: false
+                type: boolean
+              id:
+                description: The unique ID of the field.
+                example: 822227e0-47a5-921b-88a8-494760b2e6d2
+                type: string
+              key:
+                description: "`Box__Security__Classification__Key`"
+                enum:
+                  - Box__Security__Classification__Key
+                example: Box__Security__Classification__Key
+                type: string
+              options:
+                description: A list of classifications available in this enterprise.
+                items:
+                  description: A single classification available in this enterprise.
+                  properties:
+                    id:
+                      description: The unique ID of this classification.
+                      example: 46aea176-3483-4431-856c-6b5b13d1cc50
+                      type: string
+                    key:
+                      description: The display name and key for this classification.
+                      example: Sensitive
+                      type: string
+                    staticConfig:
+                      description: Additional information about the classification.
+                      properties:
+                        classification:
+                          description: >-
+                            Additional information about the classification.
+
+
+                            This is not an exclusive list of properties, and
+
+                            more object fields might be returned. These fields
+
+                            are used for internal Box Shield and Box Governance
+
+                            purposes and no additional value must be derived from
+
+                            these fields.
+                          properties:
+                            classificationDefinition:
+                              description: A longer description of the classification.
+                              example: Sensitive information
+                              type: string
+                            colorID:
+                              description: >-
+                                An internal Box identifier used to assign a color to
+
+                                a classification label.
+
+
+                                Mapping between a `colorID` and a color may change
+
+                                without notice. Currently, the color mappings are as
+
+                                follows.
+
+
+                                * `0`: Yellow
+
+                                * `1`: Orange
+
+                                * `2`: Watermelon red
+
+                                * `3`: Purple rain
+
+                                * `4`: Light blue
+
+                                * `5`: Dark blue
+
+                                * `6`: Light green
+
+                                * `7`: Gray
+                              example: 4
+                              type: number
+                          type: object
+                      type: object
+                  type: object
+                minItems: 1
+                type: array
+              type:
+                description: "`enum`"
+                enum:
+                  - enum
+                example: enum
+                type: string
+            type: object
+          maxItems: 1
+          minItems: 1
+          type: array
+        hidden:
+          description: This template is always available in web and mobile interfaces.
+          example: false
+          type: boolean
+        id:
+          description: The ID of the classification template.
+          example: 58063d82-4128-7b43-bba9-92f706befcdf
+          type: string
+        scope:
+          description: >-
+            The scope of the classification template. This is in the format
+
+            `enterprise_{id}` where the `id` is the enterprise ID.
+          example: enterprise_123456
+          type: string
+        templateKey:
+          description: "`securityClassification-6VMVochwUWo`"
+          enum:
+            - securityClassification-6VMVochwUWo
+          example: securityClassification-6VMVochwUWo
+          type: string
+        type:
+          description: "`metadata_template`"
+          enum:
+            - metadata_template
+          example: metadata_template
+          nullable: false
+          type: string
+      title: Classification Template
+      type: object
+      x-box-resource-id: classification_template
+      x-box-tag: classifications
     ClientError:
       description: A generic error
       properties:

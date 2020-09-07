@@ -718,6 +718,9 @@ definitions:
       city:
         description: The city searched for in the original request
         type: string
+      countryCode:
+        description: The country where the original request originated, as determined by geolocation. The countryCode is in ISO 3166-1 numeric format
+        type: string
       lat:
         description: The latitude parameter used in the original request
         format: float

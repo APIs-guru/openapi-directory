@@ -41,6 +41,7 @@ tags:
   - name: media
   - name: numbers
   - name: orders
+  - name: reports
   - name: texts
   - name: webhooks
 paths:
@@ -5987,16 +5988,21 @@ paths:
       x-sample-js-url: /js/orders/getOrder.js
       x-sample-php-url: /php/orders/getOrder.php
       x-sample-python-url: /python/orders/getOrder.py
-  /texts:
+  /reports/delivery:
     get:
       consumes:
         - application/json
-      description: Searches for texts sent or received by user. Use "campaignId=0" parameter to query for all texts sent through the POST /texts API. See [call states and results](https://developers.callfire.com/results-responses-errors.html)
-      operationId: findTexts
+      description: Get delivery reports
+      operationId: getDeliveryReports
       parameters:
-        - description: "Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page."
+        - description: "~"
           in: query
-          name: fields
+          name: startDate
+          required: false
+          type: string
+        - description: "~"
+          in: query
+          name: endDate
           required: false
           type: string
         - default: 100
@@ -6013,6 +6019,127 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: "~"
+          format: int64
+          in: query
+          name: campaignId
+          required: false
+          type: integer
+        - description: "~"
+          in: query
+          name: fromNumber
+          required: false
+          type: string
+        - description: "~"
+          in: query
+          name: toNumber
+          required: false
+          type: string
+        - description: "~"
+          enum:
+            - NO_DATA
+            - OPTED_OUT
+            - BOUNCED
+            - NO_CREDITS
+            - DELIVERED
+          in: query
+          name: deliveryCategory
+          required: false
+          type: string
+        - description: "~"
+          enum:
+            - DELIVERED
+            - UNSENT_OPTED_OUT_GLOBAL
+            - UNSENT_OPTED_OUT_LOCAL
+            - UNSENT_NO_CREDITS
+            - GATEWAY_REJECTED
+            - CARRIER_REJECTED
+            - NOT_DELIVERED
+            - UNSENT_BAD_DATA
+            - UNSENT_NO_WIRELESS_CARRIER
+            - UNSENT_MESSAGE_TOO_LONG
+            - UNSENT_MESSAGE_BLOCKED
+            - UNSENT_QUEUE_LIMIT_REACHED
+            - ORIGINATED
+            - SUBMITTED
+            - FORWARDED
+            - NOT_GIVEN
+            - UNKNOWN
+            - RETRY_MMS_AS_SMS
+            - QUEUED
+            - QUEUED_TRANSCODE
+            - ORIGINAL
+            - DUPE
+            - TRUNCATED
+            - REQUEUED_RATE_LIMITED
+            - BUFFERED
+            - RATE_LIMIT_EXCEEDED
+            - SERVICE_UNAVAILABLE
+            - SEND_MMS_AS_SMS
+            - REQUEUED_RECOVERABLE_ERROR
+            - SEND_WITH_ADDITIONAL_SPID
+          in: query
+          name: deliveryState
+          required: false
+          type: string
+        - description: "~"
+          in: query
+          name: carrier
+          required: false
+          type: string
+        - description: "~"
+          in: query
+          name: messageText
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/PageDeliveryReport"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - basicAuth: []
+      summary: Get delivery reports by ad hoc criteria
+      tags:
+        - reports
+      x-sample-csharp-url: /csharp/reports/getDeliveryReports.cs
+      x-sample-curl-request-url: /curl/reports/getDeliveryReports.sh
+      x-sample-curl-response-url: /curl/reports/getDeliveryReports.json
+      x-sample-description-url: /description/reports/getDeliveryReports.md
+      x-sample-go-url: /go/reports/getDeliveryReports.go
+      x-sample-java-url: /java/reports/getDeliveryReports.java
+      x-sample-js-url: /js/reports/getDeliveryReports.js
+      x-sample-php-url: /php/reports/getDeliveryReports.php
+      x-sample-python-url: /python/reports/getDeliveryReports.py
+  /texts:
+    get:
+      consumes:
+        - application/json
+      description: Searches for texts sent or received by user. Use "campaignId=0" parameter to query for all texts sent through the POST /texts API. See [call states and results](https://developers.callfire.com/results-responses-errors.html)
+      operationId: findTexts
+      parameters:
         - collectionFormat: multi
           description: List of Text ids to search for, if ids specified other query params ignored
           in: query
@@ -6076,6 +6203,25 @@ paths:
           name: intervalEnd
           required: false
           type: integer
+        - default: 10
+          description: To set the maximum number of records to return in a paged list response. The default is 100
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: Offset to the start of a given page. The default is 0. Check [pagination](https://developers.callfire.com/docs.html#pagination) page for more information about pagination in CallFire API.
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: "Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page."
+          in: query
+          name: fields
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -8844,6 +8990,73 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  DeliveryReport:
+    description: "~"
+    properties:
+      campaignId:
+        description: "~"
+        format: int64
+        type: integer
+      carrier:
+        description: "~"
+        type: string
+      deliveryCategory:
+        description: "~"
+        enum:
+          - NO_DATA
+          - OPTED_OUT
+          - BOUNCED
+          - NO_CREDITS
+          - DELIVERED
+        type: string
+      deliveryState:
+        description: "~"
+        enum:
+          - DELIVERED
+          - UNSENT_OPTED_OUT_GLOBAL
+          - UNSENT_OPTED_OUT_LOCAL
+          - UNSENT_NO_CREDITS
+          - GATEWAY_REJECTED
+          - CARRIER_REJECTED
+          - NOT_DELIVERED
+          - UNSENT_BAD_DATA
+          - UNSENT_NO_WIRELESS_CARRIER
+          - UNSENT_MESSAGE_TOO_LONG
+          - UNSENT_MESSAGE_BLOCKED
+          - UNSENT_QUEUE_LIMIT_REACHED
+          - ORIGINATED
+          - SUBMITTED
+          - FORWARDED
+          - NOT_GIVEN
+          - UNKNOWN
+          - RETRY_MMS_AS_SMS
+          - QUEUED
+          - QUEUED_TRANSCODE
+          - ORIGINAL
+          - DUPE
+          - TRUNCATED
+          - REQUEUED_RATE_LIMITED
+          - BUFFERED
+          - RATE_LIMIT_EXCEEDED
+          - SERVICE_UNAVAILABLE
+          - SEND_MMS_AS_SMS
+          - REQUEUED_RECOVERABLE_ERROR
+          - SEND_WITH_ADDITIONAL_SPID
+        type: string
+      fromNumber:
+        description: "~"
+        type: string
+      messageText:
+        description: "~"
+        type: string
+      toNumber:
+        description: "~"
+        type: string
+      updated:
+        description: "~"
+        format: date-time
+        type: string
+    type: object
   DncListDto:
     allOf:
       - $ref: "#/definitions/ItemList"
@@ -9436,6 +9649,27 @@ definitions:
         format: int32
         type: integer
     type: object
+  PageDeliveryReport:
+    description: "~"
+    properties:
+      items:
+        description: "~"
+        items:
+          $ref: "#/definitions/DeliveryReport"
+        type: array
+      limit:
+        description: "~"
+        format: int32
+        type: integer
+      offset:
+        description: "~"
+        format: int32
+        type: integer
+      totalCount:
+        description: "~"
+        format: int32
+        type: integer
+    type: object
   PageNumberOrder:
     description: "~"
     properties:
@@ -9443,6 +9677,27 @@ definitions:
         description: "~"
         items:
           $ref: "#/definitions/NumberOrder"
+        type: array
+      limit:
+        description: "~"
+        format: int32
+        type: integer
+      offset:
+        description: "~"
+        format: int32
+        type: integer
+      totalCount:
+        description: "~"
+        format: int32
+        type: integer
+    type: object
+  PageText:
+    description: "~"
+    properties:
+      items:
+        description: "~"
+        items:
+          $ref: "#/definitions/Text"
         type: array
       limit:
         description: "~"

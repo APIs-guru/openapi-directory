@@ -7654,6 +7654,12 @@ paths:
           name: gtin
           required: false
           type: string
+        - default: true
+          description: Specifies whether a tax is charged
+          in: query
+          name: taxable
+          required: false
+          type: boolean
       produces:
         - application/json
       responses:
@@ -8190,6 +8196,12 @@ paths:
           description: Is reindex required
           in: query
           name: reindex
+          required: false
+          type: boolean
+        - default: true
+          description: Specifies whether a tax is charged
+          in: query
+          name: taxable
           required: false
           type: boolean
       produces:
@@ -9911,6 +9923,8 @@ definitions:
             type: string
           last_name:
             type: string
+          phone:
+            type: string
       discounts:
         items:
           $ref: "#/definitions/Order_Totals_NewDiscount"
@@ -10993,6 +11007,10 @@ definitions:
       tax_class_id:
         description: Defines tax classes where entity has to be added
         type: integer
+      taxable:
+        default: true
+        description: Specifies whether a tax is charged
+        type: boolean
       tier_prices:
         description: Defines product's tier prices
         items:
@@ -11174,6 +11192,10 @@ definitions:
       tax_class_id:
         description: Defines tax classes where entity has to be added
         type: integer
+      taxable:
+        default: true
+        description: Specifies whether a tax is charged
+        type: boolean
       url:
         description: Defines unique product variant's URL
         type: string

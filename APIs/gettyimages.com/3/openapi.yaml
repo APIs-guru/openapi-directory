@@ -3241,9 +3241,7 @@ paths:
         ```
 
 
-        Uploads can be overwritten if the names are the same, so using a prefix like the API Key, application name or company name would help keep that
-
-        from happening.
+        Uploads can be overwritten if the names are the same, so using a prefix like the API Key, application name or company name is recommended. Uploads will expire from the bucket after 24 hours.
 
 
         Once the image has been uploaded, use the full URL in the `image_url` parameter, e.g. `image_url=https://search-by-image.s3.amazonaws.com/my-test-image.jpg`.
@@ -4565,13 +4563,19 @@ paths:
           name: id
           required: true
           schema:
-            default: ""
+            description: Specifies a unique batch transaction id to identify the report.
+            nullable: true
             type: string
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/report_usage_batch_request"
+        description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r
+
+          \            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r
+
+          \            All dates must be on or before this date and the format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
       responses:
         "201":
           content:
@@ -6038,6 +6042,16 @@ components:
         - three_quarter_length
         - waist_up
       type: string
+    Contributor:
+      additionalProperties: false
+      properties:
+        display_name:
+          nullable: true
+          type: string
+        member_name:
+          nullable: true
+          type: string
+      type: object
     CountriesList:
       additionalProperties: false
       properties:
@@ -7800,6 +7814,7 @@ components:
       properties:
         asset_id:
           description: Specifies the Id of the asset that was used.
+          nullable: true
           type: string
         quantity:
           description: Specifies the number of times the asset was used.
@@ -7818,6 +7833,7 @@ components:
           description: Identifies the list of asset id, usage count and date of usage combinations to record.
           items:
             $ref: "#/components/schemas/asset_usage"
+          nullable: true
           type: array
       type: object
     report_usage_batch_response:
@@ -7828,6 +7844,7 @@ components:
           description: Identifies a list of asset ids submitted that did not match known Getty asset ids.
           items:
             type: string
+          nullable: true
           type: array
         total_asset_usages_processed:
           description: Specifies the number of asset usage records that were successfully recorded.

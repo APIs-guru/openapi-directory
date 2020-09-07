@@ -39,6 +39,8 @@ consumes:
 produces:
   - application/json
 responses:
+  Conflict:
+    description: Conflict
   Forbidden:
     description: Forbidden
   InternalServerError:
@@ -47,6 +49,10 @@ responses:
     description: No Content
   NotFound:
     description: Not Found
+  OK:
+    description: OK
+  RequestTimeout:
+    description: Request Timeout
   ServiceUnavailable:
     description: Service Unavailable
 paths:
@@ -81,6 +87,22 @@ paths:
       summary: Get about
       tags:
         - about
+  /api/v1/about/led:
+    get:
+      description: Flash LED1 on master electronics
+      operationId: about#LED
+      produces:
+        - text/plain
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+        - http
+      summary: LED about
+      tags:
+        - about
   /api/v1/about/status:
     get:
       description: Get current IMU and GPS status
@@ -113,6 +135,56 @@ paths:
       summary: Temperature about
       tags:
         - about
+  /api/v1/config/antenna:
+    get:
+      description: Get Antenna configuration
+      operationId: config#GetAntennaConfig
+      produces:
+        - application/vnd.waterlinked.antenna_config+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedAntenna_config"
+      schemes:
+        - http
+      summary: GetAntennaConfig config
+      tags:
+        - config
+    put:
+      description: Modify Antenna configuration
+      operationId: config#ModifyAntennaConfig
+      parameters:
+        - description: Configuration parameters for antenna set up
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: "#/definitions/ModifyAntennaConfigConfigPayload"
+      produces:
+        - application/vnd.waterlinked.operation_response+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+      schemes:
+        - http
+      summary: ModifyAntennaConfig config
+      tags:
+        - config
   /api/v1/config/generic:
     get:
       description: Get generic configuration
@@ -281,6 +353,56 @@ paths:
       summary: ModifyReceiver config
       tags:
         - config
+  /api/v1/config/wifi:
+    get:
+      description: Get WIFI configuration
+      operationId: config#GetWIFI
+      produces:
+        - application/vnd.waterlinked.wifi_config+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedWifi_config"
+      schemes:
+        - http
+      summary: GetWIFI config
+      tags:
+        - config
+    put:
+      description: Modify WIFI configuration
+      operationId: config#ModifyWIFI
+      parameters:
+        - description: Configuration parameters
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: "#/definitions/ModifyWIFIConfigPayload"
+      produces:
+        - application/vnd.waterlinked.operation_response+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "400":
+          description: Bad Request
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+      schemes:
+        - http
+      summary: ModifyWIFI config
+      tags:
+        - config
   /api/v1/external/depth:
     put:
       description: Set depth from external source. If Locator A1 is used, this is required to get a position
@@ -426,7 +548,107 @@ paths:
       summary: SetOrientation external
       tags:
         - external
-  /api/v1/poi:
+  /api/v1/imu/calibrate:
+    get:
+      description: Get IMU status and orientation
+      operationId: imu#Get
+      produces:
+        - application/vnd.waterlinked.imu+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedImu"
+      schemes:
+        - http
+      summary: Get imu
+      tags:
+        - imu
+    post:
+      description: Start calibration
+      operationId: imu#Calibrate
+      parameters:
+        - description: IMU calibration action
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: "#/definitions/CalibrateImuPayload"
+      produces:
+        - text/plain
+      responses:
+        "200":
+          description: OK
+        "408":
+          description: Request Timeout
+        "409":
+          description: Conflict
+      schemes:
+        - http
+      summary: Calibrate imu
+      tags:
+        - imu
+  /api/v1/imu/resetgyros:
+    post:
+      description: Reset Gyro
+      operationId: imu#ResetGyro
+      produces:
+        - text/plain
+      responses:
+        "200":
+          description: OK
+        "408":
+          description: Request Timeout
+        "409":
+          description: Conflict
+      schemes:
+        - http
+      summary: ResetGyro imu
+      tags:
+        - imu
+  /api/v1/imu/setnorth:
+    post:
+      description: Set north point
+      operationId: imu#SetNorth
+      parameters:
+        - description: IMU set north
+          in: body
+          name: payload
+          required: true
+          schema:
+            $ref: "#/definitions/SetNorthImuPayload"
+      produces:
+        - text/plain
+      responses:
+        "200":
+          description: OK
+        "408":
+          description: Request Timeout
+        "409":
+          description: Conflict
+      schemes:
+        - http
+      summary: SetNorth imu
+      tags:
+        - imu
+  /api/v1/poi/:
+    get:
+      description: List all points of interest
+      operationId: poi#List
+      produces:
+        - application/vnd.waterlinked.poi+json; type=collection
+      responses:
+        "200":
+          description: Return list of all POIs
+          schema:
+            $ref: "#/definitions/WaterlinkedPoiCollection"
+        "404":
+          description: Not Found
+      schemes:
+        - http
+      summary: List poi
+      tags:
+        - poi
     post:
       description: Create a new POI
       operationId: poi#Create
@@ -456,24 +678,6 @@ paths:
       schemes:
         - http
       summary: Create poi
-      tags:
-        - poi
-  /api/v1/poi/:
-    get:
-      description: List all points of interest
-      operationId: poi#List
-      produces:
-        - application/vnd.waterlinked.poi+json; type=collection
-      responses:
-        "200":
-          description: Return list of all POIs
-          schema:
-            $ref: "#/definitions/WaterlinkedPoiCollection"
-        "404":
-          description: Not Found
-      schemes:
-        - http
-      summary: List poi
       tags:
         - poi
   "/api/v1/poi/{ID}":
@@ -623,65 +827,102 @@ paths:
       summary: GetMaster position
       tags:
         - position
+  /api/v1/status_report/:
+    get:
+      description: Get list of status reports from all status groups
+      operationId: status_report#Get
+      produces:
+        - application/vnd.wl.status.group+json; type=collection
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WlStatusGroupCollection"
+      schemes:
+        - http
+      summary: Get status_report
+      tags:
+        - status_report
   /api/v1/warnings/:
     get:
-      description: Get current list of messages
+      description: "[Deprecated] Get current list of messages"
       operationId: warnings#Get
       produces:
+        - application/vnd.waterlinked.operation_response+json
         - application/vnd.wl.warning+json; type=collection
       responses:
         "200":
           description: OK
           schema:
             $ref: "#/definitions/WlWarningCollection"
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
       schemes:
         - http
       summary: Get warnings
       tags:
         - warnings
 definitions:
+  CalibrateImuPayload:
+    description: IMU calibration action
+    example:
+      action: start
+    properties:
+      action:
+        description: IMU Calibration Action to use
+        enum:
+          - start
+          - abort
+        example: start
+        type: string
+    required:
+      - action
+    title: CalibrateImuPayload
+    type: object
   CreatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
-      id: 6536865564212348000
-      lat: 0.9848439086783396
-      lng: 0.983923109918765
-      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      visible: false
+      depth: 0.983923109918765
+      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+      id: 2287845429121360000
+      lat: 0.4126800396556589
+      lng: 0.09012467671506151
+      name: Accusantium ad.
+      visible: true
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.983923109918765
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       id:
         description: Unique POI id
-        example: 6536865564212348000
+        example: 2287845429121360000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.9848439086783396
+        example: 0.4126800396556589
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.983923109918765
+        example: 0.09012467671506151
         format: double
         type: number
       name:
         description: Name of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Accusantium ad.
         type: string
       visible:
         description: Visibility of POI
-        example: false
+        example: true
         type: boolean
     required:
       - name
@@ -692,25 +933,73 @@ definitions:
       - visible
     title: CreatePoiPayload
     type: object
+  ModifyAntennaConfigConfigPayload:
+    description: Configuration parameters for antenna set up
+    example:
+      antenna_rotation: 90
+      depth: 2
+      x: -2
+      y: 2
+    properties:
+      antenna_rotation:
+        description: Configured rotation of antenna relative to forward arrow on topside housing. Clockwise is positive direction (degrees)
+        example: 90
+        maximum: 180
+        minimum: -180
+        type: integer
+      depth:
+        description: Configured depth relative to surface (meter)
+        example: 2
+        maximum: 10
+        minimum: 0.1
+        type: number
+      x:
+        description: Configured f position relative to master electronics (meter)
+        example: -2
+        maximum: 100
+        minimum: -100
+        type: number
+      y:
+        description: Configured Y position relative to master electronics (meter)
+        example: 2
+        maximum: 100
+        minimum: -100
+        type: number
+    required:
+      - x
+      - y
+      - depth
+      - antenna_rotation
+    title: ModifyAntennaConfigConfigPayload
+    type: object
   ModifyConfigPayload:
     description: Configuration parameters
     example:
+      antenna_enabled: true
       channel: 13
-      compass: static
-      environment: reflective
+      compass: external
+      environment: openwater
       external_pps_enabled: false
-      gps: onboard
-      imu_vehicle_enabled: false
-      locator_type: u1
+      gps: external
+      imu_vehicle_enabled: true
+      locator_type: a1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
       range_min_x: -50
       range_min_y: -50
+      search_direction: 30
+      search_radius: 150
+      search_sector: 90
+      speed_of_sound: 1475
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
     properties:
+      antenna_enabled:
+        description: Enable use of antenna
+        example: true
+        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -723,14 +1012,14 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: external
         type: string
       environment:
-        description: Environment setting
+        description: "[Deprecated] Environment setting"
         enum:
           - reflective
           - openwater
-        example: reflective
+        example: openwater
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
@@ -742,11 +1031,11 @@ definitions:
           - onboard
           - static
           - external
-        example: onboard
+        example: external
         type: string
       imu_vehicle_enabled:
-        description: Enable IMU input from vehicle
-        example: false
+        description: "[Deprecated] Enable IMU input from vehicle"
+        example: true
         type: boolean
       locator_type:
         description: Locator type in use
@@ -756,38 +1045,62 @@ definitions:
           - s1
           - p1
           - u1
-        example: u1
+        example: a1
         type: string
       range_max_x:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
         minimum: 0
         type: number
       range_max_y:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
         minimum: 0
         type: number
       range_max_z:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
-        minimum: 1
+        minimum: 0
         type: number
       range_min_x:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: -50
         maximum: 0
         minimum: -100
         type: number
       range_min_y:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: -50
         maximum: 0
         minimum: -100
         type: number
+      search_direction:
+        description: Direction of circular search area section
+        example: 30
+        maximum: 360
+        minimum: 0
+        type: number
+      search_radius:
+        description: Radius of circular search area
+        example: 150
+        maximum: 300
+        minimum: 1
+        type: number
+      search_sector:
+        description: Sector angle of circular search area
+        example: 90
+        maximum: 360
+        minimum: 1
+        type: number
+      speed_of_sound:
+        description: Speed of sound use by the system
+        example: 1475
+        maximum: 2000
+        minimum: 1000
+        type: integer
       static_lat:
         description: Latitude to use in static mode
         example: 63.422
@@ -808,11 +1121,6 @@ definitions:
         type: number
     required:
       - channel
-      - range_min_x
-      - range_max_x
-      - range_min_y
-      - range_max_y
-      - range_max_z
       - locator_type
       - gps
       - compass
@@ -825,6 +1133,7 @@ definitions:
     description: Configuration parameters
     example:
       address: 10.11.12.94
+      dhcp: true
       dns: 10.11.12.1
       gateway: 10.11.12.1
       prefix: 24
@@ -833,6 +1142,10 @@ definitions:
         description: IP address to use
         example: 10.11.12.94
         type: string
+      dhcp:
+        description: DHCP to use
+        example: true
+        type: boolean
       dns:
         description: DNS to use
         example: 10.11.12.1
@@ -852,34 +1165,35 @@ definitions:
       - gateway
       - prefix
       - dns
+      - dhcp
     title: ModifyIPConfigPayload
     type: object
   ModifyReceiverConfigPayload:
     description: A receiver configuration
     example:
-      id: 831253423044275100
-      x: 0.6812896786410381
-      y: 0.42906662013966146
-      z: 0.25362356554993554
+      id: 3192861043049571000
+      x: 0.27252655729990977
+      y: 0.4129036062459767
+      z: 0.12624652449013432
     properties:
       id:
         description: Unique receiver identifier
-        example: 831253423044275100
+        example: 3192861043049571000
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.6812896786410381
+        example: 0.27252655729990977
         format: double
         type: number
       y:
         description: Configured Y position relative to master electronics (meter)
-        example: 0.42906662013966146
+        example: 0.4129036062459767
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.25362356554993554
+        example: 0.12624652449013432
         format: double
         type: number
     required:
@@ -888,6 +1202,34 @@ definitions:
       - y
       - z
     title: ModifyReceiverConfigPayload
+    type: object
+  ModifyWIFIConfigPayload:
+    description: Configuration parameters
+    example:
+      mode: ap
+      password: 10.11.12.1
+      ssid: 10.11.12.94
+    properties:
+      mode:
+        description: Which mode should the WiFi be in?
+        enum:
+          - ap
+          - client
+        example: ap
+        type: string
+      password:
+        description: Password to use for WiFi in Client mode
+        example: 10.11.12.1
+        type: string
+      ssid:
+        description: WIFI SSID to use for WiFi in Client mode
+        example: 10.11.12.94
+        type: string
+    required:
+      - ssid
+      - password
+      - mode
+    title: ModifyWIFIConfigPayload
     type: object
   SetDepthExternalPayload:
     description: Current locator depth and temperature
@@ -898,7 +1240,7 @@ definitions:
       depth:
         description: Curent depth (meter)
         example: 3.2
-        maximum: 100
+        maximum: 500
         minimum: 0
         type: number
       temp:
@@ -974,6 +1316,22 @@ definitions:
       - orientation
     title: SetMasterExternalPayload
     type: object
+  SetNorthImuPayload:
+    description: IMU set north
+    example:
+      action: clear
+    properties:
+      action:
+        description: IMU Set north action to use
+        enum:
+          - set
+          - clear
+        example: clear
+        type: string
+    required:
+      - action
+    title: SetNorthImuPayload
+    type: object
   SetOrientationExternalPayload:
     description: Set current compass heading of ROV/locator
     example:
@@ -1047,45 +1405,45 @@ definitions:
   UpdatePoiPayload:
     description: A list of all POI
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
-      id: 6536865564212348000
-      lat: 0.9848439086783396
-      lng: 0.983923109918765
-      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      visible: false
+      depth: 0.983923109918765
+      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+      id: 2287845429121360000
+      lat: 0.4126800396556589
+      lng: 0.09012467671506151
+      name: Accusantium ad.
+      visible: true
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.983923109918765
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       id:
         description: Unique POI id
-        example: 6536865564212348000
+        example: 2287845429121360000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.9848439086783396
+        example: 0.4126800396556589
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.983923109918765
+        example: 0.09012467671506151
         format: double
         type: number
       name:
         description: Name of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Accusantium ad.
         type: string
       visible:
         description: Visibility of POI
-        example: false
+        example: true
         type: boolean
     required:
       - name
@@ -1100,12 +1458,17 @@ definitions:
     description: About information (default view)
     example:
       chipid: "0x123456789"
+      variant: R100
       version: 1.0.0 (abc.def)
       version_short: 1.0.0
     properties:
       chipid:
         description: Chip identifier
         example: "0x123456789"
+        type: string
+      variant:
+        description: Software release variant
+        example: R100
         type: string
       version:
         description: Detailed Web Server version string
@@ -1118,27 +1481,81 @@ definitions:
     required:
       - version
       - version_short
+      - variant
       - chipid
     title: "Mediatype identifier: application/vnd.waterlinked.about+json; view=default"
     type: object
   WaterlinkedAccousticPosition:
     description: Current relative Locator position (default view)
     example:
+      position_valid: true
+      receiver_distance:
+        - 0.4571247391045424
+        - 0.4571247391045424
+      receiver_nsd:
+        - 0.748659470979663
+        - 0.748659470979663
+      receiver_rssi:
+        - 0.8800592996534627
+        - 0.8800592996534627
+        - 0.8800592996534627
+      receiver_valid:
+        - 0.768439233512868
+        - 0.768439233512868
       std: 0.5
-      temp: 5.5
       x: 32.1
       y: 11.2
       z: 10.2
     properties:
+      position_valid:
+        description: Is current position valid or not
+        example: true
+        type: boolean
+      receiver_distance:
+        description: Measured distance to the locator for each receiver
+        example:
+          - 0.4571247391045424
+          - 0.4571247391045424
+        items:
+          example: 0.4571247391045424
+          format: double
+          type: number
+        type: array
+      receiver_nsd:
+        description: Measured NSD for each receiver
+        example:
+          - 0.748659470979663
+          - 0.748659470979663
+        items:
+          example: 0.748659470979663
+          format: double
+          type: number
+        type: array
+      receiver_rssi:
+        description: Measured RSSI for each receiver
+        example:
+          - 0.8800592996534627
+          - 0.8800592996534627
+          - 0.8800592996534627
+        items:
+          example: 0.8800592996534627
+          format: double
+          type: number
+        type: array
+      receiver_valid:
+        description: Is signal valid or not for each receiver
+        example:
+          - 0.768439233512868
+          - 0.768439233512868
+        items:
+          example: 0.768439233512868
+          format: double
+          type: number
+        type: array
       std:
         description: Current acoustic position accuracy (meter)
         example: 0.5
         minimum: 0
-        type: number
-      temp:
-        description: Current acoustic temperature (C)
-        example: 5.5
-        format: double
         type: number
       x:
         description: Current acoustic x position relative to master electronics (meter)
@@ -1160,28 +1577,80 @@ definitions:
       - y
       - z
       - std
-      - temp
+      - position_valid
+      - receiver_distance
+      - receiver_rssi
+      - receiver_nsd
+      - receiver_valid
     title: "Mediatype identifier: application/vnd.waterlinked.accoustic.position+json; view=default"
+    type: object
+  WaterlinkedAntenna_config:
+    description: Configuration parameters for antenna set up (default view)
+    example:
+      antenna_rotation: 90
+      depth: 2
+      x: -2
+      y: 2
+    properties:
+      antenna_rotation:
+        description: Configured rotation of antenna relative to forward arrow on topside housing. Clockwise is positive direction (degrees)
+        example: 90
+        maximum: 180
+        minimum: -180
+        type: integer
+      depth:
+        description: Configured depth relative to surface (meter)
+        example: 2
+        maximum: 10
+        minimum: 0.1
+        type: number
+      x:
+        description: Configured f position relative to master electronics (meter)
+        example: -2
+        maximum: 100
+        minimum: -100
+        type: number
+      y:
+        description: Configured Y position relative to master electronics (meter)
+        example: 2
+        maximum: 100
+        minimum: -100
+        type: number
+    required:
+      - x
+      - y
+      - depth
+      - antenna_rotation
+    title: "Mediatype identifier: application/vnd.waterlinked.antenna_config+json; view=default"
     type: object
   WaterlinkedConfiguration:
     description: Configuration parameters (default view)
     example:
+      antenna_enabled: true
       channel: 13
-      compass: static
-      environment: reflective
+      compass: external
+      environment: openwater
       external_pps_enabled: false
-      gps: onboard
-      imu_vehicle_enabled: false
-      locator_type: u1
+      gps: external
+      imu_vehicle_enabled: true
+      locator_type: a1
       range_max_x: 50
       range_max_y: 50
       range_max_z: 50
       range_min_x: -50
       range_min_y: -50
+      search_direction: 30
+      search_radius: 150
+      search_sector: 90
+      speed_of_sound: 1475
       static_lat: 63.422
       static_lon: 10.424
       static_orientation: 42
     properties:
+      antenna_enabled:
+        description: Enable use of antenna
+        example: true
+        type: boolean
       channel:
         description: Channel to use
         example: 13
@@ -1194,14 +1663,14 @@ definitions:
           - onboard
           - static
           - external
-        example: static
+        example: external
         type: string
       environment:
-        description: Environment setting
+        description: "[Deprecated] Environment setting"
         enum:
           - reflective
           - openwater
-        example: reflective
+        example: openwater
         type: string
       external_pps_enabled:
         description: Enable external PPS input to master
@@ -1213,11 +1682,11 @@ definitions:
           - onboard
           - static
           - external
-        example: onboard
+        example: external
         type: string
       imu_vehicle_enabled:
-        description: Enable IMU input from vehicle
-        example: false
+        description: "[Deprecated] Enable IMU input from vehicle"
+        example: true
         type: boolean
       locator_type:
         description: Locator type in use
@@ -1227,38 +1696,62 @@ definitions:
           - s1
           - p1
           - u1
-        example: u1
+        example: a1
         type: string
       range_max_x:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
         minimum: 0
         type: number
       range_max_y:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
         minimum: 0
         type: number
       range_max_z:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: 50
         maximum: 100
-        minimum: 1
+        minimum: 0
         type: number
       range_min_x:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: -50
         maximum: 0
         minimum: -100
         type: number
       range_min_y:
-        description: Max range (meters)
+        description: "[Deprecated] Max range (meters)"
         example: -50
         maximum: 0
         minimum: -100
         type: number
+      search_direction:
+        description: Direction of circular search area section
+        example: 30
+        maximum: 360
+        minimum: 0
+        type: number
+      search_radius:
+        description: Radius of circular search area
+        example: 150
+        maximum: 300
+        minimum: 1
+        type: number
+      search_sector:
+        description: Sector angle of circular search area
+        example: 90
+        maximum: 360
+        minimum: 1
+        type: number
+      speed_of_sound:
+        description: Speed of sound use by the system
+        example: 1475
+        maximum: 2000
+        minimum: 1000
+        type: integer
       static_lat:
         description: Latitude to use in static mode
         example: 63.422
@@ -1279,11 +1772,6 @@ definitions:
         type: number
     required:
       - channel
-      - range_min_x
-      - range_max_x
-      - range_min_y
-      - range_max_y
-      - range_max_z
       - locator_type
       - gps
       - compass
@@ -1292,10 +1780,58 @@ definitions:
       - static_orientation
     title: "Mediatype identifier: application/vnd.waterlinked.configuration+json; view=default"
     type: object
+  WaterlinkedImu:
+    description: IMU status and orientation information (default view)
+    example:
+      pitch: 0
+      progress: 50
+      roll: 0
+      state: 0
+      yaw: 0
+    properties:
+      pitch:
+        description: Pitch
+        example: 0
+        maximum: 360
+        minimum: 0
+        type: number
+      progress:
+        description: Calibration progress
+        example: 50
+        maximum: 100
+        minimum: 0
+        type: integer
+      roll:
+        description: Roll
+        example: 0
+        maximum: 360
+        minimum: 0
+        type: number
+      state:
+        description: IMU calibration state. 0=running, 1=calibrating
+        example: 0
+        maximum: 3
+        minimum: 0
+        type: integer
+      yaw:
+        description: Yaw
+        example: 0
+        maximum: 360
+        minimum: 0
+        type: number
+    required:
+      - roll
+      - pitch
+      - yaw
+      - state
+      - progress
+    title: "Mediatype identifier: application/vnd.waterlinked.imu+json; view=default"
+    type: object
   WaterlinkedIp_config:
     description: Configuration parameters (default view)
     example:
       address: 10.11.12.94
+      dhcp: true
       dns: 10.11.12.1
       gateway: 10.11.12.1
       prefix: 24
@@ -1304,6 +1840,10 @@ definitions:
         description: IP address to use
         example: 10.11.12.94
         type: string
+      dhcp:
+        description: DHCP to use
+        example: true
+        type: boolean
       dns:
         description: DNS to use
         example: 10.11.12.1
@@ -1323,6 +1863,7 @@ definitions:
       - gateway
       - prefix
       - dns
+      - dhcp
     title: "Mediatype identifier: application/vnd.waterlinked.ip_config+json; view=default"
     type: object
   WaterlinkedOperation_response:
@@ -1346,45 +1887,45 @@ definitions:
   WaterlinkedPoi:
     description: A list of all POI (default view)
     example:
-      depth: 0.768439233512868
-      icon: Fugit quis vero in deleniti qui nihil.
-      id: 6536865564212348000
-      lat: 0.9848439086783396
-      lng: 0.983923109918765
-      name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-      visible: false
+      depth: 0.983923109918765
+      icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+      id: 2287845429121360000
+      lat: 0.4126800396556589
+      lng: 0.09012467671506151
+      name: Accusantium ad.
+      visible: true
     properties:
       depth:
         description: Depth of POI
-        example: 0.768439233512868
+        example: 0.983923109918765
         format: double
         type: number
       icon:
         description: Icon of POI
-        example: Fugit quis vero in deleniti qui nihil.
+        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
         type: string
       id:
         description: Unique POI id
-        example: 6536865564212348000
+        example: 2287845429121360000
         format: int64
         type: integer
       lat:
         description: Latitude of POI
-        example: 0.9848439086783396
+        example: 0.4126800396556589
         format: double
         type: number
       lng:
         description: Longitude of POI
-        example: 0.983923109918765
+        example: 0.09012467671506151
         format: double
         type: number
       name:
         description: Name of POI
-        example: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        example: Accusantium ad.
         type: string
       visible:
         description: Visibility of POI
-        example: false
+        example: true
         type: boolean
     required:
       - name
@@ -1398,27 +1939,27 @@ definitions:
   WaterlinkedPoiCollection:
     description: WaterlinkedPoiCollection is the media type for an array of WaterlinkedPoi (default view)
     example:
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
-        id: 6536865564212348000
-        lat: 0.9848439086783396
-        lng: 0.983923109918765
-        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        visible: false
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
-        id: 6536865564212348000
-        lat: 0.9848439086783396
-        lng: 0.983923109918765
-        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        visible: false
-      - depth: 0.768439233512868
-        icon: Fugit quis vero in deleniti qui nihil.
-        id: 6536865564212348000
-        lat: 0.9848439086783396
-        lng: 0.983923109918765
-        name: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        visible: false
+      - depth: 0.983923109918765
+        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        id: 2287845429121360000
+        lat: 0.4126800396556589
+        lng: 0.09012467671506151
+        name: Accusantium ad.
+        visible: true
+      - depth: 0.983923109918765
+        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        id: 2287845429121360000
+        lat: 0.4126800396556589
+        lng: 0.09012467671506151
+        name: Accusantium ad.
+        visible: true
+      - depth: 0.983923109918765
+        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
+        id: 2287845429121360000
+        lat: 0.4126800396556589
+        lng: 0.09012467671506151
+        name: Accusantium ad.
+        visible: true
     items:
       $ref: "#/definitions/WaterlinkedPoi"
     title: "Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default"
@@ -1426,29 +1967,29 @@ definitions:
   WaterlinkedReceiver:
     description: A receiver configuration (default view)
     example:
-      id: 831253423044275100
-      x: 0.6812896786410381
-      y: 0.42906662013966146
-      z: 0.25362356554993554
+      id: 3192861043049571000
+      x: 0.27252655729990977
+      y: 0.4129036062459767
+      z: 0.12624652449013432
     properties:
       id:
         description: Unique receiver identifier
-        example: 831253423044275100
+        example: 3192861043049571000
         format: int64
         type: integer
       x:
         description: Configured X position relative to master electronics (meter)
-        example: 0.6812896786410381
+        example: 0.27252655729990977
         format: double
         type: number
       y:
         description: Configured Y position relative to master electronics (meter)
-        example: 0.42906662013966146
+        example: 0.4129036062459767
         format: double
         type: number
       z:
         description: Configured Z position relative to master electronics (meter)
-        example: 0.25362356554993554
+        example: 0.12624652449013432
         format: double
         type: number
     required:
@@ -1461,10 +2002,14 @@ definitions:
   WaterlinkedReceiverCollection:
     description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
-      - id: 831253423044275100
-        x: 0.6812896786410381
-        y: 0.42906662013966146
-        z: 0.25362356554993554
+      - id: 3192861043049571000
+        x: 0.27252655729990977
+        y: 0.4129036062459767
+        z: 0.12624652449013432
+      - id: 3192861043049571000
+        x: 0.27252655729990977
+        y: 0.4129036062459767
+        z: 0.12624652449013432
     items:
       $ref: "#/definitions/WaterlinkedReceiver"
     title: "Mediatype identifier: application/vnd.waterlinked.receiver+json; type=collection; view=default"
@@ -1520,6 +2065,34 @@ definitions:
       - board
       - water
     title: "Mediatype identifier: application/vnd.waterlinked.temperature+json; view=default"
+    type: object
+  WaterlinkedWifi_config:
+    description: Configuration parameters (default view)
+    example:
+      mode: ap
+      password: 10.11.12.1
+      ssid: 10.11.12.94
+    properties:
+      mode:
+        description: Which mode should the WiFi be in?
+        enum:
+          - ap
+          - client
+        example: ap
+        type: string
+      password:
+        description: Password to use for WiFi in Client mode
+        example: 10.11.12.1
+        type: string
+      ssid:
+        description: WIFI SSID to use for WiFi in Client mode
+        example: 10.11.12.94
+        type: string
+    required:
+      - ssid
+      - password
+      - mode
+    title: "Mediatype identifier: application/vnd.waterlinked.wifi_config+json; view=default"
     type: object
   WlExternalLocatorOrientation:
     description: Set current compass heading of ROV/locator (default view)
@@ -1658,24 +2231,74 @@ definitions:
       - fix_quality
     title: "Mediatype identifier: application/vnd.wl.satellite.position+json; view=default"
     type: object
+  WlStatusGroup:
+    description: Current status from one specific status group (default view)
+    example:
+      message: Nemo dolorem ea molestias.
+      status: error
+      status_group: Sit qui et consequatur temporibus omnis.
+      status_group_id: Saepe quam sint distinctio qui et et.
+    properties:
+      message:
+        description: Message
+        example: Nemo dolorem ea molestias.
+        type: string
+      status:
+        description: Status
+        enum:
+          - ok
+          - warning
+          - error
+        example: error
+        type: string
+      status_group:
+        description: Status group friendly name
+        example: Sit qui et consequatur temporibus omnis.
+        type: string
+      status_group_id:
+        description: Status group identifier
+        example: Saepe quam sint distinctio qui et et.
+        type: string
+    required:
+      - status_group
+      - status_group_id
+      - status
+      - message
+    title: "Mediatype identifier: application/vnd.wl.status.group+json; view=default"
+    type: object
+  WlStatusGroupCollection:
+    description: WlStatusGroupCollection is the media type for an array of WlStatusGroup (default view)
+    example:
+      - message: Nemo dolorem ea molestias.
+        status: error
+        status_group: Sit qui et consequatur temporibus omnis.
+        status_group_id: Saepe quam sint distinctio qui et et.
+      - message: Nemo dolorem ea molestias.
+        status: error
+        status_group: Sit qui et consequatur temporibus omnis.
+        status_group_id: Saepe quam sint distinctio qui et et.
+    items:
+      $ref: "#/definitions/WlStatusGroup"
+    title: "Mediatype identifier: application/vnd.wl.status.group+json; type=collection; view=default"
+    type: array
   WlWarning:
     description: Warning message (default view)
     example:
-      id: Libero pariatur quia id modi.
-      message: Itaque nemo dolorem ea.
-      severity: Dolorum nihil.
+      id: Laboriosam ut non illo dolor illo facilis.
+      message: Nemo minima.
+      severity: Sed animi distinctio.
     properties:
       id:
         description: Identifier
-        example: Libero pariatur quia id modi.
+        example: Laboriosam ut non illo dolor illo facilis.
         type: string
       message:
         description: Message
-        example: Itaque nemo dolorem ea.
+        example: Nemo minima.
         type: string
       severity:
         description: Severity
-        example: Dolorum nihil.
+        example: Sed animi distinctio.
         type: string
     required:
       - id
@@ -1686,12 +2309,12 @@ definitions:
   WlWarningCollection:
     description: WlWarningCollection is the media type for an array of WlWarning (default view)
     example:
-      - id: Libero pariatur quia id modi.
-        message: Itaque nemo dolorem ea.
-        severity: Dolorum nihil.
-      - id: Libero pariatur quia id modi.
-        message: Itaque nemo dolorem ea.
-        severity: Dolorum nihil.
+      - id: Laboriosam ut non illo dolor illo facilis.
+        message: Nemo minima.
+        severity: Sed animi distinctio.
+      - id: Laboriosam ut non illo dolor illo facilis.
+        message: Nemo minima.
+        severity: Sed animi distinctio.
     items:
       $ref: "#/definitions/WlWarning"
     title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default"
@@ -1709,7 +2332,7 @@ definitions:
           - v1
           - v2
         items:
-          example: Et consequatur temporibus omnis dolor saepe quam.
+          example: Ipsum dicta rem tenetur commodi.
           type: string
         type: array
     required:

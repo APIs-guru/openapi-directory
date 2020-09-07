@@ -175,7 +175,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/BrandResp"
           description: Successful Response
         "422":
           content:
@@ -212,7 +212,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/DealershipDataResp"
           description: Successful Response
         "422":
           content:
@@ -250,7 +250,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/DealershipDataResp"
           description: Successful Response
         "422":
           content:
@@ -293,7 +293,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/DealershipDataPaginatedResp"
           description: Successful Response
         "422":
           content:
@@ -340,7 +340,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ModelResp"
           description: Successful Response
         "422":
           content:
@@ -382,7 +382,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ModelResp"
           description: Successful Response
         "422":
           content:
@@ -490,7 +490,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/RegionResp"
           description: Successful Response
         "422":
           content:
@@ -720,7 +720,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ListingResp"
           description: Successful Response
         "422":
           content:
@@ -786,7 +786,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ListingResp"
           description: Successful Response
         "422":
           content:
@@ -859,7 +859,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ListingResp"
           description: Successful Response
         "422":
           content:
@@ -1269,7 +1269,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/SimilarSalePriceResp"
           description: Successful Response
         "422":
           content:
@@ -1354,7 +1354,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/HistoryResp"
           description: Successful Response
         "422":
           content:
@@ -1415,6 +1415,139 @@ paths:
         - Standard Plan Or Greater
 components:
   schemas:
+    BrandResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            type: string
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: BrandResp
+      type: object
+    DealershipData:
+      properties:
+        address:
+          title: Address
+          type: string
+        dealerName:
+          title: Dealername
+          type: string
+        ids:
+          items:
+            type: integer
+          title: Ids
+          type: array
+        state:
+          title: State
+          type: string
+        zipCode:
+          title: Zipcode
+          type: integer
+      required:
+        - dealerName
+        - zipCode
+        - state
+        - address
+        - ids
+      title: DealershipData
+      type: object
+    DealershipDataPaginated:
+      properties:
+        dealers:
+          items:
+            $ref: "#/components/schemas/DealershipData"
+          title: Dealers
+          type: array
+        maxPages:
+          title: Maxpages
+          type: integer
+        page:
+          title: Page
+          type: integer
+      required:
+        - page
+        - maxPages
+        - dealers
+      title: DealershipDataPaginated
+      type: object
+    DealershipDataPaginatedResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          $ref: "#/components/schemas/DealershipDataPaginated"
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: DealershipDataPaginatedResp
+      type: object
+    DealershipDataResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/DealershipData"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: DealershipDataResp
+      type: object
     EndpointList:
       properties:
         endPoints:
@@ -1460,6 +1593,33 @@ components:
           type: array
       title: HTTPValidationError
       type: object
+    HistoryResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          $ref: "#/components/schemas/VehHistoryData"
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: HistoryResp
+      type: object
     JSONWebToken:
       properties:
         createdOn:
@@ -1474,6 +1634,262 @@ components:
       required:
         - token
       title: JSONWebToken
+      type: object
+    Listing:
+      properties:
+        askPrice:
+          title: Askprice
+          type: number
+        brandName:
+          title: Brandname
+          type: string
+        color:
+          title: Color
+          type: string
+        dealerID:
+          title: Dealerid
+          type: integer
+        firstSeen:
+          format: date
+          title: Firstseen
+          type: string
+        interiorColor:
+          title: Interiorcolor
+          type: string
+        isNew:
+          title: Isnew
+          type: boolean
+        lastSeen:
+          format: date
+          title: Lastseen
+          type: string
+        mileage:
+          default: 0
+          title: Mileage
+          type: number
+        modelName:
+          title: Modelname
+          type: string
+        msrp:
+          title: Msrp
+          type: number
+        vin:
+          title: Vin
+          type: string
+        vinDecode:
+          default: {}
+          title: Vindecode
+          type: object
+        year:
+          title: Year
+          type: number
+      required:
+        - vin
+        - askPrice
+        - msrp
+        - isNew
+        - firstSeen
+        - lastSeen
+        - modelName
+        - brandName
+        - year
+        - dealerID
+      title: Listing
+      type: object
+    ListingResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          $ref: "#/components/schemas/ListingRespPaginated"
+        endDate:
+          format: date
+          title: Enddate
+          type: string
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+        startDate:
+          format: date
+          title: Startdate
+          type: string
+      required:
+        - data
+      title: ListingResp
+      type: object
+    ListingRespPaginated:
+      properties:
+        listings:
+          items:
+            $ref: "#/components/schemas/Listing"
+          title: Listings
+          type: array
+        maxPages:
+          title: Maxpages
+          type: integer
+        page:
+          title: Page
+          type: integer
+      required:
+        - page
+        - maxPages
+        - listings
+      title: ListingRespPaginated
+      type: object
+    ModelDict:
+      properties:
+        modelName:
+          title: Modelname
+          type: string
+      required:
+        - modelName
+      title: ModelDict
+      type: object
+    ModelResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/ModelDict"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: ModelResp
+      type: object
+    RegionResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            type: string
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: RegionResp
+      type: object
+    SimilarSalePriceData:
+      properties:
+        daysBack:
+          title: Daysback
+          type: integer
+        mileCount:
+          title: Milecount
+          type: integer
+        milesAvg:
+          title: Milesavg
+          type: number
+        milesStdDev:
+          title: Milesstddev
+          type: number
+        newCount:
+          title: Newcount
+          type: integer
+        newSaleAvg:
+          title: Newsaleavg
+          type: number
+        newSaleStdDev:
+          title: Newsalestddev
+          type: number
+        usedCount:
+          title: Usedcount
+          type: integer
+        usedSaleAvg:
+          title: Usedsaleavg
+          type: number
+        usedSaleStdDev:
+          title: Usedsalestddev
+          type: number
+      required:
+        - newSaleAvg
+        - newSaleStdDev
+        - newCount
+        - usedSaleAvg
+        - usedSaleStdDev
+        - usedCount
+        - milesAvg
+        - milesStdDev
+        - mileCount
+        - daysBack
+      title: SimilarSalePriceData
+      type: object
+    SimilarSalePriceResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          $ref: "#/components/schemas/SimilarSalePriceData"
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: SimilarSalePriceResp
       type: object
     SubUserJSONWebToken:
       properties:
@@ -1523,4 +1939,58 @@ components:
         - msg
         - type
       title: ValidationError
+      type: object
+    VehHistory:
+      properties:
+        dealerName:
+          title: Dealername
+          type: string
+        firstSeen:
+          format: date
+          title: Firstseen
+          type: string
+        lastSeen:
+          format: date
+          title: Lastseen
+          type: string
+        miles:
+          title: Miles
+          type: integer
+        new:
+          title: New
+          type: boolean
+        price:
+          title: Price
+          type: number
+        state:
+          title: State
+          type: string
+        zip:
+          title: Zip
+          type: integer
+      required:
+        - dealerName
+        - firstSeen
+        - lastSeen
+        - price
+        - new
+        - miles
+        - state
+        - zip
+      title: VehHistory
+      type: object
+    VehHistoryData:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/VehHistory"
+          title: Data
+          type: array
+        vin:
+          title: Vin
+          type: string
+      required:
+        - vin
+        - data
+      title: VehHistoryData
       type: object

@@ -1495,7 +1495,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Type of the notifier - indicates the action the notifier will perform. Currently only GET is supported which performs an http(s) GET to the supplied uri with appended notifierId= and orderId= parameters when the order processing is completed
+        - description: Type of the notifier - indicates the action the notifier will perform. Currently GET and POST are supported which performs an http(s) GET/POST to the supplied uri with appended notifierId= and orderId= parameters when the order processing is completed. Upon the POST request the order object is sent as a JSON body
           in: path
           name: type
           required: true
@@ -1801,6 +1801,12 @@ paths:
               schema:
                 oneOf:
                   - properties:
+                      childOrders:
+                        items:
+                          type: string
+                        type: array
+                      data:
+                        type: string
                       mimeType:
                         type: string
                       productOrderId:

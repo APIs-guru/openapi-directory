@@ -204,36 +204,6 @@ paths:
           description: A failure response
       tags:
         - Charge Stations
-  /v1/clients:
-    get:
-      description: Get clients info
-      operationId: getClients
-      responses:
-        "200":
-          description: Success
-      tags:
-        - Clients
-    post:
-      description: Create client with parameters
-      operationId: postClients
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                properties:
-                  connector:
-                    type: object
-                  message:
-                    type: string
-                  ok:
-                    type: boolean
-                type: object
-          description: A successful response
-        "400":
-          description: A failure response
-      tags:
-        - Clients
   /v1/commands:
     get:
       description: Get Commands data
@@ -1305,37 +1275,6 @@ paths:
           description: A failure response
       tags:
         - Reservations
-  "/v1/stats/{asset}/{statistic}":
-    get:
-      description: Get statistics for an activity for an asset within a certain date
-      operationId: getStat
-      parameters:
-        - description: The asset you would like to get stats for.
-          in: path
-          name: asset
-          required: true
-          schema:
-            enum:
-              - transactions
-              - drivers
-            type: string
-        - description: Type of statistic to calculate
-          in: path
-          name: statistic
-          required: true
-          schema:
-            enum:
-              - count
-            type: string
-        - $ref: "#/components/parameters/parameter3"
-        - $ref: "#/components/parameters/parameter4"
-      responses:
-        "200":
-          description: Success
-        "401":
-          description: Not Found
-      tags:
-        - Stats
   /v1/tokens:
     get:
       description: List tokens
@@ -1629,28 +1568,6 @@ paths:
           description: Not Found
       tags:
         - Transactions
-  /v1/users/onboard:
-    post:
-      description: Onboard user
-      operationId: postUsersOnboard
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                properties:
-                  connector:
-                    type: object
-                  message:
-                    type: string
-                  ok:
-                    type: boolean
-                type: object
-          description: A successful response
-        "400":
-          description: A failure response
-      tags:
-        - Users
   /v1/vehicles:
     get:
       description: List all vehicles
@@ -1978,7 +1895,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 882e19b14b20ad037f891d8747168d4e37c93f23
+x-github-sha: 57c9742e692373ce5916f95a8a67ec4cc9ecf9d6
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

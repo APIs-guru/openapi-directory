@@ -24946,6 +24946,26 @@ paths:
       description: <p>Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
       operationId: GetIssuingDisputes
       parameters:
+        - description: Select Issuing disputes that were created during the given date interval.
+          explode: true
+          in: query
+          name: created
+          required: false
+          schema:
+            anyOf:
+              - properties:
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                title: range_query_specs
+                type: object
+              - type: integer
+          style: deepObject
         - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
           in: query
           name: ending_before
@@ -24975,6 +24995,28 @@ paths:
         - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
           in: query
           name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Select Issuing disputes with the given status.
+          in: query
+          name: status
+          required: false
+          schema:
+            enum:
+              - expired
+              - lost
+              - submitted
+              - unsubmitted
+              - won
+            type: string
+            x-stripeBypassValidation: true
+          style: form
+        - description: Select the Issuing dispute for the given transaction.
+          in: query
+          name: transaction
           required: false
           schema:
             maxLength: 5000
@@ -25036,6 +25078,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              evidence:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -25045,6 +25090,272 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                evidence:
+                  description: A hash containing all the evidence related to the dispute.
+                  properties:
+                    canceled:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            canceled_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_policy_provided:
+                              anyOf:
+                                - type: boolean
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_reason:
+                              maxLength: 1500
+                              type: string
+                            expected_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                            return_status:
+                              enum:
+                                - ""
+                                - merchant_rejected
+                                - successful
+                              type: string
+                            returned_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: canceled
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    duplicate:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            card_statement:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            cash_receipt:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            check_image:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            original_transaction:
+                              maxLength: 5000
+                              type: string
+                          title: duplicate
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    fraudulent:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                          title: fraudulent
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    merchandise_not_as_described:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            received_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            return_description:
+                              maxLength: 1500
+                              type: string
+                            return_status:
+                              enum:
+                                - ""
+                                - merchant_rejected
+                                - successful
+                              type: string
+                            returned_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: merchandise_not_as_described
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    not_received:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            expected_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                          title: not_received
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    other:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                          title: other
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    reason:
+                      enum:
+                        - canceled
+                        - duplicate
+                        - fraudulent
+                        - merchandise_not_as_described
+                        - not_received
+                        - other
+                        - service_not_as_described
+                      type: string
+                      x-stripeBypassValidation: true
+                    service_not_as_described:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            canceled_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_reason:
+                              maxLength: 1500
+                              type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            received_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: service_not_as_described
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                  title: evidence_param
+                  type: object
                 expand:
                   description: Specifies which fields in the response should be expanded.
                   items:
@@ -25056,8 +25367,14 @@ paths:
                     type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                   type: object
+                transaction:
+                  description: The ID of the issuing transaction to create a dispute for.
+                  maxLength: 5000
+                  type: string
+              required:
+                - transaction
               type: object
-        required: false
+        required: true
       responses:
         "200":
           content:
@@ -25119,6 +25436,330 @@ paths:
     post:
       description: <p>Updates the specified Issuing <code>Dispute</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged. Properties on the <code>evidence</code> object can be unset by passing in an empty string.</p>
       operationId: PostIssuingDisputesDispute
+      parameters:
+        - in: path
+          name: dispute
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              evidence:
+                explode: true
+                style: deepObject
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                evidence:
+                  description: A hash containing all the evidence related to the dispute.
+                  properties:
+                    canceled:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            canceled_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_policy_provided:
+                              anyOf:
+                                - type: boolean
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_reason:
+                              maxLength: 1500
+                              type: string
+                            expected_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                            return_status:
+                              enum:
+                                - ""
+                                - merchant_rejected
+                                - successful
+                              type: string
+                            returned_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: canceled
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    duplicate:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            card_statement:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            cash_receipt:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            check_image:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            original_transaction:
+                              maxLength: 5000
+                              type: string
+                          title: duplicate
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    fraudulent:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                          title: fraudulent
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    merchandise_not_as_described:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            received_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            return_description:
+                              maxLength: 1500
+                              type: string
+                            return_status:
+                              enum:
+                                - ""
+                                - merchant_rejected
+                                - successful
+                              type: string
+                            returned_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: merchandise_not_as_described
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    not_received:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            expected_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                          title: not_received
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    other:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            product_description:
+                              maxLength: 1500
+                              type: string
+                            product_type:
+                              enum:
+                                - ""
+                                - merchandise
+                                - service
+                              type: string
+                          title: other
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    reason:
+                      enum:
+                        - canceled
+                        - duplicate
+                        - fraudulent
+                        - merchandise_not_as_described
+                        - not_received
+                        - other
+                        - service_not_as_described
+                      type: string
+                      x-stripeBypassValidation: true
+                    service_not_as_described:
+                      anyOf:
+                        - properties:
+                            additional_documentation:
+                              anyOf:
+                                - type: string
+                                - enum:
+                                    - ""
+                                  type: string
+                            canceled_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                            cancellation_reason:
+                              maxLength: 1500
+                              type: string
+                            explanation:
+                              maxLength: 1500
+                              type: string
+                            received_at:
+                              anyOf:
+                                - format: unix-time
+                                  type: integer
+                                - enum:
+                                    - ""
+                                  type: string
+                          title: service_not_as_described
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                  title: evidence_param
+                  type: object
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  anyOf:
+                    - additionalProperties:
+                        type: string
+                      type: object
+                    - enum:
+                        - ""
+                      type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/issuing.dispute"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  "/v1/issuing/disputes/{dispute}/submit":
+    post:
+      description: <p>Submits an Issuing <code>Dispute</code> to the card network. Stripe validates that all evidence fields required for the dispute’s reason are present. For more details, see <a href="/docs/issuing/purchases/disputes#dispute-reasons-and-evidence">Dispute reasons and evidence</a>.</p>
+      operationId: PostIssuingDisputesDisputeSubmit
       parameters:
         - in: path
           name: dispute
@@ -29424,6 +30065,7 @@ paths:
                 description: ""
                 properties:
                   data:
+                    description: Details about each object.
                     items:
                       $ref: "#/components/schemas/plan"
                     type: array
@@ -29445,6 +30087,7 @@ paths:
                   - has_more
                   - object
                   - url
+                title: PlanList
                 type: object
                 x-expandableFields:
                   - data
@@ -29931,6 +30574,7 @@ paths:
                 description: ""
                 properties:
                   data:
+                    description: Details about each object.
                     items:
                       $ref: "#/components/schemas/price"
                     type: array
@@ -29952,6 +30596,7 @@ paths:
                   - has_more
                   - object
                   - url
+                title: PriceList
                 type: object
                 x-expandableFields:
                   - data
@@ -43026,6 +43671,15 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        available_payout_methods:
+          description: A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.
+          items:
+            enum:
+              - instant
+              - standard
+            type: string
+          nullable: true
+          type: array
         bank_name:
           description: Name of the bank associated with the routing number (e.g., `WELLS FARGO`).
           maxLength: 5000
@@ -43482,7 +44136,7 @@ components:
           nullable: true
           type: string
         available_payout_methods:
-          description: A set of available payout methods for this card. Will be either `["standard"]` or `["standard", "instant"]`. Only values from this set should be passed as the `method` when creating a transfer.
+          description: A set of available payout methods for this card. Only values from this set should be passed as the `method` when creating a payout.
           items:
             enum:
               - instant
@@ -44223,6 +44877,16 @@ components:
             maxLength: 5000
             type: string
           type: array
+        payment_status:
+          description: >-
+            The payment status of the Checkout Session, one of `paid`, `unpaid`, or `no_payment_required`.
+
+            You can use this value to decide when to fulfill your customer's order.
+          enum:
+            - no_payment_required
+            - paid
+            - unpaid
+          type: string
         setup_intent:
           anyOf:
             - maxLength: 5000
@@ -44287,6 +44951,7 @@ components:
         - livemode
         - object
         - payment_method_types
+        - payment_status
         - success_url
       title: Session
       type: object
@@ -48176,12 +48841,24 @@ components:
 
         Related guide: [Disputing Transactions](https://stripe.com/docs/issuing/purchases/disputes)
       properties:
+        amount:
+          description: Disputed amount. Usually the amount of the `disputed_transaction`, but can differ (usually because of currency fluctuation).
+          type: integer
         balance_transactions:
           description: List of balance transactions associated with the dispute.
           items:
             $ref: "#/components/schemas/balance_transaction"
           nullable: true
           type: array
+        created:
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+        currency:
+          description: The currency the `disputed_transaction` was made in.
+          type: string
+        evidence:
+          $ref: "#/components/schemas/issuing_dispute_evidence"
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -48189,11 +48866,27 @@ components:
         livemode:
           description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
           type: boolean
+        metadata:
+          additionalProperties:
+            maxLength: 500
+            type: string
+          description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
           enum:
             - issuing.dispute
           type: string
+        status:
+          description: Current status of the dispute.
+          enum:
+            - expired
+            - lost
+            - submitted
+            - unsubmitted
+            - won
+          type: string
+          x-stripeBypassValidation: true
         transaction:
           anyOf:
             - maxLength: 5000
@@ -48212,6 +48905,7 @@ components:
       type: object
       x-expandableFields:
         - balance_transactions
+        - evidence
         - transaction
       x-resourceId: issuing.dispute
     issuing.settlement:
@@ -48363,6 +49057,16 @@ components:
         currency:
           description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
           type: string
+        dispute:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/issuing.dispute"
+          description: If you've disputed the transaction, the ID of the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/issuing.dispute"
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -48398,6 +49102,7 @@ components:
           description: The nature of the transaction.
           enum:
             - capture
+            - dispute
             - refund
           type: string
           x-stripeBypassValidation: true
@@ -48422,6 +49127,7 @@ components:
         - balance_transaction
         - card
         - cardholder
+        - dispute
         - merchant_data
         - purchase_details
       x-resourceId: issuing.transaction
@@ -50659,6 +51365,348 @@ components:
       type: object
       x-expandableFields:
         - document
+    issuing_dispute_canceled_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        canceled_at:
+          description: Date when order was canceled.
+          format: unix-time
+          nullable: true
+          type: integer
+        cancellation_policy_provided:
+          description: Whether the cardholder was provided with a cancellation policy.
+          nullable: true
+          type: boolean
+        cancellation_reason:
+          description: Reason for canceling the order.
+          maxLength: 5000
+          nullable: true
+          type: string
+        expected_at:
+          description: Date when the cardholder expected to receive the product.
+          format: unix-time
+          nullable: true
+          type: integer
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_description:
+          description: Description of the merchandise or service that was purchased.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_type:
+          description: Whether the product was a merchandise or service.
+          enum:
+            - merchandise
+            - service
+          nullable: true
+          type: string
+        return_status:
+          description: Result of cardholder's attempt to return the product.
+          enum:
+            - merchant_rejected
+            - successful
+          nullable: true
+          type: string
+        returned_at:
+          description: Date when the product was returned or attempted to be returned.
+          format: unix-time
+          nullable: true
+          type: integer
+      title: IssuingDisputeCanceledEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+    issuing_dispute_duplicate_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        card_statement:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the card statement showing that the product had already been paid for.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        cash_receipt:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Copy of the receipt showing that the product had been paid for in cash.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        check_image:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Image of the front and back of the check that was used to pay for the product.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        original_transaction:
+          description: Transaction (e.g., ipi_...) that the disputed transaction is a duplicate of. Of the two or more transactions that are copies of each other, this is original undisputed one.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: IssuingDisputeDuplicateEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+        - card_statement
+        - cash_receipt
+        - check_image
+    issuing_dispute_evidence:
+      description: ""
+      properties:
+        canceled:
+          $ref: "#/components/schemas/issuing_dispute_canceled_evidence"
+        duplicate:
+          $ref: "#/components/schemas/issuing_dispute_duplicate_evidence"
+        fraudulent:
+          $ref: "#/components/schemas/issuing_dispute_fraudulent_evidence"
+        merchandise_not_as_described:
+          $ref: "#/components/schemas/issuing_dispute_merchandise_not_as_described_evidence"
+        not_received:
+          $ref: "#/components/schemas/issuing_dispute_not_received_evidence"
+        other:
+          $ref: "#/components/schemas/issuing_dispute_other_evidence"
+        reason:
+          description: The reason for filing the dispute. Its value will match the field containing the evidence.
+          enum:
+            - canceled
+            - duplicate
+            - fraudulent
+            - merchandise_not_as_described
+            - not_received
+            - other
+            - service_not_as_described
+          type: string
+          x-stripeBypassValidation: true
+        service_not_as_described:
+          $ref: "#/components/schemas/issuing_dispute_service_not_as_described_evidence"
+      required:
+        - reason
+      title: IssuingDisputeEvidence
+      type: object
+      x-expandableFields:
+        - canceled
+        - duplicate
+        - fraudulent
+        - merchandise_not_as_described
+        - not_received
+        - other
+        - service_not_as_described
+    issuing_dispute_fraudulent_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: IssuingDisputeFraudulentEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+    issuing_dispute_merchandise_not_as_described_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        received_at:
+          description: Date when the product was received.
+          format: unix-time
+          nullable: true
+          type: integer
+        return_description:
+          description: Description of the cardholder's attempt to return the product.
+          maxLength: 5000
+          nullable: true
+          type: string
+        return_status:
+          description: Result of cardholder's attempt to return the product.
+          enum:
+            - merchant_rejected
+            - successful
+          nullable: true
+          type: string
+        returned_at:
+          description: Date when the product was returned or attempted to be returned.
+          format: unix-time
+          nullable: true
+          type: integer
+      title: IssuingDisputeMerchandiseNotAsDescribedEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+    issuing_dispute_not_received_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        expected_at:
+          description: Date when the cardholder expected to receive the product.
+          format: unix-time
+          nullable: true
+          type: integer
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_description:
+          description: Description of the merchandise or service that was purchased.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_type:
+          description: Whether the product was a merchandise or service.
+          enum:
+            - merchandise
+            - service
+          nullable: true
+          type: string
+      title: IssuingDisputeNotReceivedEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+    issuing_dispute_other_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_description:
+          description: Description of the merchandise or service that was purchased.
+          maxLength: 5000
+          nullable: true
+          type: string
+        product_type:
+          description: Whether the product was a merchandise or service.
+          enum:
+            - merchandise
+            - service
+          nullable: true
+          type: string
+      title: IssuingDisputeOtherEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
+    issuing_dispute_service_not_as_described_evidence:
+      description: ""
+      properties:
+        additional_documentation:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/file"
+          description: (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional documentation supporting the dispute.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/file"
+        canceled_at:
+          description: Date when order was canceled.
+          format: unix-time
+          nullable: true
+          type: integer
+        cancellation_reason:
+          description: Reason for canceling the order.
+          maxLength: 5000
+          nullable: true
+          type: string
+        explanation:
+          description: Explanation of why the cardholder is disputing this transaction.
+          maxLength: 5000
+          nullable: true
+          type: string
+        received_at:
+          description: Date when the product was received.
+          format: unix-time
+          nullable: true
+          type: integer
+      title: IssuingDisputeServiceNotAsDescribedEvidence
+      type: object
+      x-expandableFields:
+        - additional_documentation
     issuing_transaction_amount_details:
       description: ""
       properties:
@@ -55755,7 +56803,7 @@ components:
         parameters:
           $ref: "#/components/schemas/financial_reporting_finance_report_run_run_parameters"
         report_type:
-          description: The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `"balance.summary.1"`.
+          description: The ID of the [report type](https://stripe.com/docs/reports/report-types) to run, such as `"balance.summary.1"`.
           maxLength: 5000
           type: string
         result:
