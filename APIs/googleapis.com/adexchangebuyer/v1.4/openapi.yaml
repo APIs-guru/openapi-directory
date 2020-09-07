@@ -1749,7 +1749,7 @@ components:
             type: string
           type: array
         advertiserName:
-          description: The name of the company being advertised in the creative. The value provided must exist in the advertisers.txt file.
+          description: The name of the company being advertised in the creative. A list of advertisers is provided in the advertisers.txt file.
           type: string
         agencyId:
           description: The agency id for this creative.
@@ -2389,6 +2389,8 @@ components:
           description: The time (ms since epoch) when the deal was last updated. (readonly)
           format: int64
           type: string
+        makegoodRequestedReason:
+          type: string
         name:
           description: The name of the deal. (updatable)
           type: string
@@ -2477,6 +2479,13 @@ components:
         timestampMs:
           description: The timestamp (ms since epoch) that this note was created. (readonly)
           format: int64
+          type: string
+      type: object
+    MobileApplication:
+      properties:
+        appStore:
+          type: string
+        externalAppId:
           type: string
       type: object
     PerformanceReport:
@@ -3046,6 +3055,17 @@ components:
         programmaticContact:
           description: Programmatic contact for the publisher profile.
           type: string
+        publisherAppIds:
+          description: The list of app IDs represented in this pubisher profile. Empty if this is a parent profile. Deprecated in favor of publisher_app.
+          items:
+            format: int64
+            type: string
+          type: array
+        publisherApps:
+          description: The list of apps represented in this pubisher profile. Empty if this is a parent profile.
+          items:
+            $ref: "#/components/schemas/MobileApplication"
+          type: array
         publisherDomains:
           description: The list of domains represented in this publisher profile. Empty if this is a parent profile.
           items:

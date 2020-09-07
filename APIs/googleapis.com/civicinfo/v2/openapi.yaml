@@ -819,11 +819,11 @@ components:
           description: An ID for this object. IDs may change in future requests and should not be cached. Access to this field requires special access that can be requested from the Request more link on the Quotas page.
           type: string
         latitude:
-          description: Latitude of the location, in degrees north of the equator. Only some locations -- generally, ballot drop boxes for vote-by-mail elections -- will have this set; for others, use a geocoding service like the Google Maps API to resolve the address to a geographic point.
+          description: Latitude of the location, in degrees north of the equator. Note this field may not be available for some locations.
           format: double
           type: number
         longitude:
-          description: Longitude of the location, in degrees east of the Prime Meridian. Only some locations -- generally, ballot drop boxes for vote-by-mail elections -- will have this set; for others, use a geocoding service like the Google Maps API to resolve the address to a geographic point.
+          description: Longitude of the location, in degrees east of the Prime Meridian. Note this field may not be available for some locations.
           format: double
           type: number
         name:

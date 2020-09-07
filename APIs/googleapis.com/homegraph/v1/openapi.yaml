@@ -64,6 +64,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/QueryResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
       tags:
         - devices
   /v1/devices:reportStateAndNotification:
@@ -94,6 +99,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ReportStateAndNotificationResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
       tags:
         - devices
   /v1/devices:requestSync:
@@ -124,6 +134,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/RequestSyncDevicesResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
       tags:
         - devices
   /v1/devices:sync:
@@ -154,6 +169,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/SyncResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
       tags:
         - devices
   "/v1/{agentUserId}":
@@ -179,6 +199,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/homegraph
+          Oauth2c:
+            - https://www.googleapis.com/auth/homegraph
       tags:
         - agentUsers
     parameters:
@@ -516,3 +541,21 @@ components:
             $ref: "#/components/schemas/Device"
           type: array
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/homegraph: "New Service: https://www.googleapis.com/auth/homegraph"
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/homegraph: "New Service: https://www.googleapis.com/auth/homegraph"
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

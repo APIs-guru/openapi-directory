@@ -62,6 +62,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/location`"
+          in: query
+          name: parent
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -98,6 +103,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "The parent resource where this build will be created. Format: `projects/{project}/locations/{location}`"
+          in: query
+          name: parent
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -132,6 +142,11 @@ paths:
           in: path
           name: id
           required: true
+          schema:
+            type: string
+        - description: "The name of the `Build` to retrieve. Format: `projects/{project}/locations/{location}/builds/{build}`"
+          in: query
+          name: name
           schema:
             type: string
       responses:
@@ -499,6 +514,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Required. ID of the build.
+          in: query
+          name: id
+          schema:
+            type: string
+        - description: Required. ID of the project.
+          in: query
+          name: projectId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -559,6 +584,134 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:retry":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a new build based on the specified build. This method creates a new build using the original build request, which may or may not result in an identical build. For triggered builds: * Triggered builds resolve to a precise revision; therefore a retry of a triggered build will result in a build that uses the same revision. For non-triggered builds that specify `RepoSource`: * If the original build built from the tip of a branch, the retried build will build from the tip of that branch, which may not be the same revision as the original build. * If the original build specified a commit sha or revision ID, the retried build will use the identical source. For builds that specify `StorageSource`: * If the original build pulled source from Google Cloud Storage without specifying the generation of the object, the new build will use the current object, which may be different from the original build source. * If the original build pulled source from Cloud Storage and specified the generation of the object, the new build will attempt to use the same object, which may or may not be available depending on the bucket's lifecycle management settings."
+      operationId: cloudbuild.projects.locations.builds.retry
+      parameters:
+        - description: "The name of the `Build` to retry. Format: `projects/{project}/locations/{location}/builds/{build}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RetryBuildRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/builds":
+    get:
+      description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
+      operationId: cloudbuild.projects.locations.builds.list
+      parameters:
+        - description: "The parent of the collection of `Builds`. Format: `projects/{project}/locations/location`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The raw filter text to constrain the results.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Number of results to return in the list.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to provide to skip to a particular spot in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. ID of the project.
+          in: query
+          name: projectId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListBuildsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts a build with the specified configuration. This method returns a long-running `Operation`, which includes the build ID. Pass the build ID to `GetBuild` to determine the build status (such as `SUCCESS` or `FAILURE`).
+      operationId: cloudbuild.projects.locations.builds.create
+      parameters:
+        - description: "The parent resource where this build will be created. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBuildRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -718,6 +871,10 @@ components:
           type: string
         logsBucket:
           description: Google Cloud Storage bucket where logs should be written (see [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)). Logs file names will be of the format `${logs_bucket}/log-${build_id}.txt`.
+          type: string
+        name:
+          description: "Output only. The 'Build' name with format: `projects/{project}/locations/{location}/builds/{build}`, where {build} is a unique identifier generated by the service."
+          readOnly: true
           type: string
         options:
           $ref: "#/components/schemas/BuildOptions"
@@ -1016,11 +1173,30 @@ components:
       type: object
     CancelBuildRequest:
       description: Request to cancel an ongoing build.
-      properties: {}
+      properties:
+        id:
+          description: Required. ID of the build.
+          type: string
+        name:
+          description: "The name of the `Build` to retrieve. Format: `projects/{project}/locations/{location}/builds/{build}`"
+          type: string
+        projectId:
+          description: Required. ID of the project.
+          type: string
       type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
+      type: object
+    CreateBuildRequest:
+      description: Request to create a new build.
+      properties:
+        build:
+          $ref: "#/components/schemas/Build"
+          description: Required. Build resource to create.
+        projectId:
+          description: Required. ID of the project.
+          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -1291,7 +1467,16 @@ components:
       type: object
     RetryBuildRequest:
       description: Specifies a build to retry.
-      properties: {}
+      properties:
+        id:
+          description: Required. Build ID of the original build.
+          type: string
+        name:
+          description: "The name of the `Build` to retry. Format: `projects/{project}/locations/{location}/builds/{build}`"
+          type: string
+        projectId:
+          description: Required. ID of the project.
+          type: string
       type: object
     SMTPDelivery:
       description: SMTPDelivery is the delivery configuration for an SMTP (email) notification.
