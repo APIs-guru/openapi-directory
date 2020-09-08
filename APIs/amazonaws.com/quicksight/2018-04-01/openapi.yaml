@@ -430,6 +430,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Arn'
                         - description: The default theme for this QuickSight subscription.
+                Tags:
+                  description: A list of the tags that you want to attach to this resource.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -9369,6 +9376,10 @@ components:
     CreateAccountCustomizationResponse:
       type: object
       properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the customization that you created for this AWS account.
         AwsAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccountId'
@@ -9391,6 +9402,21 @@ components:
             - description: The HTTP status of the request.
     Arn:
       type: string
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: Tag key.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: Tag value.
+      description: The key or keys of the key-value pairs for the resource tag or tags assigned to the resource.
     ResourceUnavailableException: {}
     CreateAnalysisResponse:
       type: object
@@ -9465,21 +9491,6 @@ components:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the source template of an analysis.
       description: The source template of an analysis.
-    Tag:
-      type: object
-      required:
-        - Key
-        - Value
-      properties:
-        Key:
-          allOf:
-            - $ref: '#/components/schemas/TagKey'
-            - description: Tag key.
-        Value:
-          allOf:
-            - $ref: '#/components/schemas/TagValue'
-            - description: Tag value.
-      description: The key or keys of the key-value pairs for the resource tag or tags assigned to the resource.
     ConflictException: {}
     UnsupportedUserEditionException: {}
     CreateDashboardResponse:
@@ -10555,6 +10566,10 @@ components:
     DescribeAccountCustomizationResponse:
       type: object
       properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the customization that's associated with this AWS account.
         AwsAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccountId'
@@ -11473,6 +11488,10 @@ components:
     UpdateAccountCustomizationResponse:
       type: object
       properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the updated customization for this AWS account.
         AwsAccountId:
           allOf:
             - $ref: '#/components/schemas/AwsAccountId'
@@ -12383,6 +12402,12 @@ components:
         $ref: '#/components/schemas/ColumnTag'
       minItems: 1
       maxItems: 16
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 200
     CreateAccountCustomizationRequest:
       type: object
       required:
@@ -12393,6 +12418,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountCustomization'
             - description: '<p>The QuickSight customizations you''re adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace. </p> <p>For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>"AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. </code>. Or, you could add a custom theme by specifying <code>"AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }</code>. </p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of the tags that you want to attach to this resource.
     Parameters:
       type: object
       properties:
@@ -12419,12 +12448,6 @@ components:
         $ref: '#/components/schemas/ResourcePermission'
       minItems: 1
       maxItems: 64
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
-      minItems: 1
-      maxItems: 200
     CreateAnalysisRequest:
       type: object
       required:
