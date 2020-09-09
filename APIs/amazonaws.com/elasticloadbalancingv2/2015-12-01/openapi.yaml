@@ -794,7 +794,7 @@ paths:
         - name: Subnets
           in: query
           required: false
-          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
+          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
           schema:
             type: array
             items:
@@ -802,7 +802,7 @@ paths:
         - name: SubnetMappings
           in: query
           required: false
-          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>'
+          description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>'
           schema:
             type: array
             items:
@@ -851,6 +851,14 @@ paths:
             enum:
               - ipv4
               - dualstack
+        - name: CustomerOwnedIpv4Pool
+          in: query
+          required: false
+          description: '[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP pool).'
+          schema:
+            type: string
+            pattern: '^(ipv4pool-coip-)[a-zA-Z0-9]+$'
+            maxLength: 256
         - name: Action
           in: query
           required: true
@@ -5752,7 +5760,7 @@ components:
         AvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/AvailabilityZones'
-            - description: Information about the subnet and Availability Zone.
+            - description: Information about the subnets.
     ActionTypeEnum:
       type: string
       enum:
@@ -6038,6 +6046,8 @@ components:
       type: boolean
     ZoneName:
       type: string
+    OutpostId:
+      type: string
     LoadBalancerAddresses:
       type: array
       items:
@@ -6053,6 +6063,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubnetId'
             - description: The ID of the subnet. You can specify one subnet per Availability Zone.
+        OutpostId:
+          allOf:
+            - $ref: '#/components/schemas/OutpostId'
+            - description: '[Application Load Balancers on Outposts] The ID of the Outpost.'
         LoadBalancerAddresses:
           allOf:
             - $ref: '#/components/schemas/LoadBalancerAddresses'
@@ -6172,6 +6186,10 @@ components:
       enum:
         - ipv4
         - dualstack
+    CustomerOwnedIpv4Pool:
+      type: string
+      pattern: '^(ipv4pool-coip-)[a-zA-Z0-9]+$'
+      maxLength: 256
     CreateLoadBalancerInput:
       type: object
       required:
@@ -6185,11 +6203,11 @@ components:
         Subnets:
           allOf:
             - $ref: '#/components/schemas/Subnets'
-            - description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
+            - description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>'
         SubnetMappings:
           allOf:
             - $ref: '#/components/schemas/SubnetMappings'
-            - description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>'
+            - description: '<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>'
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/SecurityGroups'
@@ -6210,6 +6228,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpAddressType'
             - description: '[Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.'
+        CustomerOwnedIpv4Pool:
+          allOf:
+            - $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
+            - description: '[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP pool).'
     LoadBalancers:
       type: array
       items:
@@ -6827,7 +6849,7 @@ components:
         AvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/AvailabilityZones'
-            - description: The Availability Zones for the load balancer.
+            - description: The subnets for the load balancer.
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/SecurityGroups'
@@ -6836,6 +6858,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpAddressType'
             - description: The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses).
+        CustomerOwnedIpv4Pool:
+          allOf:
+            - $ref: '#/components/schemas/CustomerOwnedIpv4Pool'
+            - description: '[Application Load Balancers on Outposts] The ID of the customer-owned address pool.'
       description: Information about a load balancer.
     PrivateIPv4Address:
       type: string
