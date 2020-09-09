@@ -476,6 +476,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: InvalidApplicationConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationConfigurationException'
       requestBody:
         required: true
         content:
@@ -620,6 +626,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
+        '486':
+          description: InvalidApplicationConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationConfigurationException'
       requestBody:
         required: true
         content:
@@ -1067,6 +1079,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: InvalidApplicationConfigurationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidApplicationConfigurationException'
       requestBody:
         required: true
         content:
@@ -2919,6 +2937,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplicationRestoreConfiguration'
             - description: Describes the restore behavior of a restarting application.
+        FlinkRunConfigurationDescription:
+          $ref: '#/components/schemas/FlinkRunConfiguration'
       description: Describes the starting properties for a Kinesis Data Analytics application.
     FlinkApplicationConfigurationDescription:
       type: object
@@ -3090,7 +3110,7 @@ components:
         - FLINK-1_8
     RoleARN:
       type: string
-      pattern: 'arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+      pattern: 'arn:.*'
       minLength: 1
       maxLength: 2048
     ApplicationStatus:
@@ -3102,6 +3122,7 @@ components:
         - READY
         - RUNNING
         - UPDATING
+        - AUTOSCALING
     Timestamp:
       type: string
       format: date-time
@@ -3228,9 +3249,11 @@ components:
     RecordRowDelimiter:
       type: string
       minLength: 1
+      maxLength: 1024
     RecordColumnDelimiter:
       type: string
       minLength: 1
+      maxLength: 1024
     CSVMappingParameters:
       type: object
       required:
@@ -3670,6 +3693,7 @@ components:
       description: Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
     InAppStreamName:
       type: string
+      pattern: '[^-\s<>&]*'
       minLength: 1
       maxLength: 32
     InAppStreamNames:
@@ -3851,6 +3875,8 @@ components:
     RecordEncoding:
       type: string
       pattern: UTF-8
+      minLength: 5
+      maxLength: 5
     RecordColumns:
       type: array
       items:
@@ -3943,7 +3969,9 @@ components:
         $ref: '#/components/schemas/Input'
     RecordRowPath:
       type: string
+      pattern: ^(?=^\$)(?=^\S+$).*$
       minLength: 1
+      maxLength: 65535
     JSONMappingParameters:
       type: object
       required:
@@ -3956,7 +3984,7 @@ components:
       description: 'For an SQL-based Amazon Kinesis Data Analytics application, provides additional mapping information when JSON is the record format on the streaming source.'
     KinesisAnalyticsARN:
       type: string
-      pattern: 'arn:aws:kinesisanalytics:[a-z]\{2\}-[a-z]\+-\d\{1\}\+:\d\{12\}\+:application/[a-zA-Z0-9_.-]\{1,128\}'
+      pattern: 'arn:.*'
       minLength: 1
       maxLength: 2048
     KinesisFirehoseOutput:
@@ -4105,6 +4133,8 @@ components:
         - PARALLELISM
     ObjectVersion:
       type: string
+      minLength: 0
+      maxLength: 1024
     OutputDescription:
       type: object
       properties:
@@ -4218,11 +4248,17 @@ components:
       type: string
     RecordColumnName:
       type: string
+      pattern: '[^-\s<>&]*'
+      minLength: 1
+      maxLength: 256
     RecordColumnMapping:
       type: string
+      minLength: 0
+      maxLength: 65535
     RecordColumnSqlType:
       type: string
       minLength: 1
+      maxLength: 100
     RecordColumn:
       type: object
       required:

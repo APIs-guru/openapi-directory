@@ -4335,6 +4335,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetPartitionIndexes:
+    post:
+      operationId: GetPartitionIndexes
+      description: Retrieves the partition indexes associated with a table.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPartitionIndexesResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPartitionIndexesRequest'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetPartitionIndexes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.GetPartitions:
     post:
       operationId: GetPartitions
@@ -9156,6 +9225,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TableInput'
             - description: The <code>TableInput</code> object that defines the metadata table to create in the catalog.
+        PartitionIndexes:
+          allOf:
+            - $ref: '#/components/schemas/PartitionIndexList'
+            - description: 'A list of partition indexes, <code>PartitionIndex</code> structures, to create in the table.'
     CreateTriggerResponse:
       type: object
       properties:
@@ -10363,6 +10436,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
             - description: The values that define the partition.
+    GetPartitionIndexesResponse:
+      type: object
+      properties:
+        PartitionIndexDescriptorList:
+          allOf:
+            - $ref: '#/components/schemas/PartitionIndexDescriptorList'
+            - description: A list of index descriptors.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A continuation token, present if the current list segment is not the last.'
+    GetPartitionIndexesRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+      title: GetPartitionIndexesRequest
+      properties:
+        CatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogIdString'
+            - description: The catalog ID where the table resides.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a database from which you want to retrieve partition indexes.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a table for which you want to retrieve the partition indexes.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A continuation token, included if this is a continuation call.'
+    ConflictException: {}
     GetPartitionsResponse:
       type: object
       properties:
@@ -13097,7 +13205,7 @@ components:
         ConnectionProperties:
           allOf:
             - $ref: '#/components/schemas/ConnectionProperties'
-            - description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is "<code>USERNAME</code>".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer''s root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> <li> <p> <code>KAFKA_SSL_ENABLED</code> - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".</p> </li> <li> <p> <code>KAFKA_CUSTOM_CERT</code> - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.</p> </li> <li> <p> <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".</p> </li> </ul>'
+            - description: '<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is "<code>USERNAME</code>".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer''s root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> </ul>'
         PhysicalConnectionRequirements:
           allOf:
             - $ref: '#/components/schemas/PhysicalConnectionRequirements'
@@ -13133,7 +13241,7 @@ components:
         ConnectionType:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
-            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> </ul> <p>SFTP is not supported.</p>'
+            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> </ul> <p>SFTP is not supported.</p>'
         MatchCriteria:
           allOf:
             - $ref: '#/components/schemas/MatchCriteria'
@@ -13844,6 +13952,11 @@ components:
             - $ref: '#/components/schemas/TableIdentifier'
             - description: A <code>TableIdentifier</code> structure that describes a target table for resource linking.
       description: A structure used to define a table.
+    PartitionIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartitionIndex'
+      maxItems: 3
     TriggerType:
       type: string
       enum:
@@ -14724,6 +14837,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MappingEntry'
+    PartitionIndexDescriptorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartitionIndexDescriptor'
     Partition:
       type: object
       properties:
@@ -15258,6 +15375,31 @@ components:
             - $ref: '#/components/schemas/GlueVersionString'
             - description: '<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p> <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer guide.</p>'
       description: Specifies information used to update an existing job definition. The previous job definition is completely overwritten by this information.
+    KeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NameString'
+      minItems: 1
+    KeySchemaElement:
+      type: object
+      required:
+        - Name
+        - Type
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of a partition key.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ColumnTypeString'
+            - description: The type of a partition key.
+      description: A partition key pair consisting of a name and a type.
+    KeySchemaElementList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeySchemaElement'
+      minItems: 1
     KeyString:
       type: string
       minLength: 1
@@ -15548,6 +15690,45 @@ components:
             - $ref: '#/components/schemas/ErrorDetail'
             - description: The details about the partition error.
       description: Contains information about a partition error.
+    PartitionIndex:
+      type: object
+      required:
+        - Keys
+        - IndexName
+      properties:
+        Keys:
+          allOf:
+            - $ref: '#/components/schemas/KeyList'
+            - description: The keys for the partition index.
+        IndexName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the partition index.
+      description: A structure for a partition index.
+    PartitionIndexStatus:
+      type: string
+      enum:
+        - ACTIVE
+    PartitionIndexDescriptor:
+      type: object
+      required:
+        - IndexName
+        - Keys
+        - IndexStatus
+      properties:
+        IndexName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the partition index.
+        Keys:
+          allOf:
+            - $ref: '#/components/schemas/KeySchemaElementList'
+            - description: 'A list of one or more keys, as <code>KeySchemaElement</code> structures, for the partition index.'
+        IndexStatus:
+          allOf:
+            - $ref: '#/components/schemas/PartitionIndexStatus'
+            - description: 'The status of the partition index. '
+      description: A descriptor for a partition index in a table.
     Permission:
       type: string
       enum:
