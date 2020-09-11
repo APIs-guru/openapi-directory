@@ -114,6 +114,75 @@ servers:
     description: The Amazon WorkSpaces endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=WorkspacesService.AssociateConnectionAlias:
+    post:
+      operationId: AssociateConnectionAlias
+      description: '<p>Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateConnectionAliasResult'
+        '480':
+          description: ResourceAssociatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAssociatedException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '484':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '485':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateConnectionAliasRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.AssociateConnectionAlias
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.AssociateIpGroups:
     post:
       operationId: AssociateIpGroups
@@ -321,6 +390,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.CreateConnectionAlias:
+    post:
+      operationId: CreateConnectionAlias
+      description: 'Creates the specified connection alias for use with cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConnectionAliasResult'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '485':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionAliasRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.CreateConnectionAlias
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.CreateIpGroup:
     post:
       operationId: CreateIpGroup
@@ -472,6 +610,75 @@ paths:
             type: string
             enum:
               - WorkspacesService.CreateWorkspaces
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DeleteConnectionAlias:
+    post:
+      operationId: DeleteConnectionAlias
+      description: '<p>Deletes the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <important> <p> <b>If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues.</b> For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html#cross-region-redirection-security-considerations"> Security Considerations if You Stop Using Cross-Region Redirection</a>.</p> </important> <note> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConnectionAliasResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceAssociatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAssociatedException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '484':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '485':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteConnectionAliasRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DeleteConnectionAlias
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -817,6 +1024,114 @@ paths:
             type: string
             enum:
               - WorkspacesService.DescribeClientProperties
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DescribeConnectionAliasPermissions:
+    post:
+      operationId: DescribeConnectionAliasPermissions
+      description: 'Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectionAliasPermissionsResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionAliasPermissionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DescribeConnectionAliasPermissions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DescribeConnectionAliases:
+    post:
+      operationId: DescribeConnectionAliases
+      description: 'Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConnectionAliasesResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConnectionAliasesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DescribeConnectionAliases
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1236,6 +1551,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.DisassociateConnectionAlias:
+    post:
+      operationId: DisassociateConnectionAlias
+      description: '<p>Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateConnectionAliasResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '483':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '484':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateConnectionAliasRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.DisassociateConnectionAlias
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.DisassociateIpGroups:
     post:
       operationId: DisassociateIpGroups
@@ -1296,7 +1674,7 @@ paths:
   /#X-Amz-Target=WorkspacesService.ImportWorkspaceImage:
     post:
       operationId: ImportWorkspaceImage
-      description: 'Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.'
+      description: 'Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html"> Bring Your Own Windows Desktop Licenses</a>.'
       responses:
         '200':
           description: Success
@@ -2223,6 +2601,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkspacesService.UpdateConnectionAliasPermission:
+    post:
+      operationId: UpdateConnectionAliasPermission
+      description: '<p>Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.</p> <note> <ul> <li> <p>Before performing this operation, call <a href="https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html"> DescribeConnectionAliases</a> to make sure that the current state of the connection alias is <code>CREATED</code>.</p> </li> <li> <p>To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectionAliasPermissionResult'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValuesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValuesException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ResourceAssociatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAssociatedException'
+        '485':
+          description: InvalidResourceStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateException'
+        '486':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConnectionAliasPermissionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkspacesService.UpdateConnectionAliasPermission
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkspacesService.UpdateRulesOfIpGroup:
     post:
       operationId: UpdateRulesOfIpGroup
@@ -2401,6 +2854,34 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateConnectionAliasResult:
+      type: object
+      properties:
+        ConnectionIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionIdentifier'
+            - description: 'The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you''re configuring your DNS routing policies. '
+    AssociateConnectionAliasRequest:
+      type: object
+      required:
+        - AliasId
+        - ResourceId
+      title: AssociateConnectionAliasRequest
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the directory to associate the connection alias with.
+    ResourceAssociatedException: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    InvalidParameterValuesException: {}
+    InvalidResourceStateException: {}
+    OperationNotSupportedException: {}
     AssociateIpGroupsResult:
       type: object
       properties: {}
@@ -2419,12 +2900,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpGroupIdList'
             - description: The identifiers of one or more IP access control groups.
-    InvalidParameterValuesException: {}
-    ResourceNotFoundException: {}
     ResourceLimitExceededException: {}
-    InvalidResourceStateException: {}
-    AccessDeniedException: {}
-    OperationNotSupportedException: {}
     AuthorizeIpRulesResult:
       type: object
       properties: {}
@@ -2480,6 +2956,27 @@ components:
             - description: The tags for the image.
     ResourceAlreadyExistsException: {}
     ResourceUnavailableException: {}
+    CreateConnectionAliasResult:
+      type: object
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias.
+    CreateConnectionAliasRequest:
+      type: object
+      required:
+        - ConnectionString
+      title: CreateConnectionAliasRequest
+      properties:
+        ConnectionString:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionString'
+            - description: '<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p> <important> <p>After you create a connection string, it is always associated to your AWS account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account.</p> </important>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to associate with the connection alias.
     CreateIpGroupResult:
       type: object
       properties:
@@ -2523,7 +3020,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -2549,6 +3046,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceRequestList'
             - description: The WorkSpaces to create. You can specify up to 25 WorkSpaces.
+    DeleteConnectionAliasResult:
+      type: object
+      properties: {}
+    DeleteConnectionAliasRequest:
+      type: object
+      required:
+        - AliasId
+      title: DeleteConnectionAliasRequest
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias to delete.
     DeleteIpGroupResult:
       type: object
       properties: {}
@@ -2562,7 +3072,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/IpGroupId'
             - description: The identifier of the IP access control group.
-    ResourceAssociatedException: {}
     DeleteTagsResult:
       type: object
       properties: {}
@@ -2576,7 +3085,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.'
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
@@ -2658,6 +3167,70 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdList'
             - description: 'The resource identifier, in the form of directory IDs.'
+    DescribeConnectionAliasPermissionsResult:
+      type: object
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias.
+        ConnectionAliasPermissions:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasPermissions'
+            - description: The permissions associated with a connection alias.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+    DescribeConnectionAliasPermissionsRequest:
+      type: object
+      required:
+        - AliasId
+      title: DescribeConnectionAliasPermissionsRequest
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of results to return.
+    DescribeConnectionAliasesResult:
+      type: object
+      properties:
+        ConnectionAliases:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasList'
+            - description: Information about the specified connection aliases.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'The token to use to retrieve the next set of results, or null if no more results are available.'
+    DescribeConnectionAliasesRequest:
+      type: object
+      title: DescribeConnectionAliasesRequest
+      properties:
+        AliasIds:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasIdList'
+            - description: The identifiers of the connection aliases to describe.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the directory associated with the connection alias.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of connection aliases to return.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results. '
     DescribeIpGroupsResult:
       type: object
       properties:
@@ -2701,7 +3274,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.'
+            - description: 'The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.'
     DescribeWorkspaceBundlesResult:
       type: object
       properties:
@@ -2903,6 +3476,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.'
+    DisassociateConnectionAliasResult:
+      type: object
+      properties: {}
+    DisassociateConnectionAliasRequest:
+      type: object
+      required:
+        - AliasId
+      title: DisassociateConnectionAliasRequest
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias to disassociate.
     DisassociateIpGroupsResult:
       type: object
       properties: {}
@@ -3293,6 +3879,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TerminateWorkspaceRequests'
             - description: The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
+    UpdateConnectionAliasPermissionResult:
+      type: object
+      properties: {}
+    UpdateConnectionAliasPermissionRequest:
+      type: object
+      required:
+        - AliasId
+        - ConnectionAliasPermission
+      title: UpdateConnectionAliasPermissionRequest
+      properties:
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias that you want to update permissions for.
+        ConnectionAliasPermission:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasPermission'
+            - description: Indicates whether to share or unshare the connection alias with the specified AWS account.
     UpdateRulesOfIpGroupResult:
       type: object
       properties: {}
@@ -3408,6 +4012,19 @@ components:
         $ref: '#/components/schemas/Application'
       minItems: 1
       maxItems: 5
+    ConnectionAliasId:
+      type: string
+      pattern: '^wsca-[0-9a-z]{8,63}$'
+      minLength: 13
+      maxLength: 68
+    NonEmptyString:
+      type: string
+      minLength: 1
+    ConnectionIdentifier:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 20
     DirectoryId:
       type: string
       pattern: '^d-[0-9a-f]{8,63}$'
@@ -3417,6 +4034,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IpGroupId'
+    AssociationStatus:
+      type: string
+      enum:
+        - NOT_ASSOCIATED
+        - ASSOCIATED_WITH_OWNER_ACCOUNT
+        - ASSOCIATED_WITH_SHARED_ACCOUNT
+        - PENDING_ASSOCIATION
+        - PENDING_DISASSOCIATION
     IpGroupId:
       type: string
       pattern: 'wsipg-[0-9a-z]{8,63}$'
@@ -3513,9 +4138,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ClientPropertiesResult'
-    NonEmptyString:
-      type: string
-      minLength: 1
     Compute:
       type: string
       enum:
@@ -3536,6 +4158,100 @@ components:
       description: Describes the compute type.
     ComputerName:
       type: string
+    ConnectionString:
+      type: string
+      pattern: '^[.0-9a-zA-Z\-]{1,255}$'
+      minLength: 1
+      maxLength: 255
+    ConnectionAliasState:
+      type: string
+      enum:
+        - CREATING
+        - CREATED
+        - DELETING
+    ConnectionAliasAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionAliasAssociation'
+      minItems: 1
+      maxItems: 25
+    ConnectionAlias:
+      type: object
+      properties:
+        ConnectionString:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionString'
+            - description: 'The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.'
+        AliasId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasId'
+            - description: The identifier of the connection alias.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasState'
+            - description: The current state of the connection alias.
+        OwnerAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account that owns the connection alias.
+        Associations:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionAliasAssociationList'
+            - description: The association status of the connection alias.
+      description: 'Describes a connection alias. Connection aliases are used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+    ConnectionAliasAssociation:
+      type: object
+      properties:
+        AssociationStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssociationStatus'
+            - description: The association status of the connection alias.
+        AssociatedAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account that associated the connection alias with a directory.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the directory associated with a connection alias.
+        ConnectionIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionIdentifier'
+            - description: The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you're configuring your DNS routing policies.
+      description: 'Describes a connection alias association that is used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+    ConnectionAliasIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionAliasId'
+      minItems: 1
+      maxItems: 25
+    ConnectionAliasList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionAlias'
+      minItems: 1
+      maxItems: 25
+    ConnectionAliasPermission:
+      type: object
+      required:
+        - SharedAccountId
+        - AllowAssociation
+      properties:
+        SharedAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccount'
+            - description: The identifier of the AWS account that the connection alias is shared with.
+        AllowAssociation:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.
+      description: 'Describes the permissions for a connection alias. Connection aliases are used for cross-Region redirection. For more information, see <a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html"> Cross-Region Redirection for Amazon WorkSpaces</a>.'
+    ConnectionAliasPermissions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConnectionAliasPermission'
+      minItems: 1
+      maxItems: 25
     ConnectionState:
       type: string
       enum:
@@ -3632,7 +4348,7 @@ components:
     PaginationToken:
       type: string
       minLength: 1
-      maxLength: 63
+      maxLength: 2048
     ResourceIdList:
       type: array
       items:
@@ -4008,7 +4724,7 @@ components:
         DefaultOu:
           allOf:
             - $ref: '#/components/schemas/DefaultOu'
-            - description: The default organizational unit (OU) for your WorkSpace directories.
+            - description: '<p>The default organizational unit (OU) for your WorkSpaces directories. This string must be the full Lightweight Directory Access Protocol (LDAP) distinguished name for the target domain and OU. It must be in the form <code>"OU=<i>value</i>,DC=<i>value</i>,DC=<i>value</i>"</code>, where <i>value</i> is any string of characters, and the number of domain components (DCs) is two or more. For example, <code>OU=WorkSpaces_machines,DC=machines,DC=example,DC=com</code>. </p> <important> <ul> <li> <p>To avoid errors, certain characters in the distinguished name must be escaped. For more information, see <a href="https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names"> Distinguished Names</a> in the Microsoft documentation.</p> </li> <li> <p>The API doesn''t validate whether the OU exists.</p> </li> </ul> </important>'
         CustomSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupId'
