@@ -7317,6 +7317,11 @@ paths:
       description: This endpoint allows you to get a list of attribute groups. Attribute groups are paginated and sorted by code.
       operationId: attribute_groups_get_list
       parameters:
+        - description: Filter attribute groups, for more details see the <a href="/documentation/filter.html#filter-attribute-groups">Filters</a> section.
+          in: query
+          name: search
+          required: false
+          type: string
         - default: 1
           description: Number of the page to retrieve when using the `page` pagination method type. <strong>Should never be set manually</strong>, see <a href="/documentation/pagination.html#pagination">Pagination</a> section
           in: query
@@ -8156,6 +8161,9 @@ paths:
                   decimals_allowed: false
                   default_metric_unit: null
                   group: other
+                  group_labels:
+                    en_US: Other
+                    fr_FR: Autre
                   labels:
                     en_US: Identifier
                     fr_FR: Identifiant
@@ -8277,6 +8285,9 @@ paths:
                                 decimals_allowed: null
                                 default_metric_unit: null
                                 group: marketing
+                                group_labels:
+                                  en_US: Marketing
+                                  fr_FR: Marketing
                                 labels:
                                   en_US: Sale date
                                   fr_FR: Date des soldes
@@ -8339,6 +8350,16 @@ paths:
                                   description: Attribute group
                                   type: string
                                   x-validation-rules: It is the code of an existing group
+                                group_labels:
+                                  default: {}
+                                  description: Group labels for each locale
+                                  properties:
+                                    localeCode:
+                                      description: Group label for the locale `localeCode`
+                                      type: string
+                                  type: object
+                                  x-read-only: true
+                                  x-validation-rules: The `localeCode` is the code of an existing and activated locale
                                 labels:
                                   default: {}
                                   description: Attribute labels for each locale
@@ -8518,6 +8539,9 @@ paths:
               decimals_allowed: null
               default_metric_unit: null
               group: marketing
+              group_labels:
+                en_US: Marketing
+                fr_FR: Marketing
               labels:
                 en_US: Sale date
                 fr_FR: Date des soldes
@@ -8580,6 +8604,16 @@ paths:
                 description: Attribute group
                 type: string
                 x-validation-rules: It is the code of an existing group
+              group_labels:
+                default: {}
+                description: Group labels for each locale
+                properties:
+                  localeCode:
+                    description: Group label for the locale `localeCode`
+                    type: string
+                type: object
+                x-read-only: true
+                x-validation-rules: The `localeCode` is the code of an existing and activated locale
               labels:
                 default: {}
                 description: Attribute labels for each locale
@@ -8801,6 +8835,9 @@ paths:
               decimals_allowed: null
               default_metric_unit: null
               group: marketing
+              group_labels:
+                en_US: Marketing
+                fr_FR: Marketing
               labels:
                 en_US: Sale date
                 fr_FR: Date des soldes
@@ -8863,6 +8900,16 @@ paths:
                 description: Attribute group
                 type: string
                 x-validation-rules: It is the code of an existing group
+              group_labels:
+                default: {}
+                description: Group labels for each locale
+                properties:
+                  localeCode:
+                    description: Group label for the locale `localeCode`
+                    type: string
+                type: object
+                x-read-only: true
+                x-validation-rules: The `localeCode` is the code of an existing and activated locale
               labels:
                 default: {}
                 description: Attribute labels for each locale
@@ -9853,6 +9900,9 @@ paths:
               decimals_allowed: null
               default_metric_unit: null
               group: marketing
+              group_labels:
+                en_US: Marketing
+                fr_FR: Marketing
               labels:
                 en_US: Sale date
                 fr_FR: Date des soldes
@@ -9915,6 +9965,16 @@ paths:
                 description: Attribute group
                 type: string
                 x-validation-rules: It is the code of an existing group
+              group_labels:
+                default: {}
+                description: Group labels for each locale
+                properties:
+                  localeCode:
+                    description: Group label for the locale `localeCode`
+                    type: string
+                type: object
+                x-read-only: true
+                x-validation-rules: The `localeCode` is the code of an existing and activated locale
               labels:
                 default: {}
                 description: Attribute labels for each locale
@@ -10111,6 +10171,9 @@ paths:
               decimals_allowed: null
               default_metric_unit: null
               group: marketing
+              group_labels:
+                en_US: Marketing
+                fr_FR: Marketing
               labels:
                 en_US: Sale date
                 fr_FR: Date des soldes
@@ -10173,6 +10236,16 @@ paths:
                 description: Attribute group
                 type: string
                 x-validation-rules: It is the code of an existing group
+              group_labels:
+                default: {}
+                description: Group labels for each locale
+                properties:
+                  localeCode:
+                    description: Group label for the locale `localeCode`
+                    type: string
+                type: object
+                x-read-only: true
+                x-validation-rules: The `localeCode` is the code of an existing and activated locale
               labels:
                 default: {}
                 description: Attribute labels for each locale
@@ -10384,6 +10457,11 @@ paths:
       description: This endpoint allows you to get a list of categories. Categories are paginated and sorted by `root/left`.
       operationId: get_categories
       parameters:
+        - description: Filter categories, for more details see the <a href="/documentation/filter.html#filter-categories">Filters</a> section.
+          in: query
+          name: search
+          required: false
+          type: string
         - default: 1
           description: Number of the page to retrieve when using the `page` pagination method type. <strong>Should never be set manually</strong>, see <a href="/documentation/pagination.html#pagination">Pagination</a> section
           in: query
@@ -23270,6 +23348,9 @@ definitions:
       decimals_allowed: null
       default_metric_unit: null
       group: marketing
+      group_labels:
+        en_US: Marketing
+        fr_FR: Marketing
       labels:
         en_US: Sale date
         fr_FR: Date des soldes
@@ -23332,6 +23413,16 @@ definitions:
         description: Attribute group
         type: string
         x-validation-rules: It is the code of an existing group
+      group_labels:
+        default: {}
+        description: Group labels for each locale
+        properties:
+          localeCode:
+            description: Group label for the locale `localeCode`
+            type: string
+        type: object
+        x-read-only: true
+        x-validation-rules: The `localeCode` is the code of an existing and activated locale
       labels:
         default: {}
         description: Attribute labels for each locale
@@ -23557,6 +23648,9 @@ definitions:
           decimals_allowed: null
           default_metric_unit: null
           group: marketing
+          group_labels:
+            en_US: Marketing
+            fr_FR: Marketing
           labels:
             en_US: Sale date
             fr_FR: Date des soldes
@@ -23619,6 +23713,16 @@ definitions:
             description: Attribute group
             type: string
             x-validation-rules: It is the code of an existing group
+          group_labels:
+            default: {}
+            description: Group labels for each locale
+            properties:
+              localeCode:
+                description: Group label for the locale `localeCode`
+                type: string
+            type: object
+            x-read-only: true
+            x-validation-rules: The `localeCode` is the code of an existing and activated locale
           labels:
             default: {}
             description: Attribute labels for each locale

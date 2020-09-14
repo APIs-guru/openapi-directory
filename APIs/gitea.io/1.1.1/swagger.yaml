@@ -271,6 +271,12 @@ responses:
       items:
         $ref: "#/definitions/Issue"
       type: array
+  IssueTemplates:
+    description: IssueTemplates
+    schema:
+      items:
+        $ref: "#/definitions/IssueTemplate"
+      type: array
   Label:
     description: Label
     schema:
@@ -540,7 +546,7 @@ responses:
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: "#/definitions/SubmitPullReviewOptions"
+      $ref: "#/definitions/MigrateRepoOptions"
   redirect:
     description: APIRedirect is a redirect response
   string:
@@ -1722,7 +1728,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: "#/definitions/MigrateRepoForm"
+            $ref: "#/definitions/MigrateRepoOptions"
       produces:
         - application/json
       responses:
@@ -3101,6 +3107,28 @@ paths:
         "204":
           $ref: "#/responses/empty"
       summary: Test a push webhook
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/issue_templates":
+    get:
+      operationId: repoGetIssueTemplates
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/IssueTemplates"
+      summary: Get available issue templates for a repository
       tags:
         - repository
   "/repos/{owner}/{repo}/issues":
@@ -9776,6 +9804,31 @@ definitions:
         x-go-name: Labels
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  IssueTemplate:
+    description: IssueTemplate represents an issue template for a repository
+    properties:
+      about:
+        type: string
+        x-go-name: About
+      content:
+        type: string
+        x-go-name: Content
+      file_name:
+        type: string
+        x-go-name: FileName
+      labels:
+        items:
+          type: string
+        type: array
+        x-go-name: Labels
+      name:
+        type: string
+        x-go-name: Name
+      title:
+        type: string
+        x-go-name: Title
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Label:
     description: Label a label to an issue or a pr
     properties:
@@ -9854,7 +9907,10 @@ definitions:
     x-go-name: MergePullRequestForm
     x-go-package: code.gitea.io/gitea/modules/auth
   MigrateRepoForm:
-    description: MigrateRepoForm form for migrating repository
+    description: >-
+      MigrateRepoForm form for migrating repository
+
+      this is used to interact with web ui
     properties:
       auth_password:
         type: string
@@ -9912,6 +9968,76 @@ definitions:
       - repo_name
     type: object
     x-go-package: code.gitea.io/gitea/modules/auth
+  MigrateRepoOptions:
+    description: >-
+      MigrateRepoOptions options for migrating repository's
+
+      this is used to interact with api v1
+    properties:
+      auth_password:
+        type: string
+        x-go-name: AuthPassword
+      auth_token:
+        type: string
+        x-go-name: AuthToken
+      auth_username:
+        type: string
+        x-go-name: AuthUsername
+      clone_addr:
+        type: string
+        x-go-name: CloneAddr
+      description:
+        type: string
+        x-go-name: Description
+      issues:
+        type: boolean
+        x-go-name: Issues
+      labels:
+        type: boolean
+        x-go-name: Labels
+      milestones:
+        type: boolean
+        x-go-name: Milestones
+      mirror:
+        type: boolean
+        x-go-name: Mirror
+      private:
+        type: boolean
+        x-go-name: Private
+      pull_requests:
+        type: boolean
+        x-go-name: PullRequests
+      releases:
+        type: boolean
+        x-go-name: Releases
+      repo_name:
+        type: string
+        x-go-name: RepoName
+      repo_owner:
+        description: Name of User or Organisation who will own Repo after migration
+        type: string
+        x-go-name: RepoOwner
+      service:
+        enum:
+          - git
+          - github
+          - gitea
+          - gitlab
+        type: string
+        x-go-name: Service
+      uid:
+        description: deprecated (only for backwards compatibility)
+        format: int64
+        type: integer
+        x-go-name: RepoOwnerID
+      wiki:
+        type: boolean
+        x-go-name: Wiki
+    required:
+      - clone_addr
+      - repo_name
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
   Milestone:
     description: Milestone milestone is a collection of issues on one repository
     properties:

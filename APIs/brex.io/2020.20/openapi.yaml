@@ -1614,6 +1614,51 @@ paths:
         - user_key: []
       tags:
         - v1-product
+  /api/v1/product/order/ubo:
+    post:
+      description: Place an order for a ubo discovery report
+      operationId: ProductOrderUbo
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                callbackUrl:
+                  description: A mandatory callback URL to which updates about the order will be sent (for instance if credits are exceeded)
+                  example: "null"
+                  type: string
+                credits:
+                  description: Specify a maximum amount of credits which should be used. To disable use -1
+                  example: -1
+                  type: number
+                includeDocs:
+                  description: Include purchase of register document to ubo report
+                  example: false
+                  type: boolean
+                levels:
+                  description: Define a threshold for different levels of crawling
+                  example: 0,25,50
+                  type: string
+                strategy:
+                  description: Choose a matching strategy. Available options (DEFAULT)
+                  example: DEFAULT
+                  type: string
+                subjectId:
+                  description: BrexId (32 byte hexid) of the company you want to place the order for
+                  example: "null"
+                  type: string
+              type: object
+        description: Parameters for the UBO order
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7Boption%7D~1%7BsubjectId%7D/post/responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      tags:
+        - v1-product
   "/api/v1/product/order/{sku}/{option}/{subjectId}":
     post:
       description: Place an order for a particular product for a particular subject
@@ -1773,6 +1818,45 @@ paths:
           schema:
             format: string
             type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7Boption%7D~1%7BsubjectId%7D/post/responses/200"
+        default:
+          $ref: "#/paths/~1api~1v1~1system~1countries/get/responses/default"
+      security:
+        - user_key: []
+      tags:
+        - v1-product
+  "/api/v1/product/update/{action}/{orderId}":
+    post:
+      description: Update an existing order
+      operationId: ProductUpdateAction
+      parameters:
+        - description: The action you want to perform for the order
+          in: path
+          name: action
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: ID of the ProductOrder as returned from a /product/buy call - 32 character hex value
+          in: path
+          name: orderId
+          required: true
+          schema:
+            format: string
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                credits:
+                  description: Specify an amount of credits which should be added to the order
+                  example: 100
+                  type: number
+              type: object
+        description: Parameters for the update order endpoint
       responses:
         "200":
           $ref: "#/paths/~1api~1v1~1product~1order~1%7Bsku%7D~1%7Boption%7D~1%7BsubjectId%7D/post/responses/200"

@@ -10179,6 +10179,16 @@ paths:
       operationId: get_groups
       parameters:
         - description: >-
+            Limits the results to only groups whose `name` starts
+
+            with the search term.
+          example: Engineering
+          in: query
+          name: filter_term
+          required: false
+          schema:
+            type: string
+        - description: >-
             A comma-separated list of attributes to include in the
 
             response. This can be used to request fields that are
@@ -22196,7 +22206,7 @@ components:
               description: >-
                 Specifies who can invite the group to collaborate
 
-                on folders (Create Collaboration).
+                on items.
 
 
                 When set to `admins_only` the enterprise admin, co-admins,
@@ -22237,6 +22247,19 @@ components:
                 - all_managed_users
               example: admins_only
               type: string
+            permissions:
+              allOf:
+                - description: The permissions that the authenticated user has for a group.
+                  properties:
+                    can_invite_as_collaborator:
+                      description: Specifies if the user can invite the group to collaborate on any items.
+                      example: true
+                      type: boolean
+                  type: object
+                - description: >-
+                    Describes the permissions that the current user has
+
+                    for this group.
             provenance:
               description: >-
                 Keeps track of which external source this group is
@@ -23224,7 +23247,7 @@ components:
           type: string
         templateKey:
           description: >-
-            The key of the of the template that is cascaded down to the folder's
+            The key of the template that is cascaded down to the folder's
 
             children.
 

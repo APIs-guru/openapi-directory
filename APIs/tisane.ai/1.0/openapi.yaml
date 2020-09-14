@@ -764,8 +764,10 @@ paths:
         When or if it's found, Tisane adds the `corrected_text` attribute to the word (if the words / lexical chunks are returned) and the sentence (if the sentence text is generated). Sentence-level `corrected_text` is displayed if `words` or `parses` are set to _true_.
 
 
-        Note that **the invocation of spell-checking does not depend on whether the sentences and the words sections are generated in the output**. The spellchecking can be disabled by [setting](#content-cues-and-instructions) `disable_spellcheck` to `true`.
+        Note that as Tisane works with large dictionaries, you may need to exclude more esoteric terms by using the `min_generic_frequency` setting. 
 
+
+        Note that **the invocation of spell-checking does not depend on whether the sentences and the words sections are generated in the output**. The spellchecking can be disabled by [setting](#content-cues-and-instructions) `disable_spellcheck` to `true`. Another option is to enable the spellchecking for lowercase words only, thus excluding potential proper nouns in languages that support capitalization; to avoid spell-checking capitalized and uppercase words, set `lowercase_spellcheck_only` to `true`.
 
       operationId: 5a3b7177a3511b11cc29265c
       requestBody:
@@ -822,6 +824,9 @@ paths:
 
 
           `lowercase_spellcheck_only` (boolean) - determines whether the automatic spellchecking is only to be applied to words in lowercase. Default: `false`
+
+
+          `min_generic_frequency` (int) - allows excluding more esoteric terms; the valid values are 0 thru 10.
 
 
           `subscope` (boolean) - enables sub-scope parsing, for scenarios like hashtag, URL parsing, and obfuscated content (e.g. _ihateyou_). Default: `false`.

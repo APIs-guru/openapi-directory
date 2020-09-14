@@ -1280,6 +1280,75 @@ paths:
       summary: List all posts
       tags:
         - posts
+  /posts/all/changes:
+    get:
+      description: >
+        This endpoint provides an easy way to get a feed of all the changes that have been made to publicly published posts on trash nothing.  Similar to the /posts/all endpoint, only data from the last 30 days is available and the changes are sorted by date (newest first).  Every change includes the date of the change, the post_id of the post that was changed and the type of change. <br /><br /> The different types of changes that are returned are listed below. <br /><br /> - deleted<br /> - undeleted<br /> - satisfied<br /> - promised<br /> - unpromised<br /> - withdrawn<br /> - edited<br /> - expired<br /> <br /> For edited changes, clients can use the retrieve post API endpoint to get the edits that have been made to the post.
+      operationId: get_all_posts_changes
+      parameters:
+        - description: >
+            Only changes newer than or equal to this UTC date and time will be returned. The UTC date and time used must be within a day or less of date_max. And the date and time must be within the last 30 days. And the date and time must be rounded to the nearest second.
+          format: date-time
+          in: query
+          name: date_min
+          required: true
+          type: string
+        - description: >
+            Only changes older than this UTC date and time will be returned. The UTC date and time used must be within a day or less of date_min. And the date and time must be rounded to the nearest second.
+          format: date-time
+          in: query
+          name: date_max
+          required: true
+          type: string
+        - default: 20
+          description: The number of changes to return per page (must be >= 1 and <= 50).
+          in: query
+          maximum: 50
+          minimum: 1
+          name: per_page
+          required: false
+          type: integer
+        - default: 1
+          description: The page of changes to return.
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: The changes.
+          schema:
+            properties:
+              changes:
+                items:
+                  properties:
+                    date:
+                      description: The UTC date and time when the post was changed.
+                      format: date-time
+                      type: string
+                    post_id:
+                      type: string
+                    type:
+                      description: >
+                        The type of change.  One of: deleted, undeleted, satisfied, promised, unpromised, withdrawn, edited, expired
+                      type: string
+                  type: object
+                type: array
+            type: object
+        "400":
+          description: Missing or invalid parameters.
+      security:
+        - oauth2_implicit:
+            - basic
+        - oauth2_code:
+            - basic
+        - api_key: []
+      summary: List all post changes
+      tags:
+        - posts
   /posts/client.js:
     get:
       description: >

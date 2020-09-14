@@ -4926,7 +4926,13 @@ components:
 
             A request can fail if the vehicle profile does not support elevation. See the features object for every vehicle profile.
           type: boolean
-        heading:
+        heading_penalty:
+          default: 120
+          description: >
+            Time penalty in seconds for not obeying a specified heading. Requires `ch.disable=true`.
+          format: int32
+          type: integer
+        headings:
           description: >
             Favour a heading direction for a certain point. Specify either one heading for the start point or as many as there are points.
 
@@ -4937,12 +4943,6 @@ components:
             format: int32
             type: integer
           type: array
-        heading_penalty:
-          default: 120
-          description: >
-            Time penalty in seconds for not obeying a specified heading. Requires `ch.disable=true`.
-          format: int32
-          type: integer
         instructions:
           default: true
           description: >
@@ -5202,36 +5202,43 @@ components:
                   A number which specifies the sign to show:
 
 
-                  |   |   |
+                  | sign | description  |
 
                   |---|---|
 
-                  |TURN_SHARP_LEFT |-3|
+                  |-98| an U-turn without the knowledge if it is a right or left U-turn |
 
-                  |TURN_LEFT | -2|
+                  | -8| a left U-turn |
 
-                  |TURN_SLIGHT_LEFT | -1|
+                  | -7| keep left |
 
-                  |CONTINUE_ON_STREET | 0|
+                  | -6| **not yet used**: leave roundabout |
 
-                  |TURN_SLIGHT_RIGHT |1|
+                  | -3| turn sharp left |
 
-                  |TURN_RIGHT | 2|
+                  | -2| turn left |
 
-                  |TURN_SHARP_RIGHT | 3|
+                  | -1| turn slight left |
 
-                  |FINISH | 4|
+                  |  0| continue on street |
 
-                  |VIA_REACHED | 5|
+                  |  1| turn slight right |
 
-                  |USE_ROUNDABOUT | 6|
+                  |  2| turn right |
 
-                  |KEEP_RIGHT | 7|
+                  |  3| turn sharp right |
 
-                  |ANY | *|
+                  |  4| the finish instruction before the last point |
 
+                  |  5| the instruction before a via point |
 
-                  What is ANY? For future compatibility it is important that all clients are able to handle also unknown instruction sign numbers.
+                  |  6| the instruction before entering a roundabout |
+
+                  |  7| keep right |
+
+                  |  8| a right U-turn |
+
+                  |  *| **For future compatibility** it is important that all clients are able to handle also unknown instruction sign numbers
                 format: int32
                 type: integer
               street_name:

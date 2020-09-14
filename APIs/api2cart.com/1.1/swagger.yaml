@@ -10359,6 +10359,9 @@ definitions:
       store_id:
         description: Store Id
         type: string
+      tracking_link:
+        description: Defines custom tracking link
+        type: string
       tracking_numbers:
         description: Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = "http://docs.api2cart.com/cart-info">cart.info</a > method
         items:

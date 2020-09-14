@@ -557,7 +557,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -3684,7 +3684,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -4440,7 +4440,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -10462,6 +10462,8 @@ paths:
                       - giropay
                       - ideal
                       - p24
+                      - sepa_debit
+                      - sofort
                     type: string
                     x-stripeBypassValidation: true
                   type: array
@@ -10781,8 +10783,6 @@ paths:
                     trial_end:
                       format: unix-time
                       type: integer
-                    trial_from_plan:
-                      type: boolean
                     trial_period_days:
                       type: integer
                   title: subscription_data_params
@@ -25091,7 +25091,7 @@ paths:
               additionalProperties: false
               properties:
                 evidence:
-                  description: A hash containing all the evidence related to the dispute.
+                  description: Evidence provided for the dispute.
                   properties:
                     canceled:
                       anyOf:
@@ -25461,7 +25461,7 @@ paths:
               additionalProperties: false
               properties:
                 evidence:
-                  description: A hash containing all the evidence related to the dispute.
+                  description: Evidence provided for the dispute.
                   properties:
                     canceled:
                       anyOf:
@@ -27230,7 +27230,7 @@ paths:
                   description: Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
                   type: integer
                 application_fee_amount:
-                  description: The amount of the application fee (if any) that will be applied to the payment and transferred to the application owner's Stripe account. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                   type: integer
                 capture_method:
                   description: Controls when the funds will be captured from the customer's account.
@@ -27497,6 +27497,21 @@ paths:
                         - iban
                       title: param
                       type: object
+                    sofort:
+                      properties:
+                        country:
+                          enum:
+                            - AT
+                            - BE
+                            - DE
+                            - ES
+                            - IT
+                            - NL
+                          type: string
+                      required:
+                        - country
+                      title: param
+                      type: object
                     type:
                       enum:
                         - alipay
@@ -27509,6 +27524,7 @@ paths:
                         - ideal
                         - p24
                         - sepa_debit
+                        - sofort
                       type: string
                       x-stripeBypassValidation: true
                   required:
@@ -27595,6 +27611,24 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sofort:
+                      anyOf:
+                        - properties:
+                            preferred_language:
+                              enum:
+                                - de
+                                - en
+                                - es
+                                - fr
+                                - it
+                                - nl
+                                - pl
+                              type: string
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -27733,6 +27767,7 @@ paths:
           name: client_secret
           required: false
           schema:
+            maxLength: 5000
             type: string
           style: form
         - description: Specifies which fields in the response should be expanded.
@@ -27841,7 +27876,7 @@ paths:
                     - enum:
                         - ""
                       type: string
-                  description: The amount of the application fee (if any) that will be applied to the payment and transferred to the application owner's Stripe account. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
                   type: string
@@ -28036,6 +28071,21 @@ paths:
                         - iban
                       title: param
                       type: object
+                    sofort:
+                      properties:
+                        country:
+                          enum:
+                            - AT
+                            - BE
+                            - DE
+                            - ES
+                            - IT
+                            - NL
+                          type: string
+                      required:
+                        - country
+                      title: param
+                      type: object
                     type:
                       enum:
                         - alipay
@@ -28048,6 +28098,7 @@ paths:
                         - ideal
                         - p24
                         - sepa_debit
+                        - sofort
                       type: string
                       x-stripeBypassValidation: true
                   required:
@@ -28134,6 +28185,24 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sofort:
+                      anyOf:
+                        - properties:
+                            preferred_language:
+                              enum:
+                                - de
+                                - en
+                                - es
+                                - fr
+                                - it
+                                - nl
+                                - pl
+                              type: string
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -28344,7 +28413,7 @@ paths:
                   description: The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
                   type: integer
                 application_fee_amount:
-                  description: The amount of the application fee (if any) that will be applied to the payment and transferred to the application owner's Stripe account. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                   type: integer
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -28476,6 +28545,7 @@ paths:
               properties:
                 client_secret:
                   description: The client secret of the PaymentIntent.
+                  maxLength: 5000
                   type: string
                 error_on_requires_action:
                   description: Set to `true` to fail the payment attempt if the PaymentIntent transitions into `requires_action`. This parameter is intended for simpler integrations that do not handle customer actions, like [saving cards without authentication](https://stripe.com/docs/payments/save-card-without-authentication).
@@ -28725,6 +28795,21 @@ paths:
                         - iban
                       title: param
                       type: object
+                    sofort:
+                      properties:
+                        country:
+                          enum:
+                            - AT
+                            - BE
+                            - DE
+                            - ES
+                            - IT
+                            - NL
+                          type: string
+                      required:
+                        - country
+                      title: param
+                      type: object
                     type:
                       enum:
                         - alipay
@@ -28737,6 +28822,7 @@ paths:
                         - ideal
                         - p24
                         - sepa_debit
+                        - sofort
                       type: string
                       x-stripeBypassValidation: true
                   required:
@@ -28823,6 +28909,24 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sofort:
+                      anyOf:
+                        - properties:
+                            preferred_language:
+                              enum:
+                                - de
+                                - en
+                                - es
+                                - fr
+                                - it
+                                - nl
+                                - pl
+                              type: string
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -28996,6 +29100,7 @@ paths:
               - ideal
               - p24
               - sepa_debit
+              - sofort
             maxLength: 5000
             type: string
             x-stripeBypassValidation: true
@@ -29099,6 +29204,9 @@ paths:
                 explode: true
                 style: deepObject
               sepa_debit:
+                explode: true
+                style: deepObject
+              sofort:
                 explode: true
                 style: deepObject
             schema:
@@ -29309,6 +29417,22 @@ paths:
                     - iban
                   title: param
                   type: object
+                sofort:
+                  description: If this is a `sofort` PaymentMethod, this hash contains details about the SOFORT payment method.
+                  properties:
+                    country:
+                      enum:
+                        - AT
+                        - BE
+                        - DE
+                        - ES
+                        - IT
+                        - NL
+                      type: string
+                  required:
+                    - country
+                  title: param
+                  type: object
                 type:
                   description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
                   enum:
@@ -29323,6 +29447,7 @@ paths:
                     - ideal
                     - p24
                     - sepa_debit
+                    - sofort
                   type: string
                   x-stripeBypassValidation: true
               type: object
@@ -34577,6 +34702,7 @@ paths:
           name: client_secret
           required: false
           schema:
+            maxLength: 5000
             type: string
           style: form
         - description: Specifies which fields in the response should be expanded.
@@ -34825,6 +34951,7 @@ paths:
               properties:
                 client_secret:
                   description: The client secret of the SetupIntent.
+                  maxLength: 5000
                   type: string
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -39169,7 +39296,7 @@ paths:
                   description: This specifies if the tax rate is inclusive or exclusive.
                   type: boolean
                 jurisdiction:
-                  description: The jurisdiction for the tax rate.
+                  description: The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
                   maxLength: 50
                   type: string
                 metadata:
@@ -39286,7 +39413,7 @@ paths:
                     type: string
                   type: array
                 jurisdiction:
-                  description: The jurisdiction for the tax rate.
+                  description: The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
                   maxLength: 50
                   type: string
                 metadata:
@@ -41910,6 +42037,7 @@ paths:
                       - invoice.paid
                       - invoice.payment_action_required
                       - invoice.payment_failed
+                      - invoice.payment_succeeded
                       - invoice.sent
                       - invoice.upcoming
                       - invoice.updated
@@ -41963,6 +42091,8 @@ paths:
                       - product.created
                       - product.deleted
                       - product.updated
+                      - promotion_code.created
+                      - promotion_code.updated
                       - radar.early_fraud_warning.created
                       - radar.early_fraud_warning.updated
                       - recipient.created
@@ -42223,6 +42353,7 @@ paths:
                       - invoice.paid
                       - invoice.payment_action_required
                       - invoice.payment_failed
+                      - invoice.payment_succeeded
                       - invoice.sent
                       - invoice.upcoming
                       - invoice.updated
@@ -42276,6 +42407,8 @@ paths:
                       - product.created
                       - product.deleted
                       - product.updated
+                      - promotion_code.created
+                      - promotion_code.updated
                       - radar.early_fraud_warning.created
                       - radar.early_fraud_warning.updated
                       - recipient.created
@@ -44169,7 +44302,7 @@ components:
               - $ref: "#/components/schemas/customer"
               - $ref: "#/components/schemas/deleted_customer"
         cvc_check:
-          description: "If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`."
+          description: "If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A result of unchecked indicates that CVC was provided but hasn't been checked yet. Checks are typically performed when attaching a card to a Customer object, or when creating a charge. For more details, see [Check if a card is valid without a charge](https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge)."
           maxLength: 5000
           nullable: true
           type: string
@@ -44296,7 +44429,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/application_fee"
         application_fee_amount:
-          description: The amount of the application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
+          description: The amount of the application fee (if any) requested for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
           nullable: true
           type: integer
         balance_transaction:
@@ -44851,7 +44984,6 @@ components:
             - payment
             - setup
             - subscription
-          nullable: true
           type: string
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -44949,6 +45081,7 @@ components:
         - cancel_url
         - id
         - livemode
+        - mode
         - object
         - payment_method_types
         - payment_status
@@ -52999,7 +53132,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/application"
         application_fee_amount:
-          description: The amount of the application fee (if any) for the resulting payment. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+          description: The amount of the application fee (if any) requested for the resulting payment. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
           nullable: true
           type: integer
         canceled_at:
@@ -53335,12 +53468,15 @@ components:
           $ref: "#/components/schemas/payment_method_options_bancontact"
         card:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
+        sofort:
+          $ref: "#/components/schemas/payment_method_options_sofort"
       title: PaymentIntentPaymentMethodOptions
       type: object
       x-expandableFields:
         - alipay
         - bancontact
         - card
+        - sofort
     payment_intent_payment_method_options_card:
       description: ""
       properties:
@@ -53451,6 +53587,8 @@ components:
           $ref: "#/components/schemas/payment_method_p24"
         sepa_debit:
           $ref: "#/components/schemas/payment_method_sepa_debit"
+        sofort:
+          $ref: "#/components/schemas/payment_method_sofort"
         type:
           description: The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
           enum:
@@ -53465,6 +53603,7 @@ components:
             - ideal
             - p24
             - sepa_debit
+            - sofort
           type: string
           x-stripeBypassValidation: true
       required:
@@ -53492,6 +53631,7 @@ components:
         - interac_present
         - p24
         - sepa_debit
+        - sofort
       x-resourceId: payment_method
     payment_method_au_becs_debit:
       description: ""
@@ -54772,6 +54912,21 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        preferred_language:
+          description: >-
+            Preferred language of the SOFORT authorization page that the customer is redirected to.
+
+            Can be one of `de`, `en`, `es`, `fr`, `it`, `nl`, or `pl`
+          enum:
+            - de
+            - en
+            - es
+            - fr
+            - it
+            - nl
+            - pl
+          nullable: true
+          type: string
         verified_name:
           description: >-
             Owner's verified full name. Values are verified or provided by SOFORT directly
@@ -54931,6 +55086,24 @@ components:
       x-expandableFields:
         - available_plans
         - plan
+    payment_method_options_sofort:
+      description: ""
+      properties:
+        preferred_language:
+          description: Preferred language of the SOFORT authorization page that the customer is redirected to.
+          enum:
+            - de
+            - en
+            - es
+            - fr
+            - it
+            - nl
+            - pl
+          nullable: true
+          type: string
+      title: payment_method_options_sofort
+      type: object
+      x-expandableFields: []
     payment_method_p24:
       description: ""
       properties: {}
@@ -54966,6 +55139,17 @@ components:
           nullable: true
           type: string
       title: payment_method_sepa_debit
+      type: object
+      x-expandableFields: []
+    payment_method_sofort:
+      description: ""
+      properties:
+        country:
+          description: Two-letter ISO code representing the country the bank account is located in.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_sofort
       type: object
       x-expandableFields: []
     payment_pages_checkout_session_total_details:
@@ -55277,11 +55461,11 @@ components:
 
         initiate a payout to either a bank account or debit card of a [connected
 
-        Stripe account](/docs/connect/payouts). You can retrieve individual payouts,
+        Stripe account](/docs/connect/bank-debit-card-payouts). You can retrieve individual payouts,
 
         as well as list all payouts. Payouts are made on [varying
 
-        schedules](/docs/payouts#payout-schedule), depending on your country and
+        schedules](/docs/connect/manage-payout-schedule), depending on your country and
 
         industry.
 
@@ -59697,7 +59881,7 @@ components:
           description: This specifies if the tax rate is inclusive or exclusive.
           type: boolean
         jurisdiction:
-          description: The jurisdiction for the tax rate.
+          description: The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
           maxLength: 5000
           nullable: true
           type: string

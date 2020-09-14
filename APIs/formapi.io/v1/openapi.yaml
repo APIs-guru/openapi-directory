@@ -2191,6 +2191,29 @@ paths:
                       webhook_url: null
                     - allow_additional_properties: false
                       description: null
+                      document_filename: null
+                      document_processed: false
+                      document_state: pending
+                      document_url: null
+                      editable_submissions: false
+                      expiration_interval: days
+                      expire_after: 7
+                      expire_submissions: true
+                      id: tpl_000000000000000003
+                      name: Template 3
+                      page_count: 1
+                      page_dimensions: null
+                      parent_folder_id: null
+                      path: /
+                      permanent_document_url: null
+                      public_submissions: false
+                      public_web_form: false
+                      redirect_url: null
+                      slack_webhook_url: null
+                      template_type: html
+                      webhook_url: null
+                    - allow_additional_properties: false
+                      description: null
                       document_filename: test-document.pdf
                       document_processed: true
                       document_state: pending
@@ -2244,7 +2267,11 @@ paths:
                   properties:
                     allow_additional_properties:
                       type: boolean
+                    description:
+                      nullable: true
+                      type: string
                     document_url:
+                      nullable: true
                       type: string
                     editable_submissions:
                       type: boolean
@@ -2270,6 +2297,7 @@ paths:
                         maxItems: 2
                         minItems: 2
                         type: array
+                      nullable: true
                       type: array
                     parent_folder_id:
                       nullable: true
@@ -2277,6 +2305,7 @@ paths:
                     path:
                       type: string
                     permanent_document_url:
+                      nullable: true
                       type: string
                     public_submissions:
                       type: boolean
@@ -2296,13 +2325,13 @@ paths:
                   required:
                     - id
                     - name
+                    - description
                     - template_type
                     - public_web_form
                     - public_submissions
                     - expire_submissions
                     - allow_additional_properties
                     - editable_submissions
-                    - page_dimensions
                     - webhook_url
                     - slack_webhook_url
                     - redirect_url
@@ -2333,7 +2362,7 @@ paths:
       tags:
         - PDF
     post:
-      operationId: createTemplate
+      operationId: createPDFTemplate
       requestBody:
         content:
           multipart/form-data:
@@ -2371,7 +2400,7 @@ paths:
                     expiration_interval: days
                     expire_after: 7
                     expire_submissions: false
-                    id: tpl_000000000000000003
+                    id: tpl_000000000000000004
                     name: Test Template
                     page_count: 0
                     page_dimensions: null
@@ -2388,6 +2417,9 @@ paths:
                 properties:
                   allow_additional_properties:
                     type: boolean
+                  description:
+                    nullable: true
+                    type: string
                   editable_submissions:
                     type: boolean
                   expiration_interval:
@@ -2428,6 +2460,7 @@ paths:
                 required:
                   - id
                   - name
+                  - description
                   - template_type
                   - public_web_form
                   - public_submissions
@@ -2453,7 +2486,7 @@ paths:
           description: authentication failed
       security:
         - api_token_basic: []
-      summary: Upload a new PDF template with a file upload
+      summary: Create a new PDF template with a form POST file upload
       tags:
         - PDF
   "/templates/{template_id}":
@@ -2502,7 +2535,11 @@ paths:
                 properties:
                   allow_additional_properties:
                     type: boolean
+                  description:
+                    nullable: true
+                    type: string
                   document_url:
+                    nullable: true
                     type: string
                   editable_submissions:
                     type: boolean
@@ -2528,6 +2565,7 @@ paths:
                       maxItems: 2
                       minItems: 2
                       type: array
+                    nullable: true
                     type: array
                   parent_folder_id:
                     nullable: true
@@ -2535,6 +2573,7 @@ paths:
                   path:
                     type: string
                   permanent_document_url:
+                    nullable: true
                     type: string
                   public_submissions:
                     type: boolean
@@ -2554,13 +2593,13 @@ paths:
                 required:
                   - id
                   - name
+                  - description
                   - template_type
                   - public_web_form
                   - public_submissions
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
-                  - page_dimensions
                   - webhook_url
                   - slack_webhook_url
                   - redirect_url
@@ -2591,6 +2630,108 @@ paths:
       security:
         - api_token_basic: []
       summary: Get a single template
+      tags:
+        - PDF
+    put:
+      operationId: updateTemplate
+      parameters:
+        - example: tpl_000000000000000003
+          in: path
+          name: template_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                template:
+                  footer_html: updated footer
+                  header_html: updated header
+                  html: updated html
+                  scss: updated scss
+              properties:
+                template:
+                  properties:
+                    allow_additional_properties:
+                      type: boolean
+                    description:
+                      nullable: true
+                      type: string
+                    editable_submissions:
+                      type: boolean
+                    expiration_interval:
+                      enum:
+                        - minutes
+                        - hours
+                        - days
+                      type: string
+                    expire_after:
+                      type: number
+                    expire_submissions:
+                      type: boolean
+                    footer_html:
+                      nullable: true
+                      type: string
+                    header_html:
+                      nullable: true
+                      type: string
+                    html:
+                      nullable: true
+                      type: string
+                    name:
+                      nullable: true
+                      type: string
+                    public_submissions:
+                      type: boolean
+                    public_web_form:
+                      type: boolean
+                    redirect_url:
+                      nullable: true
+                      type: string
+                    scss:
+                      nullable: true
+                      type: string
+                    slack_webhook_url:
+                      nullable: true
+                      type: string
+                    webhook_url:
+                      nullable: true
+                      type: string
+                  type: object
+              required:
+                - template
+              title: update_template_data
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    status: success
+              schema:
+                properties:
+                  errors:
+                    items:
+                      type: string
+                    type: array
+                  status:
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - status
+                title: update_template_response
+                type: object
+          description: update template success
+      security:
+        - api_token_basic: []
+      summary: Update a Template
       tags:
         - PDF
   "/templates/{template_id}/move":
@@ -2651,7 +2792,11 @@ paths:
                 properties:
                   allow_additional_properties:
                     type: boolean
+                  description:
+                    nullable: true
+                    type: string
                   document_url:
+                    nullable: true
                     type: string
                   editable_submissions:
                     type: boolean
@@ -2677,6 +2822,7 @@ paths:
                       maxItems: 2
                       minItems: 2
                       type: array
+                    nullable: true
                     type: array
                   parent_folder_id:
                     nullable: true
@@ -2684,6 +2830,7 @@ paths:
                   path:
                     type: string
                   permanent_document_url:
+                    nullable: true
                     type: string
                   public_submissions:
                     type: boolean
@@ -2703,13 +2850,13 @@ paths:
                 required:
                   - id
                   - name
+                  - description
                   - template_type
                   - public_web_form
                   - public_submissions
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
-                  - page_dimensions
                   - webhook_url
                   - slack_webhook_url
                   - redirect_url
@@ -3277,93 +3424,11 @@ paths:
       summary: Generates multiple PDFs
       tags:
         - PDF
-  /templates?v=2:
+  /templates?desc=cached_upload:
     post:
-      operationId: createTemplateFromUpload
+      operationId: createPDFTemplateFromUpload
       requestBody:
-        content:
-          application/json:
-            schema:
-              example:
-                template:
-                  document:
-                    id: b6903dbfb15c13bbad1444c35064df9e
-                    metadata:
-                      filename: fw8ben-presigned.pdf
-                      mime_type: application/pdf
-                      size: 5885
-                    storage: cache
-                  name: Test Template Presigned
-              properties:
-                template:
-                  properties:
-                    allow_additional_properties:
-                      type: boolean
-                    document:
-                      properties:
-                        id:
-                          type: string
-                        metadata:
-                          properties:
-                            filename:
-                              type: string
-                            mime_type:
-                              enum:
-                                - application/pdf
-                              type: string
-                            size:
-                              type: integer
-                          required:
-                            - filename
-                            - size
-                            - mime_type
-                          type: object
-                        storage:
-                          enum:
-                            - cache
-                          type: string
-                      required:
-                        - id
-                        - storage
-                        - metadata
-                      type: object
-                    editable_submissions:
-                      type: boolean
-                    expiration_interval:
-                      enum:
-                        - minutes
-                        - hours
-                        - days
-                      type: string
-                    expire_after:
-                      type: number
-                    expire_submissions:
-                      type: boolean
-                    name:
-                      nullable: true
-                      type: string
-                    public_submissions:
-                      type: boolean
-                    public_web_form:
-                      type: boolean
-                    redirect_url:
-                      nullable: true
-                      type: string
-                    slack_webhook_url:
-                      nullable: true
-                      type: string
-                    webhook_url:
-                      nullable: true
-                      type: string
-                  required:
-                    - name
-                    - document
-                  type: object
-              required:
-                - template
-              title: create_template_data
-              type: object
-        required: true
+        $ref: "#/components/requestBodies/createPDFTemplateFromUploadData"
       responses:
         "201":
           content:
@@ -3381,7 +3446,7 @@ paths:
                     expiration_interval: days
                     expire_after: 7
                     expire_submissions: false
-                    id: tpl_000000000000000003
+                    id: tpl_000000000000000004
                     name: Test Template Presigned
                     page_count: 0
                     page_dimensions: null
@@ -3398,6 +3463,9 @@ paths:
                 properties:
                   allow_additional_properties:
                     type: boolean
+                  description:
+                    nullable: true
+                    type: string
                   editable_submissions:
                     type: boolean
                   expiration_interval:
@@ -3438,6 +3506,7 @@ paths:
                 required:
                   - id
                   - name
+                  - description
                   - template_type
                   - public_web_form
                   - public_submissions
@@ -3464,6 +3533,117 @@ paths:
       security:
         - api_token_basic: []
       summary: Create a new PDF template from a cached presign upload
+      tags:
+        - PDF
+  /templates?desc=html:
+    post:
+      operationId: createHTMLTemplate
+      requestBody:
+        $ref: "#/components/requestBodies/createPDFTemplateFromUploadData"
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    allow_additional_properties: false
+                    description: HTML template created via API
+                    document_filename: null
+                    document_processed: false
+                    document_state: pending
+                    document_url: null
+                    editable_submissions: false
+                    expiration_interval: days
+                    expire_after: 7
+                    expire_submissions: false
+                    id: tpl_000000000000000004
+                    name: Test HTML Template
+                    page_count: 1
+                    page_dimensions: null
+                    parent_folder_id: null
+                    path: /
+                    permanent_document_url: null
+                    public_submissions: false
+                    public_web_form: false
+                    redirect_url: null
+                    slack_webhook_url: null
+                    template_type: html
+                    webhook_url: null
+              schema:
+                properties:
+                  allow_additional_properties:
+                    type: boolean
+                  description:
+                    nullable: true
+                    type: string
+                  editable_submissions:
+                    type: boolean
+                  expiration_interval:
+                    enum:
+                      - minutes
+                      - hours
+                      - days
+                    type: string
+                  expire_after:
+                    type: number
+                  expire_submissions:
+                    type: boolean
+                  id:
+                    type: string
+                  name:
+                    nullable: true
+                    type: string
+                  parent_folder_id:
+                    nullable: true
+                    type: string
+                  path:
+                    type: string
+                  public_submissions:
+                    type: boolean
+                  public_web_form:
+                    type: boolean
+                  redirect_url:
+                    nullable: true
+                    type: string
+                  slack_webhook_url:
+                    nullable: true
+                    type: string
+                  template_type:
+                    type: string
+                  webhook_url:
+                    nullable: true
+                    type: string
+                required:
+                  - id
+                  - name
+                  - description
+                  - template_type
+                  - public_web_form
+                  - public_submissions
+                  - expire_submissions
+                  - allow_additional_properties
+                  - editable_submissions
+                  - page_dimensions
+                  - webhook_url
+                  - slack_webhook_url
+                  - redirect_url
+                title: pending_template
+                type: object
+          description: returns a created template
+        "401":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Unauthorized
+              schema:
+                $ref: "#/components/schemas/authentication_error"
+          description: authentication failed
+      security:
+        - api_token_basic: []
+      summary: Create a new HTML template
       tags:
         - PDF
   /uploads/presign:
@@ -3543,6 +3723,110 @@ paths:
       tags:
         - PDF
 components:
+  requestBodies:
+    createPDFTemplateFromUploadData:
+      content:
+        application/json:
+          schema:
+            example:
+              template:
+                document:
+                  id: b6903dbfb15c13bbad1444c35064df9e
+                  metadata:
+                    filename: fw8ben-presigned.pdf
+                    mime_type: application/pdf
+                    size: 5885
+                  storage: cache
+                name: Test Template Presigned
+            properties:
+              template:
+                properties:
+                  allow_additional_properties:
+                    type: boolean
+                  description:
+                    nullable: true
+                    type: string
+                  document:
+                    properties:
+                      id:
+                        type: string
+                      metadata:
+                        properties:
+                          filename:
+                            type: string
+                          mime_type:
+                            enum:
+                              - application/pdf
+                            type: string
+                          size:
+                            type: integer
+                        required:
+                          - filename
+                          - size
+                          - mime_type
+                        type: object
+                      storage:
+                        enum:
+                          - cache
+                        type: string
+                    required:
+                      - id
+                      - storage
+                      - metadata
+                    type: object
+                  editable_submissions:
+                    type: boolean
+                  expiration_interval:
+                    enum:
+                      - minutes
+                      - hours
+                      - days
+                    type: string
+                  expire_after:
+                    type: number
+                  expire_submissions:
+                    type: boolean
+                  footer_html:
+                    nullable: true
+                    type: string
+                  header_html:
+                    nullable: true
+                    type: string
+                  html:
+                    nullable: true
+                    type: string
+                  name:
+                    nullable: true
+                    type: string
+                  public_submissions:
+                    type: boolean
+                  public_web_form:
+                    type: boolean
+                  redirect_url:
+                    nullable: true
+                    type: string
+                  scss:
+                    nullable: true
+                    type: string
+                  slack_webhook_url:
+                    nullable: true
+                    type: string
+                  template_type:
+                    enum:
+                      - pdf
+                      - html
+                    type: string
+                  webhook_url:
+                    nullable: true
+                    type: string
+                required:
+                  - name
+                type: object
+            required:
+              - template
+            title: create_template_data
+            type: object
+      required: true
   schemas:
     authentication_error:
       properties:

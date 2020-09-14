@@ -32,7 +32,7 @@ paths:
       description: "This method retrieves all the fulfillment policies configured for the marketplace you specify using the marketplace_id query parameter. Marketplaces and locales Get the correct policies for a marketplace that supports multiple locales using the Content-Language request header. For example, get the policies for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getFulfillmentPolicies
       parameters:
-        - description: This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -154,7 +154,7 @@ paths:
       description: "This method retrieves the complete details for a single fulfillment policy. In the request, supply both the policy name and its associated marketplace_id as query parameters. Marketplaces and locales Get the correct policy for a marketplace that supports multiple locales using the Content-Language request header. For example, get a policy for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getFulfillmentPolicyByName
       parameters:
-        - description: This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -443,7 +443,7 @@ paths:
       description: "This method retrieves all the payment policies configured for the marketplace you specify using the marketplace_id query parameter. Marketplaces and locales Get the correct policies for a marketplace that supports multiple locales using the Content-Language request header. For example, get the policies for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getPaymentPolicies
       parameters:
-        - description: This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the eBay marketplace of the policies you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -561,7 +561,7 @@ paths:
       description: "This method retrieves the complete details of a single payment policy. Supply both the policy name and its associated marketplace_id in the request query parameters. Marketplaces and locales Get the correct policy for a marketplace that supports multiple locales using the Content-Language request header. For example, get a policy for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getPaymentPolicyByName
       parameters:
-        - description: This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -1069,7 +1069,7 @@ paths:
       description: "This method retrieves a seller's shipping rate tables for the country specified in the country_code query parameter. If you call this method without specifying a country code, the call returns all the seller's shipping rate tables. The method's response includes a rateTableId for each table defined by the seller. Use a table's ID value in a fulfillment policy to specify the shipping rate table to use for that policy's DOMESTIC or INTERNATIONAL shipping option (make sure the locality of the rate table matches the optionType of the shipping option). This call currently supports getting rate tables related to the following marketplaces: EBAY_AU EBAY_CA EBAY_IT EBAY_US Note: Rate tables created with the Trading API might not have been assigned a rateTableId at the time of their creation. This method can assign and return rateTableId values for rate tables with missing IDs if you make a request using the country_code where the seller has defined rate tables. Sellers can define up to 40 shipping rate tables for their account, which lets them set up different rate tables for each of the marketplaces they sell into. Go to My eBay &gt; Account &gt; Site Preferences to create and maintain the rate tables. For more, see Using shipping rate tables. If you're using the Trading API, use the rate table ID values in the RateTableDetails container of the Add/Revise/Relist calls. If the locality for a rate table is set to DOMESTIC, pass the ID value in the RateTableDetails.DomesticRateTableId field. Otherwise, if locality is INTERNATIONAL, pass the ID value in RateTableDetails.InternationalRateTableId. Note: For regions that are not yet ramped up with multi-rate table support, this method returns an ID that maps to the seller's default rate table for the country specified."
       operationId: getRateTables
       parameters:
-        - description: This query parameter specifies the two-letter ISO 3166 code of country for which you want shipping-rate table information. If you do not specify a county code, the request returns all the seller-defined rate tables. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/CountryCodeEnum.html
+        - description: This query parameter specifies the two-letter ISO 3166 code of country for which you want shipping-rate table information. If you do not specify a county code, the request returns all the seller-defined rate tables. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:CountryCodeEnum
           in: query
           name: country_code
           required: false
@@ -1109,7 +1109,7 @@ paths:
       description: "This method retrieves all the return policies configured for the marketplace you specify using the marketplace_id query parameter. Marketplaces and locales Get the correct policies for a marketplace that supports multiple locales using the Content-Language request header. For example, get the policies for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getReturnPolicies
       parameters:
-        - description: This query parameter specifies the ID of the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the ID of the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -1223,7 +1223,7 @@ paths:
       description: "This method retrieves the complete details of a single return policy. Supply both the policy name and its associated marketplace_id in the request query parameters. Marketplaces and locales Get the correct policy for a marketplace that supports multiple locales using the Content-Language request header. For example, get a policy for the French locale of the Canadian marketplace by specifying fr-CA for the Content-Language header. Likewise, target the Dutch locale of the Belgium marketplace by setting Content-Language: fr-BE. For details on header values, see HTTP request headers."
       operationId: getReturnPolicyByName
       parameters:
-        - description: This query parameter specifies the ID of the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html
+        - description: This query parameter specifies the ID of the eBay marketplace of the policy you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum
           in: query
           name: marketplace_id
           required: true
@@ -1469,7 +1469,7 @@ paths:
       description: Use this call to retrieve a sales tax table that the seller established for a specific country. Specify the tax table to retrieve using the country_code query parameter.
       operationId: getSalesTaxes
       parameters:
-        - description: This path parameter specifies the two-letter ISO 3166 code for the country whose tax table you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/account/types/CountryCodeEnum.html
+        - description: This path parameter specifies the two-letter ISO 3166 code for the country whose tax table you want to retrieve. For implementation help, refer to eBay API documentation at https://developer.ebay.com/api-docs/sell/account/types/ba:CountryCodeEnum
           in: query
           name: country_code
           required: true
@@ -1700,7 +1700,7 @@ components:
       description: A complex type that describes the value of a monetary amount as represented by a global currency.
       properties:
         currency:
-          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO 4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/CurrencyCodeEnum.html'>eBay API documentation</a>"
+          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO 4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:CurrencyCodeEnum'>eBay API documentation</a>"
           type: string
         value:
           description: The monetary amount in the specified currency. Required in the amount type.
@@ -1713,7 +1713,7 @@ components:
           description: "Specifies the default policy for a marketplaceId and categoryTypes.name pair. Sellers can create multiple policies for any marketplaceId and categoryTypes.name combination. For example, you can create multiple fulfillment policies for one marketplace, where they all target the same category type name. However, only one policy can be the default for any marketplaceId and name combination, and eBay designates the first policy created for a combination as the default. If set to true, this policy is the default policy for the associated categoryTypes.name and marketplaceId pair. Note: eBay considers the status of this field only when you create listings through the Web flow. If you create listings using the APIs, you must specifically set the policies you want applied to a listing in the payload of the call you use to create the listing. If you use the Web flow to create item listings, eBay uses the default policy for the marketplace and category type specified, unless you override the default. For more on default policies, see Changing the default policy for a category type."
           type: boolean
         name:
-          description: "The category type to which the policy applies (motor vehicles or non-motor vehicles). Restrictions: The MOTORS_VEHICLES category type is not valid for return policies. eBay flows do not support the return of motor vehicles. Only the ALL_EXCLUDING_MOTORS_VEHICLES category type is supported for sellers who opt-in to the managed payments program. Managed payments does not currently support the sale of motor vehicles. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/CategoryTypeEnum.html'>eBay API documentation</a>"
+          description: "The category type to which the policy applies (motor vehicles or non-motor vehicles). Restrictions: The MOTORS_VEHICLES category type is not valid for return policies. eBay flows do not support the return of motor vehicles. Only the ALL_EXCLUDING_MOTORS_VEHICLES category type is supported for sellers who opt-in to the managed payments program. Managed payments does not currently support the sale of motor vehicles. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:CategoryTypeEnum'>eBay API documentation</a>"
           type: string
       type: object
     Deposit:
@@ -1806,7 +1806,7 @@ components:
           description: "If set to true, no shipping is offered by this policy and the seller offers only local pickup of the item (normally from a non-business location). This option is most often used for customer-to-customer sales and if set, costType should be set to NOT_SPECIFIED. Default: false"
           type: boolean
         marketplaceId:
-          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this fulfillment policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
@@ -1847,7 +1847,7 @@ components:
           description: "If set to true, no shipping is offered by this policy and the seller offers only local pickup of the item (normally from a non-business location). This option is most often used for customer-to-customer sales and if set, costType should be set to NOT_SPECIFIED. Default: false"
           type: boolean
         marketplaceId:
-          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this fulfillment policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
@@ -1898,13 +1898,13 @@ components:
       description: This type defines the fields for a seller's international return policy. If a seller does not populate the fields in this complex type, the international return policy defaults to the return policy set for domestic returns.
       properties:
         returnMethod:
-          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnMethodEnum.html'>eBay API documentation</a>
+          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
           type: string
         returnPeriod:
           $ref: "#/components/schemas/TimeDuration"
           description: "Specifies the amount of time the buyer has to return an item. The return period begins when the item is marked &quot;delivered&quot; at the buyer's specified ship-to location. You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods. For a definitive list of category return periods, call GeteBayDetails in the Trading API with DetailName set to ReturnPolicyDetails. In the response review the ReturnPolicyDetails.ReturnsWithin field to see the values supported in the different marketplace categories. Note: In version 1.2.0, the options for this field were reduced. See the Release Notes for details. Set this field using the TimeDuration complex type, where you set unit to DAY and value to either 30 or 60 (or other value, as appropriate). Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours. Required if the internationalOverride.returnsAccepted field is set to true."
         returnShippingCostPayer:
-          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. Required if the internationalOverride.returnsAccepted field is set to true. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>
+          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. Required if the internationalOverride.returnsAccepted field is set to true. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
           type: string
         returnsAccepted:
           description: If set to true, the seller allows international returns. If set to false, the seller does not accept international returns. Required if the seller wants to set an international return policy that differs from their domestic return policy.
@@ -1917,7 +1917,7 @@ components:
           description: This field gives a short summary of what is required from the seller. An example might be, 'Upload bank document now.'. The detailMessage field will often provide more details on what is required of the seller.
           type: string
         dataRequired:
-          description: The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the detailMessage and other applicable, corresponding fields. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/DetailsType.html'>eBay API documentation</a>
+          description: The enumeration value returned in this field categorizes the type of details needed for the KYC check. More information about the check is shown in the detailMessage and other applicable, corresponding fields. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/kyc:DetailsType'>eBay API documentation</a>
           type: string
         detailMessage:
           description: This field gives a detailed message about what is required from the seller. An example might be, 'Please upload a bank document by 2020-08-01 to get your account back in good standing.'.
@@ -1944,11 +1944,11 @@ components:
         brands:
           description: "It's important to note that the credit card brands Visa and MasterCard must both be listed if either one is listed, as is shown in the following code fragment: &quot;paymentMethods&quot;: [{ &quot;brands&quot;: [VISA, MASTERCARD] }] ... Note: Different eBay marketplaces may or may not support this field. Use the Trading API GetCategoryFeatures call with FeatureID set to PaymentMethods and DetailLevel set to ReturnAll to see what credit card brands different marketplaces support. If the GetCategoryFeatures call returns details on credit card brands for the categories in which you sell, then you can use this field to list the credit card brands the seller accepts. If, on the other hand, GetCategoryFeatures does not enumerate credit card brands for your target site (for example, if it returns PaymentMethod set to CCAccepted), then you cannot enumerate specific credit card brands with this field for that marketplace. Required if paymentMethodType is set to CREDIT_CARD. A list of credit card brands accepted by the seller."
           items:
-            description: " For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentInstrumentBrandEnum.html'>eBay API documentation</a>"
+            description: " For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentInstrumentBrandEnum'>eBay API documentation</a>"
             type: string
           type: array
         paymentMethodType:
-          description: "The payment method, selected from the supported payment method types. Use GetCategoryFeatures in the Trading API to retrieve the payment methods allowed for a category on a specific marketplace, as well as the default payment method for that marketplace (review the SiteDefaults.PaymentMethod field). For example, the response from GetCategoryFeatures shows that on the US marketplace, most categories allow only electronic payments via credit cards, PayPal, and the like. Also, note that GeteBayDetails does not return payment method information. Note: If you create item listings using the Inventory API, you must set this field to PAYPAL (currently, the Inventory API supports only fixed-prince GTC items where the only supported paymentMethod is PayPal). For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentMethodTypeEnum.html'>eBay API documentation</a>"
+          description: "The payment method, selected from the supported payment method types. Use GetCategoryFeatures in the Trading API to retrieve the payment methods allowed for a category on a specific marketplace, as well as the default payment method for that marketplace (review the SiteDefaults.PaymentMethod field). For example, the response from GetCategoryFeatures shows that on the US marketplace, most categories allow only electronic payments via credit cards, PayPal, and the like. Also, note that GeteBayDetails does not return payment method information. Note: If you create item listings using the Inventory API, you must set this field to PAYPAL (currently, the Inventory API supports only fixed-prince GTC items where the only supported paymentMethod is PayPal). For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentMethodTypeEnum'>eBay API documentation</a>"
           type: string
         recipientAccountReference:
           $ref: "#/components/schemas/RecipientAccountReference"
@@ -1975,7 +1975,7 @@ components:
           description: "If set to true, payment is due upon receipt (eBay generates a receipt when the buyer agrees to purchase an item). This boolean must be set in the payment policy if the seller wants to create a listing that has an &quot;immediate payment&quot; requirement. The seller can change the immediate payment requirement at any time during the life cycle of a listing. The following must be true before a seller can apply an immediate payment requirement to an item: The seller must have a PayPal Business account. The Buy It Now price cannot be higher than $60,000 USD. The eBay marketplace on which the item is listed must support PayPal payments. The listing type must be fixed-price, or an auction with a Buy It Now option.To enable the immediate payment requirement, the seller must also perform the following actions via API calls: Provide a valid paymentMethods.recipientAccountReference.referenceId value. Offer PayPal as the only payment method for the item(s). Specify all related costs to the buyer (because the buyer is not be able to use the Buyer Request Total feature in an immediate payment listing); these costs include flat-rate shipping costs for each domestic and international shipping service offered, package handling costs, and any shipping surcharges. Include and set the shippingProfileDiscountInfo container values if you are going to use promotional shipping discounts.For more information, see the Understanding immediate payment Help page. Note: Listings created with the Inventory API must reference a payment policy that has immediatePay is set to true. Items listed with the Inventory API must also be fixed-price good-till-canceled (GTC) listings where PayPal is the only supported payment method (paymentMethod must be set to PAYPAL). Default: false"
           type: boolean
         marketplaceId:
-          description: The ID of the eBay marketplace to which the payment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which the payment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this payment policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
@@ -2013,7 +2013,7 @@ components:
           description: "If set to true, payment is due upon receipt (eBay generates a receipt when the buyer agrees to purchase an item). This boolean must be set in the payment policy if the seller wants to create a listing that has an immediate payment requirement. The seller can change the immediate payment requirement at any time during the life cycle of a listing. The following must be true before a seller can apply an immediate payment requirement to an item: The seller must have a PayPal Business account. The Buy It Now price cannot be higher than $60,000 USD. The eBay marketplace on which the item is listed must support PayPal payments. The listing type must be fixed-price, or an auction with a Buy It Now option. Note: This container can be used for sellers who opt-in to the managed payments program, but some requirements do not apply.To enable the immediate payment requirement, the seller must also perform the following actions via API calls: Provide a valid paymentMethods.recipientAccountReference.referenceId value. Offer PayPal as the only payment method for the item(s). Specify all related costs to the buyer (because the buyer is not able to use the Buyer Request Total feature in an immediate payment listing); these costs include flat-rate shipping costs for each domestic and international shipping service offered, package handling costs, and any shipping surcharges. Include and set the shippingProfileDiscountInfo container values if you are going to use promotional shipping discounts.For more information, see the Understanding immediate payment Help page. Note: Listings created with the Inventory API must reference a payment policy that has immediatePay set to true. Items listed with the Inventory API must also be fixed-price, good-till-canceled (GTC) listings where PayPal is the only supported payment method (paymentMethod must be set to PAYPAL).Default: False"
           type: boolean
         marketplaceId:
-          description: "The ID of the eBay marketplace to which this payment policy applies. If this value is not specified, the value defaults to the seller's eBay registration site. Note: A limited number of sellers, on a limited number of eBay marketplaces, are currently opted-in to the eBay managed payments program. To view the eBay marketplaces where managed payments are currently supported, see the managed payments landing page. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>"
+          description: "The ID of the eBay marketplace to which this payment policy applies. If this value is not specified, the value defaults to the seller's eBay registration site. Note: A limited number of sellers, on a limited number of eBay marketplaces, are currently opted-in to the eBay managed payments program. To view the eBay marketplaces where managed payments are currently supported, see the managed payments landing page. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>"
           type: string
         name:
           description: "A user-defined name for this payment policy. Names must be unique for policies assigned to the same marketplace. Note: eBay will create a new payment policy for sellers who opt-in to the managed payments program.Max length: 64"
@@ -2061,7 +2061,7 @@ components:
       description: Contains the payments program onboarding response
       properties:
         onboardingStatus:
-          description: This enumeration value indicates the eligibility of payment onboarding for the registered site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentsProgramOnboardingStatus.html'>eBay API documentation</a>
+          description: This enumeration value indicates the eligibility of payment onboarding for the registered site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramOnboardingStatus'>eBay API documentation</a>
           type: string
         steps:
           description: An array of the active process steps for payment onboarding and the status of each step. This array includes the step name, step status, and a webUrl to the IN_PROGRESS step. The step names are returned in sequential order.
@@ -2076,7 +2076,7 @@ components:
           description: The name of the step in the steps array. Over time, these names are subject to change as processes change. The output sample contains example step names. Review an actual call response for updated step names.
           type: string
         status:
-          description: "This enumeration value indicates the status of the associated step. Note: Only one step can be IN_PROGRESS at a time. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentsProgramOnboardingStepStatus.html'>eBay API documentation</a>"
+          description: "This enumeration value indicates the status of the associated step. Note: Only one step can be IN_PROGRESS at a time. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramOnboardingStepStatus'>eBay API documentation</a>"
           type: string
         webUrl:
           description: This URL provides access to the IN_PROGRESS step.
@@ -2086,13 +2086,13 @@ components:
       description: The response object containing the sellers status with regards to the specified payment program.
       properties:
         marketplaceId:
-          description: The ID of the eBay marketplace to which the payment policy applies. If this value is not specified in the request, the value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which the payment policy applies. If this value is not specified in the request, the value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         paymentsProgramType:
-          description: This path parameter specifies the payment program whose status is returned by the call. Currently the only supported payments program is EBAY_PAYMENTS. For details on the program, see Payments Terms of Use. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentsProgramType.html'>eBay API documentation</a>
+          description: This path parameter specifies the payment program whose status is returned by the call. Currently the only supported payments program is EBAY_PAYMENTS. For details on the program, see Payments Terms of Use. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramType'>eBay API documentation</a>
           type: string
         status:
-          description: " For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/PaymentsProgramStatus.html'>eBay API documentation</a>"
+          description: " For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:PaymentsProgramStatus'>eBay API documentation</a>"
           type: string
         wasPreviouslyOptedIn:
           description: If set to true, the seller was at one point opted-in to the associated payment program, but they later opted out of the program. A value of false indicates the seller never opted-in to the program or if they did opt-in to the program, they never opted-out of it. It's important to note that the setting of this field does not indicate the seller's current status regarding the payment program. It is possible for this field to return true while the status field returns OPTED_IN.
@@ -2102,7 +2102,7 @@ components:
       description: A seller program in to which a seller can opt-in.
       properties:
         programType:
-          description: A seller program in to which a seller can opt-in. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ProgramTypeEnum.html'>eBay API documentation</a>
+          description: A seller program in to which a seller can opt-in. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ProgramTypeEnum'>eBay API documentation</a>
           type: string
       type: object
     Programs:
@@ -2118,10 +2118,10 @@ components:
       description: A complex type that contains information pertaining to a shipping rate table.
       properties:
         countryCode:
-          description: A two-letter ISO 3166 country code representing the eBay marketplace where an item is listed. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/CountryCodeEnum.html'>eBay API documentation</a>
+          description: A two-letter ISO 3166 country code representing the eBay marketplace where an item is listed. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:CountryCodeEnum'>eBay API documentation</a>
           type: string
         locality:
-          description: The region covered by the shipping rate table, either DOMESTIC or INTERNATIONAL. DOMESTIC indicates that the shipping rate table applies to regions within the country where an item is listed (the source country) while INTERNATIONAL indicates that the shipping rate table applies to regions outside of the country where an item is listed. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ShippingOptionTypeEnum.html'>eBay API documentation</a>
+          description: The region covered by the shipping rate table, either DOMESTIC or INTERNATIONAL. DOMESTIC indicates that the shipping rate table applies to regions within the country where an item is listed (the source country) while INTERNATIONAL indicates that the shipping rate table applies to regions outside of the country where an item is listed. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingOptionTypeEnum'>eBay API documentation</a>
           type: string
         name:
           description: The user-defined name for the shipping rate table. Sellers can access Seller Hub (or My eBay &gt; Account &gt; Site Preferences &gt; Shipping preferences) to create and assign names to their shipping rate tables.
@@ -2146,7 +2146,7 @@ components:
           description: Contains the PayPal email address of the recipient (buyer) if referenceType is set to PAYPAL_EMAIL.
           type: string
         referenceType:
-          description: A reference a recipient's account. Currently only PAYPAL_EMAIL is valid. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/RecipientAccountReferenceTypeEnum.html'>eBay API documentation</a>
+          description: A reference a recipient's account. Currently only PAYPAL_EMAIL is valid. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RecipientAccountReferenceTypeEnum'>eBay API documentation</a>
           type: string
       type: object
     Region:
@@ -2156,7 +2156,7 @@ components:
           description: A string that indicates the name of a region, as defined by eBay. A &quot;region&quot; can be either a 'world region' (e.g., the &quot;Middle East&quot; or &quot;Southeast Asia&quot;) or a country, as represented with a two-letter country code. Use GeteBayDetails to get the values accepted by this field. The values that you're allowed to use for a specific regionName field depend on the context in which you are setting the value. For details on how to set the values for this field, see The shipToLocations container.
           type: string
         regionType:
-          description: Reserved for future use. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/RegionTypeEnum.html'>eBay API documentation</a>
+          description: Reserved for future use. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:RegionTypeEnum'>eBay API documentation</a>
           type: string
       type: object
     RegionSet:
@@ -2191,13 +2191,13 @@ components:
           $ref: "#/components/schemas/InternationalReturnOverrideType"
           description: This container, if populated, specifies the seller's policies for international returns (items that require postage via an international shipping service). Buy default, the policies for international returns are inherited from the domestic return policy. This container allows the seller to customize their return policy for international returns.
         marketplaceId:
-          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this return policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
           type: string
         refundMethod:
-          description: Important! this field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. Each eBay marketplace may support different sets of refund methods and marketplaces can also have differing default values for this field. Sellers are obligated to honor the refund method displayed in their listings. Call GeteBayDetails in the Trading API to see the refund methods supported by the marketplaces you sell into. We recommend you set this field to the value of your preferred refund method and that you use the description field to detail the seller's return policy (such as indicating how quickly the seller will process a refund, whether the seller must receive the item before processing a refund, and other similar useful details). You cannot modify this value in a Revise item call if (1) the listing has bids or (2) the listing ends within 12 hours. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/RefundMethodEnum.html'>eBay API documentation</a>
+          description: Important! this field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. Each eBay marketplace may support different sets of refund methods and marketplaces can also have differing default values for this field. Sellers are obligated to honor the refund method displayed in their listings. Call GeteBayDetails in the Trading API to see the refund methods supported by the marketplaces you sell into. We recommend you set this field to the value of your preferred refund method and that you use the description field to detail the seller's return policy (such as indicating how quickly the seller will process a refund, whether the seller must receive the item before processing a refund, and other similar useful details). You cannot modify this value in a Revise item call if (1) the listing has bids or (2) the listing ends within 12 hours. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
           type: string
         restockingFeePercentage:
           description: "Important! This field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value supplied in this field is ignored, it is neither read nor returned. Sellers who accept returns should include this field if they charge buyers a restocking fee when items are returned. A restocking fee comes into play only when an item is returned due to buyer remorse and/or a purchasing mistake, but sellers cannot charge a restocking fee for SNAD-related returns. The total amount returned to the buyer is reduced by the cost of the item multiplied by the percentage indicated by this field. Allowable restocking fee values are: 0.0: No restocking fee is charged to the buyer 10.0: 10 percent of the item price is charged to the buyer 15.0: 15 percent of the item price is charged to the buyer 20.0: Up to 20 percent of the item price is charged to the buyer"
@@ -2206,7 +2206,7 @@ components:
           description: "Important! This field is being deprecated on many marketplaces. Once deprecated, this field will be ignored on marketplaces where it is not supported and it will neither be read nor returned. This optional field contains the seller's detailed explanation for their return policy and is displayed in the Return Policy section of the View Item page. This field is valid in only the following marketplaces (the field is otherwise ignored): Germany (DE) Spain (ES) France (FR) Italy (IT) Where valid, sellers can use this field to add details about their return policies. eBay uses this text string as-is in the Return Policy section of the View Item page. Avoid HTML and avoid character entity references (such as &amp;amp;pound; or &amp;amp;#163;). To include special characters in the return policy description, use the literal UTF-8 or ISO-8559-1 character (e.g. &amp;#163;). Max length: 5000 (8000 for DE)"
           type: string
         returnMethod:
-          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnMethodEnum.html'>eBay API documentation</a>
+          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
           type: string
         returnPeriod:
           $ref: "#/components/schemas/TimeDuration"
@@ -2215,7 +2215,7 @@ components:
           description: A unique eBay-assigned ID for this policy. This ID value is appended to the end of the Location URI that is returned as a response header when you call createReturnPolicy).
           type: string
         returnShippingCostPayer:
-          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>
+          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
           type: string
         returnsAccepted:
           description: If set to true, the seller accepts returns. Call the getReturnPolicies in the Metadata API to see what categories require returns to be offered for listings in each category. Also, note that some European marketplaces (for example, UK, IE, and DE) require sellers to accept returns for fixed-price items and auctions listed with Buy It Now. For details, see Returns and the Law (UK). Note:Top-Rated sellers must accept item returns and the handlingTime should be set to zero days or one day for a listing to receive a Top-Rated Plus badge on the View Item or search result pages. For more information on eBay's Top-Rated seller program, see Becoming a Top Rated Seller and qualifying for Top Rated Plus benefits.
@@ -2239,13 +2239,13 @@ components:
           $ref: "#/components/schemas/InternationalReturnOverrideType"
           description: This container, if populated, specifies the seller's policies for international returns (items that require postage via an international shipping service). Buy default, the policies for international returns are inherited from the domestic return policy. This container allows the seller to customize the return policy for international returns.
         marketplaceId:
-          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this return policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
           type: string
         refundMethod:
-          description: Important! this field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. Note that each eBay marketplace can support different sets of refund methods. Also, each eBay marketplace has a default setting for this value and if you do not specifically set this value, sellers are obligated to honor the setting that displays in their listings. Call GeteBayDetails in the Trading API to see what refund methods the marketplaces you sell into support. We recommend you set this field to the value of your preferred refund method and that you use the description field to detail the seller's return policy (such as indicating how quickly the seller will process a refund, whether the seller must receive the item before processing a refund, and other similar useful details). You cannot modify this value in a Revise item call if (1) the listing has bids or (2) the listing ends within 12 hours. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/RefundMethodEnum.html'>eBay API documentation</a>
+          description: Important! this field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. Note that each eBay marketplace can support different sets of refund methods. Also, each eBay marketplace has a default setting for this value and if you do not specifically set this value, sellers are obligated to honor the setting that displays in their listings. Call GeteBayDetails in the Trading API to see what refund methods the marketplaces you sell into support. We recommend you set this field to the value of your preferred refund method and that you use the description field to detail the seller's return policy (such as indicating how quickly the seller will process a refund, whether the seller must receive the item before processing a refund, and other similar useful details). You cannot modify this value in a Revise item call if (1) the listing has bids or (2) the listing ends within 12 hours. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
           type: string
         restockingFeePercentage:
           description: "Important! This field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value supplied in this field is ignored, it is neither read nor returned. Sellers who accept returns should include this field if they charge buyers a restocking fee when items are returned. A restocking fee comes into play only when an item is returned due to buyer remorse and/or a purchasing mistake, but sellers cannot charge a restocking fee for SNAD-related returns. The total amount returned to the buyer is reduced by the cost of the item multiplied by the percentage indicated by this field. Allowable restocking fee values are: 0.0: No restocking fee is charged to the buyer 10.0: 10 percent of the item price is charged to the buyer 15.0: 15 percent of the item price is charged to the buyer 20.0: Up to 20 percent of the item price is charged to the buyer"
@@ -2254,13 +2254,13 @@ components:
           description: "Important! This field is being deprecated on many marketplaces. Once deprecated, this field will be ignored on marketplaces where it is not supported and it will neither be read nor returned. This optional field contains the seller's detailed explanation for their return policy and is displayed in the Return Policy section of the View Item page. This field is valid in only the following marketplaces (the field is otherwise ignored): Germany (DE) Spain (ES) France (FR) Italy (IT) Where valid, sellers can use this field to add details about their return policies. eBay uses this text string as-is in the Return Policy section of the View Item page. Avoid HTML and avoid character entity references (such as &amp;amp;pound; or &amp;amp;#163;). To include special characters in the return policy description, use the literal UTF-8 or ISO-8559-1 character (e.g. &amp;#163;). Max length: 5000 (8000 for DE)"
           type: string
         returnMethod:
-          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnMethodEnum.html'>eBay API documentation</a>
+          description: Valid in the US marketplace only, this optional field indicates additional services (other than money-back) that sellers can offer buyers for remorse returns. As of version 1.2.0, the only accepted value for this field is REPLACEMENT. This field is valid in only the US marketplace, any supplied value is ignored in other marketplaces. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
           type: string
         returnPeriod:
           $ref: "#/components/schemas/TimeDuration"
           description: "Specifies the amount of time the buyer has to return an item. The return period begins when the item is marked &quot;delivered&quot; at the buyer's specified ship-to location. You must set the value to one that's accepted by the marketplace and category where the item is listed. Most categories support 30-day and 60-day return periods. For a definitive list of category return periods, call GeteBayDetails in the Trading API with DetailName set to ReturnPolicyDetails. In the response review the ReturnPolicyDetails.ReturnsWithin field to see the values supported in the different marketplace categories. Note: In version 1.2.0, the options for this field were reduced. See the Release Notes for details. Set this field using the TimeDuration complex type, where you set unit to DAY and value to either 30 or 60 (or other value, as appropriate). Note that this value cannot be modified if the listing has bids or sales, or if the listing ends within 12 hours. Required if returnsAccepted is set to true."
         returnShippingCostPayer:
-          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. Required if returnsAccepted is set to true. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>
+          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. Required if returnsAccepted is set to true. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
           type: string
         returnsAccepted:
           description: If set to true, the seller accepts returns. Call the getReturnPolicies in the Metadata API to see what categories require returns to be offered for listings in each category. Also, note that some European marketplaces (for example, UK, IE, and DE) require sellers to accept returns for fixed-price items and auctions listed with Buy It Now. For details, see Returns and the Law (UK). Note:Top-Rated sellers must accept item returns and the handlingTime should be set to zero days or one day for a listing to receive a Top-Rated Plus badge on the View Item or search result pages. For more information on eBay's Top-Rated seller program, see Becoming a Top Rated Seller and qualifying for Top Rated Plus benefits.
@@ -2300,7 +2300,7 @@ components:
       description: The applicable sales tax rate, as a percentage of the sale amount, for a given country and sales tax jurisdiction within that country.
       properties:
         countryCode:
-          description: The country code identifying the country to which this tax rate applies. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/CountryCodeEnum.html'>eBay API documentation</a>
+          description: The country code identifying the country to which this tax rate applies. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:CountryCodeEnum'>eBay API documentation</a>
           type: string
         salesTaxJurisdictionId:
           description: A unique ID that identifies the sales tax jurisdiction to which the tax rate applies (for example a state within the United States).
@@ -2379,7 +2379,7 @@ components:
           description: If set to true, no shipping is offered by this policy and the seller offers only local pickup of the item (normally from a non-business location). This option is most often used for customer-to-customer sales and if set, costType should be set to NOT_SPECIFIED.
           type: boolean
         marketplaceId:
-          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this fulfillment policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this fulfillment policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
@@ -2422,7 +2422,7 @@ components:
           description: "If set to true, payment is due upon receipt (eBay generates a receipt when the buyer agrees to purchase an item). The items will be available for other buyers until the payment is complete. This boolean must be set in the payment policy if the seller wants to create a listing that has an immediate payment requirement. Note: This container can be used for sellers who opt-in to the managed payments program, but some requirements do not apply.Default: False"
           type: boolean
         marketplaceId:
-          description: "The ID of the eBay marketplace to which this payment policy applies. If this value is not specified, the value defaults to the seller's eBay registration site. Note: A limited number of sellers, on a limited number of eBay marketplaces, are currently opted-in to the eBay managed payments program. To view the eBay marketplaces where managed payments are currently supported, see the managed payments landing page. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>"
+          description: "The ID of the eBay marketplace to which this payment policy applies. If this value is not specified, the value defaults to the seller's eBay registration site. Note: A limited number of sellers, on a limited number of eBay marketplaces, are currently opted-in to the eBay managed payments program. To view the eBay marketplaces where managed payments are currently supported, see the managed payments landing page. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>"
           type: string
         name:
           description: "A user-defined name for this payment policy. Names must be unique for policies assigned to the same marketplace. Note: eBay will create a new payment policy for sellers who opt-in to the managed payments program.Max length: 64"
@@ -2462,13 +2462,13 @@ components:
           $ref: "#/components/schemas/InternationalReturnOverrideType"
           description: This container, if populated, specifies the seller's policies for international returns (items that require postage via an international shipping service). Buy default, the policies for international returns are inherited from the domestic return policy. This container allows the seller to customize the return policy for international returns.
         marketplaceId:
-          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/MarketplaceIdEnum.html'>eBay API documentation</a>
+          description: The ID of the eBay marketplace to which this return policy applies. If this value is not specified, value defaults to the seller's eBay registration site. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:MarketplaceIdEnum'>eBay API documentation</a>
           type: string
         name:
           description: "A user-defined name for this return policy. Names must be unique for policies assigned to the same marketplace. Max length: 64"
           type: string
         refundMethod:
-          description: Important! This field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/RefundMethodEnum.html'>eBay API documentation</a>
+          description: Important! This field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value other than MONEY_BACK will be treated as MONEY_BACK (although for a period of time, eBay will store and return the legacy values to preserve backwards compatibility). Indicates the method the seller uses to compensate the buyer for returned items. The return method specified applies only to remorse returns. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:RefundMethodEnum'>eBay API documentation</a>
           type: string
         restockingFeePercentage:
           description: Important! This field has been deprecated as of version 1.2.0, released on May 31, 2018. Any value supplied in this field is ignored, it is neither read nor returned. Optionally set by the seller, the percentage charged if the seller charges buyers a a restocking fee when items are returned due to buyer remorse and/or a purchasing mistake. The total amount charged to the buyer is the cost of the item multiplied by the percentage indicated in this field.
@@ -2477,7 +2477,7 @@ components:
           description: "This field contains the seller's detailed explanation for their return policy and is displayed in the Return Policy section of the View Item page. This field is valid in only the following marketplaces (the field is otherwise ignored): Germany (DE) Spain (ES) France (FR) Italy (IT)"
           type: string
         returnMethod:
-          description: This field indicates the method in which the seller handles non-money back return requests for remorse returns. This field is valid in only the US marketplace and the only valid value is REPLACEMENT. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnMethodEnum.html'>eBay API documentation</a>
+          description: This field indicates the method in which the seller handles non-money back return requests for remorse returns. This field is valid in only the US marketplace and the only valid value is REPLACEMENT. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnMethodEnum'>eBay API documentation</a>
           type: string
         returnPeriod:
           $ref: "#/components/schemas/TimeDuration"
@@ -2486,7 +2486,7 @@ components:
           description: A unique eBay-assigned ID for a return policy. This ID is generated when the policy is created.
           type: string
         returnShippingCostPayer:
-          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ReturnShippingCostPayerEnum.html'>eBay API documentation</a>
+          description: This field indicates who is responsible for paying for the shipping charges for returned items. The field can be set to either BUYER or SELLER. Depending on the return policy and specifics of the return, either the buyer or the seller can be responsible for the return shipping costs. Note that the seller is always responsible for return shipping costs for SNAD-related issues. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ReturnShippingCostPayerEnum'>eBay API documentation</a>
           type: string
         returnsAccepted:
           description: If set to true, the seller accepts returns. If set to false, this field indicates that the seller does not accept returns.
@@ -2501,7 +2501,7 @@ components:
       description: This complex type defines a seller's shipping configuration for either a DOMESTIC or INTERNATIONAL shipping option. Shipping options configure the high-level settings for shipments, such as flat-rate or calculated shipping, and any rate tables the seller wants to associate with the policy. Each shippingOption element has a shippingServices container that defines the list of shipping carriers and services that are available for the parent shipping option (that is, for either DOMESTIC or INTERNATIONAL shipping). If a seller offers an international shipping option, they must also offer a domestic shipping option. Note that costType (FLAT_RATE or CALCULATED) is set in shippingOptions and that all associated shipping services must be able to support this cost type.
       properties:
         costType:
-          description: Defines whether the shipping cost is FLAT_RATE (the same rate for all buyers), CALCULATED (the shipping rate varies by the ship-to location and size and weight of the package, as defined by the item), or NOT_SPECIFIED (for use with local pickup). Required if the policy offers shipping options using a shippingOptions container. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ShippingCostTypeEnum.html'>eBay API documentation</a>
+          description: Defines whether the shipping cost is FLAT_RATE (the same rate for all buyers), CALCULATED (the shipping rate varies by the ship-to location and size and weight of the package, as defined by the item), or NOT_SPECIFIED (for use with local pickup). Required if the policy offers shipping options using a shippingOptions container. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingCostTypeEnum'>eBay API documentation</a>
           type: string
         insuranceFee:
           $ref: "#/components/schemas/Amount"
@@ -2510,7 +2510,7 @@ components:
           description: This field has been deprecated. Shipping insurance is offered only via a shipping carrier's shipping services and is no longer available via eBay shipping policies.
           type: boolean
         optionType:
-          description: Use this field to set the ShippingOption element to either DOMESTIC or INTERNATIONAL. Required if the policy offers shipping options using a shippingOptions container. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/ShippingOptionTypeEnum.html'>eBay API documentation</a>
+          description: Use this field to set the ShippingOption element to either DOMESTIC or INTERNATIONAL. Required if the policy offers shipping options using a shippingOptions container. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/api:ShippingOptionTypeEnum'>eBay API documentation</a>
           type: string
         packageHandlingCost:
           $ref: "#/components/schemas/Amount"
@@ -2566,7 +2566,7 @@ components:
       description: A complex type that specifies a period of time using a specified time-measurement unit.
       properties:
         unit:
-          description: A time-measurement unit that specifies a singular period of time. A span of time is defined when you apply the value specified in the value field to the value specified for unit. Time-measurement units can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/account/types/TimeDurationUnitEnum.html'>eBay API documentation</a>
+          description: A time-measurement unit that specifies a singular period of time. A span of time is defined when you apply the value specified in the value field to the value specified for unit. Time-measurement units can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/account/types/ba:TimeDurationUnitEnum'>eBay API documentation</a>
           type: string
         value:
           description: An integer that represents an amount of time, as measured by the time-measurement unit specified in the unit field.

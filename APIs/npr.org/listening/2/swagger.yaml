@@ -685,6 +685,9 @@ definitions:
       geofence:
         $ref: "#/definitions/Geofence"
         description: The geographic restrictions that should be applied by the client before playing this media
+      inFlow:
+        description: Indicates the likelihood of being within a flow, useful for stateful playback buttons
+        type: boolean
       label:
         description: The record label associated with the media
         type: string
