@@ -168,7 +168,7 @@ paths:
   /#X-Amz-Target=AWSStepFunctions.CreateStateMachine:
     post:
       operationId: CreateStateMachine
-      description: '<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>''s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, and <code>LoggingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>'
+      description: '<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href="https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>''s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, <code>LoggingConfiguration</code> and <code>TracingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>'
       responses:
         '200':
           description: Success
@@ -201,30 +201,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidLoggingConfiguration'
         '484':
+          description: InvalidTracingConfiguration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTracingConfiguration'
+        '485':
           description: StateMachineAlreadyExists
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineAlreadyExists'
-        '485':
+        '486':
           description: StateMachineDeleting
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineDeleting'
-        '486':
+        '487':
           description: StateMachineLimitExceeded
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineLimitExceeded'
-        '487':
+        '488':
           description: StateMachineTypeNotSupported
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineTypeNotSupported'
-        '488':
+        '489':
           description: TooManyTags
           content:
             application/json:
@@ -1245,18 +1251,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidLoggingConfiguration'
         '483':
+          description: InvalidTracingConfiguration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTracingConfiguration'
+        '484':
           description: MissingRequiredParameter
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MissingRequiredParameter'
-        '484':
+        '485':
           description: StateMachineDeleting
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StateMachineDeleting'
-        '485':
+        '486':
           description: StateMachineDoesNotExist
           content:
             application/json:
@@ -1413,9 +1425,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>'
+        tracingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TracingConfiguration'
+            - description: Selects whether AWS X-Ray tracing is enabled.
     InvalidArn: {}
     InvalidDefinition: {}
     InvalidLoggingConfiguration: {}
+    InvalidTracingConfiguration: {}
     StateMachineAlreadyExists: {}
     StateMachineDeleting: {}
     StateMachineLimitExceeded: {}
@@ -1520,6 +1537,10 @@ components:
             - description: '<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
         outputDetails:
           $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        traceHeader:
+          allOf:
+            - $ref: '#/components/schemas/TraceHeader'
+            - description: The AWS X-Ray trace header which was passed to the execution.
     DescribeExecutionInput:
       type: object
       required:
@@ -1571,6 +1592,10 @@ components:
             - description: The date the state machine is created.
         loggingConfiguration:
           $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TracingConfiguration'
+            - description: Selects whether AWS X-Ray tracing is enabled.
     DescribeStateMachineInput:
       type: object
       required:
@@ -1613,6 +1638,10 @@ components:
             - description: 'The date and time the state machine associated with an execution was updated. For a newly created state machine, this is the creation date.'
         loggingConfiguration:
           $ref: '#/components/schemas/LoggingConfiguration'
+        tracingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TracingConfiguration'
+            - description: Selects whether AWS X-Ray tracing is enabled.
     DescribeStateMachineForExecutionInput:
       type: object
       required:
@@ -1877,6 +1906,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
             - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>'
+        traceHeader:
+          allOf:
+            - $ref: '#/components/schemas/TraceHeader'
+            - description: Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
     ExecutionLimitExceeded: {}
     ExecutionAlreadyExists: {}
     InvalidExecutionInput: {}
@@ -1974,6 +2007,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoggingConfiguration'
             - description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
+        tracingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TracingConfiguration'
+            - description: Selects whether AWS X-Ray tracing is enabled.
     MissingRequiredParameter: {}
     SensitiveError:
       type: string
@@ -2054,8 +2091,8 @@ components:
         truncated:
           allOf:
             - $ref: '#/components/schemas/truncated'
-            - description: Indicates whether input or output was truncated in the response. Always <code>false</code>.
-      description: 'Contains details about the data from an execution''s events. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Logs.'
+            - description: Indicates whether input or output was truncated in the response. Always <code>false</code> for API calls.
+      description: Provides details about input or output in an execution history event.
     TimeoutInSeconds:
       type: integer
     ActivityScheduledEventDetails:
@@ -2127,8 +2164,8 @@ components:
         included:
           allOf:
             - $ref: '#/components/schemas/included'
-            - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Events.'
-      description: Provides details about execution input.
+            - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls. '
+      description: Provides details about execution input or output.
     CloudWatchLogsLogGroup:
       type: object
       properties:
@@ -2172,6 +2209,14 @@ components:
             - $ref: '#/components/schemas/LogDestinationList'
             - description: 'An array of objects that describes where your execution history events will be logged. Limited to size 1. Required, if your log level is not set to <code>OFF</code>.'
       description: The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.
+    TracingConfiguration:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Enabled'
+            - description: 'When set to <code>true</code>, AWS X-Ray tracing is enabled.'
+      description: 'Selects whether or not the state machine''s AWS X-Ray tracing is enabled. Default is <code>false</code> '
     ExecutionStatus:
       type: string
       enum:
@@ -2180,11 +2225,18 @@ components:
         - FAILED
         - TIMED_OUT
         - ABORTED
+    TraceHeader:
+      type: string
+      pattern: '\p{ASCII}*'
+      minLength: 0
+      maxLength: 256
     StateMachineStatus:
       type: string
       enum:
         - ACTIVE
         - DELETING
+    Enabled:
+      type: boolean
     EventId:
       type: integer
     ExecutionAbortedEventDetails:
