@@ -45,6 +45,7 @@ tags:
   - name: guideCategories
   - name: i18nLanguages
   - name: i18nRegions
+  - name: infocards
   - name: liveBroadcasts
   - name: liveChatBans
   - name: liveChatMessages
@@ -65,7 +66,6 @@ tags:
   - name: videoCategories
   - name: videos
   - name: watermarks
-  - name: youtube
 paths:
   /youtube/v3/abuseReports:
     parameters:
@@ -1625,7 +1625,7 @@ paths:
   /youtube/v3/infocards:
     get:
       description: Retrieves all infocards for a given video.
-      operationId: youtube.youtube.v3.infocards.list
+      operationId: youtube.infocards.list
       parameters:
         - description: The properties to return.
           explode: true
@@ -1668,7 +1668,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/youtubepartner
       tags:
-        - youtube
+        - infocards
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1683,7 +1683,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Updates infocards for a given video. Note: * If the card id is not provided, a new card will be created. * If the card id is provided, that card will be updated. * Existing cards will be discarded if they're not included in the request."
-      operationId: youtube.youtube.v3.infocards
+      operationId: youtube.infocards.update
       parameters:
         - description: The properties to update.
           explode: true
@@ -1731,7 +1731,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/youtubepartner
       tags:
-        - youtube
+        - infocards
   /youtube/v3/liveBroadcasts:
     delete:
       description: Delete a given broadcast.

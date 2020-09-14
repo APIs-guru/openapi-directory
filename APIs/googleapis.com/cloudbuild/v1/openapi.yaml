@@ -1146,7 +1146,7 @@ components:
         substitutions:
           additionalProperties:
             type: string
-          description: "Substitutions for Build resource. The keys must match the following regular expression: `^_[A-Z0-9_]+$`.The keys cannot conflict with the keys in bindings."
+          description: "Substitutions for Build resource. The keys must match the following regular expression: `^_[A-Z0-9_]+$`."
           type: object
         tags:
           description: Tags for annotation of a `BuildTrigger`

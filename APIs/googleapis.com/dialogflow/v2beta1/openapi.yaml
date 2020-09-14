@@ -35,7 +35,7 @@ paths:
       description: Deletes the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
       operationId: dialogflow.projects.locations.agent.sessions.entityTypes.delete
       parameters:
-        - description: 'Required. The name of the entity type to delete. Format: `projects//agent/sessions//entityTypes/` or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The name of the entity type to delete. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: name
           required: true
@@ -121,7 +121,7 @@ paths:
       description: Updates the specified session entity type. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
       operationId: dialogflow.projects.locations.agent.sessions.entityTypes.patch
       parameters:
-        - description: 'Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
+        - description: 'Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           in: path
           name: name
           required: true
@@ -311,7 +311,7 @@ paths:
       description: Deletes the specified agent.
       operationId: dialogflow.projects.locations.deleteAgent
       parameters:
-        - description: 'Required. The project that the agent to delete is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to delete is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -339,7 +339,7 @@ paths:
       description: Retrieves the specified agent.
       operationId: dialogflow.projects.locations.getAgent
       parameters:
-        - description: 'Required. The project that the agent to fetch is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to fetch is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -379,7 +379,7 @@ paths:
       description: Creates/updates the specified agent.
       operationId: dialogflow.projects.locations.setAgent
       parameters:
-        - description: 'Required. The project of this agent. Format: `projects/`.'
+        - description: 'Required. The project of this agent. Format: `projects/` or `projects//locations/`'
           in: path
           name: parent
           required: true
@@ -418,7 +418,7 @@ paths:
       description: Gets agent validation result. Agent validation is performed during training time and is updated automatically when training is completed.
       operationId: dialogflow.projects.locations.agent.getValidationResult
       parameters:
-        - description: 'Required. The project that the agent is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -476,7 +476,7 @@ paths:
       description: 'Exports the specified agent to a ZIP file. Operation '
       operationId: dialogflow.projects.locations.agent.export
       parameters:
-        - description: 'Required. The project that the agent to export is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to export is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -522,7 +522,7 @@ paths:
       description: 'Imports the specified agent from a ZIP file. Uploads new intents and entity types without deleting the existing ones. Intents and entity types with the same name are replaced with the new versions from ImportAgentRequest. After the import, the imported draft agent will be trained automatically (unless disabled in agent settings). However, once the import is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when importing is complete. It only tracks when the draft agent is updated not when it is done training.'
       operationId: dialogflow.projects.locations.agent.import
       parameters:
-        - description: 'Required. The project that the agent to import is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to import is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -568,7 +568,7 @@ paths:
       description: 'Restores the specified agent from a ZIP file. Replaces the current agent version with a new one. All the intents and entity types in the older version are deleted. After the restore, the restored draft agent will be trained automatically (unless disabled in agent settings). However, once the restore is done, training may not be completed yet. Please call TrainAgent and wait for the operation it returns in order to train explicitly. Operation An operation which tracks when restoring is complete. It only tracks when the draft agent is updated not when it is done training.'
       operationId: dialogflow.projects.locations.agent.restore
       parameters:
-        - description: 'Required. The project that the agent to restore is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to restore is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -602,7 +602,7 @@ paths:
       description: 'Returns the list of agents. Since there is at most one conversational agent per project, this method is useful primarily for listing all agents across projects the caller has access to. One can achieve that with a wildcard project collection id "-". Refer to [List Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).'
       operationId: dialogflow.projects.locations.agent.search
       parameters:
-        - description: 'Required. The project to list agents from. Format: `projects/`.'
+        - description: 'Required. The project to list agents from. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -665,7 +665,7 @@ paths:
       description: 'Trains the specified agent. Operation '
       operationId: dialogflow.projects.locations.agent.train
       parameters:
-        - description: 'Required. The project that the agent to train is associated with. Format: `projects/`.'
+        - description: 'Required. The project that the agent to train is associated with. Format: `projects/` or `projects//locations/`.'
           in: path
           name: parent
           required: true
@@ -699,7 +699,7 @@ paths:
       description: Deletes all active contexts in the specified session.
       operationId: dialogflow.projects.locations.agent.sessions.deleteContexts
       parameters:
-        - description: 'Required. The name of the session to delete all contexts from. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The name of the session to delete all contexts from. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: parent
           required: true
@@ -727,7 +727,7 @@ paths:
       description: Returns the list of all contexts in the specified session.
       operationId: dialogflow.projects.locations.agent.sessions.contexts.list
       parameters:
-        - description: 'Required. The session to list all contexts from. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The session to list all contexts from. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: parent
           required: true
@@ -777,7 +777,7 @@ paths:
       description: 'Creates a context. If the specified context already exists, overrides the context.'
       operationId: dialogflow.projects.locations.agent.sessions.contexts.create
       parameters:
-        - description: 'Required. The session to create a context for. Format: `projects//agent/sessions/` or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The session to create a context for. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: parent
           required: true
@@ -907,7 +907,7 @@ paths:
       description: 'Creates multiple new entities in the specified entity type. Operation '
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchCreate
       parameters:
-        - description: 'Required. The name of the entity type to create entities in. Format: `projects//agent/entityTypes/`.'
+        - description: 'Required. The name of the entity type to create entities in. Supported formats: - `projects//agent/entityTypes/` - `projects//locations//agent/entityTypes/`'
           in: path
           name: parent
           required: true
@@ -953,7 +953,7 @@ paths:
       description: 'Deletes entities in the specified entity type. Operation '
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchDelete
       parameters:
-        - description: 'Required. The name of the entity type to delete entries for. Format: `projects//agent/entityTypes/`.'
+        - description: 'Required. The name of the entity type to delete entries for. Supported formats: - `projects//agent/entityTypes/` - `projects//locations//agent/entityTypes/`'
           in: path
           name: parent
           required: true
@@ -999,7 +999,7 @@ paths:
       description: 'Updates or creates multiple entities in the specified entity type. This method does not affect entities in the entity type that aren''t explicitly specified in the request. Operation '
       operationId: dialogflow.projects.locations.agent.entityTypes.entities.batchUpdate
       parameters:
-        - description: 'Required. The name of the entity type to update or create entities in. Format: `projects//agent/entityTypes/`.'
+        - description: 'Required. The name of the entity type to update or create entities in. Supported formats: - `projects//agent/entityTypes/` - `projects//locations//agent/entityTypes/`'
           in: path
           name: parent
           required: true
@@ -1033,7 +1033,7 @@ paths:
       description: Returns the list of all session entity types in the specified session. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
       operationId: dialogflow.projects.locations.agent.sessions.entityTypes.list
       parameters:
-        - description: 'Required. The session to list all session entity types from. Format: `projects//agent/sessions/` or `projects//agent/environments//users// sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The session to list all session entity types from. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: parent
           required: true
@@ -1083,7 +1083,7 @@ paths:
       description: 'Creates a session entity type. If the specified session entity type already exists, overrides the session entity type. This method doesn''t work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.'
       operationId: dialogflow.projects.locations.agent.sessions.entityTypes.create
       parameters:
-        - description: 'Required. The session to create a session entity type for. Format: `projects//agent/sessions/` or `projects//agent/environments//users// sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
+        - description: 'Required. The session to create a session entity type for. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user.'
           in: path
           name: parent
           required: true
@@ -1134,7 +1134,7 @@ paths:
       description: 'Deletes entity types in the specified agent. Operation '
       operationId: dialogflow.projects.locations.agent.entityTypes.batchDelete
       parameters:
-        - description: 'Required. The name of the agent to delete all entities types for. Format: `projects//agent`.'
+        - description: 'Required. The name of the agent to delete all entities types for. Supported formats: - `projects//agent`, - `projects//locations//agent`.'
           in: path
           name: parent
           required: true
@@ -1180,7 +1180,7 @@ paths:
       description: 'Updates/Creates multiple entity types in the specified agent. Operation '
       operationId: dialogflow.projects.locations.agent.entityTypes.batchUpdate
       parameters:
-        - description: 'Required. The name of the agent to update or create entity types in. Format: `projects//agent`.'
+        - description: 'Required. The name of the agent to update or create entity types in. Supported formats: - `projects//agent` - `projects//locations//agent`'
           in: path
           name: parent
           required: true
@@ -1214,7 +1214,7 @@ paths:
       description: Returns the list of all non-draft environments of the specified agent.
       operationId: dialogflow.projects.locations.agent.environments.list
       parameters:
-        - description: 'Required. The agent to list all environments from. Format: - `projects//agent` - `projects//locations//agent'
+        - description: 'Required. The agent to list all environments from. Format: - `projects//agent` - `projects//locations//agent`'
           in: path
           name: parent
           required: true
@@ -1328,7 +1328,7 @@ paths:
       description: Creates an intent in the specified agent.
       operationId: dialogflow.projects.locations.agent.intents.create
       parameters:
-        - description: 'Required. The agent to create a intent for. Format: `projects//agent`.'
+        - description: 'Required. The agent to create a intent for. Supported formats: - `projects//agent` - `projects//locations//agent`'
           in: path
           name: parent
           required: true
@@ -1387,7 +1387,7 @@ paths:
       description: 'Deletes intents in the specified agent. Operation '
       operationId: dialogflow.projects.locations.agent.intents.batchDelete
       parameters:
-        - description: 'Required. The name of the agent to delete all entities types for. Format: `projects//agent`.'
+        - description: 'Required. The name of the agent to delete all entities types for. Supported formats: - `projects//agent` - `projects//locations//agent`'
           in: path
           name: parent
           required: true
@@ -1433,7 +1433,7 @@ paths:
       description: 'Updates/Creates multiple intents in the specified agent. Operation '
       operationId: dialogflow.projects.locations.agent.intents.batchUpdate
       parameters:
-        - description: 'Required. The name of the agent to update or create intents in. Format: `projects//agent`.'
+        - description: 'Required. The name of the agent to update or create intents in. Supported formats: - `projects//agent` - `projects//locations//agent`'
           in: path
           name: parent
           required: true
@@ -1563,7 +1563,7 @@ paths:
       description: 'Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause contexts and session entity types to be updated, which in turn might affect results of future queries.'
       operationId: dialogflow.projects.locations.agent.sessions.detectIntent
       parameters:
-        - description: 'Required. The name of the session this query is sent to. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we are using "-". It''s up to the API caller to choose an appropriate `Session ID` and `User Id`. They can be a random number or some type of user and session identifiers (preferably hashed). The length of the `Session ID` and `User ID` must not exceed 36 characters. For more information, see the [API interactions guide](https://cloud.google.com/dialogflow/docs/api-overview).'
+        - description: 'Required. The name of the session this query is sent to. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`, If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we are using "-". It''s up to the API caller to choose an appropriate `Session ID` and `User Id`. They can be a random number or some type of user and session identifiers (preferably hashed). The length of the `Session ID` and `User ID` must not exceed 36 characters. For more information, see the [API interactions guide](https://cloud.google.com/dialogflow/docs/api-overview).'
           in: path
           name: session
           required: true
@@ -1816,6 +1816,10 @@ components:
     GoogleCloudDialogflowCxV3beta1ResponseMessageOutputAudioText:
       description: 'A text or ssml response that is preferentially used for TTS output audio synthesis, as described in the comment on the ResponseMessage message.'
       properties:
+        allowPlaybackInterruption:
+          description: Output only. Whether the playback of this message can be interrupted by the end user's speech and the client can then starts the next Dialogflow request.
+          readOnly: true
+          type: boolean
         ssml:
           description: 'The SSML text to be synthesized. For more information, see [SSML](/speech/text-to-speech/docs/ssml).'
           type: string
@@ -2738,7 +2742,7 @@ components:
         payload:
           additionalProperties:
             description: Properties of the object.
-          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Standard Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Enterprise Edition agents.'
+          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Trial Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Essentials Edition agents.'
           type: object
         source:
           description: 'The source of this request, e.g., `google`, `facebook`, `slack`. It is set by Dialogflow-owned servers.'
@@ -2933,7 +2937,7 @@ components:
             - MATCH_MODE_ML_ONLY
           type: string
         parent:
-          description: 'Required. The project of this agent. Format: `projects/`.'
+          description: 'Required. The project of this agent. Format: `projects/` or `projects//locations/`'
           type: string
         supportedLanguageCodes:
           description: Optional. The list of all languages supported by this agent (except for the `default_language_code`).
@@ -3125,7 +3129,7 @@ components:
           format: int32
           type: integer
         name:
-          description: 'Required. The unique identifier of the context. Format: `projects//agent/sessions//contexts/`, or `projects//agent/environments//users//sessions//contexts/`. The `Context ID` is always converted to lowercase, may only contain characters in a-zA-Z0-9_-% and may be at most 250 bytes long. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. The following context names are reserved for internal use by Dialogflow. You should not use these contexts or create contexts with these names: * `__system_counters__` * `*_id_dialog_context` * `*_dialog_params_size`'
+          description: 'Required. The unique identifier of the context. Supported formats: - `projects//agent/sessions//contexts/`, - `projects//locations//agent/sessions//contexts/`, - `projects//agent/environments//users//sessions//contexts/`, - `projects//locations//agent/environments//users//sessions//contexts/`, The `Context ID` is always converted to lowercase, may only contain characters in a-zA-Z0-9_-% and may be at most 250 bytes long. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. The following context names are reserved for internal use by Dialogflow. You should not use these contexts or create contexts with these names: * `__system_counters__` * `*_id_dialog_context` * `*_dialog_params_size`'
           type: string
         parameters:
           additionalProperties:
@@ -3258,7 +3262,7 @@ components:
             - KIND_REGEXP
           type: string
         name:
-          description: 'The unique identifier of the entity type. Required for EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes methods. Format: `projects//agent/entityTypes/`.'
+          description: 'The unique identifier of the entity type. Required for EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes methods. Supported formats: - `projects//agent/entityTypes/` - `projects//locations//agent/entityTypes/`'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1EntityTypeBatch:
@@ -3286,13 +3290,13 @@ components:
       description: 'You can create multiple versions of your agent and publish them to separate environments. When you edit an agent, you are editing the draft agent. At any point, you can save the draft agent as an agent version, which is an immutable snapshot of your agent. When you save the draft agent, it is published to the default environment. When you create agent versions, you can publish them to custom environments. You can create a variety of custom environments for: - testing - development - production - etc. For more information, see the [versions and environments guide](https://cloud.google.com/dialogflow/docs/agents-versions).'
       properties:
         agentVersion:
-          description: 'Optional. The agent version loaded into this environment. Format: `projects//agent/versions/`.'
+          description: 'Optional. The agent version loaded into this environment. Supported formats: - `projects//agent/versions/` - `projects//locations//agent/versions/`'
           type: string
         description:
           description: 'Optional. The developer-provided description for this environment. The maximum length is 500 characters. If exceeded, the request is rejected.'
           type: string
         name:
-          description: 'Output only. The unique identifier of this agent environment. Format: - `projects//agent/environments/` - `projects//locations//agent/environments/`'
+          description: 'Output only. The unique identifier of this agent environment. Supported formats: - `projects//agent/environments/` - `projects//locations//agent/environments/`'
           readOnly: true
           type: string
         state:
@@ -3361,7 +3365,7 @@ components:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1FulfillmentGenericWebService'
           description: Configuration for a generic web service.
         name:
-          description: 'Required. The unique identifier of the fulfillment. Format: `projects//agent/fulfillment`.'
+          description: 'Required. The unique identifier of the fulfillment. Supported formats: - `projects//agent/fulfillment` - `projects//locations//agent/fulfillment`'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1FulfillmentFeature:
@@ -3504,7 +3508,7 @@ components:
           readOnly: true
           type: array
         inputContextNames:
-          description: 'Optional. The list of context names required for this intent to be triggered. Format: `projects//agent/sessions/-/contexts/`.'
+          description: 'Optional. The list of context names required for this intent to be triggered. Formats: - `projects//agent/sessions/-/contexts/` - `projects//locations//agent/sessions/-/contexts/`'
           items:
             type: string
           type: array
@@ -3523,7 +3527,7 @@ components:
           description: 'Optional. Indicates whether Machine Learning is enabled for the intent. Note: If `ml_enabled` setting is set to false, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off. DEPRECATED! Please use `ml_disabled` field instead. NOTE: If both `ml_enabled` and `ml_disabled` are either not set or false, then the default value is determined as follows: - Before April 15th, 2018 the default is: ml_enabled = false / ml_disabled = true. - After April 15th, 2018 the default is: ml_enabled = true / ml_disabled = false.'
           type: boolean
         name:
-          description: 'Optional. The unique identifier of this intent. Required for Intents.UpdateIntent and Intents.BatchUpdateIntents methods. Format: `projects//agent/intents/`.'
+          description: 'Optional. The unique identifier of this intent. Required for Intents.UpdateIntent and Intents.BatchUpdateIntents methods. Supported formats: - `projects//agent/intents/` - `projects//locations//agent/intents/`'
           type: string
         outputContexts:
           description: 'Optional. The collection of contexts that are activated when the intent is matched. Context messages in this collection should not set the parameters field. Setting the `lifespan_count` to 0 will reset the context when the intent is matched. Format: `projects//agent/sessions/-/contexts/`.'
@@ -4414,7 +4418,7 @@ components:
         payload:
           additionalProperties:
             description: Properties of the object.
-          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Standard Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Enterprise Edition agents.'
+          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Trial Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Essentials Edition agents.'
           type: object
         source:
           description: 'The source of this request, e.g., `google`, `facebook`, `slack`. It is set by Dialogflow-owned servers.'
@@ -4481,7 +4485,7 @@ components:
           type: boolean
         sentimentAnalysisRequestConfig:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1SentimentAnalysisRequestConfig'
-          description: 'Configures the type of sentiment analysis to perform. If not provided, sentiment analysis is not performed. Note: Sentiment Analysis is only currently available for Enterprise Edition agents.'
+          description: 'Configures the type of sentiment analysis to perform. If not provided, sentiment analysis is not performed. Note: Sentiment Analysis is only currently available for Essentials Edition agents.'
         sessionEntityTypes:
           description: Additional session entity types to replace or extend developer entity types with. The entity synonyms apply to all languages and persist for the session of this query.
           items:
@@ -4637,7 +4641,7 @@ components:
             - ENTITY_OVERRIDE_MODE_SUPPLEMENT
           type: string
         name:
-          description: 'Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
+          description: 'Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SpeechContext:
@@ -4660,7 +4664,7 @@ components:
           description: Optional. The unique identifier (`environment name` in dialogflow console) of this sub-agent environment. Assumes draft environment if `environment` is not set.
           type: string
         project:
-          description: 'Required. The project of this agent. Format: `projects/`.'
+          description: 'Required. The project of this agent. Format: `projects/` or `projects//locations/`.'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SynthesizeSpeechConfig:
@@ -4764,7 +4768,7 @@ components:
           description: 'The unique identifier of the response. Contains the same value as `[Streaming]DetectIntentResponse.response_id`.'
           type: string
         session:
-          description: 'The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`.'
+          description: 'The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`,'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1WebhookResponse:

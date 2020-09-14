@@ -369,6 +369,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: healthcare.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/operations":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
@@ -2103,6 +2155,18 @@ components:
           description: Token to retrieve the next page of results or empty if there are no more results in the list.
           type: string
       type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
     ListMessagesResponse:
       description: Lists the messages in the specified HL7v2 store.
       properties:
@@ -2126,6 +2190,29 @@ components:
           items:
             $ref: "#/components/schemas/Operation"
           type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
       type: object
     Message:
       description: A complete HL7v2 message. See [Introduction to HL7 Standards] (https://www.hl7.org/implement/standards/index.cfm?ref=common) for details on the standard.

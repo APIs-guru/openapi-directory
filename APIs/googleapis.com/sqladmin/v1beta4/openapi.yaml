@@ -1677,7 +1677,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Start External master migration.
+      description: Start External primary instance migration.
       operationId: sql.projects.instances.startExternalSync
       parameters:
         - description: ID of the project that contains the instance.
@@ -2058,7 +2058,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Verify External master external sync settings.
+      description: Verify External primary instance external sync settings.
       operationId: sql.projects.instances.verifyExternalSyncSettings
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -2547,7 +2547,7 @@ components:
           type: string
       type: object
     DatabaseInstance:
-      description: "A Cloud SQL instance resource. Next field: 35"
+      description: "A Cloud SQL instance resource. Next field: 36"
       properties:
         backendType:
           description: " *SECOND_GEN*: Cloud SQL database instance. *EXTERNAL*: A database server that is not managed by Google. This property is read-only; use the *tier* property in the *settings* object to determine the database type."
@@ -2595,7 +2595,7 @@ components:
           description: The name and status of the failover replica. This property is applicable only to Second Generation instances.
           properties:
             available:
-              description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The master can only failover to the failover replica when the status is true.
+              description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only failover to the failover replica when the status is true.
               type: boolean
             name:
               description: The name of the failover replica. If specified at instance creation, a failover replica is created for the instance. The name doesn't include the project ID. This property is applicable only to Second Generation instances.
@@ -2605,7 +2605,7 @@ components:
           description: The Compute Engine zone that the instance is currently serving from. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary zone.
           type: string
         instanceType:
-          description: "The instance type. This can be one of the following. *CLOUD_SQL_INSTANCE*: A Cloud SQL instance that is not replicating from a master. *ON_PREMISES_INSTANCE*: An instance running on the customer's premises. *READ_REPLICA_INSTANCE*: A Cloud SQL instance configured as a read-replica."
+          description: "The instance type. This can be one of the following. *CLOUD_SQL_INSTANCE*: A Cloud SQL instance that is not replicating from a primary instance. *ON_PREMISES_INSTANCE*: An instance running on the customer's premises. *READ_REPLICA_INSTANCE*: A Cloud SQL instance configured as a read-replica."
           enum:
             - SQL_INSTANCE_TYPE_UNSPECIFIED
             - CLOUD_SQL_INSTANCE
@@ -2624,7 +2624,7 @@ components:
           description: This is always *sql#instance*.
           type: string
         masterInstanceName:
-          description: The name of the instance which will act as master in the replication setup.
+          description: The name of the instance which will act as primary in the replication setup.
           type: string
         maxDiskSize:
           description: The maximum disk size of the instance in bytes.
@@ -2704,29 +2704,29 @@ components:
           type: string
       type: object
     DemoteMasterConfiguration:
-      description: Read-replica configuration for connecting to the on-premises master.
+      description: Read-replica configuration for connecting to the on-premises primary instance.
       properties:
         kind:
           description: This is always *sql#demoteMasterConfiguration*.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterMySqlReplicaConfiguration"
-          description: MySQL specific configuration when replicating from a MySQL on-premises master. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
+          description: MySQL specific configuration when replicating from a MySQL on-premises primary instance. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
       type: object
     DemoteMasterContext:
-      description: Database instance demote master context.
+      description: Database instance demote primary instance context.
       properties:
         kind:
           description: This is always *sql#demoteMasterContext*.
           type: string
         masterInstanceName:
-          description: The name of the instance which will act as on-premises master in the replication setup.
+          description: The name of the instance which will act as on-premises primary instance in the replication setup.
           type: string
         replicaConfiguration:
           $ref: "#/components/schemas/DemoteMasterConfiguration"
-          description: Configuration specific to read-replicas replicating from the on-premises master.
+          description: Configuration specific to read-replicas replicating from the on-premises primary instance.
         verifyGtidConsistency:
-          description: "Verify GTID consistency for demote operation. Default value: *True*. Second Generation instances only. Setting this flag to false enables you to bypass GTID consistency check between on-premises master and Cloud SQL instance during the demotion operation but also exposes you to the risk of future replication failures. Change the value only if you know the reason for the GTID divergence and are confident that doing so will not cause any replication issues."
+          description: "Verify GTID consistency for demote operation. Default value: *True*. Second Generation instances only. Setting this flag to false enables you to bypass GTID consistency check between on-premises primary instance and Cloud SQL instance during the demotion operation but also exposes you to the risk of future replication failures. Change the value only if you know the reason for the GTID divergence and are confident that doing so will not cause any replication issues."
           type: boolean
       type: object
     DemoteMasterMySqlReplicaConfiguration:
@@ -2974,7 +2974,7 @@ components:
           description: Contains details about the clone operation.
       type: object
     InstancesDemoteMasterRequest:
-      description: Database demote master request.
+      description: Database demote primary instance request.
       properties:
         demoteMasterContext:
           $ref: "#/components/schemas/DemoteMasterContext"
@@ -3107,6 +3107,19 @@ components:
           description: "The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.)."
           type: string
       type: object
+    MaintenanceDenyPeriod:
+      description: Maintenance Deny Periods. This specifies a date range during when all CSA rollout will be denied.
+      properties:
+        endDate:
+          description: '"maintenance deny period" end date. If the year of the end date is empty, the year of the start date also must be empty. In this case, it means the no maintenance interval recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
+          type: string
+        startDate:
+          description: '"maintenance deny period" start date. If the year of the start date is empty, the year of the end date also must be empty. In this case, it means the no maintenance interval recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
+          type: string
+        time:
+          description: 'Time in UTC when the "no maintenance interval" starts on start_date and ends on end_date. The time is in format: HH:mm:SS, i.e., 00:00:00'
+          type: string
+      type: object
     MaintenanceWindow:
       description: Maintenance window. This specifies when a Cloud SQL instance is restarted for system maintenance purposes.
       properties:
@@ -3165,7 +3178,7 @@ components:
           description: The username for the replication connection.
           type: string
         verifyServerCertificate:
-          description: Whether or not to check the master's Common Name value in the certificate that it sends during the SSL handshake.
+          description: Whether or not to check the primary instance's Common Name value in the certificate that it sends during the SSL handshake.
           type: boolean
       type: object
     OnPremisesConfiguration:
@@ -3329,17 +3342,17 @@ components:
           type: string
       type: object
     ReplicaConfiguration:
-      description: Read-replica configuration for connecting to the master.
+      description: Read-replica configuration for connecting to the primary instance.
       properties:
         failoverTarget:
-          description: Specifies if the replica is the failover target. If the field is set to *true* the replica will be designated as a failover replica. In case the master instance fails, the replica instance will be promoted as the new master instance. Only one replica can be specified as failover target, and the replica has to be in different zone with the master instance.
+          description: Specifies if the replica is the failover target. If the field is set to *true* the replica will be designated as a failover replica. In case the primary instance fails, the replica instance will be promoted as the new primary instance. Only one replica can be specified as failover target, and the replica has to be in different zone with the primary instance.
           type: boolean
         kind:
           description: This is always *sql#replicaConfiguration*.
           type: string
         mysqlReplicaConfiguration:
           $ref: "#/components/schemas/MySqlReplicaConfiguration"
-          description: MySQL specific configuration when replicating from a MySQL on-premises master. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
+          description: MySQL specific configuration when replicating from a MySQL on-premises primary instance. Replication configuration information such as the username, password, certificates, and keys are not stored in the instance metadata. The configuration information is used only to set up the replication connection and is stored by MySQL in a file named *master.info* in the data directory.
       type: object
     Reschedule:
       properties:
@@ -3444,6 +3457,11 @@ components:
         locationPreference:
           $ref: "#/components/schemas/LocationPreference"
           description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or Compute Engine zone for better performance. App Engine co-location was only applicable to First Generation instances.
+        maintenanceDenyPeriods:
+          description: Maintenance deny periods
+          items:
+            $ref: "#/components/schemas/MaintenanceDenyPeriod"
+          type: array
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
           description: The maintenance window for this instance. This specifies when the instance can be restarted for maintenance purposes.
@@ -3482,7 +3500,7 @@ components:
           type: object
       type: object
     SqlExternalSyncSettingError:
-      description: External master migration setting error.
+      description: External primary instance migration setting error.
       properties:
         detail:
           description: Additional information about the error encountered.

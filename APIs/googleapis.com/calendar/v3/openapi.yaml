@@ -2762,25 +2762,25 @@ components:
               type: object
           type: object
         gadget:
-          description: A gadget that extends this event.
+          description: A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
           properties:
             display:
               description: >-
-                The gadget's display mode. Optional. Possible values are:  
+                The gadget's display mode. Deprecated. Possible values are:  
 
                 - "icon" - The gadget displays next to the event's title in the calendar view. 
 
                 - "chip" - The gadget displays when the event is clicked.
               type: string
             height:
-              description: The gadget's height in pixels. The height must be an integer greater than 0. Optional.
+              description: The gadget's height in pixels. The height must be an integer greater than 0. Optional. Deprecated.
               format: int32
               type: integer
             iconLink:
-              description: The gadget's icon URL. The URL scheme must be HTTPS.
+              description: The gadget's icon URL. The URL scheme must be HTTPS. Deprecated.
               type: string
             link:
-              description: The gadget's URL. The URL scheme must be HTTPS.
+              description: The gadget's URL. The URL scheme must be HTTPS. Deprecated.
               type: string
             preferences:
               additionalProperties:
@@ -2789,13 +2789,13 @@ components:
               description: Preferences.
               type: object
             title:
-              description: The gadget's title.
+              description: The gadget's title. Deprecated.
               type: string
             type:
-              description: The gadget's type.
+              description: The gadget's type. Deprecated.
               type: string
             width:
-              description: The gadget's width in pixels. The width must be an integer greater than 0. Optional.
+              description: The gadget's width in pixels. The width must be an integer greater than 0. Optional. Deprecated.
               format: int32
               type: integer
           type: object

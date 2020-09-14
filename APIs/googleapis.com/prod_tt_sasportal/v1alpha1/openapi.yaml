@@ -34,6 +34,7 @@ externalDocs:
   url: https://developers.google.com/spectrum-access-system/
 tags:
   - name: customers
+  - name: deployments
   - name: installer
   - name: nodes
   - name: policies
@@ -1159,6 +1160,13 @@ components:
           items:
             $ref: "#/components/schemas/SasPortalNode"
           type: array
+      type: object
+    SasPortalMoveDeploymentRequest:
+      description: Request for MoveDeployment method.
+      properties:
+        destination:
+          description: Required. The name of the new parent resource Node or Customer to reparent the deployment under.
+          type: string
       type: object
     SasPortalMoveDeviceRequest:
       description: Request for MoveDevice method.

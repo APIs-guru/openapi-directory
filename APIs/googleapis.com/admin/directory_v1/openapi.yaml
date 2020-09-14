@@ -49,6 +49,7 @@ tags:
   - name: roles
   - name: schemas
   - name: tokens
+  - name: twoStepVerification
   - name: users
   - name: verificationCodes
 paths:
@@ -3434,6 +3435,11 @@ paths:
       description: Watch for changes in users list
       operationId: directory.users.watch
       parameters:
+        - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
+          in: query
+          name: customFieldMask
+          schema:
+            type: string
         - description: Immutable ID of the G Suite account. In case of multi-domain, to fetch all users for a customer, fill this field instead of domain.
           in: query
           name: customer
@@ -3456,6 +3462,65 @@ paths:
               - undelete
               - update
             type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          schema:
+            maximum: 500
+            minimum: 1
+            type: integer
+        - description: Column to use for sorting results
+          in: query
+          name: orderBy
+          schema:
+            enum:
+              - orderByUnspecified
+              - email
+              - familyName
+              - givenName
+            type: string
+        - description: Token to specify next page in the list
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: What subset of fields to fetch for this user.
+          in: query
+          name: projection
+          schema:
+            enum:
+              - projectionUnspecified
+              - basic
+              - custom
+              - full
+            type: string
+        - description: 'Query string search. Should be of the form "". Complete documentation is at https: //developers.google.com/admin-sdk/directory/v1/guides/search-users'
+          in: query
+          name: query
+          schema:
+            type: string
+        - description: "If set to true, retrieves the list of deleted users. (Default: false)"
+          in: query
+          name: showDeleted
+          schema:
+            type: string
+        - description: Whether to return results in ascending or descending order.
+          in: query
+          name: sortOrder
+          schema:
+            enum:
+              - sortOrderUnspecified
+              - ASCENDING
+              - DESCENDING
+            type: string
+        - description: Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
+          in: query
+          name: viewType
+          schema:
+            enum:
+              - admin_view
+              - domain_public
+            type: string
       requestBody:
         content:
           application/json:
@@ -3477,6 +3542,10 @@ paths:
             - https://www.googleapis.com/auth/admin.directory.user.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/admin.directory.user.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - users
   "/admin/directory/v1/users/{userKey}":
@@ -4073,6 +4142,39 @@ paths:
             - https://www.googleapis.com/auth/admin.directory.user
       tags:
         - users
+  "/admin/directory/v1/users/{userKey}/signOut":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sign a user out of all web and device sessions and reset their sign-in cookies. User will have to sign in by authenticating again.
+      operationId: directory.users.signOut
+      parameters:
+        - description: Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+      tags:
+        - users
   "/admin/directory/v1/users/{userKey}/tokens":
     get:
       description: Returns the set of tokens specified user has issued to 3rd party applications.
@@ -4179,6 +4281,39 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/admin/directory/v1/users/{userKey}/twoStepVerification/turnOff":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Turn off 2-Step Verification for user.
+      operationId: directory.twoStepVerification.turnOff
+      parameters:
+        - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
+          in: path
+          name: userKey
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+          Oauth2c:
+            - https://www.googleapis.com/auth/admin.directory.user.security
+      tags:
+        - twoStepVerification
   "/admin/directory/v1/users/{userKey}/undelete":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4361,6 +4496,10 @@ paths:
             - https://www.googleapis.com/auth/admin.directory.user.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/admin.directory.user.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - channels
 components:
@@ -5994,6 +6133,7 @@ components:
           type: string
       type: object
     UserCustomProperties:
+      additionalProperties: {}
       description: JSON template for a set of custom properties (i.e. all fields in a particular schema)
       type: object
     UserEmail:

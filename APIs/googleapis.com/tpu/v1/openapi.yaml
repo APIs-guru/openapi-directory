@@ -832,6 +832,12 @@ components:
             - HIDDEN
             - UNHIDING
           type: string
+        symptoms:
+          description: Output only. The Symptoms that have occurred to the TPU Node.
+          items:
+            $ref: "#/components/schemas/Symptom"
+          readOnly: true
+          type: array
         tensorflowVersion:
           description: The version of Tensorflow running in the Node. Required.
           type: string
@@ -931,6 +937,30 @@ components:
     StopNodeRequest:
       description: Request for StopNode.
       properties: {}
+      type: object
+    Symptom:
+      description: A Symptom instance.
+      properties:
+        createTime:
+          description: Timestamp when the Symptom is created.
+          format: google-datetime
+          type: string
+        details:
+          description: Detailed information of the current Symptom.
+          type: string
+        symptomType:
+          description: Type of the Symptom.
+          enum:
+            - SYMPTOM_TYPE_UNSPECIFIED
+            - LOW_MEMORY
+            - OUT_OF_MEMORY
+            - EXECUTE_TIMED_OUT
+            - MESH_BUILD_FAIL
+            - HBM_OUT_OF_MEMORY
+          type: string
+        workerId:
+          description: A string used to uniquely distinguish a worker within a TPU node.
+          type: string
       type: object
     TensorFlowVersion:
       description: A tensorflow version that a Node can be configured with.

@@ -3401,6 +3401,9 @@ components:
           description: "[Output-only] Slot-milliseconds for the job."
           format: int64
           type: string
+        transactionInfoTemplate:
+          $ref: "#/components/schemas/TransactionInfo"
+          description: "[Output-only] [Alpha] Information of the multi-statement transaction if this job is part of one."
       type: object
     JobStatistics2:
       properties:
@@ -4906,6 +4909,12 @@ components:
         trainingOptions:
           $ref: "#/components/schemas/TrainingOptions"
           description: Options that were used for this training run, includes user specified and default options that were used.
+      type: object
+    TransactionInfo:
+      properties:
+        transactionId:
+          description: "[Output-only] // [Alpha] Id of the transaction."
+          type: string
       type: object
     UserDefinedFunctionResource:
       description: "This is used for defining User Defined Function (UDF) resources only when using legacy SQL. Users of Standard SQL should leverage either DDL (e.g. CREATE [TEMPORARY] FUNCTION ... ) or the Routines API to define UDF resources. For additional information on migrating, see: https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions"

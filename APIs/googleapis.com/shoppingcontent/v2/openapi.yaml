@@ -4202,7 +4202,7 @@ components:
     AdsShoppingContentapiProtoFrontendV2AccountAddress:
       properties:
         country:
-          description: CLDR country code (e.g. "US").
+          description: CLDR country code (e.g. "US"). This value cannot be set for a sub-account of an MCA. All MCA sub-accounts inherit the country of their parent MCA.
           type: string
         locality:
           description: City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).

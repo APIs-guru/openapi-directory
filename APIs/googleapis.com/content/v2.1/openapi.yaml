@@ -4606,7 +4606,7 @@ components:
     AccountAddress:
       properties:
         country:
-          description: CLDR country code (e.g. "US").
+          description: CLDR country code (e.g. "US"). This value cannot be set for a sub-account of an MCA. All MCA sub-accounts inherit the country of their parent MCA.
           type: string
         locality:
           description: City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).
@@ -8091,11 +8091,14 @@ components:
     OrderreturnsRefundOperation:
       properties:
         fullRefund:
-          description: If true, the item will be fully refunded.
+          description: If true, the item will be fully refunded. // Allowed only when payment_type is FOP. Merchant can choose this refund option to indicate the full remaining amount of corresponding object to be refunded to the customer via FOP.
           type: boolean
         partialRefund:
           $ref: "#/components/schemas/OrderreturnsPartialRefund"
-          description: If this is set, the item will be partially refunded.
+          description: If this is set, the item will be partially refunded. Merchant can choose this refund option to specify the customized amount that to be refunded to the customer.
+        paymentType:
+          description: The payment way of issuing refund. Default value is ORIGINAL_FOP if not set.
+          type: string
         reasonText:
           description: The explanation of the reason.
           type: string

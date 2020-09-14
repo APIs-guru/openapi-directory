@@ -2390,62 +2390,78 @@ components:
       description: An Instance resource is the computing unit that App Engine uses to automatically scale an application.
       properties:
         appEngineRelease:
-          description: App Engine release this instance is running on.@OutputOnly
+          description: Output only. App Engine release this instance is running on.
+          readOnly: true
           type: string
         availability:
-          description: Availability of the instance.@OutputOnly
+          description: Output only. Availability of the instance.
           enum:
             - UNSPECIFIED
             - RESIDENT
             - DYNAMIC
+          readOnly: true
           type: string
         averageLatency:
-          description: Average latency (ms) over the last minute.@OutputOnly
+          description: Output only. Average latency (ms) over the last minute.
           format: int32
+          readOnly: true
           type: integer
         errors:
-          description: Number of errors since this instance was started.@OutputOnly
+          description: Output only. Number of errors since this instance was started.
           format: int32
+          readOnly: true
           type: integer
         id:
-          description: "Relative name of the instance within the version. Example: instance-1.@OutputOnly"
+          description: "Output only. Relative name of the instance within the version. Example: instance-1."
+          readOnly: true
           type: string
         memoryUsage:
-          description: Total memory in use (bytes).@OutputOnly
+          description: Output only. Total memory in use (bytes).
           format: int64
+          readOnly: true
           type: string
         name:
-          description: "Full path to the Instance resource in the API. Example: apps/myapp/services/default/versions/v1/instances/instance-1.@OutputOnly"
+          description: "Output only. Full path to the Instance resource in the API. Example: apps/myapp/services/default/versions/v1/instances/instance-1."
+          readOnly: true
           type: string
         qps:
-          description: Average queries per second (QPS) over the last minute.@OutputOnly
+          description: Output only. Average queries per second (QPS) over the last minute.
           format: float
+          readOnly: true
           type: number
         requests:
-          description: Number of requests since this instance was started.@OutputOnly
+          description: Output only. Number of requests since this instance was started.
           format: int32
+          readOnly: true
           type: integer
         startTime:
-          description: Time that this instance was started.@OutputOnly
+          description: Output only. Time that this instance was started.@OutputOnly
           format: google-datetime
+          readOnly: true
           type: string
         vmDebugEnabled:
-          description: Whether this instance is in debug mode. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. Whether this instance is in debug mode. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: boolean
         vmId:
-          description: Virtual machine ID of this instance. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. Virtual machine ID of this instance. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: string
         vmIp:
-          description: The IP address of this instance. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. The IP address of this instance. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: string
         vmName:
-          description: Name of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. Name of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: string
         vmStatus:
-          description: Status of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. Status of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: string
         vmZoneName:
-          description: Zone where the virtual machine is located. Only applicable for instances in App Engine flexible environment.@OutputOnly
+          description: Output only. Zone where the virtual machine is located. Only applicable for instances in App Engine flexible environment.
+          readOnly: true
           type: string
       type: object
     Library:
@@ -2675,6 +2691,18 @@ components:
           type: boolean
         subnetworkName:
           description: Google Cloud Platform sub-network where the virtual machines are created. Specify the short name, not the resource path.If a subnetwork name is specified, a network name will also be required unless it is for the default network. If the network that the instance is being created in is a Legacy network, then the IP address is allocated from the IPv4Range. If the network that the instance is being created in is an auto Subnet Mode Network, then only network name should be specified (not the subnetwork_name) and the IP address is created from the IPCidrRange of the subnetwork that exists in that zone for that network. If the network that the instance is being created in is a custom Subnet Mode Network, then the subnetwork_name must be specified and the IP address is created from the IPCidrRange of the subnetwork.If specified, the subnetwork must exist in the same region as the App Engine flexible environment application.
+          type: string
+      type: object
+    NetworkSettings:
+      description: A NetworkSettings resource is a container for ingress settings for a version or service.
+      properties:
+        ingressTrafficAllowed:
+          description: The ingress settings for version or service.
+          enum:
+            - INGRESS_TRAFFIC_ALLOWED_UNSPECIFIED
+            - INGRESS_TRAFFIC_ALLOWED_ALL
+            - INGRESS_TRAFFIC_ALLOWED_INTERNAL_ONLY
+            - INGRESS_TRAFFIC_ALLOWED_INTERNAL_AND_LB
           type: string
       type: object
     NetworkUtilization:
@@ -2917,6 +2945,9 @@ components:
         name:
           description: "Full path to the Service resource in the API. Example: apps/myapp/services/default.@OutputOnly"
           type: string
+        networkSettings:
+          $ref: "#/components/schemas/NetworkSettings"
+          description: Ingress settings for this service. Will apply to all versions.
         split:
           $ref: "#/components/schemas/TrafficSplit"
           description: Mapping that defines fractional HTTP traffic diversion to different versions within the service.

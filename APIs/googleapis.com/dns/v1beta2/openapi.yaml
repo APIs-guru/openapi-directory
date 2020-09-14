@@ -1295,7 +1295,7 @@ components:
           description: If the DNS queries for the zone will be served.
           type: boolean
         kind:
-          default: 'dns#change'
+          default: dns#change
           type: string
         startTime:
           description: The time that this operation was started by the server (output only). This is in RFC3339 text format.
@@ -1318,7 +1318,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#changesListResponse'
+          default: dns#changesListResponse
           description: Type of resource.
           type: string
         nextPageToken:
@@ -1363,7 +1363,7 @@ components:
           format: int32
           type: integer
         kind:
-          default: 'dns#dnsKey'
+          default: dns#dnsKey
           type: string
         publicKey:
           description: Base64 encoded public half of this key. Output only.
@@ -1411,7 +1411,7 @@ components:
             - zoneSigning
           type: string
         kind:
-          default: 'dns#dnsKeySpec'
+          default: dns#dnsKeySpec
           type: string
       type: object
     DnsKeysListResponse:
@@ -1425,7 +1425,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#dnsKeysListResponse'
+          default: dns#dnsKeysListResponse
           description: Type of resource.
           type: string
         nextPageToken:
@@ -1455,7 +1455,7 @@ components:
           format: uint64
           type: string
         kind:
-          default: 'dns#managedZone'
+          default: dns#managedZone
           type: string
         labels:
           additionalProperties:
@@ -1500,7 +1500,7 @@ components:
             $ref: '#/components/schemas/DnsKeySpec'
           type: array
         kind:
-          default: 'dns#managedZoneDnsSecConfig'
+          default: dns#managedZoneDnsSecConfig
           type: string
         nonExistence:
           description: Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
@@ -1519,7 +1519,7 @@ components:
     ManagedZoneForwardingConfig:
       properties:
         kind:
-          default: 'dns#managedZoneForwardingConfig'
+          default: dns#managedZoneForwardingConfig
           type: string
         targetNameServers:
           description: List of target name servers to forward to. Cloud DNS will select the best available name server if more than one target is given.
@@ -1539,7 +1539,7 @@ components:
           description: IPv4 address of a target name server.
           type: string
         kind:
-          default: 'dns#managedZoneForwardingConfigNameServerTarget'
+          default: dns#managedZoneForwardingConfigNameServerTarget
           type: string
       type: object
     ManagedZoneOperationsListResponse:
@@ -1547,7 +1547,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#managedZoneOperationsListResponse'
+          default: dns#managedZoneOperationsListResponse
           type: string
         nextPageToken:
           description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.'
@@ -1561,7 +1561,7 @@ components:
     ManagedZonePeeringConfig:
       properties:
         kind:
-          default: 'dns#managedZonePeeringConfig'
+          default: dns#managedZonePeeringConfig
           type: string
         targetNetwork:
           $ref: '#/components/schemas/ManagedZonePeeringConfigTargetNetwork'
@@ -1573,7 +1573,7 @@ components:
           description: 'The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.'
           type: string
         kind:
-          default: 'dns#managedZonePeeringConfigTargetNetwork'
+          default: dns#managedZonePeeringConfigTargetNetwork
           type: string
         networkUrl:
           description: 'The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
@@ -1582,7 +1582,7 @@ components:
     ManagedZonePrivateVisibilityConfig:
       properties:
         kind:
-          default: 'dns#managedZonePrivateVisibilityConfig'
+          default: dns#managedZonePrivateVisibilityConfig
           type: string
         networks:
           description: The list of VPC networks that can see this zone.
@@ -1593,7 +1593,7 @@ components:
     ManagedZonePrivateVisibilityConfigNetwork:
       properties:
         kind:
-          default: 'dns#managedZonePrivateVisibilityConfigNetwork'
+          default: dns#managedZonePrivateVisibilityConfigNetwork
           type: string
         networkUrl:
           description: 'The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
@@ -1602,14 +1602,14 @@ components:
     ManagedZoneReverseLookupConfig:
       properties:
         kind:
-          default: 'dns#managedZoneReverseLookupConfig'
+          default: dns#managedZoneReverseLookupConfig
           type: string
       type: object
     ManagedZoneServiceDirectoryConfig:
       description: Contains information about Service Directory-backed zones.
       properties:
         kind:
-          default: 'dns#managedZoneServiceDirectoryConfig'
+          default: dns#managedZoneServiceDirectoryConfig
           type: string
         namespace:
           $ref: '#/components/schemas/ManagedZoneServiceDirectoryConfigNamespace'
@@ -1621,7 +1621,7 @@ components:
           description: 'The time that the namespace backing this zone was deleted, empty string if it still exists. This is in RFC3339 text format. Output only.'
           type: string
         kind:
-          default: 'dns#managedZoneServiceDirectoryConfigNamespace'
+          default: dns#managedZoneServiceDirectoryConfigNamespace
           type: string
         namespaceUrl:
           description: 'The fully qualified URL of the namespace associated with the zone. This should be formatted like https://servicedirectory.googleapis.com/v1/projects/{project}/locations/{location}/namespaces/{namespace}'
@@ -1632,7 +1632,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#managedZonesListResponse'
+          default: dns#managedZonesListResponse
           description: Type of resource.
           type: string
         managedZones:
@@ -1654,7 +1654,7 @@ components:
           description: 'Unique identifier for the resource. This is the client_operation_id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)'
           type: string
         kind:
-          default: 'dns#operation'
+          default: dns#operation
           type: string
         startTime:
           description: The time that this operation was started by the server. This is in RFC3339 text format (output only).
@@ -1698,7 +1698,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#policiesListResponse'
+          default: dns#policiesListResponse
           description: Type of resource.
           type: string
         nextPageToken:
@@ -1744,7 +1744,7 @@ components:
           format: uint64
           type: string
         kind:
-          default: 'dns#policy'
+          default: dns#policy
           type: string
         name:
           description: User assigned name for this policy.
@@ -1758,7 +1758,7 @@ components:
     PolicyAlternativeNameServerConfig:
       properties:
         kind:
-          default: 'dns#policyAlternativeNameServerConfig'
+          default: dns#policyAlternativeNameServerConfig
           type: string
         targetNameServers:
           description: 'Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.'
@@ -1778,13 +1778,13 @@ components:
           description: IPv4 address to forward to.
           type: string
         kind:
-          default: 'dns#policyAlternativeNameServerConfigTargetNameServer'
+          default: dns#policyAlternativeNameServerConfigTargetNameServer
           type: string
       type: object
     PolicyNetwork:
       properties:
         kind:
-          default: 'dns#policyNetwork'
+          default: dns#policyNetwork
           type: string
         networkUrl:
           description: 'The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
@@ -1797,7 +1797,7 @@ components:
           description: User assigned unique identifier for the resource (output only).
           type: string
         kind:
-          default: 'dns#project'
+          default: dns#project
           type: string
         number:
           description: Unique numeric identifier for the resource; defined by the server (output only).
@@ -1815,7 +1815,7 @@ components:
           format: int32
           type: integer
         kind:
-          default: 'dns#quota'
+          default: dns#quota
           type: string
         managedZones:
           description: Maximum allowed number of managed zones in the project.
@@ -1875,7 +1875,7 @@ components:
       description: A unit of data that will be returned by the DNS servers.
       properties:
         kind:
-          default: 'dns#resourceRecordSet'
+          default: dns#resourceRecordSet
           type: string
         name:
           description: 'For example, www.example.com.'
@@ -1903,7 +1903,7 @@ components:
         header:
           $ref: '#/components/schemas/ResponseHeader'
         kind:
-          default: 'dns#resourceRecordSetsListResponse'
+          default: dns#resourceRecordSetsListResponse
           description: Type of resource.
           type: string
         nextPageToken:

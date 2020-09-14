@@ -401,6 +401,12 @@ components:
         electionInfoUrl:
           description: A URL provided by this administrative body for looking up general election information.
           type: string
+        electionNoticeText:
+          description: A last minute or emergency notification text provided by this administrative body.
+          type: string
+        electionNoticeUrl:
+          description: A URL provided by this administrative body for additional information related to the last minute or emergency notification.
+          type: string
         electionOfficials:
           description: The election officials for this election administrative body.
           items:

@@ -3033,6 +3033,13 @@ components:
         disabled:
           description: Whether Cloud Run addon is enabled for this cluster.
           type: boolean
+        loadBalancerType:
+          description: Which load balancer type is installed for Cloud Run.
+          enum:
+            - LOAD_BALANCER_TYPE_UNSPECIFIED
+            - LOAD_BALANCER_TYPE_EXTERNAL
+            - LOAD_BALANCER_TYPE_INTERNAL
+          type: string
       type: object
     Cluster:
       description: A Google Kubernetes Engine cluster.
@@ -3671,10 +3678,10 @@ components:
           description: "[Output only] Base64-encoded public certificate that is the root of trust for the cluster."
           type: string
         password:
-          description: The password to use for HTTP basic authentication to the master endpoint. Because the master endpoint is open to the Internet, you should create a strong password. If a password is provided for cluster creation, username must be non-empty.
+          description: "The password to use for HTTP basic authentication to the master endpoint. Because the master endpoint is open to the Internet, you should create a strong password. If a password is provided for cluster creation, username must be non-empty. Warning: basic authentication is deprecated, and will be removed in GKE control plane versions 1.19 and newer. For a list of recommended authentication methods, see: https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication"
           type: string
         username:
-          description: The username to use for HTTP basic authentication to the master endpoint. For clusters v1.6.0 and later, basic authentication can be disabled by leaving username unspecified (or setting it to the empty string).
+          description: "The username to use for HTTP basic authentication to the master endpoint. For clusters v1.6.0 and later, basic authentication can be disabled by leaving username unspecified (or setting it to the empty string). Warning: basic authentication is deprecated, and will be removed in GKE control plane versions 1.19 and newer. For a list of recommended authentication methods, see: https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication"
           type: string
       type: object
     MasterAuthorizedNetworksConfig:

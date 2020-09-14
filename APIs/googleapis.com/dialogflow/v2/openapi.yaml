@@ -1597,6 +1597,10 @@ components:
     GoogleCloudDialogflowCxV3beta1ResponseMessageOutputAudioText:
       description: 'A text or ssml response that is preferentially used for TTS output audio synthesis, as described in the comment on the ResponseMessage message.'
       properties:
+        allowPlaybackInterruption:
+          description: Output only. Whether the playback of this message can be interrupted by the end user's speech and the client can then starts the next Dialogflow request.
+          readOnly: true
+          type: boolean
         ssml:
           description: 'The SSML text to be synthesized. For more information, see [SSML](/speech/text-to-speech/docs/ssml).'
           type: string
@@ -2940,7 +2944,7 @@ components:
         payload:
           additionalProperties:
             description: Properties of the object.
-          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Standard Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Enterprise Edition agents.'
+          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Trial Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Essentials Edition agents.'
           type: object
         source:
           description: 'The source of this request, e.g., `google`, `facebook`, `slack`. It is set by Dialogflow-owned servers.'
@@ -3361,7 +3365,7 @@ components:
           format: int32
           type: integer
         name:
-          description: 'Required. The unique identifier of the context. Format: `projects//agent/sessions//contexts/`, or `projects//agent/environments//users//sessions//contexts/`. The `Context ID` is always converted to lowercase, may only contain characters in a-zA-Z0-9_-% and may be at most 250 bytes long. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. The following context names are reserved for internal use by Dialogflow. You should not use these contexts or create contexts with these names: * `__system_counters__` * `*_id_dialog_context` * `*_dialog_params_size`'
+          description: 'Required. The unique identifier of the context. Supported formats: - `projects//agent/sessions//contexts/`, - `projects//locations//agent/sessions//contexts/`, - `projects//agent/environments//users//sessions//contexts/`, - `projects//locations//agent/environments//users//sessions//contexts/`, The `Context ID` is always converted to lowercase, may only contain characters in a-zA-Z0-9_-% and may be at most 250 bytes long. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. The following context names are reserved for internal use by Dialogflow. You should not use these contexts or create contexts with these names: * `__system_counters__` * `*_id_dialog_context` * `*_dialog_params_size`'
           type: string
         parameters:
           additionalProperties:
@@ -3398,7 +3402,7 @@ components:
             - KIND_REGEXP
           type: string
         name:
-          description: 'The unique identifier of the entity type. Required for EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes methods. Format: `projects//agent/entityTypes/`.'
+          description: 'The unique identifier of the entity type. Required for EntityTypes.UpdateEntityType and EntityTypes.BatchUpdateEntityTypes methods. Supported formats: - `projects//agent/entityTypes/` - `projects//locations//agent/entityTypes/`'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1EntityTypeEntity:
@@ -3480,7 +3484,7 @@ components:
           readOnly: true
           type: array
         inputContextNames:
-          description: 'Optional. The list of context names required for this intent to be triggered. Format: `projects//agent/sessions/-/contexts/`.'
+          description: 'Optional. The list of context names required for this intent to be triggered. Formats: - `projects//agent/sessions/-/contexts/` - `projects//locations//agent/sessions/-/contexts/`'
           items:
             type: string
           type: array
@@ -3499,7 +3503,7 @@ components:
           description: 'Optional. Indicates whether Machine Learning is enabled for the intent. Note: If `ml_enabled` setting is set to false, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off. DEPRECATED! Please use `ml_disabled` field instead. NOTE: If both `ml_enabled` and `ml_disabled` are either not set or false, then the default value is determined as follows: - Before April 15th, 2018 the default is: ml_enabled = false / ml_disabled = true. - After April 15th, 2018 the default is: ml_enabled = true / ml_disabled = false.'
           type: boolean
         name:
-          description: 'Optional. The unique identifier of this intent. Required for Intents.UpdateIntent and Intents.BatchUpdateIntents methods. Format: `projects//agent/intents/`.'
+          description: 'Optional. The unique identifier of this intent. Required for Intents.UpdateIntent and Intents.BatchUpdateIntents methods. Supported formats: - `projects//agent/intents/` - `projects//locations//agent/intents/`'
           type: string
         outputContexts:
           description: 'Optional. The collection of contexts that are activated when the intent is matched. Context messages in this collection should not set the parameters field. Setting the `lifespan_count` to 0 will reset the context when the intent is matched. Format: `projects//agent/sessions/-/contexts/`.'
@@ -4284,7 +4288,7 @@ components:
         payload:
           additionalProperties:
             description: Properties of the object.
-          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Standard Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Enterprise Edition agents.'
+          description: 'Optional. This field is set to the value of the `QueryParameters.payload` field passed in the request. Some integrations that query a Dialogflow agent may provide additional information in the payload. In particular, for the Dialogflow Phone Gateway integration, this field has the form: { "telephony": { "caller_id": "+18558363987" } } Note: The caller ID field (`caller_id`) will be redacted for Trial Edition agents and populated with the caller ID in [E.164 format](https://en.wikipedia.org/wiki/E.164) for Essentials Edition agents.'
           type: object
         source:
           description: 'The source of this request, e.g., `google`, `facebook`, `slack`. It is set by Dialogflow-owned servers.'
@@ -4392,7 +4396,7 @@ components:
             - ENTITY_OVERRIDE_MODE_SUPPLEMENT
           type: string
         name:
-          description: 'Required. The unique identifier of this session entity type. Format: `projects//agent/sessions//entityTypes/`, or `projects//agent/environments//users//sessions//entityTypes/`. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
+          description: 'Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1WebhookRequest:
@@ -4413,7 +4417,7 @@ components:
           description: 'The unique identifier of the response. Contains the same value as `[Streaming]DetectIntentResponse.response_id`.'
           type: string
         session:
-          description: 'The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Format: `projects//agent/sessions/`, or `projects//agent/environments//users//sessions/`.'
+          description: 'The unique identifier of detectIntent request session. Can be used to identify end-user inside webhook implementation. Supported formats: - `projects//agent/sessions/, - `projects//locations//agent/sessions/`, - `projects//agent/environments//users//sessions/`, - `projects//locations//agent/environments//users//sessions/`,'
           type: string
       type: object
     GoogleCloudDialogflowV2beta1WebhookResponse:
