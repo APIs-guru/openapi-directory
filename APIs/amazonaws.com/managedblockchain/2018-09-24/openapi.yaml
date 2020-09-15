@@ -221,7 +221,7 @@ paths:
                     LogPublishingConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-                        - description: <p/>
+                        - description: Configuration properties for logging events associated with a member of a Managed Blockchain network.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -447,7 +447,7 @@ paths:
                     LogPublishingConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-                        - description: <p/>
+                        - description: Configuration properties for logging events associated with a member of a Managed Blockchain network.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -650,7 +650,11 @@ paths:
                     LogPublishingConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-                        - description: <p/>
+                        - description: 'Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. '
+                    StateDB:
+                      allOf:
+                        - $ref: '#/components/schemas/StateDBType'
+                        - description: 'The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1481,7 +1485,7 @@ paths:
   /invitations:
     get:
       operationId: ListInvitations
-      description: Returns a listing of all invitations made on the specified network.
+      description: Returns a listing of all invitations for the current AWS account.
       responses:
         '200':
           description: Success
@@ -1943,6 +1947,11 @@ components:
             - $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
             - description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
       description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
+    StateDBType:
+      type: string
+      enum:
+        - LevelDB
+        - CouchDB
     CreateProposalOutput:
       type: object
       properties:
@@ -2133,7 +2142,7 @@ components:
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
-            - description: <p/>
+            - description: Configuration properties for logging events associated with a member of a Managed Blockchain network.
       description: Configuration properties of the member.
     CreateMemberInput:
       type: object
@@ -2244,7 +2253,11 @@ components:
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-            - description: <p/>
+            - description: 'Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. '
+        StateDB:
+          allOf:
+            - $ref: '#/components/schemas/StateDBType'
+            - description: 'The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.'
       description: Configuration properties of a peer node.
     CreateNodeInput:
       type: object
@@ -2434,7 +2447,11 @@ components:
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-            - description: <p/>
+            - description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
+        StateDB:
+          allOf:
+            - $ref: '#/components/schemas/StateDBType'
+            - description: The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>.
         Status:
           allOf:
             - $ref: '#/components/schemas/NodeStatus'
