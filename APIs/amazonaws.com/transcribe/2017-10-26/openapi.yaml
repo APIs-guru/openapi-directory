@@ -2370,7 +2370,6 @@ components:
       type: object
       required:
         - TranscriptionJobName
-        - LanguageCode
         - Media
       title: StartTranscriptionJobRequest
       properties:
@@ -2418,6 +2417,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContentRedaction'
             - description: An object that contains the request parameters for content redaction.
+        IdentifyLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Set this field to <code>true</code> to enable automatic language identification. Automatic language identification is disabled by default. You receive a <code>BadRequestException</code> error if you enter a value for a <code>LanguageCode</code>.
+        LanguageOptions:
+          allOf:
+            - $ref: '#/components/schemas/LanguageOptions'
+            - description: An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.
     UpdateMedicalVocabularyResponse:
       type: object
       properties:
@@ -2841,7 +2848,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContentRedaction'
             - description: An object that describes content redaction settings for the transcription job.
+        IdentifyLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that shows if automatic language identification was enabled for a transcription job.
+        LanguageOptions:
+          allOf:
+            - $ref: '#/components/schemas/LanguageOptions'
+            - description: An object that shows the optional array of languages inputted for transcription jobs with automatic language identification enabled.
+        IdentifiedLanguageScore:
+          allOf:
+            - $ref: '#/components/schemas/IdentifiedLanguageScore'
+            - description: The score that Amazon Transcribe gives for the predominant language that it identified in your collection of source audio files. This score reflects the confidence that the language that Amazon Transcribe identified is the correct language.
       description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
+    IdentifiedLanguageScore:
+      type: number
+      format: float
     JobExecutionSettings:
       type: object
       properties:
@@ -2859,6 +2881,11 @@ components:
       pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
       minLength: 1
       maxLength: 2048
+    LanguageOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/LanguageCode'
+      minItems: 2
     NextToken:
       type: string
       pattern: .+
@@ -3126,6 +3153,14 @@ components:
             - description: The content redaction settings of the transcription job.
         ModelSettings:
           $ref: '#/components/schemas/ModelSettings'
+        IdentifyLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether automatic language identification was enabled for a transcription job.
+        IdentifiedLanguageScore:
+          allOf:
+            - $ref: '#/components/schemas/IdentifiedLanguageScore'
+            - description: A value between zero and one that Amazon Transcribe assigned to the language it identified in the source audio. A higher score indicates that Amazon Transcribe is more confident in the language it identified.
       description: Provides a summary of information about a transcription job.
     VocabularyInfo:
       type: object

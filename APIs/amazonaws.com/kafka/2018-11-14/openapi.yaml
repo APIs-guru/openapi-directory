@@ -117,6 +117,276 @@ servers:
     description: The Kafka endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/v1/clusters/{clusterArn}/scram-secrets':
+    post:
+      operationId: BatchAssociateScramSecret
+      description: |2-
+
+                    <p>Associates one or more Scram Secrets with an Amazon MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchAssociateScramSecretResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - secretArnList
+              properties:
+                secretArnList:
+                  description: |2-
+
+                                <p>List of AWS Secrets Manager secret ARNs.</p>
+                             
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: BatchDisassociateScramSecret
+      description: |2-
+
+                    <p>Disassociates one or more Scram Secrets from an Amazon MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDisassociateScramSecretResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - secretArnList
+              properties:
+                secretArnList:
+                  description: |2-
+
+                                <p>List of AWS Secrets Manager secret ARNs.</p>
+                             
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    get:
+      operationId: ListScramSecrets
+      description: |2-
+
+                    <p>Returns a list of the Scram Secrets associated with an Amazon MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListScramSecretsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The arn of the cluster.</p>
+                     
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maxResults of the query.</p>
+                     
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The nextToken of the query.</p>
+                     
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   /v1/clusters:
     post:
       operationId: CreateCluster
@@ -247,6 +517,15 @@ paths:
                              
                   type: object
                   properties:
+                    Sasl:
+                      allOf:
+                        - $ref: '#/components/schemas/Sasl'
+                        - xml:
+                            name: sasl
+                          description: |2-
+
+                                        <p>Details for ClientAuthentication using SASL.</p>
+                                     
                     Tls:
                       allOf:
                         - $ref: '#/components/schemas/Tls'
@@ -1764,7 +2043,7 @@ paths:
                 brokerIds:
                   description: |2-
 
-                                <p>The list of broker IDs to be rebooted.</p>
+                                <p>The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.</p>
                              
                   type: array
                   items:
@@ -2419,6 +2698,36 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchAssociateScramSecretResponse:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                         
+        UnprocessedScramSecrets:
+          allOf:
+            - $ref: '#/components/schemas/__listOfUnprocessedScramSecret'
+            - xml:
+                name: unprocessedScramSecrets
+              description: |2-
+
+                            <p>List of errors when associating secrets to cluster.</p>
+                         
+    __string:
+      type: string
+    BadRequestException: {}
+    UnauthorizedException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
     CreateClusterResponse:
       type: object
       properties:
@@ -2482,6 +2791,22 @@ components:
 
                     <p>Contains information about storage volumes attached to MSK broker nodes.</p>
                  
+    Sasl:
+      type: object
+      properties:
+        Scram:
+          allOf:
+            - $ref: '#/components/schemas/Scram'
+            - xml:
+                name: scram
+              description: |2-
+
+                            <p>Details for SASL/SCRAM client authentication.</p>
+                         
+      description: |2-
+
+                    <p>Details for client authentication using SASL.</p>
+                 
     Tls:
       type: object
       properties:
@@ -2498,8 +2823,6 @@ components:
 
                     <p>Details for client authentication using TLS.</p>
                  
-    __string:
-      type: string
     __long:
       type: integer
     EncryptionAtRest:
@@ -2596,12 +2919,6 @@ components:
             - $ref: '#/components/schemas/S3'
             - xml:
                 name: s3
-    BadRequestException: {}
-    InternalServerErrorException: {}
-    UnauthorizedException: {}
-    ForbiddenException: {}
-    ServiceUnavailableException: {}
-    TooManyRequestsException: {}
     ConflictException: {}
     CreateConfigurationResponse:
       type: object
@@ -2672,7 +2989,6 @@ components:
 
                             <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>
                          
-    NotFoundException: {}
     DeleteConfigurationResponse:
       type: object
       properties:
@@ -2833,6 +3149,27 @@ components:
                             <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
                                When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
                          
+    BatchDisassociateScramSecretResponse:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                         
+        UnprocessedScramSecrets:
+          allOf:
+            - $ref: '#/components/schemas/__listOfUnprocessedScramSecret'
+            - xml:
+                name: unprocessedScramSecrets
+              description: |2-
+
+                            <p>List of errors when disassociating secrets to cluster.</p>
+                         
     GetBootstrapBrokersResponse:
       type: object
       properties:
@@ -2853,6 +3190,15 @@ components:
               description: |2-
 
                             <p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>
+                         
+        BootstrapBrokerStringSaslScram:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bootstrapBrokerStringSaslScram
+              description: |2-
+
+                            <p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>
                          
     GetCompatibleKafkaVersionsResponse:
       type: object
@@ -2986,6 +3332,27 @@ components:
               description: |2-
 
                             <p>List containing a NodeInfo object.</p>
+                         
+    ListScramSecretsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: |2-
+
+                            <p>Paginated results marker.</p>
+                         
+        SecretArnList:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: secretArnList
+              description: |2-
+
+                            <p>The list of scram secrets associated with the cluster.</p>
                          
     ListTagsForResourceResponse:
       type: object
@@ -3174,6 +3541,29 @@ components:
 
                             <p>The Amazon Resource Name (ARN) of the cluster operation.</p>
                          
+    BatchAssociateScramSecretRequest:
+      type: object
+      required:
+        - SecretArnList
+      title: BatchAssociateScramSecretRequest
+      properties:
+        SecretArnList:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: secretArnList
+              description: |2-
+
+                            <p>List of AWS Secrets Manager secret ARNs.</p>
+                         
+      description: |2-
+
+                    <p>Associates sasl scram secrets to cluster.</p>
+                 
+    __listOfUnprocessedScramSecret:
+      type: array
+      items:
+        $ref: '#/components/schemas/UnprocessedScramSecret'
     __integer:
       type: integer
     CloudWatchLogs:
@@ -3384,6 +3774,15 @@ components:
     ClientAuthentication:
       type: object
       properties:
+        Sasl:
+          allOf:
+            - $ref: '#/components/schemas/Sasl'
+            - xml:
+                name: sasl
+              description: |2-
+
+                            <p>Details for ClientAuthentication using SASL.</p>
+                         
         Tls:
           allOf:
             - $ref: '#/components/schemas/Tls'
@@ -4280,6 +4679,25 @@ components:
       type: object
       title: DescribeConfigurationRevisionRequest
       properties: {}
+    BatchDisassociateScramSecretRequest:
+      type: object
+      required:
+        - SecretArnList
+      title: BatchDisassociateScramSecretRequest
+      properties:
+        SecretArnList:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: secretArnList
+              description: |2-
+
+                            <p>List of AWS Secrets Manager secret ARNs.</p>
+                         
+      description: |2-
+
+                    <p>Disassociates sasl scram secrets to cluster.</p>
+                 
     __integerMin1Max16384:
       type: integer
       minimum: 1
@@ -4382,6 +4800,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NodeInfo'
+    ListScramSecretsRequest:
+      type: object
+      title: ListScramSecretsRequest
+      properties: {}
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -4500,9 +4922,25 @@ components:
                 name: brokerIds
               description: |2-
 
-                            <p>The list of broker IDs to be rebooted.</p>
+                            <p>The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.</p>
                          
       description: Reboots a node.
+    Scram:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>SASL/SCRAM authentication is enabled or not.</p>
+                         
+      description: |2-
+
+                    <p>Details for SASL/SCRAM client authentication.</p>
+                 
     NodeType:
       type: string
       enum:
@@ -4639,6 +5077,40 @@ components:
 
                             <p>The key-value pair for the resource tag.</p>
                          
+    UnprocessedScramSecret:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: errorCode
+              description: |2-
+
+                            <p>Error code for associate/disassociate failure.</p>
+                         
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: errorMessage
+              description: |2-
+
+                            <p>Error message for associate/disassociate failure.</p>
+                         
+        SecretArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: secretArn
+              description: |2-
+
+                            <p>AWS Secrets Manager secret ARN.</p>
+                         
+      description: |2-
+
+                    <p>Error info for scram secret associate/disassociate failure.</p>
+                 
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
