@@ -1715,6 +1715,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
       requestBody:
         required: true
         content:
@@ -5250,8 +5256,6 @@ components:
             - description: Any CloudWatch dashboards that were created when provisioning the product.
     DescribeProvisionedProductInput:
       type: object
-      required:
-        - Id
       title: DescribeProvisionedProductInput
       properties:
         AcceptLanguage:
@@ -5261,7 +5265,12 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The provisioned product identifier.
+            - description: '<p>The provisioned product identifier. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProvisionedProductName'
+            - description: '<p>The name of the provisioned product. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>'
+      description: 'DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The language code for localization. Id - [Optional] The provisioned product identifier. Name - [Optional] Another provisioned product identifier. Customers must provide either Id or Name.'
     DescribeProvisionedProductPlanOutput:
       type: object
       properties:

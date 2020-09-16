@@ -3,7 +3,7 @@ info:
   version: '2017-08-08'
   x-release: v4
   title: Amazon Connect Service
-  description: '<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center and provide reliable customer engagement at any scale.</p> <p>Amazon Connect provides rich metrics and real-time reporting that allow you to optimize contact routing. You can also resolve customer issues more efficiently by putting customers in touch with the right agents.</p> <p>There are limits to the number of Amazon Connect resources that you can create and limits to the number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Limits</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
+  description: '<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center and provide reliable customer engagement at any scale.</p> <p>Amazon Connect provides rich metrics and real-time reporting that allow you to optimize contact routing. You can also resolve customer issues more efficiently by putting customers in touch with the right agents.</p> <p>There are limits to the number of Amazon Connect resources that you can create and limits to the number of requests that you can make per second. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <p>To connect programmatically to an AWS service, you use an endpoint. For a list of Amazon Connect endpoints, see <a href="https://docs.aws.amazon.com/general/latest/gr/connect_region.html">Amazon Connect Endpoints</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -114,10 +114,317 @@ servers:
     description: The Amazon Connect endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/associate-queues':
+    post:
+      operationId: AssociateRoutingProfileQueues
+      description: Associates a set of queues with a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - QueueConfigs
+              properties:
+                QueueConfigs:
+                  description: The queues to associate with this routing profile.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoutingProfileQueueConfig'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/contact-flows/{InstanceId}':
+    put:
+      operationId: CreateContactFlow
+      description: Creates a contact flow for the specified Amazon Connect instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContactFlowResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidContactFlowException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContactFlowException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Type
+                - Content
+              properties:
+                Name:
+                  description: The name of the contact flow.
+                  type: string
+                  minLength: 1
+                Type:
+                  description: 'The type of the contact flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a Contact Flow Type</a> in the <i>Amazon Connect Administrator Guide</i>.'
+                  type: string
+                  enum:
+                    - CONTACT_FLOW
+                    - CUSTOMER_QUEUE
+                    - CUSTOMER_HOLD
+                    - CUSTOMER_WHISPER
+                    - AGENT_HOLD
+                    - AGENT_WHISPER
+                    - OUTBOUND_WHISPER
+                    - AGENT_TRANSFER
+                    - QUEUE_TRANSFER
+                Description:
+                  description: 'The description of the contact flow. '
+                  type: string
+                Content:
+                  description: 'The content of the contact flow. '
+                  type: string
+                Tags:
+                  description: One or more tags.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}':
+    put:
+      operationId: CreateRoutingProfile
+      description: Creates a new routing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoutingProfileResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Description
+                - DefaultOutboundQueueId
+                - MediaConcurrencies
+              properties:
+                Name:
+                  description: The name of the routing profile. Must not be more than 127 characters.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: Description of the routing profile. Must not be more than 250 characters.
+                  type: string
+                  minLength: 1
+                  maxLength: 250
+                DefaultOutboundQueueId:
+                  description: The default outbound queue for the routing profile.
+                  type: string
+                QueueConfigs:
+                  description: 'The inbound queues associated with the routing profile. If no queue is added, the agent can only make outbound calls.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoutingProfileQueueConfig'
+                  minItems: 1
+                  maxItems: 10
+                MediaConcurrencies:
+                  description: The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaConcurrency'
+                Tags:
+                  description: One or more tags.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/users/{InstanceId}':
     put:
       operationId: CreateUser
-      description: Creates a user account for the specified Amazon Connect instance.
+      description: '<p>Creates a user account for the specified Amazon Connect instance.</p> <p>For information about how to create user accounts using the Amazon Connect console, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html">Add Users</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -253,7 +560,7 @@ paths:
                   description: One or more tags.
                   type: object
                   minProperties: 1
-                  maxProperties: 50
+                  maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -267,7 +574,7 @@ paths:
   '/users/{InstanceId}/{UserId}':
     delete:
       operationId: DeleteUser
-      description: Deletes a user account from the specified Amazon Connect instance.
+      description: '<p>Deletes a user account from the specified Amazon Connect instance.</p> <p>For information about what happens to a user''s data when their account is deleted, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html">Delete Users from Your Amazon Connect Instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -379,6 +686,141 @@ paths:
             type: string
             minLength: 1
             maxLength: 100
+  '/contact-flows/{InstanceId}/{ContactFlowId}':
+    get:
+      operationId: DescribeContactFlow
+      description: Describes the specified contact flow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeContactFlowResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ContactFlowNotPublishedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactFlowNotPublishedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: ContactFlowId
+          in: path
+          required: true
+          description: The identifier of the contact flow.
+          schema:
+            type: string
+            maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}':
+    get:
+      operationId: DescribeRoutingProfile
+      description: Describes the specified routing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRoutingProfileResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}':
     get:
       operationId: DescribeUserHierarchyGroup
@@ -501,6 +943,80 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/disassociate-queues':
+    post:
+      operationId: DisassociateRoutingProfileQueues
+      description: Disassociates a set of queues from a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - QueueReferences
+              properties:
+                QueueReferences:
+                  description: The queues to disassociate from this routing profile.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoutingProfileQueueReference'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/contact/attributes/{InstanceId}/{InitialContactId}':
     get:
       operationId: GetContactAttributes
@@ -558,7 +1074,7 @@ paths:
   '/metrics/current/{InstanceId}':
     post:
       operationId: GetCurrentMetricData
-      description: '<p>Gets the real-time metric data from the specified Amazon Connect instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-reports.html">Real-time Metrics Reports</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
+      description: '<p>Gets the real-time metric data from the specified Amazon Connect instance.</p> <p>For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -640,13 +1156,13 @@ paths:
                         - $ref: '#/components/schemas/Channels'
                         - description: The channel to use to filter the metrics.
                 Groupings:
-                  description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
+                  description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Grouping'
                   maxItems: 2
                 CurrentMetrics:
-                  description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>'
+                  description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time">ACW</a> </p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time">Available</a> </p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time">Error</a> </p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time">NPT (Non-Productive Time)</a> </p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On contact</a> </p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On contact</a> </p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time">Online</a> </p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time">Staffed</a> </p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time">In queue</a> </p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time">Scheduled</a> </p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> <p>When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:</p> <p> <code>{ "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0 </code>}</p> <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time">Oldest</a> </p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time">Active</a> </p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time">Availability</a> </p> </dd> </dl>'
                   type: array
                   items:
                     $ref: '#/components/schemas/CurrentMetric'
@@ -733,7 +1249,7 @@ paths:
   '/metrics/historical/{InstanceId}':
     post:
       operationId: GetMetricData
-      description: '<p>Gets historical metric data from the specified Amazon Connect instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics.html">Historical Metrics Reports</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
+      description: '<p>Gets historical metric data from the specified Amazon Connect instance.</p> <p>For a description of each historical metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -854,7 +1370,7 @@ paths:
   '/contact-flows-summary/{InstanceId}':
     get:
       operationId: ListContactFlows
-      description: Provides information about the contact flows for the specified Amazon Connect instance.
+      description: '<p>Provides information about the contact flows for the specified Amazon Connect instance.</p> <p>For more information about contact flows, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html">Contact Flows</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -947,7 +1463,7 @@ paths:
   '/hours-of-operations-summary/{InstanceId}':
     get:
       operationId: ListHoursOfOperations
-      description: Provides information about the hours of operation for the specified Amazon Connect instance.
+      description: '<p>Provides information about the hours of operation for the specified Amazon Connect instance.</p> <p>For more information about hours of operation, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html">Set the Hours of Operation for a Queue</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1031,7 +1547,7 @@ paths:
   '/phone-numbers-summary/{InstanceId}':
     get:
       operationId: ListPhoneNumbers
-      description: Provides information about the phone numbers for the specified Amazon Connect instance.
+      description: '<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p> <p>For more information about phone numbers, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html">Set Up Phone Numbers for Your Contact Center</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1130,10 +1646,94 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prompts-summary/{InstanceId}':
+    get:
+      operationId: ListPrompts
+      description: Provides information about the prompts for the specified Amazon Connect instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPromptsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/queues-summary/{InstanceId}':
     get:
       operationId: ListQueues
-      description: Provides information about the queues for the specified Amazon Connect instance.
+      description: '<p>Provides information about the queues for the specified Amazon Connect instance.</p> <p>For more information about queues, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html">Queues: Standard and Agent</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1223,10 +1823,167 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/queues':
+    get:
+      operationId: ListRoutingProfileQueues
+      description: List the queues associated with a routing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRoutingProfileQueuesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateRoutingProfileQueues
+      description: Updates the properties associated with a set of queues for a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - QueueConfigs
+              properties:
+                QueueConfigs:
+                  description: The queues to be updated for this routing profile.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RoutingProfileQueueConfig'
+                  minItems: 1
+                  maxItems: 10
   '/routing-profiles-summary/{InstanceId}':
     get:
       operationId: ListRoutingProfiles
-      description: Provides summary information about the routing profiles for the specified Amazon Connect instance.
+      description: '<p>Provides summary information about the routing profiles for the specified Amazon Connect instance.</p> <p>For more information about routing profiles, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html">Routing Profiles</a> and <a href="https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html">Create a Routing Profile</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1310,7 +2067,7 @@ paths:
   '/security-profiles-summary/{InstanceId}':
     get:
       operationId: ListSecurityProfiles
-      description: Provides summary information about the security profiles for the specified Amazon Connect instance.
+      description: '<p>Provides summary information about the security profiles for the specified Amazon Connect instance.</p> <p>For more information about security profiles, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html">Security Profiles</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1394,7 +2151,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Lists the tags for the specified resource.
+      description: '<p>Lists the tags for the specified resource.</p> <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1449,7 +2206,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: <p>Adds the specified tags to the specified resource.</p> <p>The supported resource type is users.</p>
+      description: '<p>Adds the specified tags to the specified resource.</p> <p>The supported resource type is users.</p> <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1503,13 +2260,13 @@ paths:
                   description: 'One or more tags. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
                   type: object
                   minProperties: 1
-                  maxProperties: 50
+                  maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
   '/user-hierarchy-groups-summary/{InstanceId}':
     get:
       operationId: ListUserHierarchyGroups
-      description: Provides summary information about the hierarchy groups for the specified Amazon Connect instance.
+      description: '<p>Provides summary information about the hierarchy groups for the specified Amazon Connect instance.</p> <p>For more information about agent hierarchies, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html">Set Up Agent Hierarchies</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1741,7 +2498,7 @@ paths:
   /contact/chat:
     put:
       operationId: StartChatContact
-      description: '<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p> <p>When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>'
+      description: '<p>Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p> <p>When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking <a href="https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p> <p>A 429 error occurs in two situations:</p> <ul> <li> <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code> exception from the API Gateway.</p> </li> <li> <p>The <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">quota for concurrent active chats</a> is exceeded. Active chat throttling returns a <code>LimitExceededException</code>.</p> </li> </ul> <p>For more information about how chat works, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat.html">Chat</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1797,7 +2554,7 @@ paths:
                   minLength: 1
                   maxLength: 100
                 ContactFlowId:
-                  description: The identifier of the contact flow for the chat.
+                  description: '<p>The identifier of the contact flow for initiating the chat. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
                   type: string
                   maxLength: 500
                 Attributes:
@@ -1919,7 +2676,7 @@ paths:
   /contact/outbound-voice:
     put:
       operationId: StartOutboundVoiceContact
-      description: '<p>This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that''s specified (in <code>ContactFlowId</code>).</p> <p>Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that''s when the call is routed to the agent, like any other inbound case.</p> <p>There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p>'
+      description: '<p>This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that''s specified (in <code>ContactFlowId</code>).</p> <p>Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that''s when the call is routed to the agent, like any other inbound case.</p> <p>There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p> <note> <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note>'
       responses:
         '200':
           description: Success
@@ -1985,7 +2742,7 @@ paths:
                   description: 'The phone number of the customer, in E.164 format.'
                   type: string
                 ContactFlowId:
-                  description: The identifier of the contact flow for the outbound call.
+                  description: '<p>The identifier of the contact flow for the outbound call. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
                   type: string
                   maxLength: 500
                 InstanceId:
@@ -2267,7 +3024,7 @@ paths:
             items:
               $ref: '#/components/schemas/TagKey'
             minItems: 1
-            maxItems: 50
+            maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2338,6 +3095,395 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/contact-flows/{InstanceId}/{ContactFlowId}/content':
+    post:
+      operationId: UpdateContactFlowContent
+      description: Updates the specified contact flow.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidContactFlowException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidContactFlowException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: ContactFlowId
+          in: path
+          required: true
+          description: The identifier of the contact flow.
+          schema:
+            type: string
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Content
+              properties:
+                Content:
+                  description: The content of the contact flow.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/contact-flows/{InstanceId}/{ContactFlowId}/name':
+    post:
+      operationId: UpdateContactFlowName
+      description: The name of the contact flow.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: ContactFlowId
+          in: path
+          required: true
+          description: The identifier of the contact flow.
+          schema:
+            type: string
+            maxLength: 500
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the contact flow.
+                  type: string
+                  minLength: 1
+                Description:
+                  description: The description of the contact flow.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/concurrency':
+    post:
+      operationId: UpdateRoutingProfileConcurrency
+      description: Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MediaConcurrencies
+              properties:
+                MediaConcurrencies:
+                  description: The channels agents can handle in the Contact Control Panel (CCP).
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MediaConcurrency'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/default-outbound-queue':
+    post:
+      operationId: UpdateRoutingProfileDefaultOutboundQueue
+      description: Updates the default outbound queue of a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DefaultOutboundQueueId
+              properties:
+                DefaultOutboundQueueId:
+                  description: The identifier for the default outbound queue.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/name':
+    post:
+      operationId: UpdateRoutingProfileName
+      description: Updates the name and description of a routing profile. The request accepts the following data in JSON format. At least <code>Name</code> or <code>Description</code> must be provided.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the routing profile. Must not be more than 127 characters.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: The description of the routing profile. Must not be more than 250 characters.
+                  type: string
+                  minLength: 1
+                  maxLength: 250
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2419,7 +3565,7 @@ paths:
   '/users/{InstanceId}/{UserId}/identity-info':
     post:
       operationId: UpdateUserIdentityInfo
-      description: Updates the identity information for the specified user.
+      description: '<p>Updates the identity information for the specified user.</p> <important> <p>Someone with the ability to invoke <code>UpdateUserIndentityInfo</code> can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker''s email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke <code>UpdateUserIndentityInfo</code>. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html">Best Practices for Security Profiles</a> in the <i>Amazon Connect Administrator Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2790,6 +3936,74 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    RoutingProfileQueueConfig:
+      type: object
+      required:
+        - QueueReference
+        - Priority
+        - Delay
+      properties:
+        QueueReference:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueReference'
+            - description: Contains information about a queue resource.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: 'The order in which contacts are to be handled for the queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a>.'
+        Delay:
+          allOf:
+            - $ref: '#/components/schemas/Delay'
+            - description: 'The delay, in seconds, a contact should be in the queue before they are routed to an available agent. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a> in the <i>Amazon Connect Administrator Guide</i>.'
+      description: Contains information about the queue and channel for which priority and delay can be set.
+    InvalidRequestException: {}
+    InvalidParameterException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    InternalServiceException: {}
+    CreateContactFlowResponse:
+      type: object
+      properties:
+        ContactFlowId:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow.
+        ContactFlowArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the contact flow.
+    TagValue:
+      type: string
+      maxLength: 256
+    InvalidContactFlowException: {}
+    DuplicateResourceException: {}
+    LimitExceededException: {}
+    CreateRoutingProfileResponse:
+      type: object
+      properties:
+        RoutingProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the routing profile.
+        RoutingProfileId:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile.
+    MediaConcurrency:
+      type: object
+      required:
+        - Channel
+        - Concurrency
+      properties:
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The channels that agents can handle in the Contact Control Panel (CCP).
+        Concurrency:
+          allOf:
+            - $ref: '#/components/schemas/Concurrency'
+            - description: The number of contacts an agent can have on a channel simultaneously.
+      description: 'Contains information about which channels are supported, and how many contacts an agent can have on a channel simultaneously.'
     CreateUserResponse:
       type: object
       properties:
@@ -2825,16 +4039,21 @@ components:
       type: string
     SecurityProfileId:
       type: string
-    TagValue:
-      type: string
-      maxLength: 256
-    InvalidRequestException: {}
-    InvalidParameterException: {}
-    LimitExceededException: {}
-    DuplicateResourceException: {}
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    InternalServiceException: {}
+    DescribeContactFlowResponse:
+      type: object
+      properties:
+        ContactFlow:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlow'
+            - description: Information about the contact flow.
+    ContactFlowNotPublishedException: {}
+    DescribeRoutingProfileResponse:
+      type: object
+      properties:
+        RoutingProfile:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfile'
+            - description: The routing profile.
     DescribeUserResponse:
       type: object
       properties:
@@ -2856,6 +4075,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/HierarchyStructure'
             - description: Information about the hierarchy structure.
+    RoutingProfileQueueReference:
+      type: object
+      required:
+        - QueueId
+        - Channel
+      properties:
+        QueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the queue.
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+      description: Contains the channel and queue identifier for a routing profile.
     GetContactAttributesResponse:
       type: object
       properties:
@@ -3235,6 +4469,17 @@ components:
         - YE
         - ZM
         - ZW
+    ListPromptsResponse:
+      type: object
+      properties:
+        PromptSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/PromptSummaryList'
+            - description: Information about the prompts.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListQueuesResponse:
       type: object
       properties:
@@ -3251,6 +4496,17 @@ components:
       enum:
         - STANDARD
         - AGENT
+    ListRoutingProfileQueuesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+        RoutingProfileQueueConfigSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueConfigSummaryList'
+            - description: Information about the routing profiles.
     ListRoutingProfilesResponse:
       type: object
       properties:
@@ -3378,6 +4634,28 @@ components:
       type: string
       minLength: 1
       maxLength: 100
+    InstanceId:
+      type: string
+      minLength: 1
+      maxLength: 100
+    RoutingProfileId:
+      type: string
+    RoutingProfileQueueConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutingProfileQueueConfig'
+      minItems: 1
+      maxItems: 10
+    AssociateRoutingProfileQueuesRequest:
+      type: object
+      required:
+        - QueueConfigs
+      title: AssociateRoutingProfileQueuesRequest
+      properties:
+        QueueConfigs:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
+            - description: The queues to associate with this routing profile.
     AttributeName:
       type: string
       minLength: 1
@@ -3413,11 +4691,58 @@ components:
       type: string
       enum:
         - LT
+    Concurrency:
+      type: integer
+      minimum: 1
+      maximum: 5
     ContactFlowId:
       type: string
       maxLength: 500
     ContactFlowName:
       type: string
+      minLength: 1
+    ContactFlowDescription:
+      type: string
+    ContactFlowContent:
+      type: string
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    ContactFlow:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the contact flow.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowName'
+            - description: The name of the contact flow.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowType'
+            - description: 'The type of the contact flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a Contact Flow Type</a> in the <i>Amazon Connect Administrator Guide</i>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowDescription'
+            - description: The description of the contact flow.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowContent'
+            - description: The content of the contact flow.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
+      description: Contains information about a contact flow.
     ContactFlowSummary:
       type: object
       properties:
@@ -3451,6 +4776,81 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    CreateContactFlowRequest:
+      type: object
+      required:
+        - Name
+        - Type
+        - Content
+      title: CreateContactFlowRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowName'
+            - description: The name of the contact flow.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowType'
+            - description: 'The type of the contact flow. For descriptions of the available types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types">Choose a Contact Flow Type</a> in the <i>Amazon Connect Administrator Guide</i>.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowDescription'
+            - description: 'The description of the contact flow. '
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowContent'
+            - description: 'The content of the contact flow. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
+    RoutingProfileName:
+      type: string
+      minLength: 1
+      maxLength: 127
+    RoutingProfileDescription:
+      type: string
+      minLength: 1
+      maxLength: 250
+    QueueId:
+      type: string
+    MediaConcurrencies:
+      type: array
+      items:
+        $ref: '#/components/schemas/MediaConcurrency'
+    CreateRoutingProfileRequest:
+      type: object
+      required:
+        - Name
+        - Description
+        - DefaultOutboundQueueId
+        - MediaConcurrencies
+      title: CreateRoutingProfileRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileName'
+            - description: The name of the routing profile. Must not be more than 127 characters.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileDescription'
+            - description: Description of the routing profile. Must not be more than 250 characters.
+        DefaultOutboundQueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The default outbound queue for the routing profile.
+        QueueConfigs:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
+            - description: 'The inbound queues associated with the routing profile. If no queue is added, the agent can only make outbound calls.'
+        MediaConcurrencies:
+          allOf:
+            - $ref: '#/components/schemas/MediaConcurrencies'
+            - description: The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
     Password:
       type: string
       pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,64}$/'
@@ -3500,20 +4900,8 @@ components:
         $ref: '#/components/schemas/SecurityProfileId'
       minItems: 1
       maxItems: 10
-    RoutingProfileId:
-      type: string
     HierarchyGroupId:
       type: string
-    InstanceId:
-      type: string
-      minLength: 1
-      maxLength: 100
-    TagMap:
-      type: object
-      minProperties: 1
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CreateUserRequest:
       type: object
       required:
@@ -3661,10 +5049,58 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CurrentMetric'
+    Delay:
+      type: integer
+      minimum: 0
+      maximum: 9999
     DeleteUserRequest:
       type: object
       title: DeleteUserRequest
       properties: {}
+    DescribeContactFlowRequest:
+      type: object
+      title: DescribeContactFlowRequest
+      properties: {}
+    DescribeRoutingProfileRequest:
+      type: object
+      title: DescribeRoutingProfileRequest
+      properties: {}
+    RoutingProfile:
+      type: object
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileName'
+            - description: The name of the routing profile.
+        RoutingProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the routing profile.
+        RoutingProfileId:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileId'
+            - description: The identifier of the routing profile.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileDescription'
+            - description: The description of the routing profile.
+        MediaConcurrencies:
+          allOf:
+            - $ref: '#/components/schemas/MediaConcurrencies'
+            - description: The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+        DefaultOutboundQueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the default outbound queue for this routing profile.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
+      description: Contains information about a routing profile.
     DescribeUserHierarchyGroupRequest:
       type: object
       title: DescribeUserHierarchyGroupRequest
@@ -3781,6 +5217,20 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) of the queue.
       description: Contains information about a queue resource for which metrics are returned.
+    RoutingProfileQueueReferenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutingProfileQueueReference'
+    DisassociateRoutingProfileQueuesRequest:
+      type: object
+      required:
+        - QueueReferences
+      title: DisassociateRoutingProfileQueuesRequest
+      properties:
+        QueueReferences:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueReferenceList'
+            - description: The queues to disassociate from this routing profile.
     Filters:
       type: object
       properties:
@@ -3818,15 +5268,15 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.'
         Groupings:
           allOf:
             - $ref: '#/components/schemas/Groupings'
-            - description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. The only supported channel is <code>VOICE</code>.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
+            - description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
         CurrentMetrics:
           allOf:
             - $ref: '#/components/schemas/CurrentMetrics'
-            - description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> </dd> </dl>'
+            - description: '<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time">ACW</a> </p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time">Available</a> </p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time">Error</a> </p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time">NPT (Non-Productive Time)</a> </p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On contact</a> </p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time">On contact</a> </p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time">Online</a> </p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time">Staffed</a> </p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time">In queue</a> </p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time">Scheduled</a> </p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> <p>When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:</p> <p> <code>{ "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0 </code>}</p> <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time">Oldest</a> </p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time">Active</a> </p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href="https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time">Availability</a> </p> </dd> </dl>'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3863,7 +5313,7 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is <code>VOICE</code>.'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.'
         Groupings:
           allOf:
             - $ref: '#/components/schemas/Groupings'
@@ -4079,6 +5529,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PhoneNumberSummary'
+    ListPromptsRequest:
+      type: object
+      title: ListPromptsRequest
+      properties: {}
+    PromptSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PromptSummary'
     QueueTypes:
       type: array
       items:
@@ -4092,6 +5550,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/QueueSummary'
+    ListRoutingProfileQueuesRequest:
+      type: object
+      title: ListRoutingProfileQueuesRequest
+      properties: {}
+    RoutingProfileQueueConfigSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RoutingProfileQueueConfigSummary'
     ListRoutingProfilesRequest:
       type: object
       title: ListRoutingProfilesRequest
@@ -4168,8 +5634,34 @@ components:
             - $ref: '#/components/schemas/PhoneNumberCountryCode'
             - description: The ISO country code.
       description: Contains summary information about a phone number for a contact center.
-    QueueId:
+    Priority:
+      type: integer
+      minimum: 1
+      maximum: 99
+    PromptId:
       type: string
+      minLength: 1
+      maxLength: 256
+    PromptName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    PromptSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/PromptId'
+            - description: The identifier of the prompt.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the prompt.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/PromptName'
+            - description: The name of the prompt.
+      description: Contains information about the prompt.
     QueueName:
       type: string
       minLength: 1
@@ -4214,10 +5706,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactId'
             - description: The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
-    RoutingProfileName:
-      type: string
-      minLength: 1
-      maxLength: 100
+    RoutingProfileQueueConfigSummary:
+      type: object
+      required:
+        - QueueId
+        - QueueArn
+        - QueueName
+        - Priority
+        - Delay
+        - Channel
+      properties:
+        QueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the queue.
+        QueueArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the queue.
+        QueueName:
+          allOf:
+            - $ref: '#/components/schemas/QueueName'
+            - description: The name of the queue.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/Priority'
+            - description: 'The order in which contacts are to be handled for the queue. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a>.'
+        Delay:
+          allOf:
+            - $ref: '#/components/schemas/Delay'
+            - description: 'The delay, in seconds, that a contact should be in the queue before they are routed to an available agent. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a> in the <i>Amazon Connect Administrator Guide</i>.'
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The channels this queue supports.
+      description: Contains summary information about a routing profile queue.
     RoutingProfileSummary:
       type: object
       properties:
@@ -4267,7 +5790,7 @@ components:
         ContactFlowId:
           allOf:
             - $ref: '#/components/schemas/ContactFlowId'
-            - description: The identifier of the contact flow for the chat.
+            - description: '<p>The identifier of the contact flow for initiating the chat. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
         Attributes:
           allOf:
             - $ref: '#/components/schemas/Attributes'
@@ -4332,7 +5855,7 @@ components:
         ContactFlowId:
           allOf:
             - $ref: '#/components/schemas/ContactFlowId'
-            - description: The identifier of the contact flow for the outbound call.
+            - description: '<p>The identifier of the contact flow for the outbound call. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
@@ -4413,7 +5936,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 1
-      maxItems: 50
+      maxItems: 200
     TagResourceRequest:
       type: object
       required:
@@ -4451,6 +5974,70 @@ components:
           allOf:
             - $ref: '#/components/schemas/Attributes'
             - description: '<p>The Amazon Connect attributes. These attributes can be accessed in contact flows just like any other contact attributes.</p> <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+    UpdateContactFlowContentRequest:
+      type: object
+      required:
+        - Content
+      title: UpdateContactFlowContentRequest
+      properties:
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowContent'
+            - description: The content of the contact flow.
+    UpdateContactFlowNameRequest:
+      type: object
+      title: UpdateContactFlowNameRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowName'
+            - description: The name of the contact flow.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowDescription'
+            - description: The description of the contact flow.
+    UpdateRoutingProfileConcurrencyRequest:
+      type: object
+      required:
+        - MediaConcurrencies
+      title: UpdateRoutingProfileConcurrencyRequest
+      properties:
+        MediaConcurrencies:
+          allOf:
+            - $ref: '#/components/schemas/MediaConcurrencies'
+            - description: The channels agents can handle in the Contact Control Panel (CCP).
+    UpdateRoutingProfileDefaultOutboundQueueRequest:
+      type: object
+      required:
+        - DefaultOutboundQueueId
+      title: UpdateRoutingProfileDefaultOutboundQueueRequest
+      properties:
+        DefaultOutboundQueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier for the default outbound queue.
+    UpdateRoutingProfileNameRequest:
+      type: object
+      title: UpdateRoutingProfileNameRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileName'
+            - description: The name of the routing profile. Must not be more than 127 characters.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileDescription'
+            - description: The description of the routing profile. Must not be more than 250 characters.
+    UpdateRoutingProfileQueuesRequest:
+      type: object
+      required:
+        - QueueConfigs
+      title: UpdateRoutingProfileQueuesRequest
+      properties:
+        QueueConfigs:
+          allOf:
+            - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
+            - description: The queues to be updated for this routing profile.
     UpdateUserHierarchyRequest:
       type: object
       title: UpdateUserHierarchyRequest

@@ -193,7 +193,7 @@ paths:
                     Schedules:
                       allOf:
                         - $ref: '#/components/schemas/ScheduleList'
-                        - description: The schedule of policy-defined actions.
+                        - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/Parameters'
@@ -628,7 +628,7 @@ paths:
                     Schedules:
                       allOf:
                         - $ref: '#/components/schemas/ScheduleList'
-                        - description: The schedule of policy-defined actions.
+                        - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/Parameters'
@@ -721,7 +721,7 @@ components:
       items:
         $ref: '#/components/schemas/Schedule'
       minItems: 1
-      maxItems: 1
+      maxItems: 4
     Parameters:
       type: object
       properties:
@@ -848,7 +848,7 @@ components:
         Schedules:
           allOf:
             - $ref: '#/components/schemas/ScheduleList'
-            - description: The schedule of policy-defined actions.
+            - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
