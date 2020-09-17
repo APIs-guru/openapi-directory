@@ -212,6 +212,9 @@ paths:
                 disableSchemaValidation:
                   description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
                   type: boolean
+                disableExecuteApiEndpoint:
+                  description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
+                  type: boolean
                 name:
                   description: 'A string with a length between [1-128].'
                   type: string
@@ -791,6 +794,22 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/DomainNameConfiguration'
+                mutualTlsAuthentication:
+                  description: The mutual TLS authentication configuration for a custom domain name.
+                  type: object
+                  properties:
+                    TruststoreUri:
+                      allOf:
+                        - $ref: '#/components/schemas/UriWithLengthBetween1And2048'
+                        - xml:
+                            name: truststoreUri
+                          description: 'An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+                    TruststoreVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/StringWithLengthBetween1And64'
+                        - xml:
+                            name: truststoreVersion
+                          description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
                 tags:
                   description: Represents a collection of tags associated with the resource.
                   type: object
@@ -2120,6 +2139,9 @@ paths:
                 disableSchemaValidation:
                   description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
                   type: boolean
+                disableExecuteApiEndpoint:
+                  description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
+                  type: boolean
                 name:
                   description: 'A string with a length between [1-128].'
                   type: string
@@ -2750,6 +2772,22 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/DomainNameConfiguration'
+                mutualTlsAuthentication:
+                  description: The mutual TLS authentication configuration for a custom domain name.
+                  type: object
+                  properties:
+                    TruststoreUri:
+                      allOf:
+                        - $ref: '#/components/schemas/UriWithLengthBetween1And2048'
+                        - xml:
+                            name: truststoreUri
+                          description: 'An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+                    TruststoreVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/StringWithLengthBetween1And64'
+                        - xml:
+                            name: truststoreVersion
+                          description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
   '/v2/apis/{apiId}/integrations/{integrationId}':
     delete:
       operationId: DeleteIntegration
@@ -4425,6 +4463,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -4663,6 +4707,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthentication'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4727,6 +4777,9 @@ components:
                 name: securityPolicy
               description: The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
       description: The domain name configuration.
+    StringWithLengthBetween1And64:
+      type: string
+      description: 'A string with a length between [1-64].'
     AccessDeniedException: {}
     CreateIntegrationResult:
       type: object
@@ -5006,9 +5059,6 @@ components:
             - xml:
                 name: target
               description: The target for the route.
-    StringWithLengthBetween1And64:
-      type: string
-      description: 'A string with a length between [1-64].'
     StringWithLengthBetween1And128:
       type: string
       description: 'A string with a length between [1-128].'
@@ -5313,6 +5363,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -5573,6 +5629,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthentication'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -6216,6 +6278,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -6309,6 +6377,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -6405,6 +6479,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -6605,6 +6685,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthentication'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -7194,6 +7280,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         ImportInfo:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -7467,6 +7559,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         Name:
           allOf:
             - $ref: '#/components/schemas/StringWithLengthBetween1And128'
@@ -7610,6 +7708,21 @@ components:
       description: The domain name configurations.
       items:
         $ref: '#/components/schemas/DomainNameConfiguration'
+    MutualTlsAuthenticationInput:
+      type: object
+      properties:
+        TruststoreUri:
+          allOf:
+            - $ref: '#/components/schemas/UriWithLengthBetween1And2048'
+            - xml:
+                name: truststoreUri
+              description: 'An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+        TruststoreVersion:
+          allOf:
+            - $ref: '#/components/schemas/StringWithLengthBetween1And64'
+            - xml:
+                name: truststoreVersion
+              description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
     CreateDomainNameRequest:
       type: object
       required:
@@ -7628,6 +7741,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthenticationInput'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -7635,6 +7754,27 @@ components:
                 name: tags
               description: The collection of tags associated with a domain name.
       description: Creates a new DomainName resource to represent a domain name.
+    MutualTlsAuthentication:
+      type: object
+      properties:
+        TruststoreUri:
+          allOf:
+            - $ref: '#/components/schemas/UriWithLengthBetween1And2048'
+            - xml:
+                name: truststoreUri
+              description: 'An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://<replaceable>bucket-name</replaceable>/<replaceable>key-name</replaceable>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+        TruststoreVersion:
+          allOf:
+            - $ref: '#/components/schemas/StringWithLengthBetween1And64'
+            - xml:
+                name: truststoreVersion
+              description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
+        TruststoreWarnings:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: truststoreWarnings
+              description: 'A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.'
     IntegrationType:
       type: string
       enum:
@@ -8237,6 +8377,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthentication'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -8936,6 +9082,12 @@ components:
             - xml:
                 name: disableSchemaValidation
               description: Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
+        DisableExecuteApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: disableExecuteApiEndpoint
+              description: 'Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.'
         Name:
           allOf:
             - $ref: '#/components/schemas/StringWithLengthBetween1And128'
@@ -9055,6 +9207,12 @@ components:
             - xml:
                 name: domainNameConfigurations
               description: The domain name configurations.
+        MutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthenticationInput'
+            - xml:
+                name: mutualTlsAuthentication
+              description: The mutual TLS authentication configuration for a custom domain name.
       description: Updates a DomainName.
     UpdateIntegrationRequest:
       type: object

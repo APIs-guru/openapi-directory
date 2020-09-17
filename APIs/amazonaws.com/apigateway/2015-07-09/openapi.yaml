@@ -677,18 +677,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
           description: UnauthorizedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
-        '482':
+        '483':
           description: TooManyRequestsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
-        '483':
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -1204,6 +1210,18 @@ paths:
                   enum:
                     - TLS_1_0
                     - TLS_1_2
+                mutualTlsAuthentication:
+                  description: 'If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.'
+                  type: object
+                  properties:
+                    truststoreUri:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication, for example, <code>s3://bucket-name/key-name</code>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+                    truststoreVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8062,6 +8080,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MapOfStringToString'
             - description: The collection of tags. Each tag element is associated with a given resource.
+        mutualTlsAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/MutualTlsAuthentication'
+            - description: 'The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.'
       description: '<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class="Remarks"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API''s root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class="seeAlso"> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html">Set a Custom Host Name for an API</a> </div>'
     ListOfEndpointType:
       type: array
@@ -9352,6 +9374,18 @@ components:
       enum:
         - TLS_1_0
         - TLS_1_2
+    MutualTlsAuthenticationInput:
+      type: object
+      properties:
+        truststoreUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication, for example, <code>s3://bucket-name/key-name</code>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+        truststoreVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
+      description: 'If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.'
     CreateDomainNameRequest:
       type: object
       required:
@@ -9402,6 +9436,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecurityPolicy'
             - description: The Transport Layer Security (TLS) version + cipher suite for this <a>DomainName</a>. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.
+        mutualTlsAuthentication:
+          $ref: '#/components/schemas/MutualTlsAuthenticationInput'
       description: A request to create a new domain name.
     CreateModelRequest:
       type: object
@@ -9795,6 +9831,22 @@ components:
         - AVAILABLE
         - UPDATING
         - PENDING
+    MutualTlsAuthentication:
+      type: object
+      properties:
+        truststoreUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example <code>s3://bucket-name/key-name</code>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.'
+        truststoreVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.'
+        truststoreWarnings:
+          allOf:
+            - $ref: '#/components/schemas/ListOfString'
+            - description: 'A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.'
+      description: 'If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.'
     ListOfDomainName:
       type: array
       items:

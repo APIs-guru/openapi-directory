@@ -1323,6 +1323,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DescribePiiEntitiesDetectionJob:
+    post:
+      operationId: DescribePiiEntitiesDetectionJob
+      description: 'Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePiiEntitiesDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: JobNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePiiEntitiesDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DescribePiiEntitiesDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.DescribeSentimentDetectionJob:
     post:
       operationId: DescribeSentimentDetectionJob
@@ -1600,6 +1657,63 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.DetectKeyPhrases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DetectPiiEntities:
+    post:
+      operationId: DetectPiiEntities
+      description: Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectPiiEntitiesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TextSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextSizeLimitExceededException'
+        '482':
+          description: UnsupportedLanguageException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedLanguageException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectPiiEntitiesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DetectPiiEntities
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2187,6 +2301,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ListPiiEntitiesDetectionJobs:
+    post:
+      operationId: ListPiiEntitiesDetectionJobs
+      description: Gets a list of the PII entity detection jobs that you have submitted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPiiEntitiesDetectionJobsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFilterException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPiiEntitiesDetectionJobsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ListPiiEntitiesDetectionJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.ListSentimentDetectionJobs:
     post:
       operationId: ListSentimentDetectionJobs
@@ -2628,6 +2799,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.StartPiiEntitiesDetectionJob:
+    post:
+      operationId: StartPiiEntitiesDetectionJob
+      description: Starts an asynchronous PII entity detection job for a collection of documents.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartPiiEntitiesDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: KmsKeyValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartPiiEntitiesDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.StartPiiEntitiesDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.StartSentimentDetectionJob:
     post:
       operationId: StartSentimentDetectionJob
@@ -2887,6 +3115,57 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.StopKeyPhrasesDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.StopPiiEntitiesDetectionJob:
+    post:
+      operationId: StopPiiEntitiesDetectionJob
+      description: Stops a PII entities detection job in progress.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopPiiEntitiesDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: JobNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopPiiEntitiesDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.StopPiiEntitiesDetectionJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3789,6 +4068,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+    DescribePiiEntitiesDetectionJobResponse:
+      type: object
+      properties:
+        PiiEntitiesDetectionJobProperties:
+          $ref: '#/components/schemas/PiiEntitiesDetectionJobProperties'
+    DescribePiiEntitiesDetectionJobRequest:
+      type: object
+      required:
+        - JobId
+      title: DescribePiiEntitiesDetectionJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
     DescribeSentimentDetectionJobResponse:
       type: object
       properties:
@@ -3887,6 +4181,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
             - description: The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
+    DetectPiiEntitiesResponse:
+      type: object
+      properties:
+        Entities:
+          allOf:
+            - $ref: '#/components/schemas/ListOfPiiEntities'
+            - description: 'A collection of PII entities identified in the input text. For each entity, the response provides the entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.'
+    DetectPiiEntitiesRequest:
+      type: object
+      required:
+        - Text
+        - LanguageCode
+      title: DetectPiiEntitiesRequest
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.'
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language of the input documents.
     DetectSentimentResponse:
       type: object
       properties:
@@ -4125,6 +4441,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
             - description: The maximum number of results to return in each page. The default is 100.
+    ListPiiEntitiesDetectionJobsResponse:
+      type: object
+      properties:
+        PiiEntitiesDetectionJobPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntitiesDetectionJobPropertiesList'
+            - description: A list containing the properties of each job that is returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+    ListPiiEntitiesDetectionJobsRequest:
+      type: object
+      title: ListPiiEntitiesDetectionJobsRequest
+      properties:
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntitiesDetectionJobFilter'
+            - description: 'Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: The maximum number of results to return in each page.
     ListSentimentDetectionJobsResponse:
       type: object
       properties:
@@ -4407,6 +4750,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+    StartPiiEntitiesDetectionJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier generated for the job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of the job.
+    StartPiiEntitiesDetectionJobRequest:
+      type: object
+      required:
+        - InputDataConfig
+        - OutputDataConfig
+        - Mode
+        - DataAccessRoleArn
+        - LanguageCode
+      title: StartPiiEntitiesDetectionJobRequest
+      properties:
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: The input properties for a PII entities detection job.
+        OutputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputDataConfig'
+            - description: Provides conﬁguration parameters for the output of PII entity detection jobs.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntitiesDetectionMode'
+            - description: Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+        RedactionConfig:
+          allOf:
+            - $ref: '#/components/schemas/RedactionConfig'
+            - description: '<p>Provides configuration parameters for PII entity redaction.</p> <p>This parameter is required if you set the <code>Mode</code> parameter to <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code> definition that includes the <code>PiiEntityTypes</code> parameter.</p>'
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The identifier of the job.
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language of the input documents.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
     StartSentimentDetectionJobResponse:
       type: object
       properties:
@@ -4573,6 +4969,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier of the key phrases detection job to stop.
+    StopPiiEntitiesDetectionJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier of the PII entities detection job to stop.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of the PII entities detection job.
+    StopPiiEntitiesDetectionJobRequest:
+      type: object
+      required:
+        - JobId
+      title: StopPiiEntitiesDetectionJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier of the PII entities detection job to stop.
     StopSentimentDetectionJobResponse:
       type: object
       properties:
@@ -5419,6 +5836,58 @@ components:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
       description: Provides information about a key phrases detection job.
+    PiiEntitiesDetectionJobProperties:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier assigned to the PII entities detection job.
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name that you assigned the PII entities detection job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: 'The current status of the PII entities detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.'
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of a job.
+        SubmitTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the PII entities detection job was submitted for processing.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the PII entities detection job completed.
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: The input properties for a PII entities detection job.
+        OutputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/PiiOutputDataConfig'
+            - description: The output data configuration that you supplied when you created the PII entities detection job.
+        RedactionConfig:
+          allOf:
+            - $ref: '#/components/schemas/RedactionConfig'
+            - description: '<p>Provides configuration parameters for PII entity redaction.</p> <p>This parameter is required if you set the <code>Mode</code> parameter to <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code> definition that includes the <code>PiiEntityTypes</code> parameter.</p>'
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language code of the input documents
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntitiesDetectionMode'
+            - description: Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+      description: Provides information about a PII entities detection job.
     SentimentDetectionJobProperties:
       type: object
       properties:
@@ -5527,6 +5996,10 @@ components:
       type: string
       pattern: 'arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer-endpoint/[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       maxLength: 256
+    ListOfPiiEntities:
+      type: array
+      items:
+        $ref: '#/components/schemas/PiiEntity'
     Float:
       type: number
       format: float
@@ -5983,6 +6456,56 @@ components:
       type: integer
       minimum: 1
       maximum: 500
+    PiiEntity:
+      type: object
+      properties:
+        Score:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntityType'
+            - description: The entity's type.
+        BeginOffset:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'A character offset in the input text that shows where the PII entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.'
+        EndOffset:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.'
+      description: Provides information about a PII entity.
+    PiiEntityType:
+      type: string
+      enum:
+        - BANK_ACCOUNT_NUMBER
+        - BANK_ROUTING
+        - CREDIT_DEBIT_NUMBER
+        - CREDIT_DEBIT_CVV
+        - CREDIT_DEBIT_EXPIRY
+        - PIN
+        - EMAIL
+        - ADDRESS
+        - NAME
+        - PHONE
+        - SSN
+        - DATE_TIME
+        - PASSPORT_NUMBER
+        - DRIVER_ID
+        - URL
+        - AGE
+        - USERNAME
+        - PASSWORD
+        - AWS_ACCESS_KEY
+        - AWS_SECRET_KEY
+        - IP_ADDRESS
+        - MAC_ADDRESS
+        - ALL
+    ListOfPiiEntityTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/PiiEntityType'
     SyntaxToken:
       type: object
       properties:
@@ -6007,6 +6530,30 @@ components:
             - $ref: '#/components/schemas/PartOfSpeechTag'
             - description: 'Provides the part of speech label and the confidence level that Amazon Comprehend has that the part of speech was correctly identified. For more information, see <a>how-syntax</a>.'
       description: Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.
+    PiiEntitiesDetectionJobFilter:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: Filters on the name of the job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+        SubmitTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+        SubmitTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+      description: Provides information for filtering a list of PII entity detection jobs.
+    PiiEntitiesDetectionJobPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PiiEntitiesDetectionJobProperties'
     SentimentDetectionJobFilter:
       type: object
       properties:
@@ -6055,6 +6602,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TopicsDetectionJobProperties'
+    MaskCharacter:
+      type: string
+      pattern: '[!@#$%&*]'
+      minLength: 1
+      maxLength: 1
     NumberOfTopicsInteger:
       type: integer
       minimum: 1
@@ -6092,6 +6644,46 @@ components:
             - $ref: '#/components/schemas/Float'
             - description: The confidence that Amazon Comprehend has that the part of speech was correctly identified.
       description: 'Identifies the part of speech represented by the token and gives the confidence that Amazon Comprehend has that the part of speech was correctly identified. For more information about the parts of speech that Amazon Comprehend can identify, see <a>how-syntax</a>.'
+    PiiOutputDataConfig:
+      type: object
+      required:
+        - S3Uri
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. '
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job.
+      description: Provides configuration parameters for the output of PII entity detection jobs.
+    RedactionConfig:
+      type: object
+      properties:
+        PiiEntityTypes:
+          allOf:
+            - $ref: '#/components/schemas/ListOfPiiEntityTypes'
+            - description: An array of the types of PII entities that Amazon Comprehend detects in the input text for your request.
+        MaskMode:
+          allOf:
+            - $ref: '#/components/schemas/PiiEntitiesDetectionMaskMode'
+            - description: Specifies whether the PII entity is redacted with the mask character or the entity type.
+        MaskCharacter:
+          allOf:
+            - $ref: '#/components/schemas/MaskCharacter'
+            - description: A character that replaces each character in the redacted PII entity.
+      description: Provides configuration parameters for PII entity redaction.
+    PiiEntitiesDetectionMode:
+      type: string
+      enum:
+        - ONLY_REDACTION
+        - ONLY_OFFSETS
+    PiiEntitiesDetectionMaskMode:
+      type: string
+      enum:
+        - MASK
+        - REPLACE_WITH_PII_ENTITY_TYPE
     SecurityGroupId:
       type: string
       pattern: '[-0-9a-zA-Z]+'

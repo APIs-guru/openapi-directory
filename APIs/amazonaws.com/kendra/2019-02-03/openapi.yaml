@@ -261,7 +261,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.CreateDataSource:
     post:
       operationId: CreateDataSource
-      description: '<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, connector type and description for your data source. You can choose between an S3 connector, a SharePoint Online connector, and a database connector.</p> <p>You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>'
+      description: '<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>'
       responses:
         '200':
           description: Success
@@ -1903,7 +1903,7 @@ components:
         Configuration:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfiguration'
-            - description: The connector configuration information that is required to access the repository.
+            - description: The data source connector configuration information that is required to access the repository.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -1961,6 +1961,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.
+        FileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FaqFileFormat'
+            - description: '<p>The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes.</p> <p>The format must match the format of the file stored in the S3 bucket identified in the <code>S3Path</code> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html">Adding questions and answers</a>.</p>'
     CreateIndexResponse:
       type: object
       properties:
@@ -2150,6 +2154,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: 'If the <code>Status</code> field is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason why the FAQ failed.'
+        FileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FaqFileFormat'
+            - description: The file format used by the input files for the FAQ.
     DescribeFaqRequest:
       type: object
       required:
@@ -3006,15 +3014,15 @@ components:
         S3Configuration:
           allOf:
             - $ref: '#/components/schemas/S3DataSourceConfiguration'
-            - description: Provides information to create a connector for a document repository in an Amazon S3 bucket.
+            - description: Provides information to create a data source connector for a document repository in an Amazon S3 bucket.
         SharePointConfiguration:
           allOf:
             - $ref: '#/components/schemas/SharePointConfiguration'
-            - description: Provides information necessary to create a connector for a Microsoft SharePoint site.
+            - description: Provides information necessary to create a data source connector for a Microsoft SharePoint site.
         DatabaseConfiguration:
           allOf:
             - $ref: '#/components/schemas/DatabaseConfiguration'
-            - description: Provides information necessary to create a connector for a database.
+            - description: Provides information necessary to create a data source connector for a database.
         SalesforceConfiguration:
           allOf:
             - $ref: '#/components/schemas/SalesforceConfiguration'
@@ -3066,6 +3074,12 @@ components:
             - $ref: '#/components/schemas/S3ObjectKey'
             - description: The name of the file.
       description: Information required to find a specific file in an Amazon S3 bucket.
+    FaqFileFormat:
+      type: string
+      enum:
+        - CSV
+        - CSV_WITH_HEADER
+        - JSON
     FaqId:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
@@ -3385,7 +3399,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricValue'
             - description: The current number of documents crawled by the current sync job in the data source.
-      description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
+      description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.
     DataSourceSyncJob:
       type: object
       properties:
@@ -3420,7 +3434,7 @@ components:
         Metrics:
           allOf:
             - $ref: '#/components/schemas/DataSourceSyncJobMetrics'
-            - description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
+            - description: Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.
       description: Provides information about a synchronization job.
     DataSourceSyncJobHistoryList:
       type: array
@@ -3800,6 +3814,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The UNIX datetime that the FAQ was last updated.
+        FileFormat:
+          allOf:
+            - $ref: '#/components/schemas/FaqFileFormat'
+            - description: 'The file type used to create the FAQ. '
       description: Provides information about a frequently asked questions and answer contained in an index.
     FaqSummaryItems:
       type: array
