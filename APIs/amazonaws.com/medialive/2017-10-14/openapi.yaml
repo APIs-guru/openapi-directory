@@ -114,6 +114,271 @@ servers:
     description: The MediaLive endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /prod/batch/delete:
+    post:
+      operationId: BatchDelete
+      description: Starts delete of resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channelIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                inputIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                inputSecurityGroupIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                multiplexIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /prod/batch/start:
+    post:
+      operationId: BatchStart
+      description: Starts existing resources
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchStartResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channelIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                multiplexIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /prod/batch/stop:
+    post:
+      operationId: BatchStop
+      description: Stops running resources
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchStopResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channelIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                multiplexIds:
+                  description: Placeholder documentation for __listOf__string
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/schedule':
     put:
       operationId: BatchUpdateSchedule
@@ -4283,6 +4548,65 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchDeleteResponse:
+      type: object
+      properties:
+        Failed:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchFailedResultModel'
+            - xml:
+                name: failed
+              description: List of failed operations
+        Successful:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchSuccessfulResultModel'
+            - xml:
+                name: successful
+              description: List of successful operations
+      description: Placeholder documentation for BatchDeleteResponse
+    __string:
+      type: string
+      description: Placeholder documentation for __string
+    BadRequestException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    BadGatewayException: {}
+    NotFoundException: {}
+    GatewayTimeoutException: {}
+    TooManyRequestsException: {}
+    ConflictException: {}
+    BatchStartResponse:
+      type: object
+      properties:
+        Failed:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchFailedResultModel'
+            - xml:
+                name: failed
+              description: List of failed operations
+        Successful:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchSuccessfulResultModel'
+            - xml:
+                name: successful
+              description: List of successful operations
+      description: Placeholder documentation for BatchStartResponse
+    BatchStopResponse:
+      type: object
+      properties:
+        Failed:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchFailedResultModel'
+            - xml:
+                name: failed
+              description: List of failed operations
+        Successful:
+          allOf:
+            - $ref: '#/components/schemas/__listOfBatchSuccessfulResultModel'
+            - xml:
+                name: successful
+              description: List of successful operations
+      description: Placeholder documentation for BatchStopResponse
     BatchUpdateScheduleResponse:
       type: object
       properties:
@@ -4309,14 +4633,7 @@ components:
       description: Placeholder documentation for __listOf__string
       items:
         $ref: '#/components/schemas/__string'
-    BadRequestException: {}
     UnprocessableEntityException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    BadGatewayException: {}
-    NotFoundException: {}
-    GatewayTimeoutException: {}
-    TooManyRequestsException: {}
     CreateChannelResponse:
       type: object
       properties:
@@ -4578,10 +4895,6 @@ components:
         - UHD
       description: |
         Input resolution based on lines of vertical resolution in the input; SD is less than 720 lines, HD is 720 to 1080 lines, UHD is greater than 1080 lines
-    __string:
-      type: string
-      description: Placeholder documentation for __string
-    ConflictException: {}
     CreateInputResponse:
       type: object
       properties:
@@ -7496,6 +7809,73 @@ components:
                 name: webDeliveryAllowedFlag
               description: 'When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates'
       description: Scte35 Time Signal Apos
+    BatchDeleteRequest:
+      type: object
+      title: BatchDeleteRequest
+      properties:
+        ChannelIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: channelIds
+              description: List of channel IDs
+        InputIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: inputIds
+              description: List of input IDs
+        InputSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: inputSecurityGroupIds
+              description: List of input security group IDs
+        MultiplexIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: multiplexIds
+              description: List of multiplex IDs
+      description: A request to delete resources
+    __listOfBatchFailedResultModel:
+      type: array
+      description: Placeholder documentation for __listOfBatchFailedResultModel
+      items:
+        $ref: '#/components/schemas/BatchFailedResultModel'
+    __listOfBatchSuccessfulResultModel:
+      type: array
+      description: Placeholder documentation for __listOfBatchSuccessfulResultModel
+      items:
+        $ref: '#/components/schemas/BatchSuccessfulResultModel'
+    BatchFailedResultModel:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: ARN of the resource
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: code
+              description: Error code for the failed operation
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: ID of the resource
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: message
+              description: Error message for the failed operation
+      description: Details from a failed operation
     BatchScheduleActionCreateRequest:
       type: object
       required:
@@ -7544,6 +7924,62 @@ components:
                 name: scheduleActions
               description: List of actions that have been deleted from the schedule.
       description: List of actions that have been deleted from the schedule.
+    BatchStartRequest:
+      type: object
+      title: BatchStartRequest
+      properties:
+        ChannelIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: channelIds
+              description: List of channel IDs
+        MultiplexIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: multiplexIds
+              description: List of multiplex IDs
+      description: A request to start resources
+    BatchStopRequest:
+      type: object
+      title: BatchStopRequest
+      properties:
+        ChannelIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: channelIds
+              description: List of channel IDs
+        MultiplexIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: multiplexIds
+              description: List of multiplex IDs
+      description: A request to stop resources
+    BatchSuccessfulResultModel:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: ARN of the resource
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: ID of the resource
+        State:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: state
+              description: Current state of the resource
+      description: Details from a successful operation
     BatchUpdateScheduleRequest:
       type: object
       title: BatchUpdateScheduleRequest
