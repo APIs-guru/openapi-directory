@@ -1535,7 +1535,7 @@ paths:
     get:
       x-aws-operation-name: CopyDBSnapshot
       operationId: GET_CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> or <code>storage-optimization</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1653,7 +1653,7 @@ paths:
     post:
       x-aws-operation-name: CopyDBSnapshot
       operationId: POST_CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the "available" state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> or <code>storage-optimization</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -2247,7 +2247,7 @@ paths:
         - name: EnableCloudwatchLogsExports
           in: query
           required: false
-          description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
+          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
           schema:
             type: array
             items:
@@ -3347,7 +3347,7 @@ paths:
         - name: EnableCloudwatchLogsExports
           in: query
           required: false
-          description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
+          description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
           schema:
             type: array
             items:
@@ -4983,7 +4983,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalCluster
       operationId: GET_CreateGlobalCluster
-      description: '<p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p> Creates an Aurora global database spread across multiple AWS Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5031,7 +5031,7 @@ paths:
         - name: Engine
           in: query
           required: false
-          description: Provides the name of the database engine to be used for this DB cluster.
+          description: The name of the database engine to be used for this DB cluster.
           schema:
             type: string
         - name: EngineVersion
@@ -5083,7 +5083,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalCluster
       operationId: POST_CreateGlobalCluster
-      description: '<p> Creates an Aurora global database spread across multiple regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p> Creates an Aurora global database spread across multiple AWS Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. </p> <p> You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database. </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -10269,7 +10269,7 @@ paths:
     get:
       x-aws-operation-name: DescribeEvents
       operationId: GET_DescribeEvents
-      description: 'Returns events related to DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots for the past 14 days. Events specific to a particular DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
+      description: '<p>Returns events related to DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots for the past 14 days. Events specific to a particular DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots group can be obtained by providing the name as a parameter.</p> <note> <p>By default, the past hour of events are returned.</p> </note>'
       responses:
         '200':
           description: Success
@@ -10376,7 +10376,7 @@ paths:
     post:
       x-aws-operation-name: DescribeEvents
       operationId: POST_DescribeEvents
-      description: 'Returns events related to DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots for the past 14 days. Events specific to a particular DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.'
+      description: '<p>Returns events related to DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots for the past 14 days. Events specific to a particular DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots group can be obtained by providing the name as a parameter.</p> <note> <p>By default, the past hour of events are returned.</p> </note>'
       responses:
         '200':
           description: Success
@@ -10450,7 +10450,7 @@ paths:
         - name: Filters
           in: query
           required: false
-          description: '<p>Filters specify one or more snapshot exports to describe. The filters are specified as name-value pairs that define what to include in the output.</p> <p>Supported filters include the following: </p> <ul> <li> <p> <code>export-task-identifier</code> - An identifier for the snapshot export task.</p> </li> <li> <p> <code>s3-bucket</code> - The Amazon S3 bucket the snapshot is exported to.</p> </li> <li> <p> <code>source-arn</code> - The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3</p> </li> <li> <p> <code>status</code> - The status of the export task.</p> </li> </ul>'
+          description: '<p>Filters specify one or more snapshot exports to describe. The filters are specified as name-value pairs that define what to include in the output. Filter names and values are case-sensitive.</p> <p>Supported filters include the following: </p> <ul> <li> <p> <code>export-task-identifier</code> - An identifier for the snapshot export task.</p> </li> <li> <p> <code>s3-bucket</code> - The Amazon S3 bucket the snapshot is exported to.</p> </li> <li> <p> <code>source-arn</code> - The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3</p> </li> <li> <p> <code>status</code> - The status of the export task. Must be lowercase, for example, <code>complete</code>.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -20675,11 +20675,11 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+            - description: 'A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', '':'', ''/'', ''='', ''+'', ''-'', ''@'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").'
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+            - description: 'A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can only contain only the set of Unicode letters, digits, white-space, ''_'', ''.'', '':'', ''/'', ''='', ''+'', ''-'', ''@'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").'
       description: Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
     DBSnapshotNotFoundFault: {}
     DBProxyNotFoundFault: {}
@@ -20934,7 +20934,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The value of a processor feature name.
-      description: '<p>Contains the processor features of a DB instance class.</p> <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name for the <code>Name</code> parameter. To specify the number of threads per core, use the <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p> <p>You can set the processor features of the DB instance class for a DB instance when you call one of the following actions:</p> <ul> <li> <p> <code>CreateDBInstance</code> </p> </li> <li> <p> <code>ModifyDBInstance</code> </p> </li> <li> <p> <code>RestoreDBInstanceFromDBSnapshot</code> </p> </li> <li> <p> <code>RestoreDBInstanceFromS3</code> </p> </li> <li> <p> <code>RestoreDBInstanceToPointInTime</code> </p> </li> </ul> <p>You can view the valid processor values for a particular instance class by calling the <code>DescribeOrderableDBInstanceOptions</code> action and specifying the instance class for the <code>DBInstanceClass</code> parameter.</p> <p>In addition, you can use the following actions for DB instance class processor information:</p> <ul> <li> <p> <code>DescribeDBInstances</code> </p> </li> <li> <p> <code>DescribeDBSnapshots</code> </p> </li> <li> <p> <code>DescribeValidDBInstanceModifications</code> </p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>'
+      description: '<p>Contains the processor features of a DB instance class.</p> <p>To specify the number of CPU cores, use the <code>coreCount</code> feature name for the <code>Name</code> parameter. To specify the number of threads per core, use the <code>threadsPerCore</code> feature name for the <code>Name</code> parameter.</p> <p>You can set the processor features of the DB instance class for a DB instance when you call one of the following actions:</p> <ul> <li> <p> <code>CreateDBInstance</code> </p> </li> <li> <p> <code>ModifyDBInstance</code> </p> </li> <li> <p> <code>RestoreDBInstanceFromDBSnapshot</code> </p> </li> <li> <p> <code>RestoreDBInstanceFromS3</code> </p> </li> <li> <p> <code>RestoreDBInstanceToPointInTime</code> </p> </li> </ul> <p>You can view the valid processor values for a particular instance class by calling the <code>DescribeOrderableDBInstanceOptions</code> action and specifying the instance class for the <code>DBInstanceClass</code> parameter.</p> <p>In addition, you can use the following actions for DB instance class processor information:</p> <ul> <li> <p> <code>DescribeDBInstances</code> </p> </li> <li> <p> <code>DescribeDBSnapshots</code> </p> </li> <li> <p> <code>DescribeValidDBInstanceModifications</code> </p> </li> </ul> <p>If you call <code>DescribeDBInstances</code>, <code>ProcessorFeature</code> returns non-null values only if the following conditions are met:</p> <ul> <li> <p>You are accessing an Oracle DB instance.</p> </li> <li> <p>Your Oracle DB instance class supports configuring the number of CPU cores and threads per core.</p> </li> <li> <p>The current number CPU cores and threads is set to a non-default value.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor">Configuring the Processor of the DB Instance Class</a> in the <i>Amazon RDS User Guide. </i> </p>'
     DBInstanceAlreadyExistsFault: {}
     InsufficientDBInstanceCapacityFault: {}
     InstanceQuotaExceededFault: {}
@@ -21707,7 +21707,7 @@ components:
         DBParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the DB parameter group.
+            - description: The name of the DB parameter group.
       description: ' Contains the result of a successful invocation of the <code>ModifyDBParameterGroup</code> or <code>ResetDBParameterGroup</code> action. '
     ModifyDBProxyResponse:
       type: object
@@ -22429,11 +22429,11 @@ components:
         DBClusterParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the DB cluster parameter group.
+            - description: The name of the DB cluster parameter group.
         DBParameterGroupFamily:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with.
+            - description: The name of the DB parameter group family that this DB cluster parameter group is compatible with.
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22590,11 +22590,11 @@ components:
         DBParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the DB parameter group.
+            - description: The name of the DB parameter group.
         DBParameterGroupFamily:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the DB parameter group family that this DB parameter group is compatible with.
+            - description: The name of the DB parameter group family that this DB parameter group is compatible with.
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23027,7 +23027,7 @@ components:
         EnableCloudwatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
-            - description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.'
+            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p> <p> <b>Aurora MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Aurora PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
         EngineMode:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23160,7 +23160,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the database engine to be used for this DB cluster.
+            - description: The name of the database engine to be used for this DB cluster.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23525,7 +23525,7 @@ components:
         EnableCloudwatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
-            - description: 'The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.'
+            - description: '<p>The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon Relational Database Service User Guide</i>.</p> <p> <b>MariaDB</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Microsoft SQL Server</b> </p> <p>Possible values are <code>agent</code> and <code>error</code>. </p> <p> <b>MySQL</b> </p> <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>. </p> <p> <b>Oracle</b> </p> <p>Possible values are <code>alert</code>, <code>audit</code>, <code>listener</code>, and <code>trace</code>. </p> <p> <b>PostgreSQL</b> </p> <p>Possible values are <code>postgresql</code> and <code>upgrade</code>. </p>'
         ProcessorFeatures:
           allOf:
             - $ref: '#/components/schemas/ProcessorFeatureList'
@@ -23691,7 +23691,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the database engine to be used for this DB instance.
+            - description: The name of the database engine to be used for this DB instance.
         DBInstanceStatus:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24222,7 +24222,7 @@ components:
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Provides the name of the database engine to be used for this DB cluster.
+            - description: The name of the database engine to be used for this DB cluster.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -26123,7 +26123,7 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: '<p>Filters specify one or more snapshot exports to describe. The filters are specified as name-value pairs that define what to include in the output.</p> <p>Supported filters include the following: </p> <ul> <li> <p> <code>export-task-identifier</code> - An identifier for the snapshot export task.</p> </li> <li> <p> <code>s3-bucket</code> - The Amazon S3 bucket the snapshot is exported to.</p> </li> <li> <p> <code>source-arn</code> - The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3</p> </li> <li> <p> <code>status</code> - The status of the export task.</p> </li> </ul>'
+            - description: '<p>Filters specify one or more snapshot exports to describe. The filters are specified as name-value pairs that define what to include in the output. Filter names and values are case-sensitive.</p> <p>Supported filters include the following: </p> <ul> <li> <p> <code>export-task-identifier</code> - An identifier for the snapshot export task.</p> </li> <li> <p> <code>s3-bucket</code> - The Amazon S3 bucket the snapshot is exported to.</p> </li> <li> <p> <code>source-arn</code> - The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3</p> </li> <li> <p> <code>status</code> - The status of the export task. Must be lowercase, for example, <code>complete</code>.</p> </li> </ul>'
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
