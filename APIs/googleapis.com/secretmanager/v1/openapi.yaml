@@ -768,7 +768,7 @@ components:
       properties:
         customerManagedEncryption:
           $ref: "#/components/schemas/CustomerManagedEncryption"
-          description: Optional. The customer-managed encryption configuration of the Secret. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration do not apply retroactively to existing SecretVersions.
+          description: Optional. The customer-managed encryption configuration of the Secret. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration only apply to SecretVersions added afterwards. They do not apply retroactively to existing SecretVersions.
       type: object
     AutomaticStatus:
       description: The replication status of a SecretVersion using automatic replication. Only populated if the parent Secret has an automatic replication policy.
@@ -936,7 +936,7 @@ components:
       properties:
         customerManagedEncryption:
           $ref: "#/components/schemas/CustomerManagedEncryption"
-          description: Optional. The customer-managed encryption configuration of the User-Managed Replica. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration do not apply retroactively to existing SecretVersions.
+          description: Optional. The customer-managed encryption configuration of the User-Managed Replica. If no configuration is provided, Google-managed default encryption is used. Updates to the Secret encryption configuration only apply to SecretVersions added afterwards. They do not apply retroactively to existing SecretVersions.
         location:
           description: 'The canonical IDs of the location to replicate data. For example: `"us-east1"`.'
           type: string

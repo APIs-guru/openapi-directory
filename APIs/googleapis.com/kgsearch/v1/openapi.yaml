@@ -37,20 +37,10 @@ tags:
 paths:
   /v1/entities:search:
     get:
-      description: >-
-        Searches Knowledge Graph for entities that match the constraints.
-
-        A list of matched entities will be returned in response, which will be in
-
-        JSON-LD format and compatible with http://schema.org
+      description: Searches Knowledge Graph for entities that match the constraints. A list of matched entities will be returned in response, which will be in JSON-LD format and compatible with http://schema.org
       operationId: kgsearch.entities.search
       parameters:
-        - description: >-
-            The list of entity id to be used for search instead of query string.
-
-            To specify multiple ids in the HTTP request, repeat the parameter in the
-
-            URL as in ...?ids=A&ids=B
+        - description: The list of entity id to be used for search instead of query string. To specify multiple ids in the HTTP request, repeat the parameter in the URL as in ...?ids=A&ids=B
           explode: true
           in: query
           name: ids
@@ -64,10 +54,7 @@ paths:
           name: indent
           schema:
             type: boolean
-        - description: >-
-            The list of language codes (defined in ISO 693) to run the query with,
-
-            e.g. 'en'.
+        - description: The list of language codes (defined in ISO 693) to run the query with, e.g. 'en'.
           explode: true
           in: query
           name: languages
@@ -91,12 +78,7 @@ paths:
           name: query
           schema:
             type: string
-        - description: >-
-            Restricts returned entities with these types, e.g. Person
-
-            (as defined in http://schema.org/Person). If multiple types are specified,
-
-            returned entities will contain one or more of these types.
+        - description: Restricts returned entities with these types, e.g. Person (as defined in http://schema.org/Person). If multiple types are specified, returned entities will contain one or more of these types.
           explode: true
           in: query
           name: types
@@ -203,16 +185,10 @@ components:
         type: string
   schemas:
     SearchResponse:
-      description: >-
-        Response message includes the context and a list of matching results
-
-        which contain the detail of associated entities.
+      description: Response message includes the context and a list of matching results which contain the detail of associated entities.
       properties:
         "@context":
-          description: >-
-            The local context applicable for the response. See more details at
-
-            http://www.w3.org/TR/json-ld/#context-definitions.
+          description: The local context applicable for the response. See more details at http://www.w3.org/TR/json-ld/#context-definitions.
         "@type":
           description: The schema type of top-level JSON-LD object, e.g. ItemList.
         itemListElement:

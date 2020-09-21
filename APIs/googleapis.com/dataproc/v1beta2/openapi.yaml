@@ -1997,7 +1997,7 @@ components:
         parameters:
           additionalProperties:
             type: string
-          description: Optional. Map from parameter names to values that should be used for those parameters. Values may not exceed 100 characters.
+          description: Optional. Map from parameter names to values that should be used for those parameters. Values may not exceed 1000 characters.
           type: object
         requestId:
           description: Optional. A tag that prevents multiple concurrent workflow instances with the same tag from running. This mitigates risk of concurrent instances started due to retries.It is recommended to always set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The tag must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
@@ -2357,10 +2357,10 @@ components:
           type: string
       type: object
     MetastoreConfig:
-      description: Specifies the metastore configuration.
+      description: Specifies a Metastore configuration.
       properties:
         dataprocMetastoreService:
-          description: Optional. Relative resource name of an existing Dataproc Metastore service.
+          description: "Required. Resource name of an existing Dataproc Metastore service.Example: projects/[project_id]/locations/[dataproc_region]/services/[service-name]"
           type: string
       type: object
     NamespacedGkeDeploymentTarget:

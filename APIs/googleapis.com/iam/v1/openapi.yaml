@@ -240,7 +240,7 @@ paths:
         - roles
   "/v1/{name}":
     delete:
-      description: Deletes a ServiceAccountKey.
+      description: Deletes a ServiceAccountKey. Deleting a service account key does not revoke short-lived credentials that have been issued based on the service account key.
       operationId: iam.projects.serviceAccounts.keys.delete
       parameters:
         - description: "Required. The resource name of the service account key in the following format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT}/keys/{key}`. Using `-` as a wildcard for the `PROJECT_ID` will infer the project from the account. The `ACCOUNT` value can be the `email` address or the `unique_id` of the service account."

@@ -1,17 +1,17 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/apps/licensing/v1/product
+  - url: https://www.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Licensing API to view and manage licenses for your domain
+  description: The Google Enterprise License Manager API's allows you to license apps for all the users of a domain managed by you.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Licensing API
+  title: Enterprise License Manager API
   version: v1
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -35,15 +35,19 @@ externalDocs:
 tags:
   - name: licenseAssignments
 paths:
-  "/{productId}/sku/{skuId}/user":
+  "/apps/licensing/v1/product/{productId}/sku/{skuId}/user":
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Assign a license.
       operationId: licensing.licenseAssignments.insert
@@ -79,7 +83,7 @@ paths:
             - https://www.googleapis.com/auth/apps.licensing
       tags:
         - licenseAssignments
-  "/{productId}/sku/{skuId}/user/{userId}":
+  "/apps/licensing/v1/product/{productId}/sku/{skuId}/user/{userId}":
     delete:
       description: Revoke a license.
       operationId: licensing.licenseAssignments.delete
@@ -96,12 +100,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
-
-            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
-
-            If the userId is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes. If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -133,12 +132,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
-
-            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
-
-            If the userId is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes. If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -159,15 +153,19 @@ paths:
       tags:
         - licenseAssignments
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Reassign a user's product SKU with a different SKU in the same product. This method supports patch semantics.
+      description: Patch a Licensing info via Apiary Patch Orchestration
       operationId: licensing.licenseAssignments.patch
       parameters:
         - description: A product's unique identifier. For more information about products in this version of the API, see Products and SKUs.
@@ -182,12 +180,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
-
-            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
-
-            If the userId is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes. If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -228,12 +221,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            The user's current primary email address. If the user's email address changes, use the new email address in your API requests.
-
-            Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes.
-
-            If the userId is suspended, the license status changes.
+        - description: The user's current primary email address. If the user's email address changes, use the new email address in your API requests. Since a userId is subject to change, do not use a userId value as a key for persistent data. This key could break if the current user's email address changes. If the userId is suspended, the license status changes.
           in: path
           name: userId
           required: true
@@ -258,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/apps.licensing
       tags:
         - licenseAssignments
-  "/{productId}/sku/{skuId}/users":
+  "/apps/licensing/v1/product/{productId}/sku/{skuId}/users":
     get:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProductAndSku
@@ -275,10 +263,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field.
-
-            If the customer is suspended, the server returns an error.
+        - description: Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
@@ -311,14 +296,18 @@ paths:
       tags:
         - licenseAssignments
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
-  "/{productId}/users":
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/apps/licensing/v1/product/{productId}/users":
     get:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProduct
@@ -329,10 +318,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: >-
-            Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field.
-
-            If the customer is suspended, the server returns an error.
+        - description: Customer's customerId. A previous version of this API accepted the primary domain name as a value for this field. If the customer is suspended, the server returns an error.
           in: query
           name: customerId
           required: true
@@ -365,22 +351,49 @@ paths:
       tags:
         - licenseAssignments
     parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
       - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/key"
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/userIp"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
     alt:
-      description: Data format for the response.
+      description: Data format for response.
       in: query
       name: alt
       schema:
         enum:
           - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
         type: string
     fields:
       description: Selector specifying which fields to include in a partial response.
@@ -407,15 +420,21 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
-    userIp:
-      description: Deprecated. Please use quotaUser instead.
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
-      name: userIp
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
       schema:
         type: string
   schemas:
@@ -456,7 +475,6 @@ components:
           type: string
       type: object
     LicenseAssignmentList:
-      description: LicesnseAssignment List for a given product/sku for a customer.
       properties:
         etag:
           description: ETag of the resource.

@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://tasks.googleapis.com/
 info:
   contact:
     name: Google
@@ -104,7 +104,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Flag indicating whether completed tasks are returned in the result. Optional. The default is True.
+        - description: Flag indicating whether completed tasks are returned in the result. Optional. The default is True. Note that showHidden must also be True to show tasks completed in first party clients, such as the web UI and Google's mobile apps.
           in: query
           name: showCompleted
           schema:
@@ -652,6 +652,7 @@ components:
         type: string
   schemas:
     Task:
+      description: LINT.IfChange
       properties:
         completed:
           description: Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.

@@ -1002,7 +1002,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new health dataset. Results are returned through the Operation interface which returns either an `Operation.response` which contains a Dataset or `Operation.error`. The metadata field type is OperationMetadata. A Google Cloud Platform project can contain up to 500 datasets across all regions.
+      description: Creates a new health dataset. Results are returned through the Operation interface which returns either an `Operation.response` which contains a Dataset or `Operation.error`. The metadata field type is OperationMetadata.
       operationId: healthcare.projects.locations.datasets.create
       parameters:
         - description: The name of the project where the server creates the dataset. For example, `projects/{project_id}/locations/{location_id}`.
@@ -3402,6 +3402,13 @@ components:
         segmentTerminator:
           description: Byte(s) to use as the segment terminator. If this is unset, '\r' is used as segment terminator, matching the HL7 version 2 specification.
           format: byte
+          type: string
+        version:
+          description: Immutable. Determines the version of the unschematized parser to be used when `schema` is not given. This field is immutable after store creation.
+          enum:
+            - PARSER_VERSION_UNSPECIFIED
+            - V1
+            - V2
           type: string
       type: object
     PatientId:

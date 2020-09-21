@@ -41,11 +41,8 @@ tags:
   - name: channelSections
   - name: comments
   - name: commentThreads
-  - name: endscreens
-  - name: guideCategories
   - name: i18nLanguages
   - name: i18nRegions
-  - name: infocards
   - name: liveBroadcasts
   - name: liveChatBans
   - name: liveChatMessages
@@ -1325,189 +1322,6 @@ paths:
             - https://www.googleapis.com/auth/youtube.force-ssl
       tags:
         - comments
-  /youtube/v3/endscreen:
-    get:
-      description: Retrieves endscreen for a given video.
-      operationId: youtube.endscreens.get
-      parameters:
-        - description: Encrypted id of the video.
-          in: query
-          name: videoId
-          required: true
-          schema:
-            type: string
-        - description: The properties to return.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Content owner of the video.
-          in: query
-          name: onBehalfOfContentOwner
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EndscreenGetResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
-      tags:
-        - endscreens
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Updates endscreen for a given video. Note: * If the element id is not provided, a new element will be created. * If the element id is provided, that element will be updated. * Existing elements will be discarded if they're not included in the request."
-      operationId: youtube.endscreens.update
-      parameters:
-        - description: Encrypted id of the video this endscreen corresponds to.
-          in: query
-          name: videoId
-          required: true
-          schema:
-            type: string
-        - description: The properties to return.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Content owner of the video.
-          in: query
-          name: onBehalfOfContentOwner
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Endscreen"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Endscreen"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
-      tags:
-        - endscreens
-  /youtube/v3/guideCategories:
-    get:
-      description: Retrieves a list of guide categories.
-      operationId: youtube.guideCategories.list
-      parameters:
-        - description: The *part* parameter specifies the guideCategory resource properties that the API response will include. Set the parameter value to snippet.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - in: query
-          name: hl
-          schema:
-            type: string
-        - description: Return the guide categories with the given IDs.
-          explode: true
-          in: query
-          name: id
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Return all categories in the given region code.
-          in: query
-          name: regionCode
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GuideCategoryListResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.readonly
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
-      tags:
-        - guideCategories
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   /youtube/v3/i18nLanguages:
     get:
       description: Retrieves a list of resources, possibly filtered.
@@ -1622,116 +1436,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /youtube/v3/infocards:
-    get:
-      description: Retrieves all infocards for a given video.
-      operationId: youtube.infocards.list
-      parameters:
-        - description: The properties to return.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Content owner of the video.
-          in: query
-          name: onBehalfOfContentOwner
-          schema:
-            type: string
-        - description: Encrypted id of the video.
-          in: query
-          name: videoId
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InfocardListResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
-      tags:
-        - infocards
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Updates infocards for a given video. Note: * If the card id is not provided, a new card will be created. * If the card id is provided, that card will be updated. * Existing cards will be discarded if they're not included in the request."
-      operationId: youtube.infocards.update
-      parameters:
-        - description: The properties to update.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Content owner of the video.
-          in: query
-          name: onBehalfOfContentOwner
-          schema:
-            type: string
-        - description: Encrypted id of the video.
-          in: query
-          name: videoId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InfoCards"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InfoCards"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
-      tags:
-        - infocards
   /youtube/v3/liveBroadcasts:
     delete:
       description: Delete a given broadcast.
@@ -5668,15 +5372,6 @@ components:
           $ref: "#/components/schemas/WatchSettings"
           description: Branding properties for the watch page.
       type: object
-    ChannelCard:
-      properties:
-        channelId:
-          description: External channel ID. Required.
-          type: string
-        customMessage:
-          description: Each card can have a custom message. Required.
-          type: string
-      type: object
     ChannelContentDetails:
       description: Details about the content of a channel.
       properties:
@@ -5731,15 +5426,6 @@ components:
           items:
             $ref: "#/components/schemas/ChannelConversionPing"
           type: array
-      type: object
-    ChannelElement:
-      properties:
-        channelId:
-          description: External channel ID. Required.
-          type: string
-        customMessage:
-          description: Customized message for the element. Required.
-          type: string
       type: object
     ChannelListResponse:
       properties:
@@ -7143,82 +6829,6 @@ components:
             - ytAgeRestricted
           type: string
       type: object
-    Endscreen:
-      properties:
-        elements:
-          description: A list of endscreen elements.
-          items:
-            $ref: "#/components/schemas/EndscreenElement"
-          type: array
-        startOffset:
-          description: The time we start the endscreen in milliseconds.
-          format: google-duration
-          type: string
-      type: object
-    EndscreenElement:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        id:
-          description: UUID for this element.
-          type: string
-        kind:
-          default: youtube#endscreen
-          description: Identifies what kind of resource this is.
-          type: string
-        snippet:
-          $ref: "#/components/schemas/EndscreenElementSnippet"
-          description: The snippet object contains basic details about the element.
-      type: object
-    EndscreenElementSnippet:
-      properties:
-        channelElement:
-          $ref: "#/components/schemas/ChannelElement"
-        duration:
-          description: Duration of the element in milliseconds. Required.
-          format: google-duration
-          type: string
-        left:
-          description: Fraction of video width.
-          format: float
-          type: number
-        linkElement:
-          $ref: "#/components/schemas/LinkElement"
-        merchandiseElement:
-          $ref: "#/components/schemas/MerchandiseElement"
-        playlistElement:
-          $ref: "#/components/schemas/PlaylistElement"
-        startOffset:
-          description: Start of the element in milliseconds. Required.
-          format: google-duration
-          type: string
-        subscribeElement:
-          $ref: "#/components/schemas/SubscribeElement"
-        top:
-          description: Fraction of video height.
-          format: float
-          type: number
-        videoElement:
-          $ref: "#/components/schemas/VideoElement"
-        width:
-          description: Fraction of video width.
-          format: float
-          type: number
-      type: object
-    EndscreenGetResponse:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        kind:
-          default: youtube#endscreenGetResponse
-          description: Identifies what kind of resource this is.
-          type: string
-        resource:
-          $ref: "#/components/schemas/Endscreen"
-          description: Endscreen resource.
-      type: object
     Entity:
       properties:
         id:
@@ -7243,63 +6853,6 @@ components:
           description: Longitude in degrees.
           format: double
           type: number
-      type: object
-    GuideCategory:
-      description: A *guideCategory* resource identifies a category that YouTube algorithmically assigns based on a channel's content or other indicators, such as the channel's popularity. The list is similar to video categories, with the difference being that a video's uploader can assign a video category but only YouTube can assign a channel category.
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        id:
-          description: The ID that YouTube uses to uniquely identify the guide category.
-          type: string
-        kind:
-          default: youtube#guideCategory
-          description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#guideCategory".'
-          type: string
-        snippet:
-          $ref: "#/components/schemas/GuideCategorySnippet"
-          description: The snippet object contains basic details about the category, such as its title.
-      type: object
-    GuideCategoryListResponse:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        eventId:
-          description: Serialized EventId of the request which produced this response.
-          type: string
-        items:
-          description: A list of categories that can be associated with YouTube channels. In this map, the category ID is the map key, and its value is the corresponding guideCategory resource.
-          items:
-            $ref: "#/components/schemas/GuideCategory"
-          type: array
-        kind:
-          default: youtube#guideCategoryListResponse
-          description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#guideCategoryListResponse".'
-          type: string
-        nextPageToken:
-          description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
-          type: string
-        pageInfo:
-          $ref: "#/components/schemas/PageInfo"
-        prevPageToken:
-          description: The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
-          type: string
-        tokenPagination:
-          $ref: "#/components/schemas/TokenPagination"
-        visitorId:
-          description: The visitorId identifies the visitor.
-          type: string
-      type: object
-    GuideCategorySnippet:
-      description: Basic details about a guide category.
-      properties:
-        channelId:
-          type: string
-        title:
-          description: Description of the guide category.
-          type: string
       type: object
     I18nLanguage:
       description: An *i18nLanguage* resource identifies a UI language currently supported by YouTube.
@@ -7466,69 +7019,6 @@ components:
         watchIconImageUrl:
           type: string
       type: object
-    InfoCard:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        id:
-          description: UUID for this infocard.
-          type: string
-        kind:
-          default: youtube#infocard
-          description: Identifies what kind of resource this is.
-          type: string
-        snippet:
-          $ref: "#/components/schemas/InfoCardSnippet"
-          description: The snippet object contains basic details about the infocard.
-      type: object
-    InfoCardSnippet:
-      properties:
-        channelInfocard:
-          $ref: "#/components/schemas/ChannelCard"
-        linkInfocard:
-          $ref: "#/components/schemas/LinkCard"
-        playlistInfocard:
-          $ref: "#/components/schemas/PlaylistCard"
-        teaser:
-          $ref: "#/components/schemas/InfoCardSnippetTeaser"
-          description: Each card can have a teaser. Required.
-        videoInfocard:
-          $ref: "#/components/schemas/VideoCard"
-      type: object
-    InfoCardSnippetTeaser:
-      properties:
-        teaserStartOffset:
-          description: The offset from the video start at which the teaser should be displayed (activated), in milliseconds. Required.
-          format: google-duration
-          type: string
-        teaserText:
-          description: The teaser text to show at the top of the player for the info-card. Required for channel and link type cards. Optional for video and playlist type cards.
-          type: string
-      type: object
-    InfoCards:
-      properties:
-        items:
-          description: A list of infocards.
-          items:
-            $ref: "#/components/schemas/InfoCard"
-          type: array
-      type: object
-    InfocardListResponse:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        items:
-          description: A list of infocards.
-          items:
-            $ref: "#/components/schemas/InfoCard"
-          type: array
-        kind:
-          default: youtube#infocardListResponse
-          description: Identifies what kind of resource this is.
-          type: string
-      type: object
     IngestionInfo:
       description: Describes information necessary for ingesting an RTMP or an HTTP stream.
       properties:
@@ -7630,79 +7120,6 @@ components:
       properties:
         displayName:
           description: The name that should be used when referring to this level.
-          type: string
-      type: object
-    LinkCard:
-      properties:
-        customLinkText:
-          description: Custom text to show as the website link. Required.
-          type: string
-        externalImageUrl:
-          description: URL to an externally hosted image.
-          type: string
-        targetUrl:
-          description: The URL to which this card points. Required.
-          type: string
-        title:
-          description: The title to show on the card. Required.
-          type: string
-        uploadedImage:
-          $ref: "#/components/schemas/LinkCardUploadedImage"
-          description: Previously uploaded image.
-      type: object
-    LinkCardUploadedImage:
-      properties:
-        imageFile:
-          description: Image reference on the thumbnail service.
-          type: string
-        version:
-          description: The version in the thumbnail service.
-          format: int64
-          type: string
-      type: object
-    LinkElement:
-      properties:
-        callToActionType:
-          enum:
-            - unknownLinkText
-            - learnMore
-            - visit
-            - signUp
-            - shop
-            - download
-            - support
-            - order
-            - buy
-          type: string
-        customLinkText:
-          description: Custom text to show as the website link.
-          type: string
-        externalImageUrl:
-          description: URL to an externally hosted image.
-          type: string
-        targetUrl:
-          description: The URL to which this card points. Required.
-          type: string
-        uploadedImage:
-          $ref: "#/components/schemas/LinkElementUploadedImage"
-          description: Previously uploaded image.
-        websiteType:
-          enum:
-            - unknownWebsite
-            - associated
-            - crowdfunding
-            - merch
-            - other
-          type: string
-      type: object
-    LinkElementUploadedImage:
-      properties:
-        imageFile:
-          description: Image reference on the thumbnail service.
-          type: string
-        version:
-          description: The version in the thumbnail service.
-          format: int64
           type: string
       type: object
     LiveBroadcast:
@@ -8573,9 +7990,6 @@ components:
           $ref: "#/components/schemas/LevelDetails"
           description: Details about the pricing level.
       type: object
-    MerchandiseElement:
-      properties: {}
-      type: object
     MonitorStreamInfo:
       description: Settings and Info of the monitor stream
       properties:
@@ -8633,30 +8047,12 @@ components:
           $ref: "#/components/schemas/PlaylistStatus"
           description: The status object contains status information for the playlist.
       type: object
-    PlaylistCard:
-      properties:
-        customMessage:
-          description: Each card can have a custom message. Optional.
-          type: string
-        playlistId:
-          description: External playlist ID. Required.
-          type: string
-        startVideoId:
-          description: Starting video, if not the first. Optional.
-          type: string
-      type: object
     PlaylistContentDetails:
       properties:
         itemCount:
           description: The number of videos in the playlist.
           format: uint32
           type: integer
-      type: object
-    PlaylistElement:
-      properties:
-        playlistId:
-          description: External playlist ID. Required.
-          type: string
       type: object
     PlaylistItem:
       description: "A *playlistItem* resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist. YouTube uses playlists to identify special collections of videos for a channel, such as: - uploaded videos - favorite videos - positively rated (liked) videos - watch history - watch later To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel. You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user's channel."
@@ -9069,9 +8465,6 @@ components:
         sponsorSince:
           description: The date and time when the user became a sponsor. The value is specified in ISO 8601 (`YYYY-MM-DDThh:mm:ss.sZ`) format.
           type: string
-      type: object
-    SubscribeElement:
-      properties: {}
       type: object
     Subscription:
       description: A *subscription* resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
@@ -9547,19 +8940,6 @@ components:
             - m17Plus
           type: string
       type: object
-    VideoCard:
-      properties:
-        customMessage:
-          description: Each card can have a custom message. Optional.
-          type: string
-        playbackStartOffset:
-          description: Playback start time offset in milliseconds. Optional.
-          format: google-duration
-          type: string
-        videoId:
-          description: Encrypted Video ID. Required.
-          type: string
-      type: object
     VideoCategory:
       description: A *videoCategory* resource identifies a category that has been or could be associated with uploaded videos.
       properties:
@@ -9678,23 +9058,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    VideoElement:
-      properties:
-        playbackStartOffset:
-          description: Playback start time offset in milliseconds. Optional.
-          format: google-duration
-          type: string
-        videoId:
-          description: Encrypted Video ID. Required.
-          type: string
-        videoType:
-          enum:
-            - videoTypeUnknown
-            - fixed
-            - recentUpload
-            - bestForViewer
-          type: string
       type: object
     VideoFileDetails:
       description: Describes original video file properties, including technical details about audio and video streams, but also metadata information like content length, digitization time, or geotagging information.

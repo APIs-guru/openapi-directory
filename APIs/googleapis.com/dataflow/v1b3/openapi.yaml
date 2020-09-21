@@ -1443,6 +1443,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: If specified, determines the maximum number of stages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3847,6 +3857,65 @@ components:
             $ref: "#/components/schemas/InstructionInput"
           type: array
       type: object
+    FlexTemplateRuntimeEnvironment:
+      description: The environment values to be set at runtime for flex template.
+      properties:
+        additionalExperiments:
+          description: Additional experiment flags for the job.
+          items:
+            type: string
+          type: array
+        additionalUserLabels:
+          additionalProperties:
+            type: string
+          description: Additional user labels to be specified for the job. Keys and values must follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page.
+          type: object
+        enableStreamingEngine:
+          description: Whether to enable Streaming Engine for the job.
+          type: boolean
+        ipConfiguration:
+          description: Configuration for VM IPs.
+          enum:
+            - WORKER_IP_UNSPECIFIED
+            - WORKER_IP_PUBLIC
+            - WORKER_IP_PRIVATE
+          type: string
+        kmsKeyName:
+          description: "Name for the Cloud KMS key for the job. Key format is: projects//locations//keyRings//cryptoKeys/"
+          type: string
+        machineType:
+          description: The machine type to use for the job. Defaults to the value from the template if not specified.
+          type: string
+        maxWorkers:
+          description: The maximum number of Google Compute Engine instances to be made available to your pipeline during execution, from 1 to 1000.
+          format: int32
+          type: integer
+        network:
+          description: Network to which VMs will be assigned. If empty or unspecified, the service will use the network "default".
+          type: string
+        numWorkers:
+          description: The initial number of Google Compute Engine instances for the job.
+          format: int32
+          type: integer
+        serviceAccountEmail:
+          description: The email address of the service account to run the job as.
+          type: string
+        subnetwork:
+          description: Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "regions/REGION/subnetworks/SUBNETWORK".
+          type: string
+        tempLocation:
+          description: The Cloud Storage path to use for temporary files. Must be a valid Cloud Storage URL, beginning with `gs://`.
+          type: string
+        workerRegion:
+          description: The Compute Engine region (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in which worker processing should occur, e.g. "us-west1". Mutually exclusive with worker_zone. If neither worker_region nor worker_zone is specified, default to the control plane's region.
+          type: string
+        workerZone:
+          description: The Compute Engine zone (https://cloud.google.com/compute/docs/regions-zones/regions-zones) in which worker processing should occur, e.g. "us-west1-a". Mutually exclusive with worker_region. If neither worker_region nor worker_zone is specified, a zone in the control plane's region is chosen based on available capacity. If both `worker_zone` and `zone` are set, `worker_zone` takes precedence.
+          type: string
+        zone:
+          description: The Compute Engine [availability zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones) for launching worker instances to run your pipeline. In the future, worker_zone will take precedence.
+          type: string
+      type: object
     FloatingPointList:
       description: A metric value representing a list of floating point numbers.
       properties:
@@ -4124,6 +4193,9 @@ components:
     JobExecutionDetails:
       description: Information about the execution of a job.
       properties:
+        nextPageToken:
+          description: If present, this response does not contain all requested tasks. To obtain the next page of results, repeat the request with page_token set to this value.
+          type: string
         stages:
           description: The stages of the job execution.
           items:
@@ -4263,6 +4335,9 @@ components:
         containerSpecGcsPath:
           description: Gcs path to a file with json serialized ContainerSpec as content.
           type: string
+        environment:
+          $ref: "#/components/schemas/FlexTemplateRuntimeEnvironment"
+          description: The runtime environment for the FlexTemplate job
         jobName:
           description: Required. The job name to use for the created job.
           type: string

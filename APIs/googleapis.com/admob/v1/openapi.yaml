@@ -57,6 +57,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListPublisherAccountsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.report
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
     parameters:
@@ -89,6 +94,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublisherAccount"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.report
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
     parameters:
@@ -138,6 +148,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenerateMediationReportResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.report
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
   "/v1/{parent}/networkReport:generate":
@@ -175,6 +190,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenerateNetworkReportResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.report
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
 components:
@@ -374,7 +394,7 @@ components:
           $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Any other values are treated as 100000.
+          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Values larger than 100000 return an error.
           format: int32
           type: integer
         metrics:
@@ -495,7 +515,7 @@ components:
           $ref: "#/components/schemas/LocalizationSettings"
           description: Localization settings of the report.
         maxReportRows:
-          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Any other values are treated as 100000.
+          description: Maximum number of report data rows to return. If the value is not set, the API returns as many rows as possible, up to 100000. Acceptable values are 1-100000, inclusive. Values larger than 100000 return an error.
           format: int32
           type: integer
         metrics:
@@ -690,3 +710,21 @@ components:
             type: string
           type: array
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/admob.report: See your AdMob data
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/admob.report: See your AdMob data
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

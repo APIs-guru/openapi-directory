@@ -30,6 +30,7 @@ externalDocs:
 tags:
   - name: admin
   - name: cursor
+  - name: topicStats
 paths:
   "/v1/admin/{name}":
     delete:
@@ -419,6 +420,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/topicStats/{topic}:computeMessageStats":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Compute statistics about a range of messages in a given topic and partition.
+      operationId: pubsublite.topicStats.projects.locations.topics.computeMessageStats
+      parameters:
+        - description: Required. The topic for which we should compute message stats.
+          in: path
+          name: topic
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ComputeMessageStatsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ComputeMessageStatsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - topicStats
 components:
   parameters:
     _.xgafv:
@@ -506,6 +549,40 @@ components:
           description: Subscribe throughput capacity per partition in MiB/s. Must be >= 4 and <= 32.
           format: int32
           type: integer
+      type: object
+    ComputeMessageStatsRequest:
+      description: Compute statistics about a range of messages in a given topic and partition.
+      properties:
+        endCursor:
+          $ref: "#/components/schemas/Cursor"
+          description: The exclusive end of the range. The range is empty if end_cursor <= start_cursor. Specifying a start_cursor before the first message and an end_cursor after the last message will retrieve all messages.
+        partition:
+          description: Required. The partition for which we should compute message stats.
+          format: int64
+          type: string
+        startCursor:
+          $ref: "#/components/schemas/Cursor"
+          description: The inclusive start of the range.
+      type: object
+    ComputeMessageStatsResponse:
+      description: Response containing stats for messages in the requested topic and partition.
+      properties:
+        messageBytes:
+          description: The number of quota bytes accounted to these messages.
+          format: int64
+          type: string
+        messageCount:
+          description: The count of messages.
+          format: int64
+          type: string
+        minimumEventTime:
+          description: The minimum event timestamp across these messages. For the purposes of this computation, if a message does not have an event time, we use the publish time. The timestamp will be unset if there are no messages.
+          format: google-datetime
+          type: string
+        minimumPublishTime:
+          description: The minimum publish timestamp across these messages. Note that publish timestamps within a partition are non-decreasing. The timestamp will be unset if there are no messages.
+          format: google-datetime
+          type: string
       type: object
     Cursor:
       description: A cursor that describes the position of a message within a topic partition.

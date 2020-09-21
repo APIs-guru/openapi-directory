@@ -517,7 +517,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/deployments":
     delete:
-      description: Undeploys a shared flow revision from an environment.
+      description: "Undeploys a shared flow revision from an environment. For a request path `organizations/{org}/environments/{env}/sharedflows/{sf}/revisions/{rev}/deployments`, two permissions are required: * `apigee.deployments.delete` on the resource `organizations/{org}/environments/{env}` * `apigee.sharedflowrevisions.undeploy` on the resource `organizations/{org}/sharedflows/{sf}/revisions/{rev}`"
       operationId: apigee.organizations.environments.sharedflows.revisions.undeploy
       parameters:
         - description: "Required. Name of the shared flow revision to undeploy in the following format: `organizations/{org}/environments/{env}/sharedflows/{sharedflow}/revisions/{rev}`"
@@ -582,7 +582,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Deploys a revision of a shared flow. If a shared flow revision is currently deployed, to ensure seamless deployment with zero downtime set the `override` parameter to `true`. In this case, hybrid attempts to deply the new revision fully before undeploying the existing revision. You cannot use a shared flows until it has been deployed to an environment.
+      description: "Deploys a revision of a shared flow. If another revision of the same shared flow is currently deployed, set the `override` parameter to `true` to have this revision replace the currently deployed revision. You cannot use a shared flow until it has been deployed to an environment. For a request path `organizations/{org}/environments/{env}/sharedflows/{sf}/revisions/{rev}/deployments`, two permissions are required: * `apigee.deployments.create` on the resource `organizations/{org}/environments/{env}` * `apigee.sharedflowrevisions.deploy` on the resource `organizations/{org}/sharedflows/{sf}/revisions/{rev}`"
       operationId: apigee.organizations.environments.sharedflows.revisions.deploy
       parameters:
         - description: "Required. Name of the shared flow revision to deploy in the following format: `organizations/{org}/environments/{env}/sharedflows/{sharedflow}/revisions/{rev}`"
@@ -629,7 +629,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates a report for a dry run analysis of a DeployApiProxy request without committing the deployment. In addition to the standard validations performed when adding deployments, additional analysis will be done to detect possible traffic routing changes that would result from this deployment being created. Any potential routing conflicts or unsafe changes will be reported in the response. This routing analysis is not performed for a non-dry-run DeployApiProxy request.
+      description: "Generates a report for a dry run analysis of a DeployApiProxy request without committing the deployment. In addition to the standard validations performed when adding deployments, additional analysis will be done to detect possible traffic routing changes that would result from this deployment being created. Any potential routing conflicts or unsafe changes will be reported in the response. This routing analysis is not performed for a non-dry-run DeployApiProxy request. For a request path `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}/deployments:generateDeployChangeReport`, two permissions are required: * `apigee.deployments.create` on the resource `organizations/{org}/environments/{env}` * `apigee.proxyrevisions.deploy` on the resource `organizations/{org}/apis/{api}/revisions/{rev}`"
       operationId: apigee.organizations.environments.apis.revisions.deployments.generateDeployChangeReport
       parameters:
         - description: "Name of the API proxy revision deployment in the following format: `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}`"
@@ -676,7 +676,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates a report for a dry run analysis of an UndeployApiProxy request without committing the undeploy. In addition to the standard validations performed when removing deployments, additional analysis will be done to detect possible traffic routing changes that would result from this deployment being removed. Any potential routing conflicts or unsafe changes will be reported in the response. This routing analysis is not performed for a non-dry-run UndeployApiProxy request.
+      description: "Generates a report for a dry run analysis of an UndeployApiProxy request without committing the undeploy. In addition to the standard validations performed when removing deployments, additional analysis will be done to detect possible traffic routing changes that would result from this deployment being removed. Any potential routing conflicts or unsafe changes will be reported in the response. This routing analysis is not performed for a non-dry-run UndeployApiProxy request. For a request path `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}/deployments:generateUndeployChangeReport`, two permissions are required: * `apigee.deployments.delete` on the resource `organizations/{org}/environments/{env}` * `apigee.proxyrevisions.undeploy` on the resource `organizations/{org}/apis/{api}/revisions/{rev}`"
       operationId: apigee.organizations.environments.apis.revisions.deployments.generateUndeployChangeReport
       parameters:
         - description: "Name of the API proxy revision deployment in the following format: `organizations/{org}/environments/{env}/apis/{api}/revisions/{rev}`"
@@ -4170,6 +4170,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1TargetServerConfig"
           type: array
+        traceConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeTraceConfig"
+          description: Trace configurations. Contains config for the environment and config overrides for specific API proxies.
         uid:
           description: Unique ID for the environment configuration. The ID will only change if the environment is deleted and recreated.
           type: string
@@ -4722,7 +4725,7 @@ components:
       description: The OperationGroup contains a list of configuration details associated with Apigee proxies or Remote services. Remote services are non-Apigee Edge proxies. eg, Istio-Envoy.
       properties:
         operationConfigType:
-          description: Identfies whether the configuration is for Apigee proxy or a remote service. Possible values are "proxy" and "remote_service". If none specified, the default is "proxy". "proxy" is used when Apigee proxies are associated with the API product. "remote_service" is used when non-Apigee proxy like Envoy is used, and is associated with the API product.
+          description: Identfies whether the configuration is for Apigee proxy or a remote service. Possible values are "proxy" and "remoteservice". If none specified, the default is "proxy". "proxy" is used when Apigee proxies are associated with the API product. "remoteservice" is used when non-Apigee proxy like Envoy is used, and is associated with the API product.
           type: string
         operationConfigs:
           description: Required. A list of OperationConfig for either Apigee proxies or other other remote services, that are associated with this API product.
@@ -5196,6 +5199,109 @@ components:
         environment:
           description: "Name of an environment bound to the environment group in the following format: `organizations/{org}/environments/{env}`."
           type: string
+      type: object
+    GoogleCloudApigeeV1RuntimeTraceConfig:
+      description: "NEXT ID: 8 RuntimeTraceConfig defines the configurations for distributed trace in an environment."
+      properties:
+        endpoint:
+          description: Endpoint of the exporter.
+          type: string
+        exporter:
+          description: Exporter that is used to view the distributed trace captured using OpenCensus. An exporter sends traces to any backend that is capable of consuming them. Recorded spans can be exported by registered exporters.
+          enum:
+            - EXPORTER_UNSPECIFIED
+            - JAEGER
+            - CLOUD_TRACE
+          type: string
+        name:
+          description: "Name of the trace config in the following format: `organizations/{org}/environment/{env}/traceConfig`"
+          type: string
+        overrides:
+          description: List of trace configuration overrides for spicific API proxies.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeTraceConfigOverride"
+          type: array
+        revisionCreateTime:
+          description: The timestamp that the revision was created or updated.
+          format: google-datetime
+          type: string
+        revisionId:
+          description: Revision number which can be used by the runtime to detect if the trace config has changed between two versions.
+          type: string
+        samplingConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeTraceSamplingConfig"
+          description: Trace configuration for all API proxies in an environment.
+      type: object
+    GoogleCloudApigeeV1RuntimeTraceConfigOverride:
+      description: "NEXT ID: 7 Trace configuration override for a specific API proxy in an environment."
+      properties:
+        apiProxy:
+          description: "Name of the API proxy that will have its trace configuration overridden following format: `organizations/{org}/apis/{api}`"
+          type: string
+        name:
+          description: "Name of the trace config override in the following format: `organizations/{org}/environment/{env}/traceConfig/overrides/{override}`"
+          type: string
+        revisionCreateTime:
+          description: The timestamp that the revision was created or updated.
+          format: google-datetime
+          type: string
+        revisionId:
+          description: Revision number which can be used by the runtime to detect if the trace config override has changed between two versions.
+          type: string
+        samplingConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeTraceSamplingConfig"
+          description: Trace configuration override for a specific API proxy in an environment.
+        uid:
+          description: Unique ID for the configuration override. The ID will only change if the override is deleted and recreated.
+          type: string
+      type: object
+    GoogleCloudApigeeV1RuntimeTraceSamplingConfig:
+      description: "NEXT ID: 6 RuntimeTraceSamplingConfig represents the detail settings of distributed tracing. Only the fields that are defined in the distributed trace configuration can be overridden using the distribute trace configuration override APIs."
+      properties:
+        errorSources:
+          description: Error sources from which to capture errors. If none are specified, error codes are captured from all sources.
+          items:
+            enum:
+              - ERROR_SOURCE_UNSPECIFIED
+              - APIGEE
+              - TARGET
+            type: string
+          type: array
+        responseCodeRanges:
+          description: List of response code ranges.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeTraceSamplingConfigResponseCodeRange"
+          type: array
+        responseCodes:
+          description: List of single response codes.
+          items:
+            format: int32
+            type: integer
+          type: array
+        sampler:
+          description: Sampler of distributed tracing. OFF is the default value.
+          enum:
+            - SAMPLER_UNSPECIFIED
+            - OFF
+            - ON
+            - PROBABILITY
+          type: string
+        samplingRate:
+          description: Field sampling rate. This value is only valid when is only applicable when sampling value is probabilistic(PROBABILITY). The supported values are > 0 and <= 0.5.
+          format: float
+          type: number
+      type: object
+    GoogleCloudApigeeV1RuntimeTraceSamplingConfigResponseCodeRange:
+      description: ResponseCodeRange represents a group of response codes to capture, from the first response code to the last response code. Each range is a close interval. For example, if an interval is [400, 403], then that means 400, 401, 402, 403 will be all captured.
+      properties:
+        firstResponseCode:
+          description: The first response code to capture.
+          format: int32
+          type: integer
+        lastResponseCode:
+          description: The last response code to capture.
+          format: int32
+          type: integer
       type: object
     GoogleCloudApigeeV1Schema:
       description: Response for Schema call

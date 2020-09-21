@@ -185,6 +185,16 @@ paths:
     post:
       description: Creates a Group.
       operationId: cloudidentity.groups.create
+      parameters:
+        - description: Optional. The initial configuration option for the `Group`.
+          in: query
+          name: initialGroupConfig
+          schema:
+            enum:
+              - INITIAL_GROUP_CONFIG_UNSPECIFIED
+              - WITH_INITIAL_OWNER
+              - EMPTY
+            type: string
       requestBody:
         content:
           application/json:
@@ -552,6 +562,52 @@ paths:
           description: Successful response
       tags:
         - devices
+  "/v1/{name}:modifyMembershipRoles":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Modifies the `MembershipRole`s of a `Membership`.
+      operationId: cloudidentity.groups.memberships.modifyMembershipRoles
+      parameters:
+        - description: Required. The [resource name](https://cloud.google.com/apis/design/resource_names) of the `Membership` whose roles are to be modified. Must be of the form `groups/{group_id}/memberships/{membership_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifyMembershipRolesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModifyMembershipRolesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - groups
   "/v1/{name}:wipe":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1558,6 +1614,32 @@ components:
           description: 'MembershipRole in string format. Currently supported MembershipRoles: `"MEMBER"`.'
           type: string
       type: object
+    ModifyMembershipRolesRequest:
+      description: The request message for MembershipsService.ModifyMembershipRoles.
+      properties:
+        addRoles:
+          description: The `MembershipRole`s to be added. Adding or removing roles in the same request as updating roles is not supported. Must not be set if `update_roles_params` is set.
+          items:
+            $ref: "#/components/schemas/MembershipRole"
+          type: array
+        removeRoles:
+          description: The `name`s of the `MembershipRole`s to be removed. Adding or removing roles in the same request as updating roles is not supported. It is not possible to remove the `MEMBER` `MembershipRole`. If you wish to delete a `Membership`, call MembershipsService.DeleteMembership instead. Must not contain `MEMBER`. Must not be set if `update_roles_params` is set.
+          items:
+            type: string
+          type: array
+        updateRolesParams:
+          description: The `MembershipRole`s to be updated. Updating roles in the same request as adding or removing roles is not supported. Must not be set if either `add_roles` or `remove_roles` is set.
+          items:
+            $ref: "#/components/schemas/UpdateMembershipRolesParams"
+          type: array
+      type: object
+    ModifyMembershipRolesResponse:
+      description: The response message for MembershipsService.ModifyMembershipRoles.
+      properties:
+        membership:
+          $ref: "#/components/schemas/Membership"
+          description: The `Membership` resource after modifying its `MembershipRole`s.
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -1609,6 +1691,17 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    UpdateMembershipRolesParams:
+      description: The details of an update to a `MembershipRole`.
+      properties:
+        fieldMask:
+          description: The fully-qualified names of fields to update. May only contain the field `expiry_detail`.
+          format: google-fieldmask
+          type: string
+        membershipRole:
+          $ref: "#/components/schemas/MembershipRole"
+          description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRole` can currently be updated.
       type: object
   securitySchemes:
     Oauth2:

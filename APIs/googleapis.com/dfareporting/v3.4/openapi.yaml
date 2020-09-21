@@ -528,6 +528,7 @@ paths:
         - description: AccountUserProfile ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -747,6 +748,7 @@ paths:
         - description: Account ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -1023,6 +1025,7 @@ paths:
                 - AD_SERVING_DEFAULT_AD
                 - AD_SERVING_CLICK_TRACKER
                 - AD_SERVING_TRACKING
+                - AD_SERVING_BRAND_SAFE_AD
               type: string
             type: array
           style: form
@@ -1065,6 +1068,7 @@ paths:
         - description: Ad ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -1279,6 +1283,7 @@ paths:
         - description: AdvertiserGroup ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -1547,6 +1552,7 @@ paths:
         - description: LandingPage ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -1802,6 +1808,7 @@ paths:
         - description: Advertiser ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -2100,6 +2107,7 @@ paths:
         - description: Campaign ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -2764,6 +2772,7 @@ paths:
         - description: ContentCategory ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -3225,6 +3234,7 @@ paths:
         - description: CreativeField ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -3408,6 +3418,7 @@ paths:
         - description: CreativeFieldValue ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -3757,6 +3768,7 @@ paths:
         - description: CreativeGroup ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -4067,6 +4079,7 @@ paths:
         - description: Creative ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -4730,6 +4743,7 @@ paths:
         - description: EventTag ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -5086,6 +5100,7 @@ paths:
         - description: FloodlightActivity ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -5386,6 +5401,7 @@ paths:
         - description: FloodlightActivityGroup ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -5567,6 +5583,7 @@ paths:
         - description: FloodlightConfiguration ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -6288,6 +6305,7 @@ paths:
         - description: PlacementGroup ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -6502,6 +6520,7 @@ paths:
         - description: PlacementStrategy ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -6879,6 +6898,7 @@ paths:
         - description: Placement ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -7882,6 +7902,41 @@ paths:
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
+    patch:
+      description: Updates an existing remarketing list share. This method supports patch semantics.
+      operationId: dfareporting.remarketingListShares.patch
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          schema:
+            type: string
+        - description: RemarketingList ID.
+          in: query
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemarketingListShare'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemarketingListShare'
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+          Oauth2c:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingListShares
     put:
       description: Updates an existing remarketing list share.
       operationId: dfareporting.remarketingListShares.update
@@ -8053,6 +8108,7 @@ paths:
         - description: RemarketingList ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -8175,59 +8231,6 @@ paths:
       - $ref: '#/components/parameters/quotaUser'
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
-  '/userprofiles/{profileId}/remarketingLists/{remarketingListId}/remarketingListShares':
-    parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-    patch:
-      description: Updates an existing remarketing list share. This method supports patch semantics.
-      operationId: dfareporting.remarketingListShares.patch
-      parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          schema:
-            type: string
-        - description: RemarketingList ID.
-          in: path
-          name: remarketingListId
-          required: true
-          schema:
-            type: string
-        - description: RemarketingListShare ID.
-          in: query
-          name: id
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RemarketingListShare'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RemarketingListShare'
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-          Oauth2c:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-      tags:
-        - remarketingListShares
   '/userprofiles/{profileId}/reports':
     get:
       description: Retrieves list of reports.
@@ -8825,6 +8828,7 @@ paths:
         - description: Site ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -9176,6 +9180,7 @@ paths:
         - description: Subaccount ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -9519,6 +9524,7 @@ paths:
         - description: TargetingTemplate ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -9912,6 +9918,7 @@ paths:
         - description: UserRole ID.
           in: query
           name: id
+          required: true
           schema:
             type: string
       requestBody:
@@ -10658,6 +10665,7 @@ components:
             - AD_SERVING_DEFAULT_AD
             - AD_SERVING_CLICK_TRACKER
             - AD_SERVING_TRACKING
+            - AD_SERVING_BRAND_SAFE_AD
           type: string
       type: object
     AdBlockingConfiguration:

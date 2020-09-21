@@ -2074,6 +2074,7 @@ paths:
               enum:
                 - completed
                 - new
+                - pending
                 - shipped
                 - undeliverable
               type: string
@@ -8091,7 +8092,7 @@ components:
     OrderreturnsRefundOperation:
       properties:
         fullRefund:
-          description: If true, the item will be fully refunded. // Allowed only when payment_type is FOP. Merchant can choose this refund option to indicate the full remaining amount of corresponding object to be refunded to the customer via FOP.
+          description: If true, the item will be fully refunded. Allowed only when payment_type is FOP. Merchant can choose this refund option to indicate the full remaining amount of corresponding object to be refunded to the customer via FOP.
           type: boolean
         partialRefund:
           $ref: "#/components/schemas/OrderreturnsPartialRefund"

@@ -3123,7 +3123,7 @@ components:
           description: Serving configuration for Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/).Only returned in GET requests if view=FULL is set.
         automaticScaling:
           $ref: "#/components/schemas/AutomaticScaling"
-          description: Automatic scaling is based on request rate, response latencies, and other application metrics.
+          description: Automatic scaling is based on request rate, response latencies, and other application metrics. Instances are dynamically created and destroyed as needed in order to handle traffic.
         basicScaling:
           $ref: "#/components/schemas/BasicScaling"
           description: A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
@@ -3213,7 +3213,7 @@ components:
           description: Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instancesOnly returned in GET requests if view=FULL is set.
         manualScaling:
           $ref: "#/components/schemas/ManualScaling"
-          description: A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.
+          description: A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time. Manually scaled versions are sometimes referred to as "backends".
         name:
           description: "Full path to the Version resource in the API. Example: apps/myapp/services/default/versions/v1.@OutputOnly"
           type: string

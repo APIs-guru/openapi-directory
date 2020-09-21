@@ -1240,6 +1240,232 @@ paths:
             - https://www.googleapis.com/auth/classroom.coursework.students
       tags:
         - courses
+  "/v1/courses/{courseId}/courseWorkMaterials":
+    get:
+      description: "Returns a list of course work material that the requester is permitted to view. Course students may only view `PUBLISHED` course work material. Course teachers and domain administrators may view all course work material. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to access the requested course or for access errors. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the requested course does not exist."
+      operationId: classroom.courses.courseWorkMaterials.list
+      parameters:
+        - description: Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+          in: path
+          name: courseId
+          required: true
+          schema:
+            type: string
+        - description: Restriction on the work status to return. Only course work material that matches is returned. If unspecified, items with a work status of `PUBLISHED` is returned.
+          explode: true
+          in: query
+          name: courseWorkMaterialStates
+          schema:
+            items:
+              enum:
+                - COURSEWORK_MATERIAL_STATE_UNSPECIFIED
+                - PUBLISHED
+                - DRAFT
+                - DELETED
+              type: string
+            type: array
+          style: form
+        - description: Optional filtering for course work material with at least one Drive material whose ID matches the provided string. If `material_link` is also specified, course work material must have materials matching both filters.
+          in: query
+          name: materialDriveId
+          schema:
+            type: string
+        - description: Optional filtering for course work material with at least one link material whose URL partially matches the provided string.
+          in: query
+          name: materialLink
+          schema:
+            type: string
+        - description: "Optional sort ordering for results. A comma-separated list of fields with an optional sort direction keyword. Supported field is `updateTime`. Supported direction keywords are `asc` and `desc`. If not specified, `updateTime desc` is the default behavior. Examples: `updateTime asc`, `updateTime`"
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Maximum number of items to return. Zero or unspecified indicates that the server may assign a maximum. The server may return fewer than the specified number of results.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: nextPageToken value returned from a previous list call, indicating that the subsequent page of results should be returned. The list request must be otherwise identical to the one that resulted in this token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCourseWorkMaterialResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly
+      tags:
+        - courses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates a course work material. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to access the requested course, create course work material in the requested course, share a Drive attachment, or for access errors. * `INVALID_ARGUMENT` if the request is malformed or if more than 20 * materials are provided. * `NOT_FOUND` if the requested course does not exist. * `FAILED_PRECONDITION` for the following request error: * AttachmentNotVisible"
+      operationId: classroom.courses.courseWorkMaterials.create
+      parameters:
+        - description: Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+          in: path
+          name: courseId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CourseWorkMaterial"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseWorkMaterial"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+      tags:
+        - courses
+  "/v1/courses/{courseId}/courseWorkMaterials/{id}":
+    delete:
+      description: "Deletes a course work material. This request must be made by the Developer Console project of the [OAuth client ID](https://support.google.com/cloud/answer/6158849) used to create the corresponding course work material item. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting developer project did not create the corresponding course work material, if the requesting user is not permitted to delete the requested course or for access errors. * `FAILED_PRECONDITION` if the requested course work material has already been deleted. * `NOT_FOUND` if no course exists with the requested ID."
+      operationId: classroom.courses.courseWorkMaterials.delete
+      parameters:
+        - description: Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+          in: path
+          name: courseId
+          required: true
+          schema:
+            type: string
+        - description: Identifier of the course work material to delete. This identifier is a Classroom-assigned identifier.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+      tags:
+        - courses
+    get:
+      description: "Returns a course work material. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting user is not permitted to access the requested course or course work material, or for access errors. * `INVALID_ARGUMENT` if the request is malformed. * `NOT_FOUND` if the requested course or course work material does not exist."
+      operationId: classroom.courses.courseWorkMaterials.get
+      parameters:
+        - description: Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+          in: path
+          name: courseId
+          required: true
+          schema:
+            type: string
+        - description: Identifier of the course work material.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseWorkMaterial"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly
+      tags:
+        - courses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: "Updates one or more fields of a course work material. This method returns the following error codes: * `PERMISSION_DENIED` if the requesting developer project for access errors. * `INVALID_ARGUMENT` if the request is malformed. * `FAILED_PRECONDITION` if the requested course work material has already been deleted. * `NOT_FOUND` if the requested course or course work material does not exist"
+      operationId: classroom.courses.courseWorkMaterials.patch
+      parameters:
+        - description: Identifier of the course. This identifier can be either the Classroom-assigned identifier or an alias.
+          in: path
+          name: courseId
+          required: true
+          schema:
+            type: string
+        - description: Identifier of the course work material.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+        - description: "Mask that identifies which fields on the course work material to update. This field is required to do an update. The update fails if invalid fields are specified. If a field supports empty values, it can be cleared by specifying it in the update mask and not in the course work material object. If a field that does not support empty values is included in the update mask and not set in the course work material object, an `INVALID_ARGUMENT` error is returned. The following fields may be specified by teachers: * `title` * `description` * `state` * `scheduled_time` * `topic_id`"
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CourseWorkMaterial"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CourseWorkMaterial"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+          Oauth2c:
+            - https://www.googleapis.com/auth/classroom.courseworkmaterials
+      tags:
+        - courses
   "/v1/courses/{courseId}/students":
     get:
       description: "Returns a list of students of this course that the requester is permitted to view. This method returns the following error codes: * `NOT_FOUND` if the course does not exist. * `PERMISSION_DENIED` for access errors."
@@ -2939,6 +3165,66 @@ components:
           description: The `course_id` of the course to subscribe to work changes for.
           type: string
       type: object
+    CourseWorkMaterial:
+      description: Course work material created by a teacher for students of the course
+      properties:
+        alternateLink:
+          description: Absolute link to this course work material in the Classroom web UI. This is only populated if `state` is `PUBLISHED`. Read-only.
+          type: string
+        assigneeMode:
+          description: Assignee mode of the course work material. If unspecified, the default value is `ALL_STUDENTS`.
+          enum:
+            - ASSIGNEE_MODE_UNSPECIFIED
+            - ALL_STUDENTS
+            - INDIVIDUAL_STUDENTS
+          type: string
+        courseId:
+          description: Identifier of the course. Read-only.
+          type: string
+        creationTime:
+          description: Timestamp when this course work material was created. Read-only.
+          format: google-datetime
+          type: string
+        creatorUserId:
+          description: Identifier for the user that created the course work material. Read-only.
+          type: string
+        description:
+          description: Optional description of this course work material. The text must be a valid UTF-8 string containing no more than 30,000 characters.
+          type: string
+        id:
+          description: Classroom-assigned identifier of this course work material, unique per course. Read-only.
+          type: string
+        individualStudentsOptions:
+          $ref: "#/components/schemas/IndividualStudentsOptions"
+          description: Identifiers of students with access to the course work material. This field is set only if `assigneeMode` is `INDIVIDUAL_STUDENTS`. If the `assigneeMode` is `INDIVIDUAL_STUDENTS`, then only students specified in this field can see the course work material.
+        materials:
+          description: Additional materials. A course work material must have no more than 20 material items.
+          items:
+            $ref: "#/components/schemas/Material"
+          type: array
+        scheduledTime:
+          description: Optional timestamp when this course work material is scheduled to be published.
+          format: google-datetime
+          type: string
+        state:
+          description: Status of this course work material. If unspecified, the default state is `DRAFT`.
+          enum:
+            - COURSEWORK_MATERIAL_STATE_UNSPECIFIED
+            - PUBLISHED
+            - DRAFT
+            - DELETED
+          type: string
+        title:
+          description: Title of this course work material. The title must be a valid UTF-8 string containing between 1 and 3000 characters.
+          type: string
+        topicId:
+          description: Identifier for the topic that this course work material is associated with. Must match an existing topic in the course.
+          type: string
+        updateTime:
+          description: Timestamp of the most recent change to this course work material. Read-only.
+          format: google-datetime
+          type: string
+      type: object
     Date:
       description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
@@ -3161,6 +3447,18 @@ components:
           description: The course aliases.
           items:
             $ref: "#/components/schemas/CourseAlias"
+          type: array
+        nextPageToken:
+          description: Token identifying the next page of results to return. If empty, no further results are available.
+          type: string
+      type: object
+    ListCourseWorkMaterialResponse:
+      description: Response when listing course work material.
+      properties:
+        courseWorkMaterial:
+          description: Course work material items that match the request.
+          items:
+            $ref: "#/components/schemas/CourseWorkMaterial"
           type: array
         nextPageToken:
           description: Token identifying the next page of results to return. If empty, no further results are available.
@@ -3646,6 +3944,8 @@ components:
             https://www.googleapis.com/auth/classroom.coursework.me.readonly: View your course work and grades in Google Classroom
             https://www.googleapis.com/auth/classroom.coursework.students: Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
             https://www.googleapis.com/auth/classroom.coursework.students.readonly: View course work and grades for students in the Google Classroom classes you teach or administer
+            https://www.googleapis.com/auth/classroom.courseworkmaterials: See, edit, and create classwork materials in Google Classroom
+            https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly: See all classwork materials for your Google Classroom classes
             https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly: View your Google Classroom guardians
             https://www.googleapis.com/auth/classroom.guardianlinks.students: View and manage guardians for students in your Google Classroom classes
             https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly: View guardians for students in your Google Classroom classes
@@ -3673,6 +3973,8 @@ components:
             https://www.googleapis.com/auth/classroom.coursework.me.readonly: View your course work and grades in Google Classroom
             https://www.googleapis.com/auth/classroom.coursework.students: Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
             https://www.googleapis.com/auth/classroom.coursework.students.readonly: View course work and grades for students in the Google Classroom classes you teach or administer
+            https://www.googleapis.com/auth/classroom.courseworkmaterials: See, edit, and create classwork materials in Google Classroom
+            https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly: See all classwork materials for your Google Classroom classes
             https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly: View your Google Classroom guardians
             https://www.googleapis.com/auth/classroom.guardianlinks.students: View and manage guardians for students in your Google Classroom classes
             https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly: View guardians for students in your Google Classroom classes

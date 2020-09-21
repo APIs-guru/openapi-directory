@@ -408,10 +408,10 @@ components:
           description: The authority selector specified by the requestor, if any. It is not guaranteed that the principal was allowed to use this authority.
           type: string
         principalEmail:
-          description: The email address of the authenticated user (or service account on behalf of third party principal) making the request. For privacy reasons, the principal email address is redacted for all read-only operations that fail with a "permission denied" error.
+          description: The email address of the authenticated user (or service account on behalf of third party principal) making the request. For third party identity callers, the `principal_subject` field is populated instead of this field. For privacy reasons, the principal email address is sometimes redacted. For more information, see [Caller identities in audit logs](https://cloud.google.com/logging/docs/audit#user-id).
           type: string
         principalSubject:
-          description: String representation of identity of requesting party. Populated for both first and third party identities.
+          description: String representation of identity of requesting party. Populated for both first and third party identities. Only present for APIs that support third-party identities.
           type: string
         serviceAccountDelegationInfo:
           description: Identity delegation history of an authenticated service account that makes the request. It contains information on the real authorities that try to access GCP resources by delegating on a service account. When multiple authorities present, they are guaranteed to be sorted based on the original ordering of the identity delegation events.
@@ -1211,7 +1211,7 @@ components:
       description: Describes a resource associated with this operation.
       properties:
         resourceContainer:
-          description: "The identifier of the parent of this resource instance. Must be in one of the following formats: - “projects/” - “folders/” - “organizations/”"
+          description: "The identifier of the parent of this resource instance. Must be in one of the following formats: - `projects/` - `folders/` - `organizations/`"
           type: string
         resourceLocation:
           description: 'The location of the resource. If not empty, the resource will be checked against location policy. The value must be a valid zone, region or multiregion. For example: "europe-west4" or "northamerica-northeast1-a"'
