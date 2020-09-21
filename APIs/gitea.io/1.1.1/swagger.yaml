@@ -4800,12 +4800,11 @@ paths:
           name: repo
           required: true
           type: string
-        - description: id of the milestone to delete
-          format: int64
+        - description: the milestone to delete, identified by ID and if not available by name
           in: path
           name: id
           required: true
-          type: integer
+          type: string
       responses:
         "204":
           $ref: "#/responses/empty"
@@ -4825,12 +4824,11 @@ paths:
           name: repo
           required: true
           type: string
-        - description: id of the milestone
-          format: int64
+        - description: the milestone to get, identified by ID and if not available by name
           in: path
           name: id
           required: true
-          type: integer
+          type: string
       produces:
         - application/json
       responses:
@@ -4854,12 +4852,11 @@ paths:
           name: repo
           required: true
           type: string
-        - description: id of the milestone
-          format: int64
+        - description: the milestone to edit, identified by ID and if not available by name
           in: path
           name: id
           required: true
-          type: integer
+          type: string
         - in: body
           name: body
           schema:
@@ -8648,6 +8645,15 @@ definitions:
         description: Readme of the repository to create
         type: string
         x-go-name: Readme
+      trust_model:
+        description: TrustModel of the repository
+        enum:
+          - default
+          - collaborator
+          - committer
+          - collaboratorcommitter
+        type: string
+        x-go-name: TrustModel
     required:
       - name
     type: object
@@ -10094,6 +10100,8 @@ definitions:
       latest_comment_url:
         type: string
         x-go-name: LatestCommentURL
+      state:
+        $ref: "#/definitions/StateType"
       title:
         type: string
         x-go-name: Title

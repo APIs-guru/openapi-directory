@@ -4261,32 +4261,107 @@ definitions:
     properties:
       accounting:
         $ref: "#/definitions/PurchaseInvoiceAccountingDetails"
-        description: The accounting details for the invoice.
-        title: Accounting Details
+        description: DEPRECATED - The accounting details for the invoice. Will only evern contain null properties.
+        title: Accounting Details - DEPRECATED
         type: object
+      accounting_cost:
+        description: The accounting cost code.
+        title: Accounting Cost
+        type: string
       allowance_charge:
-        description: A correction on the amount to pay, for instance if the invoice has been prepaid, in which case it will be negative.
-        title: Allowance Charge
+        description: DEPRECATED - Use the allowance_charges array.
+        title: Allowance Charge - DEPRECATED
+        type: number
+      allowance_charges:
+        items:
+          $ref: "#/definitions/PurchaseInvoiceAllowanceCharge"
+        type: array
+      amount_including_tax:
+        description: The total invoice amount payable, including tax. This is equal to the sum of the invoice_lines (amount_excluding_tax + tax.amount)
+        title: Amount Including Tax
         type: number
       amount_including_vat:
-        description: The total invoice amount payable, including VAT. This is equal to the sum of the invoice_lines (amount_excluding_vat + vat.amount)
-        title: Amount Including VAT
+        description: DEPRECATED - Use amount_including_tax.
+        title: Amount Including VAT - DEPRECATED
         type: number
+      attachments:
+        items:
+          $ref: "#/definitions/PurchaseInvoiceAttachment"
+        type: array
       billing_reference:
-        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
-        title: End of Period
+        description: Reference to the previous invoice this invoice relates to.
+        title: Billing Reference
         type: string
       buyer_reference:
-        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
-        title: End of Period
+        description: Reference provided by the buyer. Used for routing.
+        title: Buyer Reference
         type: string
       contract_document_reference:
-        description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
-        title: End of Period
+        description: Reference to the contract.
+        title: Contract Document Reference
         type: string
+      delivery:
+        description: The details of the delivery associated with this invoice.
+        properties:
+          actual_date:
+            description: The actual delivery date.
+            title: Actual Date
+            type: string
+          location:
+            description: The location the goods/services were delivered to.
+            properties:
+              city:
+                description: Address city.
+                title: City
+                type: string
+              country:
+                description: Address country.
+                title: Country
+                type: string
+              county:
+                description: Address county.
+                title: County
+                type: string
+              department:
+                description: Department name.
+                title: Department
+                type: string
+              id:
+                description: The id of the location.
+                title: Id
+                type: string
+              line1:
+                description: Address line 1.
+                title: Line 1
+                type: string
+              line2:
+                description: Address line 2.
+                title: Line 2
+                type: string
+              scheme_id:
+                description: The scheme id for the id of the location.
+                title: Scheme Id
+                type: string
+              zip:
+                description: Address zip code
+                title: Zip
+                type: string
+            title: Location
+            type: object
+          party:
+            description: The party the goods/services were delivered to.
+            properties:
+              name:
+                description: The name of the deliveyr party.
+                title: Name
+                type: string
+            title: Party
+            type: object
+        title: Delivery
+        type: object
       document:
-        description: The Base64 encoded PDF document associated with the invoice.
-        title: Document
+        description: DEPRECTATED. Use the new atatchments array.
+        title: Document - DEPRECTATED
         type: string
       document_currency_code:
         description: The ISO 4217 currency for the invoice.
@@ -4334,16 +4409,24 @@ definitions:
         format: int64
         title: LegalEntity id
         type: integer
+      note:
+        description: The invoice level note.
+        title: Note
+        type: string
+      order_reference:
+        description: Reference to the order. Used for matching the invoice to an order.
+        title: Order Reference
+        type: string
       payable_amount:
-        description: The total invoice amount payable including VAT. This is equal to amount_including_vat + allowance_charge + payable_rounding_amount. This property is redundant and provided only to make invoice processing more easy. You can also choose to only store this property, instead of the underlying fields.
-        title: Amount to Pay Including VAT
+        description: The total invoice amount payable including tax. This is equal to amount_including_tax + allowance_charge + payable_rounding_amount. This property is redundant and provided only to make invoice processing easier. You can also choose to only store this property, instead of the underlying fields.
+        title: Amount to Pay Including Tax
         type: number
       payable_rounding_amount:
         description: The difference between the invoice total and the sum of the invoice lines.
         title: Payable Rounding Amount
         type: number
       payment_means:
-        description: How the invoice can be paid.
+        description: DEPRECATED - Use the new payment_means_array array.
         properties:
           iban:
             description: The IBAN to which to transfer.
@@ -4353,8 +4436,22 @@ definitions:
             description: An id to mention in the transfer.
             title: Id
             type: string
-        title: Payment Means
+        title: Payment Means - DEPRECATED
         type: object
+      payment_means_array:
+        description: The different payment means that can be used to pay the invoice.
+        items:
+          $ref: "#/definitions/PurchaseInvoicePaymentMeans"
+        title: Payment Means
+        type: array
+      payment_means_payment_id:
+        description: DEPRECATED - use the payment_id property in the payment_means_array
+        title: Payment Means Payment Id - DEPRECATED
+        type: string
+      payment_terms_note:
+        description: A textual description of the payment terms.
+        title: Payment Terms Note
+        type: string
       period_end:
         description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
         title: End of Period
@@ -4367,6 +4464,10 @@ definitions:
         description: The amount already paid.
         title: Prepaid Amount
         type: number
+      project_reference:
+        description: Reference to the project.
+        title: Project Reference
+        type: string
       sender:
         $ref: "#/definitions/PurchaseInvoiceSender"
         description: The organzation that sent the invoice.
@@ -4381,13 +4482,25 @@ definitions:
           - email
         title: Invoice Source
         type: string
+      system_generated_primary_image:
+        description: Whether or not the document image (PDF) was generated by Storecove. If true, it means the invoice was received without any attachments and Storecove generated one for you. If false, the invoice will contain at least one attachment, which was received from the invoice sender..
+        title: System Generated Primary Image
+        type: boolean
       tax_point_date:
         description: The date the invoice was issued for tax purposes. In most countries MUST match the issue_date. Format "YYYY-MM-DD".
         title: Tax Point Date
         type: string
+      tax_subtotals:
+        items:
+          $ref: "#/definitions/PurchaseInvoiceTaxSubtotal"
+        type: array
+      tax_system:
+        description: The tax system of the invoice. Either tax_line_percentages or tax_line_amounts. The first tax system means the invoice lines contain only the tax percentages and the tax amounts are included only in the tax subtotals at the invoice level and so are only calculated at the invoice level. The tax system tax_line_amounts means that in addition to the percentage, each invoice line also contains the tax amount. The tax subtotals at the invoice level are calculated as the sum of the tax of the invoice lines. The distinction between the two tax systems has has implications for rounding.
+        title: Tax System
+        type: string
       vat_reverse_charge:
-        description: Whether or not the invoice is reverse charged.
-        title: VAT Reverse Charge
+        description: DEPRECATED - This is now part of each invoice line.
+        title: VAT Reverse Charge - DEPRECATED
         type: boolean
   PurchaseInvoiceAccountingDetails:
     properties:
@@ -4404,8 +4517,36 @@ definitions:
         title: List Version
         type: string
       name:
-        description: A textual descroption of the code.
+        description: A textual description of the code.
         title: Name
+        type: string
+  PurchaseInvoiceAllowanceCharge:
+    properties:
+      amount_excluding_tax:
+        description: The amount excluding tax.
+        title: Amount Excluding Tax
+        type: number
+      amount_excluding_vat:
+        description: DEPRECATED - use amount_excluding_tax.
+        title: Amount Excluding VAT - DEPRECATED
+        type: string
+      reason:
+        description: The reason for the allowance or charge.
+        title: AllowanceCharge reason
+        type: string
+      tax:
+        $ref: "#/definitions/PurchaseInvoiceTax"
+      vat:
+        $ref: "#/definitions/PurchaseInvoiceVat"
+  PurchaseInvoiceAttachment:
+    properties:
+      content_type:
+        description: The attachment content type (mime type).
+        title: Content Type
+        type: string
+      document:
+        description: The Base64 encoded document attachment.
+        title: Document
         type: string
   PurchaseInvoiceInvoiceLine:
     properties:
@@ -4415,9 +4556,13 @@ definitions:
         title: Accounting Details
         type: object
       allowance_charge:
-        description: The adjustment to the price, for instance a discount.
-        title: Allowance Charge
+        description: DEPRECATED - use allowance_charges.
+        title: Allowance Charge - DEPRECATED
         type: number
+      allowance_charges:
+        items:
+          $ref: "#/definitions/PurchaseInvoiceInvoiceLineAllowanceCharge"
+        type: array
       amount_excluding_vat:
         description: The amount excluding VAT. This is equal to quantity x price_amount + allowance_charge. This property is redundant and provided only to make invoice processing more easy. You can also choose to only store this property, instead of the underlying fields.
         title: Amount Excluding VAT
@@ -4451,6 +4596,51 @@ definitions:
             type: number
         title: VAT Details
         type: object
+  PurchaseInvoiceInvoiceLineAllowanceCharge:
+    properties:
+      amount:
+        description: The amount of the allowance or charge.
+        title: Allowance or Charge
+        type: number
+  PurchaseInvoicePaymentMeans:
+    properties:
+      account:
+        description: The account number to which to transfer.
+        title: Account Number
+        type: string
+      branch_code:
+        description: The code identifying the bank branch. May contain a BIC/SWIFT or something appropriate for the payment method, such as "NPP" for type NppPaymentMean.
+        enum:
+          - NPP
+          - SE:BANKGIRO
+          - SE:PLUSGIRO
+        title: Branch code
+      holder:
+        description: The account holder name to which to transfer.
+        title: Account Holder
+        type: string
+      mandate:
+        description: The mandate, used only for type DirectDebitPaymentMean.
+        title: Mandate
+        type: string
+      network:
+        description: The payment network. Used only for type CardPaymentType.
+        title: Network
+        type: string
+      payment_id:
+        description: The payment id to use when making the payment. The invoice sender will use this to match the received funds to the invoice.
+        title: Id
+        type: string
+      type:
+        description: The type of payment means.
+        enum:
+          - BankPaymentMean
+          - CardPaymentMean
+          - DirectDebitPaymentMean
+          - NppPaymentMean
+          - SeBankgiroPaymentMean
+          - SePlusGiroPaymentMean
+        title: Type
   PurchaseInvoiceSender:
     properties:
       billing_contact:
@@ -4474,6 +4664,12 @@ definitions:
         description: The department who sent the invoice.
         title: Department
         type: string
+      identifiers:
+        description: The array of identifiers for this sender.
+        items:
+          $ref: "#/definitions/PeppolIdentifier"
+        title: Identifiers
+        type: array
       line1:
         description: The address
         title: Address Line 1
@@ -4487,8 +4683,9 @@ definitions:
         title: Party Name
         type: string
       peppol_identifiers:
-        items:
-          $ref: "#/definitions/PeppolIdentifier"
+        $ref: "#/definitions/PeppolIdentifier"
+        description: DEPRECATED - Use the identifiers array.
+        title: Peppol Identifiers - DEPRECATED
         type: array
       zip:
         description: The zip code.
@@ -4508,6 +4705,47 @@ definitions:
         description: The last name of the billing contact.
         title: Last Name
         type: string
+  PurchaseInvoiceTax:
+    properties:
+      tax:
+        description: The tax element.
+        properties:
+          amount:
+            description: The tax country.
+            title: Country
+            type: string
+          category:
+            description: The tax category.
+            title: Category
+            type: string
+          category_code:
+            description: The tax category code.
+            title: Category Code
+            type: string
+          percentage:
+            description: The tax percentage.
+            title: Percentage
+            type: number
+          type:
+            description: The tax type.
+            title: Type
+            type: string
+        title: Tax
+        type: object
+  PurchaseInvoiceTaxSubtotal:
+    properties:
+      amount_excluding_tax:
+        description: The amount excluding tax.
+        title: Amount Excluding Tax
+        type: number
+      amount_excluding_vat:
+        description: DEPRECATED - use amount_excluding_tax.
+        title: Amount Excluding VAT - DEPRECATED
+        type: string
+      tax:
+        $ref: "#/definitions/PurchaseInvoiceTax"
+      vat:
+        $ref: "#/definitions/PurchaseInvoiceVat"
   PurchaseInvoiceUbl:
     properties:
       external_key:
@@ -4528,10 +4766,31 @@ definitions:
         format: int64
         title: LegalEntity id
         type: integer
+      system_generated_primary_image:
+        description: Whether or not the document image (PDF) was generated by Storecove. If true, it means the invoice was received without any attachments and Storecove generated one for you. If false, the invoice will contain at least one attachment, which was received from the invoice sender.
+        title: System Generated Primary Image
+        type: boolean
+      tax_system:
+        description: The tax system of the invoice. Either tax_line_percentages or tax_line_amounts. The first tax system means the invoice lines contain only the tax percentages and the tax amounts are included only in the tax subtotals at the invoice level and so are only calculated at the invoice level. The tax system tax_line_amounts means that in addition to the percentage, each invoice line also contains the tax amount.
+        title: Tax System
+        type: string
       ubl:
         description: The Base64 encoded UBL invoice.
         title: UBL invoice
         type: string
+  PurchaseInvoiceVat:
+    description: DEPRECATED - Use tax.
+    properties:
+      amount:
+        description: The VAT country.
+        title: Country
+        type: string
+      percentage:
+        description: The VAT percentage.
+        title: Percentage
+        type: string
+    title: VAT - DEPRECATED
+    type: object
   SupplierParty:
     description: A party that can send invoices
     properties:

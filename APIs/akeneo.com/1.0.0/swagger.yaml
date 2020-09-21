@@ -101,6 +101,13 @@ parameters:
     name: search_after
     required: false
     type: string
+  with_attribute_options:
+    default: false
+    description: Return labels of attribute options in the response.
+    in: query
+    name: with_attribute_options
+    required: false
+    type: boolean
   with_count:
     default: false
     description: Return the count of products in the response. Be carefull with that, on a big catalog, it can decrease performance in a significative way
@@ -17777,6 +17784,12 @@ paths:
           name: with_count
           required: false
           type: boolean
+        - default: false
+          description: Return labels of attribute options in the response.
+          in: query
+          name: with_attribute_options
+          required: false
+          type: boolean
       responses:
         "200":
           description: Return products paginated
@@ -17812,8 +17825,26 @@ paths:
                           quantity: 1
                   updated: 2016-06-25T17:56:12+02:00
                   values:
+                    collection:
+                      - data:
+                          - winter_2016
+                        linked_data:
+                          winter_2016:
+                            attribute: collection
+                            code: winter_2016
+                            labels:
+                              en_US: Winter 2016
+                              fr_FR: Hiver 2016
+                        locale: null
+                        scope: null
                     color:
                       - data: black
+                        linked_data:
+                          attribute: color
+                          code: black
+                          labels:
+                            en_US: Black
+                            fr_FR: Noir
                         locale: null
                         scope: null
                     description:
@@ -17846,6 +17877,12 @@ paths:
                         scope: null
                     size:
                       - data: m
+                        linked_data:
+                          attribute: size
+                          code: m
+                          labels:
+                            en_US: M
+                            fr_FR: M
                         locale: null
                         scope: null
                 - _links:
@@ -17870,6 +17907,12 @@ paths:
                   values:
                     color:
                       - data: black
+                        linked_data:
+                          attribute: color
+                          code: black
+                          labels:
+                            en_US: Black
+                            fr_FR: Noir
                         locale: null
                         scope: null
                     description:
@@ -18003,8 +18046,26 @@ paths:
                                         quantity: 1
                                 updated: 2016-06-25T17:56:12+02:00
                                 values:
+                                  collection:
+                                    - data:
+                                        - winter_2016
+                                      linked_data:
+                                        winter_2016:
+                                          attribute: collection
+                                          code: winter_2016
+                                          labels:
+                                            en_US: Winter 2016
+                                            fr_FR: Hiver 2016
+                                      locale: null
+                                      scope: null
                                   color:
                                     - data: black
+                                      linked_data:
+                                        attribute: color
+                                        code: black
+                                        labels:
+                                          en_US: Black
+                                          fr_FR: Noir
                                       locale: null
                                       scope: null
                                   description:
@@ -18037,6 +18098,12 @@ paths:
                                       scope: null
                                   size:
                                     - data: m
+                                      linked_data:
+                                        attribute: size
+                                        code: m
+                                        labels:
+                                          en_US: M
+                                          fr_FR: M
                                       locale: null
                                       scope: null
                               properties:
@@ -18155,6 +18222,9 @@ paths:
                                         properties:
                                           data:
                                             description: Product value
+                                            type: object
+                                          linked_data:
+                                            description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                                             type: object
                                           locale:
                                             description: Locale code of the product value
@@ -18280,8 +18350,26 @@ paths:
                       quantity: 1
               updated: 2016-06-25T17:56:12+02:00
               values:
+                collection:
+                  - data:
+                      - winter_2016
+                    linked_data:
+                      winter_2016:
+                        attribute: collection
+                        code: winter_2016
+                        labels:
+                          en_US: Winter 2016
+                          fr_FR: Hiver 2016
+                    locale: null
+                    scope: null
                 color:
                   - data: black
+                    linked_data:
+                      attribute: color
+                      code: black
+                      labels:
+                        en_US: Black
+                        fr_FR: Noir
                     locale: null
                     scope: null
                 description:
@@ -18314,6 +18402,12 @@ paths:
                     scope: null
                 size:
                   - data: m
+                    linked_data:
+                      attribute: size
+                      code: m
+                      labels:
+                        en_US: M
+                        fr_FR: M
                     locale: null
                     scope: null
             properties:
@@ -18432,6 +18526,9 @@ paths:
                       properties:
                         data:
                           description: Product value
+                          type: object
+                        linked_data:
+                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                           type: object
                         locale:
                           description: Locale code of the product value
@@ -18581,8 +18678,26 @@ paths:
                       quantity: 1
               updated: 2016-06-25T17:56:12+02:00
               values:
+                collection:
+                  - data:
+                      - winter_2016
+                    linked_data:
+                      winter_2016:
+                        attribute: collection
+                        code: winter_2016
+                        labels:
+                          en_US: Winter 2016
+                          fr_FR: Hiver 2016
+                    locale: null
+                    scope: null
                 color:
                   - data: black
+                    linked_data:
+                      attribute: color
+                      code: black
+                      labels:
+                        en_US: Black
+                        fr_FR: Noir
                     locale: null
                     scope: null
                 description:
@@ -18615,6 +18730,12 @@ paths:
                     scope: null
                 size:
                   - data: m
+                    linked_data:
+                      attribute: size
+                      code: m
+                      labels:
+                        en_US: M
+                        fr_FR: M
                     locale: null
                     scope: null
             properties:
@@ -18733,6 +18854,9 @@ paths:
                       properties:
                         data:
                           description: Product value
+                          type: object
+                        linked_data:
+                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                           type: object
                         locale:
                           description: Locale code of the product value
@@ -18919,6 +19043,12 @@ paths:
           name: code
           required: true
           type: string
+        - default: false
+          description: Return labels of attribute options in the response.
+          in: query
+          name: with_attribute_options
+          required: false
+          type: boolean
       responses:
         "200":
           description: OK
@@ -18950,8 +19080,26 @@ paths:
                       quantity: 1
               updated: 2016-06-25T17:56:12+02:00
               values:
+                collection:
+                  - data:
+                      - winter_2016
+                    linked_data:
+                      winter_2016:
+                        attribute: collection
+                        code: winter_2016
+                        labels:
+                          en_US: Winter 2016
+                          fr_FR: Hiver 2016
+                    locale: null
+                    scope: null
                 color:
                   - data: black
+                    linked_data:
+                      attribute: color
+                      code: black
+                      labels:
+                        en_US: Black
+                        fr_FR: Noir
                     locale: null
                     scope: null
                 description:
@@ -18984,6 +19132,12 @@ paths:
                     scope: null
                 size:
                   - data: m
+                    linked_data:
+                      attribute: size
+                      code: m
+                      labels:
+                        en_US: M
+                        fr_FR: M
                     locale: null
                     scope: null
             properties:
@@ -19102,6 +19256,9 @@ paths:
                       properties:
                         data:
                           description: Product value
+                          type: object
+                        linked_data:
+                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                           type: object
                         locale:
                           description: Locale code of the product value
@@ -19226,8 +19383,26 @@ paths:
                       quantity: 1
               updated: 2016-06-25T17:56:12+02:00
               values:
+                collection:
+                  - data:
+                      - winter_2016
+                    linked_data:
+                      winter_2016:
+                        attribute: collection
+                        code: winter_2016
+                        labels:
+                          en_US: Winter 2016
+                          fr_FR: Hiver 2016
+                    locale: null
+                    scope: null
                 color:
                   - data: black
+                    linked_data:
+                      attribute: color
+                      code: black
+                      labels:
+                        en_US: Black
+                        fr_FR: Noir
                     locale: null
                     scope: null
                 description:
@@ -19260,6 +19435,12 @@ paths:
                     scope: null
                 size:
                   - data: m
+                    linked_data:
+                      attribute: size
+                      code: m
+                      labels:
+                        en_US: M
+                        fr_FR: M
                     locale: null
                     scope: null
             properties:
@@ -19378,6 +19559,9 @@ paths:
                       properties:
                         data:
                           description: Product value
+                          type: object
+                        linked_data:
+                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                           type: object
                         locale:
                           description: Locale code of the product value
@@ -19520,8 +19704,26 @@ paths:
                       quantity: 1
               updated: 2016-06-25T17:56:12+02:00
               values:
+                collection:
+                  - data:
+                      - winter_2016
+                    linked_data:
+                      winter_2016:
+                        attribute: collection
+                        code: winter_2016
+                        labels:
+                          en_US: Winter 2016
+                          fr_FR: Hiver 2016
+                    locale: null
+                    scope: null
                 color:
                   - data: black
+                    linked_data:
+                      attribute: color
+                      code: black
+                      labels:
+                        en_US: Black
+                        fr_FR: Noir
                     locale: null
                     scope: null
                 description:
@@ -19554,6 +19756,12 @@ paths:
                     scope: null
                 size:
                   - data: m
+                    linked_data:
+                      attribute: size
+                      code: m
+                      labels:
+                        en_US: M
+                        fr_FR: M
                     locale: null
                     scope: null
             properties:
@@ -19672,6 +19880,9 @@ paths:
                       properties:
                         data:
                           description: Product value
+                          type: object
+                        linked_data:
+                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                           type: object
                         locale:
                           description: Locale code of the product value
@@ -25494,8 +25705,26 @@ definitions:
               quantity: 1
       updated: 2016-06-25T17:56:12+02:00
       values:
+        collection:
+          - data:
+              - winter_2016
+            linked_data:
+              winter_2016:
+                attribute: collection
+                code: winter_2016
+                labels:
+                  en_US: Winter 2016
+                  fr_FR: Hiver 2016
+            locale: null
+            scope: null
         color:
           - data: black
+            linked_data:
+              attribute: color
+              code: black
+              labels:
+                en_US: Black
+                fr_FR: Noir
             locale: null
             scope: null
         description:
@@ -25528,6 +25757,12 @@ definitions:
             scope: null
         size:
           - data: m
+            linked_data:
+              attribute: size
+              code: m
+              labels:
+                en_US: M
+                fr_FR: M
             locale: null
             scope: null
     properties:
@@ -25647,6 +25882,9 @@ definitions:
                 data:
                   description: Product value
                   type: object
+                linked_data:
+                  description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                  type: object
                 locale:
                   description: Locale code of the product value
                   type: string
@@ -25700,8 +25938,26 @@ definitions:
                   quantity: 1
           updated: 2016-06-25T17:56:12+02:00
           values:
+            collection:
+              - data:
+                  - winter_2016
+                linked_data:
+                  winter_2016:
+                    attribute: collection
+                    code: winter_2016
+                    labels:
+                      en_US: Winter 2016
+                      fr_FR: Hiver 2016
+                locale: null
+                scope: null
             color:
               - data: black
+                linked_data:
+                  attribute: color
+                  code: black
+                  labels:
+                    en_US: Black
+                    fr_FR: Noir
                 locale: null
                 scope: null
             description:
@@ -25734,6 +25990,12 @@ definitions:
                 scope: null
             size:
               - data: m
+                linked_data:
+                  attribute: size
+                  code: m
+                  labels:
+                    en_US: M
+                    fr_FR: M
                 locale: null
                 scope: null
         properties:
@@ -25852,6 +26114,9 @@ definitions:
                   properties:
                     data:
                       description: Product value
+                      type: object
+                    linked_data:
+                      description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
                       type: object
                     locale:
                       description: Locale code of the product value

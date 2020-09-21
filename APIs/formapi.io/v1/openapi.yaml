@@ -1591,6 +1591,7 @@ paths:
                           state: invalid_data
                           template_id: tpl_000000000000000001
                           test: true
+                          truncated_text: {}
               schema:
                 properties:
                   error:
@@ -1706,6 +1707,7 @@ paths:
                           state: pending
                           template_id: tpl_000000000000000001
                           test: false
+                          truncated_text: {}
                       - status: success
                         submission:
                           actions: []
@@ -1725,6 +1727,7 @@ paths:
                           state: pending
                           template_id: tpl_000000000000000001
                           test: true
+                          truncated_text: {}
               schema:
                 properties:
                   error:
@@ -1876,6 +1879,7 @@ paths:
                         state: processed
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
                       - actions: []
                         batch_id: sbb_000000000000000001
                         data_requests: []
@@ -1892,6 +1896,7 @@ paths:
                         state: processed
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
                     total_count: 10
               schema:
                 properties:
@@ -2003,6 +2008,9 @@ paths:
                     state: processed
                     template_id: tpl_000000000000000001
                     test: true
+                    truncated_text:
+                      description:
+                        - text that couldn't fit
               schema:
                 $ref: "#/components/schemas/submission"
           description: submission was expired
@@ -2092,6 +2100,9 @@ paths:
                     state: processed
                     template_id: tpl_000000000000000001
                     test: true
+                    truncated_text:
+                      description:
+                        - text that couldn't fit
               schema:
                 $ref: "#/components/schemas/submission"
           description: processed submission found
@@ -2175,8 +2186,9 @@ paths:
                       expire_after: 7
                       expire_submissions: true
                       id: tpl_000000000000000011
+                      locked: false
                       name: Sub Template 1
-                      page_count: 0
+                      page_count: 2
                       page_dimensions:
                         - - 612
                           - 792
@@ -2200,6 +2212,7 @@ paths:
                       expire_after: 7
                       expire_submissions: true
                       id: tpl_000000000000000003
+                      locked: false
                       name: Template 3
                       page_count: 1
                       page_dimensions: null
@@ -2223,8 +2236,9 @@ paths:
                       expire_after: 7
                       expire_submissions: true
                       id: tpl_000000000000000002
+                      locked: false
                       name: Template 2
-                      page_count: 0
+                      page_count: 2
                       page_dimensions:
                         - - 612
                           - 792
@@ -2248,8 +2262,9 @@ paths:
                       expire_after: 7
                       expire_submissions: true
                       id: tpl_000000000000000001
+                      locked: false
                       name: Template 1
-                      page_count: 0
+                      page_count: 2
                       page_dimensions:
                         - - 612
                           - 792
@@ -2287,6 +2302,8 @@ paths:
                       type: boolean
                     id:
                       type: string
+                    locked:
+                      type: boolean
                     name:
                       nullable: true
                       type: string
@@ -2332,6 +2349,7 @@ paths:
                     - expire_submissions
                     - allow_additional_properties
                     - editable_submissions
+                    - locked
                     - webhook_url
                     - slack_webhook_url
                     - redirect_url
@@ -2401,6 +2419,7 @@ paths:
                     expire_after: 7
                     expire_submissions: false
                     id: tpl_000000000000000004
+                    locked: false
                     name: Test Template
                     page_count: 0
                     page_dimensions: null
@@ -2434,6 +2453,8 @@ paths:
                     type: boolean
                   id:
                     type: string
+                  locked:
+                    type: boolean
                   name:
                     nullable: true
                     type: string
@@ -2467,6 +2488,7 @@ paths:
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
+                  - locked
                   - page_dimensions
                   - webhook_url
                   - slack_webhook_url
@@ -2517,8 +2539,9 @@ paths:
                     expire_after: 7
                     expire_submissions: true
                     id: tpl_000000000000000011
+                    locked: false
                     name: Sub Template 1
-                    page_count: 0
+                    page_count: 2
                     page_dimensions:
                       - - 612
                         - 792
@@ -2555,6 +2578,8 @@ paths:
                     type: boolean
                   id:
                     type: string
+                  locked:
+                    type: boolean
                   name:
                     nullable: true
                     type: string
@@ -2600,6 +2625,7 @@ paths:
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
+                  - locked
                   - webhook_url
                   - slack_webhook_url
                   - redirect_url
@@ -2699,6 +2725,7 @@ paths:
                     webhook_url:
                       nullable: true
                       type: string
+                  title: template_data
                   type: object
               required:
                 - template
@@ -2732,6 +2759,411 @@ paths:
       security:
         - api_token_basic: []
       summary: Update a Template
+      tags:
+        - PDF
+  "/templates/{template_id}/add_fields":
+    put:
+      operationId: addFieldsToTemplate
+      parameters:
+        - example: tpl_000000000000000002
+          in: path
+          name: template_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                fields:
+                  - name: new_field1
+                    page: 1
+                  - default: default text
+                    displayType: text
+                    name: new_field2
+                    overflow: truncate
+                    page: 1
+                    rotation: 10
+                    type: string
+                  - displayType: text
+                    integer: true
+                    name: new_field3
+                    page: 2
+                    rotation: 0
+                    type: number
+                  - displayType: text
+                    height: 50
+                    id: 99
+                    integer: true
+                    name: new_field4
+                    page: 2
+                    rotation: 0
+                    type: number
+                    width: 150
+                    x: 20
+                    y: 60
+                  - description: updated description for existing field
+                    displayType: text
+                    height: 50
+                    integer: true
+                    maximum: 100
+                    minimum: 10
+                    name: title
+                    page: 1
+                    rotation: 0
+                    type: number
+                    width: 150
+                    x: 40
+                    y: 60
+              properties:
+                fields:
+                  items:
+                    additionalProperties: false
+                    properties:
+                      alignment:
+                        enum:
+                          - left
+                          - center
+                          - right
+                        type: string
+                      autoCalculateMaxLength:
+                        type: boolean
+                      backgroundColor:
+                        type: string
+                      backgroundColorFieldName:
+                        type: string
+                      backgroundColorFieldRequired:
+                        type: boolean
+                      barcodeSymbology:
+                        type: string
+                      bold:
+                        type: boolean
+                      characterSpacing:
+                        type: number
+                      checkCharacter:
+                        enum:
+                          - "&#10003;"
+                          - "&#10004;"
+                          - "&#10006;"
+                          - "&#10007;"
+                          - "&#10008;"
+                        type: string
+                      checkColor:
+                        type: string
+                      checkColorFieldName:
+                        type: string
+                      checkColorFieldRequired:
+                        type: boolean
+                      color:
+                        type: string
+                      colorFieldName:
+                        type: string
+                      colorFieldRequired:
+                        type: boolean
+                      comb:
+                        type: boolean
+                      combNumberOfCells:
+                        minimum: 0
+                        type: number
+                      combValueOffset:
+                        type: number
+                      combinedFieldFormat:
+                        type: string
+                      combinedFieldNames:
+                        type: string
+                      combinedFieldSeparator:
+                        type: string
+                      combinedFieldType:
+                        type: string
+                      condition:
+                        type: string
+                      currency:
+                        type: boolean
+                      dateTimeFormat:
+                        type: string
+                      decimalPlaces:
+                        minimum: 0
+                        type: number
+                      default:
+                        type: string
+                      description:
+                        type: string
+                      displayType:
+                        enum:
+                          - text
+                          - check
+                          - qrcode
+                          - barcode
+                          - image
+                          - shape
+                        type: string
+                      exclusiveMaximum:
+                        type: boolean
+                      exclusiveMinimum:
+                        type: boolean
+                      falseText:
+                        type: string
+                      fontSize:
+                        minimum: 0
+                        type: number
+                      height:
+                        minimum: 0
+                        type: number
+                      hidden:
+                        type: boolean
+                      id:
+                        minimum: 0
+                        type: number
+                      imageGravity:
+                        enum:
+                          - NorthWest
+                          - North
+                          - NorthEast
+                          - West
+                          - Center
+                          - East
+                          - SouthWest
+                          - South
+                          - SouthEast
+                        type: string
+                      imageScaleType:
+                        enum:
+                          - fit
+                          - fill
+                          - stretch
+                        type: string
+                      includeTime:
+                        type: boolean
+                      integer:
+                        type: boolean
+                      invertBooleanCondition:
+                        type: boolean
+                      maxLength:
+                        type: number
+                      maximum:
+                        type: number
+                      metadata:
+                        type: string
+                      minLength:
+                        type: number
+                      minimum:
+                        type: number
+                      multiline:
+                        type: boolean
+                      multilineLines:
+                        minimum: 0
+                        type: number
+                      name:
+                        type: string
+                      numberConditionRangeExclusiveMax:
+                        type: boolean
+                      numberConditionRangeExclusiveMin:
+                        type: boolean
+                      numberConditionRangeMax:
+                        type: number
+                      numberConditionRangeMin:
+                        type: number
+                      numberConditionType:
+                        enum:
+                          - equals
+                          - range
+                          - gte
+                          - gt
+                          - lte
+                          - lt
+                        type: string
+                      opacity:
+                        maximum: 1
+                        minimum: 0
+                        type: number
+                      optionList:
+                        type: string
+                      overflow:
+                        enum:
+                          - shrink_to_fit
+                          - truncate
+                        type: string
+                      page:
+                        minimum: 1
+                        type: number
+                      qrcodeColor:
+                        type: string
+                      qrcodeColorFieldName:
+                        type: string
+                      qrcodeColorFieldRequired:
+                        type: boolean
+                      required:
+                        type: boolean
+                      rotation:
+                        maximum: 360
+                        minimum: 0
+                        type: number
+                      shapeBorderColor:
+                        type: string
+                      shapeBorderColorFieldName:
+                        type: string
+                      shapeBorderColorFieldRequired:
+                        type: boolean
+                      shapeBorderWidth:
+                        minimum: 0
+                        type: number
+                      shapeFillColor:
+                        type: string
+                      shapeFillColorFieldName:
+                        type: string
+                      shapeFillColorFieldRequired:
+                        type: boolean
+                      shapeType:
+                        enum:
+                          - square
+                          - rectangle
+                          - circle
+                          - ellipse
+                        type: string
+                      signatureAllowDraw:
+                        type: boolean
+                      signatureAllowType:
+                        type: boolean
+                      static:
+                        type: boolean
+                      strikethrough:
+                        type: boolean
+                      stringConditionType:
+                        enum:
+                          - equals
+                          - contains
+                          - starts_with
+                          - ends_with
+                          - regex
+                        type: string
+                      title:
+                        type: string
+                      trueText:
+                        type: string
+                      type:
+                        enum:
+                          - string
+                          - number
+                          - boolean
+                          - date
+                          - address
+                          - country
+                          - email
+                          - url
+                          - image
+                          - signature
+                          - barcode
+                          - combined
+                        type: string
+                      typeface:
+                        type: string
+                      uppercase:
+                        type: boolean
+                      vAlignment:
+                        enum:
+                          - bottom
+                          - center
+                          - top
+                        type: string
+                      width:
+                        minimum: 0
+                        type: number
+                      x:
+                        minimum: 0
+                        type: number
+                      y:
+                        minimum: 0
+                        type: number
+                    required:
+                      - name
+                      - page
+                    type: object
+                  type: array
+              required:
+                - fields
+              title: add_fields_data
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    new_field_ids:
+                      - 3
+                      - 4
+                      - 5
+                      - 99
+                      - 6
+                    status: success
+              schema:
+                properties:
+                  errors:
+                    items:
+                      type: string
+                    type: array
+                  new_field_ids:
+                    items:
+                      type: integer
+                    type: array
+                  status:
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - status
+                title: add_fields_template_response
+                type: object
+          description: add fields success
+        "422":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    errors:
+                      - The property '#/fields/0' did not contain a required property of 'page'
+                      - The property '#/fields/1/page' did not have a minimum value of 1, inclusively
+                      - The property '#/fields/5' contains additional properties ["unknown_property"] outside of the schema when none are allowed
+                      - The property '#/fields/6' did not contain a required property of 'page'
+                      - "The property '#/fields/6/type' value \"unknown type\" did not match one of the following values: string, number, boolean, date, address, country, email, url, image, signature, barcode, combined"
+                      - "The property '#/fields/6/displayType' value \"unknown display type\" did not match one of the following values: text, check, qrcode, barcode, image, shape"
+                      - "The property '#/fields/7/width' of type string did not match the following type: number"
+                      - The property '#/fields/8/x' did not have a minimum value of 0, inclusively
+                      - The property '#/fields/8/y' did not have a minimum value of 0, inclusively
+                      - The property '#/fields/8/width' did not have a minimum value of 0, inclusively
+                      - The property '#/fields/8/height' did not have a minimum value of 0, inclusively
+                      - The property '#/fields/2/id' value "1" is already taken by another field
+                      - The property '#/fields/2/page' value "5" did not have a maximum value of 2, inclusively (Template has 2 pages)
+                      - The property '#/fields/3/page' value "3" did not have a maximum value of 2, inclusively (Template has 2 pages)
+                    status: error
+              schema:
+                properties:
+                  errors:
+                    items:
+                      type: string
+                    type: array
+                  new_field_ids:
+                    items:
+                      type: integer
+                    type: array
+                  status:
+                    enum:
+                      - success
+                      - error
+                    type: string
+                required:
+                  - status
+                title: add_fields_template_response
+                type: object
+          description: add fields error
+      security:
+        - api_token_basic: []
+      summary: Add new fields to a Template
       tags:
         - PDF
   "/templates/{template_id}/move":
@@ -2774,8 +3206,9 @@ paths:
                     expire_after: 7
                     expire_submissions: true
                     id: tpl_000000000000000001
+                    locked: false
                     name: Template 1
-                    page_count: 0
+                    page_count: 2
                     page_dimensions:
                       - - 612
                         - 792
@@ -2812,6 +3245,8 @@ paths:
                     type: boolean
                   id:
                     type: string
+                  locked:
+                    type: boolean
                   name:
                     nullable: true
                     type: string
@@ -2857,6 +3292,7 @@ paths:
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
+                  - locked
                   - webhook_url
                   - slack_webhook_url
                   - redirect_url
@@ -3094,6 +3530,7 @@ paths:
                       state: pending
                       template_id: tpl_000000000000000001
                       test: false
+                      truncated_text: {}
               schema:
                 properties:
                   errors:
@@ -3164,6 +3601,7 @@ paths:
                       state: invalid_data
                       template_id: tpl_000000000000000001
                       test: false
+                      truncated_text: {}
               schema:
                 $ref: "#/components/schemas/invalid_request"
           description: invalid request
@@ -3303,6 +3741,7 @@ paths:
                         state: pending
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
                     - status: success
                       submission:
                         actions: []
@@ -3322,6 +3761,7 @@ paths:
                         state: pending
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
               schema:
                 items:
                   properties:
@@ -3392,6 +3832,7 @@ paths:
                         state: invalid_data
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
                     - errors:
                         - The root object did not contain a required property of 'title'
                       status: error
@@ -3414,6 +3855,7 @@ paths:
                         state: invalid_data
                         template_id: tpl_000000000000000001
                         test: false
+                        truncated_text: {}
               schema:
                 items:
                   $ref: "#/components/schemas/invalid_request"
@@ -3428,7 +3870,109 @@ paths:
     post:
       operationId: createPDFTemplateFromUpload
       requestBody:
-        $ref: "#/components/requestBodies/createPDFTemplateFromUploadData"
+        content:
+          application/json:
+            schema:
+              example:
+                template:
+                  document:
+                    id: b6903dbfb15c13bbad1444c35064df9e
+                    metadata:
+                      filename: fw8ben-presigned.pdf
+                      mime_type: application/pdf
+                      size: 5885
+                    storage: cache
+                  name: Test Template Presigned
+              properties:
+                template:
+                  properties:
+                    allow_additional_properties:
+                      type: boolean
+                    description:
+                      nullable: true
+                      type: string
+                    document:
+                      properties:
+                        id:
+                          type: string
+                        metadata:
+                          properties:
+                            filename:
+                              type: string
+                            mime_type:
+                              enum:
+                                - application/pdf
+                              type: string
+                            size:
+                              type: integer
+                          required:
+                            - filename
+                            - size
+                            - mime_type
+                          type: object
+                        storage:
+                          enum:
+                            - cache
+                          type: string
+                      required:
+                        - id
+                        - storage
+                        - metadata
+                      type: object
+                    editable_submissions:
+                      type: boolean
+                    expiration_interval:
+                      enum:
+                        - minutes
+                        - hours
+                        - days
+                      type: string
+                    expire_after:
+                      type: number
+                    expire_submissions:
+                      type: boolean
+                    footer_html:
+                      nullable: true
+                      type: string
+                    header_html:
+                      nullable: true
+                      type: string
+                    html:
+                      nullable: true
+                      type: string
+                    name:
+                      nullable: true
+                      type: string
+                    public_submissions:
+                      type: boolean
+                    public_web_form:
+                      type: boolean
+                    redirect_url:
+                      nullable: true
+                      type: string
+                    scss:
+                      nullable: true
+                      type: string
+                    slack_webhook_url:
+                      nullable: true
+                      type: string
+                    template_type:
+                      enum:
+                        - pdf
+                        - html
+                      type: string
+                    webhook_url:
+                      nullable: true
+                      type: string
+                  required:
+                    - name
+                  title: upload_template_data
+                  type: object
+              required:
+                - template
+              title: create_template_from_upload_data
+              type: object
+        required: true
       responses:
         "201":
           content:
@@ -3447,6 +3991,7 @@ paths:
                     expire_after: 7
                     expire_submissions: false
                     id: tpl_000000000000000004
+                    locked: false
                     name: Test Template Presigned
                     page_count: 0
                     page_dimensions: null
@@ -3480,6 +4025,8 @@ paths:
                     type: boolean
                   id:
                     type: string
+                  locked:
+                    type: boolean
                   name:
                     nullable: true
                     type: string
@@ -3513,6 +4060,7 @@ paths:
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
+                  - locked
                   - page_dimensions
                   - webhook_url
                   - slack_webhook_url
@@ -3539,7 +4087,80 @@ paths:
     post:
       operationId: createHTMLTemplate
       requestBody:
-        $ref: "#/components/requestBodies/createPDFTemplateFromUploadData"
+        content:
+          application/json:
+            schema:
+              example:
+                template:
+                  description: HTML template created via API
+                  footer_html: Test Footer
+                  header_html: Test Header
+                  html: <html><body><p>Test Content</p></body></html>
+                  name: Test HTML Template
+                  scss: "body { color: #444; }"
+                  template_type: html
+              properties:
+                template:
+                  properties:
+                    allow_additional_properties:
+                      type: boolean
+                    description:
+                      nullable: true
+                      type: string
+                    editable_submissions:
+                      type: boolean
+                    expiration_interval:
+                      enum:
+                        - minutes
+                        - hours
+                        - days
+                      type: string
+                    expire_after:
+                      type: number
+                    expire_submissions:
+                      type: boolean
+                    footer_html:
+                      nullable: true
+                      type: string
+                    header_html:
+                      nullable: true
+                      type: string
+                    html:
+                      nullable: true
+                      type: string
+                    name:
+                      nullable: true
+                      type: string
+                    public_submissions:
+                      type: boolean
+                    public_web_form:
+                      type: boolean
+                    redirect_url:
+                      nullable: true
+                      type: string
+                    scss:
+                      nullable: true
+                      type: string
+                    slack_webhook_url:
+                      nullable: true
+                      type: string
+                    template_type:
+                      enum:
+                        - pdf
+                        - html
+                      type: string
+                    webhook_url:
+                      nullable: true
+                      type: string
+                  required:
+                    - name
+                  title: html_template_data
+                  type: object
+              required:
+                - template
+              title: create_html_template_data
+              type: object
+        required: true
       responses:
         "201":
           content:
@@ -3558,6 +4179,7 @@ paths:
                     expire_after: 7
                     expire_submissions: false
                     id: tpl_000000000000000004
+                    locked: false
                     name: Test HTML Template
                     page_count: 1
                     page_dimensions: null
@@ -3591,6 +4213,8 @@ paths:
                     type: boolean
                   id:
                     type: string
+                  locked:
+                    type: boolean
                   name:
                     nullable: true
                     type: string
@@ -3624,6 +4248,7 @@ paths:
                   - expire_submissions
                   - allow_additional_properties
                   - editable_submissions
+                  - locked
                   - page_dimensions
                   - webhook_url
                   - slack_webhook_url
@@ -3723,110 +4348,6 @@ paths:
       tags:
         - PDF
 components:
-  requestBodies:
-    createPDFTemplateFromUploadData:
-      content:
-        application/json:
-          schema:
-            example:
-              template:
-                document:
-                  id: b6903dbfb15c13bbad1444c35064df9e
-                  metadata:
-                    filename: fw8ben-presigned.pdf
-                    mime_type: application/pdf
-                    size: 5885
-                  storage: cache
-                name: Test Template Presigned
-            properties:
-              template:
-                properties:
-                  allow_additional_properties:
-                    type: boolean
-                  description:
-                    nullable: true
-                    type: string
-                  document:
-                    properties:
-                      id:
-                        type: string
-                      metadata:
-                        properties:
-                          filename:
-                            type: string
-                          mime_type:
-                            enum:
-                              - application/pdf
-                            type: string
-                          size:
-                            type: integer
-                        required:
-                          - filename
-                          - size
-                          - mime_type
-                        type: object
-                      storage:
-                        enum:
-                          - cache
-                        type: string
-                    required:
-                      - id
-                      - storage
-                      - metadata
-                    type: object
-                  editable_submissions:
-                    type: boolean
-                  expiration_interval:
-                    enum:
-                      - minutes
-                      - hours
-                      - days
-                    type: string
-                  expire_after:
-                    type: number
-                  expire_submissions:
-                    type: boolean
-                  footer_html:
-                    nullable: true
-                    type: string
-                  header_html:
-                    nullable: true
-                    type: string
-                  html:
-                    nullable: true
-                    type: string
-                  name:
-                    nullable: true
-                    type: string
-                  public_submissions:
-                    type: boolean
-                  public_web_form:
-                    type: boolean
-                  redirect_url:
-                    nullable: true
-                    type: string
-                  scss:
-                    nullable: true
-                    type: string
-                  slack_webhook_url:
-                    nullable: true
-                    type: string
-                  template_type:
-                    enum:
-                      - pdf
-                      - html
-                    type: string
-                  webhook_url:
-                    nullable: true
-                    type: string
-                required:
-                  - name
-                type: object
-            required:
-              - template
-            title: create_template_data
-            type: object
-      required: true
   schemas:
     authentication_error:
       properties:
@@ -3960,6 +4481,8 @@ components:
           type: string
         test:
           type: boolean
+        truncated_text:
+          type: object
       required:
         - id
         - state

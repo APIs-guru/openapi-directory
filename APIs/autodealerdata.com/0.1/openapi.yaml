@@ -667,7 +667,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/BasicModelStatsResp"
           description: Successful Response
         "422":
           content:
@@ -968,7 +968,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/ModelYearDistResp"
           description: Successful Response
         "422":
           content:
@@ -1159,7 +1159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/BasicModelStatsResp"
           description: Successful Response
         "422":
           content:
@@ -1211,7 +1211,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/BucketResp"
           description: Successful Response
         "422":
           content:
@@ -1317,7 +1317,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GenericResponse"
+                $ref: "#/components/schemas/TopModelResp"
           description: Successful Response
         "422":
           content:
@@ -1415,6 +1415,61 @@ paths:
         - Standard Plan Or Greater
 components:
   schemas:
+    BasicModelStats:
+      properties:
+        average:
+          title: Average
+          type: number
+        median:
+          title: Median
+          type: number
+        name:
+          title: Name
+          type: string
+        pVariance:
+          title: Pvariance
+          type: number
+        stdDev:
+          title: Stddev
+          type: number
+      required:
+        - name
+        - average
+        - median
+        - stdDev
+        - pVariance
+      title: BasicModelStats
+      type: object
+    BasicModelStatsResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/BasicModelStats"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: BasicModelStatsResp
+      type: object
     BrandResp:
       properties:
         brandName:
@@ -1444,6 +1499,53 @@ components:
       required:
         - data
       title: BrandResp
+      type: object
+    BucketEntry:
+      properties:
+        bucket:
+          title: Bucket
+          type: number
+        modelName:
+          title: Modelname
+          type: string
+        percentOfMarket:
+          title: Percentofmarket
+          type: number
+      required:
+        - percentOfMarket
+        - bucket
+        - modelName
+      title: BucketEntry
+      type: object
+    BucketResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/BucketEntry"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: BucketResp
       type: object
     DealershipData:
       properties:
@@ -1789,6 +1891,57 @@ components:
         - data
       title: ModelResp
       type: object
+    ModelYearDistEntry:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        modelName:
+          title: Modelname
+          type: string
+        percentOfMarket:
+          title: Percentofmarket
+          type: number
+        year:
+          title: Year
+          type: integer
+      required:
+        - percentOfMarket
+        - modelName
+        - year
+        - brandName
+      title: ModelYearDistEntry
+      type: object
+    ModelYearDistResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/ModelYearDistEntry"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: ModelYearDistResp
+      type: object
     RegionResp:
       properties:
         brandName:
@@ -1920,6 +2073,61 @@ components:
         - domain
         - uuid
       title: SubUserJSONWebToken
+      type: object
+    TopModelEntry:
+      properties:
+        brandMarketShare:
+          title: Brandmarketshare
+          type: number
+        brandName:
+          title: Brandname
+          type: string
+        modelName:
+          title: Modelname
+          type: string
+        percentOfBrandSales:
+          title: Percentofbrandsales
+          type: number
+        percentOfTopSales:
+          title: Percentoftopsales
+          type: number
+      required:
+        - percentOfTopSales
+        - modelName
+        - brandName
+        - percentOfBrandSales
+        - brandMarketShare
+      title: TopModelEntry
+      type: object
+    TopModelResp:
+      properties:
+        brandName:
+          title: Brandname
+          type: string
+        cacheTimeLimit:
+          default: 600
+          title: Cachetimelimit
+          type: integer
+        condition:
+          title: Condition
+          type: string
+        data:
+          items:
+            $ref: "#/components/schemas/TopModelEntry"
+          title: Data
+          type: array
+        modelName:
+          title: Modelname
+          type: string
+        msg:
+          title: Msg
+          type: string
+        regionName:
+          title: Regionname
+          type: string
+      required:
+        - data
+      title: TopModelResp
       type: object
     ValidationError:
       properties:

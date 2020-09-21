@@ -318,9 +318,6 @@ info:
     Using a Wildcard API Key gives you the freedom to make API calls from any IP address after the POST device-server. You can switch to a Wildcard API Key by tapping on “Allow All IP Addresses” in your API Key menu inside the bunq app. You can also programatically switch to a Wildcard API Key by passing your current ip and a `*` (asterisk) in the `permitted_ips` field of the device-server POST call. E.g: `["1.2.3.4", "*"]`.
 
 
-    Find out more at this link https://bunq.com/en/apikey-dynamic-ip.
-
-
     # <span id="topic-psd2">Connect as a PSD2 service provider</span>
 
 
@@ -2070,8 +2067,6 @@ tags:
   - description: ""
     name: reward-sender
   - description: ""
-    name: sandbox-user
-  - description: ""
     name: sandbox-user-company
   - description: ""
     name: sandbox-user-person
@@ -2735,44 +2730,6 @@ paths:
       summary: ""
       tags:
         - payment-service-provider-credential
-  /sandbox-user:
-    post:
-      description: Used to create a sandbox user.
-      operationId: CREATE_SandboxUser
-      parameters:
-        - $ref: "#/components/parameters/Cache-Control"
-        - $ref: "#/components/parameters/User-Agent"
-        - $ref: "#/components/parameters/X-Bunq-Language"
-        - $ref: "#/components/parameters/X-Bunq-Region"
-        - $ref: "#/components/parameters/X-Bunq-Client-Request-Id"
-        - $ref: "#/components/parameters/X-Bunq-Geolocation"
-        - $ref: "#/components/parameters/X-Bunq-Client-Authentication"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SandboxUser"
-        description: ""
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SandboxUserCreate"
-          description: Used to create a sandbox user.
-          headers:
-            X-Bunq-Client-Request-Id:
-              $ref: "#/components/headers/X-Bunq-Client-Request-Id"
-            X-Bunq-Client-Response-Id:
-              $ref: "#/components/headers/X-Bunq-Client-Response-Id"
-            X-Bunq-Server-Signature:
-              $ref: "#/components/headers/X-Bunq-Server-Signature"
-        "400":
-          $ref: "#/components/responses/GenericError"
-      summary: ""
-      tags:
-        - sandbox-user
   /sandbox-user-company:
     post:
       description: Used to create a sandbox userCompany.
@@ -24752,11 +24709,6 @@ components:
       type: object
     Card:
       properties:
-        activation_code:
-          description: "DEPRECATED: Activate a card by setting status to ACTIVE when the order_status is ACCEPTED_FOR_PRODUCTION."
-          readOnly: false
-          type: string
-          writeOnly: true
         card_limit:
           $ref: "#/components/schemas/Amount"
           description: The spending limit for the card.
@@ -25830,6 +25782,11 @@ components:
           writeOnly: true
         name:
           description: The company name.
+          readOnly: false
+          type: string
+          writeOnly: true
+        subscription_type:
+          description: The subscription type for the company.
           readOnly: false
           type: string
           writeOnly: true
@@ -36642,20 +36599,9 @@ components:
           type: string
           writeOnly: false
       type: object
-    SandboxUser:
-      type: object
     SandboxUserCompany:
       type: object
     SandboxUserCompanyCreate:
-      properties:
-        Id:
-          $ref: "#/components/schemas/BunqId"
-          description: The id of the created item
-          readOnly: true
-          type: object
-          writeOnly: false
-      type: object
-    SandboxUserCreate:
       properties:
         Id:
           $ref: "#/components/schemas/BunqId"

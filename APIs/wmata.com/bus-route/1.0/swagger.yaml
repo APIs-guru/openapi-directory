@@ -5712,11 +5712,11 @@ paths:
           in: query
           name: Date
           type: string
-        - default: "false"
+        - default: false
           description: Whether or not to include variations.  For example, if B30 is specified, include all variations such as B30v1, B30v2, etc.
           enum:
-            - "false"
-            - "true"
+            - false
+            - true
           in: query
           name: IncludingVariations
           type: boolean
@@ -15290,11 +15290,11 @@ paths:
           in: query
           name: Date
           type: string
-        - default: "false"
+        - default: false
           description: Whether or not to include variations if a base route is specified in RouteID.  For example, if B30 is specified and IncludingVariations is set to true, data for all variations of B30 such as B30v1, B30v2, etc. will be returned.
           enum:
-            - "false"
-            - "true"
+            - false
+            - true
           in: query
           name: IncludingVariations
           type: boolean
@@ -19302,19 +19302,19 @@ paths:
       parameters:
         - description: Center point Latitude, required if Longitude and Radius are specified.
           enum:
-            - "38.878586"
+            - 38.878586
           in: query
           name: Lat
           type: number
         - description: Center point Longitude, required if Latitude and Radius are specified.
           enum:
-            - "-76.989626"
+            - -76.989626
           in: query
           name: Lon
           type: number
         - description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           enum:
-            - "500"
+            - 500
           in: query
           name: Radius
           type: number

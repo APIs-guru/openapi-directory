@@ -48,6 +48,11 @@ paths:
           name: active
           schema:
             type: boolean
+        - description: Chargestations that are public
+          in: query
+          name: public
+          schema:
+            type: boolean
         - $ref: "#/components/parameters/paginate_limit1"
         - $ref: "#/components/parameters/paginate_page1"
         - $ref: "#/components/parameters/paginate_enabled1"
@@ -262,6 +267,79 @@ paths:
           description: A failure response
       tags:
         - Commands
+  /v1/commands/chargingschedule:
+    delete:
+      description: Delete a smart charging schedule
+      operationId: deletechargingschedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                id:
+                  type: string
+              type: object
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  command:
+                    type: object
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                type: object
+          description: A successful response
+        "400":
+          description: Schedule not found
+      tags:
+        - Smart Charging
+    post:
+      description: Set one of charging power or current of a specific chargestation connector
+      operationId: setchargingschedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                connector:
+                  type: string
+                schedule:
+                  items:
+                    properties:
+                      endDate:
+                        type: string
+                      limit:
+                        type: number
+                      startDate:
+                        type: string
+                      unit:
+                        type: string
+                    type: object
+                  type: array
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  command:
+                    type: object
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                type: object
+          description: A successful response
+        "400":
+          description: A failure response
+      tags:
+        - Smart Charging
   /v1/commands/remotestart:
     post:
       description: Use to request a remote start command. The request will wait for the charge station to process the command. It will timeout after 60 seconds.
@@ -1845,6 +1923,8 @@ components:
           type: string
         protocol:
           type: string
+        public:
+          type: boolean
       type: object
   securitySchemes:
     oauth2:
@@ -1895,7 +1975,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: cca127d596409e7320c9580aa2d1299390f0055e
+x-github-sha: cd0a5148e2db7204513970ecfffe0ddb24842ec5
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

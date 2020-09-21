@@ -4840,7 +4840,7 @@ components:
         source_language:
           type: string
         subject:
-          $ref: "#/components/schemas/DocumentSubject"
+          type: string
         target_languages:
           items:
             type: string
@@ -4900,20 +4900,6 @@ components:
         meta:
           $ref: "#/components/schemas/PagingMeta"
       type: object
-    DocumentSubject:
-      enum:
-        - general
-        - marketing
-        - financial
-        - scientific
-        - medical
-        - legal
-        - gaming
-        - technology
-        - social-media
-        - hr
-        - immigration
-      type: string
     Earning:
       properties:
         amount:
@@ -5423,7 +5409,7 @@ components:
           $ref: "#/components/schemas/ProjectStatus"
         subjects:
           items:
-            $ref: "#/components/schemas/DocumentSubject"
+            type: string
           type: array
         target_languages:
           items:

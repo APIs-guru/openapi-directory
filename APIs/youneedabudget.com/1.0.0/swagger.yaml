@@ -140,7 +140,7 @@ paths:
       tags:
         - Accounts
     post:
-      description: Creates a new account.
+      description: Creates a new account
       operationId: createAccount
       parameters:
         - description: 'The id of the budget ("last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)'
@@ -619,7 +619,7 @@ paths:
         - Payees
   "/budgets/{budget_id}/payees/{payee_id}":
     get:
-      description: Returns single payee
+      description: Returns a single payee
       operationId: getPayeeById
       parameters:
         - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
@@ -652,7 +652,7 @@ paths:
         - Payees
   "/budgets/{budget_id}/payees/{payee_id}/payee_locations":
     get:
-      description: Returns all payee locations for the specified payee
+      description: Returns all payee locations for a specified payee
       operationId: getPayeeLocationsByPayee
       parameters:
         - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
@@ -973,7 +973,7 @@ paths:
         - Deprecated
   "/budgets/{budget_id}/transactions/import":
     post:
-      description: Imports transactions.
+      description: Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking "Import" on each account in the web application or tapping the "New Transactions" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.
       operationId: importTransactions
       parameters:
         - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'
@@ -1033,7 +1033,7 @@ paths:
       tags:
         - Transactions
     put:
-      description: Updates a transaction
+      description: Updates a single transaction
       operationId: updateTransaction
       parameters:
         - description: 'The id of the budget. "last-used" can be used to specify the last used budget and "default" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).'

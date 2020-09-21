@@ -5,8 +5,8 @@ servers:
 info:
   contact:
     x-twitter: TisaneLabs
-  description: <table><tr><td><img src="https://apimgmtstltyu1yujd2p6hpa.blob.core.windows.net/content/MediaLibrary/images/microscope.png" width="30px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>Detect abusive content, obtain sentiment analysis, extract entities, detect topics, automatically correct spelling errors, and more, in 27 languages.</td></tr></table>
-  title: Text Analysis API
+  description: <table><tr><td style="font-size:large">&nbsp;&nbsp;🔬&nbsp;&nbsp;&nbsp;</td><td>Detect abusive content, obtain sentiment analysis, extract entities, detect topics, automatically correct spelling errors, and more.</td></tr></table>
+  title: Text Analysis
   version: "1.0"
   x-apisguru-categories:
     - text
@@ -74,7 +74,7 @@ paths:
               * `social_role` - academic degrees, etc.
               * `suffix`
               * `variation` - substantially the same; the only difference is a style (e.g. hypocorism or colloquial vs formal) or a language or a spelling
-      summary: Compare named entities
+      summary: Named entity comparison
   /extract_text:
     post:
       description: "A service method to remove JavaScript, CSS tags, JSON, and other markup, returning pure decoded text. "
@@ -90,7 +90,7 @@ paths:
             text/plain:
               example: Clean me up
           description: The text without markup, script, CSS, JSON.
-      summary: Clean up text
+      summary: Text clean up
   /languages:
     get:
       description: Obtain a list of available languages. No parameters.
@@ -966,7 +966,7 @@ paths:
 
 
             `{"language":"en", "content":"An inertial force is a force that resists a change in velocity of an object.", "settings":{}}`
-      summary: Invoke text analysis
+      summary: Analyze text
   /similarity:
     post:
       description: Calculate semantic similarity between two text fragments, in the same language or in two different languages.
@@ -1027,7 +1027,7 @@ paths:
           content:
             application/json: {}
           description: A JSON-escaped URL of a Creative Commons image on Wikimedia servers, if exists. Null if no image is found.
-      summary: Generate illustration for text
+      summary: Generate image from text
 components:
   schemas:
     settings:

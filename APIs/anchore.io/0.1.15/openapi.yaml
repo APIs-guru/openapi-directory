@@ -1834,6 +1834,26 @@ paths:
     post:
       description: Request a jwt token for subsequent operations, this request is authenticated with normal HTTP auth
       operationId: get_oauth_token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                client_id:
+                  default: anonymous
+                  description: The type of client used for the OAuth token
+                  type: string
+                grant_type:
+                  default: password
+                  description: OAuth Grant type for token
+                  type: string
+                password:
+                  description: Password for corresponding user
+                  type: string
+                username:
+                  description: User to assign OAuth token to
+                  type: string
+              type: object
       responses:
         "200":
           content:

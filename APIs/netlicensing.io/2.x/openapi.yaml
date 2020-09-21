@@ -354,9 +354,6 @@ paths:
                 active:
                   description: If set to 'false', the Licensee is disabled. Licensee can not obtain new Licenses, and validation is disabled
                   type: boolean
-                licenseeSecret:
-                  description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret for Licensee.
-                  type: string
                 markedForTransfer:
                   description: Mark Licensee for transfer.
                   type: boolean
@@ -488,9 +485,6 @@ paths:
                 active:
                   description: If set to 'false', the Licensee is disabled. Licensee can not obtain new Licenses, and validation is disabled
                   type: boolean
-                licenseeSecret:
-                  description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret for Licensee.
-                  type: string
                 markedForTransfer:
                   description: Mark Licensee for transfer.
                   type: boolean
@@ -587,11 +581,14 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               properties:
+                action:
+                  description: "'Floating' licensing model: check-out or check-in session action, to allocate or return it from/to the pool of available sessions"
+                  enum:
+                    - checkOut
+                    - checkIn
+                  type: string
                 licenseeName:
                   description: Human-readable name for the auto-created Licensee (will be set as custom Licensee property)
-                  type: string
-                licenseeSecret:
-                  description: (Deprecated. Use 'Node-Locked' licensing model instead) Licensee Secret key for Licensee
                   type: string
                 nodeSecret:
                   description: "'Node-Locked' licensing model: specifies unique secret"
@@ -601,6 +598,9 @@ paths:
                   type: string
                 productNumber:
                   description: Product number, must be provided when 'Licensee auto-create' is enabled (see also Product JavaDoc). Identifies the Product to which new Licensee should be added
+                  type: string
+                sessionId:
+                  description: "'Floating' licensing model: specifies unique session identifier"
                   type: string
               type: object
       responses:
@@ -1054,13 +1054,6 @@ paths:
                 licenseeAutoCreate:
                   description: If set to 'true', non-existing Licensees will be created at first validation attempt.
                   type: boolean
-                licenseeSecretMode:
-                  description: "(Deprecated. Use 'Node-Locked' licensing model instead) Licensee secret mode for Product. Supported types: DISABLED, PREDEFINED, CLIENT"
-                  enum:
-                    - DISABLED
-                    - PREDEFINED
-                    - CLIENT
-                  type: string
                 licensingInfo:
                   description: Licensing information.
                   type: string
@@ -1206,13 +1199,6 @@ paths:
                 licenseeAutoCreate:
                   description: If set to 'true', non-existing Licensees will be created at first validation attempt.
                   type: boolean
-                licenseeSecretMode:
-                  description: "(Deprecated. Use 'Node-Locked' licensing model instead) Licensee secret mode for Product. Supported types: DISABLED, PREDEFINED, CLIENT"
-                  enum:
-                    - DISABLED
-                    - PREDEFINED
-                    - CLIENT
-                  type: string
                 licensingInfo:
                   description: Licensing information.
                   type: string
@@ -1568,6 +1554,11 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               properties:
+                action:
+                  description: For <i>type=ACTION</i> only; defines token action to be perfromed
+                  enum:
+                    - licenseeLogin
+                  type: string
                 apiKeyRole:
                   description: "For <i>tokenType=APIKEY</i> only (default: ROLE_APIKEY_LICENSEE); defines token RoleID"
                   enum:
@@ -1584,7 +1575,7 @@ paths:
                   description: For <i>tokenType=SHOP</i> only; shop link title for cancel checkout process
                   type: string
                 licenseeNumber:
-                  description: For <i>tokenType=SHOP</i> only (mandatory); identifies Licensee that will be assigned to the shop token
+                  description: For <i>tokenType=SHOP</i> or <i>type=ACTION</i> only (mandatory); identifies Licensee that will be assigned to the shop token
                   type: string
                 privateKey:
                   description: For <i>tokenType=APIKEY</i> only (optional); defines PrivateKey to be used with the validate method<br/><strong>Please Note:</strong> PrivateKey need to be provided as one line without spaces
@@ -1604,6 +1595,11 @@ paths:
                     - DEFAULT
                     - SHOP
                     - APIKEY
+                  type: string
+                type:
+                  description: For <i>tokenType=DEFAULT</i> only; action type to be set
+                  enum:
+                    - ACTION
                   type: string
               required:
                 - tokenType

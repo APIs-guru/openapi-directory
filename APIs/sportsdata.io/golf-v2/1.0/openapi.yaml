@@ -22,6 +22,28 @@ security:
   - apiKeyQuery: []
 tags: []
 paths:
+  "/{format}/CurrentSeason":
+    get:
+      operationId: CurrentSeason
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                nullable: true
+          description: ""
+      summary: Current Season
   "/{format}/DfsSlatesByTournament/{tournamentid}":
     get:
       operationId: DfsSlates

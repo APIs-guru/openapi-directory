@@ -1625,7 +1625,7 @@ paths:
             schema:
               properties:
                 callbackUrl:
-                  description: A mandatory callback URL to which updates about the order will be sent (for instance if credits are exceeded)
+                  description: A optional callback URL to which updates about the order will be sent (for instance if credits are exceeded)
                   example: "null"
                   type: string
                 credits:
@@ -1638,11 +1638,11 @@ paths:
                   type: boolean
                 levels:
                   description: Define a threshold for different levels of crawling
-                  example: 0,25,50
+                  example: 25,50
                   type: string
                 strategy:
-                  description: Choose a matching strategy. Available options (DEFAULT)
-                  example: DEFAULT
+                  description: Choose a matching strategy. Available options (FULL,LEVELS)
+                  example: FULL
                   type: string
                 subjectId:
                   description: BrexId (32 byte hexid) of the company you want to place the order for
