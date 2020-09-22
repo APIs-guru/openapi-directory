@@ -5095,6 +5095,34 @@ components:
             - description: ' The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.'
     AnyLengthString:
       type: string
+    AttributeNamesListItem:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      minLength: 1
+      maxLength: 63
+    AttributeNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeNamesListItem'
+    S3Uri:
+      type: string
+      pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+      maxLength: 1024
+    AugmentedManifestsListItem:
+      type: object
+      required:
+        - S3Uri
+        - AttributeNames
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 location of the augmented manifest file.
+        AttributeNames:
+          allOf:
+            - $ref: '#/components/schemas/AttributeNamesList'
+            - description: '<p>The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job.</p> <p>If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth.</p> <p>If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.</p>'
+      description: An augmented manifest file that provides training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.
     Integer:
       type: integer
     ListOfDominantLanguages:
@@ -5386,17 +5414,23 @@ components:
         $ref: '#/components/schemas/Tag'
     DocumentClassifierInputDataConfig:
       type: object
-      required:
-        - S3Uri
       properties:
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DocumentClassifierDataFormat'
+            - description: '<p>The format of your training data:</p> <ul> <li> <p> <code>COMPREHEND_CSV</code>: A two-column CSV file, where labels are provided in the first column, and documents are provided in the second. If you use this value, you must provide the <code>S3Uri</code> parameter in your request.</p> </li> <li> <p> <code>AUGMENTED_MANIFEST</code>: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its associated labels. </p> <p>If you use this value, you must provide the <code>AugmentedManifests</code> parameter in your request.</p> </li> </ul> <p>If you don''t specify a value, Amazon Comprehend uses <code>COMPREHEND_CSV</code> as the default.</p>'
         S3Uri:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>'
+            - description: '<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>COMPREHEND_CSV</code>.</p>'
         LabelDelimiter:
           allOf:
             - $ref: '#/components/schemas/LabelDelimiter'
             - description: 'Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it''s an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.'
+        AugmentedManifests:
+          allOf:
+            - $ref: '#/components/schemas/DocumentClassifierAugmentedManifestsList'
+            - description: <p>A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>AUGMENTED_MANIFEST</code>.</p>
       description: '<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>'
     DocumentClassifierOutputDataConfig:
       type: object
@@ -5444,24 +5478,31 @@ components:
       type: object
       required:
         - EntityTypes
-        - Documents
       properties:
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/EntityRecognizerDataFormat'
+            - description: '<p>The format of your training data:</p> <ul> <li> <p> <code>COMPREHEND_CSV</code>: A CSV file that supplements your training documents. The CSV file contains information about the custom entities that your trained model will detect. The required format of the file depends on whether you are providing annotations or an entity list.</p> <p>If you use this value, you must provide your CSV file by using either the <code>Annotations</code> or <code>EntityList</code> parameters. You must provide your training documents by using the <code>Documents</code> parameter.</p> </li> <li> <p> <code>AUGMENTED_MANIFEST</code>: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its labels. Each label annotates a named entity in the training document. </p> <p>If you use this value, you must provide the <code>AugmentedManifests</code> parameter in your request.</p> </li> </ul> <p>If you don''t specify a value, Amazon Comprehend uses <code>COMPREHEND_CSV</code> as the default.</p>'
         EntityTypes:
           allOf:
             - $ref: '#/components/schemas/EntityTypesList'
-            - description: The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.
+            - description: '<p>The entity types in the labeled training data that Amazon Comprehend uses to train the custom entity recognizer. Any entity types that you don''t specify are ignored.</p> <p>A maximum of 25 entity types can be used at one time to train an entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break), \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma). </p>'
         Documents:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerDocuments'
-            - description: S3 location of the documents folder for an entity recognizer
+            - description: <p>The S3 location of the folder that contains the training documents for your custom entity recognizer.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>COMPREHEND_CSV</code>.</p>
         Annotations:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerAnnotations'
-            - description: S3 location of the annotations file for an entity recognizer.
+            - description: The S3 location of the CSV file that annotates your training documents.
         EntityList:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerEntityList'
-            - description: S3 location of the entity list for an entity recognizer.
+            - description: The S3 location of the CSV file that has the entity list for your custom entity recognizer.
+        AugmentedManifests:
+          allOf:
+            - $ref: '#/components/schemas/EntityRecognizerAugmentedManifestsList'
+            - description: <p>A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>AUGMENTED_MANIFEST</code>.</p>
       description: Specifies the format and location of the input data.
     EntityRecognizerArn:
       type: string
@@ -6084,6 +6125,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DocumentClassificationJobProperties'
+    DocumentClassifierAugmentedManifestsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AugmentedManifestsListItem'
+    DocumentClassifierDataFormat:
+      type: string
+      enum:
+        - COMPREHEND_CSV
+        - AUGMENTED_MANIFEST
     ModelStatus:
       type: string
       enum:
@@ -6100,7 +6150,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/ModelStatus'
-            - description: 'Filters the list of classifiers based on status. '
+            - description: Filters the list of classifiers based on status.
         SubmitTimeBefore:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -6110,10 +6160,6 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.'
       description: 'Provides information for filtering a list of document classifiers. You can only specify one filtering parameter in a request. For more information, see the operation.'
-    S3Uri:
-      type: string
-      pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
-      maxLength: 1024
     LabelDelimiter:
       type: string
       pattern: '^[ ~!@#$%^*\-_+=|\\:;\t>?/]$'
@@ -6273,6 +6319,15 @@ components:
             - $ref: '#/components/schemas/S3Uri'
             - description: ' Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.'
       description: Describes the annotations associated with a entity recognizer.
+    EntityRecognizerAugmentedManifestsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AugmentedManifestsListItem'
+    EntityRecognizerDataFormat:
+      type: string
+      enum:
+        - COMPREHEND_CSV
+        - AUGMENTED_MANIFEST
     EntityRecognizerDocuments:
       type: object
       required:
@@ -6391,7 +6446,7 @@ components:
         $ref: '#/components/schemas/EntityRecognizerProperties'
     EntityTypeName:
       type: string
-      pattern: '[_A-Z0-9]+'
+      pattern: '^(?:(?!\\n+|\\t+|\\r+|[\r\t\n\s,]).)+$'
       maxLength: 64
     EntityTypesListItem:
       type: object
@@ -6401,8 +6456,8 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/EntityTypeName'
-            - description: Entity type of an item on an entity type list.
-      description: Information about an individual item on a list of entity types.
+            - description: '<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.</p> <p>Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma).</p>'
+      description: An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.
     InputFormat:
       type: string
       enum:
