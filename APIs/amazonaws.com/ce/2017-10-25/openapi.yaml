@@ -114,6 +114,90 @@ servers:
     description: The AWS Cost Explorer endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=AWSInsightsIndexService.CreateAnomalyMonitor:
+    post:
+      operationId: CreateAnomalyMonitor
+      description: 'Creates a new cost anomaly detection monitor with the requested type and monitor specification. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnomalyMonitorResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnomalyMonitorRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.CreateAnomalyMonitor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.CreateAnomalySubscription:
+    post:
+      operationId: CreateAnomalySubscription
+      description: 'Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnomalySubscriptionResponse'
+        '480':
+          description: UnknownMonitorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownMonitorException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAnomalySubscriptionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.CreateAnomalySubscription
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.CreateCostCategoryDefinition:
     post:
       operationId: CreateCostCategoryDefinition
@@ -151,6 +235,96 @@ paths:
             type: string
             enum:
               - AWSInsightsIndexService.CreateCostCategoryDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.DeleteAnomalyMonitor:
+    post:
+      operationId: DeleteAnomalyMonitor
+      description: 'Deletes a cost anomaly monitor. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAnomalyMonitorResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownMonitorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownMonitorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAnomalyMonitorRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.DeleteAnomalyMonitor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.DeleteAnomalySubscription:
+    post:
+      operationId: DeleteAnomalySubscription
+      description: 'Deletes a cost anomaly subscription. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAnomalySubscriptionResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownSubscriptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAnomalySubscriptionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.DeleteAnomalySubscription
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -241,6 +415,153 @@ paths:
             type: string
             enum:
               - AWSInsightsIndexService.DescribeCostCategoryDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.GetAnomalies:
+    post:
+      operationId: GetAnomalies
+      description: 'Retrieves all of the cost anomalies detected on your account, during the time period specified by the <code>DateInterval</code> object. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnomaliesResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAnomaliesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.GetAnomalies
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.GetAnomalyMonitors:
+    post:
+      operationId: GetAnomalyMonitors
+      description: 'Retrieves the cost anomaly monitor definitions for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnomalyMonitorsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownMonitorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownMonitorException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAnomalyMonitorsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.GetAnomalyMonitors
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.GetAnomalySubscriptions:
+    post:
+      operationId: GetAnomalySubscriptions
+      description: 'Retrieves the cost anomaly subscription objects for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnomalySubscriptionsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownSubscriptionException'
+        '482':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAnomalySubscriptionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.GetAnomalySubscriptions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1062,6 +1383,141 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.ProvideAnomalyFeedback:
+    post:
+      operationId: ProvideAnomalyFeedback
+      description: 'Modifies the feedback property of a given cost anomaly. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvideAnomalyFeedbackResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvideAnomalyFeedbackRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.ProvideAnomalyFeedback
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.UpdateAnomalyMonitor:
+    post:
+      operationId: UpdateAnomalyMonitor
+      description: 'Updates an existing cost anomaly monitor. The changes made are applied going forward, and does not change anomalies detected in the past. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnomalyMonitorResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownMonitorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownMonitorException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAnomalyMonitorRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.UpdateAnomalyMonitor
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.UpdateAnomalySubscription:
+    post:
+      operationId: UpdateAnomalySubscription
+      description: ' Updates an existing cost anomaly monitor subscription. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnomalySubscriptionResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: UnknownMonitorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownMonitorException'
+        '482':
+          description: UnknownSubscriptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnknownSubscriptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAnomalySubscriptionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.UpdateAnomalySubscription
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.UpdateCostCategoryDefinition:
     post:
       operationId: UpdateCostCategoryDefinition
@@ -1165,6 +1621,46 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateAnomalyMonitorResponse:
+      type: object
+      required:
+        - MonitorArn
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The unique identifier of your newly created cost anomaly detection monitor.'
+    CreateAnomalyMonitorRequest:
+      type: object
+      required:
+        - AnomalyMonitor
+      title: CreateAnomalyMonitorRequest
+      properties:
+        AnomalyMonitor:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyMonitor'
+            - description: ' The cost anomaly detection monitor object that you want to create.'
+    LimitExceededException: {}
+    CreateAnomalySubscriptionResponse:
+      type: object
+      required:
+        - SubscriptionArn
+      properties:
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The unique identifier of your newly created cost anomaly subscription. '
+    CreateAnomalySubscriptionRequest:
+      type: object
+      required:
+        - AnomalySubscription
+      title: CreateAnomalySubscriptionRequest
+      properties:
+        AnomalySubscription:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySubscription'
+            - description: ' The cost anomaly subscription object that you want to create. '
+    UnknownMonitorException: {}
     CreateCostCategoryDefinitionResponse:
       type: object
       properties:
@@ -1193,7 +1689,33 @@ components:
             - $ref: '#/components/schemas/CostCategoryRulesList'
             - description: 'The Cost Category rules used to categorize costs. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html">CostCategoryRule</a>.'
     ServiceQuotaExceededException: {}
-    LimitExceededException: {}
+    DeleteAnomalyMonitorResponse:
+      type: object
+      properties: {}
+    DeleteAnomalyMonitorRequest:
+      type: object
+      required:
+        - MonitorArn
+      title: DeleteAnomalyMonitorRequest
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The unique identifier of the cost anomaly monitor that you want to delete. '
+    DeleteAnomalySubscriptionResponse:
+      type: object
+      properties: {}
+    DeleteAnomalySubscriptionRequest:
+      type: object
+      required:
+        - SubscriptionArn
+      title: DeleteAnomalySubscriptionRequest
+      properties:
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The unique identifier of the cost anomaly subscription that you want to delete. '
+    UnknownSubscriptionException: {}
     DeleteCostCategoryDefinitionResponse:
       type: object
       properties:
@@ -1235,6 +1757,112 @@ components:
           allOf:
             - $ref: '#/components/schemas/ZonedDateTime'
             - description: ' The date when the Cost Category was effective. '
+    GetAnomaliesResponse:
+      type: object
+      required:
+        - Anomalies
+      properties:
+        Anomalies:
+          allOf:
+            - $ref: '#/components/schemas/Anomalies'
+            - description: ' A list of cost anomalies. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+    GetAnomaliesRequest:
+      type: object
+      required:
+        - DateInterval
+      title: GetAnomaliesRequest
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'Retrieves all of the cost anomalies detected for a specific cost anomaly monitor Amazon Resource Name (ARN). '
+        DateInterval:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyDateInterval'
+            - description: 'Assigns the start and end dates for retrieving cost anomalies. The returned anomaly object will have an <code>AnomalyEndDate</code> in the specified time range. '
+        Feedback:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyFeedbackType'
+            - description: 'Filters anomaly results by the feedback field on the anomaly object. '
+        TotalImpact:
+          allOf:
+            - $ref: '#/components/schemas/TotalImpactFilter'
+            - description: 'Filters anomaly results by the total impact field on the anomaly object. For example, you can filter anomalies <code>GREATER_THAN 200.00</code> to retrieve anomalies, with an estimated dollar impact greater than 200. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: ' The number of entries a paginated response contains. '
+    InvalidNextTokenException: {}
+    GetAnomalyMonitorsResponse:
+      type: object
+      required:
+        - AnomalyMonitors
+      properties:
+        AnomalyMonitors:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyMonitors'
+            - description: ' A list of cost anomaly monitors that includes the detailed metadata for each monitor. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+    GetAnomalyMonitorsRequest:
+      type: object
+      title: GetAnomalyMonitorsRequest
+      properties:
+        MonitorArnList:
+          allOf:
+            - $ref: '#/components/schemas/Values'
+            - description: ' A list of cost anomaly monitor ARNs. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: ' The number of entries a paginated response contains. '
+    GetAnomalySubscriptionsResponse:
+      type: object
+      required:
+        - AnomalySubscriptions
+      properties:
+        AnomalySubscriptions:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySubscriptions'
+            - description: ' A list of cost anomaly subscriptions that includes the detailed metadata for each one. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+    GetAnomalySubscriptionsRequest:
+      type: object
+      title: GetAnomalySubscriptionsRequest
+      properties:
+        SubscriptionArnList:
+          allOf:
+            - $ref: '#/components/schemas/Values'
+            - description: ' A list of cost anomaly subscription ARNs. '
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' Cost anomaly monitor ARNs. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/NextPageToken'
+            - description: ' The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: ' The number of entries a paginated response contains. '
     GetCostAndUsageResponse:
       type: object
       properties:
@@ -1254,6 +1882,7 @@ components:
       type: object
       required:
         - TimePeriod
+        - Metrics
       title: GetCostAndUsageRequest
       properties:
         TimePeriod:
@@ -1275,14 +1904,13 @@ components:
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
-            - description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, or both.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>'
+            - description: '<p>You can group AWS costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types.</p> <p>When you group by tag key, you get all tag values, including empty strings.</p> <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, <code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
             - description: The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
     BillExpirationException: {}
     DataUnavailableException: {}
-    InvalidNextTokenException: {}
     RequestChangedException: {}
     GetCostAndUsageWithResourcesResponse:
       type: object
@@ -1303,6 +1931,7 @@ components:
       type: object
       required:
         - TimePeriod
+        - Filter
       title: GetCostAndUsageWithResourcesRequest
       properties:
         TimePeriod:
@@ -1316,7 +1945,7 @@ components:
         Filter:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>.</p>'
+            - description: '<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> and get the costs that are associated with that account''s usage of that service. You can nest <code>Expression</code> objects to define any combination of dimension filters. For more information, see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a>. </p> <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a <code>ResourceId</code>. It requires the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> <code>"SERVICE = Amazon Elastic Compute Cloud - Compute"</code> in the filter.</p>'
         Metrics:
           allOf:
             - $ref: '#/components/schemas/MetricNames'
@@ -1351,7 +1980,7 @@ components:
         TimePeriod:
           allOf:
             - $ref: '#/components/schemas/DateInterval'
-            - description: The period of time that you want the forecast to cover.
+            - description: The period of time that you want the forecast to cover. The start date must be equal to or no later than the current date to avoid a validation error.
         Metric:
           allOf:
             - $ref: '#/components/schemas/Metric'
@@ -1413,7 +2042,7 @@ components:
         Context:
           allOf:
             - $ref: '#/components/schemas/Context'
-            - description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>'
+            - description: '<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. The default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values can be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, the resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p> <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p> </li> <li> <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.</p> </li> <li> <p>SERVICE - The AWS service such as Amazon DynamoDB.</p> </li> <li> <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation includes a unit attribute. Examples include GB and Hrs.</p> </li> <li> <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p> </li> <li> <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p> </li> </ul> <p>If you set the context to <code>RESERVATIONS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p> </li> <li> <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p> </li> <li> <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p> </li> <li> <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p> </li> <li> <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p> </li> <li> <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p> </li> </ul> <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p> <ul> <li> <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p> </li> <li> <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p> </li> <li> <p>REGION - The AWS Region.</p> </li> <li> <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p> </li> <li> <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.</p> </li> <li> <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p> </li> </ul>'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -1856,7 +2485,7 @@ components:
         TimePeriod:
           allOf:
             - $ref: '#/components/schemas/DateInterval'
-            - description: 'The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.'
+            - description: 'The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>. The start date must be equal to or later than the current date to avoid a validation error.'
         Metric:
           allOf:
             - $ref: '#/components/schemas/Metric'
@@ -1901,6 +2530,92 @@ components:
           allOf:
             - $ref: '#/components/schemas/CostCategoryMaxResults'
             - description: ' The number of entries a paginated response contains. '
+    ProvideAnomalyFeedbackResponse:
+      type: object
+      required:
+        - AnomalyId
+      properties:
+        AnomalyId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The ID of the modified cost anomaly. '
+    ProvideAnomalyFeedbackRequest:
+      type: object
+      required:
+        - AnomalyId
+        - Feedback
+      title: ProvideAnomalyFeedbackRequest
+      properties:
+        AnomalyId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' A cost anomaly ID. '
+        Feedback:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyFeedbackType'
+            - description: 'Describes whether the cost anomaly was a planned activity or you considered it an anomaly. '
+    UpdateAnomalyMonitorResponse:
+      type: object
+      required:
+        - MonitorArn
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' A cost anomaly monitor ARN. '
+    UpdateAnomalyMonitorRequest:
+      type: object
+      required:
+        - MonitorArn
+      title: UpdateAnomalyMonitorRequest
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' Cost anomaly monitor Amazon Resource Names (ARNs). '
+        MonitorName:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The new name for the cost anomaly monitor. '
+    UpdateAnomalySubscriptionResponse:
+      type: object
+      required:
+        - SubscriptionArn
+      properties:
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' A cost anomaly subscription ARN. '
+    UpdateAnomalySubscriptionRequest:
+      type: object
+      required:
+        - SubscriptionArn
+      title: UpdateAnomalySubscriptionRequest
+      properties:
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' A cost anomaly subscription Amazon Resource Name (ARN). '
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/NullableNonNegativeDouble'
+            - description: ' The update to the threshold value for receiving notifications. '
+        Frequency:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
+            - description: ' The update to the frequency value at which subscribers will receive notifications. '
+        MonitorArnList:
+          allOf:
+            - $ref: '#/components/schemas/Values'
+            - description: ' A list of cost anomaly subscription ARNs. '
+        Subscribers:
+          allOf:
+            - $ref: '#/components/schemas/Subscribers'
+            - description: ' The update to the subscriber list. '
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The subscription''s new name. '
     UpdateCostCategoryDefinitionResponse:
       type: object
       properties:
@@ -1939,6 +2654,266 @@ components:
       type: string
     AmortizedUpfrontFee:
       type: string
+    Anomaly:
+      type: object
+      required:
+        - AnomalyId
+        - AnomalyScore
+        - Impact
+        - MonitorArn
+      properties:
+        AnomalyId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The unique identifier for the anomaly. '
+        AnomalyStartDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The first day the anomaly is detected. '
+        AnomalyEndDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The last day the anomaly is detected. '
+        DimensionValue:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The dimension for the anomaly. For example, an AWS service in a service monitor. '
+        RootCauses:
+          allOf:
+            - $ref: '#/components/schemas/RootCauses'
+            - description: ' The list of identified root causes for the anomaly. '
+        AnomalyScore:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyScore'
+            - description: ' The latest and maximum score for the anomaly. '
+        Impact:
+          allOf:
+            - $ref: '#/components/schemas/Impact'
+            - description: ' The dollar impact for the anomaly. '
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The Amazon Resource Name (ARN) for the cost monitor that generated this anomaly. '
+        Feedback:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyFeedbackType'
+            - description: ' The feedback value. '
+      description: ' An unusual cost pattern. This consists of the detailed metadata and the current status of the anomaly object. '
+    Anomalies:
+      type: array
+      items:
+        $ref: '#/components/schemas/Anomaly'
+    GenericString:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1024
+    YearMonthDay:
+      type: string
+      pattern: '(\d{4}-\d{2}-\d{2})(T\d{2}:\d{2}:\d{2}Z)?'
+      minLength: 0
+      maxLength: 40
+    RootCauses:
+      type: array
+      items:
+        $ref: '#/components/schemas/RootCause'
+    AnomalyScore:
+      type: object
+      required:
+        - MaxScore
+        - CurrentScore
+      properties:
+        MaxScore:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The maximum score observed during the <code>AnomalyDateInterval</code>. '
+        CurrentScore:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The last observed score. '
+      description: ' Quantifies the anomaly. The higher score means that it is more anomalous. '
+    Impact:
+      type: object
+      required:
+        - MaxImpact
+      properties:
+        MaxImpact:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The maximum dollar value observed for an anomaly. '
+        TotalImpact:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The cumulative dollar value observed for an anomaly. '
+      description: ' The anomaly''s dollar value. '
+    AnomalyFeedbackType:
+      type: string
+      enum:
+        - 'YES'
+        - 'NO'
+        - PLANNED_ACTIVITY
+    AnomalyDateInterval:
+      type: object
+      required:
+        - StartDate
+      properties:
+        StartDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The first date an anomaly was observed. '
+        EndDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The last date an anomaly was observed. '
+      description: ' The time period for an anomaly. '
+    MonitorType:
+      type: string
+      enum:
+        - DIMENSIONAL
+        - CUSTOM
+    MonitorDimension:
+      type: string
+      enum:
+        - SERVICE
+    Expression:
+      type: object
+      properties:
+        Or:
+          allOf:
+            - $ref: '#/components/schemas/Expressions'
+            - description: Return results that match either <code>Dimension</code> object.
+        And:
+          allOf:
+            - $ref: '#/components/schemas/Expressions'
+            - description: Return results that match both <code>Dimension</code> objects.
+        Not:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: Return results that don't match a <code>Dimension</code> object.
+        Dimensions:
+          allOf:
+            - $ref: '#/components/schemas/DimensionValues'
+            - description: The specific <code>Dimension</code> to use for <code>Expression</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagValues'
+            - description: The specific <code>Tag</code> to use for <code>Expression</code>.
+        CostCategories:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryValues'
+            - description: The filter based on <code>CostCategory</code> values.
+      description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>'
+    NonNegativeInteger:
+      type: integer
+      minimum: 0
+    AnomalyMonitor:
+      type: object
+      required:
+        - MonitorName
+        - MonitorType
+      properties:
+        MonitorArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The Amazon Resource Name (ARN) value. '
+        MonitorName:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The name of the monitor. '
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The date when the monitor was created. '
+        LastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The date when the monitor was last updated. '
+        LastEvaluatedDate:
+          allOf:
+            - $ref: '#/components/schemas/YearMonthDay'
+            - description: ' The date when the monitor last evaluated for anomalies. '
+        MonitorType:
+          allOf:
+            - $ref: '#/components/schemas/MonitorType'
+            - description: ' The possible type values. '
+        MonitorDimension:
+          allOf:
+            - $ref: '#/components/schemas/MonitorDimension'
+            - description: ' The dimensions to evaluate. '
+        MonitorSpecification:
+          $ref: '#/components/schemas/Expression'
+        DimensionalValueCount:
+          allOf:
+            - $ref: '#/components/schemas/NonNegativeInteger'
+            - description: ' The value for evaluated dimensions. '
+      description: ' This object continuously inspects your account''s cost data for anomalies, based on <code>MonitorType</code> and <code>MonitorSpecification</code>. The content consists of detailed metadata and the current status of the monitor object. '
+    AnomalyMonitors:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnomalyMonitor'
+    GenericDouble:
+      type: number
+      format: double
+    Values:
+      type: array
+      items:
+        $ref: '#/components/schemas/Value'
+    Subscribers:
+      type: array
+      items:
+        $ref: '#/components/schemas/Subscriber'
+    NullableNonNegativeDouble:
+      type: number
+      format: double
+      minimum: 0
+    AnomalySubscriptionFrequency:
+      type: string
+      enum:
+        - DAILY
+        - IMMEDIATE
+        - WEEKLY
+    AnomalySubscription:
+      type: object
+      required:
+        - MonitorArnList
+        - Subscribers
+        - Threshold
+        - Frequency
+        - SubscriptionName
+      properties:
+        SubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The <code>AnomalySubscription</code> Amazon Resource Name (ARN). '
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' Your unique account identifier. '
+        MonitorArnList:
+          allOf:
+            - $ref: '#/components/schemas/Values'
+            - description: ' A list of cost anomaly monitors. '
+        Subscribers:
+          allOf:
+            - $ref: '#/components/schemas/Subscribers'
+            - description: ' A list of subscribers to notify. '
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/NullableNonNegativeDouble'
+            - description: ' The dollar value that triggers a notification if the threshold is exceeded. '
+        Frequency:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
+            - description: ' The frequency at which anomaly reports are sent over email. '
+        SubscriptionName:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The name for the subscription. '
+      description: ' The association between a monitor, threshold, and list of subscribers used to deliver notifications about anomalies detected by a monitor that exceeds a threshold. The content consists of the detailed metadata and the current status of the <code>AnomalySubscription</code> object. '
+    AnomalySubscriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnomalySubscription'
     Arn:
       type: string
       pattern: 'arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+'
@@ -2015,9 +2990,6 @@ components:
       type: integer
       minimum: 1
       maximum: 100
-    NonNegativeInteger:
-      type: integer
-      minimum: 0
     CostCategoryReference:
       type: object
       properties:
@@ -2050,34 +3022,6 @@ components:
       minLength: 1
       maxLength: 255
       x-pattern: '^\(\?! \)[\p\{L\}\p\{N\}\p\{Z\}-_]*$'
-    Expression:
-      type: object
-      properties:
-        Or:
-          allOf:
-            - $ref: '#/components/schemas/Expressions'
-            - description: Return results that match either <code>Dimension</code> object.
-        And:
-          allOf:
-            - $ref: '#/components/schemas/Expressions'
-            - description: Return results that match both <code>Dimension</code> objects.
-        Not:
-          allOf:
-            - $ref: '#/components/schemas/Expression'
-            - description: Return results that don't match a <code>Dimension</code> object.
-        Dimensions:
-          allOf:
-            - $ref: '#/components/schemas/DimensionValues'
-            - description: The specific <code>Dimension</code> to use for <code>Expression</code>.
-        Tags:
-          allOf:
-            - $ref: '#/components/schemas/TagValues'
-            - description: The specific <code>Tag</code> to use for <code>Expression</code>.
-        CostCategories:
-          allOf:
-            - $ref: '#/components/schemas/CostCategoryValues'
-            - description: The filter based on <code>CostCategory</code> values.
-      description: '<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p> <ul> <li> <p>Simple dimension values - You can set the dimension name and values for the filters that you plan to use. For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> <p>The list of dimension values are OR''d together to retrieve cost or usage data. You can create <code>Expression</code> and <code>DimensionValues</code> objects using either <code>with*</code> methods or <code>set*</code> methods in multiple lines. </p> </li> <li> <p>Compound dimension values with logical operations - You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. This allows you to filter on more advanced options. For example, you can filter on <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>. The <code>Expression</code> for that looks like this:</p> <p> <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error.</p> </note> <p> <code> { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> </li> </ul> <note> <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not supported. OR is not supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> </note>'
     CostCategoryRule:
       type: object
       required:
@@ -2089,12 +3033,8 @@ components:
         Rule:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
+            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
       description: 'Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.'
-    Values:
-      type: array
-      items:
-        $ref: '#/components/schemas/Value'
     CostCategoryValues:
       type: object
       properties:
@@ -2226,11 +3166,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CoverageByTime'
-    GenericString:
-      type: string
-      pattern: '[\S\s]*'
-      minLength: 0
-      maxLength: 1024
     TagValuesList:
       type: array
       items:
@@ -2249,7 +3184,7 @@ components:
         EC2ResourceUtilization:
           allOf:
             - $ref: '#/components/schemas/EC2ResourceUtilization'
-            - description: 'Utilization of current Amazon EC2 Instance '
+            - description: 'Utilization of current Amazon EC2 instance. '
       description: 'Resource utilization of current resource. '
     CurrentInstance:
       type: object
@@ -2285,7 +3220,7 @@ components:
         OnDemandHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Number of hours during the lookback period billed at On Demand rates.'
+            - description: ' Number of hours during the lookback period billed at On-Demand rates.'
         TotalRunningHoursInLookbackPeriod:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -2293,17 +3228,12 @@ components:
         MonthlyCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Current On Demand cost of operating this instance on a monthly basis.'
+            - description: ' Current On-Demand cost of operating this instance on a monthly basis.'
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The currency code that Amazon Web Services used to calculate the costs for this instance.'
+            - description: ' The currency code that AWS used to calculate the costs for this instance.'
       description: Context about the current instance.
-    YearMonthDay:
-      type: string
-      pattern: '(\d{4}-\d{2}-\d{2})(T\d{2}:\d{2}:\d{2}Z)?'
-      minLength: 0
-      maxLength: 40
     Dimension:
       type: string
       enum:
@@ -2354,7 +3284,7 @@ components:
         MatchOptions:
           allOf:
             - $ref: '#/components/schemas/MatchOptions'
-            - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
+            - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
       description: The metadata that you can use to filter and group your results. You can use <code>GetDimensionValues</code> to find specific values.
     Value:
       type: string
@@ -2421,19 +3351,19 @@ components:
         HourlyOnDemandRate:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Hourly public On Demand rate for the instance type.'
+            - description: ' Hourly public On-Demand rate for the instance type.'
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The type of Amazon Web Services instance.'
+            - description: ' The type of AWS instance.'
         Platform:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The platform of the Amazon Web Services instance. The platform is the specific combination of operating system, license model, and software on an instance.'
+            - description: ' The platform of the AWS instance. The platform is the specific combination of operating system, license model, and software on an instance.'
         Region:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The Amazon Web Services Region of the instance.'
+            - description: ' The AWS Region of the instance.'
         Sku:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -2441,19 +3371,19 @@ components:
         Memory:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Memory capacity of Amazon Web Services instance.'
+            - description: ' Memory capacity of the AWS instance.'
         NetworkPerformance:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Network performance capacity of the Amazon Web Services instance.'
+            - description: ' Network performance capacity of the AWS instance.'
         Storage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The disk storage of the Amazon Web Services instance (Not EBS storage).'
+            - description: ' The disk storage of the AWS instance (not EBS storage).'
         Vcpu:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' Number of VCPU cores in the Amazon Web Services instance type.'
+            - description: ' Number of VCPU cores in the AWS instance type.'
       description: ' Details on the Amazon EC2 Resource.'
     EC2ResourceUtilization:
       type: object
@@ -2558,7 +3488,7 @@ components:
         MatchOptions:
           allOf:
             - $ref: '#/components/schemas/MatchOptions'
-            - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
+            - description: The match options that you can use to filter your results. <code>MatchOptions</code> is only applicable for actions related to Cost Category. The default values for <code>MatchOptions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
       description: The values that are available for a tag.
     ForecastResult:
       type: object
@@ -2584,6 +3514,32 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ForecastResult'
+    TotalImpactFilter:
+      type: object
+      required:
+        - NumericOperator
+        - StartValue
+      properties:
+        NumericOperator:
+          allOf:
+            - $ref: '#/components/schemas/NumericOperator'
+            - description: ' The comparing value used in the filter. '
+        StartValue:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The lower bound dollar value used in the filter. '
+        EndValue:
+          allOf:
+            - $ref: '#/components/schemas/GenericDouble'
+            - description: ' The upper bound dollar value used in the filter. '
+      description: ' Filters cost anomalies based on the total impact. '
+    NextPageToken:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 8192
+    PageSize:
+      type: integer
     Granularity:
       type: string
       enum:
@@ -2598,11 +3554,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/GroupDefinition'
-    NextPageToken:
-      type: string
-      pattern: '[\S\s]*'
-      minLength: 0
-      maxLength: 8192
     ResultsByTime:
       type: array
       items:
@@ -2638,8 +3589,6 @@ components:
       pattern: '[\S\s]*'
       minLength: 0
       maxLength: 1024
-    PageSize:
-      type: integer
     LookbackPeriodInDays:
       type: string
       enum:
@@ -2773,11 +3722,11 @@ components:
         GenerationTimestamp:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The timestamp for when Amazon Web Services made this recommendation.'
+            - description: ' The timestamp for when AWS made this recommendation.'
         LookbackPeriodInDays:
           allOf:
             - $ref: '#/components/schemas/LookbackPeriodInDays'
-            - description: ' How many days of previous usage that Amazon Web Services considers when making this recommendation.'
+            - description: ' How many days of previous usage that AWS considers when making this recommendation.'
       description: Metadata for this recommendation set.
     RightsizingRecommendationSummary:
       type: object
@@ -2793,7 +3742,7 @@ components:
         SavingsCurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The currency code that Amazon Web Services used to calculate the savings.'
+            - description: ' The currency code that AWS used to calculate the savings.'
         SavingsPercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -2833,7 +3782,7 @@ components:
         AccountScope:
           allOf:
             - $ref: '#/components/schemas/AccountScope'
-            - description: 'The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for individual linked accounts only.'
+            - description: 'The account scope that you want your recommendations for. AWS calculates recommendations including the payer account and linked accounts if the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for individual linked accounts only.'
         SavingsPlansType:
           allOf:
             - $ref: '#/components/schemas/SupportedSavingsPlansType'
@@ -3059,10 +4008,19 @@ components:
         TargetInstances:
           allOf:
             - $ref: '#/components/schemas/TargetInstancesList'
-            - description: Identifies whether this instance type is the Amazon Web Services default recommendation.
+            - description: Identifies whether this instance type is the AWS default recommendation.
       description: ' Details on the modification recommendation.'
     NetRISavings:
       type: string
+    NumericOperator:
+      type: string
+      enum:
+        - EQUAL
+        - GREATER_THAN_OR_EQUAL
+        - LESS_THAN_OR_EQUAL
+        - GREATER_THAN
+        - LESS_THAN
+        - BETWEEN
     OnDemandCostOfRIHoursUsed:
       type: string
     PurchasedHours:
@@ -3297,7 +4255,7 @@ components:
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The currency code that Amazon Web Services used to calculate the costs for this instance.'
+            - description: ' The currency code that AWS used to calculate the costs for this instance.'
       description: ' Details on termination recommendation. '
     RightsizingRecommendation:
       type: object
@@ -3323,6 +4281,26 @@ components:
             - $ref: '#/components/schemas/TerminateRecommendationDetail'
             - description: Details for termination recommendations.
       description: Recommendations to rightsize resources.
+    RootCause:
+      type: object
+      properties:
+        Service:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The AWS service name associated with the cost anomaly. '
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The AWS Region associated with the cost anomaly. '
+        LinkedAccount:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The linked account value associated with the cost anomaly. '
+        UsageType:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: ' The <code>UsageType</code> value associated with the cost anomaly. '
+      description: ' The combination of AWS service, linked account, Region, and usage type where a cost anomaly is observed. '
     SavingsPlanArn:
       type: string
     SavingsPlansAmortizedCommitment:
@@ -3347,15 +4325,15 @@ components:
         SpendCoveredBySavingsPlans:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The amount of your Amazon Web Services usage that is covered by a Savings Plans.
+            - description: The amount of your AWS usage that is covered by a Savings Plans.
         OnDemandCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The cost of your Amazon Web Services usage at the public On-Demand rate.
+            - description: The cost of your AWS usage at the public On-Demand rate.
         TotalCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: 'The total cost of your Amazon Web Services usage, regardless of your purchase option.'
+            - description: 'The total cost of your AWS usage, regardless of your purchase option.'
         CoveragePercentage:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3405,7 +4383,7 @@ components:
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+            - description: The currency code AWS used to generate the recommendations and present potential savings.
         EstimatedTotalCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3465,7 +4443,7 @@ components:
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+            - description: The currency code AWS used to generate the recommendations and present potential savings.
         EstimatedSPCost:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3588,6 +4566,37 @@ components:
             - $ref: '#/components/schemas/SavingsPlansAmortizedCommitment'
             - description: The total amortized commitment for a Savings Plans. Includes the sum of the upfront and recurring Savings Plans fees.
       description: 'A single daily or monthly Savings Plans utilization rate, and details for your account. Master accounts in an organization have access to member accounts. You can use <code>GetDimensionValues</code> to determine the possible dimension values. '
+    SubscriberAddress:
+      type: string
+      pattern: '(^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)'
+      minLength: 6
+      maxLength: 302
+    SubscriberType:
+      type: string
+      enum:
+        - EMAIL
+        - SNS
+    SubscriberStatus:
+      type: string
+      enum:
+        - CONFIRMED
+        - DECLINED
+    Subscriber:
+      type: object
+      properties:
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberAddress'
+            - description: ' The email address or SNS Amazon Resource Name (ARN), depending on the <code>Type</code>. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberType'
+            - description: ' The notification delivery channel. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SubscriberStatus'
+            - description: ' Indicates if the subscriber accepts the notifications. '
+      description: ' The recipient of <code>AnomalySubscription</code> notifications. '
     TargetInstance:
       type: object
       properties:
@@ -3602,11 +4611,11 @@ components:
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/GenericString'
-            - description: ' The currency code that Amazon Web Services used to calculate the costs for this instance.'
+            - description: ' The currency code that AWS used to calculate the costs for this instance.'
         DefaultTargetInstance:
           allOf:
             - $ref: '#/components/schemas/GenericBoolean'
-            - description: ' Indicates whether or not this recommendation is the defaulted Amazon Web Services recommendation.'
+            - description: ' Indicates whether this recommendation is the defaulted AWS recommendation.'
         ResourceDetails:
           allOf:
             - $ref: '#/components/schemas/ResourceDetails'

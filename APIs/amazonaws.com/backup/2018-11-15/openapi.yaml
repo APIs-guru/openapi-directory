@@ -116,7 +116,7 @@ paths:
   /backup/plans/:
     put:
       operationId: CreateBackupPlan
-      description: '<p>Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an <code>AlreadyExistsException</code> is returned.</p>'
+      description: '<p>Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources.</p> <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an <code>AlreadyExistsException</code> is returned.</p>'
       responses:
         '200':
           description: Success
@@ -176,13 +176,17 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/BackupRulesInput'
                         - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+                    AdvancedBackupSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/AdvancedBackupSettings'
+                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
                 BackupPlanTags:
                   description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair. The specified tags are assigned to all backups created with this plan.'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 CreatorRequestId:
-                  description: 'Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+                  description: 'Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -194,7 +198,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListBackupPlans
-      description: 'Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.'
+      description: 'Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.'
       responses:
         '200':
           description: Success
@@ -262,7 +266,7 @@ paths:
   '/backup/plans/{backupPlanId}/selections/':
     put:
       operationId: CreateBackupSelection
-      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume Id.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically ''put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
+      description: '<p>Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected <code>Resources</code>. </p> <p>For example, consider the following patterns:</p> <ul> <li> <p> <code>Resources: "arn:aws:ec2:region:account-id:volume/volume-id"</code> </p> </li> <li> <p> <code>ConditionKey:"department"</code> </p> <p> <code>ConditionValue:"finance"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> <li> <p> <code>ConditionKey:"importance"</code> </p> <p> <code>ConditionValue:"critical"</code> </p> <p> <code>ConditionType:"StringEquals"</code> </p> </li> </ul> <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as <code>"department=finance"</code>, <code>"importance=critical"</code>, in addition to an EBS volume with the specified volume ID.</p> <p>Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn''t be confused with a logical AND, where all conditions must match. The matching patterns are logically put together using the OR operator. In other words, all patterns that match are selected for backup.</p>'
       responses:
         '200':
           description: Success
@@ -337,7 +341,7 @@ paths:
                         - $ref: '#/components/schemas/ListOfTags'
                         - description: 'An array of conditions used to specify a set of resources to assign to a backup plan; for example, <code>"StringEquals": {"ec2:ResourceTag/Department": "accounting"</code>.'
                 CreatorRequestId:
-                  description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+                  description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -462,7 +466,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
       requestBody:
         required: true
         content:
@@ -479,7 +483,7 @@ paths:
                   description: 'The server-side encryption key that is used to protect your backups; for example, <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.'
                   type: string
                 CreatorRequestId:
-                  description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+                  description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -631,7 +635,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateBackupPlan
-      description: Replaces the body of a saved backup plan identified by its <code>backupPlanId</code> with the input document in JSON format. The new version is uniquely identified by a <code>VersionId</code>.
+      description: Updates an existing backup plan identified by its <code>backupPlanId</code> with the input document in JSON format. The new version is uniquely identified by a <code>VersionId</code>.
       responses:
         '200':
           description: Success
@@ -691,6 +695,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/BackupRulesInput'
                         - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+                    AdvancedBackupSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/AdvancedBackupSettings'
+                        - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
   '/backup/plans/{backupPlanId}/selections/{selectionId}':
     delete:
       operationId: DeleteBackupSelection
@@ -828,7 +836,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -878,7 +886,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
     put:
       operationId: PutBackupVaultAccessPolicy
       description: Sets a resource-based policy that is used to manage access permissions on the target backup vault. Requires a backup vault name and an access policy document in JSON format.
@@ -916,7 +924,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
       requestBody:
         required: true
         content:
@@ -965,7 +973,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1015,7 +1023,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
     put:
       operationId: PutBackupVaultNotifications
       description: Turns on notifications on a backup vault for the specified topic and events.
@@ -1053,7 +1061,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
       requestBody:
         required: true
         content:
@@ -1116,7 +1124,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: recoveryPointArn
           in: path
           required: true
@@ -1172,7 +1180,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: recoveryPointArn
           in: path
           required: true
@@ -1220,7 +1228,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: recoveryPointArn
           in: path
           required: true
@@ -1249,7 +1257,7 @@ paths:
   '/backup-jobs/{backupJobId}':
     get:
       operationId: DescribeBackupJob
-      description: Returns metadata associated with creating a backup of a resource.
+      description: Returns backup job details for the specified <code>BackupJobId</code>.
       responses:
         '200':
           description: Success
@@ -1448,7 +1456,7 @@ paths:
   /account-settings:
     get:
       operationId: DescribeRegionSettings
-      description: 'Returns the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup attempts to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not attempt to protect that service''s resources in this Region.'
+      description: 'Returns the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service''s resources in this Region.'
       responses:
         '200':
           description: Success
@@ -1473,7 +1481,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateRegionSettings
-      description: 'Updates the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup attempts to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not attempt to protect that service''s resources in this Region.'
+      description: 'Updates the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service''s resources in this Region.'
       responses:
         '200':
           description: Success
@@ -1504,7 +1512,7 @@ paths:
               type: object
               properties:
                 ResourceTypeOptInPreference:
-                  description: Updates the list of services along with the opt-in preferences for the region.
+                  description: Updates the list of services along with the opt-in preferences for the Region.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/IsEnabled'
@@ -1617,7 +1625,7 @@ paths:
   '/backup/plans/{backupPlanId}/':
     get:
       operationId: GetBackupPlan
-      description: 'Returns the body of a backup plan in JSON format, in addition to plan metadata.'
+      description: 'Returns <code>BackupPlan</code> details for the specified <code>BackupPlanId</code>. Returns the body of a backup plan in JSON format, in addition to plan metadata.'
       responses:
         '200':
           description: Success
@@ -1824,7 +1832,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: recoveryPointArn
           in: path
           required: true
@@ -1867,7 +1875,7 @@ paths:
   /backup-jobs/:
     get:
       operationId: ListBackupJobs
-      description: Returns metadata about your backup jobs.
+      description: Returns a list of existing backup jobs for an authenticated account.
       responses:
         '200':
           description: Success
@@ -1929,7 +1937,7 @@ paths:
           description: 'Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: createdBefore
           in: query
           required: false
@@ -2403,7 +2411,7 @@ paths:
           description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+            pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
         - name: nextToken
           in: query
           required: false
@@ -2729,7 +2737,7 @@ paths:
   /backup-jobs:
     put:
       operationId: StartBackupJob
-      description: Starts a job to create a one-time backup of the specified resource.
+      description: Starts an on-demand backup job for the specified resource.
       responses:
         '200':
           description: Success
@@ -2782,7 +2790,7 @@ paths:
                 BackupVaultName:
                   description: 'The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
                   type: string
-                  pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+                  pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
                 ResourceArn:
                   description: An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
                   type: string
@@ -2815,6 +2823,11 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                BackupOptions:
+                  description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid value: <code>"WindowsVSS”:“enabled"</code>. If enabled, creates a VSS Windows backup; otherwise, creates a regular backup.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/BackupOptionValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2883,7 +2896,7 @@ paths:
                 SourceBackupVaultName:
                   description: 'The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.'
                   type: string
-                  pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+                  pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
                 DestinationBackupVaultArn:
                   description: 'An Amazon Resource Name (ARN) that uniquely identifies a destination backup vault to copy to; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
                   type: string
@@ -2964,7 +2977,7 @@ paths:
                   description: 'An ARN that uniquely identifies a recovery point; for example, <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.'
                   type: string
                 Metadata:
-                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
+                  description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/MetadataValue'
@@ -3183,12 +3196,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.'
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: A list of <code>BackupOptions</code> settings for a resource type. This option is only available for Windows VSS backup jobs.
     BackupPlanName:
       type: string
     BackupRulesInput:
       type: array
       items:
         $ref: '#/components/schemas/BackupRuleInput'
+    AdvancedBackupSettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdvancedBackupSetting'
     TagValue:
       type: string
     LimitExceededException: {}
@@ -3257,7 +3278,7 @@ components:
         VersionId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
+            - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.'
     ResourceNotFoundException: {}
     InvalidRequestException: {}
     DescribeBackupJobOutput:
@@ -3335,6 +3356,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: 'Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the <code>StartBy</code> time would be 8:00 PM on the date specified. The value of <code>StartBy</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        BackupOptions:
+          allOf:
+            - $ref: '#/components/schemas/BackupOptions'
+            - description: Represents the options specified as part of backup plan or on-demand backup job.
+        BackupType:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns “WindowsVSS”. If <code>BackupType</code> is empty, then it is a regular backup.'
     DependencyFailureException: {}
     DescribeBackupVaultOutput:
       type: object
@@ -3358,7 +3387,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         NumberOfRecoveryPoints:
           allOf:
             - $ref: '#/components/schemas/long'
@@ -3462,7 +3491,7 @@ components:
         ResourceTypeOptInPreference:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeOptInPreference'
-            - description: Returns a list of all services along with the opt-in preferences in the region.
+            - description: Returns a list of all services along with the opt-in preferences in the Region.
     DescribeRestoreJobOutput:
       type: object
       properties:
@@ -3547,7 +3576,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3559,7 +3588,11 @@ components:
         LastExecutionDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: 'The last time a job to back up resources was executed with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+            - description: 'The last time a job to back up resources was run with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: Contains a list of <code>BackupOptions</code> for each resource type. The list is populated only if the advanced option is set for the backup plan.
     GetBackupPlanFromJSONOutput:
       type: object
       properties:
@@ -3596,7 +3629,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     GetBackupVaultAccessPolicyOutput:
       type: object
       properties:
@@ -3645,7 +3678,7 @@ components:
         RestoreMetadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: The set of metadata key-value pairs that describes the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
+            - description: The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
     GetSupportedResourceTypesOutput:
       type: object
       properties:
@@ -3820,6 +3853,9 @@ components:
             - description: 'The date and time that a backup job is started, in Unix format and Coordinated Universal Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     Long:
       type: integer
+    BackupOptionValue:
+      type: string
+      pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     StartCopyJobOutput:
       type: object
       properties:
@@ -3861,6 +3897,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.'
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: Contains a list of <code>BackupOptions</code> for each resource type.
     UpdateRecoveryPointLifecycleOutput:
       type: object
       properties:
@@ -3887,9 +3927,28 @@ components:
     AccountId:
       type: string
       pattern: '^[0-9]{12}$'
-    BackupVaultName:
+    ResourceType:
       type: string
       pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
+    BackupOptions:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/BackupOptionValue'
+    AdvancedBackupSetting:
+      type: object
+      properties:
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: '<p>The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2.</p> <p>Valid values: <code>EC2</code>.</p>'
+        BackupOptions:
+          allOf:
+            - $ref: '#/components/schemas/BackupOptions'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid value: <code>"WindowsVSS”:“enabled"</code>. If enabled, creates a VSS Windows backup; otherwise, creates a regular backup.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
+      description: A list of backup options for each resource type.
+    BackupVaultName:
+      type: string
+      pattern: '^[a-zA-Z0-9\-\_]{2,50}$'
     timestamp:
       type: string
       format: date-time
@@ -3924,9 +3983,6 @@ components:
             - $ref: '#/components/schemas/string'
             - description: Uniquely identifies a rule used to schedule the backup of a selection of resources.
       description: Contains information about the backup plan and rule that AWS Backup used to initiate the recovery point backup.
-    ResourceType:
-      type: string
-      pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     BackupJob:
       type: object
       properties:
@@ -3997,16 +4053,27 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         BytesTransferred:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: The size in bytes transferred to a backup vault at the time that the job status was queried.
+        BackupOptions:
+          allOf:
+            - $ref: '#/components/schemas/BackupOptions'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid value: <code>"WindowsVSS”:“enabled"</code>. If enabled, creates a VSS Windows backup; otherwise, creates a regular backup. If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>'
+        BackupType:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: Represents the type of backup for a backup job.
       description: Contains detailed information about a backup job.
     BackupJobsList:
       type: array
       items:
         $ref: '#/components/schemas/BackupJob'
+    BackupOptionKey:
+      type: string
+      pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     BackupRules:
       type: array
       items:
@@ -4025,6 +4092,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupRules'
             - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources. '
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: Contains a list of <code>BackupOptions</code> for each resource type.
       description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources.'
     BackupPlanInput:
       type: object
@@ -4040,6 +4111,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupRulesInput'
             - description: 'An array of <code>BackupRule</code> objects, each of which specifies a scheduled task that is used to back up a selection of resources.'
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: Specifies a list of <code>BackupOptions</code> for each resource type. These settings are only available for Windows VSS backup jobs.
       description: 'Contains an optional backup plan display name and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. Each rule in a backup plan is a separate scheduled task and can back up a different selection of AWS resources. '
     BackupPlanTemplatesListMember:
       type: object
@@ -4087,11 +4162,15 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         LastExecutionDate:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: 'The last time a job to back up resources was executed with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+            - description: 'The last time a job to back up resources was run with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of <code>LastExecutionDate</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
+        AdvancedBackupSettings:
+          allOf:
+            - $ref: '#/components/schemas/AdvancedBackupSettings'
+            - description: Contains a list of <code>BackupOptions</code> for a resource type.
       description: Contains metadata about a backup plan.
     BackupPlanVersionsList:
       type: array
@@ -4255,7 +4334,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         IamRoleArn:
           allOf:
             - $ref: '#/components/schemas/IAMRoleArn'
@@ -4291,7 +4370,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
         NumberOfRecoveryPoints:
           allOf:
             - $ref: '#/components/schemas/long'
@@ -4424,7 +4503,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. '
       description: Contains detailed information about a copy job.
     CopyJobsList:
       type: array
@@ -4447,7 +4526,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
+            - description: 'Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a <code>CreatorRequestId</code> that matches an existing backup plan, that plan is returned. This parameter is optional.'
     CreateBackupSelectionInput:
       type: object
       required:
@@ -4461,7 +4540,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     CreateBackupVaultInput:
       type: object
       title: CreateBackupVaultInput
@@ -4477,7 +4556,7 @@ components:
         CreatorRequestId:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+            - description: A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
     DeleteBackupPlanInput:
       type: object
       title: DeleteBackupPlanInput
@@ -4687,7 +4766,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         LastBackupTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -4738,7 +4817,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/RecoveryPointCreator'
@@ -4866,7 +4945,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.'
+            - description: 'The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.'
       description: Contains metadata about a restore job.
     StartBackupJobInput:
       type: object
@@ -4908,6 +4987,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: 'To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.'
+        BackupOptions:
+          allOf:
+            - $ref: '#/components/schemas/BackupOptions'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid value: <code>"WindowsVSS”:“enabled"</code>. If enabled, creates a VSS Windows backup; otherwise, creates a regular backup.</p>'
     StartCopyJobInput:
       type: object
       required:
@@ -4954,7 +5037,7 @@ components:
         Metadata:
           allOf:
             - $ref: '#/components/schemas/Metadata'
-            - description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
+            - description: '<p>A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.</p> <p> You can get configuration metadata about a resource at the time it was backed up by calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists.</p> <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p> <ul> <li> <p> <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p> </li> <li> <p> <code>Encrypted</code>: A Boolean value that, if true, specifies that the file system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code> must be set to <code>true</code>.</p> </li> <li> <p> <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the restored file system.</p> </li> <li> <p> <code>PerformanceMode</code>: Specifies the throughput mode of the file system.</p> </li> <li> <p> <code>CreationToken</code>: A user-supplied value that ensures the uniqueness (idempotency) of the request.</p> </li> <li> <p> <code>newFileSystem</code>: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.</p> </li> </ul>'
         IamRoleArn:
           allOf:
             - $ref: '#/components/schemas/IAMRoleArn'
@@ -5022,6 +5105,6 @@ components:
         ResourceTypeOptInPreference:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeOptInPreference'
-            - description: Updates the list of services along with the opt-in preferences for the region.
+            - description: Updates the list of services along with the opt-in preferences for the Region.
 security:
   - hmac: []
