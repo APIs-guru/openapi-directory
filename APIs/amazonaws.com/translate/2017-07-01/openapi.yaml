@@ -134,6 +134,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
         '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -717,6 +723,7 @@ components:
             - description: 'The name of the custom terminology being deleted. '
     ResourceNotFoundException: {}
     TooManyRequestsException: {}
+    InvalidParameterValueException: {}
     InternalServerException: {}
     DescribeTextTranslationJobResponse:
       type: object
@@ -761,7 +768,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TerminologyDataFormat'
             - description: 'The data format of the custom terminology being retrieved, either CSV or TMX.'
-    InvalidParameterValueException: {}
     ImportTerminologyResponse:
       type: object
       properties:
@@ -860,7 +866,7 @@ components:
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERRORS</code> - The job was completed with errors. The errors can be analyzed in the job''s output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>'
+            - description: '<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can be analyzed in the job''s output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>'
     StartTextTranslationJobRequest:
       type: object
       required:
@@ -903,7 +909,7 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
-            - description: 'The client token of the EC2 instance calling the request. This token is auto-generated when using the Amazon Translate SDK. Otherwise, use the <a href="docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html">DescribeInstances</a> EC2 operation to retreive an instance''s client token. For more information, see <a href="docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens">Client Tokens</a> in the EC2 User Guide.'
+            - description: A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.
     UnsupportedLanguagePairException: {}
     StopTextTranslationJobResponse:
       type: object
@@ -1209,7 +1215,7 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: The multipurpose internet mail extension (MIME) type of the input files. Valid values are <code>text/plain</code> for plaintext files and <code>text/html</code> for HTML files.
+            - description: '<p>Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:</p> <ul> <li> <p> <code>text/html</code>: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the <code>html</code> element in each file.</p> </li> <li> <p> <code>text/plain</code>: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code>: The input data consists of one or more Word documents (.docx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code>: The input data consists of one or more PowerPoint Presentation files (.pptx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The input data consists of one or more Excel Workbook files (.xlsx).</p> </li> </ul> <important> <p>If you structure your input data as HTML, ensure that you set this parameter to <code>text/html</code>. By doing so, you cut costs by limiting the translation to the contents of the <code>html</code> element in each file. Otherwise, if you set this parameter to <code>text/plain</code>, your costs will cover the translation of every character.</p> </important>'
       description: The input configuration properties for requesting a batch translation job.
     Integer:
       type: integer
@@ -1326,7 +1332,8 @@ components:
       description: The term being translated by the custom terminology.
     TerminologyArn:
       type: string
-      pattern: '^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$'
+      minLength: 1
+      maxLength: 512
     TerminologyFile:
       type: string
       maxLength: 10485760

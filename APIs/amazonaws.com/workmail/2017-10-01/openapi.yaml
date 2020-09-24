@@ -258,6 +258,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.CancelMailboxExportJob:
+    post:
+      operationId: CancelMailboxExportJob
+      description: '<p>Cancels a mailbox export job.</p> <note> <p>If the mailbox export job is near completion, it might not be possible to cancel it.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelMailboxExportJobResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelMailboxExportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.CancelMailboxExportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.CreateAlias:
     post:
       operationId: CreateAlias
@@ -1137,6 +1194,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DescribeMailboxExportJob:
+    post:
+      operationId: DescribeMailboxExportJob
+      description: Describes the current status of a mailbox export job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMailboxExportJobResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMailboxExportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DescribeMailboxExportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.DescribeOrganization:
     post:
       operationId: DescribeOrganization
@@ -1861,6 +1975,69 @@ paths:
             type: string
             enum:
               - WorkMailService.ListGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.ListMailboxExportJobs:
+    post:
+      operationId: ListMailboxExportJobs
+      description: Lists the mailbox export jobs started for the specified organization within the last seven days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMailboxExportJobsResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListMailboxExportJobsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.ListMailboxExportJobs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2598,6 +2775,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.StartMailboxExportJob:
+    post:
+      operationId: StartMailboxExportJob
+      description: 'Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html">Exporting mailbox content</a> in the <i>Amazon WorkMail Administrator Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMailboxExportJobResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMailboxExportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.StartMailboxExportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.TagResource:
     post:
       operationId: TagResource
@@ -3055,6 +3295,29 @@ components:
     DirectoryServiceAuthenticationFailedException: {}
     DirectoryUnavailableException: {}
     UnsupportedOperationException: {}
+    CancelMailboxExportJobResponse:
+      type: object
+      properties: {}
+    CancelMailboxExportJobRequest:
+      type: object
+      required:
+        - ClientToken
+        - JobId
+        - OrganizationId
+      title: CancelMailboxExportJobRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: The idempotency token for the client request.
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobId'
+            - description: The job ID.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
     CreateAliasResponse:
       type: object
       properties: {}
@@ -3362,6 +3625,72 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier for the group to be described.
+    DescribeMailboxExportJobResponse:
+      type: object
+      properties:
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailIdentifier'
+            - description: The identifier of the user or resource associated with the mailbox.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The mailbox export job description.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket.
+        S3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The S3 bucket prefix.
+        S3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The path to the S3 bucket and file that the mailbox export job is exporting to.
+        EstimatedProgress:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: 'The estimated progress of the mailbox export job, in percentage points.'
+        State:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobState'
+            - description: The state of the mailbox export job.
+        ErrorInfo:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportErrorInfo'
+            - description: Error information for failed mailbox export jobs.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The mailbox export job start timestamp.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The mailbox export job end timestamp.
+    DescribeMailboxExportJobRequest:
+      type: object
+      required:
+        - JobId
+        - OrganizationId
+      title: DescribeMailboxExportJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobId'
+            - description: The mailbox export job ID.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
     DescribeOrganizationResponse:
       type: object
       properties:
@@ -3762,6 +4091,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return in a single call.
+    ListMailboxExportJobsResponse:
+      type: object
+      properties:
+        Jobs:
+          allOf:
+            - $ref: '#/components/schemas/Jobs'
+            - description: The mailbox export job details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results.
+    ListMailboxExportJobsRequest:
+      type: object
+      required:
+        - OrganizationId
+      title: ListMailboxExportJobsRequest
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to use to retrieve the next page of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a single call.
     ListMailboxPermissionsResponse:
       type: object
       properties:
@@ -4087,6 +4445,57 @@ components:
           allOf:
             - $ref: '#/components/schemas/Password'
             - description: The new password for the user.
+    StartMailboxExportJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobId'
+            - description: The job ID.
+    StartMailboxExportJobRequest:
+      type: object
+      required:
+        - ClientToken
+        - OrganizationId
+        - EntityId
+        - RoleArn
+        - KmsKeyArn
+        - S3BucketName
+        - S3Prefix
+      title: StartMailboxExportJobRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: The idempotency token for the client request.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The identifier associated with the organization.
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailIdentifier'
+            - description: The identifier of the user or resource associated with the mailbox.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The mailbox export job description.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket.
+        S3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The S3 bucket prefix.
     TagResourceResponse:
       type: object
       properties: {}
@@ -4339,6 +4748,16 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: The resource's ability to automatically decline any conflicting requests.
       description: At least one delegate must be associated to the resource to disable automatic replies from the resource.
+    IdempotencyClientToken:
+      type: string
+      pattern: '[\x21-\x7e]+'
+      minLength: 1
+      maxLength: 128
+    MailboxExportJobId:
+      type: string
+      pattern: '[A-Za-z0-9-]+'
+      minLength: 1
+      maxLength: 63
     GroupName:
       type: string
       pattern: '[\u0020-\u00FF]+'
@@ -4398,6 +4817,46 @@ components:
         - ENABLED
         - DISABLED
         - DELETED
+    Description:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 0
+      maxLength: 1023
+    RoleArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    KmsKeyArn:
+      type: string
+      pattern: 'arn:aws:kms:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}'
+      minLength: 20
+      maxLength: 2048
+    S3BucketName:
+      type: string
+      pattern: '[A-Za-z0-9.-]+'
+      minLength: 1
+      maxLength: 63
+    S3ObjectKey:
+      type: string
+      pattern: '[A-Za-z0-9!_.*''()/-]+'
+      minLength: 1
+      maxLength: 1023
+    Percentage:
+      type: integer
+      minimum: 0
+      maximum: 100
+    MailboxExportJobState:
+      type: string
+      enum:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+    MailboxExportErrorInfo:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 1
+      maxLength: 1024
     OrganizationName:
       type: string
       pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
@@ -4499,6 +4958,50 @@ components:
       pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/([0-9]|[12][0-9]|3[0-2])$'
       minLength: 1
       maxLength: 18
+    MailboxExportJob:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobId'
+            - description: The identifier of the mailbox export job.
+        EntityId:
+          allOf:
+            - $ref: '#/components/schemas/WorkMailIdentifier'
+            - description: The identifier of the user or resource associated with the mailbox.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The mailbox export job description.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the S3 bucket.
+        S3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectKey'
+            - description: The path to the S3 bucket and file that the mailbox export job exports to.
+        EstimatedProgress:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: 'The estimated progress of the mailbox export job, in percentage points.'
+        State:
+          allOf:
+            - $ref: '#/components/schemas/MailboxExportJobState'
+            - description: The state of the mailbox export job.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The mailbox export job start timestamp.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The mailbox export job end timestamp.
+      description: 'The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.'
+    Jobs:
+      type: array
+      items:
+        $ref: '#/components/schemas/MailboxExportJob'
     NextToken:
       type: string
       minLength: 1
@@ -4619,6 +5122,7 @@ components:
       type: string
       pattern: '[\w\d\s\S\-!?=,.;:''_]+'
       maxLength: 256
+      format: password
     Resource:
       type: object
       properties:
