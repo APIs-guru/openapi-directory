@@ -1,0 +1,3284 @@
+openapi: 3.0.1
+servers:
+  - url: https://online.visualstudio.com
+info:
+  description: Public APIs for managing VS Online Environments
+  title: VSOnline
+  version: v1
+  x-apisguru-categories:
+    - developer_tools
+    - collaboration
+  x-origin:
+    - format: openapi
+      url: https://online.visualstudio.com/api/v1/swagger
+      version: "3.0"
+  x-providerName: visualstudio.com
+security:
+  - Bearer: []
+paths:
+  /api/v1/AgentTelemetry:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              nullable: true
+              type: array
+          application/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              nullable: true
+              type: array
+          application/json-patch+json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              nullable: true
+              type: array
+          text/json:
+            schema:
+              items:
+                $ref: "#/components/schemas/TelemetryData"
+              nullable: true
+              type: array
+      responses:
+        "204":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - AgentTelemetry
+  "/api/v1/Agents/{family}":
+    get:
+      parameters:
+        - in: path
+          name: family
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AgentResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/AgentResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/AgentResponse"
+          description: Success
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Agents
+  /api/v1/Environments:
+    get:
+      parameters:
+        - in: query
+          name: name
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: deleted
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CloudEnvironmentResult"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CloudEnvironmentResult"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/CloudEnvironmentResult"
+                nullable: true
+                type: array
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - Environments
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateCloudEnvironmentBody"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "307":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Redirect
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Conflict
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}":
+    delete:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+    patch:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateCloudEnvironmentBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCloudEnvironmentBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/UpdateCloudEnvironmentBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCloudEnvironmentBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Conflict
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/_callback":
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/EnvironmentRegistrationCallbackBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnvironmentRegistrationCallbackBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/EnvironmentRegistrationCallbackBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/EnvironmentRegistrationCallbackBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/export":
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/folder":
+    patch:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CloudEnvironmentFolderBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloudEnvironmentFolderBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CloudEnvironmentFolderBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CloudEnvironmentFolderBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MessageCodes"
+                nullable: true
+                type: array
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/heartbeattoken":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/restore":
+    patch:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "204":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/shutdown":
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/start":
+    post:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/MessageCodes"
+          description: Server Error
+      tags:
+        - Environments
+  "/api/v1/Environments/{environmentId}/updates":
+    get:
+      parameters:
+        - in: path
+          name: environmentId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/CloudEnvironmentResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Environments
+  /api/v1/HeartBeat:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/HeartBeatBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HeartBeatBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/HeartBeatBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/HeartBeatBody"
+      responses:
+        "204":
+          description: Success
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Client Error
+      tags:
+        - HeartBeat
+  /api/v1/Locations:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationsResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/LocationsResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/LocationsResult"
+          description: Success
+      tags:
+        - Locations
+  "/api/v1/Locations/{location}":
+    get:
+      parameters:
+        - in: path
+          name: location
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LocationInfoResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/LocationInfoResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/LocationInfoResult"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Locations
+  /api/v1/Plans:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanResult"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanResult"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanResult"
+                nullable: true
+                type: array
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+      tags:
+        - Plans
+  "/api/v1/Plans/{subscriptionId}/{resourceGroupName}/{resourceName}":
+    get:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroupName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PlanResult"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PlanResult"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Plans
+  /api/v1/Sas:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+        - Sas
+  /api/v1/Secrets:
+    get:
+      parameters:
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ScopedSecretResultBody"
+                nullable: true
+                type: array
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+        - Secrets
+    post:
+      parameters:
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ScopedCreateSecretBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScopedCreateSecretBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ScopedCreateSecretBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ScopedCreateSecretBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+        - Secrets
+  "/api/v1/Secrets/{secretId}":
+    delete:
+      parameters:
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: scope
+          schema:
+            $ref: "#/components/schemas/SecretScope"
+        - in: path
+          name: secretId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+        - Secrets
+    put:
+      parameters:
+        - in: query
+          name: planId
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: secretId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ScopedUpdateSecretBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScopedUpdateSecretBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/ScopedUpdateSecretBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ScopedUpdateSecretBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ScopedSecretResultBody"
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Forbidden
+      tags:
+        - Secrets
+  "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/SubscriptionLifeCycleNotification":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RPSubscriptionNotification"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/providers/{providerNamespace}/{resourceType}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceList"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}":
+    put:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/deleteDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readAllEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/readDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceCreationValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceDeletionValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchCompleted":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: header
+          name: headers
+          schema:
+            $ref: "#/components/schemas/PlanResourceHeaders"
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourcePatchValidate":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResourceUpdateBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/resourceReadBegin":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanResource"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeCodespaces":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeDelegates":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/IssueDelegatePlanAccessTokenBody"
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  "/api/v1/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/{providerNamespace}/{resourceType}/{resourceName}/writeEnvironments":
+    post:
+      parameters:
+        - in: path
+          name: subscriptionId
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceGroup
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: providerNamespace
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceType
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: path
+          name: resourceName
+          required: true
+          schema:
+            nullable: true
+            type: string
+        - in: query
+          name: expiration
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - Subscriptions
+  /api/v1/UserSubscriptions:
+    delete:
+      parameters:
+        - in: query
+          name: email
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - UserSubscriptions
+    post:
+      parameters:
+        - in: query
+          name: email
+          schema:
+            nullable: true
+            type: string
+      responses:
+        "200":
+          description: Success
+      tags:
+        - UserSubscriptions
+  /health:
+    get:
+      responses:
+        "200":
+          description: Success
+        "500":
+          description: Server Error
+      tags:
+        - Health
+  /warmup:
+    get:
+      responses:
+        "200":
+          description: Success
+        "503":
+          description: Server Error
+      tags:
+        - Warmup
+components:
+  schemas:
+    AgentResponse:
+      nullable: true
+      properties:
+        assetUri:
+          nullable: true
+          type: string
+        family:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    AzureLocation:
+      enum:
+        - 101 (EastAsia)
+        - 102 (SouthEastAsia)
+        - 201 (AustraliaCentral)
+        - 202 (AustraliaCentral2)
+        - 203 (AustraliaEast)
+        - 205 (AustraliaSouthEast)
+        - 301 (BrazilSouth)
+        - 401 (CanadaCentral)
+        - 402 (CanadaEast)
+        - 501 (NorthEurope)
+        - 502 (WestEurope)
+        - 601 (FranceCentral)
+        - 602 (FranceSouth)
+        - 701 (CentralIndia)
+        - 702 (SouthIndia)
+        - 703 (WestIndia)
+        - 801 (JapanEast)
+        - 802 (JapanWest)
+        - 901 (KoreaCentral)
+        - 902 (KoreaSouth)
+        - 1001 (SouthAfricaNorth)
+        - 1002 (SouthAfricaWest)
+        - 1201 (UaeCentral)
+        - 1202 (UaeNorth)
+        - 1401 (UkSouth)
+        - 1402 (UkWest)
+        - 1501 (CentralUs)
+        - 1502 (EastUs)
+        - 1503 (EastUs2)
+        - 1504 (NorthCentralUs)
+        - 1505 (SouthCentralUs)
+        - 1506 (WestCentralUs)
+        - 1507 (WestUs)
+        - 1508 (WestUs2)
+        - 1601 (CentralUsEuap)
+        - 1602 (EastUs2Euap)
+        - 1701 (SwitzerlandNorth)
+        - 1702 (SwitzerlandWest)
+        - 1801 (GermanyNorth)
+        - 1802 (GermanyWestCentral)
+        - 1901 (NorwayWest)
+        - 1902 (NorwayEast)
+      format: int32
+      type: integer
+    BillingProperties:
+      nullable: true
+      properties:
+        billingType:
+          nullable: true
+          type: string
+        channelType:
+          nullable: true
+          type: string
+        paymentType:
+          nullable: true
+          type: string
+        tier:
+          nullable: true
+          type: string
+        workloadType:
+          nullable: true
+          type: string
+      type: object
+    CloudEnvironmentFolderBody:
+      nullable: true
+      properties:
+        recentFolderPaths:
+          items:
+            nullable: true
+            type: string
+          nullable: true
+          type: array
+      type: object
+    CloudEnvironmentResult:
+      nullable: true
+      properties:
+        active:
+          format: date-time
+          type: string
+        autoShutdownDelayMinutes:
+          format: int32
+          type: integer
+        connection:
+          $ref: "#/components/schemas/ConnectionInfoBody"
+        containerImage:
+          nullable: true
+          type: string
+        created:
+          format: date-time
+          type: string
+        exportedBlobUrl:
+          nullable: true
+          type: string
+        features:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        friendlyName:
+          nullable: true
+          type: string
+        hasUnpushedGitChanges:
+          type: boolean
+        id:
+          nullable: true
+          type: string
+        lastStateUpdateReason:
+          nullable: true
+          type: string
+        lastUsed:
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          nullable: true
+          type: string
+        ownerId:
+          nullable: true
+          type: string
+        planId:
+          nullable: true
+          type: string
+        platform:
+          nullable: true
+          type: string
+        recentFolders:
+          items:
+            nullable: true
+            type: string
+          nullable: true
+          type: array
+        seed:
+          $ref: "#/components/schemas/SeedInfoBody"
+        skuDisplayName:
+          nullable: true
+          type: string
+        skuName:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        subscriptionData:
+          $ref: "#/components/schemas/SubscriptionData"
+        type:
+          nullable: true
+          type: string
+        updated:
+          format: date-time
+          type: string
+      type: object
+    CollectedData:
+      nullable: true
+      properties:
+        environmentId:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    ConnectionInfoBody:
+      nullable: true
+      properties:
+        connectionServiceUri:
+          nullable: true
+          type: string
+        connectionSessionId:
+          nullable: true
+          type: string
+        connectionSessionPath:
+          nullable: true
+          type: string
+      type: object
+    CreateCloudEnvironmentBody:
+      nullable: true
+      properties:
+        autoShutdownDelayMinutes:
+          format: int32
+          type: integer
+        connection:
+          $ref: "#/components/schemas/ConnectionInfoBody"
+        containerImage:
+          nullable: true
+          type: string
+        experimentalFeatures:
+          $ref: "#/components/schemas/ExperimentalFeaturesBody"
+        features:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        friendlyName:
+          type: string
+        location:
+          deprecated: true
+          nullable: true
+          type: string
+        personalization:
+          $ref: "#/components/schemas/PersonalizationInfoBody"
+        planId:
+          nullable: true
+          type: string
+        platform:
+          deprecated: true
+          nullable: true
+          type: string
+        secrets:
+          items:
+            $ref: "#/components/schemas/SecretDataBody"
+          nullable: true
+          type: array
+        seed:
+          $ref: "#/components/schemas/SeedInfoBody"
+        skuName:
+          nullable: true
+          type: string
+        type:
+          type: string
+      required:
+        - friendlyName
+        - type
+      type: object
+    DelegateIdentity:
+      nullable: true
+      properties:
+        displayName:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        username:
+          nullable: true
+          type: string
+      type: object
+    EnvironmentRegistrationCallbackBody:
+      nullable: true
+      properties:
+        payload:
+          $ref: "#/components/schemas/EnvironmentRegistrationCallbackPayloadBody"
+        type:
+          type: string
+      required:
+        - type
+      type: object
+    EnvironmentRegistrationCallbackPayloadBody:
+      nullable: true
+      properties:
+        sessionId:
+          nullable: true
+          type: string
+        sessionPath:
+          nullable: true
+          type: string
+      type: object
+    ExperimentalFeaturesBody:
+      nullable: true
+      properties:
+        customContainers:
+          type: boolean
+        newTerminal:
+          type: boolean
+        queueResourceAllocation:
+          type: boolean
+      type: object
+    GitConfigOptionsBody:
+      nullable: true
+      properties:
+        userEmail:
+          nullable: true
+          type: string
+        userName:
+          nullable: true
+          type: string
+      type: object
+    HeartBeatBody:
+      nullable: true
+      properties:
+        agentVersion:
+          nullable: true
+          type: string
+        collectedDataList:
+          items:
+            $ref: "#/components/schemas/CollectedData"
+          nullable: true
+          type: array
+        environmentId:
+          nullable: true
+          type: string
+        resourceId:
+          format: uuid
+          type: string
+        timeStamp:
+          format: date-time
+          type: string
+      type: object
+    IssueDelegatePlanAccessTokenBody:
+      nullable: true
+      properties:
+        environmentIds:
+          items:
+            nullable: true
+            type: string
+          nullable: true
+          type: array
+        expiration:
+          format: date-time
+          nullable: true
+          type: string
+        identity:
+          $ref: "#/components/schemas/DelegateIdentity"
+        scope:
+          nullable: true
+          type: string
+      type: object
+    LocationInfoResult:
+      nullable: true
+      properties:
+        defaultAutoSuspendDelayMinutes:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
+        skus:
+          items:
+            $ref: "#/components/schemas/SkuInfoResult"
+          nullable: true
+          type: array
+      type: object
+    LocationsResult:
+      nullable: true
+      properties:
+        available:
+          items:
+            $ref: "#/components/schemas/AzureLocation"
+          nullable: true
+          type: array
+        current:
+          $ref: "#/components/schemas/AzureLocation"
+        hostnames:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+      type: object
+    MessageCodes:
+      enum:
+        - 0 (Unknown)
+        - 1 (ExceededQuota)
+        - 2 (EnvironmentNameAlreadyExists)
+        - 3 (EnvironmentDoesNotExist)
+        - 4 (ShutdownStaticEnvironment)
+        - 5 (StartStaticEnvironment)
+        - 6 (EnvironmentNotAvailable)
+        - 7 (EnvironmentNotShutdown)
+        - 8 (UnableToAllocateResources)
+        - 9 (UnableToAllocateResourcesWhileStarting)
+        - 10 (RequestedAutoShutdownDelayMinutesIsInvalid)
+        - 11 (UnableToUpdateSku)
+        - 12 (RequestedSkuIsInvalid)
+        - 13 (HeartbeatUnhealthy)
+        - 14 (StartEnvironmentGenericError)
+        - 15 (RestoringFromArchive)
+        - 16 (FilePathIsInvalid)
+        - 17 (TooManyRecentFolders)
+        - 18 (SubscriptionIsBanned)
+        - 19 (EnvironmentArchived)
+        - 20 (SubscriptionStateIsNotRegistered)
+        - 21 (FeatureDisabled)
+        - 22 (SubscriptionCannotPerformAction)
+        - 23 (InvalidLocationChange)
+        - 24 (PlanDoesNotExist)
+        - 25 (UnableToResolveEnvironmentNameConflict)
+        - 26 (ExceededSecretsQuota)
+        - 27 (InvalidPlanTenant)
+        - 28 (ExportStaticEnvironment)
+        - 29 (ExportEnvironmentGenericError)
+      format: int32
+      type: integer
+    Object:
+      nullable: true
+      type: object
+    PersonalizationInfoBody:
+      nullable: true
+      properties:
+        dotfilesInstallCommand:
+          nullable: true
+          type: string
+        dotfilesRepository:
+          nullable: true
+          type: string
+        dotfilesTargetPath:
+          nullable: true
+          type: string
+      type: object
+    PlanResource:
+      nullable: true
+      properties:
+        id:
+          nullable: true
+          type: string
+        identity:
+          $ref: "#/components/schemas/PlanResourceIdentity"
+        location:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        properties:
+          $ref: "#/components/schemas/PlanResourceProperties"
+        provisioningState:
+          nullable: true
+          type: string
+        tags:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        type:
+          nullable: true
+          type: string
+      type: object
+    PlanResourceEncryptionProperties:
+      nullable: true
+      properties:
+        keySource:
+          nullable: true
+          type: string
+        keyVaultProperties:
+          $ref: "#/components/schemas/PlanResourceKeyVaultProperties"
+      type: object
+    PlanResourceHeaders:
+      nullable: true
+      properties:
+        clientTenantId:
+          format: uuid
+          nullable: true
+          type: string
+        homeTenantId:
+          format: uuid
+          nullable: true
+          type: string
+        identityPrincipalId:
+          format: uuid
+          nullable: true
+          type: string
+        identityUrl:
+          nullable: true
+          type: string
+      type: object
+    PlanResourceIdentity:
+      nullable: true
+      properties:
+        principalId:
+          format: uuid
+          nullable: true
+          type: string
+        tenantId:
+          format: uuid
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    PlanResourceKeyVaultProperties:
+      nullable: true
+      properties:
+        keyName:
+          nullable: true
+          type: string
+        keyVaultUri:
+          nullable: true
+          type: string
+        keyVersion:
+          nullable: true
+          type: string
+      type: object
+    PlanResourceList:
+      nullable: true
+      properties:
+        value:
+          items:
+            $ref: "#/components/schemas/PlanResource"
+          nullable: true
+          type: array
+      type: object
+    PlanResourceProperties:
+      nullable: true
+      properties:
+        defaultAutoSuspendDelayMinutes:
+          format: int32
+          nullable: true
+          type: integer
+        defaultCodespaceSku:
+          nullable: true
+          type: string
+        defaultEnvironmentSku:
+          nullable: true
+          type: string
+        encryption:
+          $ref: "#/components/schemas/PlanResourceEncryptionProperties"
+        userId:
+          nullable: true
+          type: string
+        vnetProperties:
+          $ref: "#/components/schemas/VnetProperties"
+      type: object
+    PlanResourceUpdateBody:
+      nullable: true
+      properties:
+        identity:
+          $ref: "#/components/schemas/PlanResourceIdentity"
+        properties:
+          $ref: "#/components/schemas/PlanResourceProperties"
+      type: object
+    PlanResult:
+      nullable: true
+      properties:
+        id:
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/AzureLocation"
+        name:
+          nullable: true
+          type: string
+        resourceGroup:
+          nullable: true
+          type: string
+        subscription:
+          nullable: true
+          type: string
+      type: object
+    ProblemDetails:
+      additionalProperties:
+        $ref: "#/components/schemas/Object"
+      nullable: true
+      properties:
+        detail:
+          nullable: true
+          type: string
+        extensions:
+          additionalProperties:
+            $ref: "#/components/schemas/Object"
+          nullable: true
+          readOnly: true
+          type: object
+        instance:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        title:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    RPSubscriptionNotification:
+      nullable: true
+      properties:
+        properties:
+          $ref: "#/components/schemas/RPSubscriptionProperties"
+        registrationDate:
+          format: date-time
+          type: string
+        state:
+          nullable: true
+          type: string
+      type: object
+    RPSubscriptionProperties:
+      nullable: true
+      properties:
+        accountOwner:
+          $ref: "#/components/schemas/SubscriptionAccountOwner"
+        additionalProperties:
+          $ref: "#/components/schemas/SubscriptionAdditionalProperties"
+        locationPlacementId:
+          nullable: true
+          type: string
+        managedByTenants:
+          items:
+            $ref: "#/components/schemas/StringStringKeyValuePair"
+          nullable: true
+          type: array
+        quotaId:
+          nullable: true
+          type: string
+        registeredFeatures:
+          items:
+            $ref: "#/components/schemas/StringStringKeyValuePair"
+          nullable: true
+          type: array
+        tenantId:
+          format: uuid
+          type: string
+      type: object
+    ScopedCreateSecretBody:
+      nullable: true
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SecretFilterBody"
+          nullable: true
+          type: array
+        notes:
+          maxLength: 200
+          minLength: 0
+          nullable: true
+          type: string
+        scope:
+          $ref: "#/components/schemas/SecretScope"
+        secretName:
+          nullable: true
+          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
+          type: string
+        type:
+          $ref: "#/components/schemas/SecretType"
+        value:
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    ScopedSecretResultBody:
+      nullable: true
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SecretFilterBody"
+          nullable: true
+          type: array
+        id:
+          format: uuid
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        notes:
+          nullable: true
+          type: string
+        scope:
+          $ref: "#/components/schemas/SecretScope"
+        secretName:
+          nullable: true
+          type: string
+        type:
+          $ref: "#/components/schemas/SecretType"
+      type: object
+    ScopedUpdateSecretBody:
+      nullable: true
+      properties:
+        filters:
+          items:
+            $ref: "#/components/schemas/SecretFilterBody"
+          nullable: true
+          type: array
+        notes:
+          maxLength: 200
+          minLength: 0
+          nullable: true
+          type: string
+        scope:
+          $ref: "#/components/schemas/SecretScope"
+        secretName:
+          nullable: true
+          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
+          type: string
+        value:
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    SecretDataBody:
+      nullable: true
+      properties:
+        name:
+          nullable: true
+          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
+          type: string
+        type:
+          $ref: "#/components/schemas/SecretType"
+        value:
+          maxLength: 1024
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    SecretFilterBody:
+      nullable: true
+      properties:
+        type:
+          $ref: "#/components/schemas/SecretFilterType"
+        value:
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    SecretFilterType:
+      enum:
+        - 1 (GitRepo)
+        - 2 (CodespaceName)
+      format: int32
+      type: integer
+    SecretScope:
+      enum:
+        - 1 (Plan)
+        - 2 (User)
+      format: int32
+      type: integer
+    SecretType:
+      enum:
+        - 1 (EnvironmentVariable)
+      format: int32
+      type: integer
+    SeedInfoBody:
+      nullable: true
+      properties:
+        gitConfig:
+          $ref: "#/components/schemas/GitConfigOptionsBody"
+        recurseClone:
+          type: boolean
+        seedMoniker:
+          nullable: true
+          type: string
+        seedType:
+          nullable: true
+          type: string
+      type: object
+    SkuInfoResult:
+      nullable: true
+      properties:
+        displayName:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        os:
+          nullable: true
+          type: string
+      type: object
+    StringStringKeyValuePair:
+      nullable: true
+      properties:
+        key:
+          nullable: true
+          readOnly: true
+          type: string
+        value:
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    SubscriptionAccountOwner:
+      nullable: true
+      properties:
+        email:
+          nullable: true
+          type: string
+        puid:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionAdditionalProperties:
+      nullable: true
+      properties:
+        billingProperties:
+          $ref: "#/components/schemas/BillingProperties"
+        resourceProviderProperties:
+          nullable: true
+          type: string
+      type: object
+    SubscriptionData:
+      nullable: true
+      properties:
+        computeQuota:
+          format: int32
+          type: integer
+        computeUsage:
+          format: int32
+          type: integer
+        subscriptionId:
+          nullable: true
+          type: string
+        subscriptionState:
+          nullable: true
+          type: string
+      type: object
+    TelemetryData:
+      nullable: true
+      properties:
+        level:
+          nullable: true
+          type: string
+        message:
+          nullable: true
+          type: string
+        optionalValues:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
+        time:
+          nullable: true
+          type: string
+      type: object
+    UpdateCloudEnvironmentBody:
+      nullable: true
+      properties:
+        autoShutdownDelayMinutes:
+          format: int32
+          nullable: true
+          type: integer
+        friendlyName:
+          nullable: true
+          type: string
+        planAccessToken:
+          nullable: true
+          type: string
+        planId:
+          nullable: true
+          type: string
+        skuName:
+          nullable: true
+          type: string
+      type: object
+    VnetProperties:
+      nullable: true
+      properties:
+        subnetId:
+          nullable: true
+          type: string
+      type: object
+  securitySchemes:
+    Bearer:
+      bearerFormat: JWT
+      description: "JWT auth token for the user. Example: eyJ2..."
+      scheme: bearer
+      type: http
