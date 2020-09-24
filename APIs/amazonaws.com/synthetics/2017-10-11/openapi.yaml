@@ -188,9 +188,11 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 ExecutionRoleArn:
-                  description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
+                  description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:PutLogEvents</code> </p> </li> </ul>'
                   type: string
-                  pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+                  minLength: 1
+                  maxLength: 2048
                 Schedule:
                   description: This structure specifies how often a canary is to make runs and the date and time when it should stop making runs.
                   type: object
@@ -210,11 +212,15 @@ paths:
                     TimeoutInSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
-                        - description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+                        - description: '<p>How long the canary is allowed to run before it must stop. You can''t set this time to be longer than the frequency of the runs of this canary.</p> <p>If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.</p>'
                     MemoryInMB:
                       allOf:
                         - $ref: '#/components/schemas/MaxSize3008'
-                        - description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
+                        - description: 'The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.'
+                    ActiveTracing:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
                 SuccessRetentionPeriodInDays:
                   description: 'The number of days to retain data about successful runs of this canary. If you omit this field, the default of 31 days is used. The valid range is 1 to 455 days.'
                   type: integer
@@ -226,7 +232,7 @@ paths:
                   minimum: 1
                   maximum: 1024
                 RuntimeVersion:
-                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -420,9 +426,11 @@ paths:
                 ExecutionRoleArn:
                   description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
                   type: string
-                  pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+                  minLength: 1
+                  maxLength: 2048
                 RuntimeVersion:
-                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -445,11 +453,15 @@ paths:
                     TimeoutInSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
-                        - description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+                        - description: '<p>How long the canary is allowed to run before it must stop. You can''t set this time to be longer than the frequency of the runs of this canary.</p> <p>If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.</p>'
                     MemoryInMB:
                       allOf:
                         - $ref: '#/components/schemas/MaxSize3008'
-                        - description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
+                        - description: 'The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.'
+                    ActiveTracing:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
                 SuccessRetentionPeriodInDays:
                   description: The number of days to retain data about successful runs of this canary.
                   type: integer
@@ -518,7 +530,8 @@ paths:
                 NextToken:
                   description: A token that indicates that there is more data available. You can use this token in a subsequent operation to retrieve the next set of results.
                   type: string
-                  pattern: '^[a-zA-Z0-9=/+_.-]{4,252}$'
+                  minLength: 4
+                  maxLength: 252
                 MaxResults:
                   description: 'Specify this parameter to limit how many canaries are returned each time you use the <code>DescribeCanaries</code> operation. If you omit this parameter, the default of 100 is used.'
                   type: integer
@@ -578,7 +591,8 @@ paths:
                 NextToken:
                   description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeCanaries</code> operation to retrieve the next set of results.
                   type: string
-                  pattern: '^[a-zA-Z0-9=/+_.-]{4,252}$'
+                  minLength: 4
+                  maxLength: 252
                 MaxResults:
                   description: 'Specify this parameter to limit how many runs are returned each time you use the <code>DescribeLastRun</code> operation. If you omit this parameter, the default of 100 is used.'
                   type: integer
@@ -638,7 +652,8 @@ paths:
                 NextToken:
                   description: A token that indicates that there is more data available. You can use this token in a subsequent <code>DescribeRuntimeVersions</code> operation to retrieve the next set of results.
                   type: string
-                  pattern: '^[a-zA-Z0-9=/+_.-]{4,252}$'
+                  minLength: 4
+                  maxLength: 252
                 MaxResults:
                   description: 'Specify this parameter to limit how many runs are returned each time you use the <code>DescribeRuntimeVersions</code> operation. If you omit this parameter, the default of 100 is used.'
                   type: integer
@@ -713,7 +728,8 @@ paths:
                 NextToken:
                   description: A token that indicates that there is more data available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next set of results.
                   type: string
-                  pattern: '^[a-zA-Z0-9=/+_.-]{4,252}$'
+                  minLength: 4
+                  maxLength: 252
                 MaxResults:
                   description: 'Specify this parameter to limit how many runs are returned each time you use the <code>GetCanaryRuns</code> operation. If you omit this parameter, the default of 100 is used.'
                   type: integer
@@ -763,7 +779,9 @@ paths:
           description: '<p>The ARN of the canary that you want to view tags for.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            minLength: 1
+            maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -807,7 +825,9 @@ paths:
           description: '<p>The ARN of the canary that you''re adding tags to.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            minLength: 1
+            maxLength: 2048
       requestBody:
         required: true
         content:
@@ -966,7 +986,9 @@ paths:
           description: '<p>The ARN of the canary that you''re removing tags from.</p> <p>The ARN format of a canary is <code>arn:aws:synthetics:<i>Region</i>:<i>account-id</i>:canary:<i>canary-name</i> </code>.</p>'
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+            minLength: 1
+            maxLength: 2048
         - name: tagKeys
           in: query
           required: true
@@ -1058,12 +1080,14 @@ components:
       maximum: 31622400
     MaxFifteenMinutesInSeconds:
       type: integer
-      minimum: 60
-      maximum: 900
+      minimum: 3
+      maximum: 840
     MaxSize3008:
       type: integer
       minimum: 960
       maximum: 3008
+    NullableBoolean:
+      type: boolean
     SubnetIds:
       type: array
       items:
@@ -1164,9 +1188,6 @@ components:
     UpdateCanaryResponse:
       type: object
       properties: {}
-    Arn:
-      type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
     Canary:
       type: object
       properties:
@@ -1182,7 +1203,7 @@ components:
           $ref: '#/components/schemas/CanaryCodeOutput'
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/Arn'
+            - $ref: '#/components/schemas/RoleArn'
             - description: The ARN of the IAM role used to run the canary. This role must include <code>lambda.amazonaws.com</code> as a principal in the trust policy.
         Schedule:
           allOf:
@@ -1212,12 +1233,12 @@ components:
             - description: 'The location in Amazon S3 where Synthetics stores artifacts from the runs of this canary. Artifacts include the log file, screenshots, and HAR files.'
         EngineArn:
           allOf:
-            - $ref: '#/components/schemas/Arn'
+            - $ref: '#/components/schemas/FunctionArn'
             - description: 'The ARN of the Lambda function that is used as your canary''s engine. For more information about Lambda ARN format, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html">Resources and Conditions for Lambda Actions</a>.'
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         VpcConfig:
           $ref: '#/components/schemas/VpcConfigOutput'
         Tags:
@@ -1265,6 +1286,11 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The entry point to use for the source code when running the canary.
       description: This structure contains information about the canary's Lambda handler and where its code is stored by CloudWatch Synthetics.
+    RoleArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
+      minLength: 1
+      maxLength: 2048
     CanaryScheduleOutput:
       type: object
       properties:
@@ -1287,8 +1313,12 @@ components:
         MemoryInMB:
           allOf:
             - $ref: '#/components/schemas/MaxSize3008'
-            - description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.'
-      description: A structure that contains information for a canary run.
+            - description: 'The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.'
+        ActiveTracing:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'Displays whether this canary run used active AWS X-Ray tracing. '
+      description: A structure that contains information about a canary run.
     MaxSize1024:
       type: integer
       minimum: 1
@@ -1329,6 +1359,11 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the canary's most recent run ended.
       description: This structure contains information about when the canary was created and modified.
+    FunctionArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+      minLength: 1
+      maxLength: 2048
     VpcConfigOutput:
       type: object
       properties:
@@ -1351,6 +1386,11 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    CanaryArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:canary:[0-9a-z_\-]{1,21}'
+      minLength: 1
+      maxLength: 2048
     CanaryCodeInput:
       type: object
       required:
@@ -1380,6 +1420,10 @@ components:
     CanaryRun:
       type: object
       properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: A unique ID that identifies this canary run.
         Name:
           allOf:
             - $ref: '#/components/schemas/CanaryName'
@@ -1427,17 +1471,19 @@ components:
       description: This structure contains the start and end times of a single canary run.
     CanaryRunConfigInput:
       type: object
-      required:
-        - TimeoutInSeconds
       properties:
         TimeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxFifteenMinutesInSeconds'
-            - description: 'How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.'
+            - description: '<p>How long the canary is allowed to run before it must stop. You can''t set this time to be longer than the frequency of the runs of this canary.</p> <p>If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.</p>'
         MemoryInMB:
           allOf:
             - $ref: '#/components/schemas/MaxSize3008'
-            - description: 'The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.'
+            - description: 'The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.'
+        ActiveTracing:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
       description: A structure that contains input information for a canary run.
     CanaryRunState:
       type: string
@@ -1524,8 +1570,8 @@ components:
             - description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.'
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
+            - $ref: '#/components/schemas/RoleArn'
+            - description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:PutLogEvents</code> </p> </li> </ul>'
         Schedule:
           allOf:
             - $ref: '#/components/schemas/CanaryScheduleInput'
@@ -1545,7 +1591,7 @@ components:
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfigInput'
@@ -1560,7 +1606,8 @@ components:
       properties: {}
     Token:
       type: string
-      pattern: '^[a-zA-Z0-9=/+_.-]{4,252}$'
+      minLength: 4
+      maxLength: 252
     MaxSize100:
       type: integer
       minimum: 1
@@ -1635,7 +1682,7 @@ components:
         VersionName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of the runtime version. Currently, the only valid value is <code>syn-1.0</code>. </p> <p>Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>.</p>'
+            - description: 'The name of the runtime version. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1691,12 +1738,12 @@ components:
             - description: 'A structure that includes the entry point from which the canary should start running your script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. '
         ExecutionRoleArn:
           allOf:
-            - $ref: '#/components/schemas/Arn'
+            - $ref: '#/components/schemas/RoleArn'
             - description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid value is <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         Schedule:
           allOf:
             - $ref: '#/components/schemas/CanaryScheduleInput'

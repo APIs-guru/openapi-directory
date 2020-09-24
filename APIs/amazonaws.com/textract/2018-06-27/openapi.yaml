@@ -341,6 +341,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
       requestBody:
         required: true
         content:
@@ -410,6 +416,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
       requestBody:
         required: true
         content:
@@ -781,7 +793,7 @@ components:
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/StatusMessage'
-            - description: The current status of an asynchronous document-analysis operation.
+            - description: Returns if the detection job could not be completed. Contains explanation for what error occured.
         AnalyzeDocumentModelVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -831,7 +843,7 @@ components:
         StatusMessage:
           allOf:
             - $ref: '#/components/schemas/StatusMessage'
-            - description: 'The current status of an asynchronous text-detection operation for the document. '
+            - description: 'Returns if the detection job could not be completed. Contains explanation for what error occured. '
         DetectDocumentTextModelVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -888,6 +900,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationChannel'
             - description: 'The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. '
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputConfig'
+            - description: 'Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.'
     IdempotentParameterMismatchException: {}
     LimitExceededException: {}
     StartDocumentTextDetectionResponse:
@@ -919,6 +935,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NotificationChannel'
             - description: 'The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. '
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputConfig'
+            - description: Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.
     Document:
       type: object
       properties:
@@ -1257,6 +1277,30 @@ components:
             - $ref: '#/components/schemas/RoleArn'
             - description: 'The Amazon Resource Name (ARN) of an IAM role that gives Amazon Textract publishing permissions to the Amazon SNS topic. '
       description: 'The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of an asynchronous document operation, such as <a>StartDocumentTextDetection</a>. '
+    S3Bucket:
+      type: string
+      pattern: '[0-9A-Za-z\.\-_]*'
+      minLength: 3
+      maxLength: 255
+    S3ObjectName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 1024
+    OutputConfig:
+      type: object
+      required:
+        - S3Bucket
+      properties:
+        S3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The name of the bucket your output will go to.
+        S3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectName'
+            - description: 'The prefix of the object key that the output will be saved to. When not enabled, the prefix will be “textract_output".'
+      description: 'Sets whether or not your output will go to a user created bucket. Used to set the name of the bucket, and the prefix on the output file.'
     Pages:
       type: array
       items:
@@ -1278,28 +1322,19 @@ components:
       enum:
         - VALUE
         - CHILD
+        - COMPLEX_FEATURES
     Relationship:
       type: object
       properties:
         Type:
           allOf:
             - $ref: '#/components/schemas/RelationshipType'
-            - description: The type of relationship that the blocks in the IDs array have with the current block. The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks.
+            - description: 'The type of relationship that the blocks in the IDs array have with the current block. The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type VALUE is a list that contains the ID of the VALUE block that''s associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.'
         Ids:
           allOf:
             - $ref: '#/components/schemas/IdList'
             - description: An array of IDs for related blocks. You can get the type of the relationship from the <code>Type</code> element.
       description: '<p>Information about how blocks are related to each other. A <code>Block</code> object contains 0 or more <code>Relation</code> objects in a list, <code>Relationships</code>. For more information, see <a>Block</a>.</p> <p>The <code>Type</code> element provides the type of the relationship for all blocks in the <code>IDs</code> array. </p>'
-    S3Bucket:
-      type: string
-      pattern: '[0-9A-Za-z\.\-_]*'
-      minLength: 3
-      maxLength: 255
-    S3ObjectName:
-      type: string
-      pattern: .*\S.*
-      minLength: 1
-      maxLength: 1024
     S3ObjectVersion:
       type: string
       pattern: .*\S.*

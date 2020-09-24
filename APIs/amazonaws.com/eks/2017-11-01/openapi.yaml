@@ -215,6 +215,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringList'
                         - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
+                kubernetesNetworkConfig:
+                  description: The Kubernetes network configuration for the cluster.
+                  type: object
+                  properties:
+                    serviceIpv4Cidr:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
                 logging:
                   description: An object representing the logging configuration for resources in your cluster.
                   type: object
@@ -553,7 +561,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/String'
                 amiType:
-                  description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+                  description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type. Arm instances should use the <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
                   type: string
                   enum:
                     - AL2_x86_64
@@ -1711,6 +1719,8 @@ components:
         $ref: '#/components/schemas/String'
     BoxedBoolean:
       type: boolean
+    String:
+      type: string
     LogSetups:
       type: array
       items:
@@ -1744,8 +1754,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FargateProfile'
             - description: The full description of your new Fargate profile.
-    String:
-      type: string
     FargateProfileSelector:
       type: object
       properties:
@@ -2007,6 +2015,14 @@ components:
             - $ref: '#/components/schemas/StringList'
             - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the listed CIDR blocks is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that the necessary CIDR blocks are listed. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       description: An object representing an Amazon EKS cluster VPC configuration response.
+    KubernetesNetworkConfigResponse:
+      type: object
+      properties:
+        serviceIpv4Cidr:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The CIDR block that Kubernetes service IP addresses are assigned from. If you didn''t specify a CIDR block, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it cannot be changed.'
+      description: The Kubernetes network configuration for the cluster.
     Logging:
       type: object
       properties:
@@ -2073,6 +2089,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfigResponse'
             - description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.'
+        kubernetesNetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/KubernetesNetworkConfigResponse'
+            - description: Network configuration settings for your cluster.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'
@@ -2135,6 +2155,14 @@ components:
             - $ref: '#/components/schemas/StringList'
             - description: 'The CIDR blocks that are allowed access to your cluster''s public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is <code>0.0.0.0/0</code>. If you''ve disabled private endpoint access and you have worker nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>.'
       description: An object representing the VPC configuration to use for an Amazon EKS cluster.
+    KubernetesNetworkConfigRequest:
+      type: object
+      properties:
+        serviceIpv4Cidr:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The CIDR block to assign Kubernetes service IP addresses from. If you don''t specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn''t overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can''t change this value once the cluster is created.</p> </important>'
+      description: The Kubernetes network configuration for the cluster.
     CreateClusterRequest:
       type: object
       required:
@@ -2159,6 +2187,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfigRequest'
             - description: 'The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html">Cluster VPC Considerations</a> and <a href="https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.'
+        kubernetesNetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/KubernetesNetworkConfigRequest'
+            - description: The Kubernetes network configuration for the cluster.
         logging:
           allOf:
             - $ref: '#/components/schemas/Logging'
@@ -2325,7 +2357,7 @@ components:
         amiType:
           allOf:
             - $ref: '#/components/schemas/AMITypes'
-            - description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
+            - description: 'The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type. Arm instances should use the <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don''t specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html">Launch template support</a> in the Amazon EKS User Guide.'
         remoteAccess:
           allOf:
             - $ref: '#/components/schemas/RemoteAccessConfig'
@@ -2349,7 +2381,7 @@ components:
         launchTemplate:
           allOf:
             - $ref: '#/components/schemas/LaunchTemplateSpecification'
-            - description: 'An object representing a node group''s launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code>. If specified, make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.'
+            - description: 'An object representing a node group''s launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.'
         version:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2400,7 +2432,7 @@ components:
         instanceTypes:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then <code>instanceTypes</code> is <code>null</code>.'
+            - description: 'If the node group wasn''t deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
         subnets:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -2408,7 +2440,7 @@ components:
         remoteAccess:
           allOf:
             - $ref: '#/components/schemas/RemoteAccessConfig'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then <code>remoteAccess</code> is <code>null</code>.'
+            - description: 'If the node group wasn''t deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.'
         amiType:
           allOf:
             - $ref: '#/components/schemas/AMITypes'
@@ -2428,7 +2460,7 @@ components:
         diskSize:
           allOf:
             - $ref: '#/components/schemas/BoxedInteger'
-            - description: 'If the node group wasn''t deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then <code>diskSize</code> is <code>null</code>.'
+            - description: 'If the node group wasn''t deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then this is <code>null</code>.'
         health:
           allOf:
             - $ref: '#/components/schemas/NodegroupHealth'

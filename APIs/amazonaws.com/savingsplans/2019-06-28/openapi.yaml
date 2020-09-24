@@ -168,6 +168,10 @@ paths:
                 upfrontPaymentAmount:
                   description: The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is <code>Partial Upfront</code>.
                   type: string
+                purchaseTime:
+                  description: 'The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).'
+                  type: string
+                  format: date-time
                 clientToken:
                   description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
                   type: string
@@ -176,6 +180,62 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteQueuedSavingsPlan:
+    post:
+      operationId: DeleteQueuedSavingsPlan
+      description: Deletes the queued purchase for the specified Savings Plan.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteQueuedSavingsPlanResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - savingsPlanId
+              properties:
+                savingsPlanId:
+                  description: The ID of the Savings Plan.
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -744,6 +804,9 @@ components:
     ValidationException: {}
     InternalServerException: {}
     ServiceQuotaExceededException: {}
+    DeleteQueuedSavingsPlanResponse:
+      type: object
+      properties: {}
     DescribeSavingsPlanRatesResponse:
       type: object
       properties:
@@ -794,6 +857,8 @@ components:
         - payment-failed
         - active
         - retired
+        - queued
+        - queued-deleted
     SavingsPlanFilter:
       type: object
       properties:
@@ -842,7 +907,6 @@ components:
       enum:
         - AmazonEC2
         - AmazonECS
-        - AmazonEKS
         - AWSLambda
     SavingsPlanRateUsageType:
       type: string
@@ -931,6 +995,9 @@ components:
       type: string
     SavingsPlanOfferingId:
       type: string
+    DateTime:
+      type: string
+      format: date-time
     TagMap:
       type: object
       additionalProperties:
@@ -954,6 +1021,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Amount'
             - description: The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is <code>Partial Upfront</code>.
+        purchaseTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: 'The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).'
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -966,6 +1037,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CurrencyCode'
+    DeleteQueuedSavingsPlanRequest:
+      type: object
+      required:
+        - savingsPlanId
+      title: DeleteQueuedSavingsPlanRequest
+      properties:
+        savingsPlanId:
+          allOf:
+            - $ref: '#/components/schemas/SavingsPlanId'
+            - description: The ID of the Savings Plan.
     SavingsPlanRateFilterList:
       type: array
       items:
