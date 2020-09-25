@@ -5746,7 +5746,6 @@ components:
       type: object
       required:
         - ConformancePackName
-        - DeliveryS3Bucket
       title: PutConformancePackRequest
       properties:
         ConformancePackName:
@@ -5861,7 +5860,6 @@ components:
       type: object
       required:
         - OrganizationConformancePackName
-        - DeliveryS3Bucket
       title: PutOrganizationConformancePackRequest
       properties:
         OrganizationConformancePackName:
@@ -7358,11 +7356,11 @@ components:
       maxLength: 1024
     DeliveryS3Bucket:
       type: string
-      minLength: 3
+      minLength: 0
       maxLength: 63
     DeliveryS3KeyPrefix:
       type: string
-      minLength: 1
+      minLength: 0
       maxLength: 1024
     ConformancePackInputParameters:
       type: array
@@ -7376,7 +7374,6 @@ components:
         - ConformancePackName
         - ConformancePackArn
         - ConformancePackId
-        - DeliveryS3Bucket
       properties:
         ConformancePackName:
           allOf:
@@ -8293,7 +8290,6 @@ components:
       required:
         - OrganizationConformancePackName
         - OrganizationConformancePackArn
-        - DeliveryS3Bucket
         - LastUpdateTime
       properties:
         OrganizationConformancePackName:

@@ -57340,6 +57340,18 @@ components:
             - xml:
                 name: localGatewayRouteTableId
               description: The ID of the local gateway route table.
+        LocalGatewayRouteTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: localGatewayRouteTableArn
+              description: The Amazon Resource Name (ARN) of the local gateway route table.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway route.
       description: Describes a route for a local gateway route table.
     CreateLocalGatewayRouteTableVpcAssociationRequest:
       type: object
@@ -57381,6 +57393,12 @@ components:
             - xml:
                 name: localGatewayRouteTableId
               description: The ID of the local gateway route table.
+        LocalGatewayRouteTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: localGatewayRouteTableArn
+              description: The Amazon Resource Name (ARN) of the local gateway route table for the association.
         LocalGatewayId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -57393,6 +57411,12 @@ components:
             - xml:
                 name: vpcId
               description: The ID of the VPC.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway route table for the association.
         State:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -73275,7 +73299,7 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: ownerId
-              description: The ID of the AWS account ID that owns the local gateway.
+              description: The AWS account ID that owns the local gateway.
         State:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -73318,6 +73342,12 @@ components:
             - xml:
                 name: localGatewayRouteTableId
               description: The ID of the local gateway route table.
+        LocalGatewayRouteTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: localGatewayRouteTableArn
+              description: The Amazon Resource Name (ARN) of the local gateway route table.
         LocalGatewayId:
           allOf:
             - $ref: '#/components/schemas/LocalGatewayId'
@@ -73330,6 +73360,12 @@ components:
             - xml:
                 name: outpostArn
               description: The Amazon Resource Name (ARN) of the Outpost.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway route table.
         State:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -73370,6 +73406,18 @@ components:
             - xml:
                 name: localGatewayRouteTableId
               description: The ID of the local gateway route table.
+        LocalGatewayRouteTableArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: localGatewayRouteTableArn
+              description: The Amazon Resource Name (ARN) of the local gateway route table for the virtual interface group.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway virtual interface group association.
         State:
           allOf:
             - $ref: '#/components/schemas/String'

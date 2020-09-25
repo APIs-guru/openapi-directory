@@ -819,7 +819,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: The version number of the database engine to use.
+          description: 'The version number of the database engine to use. The --engine-version will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.'
           schema:
             type: string
         - name: Port
@@ -7176,7 +7176,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The version number of the database engine to use.
+            - description: 'The version number of the database engine to use. The --engine-version will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.'
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
