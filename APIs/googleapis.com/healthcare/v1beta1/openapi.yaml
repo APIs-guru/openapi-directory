@@ -120,6 +120,132 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{consentStore}:checkDataAccess":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Checks if a particular data_id of a User data mapping in the given Consent store is consented for a given use.
+      operationId: healthcare.projects.locations.datasets.consentStores.checkDataAccess
+      parameters:
+        - description: Name of the Consent store where the requested data_id is stored, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}`.
+          in: path
+          name: consentStore
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckDataAccessRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckDataAccessResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{consentStore}:evaluateUserConsents":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Evaluates the end user's Consents for all matching User data mappings. Note: User data mappings are indexed asynchronously, so there might be a slight delay between the time a mapping is created or updated and when it is included in the results of EvaluateUserConsents."
+      operationId: healthcare.projects.locations.datasets.consentStores.evaluateUserConsents
+      parameters:
+        - description: Name of the Consent store to retrieve user data mappings from.
+          in: path
+          name: consentStore
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateUserConsentsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvaluateUserConsentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{consentStore}:queryAccessibleData":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: 'Queries all data_ids that are consented for a given use in the given Consent store and writes them to a specified destination. The returned Operation includes a progress counter for the number of User data mappings processed. Errors are logged to Cloud Logging (see [Viewing logs] (/healthcare/docs/how-tos/logging)). For example, the following sample log entry shows a `failed to evaluate consent policy` error that occurred during a QueryAccessibleData call to consent store `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}`. ```json jsonPayload: { @type: "type.googleapis.com/google.cloud.healthcare.logging.QueryAccessibleDataLogEntry" error: { code: 9 message: "failed to evaluate consent policy" } resourceName: "projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}" } logName: "projects/{project_id}/logs/healthcare.googleapis.com%2Fquery_accessible_data" operation: { id: "projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/operations/{operation_id}" producer: "healthcare.googleapis.com/QueryAccessibleData" } receiveTimestamp: "TIMESTAMP" resource: { labels: { consent_store_id: "{consent_store_id}" dataset_id: "{dataset_id}" location: "{location_id}" project_id: "{project_id}" } type: "healthcare_consent_store" } severity: "ERROR" timestamp: "TIMESTAMP" ```'
+      operationId: healthcare.projects.locations.datasets.consentStores.queryAccessibleData
+      parameters:
+        - description: Name of the Consent store to retrieve user data mappings from.
+          in: path
+          name: consentStore
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryAccessibleDataRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{evalStore}:evaluate":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -652,6 +778,90 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:activate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Activates the latest revision of the specified Consent by committing a new revision with `state` updated to `ACTIVE`. If the latest revision of the given consent is in the `ACTIVE` state, no new revision is committed. A FAILED_PRECONDITION error occurs if the latest revision of the given consent is in the `REJECTED` or `REVOKED` state.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.activate
+      parameters:
+        - description: Required. The resource name of the consent to activate, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`. An INVALID_ARGUMENT error occurs if `revision_id` is specified in the name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivateConsentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consent"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:archive":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Archives the specified User data mapping.
+      operationId: healthcare.projects.locations.datasets.consentStores.userDataMappings.archive
+      parameters:
+        - description: The resource name of the user data mapping to archive.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveUserDataMappingRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchiveUserDataMappingResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -694,6 +904,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{name}:deleteRevision":
+    delete:
+      description: Deletes the specified revision of a Consent. An INVALID_ARGUMENT error occurs if the specified revision is the latest revision.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.deleteRevision
+      parameters:
+        - description: Required. The resource name of the consent revision to delete, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}@{revision_id}`. An INVALID_ARGUMENT error occurs if `revision_id` is not specified in the name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}:export":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -770,6 +1017,142 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:listRevisions":
+    get:
+      description: Lists the revisions of the given Consent in reverse chronological order.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.listRevisions
+      parameters:
+        - description: Required. The resource name of the consent to retrieve revisions for.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the revisions returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings. Fields/functions available for filtering are: - user_id - consent_artifact - state - revision_create_time"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of revisions to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConsentRevisionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:reject":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Rejects the latest revision of the specified Consent by committing a new revision with `state` updated to `REJECTED`. If the latest revision of the given consent is in the `REJECTED` state, no new revision is committed. A FAILED_PRECONDITION error occurs if the latest revision of the given consent is in the `ACTIVE` or `REVOKED` state.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.reject
+      parameters:
+        - description: Required. The resource name of the consent to reject, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`. An INVALID_ARGUMENT error occurs if `revision_id` is specified in the name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RejectConsentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consent"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{name}:revoke":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Revokes the latest revision of the specified Consent by committing a new revision with `state` updated to `REVOKED`. If the latest revision of the given consent is in the `REVOKED` state, no new revision is committed. A FAILED_PRECONDITION error occurs if the latest revision of the given consent is in `DRAFT` or `REJECTED` state.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.revoke
+      parameters:
+        - description: Required. The resource name of the consent to revoke, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`. An INVALID_ARGUMENT error occurs if `revision_id` is specified in the name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RevokeConsentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consent"
           description: Successful response
       security:
         - Oauth2:
@@ -946,6 +1329,340 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Annotation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/attributeDefinitions":
+    get:
+      description: Lists the Attribute definitions in the given Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.attributeDefinitions.list
+      parameters:
+        - description: Required. Name of the Consent store to retrieve attribute definitions from.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the attributes returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings. The only field available for filtering is `category`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of attribute definitions to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to retrieve the next page of results or empty to get the first page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAttributeDefinitionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Attribute definition in the parent Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.attributeDefinitions.create
+      parameters:
+        - description: Required. The name of the consent store that this Attribute definition belongs to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. The ID of the Attribute definition to create. The string must match the following regex: `_a-zA-Z{0,255}` and must not be a reserved keyword within the Common Expression Language as listed on https://github.com/google/cel-spec/blob/master/doc/langdef.md."
+          in: query
+          name: attributeDefinitionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AttributeDefinition"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AttributeDefinition"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/consentArtifacts":
+    get:
+      description: Lists the Consent artifacts in the given Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.consentArtifacts.list
+      parameters:
+        - description: Required. Name of the Consent store to retrieve consent artifacts from.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the artifacts returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings The fields available for filtering are: - user_id - consent_content_version"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of consent artifacts to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from the previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConsentArtifactsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Consent artifact in the parent Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.consentArtifacts.create
+      parameters:
+        - description: Required. The name of the Consent store this consent artifact belongs to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentArtifact"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsentArtifact"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/consentStores":
+    get:
+      description: Lists the Consent stores in the given dataset.
+      operationId: healthcare.projects.locations.datasets.consentStores.list
+      parameters:
+        - description: Required. Name of the dataset.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the stores returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings. Only filtering on labels is supported. For example, `labels.key=value`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of Consent stores to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to retrieve the next page of results or empty to get the first page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConsentStoresResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Consent store in the parent dataset. Attempting to create a consent store with the same ID as an existing store fails with an ALREADY_EXISTS error.
+      operationId: healthcare.projects.locations.datasets.consentStores.create
+      parameters:
+        - description: Required. The name of the dataset this Consent store belongs to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The ID of the consent store to create. The string must match the following regex: `[\\p{L}\\p{N}_\\-\\.]{1,256}`."
+          in: query
+          name: consentStoreId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentStore"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsentStore"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/consents":
+    get:
+      description: Lists the Consent in the given Consent store, returning each consent's latest revision.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.list
+      parameters:
+        - description: Required. Name of the Consent store to retrieve consents from.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the consents returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings The fields available for filtering are: - user_id - consent_artifact - state - state_change_time"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of consents to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from the previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListConsentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new Consent in the parent Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.consents.create
+      parameters:
+        - description: Required. Name of the consent store.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Consent"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Consent"
           description: Successful response
       security:
         - Oauth2:
@@ -1877,6 +2594,87 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/userDataMappings":
+    get:
+      description: Lists the User data mappings in the given Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.userDataMappings.list
+      parameters:
+        - description: Required. Name of the Consent store to retrieve user data mappings from.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Restricts the user data mappings returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings The fields available for filtering are: - data_id - user_id - archived - archive_time"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Limit on the number of user data mappings to return in a single response. If zero the default page size of 100 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to retrieve the next page of results or empty to get the first page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListUserDataMappingsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new User data mapping in the parent Consent store.
+      operationId: healthcare.projects.locations.datasets.consentStores.userDataMappings.create
+      parameters:
+        - description: Required. Name of the consent store.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDataMapping"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDataMapping"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -2163,6 +2961,21 @@ components:
       schema:
         type: string
   schemas:
+    ActivateConsentRequest:
+      description: Activates the latest revision of the specified Consent by committing a new revision with `state` updated to `ACTIVE`. If the latest revision of the given consent is in the `ACTIVE` state, no new revision is committed.
+      properties:
+        consentArtifact:
+          description: Required. The resource name of the consent artifact that contains proof of the end user's consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consentArtifacts/{consent_artifact_id}`. If the draft consent had a consent artifact, this consent artifact overwrites it.
+          type: string
+        expireTime:
+          description: Timestamp in UTC of when this consent is considered expired.
+          format: google-datetime
+          type: string
+        ttl:
+          description: The time to live for this consent from when it is marked as active.
+          format: google-duration
+          type: string
+      type: object
     Annotation:
       description: An annotation record.
       properties:
@@ -2214,6 +3027,56 @@ components:
           type: object
         name:
           description: Resource name of the Annotation store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
+          type: string
+      type: object
+    ArchiveUserDataMappingRequest:
+      description: Archives the specified User data mapping.
+      properties: {}
+      type: object
+    ArchiveUserDataMappingResponse:
+      description: Archives the specified User data mapping.
+      properties: {}
+      type: object
+    Attribute:
+      description: An attribute value for a consent or data mapping. Each Attribute must have a corresponding AttributeDefinition in the consent store that defines the default and allowed values.
+      properties:
+        attributeDefinitionId:
+          description: Indicates the name of an attribute defined at the consent store.
+          type: string
+        values:
+          description: The value of the attribute. Must be an acceptable value as defined in the consent store. For example, if the consent store defines "data type" with acceptable values "questionnaire" and "step-count", when the attribute name is data type, this field must contain one of those values.
+          items:
+            type: string
+          type: array
+      type: object
+    AttributeDefinition:
+      description: A client-defined consent attribute.
+      properties:
+        allowedValues:
+          description: Required. Possible values for the attribute. An empty list is invalid. The list can only be expanded after creation.
+          items:
+            type: string
+          type: array
+        category:
+          description: Required. The category of the attribute. The value of this field cannot be changed after creation.
+          enum:
+            - CATEGORY_UNSPECIFIED
+            - RESOURCE
+            - REQUEST
+          type: string
+        consentDefaultValues:
+          description: Default values of the attribute in consents. If no default values are specified, it defaults to an empty value.
+          items:
+            type: string
+          type: array
+        dataMappingDefaultValue:
+          description: Default value of the attribute in user data mappings. If no default value is specified, it defaults to an empty value. This field is only applicable to attributes of the category `RESOURCE`.
+          type: string
+        description:
+          description: A description of the attribute.
+          type: string
+        name:
+          description: Resource name of the attribute definition, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/attributeDefinitions/{attribute_definition_id}`.
           type: string
       type: object
     AuditConfig:
@@ -2283,11 +3146,163 @@ components:
           description: Character to mask the sensitive values. If not supplied, defaults to "*".
           type: string
       type: object
+    CheckDataAccessRequest:
+      description: Checks if a particular data_id of a User data mapping in the given Consent store is consented for a given use.
+      properties:
+        consentList:
+          $ref: "#/components/schemas/ConsentList"
+          description: The Consents to evaluate the access request against. They must have the same `user_id` as the data to check access for, exist in the current `consent_store`, and can have a `state` of either `ACTIVE` or `DRAFT`. A maximum of 100 consents can be provided here.
+        dataId:
+          description: The unique identifier of the data to check access for. It must exist in the given `consent_store`.
+          type: string
+        requestAttributes:
+          additionalProperties:
+            type: string
+          description: The values of request attributes associated with this access request.
+          type: object
+        responseView:
+          description: The view for CheckDataAccessResponse.
+          enum:
+            - RESPONSE_VIEW_UNSPECIFIED
+            - BASIC
+            - FULL
+          type: string
+      type: object
+    CheckDataAccessResponse:
+      description: Checks if a particular data_id of a User data mapping in the given Consent store is consented for a given use.
+      properties:
+        consentDetails:
+          additionalProperties:
+            $ref: "#/components/schemas/ConsentEvaluation"
+          description: The resource names of all evaluated Consents mapped to their evaluation.
+          type: object
+        consented:
+          description: Whether the requested data is consented for the given use.
+          type: boolean
+      type: object
     CloudHealthcareSource:
       description: Cloud Healthcare API resource.
       properties:
         name:
           description: Full path of a Cloud Healthcare API resource.
+          type: string
+      type: object
+    Consent:
+      description: Represents an end user's consent.
+      properties:
+        consentArtifact:
+          description: Required. The resource name of the consent artifact that contains proof of the end user's consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consentArtifacts/{consent_artifact_id}`.
+          type: string
+        expireTime:
+          description: Timestamp in UTC of when this consent is considered expired.
+          format: google-datetime
+          type: string
+        name:
+          description: Resource name of the Consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`.
+          type: string
+        policies:
+          description: Represents an end user's consent in terms of the resources that can be accessed and under what conditions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1ConsentPolicy"
+          type: array
+        revisionCreateTime:
+          description: Output only. The timestamp that the revision was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        revisionId:
+          description: Output only. The revision ID of the consent. The format is an 8-character hexadecimal string. Refer to a specific revision of a Consent by appending `@{revision_id}` to the Consent's resource name.
+          readOnly: true
+          type: string
+        state:
+          description: Indicates the current state of this consent.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - ARCHIVED
+            - REVOKED
+            - DRAFT
+            - REJECTED
+          type: string
+        ttl:
+          description: Input only. The time to live for this consent from when it is created.
+          format: google-duration
+          type: string
+        userId:
+          description: Required. User's UUID provided by the client.
+          type: string
+      type: object
+    ConsentArtifact:
+      description: Proof of an end user's consent.
+      properties:
+        consentContentScreenshots:
+          description: Screenshots of the consent content.
+          items:
+            $ref: "#/components/schemas/Image"
+          type: array
+        consentContentVersion:
+          description: An string indicating the version of the consent content.
+          type: string
+        guardianSignature:
+          $ref: "#/components/schemas/Signature"
+          description: A signature from guardian.
+        metadata:
+          additionalProperties:
+            type: string
+          description: Metadata associated with the consent artifact. For example, the consent locale or user agent version.
+          type: object
+        name:
+          description: Resource name of the Consent artifact, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consentArtifacts/{consent_artifact_id}`.
+          type: string
+        userId:
+          description: Required. User's UUID provided by the client.
+          type: string
+        userSignature:
+          $ref: "#/components/schemas/Signature"
+          description: User's signature.
+        witnessSignature:
+          $ref: "#/components/schemas/Signature"
+          description: A signature from a witness.
+      type: object
+    ConsentEvaluation:
+      description: The detailed evaluation of a particular Consent.
+      properties:
+        evaluationResult:
+          description: The evaluation result.
+          enum:
+            - EVALUATION_RESULT_UNSPECIFIED
+            - NOT_APPLICABLE
+            - NO_MATCHING_POLICY
+            - NO_SATISFIED_POLICY
+            - HAS_SATISFIED_POLICY
+          type: string
+      type: object
+    ConsentList:
+      description: List of resource names of Consent resources.
+      properties:
+        consents:
+          description: The resource names of the Consents to evaluate against, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consents/{consent_id}`.
+          items:
+            type: string
+          type: array
+      type: object
+    ConsentStore:
+      description: Represents a Consent store.
+      properties:
+        defaultConsentTtl:
+          description: Default time to live for consents in this store. Must be at least 24 hours. Updating this field will not affect the expiration time of existing consents.
+          format: google-duration
+          type: string
+        enableConsentCreateOnUpdate:
+          description: If true, UpdateConsent creates the consent if it does not already exist.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: "User-supplied key-value pairs used to organize Consent stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store."
+          type: object
+        name:
+          description: Resource name of the Consent store, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}`.
           type: string
       type: object
     CreateMessageRequest:
@@ -2528,6 +3543,52 @@ components:
           format: int64
           type: string
       type: object
+    EvaluateUserConsentsRequest:
+      description: Evaluate an end user's Consents for all matching User data mappings.
+      properties:
+        consentList:
+          $ref: "#/components/schemas/ConsentList"
+          description: The resource names of the consents to evaluate against. Consents must be in the current `consent_store` and belong to the current `user_id`. Consents can be either active or draft. If this field is empty, the default behavior is to use all active consents that belong to `user_id`. A maximum of 100 consents can be provided here.
+        pageSize:
+          description: Limit on the number of user data mappings to return in a single response. If zero the default page size of 100 is used.
+          format: int32
+          type: integer
+        pageToken:
+          description: Token to retrieve the next page of results to get the first page.
+          type: string
+        requestAttributes:
+          additionalProperties:
+            type: string
+          description: The values of request attributes associated with this access request.
+          type: object
+        resourceAttributes:
+          additionalProperties:
+            type: string
+          description: The values of resources attributes associated with the type of data being requested. If no values are specified, then all data types are queried.
+          type: object
+        responseView:
+          description: The view for EvaluateUserConsentsResponse.
+          enum:
+            - RESPONSE_VIEW_UNSPECIFIED
+            - BASIC
+            - FULL
+          type: string
+        userId:
+          description: Required. User ID to evaluate consents for.
+          type: string
+      type: object
+    EvaluateUserConsentsResponse:
+      description: Evaluate an end user's Consents for all matching User data mappings.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list. This token is valid for 72 hours after it is created.
+          type: string
+        results:
+          description: The consent evaluation result for each `data_id`.
+          items:
+            $ref: "#/components/schemas/Result"
+          type: array
+      type: object
     ExportAnnotationsErrorDetails:
       description: Deprecated. Response for failed annotation export operations. This structure is included in error details upon operation completion.
       properties:
@@ -2764,6 +3825,25 @@ components:
           description: "Points to a Cloud Storage URI containing file(s) with content only. The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The URI can include wildcards in `object_id` and thus identify multiple files. Supported wildcards: '*' to match 0 or more non-separator characters '**' to match 0 or more characters (including separators). Must be used at the end of a path and with no other wildcards in the path. Can also be used with a file extension (such as .dcm), which imports all files with the extension in the specified directory and its sub-directories. For example, `gs://my-bucket/my-directory/**.json` imports all files with .json extensions in `my-directory/` and its sub-directories. '?' to match 1 character All other URI formats are invalid. Files matching the wildcard are expected to contain content only, no metadata."
           type: string
       type: object
+    GoogleCloudHealthcareV1beta1ConsentGcsDestination:
+      description: The Cloud Storage location for export.
+      properties:
+        uriPrefix:
+          description: URI for a Cloud Storage directory where the server writes result files, in the format `gs://{bucket-id}/{path/to/destination/dir}`. If there is no trailing slash, the service appends one when composing the object path. The user is responsible for creating the Cloud Storage bucket and directory referenced in `uri_prefix`.
+          type: string
+      type: object
+    GoogleCloudHealthcareV1beta1ConsentPolicy:
+      description: Represents an end user's consent in terms of the resources that can be accessed and under what conditions.
+      properties:
+        authorizationRule:
+          $ref: "#/components/schemas/Expr"
+          description: The request conditions to meet to grant access.
+        resourceAttributes:
+          description: The data resources that this policy applies to. A data resource is a match if it matches all the attributes listed here.
+          items:
+            $ref: "#/components/schemas/Attribute"
+          type: array
+      type: object
     GoogleCloudHealthcareV1beta1DeidentifyDeidentifyDicomStoreSummary:
       description: Contains a summary of the DeidentifyDicomStore operation.
       properties:
@@ -2995,6 +4075,17 @@ components:
             type: object
           type: array
       type: object
+    Image:
+      description: An image.
+      properties:
+        gcsUri:
+          description: "Input only. Points to a Cloud Storage URI containing the image. The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The Cloud Healthcare API service account must have the `roles/storage.objectViewer` Cloud IAM role for this Cloud Storage location. The image at this URI is copied to a Cloud Storage location managed by the Cloud Healthcare API. Responses to image fetching requests return the image in raw_bytes."
+          type: string
+        rawBytes:
+          description: Image content represented as a stream of bytes. This field is populated when returned in GetConsentArtifact response, but not included in CreateConsentArtifact and ListConsentArtifact response.
+          format: byte
+          type: string
+      type: object
     ImageAnnotation:
       description: Image annotation.
       properties:
@@ -3179,6 +4270,66 @@ components:
           description: Token to retrieve the next page of results or empty if there are no more results in the list.
           type: string
       type: object
+    ListAttributeDefinitionsResponse:
+      description: Lists the Attribute definitions in the given Consent store.
+      properties:
+        attributeDefinitions:
+          description: The returned attribute definitions. The maximum number of attributes returned is determined by the value of page_size in the ListAttributeDefinitionsRequest.
+          items:
+            $ref: "#/components/schemas/AttributeDefinition"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
+    ListConsentArtifactsResponse:
+      description: Lists the Consent artifacts in the given Consent store.
+      properties:
+        consentArtifacts:
+          description: The returned consent artifacts. The maximum number of artifacts returned is determined by the value of page_size in the ListConsentArtifactsRequest.
+          items:
+            $ref: "#/components/schemas/ConsentArtifact"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
+    ListConsentRevisionsResponse:
+      description: Lists the revisions of the given Consent in reverse chronological order.
+      properties:
+        consents:
+          description: The returned consent revisions. The maximum number of revisions returned is determined by the value of `page_size` in the ListConsentRevisionsRequest.
+          items:
+            $ref: "#/components/schemas/Consent"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
+    ListConsentStoresResponse:
+      description: Lists the Consent stores in the given dataset.
+      properties:
+        consentStores:
+          description: The returned Consent stores. The maximum number of stores returned is determined by the value of page_size in the ListConsentStoresRequest.
+          items:
+            $ref: "#/components/schemas/ConsentStore"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
+    ListConsentsResponse:
+      description: Lists the Consents in the given Consent store.
+      properties:
+        consents:
+          description: The returned consents. The maximum number of consents returned is determined by the value of page_size in the ListConsentsRequest.
+          items:
+            $ref: "#/components/schemas/Consent"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+      type: object
     ListDatasetsResponse:
       description: Lists the available datasets.
       properties:
@@ -3263,6 +4414,18 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListUserDataMappingsResponse:
+      description: Lists the User data mappings in the given Consent store.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results or empty if there are no more results in the list.
+          type: string
+        userDataMappings:
+          description: The returned user data mappings. The maximum number of user data mappings returned is determined by the value of page_size in the ListUserDataMappingsRequest.
+          items:
+            $ref: "#/components/schemas/UserDataMapping"
+          type: array
+      type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
@@ -3333,7 +4496,7 @@ components:
       description: Specifies where to send notifications upon changes to a data store.
       properties:
         pubsubTopic:
-          description: The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that notifications of changes are published on. Supplied by the client. PubsubMessage.Data contains the resource name. PubsubMessage.MessageId is the ID of this message. It is guaranteed to be unique within the topic. PubsubMessage.PublishTime is the time at which the message was published. Notifications are only sent if the topic is non-empty. [Topic names](https://cloud.google.com/pubsub/docs/overview#names) must be scoped to a project. Cloud Healthcare API service account must have publisher permissions on the given Cloud Pub/Sub topic. Not having adequate permissions causes the calls that send notifications to fail. If a notification can't be published to Cloud Pub/Sub, errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)). If the number of errors exceeds a certain rate, some aren't submitted.
+          description: The [Cloud Pub/Sub](https://cloud.google.com/pubsub/docs/) topic that notifications of changes are published on. Supplied by the client. PubsubMessage.Data contains the resource name. PubsubMessage.MessageId is the ID of this message. It is guaranteed to be unique within the topic. PubsubMessage.PublishTime is the time at which the message was published. Notifications are only sent if the topic is non-empty. [Topic names](https://cloud.google.com/pubsub/docs/overview#names) must be scoped to a project. Cloud Healthcare API service account must have publisher permissions on the given Cloud Pub/Sub topic. Not having adequate permissions causes the calls that send notifications to fail. If a notification can't be published to Cloud Pub/Sub, errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)). If the number of errors exceeds a certain rate, some aren't submitted. Note that not all operations trigger notifications, see [Configuring Pub/Sub notifications](https://cloud.google.com/healthcare/docs/how-tos/pubsub) for specific details.
           type: string
       type: object
     Operation:
@@ -3459,9 +4622,33 @@ components:
           format: int64
           type: string
       type: object
+    QueryAccessibleDataRequest:
+      description: Queries all data_ids that are consented for a given use in the given Consent store and writes them to a specified destination. The returned Operation includes a progress counter for the number of User data mappings processed. Errors are logged to Cloud Logging (see [Viewing logs] (/healthcare/docs/how-tos/logging) and [QueryAccessibleData] for a sample log entry).
+      properties:
+        gcsDestination:
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1ConsentGcsDestination"
+          description: The Cloud Storage destination. The Cloud Healthcare API service account must have the `roles/storage.objectAdmin` Cloud IAM role for this Cloud Storage location.
+        requestAttributes:
+          additionalProperties:
+            type: string
+          description: The values of request attributes associated with this access request.
+          type: object
+        resourceAttributes:
+          additionalProperties:
+            type: string
+          description: The values of resources attributes associated with the type of data being requested. If no values are specified, then all data types are included in the output.
+          type: object
+      type: object
     RedactConfig:
       description: Define how to redact sensitive values. Default behaviour is erase. For example, "My name is Jane." becomes "My name is ."
       properties: {}
+      type: object
+    RejectConsentRequest:
+      description: Rejects the latest revision of the specified Consent by committing a new revision with `state` updated to `REJECTED`. If the latest revision of the given consent is in the `REJECTED` state, no new revision is committed.
+      properties:
+        consentArtifact:
+          description: The resource name of the consent artifact that contains proof of the end user's rejection of the draft consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consentArtifacts/{consent_artifact_id}`. If the draft consent had a consent artifact, this consent artifact overwrites it.
+          type: string
       type: object
     ReplaceWithInfoTypeConfig:
       description: When using the INSPECT_AND_TRANSFORM action, each match is replaced with the name of the info_type. For example, "My name is Jane" becomes "My name is [PERSON_NAME]." The TRANSFORM action is equivalent to redacting.
@@ -3482,6 +4669,28 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Result:
+      description: The consent evaluation result for a single `data_id`.
+      properties:
+        consentDetails:
+          additionalProperties:
+            $ref: "#/components/schemas/ConsentEvaluation"
+          description: The resource names of all evaluated Consents mapped to their evaluation.
+          type: object
+        consented:
+          description: Whether the requested data is consented for the given use.
+          type: boolean
+        dataId:
+          description: The unique identifier of the data the consents were checked for.
+          type: string
+      type: object
+    RevokeConsentRequest:
+      description: Revokes the latest revision of the specified Consent by committing a new revision with `state` updated to `REVOKED`. If the latest revision of the given consent is in the `REVOKED` state, no new revision is committed.
+      properties:
+        consentArtifact:
+          description: The resource name of the consent artifact that contains proof of the end user's revocation of the consent, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/consentArtifacts/{consent_artifact_id}`.
+          type: string
       type: object
     SchemaConfig:
       description: Configuration for the FHIR BigQuery schema. Determines how the server generates the schema.
@@ -3620,6 +4829,25 @@ components:
           format: google-fieldmask
           type: string
       type: object
+    Signature:
+      description: User signature.
+      properties:
+        image:
+          $ref: "#/components/schemas/Image"
+          description: An image of the user's signature.
+        metadata:
+          additionalProperties:
+            type: string
+          description: Metadata associated with the user's signature. For example, the user's name or the user's title.
+          type: object
+        signatureTime:
+          description: Timestamp of the signature.
+          format: google-datetime
+          type: string
+        userId:
+          description: User's UUID provided by the client.
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -3703,6 +4931,33 @@ components:
             - STRING
             - VARIES
             - UNESCAPED_STRING
+          type: string
+      type: object
+    UserDataMapping:
+      description: Maps a user data entry to its end user and Attributes.
+      properties:
+        archiveTime:
+          description: Output only. Indicates the time when this data mapping was archived.
+          format: google-datetime
+          readOnly: true
+          type: string
+        archived:
+          description: Output only. Indicates whether this data mapping is archived.
+          readOnly: true
+          type: boolean
+        dataId:
+          description: Required. A unique identifier for the mapped data.
+          type: string
+        name:
+          description: Resource name of the User data mapping, of the form `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/consentStores/{consent_store_id}/userDataMappings/{user_data_mapping_id}`.
+          type: string
+        resourceAttributes:
+          description: Attributes of end user data. Each attribute can have exactly one value specified. Only explicitly set attributes are displayed here. Attribute definitions with defaults set implicitly apply to these User data mappings. Attributes listed here must be single valued, that is, exactly one value is specified for the field "values" in each Attribute.
+          items:
+            $ref: "#/components/schemas/Attribute"
+          type: array
+        userId:
+          description: Required. User's UUID provided by the client.
           type: string
       type: object
     VersionSource:

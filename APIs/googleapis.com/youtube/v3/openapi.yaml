@@ -5303,9 +5303,6 @@ components:
         id:
           description: The ID that YouTube uses to uniquely identify the channel.
           type: string
-        invideoPromotion:
-          $ref: "#/components/schemas/InvideoPromotion"
-          description: The invideoPromotion object encapsulates information about promotion campaign associated with the channel.
         kind:
           default: youtube#channel
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#channel".'
@@ -7075,24 +7072,6 @@ components:
             - corner
           type: string
       type: object
-    InvideoPromotion:
-      description: Describes an invideo promotion campaign consisting of multiple promoted items. A campaign belongs to a single channel_id.
-      properties:
-        defaultTiming:
-          $ref: "#/components/schemas/InvideoTiming"
-          description: The default temporal position within the video where the promoted item will be displayed. Can be overridden by more specific timing in the item.
-        items:
-          description: List of promoted items in decreasing priority.
-          items:
-            $ref: "#/components/schemas/PromotedItem"
-          type: array
-        position:
-          $ref: "#/components/schemas/InvideoPosition"
-          description: The spatial position within the video where the promoted item will be displayed.
-        useSmartTiming:
-          description: Indicates whether the channel's promotional campaign uses "smart timing." This feature attempts to show promotions at a point in the video when they are more likely to be clicked and less likely to disrupt the viewing experience. This feature also picks up a single promotion to show on each video.
-          type: boolean
-      type: object
     InvideoTiming:
       description: Describes a temporal position of a visual widget inside a video.
       properties:
@@ -8258,42 +8237,6 @@ components:
             - public
             - unlisted
             - private
-          type: string
-      type: object
-    PromotedItem:
-      description: Describes a single promoted item.
-      properties:
-        customMessage:
-          description: A custom message to display for this promotion. This field is currently ignored unless the promoted item is a website.
-          type: string
-        id:
-          $ref: "#/components/schemas/PromotedItemId"
-          description: Identifies the promoted item.
-        promotedByContentOwner:
-          description: If true, the content owner's name will be used when displaying the promotion. This field can only be set when the update is made on behalf of the content owner.
-          type: boolean
-        timing:
-          $ref: "#/components/schemas/InvideoTiming"
-          description: The temporal position within the video where the promoted item will be displayed. If present, it overrides the default timing.
-      type: object
-    PromotedItemId:
-      description: Describes a single promoted item id. It is a union of various possible types.
-      properties:
-        recentlyUploadedBy:
-          description: If type is recentUpload, this field identifies the channel from which to take the recent upload. If missing, the channel is assumed to be the same channel for which the invideoPromotion is set.
-          type: string
-        type:
-          description: Describes the type of the promoted item.
-          enum:
-            - video
-            - website
-            - recentUpload
-          type: string
-        videoId:
-          description: If the promoted item represents a video, this field represents the unique YouTube ID identifying it. This field will be present only if type has the value video.
-          type: string
-        websiteUrl:
-          description: If the promoted item represents a website, this field represents the url pointing to the website. This field will be present only if type has the value website.
           type: string
       type: object
     PropertyValue:

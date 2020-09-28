@@ -638,11 +638,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Base path where the API proxy revision should be deployed. Defaults to '/' if not provided.
-          in: query
-          name: basepath
-          schema:
-            type: string
         - description: Flag that specifies whether to force the deployment of the new revision over the currently deployed revision by overriding conflict checks.
           in: query
           name: override
@@ -3774,9 +3769,6 @@ components:
       properties:
         apiProxy:
           description: API proxy.
-          type: string
-        basePath:
-          description: Base path for the deployment.
           type: string
         deployStartTime:
           description: Time the API proxy was marked `deployed` in the control plane in millisconds since epoch.

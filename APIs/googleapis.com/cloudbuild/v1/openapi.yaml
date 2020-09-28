@@ -701,11 +701,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Required. ID of the project.
+          in: query
+          name: projectId
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateBuildRequest"
+              $ref: "#/components/schemas/Build"
       responses:
         "200":
           content:
@@ -1187,16 +1192,6 @@ components:
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
-      type: object
-    CreateBuildRequest:
-      description: Request to create a new build.
-      properties:
-        build:
-          $ref: "#/components/schemas/Build"
-          description: Required. Build resource to create.
-        projectId:
-          description: Required. ID of the project.
-          type: string
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."

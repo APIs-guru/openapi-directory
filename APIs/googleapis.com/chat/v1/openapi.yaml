@@ -376,6 +376,9 @@ components:
           description: Length of the substring in the plain-text message body this annotation corresponds to.
           format: int32
           type: integer
+        slashCommand:
+          $ref: "#/components/schemas/SlashCommandMetadata"
+          description: The metadata for a slash command.
         startIndex:
           description: Start index (0-based, inclusive) in the plain-text message body this annotation corresponds to.
           format: int32
@@ -385,6 +388,7 @@ components:
           enum:
             - ANNOTATION_TYPE_UNSPECIFIED
             - USER_MENTION
+            - SLASH_COMMAND
           type: string
         userMention:
           $ref: "#/components/schemas/UserMentionMetadata"
@@ -709,9 +713,8 @@ components:
           type: string
         member:
           $ref: "#/components/schemas/User"
-          description: Member details.
+          description: A User in Hangout Chat
         name:
-          description: 'Resource name of the membership, in the form "spaces/*/members/*". Example: spaces/AAAAMpdlehY/members/105115627578887013105'
           type: string
         state:
           description: State of the membership.
@@ -762,6 +765,9 @@ components:
         sender:
           $ref: "#/components/schemas/User"
           description: The user who created the message.
+        slashCommand:
+          $ref: "#/components/schemas/SlashCommand"
+          description: Slash command information, if applicable.
         space:
           $ref: "#/components/schemas/Space"
           description: The space the message belongs to.
@@ -777,7 +783,7 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/FormAction"
-          description: A form action will be trigger by this onclick if specified.
+          description: A form action will be triggered by this onclick if specified.
         openLink:
           $ref: "#/components/schemas/OpenLink"
           description: This onclick triggers an open link action if specified.
@@ -800,6 +806,38 @@ components:
           items:
             $ref: "#/components/schemas/WidgetMarkup"
           type: array
+      type: object
+    SlashCommand:
+      description: A Slash Command in Hangouts Chat.
+      properties:
+        commandId:
+          description: The id of the slash command invoked.
+          format: int64
+          type: string
+      type: object
+    SlashCommandMetadata:
+      description: Annotation metadata for slash commands (/).
+      properties:
+        bot:
+          $ref: "#/components/schemas/User"
+          description: The bot whose command was invoked.
+        commandId:
+          description: The command id of the invoked slash command.
+          format: int64
+          type: string
+        commandName:
+          description: The name of the invoked slash command.
+          type: string
+        triggersDialog:
+          description: Indicating whether the slash command is for a dialog.
+          type: boolean
+        type:
+          description: The type of slash command.
+          enum:
+            - TYPE_UNSPECIFIED
+            - ADD
+            - INVOKE
+          type: string
       type: object
     Space:
       description: A room or DM in Hangouts Chat.

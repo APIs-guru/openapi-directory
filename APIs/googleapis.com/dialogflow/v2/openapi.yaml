@@ -4474,12 +4474,40 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowV3alpha1ExportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV3alpha1ExportTestCasesResponse:
+      description: The response message for TestCases.ExportTestCases.
+      properties:
+        content:
+          description: Uncompressed raw byte content for test cases.
+          format: byte
+          type: string
+        gcsUri:
+          description: The URI to a file containing the exported test cases. This field is populated only if `gcs_uri` is specified in ExportTestCasesRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowV3alpha1ImportAgentResponse:
       description: The response message for Agents.ImportAgent.
       properties:
         agent:
           description: 'The unique identifier of the new agent. Format: `projects//locations//agents/`.'
           type: string
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ImportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportTestCasesResponse:
+      description: The response message for TestCases.ImportTestCases.
+      properties:
+        names:
+          description: 'The unique identifiers of the new test cases. Format: `projects//locations//agents//testCases/`.'
+          items:
+            type: string
+          type: array
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.

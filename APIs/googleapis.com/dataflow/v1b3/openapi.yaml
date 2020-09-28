@@ -3868,7 +3868,7 @@ components:
         additionalUserLabels:
           additionalProperties:
             type: string
-          description: Additional user labels to be specified for the job. Keys and values must follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page.
+          description: 'Additional user labels to be specified for the job. Keys and values must follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page. An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1kg", "count": "3" }.'
           type: object
         enableStreamingEngine:
           description: Whether to enable Streaming Engine for the job.
@@ -3901,7 +3901,7 @@ components:
           description: The email address of the service account to run the job as.
           type: string
         subnetwork:
-          description: Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "regions/REGION/subnetworks/SUBNETWORK".
+          description: Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form "https://www.googleapis.com/compute/v1/projects/HOST_PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK" or "regions/REGION/subnetworks/SUBNETWORK". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
           type: string
         tempLocation:
           description: The Cloud Storage path to use for temporary files. Must be a valid Cloud Storage URL, beginning with `gs://`.
@@ -5037,7 +5037,7 @@ components:
         additionalUserLabels:
           additionalProperties:
             type: string
-          description: Additional user labels to be specified for the job. Keys and values should follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page.
+          description: 'Additional user labels to be specified for the job. Keys and values should follow the restrictions specified in the [labeling restrictions](https://cloud.google.com/compute/docs/labeling-resources#restrictions) page. An object containing a list of "key": value pairs. Example: { "name": "wrench", "mass": "1kg", "count": "3" }.'
           type: object
         bypassTempDirValidation:
           description: Whether to bypass the safety checks for the job's temporary directory. Use with caution.
@@ -5053,7 +5053,7 @@ components:
             - WORKER_IP_PRIVATE
           type: string
         kmsKeyName:
-          description: "Optional. Name for the Cloud KMS key for the job. Key format is: projects//locations//keyRings//cryptoKeys/"
+          description: "Name for the Cloud KMS key for the job. Key format is: projects//locations//keyRings//cryptoKeys/"
           type: string
         machineType:
           description: The machine type to use for the job. Defaults to the value from the template if not specified.
@@ -5073,7 +5073,7 @@ components:
           description: The email address of the service account to run the job as.
           type: string
         subnetwork:
-          description: Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "regions/REGION/subnetworks/SUBNETWORK".
+          description: Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form "https://www.googleapis.com/compute/v1/projects/HOST_PROJECT_ID/regions/REGION/subnetworks/SUBNETWORK" or "regions/REGION/subnetworks/SUBNETWORK". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
           type: string
         tempLocation:
           description: The Cloud Storage path to use for temporary files. Must be a valid Cloud Storage URL, beginning with `gs://`.

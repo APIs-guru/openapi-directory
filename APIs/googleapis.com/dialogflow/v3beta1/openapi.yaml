@@ -1691,6 +1691,13 @@ components:
           $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment'
           description: The fulfillment to call when the event occurs. Handling webhook errors with a fulfillment enabled with webhook could cause infinite loop. It is invalid to specify such fulfillment for a handler handling webhooks.
       type: object
+    GoogleCloudDialogflowCxV3beta1EventInput:
+      description: Represents the event to trigger.
+      properties:
+        event:
+          description: Name of the event.
+          type: string
+      type: object
     GoogleCloudDialogflowCxV3beta1ExportAgentRequest:
       description: The request message for Agents.ExportAgent.
       properties:
@@ -2321,6 +2328,9 @@ components:
         audio:
           $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1AudioInput'
           description: The natural language speech audio to be processed.
+        event:
+          $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1EventInput'
+          description: The event to be triggered.
         intent:
           $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentInput'
           description: The intent to be triggered.
@@ -2334,6 +2344,9 @@ components:
     GoogleCloudDialogflowCxV3beta1QueryParameters:
       description: Represents the parameters of a conversational query.
       properties:
+        analyzeQueryTextSentiment:
+          description: 'Configures whether sentiment analysis should be performed. If not provided, sentiment analysis is not performed.'
+          type: boolean
         geoLocation:
           $ref: '#/components/schemas/GoogleTypeLatLng'
           description: The geo location of this conversational query.
@@ -2390,6 +2403,9 @@ components:
           items:
             $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessage'
           type: array
+        sentimentAnalysisResult:
+          $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1SentimentAnalysisResult'
+          description: 'The sentiment analyss result, which depends on `analyze_query_text_sentiment`, specified in the request.'
         text:
           description: 'If natural language text was provided as input, this field will contain a copy of the text.'
           type: string
@@ -2541,6 +2557,18 @@ components:
         agentUri:
           description: 'The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to restore agent from. The format of this URI must be `gs:///`.'
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1SentimentAnalysisResult:
+      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral.'
+      properties:
+        magnitude:
+          description: 'A non-negative number in the [0, +inf) range, which represents the absolute magnitude of sentiment, regardless of score (positive or negative).'
+          format: float
+          type: number
+        score:
+          description: Sentiment score between -1.0 (negative sentiment) and 1.0 (positive sentiment).
+          format: float
+          type: number
       type: object
     GoogleCloudDialogflowCxV3beta1SessionEntityType:
       description: 'Session entity types are referred to as **User** entity types and are entities that are built for an individual user such as favorites, preferences, playlists, and so on. You can redefine a session entity type at the session level to extend or replace a custom entity type at the user session level (we refer to the entity types defined at the agent level as "custom entity types"). Note: session entity types apply to all queries, regardless of the language. For more information about entity types, see the [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/entities-overview).'
@@ -4957,12 +4985,40 @@ components:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
       type: object
+    GoogleCloudDialogflowV3alpha1ExportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV3alpha1ExportTestCasesResponse:
+      description: The response message for TestCases.ExportTestCases.
+      properties:
+        content:
+          description: Uncompressed raw byte content for test cases.
+          format: byte
+          type: string
+        gcsUri:
+          description: The URI to a file containing the exported test cases. This field is populated only if `gcs_uri` is specified in ExportTestCasesRequest.
+          type: string
+      type: object
     GoogleCloudDialogflowV3alpha1ImportAgentResponse:
       description: The response message for Agents.ImportAgent.
       properties:
         agent:
           description: 'The unique identifier of the new agent. Format: `projects//locations//agents/`.'
           type: string
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ImportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportTestCasesResponse:
+      description: The response message for TestCases.ImportTestCases.
+      properties:
+        names:
+          description: 'The unique identifiers of the new test cases. Format: `projects//locations//agents//testCases/`.'
+          items:
+            type: string
+          type: array
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.

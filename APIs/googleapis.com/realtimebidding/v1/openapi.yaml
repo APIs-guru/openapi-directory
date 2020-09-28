@@ -80,7 +80,7 @@ paths:
       description: Updates a creative.
       operationId: realtimebidding.buyers.creatives.patch
       parameters:
-        - description: Name of the creative to update. See creative.name.
+        - description: Name of the creative. Follows the pattern `buyers/{buyer}/creatives/{creative}`, where `{buyer}` represents the account ID of the buyer who owns the creative, and `{creative}` is the buyer-specific creative ID that references this creative in the bid response.
           in: path
           name: name
           required: true
@@ -696,8 +696,7 @@ components:
             type: string
           type: array
         name:
-          description: Output only. Name of the creative. Follows the pattern `buyers/{buyer}/creatives/{creative}`, where `{buyer}` represents the account ID of the buyer who owns the creative, and `{creative}` is the buyer-specific creative ID that references this creative in the bid response.
-          readOnly: true
+          description: Name of the creative. Follows the pattern `buyers/{buyer}/creatives/{creative}`, where `{buyer}` represents the account ID of the buyer who owns the creative, and `{creative}` is the buyer-specific creative ID that references this creative in the bid response.
           type: string
         native:
           $ref: "#/components/schemas/NativeContent"

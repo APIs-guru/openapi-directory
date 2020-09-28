@@ -35,6 +35,48 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{attestor}:validateAttestationOccurrence":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Returns whether the given Attestation for the given image URI was signed by the given Attestor
+      operationId: binaryauthorization.projects.attestors.validateAttestationOccurrence
+      parameters:
+        - description: Required. The resource name of the Attestor of the occurrence, in the format `projects/*/attestors/*`.
+          in: path
+          name: attestor
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateAttestationOccurrenceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateAttestationOccurrenceResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}":
     delete:
       description: Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
@@ -439,6 +481,24 @@ components:
           description: An image name pattern to whitelist, in the form `registry/path/to/image`. This supports a trailing `*` as a wildcard, but this is allowed only in text after the `registry/` part.
           type: string
       type: object
+    AttestationOccurrence:
+      description: Occurrence that represents a single "attestation". The authenticity of an attestation can be verified using the attached signature. If the verifier trusts the public key of the signer, then verifying the signature is sufficient to establish trust. In this circumstance, the authority to which this attestation is attached is primarily useful for lookup (how to find this attestation if you already know the authority and artifact to be verified) and intent (for which authority this attestation was intended to sign.
+      properties:
+        jwts:
+          description: One or more JWTs encoding a self-contained attestation. Each JWT encodes the payload that it verifies within the JWT itself. Verifier implementation SHOULD ignore the `serialized_payload` field when verifying these JWTs. If only JWTs are present on this AttestationOccurrence, then the `serialized_payload` SHOULD be left empty. Each JWT SHOULD encode a claim specific to the `resource_uri` of this Occurrence, but this is not validated by Grafeas metadata API implementations. The JWT itself is opaque to Grafeas.
+          items:
+            $ref: "#/components/schemas/Jwt"
+          type: array
+        serializedPayload:
+          description: Required. The serialized payload that is verified by one or more `signatures`.
+          format: byte
+          type: string
+        signatures:
+          description: One or more signatures over `serialized_payload`. Verifier implementations should consider this attestation message verified if at least one `signature` verifies `serialized_payload`. See `Signature` in common.proto for more details on signature structure and verification.
+          items:
+            $ref: "#/components/schemas/Signature"
+          type: array
+      type: object
     Attestor:
       description: An attestor that attests to container image artifacts. An existing attestor cannot be modified except where indicated.
       properties:
@@ -528,6 +588,12 @@ components:
           format: int32
           type: integer
       type: object
+    Jwt:
+      properties:
+        compactJwt:
+          description: "The compact encoding of a JWS, which is always three base64 encoded strings joined by periods. For details, see: https://tools.ietf.org/html/rfc7515.html#section-3.1"
+          type: string
+      type: object
     ListAttestorsResponse:
       description: Response message for BinauthzManagementService.ListAttestors.
       properties:
@@ -609,6 +675,17 @@ components:
           $ref: "#/components/schemas/IamPolicy"
           description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
       type: object
+    Signature:
+      description: 'Verifiers (e.g. Kritis implementations) MUST verify signatures with respect to the trust anchors defined in policy (e.g. a Kritis policy). Typically this means that the verifier has been configured with a map from `public_key_id` to public key material (and any required parameters, e.g. signing algorithm). In particular, verification implementations MUST NOT treat the signature `public_key_id` as anything more than a key lookup hint. The `public_key_id` DOES NOT validate or authenticate a public key; it only provides a mechanism for quickly selecting a public key ALREADY CONFIGURED on the verifier through a trusted channel. Verification implementations MUST reject signatures in any of the following circumstances: * The `public_key_id` is not recognized by the verifier. * The public key that `public_key_id` refers to does not verify the signature with respect to the payload. The `signature` contents SHOULD NOT be "attached" (where the payload is included with the serialized `signature` bytes). Verifiers MUST ignore any "attached" payload and only verify signatures with respect to explicitly provided payload (e.g. a `payload` field on the proto message that holds this Signature, or the canonical serialization of the proto message that holds this signature).'
+      properties:
+        publicKeyId:
+          description: 'The identifier for the public key that verifies this signature. * The `public_key_id` is required. * The `public_key_id` SHOULD be an RFC3986 conformant URI. * When possible, the `public_key_id` SHOULD be an immutable reference, such as a cryptographic digest. Examples of valid `public_key_id`s: OpenPGP V4 public key fingerprint: * "openpgp4fpr:74FAF3B861BDA0870C7B6DEF607E48D2A663AEEA" See https://www.iana.org/assignments/uri-schemes/prov/openpgp4fpr for more details on this scheme. RFC6920 digest-named SubjectPublicKeyInfo (digest of the DER serialization): * "ni:///sha-256;cD9o9Cq6LG3jD0iKXqEi_vdjJGecm_iXkbqVoScViaU" * "nih:///sha-256;703f68f42aba2c6de30f488a5ea122fef76324679c9bf89791ba95a1271589a5"'
+          type: string
+        signature:
+          description: The content of the signature, an opaque bytestring. The payload that this signature verifies MUST be unambiguously provided with the Signature during verification. A wrapper message might provide the payload explicitly. Alternatively, a message might have a canonical serialization that can always be unambiguously computed to derive the payload.
+          format: byte
+          type: string
+      type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
@@ -642,6 +719,33 @@ components:
           items:
             $ref: "#/components/schemas/AttestorPublicKey"
           type: array
+      type: object
+    ValidateAttestationOccurrenceRequest:
+      description: Request message for ValidationHelperV1.ValidateAttestationOccurrence.
+      properties:
+        attestation:
+          $ref: "#/components/schemas/AttestationOccurrence"
+          description: Required. An AttestationOccurrence to be checked that it can be verified by the Attestor. It does not have to be an existing entity in Container Analysis. It must otherwise be a valid AttestationOccurrence.
+        occurrenceNote:
+          description: Required. The resource name of the Note to which the containing Occurrence is associated.
+          type: string
+        occurrenceResourceUri:
+          description: Required. The URI of the artifact (e.g. container image) that is the subject of the containing Occurrence.
+          type: string
+      type: object
+    ValidateAttestationOccurrenceResponse:
+      description: Response message for ValidationHelperV1.ValidateAttestationOccurrence.
+      properties:
+        denialReason:
+          description: The reason for denial if the Attestation couldn't be validated.
+          type: string
+        result:
+          description: The result of the Attestation validation.
+          enum:
+            - RESULT_UNSPECIFIED
+            - VERIFIED
+            - ATTESTATION_NOT_VERIFIABLE
+          type: string
       type: object
   securitySchemes:
     Oauth2:

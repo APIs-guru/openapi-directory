@@ -672,52 +672,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/services/{serviceName}:disable":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Disables a service for a project, so it can no longer be be used for the project. It prevents accidental usage that may cause unexpected billing charges or security leaks. Operation
-      operationId: servicemanagement.services.disable
-      parameters:
-        - description: Required. Name of the service to disable. Specifying an unknown service name will cause the request to fail.
-          in: path
-          name: serviceName
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DisableServiceRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
   "/v1/services/{serviceName}:enable":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1503,13 +1457,6 @@ components:
           type: string
         message:
           description: Message describing the error or warning.
-          type: string
-      type: object
-    DisableServiceRequest:
-      description: Request message for DisableService method.
-      properties:
-        consumerId:
-          description: 'Required. The identity of consumer resource which service disablement will be applied to. The Google Service Management implementation accepts the following forms: - "project:" Note: this is made compatible with google.api.servicecontrol.v1.Operation.consumer_id.'
           type: string
       type: object
     DisableServiceResponse:

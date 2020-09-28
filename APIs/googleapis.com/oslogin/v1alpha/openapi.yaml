@@ -40,7 +40,7 @@ paths:
       description: Deletes an SSH public key.
       operationId: oslogin.users.sshPublicKeys.delete
       parameters:
-        - description: The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+        - description: Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
           name: name
           required: true
@@ -77,7 +77,7 @@ paths:
       description: Retrieves an SSH public key.
       operationId: oslogin.users.sshPublicKeys.get
       parameters:
-        - description: The fingerprint of the public key to retrieve. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+        - description: Required. The fingerprint of the public key to retrieve. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
           name: name
           required: true
@@ -117,7 +117,7 @@ paths:
       description: Updates an SSH public key and returns the profile information. This method supports patch semantics.
       operationId: oslogin.users.sshPublicKeys.patch
       parameters:
-        - description: The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
+        - description: Required. The fingerprint of the public key to update. Public keys are identified by their SHA-256 fingerprint. The fingerprint of the public key is in format `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
           name: name
           required: true
@@ -156,7 +156,7 @@ paths:
       description: Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.
       operationId: oslogin.users.getLoginProfile
       parameters:
-        - description: The unique ID for the user in format `users/{user}`.
+        - description: Required. The unique ID for the user in format `users/{user}`.
           in: path
           name: name
           required: true
@@ -351,7 +351,7 @@ components:
       properties: {}
       type: object
     ImportSshPublicKeyResponse:
-      description: A response message from importing an SSH public key.
+      description: A response message for importing an SSH public key.
       properties:
         details:
           description: Detailed information about import results.
@@ -364,7 +364,7 @@ components:
       description: The user profile information used for logging in to a virtual machine on Google Compute Engine.
       properties:
         name:
-          description: A unique user ID.
+          description: Required. A unique user ID.
           type: string
         posixAccounts:
           description: The list of POSIX accounts associated with the user.

@@ -791,6 +791,106 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
+  "/v1beta1/{parent}/memberships:checkTransitiveMembership":
+    get:
+      description: Check a potential member for membership in a group.
+      operationId: cloudidentity.groups.memberships.checkTransitiveMembership
+      parameters:
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group_id}`, where `group_id` is the unique id assigned to the Group to which the Membership belongs to."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. A CEL expression that MUST include member specification. This is a `required` field. Example query: member_key_id == ‘member_key_id_value’ [ && member_key_namespace == ‘member_key_namespace_value’ ]"
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckTransitiveMembershipResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - groups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/memberships:getMembershipGraph":
+    get:
+      description: Get a membership graph of a member or member/group.
+      operationId: cloudidentity.groups.memberships.getMembershipGraph
+      parameters:
+        - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group to which the Membership belongs to. group_id can be a wildcard collection id "-". When a group_id is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Required. A CEL expression that MUST include member specification AND label(s). Example query: member_key_id == ‘member_key_id_value’ [ && member_key_namespace == ‘member_key_namespace_value’ ] && in labels"
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - groups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships:lookup":
     get:
       description: Looks up the [resource name](https://cloud.google.com/apis/design/resource_names) of a `Membership` by its `EntityKey`.
@@ -818,6 +918,121 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LookupMembershipNameResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - groups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/memberships:searchTransitiveGroups":
+    get:
+      description: Search transitive groups of a member.
+      operationId: cloudidentity.groups.memberships.searchTransitiveGroups
+      parameters:
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is always '-' as this API will search across all groups for a given member."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The default page size is 200 (max 1000).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "Required. A CEL expression that MUST include member specification AND label(s). This is a `required` field. Users can search on label attributes of groups. CONTAINS match ('in') is supported on labels. Example query: member_key_id == ‘member_key_id_value’ [ && member_key_namespace == ‘member_key_namespace_value’ ] && in labels"
+          in: query
+          name: query
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTransitiveGroupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - groups
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/memberships:searchTransitiveMemberships":
+    get:
+      description: Search transitive memberships of a group.
+      operationId: cloudidentity.groups.memberships.searchTransitiveMemberships
+      parameters:
+        - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The default page size is 200 (max 1000).
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous list request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTransitiveMembershipsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1060,6 +1275,13 @@ components:
         deviceUser:
           $ref: "#/components/schemas/DeviceUser"
           description: Resultant DeviceUser object for the action.
+      type: object
+    CheckTransitiveMembershipResponse:
+      description: The response message for MembershipsService.CheckTransitiveMembership.
+      properties:
+        hasMembership:
+          description: Response does not include the possible roles of a member since the behavior of this rpc is not all-or-nothing unlike the other rpcs. So, it may not be possible to list all the roles definitively, due to possible lack of authorization in some of the paths.
+          type: boolean
       type: object
     ClientState:
       description: Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
@@ -1831,6 +2053,37 @@ components:
           readOnly: true
           type: string
       type: object
+    GroupRelation:
+      description: Message representing a transitive group of a user or a group.
+      properties:
+        displayName:
+          description: Display name for this group.
+          type: string
+        group:
+          description: Resource name for this group.
+          type: string
+        groupKey:
+          $ref: "#/components/schemas/EntityKey"
+          description: Entity key has an id and a namespace. In case of discussion forums, the id will be an email address without a namespace.
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels for Group resource.
+          type: object
+        relationType:
+          description: The relation between the member and the transitive group.
+          enum:
+            - RELATION_TYPE_UNSPECIFIED
+            - DIRECT
+            - INDIRECT
+            - DIRECT_AND_INDIRECT
+          type: string
+        roles:
+          description: Membership roles of the member for the group.
+          items:
+            $ref: "#/components/schemas/TransitiveMembershipRole"
+          type: array
+      type: object
     ListClientStatesResponse:
       description: Response message that is returned in LRO result of ListClientStates Operation.
       properties:
@@ -1920,6 +2173,31 @@ components:
         nextPageToken:
           description: Token to retrieve the next page of results. Empty if there are no more results.
           type: string
+      type: object
+    MemberRelation:
+      description: Message representing a transitive membership of a group.
+      properties:
+        member:
+          description: Resource name for this member if member is a GROUP, otherwise it is empty.
+          type: string
+        preferredMemberKey:
+          description: Entity key has an id and a namespace. In case of discussion forums, the id will be an email address without a namespace.
+          items:
+            $ref: "#/components/schemas/EntityKey"
+          type: array
+        relationType:
+          description: The relation between the group and the transitive member.
+          enum:
+            - RELATION_TYPE_UNSPECIFIED
+            - DIRECT
+            - INDIRECT
+            - DIRECT_AND_INDIRECT
+          type: string
+        roles:
+          description: The membership role details (i.e name of role and expiry time).
+          items:
+            $ref: "#/components/schemas/TransitiveMembershipRole"
+          type: array
       type: object
     Membership:
       description: A membership within the Cloud Identity Groups API. A `Membership` defines a relationship between a `Group` and an entity belonging to that `Group`, referred to as a "member".
@@ -2043,6 +2321,30 @@ components:
           description: A continuation token to retrieve the next page of results, or empty if there are no more results available.
           type: string
       type: object
+    SearchTransitiveGroupsResponse:
+      description: The response message for MembershipsService.SearchTransitiveGroups.
+      properties:
+        memberships:
+          description: List of transitive groups satisfying the query.
+          items:
+            $ref: "#/components/schemas/GroupRelation"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results available for listing.
+          type: string
+      type: object
+    SearchTransitiveMembershipsResponse:
+      description: The response message for MembershipsService.SearchTransitiveMemberships.
+      properties:
+        memberships:
+          description: List of transitive members satisfying the query.
+          items:
+            $ref: "#/components/schemas/MemberRelation"
+          type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results.
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2059,6 +2361,13 @@ components:
           type: array
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+    TransitiveMembershipRole:
+      description: Message representing the role of a TransitiveMembership.
+      properties:
+        role:
+          description: 'TransitiveMembershipRole in string format. Currently supported TransitiveMembershipRoles: `"MEMBER"`, `"OWNER"`, and `"MANAGER"`.'
           type: string
       type: object
     UpdateMembershipRolesParams:

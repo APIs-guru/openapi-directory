@@ -1627,11 +1627,6 @@ components:
           items:
             type: string
           type: array
-        updateRolesParams:
-          description: The `MembershipRole`s to be updated. Updating roles in the same request as adding or removing roles is not supported. Must not be set if either `add_roles` or `remove_roles` is set.
-          items:
-            $ref: "#/components/schemas/UpdateMembershipRolesParams"
-          type: array
       type: object
     ModifyMembershipRolesResponse:
       description: The response message for MembershipsService.ModifyMembershipRoles.
@@ -1691,17 +1686,6 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
-      type: object
-    UpdateMembershipRolesParams:
-      description: The details of an update to a `MembershipRole`.
-      properties:
-        fieldMask:
-          description: The fully-qualified names of fields to update. May only contain the field `expiry_detail`.
-          format: google-fieldmask
-          type: string
-        membershipRole:
-          $ref: "#/components/schemas/MembershipRole"
-          description: The `MembershipRole`s to be updated. Only `MEMBER` `MembershipRole` can currently be updated.
       type: object
   securitySchemes:
     Oauth2:

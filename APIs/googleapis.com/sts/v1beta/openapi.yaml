@@ -165,7 +165,7 @@ components:
       description: Response message for ExchangeToken.
       properties:
         access_token:
-          description: 'An OAuth 2.0 security token, issued by Google, in response to the token exchange request.'
+          description: 'An OAuth 2.0 security token, issued by Google, in response to the token exchange request. Tokens can vary in size (mainly depending on the size of mapped claims), currently up to the 12288 bytes (12 KB) size limit. Google reserves the right to change token size, including increasing these limits. Your application must support variable token sizes accordingly.'
           type: string
         expires_in:
           description: 'The expiration time of `access_token`, in seconds, from the time of issuance. This field is absent when the `subject_token` in the request is a Google-issued, short-lived access token. In this case, the expiration time of the `access_token` is the same as the `subject_token`.'
