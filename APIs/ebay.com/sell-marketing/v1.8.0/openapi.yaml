@@ -110,7 +110,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -620,7 +620,7 @@ paths:
                 description: You have exceeded the maximum number of listing IDs. Only {maxSupportedNumber} listings are supported per call.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -735,7 +735,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35075":
                 category: BUSINESS
@@ -805,7 +805,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -818,7 +818,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35077":
                 category: BUSINESS
@@ -829,7 +829,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -889,7 +889,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -961,7 +961,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -986,7 +986,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35075":
                 category: BUSINESS
@@ -1093,7 +1093,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35071":
                 category: BUSINESS
@@ -1199,7 +1199,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35052":
@@ -1247,7 +1247,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1326,7 +1326,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35061":
@@ -1339,7 +1339,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35071":
                 category: BUSINESS
@@ -1458,7 +1458,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35071":
                 category: BUSINESS
@@ -1473,7 +1473,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1552,7 +1552,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -1565,7 +1565,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35071":
                 category: BUSINESS
@@ -1671,7 +1671,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -1696,7 +1696,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35071":
                 category: BUSINESS
@@ -1902,7 +1902,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -1915,7 +1915,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35072":
                 category: BUSINESS
@@ -1995,7 +1995,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -2008,7 +2008,7 @@ paths:
                 domain: API_MARKETING
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
               "35072":
                 category: BUSINESS
@@ -2166,7 +2166,7 @@ paths:
             errors:
               "35064":
                 category: BUSINESS
-                description: This operation is not supported for key based campaigns.
+                description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
         "500":
           description: Internal Server Error
@@ -2215,7 +2215,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -2239,7 +2239,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2284,7 +2284,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -2308,7 +2308,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2458,7 +2458,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2482,7 +2482,7 @@ paths:
                 $ref: "#/components/schemas/ReportMetadatas"
           description: Success
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2582,7 +2582,7 @@ paths:
                 description: "The 'report_task_statuses' {invalid_report_task_statuses} is invalid. Valid values are: {supportedReportTaskStatuses}."
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -3017,7 +3017,7 @@ paths:
                 description: You cannot specify a child Store Category ID when the parent Store Category ID is already specified. Please refer to the API documentation to source allowed values.
                 domain: API_MARKETING
         "409":
-          description: Conflict
+          description: Business Error
           x-response-codes:
             errors:
               "38248":
@@ -3685,7 +3685,7 @@ paths:
                 description: The 'discountBenefit' specified is not supported for this promotion Type. For help, see the documentation for this call.
                 domain: API_MARKETING
         "409":
-          description: Conflict
+          description: Business Error
           x-response-codes:
             errors:
               "38243":

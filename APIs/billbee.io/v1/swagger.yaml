@@ -2864,6 +2864,10 @@ definitions:
       LanguageCode:
         description: The two-letter language code of the customer
         type: string
+      LastModifiedAt:
+        description: Date of the last update, the order got
+        format: date-time
+        type: string
       OrderItems:
         description: The list of items purchased like shirt, pant, toys etc
         items:

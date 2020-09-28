@@ -507,6 +507,69 @@ paths:
           description: A failure response
       tags:
         - Commands
+  "/v1/commands/{id}/variables":
+    get:
+      description: Get a charge station's config variables
+      operationId: getVariables
+      parameters:
+        - description: The chargestation id
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns Cs configurations array
+      tags:
+        - Commands
+    patch:
+      description: Update config variables for a chargestation
+      operationId: patchChargeStationVariable
+      parameters:
+        - description: ID of charge station
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  type: string
+                variable:
+                  enum:
+                    - MeterValueSampleInterval
+                    - HeartbeatInterval
+                    - ConnectionTimeOut
+                    - WebSocketPingInterval
+                    - TransactionMessageRetryInterval
+                    - TransactionMessageAttempts
+                  type: string
+              type: object
+        description: Charge Station Variable to set
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                  ok:
+                    type: boolean
+                  result:
+                    type: object
+                type: object
+          description: A successful response
+        "400":
+          description: A failure response
+      tags:
+        - Commands
   /v1/configurations:
     get:
       description: Get Configurations data
@@ -1975,7 +2038,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: cd0a5148e2db7204513970ecfffe0ddb24842ec5
+x-github-sha: e7e7aae23de323870658ba0cd7087890643a8433
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

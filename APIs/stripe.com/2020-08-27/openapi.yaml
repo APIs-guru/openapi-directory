@@ -8088,7 +8088,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: "Only returns transactions of the given type. One of: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`."
+        - description: "Only returns transactions of the given type. One of: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`."
           in: query
           name: type
           required: false
@@ -8298,7 +8298,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: "Only returns transactions of the given type. One of: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`."
+        - description: "Only returns transactions of the given type. One of: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`."
           in: query
           name: type
           required: false
@@ -10795,9 +10795,7 @@ paths:
 
                     If you’d like access to the Checkout Session for the successful
 
-                    payment, read more about it in our guide on [fulfilling your payments
-
-                    with webhooks](/docs/payments/checkout/accept-a-payment#payment-success).
+                    payment, read more about it in the guide on [fulfilling orders](https://stripe.com/docs/payments/checkout/fulfill-orders).
                   maxLength: 5000
                   type: string
               required:
@@ -11582,10 +11580,10 @@ paths:
               additionalProperties: false
               properties:
                 amount:
-                  description: The integer amount in **%s** representing the total amount of the credit note.
+                  description: The integer amount in %s representing the total amount of the credit note.
                   type: integer
                 credit_amount:
-                  description: The integer amount in **%s** representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+                  description: The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
                   type: integer
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -11645,7 +11643,7 @@ paths:
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                   type: object
                 out_of_band_amount:
-                  description: The integer amount in **%s** representing the amount that is credited outside of Stripe.
+                  description: The integer amount in %s representing the amount that is credited outside of Stripe.
                   type: integer
                 reason:
                   description: Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`
@@ -11659,7 +11657,7 @@ paths:
                   description: ID of an existing refund to link this credit note to.
                   type: string
                 refund_amount:
-                  description: The integer amount in **%s** representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+                  description: The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
                   type: integer
               required:
                 - invoice
@@ -11683,14 +11681,14 @@ paths:
       description: <p>Get a preview of a credit note without creating it.</p>
       operationId: GetCreditNotesPreview
       parameters:
-        - description: The integer amount in **%s** representing the total amount of the credit note.
+        - description: The integer amount in %s representing the total amount of the credit note.
           in: query
           name: amount
           required: false
           schema:
             type: integer
           style: form
-        - description: The integer amount in **%s** representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+        - description: The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
           in: query
           name: credit_amount
           required: false
@@ -11777,7 +11775,7 @@ paths:
               type: string
             type: object
           style: deepObject
-        - description: The integer amount in **%s** representing the amount that is credited outside of Stripe.
+        - description: The integer amount in %s representing the amount that is credited outside of Stripe.
           in: query
           name: out_of_band_amount
           required: false
@@ -11803,7 +11801,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: The integer amount in **%s** representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+        - description: The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
           in: query
           name: refund_amount
           required: false
@@ -11837,14 +11835,14 @@ paths:
       description: <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
       operationId: GetCreditNotesPreviewLines
       parameters:
-        - description: The integer amount in **%s** representing the total amount of the credit note.
+        - description: The integer amount in %s representing the total amount of the credit note.
           in: query
           name: amount
           required: false
           schema:
             type: integer
           style: form
-        - description: The integer amount in **%s** representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+        - description: The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
           in: query
           name: credit_amount
           required: false
@@ -11946,7 +11944,7 @@ paths:
               type: string
             type: object
           style: deepObject
-        - description: The integer amount in **%s** representing the amount that is credited outside of Stripe.
+        - description: The integer amount in %s representing the amount that is credited outside of Stripe.
           in: query
           name: out_of_band_amount
           required: false
@@ -11972,7 +11970,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: The integer amount in **%s** representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+        - description: The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
           in: query
           name: refund_amount
           required: false
@@ -15306,11 +15304,11 @@ paths:
                   description: Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
                   type: integer
                 default_payment_method:
-                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. If not set, invoices will use the default payment method in the customer's invoice settings.
+                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_source:
-                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If not set, defaults to the customer's default source.
+                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_tax_rates:
@@ -15752,11 +15750,11 @@ paths:
                   description: Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
                   type: integer
                 default_payment_method:
-                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. If not set, invoices will use the default payment method in the customer's invoice settings.
+                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_source:
-                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If not set, defaults to the customer's default source.
+                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_tax_rates:
@@ -17798,7 +17796,7 @@ paths:
               additionalProperties: false
               properties:
                 amount:
-                  description: The integer amount in **%s** of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
+                  description: The integer amount in %s of the charge to be applied to the upcoming invoice. Passing in a negative `amount` will reduce the `amount_due` on the invoice.
                   type: integer
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -17900,10 +17898,10 @@ paths:
                     type: string
                   type: array
                 unit_amount:
-                  description: The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
+                  description: The integer unit amount in %s of the charge to be applied to the upcoming invoice. This `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative `unit_amount` will reduce the `amount_due` on the invoice.
                   type: integer
                 unit_amount_decimal:
-                  description: Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+                  description: Same as `unit_amount`, but accepts a decimal value in %s with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
                   format: decimal
                   type: string
               required:
@@ -18038,7 +18036,7 @@ paths:
               additionalProperties: false
               properties:
                 amount:
-                  description: The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
+                  description: The integer amount in %s of the charge to be applied to the upcoming invoice. If you want to apply a credit to the customer's account, pass a negative amount.
                   type: integer
                 description:
                   description: An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
@@ -18129,10 +18127,10 @@ paths:
                       type: string
                   description: The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
                 unit_amount:
-                  description: The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
+                  description: The integer unit amount in %s of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
                   type: integer
                 unit_amount_decimal:
-                  description: Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+                  description: Same as `unit_amount`, but accepts a decimal value in %s with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
                   format: decimal
                   type: string
               type: object
@@ -27484,6 +27482,10 @@ paths:
                       additionalProperties:
                         type: string
                       type: object
+                    oxxo:
+                      properties: {}
+                      title: param
+                      type: object
                     p24:
                       properties: {}
                       title: param
@@ -27522,6 +27524,7 @@ paths:
                         - fpx
                         - giropay
                         - ideal
+                        - oxxo
                         - p24
                         - sepa_debit
                         - sofort
@@ -27611,6 +27614,16 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    oxxo:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -28058,6 +28071,10 @@ paths:
                       additionalProperties:
                         type: string
                       type: object
+                    oxxo:
+                      properties: {}
+                      title: param
+                      type: object
                     p24:
                       properties: {}
                       title: param
@@ -28096,6 +28113,7 @@ paths:
                         - fpx
                         - giropay
                         - ideal
+                        - oxxo
                         - p24
                         - sepa_debit
                         - sofort
@@ -28185,6 +28203,16 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    oxxo:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -28782,6 +28810,10 @@ paths:
                       additionalProperties:
                         type: string
                       type: object
+                    oxxo:
+                      properties: {}
+                      title: param
+                      type: object
                     p24:
                       properties: {}
                       title: param
@@ -28820,6 +28852,7 @@ paths:
                         - fpx
                         - giropay
                         - ideal
+                        - oxxo
                         - p24
                         - sepa_debit
                         - sofort
@@ -28909,6 +28942,16 @@ paths:
                               type: string
                               x-stripeBypassValidation: true
                           title: payment_intent_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    oxxo:
+                      anyOf:
+                        - properties:
+                            expires_after_days:
+                              type: integer
+                          title: payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -29093,15 +29136,14 @@ paths:
               - bacs_debit
               - bancontact
               - card
-              - card_present
               - eps
               - fpx
               - giropay
               - ideal
+              - oxxo
               - p24
               - sepa_debit
               - sofort
-            maxLength: 5000
             type: string
             x-stripeBypassValidation: true
           style: form
@@ -29198,6 +29240,9 @@ paths:
                 explode: true
                 style: deepObject
               metadata:
+                explode: true
+                style: deepObject
+              oxxo:
                 explode: true
                 style: deepObject
               p24:
@@ -29398,6 +29443,11 @@ paths:
                     type: string
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                   type: object
+                oxxo:
+                  description: If this is an `oxxo` PaymentMethod, this hash contains details about the OXXO payment method.
+                  properties: {}
+                  title: param
+                  type: object
                 p24:
                   description: If this is a `p24` PaymentMethod, this hash contains details about the P24 payment method.
                   properties: {}
@@ -29445,6 +29495,7 @@ paths:
                     - fpx
                     - giropay
                     - ideal
+                    - oxxo
                     - p24
                     - sepa_debit
                     - sofort
@@ -30902,7 +30953,7 @@ paths:
                   description: A positive integer in %s (or 0 for a free price) representing how much to charge.
                   type: integer
                 unit_amount_decimal:
-                  description: Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+                  description: Same as `unit_amount`, but accepts a decimal value in %s with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
                   format: decimal
                   type: string
               required:
@@ -31119,16 +31170,6 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: Only return products of this type.
-          in: query
-          name: type
-          required: false
-          schema:
-            enum:
-              - good
-              - service
-            type: string
-          style: form
         - description: Only return products with the given url.
           in: query
           name: url
@@ -31289,12 +31330,6 @@ paths:
                     This may be up to 22 characters. The statement description may not include `<`, `>`, `\`, `"`, `'` characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped.
                      It must contain at least one letter.
                   maxLength: 22
-                  type: string
-                type:
-                  description: The type of the product. Defaults to `service` if not explicitly specified, enabling use of this product with Subscriptions and Plans. Set this parameter to `good` to use this product with Orders and SKUs. On API versions before `2018-02-05`, this field defaults to `good` for compatibility reasons.
-                  enum:
-                    - good
-                    - service
                   type: string
                 unit_label:
                   description: A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
@@ -35390,7 +35425,6 @@ paths:
                         - bucket
                         - finite
                         - infinite
-                      maxLength: 5000
                       type: string
                     value:
                       enum:
@@ -35398,7 +35432,6 @@ paths:
                         - in_stock
                         - limited
                         - out_of_stock
-                      maxLength: 5000
                       type: string
                   title: inventory_specs
                   type: object
@@ -35601,7 +35634,6 @@ paths:
                         - bucket
                         - finite
                         - infinite
-                      maxLength: 5000
                       type: string
                     value:
                       enum:
@@ -35609,7 +35641,6 @@ paths:
                         - in_stock
                         - limited
                         - out_of_stock
-                      maxLength: 5000
                       type: string
                   title: inventory_update_specs
                   type: object
@@ -37385,7 +37416,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled subscriptions.</p>
+      description: <p>Creates a new subscription schedule object. Each customer can have up to 500 active or scheduled subscriptions.</p>
       operationId: PostSubscriptionSchedules
       requestBody:
         content:
@@ -38261,7 +38292,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: "The status of the subscriptions to retrieve. One of: `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`, `unpaid`, `canceled`, or `all`. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Passing in a value of `all` will return subscriptions of all statuses."
+        - description: The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses.
           in: query
           name: status
           required: false
@@ -38327,7 +38358,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>Creates a new subscription on an existing customer. Each customer can have up to 25 active or scheduled subscriptions.</p>
+      description: <p>Creates a new subscription on an existing customer. Each customer can have up to 500 active or scheduled subscriptions.</p>
       operationId: PostSubscriptions
       requestBody:
         content:
@@ -38442,11 +38473,11 @@ paths:
                   description: Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
                   type: integer
                 default_payment_method:
-                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. If not set, invoices will use the default payment method in the customer's invoice settings.
+                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_source:
-                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If not set, defaults to the customer's default source.
+                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_tax_rates:
@@ -38869,11 +38900,11 @@ paths:
                   description: Number of days a customer has to pay invoices generated by this subscription. Valid only for subscriptions where `collection_method` is set to `send_invoice`.
                   type: integer
                 default_payment_method:
-                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. If not set, invoices will use the default payment method in the customer's invoice settings.
+                  description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_source:
-                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If not set, defaults to the customer's default source.
+                  description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
                   maxLength: 5000
                   type: string
                 default_tax_rates:
@@ -42052,8 +42083,10 @@ paths:
                       - issuing_card.updated
                       - issuing_cardholder.created
                       - issuing_cardholder.updated
+                      - issuing_dispute.closed
                       - issuing_dispute.created
                       - issuing_dispute.funds_reinstated
+                      - issuing_dispute.submitted
                       - issuing_dispute.updated
                       - issuing_transaction.created
                       - issuing_transaction.updated
@@ -42368,8 +42401,10 @@ paths:
                       - issuing_card.updated
                       - issuing_cardholder.created
                       - issuing_cardholder.updated
+                      - issuing_dispute.closed
                       - issuing_dispute.created
                       - issuing_dispute.funds_reinstated
+                      - issuing_dispute.submitted
                       - issuing_dispute.updated
                       - issuing_transaction.created
                       - issuing_transaction.updated
@@ -43543,6 +43578,11 @@ components:
           items:
             $ref: "#/components/schemas/balance_amount"
           type: array
+        instant_available:
+          description: Funds that can be paid out using Instant Payouts.
+          items:
+            $ref: "#/components/schemas/balance_amount"
+          type: array
         issuing:
           $ref: "#/components/schemas/balance_detail"
         livemode:
@@ -43568,6 +43608,7 @@ components:
       x-expandableFields:
         - available
         - connect_reserved
+        - instant_available
         - issuing
         - pending
       x-resourceId: balance
@@ -43717,7 +43758,7 @@ components:
           maxLength: 5000
           type: string
         type:
-          description: "Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction types and what they represent. If you are looking to classify transactions for accounting purposes, you might want to consider `reporting_category` instead."
+          description: "Transaction type: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction types and what they represent. If you are looking to classify transactions for accounting purposes, you might want to consider `reporting_category` instead."
           enum:
             - adjustment
             - advance
@@ -43727,6 +43768,7 @@ components:
             - application_fee_refund
             - charge
             - connect_collection_transfer
+            - contribution
             - issuing_authorization_hold
             - issuing_authorization_release
             - issuing_dispute
@@ -44037,6 +44079,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -44102,7 +44145,6 @@ components:
         - id
         - inbound_address
         - livemode
-        - metadata
         - object
         - uncaptured_funds
       title: BitcoinReceiver
@@ -44287,6 +44329,7 @@ components:
           nullable: true
           type: string
         currency:
+          description: Three-letter [ISO code for currency](https://stripe.com/docs/payouts). Only applicable on accounts (not customers or recipients). The card can be used as a transfer destination for funds in this currency.
           nullable: true
           type: string
         customer:
@@ -44343,6 +44386,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         name:
           description: Cardholder name.
@@ -44376,7 +44420,6 @@ components:
         - funding
         - id
         - last4
-        - metadata
         - object
       title: Card
       type: object
@@ -44385,6 +44428,21 @@ components:
         - customer
         - recipient
       x-resourceId: card
+    card_generated_from_payment_method_details:
+      description: ""
+      properties:
+        card_present:
+          $ref: "#/components/schemas/payment_method_details_card_present"
+        type:
+          description: The type of payment method transaction-specific details from the transaction that generated this `card` payment method. Always `card_present`.
+          maxLength: 5000
+          type: string
+      required:
+        - type
+      title: card_generated_from_payment_method_details
+      type: object
+      x-expandableFields:
+        - card_present
     card_mandate_payment_method_details:
       description: ""
       properties: {}
@@ -44404,6 +44462,9 @@ components:
       properties:
         amount:
           description: Amount intended to be collected by this payment. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+          type: integer
+        amount_captured:
+          description: Amount in %s captured (can be less than the amount attribute on the charge if a partial capture was made).
           type: integer
         amount_refunded:
           description: Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund was issued).
@@ -44677,6 +44738,7 @@ components:
           type: string
       required:
         - amount
+        - amount_captured
         - amount_refunded
         - billing_details
         - captured
@@ -45292,6 +45354,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         name:
           description: Name of the coupon displayed to customers on for instance invoices or receipts.
@@ -45323,7 +45386,6 @@ components:
         - duration
         - id
         - livemode
-        - metadata
         - object
         - times_redeemed
         - valid
@@ -45354,7 +45416,7 @@ components:
         Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
       properties:
         amount:
-          description: The integer amount in **%s** representing the total amount of the credit note, including tax.
+          description: The integer amount in %s representing the total amount of the credit note, including tax.
           type: integer
         created:
           description: Time at which the object was created. Measured in seconds since the Unix epoch.
@@ -45385,7 +45447,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/customer_balance_transaction"
         discount_amount:
-          description: The integer amount in **%s** representing the total amount of discount that was credited.
+          description: The integer amount in %s representing the total amount of discount that was credited.
           type: integer
         discount_amounts:
           description: The aggregate amounts calculated per discount for all line items.
@@ -45447,6 +45509,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         number:
           description: A unique number that identifies this particular credit note and appears on the PDF of the credit note and its associated invoice.
@@ -45491,7 +45554,7 @@ components:
             - void
           type: string
         subtotal:
-          description: The integer amount in **%s** representing the amount of the credit note, excluding tax and invoice level discounts.
+          description: The integer amount in %s representing the amount of the credit note, excluding tax and invoice level discounts.
           type: integer
         tax_amounts:
           description: The aggregate amounts calculated per tax rate for all line items.
@@ -45499,7 +45562,7 @@ components:
             $ref: "#/components/schemas/credit_note_tax_amount"
           type: array
         total:
-          description: The integer amount in **%s** representing the total amount of the credit note, including tax and all discount.
+          description: The integer amount in %s representing the total amount of the credit note, including tax and all discount.
           type: integer
         type:
           description: Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note means it was issued when the invoice was open. A `post_payment` credit note means it was issued when the invoice was paid.
@@ -45522,7 +45585,6 @@ components:
         - invoice
         - lines
         - livemode
-        - metadata
         - number
         - object
         - pdf
@@ -45546,7 +45608,7 @@ components:
       description: ""
       properties:
         amount:
-          description: The integer amount in **%s** representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.
+          description: The integer amount in %s representing the gross amount being credited for this line item, excluding (exclusive) tax and discounts.
           type: integer
         description:
           description: Description of the item being credited.
@@ -45554,7 +45616,7 @@ components:
           nullable: true
           type: string
         discount_amount:
-          description: The integer amount in **%s** representing the discount being credited for this line item.
+          description: The integer amount in %s representing the discount being credited for this line item.
           type: integer
         discount_amounts:
           description: The amount of discount calculated per discount for this line item
@@ -46230,6 +46292,11 @@ components:
     deleted_discount:
       description: ""
       properties:
+        checkout_session:
+          description: The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
+          maxLength: 5000
+          nullable: true
+          type: string
         coupon:
           $ref: "#/components/schemas/coupon"
         customer:
@@ -46722,6 +46789,11 @@ components:
 
         Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
       properties:
+        checkout_session:
+          description: The Checkout session that this coupon is applied to, if it is applied to a particular session in payment mode. Will not be present for subscription mode.
+          maxLength: 5000
+          nullable: true
+          type: string
         coupon:
           $ref: "#/components/schemas/coupon"
         customer:
@@ -47431,6 +47503,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -47443,7 +47516,6 @@ components:
         - currency
         - fee
         - id
-        - metadata
         - object
       title: FeeRefund
       type: object
@@ -48388,6 +48460,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -48428,7 +48501,7 @@ components:
           nullable: true
           type: array
         unit_amount:
-          description: Unit Amount (in the `currency` specified) of the invoice item.
+          description: Unit amount (in the `currency` specified) of the invoice item.
           nullable: true
           type: integer
         unit_amount_decimal:
@@ -48444,7 +48517,6 @@ components:
         - discountable
         - id
         - livemode
-        - metadata
         - object
         - period
         - proration
@@ -52831,6 +52903,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -52908,7 +52981,6 @@ components:
         - id
         - items
         - livemode
-        - metadata
         - object
         - status
       title: Order
@@ -53401,6 +53473,8 @@ components:
       properties:
         alipay_handle_redirect:
           $ref: "#/components/schemas/payment_intent_next_action_alipay_handle_redirect"
+        oxxo_display_details:
+          $ref: "#/components/schemas/payment_intent_next_action_display_oxxo_details"
         redirect_to_url:
           $ref: "#/components/schemas/payment_intent_next_action_redirect_to_url"
         type:
@@ -53416,6 +53490,7 @@ components:
       type: object
       x-expandableFields:
         - alipay_handle_redirect
+        - oxxo_display_details
         - redirect_to_url
     payment_intent_next_action_alipay_handle_redirect:
       description: ""
@@ -53443,6 +53518,27 @@ components:
       title: PaymentIntentNextActionAlipayHandleRedirect
       type: object
       x-expandableFields: []
+    payment_intent_next_action_display_oxxo_details:
+      description: ""
+      properties:
+        expires_after:
+          description: The timestamp after which the OXXO voucher expires.
+          format: unix-time
+          nullable: true
+          type: integer
+        hosted_voucher_url:
+          description: The URL for the hosted OXXO voucher page, which allows customers to view and print an OXXO voucher.
+          maxLength: 5000
+          nullable: true
+          type: string
+        number:
+          description: OXXO reference number.
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: PaymentIntentNextActionDisplayOxxoDetails
+      type: object
+      x-expandableFields: []
     payment_intent_next_action_redirect_to_url:
       description: ""
       properties:
@@ -53468,6 +53564,8 @@ components:
           $ref: "#/components/schemas/payment_method_options_bancontact"
         card:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
+        oxxo:
+          $ref: "#/components/schemas/payment_method_options_oxxo"
         sofort:
           $ref: "#/components/schemas/payment_method_options_sofort"
       title: PaymentIntentPaymentMethodOptions
@@ -53476,6 +53574,7 @@ components:
         - alipay
         - bancontact
         - card
+        - oxxo
         - sofort
     payment_intent_payment_method_options_card:
       description: ""
@@ -53577,12 +53676,15 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
           enum:
             - payment_method
           type: string
+        oxxo:
+          $ref: "#/components/schemas/payment_method_oxxo"
         p24:
           $ref: "#/components/schemas/payment_method_p24"
         sepa_debit:
@@ -53601,6 +53703,7 @@ components:
             - fpx
             - giropay
             - ideal
+            - oxxo
             - p24
             - sepa_debit
             - sofort
@@ -53629,6 +53732,7 @@ components:
         - giropay
         - ideal
         - interac_present
+        - oxxo
         - p24
         - sepa_debit
         - sofort
@@ -53782,7 +53886,7 @@ components:
           type: string
         payment_method_details:
           anyOf:
-            - $ref: "#/components/schemas/payment_method_details"
+            - $ref: "#/components/schemas/card_generated_from_payment_method_details"
           description: Transaction-specific details of the payment method used in the payment.
           nullable: true
       title: payment_method_card_generated_card
@@ -53949,6 +54053,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_klarna"
         multibanco:
           $ref: "#/components/schemas/payment_method_details_multibanco"
+        oxxo:
+          $ref: "#/components/schemas/payment_method_details_oxxo"
         p24:
           $ref: "#/components/schemas/payment_method_details_p24"
         sepa_debit:
@@ -53988,6 +54094,7 @@ components:
         - interac_present
         - klarna
         - multibanco
+        - oxxo
         - p24
         - sepa_debit
         - sofort
@@ -54827,6 +54934,17 @@ components:
       title: payment_method_details_multibanco
       type: object
       x-expandableFields: []
+    payment_method_details_oxxo:
+      description: ""
+      properties:
+        number:
+          description: OXXO reference number
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_details_oxxo
+      type: object
+      x-expandableFields: []
     payment_method_details_p24:
       description: ""
       properties:
@@ -55086,6 +55204,17 @@ components:
       x-expandableFields:
         - available_plans
         - plan
+    payment_method_options_oxxo:
+      description: ""
+      properties:
+        expires_after_days:
+          description: The number of calendar days before an OXXO invoice expires. For example, if you create an OXXO invoice on Monday and you set expires_after_days to 2, the OXXO invoice will expire on Wednesday at 23:59 America/Mexico_City time.
+          type: integer
+      required:
+        - expires_after_days
+      title: payment_method_options_oxxo
+      type: object
+      x-expandableFields: []
     payment_method_options_sofort:
       description: ""
       properties:
@@ -55102,6 +55231,12 @@ components:
           nullable: true
           type: string
       title: payment_method_options_sofort
+      type: object
+      x-expandableFields: []
+    payment_method_oxxo:
+      description: ""
+      properties: {}
+      title: payment_method_oxxo
       type: object
       x-expandableFields: []
     payment_method_p24:
@@ -55552,6 +55687,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         method:
           description: The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
@@ -55589,7 +55725,6 @@ components:
         - currency
         - id
         - livemode
-        - metadata
         - method
         - object
         - source_type
@@ -55626,6 +55761,7 @@ components:
         Related guide: [Handling Identity Verification with the API](https://stripe.com/docs/connect/identity-verification-api#person-information).
       properties:
         account:
+          description: The account the person is associated with.
           maxLength: 5000
           type: string
         address:
@@ -55645,22 +55781,27 @@ components:
         dob:
           $ref: "#/components/schemas/legal_entity_dob"
         email:
+          description: The person's email address.
           maxLength: 5000
           nullable: true
           type: string
         first_name:
+          description: The person's first name.
           maxLength: 5000
           nullable: true
           type: string
         first_name_kana:
+          description: The Kana variation of the person's first name (Japan only).
           maxLength: 5000
           nullable: true
           type: string
         first_name_kanji:
+          description: The Kanji variation of the person's first name (Japan only).
           maxLength: 5000
           nullable: true
           type: string
         gender:
+          description: The person's gender (International regulations require either "male" or "female").
           maxLength: 5000
           nullable: true
           type: string
@@ -55669,20 +55810,25 @@ components:
           maxLength: 5000
           type: string
         id_number_provided:
+          description: Whether the person's `id_number` was provided.
           type: boolean
         last_name:
+          description: The person's last name.
           maxLength: 5000
           nullable: true
           type: string
         last_name_kana:
+          description: The Kana variation of the person's last name (Japan only).
           maxLength: 5000
           nullable: true
           type: string
         last_name_kanji:
+          description: The Kanji variation of the person's last name (Japan only).
           maxLength: 5000
           nullable: true
           type: string
         maiden_name:
+          description: The person's maiden name.
           maxLength: 5000
           nullable: true
           type: string
@@ -55698,6 +55844,7 @@ components:
             - person
           type: string
         phone:
+          description: The person's phone number.
           maxLength: 5000
           nullable: true
           type: string
@@ -55714,6 +55861,7 @@ components:
             - $ref: "#/components/schemas/person_requirements"
           nullable: true
         ssn_last_4_provided:
+          description: Whether the last four digits of the person's Social Security number have been provided (U.S. only).
           type: boolean
         verification:
           $ref: "#/components/schemas/legal_entity_person_verification"
@@ -55878,6 +56026,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         nickname:
           description: A brief description of the plan, hidden from customers.
@@ -55937,7 +56086,6 @@ components:
         - interval
         - interval_count
         - livemode
-        - metadata
         - object
         - usage_type
       title: Plan
@@ -56242,12 +56390,6 @@ components:
           maxLength: 5000
           nullable: true
           type: string
-        type:
-          description: The type of the product. The product is either of type `good`, which is eligible for use with Orders and SKUs, or `service`, which is eligible for use with Subscriptions and Plans.
-          enum:
-            - good
-            - service
-          type: string
         unit_label:
           description: A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
           maxLength: 5000
@@ -56271,7 +56413,6 @@ components:
         - metadata
         - name
         - object
-        - type
         - updated
       title: Product
       type: object
@@ -56330,6 +56471,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -56348,7 +56490,6 @@ components:
         - created
         - id
         - livemode
-        - metadata
         - object
         - restrictions
         - times_redeemed
@@ -56874,6 +57015,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -56930,7 +57072,6 @@ components:
         - created
         - currency
         - id
-        - metadata
         - object
       title: Refund
       type: object
@@ -57435,6 +57576,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         next_action:
           anyOf:
@@ -58943,7 +59085,7 @@ components:
             - maxLength: 5000
               type: string
             - $ref: "#/components/schemas/payment_method"
-          description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. If not set, invoices will use the default payment method in the customer's invoice settings.
+          description: ID of the default payment method for the subscription. It must belong to the customer associated with the subscription. This takes precedence over `default_source`. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
           nullable: true
           x-expansionResources:
             oneOf:
@@ -58957,7 +59099,7 @@ components:
             - $ref: "#/components/schemas/bitcoin_receiver"
             - $ref: "#/components/schemas/card"
             - $ref: "#/components/schemas/source"
-          description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If not set, defaults to the customer's default source.
+          description: ID of the default payment source for the subscription. It must belong to the customer associated with the subscription and be in a chargeable state. If `default_payment_method` is also set, `default_payment_method` will take precedence. If neither are set, invoices will use the customer's [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method) or [default_source](https://stripe.com/docs/api/customers/object#customer_object-default_source).
           nullable: true
           x-expansionResources:
             oneOf:
@@ -59893,6 +60035,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -59909,7 +60052,6 @@ components:
         - id
         - inclusive
         - livemode
-        - metadata
         - object
         - percentage
       title: TaxRate
@@ -60620,6 +60762,7 @@ components:
             maxLength: 500
             type: string
           description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+          nullable: true
           type: object
         object:
           description: String representing the object's type. Objects of the same type share the same value.
@@ -60650,7 +60793,6 @@ components:
         - created
         - currency
         - id
-        - metadata
         - object
         - transfer
       title: TransferReversal

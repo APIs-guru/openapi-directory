@@ -62,8 +62,6 @@ tags:
     x-box-tag: email_aliases
   - name: Events
     x-box-tag: events
-  - name: File requests
-    x-box-tag: file_requests
   - name: File version legal holds
     x-box-tag: file_version_legal_holds
   - name: File version retentions
@@ -1918,343 +1916,6 @@ paths:
       tags:
         - Events
       x-box-tag: events
-  "/file_requests/{file_request_id}":
-    delete:
-      description: Deletes a file request permanently.
-      operationId: delete_file_requests_id
-      parameters:
-        - description: >-
-            The unique identifier that represent a file request.
-
-
-            The ID for any file request can be determined
-
-            by visiting a file request builder in the web application
-
-            and copying the ID from the URL. For example,
-
-            for the URL `https://*.app.box.com/filerequest/123`
-
-            the `file_request_id` is `123`.
-          example: "123"
-          in: path
-          name: file_request_id
-          required: true
-          schema:
-            type: string
-      responses:
-        "204":
-          description: >-
-            Returns an empty response when the file request has been successfully
-
-            deleted.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned when the access token provided in the `Authorization` header
-
-            is not recognized or not provided.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the file request is not found or has already been deleted,
-
-            or the user does not have access to the associated folder.
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: Returned if the `file_request_id` is not in a recognized format.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: An unexpected client error.
-      summary: Delete file request
-      tags:
-        - File requests
-      x-box-sanitized: true
-      x-box-tag: file_requests
-    get:
-      description: Retrieves the information about a file request.
-      operationId: get_file_requests_id
-      parameters:
-        - description: >-
-            The unique identifier that represent a file request.
-
-
-            The ID for any file request can be determined
-
-            by visiting a file request builder in the web application
-
-            and copying the ID from the URL. For example,
-
-            for the URL `https://*.app.box.com/filerequest/123`
-
-            the `file_request_id` is `123`.
-          example: "123"
-          in: path
-          name: file_request_id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileRequest"
-          description: Returns a file request object.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned when the access token provided in the `Authorization` header
-
-            is not recognized or not provided.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the file request is not found, or the user does not
-
-            have access to the associated folder.
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: Returned if the `file_request_id` is not in a recognized format.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: An unexpected client error.
-      summary: Get file request
-      tags:
-        - File requests
-      x-box-enable-explorer: true
-      x-box-tag: file_requests
-    put:
-      description: >-
-        Updates a file request. This can be used to activate or
-
-        deactivate a file request.
-      operationId: put_file_requests_id
-      parameters:
-        - description: >-
-            The unique identifier that represent a file request.
-
-
-            The ID for any file request can be determined
-
-            by visiting a file request builder in the web application
-
-            and copying the ID from the URL. For example,
-
-            for the URL `https://*.app.box.com/filerequest/123`
-
-            the `file_request_id` is `123`.
-          example: "123"
-          in: path
-          name: file_request_id
-          required: true
-          schema:
-            type: string
-        - description: >-
-            Ensures this item hasn't recently changed before
-
-            making changes.
-
-
-            Pass in the item's last observed `etag` value
-
-            into this header and the endpoint will fail
-
-            with a `412 Precondition Failed` if it
-
-            has changed since.
-          example: "1"
-          in: header
-          name: if-match
-          required: false
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FileRequestUpdateRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileRequest"
-          description: Returns the updated file request object.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned when the access token provided in the `Authorization` header
-
-            is not recognized or not provided.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the user does not have all the permissions to complete the
-
-            update.
-
-
-            * `access_denied_insufficient_permissions` when the authenticated user
-
-            does not have access to update the file request.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the file request is not found, or the user does not
-
-            have access to the associated folder.
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: Returned if the `file_request_id` is not in a recognized format.
-        "412":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returns an error when the `If-Match` header does not match
-
-            the current `etag` value of the file request. This indicates that the
-
-            file request has changed since it was last requested.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: An unexpected client error.
-      summary: Update file request
-      tags:
-        - File requests
-      x-box-enable-explorer: true
-      x-box-sanitized: true
-      x-box-tag: file_requests
-  "/file_requests/{file_request_id}/copy":
-    post:
-      description: >-
-        Copies an existing file request that is already present on one folder,
-
-        and applies it to another folder.
-      operationId: post_file_requests_id_copy
-      parameters:
-        - description: >-
-            The unique identifier that represent a file request.
-
-
-            The ID for any file request can be determined
-
-            by visiting a file request builder in the web application
-
-            and copying the ID from the URL. For example,
-
-            for the URL `https://*.app.box.com/filerequest/123`
-
-            the `file_request_id` is `123`.
-          example: "123"
-          in: path
-          name: file_request_id
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/FileRequestCopyRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileRequest"
-          description: Returns updated file request object.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned when the access token provided in the `Authorization` header
-
-            is not recognized or not provided.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the user does not have all the permissions to complete the
-
-            update.
-
-
-            * `access_denied_insufficient_permissions` when the authenticated user
-
-            does not have access to update the file request.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: >-
-            Returned if the file request is not found, or the user does not
-
-            have access to the associated folder.
-        "405":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: Returned if the `file_request_id` is not in a recognized format.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: An unexpected client error.
-      summary: Copy file request
-      tags:
-        - File requests
-      x-box-enable-explorer: true
-      x-box-sanitized: true
-      x-box-tag: file_requests
   /file_version_legal_holds:
     get:
       description: >-
@@ -15855,7 +15516,10 @@ paths:
       x-box-tag: retention_policy_assignments
   /search:
     get:
-      description: Searches for items that are available to the user or an entire enterprise.
+      description: >-
+        Searches for files, folders, web links, and shared files across the
+
+        users content or across the entire enterprise.
       operationId: get_search
       parameters:
         - description: >-
@@ -15866,7 +15530,41 @@ paths:
             the different item types.
 
 
-            Required unless `mdfilters` parameter is defined.
+            This parameter supports a variety of operators to further refine
+
+            the results returns.
+
+
+            * `""` - by wrapping a query in double quotes only exact matches are
+              returned by the API. Exact searches do not return search matches
+              based on specific character sequences. Instead, they return
+              matches based on phrases, that is, word sequences. For example:
+              A search for `"Blue-Box"` may return search results including
+              the sequence `"blue.box"`, `"Blue Box"`, and `"Blue-Box"`;
+              any item containing the words `Blue` and `Box` consecutively, in
+              the order specified.
+            * `AND` - returns items that contain both the search terms. For
+              example, a search for `marketing AND BoxWorks` returns items
+              that have both `marketing` and `BoxWorks` within its text in any order.
+              It does not return a result that only has `BoxWorks` in its text.
+            * `OR` - returns items that contain either of the search terms. For
+              example, a search for `marketing OR BoxWorks` returns a result that
+              has either `marketing` or `BoxWorks` within its text. Using this
+              operator is not necessary as we implicitly interpret multi-word
+              queries as `OR` unless another supported boolean term is used.
+            * `NOT` - returns items that do not contain the search term provided.
+              For example, a search for `marketing AND NOT BoxWorks` returns a result
+              that has only `marketing` within its text. Results containing
+              `BoxWorks` are omitted.
+
+            Please note that we do not support lower case (that is,
+
+            `and`, `or`, and `not`) or mixed case (that is, `And`, `Or`, and `Not`)
+
+            operators.
+
+
+            This field is required unless the `mdfilters` parameter is defined.
           example: sales
           in: query
           name: query
@@ -15874,40 +15572,55 @@ paths:
           schema:
             type: string
         - description: >-
-            Limits search results to a user scope.
+            Limits the search results to either the files that the user has
+
+            access to, or to files available to the entire enterprise.
 
 
-            Defaults to `user_content` which limits the search to content
+            The scope defaults to `user_content`, which limits the search
 
-            available to the current user
+            results to content that is available to the currently authenticated
+
+            user.
 
 
-            Setting this to `enterprise_content` widens the search to content
+            The `enterprise_content` can be requested by an admin through our
 
-            available to the entire enterprise. To enable this scope for an
+            support channels. Once this scope has been enabled for a user, it
 
-            administrator, please reach out to support.
+            will allow that use to query for content across the entire
+
+            enterprise and not only the content that they have access to.
           example: user_content
           in: query
           name: scope
           required: false
           schema:
+            default: user_content
             enum:
               - user_content
               - enterprise_content
             type: string
         - description: >-
-            Limits search results to a comma-separated list of
+            Limits the search results to any files that match any of the provided
 
-            file extensions.
-          example: pdf,png,gif
+            file extensions. This list is a comma-separated list of file extensions
+
+            without the dots.
+          example:
+            - pdf
+            - png
+            - gif
+          explode: false
           in: query
           name: file_extensions
           required: false
           schema:
-            type: string
+            items:
+              type: string
+            type: array
         - description: >-
-            Limits search results to items created within
+            Limits the search results to any items created within
 
             a given date range.
 
@@ -15919,20 +15632,25 @@ paths:
 
             If the the start date is omitted (`,2014-05-17T13:35:01-07:00`)
 
-            the earliest known date will be used as the start date instead.
+            anything created before the end date will be returned.
 
 
             If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
 
             current date will be used as the end date instead.
-          example: 2014-05-15T13:35:01-07:00,2014-05-17T13:35:01-07:00
+          example:
+            - 2014-05-15T13:35:01-07:00
+            - 2014-05-17T13:35:01-07:00
+          explode: false
           in: query
           name: created_at_range
           required: false
           schema:
-            type: string
+            items:
+              type: string
+            type: array
         - description: >-
-            Limits search results to items updated within
+            Limits the search results to any items updated within
 
             a given date range.
 
@@ -15944,77 +15662,144 @@ paths:
 
             If the start date is omitted (`,2014-05-17T13:35:01-07:00`)
 
-            the earliest known date will be used as the start date instead.
+            anything updated before the end date will be returned.
 
 
             If the end date is omitted (`2014-05-15T13:35:01-07:00,`) the
 
             current date will be used as the end date instead.
-          example: 2014-05-15T13:35:01-07:00,2014-05-17T13:35:01-07:00
+          example:
+            - 2014-05-15T13:35:01-07:00
+            - 2014-05-17T13:35:01-07:00
+          explode: false
           in: query
           name: updated_at_range
           required: false
           schema:
-            type: string
+            items:
+              type: string
+            type: array
         - description: >-
-            Limits search results to items within a given file size
+            Limits the search results to any items with a size within
 
-            range.
+            a given file size range. This applied to files and folders.
 
 
-            File size ranges are defined as comma separated byte sizes.
+            Size ranges are defined as comma separated list of a lower
+
+            and upper byte size limit (inclusive).
 
 
             The upper and lower bound can be omitted to create open ranges.
-          example: 1000000,5000000
+          example:
+            - 1000000
+            - 5000000
+          explode: false
           in: query
           name: size_range
           required: false
           schema:
-            type: string
+            items:
+              type: integer
+            type: array
         - description: >-
-            Limits search results to items owned
+            Limits the search results to any items that are owned
 
-            by the given list of owners.
+            by the given list of owners, defined as a list of comma separated
+
+            user IDs.
 
 
-            Owners are defined as a comma separated list of user IDs.
-          example: 123422,23532,3241212
+            Please note that the items still need to be owned or shared with
+
+            the currently authenticated user for them to show up in the search
+
+            results. If the user does not have access to any files owned by any of
+
+            the users an empty result set will be returned.
+
+
+            To search across an entire enterprise, we recommend using the
+
+            `enterprise_content` scope parameter which can be requested with our
+
+            support team.
+          example:
+            - "123422"
+            - "23532"
+            - "3241212"
+          explode: false
           in: query
           name: owner_user_ids
           required: false
           schema:
-            type: string
+            items:
+              type: string
+            type: array
         - description: >-
-            Limits search results to items within the given
+            Limits the search results to items within the given
 
-            list of folders.
-
-
-            Folders are defined as a comma separated lists
+            list of folders, defined as a comma separated lists
 
             of folder IDs.
 
 
-            Search results will also include items within subfolders.
-          example: 4535234,234123235,2654345
+            Search results will also include items within any subfolders
+
+            of those ancestor folders.
+
+
+            Please note that the folders still need to be owned or shared with
+
+            the currently authenticated user. If the folder is not accessible by this
+
+            user, or it does not exist, a `HTTP 404` error code will be returned
+
+            instead.
+
+
+            To search across an entire enterprise, we recommend using the
+
+            `enterprise_content` scope parameter which can be requested with our
+
+            support team.
+          example:
+            - "4535234"
+            - "234123235"
+            - "2654345"
+          explode: false
           in: query
           name: ancestor_folder_ids
           required: false
           schema:
-            type: string
+            items:
+              type: string
+            type: array
         - description: >-
-            Limits search results to items with the given
+            Limits the search results to any items that match the search query
 
-            content types.
+            for a specific part of the file, for example the file description.
 
 
             Content types are defined as a comma separated lists
 
-            of Box recognized content types.
+            of Box recognized content types. The allowed content types are as follows.
+
+
+            * `name` - The name of the item, as defined by its `name` field.
+
+            * `description` - The description of the item, as defined by its
+              `description` field.
+            * `file_content` - The actual content of the file.
+
+            * `comments` - The content of any of the comments on a file or
+               folder.
+            * `tag` - Any tags that are applied to an item, as defined by its
+               `tag` field.
           example:
             - name
             - description
+          explode: false
           in: query
           name: content_types
           required: false
@@ -16028,7 +15813,20 @@ paths:
                 - tag
               type: string
             type: array
-        - description: Limits search results to items of this type.
+        - description: >-
+            Limits the search results to any items of this type. This
+
+            parameter only takes one value. By default the API returns
+
+            items that match any of these types.
+
+
+            * `file` - Limits the search results to files
+
+            * `folder` - Limits the search results to folders
+
+            * `web_link` - Limits the search results to web links, also known
+               as bookmarks
           example: file
           in: query
           name: type
@@ -16040,28 +15838,42 @@ paths:
               - web_link
             type: string
         - description: >-
-            Controls if search results include the trash.
+            Determines if the search should look in the trash for items.
 
 
-            Defaults to `non_trashed_only`
+            By default, this API only returns search results for items
+
+            not currently in the trash (`non_trashed_only`).
+
+
+            * `trashed_only` - Only searches for items currently in the trash
+
+            * `non_trashed_only` - Only searches for items currently not in
+              the trash
           example: non_trashed_only
           in: query
           name: trash_content
           required: false
           schema:
+            default: non_trashed_only
             enum:
               - non_trashed_only
               - trashed_only
             type: string
         - description: >-
-            A list containing 1 metadata template to filter
+            Limits the search results to any items for which the metadata matches
 
-            search results by. This list can currently only
-
-            contain one entry.
+            the provided filter.
 
 
-            Required unless `query` is defined.
+            This parameter contains a list of 1 metadata template to filter
+
+            the search results by. This list can currently only
+
+            contain one entry, though this might be expanded in the future.
+
+
+            This parameter is required unless the `query` parameter is provided.
           example:
             - filters:
                 category: online
@@ -16088,12 +15900,18 @@ paths:
               scope: enterprise
               templateKey: contract
         - description: >-
-            Defines the order in which results are returned. Defaults to `relevance`.
+            Defines the order in which search results are returned. This API
+
+            defaults to returning items by relevance unless this parameter is
+
+            explicitly specified.
 
 
             * `relevance` (default) returns the results sorted by relevance to the
 
-            query search term.
+            query search term. The relevance is based on the occurrence of the search
+
+            term in the items name, description, content, and additional properties.
 
             * `modified_at` returns the results ordered in descending order by date
 
@@ -16109,14 +15927,16 @@ paths:
               - relevance
             type: string
         - description: >-
-            Defines the direction in which search results are ordered. Default value
+            Defines the direction in which search results are ordered. This API
 
-            is `DESC`.
+            defaults to returning items in descending (`DESC`) order unless this
+
+            parameter is explicitly specified.
 
 
-            When results are sorted by `relevance` the ordering is forced to `DESC`,
+            When results are sorted by `relevance` the ordering is locked to returning
 
-            ignoring the value of this parameter.
+            items in descending order of relevance, and this parameter is ignored.
           example: ASC
           in: query
           name: direction
@@ -16127,7 +15947,10 @@ paths:
               - DESC
               - ASC
             type: string
-        - description: The maximum number of items to return.
+        - description: >-
+            Defines the maximum number of items to return as part of a page of
+
+            results.
           example: 100
           in: query
           name: limit
@@ -16185,6 +16008,49 @@ paths:
             Returns a collection of search results. If there are no matching
 
             search results, the `entries` array will be empty.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request was not valid. This can have multiple
+
+            reasons and the `context_info` object will provide you with more details.
+
+
+            * `missing_parameter` - Please provide at least the `query` or `mdfilters`
+              query parameter in a search.
+            * `invalid_parameter` - Any of the fields might not be in the right
+              format. This could for example mean that one of the RFC3339 dates is
+              incorrect, or a string is provided where an integer is expected.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the user does not have the permission to make
+
+            this API call.
+
+
+            * The developer provided a `scope` of `enterprise_content` but did
+              not request this scope to be enabled for the user through our
+              support channels.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the user does not have access to an item
+
+            mentioned in the request.
+
+
+            * The developer provided a folder ID in `ancestor_folder_ids`
+              that either does not exist or the user does not have access to.
         default:
           content:
             application/json:
@@ -21866,6 +21732,11 @@ components:
                       format: url
                       nullable: false
                       type: string
+                    vanity_name:
+                      description: The custom name of a shared link, as used in the `vanity_url` field.
+                      example: my_url
+                      nullable: true
+                      type: string
                     vanity_url:
                       description: >-
                         The "Custom URL" that can also be used to preview the item on Box.  Custom
@@ -22605,291 +22476,6 @@ components:
       x-box-resource-id: file_conflict
       x-box-sanitized: true
       x-box-tag: null
-    FileRequest:
-      description: >-
-        A standard representation of a file request, as returned
-
-        from any file request API endpoints by default.
-      properties:
-        created_at:
-          description: The date and time when the file request was created.
-          example: 2020-09-28T10:53:43-08:00
-          format: date-time
-          nullable: false
-          type: string
-        created_by:
-          allOf:
-            - $ref: "#/components/schemas/User--Mini"
-            - description: The user who created this file request.
-        description:
-          description: >-
-            The optional description of this file request. This is
-
-            shown in the Box UI to users uploading files.
-
-
-            This defaults to description of the file request that was
-
-            copied to create this file request.
-          example: Following documents are requested for your process
-          nullable: true
-          type: string
-        etag:
-          description: >-
-            The HTTP `etag` of this file. This can be used in combination with
-
-            the `If-Match` header when updating a file request. By providing that
-
-            header, a change will only be performed on the  file request if the `etag`
-
-            on the file request still matches the `etag` provided in the `If-Match`
-
-            header.
-          example: "1"
-          nullable: true
-          type: string
-        expires_at:
-          description: >-
-            The date after which a file request will no longer accept new
-
-            submissions.
-
-
-            After this date, the `status` will automatically be set to
-
-            `inactive`.
-          example: 2020-09-28T10:53:43-08:00
-          format: date-time
-          type: string
-        folder:
-          allOf:
-            - $ref: "#/components/schemas/Folder--Mini"
-            - description: >-
-                The folder that this file request is associated with.
-
-
-                Files submitted through the file request form will be
-
-                uploaded to this folder.
-          nullable: false
-        id:
-          description: The unique identifier for this file request.
-          example: "42037322"
-          readOnly: true
-          type: string
-        is_description_required:
-          description: >-
-            Whether a file request submitter is required to provide
-
-            a description of the files they are submitting.
-
-
-            When this setting is set to true, the Box UI will show
-
-            a description field on the file request form.
-
-
-            This defaults to setting of file request that was
-
-            copied to create this file request.
-          example: true
-          type: boolean
-        is_email_required:
-          description: >-
-            Whether a file request submitter is required to provide
-
-            their email address.
-
-
-            When this setting is set to true, the Box UI will show
-
-            an email field on the file request form.
-
-
-            This defaults to setting of file request that was
-
-            copied to create this file request.
-          example: true
-          type: boolean
-        status:
-          description: >-
-            The status of the file request. This defaults
-
-            to `active`.
-
-
-            When the status is set to `inactive`, the file request
-
-            will no longer accept new submissions, and any visitor
-
-            to the file request URL will receive a `HTTP 404` status
-
-            code.
-
-
-            This defaults to status of file request that was
-
-            copied to create this file request.
-          enum:
-            - active
-            - inactive
-          example: active
-          type: string
-        title:
-          description: >-
-            The title of file request. This is shown
-
-            in the Box UI to users uploading files.
-
-
-            This defaults to title of the file request that was
-
-            copied to create this file request.
-          example: Please upload documents
-          type: string
-        type:
-          description: "`file-request`"
-          enum:
-            - file-request
-          example: file-request
-          readOnly: true
-          type: string
-        updated_at:
-          description: The date and time when the file request was last updated.
-          example: 2020-09-28T10:53:43-08:00
-          format: date-time
-          nullable: false
-          type: string
-        updated_by:
-          allOf:
-            - $ref: "#/components/schemas/User--Mini"
-            - description: The user who last modified this file request.
-            - nullable: false
-        url:
-          description: >-
-            The generated URL for this file request. This URL can be shared
-
-            with users to let them upload files to the associated folder.
-          example: https://cloud.app.box.com/f/19e57f40ace247278a8e3d336678c64a
-          readOnly: true
-          type: string
-      title: File Request
-      type: object
-      x-box-resource-id: file_request
-      x-box-tag: file_requests
-    FileRequestCopyRequest:
-      allOf:
-        - $ref: "#/components/schemas/FileRequestUpdateRequest"
-        - properties:
-            folder:
-              description: The folder to associate the new file request to.
-              properties:
-                id:
-                  description: >-
-                    The ID of the folder to associate the new
-
-                    file request to.
-                  example: "42037322"
-                  type: string
-              required:
-                - id
-              type: object
-      description: The request body to copy a file request.
-      required:
-        - folder
-      title: File Request (Copy)
-      type: object
-    FileRequestUpdateRequest:
-      description: The request body to update a file request.
-      properties:
-        description:
-          description: >-
-            An optional new description for the file request. This can be
-
-            used to change the description of the file request.
-
-
-            This will default to the value on the existing file request.
-          example: Please upload required documents
-          type: string
-        expires_at:
-          description: >-
-            The date after which a file request will no longer accept new
-
-            submissions.
-
-
-            After this date, the `status` will automatically be set to
-
-            `inactive`.
-
-
-            This will default to the value on the existing file request.
-          example: 2020-09-28T10:53:43-08:00
-          format: date-time
-          type: string
-        is_description_required:
-          description: >-
-            Whether a file request submitter is required to provide
-
-            a description of the files they are submitting.
-
-
-            When this setting is set to true, the Box UI will show
-
-            a description field on the file request form.
-
-
-            This will default to the value on the existing file request.
-          example: true
-          type: boolean
-        is_email_required:
-          description: >-
-            Whether a file request submitter is required to provide
-
-            their email address.
-
-
-            When this setting is set to true, the Box UI will show
-
-            an email field on the file request form.
-
-
-            This will default to the value on the existing file request.
-          example: true
-          type: boolean
-        status:
-          description: >-
-            An optional new status of the file request.
-
-
-            When the status is set to `inactive`, the file request
-
-            will no longer accept new submissions, and any visitor
-
-            to the file request URL will receive a `HTTP 404` status
-
-            code.
-
-
-            This will default to the value on the existing file request.
-          enum:
-            - active
-            - inactive
-          example: active
-          type: string
-        title:
-          description: >-
-            An optional new title for the file request. This can be
-
-            used to change the title of the file request.
-
-
-            This will default to the value on the existing file request.
-          example: Please upload required documents
-          type: string
-      title: File Request (Update)
-      type: object
     FileScope:
       description: A relation between a file and the scopes for which the file can be accessed
       properties:
@@ -23648,6 +23234,11 @@ components:
                       example: https://www.box.com/s/vspke7y05sb214wjokpk
                       format: url
                       nullable: false
+                      type: string
+                    vanity_name:
+                      description: The custom name of a shared link, as used in the `vanity_url` field.
+                      example: my_url
+                      nullable: true
                       type: string
                     vanity_url:
                       description: >-
@@ -25716,10 +25307,7 @@ components:
       description: A template for metadata that can be applied to files and folders
       properties:
         copyInstanceOnItemCopy:
-          description: >-
-            Whether or not to copy the metadata for a file or folder when an it is
-
-            copied.
+          description: Whether or not to include the metadata when a file or folder is copied.
           example: true
           type: boolean
         displayName:
@@ -28853,6 +28441,11 @@ components:
                       example: https://www.box.com/s/vspke7y05sb214wjokpk
                       format: url
                       nullable: false
+                      type: string
+                    vanity_name:
+                      description: The custom name of a shared link, as used in the `vanity_url` field.
+                      example: my_url
+                      nullable: true
                       type: string
                     vanity_url:
                       description: >-

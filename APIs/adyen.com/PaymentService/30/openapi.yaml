@@ -722,11 +722,11 @@ components:
           type: string
         carRental.daysRented:
           description: >-
-            Specifies whether the given rate is applied daily or weekly.
+            Number of days for which the car is being rented.
 
-            * D - Daily rate.
+            * Format: Numeric
 
-            * W - Weekly rate.
+            * maxLength: 19
           type: string
         carRental.fuelCharges:
           description: >-
@@ -746,7 +746,7 @@ components:
           type: string
         carRental.locationCity:
           description: >-
-            The location from which the car is rented.
+            The city from which the car is rented.
 
             * Format: Alphanumeric
 
@@ -754,25 +754,27 @@ components:
           type: string
         carRental.locationCountry:
           description: >-
-            The customer service phone number of the car rental company.
+            The country from which the car is rented.
 
             * Format: Alphanumeric
 
-            * maxLength: 17
+            * maxLength: 2
           type: string
         carRental.locationStateProvince:
           description: >-
-            Pick-up date.
+            The state or province from where the car is rented.
 
-            * Date format: `yyyyMMdd`
+            * Format: Alphanumeric
+
+            * maxLength: 3
           type: string
         carRental.noShowIndicator:
           description: >-
             Indicates if the customer was a "no-show" (neither keeps nor cancels their booking).
 
-            * 0 - Not applicable.
+            * Y - Customer was a no show.
 
-            * 1 - Customer was a no show.
+            * N - Not applicable.
           type: string
         carRental.oneWayDropOffCharges:
           description: Charge associated with not returning a vehicle to the original rental location.
@@ -799,7 +801,7 @@ components:
 
             * Format: Alphanumeric
 
-            * maxLength: 14
+            * maxLength: 9
           type: string
         carRental.rentalClassId:
           description: >-
@@ -862,9 +864,9 @@ components:
 
             Values:
 
-            * 0 - Tax was not collected
+            * Y - Goods or services were tax exempt
 
-            * 1 - Goods or services were tax exempt
+            * N - Tax was not collected
           type: string
         travelEntertainmentAuthData.duration:
           description: >-
@@ -1390,6 +1392,15 @@ components:
 
             * None.
           type: string
+    AdditionalDataOpi:
+      properties:
+        opi.includeTransToken:
+          description: >-
+            Optional boolean indicator. Set to **true** if you want an ecommerce transaction to return an `opi.transToken` as additional data in the response.
+
+
+            Make sure that you set `shopperInteraction` to **Ecommerce** and leave the `shopperReference` blank. You can use this token to identify an ecommerce transaction in your Oracle system integrations such as Opera.
+          type: string
     AdditionalDataRatepay:
       properties:
         ratepay.installmentAmount:
@@ -1683,11 +1694,7 @@ components:
           minLength: 3
           type: string
         value:
-          description: >-
-            The payable amount that can be charged for the transaction.
-
-
-            The transaction amount needs to be represented in minor units according to the [following table](https://docs.adyen.com/development-resources/currency-codes).
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -1929,6 +1936,7 @@ components:
             - $ref: "#/components/schemas/AdditionalDataLevel23"
             - $ref: "#/components/schemas/AdditionalDataLodging"
             - $ref: "#/components/schemas/AdditionalDataOpenInvoice"
+            - $ref: "#/components/schemas/AdditionalDataOpi"
             - $ref: "#/components/schemas/AdditionalDataRatepay"
             - $ref: "#/components/schemas/AdditionalDataRetry"
             - $ref: "#/components/schemas/AdditionalDataRisk"
@@ -2044,6 +2052,7 @@ components:
             - $ref: "#/components/schemas/AdditionalDataLevel23"
             - $ref: "#/components/schemas/AdditionalDataLodging"
             - $ref: "#/components/schemas/AdditionalDataOpenInvoice"
+            - $ref: "#/components/schemas/AdditionalDataOpi"
             - $ref: "#/components/schemas/AdditionalDataRatepay"
             - $ref: "#/components/schemas/AdditionalDataRetry"
             - $ref: "#/components/schemas/AdditionalDataRisk"
@@ -2291,6 +2300,7 @@ components:
             - $ref: "#/components/schemas/AdditionalDataLevel23"
             - $ref: "#/components/schemas/AdditionalDataLodging"
             - $ref: "#/components/schemas/AdditionalDataOpenInvoice"
+            - $ref: "#/components/schemas/AdditionalDataOpi"
             - $ref: "#/components/schemas/AdditionalDataRatepay"
             - $ref: "#/components/schemas/AdditionalDataRetry"
             - $ref: "#/components/schemas/AdditionalDataRisk"
@@ -2512,6 +2522,7 @@ components:
             - $ref: "#/components/schemas/ResponseAdditionalDataDeliveryAddress"
             - $ref: "#/components/schemas/ResponseAdditionalDataInstallments"
             - $ref: "#/components/schemas/ResponseAdditionalDataNetworkTokens"
+            - $ref: "#/components/schemas/ResponseAdditionalDataOpi"
             - $ref: "#/components/schemas/ResponseAdditionalDataPayPal"
             - $ref: "#/components/schemas/ResponseAdditionalDataSepa"
           description: This field contains additional data, which may be required to return in a particular payment response. To choose data fields to be returned, go to **Customer Area** > **Account** > **API URLs** > **Additional data settings**.
@@ -3174,6 +3185,11 @@ components:
           type: string
         networkToken.tokenSummary:
           description: The last four digits of a card number.
+          type: string
+    ResponseAdditionalDataOpi:
+      properties:
+        opi.transToken:
+          description: Returned in the response if you included `opi.returnTransToken` in an ecommerce request. This contains an OPI token that you can use to identify an ecommerce transaction in your Oracle system integrations such as Opera.
           type: string
     ResponseAdditionalDataPayPal:
       properties:

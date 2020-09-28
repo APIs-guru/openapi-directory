@@ -47,6 +47,7 @@ paths:
         - $ref: "#/components/parameters/q"
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
+        - $ref: "#/components/parameters/subdomains"
       responses:
         "200":
           $ref: "#/components/responses/searchResponse"
@@ -73,6 +74,7 @@ paths:
         - $ref: "#/components/parameters/q"
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
+        - $ref: "#/components/parameters/subdomains"
       responses:
         "200":
           $ref: "#/components/responses/searchResponse"
@@ -97,6 +99,11 @@ components:
       name: start
       schema:
         type: number
+    subdomains:
+      in: query
+      name: subdomains
+      schema:
+        type: string
   responses:
     searchResponse:
       content:

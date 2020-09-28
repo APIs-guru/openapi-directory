@@ -2060,7 +2060,7 @@ paths:
           required: true
           schema:
             type: string
-        - example: false
+        - example: true
           in: query
           name: include_data
           schema:
@@ -2084,6 +2084,9 @@ paths:
                           s3_url: https://docspring-custom-s3-test.s3.amazonaws.com/templates/tpl_eGc5CmFbPnCCmerqsx/sub_gzYpKDYFqEHxzca4kK.pdf
                         state: processed
                     batch_id: null
+                    data:
+                      description: This PDF is great!
+                      title: Test PDF
                     data_requests: []
                     download_url: https://example.com/submissions/submission.pdf
                     editable: false
@@ -2097,6 +2100,8 @@ paths:
                     pdf_hash: bbc369dd471442006963e3244a1b43610e066165c09770978221f91bd7ace8f5
                     permanent_download_url: http://app.docspring.local/submissions/sub_000000000000000001/download
                     processed_at: 2020-05-14T02:00:00Z
+                    referrer: null
+                    source: api
                     state: processed
                     template_id: tpl_000000000000000001
                     test: true
@@ -2188,8 +2193,12 @@ paths:
                       id: tpl_000000000000000011
                       locked: false
                       name: Sub Template 1
-                      page_count: 2
+                      page_count: 3
                       page_dimensions:
+                        - - 612
+                          - 792
+                        - - 792
+                          - 612
                         - - 612
                           - 792
                       parent_folder_id: fld_000000000000000001
@@ -2238,8 +2247,12 @@ paths:
                       id: tpl_000000000000000002
                       locked: false
                       name: Template 2
-                      page_count: 2
+                      page_count: 3
                       page_dimensions:
+                        - - 612
+                          - 792
+                        - - 792
+                          - 612
                         - - 612
                           - 792
                       parent_folder_id: null
@@ -2264,8 +2277,12 @@ paths:
                       id: tpl_000000000000000001
                       locked: false
                       name: Template 1
-                      page_count: 2
+                      page_count: 3
                       page_dimensions:
+                        - - 612
+                          - 792
+                        - - 792
+                          - 612
                         - - 612
                           - 792
                       parent_folder_id: null
@@ -2541,8 +2558,12 @@ paths:
                     id: tpl_000000000000000011
                     locked: false
                     name: Sub Template 1
-                    page_count: 2
+                    page_count: 3
                     page_dimensions:
+                      - - 612
+                        - 792
+                      - - 792
+                        - 612
                       - - 612
                         - 792
                     parent_folder_id: fld_000000000000000001
@@ -2793,10 +2814,16 @@ paths:
                     rotation: 0
                     type: number
                   - displayType: text
+                    integer: true
+                    name: new_field4
+                    page: 3
+                    rotation: 0
+                    type: number
+                  - displayType: text
                     height: 50
                     id: 99
                     integer: true
-                    name: new_field4
+                    name: new_field5
                     page: 2
                     rotation: 0
                     type: number
@@ -3096,8 +3123,9 @@ paths:
                       - 3
                       - 4
                       - 5
-                      - 99
                       - 6
+                      - 99
+                      - 7
                     status: success
               schema:
                 properties:
@@ -3129,17 +3157,17 @@ paths:
                       - The property '#/fields/0' did not contain a required property of 'page'
                       - The property '#/fields/1/page' did not have a minimum value of 1, inclusively
                       - The property '#/fields/5' contains additional properties ["unknown_property"] outside of the schema when none are allowed
-                      - The property '#/fields/6' did not contain a required property of 'page'
-                      - "The property '#/fields/6/type' value \"unknown type\" did not match one of the following values: string, number, boolean, date, address, country, email, url, image, signature, barcode, combined"
                       - "The property '#/fields/6/displayType' value \"unknown display type\" did not match one of the following values: text, check, qrcode, barcode, image, shape"
+                      - "The property '#/fields/6/type' value \"unknown type\" did not match one of the following values: string, number, boolean, date, address, country, email, url, image, signature, barcode, combined"
+                      - The property '#/fields/6' did not contain a required property of 'page'
                       - "The property '#/fields/7/width' of type string did not match the following type: number"
+                      - The property '#/fields/8/height' did not have a minimum value of 0, inclusively
+                      - The property '#/fields/8/width' did not have a minimum value of 0, inclusively
                       - The property '#/fields/8/x' did not have a minimum value of 0, inclusively
                       - The property '#/fields/8/y' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/8/width' did not have a minimum value of 0, inclusively
-                      - The property '#/fields/8/height' did not have a minimum value of 0, inclusively
                       - The property '#/fields/2/id' value "1" is already taken by another field
-                      - The property '#/fields/2/page' value "5" did not have a maximum value of 2, inclusively (Template has 2 pages)
-                      - The property '#/fields/3/page' value "3" did not have a maximum value of 2, inclusively (Template has 2 pages)
+                      - The property '#/fields/2/page' value "5" did not have a maximum value of 3, inclusively (Template has 3 pages)
+                      - The property '#/fields/3/page' value "4" did not have a maximum value of 3, inclusively (Template has 3 pages)
                     status: error
               schema:
                 properties:
@@ -3208,8 +3236,12 @@ paths:
                     id: tpl_000000000000000001
                     locked: false
                     name: Template 1
-                    page_count: 2
+                    page_count: 3
                     page_dimensions:
+                      - - 612
+                        - 792
+                      - - 792
+                        - 612
                       - - 612
                         - 792
                     parent_folder_id: fld_000000000000000001
@@ -4435,6 +4467,9 @@ components:
         batch_id:
           nullable: true
           type: string
+        data:
+          nullable: true
+          type: object
         data_requests:
           items:
             $ref: "#/components/schemas/submission_data_request"
@@ -4461,6 +4496,12 @@ components:
           nullable: true
           type: string
         processed_at:
+          nullable: true
+          type: string
+        referrer:
+          nullable: true
+          type: string
+        source:
           nullable: true
           type: string
         state:

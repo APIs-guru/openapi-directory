@@ -19,8 +19,7 @@ paths:
   /v3/affiliates/search/images:
     get:
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -45,8 +44,7 @@ paths:
   /v3/affiliates/search/videos:
     get:
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -67,8 +65,7 @@ paths:
   /v3/artists/images:
     get:
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -119,8 +116,7 @@ paths:
   /v3/artists/videos:
     get:
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -292,8 +288,7 @@ paths:
   "/v3/asset-licensing/{assetId}":
     post:
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -730,8 +725,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -755,8 +749,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -782,8 +775,7 @@ paths:
         	
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -817,8 +809,7 @@ paths:
 
         Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -885,8 +876,7 @@ paths:
             description: Specifies page size. Default is 30, maximum page_size is 100.
             format: int32
             type: integer
-        - description: Specifies product type to be included in the previous download results. To get previous iStockPhoto credit downloads, credit_pack must be selected.
-          in: query
+        - in: query
           name: product_type
           schema:
             $ref: "#/components/schemas/ProductTypeRequest"
@@ -984,8 +974,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1028,12 +1017,7 @@ paths:
 
               \                </remarks>"
             type: boolean
-        - description: "<remarks>\r
-
-            \                    File Type expressed with three character file extension.\r
-
-            \                </remarks>"
-          in: query
+        - in: query
           name: file_type
           schema:
             $ref: "#/components/schemas/DownloadFileType"
@@ -1076,12 +1060,7 @@ paths:
             format: int32
             nullable: true
             type: integer
-        - description: "<remarks>\r
-
-            \                    Product type.\r
-
-            \                </remarks>"
-          in: query
+        - in: query
           name: product_type
           schema:
             $ref: "#/components/schemas/ProductTypeRequest"
@@ -1199,8 +1178,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1326,8 +1304,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1386,8 +1363,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1550,8 +1526,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1728,8 +1703,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1776,8 +1750,7 @@ paths:
     get:
       description: ""
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -1950,8 +1923,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2141,8 +2113,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2211,8 +2182,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2250,8 +2220,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2294,8 +2263,7 @@ paths:
 
         You'll need an API key and access token to use this resource.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2359,29 +2327,27 @@ paths:
 
         You can search with only an API key, and that will give you search results that are equivalent to doing a search on the GettyImages.com site without being logged in (anonymous search).  If you are a Getty Images API customer and would like to ensure that your API searches return only assets that you have a license to use, you need to also include an authorization token in the header of your request.  Please consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens, and our [Authorization Workflows](https://github.com/gettyimages/gettyimages-api/blob/master/OAuth2Workflow.md) for code examples of getting a token.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
-        - description: Filters to events with a matching editorial segment.
-          in: query
+        - in: query
           name: editorial_segment
           schema:
             $ref: "#/components/schemas/EditorialSegmentContract"
-        - description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+        - description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
           in: query
           name: date_from
           schema:
-            description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).
+            description: Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
             format: date-time
             nullable: true
             type: string
-        - description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+        - description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
           in: query
           name: date_to
           schema:
-            description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).
+            description: Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31). Defaults to UTC unless otherwise specified.
             format: date-time
             nullable: true
             type: string
@@ -2579,8 +2545,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2613,8 +2578,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -2659,7 +2623,7 @@ paths:
               \                    Product ID can be obtained from the GET /products response."
             nullable: true
             type: string
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
+        - description: Restrict search results to embeddable images. The default is false.
           in: query
           name: embed_content_only
           schema:
@@ -2688,7 +2652,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
+        - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
           schema:
@@ -2727,8 +2691,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -2744,8 +2707,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -2794,8 +2756,7 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/BlendedImageSortOrder"
@@ -2961,8 +2922,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -2995,8 +2955,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -3041,7 +3000,7 @@ paths:
               \                    Product ID can be obtained from the GET /products response."
             nullable: true
             type: string
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
+        - description: Restrict search results to embeddable images. The default is false.
           in: query
           name: embed_content_only
           schema:
@@ -3058,7 +3017,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
+        - description: Excludes images containing nudity. The default is false.
           in: query
           name: exclude_nudity
           schema:
@@ -3104,8 +3063,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -3121,8 +3079,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -3172,8 +3129,7 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/CreativeImageSortOrder"
@@ -3199,7 +3155,7 @@ paths:
             description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -3251,8 +3207,7 @@ paths:
 
         <!-- Subsequent searches for the same image can be executed using the `image_fingerprint` that is returned by the initial search. -->
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -3339,7 +3294,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -3508,8 +3463,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -3542,8 +3496,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -3603,7 +3556,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiBoolean"
+        - description: Restrict search results to embeddable images. The default is false.
           in: query
           name: embed_content_only
           schema:
@@ -3681,8 +3634,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
@@ -3698,8 +3650,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: minimum_size
           schema:
             $ref: "#/components/schemas/TeeShirtSize"
@@ -3748,8 +3699,7 @@ paths:
             description: Search images using a search phrase.
             nullable: true
             type: string
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
@@ -3794,7 +3744,7 @@ paths:
             description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -3963,8 +3913,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -3997,8 +3946,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -4025,8 +3973,7 @@ paths:
               \                    Product ID can be obtained from the GET /products response."
             nullable: true
             type: string
-        - description: Filters according to the digital video format available on a film asset.
-          in: query
+        - in: query
           name: format_available
           schema:
             $ref: "#/components/schemas/VideoFormatsRequest"
@@ -4115,13 +4062,11 @@ paths:
             description: Free-text search query.
             nullable: true
             type: string
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/CreativeVideoSortOrder"
-        - description: Allows filtering by type of model release.
-          in: query
+        - in: query
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
@@ -4140,7 +4085,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -4310,8 +4255,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -4344,8 +4288,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
@@ -4405,8 +4348,7 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: Filters according to the digital video format available on a film asset.
-          in: query
+        - in: query
           name: format_available
           schema:
             $ref: "#/components/schemas/VideoFormatsRequest"
@@ -4484,13 +4426,11 @@ paths:
             description: Free-text search query.
             nullable: true
             type: string
-        - description: "*Default value*: "
-          in: query
+        - in: query
           name: sort_order
           schema:
             $ref: "#/components/schemas/SortOrder"
-        - description: Allows filtering by type of model release.
-          in: query
+        - in: query
           name: release_status
           schema:
             $ref: "#/components/schemas/ReleaseStatus"
@@ -4516,7 +4456,7 @@ paths:
             description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
-        - description: "*Default value*: Microsoft.OpenApi.Any.OpenApiInteger"
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
           in: query
           name: facet_max_count
           schema:
@@ -4733,8 +4673,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -4915,8 +4854,7 @@ paths:
 
         - Specifying the "entity_details" response field can have significant performance implications. The field should be used only when necessary.
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -4959,8 +4897,7 @@ paths:
     get:
       description: ""
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -5130,8 +5067,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string
@@ -5314,8 +5250,7 @@ paths:
 
         ```
       parameters:
-        - description: Provide a header to specify the language of result values.
-          in: header
+        - in: header
           name: Accept-Language
           schema:
             type: string

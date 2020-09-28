@@ -276,6 +276,99 @@ paths:
                 type: array
           description: ""
       summary: Conference Hierarchy (with Teams)
+  "/{format}/Player/{playerid}":
+    get:
+      operationId: PlayerDetailsByPlayer
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "
+
+            \          Unique FantasyData Player ID.
+
+            \          Example:<code>50002016</code>.
+
+            \        "
+          in: path
+          name: playerid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Player Details By Player
+  "/{format}/Players":
+    get:
+      operationId: PlayerDetailsByActive
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Player Details By Active
+  "/{format}/Players/{team}":
+    get:
+      operationId: PlayerDetailsByTeam
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            enum:
+              - XML
+              - JSON
+            type: string
+        - description: "
+
+            \          The abbreviation of the requested team.
+
+            \          <br>Examples: <code>SF</code>, <code>NYY</code>.
+
+            \        "
+          in: path
+          name: team
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Player"
+                type: array
+          description: ""
+      summary: Player Details by Team
   "/{format}/Stadiums":
     get:
       operationId: Stadiums
@@ -569,6 +662,68 @@ components:
           type: integer
         PeriodID:
           nullable: false
+          type: integer
+    Player:
+      properties:
+        BirthCity:
+          nullable: true
+          type: string
+        BirthState:
+          nullable: true
+          type: string
+        Class:
+          nullable: true
+          type: string
+        Created:
+          nullable: true
+          type: string
+        FirstName:
+          nullable: true
+          type: string
+        GlobalTeamID:
+          nullable: true
+          type: integer
+        Height:
+          nullable: true
+          type: integer
+        InjuryBodyPart:
+          nullable: true
+          type: string
+        InjuryNotes:
+          nullable: true
+          type: string
+        InjuryStartDate:
+          nullable: true
+          type: string
+        InjuryStatus:
+          nullable: true
+          type: string
+        Jersey:
+          nullable: true
+          type: integer
+        LastName:
+          nullable: true
+          type: string
+        PlayerID:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        PositionCategory:
+          nullable: true
+          type: string
+        Team:
+          nullable: true
+          type: string
+        TeamID:
+          nullable: true
+          type: integer
+        Updated:
+          nullable: true
+          type: string
+        Weight:
+          nullable: true
           type: integer
     Season:
       properties:

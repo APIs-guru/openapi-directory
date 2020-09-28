@@ -3086,18 +3086,21 @@ components:
   schemas:
     ActivationResponse:
       properties:
-        _id:
-          type: string
         end:
+          type: string
+        id:
           type: string
         info:
           type: string
         learnersCount:
           description: number of learners in the offering, excluding facilitators and coaches
           type: string
+        metadata:
+          properties:
+            rootContentId:
+              type: string
+          type: object
         name:
-          type: string
-        org:
           type: string
         portfolioId:
           type: string
@@ -4071,6 +4074,11 @@ components:
         learnersCount:
           description: number of learners in the offering, excluding facilitators and coaches
           type: number
+        metadata:
+          properties:
+            rootContentId:
+              type: string
+          type: object
         name:
           type: string
         start:

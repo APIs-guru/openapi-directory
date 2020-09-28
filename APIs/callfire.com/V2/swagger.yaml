@@ -7912,28 +7912,226 @@ definitions:
   Account:
     description: Object represents user account in Callfire system
     properties:
-      email:
-        description: Email address associated with an account
+      active:
+        description: "~"
+        type: boolean
+      age:
+        $ref: "#/definitions/Duration"
+        description: "~"
+      agency:
+        description: "~"
+        type: boolean
+      allowedToCreateCampaign:
+        description: "~"
+        type: boolean
+      apiCallLimit:
+        description: "~"
+        format: int32
+        type: integer
+      autoAddDoNotContact:
+        description: "~"
+        type: boolean
+      brand:
+        description: "~"
+        enum:
+          - EZTEXTING
+          - CLUBTEXTING
+          - GROUPTEXTING
+          - TELLMYCELL
+          - EZ
+          - CALLFIRE
+          - TESLA
         type: string
-      firstName:
-        description: First name of an account holder
+      canceled:
+        description: "~"
+        type: boolean
+      cf2MigrationState:
+        description: "~"
+        enum:
+          - CF2_ONLY
+          - MIGRATING
+          - FINISHED
+        type: string
+      cf2Only:
+        description: "~"
+        type: boolean
+      country:
+        description: "~"
+        enum:
+          - US
+          - CA
+        type: string
+      countryOrDefault:
+        description: "~"
+        enum:
+          - US
+          - CA
+        type: string
+      created:
+        description: "~"
+        format: date-time
+        type: string
+      dateTimeZone:
+        $ref: "#/definitions/DateTimeZone"
+        description: "~"
+      defaultNotificationTtlMillis:
+        description: "~"
+        format: int64
+        type: integer
+      ez:
+        description: "~"
+        type: boolean
+      failedVerificationAttempts:
+        description: "~"
+        format: int32
+        type: integer
+      fromNumberPool:
+        description: "~"
         type: string
       id:
         description: An id of an account
         format: int64
         type: integer
-      lastName:
-        description: Last name of an account holder
+      industry:
+        description: "~"
+        enum:
+          - UNKNOWN
+          - ADVERTISING
+          - AUTOMOTIVE
+          - COLLECTIONS
+          - CONSULTING
+          - DECLINE
+          - EDUCATION
+          - EMERGENCY
+          - ENTERTAINMENT
+          - FINANCE
+          - HOSPITALITY
+          - HEALTHFITNESS
+          - HEALTHCARE
+          - INSURANCE
+          - LEAD
+          - OTHER
+          - POLITICAL
+          - REAL_ESTATE
+          - RETAIL
+          - SEARCH_MARKETING
+          - TELECOM
+        type: string
+      industryName:
+        description: "~"
+        type: string
+      key:
+        description: "~"
+        type: string
+      localTimeZoneRestriction:
+        $ref: "#/definitions/LocalTimeZoneRestriction"
+        description: "~"
+      locale:
+        $ref: "#/definitions/Locale"
+        description: "~"
+      maxAgents:
+        description: "~"
+        format: int32
+        type: integer
+      messageClass:
+        description: "~"
         type: string
       name:
         description: Name associated with an account
         type: string
-      permissions:
-        description: User permissions (API, ACCOUNT_HOLDER, AGENT)
-        items:
-          type: string
-        type: array
-        uniqueItems: true
+      outboundThreshold:
+        description: "~"
+        format: int32
+        type: integer
+      receiverPeriodCall:
+        description: "~"
+        format: int32
+        type: integer
+      receiverPeriodEnabled:
+        description: "~"
+        type: boolean
+      receiverPeriodGlobal:
+        description: "~"
+        format: int32
+        type: integer
+      receiverPeriodText:
+        description: "~"
+        format: int32
+        type: integer
+      receiverPeriodTimeUnit:
+        description: "~"
+        enum:
+          - NANOSECONDS
+          - MICROSECONDS
+          - MILLISECONDS
+          - SECONDS
+          - MINUTES
+          - HOURS
+          - DAYS
+        type: string
+      retainOnlyMetadata:
+        description: "~"
+        type: boolean
+      retainOnlyMetadataLastDetailRecordId:
+        description: "~"
+        format: int64
+        type: integer
+      retainOnlyMetadataLastModified:
+        description: "~"
+        format: date-time
+        type: string
+      scrub:
+        description: "~"
+        type: boolean
+      sharedShortCodeId:
+        description: "~"
+        format: int64
+        type: integer
+      soaAccount:
+        $ref: "#/definitions/Account"
+        description: "~"
+      startCapable:
+        description: "~"
+        type: boolean
+      status:
+        description: "~"
+        enum:
+          - ACTIVE
+          - PENDING_CANCELLED
+          - CANCELLED
+        type: string
+      textOutboundThreshold:
+        description: "~"
+        format: int32
+        type: integer
+      timeZone:
+        $ref: "#/definitions/TimeZone"
+        description: "~"
+      trustLevel:
+        description: "~"
+        enum:
+          - LOCKED
+          - SUSPENDED
+          - PROBATION
+          - NORMAL
+          - TRUSTED
+        type: string
+      tsrAgreement:
+        description: "~"
+        format: date-time
+        type: string
+      tsrInitials:
+        description: "~"
+        type: string
+      uiContext:
+        description: "~"
+        type: string
+      universal:
+        description: "~"
+        type: boolean
+      website:
+        description: "~"
+        type: string
     type: object
   AddContactListContactsRequest:
     description: Request object for adding new contacts to an existing contact list
@@ -8017,6 +8215,63 @@ definitions:
             type: array
         type: object
     description: "~"
+  ApiExceptionHandler:
+    description: "~"
+    type: object
+  ApiValidator:
+    description: "~"
+    properties:
+      exceptionHandler:
+        $ref: "#/definitions/ApiExceptionHandler"
+        description: "~"
+    type: object
+  AuthController:
+    description: "~"
+    properties:
+      authBrand:
+        description: "~"
+        enum:
+          - EZTEXTING
+          - CLUBTEXTING
+          - GROUPTEXTING
+          - TELLMYCELL
+          - EZ
+          - CALLFIRE
+          - TESLA
+        type: string
+      authToken:
+        $ref: "#/definitions/AuthToken"
+        description: "~"
+    type: object
+  AuthToken:
+    description: "~"
+    properties:
+      accountId:
+        description: "~"
+        format: int64
+        type: integer
+      adminToken:
+        $ref: "#/definitions/AuthToken"
+        description: "~"
+      brand:
+        description: "~"
+        enum:
+          - EZTEXTING
+          - CLUBTEXTING
+          - GROUPTEXTING
+          - TELLMYCELL
+          - EZ
+          - CALLFIRE
+          - TESLA
+        type: string
+      sessionId:
+        description: "~"
+        type: string
+      userId:
+        description: "~"
+        format: int64
+        type: integer
+    type: object
   Batch:
     description: A batch represents a group of contacts which can be dialed or texted via call/text broadcast
     properties:
@@ -8990,6 +9245,16 @@ definitions:
         readOnly: true
         type: integer
     type: object
+  DateTimeZone:
+    description: "~"
+    properties:
+      fixed:
+        description: "~"
+        type: boolean
+      id:
+        description: "~"
+        type: string
+    type: object
   DeliveryReport:
     description: "~"
     properties:
@@ -9109,6 +9374,30 @@ definitions:
             type: array
         type: object
     description: "~"
+  Duration:
+    description: "~"
+    properties:
+      millis:
+        description: "~"
+        format: int64
+        type: integer
+      standardDays:
+        description: "~"
+        format: int64
+        type: integer
+      standardHours:
+        description: "~"
+        format: int64
+        type: integer
+      standardMinutes:
+        description: "~"
+        format: int64
+        type: integer
+      standardSeconds:
+        description: "~"
+        format: int64
+        type: integer
+    type: object
   ErrorResponse:
     description: Error response containing error info
     properties:
@@ -9300,6 +9589,10 @@ definitions:
         description: "The minutes. Available values: 0-59"
         format: int32
         type: integer
+      nano:
+        description: "~"
+        format: int32
+        type: integer
       second:
         description: "The seconds.  Available values: 0-59"
         format: int32
@@ -9327,6 +9620,76 @@ definitions:
         description: The minutes of restriction end
         format: int32
         type: integer
+    type: object
+  LocalTimeZoneRestriction:
+    description: "~"
+    properties:
+      enabled:
+        description: "~"
+        type: boolean
+      startTime:
+        description: "~"
+        format: date-time
+        type: string
+      stopTime:
+        description: "~"
+        format: date-time
+        type: string
+    type: object
+  Locale:
+    description: "~"
+    properties:
+      country:
+        description: "~"
+        type: string
+      displayCountry:
+        description: "~"
+        type: string
+      displayLanguage:
+        description: "~"
+        type: string
+      displayName:
+        description: "~"
+        type: string
+      displayScript:
+        description: "~"
+        type: string
+      displayVariant:
+        description: "~"
+        type: string
+      extensionKeys:
+        description: "~"
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      iso3Country:
+        description: "~"
+        type: string
+      iso3Language:
+        description: "~"
+        type: string
+      language:
+        description: "~"
+        type: string
+      script:
+        description: "~"
+        type: string
+      unicodeLocaleAttributes:
+        description: "~"
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      unicodeLocaleKeys:
+        description: "~"
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      variant:
+        description: "~"
+        type: string
     type: object
   Media:
     description: Represents a media file which can be added to a text message
@@ -10273,6 +10636,24 @@ definitions:
           - FRENCHCANADIAN1
         type: string
     type: object
+  TimeZone:
+    description: "~"
+    properties:
+      displayName:
+        description: "~"
+        type: string
+      dstsavings:
+        description: "~"
+        format: int32
+        type: integer
+      id:
+        description: "~"
+        type: string
+      rawOffset:
+        description: "~"
+        format: int32
+        type: integer
+    type: object
   UniversalDoNotContact:
     description: Represents a Universal (platform-wide) Do-Not-Contact object for a given phone number. Shows whether inbound/outbound actions are allowed for a given number.
     properties:
@@ -10301,6 +10682,146 @@ definitions:
       name:
         description: A name of a contact list
         type: string
+    type: object
+  User:
+    description: "~"
+    properties:
+      account:
+        $ref: "#/definitions/Account"
+        description: "~"
+      accountHolder:
+        description: "~"
+        type: boolean
+      accountId:
+        description: "~"
+        format: int64
+        type: integer
+      accountUser:
+        description: "~"
+        type: boolean
+      active:
+        description: "~"
+        type: boolean
+      apiPasswordLastFour:
+        description: "~"
+        type: string
+      brand:
+        description: "~"
+        enum:
+          - EZTEXTING
+          - CLUBTEXTING
+          - GROUPTEXTING
+          - TELLMYCELL
+          - EZ
+          - CALLFIRE
+          - TESLA
+        type: string
+      cccAgent:
+        description: "~"
+        type: boolean
+      created:
+        description: "~"
+        format: date-time
+        type: string
+      dateOfBirth:
+        description: "~"
+        format: date-time
+        type: string
+      disabled:
+        description: "~"
+        type: boolean
+      firstName:
+        description: "~"
+        type: string
+      fullName:
+        description: "~"
+        type: string
+      id:
+        description: "~"
+        format: int64
+        type: integer
+      industryName:
+        description: "~"
+        type: string
+      lastName:
+        description: "~"
+        type: string
+      musicOnHold:
+        description: "~"
+        enum:
+          - DEFAULT
+          - SILENCE
+          - ALTERNATIVE
+          - BLUES
+          - CELTIC
+          - CLASSICAL
+          - COUNTRY
+          - INSTRUMENTAL
+          - JAZZ
+          - NEOPUNK
+          - NEW_AGE
+          - POP
+          - ROCK
+          - SWING
+          - TECHNO
+        type: string
+      notificationSoundEnabled:
+        description: "~"
+        type: boolean
+      optIn:
+        description: "~"
+        type: boolean
+      optInNumber:
+        description: "~"
+        type: string
+      permissions:
+        description: "~"
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      phoneNumber:
+        description: "~"
+        type: string
+      phoneNumberExtension:
+        description: "~"
+        type: string
+      phoneNumberExtensionDelaySec:
+        description: "~"
+        format: int32
+        type: integer
+      phoneNumberForDisplay:
+        description: "~"
+        type: string
+      phoneNumberVerified:
+        description: "~"
+        type: boolean
+      profileEmail:
+        description: "~"
+        type: string
+      signupComplete:
+        description: "~"
+        type: boolean
+      soaUser:
+        $ref: "#/definitions/User"
+        description: "~"
+      userState:
+        description: "~"
+        enum:
+          - ACTIVE
+          - NEW_AUTH_INVITE
+          - NEW_USER_INVITE
+          - EXISTING_USER_INVITE
+        type: string
+      userStatePending:
+        description: "~"
+        type: boolean
+      visible:
+        description: "~"
+        type: boolean
+    type: object
+  UserController:
+    description: "~"
     type: object
   Webhook:
     description: Webhook is a user-defined callback, which can be maintained via API. CallFire will send POST request to a client's endpoint defined in webhook once one of assigned events is triggered. See [webhooks guide](https://developers.callfire.com/webhooks-guide.html) for more information about CallFire Webhooks API.

@@ -5030,6 +5030,11 @@ paths:
           name: customer_email
           required: false
           type: string
+        - description: Filter orders by customer's phone number
+          in: query
+          name: phone
+          required: false
+          type: string
         - description: Retrieves orders specified by order status
           in: query
           name: order_status
@@ -10828,6 +10833,9 @@ definitions:
         default: true
         description: Specifies the set of visible/invisible products for users
         type: boolean
+      backorder_status:
+        description: Set backorder status
+        type: string
       barcode:
         description: A barcode is a unique code composed of numbers used as a product identifier.
         type: string
@@ -11120,7 +11128,14 @@ definitions:
       attributes:
         description: Defines variant's attributes list
         items:
-          type: string
+          properties:
+            attribute_name:
+              type: string
+            attribute_price:
+              type: number
+            attribute_value:
+              type: string
+          type: object
         type: array
       available_for_sale:
         default: true

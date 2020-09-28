@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                nullable: true
+                $ref: "#/components/schemas/Season"
           description: ""
       summary: Current Season
   "/{format}/DfsSlatesByTournament/{tournamentid}":
@@ -1160,6 +1160,20 @@ components:
         TournamentID:
           nullable: false
           type: integer
+    Season:
+      properties:
+        Description:
+          nullable: true
+          type: string
+        EndDate:
+          nullable: true
+          type: string
+        SeasonID:
+          nullable: false
+          type: integer
+        StartDate:
+          nullable: true
+          type: string
     Tournament:
       properties:
         Canceled:

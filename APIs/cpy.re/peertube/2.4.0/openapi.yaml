@@ -2507,10 +2507,13 @@ paths:
                   type: integer
                 commentsEnabled:
                   description: Enable or disable comments for this video
-                  type: string
+                  type: boolean
                 description:
                   description: Video description
                   type: string
+                downloadEnabled:
+                  description: Enable or disable downloading for this video
+                  type: boolean
                 language:
                   description: Video language
                   type: string
@@ -2525,7 +2528,7 @@ paths:
                   type: string
                 nsfw:
                   description: Whether or not this video contains sensitive content
-                  type: string
+                  type: boolean
                 previewfile:
                   description: Video preview file
                   format: binary
@@ -2560,7 +2563,7 @@ paths:
                   type: string
                 waitTranscoding:
                   description: Whether or not we wait transcoding before publish the video
-                  type: string
+                  type: boolean
               required:
                 - channelId
                 - name
@@ -2701,6 +2704,9 @@ paths:
                 description:
                   description: Video description
                   type: string
+                downloadEnabled:
+                  description: Enable or disable downloading for this video
+                  type: boolean
                 language:
                   description: Video language
                   example: 2
@@ -2750,7 +2756,7 @@ paths:
                   type: string
                 waitTranscoding:
                   description: Whether or not we wait transcoding before publish the video
-                  type: string
+                  type: boolean
               required:
                 - videofile
                 - channelId

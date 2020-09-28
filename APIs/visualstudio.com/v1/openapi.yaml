@@ -2614,6 +2614,9 @@ components:
         containerImage:
           nullable: true
           type: string
+        devContainer:
+          nullable: true
+          type: string
         experimentalFeatures:
           $ref: "#/components/schemas/ExperimentalFeaturesBody"
         features:
@@ -2810,6 +2813,8 @@ components:
         - 27 (InvalidPlanTenant)
         - 28 (ExportStaticEnvironment)
         - 29 (ExportEnvironmentGenericError)
+        - 30 (ExceededOrgDevContainerMaxLength)
+        - 31 (ActionNotAllowedInThisState)
       format: int32
       type: integer
     Object:

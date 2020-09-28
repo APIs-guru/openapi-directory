@@ -460,6 +460,13 @@ paths:
                     type: object
                 type: object
           description: OK
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
       summary: Get your delivery pools
       tags:
         - Delivery Pools API
@@ -470,13 +477,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery-pool"
+              $ref: "#/components/schemas/create-delivery-pool"
         required: true
       responses:
         "201":
           description: Pool has been created.
         "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    name:
+                      - "'Name' should not be empty"
           description: There was something invalid in your request - check response body for details
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
       summary: Create a new delivery pool
       tags:
         - Delivery Pools API
@@ -489,6 +510,13 @@ paths:
           description: Pool deleted
         "404":
           description: The pool could not be found
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
       summary: Delete a delivery pool
       tags:
         - Delivery Pools API
@@ -521,6 +549,13 @@ paths:
           description: OK
         "404":
           description: The pool could not be found
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
       summary: Get an individual delivery pool
       tags:
         - Delivery Pools API
@@ -538,17 +573,120 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery-pool"
+              $ref: "#/components/schemas/patch-delivery-pool"
         description: Request body should contain an object with either or both of the properties. If a property is not specified then the existing values are retained.
         required: true
       responses:
-        "200":
+        "202":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    name: Toronto - North
+                    restaurants:
+                      - 123
+                      - 456
+              schema:
+                properties:
+                  name:
+                    description: The name of the pool, used by operations teams, in reports, etc.
+                    type: string
+                  restaurants:
+                    description: A list of Just Eat restaurant ids served by the delivery pool.
+                    items:
+                      format: int32
+                      type: number
+                    type: array
+                type: object
           description: Pool has been updated
         "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    name:
+                      - "'Name' should not be empty"
           description: There was something invalid in your request - check response body for details
         "404":
           description: The pool could not be found
+        "409":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: "Restaurant(s) are already assigned to pools : {RestaurantId:55474, PoolId:cccebb96452349b799b71a7adc51df66}"
+          description: A restaurant in your request already belongs to another pool
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
       summary: Modify a delivery pool
+      tags:
+        - Delivery Pools API
+        - publicly-accessible
+    put:
+      description: Replace an existing delivery pool changing all of its properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/create-delivery-pool"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    name: Toronto - West
+                    restaurants:
+                      - 123
+                      - 456
+              schema:
+                properties:
+                  name:
+                    description: The name of the pool, used by operations teams, in reports, etc.
+                    type: string
+                  restaurants:
+                    description: A list of Just Eat restaurant ids served by the delivery pool.
+                    items:
+                      format: int32
+                      type: number
+                    type: array
+                type: object
+          description: Pool has been replaced
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    name:
+                      - "'Name' should not be empty"
+          description: There was something invalid in your request - check response body for details
+        "404":
+          description: The pool could not be found
+        "409":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: "Restaurant(s) are already assigned to pools : {RestaurantId:55474, PoolId:cccebb96452349b799b71a7adc51df66}"
+          description: A restaurant in your request already belongs to another pool
+        "500":
+          content:
+            text/plain:
+              examples:
+                response:
+                  value: Internal Server Error
+          description: Internal Server Error
+      summary: Replace an existing delivery pool
       tags:
         - Delivery Pools API
         - publicly-accessible
@@ -4070,6 +4208,118 @@ paths:
         - Restaurants
         - publicly-accessible
       x-status: Draft
+  "/search/autocomplete/{tenant}":
+    get:
+      description: Used for the predictive dish search feature in Apps and Web
+      parameters:
+        - description: A valid country code, e.g. "uk".
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: User's search term - at least one character required
+          in: query
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+        - description: "The latitude and longitude coordinates of the location in which to search.\r
+
+            Specify the coordinates as latitude,longitude."
+          example: 51.501285,-0.1424422
+          explode: false
+          in: query
+          name: latlong
+          required: true
+          schema:
+            items:
+              format: decimal
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          style: form
+        - description: Limit the number of suggestions returned by the API. Defaults to 7. Valid values 1 - 10
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: integer
+            type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AutoCompleteSearchResponse"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Validation failed on one or more fields
+                    errorCode: 400
+                    fields:
+                      - latlong
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                description: A HTTP 4xx error response
+                properties:
+                  fault:
+                    properties:
+                      errors:
+                        items:
+                          properties:
+                            description:
+                              description: Specific details about the error that may assist the you in resolving the issue
+                              type: string
+                            errorCode:
+                              description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                              type: string
+                            fields:
+                              description: An array of invalid query fields
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        type: array
+                      faultId:
+                        description: A value that helps identify this response back to logs, so we can easily find this specific fault
+                        type: string
+                      traceId:
+                        description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+                        type: string
+                    required:
+                      - faultId
+                    type: object
+                type: object
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - errorCode: "401"
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+      summary: Get search term completions
+      tags:
+        - Search
+        - publicly-accessible
+      x-status: Stable
   /send-to-pos-failed:
     post:
       description: "This webhook will be invoked if we experience an error or timeout in sending an order to the underlying POS / kitchen screen. When notified via this webhook, typically you will perform some form of alerting or backup flow (e.g. ask the operator to enter the order manually into the POS). NOTE: This message contains the `OrderId`, but not the full order. It is assumed that you have stored/cached the full order details earlier in the flow - e.g. via the [/order-ready-for-preparation](#/paths/~1order-ready-for-preparation-sync/post) webhook."
@@ -4892,6 +5142,40 @@ components:
       type: object
     AuthorizeResponse:
       description: The response object for the `authorize` endpoint.
+      type: object
+    AutoCompleteSearchResponse:
+      example:
+        suggestions:
+          - classification: Restaurant
+            suggestedTerm: Pizza Palace
+          - classification: Cuisine
+            suggestedTerm: Pizza
+          - classification: Dish
+            suggestedTerm: Large Hawaiian
+      properties:
+        suggestions:
+          description: Ordered list of suggested term completions
+          items:
+            $ref: "#/components/schemas/AutoCompleteSearchResponseItem"
+          maxItems: 10
+          type: array
+          uniqueItems: false
+      type: object
+    AutoCompleteSearchResponseItem:
+      example:
+        classification: Restaurant
+        suggestedTerm: Pizza Palace
+      properties:
+        classification:
+          description: Grouping to which term belongs
+          enum:
+            - Restaurant
+            - Cuisine
+            - Dish
+          type: string
+        suggestedTerm:
+          description: Suggested search term
+          type: string
       type: object
     Availability:
       example:
@@ -17212,6 +17496,25 @@ components:
             - no_answer
           type: string
       type: object
+    create-delivery-pool:
+      example:
+        name: Toronto - West
+        restaurants:
+          - 123
+          - 456
+      properties:
+        name:
+          description: The name of the pool, used by operations teams, in reports, etc.
+          type: string
+        restaurants:
+          description: A list of Just Eat restaurant ids served by the delivery pool.
+          items:
+            format: int32
+            type: number
+          type: array
+      required:
+        - name
+      type: object
     customer:
       properties:
         Address:
@@ -18887,6 +19190,20 @@ components:
       properties:
         Password:
           type: string
+      type: object
+    patch-delivery-pool:
+      example:
+        name: Toronto - North
+      properties:
+        name:
+          description: The name of the pool, used by operations teams, in reports, etc.
+          type: string
+        restaurants:
+          description: A list of Just Eat restaurant ids served by the delivery pool.
+          items:
+            format: int32
+            type: number
+          type: array
       type: object
     payment:
       properties:

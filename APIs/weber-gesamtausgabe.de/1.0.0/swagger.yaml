@@ -96,6 +96,8 @@ tags:
     name: Code Samples
   - description: Access to application settings
     name: Application
+  - description: Access to facets for filtering result sets
+    name: Facets
 paths:
   /application/newID:
     get:
@@ -363,6 +365,51 @@ paths:
       summary: Returns documents by ID
       tags:
         - Documents
+  "/facets/{facet}":
+    get:
+      description: ""
+      parameters:
+        - description: The facet to search for
+          enum:
+            - sender
+            - addressee
+          in: path
+          name: facet
+          required: true
+          type: string
+        - description: The scope of the result set, i.e. 'indices' or a WeGA ID
+          in: query
+          name: scope
+          pattern: ^(indices)|(A[A-F0-9]{6})$
+          required: true
+          type: string
+        - description: The search term to be looked for in the facet's label
+          in: query
+          name: term
+          type: string
+        - $ref: "#/parameters/docTypeRequiredParam"
+        - $ref: "#/parameters/offsetParam"
+        - $ref: "#/parameters/limitParam"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: An array of facets
+          headers:
+            totalrecordcount:
+              description: The total size of the result set
+              type: integer
+          schema:
+            items:
+              $ref: "#/definitions/Facet"
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/Error"
+      summary: Returns facets
+      tags:
+        - Facets
 definitions:
   CodeSample:
     properties:
@@ -399,5 +446,18 @@ definitions:
       fields:
         type: string
       message:
+        type: string
+    type: object
+  Facet:
+    properties:
+      frequency:
+        description: The sum of occurences of the object for the current result set
+        type: integer
+      label:
+        description: The name or title of the object
+        type: string
+      value:
+        description: the WeGA ID
+        pattern: ^A[A-F0-9]{6}$
         type: string
     type: object

@@ -81,6 +81,10 @@ tags:
     name: invoice
   - description: InvoiceItem Operations
     name: invoiceItem
+  - description: PriceBook Operations
+    name: priceBook
+  - description: PriceBookItem Operations
+    name: priceBookItem
   - description: Ticket Operations
     name: ticket
   - description: Custom Field Operations
@@ -14503,6 +14507,1496 @@ paths:
       summary: PUT for post
       tags:
         - post
+  /priceBook:
+    get:
+      consumes:
+        - application/json
+      description: Returns all priceBooks from the system
+      operationId: getPriceBookCollection
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: "Amount of results (default: 25)"
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - description: "Page to show (default: 1)"
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Expand relations
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: Comma-separated list of fields to include in the response
+          in: query
+          name: fields
+          required: false
+          type: string
+        - description: Specifies ascending or descending sort on existing fields
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Find all unique values for selected field
+          enum:
+            - "false"
+            - "true"
+          in: query
+          name: unique
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/PriceBookEntity"
+            type: array
+        "404":
+          description: Not Found
+      summary: GET for priceBook
+      tags:
+        - priceBook
+    post:
+      consumes:
+        - application/json
+      description: Add priceBook into the system
+      operationId: createPriceBookEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Add priceBook into the system
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PriceBookEntity"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/PriceBookEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: POST for priceBook
+      tags:
+        - priceBook
+  /priceBook/aggregate:
+    get:
+      consumes:
+        - application/json
+      description: Returns aggregate for priceBooks
+      operationId: getPriceBookAggregate
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Pipeline
+          in: query
+          name: pipeline
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Aggregate"
+        "404":
+          description: Not Found
+      summary: AGGREGATE for priceBook
+      tags:
+        - priceBook
+  /priceBook/bulk:
+    delete:
+      consumes:
+        - application/json
+      description: ""
+      operationId: deletePriceBookCollectionBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: ""
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/BulkEntity"
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      summary: DELETE bulk  for priceBook
+      tags:
+        - priceBook
+    post:
+      consumes:
+        - application/json
+      description: Add priceBook into the system
+      operationId: createPriceBookEntityBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Add priceBook into the system
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/BulkEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: POST bulk  for priceBook
+      tags:
+        - priceBook
+    put:
+      consumes:
+        - application/json
+      description: ""
+      operationId: updatePriceBookEntityBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: ""
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/BulkEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: PUT bulk  for priceBook
+      tags:
+        - priceBook
+  /priceBook/count:
+    get:
+      consumes:
+        - application/json
+      description: Count all priceBooks from the system
+      operationId: getPriceBookCountCollection
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Count"
+        "404":
+          description: Not Found
+      summary: COUNT for priceBook
+      tags:
+        - priceBook
+  /priceBook/describe:
+    get:
+      consumes:
+        - application/json
+      description: Returns describe for priceBooks
+      operationId: getPriceBookDescribe
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookDescribe"
+        "404":
+          description: Not Found
+      summary: DESCRIBE for priceBook
+      tags:
+        - priceBook
+  "/priceBook/{priceBook_id}":
+    delete:
+      consumes:
+        - application/json
+      description: Delete priceBook information
+      operationId: deletePriceBookEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: PriceBook Identifier
+          in: path
+          name: priceBook_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      summary: DELETE for priceBook
+      tags:
+        - priceBook
+    get:
+      consumes:
+        - application/json
+      description: Return priceBook information
+      operationId: getPriceBookEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: PriceBook Identifier
+          in: path
+          name: priceBook_id
+          required: true
+          type: string
+        - description: Expand relations
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: Comma-separated list of fields to include in the response
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookEntity"
+        "404":
+          description: Not Found
+      summary: GET for priceBook
+      tags:
+        - priceBook
+    put:
+      consumes:
+        - application/json
+      description: Update priceBook information
+      operationId: updatePriceBookEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: PriceBook Identifier
+          in: path
+          name: priceBook_id
+          required: true
+          type: string
+        - description: Update priceBook information
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PriceBookEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: PUT for priceBook
+      tags:
+        - priceBook
+  /priceBookItem:
+    get:
+      consumes:
+        - application/json
+      description: Returns all priceBookItems from the system
+      operationId: getPriceBookItemCollection
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: "Amount of results (default: 25)"
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+        - description: "Page to show (default: 1)"
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Expand relations
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: Comma-separated list of fields to include in the response
+          in: query
+          name: fields
+          required: false
+          type: string
+        - description: Specifies ascending or descending sort on existing fields
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Find all unique values for selected field
+          enum:
+            - "false"
+            - "true"
+          in: query
+          name: unique
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/PriceBookItemEntity"
+            type: array
+        "404":
+          description: Not Found
+      summary: GET for priceBookItem
+      tags:
+        - priceBookItem
+    post:
+      consumes:
+        - application/json
+      description: Add priceBookItem into the system
+      operationId: createPriceBookItemEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Add priceBookItem into the system
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PriceBookItemEntity"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/PriceBookItemEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: POST for priceBookItem
+      tags:
+        - priceBookItem
+  /priceBookItem/aggregate:
+    get:
+      consumes:
+        - application/json
+      description: Returns aggregate for priceBookItems
+      operationId: getPriceBookItemAggregate
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: Pipeline
+          in: query
+          name: pipeline
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Aggregate"
+        "404":
+          description: Not Found
+      summary: AGGREGATE for priceBookItem
+      tags:
+        - priceBookItem
+  /priceBookItem/bulk:
+    delete:
+      consumes:
+        - application/json
+      description: ""
+      operationId: deletePriceBookItemCollectionBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: ""
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/BulkEntity"
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      summary: DELETE bulk  for priceBookItem
+      tags:
+        - priceBookItem
+    post:
+      consumes:
+        - application/json
+      description: Add priceBookItem into the system
+      operationId: createPriceBookItemEntityBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: Add priceBookItem into the system
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: "#/definitions/BulkEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: POST bulk  for priceBookItem
+      tags:
+        - priceBookItem
+    put:
+      consumes:
+        - application/json
+      description: ""
+      operationId: updatePriceBookItemEntityBulk
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: ""
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/BulkEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/BulkEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: PUT bulk  for priceBookItem
+      tags:
+        - priceBookItem
+  /priceBookItem/count:
+    get:
+      consumes:
+        - application/json
+      description: Count all priceBookItems from the system
+      operationId: getPriceBookItemCountCollection
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Count"
+        "404":
+          description: Not Found
+      summary: COUNT for priceBookItem
+      tags:
+        - priceBookItem
+  /priceBookItem/describe:
+    get:
+      consumes:
+        - application/json
+      description: Returns describe for priceBookItems
+      operationId: getPriceBookItemDescribe
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookItemDescribe"
+        "404":
+          description: Not Found
+      summary: DESCRIBE for priceBookItem
+      tags:
+        - priceBookItem
+  "/priceBookItem/{priceBookItem_id}":
+    delete:
+      consumes:
+        - application/json
+      description: Delete priceBookItem information
+      operationId: deletePriceBookItemEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: PriceBookItem Identifier
+          in: path
+          name: priceBookItem_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+      summary: DELETE for priceBookItem
+      tags:
+        - priceBookItem
+    get:
+      consumes:
+        - application/json
+      description: Return priceBookItem information
+      operationId: getPriceBookItemEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Data Enable
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
+        - description: Data Is Final
+          enum:
+            - "true"
+            - "false"
+          in: header
+          name: X-API2CRM-DATA-IS-FINAL
+          required: false
+          type: string
+        - description: Data Strategy
+          enum:
+            - default
+          in: header
+          name: X-API2CRM-DATA-STRATEGY
+          required: false
+          type: string
+        - description: Data Is Actual
+          enum:
+            - "true"
+          in: header
+          name: X-API2CRM-DATA-ALWAYS-ACTUAL
+          required: false
+          type: string
+        - description: Data Actual At
+          format: date-time
+          in: header
+          name: X-API2CRM-DATA-ACTUAL-AT
+          pattern: /^\d{4}-\d{2}-\d{2}T(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}(\-(0[0-9]|1[0-2])|\+(0[0-9]|1[0-4]))[0-5][0-9]$/
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: PriceBookItem Identifier
+          in: path
+          name: priceBookItem_id
+          required: true
+          type: string
+        - description: Expand relations
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: Comma-separated list of fields to include in the response
+          in: query
+          name: fields
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookItemEntity"
+        "404":
+          description: Not Found
+      summary: GET for priceBookItem
+      tags:
+        - priceBookItem
+    put:
+      consumes:
+        - application/json
+      description: Update priceBookItem information
+      operationId: updatePriceBookItemEntity
+      parameters:
+        - default: e2a6379ab878ae7e58119d4ec842bf9c
+          description: User Key
+          in: header
+          name: X-API2CRM-USER-KEY
+          required: true
+          type: string
+        - default: 7ae5b17008fb414d84981191cf3b66a476ef8bef
+          description: Application Key
+          in: header
+          name: X-API2CRM-APPLICATION-KEY
+          required: true
+          type: string
+        - description: Return native response
+          enum:
+            - "false"
+            - "true"
+          in: header
+          name: X-API2CRM-NATIVE-ENABLE
+          required: false
+          type: string
+        - description: Describe lifetime
+          in: header
+          name: X-API2CRM-DESCRIBE-LIFETIME
+          required: false
+          type: string
+        - description: PriceBookItem Identifier
+          in: path
+          name: priceBookItem_id
+          required: true
+          type: string
+        - description: Update priceBookItem information
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PriceBookItemEntity"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PriceBookItemEntityRelation"
+        "400":
+          description: Client Error
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+      summary: PUT for priceBookItem
+      tags:
+        - priceBookItem
   /product:
     get:
       consumes:
@@ -22720,6 +24214,149 @@ definitions:
         format: float
         type: number
     type: object
+  PriceBookDescribe:
+    properties:
+      entity:
+        description: Entity
+        type: string
+      schema:
+        $ref: "#/definitions/SchemaDescribe"
+        description: Schema
+        type: object
+    type: object
+  PriceBookEntity:
+    properties:
+      created_at:
+        description: Created At
+        example: 2015-01-01T05:18:23-0700
+        format: date-time
+        type: string
+      currency:
+        $ref: "#/definitions/Currency"
+        description: Currency
+        type: object
+      description:
+        description: Description
+        example: Description
+        type: string
+      id:
+        description: PriceBook Identifier
+        example: "21312411"
+        type: string
+      is_active:
+        description: Is Active
+        example: true
+        type: boolean
+      is_standard:
+        description: Is Standard
+        example: true
+        type: boolean
+      name:
+        description: Name
+        example: Bill Wall
+        type: string
+      relation:
+        $ref: "#/definitions/Relation"
+        description: Relation
+        type: object
+      type:
+        description: Number
+        example: "21312411"
+        type: string
+      updated_at:
+        description: Updated At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
+        type: string
+    type: object
+  PriceBookEntityRelation:
+    properties:
+      id:
+        description: PriceBook Identifier
+        example: "21312411"
+        type: string
+    type: object
+  PriceBookItemDescribe:
+    properties:
+      entity:
+        description: Entity
+        type: string
+      schema:
+        $ref: "#/definitions/SchemaDescribe"
+        description: Schema
+        type: object
+    type: object
+  PriceBookItemEntity:
+    properties:
+      code:
+        description: Code
+        example: "21312411"
+        type: string
+      created_at:
+        description: Created At
+        example: 2015-01-01T05:18:23-0700
+        format: date-time
+        type: string
+      id:
+        description: PriceBookItem Identifier
+        example: "21312411"
+        type: string
+      is_active:
+        description: Is Active
+        example: true
+        type: boolean
+      name:
+        description: Name
+        example: Bill Wall
+        type: string
+      price:
+        description: Price
+        items:
+          $ref: "#/definitions/Price"
+        type: array
+      relation:
+        $ref: "#/definitions/Relation"
+        description: Relation
+        type: object
+      updated_at:
+        description: Updated At
+        example: 2015-02-10T17:12:23-0700
+        format: date-time
+        type: string
+      use_standard_price:
+        description: Is Standard
+        example: true
+        type: boolean
+    type: object
+  PriceBookItemEntityRelation:
+    properties:
+      id:
+        description: PriceBookItem Identifier
+        example: "21312411"
+        type: string
+    type: object
+  PriceBookItemRelation:
+    properties:
+      entity:
+        $ref: "#/definitions/PriceBookItemEntityRelation"
+        description: Entity
+        type: object
+      type:
+        description: Type
+        example: General
+        type: string
+    type: object
+  PriceBookRelation:
+    properties:
+      entity:
+        $ref: "#/definitions/PriceBookEntityRelation"
+        description: Entity
+        type: object
+      type:
+        description: Type
+        example: General
+        type: string
+    type: object
   ProductDescribe:
     properties:
       entity:
@@ -23256,6 +24893,16 @@ definitions:
         items:
           $ref: "#/definitions/PostRelation"
         type: array
+      priceBook:
+        description: Price Book
+        items:
+          $ref: "#/definitions/PriceBookRelation"
+        type: array
+      priceBookItem:
+        description: Price Book Item
+        items:
+          $ref: "#/definitions/PriceBookItemRelation"
+        type: array
       product:
         description: Product
         items:
@@ -23414,6 +25061,8 @@ definitions:
           - invoiceItem
           - quote
           - quoteItem
+          - priceBook
+          - priceBookItem
           - comment
         type: string
       id:

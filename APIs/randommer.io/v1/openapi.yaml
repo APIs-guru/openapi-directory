@@ -102,7 +102,7 @@ paths:
           schema:
             description: ""
             format: int32
-            maximum: 10000
+            maximum: 5000
             minimum: 1
             type: integer
         - description: Enter your key
@@ -122,9 +122,10 @@ paths:
         - description: ""
           in: query
           name: startingWords
+          required: true
           schema:
             description: ""
-            nullable: true
+            maxLength: 100
             type: string
         - description: Enter your key
           in: header
@@ -134,7 +135,7 @@ paths:
       responses:
         "200":
           description: Success
-      summary: Get businss name suggestions
+      summary: Get business name suggestions
       tags:
         - Name
   /api/Phone/Countries:

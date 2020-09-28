@@ -624,6 +624,81 @@ paths:
       summary: List all organizations
       tags:
         - admin
+  /admin/unadopted:
+    get:
+      operationId: adminUnadoptedList
+      parameters:
+        - description: page number of results to return (1-based)
+          in: query
+          name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
+          type: integer
+        - description: pattern of repositories to search for
+          in: query
+          name: pattern
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/StringSlice"
+        "403":
+          $ref: "#/responses/forbidden"
+      summary: List unadopted repositories
+      tags:
+        - admin
+  "/admin/unadopted/{owner}/{repo}":
+    delete:
+      operationId: adminDeleteUnadoptedRepository
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "403":
+          $ref: "#/responses/forbidden"
+      summary: Delete unadopted files
+      tags:
+        - admin
+    post:
+      operationId: adminAdoptRepository
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "403":
+          $ref: "#/responses/forbidden"
+        "404":
+          $ref: "#/responses/notFound"
+      summary: Adopt unadopted files as a repository
+      tags:
+        - admin
   /admin/users:
     get:
       operationId: adminGetAllUsers
@@ -5626,9 +5701,40 @@ paths:
       responses:
         "201":
           $ref: "#/responses/Release"
+        "404":
+          $ref: "#/responses/notFound"
         "409":
           $ref: "#/responses/error"
       summary: Create a release
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/releases/tags/{tag}":
+    get:
+      operationId: repoGetReleaseTag
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: tagname of the release to get
+          in: path
+          name: tag
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/Release"
+        "404":
+          $ref: "#/responses/notFound"
+      summary: Get a release by tag name
       tags:
         - repository
   "/repos/{owner}/{repo}/releases/{id}":
@@ -5654,6 +5760,8 @@ paths:
       responses:
         "204":
           $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Delete a release
       tags:
         - repository
@@ -5681,6 +5789,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/Release"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Get a release
       tags:
         - repository
@@ -5714,6 +5824,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/Release"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Update a release
       tags:
         - repository
@@ -8645,6 +8757,10 @@ definitions:
         description: Readme of the repository to create
         type: string
         x-go-name: Readme
+      template:
+        description: Whether the repository is template
+        type: boolean
+        x-go-name: Template
       trust_model:
         description: TrustModel of the repository
         enum:
@@ -9623,6 +9739,11 @@ definitions:
     title: GitObject represents a Git object.
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
+  GitServiceType:
+    description: GitServiceType represents a git service
+    format: int64
+    type: integer
+    x-go-package: code.gitea.io/gitea/modules/structs
   GitTreeResponse:
     description: GitTreeResponse returns a git tree
     properties:
@@ -9958,9 +10079,7 @@ definitions:
         type: string
         x-go-name: RepoName
       service:
-        format: int64
-        type: integer
-        x-go-name: Service
+        $ref: "#/definitions/GitServiceType"
       uid:
         format: int64
         type: integer
