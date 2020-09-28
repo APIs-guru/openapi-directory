@@ -15571,6 +15571,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidDBProxyStateFault'
+        '488':
+          description: InsufficientAvailableIPsInSubnetFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientAvailableIPsInSubnetFault'
       parameters:
         - name: DBProxyName
           in: query
@@ -15681,6 +15687,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidDBProxyStateFault'
+        '488':
+          description: InsufficientAvailableIPsInSubnetFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientAvailableIPsInSubnetFault'
       requestBody:
         content:
           text/xml:
@@ -21818,6 +21830,7 @@ components:
             - $ref: '#/components/schemas/TargetList'
             - description: One or more <code>DBProxyTarget</code> objects that are created when you register targets with a target group.
     DBProxyTargetAlreadyRegisteredFault: {}
+    InsufficientAvailableIPsInSubnetFault: {}
     RemoveFromGlobalClusterResult:
       type: object
       properties:
@@ -27762,7 +27775,7 @@ components:
         ForcedApplyDate:
           allOf:
             - $ref: '#/components/schemas/TStamp'
-            - description: The date when the maintenance action is automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource.
+            - description: '<p>The date when the maintenance action is automatically applied.</p> <p>On this date, the maintenance action is applied to the resource as soon as possible, regardless of the maintenance window for the resource. There might be a delay of one or more days from this date before the maintenance action is applied.</p>'
         OptInStatus:
           allOf:
             - $ref: '#/components/schemas/String'
