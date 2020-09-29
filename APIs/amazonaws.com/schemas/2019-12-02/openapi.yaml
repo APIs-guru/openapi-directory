@@ -595,6 +595,7 @@ paths:
                   type: string
                   enum:
                     - OpenApi3
+                    - JSONSchemaDraft4
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -803,6 +804,7 @@ paths:
                   type: string
                   enum:
                     - OpenApi3
+                    - JSONSchemaDraft4
   '/v1/discoverers/id/{discovererId}':
     delete:
       operationId: DeleteDiscoverer
@@ -1391,6 +1393,92 @@ paths:
           description: Specifying this limits the results to only this schema version.
           schema:
             type: string
+  '/v1/registries/name/{registryName}/schemas/name/{schemaName}/export#type':
+    get:
+      operationId: ExportSchema
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportSchemaResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: registryName
+          in: path
+          required: true
+          description: The name of the registry.
+          schema:
+            type: string
+        - name: schemaName
+          in: path
+          required: true
+          description: The name of the schema.
+          schema:
+            type: string
+        - name: schemaVersion
+          in: query
+          required: false
+          description: Specifying this limits the results to only this schema version.
+          schema:
+            type: string
+        - name: type
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/registries/name/{registryName}/schemas/name/{schemaName}/language/{language}/source':
     get:
       operationId: GetCodeBindingSource
@@ -1535,6 +1623,7 @@ paths:
                   type: string
                   enum:
                     - OpenApi3
+                    - JSONSchemaDraft4
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2430,6 +2519,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
             - description: The date the schema version was created.
+    ExportSchemaResponse:
+      type: object
+      properties:
+        Content:
+          $ref: '#/components/schemas/__string'
+        SchemaArn:
+          $ref: '#/components/schemas/__string'
+        SchemaName:
+          $ref: '#/components/schemas/__string'
+        SchemaVersion:
+          $ref: '#/components/schemas/__string'
+        Type:
+          $ref: '#/components/schemas/__string'
     GetCodeBindingSourceResponse:
       type: object
       properties:
@@ -2727,6 +2829,7 @@ components:
       type: string
       enum:
         - OpenApi3
+        - JSONSchemaDraft4
     CreateSchemaRequest:
       type: object
       required:
@@ -2816,6 +2919,10 @@ components:
             - xml:
                 name: tags
               description: Tags associated with the resource.
+    ExportSchemaRequest:
+      type: object
+      title: ExportSchemaRequest
+      properties: {}
     GetCodeBindingSourceRequest:
       type: object
       title: GetCodeBindingSourceRequest
@@ -2964,6 +3071,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The version number of the schema.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of schema.
     __listOfSearchSchemaVersionSummary:
       type: array
       items:
@@ -2998,6 +3109,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The version number of the schema
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: The type of schema.
     SearchSchemasRequest:
       type: object
       title: SearchSchemasRequest

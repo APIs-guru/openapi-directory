@@ -13575,7 +13575,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/ComplianceStatus'
-            - description: The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+            - description: 'The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren''t applicable).'
         Severity:
           allOf:
             - $ref: '#/components/schemas/ComplianceSeverity'
@@ -13613,7 +13613,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/ComplianceStatus'
-            - description: 'The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren''t applicable).'
+            - description: The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
         Details:
           allOf:
             - $ref: '#/components/schemas/ComplianceItemDetails'
@@ -15349,7 +15349,7 @@ components:
         PingStatus:
           allOf:
             - $ref: '#/components/schemas/PingStatus'
-            - description: 'Connection status of SSM Agent. '
+            - description: <p>Connection status of SSM Agent. </p> <note> <p>The status <code>Inactive</code> has been deprecated and is no longer in use.</p> </note>
         LastPingDateTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
