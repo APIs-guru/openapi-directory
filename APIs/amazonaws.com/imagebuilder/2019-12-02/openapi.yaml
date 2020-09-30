@@ -729,11 +729,11 @@ paths:
                     scheduleExpression:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
-                        - description: The expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.
+                        - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
                     pipelineExecutionStartCondition:
                       allOf:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
-                        - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time.'
+                        - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
                 status:
                   description: ' The status of the image pipeline. '
                   type: string
@@ -871,7 +871,7 @@ paths:
                     $ref: '#/components/schemas/ComponentConfiguration'
                   minItems: 1
                 parentImage:
-                  description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x</code>. The ARN ends with <code>/20xx.x.x</code>, which communicates to EC2 Image Builder that you want to use the latest AMI created in 20xx (year). You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
+                  description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -3844,11 +3844,11 @@ paths:
                     scheduleExpression:
                       allOf:
                         - $ref: '#/components/schemas/NonEmptyString'
-                        - description: The expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.
+                        - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
                     pipelineExecutionStartCondition:
                       allOf:
                         - $ref: '#/components/schemas/PipelineExecutionStartCondition'
-                        - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time.'
+                        - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
                 status:
                   description: 'The status of the image pipeline. '
                   type: string
@@ -4137,7 +4137,7 @@ components:
             - description: 'The specific AMI settings (for example, launch permissions, AMI tags). '
         licenseConfigurationArns:
           allOf:
-            - $ref: '#/components/schemas/ArnList'
+            - $ref: '#/components/schemas/LicenseConfigurationArnList'
             - description: The License Manager Configuration to associate with the AMI in the specified Region.
       description: ' Defines the settings for a specific Region. '
     ResourceAlreadyExistsException: {}
@@ -4704,10 +4704,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
             - description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by this request. '
+    AccountId:
+      type: string
+      pattern: '^\d{12}$'
     AccountList:
       type: array
       items:
-        $ref: '#/components/schemas/NonEmptyString'
+        $ref: '#/components/schemas/AccountId'
+      minItems: 1
+      maxItems: 50
     ImageState:
       type: object
       properties:
@@ -4741,6 +4746,10 @@ components:
             - description: 'The description of the EC2 AMI. '
         state:
           $ref: '#/components/schemas/ImageState'
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The account ID of the owner of the AMI. '
       description: ' Details of an EC2 AMI. '
     AmiNameString:
       type: string
@@ -4776,6 +4785,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The description of the distribution configuration. '
+        targetAccountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+            - description: ' The ID of an account to which you want to distribute an image. '
         amiTags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4795,10 +4808,6 @@ components:
         $ref: '#/components/schemas/Ami'
     Arn:
       type: string
-    ArnList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Arn'
     ImageBuildVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
@@ -5142,11 +5151,11 @@ components:
         scheduleExpression:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.
+            - description: '<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html">Use cron expressions in EC2 Image Builder</a>.</p>'
         pipelineExecutionStartCondition:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionStartCondition'
-            - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time.'
+            - description: 'The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href="https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.'
       description: 'A schedule configures how often and when a pipeline will automatically create a new image. '
     PipelineStatus:
       type: string
@@ -5242,7 +5251,7 @@ components:
         parentImage:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x</code>. The ARN ends with <code>/20xx.x.x</code>, which communicates to EC2 Image Builder that you want to use the latest AMI created in 20xx (year). You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
+            - description: 'The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. '
         blockDeviceMappings:
           allOf:
             - $ref: '#/components/schemas/InstanceBlockDeviceMappings'
@@ -5404,6 +5413,12 @@ components:
       type: object
       title: DeleteInfrastructureConfigurationRequest
       properties: {}
+    LicenseConfigurationArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LicenseConfigurationArn'
+      minItems: 1
+      maxItems: 50
     DistributionTimeoutMinutes:
       type: integer
       minimum: 30
@@ -5491,6 +5506,7 @@ components:
       enum:
         - standard
         - io1
+        - io2
         - gp2
         - sc1
         - st1
@@ -6092,6 +6108,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
+    LicenseConfigurationArn:
+      type: string
+      pattern: '^arn:aws[^:]*:license-manager:[^:]+:\d{12}:license-configuration:lic-[a-z0-9-_]{32}$'
     RestrictedInteger:
       type: integer
       minimum: 1

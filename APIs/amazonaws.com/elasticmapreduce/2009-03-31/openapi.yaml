@@ -2623,6 +2623,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ManagedScalingPolicy'
             - description: ' The specified managed scaling policy for an Amazon EMR cluster. '
+        PlacementGroupConfigs:
+          $ref: '#/components/schemas/PlacementGroupConfigList'
       description: ' Input to the <a>RunJobFlow</a> operation. '
     SetTerminationProtectionInput:
       type: object
@@ -3262,6 +3264,10 @@ components:
       type: string
       minLength: 0
       maxLength: 2048
+    PlacementGroupConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlacementGroupConfig'
     Cluster:
       type: object
       properties:
@@ -3381,6 +3387,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: Specifies the number of steps that can be executed concurrently.
+        PlacementGroups:
+          $ref: '#/components/schemas/PlacementGroupConfigList'
       description: The detailed description of the cluster.
     ClusterState:
       type: string
@@ -4907,6 +4915,22 @@ components:
       type: string
       enum:
         - lowest-price
+    PlacementGroupStrategy:
+      type: string
+      enum:
+        - SPREAD
+        - PARTITION
+        - CLUSTER
+        - NONE
+    PlacementGroupConfig:
+      type: object
+      required:
+        - InstanceRole
+      properties:
+        InstanceRole:
+          $ref: '#/components/schemas/InstanceRoleType'
+        PlacementStrategy:
+          $ref: '#/components/schemas/PlacementGroupStrategy'
     Port:
       type: integer
       minimum: -1

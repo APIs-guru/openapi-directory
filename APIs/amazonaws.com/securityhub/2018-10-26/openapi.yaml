@@ -3,7 +3,7 @@ info:
   version: '2018-10-26'
   x-release: v4
   title: AWS SecurityHub
-  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
+  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>BatchEnableStandards</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p> <code> <a>UpdateStandardsControl</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -404,7 +404,7 @@ paths:
   /findings/batchupdate:
     patch:
       operationId: BatchUpdateFindings
-      description: <p>Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Master accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>Member accounts can only use <code>BatchUpdateFindings</code> to update the Note object.</p>
+      description: '<p>Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Master and member accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the <i>AWS Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -659,7 +659,7 @@ paths:
                   type: string
                   pattern: .*\S.*
                 Filters:
-                  description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+                  description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
                   type: object
                   properties:
                     ProductArn:
@@ -1416,7 +1416,7 @@ paths:
                   type: string
                   pattern: .*\S.*
                 Filters:
-                  description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+                  description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
                   type: object
                   properties:
                     ProductArn:
@@ -2746,7 +2746,7 @@ paths:
               type: object
               properties:
                 Filters:
-                  description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+                  description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
                   type: object
                   properties:
                     ProductArn:
@@ -3157,7 +3157,7 @@ paths:
                 - Filters
               properties:
                 Filters:
-                  description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+                  description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
                   type: object
                   properties:
                     ProductArn:
@@ -4844,12 +4844,374 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AvailabilityZone'
+    AwsApiGatewayAccessLogSettings:
+      type: object
+      properties:
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'A single-line format of the access logs of data, as specified by selected <code>$context</code> variables. The format must include at least <code>$context.requestId</code>.'
+        DestinationArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the CloudWatch Logs log group that receives the access logs.
+      description: Contains information about settings for logging access for the stage.
+    FieldMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NonEmptyString'
+    Boolean:
+      type: boolean
+    AwsApiGatewayCanarySettings:
+      type: object
+      properties:
+        PercentTraffic:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The percentage of traffic that is diverted to a canary deployment.
+        DeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The deployment identifier for the canary deployment.
+        StageVariableOverrides:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: <p>Stage variables that are overridden in the canary release deployment. The variables include new stage variables that are introduced in the canary.</p> <p>Each variable is represented as a string-to-string map between the stage variable name and the variable value.</p>
+        UseStageCache:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the canary deployment uses the stage cache.
+      description: Contains information about settings for canary deployment in the stage.
+    NonEmptyStringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    AwsApiGatewayEndpointConfiguration:
+      type: object
+      properties:
+        Types:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: '<p>A list of endpoint types for the REST API.</p> <p>For an edge-optimized API, the endpoint type is <code>EDGE</code>. For a Regional API, the endpoint type is <code>REGIONAL</code>. For a private API, the endpoint type is <code>PRIVATE</code>.</p>'
+      description: Contains information about the endpoints for the API.
+    Integer:
+      type: integer
+    AwsApiGatewayMethodSettings:
+      type: object
+      properties:
+        MetricsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether CloudWatch metrics are enabled for the method. '
+        LoggingLevel:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The logging level for this method. The logging level affects the log entries that are pushed to CloudWatch Logs.</p> <p>If the logging level is <code>ERROR</code>, then the logs only include error-level entries.</p> <p>If the logging level is <code>INFO</code>, then the logs include both <code>ERROR</code> events and extra informational events.</p> <p>Valid values: <code>OFF</code> | <code>ERROR</code> | <code>INFO</code> </p>'
+        DataTraceEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether data trace logging is enabled for the method. Data trace logging affects the log entries that are pushed to CloudWatch Logs.
+        ThrottlingBurstLimit:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The throttling burst limit for the method.
+        ThrottlingRateLimit:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The throttling rate limit for the method.
+        CachingEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether responses are cached and returned for requests. For responses to be cached, a cache cluster must be enabled on the stage.'
+        CacheTtlInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response is cached.'
+        CacheDataEncrypted:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether the cached responses are encrypted. '
+        RequireAuthorizationForCacheControl:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether authorization is required for a cache invalidation request.
+        UnauthorizedCacheControlHeaderStrategy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates how to handle unauthorized requests for cache invalidation.</p> <p>Valid values: <code>FAIL_WITH_403</code> | <code>SUCCEED_WITH_RESPONSE_HEADER</code> | <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code> </p>'
+        HttpMethod:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.
+        ResourcePath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The resource path for this method. Forward slashes (/) are encoded as ~1 . The initial slash must include a forward slash.</p> <p>For example, the path value <code>/resource/subresource</code> must be encoded as <code>/~1resource~1subresource</code>.</p> <p>To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.</p>'
+      description: Defines settings for a method for the stage.
+    AwsApiGatewayMethodSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsApiGatewayMethodSettings'
+    AwsApiGatewayRestApiDetails:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the REST API.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the REST API.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the REST API.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version identifier for the REST API.
+        BinaryMediaTypes:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The list of binary media types supported by the REST API.
+        MinimumCompressionSize:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The minimum size in bytes of a payload before compression is enabled.</p> <p>If <code>null</code>, then compression is disabled.</p> <p>If 0, then all payloads are compressed.</p>'
+        ApiKeySource:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The source of the API key for metering requests according to a usage plan.</p> <p> <code>HEADER</code> indicates whether to read the API key from the X-API-Key header of a request.</p> <p> <code>AUTHORIZER</code> indicates whether to read the API key from the <code>UsageIdentifierKey</code> from a custom authorizer.</p>
+        EndpointConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayEndpointConfiguration'
+            - description: The endpoint configuration of the REST API.
+      description: contains information about a REST API in version 1 of Amazon API Gateway.
+    AwsApiGatewayStageDetails:
+      type: object
+      properties:
+        DeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the deployment that the stage points to.
+        ClientCertificateId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the client certificate for the stage.
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the stage.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the stage.
+        CacheClusterEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether a cache cluster is enabled for the stage.
+        CacheClusterSize:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'If a cache cluster is enabled, the size of the cache cluster.'
+        CacheClusterStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'If a cache cluster is enabled, the status of the cache cluster.'
+        MethodSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayMethodSettingsList'
+            - description: Defines the method settings for the stage.
+        Variables:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: '<p>A map that defines the stage variables for the stage.</p> <p>Variable names can have alphanumeric and underscore characters.</p> <p>Variable values can contain the following characters:</p> <ul> <li> <p>Uppercase and lowercase letters</p> </li> <li> <p>Numbers</p> </li> <li> <p>Special characters -._~:/?#&amp;=,</p> </li> </ul>'
+        DocumentationVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version of the API documentation that is associated with the stage.
+        AccessLogSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayAccessLogSettings'
+            - description: Settings for logging access for the stage.
+        CanarySettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayCanarySettings'
+            - description: Information about settings for canary deployment in the stage.
+        TracingEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether active tracing with AWS X-Ray is enabled for the stage.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        LastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        WebAclArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the web ACL associated with the stage.
+      description: Provides information about a version 1 Amazon API Gateway stage.
+    AwsCorsConfiguration:
+      type: object
+      properties:
+        AllowOrigins:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The allowed origins for CORS requests.
+        AllowCredentials:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the CORS request includes credentials.
+        ExposeHeaders:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The exposed headers for CORS requests.
+        MaxAge:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of seconds for which the browser caches preflight request results.
+        AllowMethods:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The allowed methods for CORS requests.
+        AllowHeaders:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The allowed headers for CORS requests.
+      description: Contains the cross-origin resource sharing (CORS) configuration for the API. CORS is only supported for HTTP APIs.
+    AwsApiGatewayV2ApiDetails:
+      type: object
+      properties:
+        ApiEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The URI of the API. </p> <p>Uses the format <code> <i>&lt;api-id&gt;</i>.execute-api.<i>&lt;region&gt;</i>.amazonaws.com</code> </p> <p>The stage name is typically appended to the URI to form a complete path to a deployed API stage.</p>
+        ApiId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the API.
+        ApiKeySelectionExpression:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'An API key selection expression. Supported only for WebSocket APIs. '
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the API.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version identifier for the API.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the API.
+        ProtocolType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The API protocol for the API.</p> <p>Valid values: <code>WEBSOCKET</code> | <code>HTTP</code> </p>'
+        RouteSelectionExpression:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The route selection expression for the API.</p> <p>For HTTP APIs, must be <code>${request.method} ${request.path}</code>. This is the default value for HTTP APIs.</p> <p>For WebSocket APIs, there is no default value.</p>'
+        CorsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsCorsConfiguration'
+            - description: A cross-origin resource sharing (CORS) configuration. Supported only for HTTP APIs.
+      description: Contains information about a version 2 API in Amazon API Gateway.
+    AwsApiGatewayV2RouteSettings:
+      type: object
+      properties:
+        DetailedMetricsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether detailed metrics are enabled.
+        LoggingLevel:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The logging level. The logging level affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs.</p> <p>If the logging level is <code>ERROR</code>, then the logs only include error-level entries.</p> <p>If the logging level is <code>INFO</code>, then the logs include both <code>ERROR</code> events and extra informational events.</p> <p>Valid values: <code>OFF</code> | <code>ERROR</code> | <code>INFO</code> </p>'
+        DataTraceEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether data trace logging is enabled. Data trace logging affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs.
+        ThrottlingBurstLimit:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The throttling burst limit.
+        ThrottlingRateLimit:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The throttling rate limit.
+      description: Contains route settings for a stage.
+    AwsApiGatewayV2StageDetails:
+      type: object
+      properties:
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The description of the stage.
+        DefaultRouteSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayV2RouteSettings'
+            - description: Default route settings for the stage.
+        DeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The identifier of the deployment that the stage is associated with. '
+        LastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        RouteSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayV2RouteSettings'
+            - description: The route settings for the stage.
+        StageName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the stage.
+        StageVariables:
+          allOf:
+            - $ref: '#/components/schemas/FieldMap'
+            - description: '<p>A map that defines the stage variables for the stage.</p> <p>Variable names can have alphanumeric and underscore characters.</p> <p>Variable values can contain the following characters:</p> <ul> <li> <p>Uppercase and lowercase letters</p> </li> <li> <p>Numbers</p> </li> <li> <p>Special characters -._~:/?#&amp;=,</p> </li> </ul>'
+        AccessLogSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayAccessLogSettings'
+            - description: Information about settings for logging access for the stage.
+        AutoDeploy:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether updates to an API automatically trigger a new deployment.
+        LastDeploymentStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the last deployment of a stage. Supported only if the stage has automatic deployment enabled.
+        ApiGatewayManaged:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the stage is managed by API Gateway.
+      description: Contains information about a version 2 stage for Amazon API Gateway.
     StringList:
       type: array
       items:
         $ref: '#/components/schemas/NonEmptyString'
-    Integer:
-      type: integer
     AwsAutoScalingAutoScalingGroupDetails:
       type: object
       properties:
@@ -4874,6 +5236,234 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: Provides details about an auto scaling group.
+    AwsCertificateManagerCertificateDomainValidationOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCertificateManagerCertificateDomainValidationOption'
+    AwsCertificateManagerCertificateExtendedKeyUsages:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCertificateManagerCertificateExtendedKeyUsage'
+    AwsCertificateManagerCertificateKeyUsages:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCertificateManagerCertificateKeyUsage'
+    AwsCertificateManagerCertificateOptions:
+      type: object
+      properties:
+        CertificateTransparencyLoggingPreference:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Whether to add the certificate to a transparency log.</p> <p>Valid values: <code>DISABLED</code> | <code>ENABLED</code> </p>'
+      description: Contains other options for the certificate.
+    AwsCertificateManagerCertificateRenewalSummary:
+      type: object
+      properties:
+        DomainValidationOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateDomainValidationOptions'
+            - description: 'Information about the validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.'
+        RenewalStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the AWS Certificate Manager managed renewal of the certificate.</p> <p>Valid values: <code>PENDING_AUTO_RENEWAL</code> | <code>PENDING_VALIDATION</code> | <code>SUCCESS</code> | <code>FAILED</code> </p>'
+        RenewalStatusReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The reason that a renewal request was unsuccessful.</p> <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> | <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> | <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> | <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code> | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> | <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> | <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> | <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code> </p>'
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the renewal summary was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Contains information about the AWS Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.
+    AwsCertificateManagerCertificateDetails:
+      type: object
+      properties:
+        CertificateAuthorityArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the private certificate authority (CA) that will be used to issue the certificate.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the certificate was requested.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The fully qualified domain name (FQDN), such as www.example.com, that is secured by the certificate.'
+        DomainValidationOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateDomainValidationOptions'
+            - description: <p>Contains information about the initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request.</p> <p>Only provided if the certificate type is <code>AMAZON_ISSUED</code>.</p>
+        ExtendedKeyUsages:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateExtendedKeyUsages'
+            - description: Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID).
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>For a failed certificate request, the reason for the failure.</p> <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> | <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> | <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> | <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code> | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> | <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> | <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> | <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code> </p>'
+        ImportedAt:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the certificate was imported. Provided if the certificate type is <code>IMPORTED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        InUseBy:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The list of ARNs for the AWS resources that use the certificate.
+        IssuedAt:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the certificate was issued. Provided if the certificate type is <code>AMAZON_ISSUED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the certificate authority that issued and signed the certificate.
+        KeyAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The algorithm that was used to generate the public-private key pair.</p> <p>Valid values: <code>RSA_2048</code> | <code>RSA_1024</code> |<code> RSA_4096</code> | <code>EC_prime256v1</code> | <code>EC_secp384r1</code> | <code>EC_secp521r1</code> </p>'
+        KeyUsages:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateKeyUsages'
+            - description: A list of key usage X.509 v3 extension objects.
+        NotAfter:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The time after which the certificate becomes invalid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        NotBefore:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The time before which the certificate is not valid.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateOptions'
+            - description: Provides a value that specifies whether to add the certificate to a transparency log.
+        RenewalEligibility:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Whether the certificate is eligible for renewal.</p> <p>Valid values: <code>ELIGIBLE</code> | <code>INELIGIBLE</code> </p>'
+        RenewalSummary:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateRenewalSummary'
+            - description: Information about the status of the AWS Certificate Manager managed renewal for the certificate. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.
+        Serial:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The serial number of the certificate.
+        SignatureAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The algorithm that was used to sign the certificate.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the certificate.</p> <p>Valid values: <code>PENDING_VALIDATION</code> | <code>ISSUED</code> | <code>INACTIVE</code> | <code>EXPIRED</code> | <code>VALIDATION_TIMED_OUT</code> | <code>REVOKED</code> | <code>FAILED</code> </p>'
+        Subject:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the entity that is associated with the public key contained in the certificate.
+        SubjectAlternativeNames:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: <p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate.</p> <p>The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.</p>
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The source of the certificate. For certificates that AWS Certificate Manager provides, <code>Type</code> is <code>AMAZON_ISSUED</code>. For certificates that are imported with <code>ImportCertificate</code>, <code>Type</code> is <code>IMPORTED</code>.</p> <p>Valid values: <code>IMPORTED</code> | <code>AMAZON_ISSUED</code> | <code>PRIVATE</code> </p>'
+      description: Provides details about an AWS Certificate Manager certificate.
+    AwsCertificateManagerCertificateResourceRecord:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the resource.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The type of resource.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value of the resource.
+      description: Provides details about the CNAME record that is added to the DNS database for domain validation.
+    AwsCertificateManagerCertificateDomainValidationOption:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A fully qualified domain name (FQDN) in the certificate.
+        ResourceRecord:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateResourceRecord'
+            - description: The CNAME record that is added to the DNS database for domain validation.
+        ValidationDomain:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The domain name that AWS Certificate Manager uses to send domain validation emails.
+        ValidationEmails:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of email addresses that AWS Certificate Manager uses to send domain validation emails.
+        ValidationMethod:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The method used to validate the domain name.
+        ValidationStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The validation status of the domain name.
+      description: '<p>Contains information about one of the following:</p> <ul> <li> <p>The initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request</p> </li> <li> <p>The validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal</p> </li> </ul>'
+    AwsCertificateManagerCertificateExtendedKeyUsage:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of an extension value. Indicates the purpose for which the certificate public key can be used.
+        OId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>An object identifier (OID) for the extension value.</p> <p>The format is numbers separated by periods.</p>
+      description: Contains information about an extended key usage X.509 v3 extension object.
+    AwsCertificateManagerCertificateKeyUsage:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The key usage extension name.
+      description: Contains information about a key usage X.509 v3 extension object.
+    AwsCloudFrontDistributionCacheBehavior:
+      type: object
+      properties:
+        ViewerProtocolPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The protocol that viewers can use to access the files in an origin. You can specify the following options:</p> <ul> <li> <p> <code>allow-all</code> - Viewers can use HTTP or HTTPS.</p> </li> <li> <p> <code>redirect-to-https</code> - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.</p> </li> <li> <p> <code>https-only</code> - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).</p> </li> </ul>'
+      description: Information about a cache behavior for the distribution.
+    AwsCloudFrontDistributionCacheBehaviorsItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCloudFrontDistributionCacheBehavior'
+    AwsCloudFrontDistributionCacheBehaviors:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionCacheBehaviorsItemList'
+            - description: The cache behaviors for the distribution.
+      description: Provides information about caching for the distribution.
+    AwsCloudFrontDistributionDefaultCacheBehavior:
+      type: object
+      properties:
+        ViewerProtocolPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The protocol that viewers can use to access the files in an origin. You can specify the following options:</p> <ul> <li> <p> <code>allow-all</code> - Viewers can use HTTP or HTTPS.</p> </li> <li> <p> <code>redirect-to-https</code> - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.</p> </li> <li> <p> <code>https-only</code> - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).</p> </li> </ul>'
+      description: Contains information about the default cache configuration for the distribution.
     AwsCloudFrontDistributionLogging:
       type: object
       properties:
@@ -4902,9 +5492,29 @@ components:
             - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginItemList'
             - description: A complex type that contains origins or origin groups for this distribution.
       description: A complex type that contains information about origins and origin groups for this distribution.
+    AwsCloudFrontDistributionOriginGroups:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroupsItemList'
+            - description: The list of origin groups.
+      description: Provides information about origin groups that are associated with the distribution.
     AwsCloudFrontDistributionDetails:
       type: object
       properties:
+        CacheBehaviors:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionCacheBehaviors'
+            - description: Provides information about the cache configuration for the distribution.
+        DefaultCacheBehavior:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionDefaultCacheBehavior'
+            - description: The default cache behavior for the configuration.
+        DefaultRootObject:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The object that CloudFront sends in response to requests from the origin (for example, index.html) when a viewer requests the root URL for the distribution (http://www.example.com) instead of an object in your distribution (http://www.example.com/product-description.html). '
         DomainName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -4925,6 +5535,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsCloudFrontDistributionOrigins'
             - description: A complex type that contains information about origins for this distribution.
+        OriginGroups:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroups'
+            - description: Provides information about the origin groups in the distribution.
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -4934,8 +5548,50 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.'
       description: A distribution configuration.
-    Boolean:
-      type: boolean
+    AwsCloudFrontDistributionOriginGroupFailover:
+      type: object
+      properties:
+        StatusCodes:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroupFailoverStatusCodes'
+            - description: Information about the status codes that cause an origin group to fail over.
+      description: Provides information about when an origin group fails over.
+    AwsCloudFrontDistributionOriginGroup:
+      type: object
+      properties:
+        FailoverCriteria:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroupFailover'
+            - description: Provides the criteria for an origin group to fail over.
+      description: Information about an origin group for the distribution.
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodes:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList'
+            - description: The list of status code values that can cause a failover to the next origin.
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of status codes that can cause a failover.
+      description: The status codes that cause an origin group to fail over.
+    AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Integer'
+    AwsCloudFrontDistributionOriginGroupsItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsCloudFrontDistributionOriginGroup'
+    AwsCloudFrontDistributionOriginS3OriginConfig:
+      type: object
+      properties:
+        OriginAccessIdentity:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The CloudFront origin access identity to associate with the origin.
+      description: Information about an origin that is an S3 bucket that is not configured with static website hosting.
     AwsCloudFrontDistributionOriginItem:
       type: object
       properties:
@@ -4951,11 +5607,79 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
+        S3OriginConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginS3OriginConfig'
+            - description: An origin that is an S3 bucket that is not configured with static website hosting.
       description: 'A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon Elemental MediaStore, or other server from which CloudFront gets your files.'
     AwsCloudFrontDistributionOriginItemList:
       type: array
       items:
         $ref: '#/components/schemas/AwsCloudFrontDistributionOriginItem'
+    AwsCloudTrailTrailDetails:
+      type: object
+      properties:
+        CloudWatchLogsLogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the log group that CloudTrail logs are delivered to.
+        CloudWatchLogsRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group.
+        HasCustomEventSelectors:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the trail has custom event selectors.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Region where the trail was created.
+        IncludeGlobalServiceEvents:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the trail publishes events from global services such as IAM to the log files.
+        IsMultiRegionTrail:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the trail applies only to the current Region or to all Regions.
+        IsOrganizationTrail:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account.'
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS KMS key ID to use to encrypt the logs.
+        LogFileValidationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether CloudTrail log file validation is enabled.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the trail.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the S3 bucket where the log files are published.
+        S3KeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The S3 key prefix. The key prefix is added after the name of the S3 bucket where the log files are published.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the SNS topic that is used for notifications of log file delivery.
+        SnsTopicName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the SNS topic that is used for notifications of log file delivery.
+        TrailArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the trail.
+      description: Provides details about a CloudTrail trail.
     AwsCodeBuildProjectEnvironment:
       type: object
       properties:
@@ -5052,10 +5776,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The service that created the credentials to access a private Docker registry.</p> <p>The valid value,<code> SECRETS_MANAGER</code>, is for AWS Secrets Manager.</p>'
       description: The credentials for access to a private registry.
-    NonEmptyStringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/NonEmptyString'
     AwsDynamoDbTableAttributeDefinition:
       type: object
       properties:
@@ -5774,10 +6494,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain.</p> <p>Valid values:</p> <ul> <li> <p> <code>Policy-Min-TLS-1-0-2019-07</code>, which supports TLSv1.0 and higher</p> </li> <li> <p> <code>Policy-Min-TLS-1-2-2019-07</code>, which only supports TLSv1.2</p> </li> </ul>'
       description: 'Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.'
-    FieldMap:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/NonEmptyString'
     AwsElasticsearchDomainEncryptionAtRestOptions:
       type: object
       properties:
@@ -5862,6 +6578,300 @@ components:
             - $ref: '#/components/schemas/AwsElasticsearchDomainVPCOptions'
             - description: Information that Amazon ES derives based on <code>VPCOptions</code> for the domain.
       description: Information about an Elasticsearch domain.
+    AwsElbAppCookieStickinessPolicy:
+      type: object
+      properties:
+        CookieName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the application cookie used for stickiness.
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The mnemonic name for the policy being created. The name must be unique within the set of policies for the load balancer.
+      description: Contains information about a stickiness policy that was created using <code>CreateAppCookieStickinessPolicy</code>.
+    AwsElbAppCookieStickinessPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElbAppCookieStickinessPolicy'
+    AwsElbLbCookieStickinessPolicy:
+      type: object
+      properties:
+        CookieExpirationPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The amount of time, in seconds, after which the cookie is considered stale. If an expiration period is not specified, the stickiness session lasts for the duration of the browser session.'
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the policy. The name must be unique within the set of policies for the load balancer.
+      description: Contains information about a stickiness policy that was created using <code>CreateLBCookieStickinessPolicy</code>.
+    AwsElbLbCookieStickinessPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElbLbCookieStickinessPolicy'
+    Long:
+      type: integer
+    AwsElbLoadBalancerAccessLog:
+      type: object
+      properties:
+        EmitInterval:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: <p>The interval in minutes for publishing the access logs.</p> <p>You can publish access logs either every 5 minutes or every 60 minutes.</p>
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether access logs are enabled for the load balancer.
+        S3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the S3 bucket where the access logs are stored.
+        S3BucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The logical hierarchy that was created for the S3 bucket.</p> <p>If a prefix is not provided, the log is placed at the root level of the bucket.</p>'
+      description: Contains information about the access log configuration for the load balancer.
+    AwsElbLoadBalancerConnectionDraining:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether connection draining is enabled for the load balancer.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The maximum time, in seconds, to keep the existing connections open before deregistering the instances.'
+      description: Contains information about the connection draining configuration for the load balancer.
+    AwsElbLoadBalancerConnectionSettings:
+      type: object
+      properties:
+        IdleTimeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The time, in seconds, that the connection can be idle (no data is sent over the connection) before it is closed by the load balancer.'
+      description: Contains connection settings for the load balancer.
+    AwsElbLoadBalancerCrossZoneLoadBalancing:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether cross-zone load balancing is enabled for the load balancer.
+      description: Contains cross-zone load balancing settings for the load balancer.
+    AwsElbLoadBalancerAttributes:
+      type: object
+      properties:
+        AccessLog:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerAccessLog'
+            - description: '<p>Information about the access log configuration for the load balancer.</p> <p>If the access log is enabled, the load balancer captures detailed information about all requests. It delivers the information to a specified S3 bucket.</p>'
+        ConnectionDraining:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerConnectionDraining'
+            - description: '<p>Information about the connection draining configuration for the load balancer.</p> <p>If connection draining is enabled, the load balancer allows existing requests to complete before it shifts traffic away from a deregistered or unhealthy instance.</p>'
+        ConnectionSettings:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerConnectionSettings'
+            - description: '<p>Connection settings for the load balancer.</p> <p>If an idle timeout is configured, the load balancer allows connections to remain idle for the specified duration. When a connection is idle, no data is sent over the connection.</p>'
+        CrossZoneLoadBalancing:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerCrossZoneLoadBalancing'
+            - description: '<p>Cross-zone load balancing settings for the load balancer.</p> <p>If cross-zone load balancing is enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p>'
+      description: Contains attributes for the load balancer.
+    AwsElbLoadBalancerBackendServerDescription:
+      type: object
+      properties:
+        InstancePort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port on which the EC2 instance is listening.
+        PolicyNames:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The names of the policies that are enabled for the EC2 instance.
+      description: Provides information about the configuration of an EC2 instance for the load balancer.
+    AwsElbLoadBalancerBackendServerDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElbLoadBalancerBackendServerDescription'
+    AwsElbLoadBalancerHealthCheck:
+      type: object
+      properties:
+        HealthyThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of consecutive health check successes required before the instance is moved to the Healthy state.
+        Interval:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The approximate interval, in seconds, between health checks of an individual instance.'
+        Target:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The instance that is being checked. The target specifies the protocol and port. The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports is 1 through 65535.</p> <p>For the HTTP and HTTPS protocols, the target also specifies the ping path.</p> <p>For the TCP protocol, the target is specified as <code>TCP: <i>&lt;port&gt;</i> </code>.</p> <p>For the SSL protocol, the target is specified as <code>SSL.<i>&lt;port&gt;</i> </code>.</p> <p>For the HTTP and HTTPS protocols, the target is specified as <code> <i>&lt;protocol&gt;</i>:<i>&lt;port&gt;</i>/<i>&lt;path to ping&gt;</i> </code>.</p>'
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The amount of time, in seconds, during which no response means a failed health check.'
+        UnhealthyThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of consecutive health check failures that must occur before the instance is moved to the Unhealthy state.
+      description: Contains information about the health checks that are conducted on the load balancer.
+    AwsElbLoadBalancerInstances:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElbLoadBalancerInstance'
+    AwsElbLoadBalancerListenerDescriptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsElbLoadBalancerListenerDescription'
+    AwsElbLoadBalancerPolicies:
+      type: object
+      properties:
+        AppCookieStickinessPolicies:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbAppCookieStickinessPolicies'
+            - description: The stickiness policies that are created using <code>CreateAppCookieStickinessPolicy</code>.
+        LbCookieStickinessPolicies:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLbCookieStickinessPolicies'
+            - description: The stickiness policies that are created using <code>CreateLBCookieStickinessPolicy</code>.
+        OtherPolicies:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The policies other than the stickiness policies.
+      description: Contains information about the policies for a load balancer.
+    AwsElbLoadBalancerSourceSecurityGroup:
+      type: object
+      properties:
+        GroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the security group.
+        OwnerAlias:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The owner of the security group.
+      description: Contains information about the security group for the load balancer.
+    AwsElbLoadBalancerDetails:
+      type: object
+      properties:
+        AvailabilityZones:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The list of Availability Zones for the load balancer.
+        BackendServerDescriptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerBackendServerDescriptions'
+            - description: Information about the configuration of the EC2 instances.
+        CanonicalHostedZoneName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: "The name of the Amazon Route\_53 hosted zone for the load balancer."
+        CanonicalHostedZoneNameID:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: "The ID of the Amazon Route\_53 hosted zone for the load balancer."
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        DnsName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The DNS name of the load balancer.
+        HealthCheck:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerHealthCheck'
+            - description: Information about the health checks that are conducted on the load balancer.
+        Instances:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerInstances'
+            - description: List of EC2 instances for the load balancer.
+        ListenerDescriptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerListenerDescriptions'
+            - description: The policies that are enabled for the load balancer listeners.
+        LoadBalancerAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerAttributes'
+            - description: The attributes for a load balancer.
+        LoadBalancerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the load balancer.
+        Policies:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerPolicies'
+            - description: The policies for a load balancer.
+        Scheme:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The type of load balancer. Only provided if the load balancer is in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>'
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The security groups for the load balancer. Only provided if the load balancer is in a VPC.
+        SourceSecurityGroup:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerSourceSecurityGroup'
+            - description: Information about the security group for the load balancer. This is the security group that is used for inbound rules.
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The list of subnet identifiers for the load balancer.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the VPC for the load balancer.
+      description: Contains details about a Classic Load Balancer.
+    AwsElbLoadBalancerInstance:
+      type: object
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The instance identifier.
+      description: Provides information about an EC2 instance for a load balancer.
+    AwsElbLoadBalancerListener:
+      type: object
+      properties:
+        InstancePort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port on which the instance is listening.
+        InstanceProtocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The protocol to use to route traffic to instances.</p> <p>Valid values: <code>HTTP</code> | <code>HTTPS</code> | <code>TCP</code> | <code>SSL</code> </p>'
+        LoadBalancerPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The port on which the load balancer is listening.</p> <p>On EC2-VPC, you can specify any port from the range 1-65535.</p> <p>On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.</p>'
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The load balancer transport protocol to use for routing.</p> <p>Valid values: <code>HTTP</code> | <code>HTTPS</code> | <code>TCP</code> | <code>SSL</code> </p>'
+        SslCertificateId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the server certificate.
+      description: Information about a load balancer listener.
+    AwsElbLoadBalancerListenerDescription:
+      type: object
+      properties:
+        Listener:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerListener'
+            - description: Information about the listener.
+        PolicyNames:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The policies enabled for the listener.
+      description: Lists the policies that are enabled for a load balancer listener.
     SecurityGroups:
       type: array
       items:
@@ -5927,6 +6937,18 @@ components:
       enum:
         - Active
         - Inactive
+    AwsIamAccessKeySessionContext:
+      type: object
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamAccessKeySessionContextAttributes'
+            - description: Attributes of the session that the key was used for.
+        SessionIssuer:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamAccessKeySessionContextSessionIssuer'
+            - description: Information about the entity that created the session.
+      description: Provides information about the session that the key was used for.
     AwsIamAccessKeyDetails:
       type: object
       properties:
@@ -5955,7 +6977,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The name of the principal.
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS account ID of the account for the key.
+        AccessKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the access key.
+        SessionContext:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamAccessKeySessionContext'
+            - description: Information about the session that the key was used for.
       description: IAM access key details related to a finding.
+    AwsIamAccessKeySessionContextAttributes:
+      type: object
+      properties:
+        MfaAuthenticated:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the session used multi-factor authentication (MFA).
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the session was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Attributes of the session that the key was used for.
+    AwsIamAccessKeySessionContextSessionIssuer:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The type of principal (user, role, or group) that created the session.'
+        PrincipalId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The principal ID of the principal (user, role, or group) that created the session.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the session.
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the AWS account that created the session.
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the principal that created the session.
+      description: Information about the entity that created the session.
     AwsIamAttachedManagedPolicy:
       type: object
       properties:
@@ -5967,23 +7037,132 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of the policy.
-      description: A managed policy that is attached to an IAM user.
+      description: A managed policy that is attached to an IAM principal.
     AwsIamAttachedManagedPolicyList:
       type: array
       items:
         $ref: '#/components/schemas/AwsIamAttachedManagedPolicy'
+    AwsIamGroupPolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamGroupPolicy'
+    AwsIamGroupDetails:
+      type: object
+      properties:
+        AttachedManagedPolicies:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamAttachedManagedPolicyList'
+            - description: A list of the managed policies that are attached to the IAM group.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the IAM group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the IAM group.
+        GroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the IAM group.
+        GroupPolicyList:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamGroupPolicyList'
+            - description: The list of inline policies that are embedded in the group.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path to the group.
+      description: Contains details about an IAM group.
+    AwsIamGroupPolicy:
+      type: object
+      properties:
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the policy.
+      description: A managed policy that is attached to the IAM group.
+    AwsIamInstanceProfileRoles:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamInstanceProfileRole'
+    AwsIamInstanceProfile:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the instance profile.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the instance profile was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        InstanceProfileId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the instance profile.
+        InstanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the instance profile.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path to the instance profile.
+        Roles:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamInstanceProfileRoles'
+            - description: The roles associated with the instance profile.
+      description: Information about an instance profile.
+    AwsIamInstanceProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamInstanceProfile'
+    AwsIamRoleAssumeRolePolicyDocument:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
+      minLength: 1
+      maxLength: 131072
+    AwsIamInstanceProfileRole:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the role.
+        AssumeRolePolicyDocument:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamRoleAssumeRolePolicyDocument'
+            - description: The policy that grants an entity permission to assume the role.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The path to the role.
+        RoleId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the role.
+        RoleName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the role.
+      description: Information about a role associated with an instance profile.
     AwsIamPermissionsBoundary:
       type: object
       properties:
         PermissionsBoundaryArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the policy used to set the permissions boundary for the user.
+            - description: The ARN of the policy used to set the permissions boundary.
         PermissionsBoundaryType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The usage type for the permissions boundary.
-      description: Information about the policy used to set the permissions boundary for an IAM user.
+      description: Information about the policy used to set the permissions boundary for an IAM principal.
     AwsIamPolicyVersionList:
       type: array
       items:
@@ -6052,11 +7231,10 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
       description: A version of an IAM policy.
-    AwsIamRoleAssumeRolePolicyDocument:
-      type: string
-      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
-      minLength: 1
-      maxLength: 131072
+    AwsIamRolePolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsIamRolePolicy'
     AwsIamRoleDetails:
       type: object
       properties:
@@ -6064,10 +7242,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsIamRoleAssumeRolePolicyDocument'
             - description: The trust policy that grants permission to assume the role.
+        AttachedManagedPolicies:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamAttachedManagedPolicyList'
+            - description: The list of the managed policies that are attached to the role.
         CreateDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        InstanceProfileList:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamInstanceProfileList'
+            - description: The list of instance profiles that contain this role.
+        PermissionsBoundary:
+          $ref: '#/components/schemas/AwsIamPermissionsBoundary'
         RoleId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6076,6 +7264,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The friendly name that identifies the role.
+        RolePolicyList:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamRolePolicyList'
+            - description: The list of inline policies that are embedded in the role.
         MaxSessionDuration:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -6085,6 +7277,14 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The path to the role.
       description: 'Contains information about an IAM role, including all of the role''s policies.'
+    AwsIamRolePolicy:
+      type: object
+      properties:
+        PolicyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the policy.
+      description: An inline policy that is embedded in the role.
     AwsIamUserPolicyList:
       type: array
       items:
@@ -7257,6 +8457,458 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The status of a subnet in the subnet group.
       description: Information about a subnet in a subnet group.
+    AwsRedshiftClusterClusterNode:
+      type: object
+      properties:
+        NodeRole:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The role of the node. A node might be a leader node or a compute node.
+        PrivateIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The private IP address of the node.
+        PublicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The public IP address of the node.
+      description: A node in an Amazon Redshift cluster.
+    AwsRedshiftClusterClusterNodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterClusterNode'
+    AwsRedshiftClusterClusterParameterStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterClusterParameterStatus'
+    AwsRedshiftClusterClusterParameterGroup:
+      type: object
+      properties:
+        ClusterParameterStatusList:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterClusterParameterStatusList'
+            - description: The list of parameter statuses.
+        ParameterApplyStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of updates to the parameters.
+        ParameterGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the parameter group.
+      description: A cluster parameter group that is associated with an Amazon Redshift cluster.
+    AwsRedshiftClusterClusterParameterGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterClusterParameterGroup'
+    AwsRedshiftClusterClusterParameterStatus:
+      type: object
+      properties:
+        ParameterName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the parameter.
+        ParameterApplyStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the parameter. Indicates whether the parameter is in sync with the database, waiting for a cluster reboot, or encountered an error when it was applied.</p> <p>Valid values: <code>in-sync</code> | <code>pending-reboot</code> | <code>applying</code> | <code>invalid-parameter</code> | <code>apply-deferred</code> | <code>apply-error</code> | <code>unknown-error</code> </p>'
+        ParameterApplyErrorDescription:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error that prevented the parameter from being applied to the database.
+      description: The status of a parameter in a cluster parameter group for an Amazon Redshift cluster.
+    AwsRedshiftClusterClusterSecurityGroup:
+      type: object
+      properties:
+        ClusterSecurityGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the cluster security group.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the cluster security group.
+      description: A security group that is associated with the cluster.
+    AwsRedshiftClusterClusterSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterClusterSecurityGroup'
+    AwsRedshiftClusterClusterSnapshotCopyStatus:
+      type: object
+      properties:
+        DestinationRegion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The destination Region that snapshots are automatically copied to when cross-Region snapshot copy is enabled.
+        ManualSnapshotRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The number of days that manual snapshots are retained in the destination region after they are copied from a source region.</p> <p>If the value is -1, then the manual snapshot is retained indefinitely.</p> <p>Valid values: Either -1 or an integer between 1 and 3,653</p>'
+        RetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of days to retain automated snapshots in the destination Region after they are copied from a source Region.
+        SnapshotCopyGrantName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the snapshot copy grant.
+      description: Information about a cross-Region snapshot copy.
+    AwsRedshiftClusterDeferredMaintenanceWindow:
+      type: object
+      properties:
+        DeferMaintenanceEndTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The end of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        DeferMaintenanceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the maintenance window.
+        DeferMaintenanceStartTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The start of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: A time windows during which maintenance was deferred for an Amazon Redshift cluster.
+    AwsRedshiftClusterDeferredMaintenanceWindows:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterDeferredMaintenanceWindow'
+    AwsRedshiftClusterElasticIpStatus:
+      type: object
+      properties:
+        ElasticIp:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The elastic IP address for the cluster.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the elastic IP address.
+      description: The status of the elastic IP (EIP) address for an Amazon Redshift cluster.
+    AwsRedshiftClusterEndpoint:
+      type: object
+      properties:
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The DNS address of the cluster.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port that the database engine listens on.
+      description: The connection endpoint for an Amazon Redshift cluster.
+    AwsRedshiftClusterHsmStatus:
+      type: object
+      properties:
+        HsmClientCertificateIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the HSM client certificate that the Amazon Redshift cluster uses to retrieve the data encryption keys that are stored in an HSM.
+        HsmConfigurationIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the HSM configuration that contains the information that the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.</p> <p>Type: String</p> <p>Valid values: <code>active</code> | <code>applying</code> </p>'
+      description: Information about whether an Amazon Redshift cluster finished applying any hardware changes to security module (HSM) settings that were specified in a modify cluster command.
+    AwsRedshiftClusterIamRoles:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterIamRole'
+    AwsRedshiftClusterPendingModifiedValues:
+      type: object
+      properties:
+        AutomatedSnapshotRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The pending or in-progress change to the automated snapshot retention period.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The pending or in-progress change to the identifier for the cluster.
+        ClusterType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The pending or in-progress change to the cluster type.
+        ClusterVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The pending or in-progress change to the service version.
+        EncryptionType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The encryption type for a cluster.
+        EnhancedVpcRouting:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether to create the cluster with enhanced VPC routing enabled.
+        MaintenanceTrackName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the maintenance track that the cluster changes to during the next maintenance window.
+        MasterUserPassword:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The pending or in-progress change to the master user password for the cluster.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The pending or in-progress change to the cluster's node type.
+        NumberOfNodes:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The pending or in-progress change to the number of nodes in the cluster.
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The pending or in-progress change to whether the cluster can be connected to from the public network.
+      description: Changes to the Amazon Redshift cluster that are currently pending.
+    AwsRedshiftClusterResizeInfo:
+      type: object
+      properties:
+        AllowCancelResize:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the resize operation can be canceled.
+        ResizeType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The type of resize operation.</p> <p>Valid values: <code>ClassicResize</code> </p>'
+      description: Information about the resize operation for the cluster.
+    AwsRedshiftClusterRestoreStatus:
+      type: object
+      properties:
+        CurrentRestoreRateInMegaBytesPerSecond:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: <p>The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>
+        ElapsedTimeInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: '<p>The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>'
+        EstimatedTimeToCompletionInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p>The estimate of the time remaining before the restore is complete. Returns 0 for a completed restore.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>
+        ProgressInMegaBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p>The number of megabytes that were transferred from snapshot storage.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>
+        SnapshotSizeInMegaBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: <p>The size of the set of snapshot data that was used to restore the cluster.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the restore action.</p> <p>Valid values: <code>starting</code> | <code>restoring</code> | <code>completed</code> | <code>failed</code> </p>'
+      description: Information about the status of a cluster restore action. It only applies if the cluster was created by restoring a snapshot.
+    AwsRedshiftClusterVpcSecurityGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsRedshiftClusterVpcSecurityGroup'
+    AwsRedshiftClusterDetails:
+      type: object
+      properties:
+        AllowVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether major version upgrades are applied automatically to the cluster during the maintenance window.
+        AutomatedSnapshotRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of days that automatic cluster snapshots are retained.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the Availability Zone in which the cluster is located.
+        ClusterAvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The availability status of the cluster for queries. Possible values are the following:</p> <ul> <li> <p> <code>Available</code> - The cluster is available for queries.</p> </li> <li> <p> <code>Unavailable</code> - The cluster is not available for queries.</p> </li> <li> <p> <code>Maintenance</code> - The cluster is intermittently available for queries due to maintenance activities.</p> </li> <li> <p> <code>Modifying</code> -The cluster is intermittently available for queries due to changes that modify the cluster.</p> </li> <li> <p> <code>Failed</code> - The cluster failed and is not available for queries.</p> </li> </ul>'
+        ClusterCreateTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the cluster was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The unique identifier of the cluster.
+        ClusterNodes:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterClusterNodes'
+            - description: The nodes in the cluster.
+        ClusterParameterGroups:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterClusterParameterGroups'
+            - description: The list of cluster parameter groups that are associated with this cluster.
+        ClusterPublicKey:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The public key for the cluster.
+        ClusterRevisionNumber:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The specific revision number of the database in the cluster.
+        ClusterSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterClusterSecurityGroups'
+            - description: A list of cluster security groups that are associated with the cluster.
+        ClusterSnapshotCopyStatus:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterClusterSnapshotCopyStatus'
+            - description: Information about the destination Region and retention period for the cross-Region snapshot copy.
+        ClusterStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The current status of the cluster.</p> <p>Valid values: <code>available</code> | <code>available, prep-for-resize</code> | <code>available, resize-cleanup</code> |<code> cancelling-resize</code> | <code>creating</code> | <code>deleting</code> | <code>final-snapshot</code> | <code>hardware-failure</code> | <code>incompatible-hsm</code> |<code> incompatible-network</code> | <code>incompatible-parameters</code> | <code>incompatible-restore</code> | <code>modifying</code> | <code>paused</code> | <code>rebooting</code> | <code>renaming</code> | <code>resizing</code> | <code>rotating-keys</code> | <code>storage-full</code> | <code>updating-hsm</code> </p>'
+        ClusterSubnetGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.
+        ClusterVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The version ID of the Amazon Redshift engine that runs on the cluster.
+        DBName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the initial database that was created when the cluster was created.</p> <p>The same name is returned for the life of the cluster.</p> <p>If an initial database is not specified, a database named <code>devdev</code> is created by default.</p>'
+        DeferredMaintenanceWindows:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterDeferredMaintenanceWindows'
+            - description: List of time windows during which maintenance was deferred.
+        ElasticIpStatus:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterElasticIpStatus'
+            - description: Information about the status of the Elastic IP (EIP) address.
+        ElasticResizeNumberOfNodeOptions:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The number of nodes that you can use the elastic resize method to resize the cluster to.
+        Encrypted:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the data in the cluster is encrypted at rest.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterEndpoint'
+            - description: The connection endpoint.
+        EnhancedVpcRouting:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether to create the cluster with enhanced VPC routing enabled.
+        ExpectedNextSnapshotScheduleTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        ExpectedNextSnapshotScheduleTimeStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the next expected snapshot.</p> <p>Valid values: <code>OnTrack</code> | <code>Pending</code> </p>'
+        HsmStatus:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterHsmStatus'
+            - description: Information about whether the Amazon Redshift cluster finished applying any changes to hardware security module (HSM) settings that were specified in a modify cluster command.
+        IamRoles:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterIamRoles'
+            - description: A list of IAM roles that the cluster can use to access other AWS services.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster.
+        MaintenanceTrackName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the maintenance track for the cluster.
+        ManualSnapshotRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The default number of days to retain a manual snapshot.</p> <p>If the value is -1, the snapshot is retained indefinitely.</p> <p>This setting doesn''t change the retention period of existing snapshots.</p> <p>Valid values: Either -1 or an integer between 1 and 3,653</p>'
+        MasterUsername:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The master user name for the cluster. This name is used to connect to the database that is specified in as the value of <code>DBName</code>.
+        NextMaintenanceWindowStartTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates the start of the next maintenance window.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The node type for the nodes in the cluster.
+        NumberOfNodes:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of compute nodes in the cluster.
+        PendingActions:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of cluster operations that are waiting to start.
+        PendingModifiedValues:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterPendingModifiedValues'
+            - description: A list of changes to the cluster that are currently pending.
+        PreferredMaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur.</p> <p>Format: <code> <i>&lt;day&gt;</i>:HH:MM-<i>&lt;day&gt;</i>:HH:MM</code> </p> <p>For the day values, use <code>mon</code> | <code>tue</code> | <code>wed</code> | <code>thu</code> | <code>fri</code> | <code>sat</code> | <code>sun</code> </p> <p>For example, <code>sun:09:32-sun:10:02</code> </p>'
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the cluster can be accessed from a public network.
+        ResizeInfo:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterResizeInfo'
+            - description: Information about the resize operation for the cluster.
+        RestoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterRestoreStatus'
+            - description: Information about the status of a cluster restore action. Only applies to a cluster that was created by restoring a snapshot.
+        SnapshotScheduleIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A unique identifier for the cluster snapshot schedule.
+        SnapshotScheduleState:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The current state of the cluster snapshot schedule.</p> <p>Valid values: <code>MODIFYING</code> | <code>ACTIVE</code> | <code>FAILED</code> </p>'
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The identifier of the VPC that the cluster is in, if the cluster is in a VPC.'
+        VpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterVpcSecurityGroups'
+            - description: 'The list of VPC security groups that the cluster belongs to, if the cluster is in a VPC.'
+      description: Details about an Amazon Redshift cluster.
+    AwsRedshiftClusterIamRole:
+      type: object
+      properties:
+        ApplyStatus:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the IAM role''s association with the cluster.</p> <p>Valid values: <code>in-sync</code> | <code>adding</code> | <code>removing</code> </p>'
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the IAM role.
+      description: An IAM role that the cluster can use to access other AWS services.
+    AwsRedshiftClusterVpcSecurityGroup:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The status of the VPC security group.
+        VpcSecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the VPC security group.
+      description: 'A VPC security group that the cluster belongs to, if the cluster is in a VPC.'
     AwsS3BucketServerSideEncryptionConfiguration:
       type: object
       properties:
@@ -7615,7 +9267,7 @@ components:
         InstalledPendingReboot:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of patches that were installed since the last time the instance was rebooted.
+            - description: 'The number of patches that were applied, but that require the instance to be rebooted in order to be marked as installed.'
         OperationStartTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7972,7 +9624,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/KeywordFilterList'
             - description: A keyword for a finding.
-      description: A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.
+      description: '<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>'
     AwsSecurityFindingIdentifierList:
       type: array
       items:
@@ -8591,7 +10243,7 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/AwsSecurityFindingFilters'
-            - description: '<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
+            - description: '<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>'
         SortCriteria:
           allOf:
             - $ref: '#/components/schemas/SortCriteria'
@@ -8918,7 +10570,7 @@ components:
         MemberStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The status of the relationship between the member account and its master account. '
+            - description: '<p>The status of the relationship between the member account and its master account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the master account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ASSOCIATED</code> - Indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the master account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the master account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the master account deleted the member account.</p> </li> </ul>'
         InvitedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -9144,10 +10796,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsIamPolicyDetails'
             - description: Details about an IAM permissions policy.
+        AwsApiGatewayV2Stage:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayV2StageDetails'
+            - description: <p/>
+        AwsApiGatewayV2Api:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayV2ApiDetails'
+            - description: <p/>
         AwsDynamoDbTable:
           allOf:
             - $ref: '#/components/schemas/AwsDynamoDbTableDetails'
             - description: Details about a DynamoDB table.
+        AwsApiGatewayStage:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayStageDetails'
+            - description: <p/>
+        AwsApiGatewayRestApi:
+          allOf:
+            - $ref: '#/components/schemas/AwsApiGatewayRestApiDetails'
+            - description: <p/>
+        AwsCloudTrailTrail:
+          allOf:
+            - $ref: '#/components/schemas/AwsCloudTrailTrailDetails'
+            - description: <p/>
+        AwsCertificateManagerCertificate:
+          allOf:
+            - $ref: '#/components/schemas/AwsCertificateManagerCertificateDetails'
+            - description: <p/>
+        AwsRedshiftCluster:
+          allOf:
+            - $ref: '#/components/schemas/AwsRedshiftClusterDetails'
+            - description: <p/>
+        AwsElbLoadBalancer:
+          allOf:
+            - $ref: '#/components/schemas/AwsElbLoadBalancerDetails'
+            - description: <p/>
+        AwsIamGroup:
+          allOf:
+            - $ref: '#/components/schemas/AwsIamGroupDetails'
+            - description: <p/>
         AwsIamRole:
           allOf:
             - $ref: '#/components/schemas/AwsIamRoleDetails'
@@ -9223,6 +10911,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The canonical AWS external Region name where this resource is located.
+        ResourceRole:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p/>
         Tags:
           allOf:
             - $ref: '#/components/schemas/FieldMap'

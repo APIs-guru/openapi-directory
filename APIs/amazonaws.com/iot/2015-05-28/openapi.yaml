@@ -10347,7 +10347,7 @@ paths:
   /audit/findings:
     post:
       operationId: ListAuditFindings
-      description: Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+      description: Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.)
       responses:
         '200':
           description: Success
@@ -10783,7 +10783,7 @@ paths:
         - name: startTime
           in: query
           required: true
-          description: The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+          description: The beginning of the time period. Audit information is retained for a limited time (90 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
           schema:
             type: string
             format: date-time
@@ -13593,6 +13593,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
       parameters: []
       requestBody:
         required: true
@@ -16137,6 +16143,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StepFunctionsAction'
             - description: Starts execution of a Step Functions state machine.
+        timestream:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamAction'
+            - description: 'The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html">Timestream</a> topic rule action documentation.'
         http:
           allOf:
             - $ref: '#/components/schemas/HttpAction'
@@ -18519,6 +18529,35 @@ components:
             - $ref: '#/components/schemas/AwsArn'
             - description: 'The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").'
       description: Starts execution of a Step Functions state machine.
+    TimestreamAction:
+      type: object
+      required:
+        - roleArn
+        - databaseName
+        - tableName
+        - dimensions
+      properties:
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The ARN of the role that grants permission to write to the Amazon Timestream database table.
+        databaseName:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamDatabaseName'
+            - description: The name of an Amazon Timestream database.
+        tableName:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamTableName'
+            - description: The name of the database table into which to write the measure records.
+        dimensions:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamDimensionList'
+            - description: Metadata attributes of the time series that are written in each measure record.
+        timestamp:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamTimestamp'
+            - description: '<p>Specifies an application-defined value to replace the default value assigned to the Timestream record''s timestamp in the <code>time</code> column.</p> <p>You can use this property to specify the value and the precision of the Timestream record''s timestamp. You can specify a value from the message payload or a value computed by a substitution template.</p> <p>If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it processed the rule. </p>'
+      description: 'The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html">Timestream</a> topic rule action documentation.'
     HttpAction:
       type: object
       required:
@@ -18736,7 +18775,6 @@ components:
     AssetPropertyAlias:
       type: string
       minLength: 1
-      maxLength: 2048
     AssetPropertyBooleanValue:
       type: string
     AssetPropertyDoubleValue:
@@ -24049,6 +24087,54 @@ components:
             - $ref: '#/components/schemas/ThingTypeMetadata'
             - description: 'The ThingTypeMetadata contains additional information about the thing type including: creation date and time, a value indicating whether the thing type is deprecated, and a date and time when it was deprecated.'
       description: 'The definition of the thing type, including thing type name and description.'
+    TimestreamDatabaseName:
+      type: string
+    TimestreamTableName:
+      type: string
+    TimestreamDimensionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TimestreamDimension'
+      minItems: 1
+      maxItems: 128
+    TimestreamTimestamp:
+      type: object
+      required:
+        - value
+        - unit
+      properties:
+        value:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamTimestampValue'
+            - description: An expression that returns a long epoch time value.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamTimestampUnit'
+            - description: '<p>The precision of the timestamp value that results from the expression described in <code>value</code>.</p> <p>Valid values: <code>SECONDS</code> | <code>MILLISECONDS</code> | <code>MICROSECONDS</code> | <code>NANOSECONDS</code>. The default is <code>MILLISECONDS</code>.</p>'
+      description: Describes how to interpret an application-defined timestamp value from an MQTT message payload and the precision of that value.
+    TimestreamDimensionName:
+      type: string
+    TimestreamDimensionValue:
+      type: string
+    TimestreamDimension:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamDimensionName'
+            - description: '<p>The metadata dimension name. This is the name of the column in the Amazon Timestream database table record.</p> <p>Dimensions cannot be named: <code>measure_name</code>, <code>measure_value</code>, or <code>time</code>. These names are reserved. Dimension names cannot start with <code>ts_</code> or <code>measure_value</code> and they cannot contain the colon (<code>:</code>) character.</p>'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamDimensionValue'
+            - description: The value to write in this column of the database record.
+      description: Metadata attributes of the time series that are written in each measure record.
+    TimestreamTimestampValue:
+      type: string
+    TimestreamTimestampUnit:
+      type: string
     TopicRuleDestinationStatus:
       type: string
       enum:

@@ -775,6 +775,187 @@ paths:
                         - $ref: '#/components/schemas/State'
                         - xml:
                             name: state
+  '/v1/offerings/{offeringArn}':
+    get:
+      operationId: DescribeOffering
+      description: 'Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOfferingResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: offeringArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the offering.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: PurchaseOffering
+      description: 'Submits a request to purchase an offering. If you already have an active reservation, you can''t purchase another offering.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOfferingResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: offeringArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the offering.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reservationName
+                - start
+              properties:
+                reservationName:
+                  description: The name that you want to use for the reservation.
+                  type: string
+                start:
+                  description: 'The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today''s date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.'
+                  type: string
+  '/v1/reservations/{reservationArn}':
+    get:
+      operationId: DescribeReservation
+      description: 'Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReservationResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: reservationArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the reservation.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/flows/{flowArn}/entitlements':
     post:
       operationId: GrantFlowEntitlements
@@ -905,6 +1086,146 @@ paths:
           in: query
           required: false
           description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListEntitlements request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListEntitlements request a second time and specify the NextToken value.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/offerings:
+    get:
+      operationId: ListOfferings
+      description: 'Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you''ve purchased an offering that has already started and hasn''t expired yet), your account isn''t eligible for other offerings.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfferingsResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListOfferings request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.'
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/reservations:
+    get:
+      operationId: ListReservations
+      description: Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReservationsResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return per API request. For example, you submit a ListReservations request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.'
           schema:
             type: string
         - name: MaxResults
@@ -2366,6 +2687,22 @@ components:
             - $ref: '#/components/schemas/Messages'
             - xml:
                 name: messages
+    DescribeOfferingResponse:
+      type: object
+      properties:
+        Offering:
+          allOf:
+            - $ref: '#/components/schemas/Offering'
+            - xml:
+                name: offering
+    DescribeReservationResponse:
+      type: object
+      properties:
+        Reservation:
+          allOf:
+            - $ref: '#/components/schemas/Reservation'
+            - xml:
+                name: reservation
     GrantFlowEntitlementsResponse:
       type: object
       properties:
@@ -2412,6 +2749,36 @@ components:
             - xml:
                 name: nextToken
               description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.'
+    ListOfferingsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.'
+        Offerings:
+          allOf:
+            - $ref: '#/components/schemas/__listOfOffering'
+            - xml:
+                name: offerings
+              description: A list of offerings that are available to this account in the current AWS Region.
+    ListReservationsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: 'The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListReservations request a second time and specify the NextToken value.'
+        Reservations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfReservation'
+            - xml:
+                name: reservations
+              description: A list of all reservations that have been purchased by this account in the current AWS Region.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -2421,6 +2788,14 @@ components:
             - xml:
                 name: tags
               description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    PurchaseOfferingResponse:
+      type: object
+      properties:
+        Reservation:
+          allOf:
+            - $ref: '#/components/schemas/Reservation'
+            - xml:
+                name: reservation
     RemoveFlowOutputResponse:
       type: object
       properties:
@@ -2533,6 +2908,7 @@ components:
             - $ref: '#/components/schemas/Entitlement'
             - xml:
                 name: entitlement
+              description: The new configuration of the entitlement that you updated.
         FlowArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2564,6 +2940,7 @@ components:
             - $ref: '#/components/schemas/Output'
             - xml:
                 name: output
+              description: The new settings of the output that you updated.
     UpdateFlowSourceResponse:
       type: object
       properties:
@@ -2838,6 +3215,175 @@ components:
                 name: errors
               description: A list of errors that might have been generated from processes on this flow.
       description: Messages that provide the state of the flow.
+    DescribeOfferingRequest:
+      type: object
+      title: DescribeOfferingRequest
+      properties: {}
+    Offering:
+      type: object
+      required:
+        - CurrencyCode
+        - OfferingArn
+        - OfferingDescription
+        - DurationUnits
+        - Duration
+        - PricePerUnit
+        - ResourceSpecification
+        - PriceUnits
+      properties:
+        CurrencyCode:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currencyCode
+              description: The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: duration
+              description: The length of time that your reservation would be active.
+        DurationUnits:
+          allOf:
+            - $ref: '#/components/schemas/DurationUnits'
+            - xml:
+                name: durationUnits
+              description: The unit of measurement for the duration of the offering.
+        OfferingArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: offeringArn
+              description: The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+        OfferingDescription:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: offeringDescription
+              description: A description of the offering.
+        PricePerUnit:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pricePerUnit
+              description: 'The cost of a single unit. This value, in combination with priceUnits, makes up the rate.'
+        PriceUnits:
+          allOf:
+            - $ref: '#/components/schemas/PriceUnits'
+            - xml:
+                name: priceUnits
+              description: 'The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate.'
+        ResourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSpecification'
+            - xml:
+                name: resourceSpecification
+              description: A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering.
+      description: A savings plan that reserves a certain amount of outbound bandwidth usage at a discounted rate each month over a period of time.
+    DescribeReservationRequest:
+      type: object
+      title: DescribeReservationRequest
+      properties: {}
+    Reservation:
+      type: object
+      required:
+        - CurrencyCode
+        - ReservationState
+        - OfferingArn
+        - ReservationArn
+        - Start
+        - OfferingDescription
+        - ReservationName
+        - End
+        - Duration
+        - DurationUnits
+        - PricePerUnit
+        - ResourceSpecification
+        - PriceUnits
+      properties:
+        CurrencyCode:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currencyCode
+              description: The type of currency that is used for billing. The currencyCode used for your reservation is US dollars.
+        Duration:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: duration
+              description: The length of time that this reservation is active. MediaConnect defines this value in the offering.
+        DurationUnits:
+          allOf:
+            - $ref: '#/components/schemas/DurationUnits'
+            - xml:
+                name: durationUnits
+              description: The unit of measurement for the duration of the reservation. MediaConnect defines this value in the offering.
+        End:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: end
+              description: The day and time that this reservation expires. This value is calculated based on the start date and time that you set and the offering's duration.
+        OfferingArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: offeringArn
+              description: The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+        OfferingDescription:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: offeringDescription
+              description: A description of the offering. MediaConnect defines this value in the offering.
+        PricePerUnit:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pricePerUnit
+              description: 'The cost of a single unit. This value, in combination with priceUnits, makes up the rate. MediaConnect defines this value in the offering.'
+        PriceUnits:
+          allOf:
+            - $ref: '#/components/schemas/PriceUnits'
+            - xml:
+                name: priceUnits
+              description: 'The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate. MediaConnect defines this value in the offering.'
+        ReservationArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: reservationArn
+              description: The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when you purchase an offering.
+        ReservationName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: reservationName
+              description: The name that you assigned to the reservation when you purchased the offering.
+        ReservationState:
+          allOf:
+            - $ref: '#/components/schemas/ReservationState'
+            - xml:
+                name: reservationState
+              description: The status of your reservation.
+        ResourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSpecification'
+            - xml:
+                name: resourceSpecification
+              description: A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering. MediaConnect defines the values that make up the resourceSpecification in the offering.
+        Start:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: start
+              description: The day and time that the reservation becomes active. You set this value when you purchase the offering.
+      description: 'A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.'
+    DurationUnits:
+      type: string
+      enum:
+        - MONTHS
     EntitlementStatus:
       type: string
       enum:
@@ -3003,6 +3549,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ListedFlow'
+    ListOfferingsRequest:
+      type: object
+      title: ListOfferingsRequest
+      properties: {}
+    __listOfOffering:
+      type: array
+      items:
+        $ref: '#/components/schemas/Offering'
+    ListReservationsRequest:
+      type: object
+      title: ListReservationsRequest
+      properties: {}
+    __listOfReservation:
+      type: array
+      items:
+        $ref: '#/components/schemas/Reservation'
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -3088,6 +3650,28 @@ components:
                 name: status
               description: The current status of the flow.
       description: 'Provides a summary of a flow, including its ARN, Availability Zone, and source type.'
+    PriceUnits:
+      type: string
+      enum:
+        - HOURLY
+    ResourceSpecification:
+      type: object
+      required:
+        - ResourceType
+      properties:
+        ReservedBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: reservedBitrate
+              description: The amount of outbound bandwidth that is discounted in the offering.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - xml:
+                name: resourceType
+              description: The type of resource and the unit that is being billed for.
+      description: 'A definition of what is being billed for, including the type and amount.'
     Transport:
       type: object
       required:
@@ -3209,6 +3793,26 @@ components:
                 name: vpcInterfaceAttachment
               description: The name of the VPC interface attachment to use for this output.
       description: The settings for an output.
+    PurchaseOfferingRequest:
+      type: object
+      required:
+        - Start
+        - ReservationName
+      title: PurchaseOfferingRequest
+      properties:
+        ReservationName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: reservationName
+              description: The name that you want to use for the reservation.
+        Start:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: start
+              description: 'The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today''s date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.'
+      description: A request to purchase a offering.
     RemoveFlowOutputRequest:
       type: object
       title: RemoveFlowOutputRequest
@@ -3221,6 +3825,17 @@ components:
       type: object
       title: RemoveFlowVpcInterfaceRequest
       properties: {}
+    ReservationState:
+      type: string
+      enum:
+        - ACTIVE
+        - EXPIRED
+        - PROCESSING
+        - CANCELED
+    ResourceType:
+      type: string
+      enum:
+        - Mbps_Outbound_Bandwidth
     RevokeFlowEntitlementRequest:
       type: object
       title: RevokeFlowEntitlementRequest
