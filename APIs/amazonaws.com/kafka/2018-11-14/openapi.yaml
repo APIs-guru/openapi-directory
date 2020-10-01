@@ -4051,6 +4051,15 @@ components:
 
                             <p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>
                          
+        ZookeeperConnectStringTls:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: zookeeperConnectStringTls
+              description: |2-
+
+                            <p>The connection string to use to connect to zookeeper cluster on Tls port.</p>
+                         
       description: |2-
 
                     <p>Returns information about a cluster.</p>

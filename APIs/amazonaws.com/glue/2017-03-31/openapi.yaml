@@ -10649,6 +10649,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Language'
             - description: The programming language of the code to perform the mapping.
+        AdditionalPlanOptionsMap:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalPlanOptionsMap'
+            - description: A map to hold additional optional key-value parameters.
     GetResourcePoliciesResponse:
       type: object
       properties:
@@ -12266,6 +12270,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Action'
+    GenericString:
+      type: string
+    AdditionalPlanOptionsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/GenericString'
     AttemptCount:
       type: integer
     CatalogIdString:
@@ -13892,8 +13902,6 @@ components:
             - $ref: '#/components/schemas/DatabaseIdentifier'
             - description: A <code>DatabaseIdentifier</code> structure that describes a target database for resource linking.
       description: The structure used to create or update a database.
-    GenericString:
-      type: string
     RoleArn:
       type: string
       pattern: 'arn:aws:iam::\d{12}:role/.*'

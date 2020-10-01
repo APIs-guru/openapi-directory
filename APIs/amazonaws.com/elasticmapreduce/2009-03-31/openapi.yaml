@@ -2624,7 +2624,9 @@ components:
             - $ref: '#/components/schemas/ManagedScalingPolicy'
             - description: ' The specified managed scaling policy for an Amazon EMR cluster. '
         PlacementGroupConfigs:
-          $ref: '#/components/schemas/PlacementGroupConfigList'
+          allOf:
+            - $ref: '#/components/schemas/PlacementGroupConfigList'
+            - description: The specified placement group configuration for an Amazon EMR cluster.
       description: ' Input to the <a>RunJobFlow</a> operation. '
     SetTerminationProtectionInput:
       type: object
@@ -3388,7 +3390,9 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: Specifies the number of steps that can be executed concurrently.
         PlacementGroups:
-          $ref: '#/components/schemas/PlacementGroupConfigList'
+          allOf:
+            - $ref: '#/components/schemas/PlacementGroupConfigList'
+            - description: Placement group configured for an Amazon EMR cluster.
       description: The detailed description of the cluster.
     ClusterState:
       type: string
@@ -4928,9 +4932,14 @@ components:
         - InstanceRole
       properties:
         InstanceRole:
-          $ref: '#/components/schemas/InstanceRoleType'
+          allOf:
+            - $ref: '#/components/schemas/InstanceRoleType'
+            - description: '<p>Role of the instance in the cluster.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported instance role is <code>MASTER</code>.</p>'
         PlacementStrategy:
-          $ref: '#/components/schemas/PlacementGroupStrategy'
+          allOf:
+            - $ref: '#/components/schemas/PlacementGroupStrategy'
+            - description: '<p>EC2 Placement Group strategy associated with instance role.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported placement strategy is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>'
+      description: '<p>Placement group configuration for an Amazon EMR cluster. The configuration specifies the placement strategy that can be applied to instance roles during cluster creation.</p> <p>To use this configuration, consider attaching managed policy AmazonElasticMapReducePlacementGroupPolicy to the EMR role.</p>'
     Port:
       type: integer
       minimum: -1
