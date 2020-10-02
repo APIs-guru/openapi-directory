@@ -168,6 +168,106 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /items:
+    post:
+      operationId: PutItems
+      description: Adds one or more items to an Items dataset. For more information see <a>importing-items</a>.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datasetArn
+                - items
+              properties:
+                datasetArn:
+                  description: The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                  maxLength: 256
+                items:
+                  description: A list of item data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Item'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /users:
+    post:
+      operationId: PutUsers
+      description: Adds one or more users to a Users dataset. For more information see <a>importing-users</a>.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datasetArn
+                - users
+              properties:
+                datasetArn:
+                  description: The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.
+                  type: string
+                  pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+                  maxLength: 256
+                users:
+                  description: A list of user data.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/User'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -233,7 +333,7 @@ components:
         eventType:
           allOf:
             - $ref: '#/components/schemas/StringType'
-            - description: The type of event. This property corresponds to the <code>EVENT_TYPE</code> field of the Interactions schema.
+            - description: 'The type of event, such as click or download. This property corresponds to the <code>EVENT_TYPE</code> field of your Interactions schema and depends on the types of events you are tracking.'
         eventValue:
           allOf:
             - $ref: '#/components/schemas/FloatType'
@@ -260,6 +360,39 @@ components:
             - description: 'A list of item IDs that represents the sequence of items you have shown the user. For example, <code>["itemId1", "itemId2", "itemId3"]</code>.'
       description: Represents user interaction event information sent using the <code>PutEvents</code> API.
     InvalidInputException: {}
+    Item:
+      type: object
+      required:
+        - itemId
+      properties:
+        itemId:
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: The ID associated with the item.
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/ItemProperties'
+            - description: '<p>A string map of item-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{"numberOfRatings": "12"}</code> </p> <p>The keys use camel case names that match the fields in the Items schema. In the above example, the <code>numberOfRatings</code> would match the ''NUMBER_OF_RATINGS'' field defined in the Items schema.</p>'
+      description: Represents item metadata added to an Items dataset using the <code>PutItems</code> API.
+    ResourceNotFoundException: {}
+    User:
+      type: object
+      required:
+        - userId
+      properties:
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/StringType'
+            - description: The ID associated with the user.
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/UserProperties'
+            - description: '<p>A string map of user-specific metadata. Each element in the map consists of a key-value pair. For example, </p> <p> <code>{"numberOfVideosWatched": "45"}</code> </p> <p>The keys use camel case names that match the fields in the Users schema. In the above example, the <code>numberOfVideosWatched</code> would match the ''NUMBER_OF_VIDEOS_WATCHED'' field defined in the Users schema.</p>'
+      description: Represents user metadata added to a Users dataset using the <code>PutUsers</code> API.
+    Arn:
+      type: string
+      pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
+      maxLength: 256
     Date:
       type: string
       format: date-time
@@ -294,6 +427,16 @@ components:
         $ref: '#/components/schemas/Event'
       minItems: 1
       maxItems: 10
+    ItemProperties:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Item'
+      minItems: 1
+      maxItems: 10
     UserId:
       type: string
       minLength: 1
@@ -322,5 +465,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventList'
             - description: A list of event data from the session.
+    PutItemsRequest:
+      type: object
+      required:
+        - datasetArn
+        - items
+      title: PutItemsRequest
+      properties:
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) of the Items dataset you are adding the item or items to.
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ItemList'
+            - description: A list of item data.
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+      minItems: 1
+      maxItems: 10
+    PutUsersRequest:
+      type: object
+      required:
+        - datasetArn
+        - users
+      title: PutUsersRequest
+      properties:
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) of the Users dataset you are adding the user or users to.
+        users:
+          allOf:
+            - $ref: '#/components/schemas/UserList'
+            - description: A list of user data.
+    UserProperties:
+      type: string
+      minLength: 1
+      maxLength: 1024
 security:
   - hmac: []

@@ -112,6 +112,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The AWS Batch endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /v1/canceljob:
     post:
@@ -262,7 +263,7 @@ paths:
                     tags:
                       allOf:
                         - $ref: '#/components/schemas/TagsMap'
-                        - description: 'Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }.'
+                        - description: 'Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }. These tags can not be updated or removed after the compute environment has been created; any changes require creating a new compute environment and removing the old compute environment. These tags are not seen when using the AWS Batch ListTagsForResource API operation.'
                     placementGroup:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -282,6 +283,13 @@ paths:
                 serviceRole:
                   description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
                   type: string
+                tags:
+                  description: '<p>The tags that you apply to the compute environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.</p> <p>These tags can be updated or removed using the <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html">TagResource</a> and <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html">UntagResource</a> API operations. These tags do not propagate to the underlying compute resources.</p>'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -342,6 +350,13 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ComputeEnvironmentOrder'
+                tags:
+                  description: 'The tags that you apply to the job queue to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -797,6 +812,89 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'List the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '481':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource with the specified <code>resourceArn</code>. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '481':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource to which to add tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'The tags that you apply to the resource to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
   /v1/registerjobdefinition:
     post:
       operationId: RegisterJobDefinition
@@ -872,7 +970,7 @@ paths:
                     executionRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Amazon ECS task execution IAM role</a>.'
+                        - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html">AWS Batch execution IAM role</a>.'
                     volumes:
                       allOf:
                         - $ref: '#/components/schemas/Volumes'
@@ -953,6 +1051,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Integer'
                         - description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
+                tags:
+                  description: 'The tags that you apply to the job definition to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1079,6 +1184,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Integer'
                         - description: The time duration in seconds (measured from the job attempt's <code>startedAt</code> timestamp) after which AWS Batch terminates your jobs if they have not finished.
+                tags:
+                  description: 'The tags that you apply to the job request to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1127,6 +1239,54 @@ paths:
                 reason:
                   description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
                   type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Deletes specified tags from an AWS Batch resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '481':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the resource from which to delete tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.'
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys of the tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1373,6 +1533,9 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The version number of the launch template, <code>$Latest</code>, or <code>$Default</code>.</p> <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If the value is <code>$Default</code>, the default version of the launch template is used.</p> <p>Default: <code>$Default</code>.</p>'
       description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.'
+    TagValue:
+      type: string
+      maxLength: 256
     CreateJobQueueResponse:
       type: object
       required:
@@ -1555,6 +1718,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The <code>nextToken</code> value to include in a future <code>ListJobs</code> request. When the results of a <code>ListJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.'
+    ListTagsForResourceResponse:
+      type: object
+      example:
+        tags:
+          Department: Engineering
+          Stage: Alpha
+          User: JaneDoe
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: The tags for the resource.
     RegisterJobDefinitionResponse:
       type: object
       required:
@@ -1562,8 +1737,8 @@ components:
         - jobDefinitionArn
         - revision
       example:
-        jobDefinitionArn: 'arn:aws:batch:us-east-1:012345678910:job-definition/sleep10:1'
-        jobDefinitionName: sleep10
+        jobDefinitionArn: 'arn:aws:batch:us-east-1:012345678910:job-definition/sleep30:1'
+        jobDefinitionName: sleep30
         revision: 1
       properties:
         jobDefinitionName:
@@ -1610,7 +1785,7 @@ components:
         initProcessEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Run an <code>init</code> process inside the container that forwards signals and reaps processes. This parameter maps to the <code>--init</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep "Server API version"</code> '
+            - description: 'If true, run an <code>init</code> process inside the container that forwards signals and reaps processes. This parameter maps to the <code>--init</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep "Server API version"</code> '
         sharedMemorySize:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -1636,7 +1811,7 @@ components:
         logDriver:
           allOf:
             - $ref: '#/components/schemas/LogDriver'
-            - description: '<p>The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default.</p> <p>The supported log drivers are <code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>, <code>json-file</code>, <code>journald</code>, <code>logentries</code>, <code>syslog</code>, and <code>splunk</code>.</p> <p>For more information about using the <code>awslogs</code> log driver, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html">Using the awslogs Log Driver</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is <a href="https://github.com/aws/amazon-ecs-agent">available on GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep "Server API version"</code> </p>'
+            - description: '<p>The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default.</p> <p>The supported log drivers are <code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>, <code>json-file</code>, <code>journald</code>, <code>logentries</code>, <code>syslog</code>, and <code>splunk</code>.</p> <dl> <dt>awslogs</dt> <dd> <p>Specifies the Amazon CloudWatch Logs logging driver. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html">Using the awslogs Log Driver</a> in the <i>AWS Batch User Guide</i> and <a href="https://docs.docker.com/config/containers/logging/awslogs/">Amazon CloudWatch Logs logging driver</a> in the Docker documentation.</p> </dd> <dt>fluentd</dt> <dd> <p>Specifies the Fluentd logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/fluentd/">Fluentd logging driver</a> in the Docker documentation.</p> </dd> <dt>gelf</dt> <dd> <p>Specifies the Graylog Extended Format (GELF) logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/gelf/">Graylog Extended Format logging driver</a> in the Docker documentation.</p> </dd> <dt>journald</dt> <dd> <p>Specifies the journald logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/journald/">Journald logging driver</a> in the Docker documentation.</p> </dd> <dt>json-file</dt> <dd> <p>Specifies the JSON file logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/json-file/">JSON File logging driver</a> in the Docker documentation.</p> </dd> <dt>splunk</dt> <dd> <p>Specifies the Splunk logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/splunk/">Splunk logging driver</a> in the Docker documentation.</p> </dd> <dt>syslog</dt> <dd> <p>Specifies the syslog logging driver. For more information, including usage and options, see <a href="https://docs.docker.com/config/containers/logging/syslog/">Syslog logging driver</a> in the Docker documentation.</p> </dd> </dl> <note> <p>If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is <a href="https://github.com/aws/amazon-ecs-agent">available on GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep "Server API version"</code> </p>'
         options:
           allOf:
             - $ref: '#/components/schemas/LogConfigurationOptionsMap'
@@ -1644,7 +1819,7 @@ components:
         secretOptions:
           allOf:
             - $ref: '#/components/schemas/SecretList'
-            - description: 'The secrets to pass to the log configuration. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'The secrets to pass to the log configuration. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html">Specifying Sensitive Data</a> in the <i>AWS Batch User Guide</i>.'
       description: Log configuration options to send to a custom log driver for the container.
     SecretList:
       type: array
@@ -1663,6 +1838,10 @@ components:
         jobId: 876da822-4198-45f2-a252-6cea32512ea8
         jobName: example
       properties:
+        jobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the job.
         jobName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1687,10 +1866,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NodePropertyOverride'
+    TagResourceResponse:
+      type: object
+      example: {}
+      properties: {}
     TerminateJobResponse:
       type: object
       example: {}
       properties: {}
+    UntagResourceResponse:
+      type: object
+      example: {}
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
     UpdateComputeEnvironmentResponse:
       type: object
       example:
@@ -1856,6 +2047,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A message to attach to the job that explains the reason for canceling it. This message is returned by future <a>DescribeJobs</a> operations on the job. This message is also recorded in the AWS Batch activity logs.
+    TagrisTagsMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     ComputeResource:
       type: object
       required:
@@ -1913,7 +2110,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
-            - description: 'Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }.'
+            - description: 'Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }. These tags can not be updated or removed after the compute environment has been created; any changes require creating a new compute environment and removing the old compute environment. These tags are not seen when using the AWS Batch ListTagsForResource API operation.'
         placementGroup:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1950,6 +2147,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: The tags applied to the compute environment.
         type:
           allOf:
             - $ref: '#/components/schemas/CEType'
@@ -2009,11 +2210,11 @@ components:
         vcpus:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of VCPUs allocated for the job.
+            - description: The number of VCPUs allocated for the job. This is a required parameter.
         memory:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of MiB of memory reserved for the job.
+            - description: The number of MiB of memory reserved for the job. This is a required parameter.
         command:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -2025,7 +2226,7 @@ components:
         executionRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Amazon ECS task execution IAM role</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html">AWS Batch execution IAM role</a>.'
         volumes:
           allOf:
             - $ref: '#/components/schemas/Volumes'
@@ -2153,7 +2354,7 @@ components:
         executionRoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html">Amazon ECS task execution IAM role</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html">AWS Batch execution IAM role</a>.'
         volumes:
           allOf:
             - $ref: '#/components/schemas/Volumes'
@@ -2243,6 +2444,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: '<p>The tags that you apply to the compute environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.</p> <p>These tags can be updated or removed using the <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html">TagResource</a> and <a href="https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html">UntagResource</a> API operations. These tags do not propagate to the underlying compute resources.</p>'
     JQState:
       type: string
       enum:
@@ -2272,6 +2477,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComputeEnvironmentOrders'
             - description: The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the <code>VALID</code> state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: 'The tags that you apply to the job queue to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
     DeleteComputeEnvironmentRequest:
       type: object
       required:
@@ -2529,6 +2738,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NodeProperties'
             - description: An object with various properties specific to multi-node parallel jobs.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: The tags applied to the job definition.
       description: An object representing an AWS Batch job definition.
     JobDefinitionType:
       type: string
@@ -2571,6 +2784,10 @@ components:
         - startedAt
         - jobDefinition
       properties:
+        jobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the job.
         jobName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2643,6 +2860,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTimeout'
             - description: The timeout configuration for the job.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: The tags applied to the job.
       description: An object representing an AWS Batch job.
     JobQueueDetail:
       type: object
@@ -2681,6 +2902,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComputeEnvironmentOrders'
             - description: The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: The tags applied to the job queue.
       description: An object representing the details of an AWS Batch job queue.
     NodePropertiesSummary:
       type: object
@@ -2704,6 +2929,10 @@ components:
         - jobId
         - jobName
       properties:
+        jobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the job.
         jobId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2781,6 +3010,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     LogDriver:
       type: string
       enum:
@@ -2902,6 +3135,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTimeout'
             - description: 'The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a <a>SubmitJob</a> operation overrides the timeout configuration defined here. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: 'The tags that you apply to the job definition to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
     ResourceType:
       type: string
       enum:
@@ -2984,6 +3221,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobTimeout'
             - description: 'The timeout configuration for this <a>SubmitJob</a> operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html">Job Timeouts</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: 'The tags that you apply to the job request to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
+    TagKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagrisTagsMap'
+            - description: 'The tags that you apply to the resource to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> in <i>AWS General Reference</i>.'
     TerminateJobRequest:
       type: object
       required:
@@ -3008,7 +3265,7 @@ components:
         containerPath:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The absolute file path where the tmpfs volume is to be mounted.
+            - description: The absolute file path in the container where the tmpfs volume is to be mounted.
         size:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -3016,7 +3273,7 @@ components:
         mountOptions:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: '<p>The list of tmpfs volume mount options.</p> <p>Valid values: <code>"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"</code> </p>'
+            - description: '<p>The list of tmpfs volume mount options.</p> <p>Valid values: "<code>defaults</code>" | "<code>ro</code>" | "<code>rw</code>" | "<code>suid</code>" | "<code>nosuid</code>" | "<code>dev</code>" | "<code>nodev</code>" | "<code>exec</code>" | "<code>noexec</code>" | "<code>sync</code>" | "<code>async</code>" | "<code>dirsync</code>" | "<code>remount</code>" | "<code>mand</code>" | "<code>nomand</code>" | "<code>atime</code>" | "<code>noatime</code>" | "<code>diratime</code>" | "<code>nodiratime</code>" | "<code>bind</code>" | "<code>rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime</code>" | "<code>norelatime</code>" | "<code>strictatime</code>" | "<code>nostrictatime</code>" | "<code>mode</code>" | "<code>uid</code>" | "<code>gid</code>" | "<code>nr_inodes</code>" | "<code>nr_blocks</code>" | "<code>mpol</code>"</p>'
       description: 'The container path, mount options, and size of the tmpfs mount.'
     Ulimit:
       type: object
@@ -3038,6 +3295,10 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: The soft limit for the <code>ulimit</code> type.
       description: The <code>ulimit</code> settings to pass to the container.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
     UpdateComputeEnvironmentRequest:
       type: object
       required:

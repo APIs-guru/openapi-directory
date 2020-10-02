@@ -3224,6 +3224,12 @@ paths:
           description: '<p>For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The character set is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p>'
           schema:
             type: string
+        - name: NcharCharacterSetName
+          in: query
+          required: false
+          description: The name of the NCHAR character set for the Oracle DB instance.
+          schema:
+            type: string
         - name: PubliclyAccessible
           in: query
           required: false
@@ -23459,6 +23465,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The character set is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p>'
+        NcharCharacterSetName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the NCHAR character set for the Oracle DB instance.
         PubliclyAccessible:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -23813,6 +23823,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'If present, specifies the name of the character set that this instance is associated with.'
+        NcharCharacterSetName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the NCHAR character set for the Oracle DB instance. This character set specifies the Unicode encoding for data stored in table columns of type NCHAR, NCLOB, or NVARCHAR2. '
         SecondaryAvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24616,7 +24630,11 @@ components:
         SupportedCharacterSets:
           allOf:
             - $ref: '#/components/schemas/SupportedCharacterSetsList'
-            - description: ' A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> action. '
+            - description: 'A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> operation. '
+        SupportedNcharCharacterSets:
+          allOf:
+            - $ref: '#/components/schemas/SupportedCharacterSetsList'
+            - description: 'A list of the character sets supported by the Oracle DB engine for the <code>NcharCharacterSetName</code> parameter of the <code>CreateDBInstance</code> operation. '
         ValidUpgradeTarget:
           allOf:
             - $ref: '#/components/schemas/ValidUpgradeTargetList'
