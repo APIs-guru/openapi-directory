@@ -1778,7 +1778,7 @@ components:
           type: string
       type: object
     GceClusterConfig:
-      description: "Common config settings for resources of Compute Engine cluster instances, applicable to all instances in the cluster. NEXT ID: 14"
+      description: Common config settings for resources of Compute Engine cluster instances, applicable to all instances in the cluster.
       properties:
         internalIpOnly:
           description: Optional. If true, all instances in the cluster will only have internal IP addresses. By default, clusters are not restricted to internal IP addresses, and will have ephemeral external IP addresses assigned to each instance. This internal_ip_only restriction can only be enabled for subnetwork enabled networks, and all off-cluster dependencies must be configured to be accessible without external IP addresses.
@@ -1791,6 +1791,9 @@ components:
         networkUri:
           description: 'Optional. The Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see Using Subnetworks (https://cloud.google.com/compute/docs/subnetworks) for more information).A full URL, partial URI, or short name are valid. Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default projects/[project_id]/regions/global/default default'
           type: string
+        nodeGroupAffinity:
+          $ref: "#/components/schemas/NodeGroupAffinity"
+          description: Optional. Node Group Affinity for sole-tenant clusters.
         privateIpv6GoogleAccess:
           description: Optional. The type of IPv6 access for a cluster.
           enum:
@@ -2371,6 +2374,13 @@ components:
           type: string
         targetGkeCluster:
           description: "Optional. The target GKE cluster to deploy to. Format: 'projects/{project}/locations/{location}/clusters/{cluster_id}'"
+          type: string
+      type: object
+    NodeGroupAffinity:
+      description: Node Group Affinity for clusters using sole-tenant node groups.
+      properties:
+        nodeGroupUri:
+          description: Optional. The name of a single node group (https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups) a cluster will be created on.
           type: string
       type: object
     NodeInitializationAction:

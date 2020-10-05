@@ -2811,7 +2811,7 @@ components:
       description: Model metadata that is specific to text extraction.
       properties:
         modelHint:
-          description: "Indicates the scope of model use case. * `default`: A General text extraction model will be trained. It's the default value upon unset. * `health_care`: A text extraction model tuned for health care will be trained."
+          description: "Indicates the scope of model use case. * `default`: Use to train a general text extraction model. Default value. * `health_care`: Use to train a text extraction model that is tuned for healthcare applications."
           type: string
       type: object
     TextSegment:

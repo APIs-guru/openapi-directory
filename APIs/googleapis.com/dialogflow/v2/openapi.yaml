@@ -3357,6 +3357,15 @@ components:
             $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1Intent'
           type: array
       type: object
+    GoogleCloudDialogflowV2beta1BatchUpdateSmartMessagingEntriesResponse:
+      description: 'Response message for [Documents.BatchUpdateSmartMessagingEntries]'
+      properties:
+        smartMessagingEntries:
+          description: List of updated smart message entries.
+          items:
+            $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1SmartMessagingEntry'
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1Context:
       description: 'Dialogflow contexts are similar to natural language context. If a person says to you "they are orange", you need context in order to understand what "they" is referring to. Similarly, for Dialogflow to handle an end-user expression like that, it needs to be provided with context in order to correctly match an intent. Using contexts, you can control the flow of a conversation. You can configure contexts for an intent by setting input and output contexts, which are identified by string names. When an intent is matched, any configured output contexts for that intent become active. While any contexts are active, Dialogflow is more likely to match intents that are configured with input contexts that correspond to the currently active contexts. For more information about context, see the [Contexts guide](https://cloud.google.com/dialogflow/docs/contexts-overview).'
       properties:
@@ -4398,6 +4407,42 @@ components:
         name:
           description: 'Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SmartMessagingEntry:
+      description: Smart Messaging Entry resource.
+      properties:
+        messageInfo:
+          $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1SmartMessagingEntryInfo'
+          description: Output only. Metadata of the message entry
+        name:
+          description: 'The unique identifier of this message entry. Required for [Documents.GetSmartMessagingEntry], [Documents.CreateSmartMessagingEntry], [Documents.UpdateSmartMessagingEntry], and [Documents.DeleteSmartMessagingEntry]. Format: `projects//knowledgeBases//documents//smartMessagingEntries/`'
+          type: string
+        rawText:
+          description: Required. The raw text of the message.
+          type: string
+        state:
+          description: Required. Smart Messaging Entry's enabled/disabled state.
+          enum:
+            - SMART_MESSAGING_ENTRY_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SmartMessagingEntryInfo:
+      description: Smart messaging entry info.
+      properties:
+        creationMethod:
+          description: 'Output only. Method of how the smart messaging entry was created. When the smart messaging entry was generated from GenerateDocument, the value is AUTOMATIC; when the entry was manually added through CreateSmartMessagingEntry, the value is MANUAL.'
+          enum:
+            - CREATION_METHOD_UNSPECIFIED
+            - AUTOMATIC
+            - MANUAL
+          readOnly: true
+          type: string
+        occurrenceCount:
+          description: The number of times an entry's message text has been uttered
+          format: int32
+          type: integer
       type: object
     GoogleCloudDialogflowV2beta1WebhookRequest:
       description: The request message for a webhook call.

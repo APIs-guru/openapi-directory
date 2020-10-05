@@ -343,6 +343,137 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudAssuredworkloadsV1CreateWorkloadOperationMetadata:
+      description: Operation metadata to give request details of CreateWorkload.
+      properties:
+        complianceRegime:
+          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
+          enum:
+            - COMPLIANCE_REGIME_UNSPECIFIED
+            - IL4
+            - CJIS
+            - FEDRAMP_HIGH
+            - FEDRAMP_MODERATE
+          type: string
+        createTime:
+          description: Optional. Time when the operation was created.
+          format: google-datetime
+          type: string
+        displayName:
+          description: Optional. The display name of the workload.
+          type: string
+        parent:
+          description: Optional. The parent of the workload.
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1Workload:
+      description: An Workload object for managing highly regulated workloads of cloud customers.
+      properties:
+        billingAccount:
+          description: Required. Input only. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
+          type: string
+        cjisSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadCJISSettings"
+          description: Required. Input only. Immutable. Settings specific to resources needed for CJIS.
+        complianceRegime:
+          description: Required. Immutable. Compliance Regime associated with this workload.
+          enum:
+            - COMPLIANCE_REGIME_UNSPECIFIED
+            - IL4
+            - CJIS
+            - FEDRAMP_HIGH
+            - FEDRAMP_MODERATE
+          type: string
+        createTime:
+          description: Output only. Immutable. The Workload creation timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: "Required. The user-assigned display name of the Workload. When present it must be between 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, and spaces. Example: My Workload"
+          type: string
+        etag:
+          description: Optional. ETag of the workload, it is calculated on the basis of the Workload contents. It will be used in Update & Delete operations.
+          type: string
+        fedrampHighSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadFedrampHighSettings"
+          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP High.
+        fedrampModerateSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadFedrampModerateSettings"
+          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
+        il4Settings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadIL4Settings"
+          description: Required. Input only. Immutable. Settings specific to resources needed for IL4.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Labels applied to the workload.
+          type: object
+        name:
+          description: "Optional. The resource name of the workload. Format: organizations/{organization}/locations/{location}/workloads/{workload} Read-only."
+          type: string
+        resources:
+          description: Output only. The resources associated with this workload. These resources will be created when creating the workload. If any of the projects already exist, the workload creation will fail. Always read only.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadResourceInfo"
+          readOnly: true
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadCJISSettings:
+      description: Settings specific to resources needed for CJIS.
+      properties:
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadFedrampHighSettings:
+      description: Settings specific to resources needed for FedRAMP High.
+      properties:
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadFedrampModerateSettings:
+      description: Settings specific to resources needed for FedRAMP Moderate.
+      properties:
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadIL4Settings:
+      description: Settings specific to resources needed for IL4.
+      properties:
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
+      description: Settings specific to the Key Management Service.
+      properties:
+        nextRotationTime:
+          description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
+          format: google-datetime
+          type: string
+        rotationPeriod:
+          description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadResourceInfo:
+      description: Represent the resources that are children of this Workload.
+      properties:
+        resourceId:
+          description: Resource identifier. For a project this represents project_number.
+          format: int64
+          type: string
+        resourceType:
+          description: Indicates the type of resource.
+          enum:
+            - RESOURCE_TYPE_UNSPECIFIED
+            - CONSUMER_PROJECT
+            - ENCRYPTION_KEYS_PROJECT
+          type: string
+      type: object
     GoogleCloudAssuredworkloadsV1beta1CreateWorkloadOperationMetadata:
       description: Operation metadata to give request details of CreateWorkload.
       properties:

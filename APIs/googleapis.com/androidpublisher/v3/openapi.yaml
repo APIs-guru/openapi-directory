@@ -3354,6 +3354,9 @@ components:
           description: The quantity associated with the purchase of the inapp product.
           format: int32
           type: integer
+        regionCode:
+          description: ISO 3166-1 alpha-2 billing region code of the user at the time the product was granted.
+          type: string
       type: object
     ProductPurchasesAcknowledgeRequest:
       description: Request for the product.purchases.acknowledge API.

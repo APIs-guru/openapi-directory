@@ -1475,7 +1475,7 @@ paths:
       description: Retrieve the list of broadcasts associated with the given channel.
       operationId: youtube.liveBroadcasts.list
       parameters:
-        - description: The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.
+        - description: The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, status and statistics.
           explode: true
           in: query
           name: part

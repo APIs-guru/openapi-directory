@@ -4289,7 +4289,7 @@ components:
           description: Country for which this issue is reported.
           type: string
         destination:
-          description: The destination the issue applies to.
+          description: The destination the issue applies to. If this field is empty then the issue applies to all available destinations.
           type: string
         detail:
           description: Additional details about the issue.

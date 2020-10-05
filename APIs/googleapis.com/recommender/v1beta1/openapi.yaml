@@ -245,7 +245,7 @@ paths:
       description: Lists insights for a Cloud project. Requires the recommender.*.list IAM permission for the specified insight type.
       operationId: recommender.projects.locations.insightTypes.insights.list
       parameters:
-        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/'
+        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/insightTypes/[INSIGHT_TYPE_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/ INSIGHT_TYPE_ID refers to supported insight types: https://cloud.google.com/recommender/docs/insights/insight-types.'
           in: path
           name: parent
           required: true
@@ -297,7 +297,7 @@ paths:
       description: Lists recommendations for a Cloud project. Requires the recommender.*.list IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.list
       parameters:
-        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/'
+        - description: 'Required. The container resource on which to execute the request. Acceptable formats: 1. "projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]", LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/ RECOMMENDER_ID refers to supported recommenders: https://cloud.google.com/recommender/docs/recommenders.'
           in: path
           name: parent
           required: true

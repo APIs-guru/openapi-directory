@@ -86,6 +86,7 @@ tags:
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
   - name: regionInstances
+  - name: regionInstantSnapshots
   - name: regionNetworkEndpointGroups
   - name: regionNotificationEndpoints
   - name: regionOperations
@@ -116,6 +117,7 @@ tags:
   - name: vpnGateways
   - name: vpnTunnels
   - name: zoneInPlaceSnapshots
+  - name: zoneInstantSnapshots
   - name: zoneOperations
   - name: zones
 paths:
@@ -15006,6 +15008,51 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates a snapshot in the specified project using the data included in the request.
+      operationId: compute.snapshots.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Snapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - snapshots
   "/projects/{project}/global/snapshots/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -16585,6 +16632,57 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patches the specified TargetHttpProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules. (== suppress_warning http-rest-shadowed ==)
+      operationId: compute.targetHttpProxies.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the TargetHttpProxy resource to patch.
+          in: path
+          name: targetHttpProxy
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TargetHttpProxy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - targetHttpProxies
   "/projects/{project}/global/targetHttpsProxies":
     get:
       description: Retrieves the list of TargetHttpsProxy resources available to the specified project.
@@ -24987,6 +25085,492 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstances
+  "/projects/{project}/regions/{region}/instantSnapshots":
+    get:
+      description: Retrieves the list of InstantSnapshot resources contained within the specified region.
+      operationId: compute.regionInstantSnapshots.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: >-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+
+
+            You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: >-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+
+            You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+
+            Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshotList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an instant snapshot in the specified region.
+      operationId: compute.regionInstantSnapshots.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstantSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}":
+    delete:
+      description: >-
+        Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot.
+
+
+        For more information, see Deleting instantSnapshots.
+      operationId: compute.regionInstantSnapshots.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to delete.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+    get:
+      description: Returns the specified InstantSnapshot resource in the specified region.
+      operationId: compute.regionInstantSnapshots.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to return.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.regionInstantSnapshots.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.regionInstantSnapshots.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/setLabels":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the labels on a instantSnapshot in the given region. To learn more about labels, read the Labeling Resources documentation.
+      operationId: compute.regionInstantSnapshots.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetLabelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionInstantSnapshots.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
   "/projects/{project}/regions/{region}/interconnectAttachments":
     get:
       description: Retrieves the list of interconnect attachments contained within the specified region.
@@ -34535,7 +35119,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "[Input Only] Specifies to create an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
+        - description: "[Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
           in: query
           name: guestFlush
           schema:
@@ -37017,7 +37601,11 @@ paths:
         - instanceGroupManagers
   "/projects/{project}/zones/{zone}/instanceGroups":
     get:
-      description: Retrieves the list of instance groups that are located in the specified project and zone.
+      description: >-
+        Retrieves the list of zonal instance group resources contained within the specified zone.
+
+
+        For managed instance groups, use the instanceGroupManagers or regionInstanceGroupManagers methods instead.
       operationId: compute.instanceGroups.list
       parameters:
         - description: Project ID for this request.
@@ -37210,7 +37798,11 @@ paths:
       tags:
         - instanceGroups
     get:
-      description: Returns the specified instance group. Gets a list of available instance groups by making a list() request.
+      description: >-
+        Returns the specified zonal instance group. Get a list of available zonal instance groups by making a list() request.
+
+
+        For managed instance groups, use the instanceGroupManagers or regionInstanceGroupManagers methods instead.
       operationId: compute.instanceGroups.get
       parameters:
         - description: Project ID for this request.
@@ -38204,7 +38796,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Whether to force attach the regional disk even if it's currently attached to another instance.
+        - description: Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error.
           in: query
           name: forceAttach
           schema:
@@ -40711,6 +41303,492 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instances
+  "/projects/{project}/zones/{zone}/instantSnapshots":
+    get:
+      description: Retrieves the list of InstantSnapshot resources contained within the specified zone.
+      operationId: compute.zoneInstantSnapshots.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: >-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+
+
+            You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: >-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+
+            You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+
+            Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshotList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - zoneInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an instant snapshot in the specified zone.
+      operationId: compute.zoneInstantSnapshots.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstantSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - zoneInstantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}":
+    delete:
+      description: >-
+        Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot.
+
+
+        For more information, see Deleting instantSnapshots.
+      operationId: compute.zoneInstantSnapshots.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to delete.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - zoneInstantSnapshots
+    get:
+      description: Returns the specified InstantSnapshot resource in the specified zone.
+      operationId: compute.zoneInstantSnapshots.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to return.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - zoneInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.zoneInstantSnapshots.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - zoneInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.zoneInstantSnapshots.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZoneSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - zoneInstantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setLabels":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the labels on a instantSnapshot in the given zone. To learn more about labels, read the Labeling Resources documentation.
+      operationId: compute.zoneInstantSnapshots.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZoneSetLabelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - zoneInstantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.zoneInstantSnapshots.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - zoneInstantSnapshots
   "/projects/{project}/zones/{zone}/machineTypes":
     get:
       description: Retrieves a list of machine types available to the specified project.
@@ -44089,16 +45167,6 @@ components:
           description: Specifies the number of hours after reservation creation where instances using the reservation won't be scheduled for maintenance.
           format: int32
           type: integer
-        maintenanceInterval:
-          description: >-
-            Specifies whether this VM may be a stable fleet VM. Setting this to "Periodic" designates this VM as a Stable Fleet VM.
-
-
-            See go/stable-fleet-ug for more details.
-          enum:
-            - AS_NEEDED
-            - PERIODIC
-          type: string
         minCpuPlatform:
           description: Minimum cpu platform the reservation.
           type: string
@@ -44858,7 +45926,7 @@ components:
       description: CPU utilization policy.
       properties:
         predictiveMethod:
-          description: "Indicates which method of prediction is used for CPU utilization metric, if any. Current set of possible values: * NONE: No predictions are made based on the scaling metric when calculating the number of VM instances. * STANDARD: Standard predictive autoscaling predicts the future values of the scaling metric and then scales a MIG to ensure that new VM instances are ready in time to cover the predicted peak. New values might be added in the future. Some of the values might not be available in all API versions."
+          description: "Indicates which method of prediction is used for CPU utilization metric, if any. Current set of possible values: * NONE: No predictions are made based on the scaling metric when calculating the number of VM instances. * OPTIMIZE_AVAILABILITY: Standard predictive autoscaling predicts the future values of the scaling metric and then scales a MIG to ensure that new VM instances are ready in time to cover the predicted peak. New values might be added in the future. Some of the values might not be available in all API versions."
           enum:
             - NONE
             - OPTIMIZE_AVAILABILITY
@@ -45184,15 +46252,15 @@ components:
           format: int32
           type: integer
         defaultTtl:
-          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         maxTtl:
-          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         negativeCaching:
-          description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 414 (URI Too Long), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
+          description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
           type: boolean
         negativeCachingPolicy:
           description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
@@ -45203,7 +46271,7 @@ components:
           description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
           type: boolean
         serveWhileStale:
-          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800(1 week). Set this to zero (0) to disable serve-while-stale.
+          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
           format: int32
           type: integer
         signedUrlCacheMaxAgeSec:
@@ -45227,11 +46295,11 @@ components:
       description: Specify CDN TTLs for response error codes.
       properties:
         code:
-          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 414, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
           format: int32
           type: integer
         ttl:
-          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: The TTL (in seconds) to cache responses with the corresponding status code for. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
       type: object
@@ -45328,6 +46396,9 @@ components:
       properties:
         affinityCookieTtlSec:
           description: >-
+            Lifetime of cookies in seconds. Only applicable if the loadBalancingScheme is EXTERNAL, INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED, the protocol is HTTP or HTTPS, and the sessionAffinity is GENERATED_COOKIE, or HTTP_COOKIE.
+
+
             If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value is one day (86,400).
 
 
@@ -45569,6 +46640,8 @@ components:
             - HTTP_COOKIE
             - NONE
           type: string
+        subsetting:
+          $ref: "#/components/schemas/Subsetting"
         timeoutSec:
           description: The backend service timeout has a different meaning depending on the type of load balancer. For more information see,  Backend service settings The default is 30 seconds.
           format: int32
@@ -45675,15 +46748,15 @@ components:
           format: int32
           type: integer
         defaultTtl:
-          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         maxTtl:
-          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Setting a TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
         negativeCaching:
-          description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 414 (URI Too Long), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
+          description: "Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s These defaults can be overridden in negative_caching_policy"
           type: boolean
         negativeCachingPolicy:
           description: Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
@@ -45694,7 +46767,7 @@ components:
           description: If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
           type: boolean
         serveWhileStale:
-          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800(1 week). Set this to zero (0) to disable serve-while-stale.
+          description: Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
           format: int32
           type: integer
         signedUrlCacheMaxAgeSec:
@@ -45718,11 +46791,11 @@ components:
       description: Specify CDN TTLs for response error codes.
       properties:
         code:
-          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 414, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+          description: The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
           format: int32
           type: integer
         ttl:
-          description: The TTL (in seconds) to cache responses with the corresponding status code for. A TTL of "0" means "always revalidate" and a value of "-1" disables caching for that status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+          description: The TTL (in seconds) to cache responses with the corresponding status code for. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
           format: int32
           type: integer
       type: object
@@ -46116,6 +47189,9 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
+        bindingId:
+          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
+          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: >-
@@ -46935,8 +48011,8 @@ components:
           items:
             type: string
           type: array
-        satisfiesPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this disk satisfies zone separation."
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
         selfLink:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
@@ -48590,7 +49666,7 @@ components:
             This field is not used for external load balancing.
 
 
-            For INTERNAL and INTERNAL_SELF_MANAGED load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
+            For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
           type: string
         networkTier:
           description: >-
@@ -48677,7 +49753,7 @@ components:
           type: string
         subnetwork:
           description: >-
-            This field is only used for INTERNAL load balancing.
+            This field is only used for internal load balancing.
 
 
             For internal load balancing, this field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule.
@@ -49737,7 +50813,6 @@ components:
           description: >-
             The list of host patterns to match. They must be valid hostnames with optional port numbers in the format host:port. * matches any string of ([a-z0-9-.]*). In that case, * must be the first character and must be followed in the pattern by either - or ..
 
-
             * based matching is not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             type: string
@@ -49841,6 +50916,8 @@ components:
             For matching against the HTTP request's authority, use a headerMatch with the header name ":authority".
 
             For matching a request's method, use the headerName ":method".
+
+            When the URL map is bound to target gRPC proxy that has validateForProxyless field set to true, only non-binary user-specified custom metadata and the `content-type` header are supported. The following transport-level headers cannot be used in header matching rules: `:authority`, `:method`, `:path`, `:scheme`, `user-agent`, `accept-encoding`, `content-encoding`, `grpc-accept-encoding`, `grpc-encoding`, `grpc-previous-rpc-attempts`, `grpc-tags-bin`, `grpc-timeout` and `grpc-trace-bin.
           type: string
         invertMatch:
           description: >-
@@ -50174,36 +51251,51 @@ components:
       properties:
         corsPolicy:
           $ref: "#/components/schemas/CorsPolicy"
-          description: The specification for allowing client side cross-origin requests. Please see W3C Recommendation for Cross Origin Resource Sharing
+          description: >-
+            The specification for allowing client side cross-origin requests. Please see W3C Recommendation for Cross Origin Resource Sharing 
+
+            Not supported when the URL map is bound to target gRPC proxy.
         faultInjectionPolicy:
           $ref: "#/components/schemas/HttpFaultInjection"
           description: >-
             The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.
 
             timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         requestMirrorPolicy:
           $ref: "#/components/schemas/RequestMirrorPolicy"
-          description: Specifies the policy on how requests intended for the route's backends are shadowed to a separate mirrored backend service. Loadbalancer does not wait for responses from the shadow service. Prior to sending traffic to the shadow service, the host / authority header is suffixed with -shadow.
+          description: >-
+            Specifies the policy on how requests intended for the route's backends are shadowed to a separate mirrored backend service. Loadbalancer does not wait for responses from the shadow service. Prior to sending traffic to the shadow service, the host / authority header is suffixed with -shadow.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         retryPolicy:
           $ref: "#/components/schemas/HttpRetryPolicy"
-          description: Specifies the retry policy associated with this route.
+          description: >-
+            Specifies the retry policy associated with this route.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         timeout:
           $ref: "#/components/schemas/Duration"
           description: >-
             Specifies the timeout for the selected route. Timeout is computed from the time the request has been fully processed (i.e. end-of-stream) up until the response has been completely processed. Timeout includes all retries.
 
             If not specified, will use the largest timeout among all backend services associated with the route.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         urlRewrite:
           $ref: "#/components/schemas/UrlRewrite"
           description: >-
             The spec to modify the URL of the request, prior to forwarding the request to the matched service.
 
             urlRewrite is the only action supported in UrlMaps for external HTTP(S) load balancers.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         weightedBackendServices:
           description: >-
-            A list of weighted backend services to send traffic to when a route match occurs. The weights determine the fraction of traffic that flows to their corresponding backend service. If all traffic needs to go to a single backend service, there must be one  weightedBackendService with weight set to a non 0 number.
+            A list of weighted backend services to send traffic to when a route match occurs. The weights determine the fraction of traffic that flows to their corresponding backend service. If all traffic needs to go to a single backend service, there must be one  weightedBackendService with weight set to a non-zero number.
 
-            Once a backendService is identified and before forwarding the request to the backend service, advanced routing actions like Url rewrites and header transformations are applied depending on additional settings specified in this HttpRouteAction.
+            Once a backendService is identified and before forwarding the request to the backend service, advanced routing actions such as URL rewrites and header transformations are applied depending on additional settings specified in this HttpRouteAction.
           items:
             $ref: "#/components/schemas/WeightedBackendService"
           type: array
@@ -50225,8 +51317,13 @@ components:
             The headerAction specified here are applied before the matching pathMatchers[].headerAction and after pathMatchers[].routeRules[].routeAction.weightedBackendService.backendServiceWeightAction[].headerAction 
 
             Note that headerAction is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         httpFilterConfigs:
-          description: Outbound route specific configuration for networkservices.HttpFilter resources enabled by Traffic Director. httpFilterConfigs only applies for Loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.
+          description: >-
+            Outbound route specific configuration for networkservices.HttpFilter resources enabled by Traffic Director. httpFilterConfigs only applies for Loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/HttpFilterConfig"
           type: array
@@ -50234,7 +51331,9 @@ components:
           description: >-
             Outbound route specific metadata supplied to networkservices.HttpFilter resources enabled by Traffic Director. httpFilterMetadata only applies for Loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.
 
-            The only configTypeUrl supported is type.googleapis.com/google.protobuf.Struct
+            The only configTypeUrl supported is type.googleapis.com/google.protobuf.Struct 
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/HttpFilterConfig"
           type: array
@@ -50272,6 +51371,8 @@ components:
             When this rule is matched, the request is redirected to a URL specified by urlRedirect.
 
             If urlRedirect is specified, service or routeAction must not be set.
+
+            Not supported when the URL map is bound to target gRPC proxy.
       type: object
     HttpRouteRuleMatch:
       description: HttpRouteRuleMatch specifies a set of criteria for matching requests to an HttpRouteRule. All specified criteria must be satisfied for a match to occur.
@@ -50296,6 +51397,8 @@ components:
             The default value is false.
 
             ignoreCase must not be used with regexMatch.
+
+            Not supported when the URL map is bound to target gRPC proxy.
           type: boolean
         metadataFilters:
           description: >-
@@ -50306,6 +51409,8 @@ components:
             metadataFilters specified here will be applied after those specified in ForwardingRule that refers to the UrlMap this HttpRouteRuleMatch belongs to.
 
             metadataFilters only applies to Loadbalancers that have their loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/MetadataFilter"
           type: array
@@ -50318,7 +51423,10 @@ components:
             Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
           type: string
         queryParameterMatches:
-          description: Specifies a list of query parameter match criteria, all of which must match corresponding query parameters in the request.
+          description: >-
+            Specifies a list of query parameter match criteria, all of which must match corresponding query parameters in the request.
+
+            Not supported when the URL map is bound to target gRPC proxy.
           items:
             $ref: "#/components/schemas/HttpQueryParameterMatch"
           type: array
@@ -51027,11 +52135,11 @@ components:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
         postKeyRevocationActionType:
-          description: Specifies whether this instance will be shut down on key revocation.
+          description: PostKeyRevocationActionType of the instance.
           enum:
             - NOOP
+            - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
             - SHUTDOWN
-            - UNSPECIFIED
           type: string
         preservedStateSizeGb:
           description: Total amount of preserved state for SUSPENDED instances. Read-only in the api.
@@ -51052,12 +52160,17 @@ components:
           items:
             type: string
           type: array
-        satisfiesPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this instance satisfies zone separation."
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
         scheduling:
           $ref: "#/components/schemas/Scheduling"
           description: Sets the scheduling options for this instance.
+        secureLabels:
+          description: Secure labels to apply to this instance. These can be later modified by the update method. Maximum number of secure labels allowed is 300.
+          items:
+            type: string
+          type: array
         selfLink:
           description: "[Output Only] Server-defined URL for this resource."
           type: string
@@ -52610,11 +53723,11 @@ components:
             $ref: "#/components/schemas/NetworkInterface"
           type: array
         postKeyRevocationActionType:
-          description: Specifies whether instances will be shut down on key revocation.
+          description: PostKeyRevocationActionType of the instance.
           enum:
             - NOOP
+            - POST_KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED
             - SHUTDOWN
-            - UNSPECIFIED
           type: string
         privateIpv6GoogleAccess:
           description: The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
@@ -52991,6 +54104,157 @@ components:
 
 
             If the instance you are starting is protected with a customer-supplied encryption key, the correct key must be provided otherwise the instance start will not succeed.
+      type: object
+    InstantSnapshot:
+      description: >-
+        Represents a InstantSnapshot resource.
+
+
+        You can use instant snapshots to create disk rollback points quickly.. (== resource_for {$api_version}.instantSnapshots ==)
+      properties:
+        creationTimestamp:
+          description: "[Output Only] Creation timestamp in RFC3339 text format."
+          type: string
+        description:
+          description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        diskSizeGb:
+          description: "[Output Only] Size of the source disk, specified in GB."
+          format: int64
+          type: string
+        guestFlush:
+          description: Whether to attempt an application consistent instant snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
+          type: boolean
+        id:
+          description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
+          format: uint64
+          type: string
+        kind:
+          default: compute#instantSnapshot
+          description: "[Output Only] Type of the resource. Always compute#instantSnapshot for InstantSnapshot resources."
+          type: string
+        labelFingerprint:
+          description: >-
+            A fingerprint for the labels being applied to this InstantSnapshot, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet.
+
+
+            To see the latest fingerprint, make a get() request to retrieve a InstantSnapshot.
+          format: byte
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels to apply to this InstantSnapshot. These can be later modified by the setLabels method. Label values may be empty.
+          type: object
+        name:
+          description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        region:
+          description: "[Output Only] URL of the region where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for the resource."
+          type: string
+        selfLinkWithId:
+          description: "[Output Only] Server-defined URL for this resource's resource id."
+          type: string
+        sourceDisk:
+          description: >-
+            URL of the source disk used to create this instant snapshot. Note that the source disk must be in the same zone/region as the instant snapshot to be created. This can be a full or valid partial URL. For example, the following are valid values:  
+
+            - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk 
+
+            - projects/project/zones/zone/disks/disk 
+
+            - zones/zone/disks/disk
+          type: string
+        sourceDiskId:
+          description: "[Output Only] The ID value of the disk used to create this InstantSnapshot. This value may be used to determine whether the InstantSnapshot was taken from the current or a previous instance of a given disk name."
+          type: string
+        status:
+          description: "[Output Only] The status of the instantSnapshot. This can be CREATING, DELETING, FAILED, or READY."
+          enum:
+            - CREATING
+            - DELETING
+            - FAILED
+            - READY
+          type: string
+        zone:
+          description: "[Output Only] URL of the zone where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+      type: object
+    InstantSnapshotList:
+      description: Contains a list of InstantSnapshot resources.
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          description: A list of InstantSnapshot resources.
+          items:
+            $ref: "#/components/schemas/InstantSnapshot"
+          type: array
+        kind:
+          default: compute#instantSnapshotList
+          description: Type of resource.
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: >-
+                [Output Only] Metadata about this warning in key: value format. For example:
+
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
       type: object
     Int64RangeMatch:
       description: HttpRouteRuleMatch criteria for field values that must stay within the specified integer range.
@@ -54532,7 +55796,7 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         guestFlush:
-          description: "[Input Only] Specifies to create an application consistent machine image by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
+          description: "[Input Only] Whether to attempt an application consistent machine image by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
           type: boolean
         id:
           description: "[Output Only] A unique identifier for this machine image. The server defines this identifier."
@@ -55847,6 +57111,10 @@ components:
         networkIP:
           description: An IPv4 internal IP address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.
           type: string
+        queueCount:
+          description: "The networking queue count for the network interface. Both Rx and Tx queues will be set to this number. If it's not specified by the user, a default number of queues will be assigned. For Virtio-net, each interface will get (min(#vCPU, 32) / #vNIC) queues. For gVNIC, each interface will get (min(#vCPU / 2, 16) / #vNIC) qeueus."
+          format: int32
+          type: integer
         subnetwork:
           description: >-
             The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs:  
@@ -56315,8 +57583,8 @@ components:
         nodeType:
           description: The type of this node.
           type: string
-        satisfiesPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this node satisfies zone separation."
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
         serverBinding:
           $ref: "#/components/schemas/ServerBinding"
@@ -58022,9 +59290,6 @@ components:
             Only one of defaultRouteAction or defaultUrlRedirect must be set.
 
             UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within a pathMatcher's defaultRouteAction.
-
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         defaultService:
           description: >-
             The full or partial URL to the BackendService resource. This will be used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource:  
@@ -58041,10 +59306,7 @@ components:
 
             - compute.backendBuckets.use 
 
-            - compute.backendServices.use  
-
-
-            pathMatchers[].defaultService is the only option available when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
+            - compute.backendServices.use
           type: string
         defaultUrlRedirect:
           $ref: "#/components/schemas/HttpRedirectAction"
@@ -58053,8 +59315,7 @@ components:
 
             If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
 
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy.
+            Not supported when the URL map is bound to target gRPC proxy.
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
@@ -58067,8 +59328,7 @@ components:
 
             Note that headerAction is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
 
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         name:
           description: The name to which this PathMatcher is referred by the HostRule.
           type: string
@@ -58079,9 +59339,6 @@ components:
             For example: a pathRule with a path /a/b/c/* will match before /a/b/* irrespective of the order in which those paths appear in this list.
 
             Within a given pathMatcher, only one of pathRules or routeRules must be set.
-
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/PathRule"
           type: array
@@ -58090,9 +59347,6 @@ components:
             The list of HTTP route rules. Use this list instead of pathRules when advanced route matching and routing actions are desired. routeRules are evaluated in order of priority, from the lowest to highest number.
 
             Within a given pathMatcher, you can set only one of pathRules or routeRules.
-
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/HttpRouteRule"
           type: array
@@ -58125,6 +59379,8 @@ components:
             When a path pattern is matched, the request is redirected to a URL specified by urlRedirect.
 
             If urlRedirect is specified, service or routeAction must not be set.
+
+            Not supported when the URL map is bound to target gRPC proxy.
       type: object
     PeerAuthenticationMethod:
       description: "[Deprecated] Configuration for the peer authentication method. Configuration for the peer authentication method."
@@ -59153,8 +60409,8 @@ components:
             - DOWN
             - UP
           type: string
-        supportsPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this region supports physical zone separation."
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
         zones:
           description: "[Output Only] A list of zones available in this region, in the form of resource URLs."
@@ -61867,11 +63123,10 @@ components:
             - ACTIVE
             - DISABLED
             - OBSOLETE
-            - PENDING
           type: string
       type: object
     Scheduling:
-      description: "Sets the scheduling options for an Instance. NextID: 12"
+      description: "Sets the scheduling options for an Instance. NextID: 13"
       properties:
         automaticRestart:
           description: >-
@@ -62280,8 +63535,15 @@ components:
       type: object
     SecurityPolicyRuleRateLimitOptions:
       properties:
+        banDurationSec:
+          description: Can only be specified if the action for the rule is "rate_based_ban". If specified, the key will be banned for the configured 'ban_duration' when the number of requests that exceed the 'rate_limit_threshold' also exceed this 'ban_threshold'.
+          format: int32
+          type: integer
+        banThreshold:
+          $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptionsThreshold"
+          description: Can only be specified if the action for the rule is "rate_based_ban". If specified, the key will be banned for the configured 'ban_duration' when the number of requests that exceed the 'rate_limit_threshold' also exceed this 'ban_threshold'.
         blockDuration:
-          description: Can only be specified if the action for the rule is "rate_based_blacklist" If specified, determines the time (in seconds) the traffic will continue to be blocked by the rate limit after the rate falls below the threshold. The default value is 0 seconds.
+          description: Can only be specified if the action for the rule is "rate_based_ban" If specified, determines the time (in seconds) the traffic will continue to be blocked by the rate limit after the rate falls below the threshold. The default value is 0 seconds. [Deprecated] This field is deprecated.
           format: int32
           type: integer
         conformAction:
@@ -62296,8 +63558,22 @@ components:
         exceedAction:
           description: When a request is denied, returns the HTTP response code specified. Valid options are "deny()" where valid values for status are 403, 404, 429, and 502.
           type: string
+        rateLimitThreshold:
+          $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptionsThreshold"
+          description: Threshold at which to begin ratelimiting.
         thresholdRps:
-          description: Rate in requests per second at which to begin ratelimiting.
+          description: Rate in requests per second at which to begin ratelimiting. [Deprecated] This field is deprecated.
+          format: int32
+          type: integer
+      type: object
+    SecurityPolicyRuleRateLimitOptionsThreshold:
+      properties:
+        count:
+          description: Number of HTTP(S) requests for calculating the threshold.
+          format: int32
+          type: integer
+        intervalSec:
+          description: Interval over which the threshold is computed.
           format: int32
           type: integer
       type: object
@@ -62441,8 +63717,8 @@ components:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
-        natIpCidrRanges:
-          description: An array of IP CIDR ranges where each range is the url of the address resource which represents the range provided by the service producer to use for NAT in this service attachment.
+        natSubnets:
+          description: An array of URLs where each entry is the URL of a subnet provided by the service producer to use for NAT in this service attachment.
           items:
             type: string
           type: array
@@ -62668,6 +63944,9 @@ components:
           description: "[Output Only] Number of bytes downloaded to restore a snapshot to a disk."
           format: int64
           type: string
+        guestFlush:
+          description: "[Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS)."
+          type: boolean
         guestOsFeatures:
           description: "[Output Only] A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options."
           items:
@@ -62709,8 +63988,8 @@ components:
           description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
-        satisfiesPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this snapshot satisfies zone separation."
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
@@ -62732,7 +64011,7 @@ components:
 
             If you do not provide an encryption key when creating the snapshot, then the snapshot will be encrypted using an automatically generated key and you do not need to provide a key to use the snapshot later.
         sourceDisk:
-          description: "[Output Only] The source disk used to create this snapshot."
+          description: The source disk used to create this snapshot.
           type: string
         sourceDiskEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
@@ -62941,7 +64220,7 @@ components:
         Optionally, certificate file contents that you upload can contain a set of up to five PEM-encoded certificates. The API call creates an object (sslCertificate) that holds this data. You can use SSL keys and certificates to secure connections to a load balancer. For more information, read  Creating and using SSL certificates, SSL certificates quotas and limits, and  Troubleshooting SSL certificates. (== resource_for {$api_version}.sslCertificates ==) (== resource_for {$api_version}.regionSslCertificates ==)
       properties:
         certificate:
-          description: A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
+          description: A value read into memory from a certificate file. The certificate file must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.
           type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -62968,7 +64247,7 @@ components:
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
         privateKey:
-          description: A write-only private key in PEM format. Only insert requests will include this field.
+          description: A value read into memory from a write-only private key file. The private key file must be in PEM format. For security, only insert requests include this field.
           type: string
         region:
           description: "[Output Only] URL of the region where the regional SSL Certificate resides. This field is not applicable to global SSL Certificate."
@@ -63588,6 +64867,7 @@ components:
             - INTERNAL_HTTPS_LOAD_BALANCER
             - PRIVATE
             - PRIVATE_RFC_1918
+            - PRIVATE_SERVICE_CONNECT
           type: string
         region:
           description: URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
@@ -63880,6 +65160,15 @@ components:
         privateIpGoogleAccess:
           type: boolean
       type: object
+    Subsetting:
+      description: Subsetting options to make L4 ILB support any number of backend instances
+      properties:
+        policy:
+          enum:
+            - CONSISTENT_HASH_SUBSETTING
+            - NONE
+          type: string
+      type: object
     TCPHealthCheck:
       properties:
         port:
@@ -64133,9 +65422,13 @@ components:
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
+        fingerprint:
+          description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpProxy. An up-to-date fingerprint must be provided in order to patch/update the TargetHttpProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpProxy.
+          format: byte
+          type: string
         httpFilters:
           description: >-
-            Urls to networkservices.HttpFilter resources enabled for xDS clients using this configuration. For example, https://networkservices.googleapis.com/v1alpha1/projects/project/locations/locationhttpFilters/httpFilter Only filters that handle outbound connection and stream events may be specified. These filters work in conjunction with a default set of HTTP filters that may already be configured by Traffic Director. Traffic Director will determine the final location of these filters within xDS configuration based on the name of the HTTP filter. If Traffic Director positions multiple filters at the same location, those filters will be in the same order as specified in this list.
+            URLs to networkservices.HttpFilter resources enabled for xDS clients using this configuration. For example, https://networkservices.googleapis.com/v1alpha1/projects/project/locations/locationhttpFilters/httpFilter Only filters that handle outbound connection and stream events may be specified. These filters work in conjunction with a default set of HTTP filters that may already be configured by Traffic Director. Traffic Director will determine the final location of these filters within xDS configuration based on the name of the HTTP filter. If Traffic Director positions multiple filters at the same location, those filters will be in the same order as specified in this list.
 
             httpFilters only applies for loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.
           items:
@@ -65829,12 +67122,16 @@ components:
     TestFailure:
       properties:
         actualService:
+          description: BackendService or BackendBucket returned by load balancer.
           type: string
         expectedService:
+          description: Expected BackendService or BackendBucket resource the given URL should be mapped to.
           type: string
         host:
+          description: Host portion of the URL.
           type: string
         path:
+          description: Path portion including query parameters in the URL.
           type: string
       type: object
     TestPermissionsRequest:
@@ -65980,16 +67277,14 @@ components:
 
             UrlMaps for external HTTP(S) load balancers support only the urlRewrite action within defaultRouteAction.
 
-
-            defaultRouteAction has no effect when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+            defaultRouteAction has no effect when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         defaultService:
           description: >-
             The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified.
 
             Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
 
-
-            defaultService has no effect when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+            defaultService has no effect when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           type: string
         defaultUrlRedirect:
           $ref: "#/components/schemas/HttpRedirectAction"
@@ -65998,8 +67293,7 @@ components:
 
             If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
 
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy.
+            Not supported when the URL map is bound to target gRPC proxy.
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
@@ -66018,8 +67312,9 @@ components:
 
             The headerAction specified here take effect after headerAction specified under pathMatcher.
 
+            Note that headerAction is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
 
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         hostRules:
           description: The list of HostRules to use against the URL.
           items:
@@ -66052,8 +67347,7 @@ components:
           description: >-
             The list of expected URL mapping tests. Request to update this UrlMap will succeed only if all of the test cases pass. You can specify a maximum of 100 tests per UrlMap.
 
-
-            Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
           items:
             $ref: "#/components/schemas/UrlMapTest"
           type: array
@@ -66146,16 +67440,19 @@ components:
           description: Description of this test case.
           type: string
         expectedUrlRedirect:
-          description: The expected URL that should be redirected to for the host and path being tested.
+          description: The expected URL that should be redirected to for the host and path being tested. [Deprecated] This field is deprecated. Use expected_output_url instead.
           type: string
         host:
-          description: Host portion of the URL.
+          description: Host portion of the URL. If headers contains a host header, then host must also match the header value.
           type: string
         path:
           description: Path portion of the URL.
           type: string
         service:
-          description: Expected BackendService resource the given URL should be mapped to.
+          description: >-
+            Expected BackendService or BackendBucket resource the given URL should be mapped to.
+
+            service cannot be set if expectedRedirectResponseCode is set.
           type: string
       type: object
     UrlMapValidationResult:
@@ -67307,6 +68604,10 @@ components:
             Specifies changes to request and response headers that need to take effect for the selected backendService.
 
             headerAction specified here take effect before headerAction in the enclosing HttpRouteRule, PathMatcher and UrlMap.
+
+            Note that headerAction is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
+
+            Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
         weight:
           description: >-
             Specifies the fraction of traffic sent to backendService, computed as weight / (sum of all weightedBackendService weights in routeAction) .
@@ -67445,8 +68746,8 @@ components:
             - DOWN
             - UP
           type: string
-        supportsPhysicalZoneSeparation:
-          description: "[Output Only] Specifies whether this zone supports physical zone separation."
+        supportsPzs:
+          description: "[Output Only] Reserved for future use."
           type: boolean
       type: object
     ZoneList:

@@ -3121,6 +3121,15 @@ components:
             $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1Intent'
           type: array
       type: object
+    GoogleCloudDialogflowV2beta1BatchUpdateSmartMessagingEntriesResponse:
+      description: 'Response message for [Documents.BatchUpdateSmartMessagingEntries]'
+      properties:
+        smartMessagingEntries:
+          description: List of updated smart message entries.
+          items:
+            $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1SmartMessagingEntry'
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1Context:
       description: 'Dialogflow contexts are similar to natural language context. If a person says to you "they are orange", you need context in order to understand what "they" is referring to. Similarly, for Dialogflow to handle an end-user expression like that, it needs to be provided with context in order to correctly match an intent. Using contexts, you can control the flow of a conversation. You can configure contexts for an intent by setting input and output contexts, which are identified by string names. When an intent is matched, any configured output contexts for that intent become active. While any contexts are active, Dialogflow is more likely to match intents that are configured with input contexts that correspond to the currently active contexts. For more information about context, see the [Contexts guide](https://cloud.google.com/dialogflow/docs/contexts-overview).'
       properties:
@@ -3351,13 +3360,13 @@ components:
       description: 'By default, your agent responds to a matched intent with a static response. As an alternative, you can provide a more dynamic response by using fulfillment. When you enable fulfillment for an intent, Dialogflow responds to that intent by calling a service that you define. For example, if an end-user wants to schedule a haircut on Friday, your service can check your database and respond to the end-user with availability information for Friday. For more information, see the [fulfillment guide](https://cloud.google.com/dialogflow/docs/fulfillment-overview).'
       properties:
         displayName:
-          description: 'Optional. The human-readable name of the fulfillment, unique within the agent.'
+          description: 'The human-readable name of the fulfillment, unique within the agent.'
           type: string
         enabled:
-          description: Optional. Whether fulfillment is enabled.
+          description: Whether fulfillment is enabled.
           type: boolean
         features:
-          description: Optional. The field defines whether the fulfillment is enabled for certain features.
+          description: The field defines whether the fulfillment is enabled for certain features.
           items:
             $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1FulfillmentFeature'
           type: array
@@ -3382,21 +3391,21 @@ components:
       description: 'Represents configuration for a generic web service. Dialogflow supports two mechanisms for authentications: - Basic authentication with username and password. - Authentication with additional authentication headers. More information could be found at: https://cloud.google.com/dialogflow/docs/fulfillment-configure.'
       properties:
         isCloudFunction:
-          description: Optional. Indicates if generic web service is created through Cloud Functions integration. Defaults to false.
+          description: Indicates if generic web service is created through Cloud Functions integration. Defaults to false.
           type: boolean
         password:
-          description: Optional. The password for HTTP Basic authentication.
+          description: The password for HTTP Basic authentication.
           type: string
         requestHeaders:
           additionalProperties:
             type: string
-          description: Optional. The HTTP request headers to send together with fulfillment requests.
+          description: The HTTP request headers to send together with fulfillment requests.
           type: object
         uri:
           description: Required. The fulfillment URI for receiving POST requests. It must use https protocol.
           type: string
         username:
-          description: Optional. The user name for HTTP Basic authentication.
+          description: The user name for HTTP Basic authentication.
           type: string
       type: object
     GoogleCloudDialogflowV2beta1GcsSource:
@@ -4643,6 +4652,42 @@ components:
         name:
           description: 'Required. The unique identifier of this session entity type. Supported formats: - `projects//agent/sessions//entityTypes/` - `projects//locations//agent/sessions//entityTypes/` - `projects//agent/environments//users//sessions//entityTypes/` - `projects//locations//agent/environments/ /users//sessions//entityTypes/` If `Location ID` is not specified we assume default ''us'' location. If `Environment ID` is not specified, we assume default ''draft'' environment. If `User ID` is not specified, we assume default ''-'' user. `` must be the display name of an existing entity type in the same agent that will be overridden or supplemented.'
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SmartMessagingEntry:
+      description: Smart Messaging Entry resource.
+      properties:
+        messageInfo:
+          $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1SmartMessagingEntryInfo'
+          description: Output only. Metadata of the message entry
+        name:
+          description: 'The unique identifier of this message entry. Required for [Documents.GetSmartMessagingEntry], [Documents.CreateSmartMessagingEntry], [Documents.UpdateSmartMessagingEntry], and [Documents.DeleteSmartMessagingEntry]. Format: `projects//knowledgeBases//documents//smartMessagingEntries/`'
+          type: string
+        rawText:
+          description: Required. The raw text of the message.
+          type: string
+        state:
+          description: Required. Smart Messaging Entry's enabled/disabled state.
+          enum:
+            - SMART_MESSAGING_ENTRY_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SmartMessagingEntryInfo:
+      description: Smart messaging entry info.
+      properties:
+        creationMethod:
+          description: 'Output only. Method of how the smart messaging entry was created. When the smart messaging entry was generated from GenerateDocument, the value is AUTOMATIC; when the entry was manually added through CreateSmartMessagingEntry, the value is MANUAL.'
+          enum:
+            - CREATION_METHOD_UNSPECIFIED
+            - AUTOMATIC
+            - MANUAL
+          readOnly: true
+          type: string
+        occurrenceCount:
+          description: The number of times an entry's message text has been uttered
+          format: int32
+          type: integer
       type: object
     GoogleCloudDialogflowV2beta1SpeechContext:
       description: Hints for the speech recognizer to help with recognition in a specific conversation state.

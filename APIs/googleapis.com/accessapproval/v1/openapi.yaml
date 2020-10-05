@@ -102,7 +102,7 @@ paths:
       description: Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.
       operationId: accessapproval.projects.updateAccessApprovalSettings
       parameters:
-        - description: 'The resource name of the settings. Format is one of: 1. "projects/{project_id}/accessApprovalSettings" 2. "folders/{folder_id}/accessApprovalSettings" 3. "organizations/{organization_id}/accessApprovalSettings" '
+        - description: 'The resource name of the settings. Format is one of: * "projects/{project}/accessApprovalSettings" * "folders/{folder}/accessApprovalSettings" * "organizations/{organization}/accessApprovalSettings"'
           in: path
           name: name
           required: true
@@ -221,13 +221,13 @@ paths:
       description: Lists approval requests associated with a project, folder, or organization. Approval requests can be filtered by state (pending, active, dismissed). The order is reverse chronological.
       operationId: accessapproval.projects.approvalRequests.list
       parameters:
-        - description: The parent resource. This may be "projects/{project_id}", "folders/{folder_id}", or "organizations/{organization_id}".
+        - description: The parent resource. This may be "projects/{project}", "folders/{folder}", or "organizations/{organization}".
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "A filter on the type of approval requests to retrieve. Must be one of the following values: 1. [not set]: Requests that are pending or have active approvals. 2. ALL: All requests. 3. PENDING: Only pending requests. 4. ACTIVE: Only active (i.e. currently approved) requests. 5. DISMISSED: Only dismissed (including expired) requests. 6. HISTORY: Active and dismissed (including expired) requests. "
+        - description: "A filter on the type of approval requests to retrieve. Must be one of the following values: * [not set]: Requests that are pending or have active approvals. * ALL: All requests. * PENDING: Only pending requests. * ACTIVE: Only active (i.e. currently approved) requests. * DISMISSED: Only dismissed (including expired) requests. * HISTORY: Active and dismissed (including expired) requests."
           in: query
           name: filter
           schema:
@@ -357,7 +357,7 @@ components:
             $ref: "#/components/schemas/EnrolledService"
           type: array
         name:
-          description: 'The resource name of the settings. Format is one of: 1. "projects/{project_id}/accessApprovalSettings" 2. "folders/{folder_id}/accessApprovalSettings" 3. "organizations/{organization_id}/accessApprovalSettings" '
+          description: 'The resource name of the settings. Format is one of: * "projects/{project}/accessApprovalSettings" * "folders/{folder}/accessApprovalSettings" * "organizations/{organization}/accessApprovalSettings"'
           type: string
         notificationEmails:
           description: A list of email addresses to which notifications relating to approval requests should be sent. Notifications relating to a resource will be sent to all emails in the settings of ancestor resources of that resource. A maximum of 50 email addresses are allowed.
@@ -369,10 +369,10 @@ components:
       description: Home office and physical location of the principal.
       properties:
         principalOfficeCountry:
-          description: 'The "home office" location of the principal. A two-letter country code (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: 1. ASI: Asia 2. EUR: Europe 3. OCE: Oceania 4. AFR: Africa 5. NAM: North America 6. SAM: South America 7. ANT: Antarctica 8. ANY: Any location '
+          description: 'The "home office" location of the principal. A two-letter country code (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: * ASI: Asia * EUR: Europe * OCE: Oceania * AFR: Africa * NAM: North America * SAM: South America * ANT: Antarctica * ANY: Any location'
           type: string
         principalPhysicalLocationCountry:
-          description: 'Physical location of the principal at the time of the access. A two-letter country code (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: 1. ASI: Asia 2. EUR: Europe 3. OCE: Oceania 4. AFR: Africa 5. NAM: North America 6. SAM: South America 7. ANT: Antarctica 8. ANY: Any location '
+          description: 'Physical location of the principal at the time of the access. A two-letter country code (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or a region code. In some limited situations Google systems may refer refer to a region code instead of a country code. Possible Region Codes: * ASI: Asia * EUR: Europe * OCE: Oceania * AFR: Africa * NAM: North America * SAM: South America * ANT: Antarctica * ANY: Any location'
           type: string
       type: object
     AccessReason:
@@ -399,7 +399,7 @@ components:
           $ref: "#/components/schemas/DismissDecision"
           description: The request was dismissed.
         name:
-          description: The resource name of the request. Format is "{projects|folders|organizations}/{id}/approvalRequests/{approval_request_id}".
+          description: The resource name of the request. Format is "{projects|folders|organizations}/{id}/approvalRequests/{approval_request}".
           type: string
         requestTime:
           description: The time at which approval was requested.
@@ -465,7 +465,7 @@ components:
       description: Represents the enrollment of a cloud resource into a specific service.
       properties:
         cloudProduct:
-          description: "The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): 1. all 2. ga-only 3. appengine.googleapis.com 4. bigquery.googleapis.com 5. bigtable.googleapis.com 6. cloudkms.googleapis.com 7. compute.googleapis.com 8. dataflow.googleapis.com 9. iam.googleapis.com 10. pubsub.googleapis.com 11. storage.googleapis.com Note: 'all' will enroll the resource in all products supported at both 'GA' and 'Preview' levels. 'ga-only' will only enroll the resource in products supported at 'GA' level."
+          description: "The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): * all * GA * App Engine * BigQuery * Cloud Bigtable * Cloud Key Management Service * Compute Engine * Cloud Dataflow * Cloud Identity and Access Management * Cloud Pub/Sub * Cloud Storage * Persistent Disk Note: These values are supported as input for legacy purposes, but will not be returned from the API. * all * ga-only * appengine.googleapis.com * bigquery.googleapis.com * bigtable.googleapis.com * cloudkms.googleapis.com * compute.googleapis.com * dataflow.googleapis.com * iam.googleapis.com * pubsub.googleapis.com * storage.googleapis.com Calls to UpdateAccessApprovalSettings using 'all', 'ga-only', or any of the XXX.googleapis.com will be translated to the associated product name ('all', 'GA', 'App Engine', etc.). Note: 'all' will enroll the resource in all products supported at both 'GA' and 'Preview' levels. 'ga-only'/'GA' will only enroll the resource in products supported at 'GA' level. More information about levels of support is available at https://cloud.google.com/access-approval/docs/supported-services"
           type: string
         enrollmentLevel:
           description: The enrollment level of the service.

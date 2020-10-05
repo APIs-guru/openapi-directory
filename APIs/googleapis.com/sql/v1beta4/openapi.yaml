@@ -2565,7 +2565,7 @@ components:
           format: int64
           type: string
         databaseVersion:
-          description: "The database engine type and version. The *databaseVersion* field cannot be changed after instance creation. MySQL instances: *MYSQL_5_7* (default), or *MYSQL_5_6*. PostgreSQL instances: *POSTGRES_9_6*, *POSTGRES_10*, *POSTGRES_11* or *POSTGRES_12* (default). SQL Server instances: *SQLSERVER_2017_STANDARD* (default), *SQLSERVER_2017_ENTERPRISE*, *SQLSERVER_2017_EXPRESS*, or *SQLSERVER_2017_WEB*."
+          description: "The database engine type and version. The *databaseVersion* field cannot be changed after instance creation. MySQL instances: *MYSQL_8_0*, *MYSQL_5_7* (default), or *MYSQL_5_6*. PostgreSQL instances: *POSTGRES_9_6*, *POSTGRES_10*, *POSTGRES_11* or *POSTGRES_12* (default). SQL Server instances: *SQLSERVER_2017_STANDARD* (default), *SQLSERVER_2017_ENTERPRISE*, *SQLSERVER_2017_EXPRESS*, or *SQLSERVER_2017_WEB*."
           enum:
             - SQL_DATABASE_VERSION_UNSPECIFIED
             - MYSQL_5_1
@@ -2751,6 +2751,19 @@ components:
           description: The username for the replication connection.
           type: string
       type: object
+    DenyMaintenancePeriod:
+      description: Deny Maintenance Periods. This specifies a date range during when all CSA rollout will be denied.
+      properties:
+        endDate:
+          description: '"deny maintenance period" end date. If the year of the end date is empty, the year of the start date also must be empty. In this case, it means the deny maintenance period recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
+          type: string
+        startDate:
+          description: '"deny maintenance period" start date. If the year of the start date is empty, the year of the end date also must be empty. In this case, it means the deny maintenance period recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
+          type: string
+        time:
+          description: 'Time in UTC when the "deny maintenance period" starts on start_date and ends on end_date. The time is in format: HH:mm:SS, i.e., 00:00:00'
+          type: string
+      type: object
     DiskEncryptionConfiguration:
       description: Disk encryption configuration for an instance.
       properties:
@@ -2850,7 +2863,7 @@ components:
             type: string
           type: array
         appliesTo:
-          description: The database version this flag applies to. Can be *MYSQL_5_5*, *MYSQL_5_6*, or *MYSQL_5_7*. *MYSQL_5_7* is applicable only to Second Generation instances.
+          description: The database version this flag applies to. Can be *MYSQL_8_0*, *MYSQL_5_6*, or *MYSQL_5_7*.
           items:
             enum:
               - SQL_DATABASE_VERSION_UNSPECIFIED
@@ -3105,19 +3118,6 @@ components:
           type: string
         zone:
           description: "The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.)."
-          type: string
-      type: object
-    MaintenanceDenyPeriod:
-      description: Maintenance Deny Periods. This specifies a date range during when all CSA rollout will be denied.
-      properties:
-        endDate:
-          description: '"maintenance deny period" end date. If the year of the end date is empty, the year of the start date also must be empty. In this case, it means the no maintenance interval recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
-          type: string
-        startDate:
-          description: '"maintenance deny period" start date. If the year of the start date is empty, the year of the end date also must be empty. In this case, it means the no maintenance interval recurs every year. The date is in format yyyy-mm-dd i.e., 2020-11-01, or mm-dd, i.e., 11-01'
-          type: string
-        time:
-          description: 'Time in UTC when the "no maintenance interval" starts on start_date and ends on end_date. The time is in format: HH:mm:SS, i.e., 00:00:00'
           type: string
       type: object
     MaintenanceWindow:
@@ -3407,6 +3407,9 @@ components:
             - NEVER
             - ON_DEMAND
           type: string
+        activeDirectoryConfig:
+          $ref: "#/components/schemas/SqlActiveDirectoryConfig"
+          description: Active Directory configuration, for now relevant only for SQL Server
         authorizedGaeApplications:
           description: The App Engine app IDs that can access this instance. (Deprecated) Applied to First Generation instances only.
           items:
@@ -3448,6 +3451,11 @@ components:
         databaseReplicationEnabled:
           description: Configuration specific to read replica instances. Indicates whether replication is enabled or not.
           type: boolean
+        denyMaintenancePeriods:
+          description: Deny maintenance periods
+          items:
+            $ref: "#/components/schemas/DenyMaintenancePeriod"
+          type: array
         ipConfiguration:
           $ref: "#/components/schemas/IpConfiguration"
           description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.
@@ -3457,11 +3465,6 @@ components:
         locationPreference:
           $ref: "#/components/schemas/LocationPreference"
           description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or Compute Engine zone for better performance. App Engine co-location was only applicable to First Generation instances.
-        maintenanceDenyPeriods:
-          description: Maintenance deny periods
-          items:
-            $ref: "#/components/schemas/MaintenanceDenyPeriod"
-          type: array
         maintenanceWindow:
           $ref: "#/components/schemas/MaintenanceWindow"
           description: The maintenance window for this instance. This specifies when the instance can be restarted for maintenance purposes.
@@ -3499,6 +3502,16 @@ components:
           description: User-provided labels, represented as a dictionary where each label is a single key value pair.
           type: object
       type: object
+    SqlActiveDirectoryConfig:
+      description: Active Directory configuration, for now relevant only for SQL Server
+      properties:
+        domain:
+          description: Domain name
+          type: string
+        kind:
+          description: This will be always sql#activeDirectoryConfig.
+          type: string
+      type: object
     SqlExternalSyncSettingError:
       description: External primary instance migration setting error.
       properties:
@@ -3530,6 +3543,7 @@ components:
             - INVALID_LOGGING_SETUP
             - INVALID_DB_PARAM
             - UNSUPPORTED_GTID_MODE
+            - SQLSERVER_AGENT_NOT_RUNNING
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
