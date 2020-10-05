@@ -389,10 +389,10 @@ paths:
                   minimum: -50
                   maximum: 50
                 queue:
-                  description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
+                  description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
                   type: string
                 role:
-                  description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
+                  description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
                   type: string
                 settings:
                   description: JobSettings contains all the transcode settings for a job.
@@ -434,6 +434,12 @@ paths:
                         - xml:
                             name: nielsenConfiguration
                           description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+                    NielsenNonLinearWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/NielsenNonLinearWatermarkSettings'
+                        - xml:
+                            name: nielsenNonLinearWatermark
+                          description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
                     OutputGroups:
                       allOf:
                         - $ref: '#/components/schemas/__listOfOutputGroup'
@@ -451,7 +457,7 @@ paths:
                         - $ref: '#/components/schemas/TimedMetadataInsertion'
                         - xml:
                             name: timedMetadataInsertion
-                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
                 simulateReservedQueue:
                   description: 'Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.'
                   type: string
@@ -727,6 +733,12 @@ paths:
                         - xml:
                             name: nielsenConfiguration
                           description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+                    NielsenNonLinearWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/NielsenNonLinearWatermarkSettings'
+                        - xml:
+                            name: nielsenNonLinearWatermark
+                          description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
                     OutputGroups:
                       allOf:
                         - $ref: '#/components/schemas/__listOfOutputGroup'
@@ -744,7 +756,7 @@ paths:
                         - $ref: '#/components/schemas/TimedMetadataInsertion'
                         - xml:
                             name: timedMetadataInsertion
-                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
                 statusUpdateInterval:
                   description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
                   type: string
@@ -1532,6 +1544,12 @@ paths:
                         - xml:
                             name: nielsenConfiguration
                           description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+                    NielsenNonLinearWatermark:
+                      allOf:
+                        - $ref: '#/components/schemas/NielsenNonLinearWatermarkSettings'
+                        - xml:
+                            name: nielsenNonLinearWatermark
+                          description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
                     OutputGroups:
                       allOf:
                         - $ref: '#/components/schemas/__listOfOutputGroup'
@@ -1549,7 +1567,7 @@ paths:
                         - $ref: '#/components/schemas/TimedMetadataInsertion'
                         - xml:
                             name: timedMetadataInsertion
-                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+                          description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
                 statusUpdateInterval:
                   description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
                   type: string
@@ -2406,7 +2424,7 @@ components:
             - $ref: '#/components/schemas/Job'
             - xml:
                 name: job
-              description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+              description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
     AccelerationMode:
       type: string
       enum:
@@ -2532,6 +2550,76 @@ components:
                 name: distributorId
               description: Use Distributor ID (DistributorID) to specify the distributor ID that is assigned to your organization by Neilsen.
       description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+    NielsenNonLinearWatermarkSettings:
+      type: object
+      properties:
+        ActiveWatermarkProcess:
+          allOf:
+            - $ref: '#/components/schemas/NielsenActiveWatermarkProcessType'
+            - xml:
+                name: activeWatermarkProcess
+              description: 'Choose the type of Nielsen watermarks that you want in your outputs. When you choose NAES 2 and NW (NAES2_AND_NW), you must provide a value for the setting SID (sourceId). When you choose CBET (CBET), you must provide a value for the setting CSID (cbetSourceId). When you choose NAES 2, NW, and CBET (NAES2_AND_NW_AND_CBET), you must provide values for both of these settings.'
+        AdiFilename:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternS3'
+            - xml:
+                name: adiFilename
+              description: 'Optional. Use this setting when you want the service to include an ADI file in the Nielsen  metadata .zip file. To provide an ADI file, store it in Amazon S3 and provide a URL to it  here. The URL should be in the following format: S3://bucket/path/ADI-file. For more information about the metadata .zip file, see the setting Metadata destination (metadataDestination).'
+        AssetId:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max20'
+            - xml:
+                name: assetId
+              description: Use the asset ID that you provide to Nielsen to uniquely identify this asset. Required for all Nielsen non-linear watermarking.
+        AssetName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max50'
+            - xml:
+                name: assetName
+              description: Use the asset name that you provide to Nielsen for this asset. Required for all Nielsen non-linear watermarking.
+        CbetSourceId:
+          allOf:
+            - $ref: '#/components/schemas/__stringPattern0xAFaF0908190908'
+            - xml:
+                name: cbetSourceId
+              description: Use the CSID that Nielsen provides to you. This CBET source ID should be unique to your Nielsen account but common to all of your output assets that have CBET watermarking. Required when you choose a value for the setting Watermark types (ActiveWatermarkProcess) that includes CBET.
+        EpisodeId:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1Max20'
+            - xml:
+                name: episodeId
+              description: 'Optional. If this asset uses an episode ID with Nielsen, provide it here.'
+        MetadataDestination:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternS3'
+            - xml:
+                name: metadataDestination
+              description: 'Specify the Amazon S3 location where you want MediaConvert to save your Nielsen non-linear metadata .zip file. This Amazon S3 bucket must be in the same Region as the one where you do your MediaConvert transcoding. If you want to include an ADI file in this .zip file, use the setting ADI file (adiFilename) to specify it. MediaConvert delivers the Nielsen metadata .zip files only to your metadata destination Amazon S3 bucket. It doesn''t deliver the .zip files to Nielsen. You are responsible for delivering the metadata .zip files to Nielsen.'
+        SourceId:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max65534'
+            - xml:
+                name: sourceId
+              description: Use the SID that Nielsen provides to you. This source ID should be unique to your Nielsen account but common to all of your output assets. Required for all Nielsen non-linear watermarking. This ID should be unique to your Nielsen account but common to all of your output assets. Required for all Nielsen non-linear watermarking.
+        SourceWatermarkStatus:
+          allOf:
+            - $ref: '#/components/schemas/NielsenSourceWatermarkStatusType'
+            - xml:
+                name: sourceWatermarkStatus
+              description: 'Required. Specify whether your source content already contains Nielsen non-linear watermarks. When you set this value to Watermarked (WATERMARKED), the service fails the job. Nielsen requires that you add non-linear watermarking to only clean content that doesn''t already  have non-linear Nielsen watermarks.'
+        TicServerUrl:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternHttps'
+            - xml:
+                name: ticServerUrl
+              description: 'Specify the endpoint for the TIC server that you have deployed and configured in the AWS Cloud. Required for all Nielsen non-linear watermarking. MediaConvert can''t connect directly to a TIC server. Instead, you must use API Gateway to provide a RESTful interface between MediaConvert and a TIC server that you deploy in your AWS account. For more information on deploying a TIC server in your AWS account and the required API Gateway, contact Nielsen support.'
+        UniqueTicPerAudioTrack:
+          allOf:
+            - $ref: '#/components/schemas/NielsenUniqueTicPerAudioTrackType'
+            - xml:
+                name: uniqueTicPerAudioTrack
+              description: 'To create assets that have the same TIC values in each audio track, keep the default value Share TICs (SAME_TICS_PER_TRACK). To create assets that have unique TIC values for each audio track, choose Use unique TICs (RESERVE_UNIQUE_TICS_PER_TRACK).'
+      description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
     __listOfOutputGroup:
       type: array
       items:
@@ -2573,7 +2661,7 @@ components:
             - xml:
                 name: id3Insertions
               description: Id3Insertions contains the array of Id3Insertion instances.
-      description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+      description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
     __string:
       type: string
     CreateJobTemplateResponse:
@@ -2684,7 +2772,7 @@ components:
             - $ref: '#/components/schemas/VideoCodecSettings'
             - xml:
                 name: codecSettings
-              description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9, Vp9Settings'
+              description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings'
         ColorMetadata:
           allOf:
             - $ref: '#/components/schemas/ColorMetadata'
@@ -2815,7 +2903,7 @@ components:
             - $ref: '#/components/schemas/Job'
             - xml:
                 name: job
-              description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+              description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
     GetJobTemplateResponse:
       type: object
       properties:
@@ -4258,7 +4346,7 @@ components:
         - HIGH
         - HIGHER
         - MAX
-      description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      description: Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization).
     Av1FramerateControl:
       type: string
       enum:
@@ -4270,7 +4358,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     __integerMin1Max10:
       type: integer
       minimum: 1
@@ -4323,7 +4412,7 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on spatial variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
     Av1Settings:
       type: object
       properties:
@@ -4332,7 +4421,7 @@ components:
             - $ref: '#/components/schemas/Av1AdaptiveQuantization'
             - xml:
                 name: adaptiveQuantization
-              description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+              description: Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization).
         FramerateControl:
           allOf:
             - $ref: '#/components/schemas/Av1FramerateControl'
@@ -4344,7 +4433,7 @@ components:
             - $ref: '#/components/schemas/Av1FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
@@ -4398,12 +4487,113 @@ components:
             - $ref: '#/components/schemas/Av1SpatialAdaptiveQuantization'
             - xml:
                 name: spatialAdaptiveQuantization
-              description: Adjust quantization within each frame based on spatial variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
       description: 'Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.'
     __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG:
       type: string
       pattern: '^((s3://(.*?)\.(bmp|BMP|png|PNG))|(https?://(.*?)\.(bmp|BMP|png|PNG)(\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$'
       minLength: 14
+    AvcIntraClass:
+      type: string
+      enum:
+        - CLASS_50
+        - CLASS_100
+        - CLASS_200
+      description: Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.
+    AvcIntraFramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    AvcIntraFramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+    AvcIntraInterlaceMode:
+      type: string
+      enum:
+        - PROGRESSIVE
+        - TOP_FIELD
+        - BOTTOM_FIELD
+        - FOLLOW_TOP_FIELD
+        - FOLLOW_BOTTOM_FIELD
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+    __integerMin1Max1001:
+      type: integer
+      minimum: 1
+      maximum: 1001
+    __integerMin24Max60000:
+      type: integer
+      minimum: 24
+      maximum: 60000
+    AvcIntraSlowPal:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+    AvcIntraTelecine:
+      type: string
+      enum:
+        - NONE
+        - HARD
+      description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
+    AvcIntraSettings:
+      type: object
+      properties:
+        AvcIntraClass:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraClass'
+            - xml:
+                name: avcIntraClass
+              description: Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.
+        FramerateControl:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraFramerateControl'
+            - xml:
+                name: framerateControl
+              description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraFramerateConversionAlgorithm'
+            - xml:
+                name: framerateConversionAlgorithm
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+        FramerateDenominator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max1001'
+            - xml:
+                name: framerateDenominator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        FramerateNumerator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin24Max60000'
+            - xml:
+                name: framerateNumerator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        InterlaceMode:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraInterlaceMode'
+            - xml:
+                name: interlaceMode
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
+        SlowPal:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraSlowPal'
+            - xml:
+                name: slowPal
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+        Telecine:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraTelecine'
+            - xml:
+                name: telecine
+              description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
+      description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.'
     BillingTagsSource:
       type: string
       enum:
@@ -4986,10 +5176,6 @@ components:
                 name: sourceSettings
               description: 'If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings.'
       description: Set up captions in your outputs by first selecting them from your input here.
-    __integerMin1Max1001:
-      type: integer
-      minimum: 1
-      maximum: 1001
     __integerMin1Max60000:
       type: integer
       minimum: 1
@@ -6018,7 +6204,7 @@ components:
             - $ref: '#/components/schemas/MovPaddingControl'
             - xml:
                 name: paddingControl
-              description: 'If set to OMNEON, inserts Omneon-compatible padding'
+              description: 'To make this output compatible with Omenon, keep the default value, OMNEON. Unless you need Omneon compatibility, set this value to NONE. When you keep the default value, OMNEON, MediaConvert increases the length of the edit list atom. This might cause file rejections when a recipient of the output file doesn''t expct this extra padding.'
         Reference:
           allOf:
             - $ref: '#/components/schemas/MovReference'
@@ -6091,6 +6277,12 @@ components:
             - xml:
                 name: afdSignaling
               description: 'Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don''t copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output''s video encoding settings.'
+        Profile:
+          allOf:
+            - $ref: '#/components/schemas/MxfProfile'
+            - xml:
+                name: profile
+              description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
       description: MXF settings
     __listOfHopDestination:
       type: array
@@ -6139,6 +6331,12 @@ components:
             - xml:
                 name: nielsenConfiguration
               description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+        NielsenNonLinearWatermark:
+          allOf:
+            - $ref: '#/components/schemas/NielsenNonLinearWatermarkSettings'
+            - xml:
+                name: nielsenNonLinearWatermark
+              description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
         OutputGroups:
           allOf:
             - $ref: '#/components/schemas/__listOfOutputGroup'
@@ -6156,7 +6354,7 @@ components:
             - $ref: '#/components/schemas/TimedMetadataInsertion'
             - xml:
                 name: timedMetadataInsertion
-              description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+              description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
       description: JobSettings contains all the transcode settings for a job.
     SimulateReservedQueue:
       type: string
@@ -6235,13 +6433,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: queue
-              description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
+              description: 'Optional. When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.'
         Role:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: role
-              description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
+              description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
         Settings:
           allOf:
             - $ref: '#/components/schemas/JobSettings'
@@ -6373,7 +6571,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: queue
-              description: 'When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+              description: 'When you create a job, you can specify a queue to send it to. If you don''t specify, the job will go to the default queue. For more about queues, see the User Guide topic at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
         QueueTransitions:
           allOf:
             - $ref: '#/components/schemas/__listOfQueueTransition'
@@ -6391,7 +6589,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: role
-              description: 'The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html'
+              description: 'The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html'
         Settings:
           allOf:
             - $ref: '#/components/schemas/JobSettings'
@@ -6428,7 +6626,7 @@ components:
             - xml:
                 name: userMetadata
               description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
-      description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
+      description: 'Each job converts an input file into an output file or files. For more information, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html'
     JobTemplateSettings:
       type: object
       properties:
@@ -6468,6 +6666,12 @@ components:
             - xml:
                 name: nielsenConfiguration
               description: 'Settings for your Nielsen configuration. If you don''t do Nielsen measurement and analytics, ignore these settings. When you enable Nielsen configuration (nielsenConfiguration), MediaConvert enables PCM to ID3 tagging for all outputs in the job. To enable Nielsen configuration programmatically, include an instance of nielsenConfiguration in your JSON job specification. Even if you don''t include any children of nielsenConfiguration, you still enable the setting.'
+        NielsenNonLinearWatermark:
+          allOf:
+            - $ref: '#/components/schemas/NielsenNonLinearWatermarkSettings'
+            - xml:
+                name: nielsenNonLinearWatermark
+              description: 'Ignore these settings unless you are using Nielsen non-linear watermarking. Specify the values that  MediaConvert uses to generate and place Nielsen watermarks in your output audio. In addition to  specifying these values, you also need to set up your cloud TIC server. These settings apply to  every output in your job. The MediaConvert implementation is currently with the following Nielsen versions: Nielsen Watermark SDK Version 5.2.1 Nielsen NLM Watermark Engine Version 1.2.7 Nielsen Watermark Authenticator [SID_TIC] Version [5.0.0]'
         OutputGroups:
           allOf:
             - $ref: '#/components/schemas/__listOfOutputGroup'
@@ -6485,7 +6689,7 @@ components:
             - $ref: '#/components/schemas/TimedMetadataInsertion'
             - xml:
                 name: timedMetadataInsertion
-              description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
+              description: 'Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects.'
       description: JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it.
     CreateJobTemplateRequest:
       type: object
@@ -7720,7 +7924,7 @@ components:
         - HIGH
         - HIGHER
         - MAX
-      description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
     H264CodecLevel:
       type: string
       enum:
@@ -7769,13 +7973,13 @@ components:
       enum:
         - PAFF
         - FORCE_FIELD
-      description: Choosing FORCE_FIELD disables PAFF encoding for interlaced outputs.
+      description: 'Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.'
     H264FlickerAdaptiveQuantization:
       type: string
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+      description: 'Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set adaptiveQuantization to a value other than Off (OFF).'
     H264FramerateControl:
       type: string
       enum:
@@ -7787,7 +7991,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     H264GopBReference:
       type: string
       enum:
@@ -7808,10 +8013,7 @@ components:
         - BOTTOM_FIELD
         - FOLLOW_TOP_FIELD
         - FOLLOW_BOTTOM_FIELD
-      description: |-
-        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type, as follows.
-          - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-          - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
     H264ParControl:
       type: string
       enum:
@@ -7888,7 +8090,7 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
     __integerMin0Max128:
       type: integer
       minimum: 0
@@ -7898,7 +8100,7 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on spatial variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
     H264Syntax:
       type: string
       enum:
@@ -7911,13 +8113,13 @@ components:
         - NONE
         - SOFT
         - HARD
-      description: 'This field applies only if the Streams > Advanced > Framerate (framerate) field  is set to 29.970. This field works with the Streams > Advanced > Preprocessors > Deinterlacer  field (deinterlace_mode) and the Streams > Advanced > Interlaced Mode field (interlace_mode)  to identify the scan type for the output: Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard: produces 29.97i output from 23.976 input. - Soft: produces 23.976; the player converts this output to 29.97i.'
+      description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard or soft telecine to create a smoother picture. Hard telecine (HARD) produces a 29.97i output. Soft telecine (SOFT) produces an output with a 23.976 output that signals to the video player device to do the conversion during play back. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
     H264TemporalAdaptiveQuantization:
       type: string
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on temporal variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
     H264UnregisteredSeiTimecode:
       type: string
       enum:
@@ -7932,7 +8134,7 @@ components:
             - $ref: '#/components/schemas/H264AdaptiveQuantization'
             - xml:
                 name: adaptiveQuantization
-              description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+              description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
         Bitrate:
           allOf:
             - $ref: '#/components/schemas/__integerMin1000Max1152000000'
@@ -7968,13 +8170,13 @@ components:
             - $ref: '#/components/schemas/H264FieldEncoding'
             - xml:
                 name: fieldEncoding
-              description: Choosing FORCE_FIELD disables PAFF encoding for interlaced outputs.
+              description: 'Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.'
         FlickerAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/H264FlickerAdaptiveQuantization'
             - xml:
                 name: flickerAdaptiveQuantization
-              description: Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+              description: 'Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set adaptiveQuantization to a value other than Off (OFF).'
         FramerateControl:
           allOf:
             - $ref: '#/components/schemas/H264FramerateControl'
@@ -7986,7 +8188,7 @@ components:
             - $ref: '#/components/schemas/H264FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
@@ -7998,7 +8200,7 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: framerateNumerator
-              description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         GopBReference:
           allOf:
             - $ref: '#/components/schemas/H264GopBReference'
@@ -8040,10 +8242,7 @@ components:
             - $ref: '#/components/schemas/H264InterlaceMode'
             - xml:
                 name: interlaceMode
-              description: |-
-                Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type, as follows.
-                  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-                  - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
         MaxBitrate:
           allOf:
             - $ref: '#/components/schemas/__integerMin1000Max1152000000'
@@ -8127,19 +8326,19 @@ components:
             - $ref: '#/components/schemas/H264SlowPal'
             - xml:
                 name: slowPal
-              description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
         Softness:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max128'
             - xml:
                 name: softness
-              description: 'Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.'
+              description: 'Ignore this setting unless you need to comply with a specification that requires a specific value. If you don''t have a specification requirement, we recommend that you adjust the softness of your output by using a lower value for the setting Sharpness (sharpness) or by enabling a noise reducer filter (noiseReducerFilter). The Softness (softness) setting specifies the quantization matrices that the encoder uses. Keep the default value, 0, for flat quantization. Choose the value 1 or 16 to use the default JVT softening quantization matricies from the H.264 specification. Choose a value from 17 to 128 to use planar interpolation. Increasing values from 17 to 128 result in increasing reduction of high-frequency data. The value 128 results in the softest video.'
         SpatialAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/H264SpatialAdaptiveQuantization'
             - xml:
                 name: spatialAdaptiveQuantization
-              description: Adjust quantization within each frame based on spatial variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
         Syntax:
           allOf:
             - $ref: '#/components/schemas/H264Syntax'
@@ -8151,13 +8350,13 @@ components:
             - $ref: '#/components/schemas/H264Telecine'
             - xml:
                 name: telecine
-              description: 'This field applies only if the Streams > Advanced > Framerate (framerate) field  is set to 29.970. This field works with the Streams > Advanced > Preprocessors > Deinterlacer  field (deinterlace_mode) and the Streams > Advanced > Interlaced Mode field (interlace_mode)  to identify the scan type for the output: Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard: produces 29.97i output from 23.976 input. - Soft: produces 23.976; the player converts this output to 29.97i.'
+              description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard or soft telecine to create a smoother picture. Hard telecine (HARD) produces a 29.97i output. Soft telecine (SOFT) produces an output with a 23.976 output that signals to the video player device to do the conversion during play back. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
         TemporalAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/H264TemporalAdaptiveQuantization'
             - xml:
                 name: temporalAdaptiveQuantization
-              description: Adjust quantization within each frame based on temporal variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
         UnregisteredSeiTimecode:
           allOf:
             - $ref: '#/components/schemas/H264UnregisteredSeiTimecode'
@@ -8174,7 +8373,7 @@ components:
         - HIGH
         - HIGHER
         - MAX
-      description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
     H265AlternateTransferFunctionSei:
       type: string
       enum:
@@ -8222,7 +8421,7 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+      description: 'Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set adaptiveQuantization to a value other than Off (OFF).'
     H265FramerateControl:
       type: string
       enum:
@@ -8234,7 +8433,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     H265GopBReference:
       type: string
       enum:
@@ -8255,7 +8455,7 @@ components:
         - BOTTOM_FIELD
         - FOLLOW_TOP_FIELD
         - FOLLOW_BOTTOM_FIELD
-      description: 'Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose. If you don''t choose a value, the service will default to Progressive (PROGRESSIVE).'
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
     H265ParControl:
       type: string
       enum:
@@ -8325,13 +8525,13 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
     H265SpatialAdaptiveQuantization:
       type: string
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on spatial variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
     H265Telecine:
       type: string
       enum:
@@ -8344,7 +8544,7 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on temporal variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
     H265TemporalIds:
       type: string
       enum:
@@ -8377,7 +8577,7 @@ components:
             - $ref: '#/components/schemas/H265AdaptiveQuantization'
             - xml:
                 name: adaptiveQuantization
-              description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+              description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
         AlternateTransferFunctionSei:
           allOf:
             - $ref: '#/components/schemas/H265AlternateTransferFunctionSei'
@@ -8413,7 +8613,7 @@ components:
             - $ref: '#/components/schemas/H265FlickerAdaptiveQuantization'
             - xml:
                 name: flickerAdaptiveQuantization
-              description: Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+              description: 'Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set adaptiveQuantization to a value other than Off (OFF).'
         FramerateControl:
           allOf:
             - $ref: '#/components/schemas/H265FramerateControl'
@@ -8425,19 +8625,19 @@ components:
             - $ref: '#/components/schemas/H265FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: framerateDenominator
-              description: Frame rate denominator.
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         FramerateNumerator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: framerateNumerator
-              description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         GopBReference:
           allOf:
             - $ref: '#/components/schemas/H265GopBReference'
@@ -8479,7 +8679,7 @@ components:
             - $ref: '#/components/schemas/H265InterlaceMode'
             - xml:
                 name: interlaceMode
-              description: 'Choose the scan line type for the output. Choose Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Choose Top Field First (TOP_FIELD) or Bottom Field First (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Choose Follow, Default Top (FOLLOW_TOP_FIELD) or Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) to create an interlaced output with the same field polarity as the source. If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first". If the source is progressive, your output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose. If you don''t choose a value, the service will default to Progressive (PROGRESSIVE).'
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
         MaxBitrate:
           allOf:
             - $ref: '#/components/schemas/__integerMin1000Max1466400000'
@@ -8563,13 +8763,13 @@ components:
             - $ref: '#/components/schemas/H265SlowPal'
             - xml:
                 name: slowPal
-              description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
         SpatialAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/H265SpatialAdaptiveQuantization'
             - xml:
                 name: spatialAdaptiveQuantization
-              description: Adjust quantization within each frame based on spatial variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
         Telecine:
           allOf:
             - $ref: '#/components/schemas/H265Telecine'
@@ -8581,7 +8781,7 @@ components:
             - $ref: '#/components/schemas/H265TemporalAdaptiveQuantization'
             - xml:
                 name: temporalAdaptiveQuantization
-              description: Adjust quantization within each frame based on temporal variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
         TemporalIds:
           allOf:
             - $ref: '#/components/schemas/H265TemporalIds'
@@ -9171,7 +9371,7 @@ components:
         - AUTO
         - DISABLE
         - FORCE
-      description: 'Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type.'
+      description: 'Specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered regardless of input type.'
     __integerMinNegative5Max5:
       type: integer
       minimum: -5
@@ -9180,6 +9380,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InputClipping'
+    InputScanType:
+      type: string
+      enum:
+        - AUTO
+        - PSF
+      description: 'When you have a progressive segmented frame (PsF) input, use this setting to flag the input as PsF. MediaConvert doesn''t automatically detect PsF. Therefore, flagging your input as PsF results in better preservation of video quality when you do deinterlacing and frame rate conversion. If you don''t specify, the default value is Auto (AUTO). Auto is the correct setting for all inputs that are not PsF. Don''t set this value to PsF when your input is interlaced. Doing so creates horizontal interlacing artifacts.'
     InputPsiControl:
       type: string
       enum:
@@ -9304,7 +9510,7 @@ components:
             - $ref: '#/components/schemas/InputFilterEnable'
             - xml:
                 name: filterEnable
-              description: 'Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type.'
+              description: 'Specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered regardless of input type.'
         FilterStrength:
           allOf:
             - $ref: '#/components/schemas/__integerMinNegative5Max5'
@@ -9323,6 +9529,12 @@ components:
             - xml:
                 name: inputClippings
               description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
+        InputScanType:
+          allOf:
+            - $ref: '#/components/schemas/InputScanType'
+            - xml:
+                name: inputScanType
+              description: 'When you have a progressive segmented frame (PsF) input, use this setting to flag the input as PsF. MediaConvert doesn''t automatically detect PsF. Therefore, flagging your input as PsF results in better preservation of video quality when you do deinterlacing and frame rate conversion. If you don''t specify, the default value is Auto (AUTO). Auto is the correct setting for all inputs that are not PsF. Don''t set this value to PsF when your input is interlaced. Doing so creates horizontal interlacing artifacts.'
         Position:
           allOf:
             - $ref: '#/components/schemas/Rectangle'
@@ -9450,7 +9662,7 @@ components:
             - $ref: '#/components/schemas/InputFilterEnable'
             - xml:
                 name: filterEnable
-              description: 'Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type.'
+              description: 'Specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered regardless of input type.'
         FilterStrength:
           allOf:
             - $ref: '#/components/schemas/__integerMinNegative5Max5'
@@ -9469,6 +9681,12 @@ components:
             - xml:
                 name: inputClippings
               description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
+        InputScanType:
+          allOf:
+            - $ref: '#/components/schemas/InputScanType'
+            - xml:
+                name: inputScanType
+              description: 'When you have a progressive segmented frame (PsF) input, use this setting to flag the input as PsF. MediaConvert doesn''t automatically detect PsF. Therefore, flagging your input as PsF results in better preservation of video quality when you do deinterlacing and frame rate conversion. If you don''t specify, the default value is Auto (AUTO). Auto is the correct setting for all inputs that are not PsF. Don''t set this value to PsF when your input is interlaced. Doing so creates horizontal interlacing artifacts.'
         Position:
           allOf:
             - $ref: '#/components/schemas/Rectangle'
@@ -9953,7 +10171,7 @@ components:
       enum:
         - OMNEON
         - NONE
-      description: 'If set to OMNEON, inserts Omneon-compatible padding'
+      description: 'To make this output compatible with Omenon, keep the default value, OMNEON. Unless you need Omneon compatibility, set this value to NONE. When you keep the default value, OMNEON, MediaConvert increases the length of the edit list atom. This might cause file rejections when a recipient of the output file doesn''t expct this extra padding.'
     MovReference:
       type: string
       enum:
@@ -10037,7 +10255,7 @@ components:
         - LOW
         - MEDIUM
         - HIGH
-      description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+      description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
     Mpeg2CodecLevel:
       type: string
       enum:
@@ -10070,7 +10288,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     Mpeg2GopSizeUnits:
       type: string
       enum:
@@ -10085,10 +10304,7 @@ components:
         - BOTTOM_FIELD
         - FOLLOW_TOP_FIELD
         - FOLLOW_BOTTOM_FIELD
-      description: |-
-        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-          - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-          - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
     Mpeg2IntraDcPrecision:
       type: string
       enum:
@@ -10126,10 +10342,6 @@ components:
       type: integer
       minimum: 1000
       maximum: 288000000
-    __integerMin24Max60000:
-      type: integer
-      minimum: 24
-      maximum: 60000
     __integerMin0Max47185920:
       type: integer
       minimum: 0
@@ -10143,32 +10355,32 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
     Mpeg2SpatialAdaptiveQuantization:
       type: string
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on spatial variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
     Mpeg2Syntax:
       type: string
       enum:
         - DEFAULT
         - D_10
-      description: Produces a Type D-10 compatible bitstream (SMPTE 356M-2001).
+      description: 'Specify whether this output''s video uses the D10 syntax. Keep the default value to  not use the syntax. Related settings: When you choose D10 (D_10) for your MXF  profile (profile), you must also set this value to to D10 (D_10).'
     Mpeg2Telecine:
       type: string
       enum:
         - NONE
         - SOFT
         - HARD
-      description: Only use Telecine (Mpeg2Telecine) when you set Framerate (Framerate) to 29.970. Set Telecine (Mpeg2Telecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player.
+      description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard or soft telecine to create a smoother picture. Hard telecine (HARD) produces a 29.97i output. Soft telecine (SOFT) produces an output with a 23.976 output that signals to the video player device to do the conversion during play back. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
     Mpeg2TemporalAdaptiveQuantization:
       type: string
       enum:
         - DISABLED
         - ENABLED
-      description: Adjust quantization within each frame based on temporal variation of content complexity.
+      description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
     Mpeg2Settings:
       type: object
       properties:
@@ -10177,7 +10389,7 @@ components:
             - $ref: '#/components/schemas/Mpeg2AdaptiveQuantization'
             - xml:
                 name: adaptiveQuantization
-              description: Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+              description: 'Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization).'
         Bitrate:
           allOf:
             - $ref: '#/components/schemas/__integerMin1000Max288000000'
@@ -10213,19 +10425,19 @@ components:
             - $ref: '#/components/schemas/Mpeg2FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max1001'
             - xml:
                 name: framerateDenominator
-              description: Frame rate denominator.
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         FramerateNumerator:
           allOf:
             - $ref: '#/components/schemas/__integerMin24Max60000'
             - xml:
                 name: framerateNumerator
-              description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         GopClosedCadence:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max2147483647'
@@ -10261,10 +10473,7 @@ components:
             - $ref: '#/components/schemas/Mpeg2InterlaceMode'
             - xml:
                 name: interlaceMode
-              description: |-
-                Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-                  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-                  - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
         IntraDcPrecision:
           allOf:
             - $ref: '#/components/schemas/Mpeg2IntraDcPrecision'
@@ -10330,37 +10539,37 @@ components:
             - $ref: '#/components/schemas/Mpeg2SlowPal'
             - xml:
                 name: slowPal
-              description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
         Softness:
           allOf:
             - $ref: '#/components/schemas/__integerMin0Max128'
             - xml:
                 name: softness
-              description: 'Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.'
+              description: 'Ignore this setting unless you need to comply with a specification that requires a specific value. If you don''t have a specification requirement, we recommend that you adjust the softness of your output by using a lower value for the setting Sharpness (sharpness) or by enabling a noise reducer filter (noiseReducerFilter). The Softness (softness) setting specifies the quantization matrices that the encoder uses. Keep the default value, 0, to use the AWS Elemental default matrices. Choose a value from 17 to 128 to use planar interpolation. Increasing values from 17 to 128 result in increasing reduction of high-frequency data. The value 128 results in the softest video.'
         SpatialAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/Mpeg2SpatialAdaptiveQuantization'
             - xml:
                 name: spatialAdaptiveQuantization
-              description: Adjust quantization within each frame based on spatial variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher.'
         Syntax:
           allOf:
             - $ref: '#/components/schemas/Mpeg2Syntax'
             - xml:
                 name: syntax
-              description: Produces a Type D-10 compatible bitstream (SMPTE 356M-2001).
+              description: 'Specify whether this output''s video uses the D10 syntax. Keep the default value to  not use the syntax. Related settings: When you choose D10 (D_10) for your MXF  profile (profile), you must also set this value to to D10 (D_10).'
         Telecine:
           allOf:
             - $ref: '#/components/schemas/Mpeg2Telecine'
             - xml:
                 name: telecine
-              description: Only use Telecine (Mpeg2Telecine) when you set Framerate (Framerate) to 29.970. Set Telecine (Mpeg2Telecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player.
+              description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard or soft telecine to create a smoother picture. Hard telecine (HARD) produces a 29.97i output. Soft telecine (SOFT) produces an output with a 23.976 output that signals to the video player device to do the conversion during play back. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
         TemporalAdaptiveQuantization:
           allOf:
             - $ref: '#/components/schemas/Mpeg2TemporalAdaptiveQuantization'
             - xml:
                 name: temporalAdaptiveQuantization
-              description: Adjust quantization within each frame based on temporal variation of content complexity.
+              description: 'Keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren''t moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn''t take into account where the viewer''s attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn''t have moving objects with sharp edges, such as sports athletes'' faces, you might choose to disable this feature. Related setting: When you enable temporal quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization).'
       description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value MPEG2.
     MsSmoothAdditionalManifest:
       type: object
@@ -10456,6 +10665,13 @@ components:
         - NO_COPY
         - COPY_FROM_VIDEO
       description: 'Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don''t copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output''s video encoding settings.'
+    MxfProfile:
+      type: string
+      enum:
+        - D_10
+        - XDCAM
+        - OP1A
+      description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
     __stringMin1Max100000:
       type: string
       minLength: 1
@@ -10501,10 +10717,47 @@ components:
                 name: strength
               description: 'Optional. Ignore this setting unless Nagra support directs you to specify a value. When you don''t specify a value here, the Nagra NexGuard library uses its default value.'
       description: 'For forensic video watermarking, MediaConvert supports Nagra NexGuard File Marker watermarking. MediaConvert supports both PreRelease Content (NGPR/G2) and OTT Streaming workflows.'
+    NielsenActiveWatermarkProcessType:
+      type: string
+      enum:
+        - NAES2_AND_NW
+        - CBET
+        - NAES2_AND_NW_AND_CBET
+      description: 'Choose the type of Nielsen watermarks that you want in your outputs. When you choose NAES 2 and NW (NAES2_AND_NW), you must provide a value for the setting SID (sourceId). When you choose CBET (CBET), you must provide a value for the setting CSID (cbetSourceId). When you choose NAES 2, NW, and CBET (NAES2_AND_NW_AND_CBET), you must provide values for both of these settings.'
     __integerMin0Max0:
       type: integer
       minimum: 0
       maximum: 0
+    __stringMin1Max20:
+      type: string
+      minLength: 1
+      maxLength: 20
+    __stringMin1Max50:
+      type: string
+      minLength: 1
+      maxLength: 50
+    __stringPattern0xAFaF0908190908:
+      type: string
+      pattern: '(^0x[A-Fa-f0-9]{0,8}$|^[1-9][0-9]{0,8}$)'
+    __integerMin0Max65534:
+      type: integer
+      minimum: 0
+      maximum: 65534
+    NielsenSourceWatermarkStatusType:
+      type: string
+      enum:
+        - CLEAN
+        - WATERMARKED
+      description: 'Required. Specify whether your source content already contains Nielsen non-linear watermarks. When you set this value to Watermarked (WATERMARKED), the service fails the job. Nielsen requires that you add non-linear watermarking to only clean content that doesn''t already  have non-linear Nielsen watermarks.'
+    __stringPatternHttps:
+      type: string
+      pattern: '^https:\/\/'
+    NielsenUniqueTicPerAudioTrackType:
+      type: string
+      enum:
+        - RESERVE_UNIQUE_TICS_PER_TRACK
+        - SAME_TICS_PER_TRACK
+      description: 'To create assets that have the same TIC values in each audio track, keep the default value Share TICs (SAME_TICS_PER_TRACK). To create assets that have unique TIC values for each audio track, choose Use unique TICs (RESERVE_UNIQUE_TICS_PER_TRACK).'
     NoiseFilterPostTemporalSharpening:
       type: string
       enum:
@@ -10879,7 +11132,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     ProresInterlaceMode:
       type: string
       enum:
@@ -10888,10 +11142,7 @@ components:
         - BOTTOM_FIELD
         - FOLLOW_TOP_FIELD
         - FOLLOW_BOTTOM_FIELD
-      description: |-
-        Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-          - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-          - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+      description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
     ProresParControl:
       type: string
       enum:
@@ -10903,13 +11154,13 @@ components:
       enum:
         - DISABLED
         - ENABLED
-      description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
     ProresTelecine:
       type: string
       enum:
         - NONE
         - HARD
-      description: Only use Telecine (ProresTelecine) when you set Framerate (Framerate) to 29.970. Set Telecine (ProresTelecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player.
+      description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
     ProresSettings:
       type: object
       properties:
@@ -10930,28 +11181,25 @@ components:
             - $ref: '#/components/schemas/ProresFramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use duplicate drop conversion.
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: framerateDenominator
-              description: Frame rate denominator.
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         FramerateNumerator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: framerateNumerator
-              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.'
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
         InterlaceMode:
           allOf:
             - $ref: '#/components/schemas/ProresInterlaceMode'
             - xml:
                 name: interlaceMode
-              description: |-
-                Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.
-                  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of "top field first" and "bottom field first".
-                  - If the source is progressive, the output will be interlaced with "top field first" or "bottom field first" polarity, depending on which of the Follow options you chose.
+              description: 'Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that''s interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.'
         ParControl:
           allOf:
             - $ref: '#/components/schemas/ProresParControl'
@@ -10975,13 +11223,13 @@ components:
             - $ref: '#/components/schemas/ProresSlowPal'
             - xml:
                 name: slowPal
-              description: 'Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly.'
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output. When you enable slow PAL, MediaConvert relabels the video frames to 25 fps and resamples your audio to keep it synchronized with the video. Note that enabling this setting will slightly reduce the duration of your video. Required settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
         Telecine:
           allOf:
             - $ref: '#/components/schemas/ProresTelecine'
             - xml:
                 name: telecine
-              description: Only use Telecine (ProresTelecine) when you set Framerate (Framerate) to 29.970. Set Telecine (ProresTelecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player.
+              description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
       description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
     ReservationPlan:
       type: object
@@ -11127,9 +11375,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12'
-    __stringPatternHttps:
-      type: string
-      pattern: '^https:\/\/'
     __listOf__stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
       type: array
       items:
@@ -11351,15 +11596,107 @@ components:
             - xml:
                 name: status
               description: 'Pause or activate a queue by changing its status between ACTIVE and PAUSED. If you pause a queue, jobs in that queue won''t begin. Jobs that are running when you pause the queue continue to run until they finish or result in an error.'
+    Vc3Class:
+      type: string
+      enum:
+        - CLASS_145_8BIT
+        - CLASS_220_8BIT
+        - CLASS_220_10BIT
+      description: 'Specify the VC3 class to choose the quality characteristics for this output. VC3 class, together with the settings Framerate (framerateNumerator and framerateDenominator) and Resolution (height and width), determine your output bitrate. For example, say that your video resolution is 1920x1080 and your framerate is 29.97. Then Class 145 (CLASS_145) gives you an output with a bitrate of approximately 145 Mbps and Class 220 (CLASS_220) gives you and output with a bitrate of approximately 220 Mbps. VC3 class also specifies the color bit depth of your output.'
+    Vc3FramerateControl:
+      type: string
+      enum:
+        - INITIALIZE_FROM_SOURCE
+        - SPECIFIED
+      description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    Vc3FramerateConversionAlgorithm:
+      type: string
+      enum:
+        - DUPLICATE_DROP
+        - INTERPOLATE
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+    Vc3InterlaceMode:
+      type: string
+      enum:
+        - INTERLACED
+        - PROGRESSIVE
+      description: 'Optional. Choose the scan line type for this output. If you don''t specify a value, MediaConvert will create a progressive output.'
+    Vc3SlowPal:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+      description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+    Vc3Telecine:
+      type: string
+      enum:
+        - NONE
+        - HARD
+      description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
+    Vc3Settings:
+      type: object
+      properties:
+        FramerateControl:
+          allOf:
+            - $ref: '#/components/schemas/Vc3FramerateControl'
+            - xml:
+                name: framerateControl
+              description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
+        FramerateConversionAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/Vc3FramerateConversionAlgorithm'
+            - xml:
+                name: framerateConversionAlgorithm
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
+        FramerateDenominator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max1001'
+            - xml:
+                name: framerateDenominator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        FramerateNumerator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin24Max60000'
+            - xml:
+                name: framerateNumerator
+              description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        InterlaceMode:
+          allOf:
+            - $ref: '#/components/schemas/Vc3InterlaceMode'
+            - xml:
+                name: interlaceMode
+              description: 'Optional. Choose the scan line type for this output. If you don''t specify a value, MediaConvert will create a progressive output.'
+        SlowPal:
+          allOf:
+            - $ref: '#/components/schemas/Vc3SlowPal'
+            - xml:
+                name: slowPal
+              description: 'Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1.'
+        Telecine:
+          allOf:
+            - $ref: '#/components/schemas/Vc3Telecine'
+            - xml:
+                name: telecine
+              description: 'When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.'
+        Vc3Class:
+          allOf:
+            - $ref: '#/components/schemas/Vc3Class'
+            - xml:
+                name: vc3Class
+              description: 'Specify the VC3 class to choose the quality characteristics for this output. VC3 class, together with the settings Framerate (framerateNumerator and framerateDenominator) and Resolution (height and width), determine your output bitrate. For example, say that your video resolution is 1920x1080 and your framerate is 29.97. Then Class 145 (CLASS_145) gives you an output with a bitrate of approximately 145 Mbps and Class 220 (CLASS_220) gives you and output with a bitrate of approximately 220 Mbps. VC3 class also specifies the color bit depth of your output.'
+      description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VC3
     VideoCodec:
       type: string
       enum:
-        - FRAME_CAPTURE
         - AV1
+        - AVC_INTRA
+        - FRAME_CAPTURE
         - H_264
         - H_265
         - MPEG2
         - PRORES
+        - VC3
         - VP8
         - VP9
       description: Type of video codec
@@ -11383,7 +11720,7 @@ components:
             - $ref: '#/components/schemas/Vp8FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
@@ -11465,7 +11802,7 @@ components:
             - $ref: '#/components/schemas/Vp9FramerateConversionAlgorithm'
             - xml:
                 name: framerateConversionAlgorithm
-              description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+              description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
         FramerateDenominator:
           allOf:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
@@ -11536,6 +11873,12 @@ components:
             - xml:
                 name: av1Settings
               description: 'Required when you set Codec, under VideoDescription>CodecSettings to the value AV1.'
+        AvcIntraSettings:
+          allOf:
+            - $ref: '#/components/schemas/AvcIntraSettings'
+            - xml:
+                name: avcIntraSettings
+              description: 'Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.'
         Codec:
           allOf:
             - $ref: '#/components/schemas/VideoCodec'
@@ -11572,6 +11915,12 @@ components:
             - xml:
                 name: proresSettings
               description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES.
+        Vc3Settings:
+          allOf:
+            - $ref: '#/components/schemas/Vc3Settings'
+            - xml:
+                name: vc3Settings
+              description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VC3
         Vp8Settings:
           allOf:
             - $ref: '#/components/schemas/Vp8Settings'
@@ -11584,7 +11933,7 @@ components:
             - xml:
                 name: vp9Settings
               description: Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9.
-      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * FRAME_CAPTURE, FrameCaptureSettings * AV1, Av1Settings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VP8, Vp8Settings * VP9, Vp9Settings'
+      description: 'Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings'
     __integerMin0Max15:
       type: integer
       minimum: 0
@@ -11660,7 +12009,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     Vp8ParControl:
       type: string
       enum:
@@ -11689,7 +12039,8 @@ components:
       enum:
         - DUPLICATE_DROP
         - INTERPOLATE
-      description: 'Optional. Specify how the transcoder performs framerate conversion. The default behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.'
+        - FRAMEFORMER
+      description: 'Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost.'
     Vp9ParControl:
       type: string
       enum:

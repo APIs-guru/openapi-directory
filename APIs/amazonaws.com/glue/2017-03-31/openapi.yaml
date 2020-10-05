@@ -13534,6 +13534,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JdbcTargetList'
             - description: Specifies JDBC targets.
+        MongoDBTargets:
+          allOf:
+            - $ref: '#/components/schemas/MongoDBTargetList'
+            - description: Specifies Amazon DocumentDB or MongoDB targets.
         DynamoDBTargets:
           allOf:
             - $ref: '#/components/schemas/DynamoDBTargetList'
@@ -13748,6 +13752,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JdbcTarget'
+    MongoDBTargetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MongoDBTarget'
     DynamoDBTargetList:
       type: array
       items:
@@ -15690,6 +15698,22 @@ components:
             - $ref: '#/components/schemas/FieldType'
             - description: The target type.
       description: Defines a mapping.
+    MongoDBTarget:
+      type: object
+      properties:
+        ConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionName'
+            - description: The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target.
+        Path:
+          allOf:
+            - $ref: '#/components/schemas/Path'
+            - description: The path of the Amazon DocumentDB or MongoDB target (database/collection).
+        ScanAll:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: '<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p> <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>'
+      description: Specifies an Amazon DocumentDB or MongoDB data store to crawl.
     NodeType:
       type: string
       enum:
