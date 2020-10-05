@@ -1574,8 +1574,14 @@ paths:
                 cancelURLTitle:
                   description: For <i>tokenType=SHOP</i> only; shop link title for cancel checkout process
                   type: string
+                licenseTemplateNumber:
+                  description: For <i>tokenType=SHOP</i> only; identifies LicenseTemplate that will be assigned to the shop token
+                  type: string
                 licenseeNumber:
                   description: For <i>tokenType=SHOP</i> or <i>type=ACTION</i> only (mandatory); identifies Licensee that will be assigned to the shop token
+                  type: string
+                predefinedShoppingItem:
+                  description: For <i>tokenType=SHOP</i> only; identifies Shopping Item name that will be shown to the customer
                   type: string
                 privateKey:
                   description: For <i>tokenType=APIKEY</i> only (optional); defines PrivateKey to be used with the validate method<br/><strong>Please Note:</strong> PrivateKey need to be provided as one line without spaces

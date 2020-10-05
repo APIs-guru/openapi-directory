@@ -103,7 +103,7 @@ parameters:
     type: string
   with_attribute_options:
     default: false
-    description: Return labels of attribute options in the response.
+    description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
     in: query
     name: with_attribute_options
     required: false
@@ -1647,7 +1647,7 @@ paths:
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/assets":
     get:
-      description: This endpoint allows you to get a list of assets of a given asset family. Assets are paginated.
+      description: This endpoint allows you to get a list of assets of a given asset family. Assets are paginated. This endpoint is case sensitive on the asset family code.
       operationId: get_assets
       parameters:
         - description: Filter assets, for more details see the <a href="/documentation/filter.html#filter-assets">Asset filters</a> section
@@ -1887,7 +1887,7 @@ paths:
         - "4.0"
         - Serenity
     patch:
-      description: This endpoint allows you to update and/or create several assets of one given asset family at once. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it.
+      description: This endpoint allows you to update and/or create several assets of one given asset family at once. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it. This endpoint is case sensitive on the asset family code.
       operationId: patch_assets
       parameters:
         - description: Code of the asset family
@@ -2122,7 +2122,7 @@ paths:
         - Serenity
   "/api/rest/v1/asset-families/{asset_family_code}/assets/{code}":
     delete:
-      description: This endpoint allows you to delete a given asset.
+      description: This endpoint allows you to delete a given asset. This endpoint is case sensitive on the asset family code.
       operationId: delete_assets__code_
       parameters:
         - description: Code of the asset family
@@ -2178,7 +2178,7 @@ paths:
         - "4.0"
         - Serenity
     get:
-      description: This endpoint allows you to get the information about a given asset for a given asset family.
+      description: This endpoint allows you to get the information about a given asset for a given asset family. This endpoint is case sensitive on the asset family code.
       operationId: get_assets__code_
       parameters:
         - description: Code of the asset family
@@ -2302,7 +2302,7 @@ paths:
         - "4.0"
         - Serenity
     patch:
-      description: This endpoint allows you to update a given asset of a given asset family. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it.
+      description: This endpoint allows you to update a given asset of a given asset family. Learn more about the <a href="/documentation/update.html#patch-asset-attribute-values">Update behavior</a>. Note that if the asset does not already exist for the given asset family, it creates it. This endpoint is case sensitive on the asset family code.
       operationId: patch_asset__code_
       parameters:
         - description: Code of the asset family
@@ -17785,7 +17785,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Return labels of attribute options in the response.
+          description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
           in: query
           name: with_attribute_options
           required: false
@@ -18224,8 +18224,16 @@ paths:
                                             description: Product value
                                             type: object
                                           linked_data:
-                                            description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                                            description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                                            properties:
+                                              attribute:
+                                                type: string
+                                              code:
+                                                type: string
+                                              labels:
+                                                type: object
                                             type: object
+                                            x-read-only: true
                                           locale:
                                             description: Locale code of the product value
                                             type: string
@@ -18528,8 +18536,16 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          properties:
+                            attribute:
+                              type: string
+                            code:
+                              type: string
+                            labels:
+                              type: object
                           type: object
+                          x-read-only: true
                         locale:
                           description: Locale code of the product value
                           type: string
@@ -18856,8 +18872,16 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          properties:
+                            attribute:
+                              type: string
+                            code:
+                              type: string
+                            labels:
+                              type: object
                           type: object
+                          x-read-only: true
                         locale:
                           description: Locale code of the product value
                           type: string
@@ -19044,7 +19068,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: Return labels of attribute options in the response.
+          description: Return labels of attribute options in the response. (Only available in the PIM Serenity version.)
           in: query
           name: with_attribute_options
           required: false
@@ -19258,8 +19282,16 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          properties:
+                            attribute:
+                              type: string
+                            code:
+                              type: string
+                            labels:
+                              type: object
                           type: object
+                          x-read-only: true
                         locale:
                           description: Locale code of the product value
                           type: string
@@ -19561,8 +19593,16 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          properties:
+                            attribute:
+                              type: string
+                            code:
+                              type: string
+                            labels:
+                              type: object
                           type: object
+                          x-read-only: true
                         locale:
                           description: Locale code of the product value
                           type: string
@@ -19882,8 +19922,16 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          properties:
+                            attribute:
+                              type: string
+                            code:
+                              type: string
+                            labels:
+                              type: object
                           type: object
+                          x-read-only: true
                         locale:
                           description: Locale code of the product value
                           type: string
@@ -25883,8 +25931,16 @@ definitions:
                   description: Product value
                   type: object
                 linked_data:
-                  description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                  description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                  properties:
+                    attribute:
+                      type: string
+                    code:
+                      type: string
+                    labels:
+                      type: object
                   type: object
+                  x-read-only: true
                 locale:
                   description: Locale code of the product value
                   type: string
@@ -26116,8 +26172,16 @@ definitions:
                       description: Product value
                       type: object
                     linked_data:
-                      description: Object containing labels of attribute options (only when query parameter "with_attribute_options" is set to "true")
+                      description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                      properties:
+                        attribute:
+                          type: string
+                        code:
+                          type: string
+                        labels:
+                          type: object
                       type: object
+                      x-read-only: true
                     locale:
                       description: Locale code of the product value
                       type: string

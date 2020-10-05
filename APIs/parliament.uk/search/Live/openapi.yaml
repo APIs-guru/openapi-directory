@@ -48,6 +48,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/subdomains"
+        - $ref: "#/components/parameters/inUrlPrefixes"
       responses:
         "200":
           $ref: "#/components/responses/searchResponse"
@@ -75,6 +76,7 @@ paths:
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/subdomains"
+        - $ref: "#/components/parameters/inUrlPrefixes"
       responses:
         "200":
           $ref: "#/components/responses/searchResponse"
@@ -88,6 +90,11 @@ components:
       name: count
       schema:
         type: number
+    inUrlPrefixes:
+      in: query
+      name: inUrlPrefixes
+      schema:
+        type: string
     q:
       in: query
       name: q

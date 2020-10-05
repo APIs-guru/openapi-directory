@@ -238,7 +238,7 @@ paths:
               status: COMPLETE
             link: https://documentation.image-charts.com/reference/output-format/
             note: >-
-              Some clients like Flowdock/Facebook messenger and so on, needs an URL to ends with a valid image extension file to display the image, use this parameter at the end your URL to support them. Valid values are ".png", ".svg" and ".gif". 
+              Some clients like Flowdock/Facebook messenger and so on, needs an URL to ends with a valid image extension file to display the image, use this parameter at the end your URL to support them. Valid values are ".png", ".svg" and ".gif".
                         Only QRCodes and GraphViz support svg output.
         - description: Chart size (<width>x<height>)
           in: query
@@ -1593,6 +1593,10 @@ paths:
               status: COMPLETE
             link: https://documentation.image-charts.com/reference/chart-font/
         - description: localization (ISO 639-1)
+          enum:
+            - fr
+            - de
+            - en
           in: query
           name: iclocale
           type: string

@@ -4866,12 +4866,12 @@ paths:
             description: A video id. For more than one video please use the /v3/video endpoint.
             nullable: true
             type: string
-        - description: comma delimited list of fields to retrive for the video
+        - description: comma delimited list of fields to retrieve for the video
           explode: false
           in: query
           name: fields
           schema:
-            description: comma delimited list of fields to retrive for the video
+            description: comma delimited list of fields to retrieve for the video
             items:
               $ref: "#/components/schemas/VideoDetailFieldValues"
             nullable: true
@@ -5979,11 +5979,14 @@ components:
       type: string
     Contributor:
       additionalProperties: false
+      description: Contributor information for an image or video
       properties:
         display_name:
+          description: The contributor's display name
           nullable: true
           type: string
         member_name:
+          description: The contributor's member name
           nullable: true
           type: string
       type: object

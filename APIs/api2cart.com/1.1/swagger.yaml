@@ -71,6 +71,7 @@ paths:
             - MijoShop
             - Neto
             - Opencart14
+            - LightSpeed
             - Oscmax2
             - Oscommerce22ms2
             - Oxid
@@ -311,6 +312,16 @@ paths:
         - description: Store Id
           in: query
           name: ecwid_store_id
+          required: false
+          type: string
+        - description: LightSpeed api key
+          in: query
+          name: lightspeed_api_key
+          required: false
+          type: string
+        - description: LightSpeed api secret
+          in: query
+          name: lightspeed_api_secret
           required: false
           type: string
         - description: Etsy keystring
@@ -754,6 +765,16 @@ paths:
         - description: User password
           in: query
           name: hybris_password
+          required: false
+          type: string
+        - description: LightSpeed api key
+          in: query
+          name: lightspeed_api_key
+          required: false
+          type: string
+        - description: LightSpeed api secret
+          in: query
+          name: lightspeed_api_secret
           required: false
           type: string
       produces:
@@ -2389,6 +2410,7 @@ paths:
             - MijoShop
             - Neto
             - Opencart14
+            - LightSpeed
             - Oscmax2
             - Oscommerce22ms2
             - Oxid
@@ -2724,6 +2746,16 @@ paths:
         - description: Walmart client secret
           in: query
           name: walmart_client_secret
+          required: false
+          type: string
+        - description: LightSpeed api key
+          in: query
+          name: lightspeed_api_key
+          required: false
+          type: string
+        - description: LightSpeed api secret
+          in: query
+          name: lightspeed_api_secret
           required: false
           type: string
       produces:
@@ -3552,6 +3584,11 @@ paths:
         - description: Store Id
           in: query
           name: store_id
+          required: false
+          type: string
+        - description: Language id
+          in: query
+          name: lang_id
           required: false
           type: string
         - default: true
@@ -6141,6 +6178,18 @@ paths:
           name: disable_report_cache
           required: false
           type: boolean
+        - description: Retrieves brands specified by brand name
+          in: query
+          name: brand_name
+          required: false
+          type: string
+        - description: Defines product attributes
+          in: query
+          items:
+            type: string
+          name: product_attributes
+          required: false
+          type: array
       produces:
         - application/json
       responses:
@@ -6834,6 +6883,18 @@ paths:
           name: disable_cache
           required: false
           type: boolean
+        - description: Retrieves brands specified by brand name
+          in: query
+          name: brand_name
+          required: false
+          type: string
+        - description: Defines product attributes
+          in: query
+          items:
+            type: string
+          name: product_attributes
+          required: false
+          type: array
       produces:
         - application/json
       responses:
@@ -10193,7 +10254,6 @@ definitions:
           required:
             - order_item_id
             - order_item_name
-            - order_item_model
             - order_item_price
             - order_item_quantity
           type: object

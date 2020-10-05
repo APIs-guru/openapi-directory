@@ -79,7 +79,7 @@ tags:
       You can turn Feature Flags on or off, update Setting values and also add, remove or change the order of Percentage and Targeting Rules.
 
 
-      These endpoints are determining the Environment and Config by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in
+      These endpoints are determining the Environment and Config by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in
 
       the `X-CONFIGCAT-SDKKEY` request header. To identify the desired Feature Flag or Setting to change, 
 
@@ -124,7 +124,7 @@ tags:
       to use them for further operations in this API. 
 
 
-      <a href="https://configcat.com/docs/main-concepts/#setting" target="_blank">Here</a> you can read more about the concept of Settings.
+      <a href="https://configcat.com/docs/main-concepts/#setting" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Settings.
     name: Feature Flags & Settings
   - description: >-
       With these endpoints you can get useful information about your Products.
@@ -132,7 +132,7 @@ tags:
       This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
 
 
-      <a href="https://configcat.com/docs/main-concepts/#product" target="_blank">Here</a> you can read more about the concept of Products.
+      <a href="https://configcat.com/docs/main-concepts/#product" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Products.
     name: Products
   - description: >-
       With these endpoints you can get useful information about your Configs.
@@ -142,13 +142,13 @@ tags:
       [served values](#tag/Feature-Flag-and-Setting-values) through this API.
 
 
-      <a href="https://configcat.com/docs/main-concepts/#config" target="_blank">Here</a> you can read more about the concept of Configs.
+      <a href="https://configcat.com/docs/main-concepts/#config" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Configs.
     name: Configs
   - description: >-
       With these endpoints you can update existing Environments or add new ones into your selected [Product](#tag/Products). 
 
 
-      <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank">Here</a> you can read more about the concept of Environments.
+      <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
   - description: Access audit log entries.
     name: Audit logs
@@ -1397,7 +1397,7 @@ paths:
       description: >-
         This endpoint returns the value of a Feature Flag or Setting 
 
-        in a specified Environment identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+        in a specified Environment identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
 
 
         The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`.
@@ -1455,7 +1455,7 @@ paths:
 
         with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment
 
-        identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+        identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
 
 
         Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
@@ -1767,7 +1767,7 @@ paths:
       description: >-
         This endpoint replaces the value of a Feature Flag or Setting 
 
-        in a specified Environment identified by the <a target="_blank" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
+        in a specified Environment identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
 
 
         Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.

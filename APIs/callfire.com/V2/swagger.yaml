@@ -6060,6 +6060,7 @@ paths:
             - UNSENT_MESSAGE_TOO_LONG
             - UNSENT_MESSAGE_BLOCKED
             - UNSENT_QUEUE_LIMIT_REACHED
+            - SPAM_DETECTED
             - ORIGINATED
             - SUBMITTED
             - FORWARDED
@@ -7945,16 +7946,6 @@ definitions:
       canceled:
         description: "~"
         type: boolean
-      cf2MigrationState:
-        description: "~"
-        enum:
-          - CF2_ONLY
-          - MIGRATING
-          - FINISHED
-        type: string
-      cf2Only:
-        description: "~"
-        type: boolean
       country:
         description: "~"
         enum:
@@ -8106,6 +8097,9 @@ definitions:
         type: integer
       timeZone:
         $ref: "#/definitions/TimeZone"
+        description: "~"
+      timeZoneId:
+        $ref: "#/definitions/ZoneId"
         description: "~"
       trustLevel:
         description: "~"
@@ -9289,6 +9283,7 @@ definitions:
           - UNSENT_MESSAGE_TOO_LONG
           - UNSENT_MESSAGE_BLOCKED
           - UNSENT_QUEUE_LIMIT_REACHED
+          - SPAM_DETECTED
           - ORIGINATED
           - SUBMITTED
           - FORWARDED
@@ -10251,6 +10246,22 @@ definitions:
             type: array
         type: object
     description: "~"
+  TemporalUnit:
+    description: "~"
+    properties:
+      dateBased:
+        description: "~"
+        type: boolean
+      duration:
+        $ref: "#/definitions/Duration"
+        description: "~"
+      durationEstimated:
+        description: "~"
+        type: boolean
+      timeBased:
+        description: "~"
+        type: boolean
+    type: object
   Text:
     description: Represents a text action sent or received by CallFire platform
     properties:
@@ -10916,5 +10927,134 @@ definitions:
       timeZone:
         description: A user's timezone
         type: string
+    type: object
+  ZoneId:
+    description: "~"
+    properties:
+      id:
+        description: "~"
+        type: string
+      rules:
+        $ref: "#/definitions/ZoneRules"
+        description: "~"
+    type: object
+  ZoneOffset:
+    description: "~"
+    properties:
+      id:
+        description: "~"
+        type: string
+      rules:
+        $ref: "#/definitions/ZoneRules"
+        description: "~"
+      totalSeconds:
+        description: "~"
+        format: int32
+        type: integer
+    type: object
+  ZoneOffsetTransition:
+    description: "~"
+    properties:
+      dateTimeAfter:
+        description: "~"
+        format: date-time
+        type: string
+      dateTimeBefore:
+        description: "~"
+        format: date-time
+        type: string
+      duration:
+        $ref: "#/definitions/Duration"
+        description: "~"
+      gap:
+        description: "~"
+        type: boolean
+      instant:
+        description: "~"
+        format: int64
+        type: integer
+      offsetAfter:
+        $ref: "#/definitions/ZoneOffset"
+        description: "~"
+      offsetBefore:
+        $ref: "#/definitions/ZoneOffset"
+        description: "~"
+      overlap:
+        description: "~"
+        type: boolean
+    type: object
+  ZoneOffsetTransitionRule:
+    description: "~"
+    properties:
+      dayOfMonthIndicator:
+        description: "~"
+        format: int32
+        type: integer
+      dayOfWeek:
+        description: "~"
+        enum:
+          - MONDAY
+          - TUESDAY
+          - WEDNESDAY
+          - THURSDAY
+          - FRIDAY
+          - SATURDAY
+          - SUNDAY
+        type: string
+      localTime:
+        $ref: "#/definitions/LocalTime"
+        description: "~"
+      midnightEndOfDay:
+        description: "~"
+        type: boolean
+      month:
+        description: "~"
+        enum:
+          - JANUARY
+          - FEBRUARY
+          - MARCH
+          - APRIL
+          - MAY
+          - JUNE
+          - JULY
+          - AUGUST
+          - SEPTEMBER
+          - OCTOBER
+          - NOVEMBER
+          - DECEMBER
+        type: string
+      offsetAfter:
+        $ref: "#/definitions/ZoneOffset"
+        description: "~"
+      offsetBefore:
+        $ref: "#/definitions/ZoneOffset"
+        description: "~"
+      standardOffset:
+        $ref: "#/definitions/ZoneOffset"
+        description: "~"
+      timeDefinition:
+        description: "~"
+        enum:
+          - UTC
+          - WALL
+          - STANDARD
+        type: string
+    type: object
+  ZoneRules:
+    description: "~"
+    properties:
+      fixedOffset:
+        description: "~"
+        type: boolean
+      transitionRules:
+        description: "~"
+        items:
+          $ref: "#/definitions/ZoneOffsetTransitionRule"
+        type: array
+      transitions:
+        description: "~"
+        items:
+          $ref: "#/definitions/ZoneOffsetTransition"
+        type: array
     type: object
 x-sample-basepath: https://raw.githubusercontent.com/CallFire/callfire-api-samples/master/2.0

@@ -185,7 +185,7 @@ paths:
       operationId: CustomerAddresses_GetOne
       parameters:
         - description: The id of the address to query
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -218,7 +218,7 @@ paths:
           schema:
             $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
         - description: The id of the address
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -299,7 +299,7 @@ paths:
       operationId: Customer_GetCustomerAddress
       parameters:
         - description: The id of the address
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -326,7 +326,7 @@ paths:
       operationId: Customer_PatchAddress
       parameters:
         - description: The id of the address
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -367,7 +367,7 @@ paths:
           schema:
             $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel"
         - description: The id of the address
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -391,7 +391,7 @@ paths:
       operationId: Customer_GetOne
       parameters:
         - description: The id of the customer to query
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -424,7 +424,7 @@ paths:
           schema:
             $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel"
         - description: The id of the customer
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -448,7 +448,7 @@ paths:
       operationId: Customer_GetCustomerAddresses
       parameters:
         - description: The id of the customer
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -489,7 +489,7 @@ paths:
       operationId: Customer_AddCustomerAddress
       parameters:
         - description: CustomerId to attach the new address to.
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -519,7 +519,7 @@ paths:
       operationId: Customer_GetCustomerOrders
       parameters:
         - description: The id of the customer
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -698,7 +698,7 @@ paths:
           description: Specifies a list of shop ids for which invoices should be included
           in: query
           items:
-            format: int32
+            format: int64
             type: integer
           name: shopId
           required: false
@@ -721,7 +721,7 @@ paths:
           required: false
           type: array
         - description: If given, all delivered orders have an Id greater than or equal to the given minimumOrderId
-          format: int32
+          format: int64
           in: query
           name: minimumBillBeeOrderId
           required: false
@@ -786,7 +786,7 @@ paths:
           schema:
             $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Order"
         - description: ""
-          format: int32
+          format: int64
           in: query
           name: shopId
           required: false
@@ -814,7 +814,7 @@ paths:
       operationId: OrderApi_CreateDeliveryNote
       parameters:
         - description: The internal billbee id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -825,7 +825,7 @@ paths:
           required: false
           type: boolean
         - description: Optionally specify the id of a billbee connected cloud device to send the pdf to
-          format: int32
+          format: int64
           in: query
           name: sendToCloudId
           required: false
@@ -848,7 +848,7 @@ paths:
       operationId: OrderApi_CreateInvoice
       parameters:
         - description: The internal billbee id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -859,13 +859,13 @@ paths:
           required: false
           type: boolean
         - description: You can pass the id of an invoice template to overwrite the assigned template for invoice creation
-          format: int32
+          format: int64
           in: query
           name: templateId
           required: false
           type: integer
         - description: You can pass the id of a connected cloud printer/storage to send the invoice to it
-          format: int32
+          format: int64
           in: query
           name: sendToCloudId
           required: false
@@ -980,7 +980,7 @@ paths:
           description: Specifies a list of shop ids for which invoices should be included
           in: query
           items:
-            format: int32
+            format: int64
             type: integer
           name: shopId
           required: false
@@ -1038,7 +1038,7 @@ paths:
       operationId: OrderApi_Get
       parameters:
         - description: The internal billbee id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1075,7 +1075,7 @@ paths:
       operationId: OrderApi_PatchOrder
       parameters:
         - description: The Billbee internal order id of the Order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1151,7 +1151,7 @@ paths:
       operationId: OrderApi_UpdateState
       parameters:
         - description: The internal id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1184,7 +1184,7 @@ paths:
       operationId: OrderApi_ParsePlaceholders
       parameters:
         - description: The id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1216,7 +1216,7 @@ paths:
       operationId: OrderApi_SendMessage
       parameters:
         - description: The id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1249,7 +1249,7 @@ paths:
       operationId: OrderApi_AddShipment
       parameters:
         - description: The internal billbee id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1289,7 +1289,7 @@ paths:
           schema:
             $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderTagCreate"
         - description: The internal id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1321,7 +1321,7 @@ paths:
           schema:
             $ref: "#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderTagCreate"
         - description: The internal id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1348,7 +1348,7 @@ paths:
       operationId: OrderApi_TriggerEvent
       parameters:
         - description: The id of the order
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1490,7 +1490,7 @@ paths:
       operationId: Article_GetCustomField
       parameters:
         - description: The id of the custom field to query
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1524,7 +1524,7 @@ paths:
           required: true
           schema:
             items:
-              format: int32
+              format: int64
               type: integer
             type: array
       produces:
@@ -1546,7 +1546,7 @@ paths:
       operationId: Article_DeleteImage
       parameters:
         - description: The image id
-          format: int32
+          format: int64
           in: path
           name: imageId
           required: true
@@ -1567,7 +1567,7 @@ paths:
       operationId: Article_GetImage
       parameters:
         - description: The Id of the image
-          format: int32
+          format: int64
           in: path
           name: imageId
           required: true
@@ -1601,7 +1601,7 @@ paths:
           required: false
           type: string
         - description: Optional the stock id if the multi stock feature is enabled
-          format: int32
+          format: int64
           in: query
           name: stockId
           required: false
@@ -1717,7 +1717,7 @@ paths:
       operationId: Article_DeleteArticle
       parameters:
         - description: The id of the Product
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1766,7 +1766,7 @@ paths:
       operationId: Article_PatchArticle
       parameters:
         - description: The id of the Product
-          format: int32
+          format: int64
           in: path
           name: id
           required: true
@@ -1794,7 +1794,7 @@ paths:
       operationId: Article_GetImages
       parameters:
         - description: The Id of the product
-          format: int32
+          format: int64
           in: path
           name: productId
           required: true
@@ -1822,7 +1822,7 @@ paths:
       operationId: Article_PutImages
       parameters:
         - description: The id of the product
-          format: int32
+          format: int64
           in: path
           name: productId
           required: true
@@ -1859,13 +1859,13 @@ paths:
       operationId: Article_DeleteImageFromProduct
       parameters:
         - description: The product id
-          format: int32
+          format: int64
           in: path
           name: productId
           required: true
           type: integer
         - description: The image id
-          format: int32
+          format: int64
           in: path
           name: imageId
           required: true
@@ -1886,13 +1886,13 @@ paths:
       operationId: Article_GetImageFromProduct
       parameters:
         - description: The Id of the product
-          format: int32
+          format: int64
           in: path
           name: productId
           required: true
           type: integer
         - description: The Id of the image
-          format: int32
+          format: int64
           in: path
           name: imageId
           required: true
@@ -1920,13 +1920,13 @@ paths:
       operationId: Article_PutImage
       parameters:
         - description: The product id
-          format: int32
+          format: int64
           in: path
           name: productId
           required: true
           type: integer
         - description: The image id. If you pass 0, the image will be added
-          format: int32
+          format: int64
           in: path
           name: imageId
           required: true
@@ -2055,19 +2055,19 @@ paths:
           required: false
           type: string
         - description: Get shipments for this order only.
-          format: int32
+          format: int64
           in: query
           name: orderId
           required: false
           type: integer
         - description: Get Shipments with a shipment greater or equal than this id. New shipments have a greater id than older shipments.
-          format: int32
+          format: int64
           in: query
           name: minimumShipmentId
           required: false
           type: integer
         - description: Get Shippings for the specified shipping provider only. <seealso cref="M:Rechnungsdruck.WebApp.Controllers.Api.ShipmentController.GetShippingproviders" />
-          format: int32
+          format: int64
           in: query
           name: shippingProviderId
           required: false
@@ -2289,7 +2289,7 @@ definitions:
       Configuration:
         type: object
       Id:
-        format: int32
+        format: int64
         type: integer
       IsNullable:
         type: boolean
@@ -2307,15 +2307,15 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldValueModel:
     properties:
       ArticleId:
-        format: int32
+        format: int64
         type: integer
       Definition:
         $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel"
       DefinitionId:
-        format: int32
+        format: int64
         type: integer
       Id:
-        format: int32
+        format: int64
         type: integer
       Value:
         type: object
@@ -2363,7 +2363,7 @@ definitions:
         format: double
         type: number
       Id:
-        format: int32
+        format: int64
         type: integer
       Images:
         items:
@@ -2496,7 +2496,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.ArticleCategoryApiModel:
     properties:
       Id:
-        format: int32
+        format: int64
         type: integer
       Name:
         type: string
@@ -2504,10 +2504,10 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel:
     properties:
       ArticleId:
-        format: int32
+        format: int64
         type: integer
       Id:
-        format: int32
+        format: int64
         type: integer
       IsDefault:
         type: boolean
@@ -2524,7 +2524,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.ArticleSourceApiModel:
     properties:
       ApiAccountId:
-        format: int32
+        format: int64
         type: integer
       ApiAccountName:
         type: string
@@ -2561,7 +2561,7 @@ definitions:
         format: double
         type: number
       ArticleId:
-        format: int32
+        format: int64
         type: integer
       SKU:
         type: string
@@ -2569,7 +2569,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Model.CloudStorageApiModel:
     properties:
       Id:
-        format: int32
+        format: int64
         type: integer
       Name:
         type: string
@@ -2578,6 +2578,21 @@ definitions:
       UsedAsPrinter:
         type: boolean
     type: object
+  Billbee.Interfaces.BillbeeAPI.Model.CommentApiModel:
+    properties:
+      Created:
+        format: date-time
+        type: string
+      FromCustomer:
+        type: boolean
+      Id:
+        format: int64
+        type: integer
+      Name:
+        type: string
+      Text:
+        type: string
+    type: object
   Billbee.Interfaces.BillbeeAPI.Model.CreateCustomerApiModel:
     properties:
       Address:
@@ -2585,7 +2600,7 @@ definitions:
       Email:
         type: string
       Id:
-        format: int32
+        format: int64
         type: integer
       LanguageId:
         format: int32
@@ -2596,7 +2611,7 @@ definitions:
         format: int32
         type: integer
       PriceGroupId:
-        format: int32
+        format: int64
         type: integer
       Tel1:
         type: string
@@ -2631,7 +2646,7 @@ definitions:
         type: number
       PrinterIdForExportDocs:
         description: The id of a connected Cloudprinter to sent the export docs to
-        format: int32
+        format: int64
         type: integer
       PrinterName:
         description: The name of a connected Cloudprinter to sent the label to
@@ -2703,7 +2718,7 @@ definitions:
         type: string
       CustomerId:
         description: The internal Billbee id of the customer the address belongs to
-        format: int32
+        format: int64
         type: integer
       Email:
         type: string
@@ -2715,7 +2730,7 @@ definitions:
         type: string
       Id:
         description: The internal Billbee ID of the address record. Can be null if a new address is created
-        format: int32
+        format: int64
         type: integer
       LastName:
         type: string
@@ -2738,7 +2753,7 @@ definitions:
       Email:
         type: string
       Id:
-        format: int32
+        format: int64
         type: integer
       LanguageId:
         format: int32
@@ -2749,7 +2764,7 @@ definitions:
         format: int32
         type: integer
       PriceGroupId:
-        format: int32
+        format: int64
         type: integer
       Tel1:
         type: string
@@ -2766,12 +2781,12 @@ definitions:
     properties:
       Deleted:
         items:
-          format: int32
+          format: int64
           type: integer
         type: array
       NotFound:
         items:
-          format: int32
+          format: int64
           type: integer
         type: array
     type: object
@@ -2795,18 +2810,18 @@ definitions:
         type: string
       BillBeeOrderId:
         description: The Order.Id from the Billbee database
-        format: int32
+        format: int64
         type: integer
       BillBeeParentOrderId:
         description: The Id of the parent order in the Billbee database
-        format: int32
+        format: int64
         type: integer
       Buyer:
         $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderUser"
       Comments:
         description: All messages / comments of the order
         items:
-          $ref: "#/definitions/Billbee.Interfaces.Order.Comment"
+          $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CommentApiModel"
         type: array
       ConfirmedAt:
         description: The date on which the order was confirmed
@@ -2842,7 +2857,7 @@ definitions:
         description: Id of the order in the external system (marketplace)
         type: string
       InvoiceAddress:
-        $ref: "#/definitions/Billbee.Interfaces.Order.Address"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderAddressApiModel"
         description: The billing address
       InvoiceDate:
         description: The date on which the invoice was created
@@ -3018,7 +3033,7 @@ definitions:
         format: date-time
         type: string
       ShippingAddress:
-        $ref: "#/definitions/Billbee.Interfaces.Order.Address"
+        $ref: "#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderAddressApiModel"
         description: The delivery address
       ShippingCost:
         description: The shipping cost
@@ -3037,14 +3052,14 @@ definitions:
         type: string
       ShippingProviderId:
         description: Internal Id for the used shipping provider
-        format: int32
+        format: int64
         type: integer
       ShippingProviderName:
         description: The Name for of used shipping provider
         type: string
       ShippingProviderProductId:
         description: Internal Id for the used shipping product
-        format: int32
+        format: int64
         type: integer
       ShippingProviderProductName:
         description: The Name of the used shipping product
@@ -3111,6 +3126,40 @@ definitions:
         format: int32
         type: integer
     type: object
+  Billbee.Interfaces.BillbeeAPI.Model.OrderAddressApiModel:
+    properties:
+      BillbeeId:
+        format: int64
+        type: integer
+      City:
+        type: string
+      Company:
+        type: string
+      Country:
+        type: string
+      CountryISO2:
+        type: string
+      Email:
+        type: string
+      FirstName:
+        type: string
+      HouseNumber:
+        type: string
+      LastName:
+        type: string
+      Line2:
+        type: string
+      NameAddition:
+        type: string
+      Phone:
+        type: string
+      State:
+        type: string
+      Street:
+        type: string
+      Zip:
+        type: string
+    type: object
   Billbee.Interfaces.BillbeeAPI.Model.OrderItem:
     properties:
       Attributes:
@@ -3120,7 +3169,7 @@ definitions:
         type: array
       BillbeeId:
         description: The billbee id of this item
-        format: int32
+        format: int64
         type: integer
       Discount:
         description: Sets the discount in percent
@@ -3187,7 +3236,7 @@ definitions:
     properties:
       BillbeeShopId:
         description: The Billbee internal id of the shop connection
-        format: int32
+        format: int64
         type: integer
       BillbeeShopName:
         description: The name of shop connection in Billbee
@@ -3236,7 +3285,7 @@ definitions:
     properties:
       BillbeeId:
         description: The billbee internal id of the shipment
-        format: int32
+        format: int64
         type: integer
       Created:
         description: The creation date
@@ -3254,11 +3303,11 @@ definitions:
         type: string
       ShippingProviderId:
         description: The id of the used shipping provider
-        format: int32
+        format: int64
         type: integer
       ShippingProviderProductId:
         description: The id of the used shipping provider product
-        format: int32
+        format: int64
         type: integer
       TrackingUrl:
         description: The url to track this shipment
@@ -3307,7 +3356,7 @@ definitions:
     properties:
       BillbeeId:
         description: The Billbee internal id of the linked product
-        format: int32
+        format: int64
         type: integer
       CountryOfOrigin:
         description: The country where this article was made
@@ -3381,7 +3430,7 @@ definitions:
         type: boolean
       BillbeeId:
         description: Optional the ID of the Billbee product to update
-        format: int32
+        format: int64
         type: integer
       DeltaQuantity:
         description: This parameter is currently ignored
@@ -3406,20 +3455,20 @@ definitions:
         type: string
       StockId:
         description: Optional the stock id if the feature multi stock is activated
-        format: int32
+        format: int64
         type: integer
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiModel:
     properties:
       BillbeeId:
-        format: int32
+        format: int64
         type: integer
       Sku:
         type: string
       StockCode:
         type: string
       StockId:
-        format: int32
+        format: int64
         type: integer
     type: object
   Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData:
@@ -3445,7 +3494,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate:
     properties:
       Id:
-        format: int32
+        format: int64
         type: integer
       Name:
         type: string
@@ -3463,7 +3512,7 @@ definitions:
   Billbee.Interfaces.BillbeeAPI.Models.OrderPayment:
     properties:
       BillbeeId:
-        format: int32
+        format: int64
         type: integer
       Name:
         type: string
@@ -3483,92 +3532,6 @@ definitions:
       SourceText:
         type: string
       TransactionId:
-        type: string
-    type: object
-  Billbee.Interfaces.Order.Address:
-    properties:
-      BillbeeId:
-        description: The Billbee internal ID of the address record
-        format: int32
-        type: integer
-      City:
-        description: The city
-        type: string
-      Comment:
-        description: A internal comment to this address
-        type: string
-      Company:
-        description: The company name
-        type: string
-      Country:
-        description: The name of the country
-        type: string
-      CountryISO2:
-        description: The 2-letter country code
-        type: string
-      Email:
-        description: The email address
-        type: string
-      FirstName:
-        description: The first name
-        type: string
-      HouseNumber:
-        description: The house number
-        type: string
-      Id:
-        description: The id of the address in the external system
-        type: string
-      LastName:
-        description: The last name
-        type: string
-      Line2:
-        description: The second address line
-        type: string
-      Line3:
-        description: The third address line
-        type: string
-      NameAddition:
-        description: A addition to the address (e.g. Apartment 2, Back door)
-        type: string
-      Phone:
-        description: The phone number
-        type: string
-      Salutation:
-        description: The salutation
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-        format: int32
-        type: integer
-      State:
-        description: The name of the state
-        type: string
-      Street:
-        description: The street excl. the housenumber
-        type: string
-      Title:
-        description: An internal identifier for this address
-        type: string
-      Zip:
-        description: The postal code
-        type: string
-    type: object
-  Billbee.Interfaces.Order.Comment:
-    properties:
-      Created:
-        format: date-time
-        type: string
-      FromCustomer:
-        type: boolean
-      Id:
-        format: int32
-        type: integer
-      Name:
-        type: string
-      Text:
         type: string
     type: object
   Billbee.Interfaces.Order.HistoryEntry:
@@ -3685,11 +3648,11 @@ definitions:
         type: string
       ShippingProviderId:
         description: Optional the id of a shipping provider existing in the billbee account that should be assigned to the shipment
-        format: int32
+        format: int64
         type: integer
       ShippingProviderProductId:
         description: Optional the id of a shipping provider product that should be assigend to the shipment
-        format: int32
+        format: int64
         type: integer
     type: object
   "Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.ArticleApiCustomFieldDefinitionModel]]":
@@ -4860,7 +4823,7 @@ definitions:
       Addresses:
         type: string
       Id:
-        format: int32
+        format: int64
         type: integer
       Name:
         type: string
@@ -4878,7 +4841,7 @@ definitions:
       ExternalReference:
         type: string
       Id:
-        format: int32
+        format: int64
         type: integer
       InvoiceNumber:
         type: string
@@ -4886,7 +4849,7 @@ definitions:
   Rechnungsdruck.WebApp.Controllers.Api.SearchController.ProductResult:
     properties:
       Id:
-        format: int32
+        format: int64
         type: integer
       SKU:
         type: string
@@ -4941,18 +4904,18 @@ definitions:
         description: Option specify the dimensions of the package in cm
       OrderId:
         description: The Billbee internal id of the order to ship
-        format: int32
+        format: int64
         type: integer
       PrinterName:
         description: Optional the name of a connected cloudprinter to send the label to
         type: string
       ProductId:
         description: the id of the shipping provider product to be used
-        format: int32
+        format: int64
         type: integer
       ProviderId:
         description: The id of the provider. You can query all providers with the shippingproviders endpoint
-        format: int32
+        format: int64
         type: integer
       ShipDate:
         description: Optional specify the shipdate to be transmitted to the carrier
@@ -4974,7 +4937,7 @@ definitions:
         format: byte
         type: string
       OrderId:
-        format: int32
+        format: int64
         type: integer
       OrderReference:
         type: string

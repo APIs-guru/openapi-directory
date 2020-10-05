@@ -62,6 +62,8 @@ tags:
     x-box-tag: email_aliases
   - name: Events
     x-box-tag: events
+  - name: File requests
+    x-box-tag: file_requests
   - name: File version legal holds
     x-box-tag: file_version_legal_holds
   - name: File version retentions
@@ -1916,6 +1918,343 @@ paths:
       tags:
         - Events
       x-box-tag: events
+  "/file_requests/{file_request_id}":
+    delete:
+      description: Deletes a file request permanently.
+      operationId: delete_file_requests_id
+      parameters:
+        - description: >-
+            The unique identifier that represent a file request.
+
+
+            The ID for any file request can be determined
+
+            by visiting a file request builder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/filerequest/123`
+
+            the `file_request_id` is `123`.
+          example: "123"
+          in: path
+          name: file_request_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: >-
+            Returns an empty response when the file request has been successfully
+
+            deleted.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when the access token provided in the `Authorization` header
+
+            is not recognized or not provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the file request is not found or has already been deleted,
+
+            or the user does not have access to the associated folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the `file_request_id` is not in a recognized format.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Delete file request
+      tags:
+        - File requests
+      x-box-sanitized: true
+      x-box-tag: file_requests
+    get:
+      description: Retrieves the information about a file request.
+      operationId: get_file_requests_id
+      parameters:
+        - description: >-
+            The unique identifier that represent a file request.
+
+
+            The ID for any file request can be determined
+
+            by visiting a file request builder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/filerequest/123`
+
+            the `file_request_id` is `123`.
+          example: "123"
+          in: path
+          name: file_request_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileRequest"
+          description: Returns a file request object.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when the access token provided in the `Authorization` header
+
+            is not recognized or not provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the file request is not found, or the user does not
+
+            have access to the associated folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the `file_request_id` is not in a recognized format.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get file request
+      tags:
+        - File requests
+      x-box-enable-explorer: true
+      x-box-tag: file_requests
+    put:
+      description: >-
+        Updates a file request. This can be used to activate or
+
+        deactivate a file request.
+      operationId: put_file_requests_id
+      parameters:
+        - description: >-
+            The unique identifier that represent a file request.
+
+
+            The ID for any file request can be determined
+
+            by visiting a file request builder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/filerequest/123`
+
+            the `file_request_id` is `123`.
+          example: "123"
+          in: path
+          name: file_request_id
+          required: true
+          schema:
+            type: string
+        - description: >-
+            Ensures this item hasn't recently changed before
+
+            making changes.
+
+
+            Pass in the item's last observed `etag` value
+
+            into this header and the endpoint will fail
+
+            with a `412 Precondition Failed` if it
+
+            has changed since.
+          example: "1"
+          in: header
+          name: if-match
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileRequestUpdateRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileRequest"
+          description: Returns the updated file request object.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when the access token provided in the `Authorization` header
+
+            is not recognized or not provided.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the user does not have all the permissions to complete the
+
+            update.
+
+
+            * `access_denied_insufficient_permissions` when the authenticated user
+
+            does not have access to update the file request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the file request is not found, or the user does not
+
+            have access to the associated folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the `file_request_id` is not in a recognized format.
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the `If-Match` header does not match
+
+            the current `etag` value of the file request. This indicates that the
+
+            file request has changed since it was last requested.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Update file request
+      tags:
+        - File requests
+      x-box-enable-explorer: true
+      x-box-sanitized: true
+      x-box-tag: file_requests
+  "/file_requests/{file_request_id}/copy":
+    post:
+      description: >-
+        Copies an existing file request that is already present on one folder,
+
+        and applies it to another folder.
+      operationId: post_file_requests_id_copy
+      parameters:
+        - description: >-
+            The unique identifier that represent a file request.
+
+
+            The ID for any file request can be determined
+
+            by visiting a file request builder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/filerequest/123`
+
+            the `file_request_id` is `123`.
+          example: "123"
+          in: path
+          name: file_request_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileRequestCopyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileRequest"
+          description: Returns updated file request object.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when the access token provided in the `Authorization` header
+
+            is not recognized or not provided.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the user does not have all the permissions to complete the
+
+            update.
+
+
+            * `access_denied_insufficient_permissions` when the authenticated user
+
+            does not have access to update the file request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the file request is not found, or the user does not
+
+            have access to the associated folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the `file_request_id` is not in a recognized format.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Copy file request
+      tags:
+        - File requests
+      x-box-enable-explorer: true
+      x-box-sanitized: true
+      x-box-tag: file_requests
   /file_version_legal_holds:
     get:
       description: >-
@@ -22476,6 +22815,291 @@ components:
       x-box-resource-id: file_conflict
       x-box-sanitized: true
       x-box-tag: null
+    FileRequest:
+      description: >-
+        A standard representation of a file request, as returned
+
+        from any file request API endpoints by default.
+      properties:
+        created_at:
+          description: The date and time when the file request was created.
+          example: 2020-09-28T10:53:43-08:00
+          format: date-time
+          nullable: false
+          type: string
+        created_by:
+          allOf:
+            - $ref: "#/components/schemas/User--Mini"
+            - description: The user who created this file request.
+        description:
+          description: >-
+            The optional description of this file request. This is
+
+            shown in the Box UI to users uploading files.
+
+
+            This defaults to description of the file request that was
+
+            copied to create this file request.
+          example: Following documents are requested for your process
+          nullable: true
+          type: string
+        etag:
+          description: >-
+            The HTTP `etag` of this file. This can be used in combination with
+
+            the `If-Match` header when updating a file request. By providing that
+
+            header, a change will only be performed on the  file request if the `etag`
+
+            on the file request still matches the `etag` provided in the `If-Match`
+
+            header.
+          example: "1"
+          nullable: true
+          type: string
+        expires_at:
+          description: >-
+            The date after which a file request will no longer accept new
+
+            submissions.
+
+
+            After this date, the `status` will automatically be set to
+
+            `inactive`.
+          example: 2020-09-28T10:53:43-08:00
+          format: date-time
+          type: string
+        folder:
+          allOf:
+            - $ref: "#/components/schemas/Folder--Mini"
+            - description: >-
+                The folder that this file request is associated with.
+
+
+                Files submitted through the file request form will be
+
+                uploaded to this folder.
+          nullable: false
+        id:
+          description: The unique identifier for this file request.
+          example: "42037322"
+          readOnly: true
+          type: string
+        is_description_required:
+          description: >-
+            Whether a file request submitter is required to provide
+
+            a description of the files they are submitting.
+
+
+            When this setting is set to true, the Box UI will show
+
+            a description field on the file request form.
+
+
+            This defaults to setting of file request that was
+
+            copied to create this file request.
+          example: true
+          type: boolean
+        is_email_required:
+          description: >-
+            Whether a file request submitter is required to provide
+
+            their email address.
+
+
+            When this setting is set to true, the Box UI will show
+
+            an email field on the file request form.
+
+
+            This defaults to setting of file request that was
+
+            copied to create this file request.
+          example: true
+          type: boolean
+        status:
+          description: >-
+            The status of the file request. This defaults
+
+            to `active`.
+
+
+            When the status is set to `inactive`, the file request
+
+            will no longer accept new submissions, and any visitor
+
+            to the file request URL will receive a `HTTP 404` status
+
+            code.
+
+
+            This defaults to status of file request that was
+
+            copied to create this file request.
+          enum:
+            - active
+            - inactive
+          example: active
+          type: string
+        title:
+          description: >-
+            The title of file request. This is shown
+
+            in the Box UI to users uploading files.
+
+
+            This defaults to title of the file request that was
+
+            copied to create this file request.
+          example: Please upload documents
+          type: string
+        type:
+          description: "`file-request`"
+          enum:
+            - file-request
+          example: file-request
+          readOnly: true
+          type: string
+        updated_at:
+          description: The date and time when the file request was last updated.
+          example: 2020-09-28T10:53:43-08:00
+          format: date-time
+          nullable: false
+          type: string
+        updated_by:
+          allOf:
+            - $ref: "#/components/schemas/User--Mini"
+            - description: The user who last modified this file request.
+            - nullable: false
+        url:
+          description: >-
+            The generated URL for this file request. This URL can be shared
+
+            with users to let them upload files to the associated folder.
+          example: https://cloud.app.box.com/f/19e57f40ace247278a8e3d336678c64a
+          readOnly: true
+          type: string
+      title: File Request
+      type: object
+      x-box-resource-id: file_request
+      x-box-tag: file_requests
+    FileRequestCopyRequest:
+      allOf:
+        - $ref: "#/components/schemas/FileRequestUpdateRequest"
+        - properties:
+            folder:
+              description: The folder to associate the new file request to.
+              properties:
+                id:
+                  description: >-
+                    The ID of the folder to associate the new
+
+                    file request to.
+                  example: "42037322"
+                  type: string
+              required:
+                - id
+              type: object
+      description: The request body to copy a file request.
+      required:
+        - folder
+      title: File Request (Copy)
+      type: object
+    FileRequestUpdateRequest:
+      description: The request body to update a file request.
+      properties:
+        description:
+          description: >-
+            An optional new description for the file request. This can be
+
+            used to change the description of the file request.
+
+
+            This will default to the value on the existing file request.
+          example: Please upload required documents
+          type: string
+        expires_at:
+          description: >-
+            The date after which a file request will no longer accept new
+
+            submissions.
+
+
+            After this date, the `status` will automatically be set to
+
+            `inactive`.
+
+
+            This will default to the value on the existing file request.
+          example: 2020-09-28T10:53:43-08:00
+          format: date-time
+          type: string
+        is_description_required:
+          description: >-
+            Whether a file request submitter is required to provide
+
+            a description of the files they are submitting.
+
+
+            When this setting is set to true, the Box UI will show
+
+            a description field on the file request form.
+
+
+            This will default to the value on the existing file request.
+          example: true
+          type: boolean
+        is_email_required:
+          description: >-
+            Whether a file request submitter is required to provide
+
+            their email address.
+
+
+            When this setting is set to true, the Box UI will show
+
+            an email field on the file request form.
+
+
+            This will default to the value on the existing file request.
+          example: true
+          type: boolean
+        status:
+          description: >-
+            An optional new status of the file request.
+
+
+            When the status is set to `inactive`, the file request
+
+            will no longer accept new submissions, and any visitor
+
+            to the file request URL will receive a `HTTP 404` status
+
+            code.
+
+
+            This will default to the value on the existing file request.
+          enum:
+            - active
+            - inactive
+          example: active
+          type: string
+        title:
+          description: >-
+            An optional new title for the file request. This can be
+
+            used to change the title of the file request.
+
+
+            This will default to the value on the existing file request.
+          example: Please upload required documents
+          type: string
+      title: File Request (Update)
+      type: object
     FileScope:
       description: A relation between a file and the scopes for which the file can be accessed
       properties:

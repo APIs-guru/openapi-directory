@@ -343,8 +343,6 @@ tags:
       ### Flexible
 
       Unlock further flexible features via `ch.disable=true`.
-
-      Please note that some options make the request more expensive, see the [FAQ](https://graphhopper.com/api/1/docs/FAQ/) for more details.
     name: Routing API
   - description: >
       
@@ -944,7 +942,7 @@ paths:
           name: vehicle
           schema:
             $ref: "#/components/schemas/VehicleProfileId"
-        - description: For how many subintervals an additional polygon should be calculated.
+        - description: Number by which to divide the given `time_limit` to create `buckets` nested isochrones of time intervals `time_limit-n*time_limit/buckets`. Applies analogously to `distance_limit`.
           in: query
           name: buckets
           schema:
@@ -1638,7 +1636,7 @@ paths:
             default: false
             type: boolean
         - description: >
-            Determines the way the ''best'' route is calculated. Default is `fastest`. Other options are `shortest` (e.g. for `vehicle=foot` or `bike`) and `short_fastest` which finds a reasonable balance between `shortest` and `fastest`. Requires `ch.disable=true`.
+            Determines the way the ''best'' route is calculated. Default is `fastest`. Other options are `shortest` (e.g. for `vehicle=foot` or `bike`) and `short_fastest` which finds a reasonable balance between `shortest` and `fastest`, both require `ch.disable=true`.
           in: query
           name: weighting
           schema:
@@ -1698,11 +1696,11 @@ paths:
 
             With `round_trip`, the route will get you back to where you started. This is meant for fun (think of
 
-            a bike trip), so we will add some randomness.
+            a bike trip), so we will add some randomness. And this requires `ch.disable=true`.
 
             With `alternative_route`, we give you not one but several routes that are close to optimal, but
 
-            not too similar to each other. You can control both of these features with additional parameters, see below. Requires `ch.disable=true`.
+            not too similar to each other. You can control both of these features with additional parameters, see below. 
           in: query
           name: algorithm
           schema:

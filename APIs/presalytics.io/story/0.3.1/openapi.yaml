@@ -71,6 +71,53 @@ paths:
       summary: "Story: Upload"
       tags:
         - Story
+  /cache:
+    post:
+      description: An endpoint for Presalytics Renderers to cache html subdocuments for subsequent retrieval by the browser.  Documents Are retrieved via token expire after 1 minute.
+      operationId: cache_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/cache_post_request"
+        description: parameters to identify an update a collaborator across multiple stories
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/success_response_no_content"
+        "400":
+          $ref: "#/components/responses/badrequest"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Cache: Store Subdocument"
+      tags:
+        - Cache
+  "/cache/{nonce}":
+    get:
+      description: An endpoint for broswer retreive html documents that were cached durin the rendering process via a nonce (token)
+      operationId: cache_nonce_get
+      parameters:
+        - $ref: "#/components/parameters/nonce"
+      responses:
+        "200":
+          content:
+            text/html:
+              schema:
+                description: html document with a link to the login page
+                title: Login Button
+                type: string
+          description: A cached html subdocument (typically loaded via iframe)
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "403":
+          $ref: "#/components/responses/forbidden"
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Cache: Get Subdocument"
+      tags:
+        - Cache
   /collaborators:
     post:
       description: Allows for bulk updates on collaborator metadata.  Restricted to internal admins
@@ -436,6 +483,37 @@ paths:
       summary: "Story: Modify"
       tags:
         - Story
+  "/{id}/analytics":
+    get:
+      description: returns an html document containing session and event metrics for the story
+      operationId: story_id_analytics
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: html document with reveal.js presenation of story
+                title: reveal.js presenation with analytics data
+                type: string
+          description: An html document containing session analytics for the story
+        "400":
+          $ref: "#/components/responses/badrequest"
+        "401":
+          content:
+            text/html:
+              schema:
+                description: html document with a link to the login page
+                title: Login Button
+                type: string
+          description: An html document containing a login button
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Story: View Analytics"
+      tags:
+        - Story
+      x-operationName: getAnalytics
   "/{id}/collaborators":
     get:
       description: Gets a list users that can read or edit this story
@@ -616,24 +694,56 @@ paths:
       summary: "Story Collaborators: Edit Access Rights"
       tags:
         - Story Collaborators
-  "/{id}/d3/{d3_id}":
+  "/{id}/events":
     get:
-      description: Gets a barebones html document with objects redender by d3 script with a Restrictive Content-Security-Policy.
-      operationId: story_id_d3_id_get
+      description: Get a list of Events available to users of this story
+      operationId: story_id_events_get
       parameters:
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/d3_id"
       responses:
         "200":
           content:
-            text/html:
+            application/json:
               schema:
-                type: string
-          description: Html document with d3 content
-      summary: "Story: Get D3 Iframe"
+                items:
+                  $ref: "#/components/schemas/event"
+                type: array
+          description: An Array of events
+        "401":
+          $ref: "#/components/responses/unauthorized"
+      summary: "Events: List Events"
       tags:
-        - Story
-      x-operationName: d3
+        - Events
+      x-operationName: get-events
+    post:
+      description: Add a message to the Story's conversation
+      operationId: story_id_events_post
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/manage_event"
+        description: Collaborator user id and permission type
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: A repsonse to the requested action
+        "400":
+          $ref: "#/components/responses/badrequest"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Events: Manage Events"
+      tags:
+        - Events
+      x-operationName: post-events
   "/{id}/file":
     post:
       description: Upload a file to an existing story
@@ -704,24 +814,52 @@ paths:
       tags:
         - Story
       x-operationName: download
-  "/{id}/matplotlib-responsive/{figure_id}":
+  "/{id}/messages":
     get:
-      description: Gets a barebones html document with a matplotlib chart. Useful for rendering inside responsive iframes
-      operationId: story_id_maplotlib_responsive_figure_id_get
+      description: Get a list of messages that have been send in this story
+      operationId: story_id_messages_get
       parameters:
         - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/figure_id"
       responses:
         "200":
           content:
-            text/html:
+            application/json:
               schema:
-                type: string
-          description: Html document with matplotlib figure
-      summary: "Story: Get Matplotlib Iframe"
+                items:
+                  $ref: "#/components/schemas/message"
+                type: array
+          description: An Array of conversation messages
+        "401":
+          $ref: "#/components/responses/unauthorized"
+      summary: "Conversation: List Conversation Messages"
       tags:
-        - Story
-      x-operationName: matplotlib
+        - Conversation
+      x-operationName: get-messages
+    post:
+      description: Add a message to the Story's conversation
+      operationId: story_id_messages_post
+      parameters:
+        - $ref: "#/components/parameters/id"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: The message text
+        required: true
+      responses:
+        "204":
+          $ref: "#/components/responses/success_response_no_content"
+        "400":
+          $ref: "#/components/responses/badrequest"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Conversation: Send a Message"
+      tags:
+        - Conversation
+      x-operationName: post-messages
   "/{id}/outline":
     get:
       description: Returns Story's outline
@@ -774,6 +912,29 @@ paths:
       tags:
         - Story
       x-operationName: postOutline
+  "/{id}/public/":
+    get:
+      description: returns an html document containing a reveal.js epresentation of the story, if the story if set to is_public = True
+      operationId: story_id_public
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: html document with reveal.js presenation of story
+                title: reveal.js presenation
+                type: string
+          description: An html document containing a reveal.js represenation of the story
+        "302":
+          description: Not Found redirect
+        "400":
+          $ref: "#/components/responses/badrequest"
+      summary: "Story: Public Link to Story Reveal.js Document"
+      tags:
+        - Story
+      x-operationName: getPublic
   "/{id}/reveal":
     get:
       description: returns an html document containing a reveal.js epresentation of the story
@@ -926,6 +1087,14 @@ components:
       required: false
       schema:
         type: boolean
+    nonce:
+      description: A one-time use token for retieving items in the users cache
+      in: path
+      name: nonce
+      required: true
+      schema:
+        format: uuid
+        type: string
     obsolete_id:
       description: A primary key pointing to an obsolete item in the story. Item type is context-dependent
       in: query
@@ -1081,6 +1250,18 @@ components:
           type: string
           x-nullable: true
       title: BaseModel
+    cache_post_request:
+      properties:
+        current_user_id:
+          format: uuid
+          type: string
+        nonce:
+          format: uuid
+          type: string
+        subdocument:
+          type: string
+      title: Cache Post Request body
+      type: object
     collaborator_bulk_update_request:
       description: allows for bulk updating of user_ids and active status based on a lead id or user_id
       properties:
@@ -1102,6 +1283,27 @@ components:
         host:
           type: string
       title: session-create
+    event:
+      allOf:
+        - $ref: "#/components/schemas/base_model"
+        - properties:
+            attributes:
+              type: string
+            chat_prompt:
+              type: string
+            conversation_id:
+              type: string
+            dom_selectors:
+              type: string
+            is_chat_hidden:
+              type: boolean
+            is_notify_enabled:
+              type: boolean
+            name:
+              type: string
+          type: object
+      description: An Story Event object
+      title: Event
     file_upload:
       description: A Base64 encoded file object
       properties:
@@ -1114,6 +1316,42 @@ components:
         mimetype:
           type: string
       title: File Upload
+    manage_event:
+      properties:
+        action:
+          enum:
+            - create
+            - fire
+            - update
+          type: string
+        action_params:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          nullable: true
+          type: string
+          x-nullable: true
+      title: Event Actions
+      type: object
+    message:
+      description: A conversation message
+      properties:
+        body:
+          type: string
+        id:
+          type: string
+        remote:
+          type: boolean
+        timestamp:
+          format: date-time
+          type: string
+        userId:
+          format: uuid
+          type: string
+        userName:
+          type: string
+      title: Message
     modify_inactive_collaborator:
       description: Action can be either "delete" or "activate".  Either lead_id or user_id is required.  user_id takes precedence.
       properties:

@@ -11608,6 +11608,7 @@ components:
             $ref: "#/components/schemas/warningSummary"
           type: array
       type: object
+      x-exclude: true
     infoSummary:
       properties:
         informationArguments:
@@ -11960,7 +11961,6 @@ components:
       additionalProperties:
         $ref: "#/components/schemas/linkParameter3"
       type: object
-      x-exclude: true
     linkParameterProperty3:
       properties:
         description:

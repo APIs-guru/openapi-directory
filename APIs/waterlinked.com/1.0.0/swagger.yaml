@@ -87,6 +87,32 @@ paths:
       summary: Get about
       tags:
         - about
+  /api/v1/about/factoryreset:
+    post:
+      description: Reset all settings on master electronics
+      operationId: about#FactoryReset
+      produces:
+        - application/vnd.waterlinked.operation_response+json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/WaterlinkedOperation_response"
+      schemes:
+        - http
+      summary: FactoryReset about
+      tags:
+        - about
   /api/v1/about/led:
     get:
       description: Flash LED1 on master electronics
@@ -1953,13 +1979,6 @@ definitions:
         lng: 0.09012467671506151
         name: Accusantium ad.
         visible: true
-      - depth: 0.983923109918765
-        icon: Molestias laboriosam quasi aut ex omnis reprehenderit.
-        id: 2287845429121360000
-        lat: 0.4126800396556589
-        lng: 0.09012467671506151
-        name: Accusantium ad.
-        visible: true
     items:
       $ref: "#/definitions/WaterlinkedPoi"
     title: "Mediatype identifier: application/vnd.waterlinked.poi+json; type=collection; view=default"
@@ -2002,10 +2021,6 @@ definitions:
   WaterlinkedReceiverCollection:
     description: WaterlinkedReceiverCollection is the media type for an array of WaterlinkedReceiver (default view)
     example:
-      - id: 3192861043049571000
-        x: 0.27252655729990977
-        y: 0.4129036062459767
-        z: 0.12624652449013432
       - id: 3192861043049571000
         x: 0.27252655729990977
         y: 0.4129036062459767
@@ -2234,14 +2249,28 @@ definitions:
   WlStatusGroup:
     description: Current status from one specific status group (default view)
     example:
-      message: Nemo dolorem ea molestias.
-      status: error
-      status_group: Sit qui et consequatur temporibus omnis.
-      status_group_id: Saepe quam sint distinctio qui et et.
+      error_ids:
+        - Dolorem ea molestias dolorum nihil sit.
+        - Dolorem ea molestias dolorum nihil sit.
+        - Dolorem ea molestias dolorum nihil sit.
+      message: Et consequatur temporibus omnis dolor saepe quam.
+      status: ok
+      status_group: Qui et et cupiditate.
+      status_group_id: Laboriosam ut non illo dolor illo facilis.
     properties:
+      error_ids:
+        description: Identifiers for warnings/errors
+        example:
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+        items:
+          example: Dolorem ea molestias dolorum nihil sit.
+          type: string
+        type: array
       message:
         description: Message
-        example: Nemo dolorem ea molestias.
+        example: Et consequatur temporibus omnis dolor saepe quam.
         type: string
       status:
         description: Status
@@ -2249,34 +2278,51 @@ definitions:
           - ok
           - warning
           - error
-        example: error
+        example: ok
         type: string
       status_group:
         description: Status group friendly name
-        example: Sit qui et consequatur temporibus omnis.
+        example: Qui et et cupiditate.
         type: string
       status_group_id:
         description: Status group identifier
-        example: Saepe quam sint distinctio qui et et.
+        example: Laboriosam ut non illo dolor illo facilis.
         type: string
     required:
       - status_group
       - status_group_id
       - status
       - message
+      - error_ids
     title: "Mediatype identifier: application/vnd.wl.status.group+json; view=default"
     type: object
   WlStatusGroupCollection:
     description: WlStatusGroupCollection is the media type for an array of WlStatusGroup (default view)
     example:
-      - message: Nemo dolorem ea molestias.
-        status: error
-        status_group: Sit qui et consequatur temporibus omnis.
-        status_group_id: Saepe quam sint distinctio qui et et.
-      - message: Nemo dolorem ea molestias.
-        status: error
-        status_group: Sit qui et consequatur temporibus omnis.
-        status_group_id: Saepe quam sint distinctio qui et et.
+      - error_ids:
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+        message: Et consequatur temporibus omnis dolor saepe quam.
+        status: ok
+        status_group: Qui et et cupiditate.
+        status_group_id: Laboriosam ut non illo dolor illo facilis.
+      - error_ids:
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+        message: Et consequatur temporibus omnis dolor saepe quam.
+        status: ok
+        status_group: Qui et et cupiditate.
+        status_group_id: Laboriosam ut non illo dolor illo facilis.
+      - error_ids:
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+          - Dolorem ea molestias dolorum nihil sit.
+        message: Et consequatur temporibus omnis dolor saepe quam.
+        status: ok
+        status_group: Qui et et cupiditate.
+        status_group_id: Laboriosam ut non illo dolor illo facilis.
     items:
       $ref: "#/definitions/WlStatusGroup"
     title: "Mediatype identifier: application/vnd.wl.status.group+json; type=collection; view=default"
@@ -2284,21 +2330,21 @@ definitions:
   WlWarning:
     description: Warning message (default view)
     example:
-      id: Laboriosam ut non illo dolor illo facilis.
-      message: Nemo minima.
-      severity: Sed animi distinctio.
+      id: Minima facilis sed.
+      message: Distinctio praesentium saepe ipsum.
+      severity: Rem tenetur.
     properties:
       id:
         description: Identifier
-        example: Laboriosam ut non illo dolor illo facilis.
+        example: Minima facilis sed.
         type: string
       message:
         description: Message
-        example: Nemo minima.
+        example: Distinctio praesentium saepe ipsum.
         type: string
       severity:
         description: Severity
-        example: Sed animi distinctio.
+        example: Rem tenetur.
         type: string
     required:
       - id
@@ -2309,12 +2355,15 @@ definitions:
   WlWarningCollection:
     description: WlWarningCollection is the media type for an array of WlWarning (default view)
     example:
-      - id: Laboriosam ut non illo dolor illo facilis.
-        message: Nemo minima.
-        severity: Sed animi distinctio.
-      - id: Laboriosam ut non illo dolor illo facilis.
-        message: Nemo minima.
-        severity: Sed animi distinctio.
+      - id: Minima facilis sed.
+        message: Distinctio praesentium saepe ipsum.
+        severity: Rem tenetur.
+      - id: Minima facilis sed.
+        message: Distinctio praesentium saepe ipsum.
+        severity: Rem tenetur.
+      - id: Minima facilis sed.
+        message: Distinctio praesentium saepe ipsum.
+        severity: Rem tenetur.
     items:
       $ref: "#/definitions/WlWarning"
     title: "Mediatype identifier: application/vnd.wl.warning+json; type=collection; view=default"
@@ -2332,7 +2381,7 @@ definitions:
           - v1
           - v2
         items:
-          example: Ipsum dicta rem tenetur commodi.
+          example: Iusto facere beatae qui.
           type: string
         type: array
     required:

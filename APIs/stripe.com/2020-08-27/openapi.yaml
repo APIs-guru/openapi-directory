@@ -386,6 +386,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    oxxo_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     tax_reporting_us_1099_k:
                       properties:
                         requested:
@@ -834,6 +840,9 @@ paths:
                       format: unix-time
                       type: integer
                     ip:
+                      type: string
+                    service_agreement:
+                      maxLength: 5000
                       type: string
                     user_agent:
                       maxLength: 5000
@@ -3509,6 +3518,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    oxxo_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     tax_reporting_us_1099_k:
                       properties:
                         requested:
@@ -3962,6 +3977,9 @@ paths:
                       type: integer
                     ip:
                       type: string
+                    service_agreement:
+                      maxLength: 5000
+                      type: string
                     user_agent:
                       maxLength: 5000
                       type: string
@@ -4264,6 +4282,12 @@ paths:
                       title: capability_param
                       type: object
                     legacy_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    oxxo_payments:
                       properties:
                         requested:
                           type: boolean
@@ -4717,6 +4741,9 @@ paths:
                       format: unix-time
                       type: integer
                     ip:
+                      type: string
+                    service_agreement:
+                      maxLength: 5000
                       type: string
                     user_agent:
                       maxLength: 5000
@@ -13082,7 +13109,7 @@ paths:
           description: Error response.
   "/v1/customers/{customer}/balance_transactions":
     get:
-      description: <p>Returns a list of transactions that updated the customer’s <a href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.</p>
+      description: <p>Returns a list of transactions that updated the customer’s <a href="/docs/billing/customer/balance">balances</a>.</p>
       operationId: GetCustomersCustomerBalanceTransactions
       parameters:
         - in: path
@@ -13176,7 +13203,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>Creates an immutable transaction that updates the customer’s <a href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.</p>
+      description: <p>Creates an immutable transaction that updates the customer’s credit <a href="/docs/billing/customer/balance">balance</a>.</p>
       operationId: PostCustomersCustomerBalanceTransactions
       parameters:
         - in: path
@@ -13200,7 +13227,7 @@ paths:
               additionalProperties: false
               properties:
                 amount:
-                  description: The integer amount in **%s** to apply to the customer's balance. Pass a negative amount to credit the customer's balance, and pass in a positive amount to debit the customer's balance.
+                  description: The integer amount in **%s** to apply to the customer's credit balance.
                   type: integer
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the customer's [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency) is set, this value must match it. If the customer's `currency` is not set, it will be updated to this value.
@@ -13244,7 +13271,7 @@ paths:
           description: Error response.
   "/v1/customers/{customer}/balance_transactions/{transaction}":
     get:
-      description: <p>Retrieves a specific transaction that updated the customer’s <a href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.</p>
+      description: <p>Retrieves a specific customer balance transaction that updated the customer’s <a href="/docs/billing/customer/balance">balances</a>.</p>
       operationId: GetCustomersCustomerBalanceTransactionsTransaction
       parameters:
         - in: path
@@ -13294,7 +13321,7 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>Most customer balance transaction fields are immutable, but you may update its <code>description</code> and <code>metadata</code>.</p>
+      description: <p>Most credit balance transaction fields are immutable, but you may update its <code>description</code> and <code>metadata</code>.</p>
       operationId: PostCustomersCustomerBalanceTransactionsTransaction
       parameters:
         - in: path
@@ -27228,7 +27255,7 @@ paths:
                   description: Amount intended to be collected by this PaymentIntent. A positive integer representing how much to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
                   type: integer
                 application_fee_amount:
-                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                   type: integer
                 capture_method:
                   description: Controls when the funds will be captured from the customer's account.
@@ -27889,7 +27916,7 @@ paths:
                     - enum:
                         - ""
                       type: string
-                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
                   type: string
@@ -28441,7 +28468,7 @@ paths:
                   description: The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
                   type: integer
                 application_fee_amount:
-                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. Must be greater than zero when provided. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
+                  description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
                   type: integer
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -33437,6 +33464,7 @@ paths:
                         - charge_failure
                         - connect_collection_transfer
                         - connect_reserved_funds
+                        - contribution
                         - dispute
                         - dispute_reversal
                         - fee
@@ -34426,6 +34454,130 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/review"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
+  /v1/setup_attempts:
+    get:
+      description: <p>Returns a list of SetupAttempts associated with a provided SetupIntent.</p>
+      operationId: GetSetupAttempts
+      parameters:
+        - description: >-
+            A filter on the list, based on the object `created` field. The value
+
+            can be a string with an integer Unix timestamp, or it can be a
+
+            dictionary with a number of different query options.
+          explode: true
+          in: query
+          name: created
+          required: false
+          schema:
+            anyOf:
+              - properties:
+                  gt:
+                    type: integer
+                  gte:
+                    type: integer
+                  lt:
+                    type: integer
+                  lte:
+                    type: integer
+                title: range_query_specs
+                type: object
+              - type: integer
+          style: deepObject
+        - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+          in: query
+          name: ending_before
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: Specifies which fields in the response should be expanded.
+          explode: true
+          in: query
+          name: expand
+          required: false
+          schema:
+            items:
+              maxLength: 5000
+              type: string
+            type: array
+          style: deepObject
+        - description: A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+          style: form
+        - description: >-
+            Only return SetupAttempts created by the SetupIntent specified by
+
+            this ID.
+          in: query
+          name: setup_intent
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+        - description: A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+          in: query
+          name: starting_after
+          required: false
+          schema:
+            maxLength: 5000
+            type: string
+          style: form
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              additionalProperties: false
+              properties: {}
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: ""
+                properties:
+                  data:
+                    items:
+                      $ref: "#/components/schemas/setup_attempt"
+                    type: array
+                  has_more:
+                    description: True if this list has another page of items after this one that can be fetched.
+                    type: boolean
+                  object:
+                    description: String representing the object's type. Objects of the same type share the same value. Always has the value `list`.
+                    enum:
+                      - list
+                    type: string
+                  url:
+                    description: The URL where this list can be accessed.
+                    maxLength: 5000
+                    pattern: ^/v1/setup_attempts
+                    type: string
+                required:
+                  - data
+                  - has_more
+                  - object
+                  - url
+                title: PaymentFlowsSetupIntentSetupAttemptList
+                type: object
+                x-expandableFields:
+                  - data
           description: Successful response.
         default:
           content:
@@ -42818,6 +42970,13 @@ components:
             - inactive
             - pending
           type: string
+        oxxo_payments:
+          description: The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         tax_reporting_us_1099_k:
           description: The status of the tax reporting 1099-K (US) capability of the account.
           enum:
@@ -43177,17 +43336,21 @@ components:
       description: ""
       properties:
         date:
-          description: The Unix timestamp marking when the Stripe Services Agreement was accepted by the account representative
+          description: The Unix timestamp marking when the account representative accepted their service agreement
           format: unix-time
           nullable: true
           type: integer
         ip:
-          description: The IP address from which the Stripe Services Agreement was accepted by the account representative
+          description: The IP address from which the account representative accepted their service agreement
           maxLength: 5000
           nullable: true
           type: string
+        service_agreement:
+          description: The user's service agreement type
+          maxLength: 5000
+          type: string
         user_agent:
-          description: The user agent of the browser from which the Stripe Services Agreement was accepted by the account representative
+          description: The user agent of the browser from which the account representative accepted their service agreement
           maxLength: 5000
           nullable: true
           type: string
@@ -44803,11 +44966,11 @@ components:
           nullable: true
           type: string
         risk_level:
-          description: Stripe's evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`.
+          description: Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`. This field is only available with Radar.
           maxLength: 5000
           type: string
         risk_score:
-          description: Stripe's evaluation of the riskiness of the payment. Possible values for evaluated payments are between 0 and 100. For non-card payments, card-based payments predating the public assignment of risk scores, or in the event of an error during evaluation, this field will not be present. This field is only available with Radar for Fraud Teams.
+          description: Stripe Radar's evaluation of the riskiness of the payment. Possible values for evaluated payments are between 0 and 100. For non-card payments, card-based payments predating the public assignment of risk scores, or in the event of an error during evaluation, this field will not be present. This field is only available with Radar for Fraud Teams.
           type: integer
         rule:
           anyOf:
@@ -57455,6 +57618,145 @@ components:
         - error
         - file
       x-resourceId: scheduled_query_run
+    setup_attempt:
+      description: >-
+        A SetupAttempt describes one attempted confirmation of a SetupIntent,
+
+        whether that confirmation was successful or unsuccessful. You can use
+
+        SetupAttempts to inspect details of a specific attempt at setting up a
+
+        payment method using a SetupIntent.
+      properties:
+        application:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/application"
+          description: The value of [application](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-application) on the SetupIntent at the time of this confirmation.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/application"
+        created:
+          description: Time at which the object was created. Measured in seconds since the Unix epoch.
+          format: unix-time
+          type: integer
+        customer:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/customer"
+            - $ref: "#/components/schemas/deleted_customer"
+          description: The value of [customer](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer) on the SetupIntent at the time of this confirmation.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/customer"
+              - $ref: "#/components/schemas/deleted_customer"
+        id:
+          description: Unique identifier for the object.
+          maxLength: 5000
+          type: string
+        livemode:
+          description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+          type: boolean
+        object:
+          description: String representing the object's type. Objects of the same type share the same value.
+          enum:
+            - setup_attempt
+          type: string
+        on_behalf_of:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/account"
+          description: The value of [on_behalf_of](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-on_behalf_of) on the SetupIntent at the time of this confirmation.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/account"
+        payment_method:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/payment_method"
+          description: ID of the payment method used with this SetupAttempt.
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/payment_method"
+        payment_method_details:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details"
+        setup_error:
+          anyOf:
+            - $ref: "#/components/schemas/api_errors"
+          description: The error encountered during this attempt to confirm the SetupIntent, if any.
+          nullable: true
+        setup_intent:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/setup_intent"
+          description: ID of the SetupIntent that this attempt belongs to.
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/setup_intent"
+        status:
+          description: Status of this SetupAttempt, one of `requires_confirmation`, `requires_action`, `processing`, `succeeded`, `failed`, or `abandoned`.
+          maxLength: 5000
+          type: string
+        usage:
+          description: The value of [usage](https://stripe.com/docs/api/setup_intents/object#setup_intent_object-usage) on the SetupIntent at the time of this confirmation, one of `off_session` or `on_session`.
+          maxLength: 5000
+          type: string
+      required:
+        - created
+        - id
+        - livemode
+        - object
+        - payment_method
+        - payment_method_details
+        - setup_intent
+        - status
+        - usage
+      title: PaymentFlowsSetupIntentSetupAttempt
+      type: object
+      x-expandableFields:
+        - application
+        - customer
+        - on_behalf_of
+        - payment_method
+        - payment_method_details
+        - setup_error
+        - setup_intent
+      x-resourceId: setup_attempt
+    setup_attempt_payment_method_details:
+      description: ""
+      properties:
+        card:
+          $ref: "#/components/schemas/setup_attempt_payment_method_details_card"
+        type:
+          description: The type of the payment method used in the SetupIntent (e.g., `card`). An additional hash is included on `payment_method_details` with a name matching this value. It contains confirmation-specific information for the payment method.
+          maxLength: 5000
+          type: string
+      required:
+        - type
+      title: SetupAttemptPaymentMethodDetails
+      type: object
+      x-expandableFields:
+        - card
+    setup_attempt_payment_method_details_card:
+      description: ""
+      properties:
+        three_d_secure:
+          anyOf:
+            - $ref: "#/components/schemas/three_d_secure_details"
+          description: Populated if this authorization used 3D Secure authentication.
+          nullable: true
+      title: setup_attempt_payment_method_details_card
+      type: object
+      x-expandableFields:
+        - three_d_secure
     setup_intent:
       description: >-
         A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
@@ -57558,6 +57860,16 @@ components:
             - $ref: "#/components/schemas/api_errors"
           description: The error encountered in the previous SetupIntent confirmation.
           nullable: true
+        latest_attempt:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/setup_attempt"
+          description: The most recent SetupAttempt for this SetupIntent.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/setup_attempt"
         livemode:
           description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
           type: boolean
@@ -57661,6 +57973,7 @@ components:
         - application
         - customer
         - last_setup_error
+        - latest_attempt
         - mandate
         - next_action
         - on_behalf_of

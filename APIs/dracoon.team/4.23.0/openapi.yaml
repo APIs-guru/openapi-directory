@@ -47549,7 +47549,7 @@ paths:
       externalDocs:
         description: Range Requests
         url: https://tools.ietf.org/html/rfc7233
-      operationId: uploadFileByTokenAsBinary_1
+      operationId: uploadFileByTokenAsMultipart_1
       parameters:
         - description: Upload token
           in: path
@@ -47579,6 +47579,12 @@ paths:
         description: File
         required: true
       responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChunkUploadResponse"
+          description: default response
         "201":
           content:
             application/json:
@@ -47640,9 +47646,7 @@ paths:
                     errorCode: -90033
                     message: Bad Request
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Bad Request
         "401":
           content:
@@ -47669,9 +47673,7 @@ paths:
                     errorCode: -20502
                     message: Unauthorized
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Unauthorized
         "403":
           content:
@@ -47686,9 +47688,7 @@ paths:
                     errorCode: null
                     message: Forbidden
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Forbidden
         "404":
           content:
@@ -47735,9 +47735,7 @@ paths:
                     errorCode: -50501
                     message: Not Found
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Not Found
         "406":
           content:
@@ -47752,9 +47750,7 @@ paths:
                     errorCode: null
                     message: Not Acceptable
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Not Acceptable
         "507":
           content:
@@ -47801,9 +47797,7 @@ paths:
                     errorCode: -90201
                     message: Insufficient Storage
               schema:
-                oneOf:
-                  - $ref: "#/components/schemas/ChunkUploadResponse"
-                  - $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/ErrorResponse"
           description: Insufficient Storage
       security: []
       summary: Upload file
@@ -59304,7 +59298,6 @@ components:
         - items
       type: object
     CustomerData:
-      deprecated: true
       description: Customer information
       properties:
         accountsLimit:

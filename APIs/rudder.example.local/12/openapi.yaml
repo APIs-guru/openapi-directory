@@ -4787,6 +4787,11 @@ paths:
                             description: Number of days to retain modified files
                             example: 7
                             type: integer
+                          node_accept_duplicated_hostname:
+                            default: false
+                            description: Allow acceptation of a pending node when another one with the same hostname is already accepted
+                            example: false
+                            type: boolean
                           node_onaccept_default_policyMode:
                             description: Default policy mode for accepted node
                             enum:

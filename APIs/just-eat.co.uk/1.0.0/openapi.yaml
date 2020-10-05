@@ -5561,36 +5561,6 @@ components:
       enum:
         - TOP_UP_PROMOTION
       type: string
-    BrazeContentCardPreviewResponse:
-      additionalProperties: false
-      description: Returns the minimum amount of information that can be used to re-create the display of a Braze Content Card as rendered by the iOS and Android application
-      properties:
-        customParameters:
-          description: Dictionary of custom key-value pairs used by the iOS/Android application to define how the Content Card is rendered
-          example:
-            button_1: Copy code
-            custom_card_type: Voucher_Card_1
-            icon_1: https://d30v2pzvrfyzpo.cloudfront.net/uk/images/restaurants/70302.gif
-            order: "0"
-            voucher_code: ABCDE1234
-          type: object
-        description:
-          description: Main content of the Content Card
-          example: Love Indian? Then you'll love our 15% discount for new customers at Rajistan & Royal. Just enter the code below at checkout. (Code can only be used once and only at this restaurant; expires DD MMM.)
-          type: string
-        imageUrl:
-          description: URL of the image shown on the Content Card
-          example: https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,d_uk:cuisines:Indian-9.jpg,f_auto,q_auto,w_300/v1/uk/restaurants/149239.jpg
-          type: string
-        title:
-          description: Title used on the Content Card
-          example: Save 15% at Rajistan & Royal
-          type: string
-        uriText:
-          description: Text to use on the link from the Content Card to the restaurant menu
-          example: Order Now
-          type: string
-      type: object
     BringOnlineRequest:
       additionalProperties: false
       properties:
@@ -5598,42 +5568,6 @@ components:
           description: Any additional information
           nullable: true
           type: string
-      type: object
-    CampaignConfiguration:
-      additionalProperties: false
-      properties:
-        campaignsAvailable:
-          description: States whether campaigns are available
-          type: boolean
-      type: object
-    CampaignCreatedResponse:
-      additionalProperties: false
-      description: Empty.  Once the Get:/campaigns/{{campaignId}} endpoint exists, a location header pointing to the newly created resource will be added to the response header.
-      type: object
-    CampaignType:
-      description: Denotes the type of campaign that should be sent
-      enum:
-        - 0
-        - 1
-        - 2
-      type: integer
-      x-enumNames:
-        - None
-        - Awareness
-        - Voucher
-    CampaignsPotentialResult:
-      additionalProperties: false
-      properties:
-        segments:
-          additionalProperties:
-            $ref: "#/components/schemas/SegmentPotentialResult"
-          description: A dictionary of segments and the potential for each segment
-          example:
-            Prospecting:
-              reach: 200
-          type: object
-          x-dictionaryKey:
-            $ref: "#/components/schemas/SegmentType"
       type: object
     CancelOrderResolution:
       properties:
@@ -5747,7 +5681,7 @@ components:
         - $ref: "#/components/schemas/CategoryBase"
         - properties:
             itemIds:
-              description: The ids of the menu items that are within the category.
+              description: The ids of the menu items that are within the category. Each id must be unique within the category.
               items:
                 type: string
               type: array
@@ -14066,6 +14000,307 @@ components:
           format: enum
           type: string
       type: object
+    RestaurantOrderDetails:
+      description: An order details
+      example:
+        currencyCode: GBP
+        fees:
+          - type: Card
+            value: 50
+          - type: Delivery
+            value: 200
+        friendlyId: 821367535
+        id: rtvtgo0wwugmiiikdpzvsg
+        orderItems:
+          - description: one pizza and one drink from choices
+            itemId: p1
+            itemType: Product
+            name: Pizza and drink
+            quantity: 1
+            subItems:
+              - description: classic pizza Margarita
+                itemId: mp1
+                itemType: MealPart
+                name: Margarita
+                quantity: 1
+                subItems: []
+                synonym: Medium
+                unitPrice: 0
+              - description: ""
+                itemId: mp2
+                itemType: MealPart
+                name: Coca-Cola
+                quantity: 1
+                subItems: []
+                synonym: 1L
+                unitPrice: 0
+              - itemId: a1
+                itemType: Accessory
+                name: Double Cheese
+                quantity: 1
+                subItems: []
+                synonym: ""
+                unitPrice: 100
+            synonym: Medium
+            unitPrice: 999
+          - description: Romaine lettuce, croutons, Parmesan cheese, lemon juice, olive oil, egg, Worcestershire sauce, anchovies, Dijon mustard, black pepper
+            itemId: p2
+            itemType: Product
+            name: Cesar Salad
+            quantity: 2
+            subItems: []
+            synonym: ""
+            unitPrice: 533
+        orderPrice: 2099
+        orderPriceBreakdown:
+          accountCredits: 500
+          discounts: 207
+          fees: 250
+          items: 2066
+          taxes: 0
+          tips: 0
+          vouchers: 0
+        orderStatus: Accepted
+        orderType: Delivery
+        paymentInfo:
+          paidDate: 2020-01-01T09:31:00.000Z
+          paymentLines:
+            - fee: 0
+              paymentMethod: AccountCredit
+              value: 500
+            - fee: 50
+              paymentMethod: Card
+              value: 1549
+        placedDate: 2020-01-01T09:30:00.000Z
+      properties:
+        currencyCode:
+          description: The ISO-4217 currency code associated with the all prices and money amounts in order details
+          type: string
+        friendlyId:
+          description: The friendly order Id
+          type: string
+        id:
+          description: The Id of the order
+          type: string
+        orderItems:
+          description: List of restaurant order items
+          items:
+            $ref: "#/components/schemas/RestaurantOrderItem"
+          type: array
+        orderPrice:
+          description: The order price in smallest unit of relevant currency
+          format: integer
+          type: number
+        orderPriceBreakdown:
+          $ref: "#/components/schemas/RestaurantOrderPriceBreakdown"
+          description: The order price breakdown (all amounts in smallest unit of relevant currency)
+        orderStatus:
+          description: Status of completed order
+          enum:
+            - Accepted
+            - Cancelled
+            - Declined
+        orderType:
+          description: Type of order (collection or delivery)
+          enum:
+            - Delivery
+            - Collection
+        paymentInfo:
+          $ref: "#/components/schemas/RestaurantOrderPaymentInfo"
+          description: Information about a payment
+        placedDate:
+          description: The order placed date
+          format: date-time
+          type: string
+      type: object
+    RestaurantOrderHistory:
+      example:
+        orders:
+          - currencyCode: GBP
+            friendlyId: 821367535
+            id: rtvtgo0wwugmiiikdpzvsg
+            orderPrice: 2099
+            orderStatus: Accepted
+            orderType: Delivery
+            placedDate: 2020-01-01T09:30:00.000Z
+            usedPaymentMethods:
+              - AccountCredit
+              - Card
+          - currencyCode: GBP
+            friendlyId: 829022736
+            id: uerbbymdfkxdecduuerbby
+            orderPrice: 99900
+            orderStatus: Declined
+            orderType: Collection
+            placedDate: 2020-01-02T19:20:00.000Z
+            usedPaymentMethods:
+              - Cash
+        paging:
+          cursors:
+            after: NDMyNzQyODI3OTQw
+      properties:
+        orders:
+          description: List of restaurant order summaries
+          items:
+            $ref: "#/components/schemas/RestaurantOrderSummary"
+          type: array
+        paging:
+          description: Consists of pagination information
+          properties:
+            cursors:
+              description: Consists of cursors markers used in pagination
+              properties:
+                after:
+                  description: The value should be used in the query parameter named after. It is used as a cursor of the last returned record in the previous request, from which next offset going to be fetched. A missing or empty value indicates that the end of the result set has been reached
+                  type: string
+              type: object
+          type: object
+      type: object
+    RestaurantOrderItem:
+      description: An item in an order
+      properties:
+        description:
+          description: The description for the item
+          type: string
+        itemId:
+          description: The Id of the item
+          type: string
+        itemType:
+          description: The type of item
+          enum:
+            - Product
+            - MealPart
+            - Accessory
+        name:
+          description: The name of the item
+          type: string
+        quantity:
+          description: The quantity of the item
+          format: int32
+          type: integer
+        subItems:
+          description: The sub items of item, such as meal parts of the meal or accessories
+          items:
+            $ref: "#/components/schemas/RestaurantOrderItem"
+          type: array
+        synonym:
+          description: The synonym of the item
+          type: string
+        unitPrice:
+          description: The unit price for the item
+          format: integer
+          type: number
+      type: object
+    RestaurantOrderPaymentInfo:
+      description: Information about a payment
+      properties:
+        fees:
+          description: The fees applied to the order
+          items:
+            properties:
+              type:
+                description: The type of fee, such as delivery or card
+                type: string
+              value:
+                description: The fee value in smallest unit of relevant currency
+                format: integer
+                type: number
+            type: object
+          type: array
+        paidDate:
+          description: The date and time the order was paid for, if known
+          format: date-time
+          nullable: true
+          type: string
+        paymentLines:
+          description: The payment lines
+          items:
+            description: An individual payment line
+            properties:
+              fee:
+                description: The payment fee in smallest unit of relevant currency
+                format: integer
+                type: number
+              paymentMethod:
+                description: The payment method, such as cash or card
+                type: string
+              value:
+                description: The payment value in smallest unit of relevant currency
+                format: integer
+                type: number
+            type: object
+          type: array
+      type: object
+    RestaurantOrderPriceBreakdown:
+      description: The order price breakdown (all amounts in smallest unit of relevant currency)
+      properties:
+        accountCredits:
+          description: The total amount of account credit(s) applied to the order
+          format: integer
+          type: number
+        discounts:
+          description: The total amount of discount(s) applied to the order
+          format: integer
+          type: number
+        fees:
+          description: The total amount of fees applied to the order
+          format: integer
+          type: number
+        items:
+          description: The total amount of order items
+          format: integer
+          type: number
+        taxes:
+          description: The total amount of taxes applied to the order
+          format: integer
+          type: number
+        tips:
+          description: The total amount of tips applied to the order
+          format: integer
+          type: number
+        vouchers:
+          description: The total amount of voucher(s) applied to the order
+          format: integer
+          type: number
+      type: object
+    RestaurantOrderSummary:
+      description: An order summary
+      properties:
+        currencyCode:
+          description: The ISO-4217 currency code associated with the order price
+          type: string
+        friendlyId:
+          description: The friendly order Id
+          type: string
+        id:
+          description: The Id of the order
+          type: string
+        orderPrice:
+          description: The order price in smallest unit of relevant currency
+          format: integer
+          type: number
+        orderStatus:
+          description: Status of completed order
+          enum:
+            - Accepted
+            - Cancelled
+            - Declined
+        orderType:
+          description: Type of order (collection or delivery)
+          enum:
+            - Delivery
+            - Collection
+        placedDate:
+          description: The order placed date
+          format: date-time
+          type: string
+        usedPaymentMethods:
+          description: The list of payment methods used for order payment
+          items:
+            description: The payment method, such as cash or card
+            type: string
+          type: array
+      type: object
     RestaurantPromotedPlacementInfo:
       example:
         defaultPromoted: true
@@ -14101,27 +14336,6 @@ components:
           nullable: true
           oneOf:
             - $ref: "#/components/schemas/OrdersData"
-      type: object
-    ScheduleContentCardModel:
-      additionalProperties: false
-      properties:
-        campaignType:
-          description: The type of campaign to send
-          oneOf:
-            - $ref: "#/components/schemas/CampaignType"
-        sendAtDateTime:
-          description: ISO 8601 format of the users local current datetime. Tells Braze when to send the content card.
-          format: date-time
-          minLength: 1
-          type: string
-        userSegments:
-          description: The type of segment (group of users) to send the campaign to. Users in the segment are pre-determined and exported via BQ/Egress.
-          items:
-            $ref: "#/components/schemas/SegmentType"
-          nullable: true
-          type: array
-      required:
-        - sendAtDateTime
       type: object
     SearchByConsumerResponse:
       properties:
@@ -14751,21 +14965,6 @@ components:
             $ref: "#/components/schemas/SearchRestaurant"
           type: array
       type: object
-    SegmentPotentialResult:
-      additionalProperties: false
-      properties:
-        reach:
-          description: The number of customers that this campaign will reach
-          format: int32
-          type: integer
-      type: object
-    SegmentType:
-      description: The type of segment (group of users) to send the campaign to. Users in the segment are predetermined and exported via BigQuery/Egress.
-      enum:
-        - Prospecting
-      type: string
-      x-enumNames:
-        - Prospecting
     ServiceTimes:
       example:
         desiredServiceTimes:
@@ -18204,6 +18403,7 @@ components:
     emailaddress:
       properties:
         EmailAddress:
+          description: An email address for an account.
           type: string
       type: object
     estimated-delivery-time:
@@ -19189,6 +19389,7 @@ components:
     password:
       properties:
         Password:
+          description: A password for a consumers account.
           type: string
       type: object
     patch-delivery-pool:
