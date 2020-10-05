@@ -72,11 +72,11 @@ paths:
             type: string
         - description: Year filter
           in: query
-          minumum: 1869
           name: year
           required: false
           schema:
             type: integer
+            minimum: 1869
         - description: Minimum year filter (inclusive)
           in: query
           name: minYear
@@ -151,10 +151,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -313,10 +313,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Season type filter (regular, postseason, or both)
@@ -364,17 +364,17 @@ paths:
       parameters:
         - description: Year/season filter for games
           in: query
-          minumum: 2001
           name: year
           required: true
           schema:
+            minimum: 2001
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Season type filter (regular or postseason)
@@ -501,10 +501,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Season type filter (regular or postseason)
@@ -591,10 +591,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -655,10 +655,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -881,10 +881,10 @@ paths:
             type: integer
         - description: Week filter (required if team, offense, or defense, not specified)
           in: query
-          minumum: 1
           name: week
           required: true
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -955,10 +955,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -1007,10 +1007,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter
@@ -1212,10 +1212,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Season type filter (regular or postseason)
@@ -1520,10 +1520,10 @@ paths:
             type: string
         - description: Season year
           in: query
-          minumum: 2009
           name: year
           required: false
           schema:
+            minimum: 2009
             type: integer
       responses:
         "200":
@@ -1569,10 +1569,10 @@ paths:
             type: integer
         - description: Week filter
           in: query
-          minumum: 1
           name: week
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Team filter (required if no year specified)
@@ -1700,18 +1700,18 @@ paths:
             type: string
         - description: Starting week filter
           in: query
-          minumum: 1
           name: startWeek
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Starting week filter
           in: query
-          minumum: 1
           name: endWeek
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
       responses:
@@ -1754,18 +1754,18 @@ paths:
             type: boolean
         - description: Starting week filter
           in: query
-          minumum: 1
           name: startWeek
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
         - description: Starting week filter
           in: query
-          minumum: 1
           name: endWeek
           required: false
           schema:
+            minimum: 1
             maximum: 16
             type: integer
       responses:
@@ -1878,11 +1878,11 @@ paths:
             type: string
         - description: Minimum year
           in: query
-          minumum: 1869
           name: minYear
           required: false
           schema:
             type: integer
+            minimum: 1869
         - description: Maximum year
           in: query
           name: maxYear
