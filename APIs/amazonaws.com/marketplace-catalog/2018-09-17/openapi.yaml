@@ -3,7 +3,7 @@ info:
   version: '2018-09-17'
   x-release: v4
   title: AWS Marketplace Catalog Service
-  description: '<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>'
+  description: '<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace. </p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -737,6 +737,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChangeStatus'
             - description: The status of the change request.
+        FailureCode:
+          allOf:
+            - $ref: '#/components/schemas/FailureCode'
+            - description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
         FailureDescription:
           allOf:
             - $ref: '#/components/schemas/StringValue'
@@ -948,6 +952,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdList'
             - description: This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.
+        FailureCode:
+          allOf:
+            - $ref: '#/components/schemas/FailureCode'
+            - description: 'Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.'
       description: A summary of a change set returned in a list of change sets when the <code>ListChangeSets</code> action is called.
     ChangeSetSummaryList:
       type: array
@@ -970,6 +978,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceId'
+    FailureCode:
+      type: string
+      enum:
+        - CLIENT_ERROR
+        - SERVER_FAULT
     ErrorDetailList:
       type: array
       items:

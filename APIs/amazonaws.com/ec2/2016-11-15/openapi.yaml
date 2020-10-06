@@ -73476,6 +73476,12 @@ components:
             - xml:
                 name: peerBgpAsn
               description: The peer BGP ASN.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway virtual interface.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -73504,6 +73510,12 @@ components:
             - xml:
                 name: localGatewayId
               description: The ID of the local gateway.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: The AWS account ID that owns the local gateway virtual interface group.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
