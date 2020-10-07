@@ -114,6 +114,95 @@ servers:
     description: The MediaPackage endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/channels/{id}/configure_logs':
+    put:
+      operationId: ConfigureLogs
+      description: Changes the Channel's properities to configure log subscription
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigureLogsResponse'
+        '480':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the channel to log subscription.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                egressAccessLogs:
+                  description: Configure egress access logging.
+                  type: object
+                  properties:
+                    LogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: logGroupName
+                          description: Customize the log group name.
+                ingressAccessLogs:
+                  description: Configure ingress access logging.
+                  type: object
+                  properties:
+                    LogGroupName:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: logGroupName
+                          description: Customize the log group name.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /channels:
     post:
       operationId: CreateChannel
@@ -1890,6 +1979,55 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    ConfigureLogsResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: The Amazon Resource Name (ARN) assigned to the Channel.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: description
+              description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
+        HlsIngest:
+          allOf:
+            - $ref: '#/components/schemas/HlsIngest'
+            - xml:
+                name: hlsIngest
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    __string:
+      type: string
+    UnprocessableEntityException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    NotFoundException: {}
+    ServiceUnavailableException: {}
+    TooManyRequestsException: {}
     CreateChannelResponse:
       type: object
       properties:
@@ -1905,6 +2043,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -1916,19 +2059,16 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - xml:
                 name: tags
-    __string:
-      type: string
-    UnprocessableEntityException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    NotFoundException: {}
-    ServiceUnavailableException: {}
-    TooManyRequestsException: {}
     CreateHarvestJobResponse:
       type: object
       properties:
@@ -2293,6 +2433,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -2304,6 +2449,11 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2546,6 +2696,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -2557,6 +2712,11 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2577,6 +2737,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -2588,6 +2753,11 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2608,6 +2778,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -2619,6 +2794,11 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2756,6 +2936,16 @@ components:
               description: |
                 The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
       description: CDN Authorization credentials
+    EgressAccessLogs:
+      type: object
+      properties:
+        LogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: logGroupName
+              description: Customize the log group name.
+      description: Configure egress access logging.
     HlsIngest:
       type: object
       properties:
@@ -2766,6 +2956,16 @@ components:
                 name: ingestEndpoints
               description: A list of endpoints to which the source stream should be sent.
       description: An HTTP Live Streaming (HLS) ingest resource configuration.
+    IngressAccessLogs:
+      type: object
+      properties:
+        LogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: logGroupName
+              description: Customize the log group name.
+      description: Configure ingress access logging.
     Tags:
       type: object
       description: A collection of tags associated with a resource
@@ -2786,6 +2986,11 @@ components:
             - xml:
                 name: description
               description: A short text description of the Channel.
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
         HlsIngest:
           allOf:
             - $ref: '#/components/schemas/HlsIngest'
@@ -2797,6 +3002,11 @@ components:
             - xml:
                 name: id
               description: The ID of the Channel.
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2919,6 +3129,21 @@ components:
             - xml:
                 name: streamSelection
       description: A Common Media Application Format (CMAF) packaging configuration.
+    ConfigureLogsRequest:
+      type: object
+      title: ConfigureLogsRequest
+      properties:
+        EgressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/EgressAccessLogs'
+            - xml:
+                name: egressAccessLogs
+        IngressAccessLogs:
+          allOf:
+            - $ref: '#/components/schemas/IngressAccessLogs'
+            - xml:
+                name: ingressAccessLogs
+      description: the option to configure log subscription.
     CreateChannelRequest:
       required:
         - Id

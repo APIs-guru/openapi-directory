@@ -360,7 +360,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.GetAutoScalingGroupRecommendations:
     post:
       operationId: GetAutoScalingGroupRecommendations
-      description: '<p>Returns Auto Scaling group recommendations.</p> <p>AWS Compute Optimizer currently generates recommendations for Auto Scaling groups that are configured to run instances of the M, C, R, T, and X instance families. The service does not generate recommendations for Auto Scaling groups that have a scaling policy attached to them, or that do not have the same values for desired, minimum, and maximum capacity. In order for Compute Optimizer to analyze your Auto Scaling groups, they must be of a fixed size. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html">AWS Compute Optimizer User Guide</a>.</p>'
+      description: '<p>Returns Auto Scaling group recommendations.</p> <p>AWS Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -441,7 +441,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.GetEC2InstanceRecommendations:
     post:
       operationId: GetEC2InstanceRecommendations
-      description: '<p>Returns Amazon EC2 instance recommendations.</p> <p>AWS Compute Optimizer currently generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) and Amazon EC2 Auto Scaling. It generates recommendations for M, C, R, T, and X instance families. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is.html">AWS Compute Optimizer User Guide</a>.</p>'
+      description: '<p>Returns Amazon EC2 instance recommendations.</p> <p>AWS Compute Optimizer generates recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -522,7 +522,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.GetEC2RecommendationProjectedMetrics:
     post:
       operationId: GetEC2RecommendationProjectedMetrics
-      description: Returns the projected utilization metrics of Amazon EC2 instance recommendations.
+      description: '<p>Returns the projected utilization metrics of Amazon EC2 instance recommendations.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run this action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -932,7 +932,7 @@ components:
         fieldsToExport:
           allOf:
             - $ref: '#/components/schemas/ExportableAutoScalingGroupFields'
-            - description: The recommendations data to include in the export file.
+            - description: 'The recommendations data to include in the export file. For more information about the fields that can be exported, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files">Exported files</a> in the <i>Compute Optimizer User Guide</i>.'
         s3DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/S3DestinationConfig'
@@ -974,7 +974,7 @@ components:
         fieldsToExport:
           allOf:
             - $ref: '#/components/schemas/ExportableInstanceFields'
-            - description: The recommendations data to include in the export file.
+            - description: 'The recommendations data to include in the export file. For more information about the fields that can be exported, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files">Exported files</a> in the <i>Compute Optimizer User Guide</i>.'
         s3DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/S3DestinationConfig'
@@ -1297,7 +1297,7 @@ components:
         projectedUtilizationMetrics:
           allOf:
             - $ref: '#/components/schemas/ProjectedUtilizationMetrics'
-            - description: An array of objects that describe the projected utilization metrics of the Auto Scaling group recommendation option.
+            - description: '<p>An array of objects that describe the projected utilization metrics of the Auto Scaling group recommendation option.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
         performanceRisk:
           allOf:
             - $ref: '#/components/schemas/PerformanceRisk'
@@ -1405,6 +1405,10 @@ components:
         - Finding
         - UtilizationMetricsCpuMaximum
         - UtilizationMetricsMemoryMaximum
+        - UtilizationMetricsEbsReadOpsPerSecondMaximum
+        - UtilizationMetricsEbsWriteOpsPerSecondMaximum
+        - UtilizationMetricsEbsReadBytesPerSecondMaximum
+        - UtilizationMetricsEbsWriteBytesPerSecondMaximum
         - LookbackPeriodInDays
         - CurrentConfigurationInstanceType
         - CurrentConfigurationDesiredCapacity
@@ -1443,6 +1447,10 @@ components:
         - CurrentInstanceType
         - UtilizationMetricsCpuMaximum
         - UtilizationMetricsMemoryMaximum
+        - UtilizationMetricsEbsReadOpsPerSecondMaximum
+        - UtilizationMetricsEbsWriteOpsPerSecondMaximum
+        - UtilizationMetricsEbsReadBytesPerSecondMaximum
+        - UtilizationMetricsEbsWriteBytesPerSecondMaximum
         - CurrentOnDemandPrice
         - CurrentStandardOneYearNoUpfrontReservedPrice
         - CurrentStandardThreeYearNoUpfrontReservedPrice
@@ -1616,7 +1624,7 @@ components:
         projectedUtilizationMetrics:
           allOf:
             - $ref: '#/components/schemas/ProjectedUtilizationMetrics'
-            - description: An array of objects that describe the projected utilization metrics of the instance recommendation option.
+            - description: '<p>An array of objects that describe the projected utilization metrics of the instance recommendation option.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
         performanceRisk:
           allOf:
             - $ref: '#/components/schemas/PerformanceRisk'
@@ -1660,6 +1668,10 @@ components:
       enum:
         - Cpu
         - Memory
+        - EBS_READ_OPS_PER_SECOND
+        - EBS_WRITE_OPS_PER_SECOND
+        - EBS_READ_BYTES_PER_SECOND
+        - EBS_WRITE_BYTES_PER_SECOND
     MetricValue:
       type: number
       format: double
@@ -1677,7 +1689,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/MetricName'
-            - description: '<p>The name of the projected utilization metric.</p> <note> <p>Memory metrics are only returned for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
+            - description: The name of the projected utilization metric.
         timestamps:
           allOf:
             - $ref: '#/components/schemas/Timestamps'
@@ -1686,7 +1698,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricValues'
             - description: The values of the projected utilization metrics.
-      description: 'Describes a projected utilization metric of a recommendation option, such as an Amazon EC2 instance.'
+      description: '<p>Describes a projected utilization metric of a recommendation option, such as an Amazon EC2 instance.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run the <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
     ProjectedMetrics:
       type: array
       items:
@@ -1697,7 +1709,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/MetricName'
-            - description: '<p>The name of the utilization metric.</p> <note> <p>Memory metrics are only returned for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
+            - description: '<p>The name of the utilization metric.</p> <note> <p>The <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
         statistic:
           allOf:
             - $ref: '#/components/schemas/MetricStatistic'
@@ -1800,7 +1812,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectedMetrics'
             - description: An array of objects that describe a projected utilization metric.
-      description: Describes a projected utilization metric of a recommendation option.
+      description: '<p>Describes a projected utilization metric of a recommendation option.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run the <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
     Summary:
       type: object
       properties:

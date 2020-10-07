@@ -1156,6 +1156,32 @@ paths:
           description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
           schema:
             type: string
+        - name: OutpostMode
+          in: query
+          required: false
+          description: Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.
+          schema:
+            type: string
+            enum:
+              - single-outpost
+              - cross-outpost
+        - name: PreferredOutpostArn
+          in: query
+          required: false
+          description: The outpost ARN in which the cache cluster is created.
+          schema:
+            type: string
+        - name: PreferredOutpostArns
+          in: query
+          required: false
+          description: The outpost ARNs in which the cache cluster is created.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: PreferredOutpostArn
         - name: Action
           in: query
           required: true
@@ -1599,6 +1625,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: SubnetNotAllowedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
       parameters:
         - name: CacheSubnetGroupName
           in: query
@@ -1680,6 +1712,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: SubnetNotAllowedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
       requestBody:
         content:
           text/xml:
@@ -1746,7 +1784,7 @@ paths:
         - name: GlobalReplicationGroupIdSuffix
           in: query
           required: true
-          description: The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+          description: '<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>'
           schema:
             type: string
         - name: GlobalReplicationGroupDescription
@@ -1875,84 +1913,96 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReplicationGroupAlreadyExistsFault'
         '483':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '484':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '485':
           description: InsufficientCacheClusterCapacityFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
-        '484':
+        '486':
           description: CacheSecurityGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
-        '485':
+        '487':
           description: CacheSubnetGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
-        '486':
+        '488':
           description: ClusterQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
-        '487':
+        '489':
           description: NodeQuotaForClusterExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
-        '488':
+        '490':
           description: NodeQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
-        '489':
+        '491':
           description: CacheParameterGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
-        '490':
+        '492':
           description: InvalidVPCNetworkStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
-        '491':
+        '493':
           description: TagQuotaPerResourceExceeded
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
-        '492':
+        '494':
           description: NodeGroupsPerReplicationGroupQuotaExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeGroupsPerReplicationGroupQuotaExceededFault'
-        '493':
+        '495':
           description: GlobalReplicationGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/GlobalReplicationGroupNotFoundFault'
-        '494':
+        '496':
           description: InvalidGlobalReplicationGroupStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidGlobalReplicationGroupStateFault'
-        '495':
+        '497':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '496':
+        '498':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -2175,6 +2225,15 @@ paths:
           description: The ID of the KMS key used to encrypt the disk in the cluster.
           schema:
             type: string
+        - name: UserGroupIds
+          in: query
+          required: false
+          description: The list of user groups to associate with the replication group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserGroupId'
+            minItems: 1
         - name: Action
           in: query
           required: true
@@ -2227,84 +2286,96 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReplicationGroupAlreadyExistsFault'
         '483':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '484':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '485':
           description: InsufficientCacheClusterCapacityFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
-        '484':
+        '486':
           description: CacheSecurityGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
-        '485':
+        '487':
           description: CacheSubnetGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSubnetGroupNotFoundFault'
-        '486':
+        '488':
           description: ClusterQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ClusterQuotaForCustomerExceededFault'
-        '487':
+        '489':
           description: NodeQuotaForClusterExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
-        '488':
+        '490':
           description: NodeQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
-        '489':
+        '491':
           description: CacheParameterGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
-        '490':
+        '492':
           description: InvalidVPCNetworkStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
-        '491':
+        '493':
           description: TagQuotaPerResourceExceeded
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TagQuotaPerResourceExceeded'
-        '492':
+        '494':
           description: NodeGroupsPerReplicationGroupQuotaExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeGroupsPerReplicationGroupQuotaExceededFault'
-        '493':
+        '495':
           description: GlobalReplicationGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/GlobalReplicationGroupNotFoundFault'
-        '494':
+        '496':
           description: InvalidGlobalReplicationGroupStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidGlobalReplicationGroupStateFault'
-        '495':
+        '497':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '496':
+        '498':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -2521,6 +2592,336 @@ paths:
             type: string
             enum:
               - CreateSnapshot
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=CreateUser:
+    get:
+      x-aws-operation-name: CreateUser
+      operationId: GET_CreateUser
+      description: 'For Redis engine version 6.04 onwards: Creates a Redis user. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: UserAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserAlreadyExistsFault'
+        '481':
+          description: UserQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserQuotaExceededFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: UserId
+          in: query
+          required: true
+          description: The ID of the user.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+            minLength: 1
+        - name: UserName
+          in: query
+          required: true
+          description: The username of the user.
+          schema:
+            type: string
+            minLength: 1
+        - name: Engine
+          in: query
+          required: true
+          description: 'Must be Redis. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z]*'
+        - name: Passwords
+          in: query
+          required: false
+          description: Passwords used for this user account. You can create up to two passwords for each user.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+            minItems: 1
+        - name: AccessString
+          in: query
+          required: true
+          description: Access permissions string used for this user account.
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: NoPasswordRequired
+          in: query
+          required: false
+          description: Indicates a password is not required for this user account.
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateUser
+      operationId: POST_CreateUser
+      description: 'For Redis engine version 6.04 onwards: Creates a Redis user. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: UserAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserAlreadyExistsFault'
+        '481':
+          description: UserQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserQuotaExceededFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '484':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateUserMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=CreateUserGroup:
+    get:
+      x-aws-operation-name: CreateUserGroup
+      operationId: GET_CreateUserGroup
+      description: 'For Redis engine version 6.04 onwards: Creates a Redis user group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a> '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '482':
+          description: UserGroupAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupAlreadyExistsFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: UserGroupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupQuotaExceededFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters:
+        - name: UserGroupId
+          in: query
+          required: true
+          description: The ID of the user group.
+          schema:
+            type: string
+        - name: Engine
+          in: query
+          required: true
+          description: 'Must be Redis. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z]*'
+        - name: UserIds
+          in: query
+          required: false
+          description: The list of user IDs that belong to the user group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserId'
+            minItems: 1
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUserGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateUserGroup
+      operationId: POST_CreateUserGroup
+      description: 'For Redis engine version 6.04 onwards: Creates a Redis user group. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a> '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '482':
+          description: UserGroupAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupAlreadyExistsFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: UserGroupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupQuotaExceededFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateUserGroupMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateUserGroup
         - name: Version
           in: query
           required: true
@@ -3805,6 +4206,236 @@ paths:
             type: string
             enum:
               - '2015-02-02'
+  /#Action=DeleteUser:
+    get:
+      x-aws-operation-name: DeleteUser
+      operationId: GET_DeleteUser
+      description: 'For Redis engine version 6.04 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: InvalidUserStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: DefaultUserAssociatedToUserGroupFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserAssociatedToUserGroupFault'
+      parameters:
+        - name: UserId
+          in: query
+          required: true
+          description: The ID of the user.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+            minLength: 1
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteUser
+      operationId: POST_DeleteUser
+      description: 'For Redis engine version 6.04 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: InvalidUserStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: DefaultUserAssociatedToUserGroupFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserAssociatedToUserGroupFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteUserMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=DeleteUserGroup:
+    get:
+      x-aws-operation-name: DeleteUserGroup
+      operationId: GET_DeleteUserGroup
+      description: 'For Redis engine version 6.04 onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters:
+        - name: UserGroupId
+          in: query
+          required: true
+          description: The ID of the user group.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUserGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteUserGroup
+      operationId: POST_DeleteUserGroup
+      description: 'For Redis engine version 6.04 onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html">Using Role Based Access Control (RBAC)</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteUserGroupMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteUserGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
   /#Action=DescribeCacheClusters:
     get:
       x-aws-operation-name: DescribeCacheClusters
@@ -4736,6 +5367,8 @@ paths:
               - cache-security-group
               - cache-subnet-group
               - replication-group
+              - user
+              - user-group
         - name: StartTime
           in: query
           required: false
@@ -5926,6 +6559,263 @@ paths:
             type: string
             enum:
               - '2015-02-02'
+  /#Action=DescribeUserGroups:
+    get:
+      x-aws-operation-name: DescribeUserGroups
+      operationId: GET_DescribeUserGroups
+      description: Returns a list of user groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeUserGroupsResult'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: UserGroupId
+          in: query
+          required: false
+          description: The ID of the user group.
+          schema:
+            type: string
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUserGroups
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeUserGroups
+      operationId: POST_DescribeUserGroups
+      description: Returns a list of user groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeUserGroupsResult'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeUserGroupsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUserGroups
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=DescribeUsers:
+    get:
+      x-aws-operation-name: DescribeUsers
+      operationId: GET_DescribeUsers
+      description: Returns a list of users.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeUsersResult'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: Engine
+          in: query
+          required: false
+          description: 'The Redis engine. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z]*'
+        - name: UserId
+          in: query
+          required: false
+          description: The ID of the user.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+            minLength: 1
+        - name: Filters
+          in: query
+          required: false
+          description: Filter to determine the list of User IDs to return.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Filter'
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUsers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeUsers
+      operationId: POST_DescribeUsers
+      description: Returns a list of users.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeUsersResult'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeUsersMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeUsers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
   /#Action=DisassociateGlobalReplicationGroup:
     get:
       x-aws-operation-name: DisassociateGlobalReplicationGroup
@@ -7013,6 +7903,7 @@ paths:
             enum:
               - SET
               - ROTATE
+              - DELETE
         - name: Action
           in: query
           required: true
@@ -7311,6 +8202,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: SubnetNotAllowedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
       parameters:
         - name: CacheSubnetGroupName
           in: query
@@ -7392,6 +8289,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: SubnetNotAllowedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/SubnetNotAllowedFault'
       requestBody:
         content:
           text/xml:
@@ -7575,72 +8478,84 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
         '482':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '483':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '484':
           description: InvalidCacheClusterStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidCacheClusterStateFault'
-        '483':
+        '485':
           description: InvalidCacheSecurityGroupStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
-        '484':
+        '486':
           description: InsufficientCacheClusterCapacityFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
-        '485':
+        '487':
           description: CacheClusterNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
-        '486':
+        '488':
           description: NodeQuotaForClusterExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
-        '487':
+        '489':
           description: NodeQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
-        '488':
+        '490':
           description: CacheSecurityGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
-        '489':
+        '491':
           description: CacheParameterGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
-        '490':
+        '492':
           description: InvalidVPCNetworkStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
-        '491':
+        '493':
           description: InvalidKMSKeyFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidKMSKeyFault'
-        '492':
+        '494':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '493':
+        '495':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -7786,6 +8701,29 @@ paths:
             enum:
               - SET
               - ROTATE
+              - DELETE
+        - name: UserGroupIdsToAdd
+          in: query
+          required: false
+          description: A list of user group IDs.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserGroupId'
+        - name: UserGroupIdsToRemove
+          in: query
+          required: false
+          description: 'A list of users groups to remove, meaning the users in the group no longer can access thereplication group.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserGroupId'
+        - name: RemoveUserGroups
+          in: query
+          required: false
+          description: Removes the user groups that can access this replication group.
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -7832,72 +8770,84 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidReplicationGroupStateFault'
         '482':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '483':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '484':
           description: InvalidCacheClusterStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidCacheClusterStateFault'
-        '483':
+        '485':
           description: InvalidCacheSecurityGroupStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidCacheSecurityGroupStateFault'
-        '484':
+        '486':
           description: InsufficientCacheClusterCapacityFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InsufficientCacheClusterCapacityFault'
-        '485':
+        '487':
           description: CacheClusterNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheClusterNotFoundFault'
-        '486':
+        '488':
           description: NodeQuotaForClusterExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForClusterExceededFault'
-        '487':
+        '489':
           description: NodeQuotaForCustomerExceededFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NodeQuotaForCustomerExceededFault'
-        '488':
+        '490':
           description: CacheSecurityGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheSecurityGroupNotFoundFault'
-        '489':
+        '491':
           description: CacheParameterGroupNotFoundFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/CacheParameterGroupNotFoundFault'
-        '490':
+        '492':
           description: InvalidVPCNetworkStateFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidVPCNetworkStateFault'
-        '491':
+        '493':
           description: InvalidKMSKeyFault
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidKMSKeyFault'
-        '492':
+        '494':
           description: InvalidParameterValueException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidParameterValueException'
-        '493':
+        '495':
           description: InvalidParameterCombinationException
           content:
             text/xml:
@@ -8153,6 +9103,331 @@ paths:
             type: string
             enum:
               - ModifyReplicationGroupShardConfiguration
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=ModifyUser:
+    get:
+      x-aws-operation-name: ModifyUser
+      operationId: GET_ModifyUser
+      description: Changes user password(s) and/or access string.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidUserStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: UserId
+          in: query
+          required: true
+          description: The ID of the user.
+          schema:
+            type: string
+            pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+            minLength: 1
+        - name: AccessString
+          in: query
+          required: false
+          description: Access permissions string used for this user account.
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: AppendAccessString
+          in: query
+          required: false
+          description: Adds additional user permissions to the access string.
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: Passwords
+          in: query
+          required: false
+          description: The passwords belonging to the user account. You are allowed up to two.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+            minItems: 1
+        - name: NoPasswordRequired
+          in: query
+          required: false
+          description: Indicates no password is required for the user account.
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyUser
+      operationId: POST_ModifyUser
+      description: Changes user password(s) and/or access string.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '480':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '481':
+          description: InvalidUserStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserStateFault'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyUserMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUser
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+  /#Action=ModifyUserGroup:
+    get:
+      x-aws-operation-name: ModifyUserGroup
+      operationId: GET_ModifyUserGroup
+      description: Changes the list of users that belong to the user group.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      parameters:
+        - name: UserGroupId
+          in: query
+          required: true
+          description: The ID of the user group.
+          schema:
+            type: string
+        - name: UserIdsToAdd
+          in: query
+          required: false
+          description: The list of user IDs to add to the user group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserId'
+            minItems: 1
+        - name: UserIdsToRemove
+          in: query
+          required: false
+          description: The list of user IDs to remove from the user group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/UserId'
+            minItems: 1
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUserGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2015-02-02'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyUserGroup
+      operationId: POST_ModifyUserGroup
+      description: Changes the list of users that belong to the user group.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroup'
+        '480':
+          description: UserGroupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserGroupNotFoundFault'
+        '481':
+          description: UserNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundFault'
+        '482':
+          description: DuplicateUserNameFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DuplicateUserNameFault'
+        '483':
+          description: DefaultUserRequired
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DefaultUserRequired'
+        '484':
+          description: InvalidUserGroupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidUserGroupStateFault'
+        '485':
+          description: InvalidParameterValueException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '486':
+          description: InvalidParameterCombinationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyUserGroupMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyUserGroup
         - name: Version
           in: query
           required: true
@@ -9416,6 +10691,7 @@ components:
     CacheSubnetGroupQuotaExceededFault: {}
     CacheSubnetQuotaExceededFault: {}
     InvalidSubnet: {}
+    SubnetNotAllowedFault: {}
     CreateGlobalReplicationGroupResult:
       type: object
       properties:
@@ -9451,9 +10727,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/AvailabilityZonesList'
             - description: A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of <code>ReplicaCount</code> or <code>ReplicasPerNodeGroup</code> if not specified.
+        PrimaryOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The output ARN of the primary node.
+        ReplicaOutpostArns:
+          allOf:
+            - $ref: '#/components/schemas/OutpostArnsList'
+            - description: The outpost ARN of the node replicas.
       description: 'Node group (shard) configuration options. Each node group (shard) configuration has the following: <code>Slots</code>, <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>.'
+    UserGroupId:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+      minLength: 1
     InvalidCacheClusterStateFault: {}
     ReplicationGroupAlreadyExistsFault: {}
+    InvalidUserGroupStateFault: {}
+    UserGroupNotFoundFault: {}
     NodeGroupsPerReplicationGroupQuotaExceededFault: {}
     GlobalReplicationGroupNotFoundFault: {}
     InvalidGlobalReplicationGroupStateFault: {}
@@ -9463,6 +10753,83 @@ components:
         Snapshot:
           $ref: '#/components/schemas/Snapshot'
     SnapshotFeatureNotSupportedFault: {}
+    User:
+      type: object
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user.
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The username of the user.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates the user status. Can be "active", "modifying" or "deleting".'
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'Must be Redis. '
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Access permissions string used for this user account.
+        UserGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: Returns a list of the user group IDs the user belongs to.
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/Authentication'
+            - description: Denotes whether the user requires a password to authenticate.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the user account.
+    UserAlreadyExistsFault: {}
+    UserQuotaExceededFault: {}
+    DuplicateUserNameFault: {}
+    UserGroup:
+      type: object
+      properties:
+        UserGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user group.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Indicates user group status. Can be "creating", "active", "modifying", "deleting".'
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'Must be Redis. '
+        UserIds:
+          allOf:
+            - $ref: '#/components/schemas/UserIdList'
+            - description: The list of user IDs that belong to the user group.
+        PendingChanges:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupPendingChanges'
+            - description: A list of updates being applied to the user groups.
+        ReplicationGroups:
+          allOf:
+            - $ref: '#/components/schemas/UGReplicationGroupIdList'
+            - description: A list of replication groups that the user group can access.
+        ARN:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the user group.
+    UserId:
+      type: string
+      pattern: '[a-zA-Z][a-zA-Z0-9\-]*'
+      minLength: 1
+    UserNotFoundFault: {}
+    UserGroupAlreadyExistsFault: {}
+    DefaultUserRequired: {}
+    UserGroupQuotaExceededFault: {}
     DecreaseNodeGroupsInGlobalReplicationGroupResult:
       type: object
       properties:
@@ -9491,6 +10858,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PreferredAvailabilityZoneList'
             - description: 'A list of <code>PreferredAvailabilityZone</code> strings that specify which availability zones the replication group''s nodes are to be in. The nummber of <code>PreferredAvailabilityZone</code> values must equal the value of <code>NewReplicaCount</code> plus 1 to account for the primary node. If this member of <code>ReplicaConfiguration</code> is omitted, ElastiCache for Redis selects the availability zone for each of the replicas.'
+        PreferredOutpostArns:
+          allOf:
+            - $ref: '#/components/schemas/PreferredOutpostArnList'
+            - description: The outpost ARNs in which the cache cluster is created.
       description: 'Node group (shard) configuration options when adding or removing replicas. Each node group (shard) configuration has the following members: NodeGroupId, NewReplicaCount, and PreferredAvailabilityZones. '
     NoOperationFault: {}
     DeleteCacheClusterResult:
@@ -9514,6 +10885,8 @@ components:
       properties:
         Snapshot:
           $ref: '#/components/schemas/Snapshot'
+    InvalidUserStateFault: {}
+    DefaultUserAssociatedToUserGroupFault: {}
     CacheClusterMessage:
       type: object
       properties:
@@ -9711,6 +11084,43 @@ components:
         - scheduling
         - scheduled
         - not-applicable
+    DescribeUserGroupsResult:
+      type: object
+      properties:
+        UserGroups:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupList'
+            - description: Returns a list of user groups.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+    DescribeUsersResult:
+      type: object
+      properties:
+        Users:
+          allOf:
+            - $ref: '#/components/schemas/UserList'
+            - description: A list of users.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+    Filter:
+      type: object
+      required:
+        - Name
+        - Values
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/FilterName'
+            - description: 'The property being filtered. For example, UserId.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValueList'
+            - description: 'The property values to filter on. For example, "user-123".'
+      description: Used to streamline results of a search based on the property being filtered.
     DisassociateGlobalReplicationGroupResult:
       type: object
       properties:
@@ -9882,6 +11292,9 @@ components:
       enum:
         - single-az
         - cross-az
+    AccessString:
+      type: string
+      pattern: .*\S.*
     TagList:
       type: array
       items:
@@ -9919,6 +11332,26 @@ components:
       enum:
         - SET
         - ROTATE
+        - DELETE
+    AuthenticationType:
+      type: string
+      enum:
+        - password
+        - no-password
+    IntegerOptional:
+      type: integer
+    Authentication:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AuthenticationType'
+            - description: Indicates whether the user requires a password to authenticate.
+        PasswordCount:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The number of passwords belonging to the user. The maximum is two.
+      description: Indicates whether the user requires a password to authenticate.
     AuthorizeCacheSecurityGroupIngressMessage:
       type: object
       required:
@@ -9962,7 +11395,7 @@ components:
         ARN:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN (Amazon Resource Name) of the cache security group.
+            - description: 'The ARN of the cache security group,'
       description: '<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>'
     AutomaticFailoverStatus:
       type: string
@@ -10048,8 +11481,6 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: The port number that the cache engine is listening on.
       description: Represents the information required for client programs to connect to a cache node.
-    IntegerOptional:
-      type: integer
     PendingModifiedValues:
       type: object
       properties:
@@ -10159,6 +11590,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the Availability Zone in which the cluster is located or "Multiple" if the cache nodes are located in different Availability Zones.
+        PreferredOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The outpost ARN in which the cache cluster is created.
         CacheClusterCreateTime:
           allOf:
             - $ref: '#/components/schemas/TStamp'
@@ -10299,6 +11734,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Availability Zone where this node was created and now resides.
+        CustomerOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The customer outpost ARN of the cache node.
       description: '<p>Represents an individual cache node within a cluster. Each cache node runs its own instance of the cluster''s protocol-compliant caching software - either Memcached or Redis.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>M5 node types:</b> <code>cache.m5.large</code>, <code>cache.m5.xlarge</code>, <code>cache.m5.2xlarge</code>, <code>cache.m5.4xlarge</code>, <code>cache.m5.12xlarge</code>, <code>cache.m5.24xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> <p> <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code> </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R5 node types:</b> <code>cache.r5.large</code>, <code>cache.r5.xlarge</code>, <code>cache.r5.2xlarge</code>, <code>cache.r5.4xlarge</code>, <code>cache.r5.12xlarge</code>, <code>cache.r5.24xlarge</code> </p> <p> <b>R4 node types:</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Additional node type info</b> </p> <ul> <li> <p>All current generation instance types are created in Amazon VPC by default.</p> </li> <li> <p>Redis append-only files (AOF) are not supported for T1 or T2 instances.</p> </li> <li> <p>Redis Multi-AZ with automatic failover is not supported on T1 instances.</p> </li> <li> <p>Redis configuration variables <code>appendonly</code> and <code>appendfsync</code> are not supported on Redis version 2.8.22 and later.</p> </li> </ul>'
     CacheNodeIdsList:
       type: array
@@ -10644,6 +12083,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: '<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>'
+        MemberClustersOutpostArns:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationGroupOutpostArnList'
+            - description: The outpost ARNs of the replication group's member clusters.
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -10652,6 +12095,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ARN (Amazon Resource Name) of the replication group.
+        UserGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: The list of user group IDs that have access to the replication group.
       description: Contains all of the attributes of a specific Redis replication group.
     Integer:
       type: integer
@@ -10662,6 +12109,13 @@ components:
           - $ref: '#/components/schemas/String'
           - xml:
               name: PreferredAvailabilityZone
+    PreferredOutpostArnList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: PreferredOutpostArn
     CopySnapshotMessage:
       type: object
       required:
@@ -10733,6 +12187,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the Availability Zone in which the source cluster is located.
+        PreferredOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN (Amazon Resource Name) of the preferred outpost.
         CacheClusterCreateTime:
           allOf:
             - $ref: '#/components/schemas/TStamp'
@@ -10808,6 +12266,11 @@ components:
           - $ref: '#/components/schemas/String'
           - xml:
               name: SnapshotArn
+    OutpostMode:
+      type: string
+      enum:
+        - single-outpost
+        - cross-outpost
     CreateCacheClusterMessage:
       type: object
       required:
@@ -10906,6 +12369,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href="http://redis.io/commands/AUTH">AUTH password</a> at http://redis.io/commands/AUTH.</p>'
+        OutpostMode:
+          allOf:
+            - $ref: '#/components/schemas/OutpostMode'
+            - description: Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.
+        PreferredOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The outpost ARN in which the cache cluster is created.
+        PreferredOutpostArns:
+          allOf:
+            - $ref: '#/components/schemas/PreferredOutpostArnList'
+            - description: The outpost ARNs in which the cache cluster is created.
       description: Represents the input of a CreateCacheCluster operation.
     CreateCacheParameterGroupMessage:
       type: object
@@ -10982,7 +12457,7 @@ components:
         GlobalReplicationGroupIdSuffix:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+            - description: '<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href="http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html">Using the AWS CLI with Global Datastores </a>.</p>'
         GlobalReplicationGroupDescription:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -11054,6 +12529,11 @@ components:
           - $ref: '#/components/schemas/NodeGroupConfiguration'
           - xml:
               name: NodeGroupConfiguration
+    UserGroupIdListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserGroupId'
+      minItems: 1
     CreateReplicationGroupMessage:
       type: object
       required:
@@ -11185,6 +12665,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ID of the KMS key used to encrypt the disk in the cluster.
+        UserGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdListInput'
+            - description: The list of user groups to associate with the replication group.
       description: Represents the input of a <code>CreateReplicationGroup</code> operation.
     CreateSnapshotMessage:
       type: object
@@ -11209,6 +12693,74 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The ID of the KMS key used to encrypt the snapshot.
       description: Represents the input of a <code>CreateSnapshot</code> operation.
+    EngineType:
+      type: string
+      pattern: '[a-zA-Z]*'
+    UserIdListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserId'
+      minItems: 1
+    CreateUserGroupMessage:
+      type: object
+      required:
+        - UserGroupId
+        - Engine
+      title: CreateUserGroupMessage
+      properties:
+        UserGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user group.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'Must be Redis. '
+        UserIds:
+          allOf:
+            - $ref: '#/components/schemas/UserIdListInput'
+            - description: The list of user IDs that belong to the user group.
+    UserName:
+      type: string
+      minLength: 1
+    PasswordListInput:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+    CreateUserMessage:
+      type: object
+      required:
+        - UserId
+        - UserName
+        - Engine
+        - AccessString
+      title: CreateUserMessage
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The ID of the user.
+        UserName:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The username of the user.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'Must be Redis. '
+        Passwords:
+          allOf:
+            - $ref: '#/components/schemas/PasswordListInput'
+            - description: Passwords used for this user account. You can create up to two passwords for each user.
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/AccessString'
+            - description: Access permissions string used for this user account.
+        NoPasswordRequired:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Indicates a password is not required for this user account.
     CustomerNodeEndpointList:
       type: array
       items:
@@ -11379,6 +12931,26 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The name of the snapshot to be deleted.
       description: Represents the input of a <code>DeleteSnapshot</code> operation.
+    DeleteUserGroupMessage:
+      type: object
+      required:
+        - UserGroupId
+      title: DeleteUserGroupMessage
+      properties:
+        UserGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user group.
+    DeleteUserMessage:
+      type: object
+      required:
+        - UserId
+      title: DeleteUserMessage
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The ID of the user.
     DescribeCacheClustersMessage:
       type: object
       title: DescribeCacheClustersMessage
@@ -11554,6 +13126,8 @@ components:
         - cache-security-group
         - cache-subnet-group
         - replication-group
+        - user
+        - user-group
     DescribeEventsMessage:
       type: object
       title: DescribeEventsMessage
@@ -11827,6 +13401,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    DescribeUserGroupsMessage:
+      type: object
+      title: DescribeUserGroupsMessage
+      properties:
+        UserGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user group.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+    UserGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserGroup'
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
+    DescribeUsersMessage:
+      type: object
+      title: DescribeUsersMessage
+      properties:
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - description: 'The Redis engine. '
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The ID of the user.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filter to determine the list of User IDs to return.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;'
+    UserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
     DisassociateGlobalReplicationGroupMessage:
       type: object
       required:
@@ -11913,6 +13539,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the primary replication group
+    FilterName:
+      type: string
+      pattern: .*\S.*
+    FilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+      minItems: 1
+    FilterValue:
+      type: string
+      pattern: .*\S.*
     GlobalNodeGroup:
       type: object
       properties:
@@ -12213,6 +13850,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. '
+    UserGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserGroupId'
     ModifyReplicationGroupMessage:
       type: object
       required:
@@ -12304,6 +13945,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthTokenUpdateStrategyType'
             - description: '<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html">Authenticating Users with Redis AUTH</a> </p>'
+        UserGroupIdsToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: A list of user group IDs.
+        UserGroupIdsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: 'A list of users groups to remove, meaning the users in the group no longer can access thereplication group.'
+        RemoveUserGroups:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Removes the user groups that can access this replication group.
       description: Represents the input of a <code>ModifyReplicationGroups</code> operation.
     ReshardingConfigurationList:
       type: array
@@ -12359,6 +14012,50 @@ components:
             - $ref: '#/components/schemas/NodeGroupsToRetainList'
             - description: '<p>If the value of <code>NodeGroupCount</code> is less than the current number of node groups (shards), then either <code>NodeGroupsToRemove</code> or <code>NodeGroupsToRetain</code> is required. <code>NodeGroupsToRetain</code> is a list of <code>NodeGroupId</code>s to retain in the cluster.</p> <p>ElastiCache for Redis will attempt to remove all node groups except those listed by <code>NodeGroupsToRetain</code> from the cluster.</p>'
       description: Represents the input for a <code>ModifyReplicationGroupShardConfiguration</code> operation.
+    ModifyUserGroupMessage:
+      type: object
+      required:
+        - UserGroupId
+      title: ModifyUserGroupMessage
+      properties:
+        UserGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the user group.
+        UserIdsToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserIdListInput'
+            - description: The list of user IDs to add to the user group.
+        UserIdsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserIdListInput'
+            - description: The list of user IDs to remove from the user group.
+    ModifyUserMessage:
+      type: object
+      required:
+        - UserId
+      title: ModifyUserMessage
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The ID of the user.
+        AccessString:
+          allOf:
+            - $ref: '#/components/schemas/AccessString'
+            - description: Access permissions string used for this user account.
+        AppendAccessString:
+          allOf:
+            - $ref: '#/components/schemas/AccessString'
+            - description: Adds additional user permissions to the access string.
+        Passwords:
+          allOf:
+            - $ref: '#/components/schemas/PasswordListInput'
+            - description: The passwords belonging to the user account. You are allowed up to two.
+        NoPasswordRequired:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Indicates no password is required for the user account.
     MultiAZStatus:
       type: string
       enum:
@@ -12399,6 +14096,13 @@ components:
             - $ref: '#/components/schemas/NodeGroupMemberList'
             - description: A list containing information about individual nodes within the node group (shard).
       description: Represents a collection of cache nodes in a replication group. One node in the node group is the read/write primary node. All the other nodes are read-only Replica nodes.
+    OutpostArnsList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: OutpostArn
     NodeGroupList:
       type: array
       items:
@@ -12425,6 +14129,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the Availability Zone in which the node is located.
+        PreferredOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The outpost ARN of the node group member.
         CurrentRole:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12767,7 +14475,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthTokenUpdateStatus'
             - description: The auth token status
+        UserGroups:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupsUpdateStatus'
+            - description: The user groups being modified.
       description: 'The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.'
+    ReplicationGroupOutpostArnList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: ReplicationGroupOutpostArn
     ReplicationGroupList:
       type: array
       items:
@@ -12783,6 +14502,18 @@ components:
             - $ref: '#/components/schemas/SlotMigration'
             - description: Represents the progress of an online resharding operation.
       description: The status of an online resharding operation.
+    UserGroupsUpdateStatus:
+      type: object
+      properties:
+        UserGroupIdsToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: The list of user group IDs to add.
+        UserGroupIdsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserGroupIdList'
+            - description: The list of user group IDs to remove.
+      description: The status of the user group update.
     ReservedCacheNodeList:
       type: array
       items:
@@ -12984,6 +14715,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomerNodeEndpointList'
             - description: 'List of endpoints from which data should be migrated. For Redis (cluster mode disabled), list should have only one element.'
+    SubnetOutpost:
+      type: object
+      properties:
+        SubnetOutpostArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The outpost ARN of the subnet.
+      description: The ID of the outpost subnet.
     Subnet:
       type: object
       properties:
@@ -12995,6 +14734,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AvailabilityZone'
             - description: The Availability Zone associated with the subnet.
+        SubnetOutpost:
+          allOf:
+            - $ref: '#/components/schemas/SubnetOutpost'
+            - description: The outpost ARN of the subnet.
       description: Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with ElastiCache.
     TestFailoverMessage:
       type: object
@@ -13011,6 +14754,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AllowedNodeGroupId'
             - description: The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested. You may test automatic failover on up to 5 node groups in any rolling 24-hour period.
+    UGReplicationGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     UnprocessedUpdateAction:
       type: object
       properties:
@@ -13121,5 +14868,21 @@ components:
           - $ref: '#/components/schemas/UpdateAction'
           - xml:
               name: UpdateAction
+    UserIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserId'
+    UserGroupPendingChanges:
+      type: object
+      properties:
+        UserIdsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/UserIdList'
+            - description: The list of user group IDs ro remove.
+        UserIdsToAdd:
+          allOf:
+            - $ref: '#/components/schemas/UserIdList'
+            - description: The list of user IDs to add.
+      description: Returns the updates being applied to the user group.
 security:
   - hmac: []
