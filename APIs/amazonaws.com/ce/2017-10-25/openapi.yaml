@@ -2956,6 +2956,10 @@ components:
         $ref: '#/components/schemas/CostCategoryRule'
       minItems: 1
       maxItems: 500
+    CostCategoryProcessingStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CostCategoryProcessingStatus'
     CostCategory:
       type: object
       required:
@@ -2985,11 +2989,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/CostCategoryRulesList'
             - description: ' Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. '
+        ProcessingStatus:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryProcessingStatusList'
+            - description: ' The list of processing statuses for Cost Management products for a specific cost category. '
       description: The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.
     CostCategoryMaxResults:
       type: integer
       minimum: 1
       maximum: 100
+    CostCategoryStatusComponent:
+      type: string
+      enum:
+        - COST_EXPLORER
+    CostCategoryStatus:
+      type: string
+      enum:
+        - PROCESSING
+        - APPLIED
+    CostCategoryProcessingStatus:
+      type: object
+      properties:
+        Component:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryStatusComponent'
+            - description: ' The Cost Management product name of the applied status. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryStatus'
+            - description: ' The process status for a specific cost category. '
+      description: ' The list of processing statuses for Cost Management products for a specific cost category. '
+    CostCategoryValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CostCategoryValue'
     CostCategoryReference:
       type: object
       properties:
@@ -3011,6 +3044,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonNegativeInteger'
             - description: ' The number of rules associated with a specific Cost Category. '
+        ProcessingStatus:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryProcessingStatusList'
+            - description: ' The list of processing statuses for Cost Management products for a specific cost category. '
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/CostCategoryValuesList'
+            - description: ' A list of unique cost category values in a specific cost category. '
       description: <p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>
     CostCategoryReferencesList:
       type: array
@@ -3035,6 +3076,10 @@ components:
             - $ref: '#/components/schemas/Expression'
             - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>'
       description: 'Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.'
+    MatchOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchOption'
     CostCategoryValues:
       type: object
       properties:
@@ -3044,6 +3089,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Values'
             - description: The specific value of the Cost Category.
+        MatchOptions:
+          allOf:
+            - $ref: '#/components/schemas/MatchOptions'
+            - description: ' The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>. '
       description: The Cost Categories values used for filtering the costs.
     CoverageHours:
       type: object
@@ -3266,10 +3315,6 @@ components:
         - SAVINGS_PLANS_TYPE
         - SAVINGS_PLAN_ARN
         - PAYMENT_OPTION
-    MatchOptions:
-      type: array
-      items:
-        $ref: '#/components/schemas/MatchOption'
     DimensionValues:
       type: object
       properties:

@@ -2642,6 +2642,18 @@ components:
       pattern: '([a-zA-Z0-9]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
       minLength: 1
       maxLength: 128
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1600
+    DeadLetterConfig:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the SQS queue specified as the target for the dead-letter queue.
+      description: A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue configuration.
     RuleName:
       type: string
       pattern: '[\.\-_A-Za-z0-9]+'
@@ -2915,6 +2927,14 @@ components:
         $ref: '#/components/schemas/Target'
       minItems: 1
       maxItems: 100
+    MaximumEventAgeInSeconds:
+      type: integer
+      minimum: 60
+      maximum: 86400
+    MaximumRetryAttempts:
+      type: integer
+      minimum: 0
+      maximum: 185
     MessageGroupId:
       type: string
     NonPartnerEventBusName:
@@ -3174,6 +3194,18 @@ components:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: The error message that explains why the target removal failed.
       description: Represents a target that failed to be removed from a rule.
+    RetryPolicy:
+      type: object
+      properties:
+        MaximumRetryAttempts:
+          allOf:
+            - $ref: '#/components/schemas/MaximumRetryAttempts'
+            - description: The maximum number of retry attempts to make before the request fails. Retry attempts continue until either the maximum number of attempts is made or until the duration of the <code>MaximumEventAgeInSeconds</code> is met.
+        MaximumEventAgeInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/MaximumEventAgeInSeconds'
+            - description: 'The maximum amount of time, in seconds, to continue to make retry attempts.'
+      description: A <code>RetryPolicy</code> object that includes information about the retry policy settings.
     Rule:
       type: object
       properties:
@@ -3359,6 +3391,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RedshiftDataParameters'
             - description: '<p>Contains the Redshift Data API parameters to use when the target is a Redshift cluster.</p> <p>If you specify a Redshift Cluster as a Target, you can use this to specify parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge events.</p>'
+        DeadLetterConfig:
+          allOf:
+            - $ref: '#/components/schemas/DeadLetterConfig'
+            - description: The <code>DeadLetterConfig</code> that defines the target queue to send dead-letter queue events to.
+        RetryPolicy:
+          allOf:
+            - $ref: '#/components/schemas/RetryPolicy'
+            - description: The <code>RetryPolicy</code> object that contains the retry policy configuration to use for the dead-letter queue.
       description: '<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of services and resources that can be set as a target, see <a>PutTargets</a>.</p> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p>'
 security:
   - hmac: []

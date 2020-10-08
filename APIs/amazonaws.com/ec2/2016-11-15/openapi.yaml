@@ -41673,10 +41673,14 @@ paths:
     get:
       x-aws-operation-name: RevokeSecurityGroupEgress
       operationId: GET_RevokeSecurityGroupEgress
-      description: '<p>[VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn''t apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
+      description: '<p>[VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[Default VPC] If the values you specify do not match the existing rule''s values, no error is returned, and the output describes the security group rules that were not revoked. </p> <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
       responses:
         '200':
           description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RevokeSecurityGroupEgressResult'
       parameters:
         - name: DryRun
           in: query
@@ -41762,10 +41766,14 @@ paths:
     post:
       x-aws-operation-name: RevokeSecurityGroupEgress
       operationId: POST_RevokeSecurityGroupEgress
-      description: '<p>[VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn''t apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
+      description: '<p>[VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action does not apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[Default VPC] If the values you specify do not match the existing rule''s values, no error is returned, and the output describes the security group rules that were not revoked. </p> <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
       responses:
         '200':
           description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RevokeSecurityGroupEgressResult'
       requestBody:
         content:
           text/xml:
@@ -41790,10 +41798,14 @@ paths:
     get:
       x-aws-operation-name: RevokeSecurityGroupIngress
       operationId: GET_RevokeSecurityGroupIngress
-      description: '<p>Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[EC2-Classic only] If the values you specify do not match the existing rule''s values, no error is returned. Use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
+      description: '<p>Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[EC2-Classic , default VPC] If the values you specify do not match the existing rule''s values, no error is returned, and the output describes the security group rules that were not revoked. </p> <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
       responses:
         '200':
           description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RevokeSecurityGroupIngressResult'
       parameters:
         - name: CidrIp
           in: query
@@ -41885,10 +41897,14 @@ paths:
     post:
       x-aws-operation-name: RevokeSecurityGroupIngress
       operationId: POST_RevokeSecurityGroupIngress
-      description: '<p>Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[EC2-Classic only] If the values you specify do not match the existing rule''s values, no error is returned. Use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
+      description: '<p>Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule''s values exactly.</p> <note> <p>[EC2-Classic , default VPC] If the values you specify do not match the existing rule''s values, no error is returned, and the output describes the security group rules that were not revoked. </p> <p>AWS recommends that you use <a>DescribeSecurityGroups</a> to verify that the rule has been removed.</p> </note> <p>Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p>'
       responses:
         '200':
           description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RevokeSecurityGroupIngressResult'
       requestBody:
         content:
           text/xml:
@@ -51562,6 +51578,36 @@ components:
             - xml:
                 name: status
               description: The current state of the authorization rule.
+    RevokeSecurityGroupEgressResult:
+      type: object
+      properties:
+        Return:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: return
+              description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
+        UnknownIpPermissions:
+          allOf:
+            - $ref: '#/components/schemas/IpPermissionList'
+            - xml:
+                name: unknownIpPermissionSet
+              description: 'The outbound rules that were unknown to the service. In some cases, <code>unknownIpPermissionSet</code> might be in a different format from the request parameter. '
+    RevokeSecurityGroupIngressResult:
+      type: object
+      properties:
+        Return:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: return
+              description: 'Returns <code>true</code> if the request succeeds; otherwise, returns an error.'
+        UnknownIpPermissions:
+          allOf:
+            - $ref: '#/components/schemas/IpPermissionList'
+            - xml:
+                name: unknownIpPermissionSet
+              description: 'The inbound rules that were unknown to the service. In some cases, <code>unknownIpPermissionSet</code> might be in a different format from the request parameter. '
     Reservation:
       type: object
       example: {}
