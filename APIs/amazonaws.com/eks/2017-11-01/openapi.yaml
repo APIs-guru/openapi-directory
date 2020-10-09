@@ -2552,6 +2552,7 @@ components:
         - NodeCreationFailure
         - PodEvictionFailure
         - InsufficientFreeAddresses
+        - ClusterUnreachable
     ErrorDetail:
       type: object
       properties:
@@ -2616,6 +2617,7 @@ components:
         - InsufficientFreeAddresses
         - AccessDenied
         - InternalFailure
+        - ClusterUnreachable
     Issue:
       type: object
       properties:

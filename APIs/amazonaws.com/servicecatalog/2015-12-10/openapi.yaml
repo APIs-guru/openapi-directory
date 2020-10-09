@@ -678,7 +678,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolioShare:
     post:
       operationId: CreatePortfolioShare
-      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can''t share a shared resource. This includes portfolios that contain a shared product.</p>'
+      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can''t share a shared resource. This includes portfolios that contain a shared product.</p>'
       responses:
         '200':
           description: Success
@@ -1092,7 +1092,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.DeletePortfolioShare:
     post:
       operationId: DeletePortfolioShare
-      description: '<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an organization or by a delegated administrator.</p> <p>Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.</p>'
+      description: '<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the management account of an organization or by a delegated administrator.</p> <p>Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.</p>'
       responses:
         '200':
           description: Success
@@ -1515,7 +1515,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolioShareStatus:
     post:
       operationId: DescribePortfolioShareStatus
-      description: Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization or by a delegated admin.
+      description: Gets the status of the specified portfolio share operation. This API can only be called by the management account in the organization or by a delegated admin.
       responses:
         '200':
           description: Success
@@ -2049,7 +2049,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.DisableAWSOrganizationsAccess:
     post:
       operationId: DisableAWSOrganizationsAccess
-      description: <p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.</p> <p>This API can't be invoked if there are active delegated administrators in the organization.</p> <p>Note that a delegated administrator is not authorized to invoke <code>DisableAWSOrganizationsAccess</code>.</p>
+      description: <p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the management account in the organization.</p> <p>This API can't be invoked if there are active delegated administrators in the organization.</p> <p>Note that a delegated administrator is not authorized to invoke <code>DisableAWSOrganizationsAccess</code>.</p>
       responses:
         '200':
           description: Success
@@ -2319,7 +2319,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.EnableAWSOrganizationsAccess:
     post:
       operationId: EnableAWSOrganizationsAccess
-      description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p> <p>Note that a delegated administrator is not authorized to invoke <code>EnableAWSOrganizationsAccess</code>.</p>'
+      description: '<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the management account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p> <p>Note that a delegated administrator is not authorized to invoke <code>EnableAWSOrganizationsAccess</code>.</p>'
       responses:
         '200':
           description: Success
@@ -2472,7 +2472,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.GetAWSOrganizationsAccessStatus:
     post:
       operationId: GetAWSOrganizationsAccessStatus
-      description: Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization or by a delegated admin.
+      description: Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the management account in the organization or by a delegated admin.
       responses:
         '200':
           description: Success
@@ -2506,6 +2506,63 @@ paths:
             type: string
             enum:
               - AWS242ServiceCatalogService.GetAWSOrganizationsAccessStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWS242ServiceCatalogService.GetProvisionedProductOutputs:
+    post:
+      operationId: GetProvisionedProductOutputs
+      description: 'This API takes either a <code>ProvisonedProductId</code> or a <code>ProvisionedProductName</code>, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProvisionedProductOutputsOutput'
+        '480':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetProvisionedProductOutputsInput'
+      parameters:
+        - name: PageSize
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWS242ServiceCatalogService.GetProvisionedProductOutputs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2745,7 +2802,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.ListOrganizationPortfolioAccess:
     post:
       operationId: ListOrganizationPortfolioAccess
-      description: '<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization or by a delegated admin.</p> <p>If a delegated admin is de-registered, they can no longer perform this operation.</p>'
+      description: '<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the management account in the organization or by a delegated admin.</p> <p>If a delegated admin is de-registered, they can no longer perform this operation.</p>'
       responses:
         '200':
           description: Success
@@ -4281,7 +4338,7 @@ components:
         PortfolioShareType:
           allOf:
             - $ref: '#/components/schemas/PortfolioShareType'
-            - description: '<p>The type of shared portfolios to accept. The default is to accept imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Accept portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Accept imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
+            - description: '<p>The type of shared portfolios to accept. The default is to accept imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Accept portfolios shared by the management account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Accept imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
     InvalidParametersException: {}
     ResourceNotFoundException: {}
     LimitExceededException: {}
@@ -4590,7 +4647,7 @@ components:
         PortfolioShareToken:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
+            - description: The portfolio shares a unique identifier that only returns if the portfolio is shared to an organization node.
     CreatePortfolioShareInput:
       type: object
       required:
@@ -4612,7 +4669,7 @@ components:
         OrganizationNode:
           allOf:
             - $ref: '#/components/schemas/OrganizationNode'
-            - description: 'The organization node to whom you are going to share. If <code>OrganizationNode</code> is passed in, <code>PortfolioShare</code> will be created for the node and its children (when applies), and a <code>PortfolioShareToken</code> will be returned in the output in order for the administrator to monitor the status of the <code>PortfolioShare</code> creation process.'
+            - description: 'The organization node to whom you are going to share. If <code>OrganizationNode</code> is passed in, <code>PortfolioShare</code> will be created for the node an ListOrganizationPortfolioAccessd its children (when applies), and a <code>PortfolioShareToken</code> will be returned in the output in order for the administrator to monitor the status of the <code>PortfolioShare</code> creation process.'
     OperationNotSupportedException: {}
     CreateProductOutput:
       type: object
@@ -5265,11 +5322,11 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/Id'
-            - description: '<p>The provisioned product identifier. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>'
+            - description: The provisioned product identifier.
         Name:
           allOf:
             - $ref: '#/components/schemas/ProvisionedProductName'
-            - description: '<p>The name of the provisioned product. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>'
+            - description: The name of the provisioned product.
       description: 'DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The language code for localization. Id - [Optional] The provisioned product identifier. Name - [Optional] Another provisioned product identifier. Customers must provide either Id or Name.'
     DescribeProvisionedProductPlanOutput:
       type: object
@@ -5704,6 +5761,45 @@ components:
       type: object
       title: GetAWSOrganizationsAccessStatusInput
       properties: {}
+    GetProvisionedProductOutputsOutput:
+      type: object
+      properties:
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/RecordOutputs'
+            - description: 'Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL. '
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+    GetProvisionedProductOutputsInput:
+      type: object
+      title: GetProvisionedProductOutputsInput
+      properties:
+        AcceptLanguage:
+          allOf:
+            - $ref: '#/components/schemas/AcceptLanguage'
+            - description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+        ProvisionedProductId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the provisioned product that you want the outputs from.
+        ProvisionedProductName:
+          allOf:
+            - $ref: '#/components/schemas/ProvisionedProductName'
+            - description: The name of the provisioned product that you want the outputs from.
+        OutputKeys:
+          allOf:
+            - $ref: '#/components/schemas/OutputKeys'
+            - description: 'The list of keys that the API should return with their values. If none are provided, the API will return all outputs of the provisioned product.'
+        PageSize:
+          allOf:
+            - $ref: '#/components/schemas/PageSize'
+            - description: The maximum number of items to return with this call.
+        PageToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
     ListAcceptedPortfolioSharesOutput:
       type: object
       properties:
@@ -5734,7 +5830,7 @@ components:
         PortfolioShareType:
           allOf:
             - $ref: '#/components/schemas/PortfolioShareType'
-            - description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the master account of your organization</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
+            - description: <p>The type of shared portfolios to list. The default is to list imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - List portfolios shared by the management account of your organization</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - List default portfolios</p> </li> <li> <p> <code>IMPORTED</code> - List imported portfolios</p> </li> </ul>
     ListBudgetsForResourceOutput:
       type: object
       properties:
@@ -6378,7 +6474,7 @@ components:
         PortfolioShareType:
           allOf:
             - $ref: '#/components/schemas/PortfolioShareType'
-            - description: '<p>The type of shared portfolios to reject. The default is to reject imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Reject portfolios shared by the master account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Reject imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
+            - description: '<p>The type of shared portfolios to reject. The default is to reject imported portfolios.</p> <ul> <li> <p> <code>AWS_ORGANIZATIONS</code> - Reject portfolios shared by the management account of your organization.</p> </li> <li> <p> <code>IMPORTED</code> - Reject imported portfolios.</p> </li> <li> <p> <code>AWS_SERVICECATALOG</code> - Not supported. (Throws ResourceNotFoundException.)</p> </li> </ul> <p>For example, <code>aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS</code> </p>'
     ScanProvisionedProductsOutput:
       type: object
       properties:
@@ -7834,6 +7930,11 @@ components:
             - $ref: '#/components/schemas/ServiceActionAssociationErrorMessage'
             - description: A text description of the error.
       description: 'An object containing information about the error, along with identifying information about the self-service action and its associations.'
+    OutputKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputKey'
+      maxItems: 60
     HasDefaultPath:
       type: boolean
     InstructionType:

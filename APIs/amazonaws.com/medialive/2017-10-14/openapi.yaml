@@ -696,6 +696,16 @@ paths:
             schema:
               type: object
               properties:
+                cdiInputSpecification:
+                  description: Placeholder documentation for CdiInputSpecification
+                  type: object
+                  properties:
+                    Resolution:
+                      allOf:
+                        - $ref: '#/components/schemas/CdiInputResolution'
+                        - xml:
+                            name: resolution
+                          description: Maximum CDI input resolution
                 channelClass:
                   description: A standard channel has two encoding pipelines and a single pipeline channel only has one.
                   type: string
@@ -1355,7 +1365,7 @@ paths:
                   properties:
                     MaximumVideoBufferDelayMilliseconds:
                       allOf:
-                        - $ref: '#/components/schemas/__integerMin1000Max3000'
+                        - $ref: '#/components/schemas/__integerMin800Max3000'
                         - xml:
                             name: maximumVideoBufferDelayMilliseconds
                           description: Maximum video buffer delay in milliseconds.
@@ -1982,6 +1992,16 @@ paths:
             schema:
               type: object
               properties:
+                cdiInputSpecification:
+                  description: Placeholder documentation for CdiInputSpecification
+                  type: object
+                  properties:
+                    Resolution:
+                      allOf:
+                        - $ref: '#/components/schemas/CdiInputResolution'
+                        - xml:
+                            name: resolution
+                          description: Maximum CDI input resolution
                 destinations:
                   description: Placeholder documentation for __listOfOutputDestination
                   type: array
@@ -2749,7 +2769,7 @@ paths:
                   properties:
                     MaximumVideoBufferDelayMilliseconds:
                       allOf:
-                        - $ref: '#/components/schemas/__integerMin1000Max3000'
+                        - $ref: '#/components/schemas/__integerMin800Max3000'
                         - xml:
                             name: maximumVideoBufferDelayMilliseconds
                           description: Maximum video buffer delay in milliseconds.
@@ -4643,6 +4663,15 @@ components:
             - xml:
                 name: channel
       description: Placeholder documentation for CreateChannelResponse
+    CdiInputResolution:
+      type: string
+      enum:
+        - SD
+        - HD
+        - FHD
+        - UHD
+      description: |
+        Maximum CDI input resolution; SD is 480i and 576i up to 30 frames-per-second (fps), HD is 720p up to 60 fps / 1080i up to 30 fps, FHD is 1080p up to 60 fps, UHD is 2160p up to 60 fps
     OutputDestination:
       type: object
       properties:
@@ -4989,10 +5018,10 @@ components:
                 name: multiplex
               description: The newly created multiplex.
       description: Placeholder documentation for CreateMultiplexResponse
-    __integerMin1000Max3000:
+    __integerMin800Max3000:
       type: integer
-      description: Placeholder documentation for __integerMin1000Max3000
-      minimum: 1000
+      description: Placeholder documentation for __integerMin800Max3000
+      minimum: 800
       maximum: 3000
     __integerMin1000000Max100000000:
       type: integer
@@ -5079,6 +5108,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -5122,6 +5157,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -5257,6 +5293,12 @@ components:
             - xml:
                 name: packetIdentifiersMap
               description: The packet identifier map for this multiplex program.
+        PipelineDetails:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMultiplexProgramPipelineDetail'
+            - xml:
+                name: pipelineDetails
+              description: Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
         ProgramName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5389,6 +5431,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -5432,6 +5480,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -5769,6 +5818,12 @@ components:
             - xml:
                 name: packetIdentifiersMap
               description: The packet identifier map for this multiplex program.
+        PipelineDetails:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMultiplexProgramPipelineDetail'
+            - xml:
+                name: pipelineDetails
+              description: Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
         ProgramName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6124,6 +6179,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -6167,6 +6228,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -6282,6 +6344,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -6325,6 +6393,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -6789,6 +6858,21 @@ components:
         - FIXED
         - NONE
       description: Afd Signaling
+    __integerMin1Max4:
+      type: integer
+      description: Placeholder documentation for __integerMin1Max4
+      minimum: 1
+      maximum: 4
+    AncillarySourceSettings:
+      type: object
+      properties:
+        SourceAncillaryChannelNumber:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1Max4'
+            - xml:
+                name: sourceAncillaryChannelNumber
+              description: 'Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.'
+      description: Ancillary Source Settings
     M2tsSettings:
       type: object
       properties:
@@ -7080,6 +7164,10 @@ components:
                 name: videoPid
               description: Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
       description: M2ts Settings
+    RawSettings:
+      type: object
+      properties: {}
+      description: Raw Settings
     ArchiveContainerSettings:
       type: object
       properties:
@@ -7088,6 +7176,11 @@ components:
             - $ref: '#/components/schemas/M2tsSettings'
             - xml:
                 name: m2tsSettings
+        RawSettings:
+          allOf:
+            - $ref: '#/components/schemas/RawSettings'
+            - xml:
+                name: rawSettings
       description: Archive Container Settings
     OutputLocationRef:
       type: object
@@ -7331,6 +7424,28 @@ components:
       type: object
       properties: {}
       description: Pass Through Settings
+    WavSettings:
+      type: object
+      properties:
+        BitDepth:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: bitDepth
+              description: Bits per sample.
+        CodingMode:
+          allOf:
+            - $ref: '#/components/schemas/WavCodingMode'
+            - xml:
+                name: codingMode
+              description: The audio coding mode for the WAV audio. The mode determines the number of channels in the audio.
+        SampleRate:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: sampleRate
+              description: Sample rate in Hz.
+      description: Wav Settings
     AudioCodecSettings:
       type: object
       properties:
@@ -7359,6 +7474,11 @@ components:
             - $ref: '#/components/schemas/PassThroughSettings'
             - xml:
                 name: passThroughSettings
+        WavSettings:
+          allOf:
+            - $ref: '#/components/schemas/WavSettings'
+            - xml:
+                name: wavSettings
       description: Audio Codec Settings
     AudioNormalizationSettings:
       type: object
@@ -8476,11 +8596,6 @@ components:
       type: object
       properties: {}
       description: Webvtt Destination Settings
-    __integerMin1Max4:
-      type: integer
-      description: Placeholder documentation for __integerMin1Max4
-      minimum: 1
-      maximum: 4
     __stringMin3Max3:
       type: string
       description: Placeholder documentation for __stringMin3Max3
@@ -8515,6 +8630,11 @@ components:
     CaptionSelectorSettings:
       type: object
       properties:
+        AncillarySourceSettings:
+          allOf:
+            - $ref: '#/components/schemas/AncillarySourceSettings'
+            - xml:
+                name: ancillarySourceSettings
         AribSourceSettings:
           allOf:
             - $ref: '#/components/schemas/AribSourceSettings'
@@ -8649,6 +8769,16 @@ components:
                 name: pageNumber
               description: Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no "0x" prefix.
       description: Teletext Source Settings
+    CdiInputSpecification:
+      type: object
+      properties:
+        Resolution:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputResolution'
+            - xml:
+                name: resolution
+              description: Maximum CDI input resolution
+      description: Placeholder documentation for CdiInputSpecification
     ChannelClass:
       type: string
       enum:
@@ -8807,6 +8937,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -8850,6 +8986,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -8911,6 +9048,12 @@ components:
             - xml:
                 name: arn
               description: The unique arn of the channel.
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -8949,6 +9092,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -8993,6 +9137,12 @@ components:
       type: object
       title: CreateChannelRequest
       properties:
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         ChannelClass:
           allOf:
             - $ref: '#/components/schemas/ChannelClass'
@@ -9020,7 +9170,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
-              description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -9435,6 +9585,12 @@ components:
             - xml:
                 name: packetIdentifiersMap
               description: The packet identifier map for this multiplex program.
+        PipelineDetails:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMultiplexProgramPipelineDetail'
+            - xml:
+                name: pipelineDetails
+              description: Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
         ProgramName:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -9450,7 +9606,7 @@ components:
       properties:
         MaximumVideoBufferDelayMilliseconds:
           allOf:
-            - $ref: '#/components/schemas/__integerMin1000Max3000'
+            - $ref: '#/components/schemas/__integerMin800Max3000'
             - xml:
                 name: maximumVideoBufferDelayMilliseconds
               description: Maximum video buffer delay in milliseconds.
@@ -9678,6 +9834,11 @@ components:
             - xml:
                 name: videoPid
       description: Packet identifiers map for a given Multiplex program.
+    __listOfMultiplexProgramPipelineDetail:
+      type: array
+      description: Placeholder documentation for __listOfMultiplexProgramPipelineDetail
+      items:
+        $ref: '#/components/schemas/MultiplexProgramPipelineDetail'
     DeleteMultiplexRequest:
       type: object
       title: DeleteMultiplexRequest
@@ -13131,6 +13292,188 @@ components:
         - CODING_MODE_1_0
         - CODING_MODE_2_0
       description: Mp2 Coding Mode
+    Mpeg2AdaptiveQuantization:
+      type: string
+      enum:
+        - AUTO
+        - HIGH
+        - LOW
+        - MEDIUM
+        - 'OFF'
+      description: Mpeg2 Adaptive Quantization
+    Mpeg2ColorMetadata:
+      type: string
+      enum:
+        - IGNORE
+        - INSERT
+      description: Mpeg2 Color Metadata
+    Mpeg2ColorSpace:
+      type: string
+      enum:
+        - AUTO
+        - PASSTHROUGH
+      description: Mpeg2 Color Space
+    Mpeg2DisplayRatio:
+      type: string
+      enum:
+        - DISPLAYRATIO16X9
+        - DISPLAYRATIO4X3
+      description: Mpeg2 Display Ratio
+    Mpeg2FilterSettings:
+      type: object
+      properties:
+        TemporalFilterSettings:
+          allOf:
+            - $ref: '#/components/schemas/TemporalFilterSettings'
+            - xml:
+                name: temporalFilterSettings
+      description: Mpeg2 Filter Settings
+    Mpeg2GopSizeUnits:
+      type: string
+      enum:
+        - FRAMES
+        - SECONDS
+      description: Mpeg2 Gop Size Units
+    Mpeg2ScanType:
+      type: string
+      enum:
+        - INTERLACED
+        - PROGRESSIVE
+      description: Mpeg2 Scan Type
+    Mpeg2SubGopLength:
+      type: string
+      enum:
+        - DYNAMIC
+        - FIXED
+      description: Mpeg2 Sub Gop Length
+    Mpeg2TimecodeInsertionBehavior:
+      type: string
+      enum:
+        - DISABLED
+        - GOP_TIMECODE
+      description: Mpeg2 Timecode Insertion Behavior
+    Mpeg2Settings:
+      type: object
+      required:
+        - FramerateNumerator
+        - FramerateDenominator
+      properties:
+        AdaptiveQuantization:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2AdaptiveQuantization'
+            - xml:
+                name: adaptiveQuantization
+              description: 'Choose Off to disable adaptive quantization. Or choose another value to enable the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium, High. When you enable this field, MediaLive allows intra-frame quantizers to vary, which might improve visual quality.'
+        AfdSignaling:
+          allOf:
+            - $ref: '#/components/schemas/AfdSignaling'
+            - xml:
+                name: afdSignaling
+              description: |-
+                Indicates the AFD values that MediaLive will write into the video encode. If you do not know what AFD signaling is, or if your downstream system has not given you guidance, choose AUTO.
+                AUTO: MediaLive will try to preserve the input AFD value (in cases where multiple AFD values are valid).
+                FIXED: MediaLive will use the value you specify in fixedAFD.
+        ColorMetadata:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2ColorMetadata'
+            - xml:
+                name: colorMetadata
+              description: Specifies whether to include the color space metadata. The metadata describes the color space that applies to the video (the colorSpace field). We recommend that you insert the metadata.
+        ColorSpace:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2ColorSpace'
+            - xml:
+                name: colorSpace
+              description: |-
+                Choose the type of color space conversion to apply to the output. For detailed information on setting up both the input and the output to obtain the desired color space in the output, see the section on \"MediaLive Features - Video - color space\" in the MediaLive User Guide.
+                PASSTHROUGH: Keep the color space of the input content - do not convert it.
+                AUTO:Convert all content that is SD to rec 601, and convert all content that is HD to rec 709.
+        DisplayAspectRatio:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2DisplayRatio'
+            - xml:
+                name: displayAspectRatio
+              description: Sets the pixel aspect ratio for the encode.
+        FilterSettings:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2FilterSettings'
+            - xml:
+                name: filterSettings
+              description: |-
+                Optionally specify a noise reduction filter, which can improve quality of compressed content. If you do not choose a filter, no filter will be applied.
+                TEMPORAL: This filter is useful for both source content that is noisy (when it has excessive digital artifacts) and source content that is clean.
+                When the content is noisy, the filter cleans up the source content before the encoding phase, with these two effects: First, it improves the output video quality because the content has been cleaned up. Secondly, it decreases the bandwidth because MediaLive does not waste bits on encoding noise.
+                When the content is reasonably clean, the filter tends to decrease the bitrate.
+        FixedAfd:
+          allOf:
+            - $ref: '#/components/schemas/FixedAfd'
+            - xml:
+                name: fixedAfd
+              description: Complete this field only when afdSignaling is set to FIXED. Enter the AFD value (4 bits) to write on all frames of the video encode.
+        FramerateDenominator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - xml:
+                name: framerateDenominator
+              description: 'description": "The framerate denominator. For example, 1001. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.'
+        FramerateNumerator:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1'
+            - xml:
+                name: framerateNumerator
+              description: 'The framerate numerator. For example, 24000. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.'
+        GopClosedCadence:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0'
+            - xml:
+                name: gopClosedCadence
+              description: 'MPEG2: default is open GOP.'
+        GopNumBFrames:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin0Max7'
+            - xml:
+                name: gopNumBFrames
+              description: 'Relates to the GOP structure. The number of B-frames between reference frames. If you do not know what a B-frame is, use the default.'
+        GopSize:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: gopSize
+              description: |-
+                Relates to the GOP structure. The GOP size (keyframe interval) in the units specified in gopSizeUnits. If you do not know what GOP is, use the default.
+                If gopSizeUnits is frames, then the gopSize must be an integer and must be greater than or equal to 1.
+                If gopSizeUnits is seconds, the gopSize must be greater than 0, but does not need to be an integer.
+        GopSizeUnits:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2GopSizeUnits'
+            - xml:
+                name: gopSizeUnits
+              description: 'Relates to the GOP structure. Specifies whether the gopSize is specified in frames or seconds. If you do not plan to change the default gopSize, leave the default. If you specify SECONDS, MediaLive will internally convert the gop size to a frame count.'
+        ScanType:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2ScanType'
+            - xml:
+                name: scanType
+              description: Set the scan type of the output to PROGRESSIVE or INTERLACED (top field first).
+        SubgopLength:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2SubGopLength'
+            - xml:
+                name: subgopLength
+              description: |-
+                Relates to the GOP structure. If you do not know what GOP is, use the default.
+                FIXED: Set the number of B-frames in each sub-GOP to the value in gopNumBFrames.
+                DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to improve visual quality.
+        TimecodeInsertion:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2TimecodeInsertionBehavior'
+            - xml:
+                name: timecodeInsertion
+              description: |-
+                Determines how MediaLive inserts timecodes in the output video. For detailed information about setting up the input and the output for a timecode, see the section on \"MediaLive Features - Timecode configuration\" in the MediaLive User Guide.
+                DISABLED: do not include timecodes.
+                GOP_TIMECODE: Include timecode metadata in the GOP header.
+      description: Mpeg2 Settings
     SmoothGroupAudioOnlyTimecodeControl:
       type: string
       enum:
@@ -13400,6 +13743,22 @@ components:
       description: Placeholder documentation for __listOf__integer
       items:
         $ref: '#/components/schemas/__integer'
+    MultiplexProgramPipelineDetail:
+      type: object
+      properties:
+        ActiveChannelPipeline:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: activeChannelPipeline
+              description: Identifies the channel pipeline that is currently active for the pipeline (identified by PipelineId) in the multiplex.
+        PipelineId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pipelineId
+              description: Identifies a specific pipeline in the multiplex.
+      description: The current source for one of the pipelines in the multiplex.
     __stringMax256:
       type: string
       description: Placeholder documentation for __stringMax256
@@ -13435,6 +13794,11 @@ components:
       description: Placeholder documentation for __integerMin100000Max100000000
       minimum: 100000
       maximum: 100000000
+    __integerMinNegative5Max5:
+      type: integer
+      description: Placeholder documentation for __integerMinNegative5Max5
+      minimum: -5
+      maximum: 5
     MultiplexStatmuxVideoSettings:
       type: object
       properties:
@@ -13450,6 +13814,12 @@ components:
             - xml:
                 name: minimumBitrate
               description: Minimum statmux bitrate.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/__integerMinNegative5Max5'
+            - xml:
+                name: priority
+              description: The purpose of the priority is to use a combination of the\nmultiplex rate control algorithm and the QVBR capability of the\nencoder to prioritize the video quality of some channels in a\nmultiplex over others.  Channels that have a higher priority will\nget higher video quality at the expense of the video quality of\nother channels in the multiplex with lower priority.
       description: Statmux rate control settings
     MultiplexSummary:
       type: object
@@ -14763,6 +15133,12 @@ components:
       type: object
       title: UpdateChannelRequest
       properties:
+        CdiInputSpecification:
+          allOf:
+            - $ref: '#/components/schemas/CdiInputSpecification'
+            - xml:
+                name: cdiInputSpecification
+              description: Specification of CDI inputs for this channel
         Destinations:
           allOf:
             - $ref: '#/components/schemas/__listOfOutputDestination'
@@ -14785,7 +15161,7 @@ components:
             - $ref: '#/components/schemas/InputSpecification'
             - xml:
                 name: inputSpecification
-              description: 'Specification of input for this channel (max. bitrate, resolution, codec, etc.)'
+              description: Specification of network and file inputs for this channel
         LogLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
@@ -14954,6 +15330,11 @@ components:
             - $ref: '#/components/schemas/H265Settings'
             - xml:
                 name: h265Settings
+        Mpeg2Settings:
+          allOf:
+            - $ref: '#/components/schemas/Mpeg2Settings'
+            - xml:
+                name: mpeg2Settings
       description: Video Codec Settings
     VideoDescriptionRespondToAfd:
       type: string
@@ -15067,5 +15448,13 @@ components:
                 name: programId
               description: 'Selects a specific program from within a multi-program transport stream. If the program doesn''t exist, the first program within the transport stream will be selected by default.'
       description: Video Selector Program Id
+    WavCodingMode:
+      type: string
+      enum:
+        - CODING_MODE_1_0
+        - CODING_MODE_2_0
+        - CODING_MODE_4_0
+        - CODING_MODE_8_0
+      description: Wav Coding Mode
 security:
   - hmac: []

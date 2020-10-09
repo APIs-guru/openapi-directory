@@ -271,6 +271,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EnableBasicAuth'
                         - description: ' Enables basic authorization for the autocreated branch. '
+                    enablePerformanceMode:
+                      allOf:
+                        - $ref: '#/components/schemas/EnablePerformanceMode'
+                        - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
                     buildSpec:
                       allOf:
                         - $ref: '#/components/schemas/BuildSpec'
@@ -582,6 +586,9 @@ paths:
                   format: password
                 enableBasicAuth:
                   description: ' Enables basic authorization for the branch. '
+                  type: boolean
+                enablePerformanceMode:
+                  description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
                   type: boolean
                 tags:
                   description: ' The tag for the branch. '
@@ -1270,6 +1277,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EnableBasicAuth'
                         - description: ' Enables basic authorization for the autocreated branch. '
+                    enablePerformanceMode:
+                      allOf:
+                        - $ref: '#/components/schemas/EnablePerformanceMode'
+                        - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
                     buildSpec:
                       allOf:
                         - $ref: '#/components/schemas/BuildSpec'
@@ -1630,6 +1641,9 @@ paths:
                   format: password
                 enableBasicAuth:
                   description: ' Enables basic authorization for the branch. '
+                  type: boolean
+                enablePerformanceMode:
+                  description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
                   type: boolean
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
@@ -2963,6 +2977,8 @@ components:
       format: password
     EnableBasicAuth:
       type: boolean
+    EnablePerformanceMode:
+      type: boolean
     BuildSpec:
       type: string
       description: ' The build specification (build spec) file for an Amplify app build. '
@@ -3487,6 +3503,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
             - description: ' Enables basic authorization for the autocreated branch. '
+        enablePerformanceMode:
+          allOf:
+            - $ref: '#/components/schemas/EnablePerformanceMode'
+            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
         buildSpec:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
@@ -3821,6 +3841,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
             - description: ' Enables basic authorization for a branch of an Amplify app. '
+        enablePerformanceMode:
+          allOf:
+            - $ref: '#/components/schemas/EnablePerformanceMode'
+            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
         thumbnailUrl:
           allOf:
             - $ref: '#/components/schemas/ThumbnailUrl'
@@ -4029,6 +4053,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
             - description: ' Enables basic authorization for the branch. '
+        enablePerformanceMode:
+          allOf:
+            - $ref: '#/components/schemas/EnablePerformanceMode'
+            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4798,6 +4826,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableBasicAuth'
             - description: ' Enables basic authorization for the branch. '
+        enablePerformanceMode:
+          allOf:
+            - $ref: '#/components/schemas/EnablePerformanceMode'
+            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
         buildSpec:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
