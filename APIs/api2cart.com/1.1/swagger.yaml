@@ -7542,6 +7542,11 @@ paths:
           name: model
           required: false
           type: string
+        - description: Defines product's old price
+          in: query
+          name: old_price
+          required: false
+          type: number
         - description: Defines new product's price
           in: query
           name: price
@@ -8987,6 +8992,21 @@ definitions:
       - action_scope
       - action_amount
     type: object
+  Cart_Channel:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      id:
+        type: string
+      is_enabled:
+        type: boolean
+      name:
+        type: string
+      platform:
+        type: string
+    type: object
   Cart_MetaData:
     properties:
       additional_fields:
@@ -9028,6 +9048,10 @@ definitions:
       carrier_info:
         items:
           $ref: "#/definitions/Carrier"
+        type: array
+      channels:
+        items:
+          $ref: "#/definitions/Cart_Channel"
         type: array
       country:
         type: string
@@ -9971,6 +9995,8 @@ definitions:
         items:
           $ref: "#/definitions/Order_Item"
         type: array
+      channel_id:
+        type: string
       comment:
         type: string
       create_at:
@@ -10109,6 +10135,9 @@ definitions:
         type: string
       bill_state:
         description: Specifies billing state code
+        type: string
+      channel_id:
+        description: Channel ID
         type: string
       comment:
         description: Specifies order comment

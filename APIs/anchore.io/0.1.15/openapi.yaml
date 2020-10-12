@@ -2942,6 +2942,49 @@ paths:
         - Services
       x-anchore-authz-action: getService
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
+  "/system/webhooks/{webhook_type}/test":
+    post:
+      description: Loads the Webhook configuration for webhook_type, and sends the notification out as a test
+      operationId: test_webhook
+      parameters:
+        - description: The Webhook Type that we should test
+          in: path
+          name: webhook_type
+          required: true
+          schema:
+            type: string
+        - description: What kind of Notification to send
+          in: query
+          name: notification_type
+          required: false
+          schema:
+            default: tag_update
+            enum:
+              - tag_update
+              - analysis_update
+              - vuln_update
+              - policy_eval
+            type: string
+      responses:
+        "200":
+          description: The Webhook was sent successfully. Schemas may be found under Models (PolicyEvalNotification, TagUpdateNotification, VulnUpdateNotification, AnalysisUpdateNotification)
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiErrorResponse"
+          description: The Webhook failed to send due to misconfiguration
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiErrorResponse"
+          description: The Webhook failed to send due to an Internal Error
+      summary: Adds the capabilities to test a webhook delivery for the given notification type
+      tags:
+        - System
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /user:
     get:
       operationId: get_user
@@ -3238,6 +3281,44 @@ components:
       required:
         - transition
       type: object
+    AnalysisUpdateEval:
+      description: Evaluation Results for an entity (current or last)
+      properties:
+        analysis_status:
+          type: string
+        annotations:
+          type: object
+        image_digest:
+          type: string
+      type: object
+    AnalysisUpdateNotification:
+      allOf:
+        - $ref: "#/components/schemas/NotificationBase"
+        - description: The Notification Object definition for Tag Update Notifications
+          properties:
+            data:
+              $ref: "#/components/schemas/AnalysisUpdateNotificationData"
+          type: object
+    AnalysisUpdateNotificationData:
+      allOf:
+        - $ref: "#/components/schemas/BaseNotificationData"
+        - properties:
+            notification_payload:
+              $ref: "#/components/schemas/AnalysisUpdateNotificationPayload"
+          type: object
+    AnalysisUpdateNotificationPayload:
+      allOf:
+        - $ref: "#/components/schemas/GenericNotificationPayload"
+        - properties:
+            annotations:
+              description: List of Corresponding Image Annotations
+              nullable: true
+              type: object
+            curr_eval:
+              $ref: "#/components/schemas/AnalysisUpdateEval"
+            last_eval:
+              $ref: "#/components/schemas/AnalysisUpdateEval"
+          type: object
     AnchoreErrorCode:
       description: A description of an anchore error code (name, description)
       properties:
@@ -3380,6 +3461,16 @@ components:
             - archived
             - deleting
             - deleted
+          type: string
+      type: object
+    BaseNotificationData:
+      description: Every notification has a payload, which follows this basic structure
+      properties:
+        notification_type:
+          type: string
+        notification_user:
+          type: string
+        notification_user_email:
           type: string
       type: object
     CVSSV2Scores:
@@ -3758,6 +3849,18 @@ components:
             $ref: "#/components/schemas/TriggerSpec"
           type: array
       type: object
+    GenericNotificationPayload:
+      description: Parent class for Notification Payloads
+      properties:
+        notificationId:
+          type: string
+        subscription_key:
+          type: string
+        subscription_type:
+          type: string
+        userId:
+          type: string
+      type: object
     GroupSyncResult:
       properties:
         group:
@@ -4000,6 +4103,30 @@ components:
         metadata_type:
           type: string
       type: object
+    NotificationBase:
+      description: base object for Notifications (every notification has this basic structure)
+      properties:
+        created_at:
+          type: integer
+        dataId:
+          type: string
+        last_updated:
+          type: integer
+        max_tries:
+          type: integer
+        queueId:
+          type: string
+        record_state_key:
+          default: active
+          type: string
+        record_state_val:
+          nullable: true
+          type: string
+        tries:
+          type: integer
+        userId:
+          type: string
+      type: object
     NvdDataList:
       description: List of Nvd Data objects
       items:
@@ -4166,6 +4293,36 @@ components:
           description: UserId of the user that owns the bundle
           type: string
       type: object
+    PolicyEvalNotification:
+      allOf:
+        - $ref: "#/components/schemas/NotificationBase"
+        - description: The Notification Object definition for Policy Eval Notifications
+          properties:
+            data:
+              $ref: "#/components/schemas/PolicyEvalNotificationData"
+          type: object
+    PolicyEvalNotificationData:
+      allOf:
+        - $ref: "#/components/schemas/BaseNotificationData"
+        - properties:
+            notification_payload:
+              $ref: "#/components/schemas/PolicyEvalNotificationPayload"
+          type: object
+    PolicyEvalNotificationPayload:
+      allOf:
+        - $ref: "#/components/schemas/GenericNotificationPayload"
+        - properties:
+            annotations:
+              description: List of Corresponding Image Annotations
+              nullable: true
+              type: object
+            curr_eval:
+              description: The Current Policy Evaluation result
+              type: object
+            last_eval:
+              description: The Previous Policy Evaluation result
+              type: object
+          type: object
     PolicyEvaluation:
       description: Evaluation response object
       type: object
@@ -4539,6 +4696,38 @@ components:
           description: The tag-only section of the pull string
           type: string
       type: object
+    TagUpdateNotification:
+      allOf:
+        - $ref: "#/components/schemas/NotificationBase"
+        - description: The Notification Object definition for Tag Update Notifications
+          properties:
+            data:
+              $ref: "#/components/schemas/TagUpdateNotificationData"
+          type: object
+    TagUpdateNotificationData:
+      allOf:
+        - $ref: "#/components/schemas/BaseNotificationData"
+        - properties:
+            notification_payload:
+              $ref: "#/components/schemas/TagUpdateNotificationPayload"
+          type: object
+    TagUpdateNotificationPayload:
+      allOf:
+        - $ref: "#/components/schemas/GenericNotificationPayload"
+        - properties:
+            annotations:
+              description: List of Corresponding Image Annotations
+              nullable: true
+              type: object
+            curr_eval:
+              description: A list containing the current image digest
+              items: {}
+              type: array
+            last_eval:
+              description: A list containing the previous image digests
+              items: {}
+              type: array
+          type: object
     TokenResponse:
       properties:
         token:
@@ -4663,6 +4852,47 @@ components:
           description: Vendor Vulnerability ID
           type: string
       type: object
+    VulnDiffResult:
+      description: The results of the comparing two vulnerability records during an update
+      properties:
+        added:
+          items: {}
+          type: array
+        removed:
+          items: {}
+          type: array
+        updated:
+          items: {}
+          type: array
+      type: object
+    VulnUpdateNotification:
+      allOf:
+        - $ref: "#/components/schemas/NotificationBase"
+        - description: The Notification Object definition for Tag Update Notifications
+          properties:
+            data:
+              $ref: "#/components/schemas/VulnUpdateNotificationData"
+          type: object
+    VulnUpdateNotificationData:
+      allOf:
+        - $ref: "#/components/schemas/BaseNotificationData"
+        - properties:
+            notification_payload:
+              $ref: "#/components/schemas/VulnUpdateNotificationPayload"
+          type: object
+    VulnUpdateNotificationPayload:
+      allOf:
+        - $ref: "#/components/schemas/GenericNotificationPayload"
+        - properties:
+            annotations:
+              description: List of Corresponding Image Annotations
+              nullable: true
+              type: object
+            diff_vulnerability_result:
+              $ref: "#/components/schemas/VulnDiffResult"
+            imageDigest:
+              type: string
+          type: object
     Vulnerability:
       properties:
         feed:

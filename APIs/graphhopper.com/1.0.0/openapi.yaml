@@ -26,69 +26,18 @@ info:
     # Explore our APIs
 
 
-    Read through this documentation and search for key words on the left side. To unfold detailed information
-
-    about each object in the documentation, you click on e.g. `services` in the [Route Optimization documentation](#operation/solveVRP) as shown here:
-
-
-    ![Nested Doc](./img/nested-doc.gif)
-
-
-    To play and see the Route Optimization API in action try our [route editor](https://graphhopper.com/blog/2015/07/21/graphhoppers-new-route-optimization-editor/)
-
-    which available in the [dashboard](https://graphhopper.com/dashboard/). See how the Routing and Geocoding API is integrated in 
-
-    our route planner website [GraphHopper Maps](https://graphhopper.com/maps) ([sources](https://github.com/graphhopper/graphhopper/tree/0.12/web/src/main/resources/assets)). 
-
-    And [see below](#section/Explore-our-APIs/Insomnia) for a collection of requests for [Insomnia](https://insomnia.rest/) and [Postman](https://www.getpostman.com/). The request file contains all example requests from this documentation.
-
-
     ## Get started
 
 
-    1. To use the GraphHopper Directions API you sign up [here](https://graphhopper.com/dashboard/#/register) and create an API key.
+    1. [Sign up for GraphHopper](https://support.graphhopper.com/a/solutions/articles/44001976025)
 
-    2. Read the documentation of the desired API part below.
-
-    3. Start using the GraphHopper Directions API. [Our API clients](#section/Explore-our-APIs/API-Clients) can speed up the integration.
+    2. [Create an API key](https://support.graphhopper.com/a/solutions/articles/44001976027)
 
 
-    To use the GraphHopper Directions API commercially, you can buy paid package [in the dashboard](https://graphhopper.com/dashboard/#/pricing).
+    Each API part has its own documentation. Jump to the desired API part and learn about the API through the given examples and tutorials.
 
 
-    ## Contact Us
-
-
-    If you have problems or questions see the following information:
-
-     * [FAQ](https://graphhopper.com/api/1/docs/FAQ/)
-     * [Public forum](https://discuss.graphhopper.com/c/directions-api)     
-     * [Contact us](https://www.graphhopper.com/contact-form/)
-
-    To get informed about the newest features and development follow us at [twitter](https://twitter.com/graphhopper/) or [our blog](https://graphhopper.com/blog/). 
-
-    Furthermore you can watch [this git repository](https://github.com/graphhopper/directions-api-doc) of this documentation, sign up at our [dashboard](https://graphhopper.com/dashboard/) to get the newsletter or sign up at [our forum](https://discuss.graphhopper.com/c/directions-api). Pick the channel you like most.
-
-
-    ## API Client Libraries
-
-
-    To speed up development and make coding easier, we offer the following client libraries:
-
-     * [JavaScript client](https://github.com/graphhopper/directions-api-js-client) - try the [live examples](https://graphhopper.com/api/1/examples/)
-     * [Others](https://github.com/graphhopper/directions-api-clients) like C#, Ruby, PHP, Python, ... automatically created for the Route Optimization API
-
-    ### Bandwidth reduction
-
-
-    If you create your own client, make sure it supports http/2 and gzipped responses for best speed.
-
-
-    If you use the Matrix or Route Optimization API and want to solve large problems, we recommend you to reduce bandwidth
-
-    by [compressing your POST request](https://gist.github.com/karussell/82851e303ea7b3459b2dea01f18949f4)
-
-    and specifying the header as follows: `Content-Encoding: gzip`.
+    In addition, for each API there are specific sample requests that you can send via Insomnia or Postman to see what the requests and responses look like.
 
 
     ## Insomnia
@@ -123,6 +72,58 @@ info:
     ![Postman](./img/postman.png)
 
 
+    ## API Client Libraries
+
+
+    To speed up development and make coding easier, we offer the following client libraries:
+
+     * [JavaScript client](https://github.com/graphhopper/directions-api-js-client) - try the [live examples](https://graphhopper.com/api/1/examples/)
+     * [Others](https://github.com/graphhopper/directions-api-clients) like C#, Ruby, PHP, Python, ... automatically created for the Route Optimization API
+
+    ### Bandwidth reduction
+
+
+    If you create your own client, make sure it supports http/2 and gzipped responses for best speed.
+
+
+    If you use the Matrix or Route Optimization API and want to solve large problems, we recommend you to reduce bandwidth
+
+    by [compressing your POST request](https://gist.github.com/karussell/82851e303ea7b3459b2dea01f18949f4)
+
+    and specifying the header as follows: `Content-Encoding: gzip`.
+
+
+    ## Contact Us
+
+
+    If you have problems or questions, please read the following information:
+
+
+    - [FAQ](https://graphhopper.com/api/1/docs/FAQ/)
+
+    - [Public forum](https://discuss.graphhopper.com/c/directions-api)
+
+    - [Contact us](https://www.graphhopper.com/contact-form/)
+
+
+    To stay informed about the latest developments, you can
+
+
+    - follow us on [twitter](https://twitter.com/graphhopper/),
+
+    - read [our blog](https://graphhopper.com/blog/),
+
+    - watch [our documentation](https://github.com/graphhopper/directions-api-doc),
+
+    - sign up for our newsletter or
+
+    - [our forum](https://discuss.graphhopper.com/c/directions-api).
+
+
+    Select the channel you like the most.
+
+
+
     # Map Data and Routing Profiles
 
 
@@ -137,16 +138,13 @@ info:
     #### Geographical Coverage
 
 
-    [OpenStreetMap](https://www.openstreetmap.org) covers the entire world. If you want to convince yourself whether we can offer appropriate data for your region,
+    [OpenStreetMap](https://www.openstreetmap.org) covers the whole world. If you want to see for yourself if we can provide data suitable for your region,
 
-    please visit [GraphHopper Maps](https://graphhopper.com/maps/). You can edit and modify OpenStreetMap data if you find that important
+    please visit [GraphHopper Maps](https://graphhopper.com/maps/).
 
-    information is missing, for example, a weight restriction for a bridge. [Here](https://wiki.openstreetmap.org/wiki/Beginners%27_guide)
+    You can edit and modify OpenStreetMap data if you find that important information is missing, e.g. a weight limit for a bridge.
 
-    is a beginner's guide that shows how to add data.
-
-
-    If you edited data, we usually consider your data after 1 week at latest.
+    [Here](https://wiki.openstreetmap.org/wiki/Beginners%27_guide) is a beginner's guide that shows how to add data. If you have edited data, we usually consider your data after 1 week at the latest.
 
 
     #### Supported Vehicle Profiles
@@ -190,16 +188,18 @@ info:
     ## TomTom
 
 
-    If you need to consider traffic, you can purchase the TomTom add-on.
+    If you want to include traffic, you can purchase the TomTom Add-on.
+
+    This Add-on only uses TomTom's road network and historical traffic information.
+
+    Live traffic is not yet considered. If you are interested to learn how we consider traffic information, we recommend that you read [this article](https://www.graphhopper.com/blog/2017/11/06/time-dependent-optimization/).
 
 
-    Please note:
+    Please note the following:
 
-     * currently we only offer this for our [Route Optimization API](#tag/Route-Optimization-API).
-     * this add-on uses the TomTom road network and historical traffic information only. Live traffic is not yet considered. Read more about [how this works](https://www.graphhopper.com/blog/2017/11/06/time-dependent-optimization/).
-     * additionally to our terms your end users need to accept the [TomTom Eula](https://www.graphhopper.com/tomtom-end-user-license-agreement/).
-     * we do *not* use the TomTom web services. We only use their data with our software.
-     * up to 2 different vehicle profiles can be used in a single optimization request. The number of vehicles is unaffected and depends on your subscription.
+     * Currently we only offer this for our [Route Optimization API](#tag/Route-Optimization-API).
+     * In addition to our terms, you need to accept TomTom's [End User License Aggreement](https://www.graphhopper.com/tomtom-end-user-license-agreement/).
+     * We do *not* use TomTom's web services. We only use their data with our software.
 
      
     [Contact us](https://www.graphhopper.com/contact-form/) for more details.
@@ -1636,7 +1636,7 @@ paths:
             default: false
             type: boolean
         - description: >
-            Determines the way the ''best'' route is calculated. Default is `fastest`. Other options are `shortest` (e.g. for `vehicle=foot` or `bike`) and `short_fastest` which finds a reasonable balance between `shortest` and `fastest`, both require `ch.disable=true`.
+            Determines the way the "best" route is calculated. Besides `fastest` you can use `short_fastest` which finds a reasonable balance between the distance influence (`shortest`) and the time (`fastest`). You could also use `shortest` but is deprecated and not recommended for motor vehicles. All except `fastest` require `ch.disable=true`.
           in: query
           name: weighting
           schema:
@@ -2108,23 +2108,34 @@ paths:
     post:
       description: >
         
-        To get started with the Route Optimization API see the [introduction](#tag/Route-Optimization-API).
+        To get started with the Route Optimization API, please read the [introduction](#tag/Route-Optimization-API).
 
 
-        The Route Optimization endpoint is used with a POST request towards
+        To solve a new vehicle routing problem, make a HTTP POST to this URL
 
-        `https://graphhopper.com/api/1/vrp?key=<your_key>`. Then you'll find the solution in the JSON response.
 
-        Please note that for problems that take longer than 10 seconds a bad request error is returned.
+        ```
 
-        In this case please use the asynchronous [Batch Route Optimization Endpoint](#operation/asyncVRP) instead.
+        https://graphhopper.com/api/1/vrp?key=<your_key>
+
+        ```
+
+
+        It returns the solution to this problem in the JSON response.
+
+
+        Please note that this URL is very well suited to solve minor problems.
+
+        Larger vehicle routing problems, which take longer than 10 seconds to solve, cannot be solved.
+
+        To solve them, please use the [batch mode URL](#operation/asyncVRP) instead.
       operationId: solveVRP
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Request"
-        description: Request object that contains the problem to be solved
+        description: The request that contains the vehicle routing problem to be solved.
         required: true
       responses:
         "200":
@@ -2162,7 +2173,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalErrorMessage"
           description: Error occurred on server side.
-      summary: POST Route Optimization Endpoint
+      summary: POST route optimization problem
       tags:
         - Route Optimization API
       x-code-samples:
@@ -2218,22 +2229,45 @@ paths:
     post:
       description: >
         
-        Prefer the [synchronous endpoint](#operation/solveVRP) and use this Batch Route Optimization endpoint for
-
-        long running problems only. The work flow is asynchronous:
+        To solve a vehicle routing problem, perform the following steps:
 
 
-        - send a POST request towards `https://graphhopper.com/api/1/vrp/optimize?key=<your_key>` and fetch the job_id.
+        1.) Make a HTTP POST to this URL
 
-        - poll the solution every 500ms until it gives `status=finished`. Do this with a GET request 
-          towards `https://graphhopper.com/api/1/vrp/solution/<job_id>?key=<your_key>`.        
+
+        ```
+
+        https://graphhopper.com/api/1/vrp/optimize?key=<your_key>
+
+        ```
+
+
+        It returns a job id (job_id).
+
+
+        2.) Take the job id and fetch the solution for the vehicle routing problem from this URL:
+
+
+        ```
+
+        https://graphhopper.com/api/1/vrp/solution/<job_id>?key=<your_key>
+
+        ```
+
+
+        We recommend to query the solution every 500ms until it returns 'status=finished'.
+
+
+        **Note**: Since the workflow is a bit more cumbersome and since you lose some time in fetching the solution, you should always prefer
+
+        the [synchronous endpoint](#operation/solveVRP). You should use the batch mode only for long running problems.
       operationId: asyncVRP
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Request"
-        description: Request object that contains the problem to be solved
+        description: The request that contains the problem to be solved.
         required: true
       responses:
         "200":
@@ -2278,7 +2312,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/InternalErrorMessage"
           description: Error occurred on server side.
-      summary: Batch Route Optimization Endpoint
+      summary: POST route optimization problem (batch mode)
       tags:
         - Route Optimization API
       x-code-samples:
@@ -2333,9 +2367,18 @@ paths:
   "/vrp/solution/{jobId}":
     get:
       description: >
-        This endpoint returns the solution of a vehicle routing problems submitted to the [Batch Route Optimization endpoint](#operation/asyncVRP).
+        
+        Take the job id and fetch the solution for the vehicle routing problem from this URL:
 
-        You can fetch it with the job_id, you have been sent.
+
+        ```
+
+        https://graphhopper.com/api/1/vrp/solution/<job_id>?key=<your_key>
+
+        ```
+
+
+        You get the job id by sending a vehicle routing problem to the [batch mode URL](#operation/asyncVRP).
       operationId: getSolution
       parameters:
         - description: Request solution with jobId
@@ -2392,7 +2435,7 @@ paths:
           description: Requested solution could not be found.
         "500":
           description: Error occurred on server side.
-      summary: GET Batch Solution Endpoint
+      summary: GET the solution (batch mode)
       tags:
         - Route Optimization API
       x-code-samples:
@@ -2681,7 +2724,7 @@ components:
           type: number
       type: object
     Configuration:
-      description: Here you can specify general configurations of the API.
+      description: Specifies general configurations that are taken into account when solving the vehicle routing problem.
       properties:
         routing:
           $ref: "#/components/schemas/Routing"
@@ -3716,7 +3759,7 @@ components:
           $ref: "#/components/schemas/Configuration"
           description: Specifies general configurations.
         cost_matrices:
-          description: Specifies an array of cost matrix objects. This is used if you want to provide custom distance and/or time matrix values e.g. for time-dependent or indoor routing like for warehouses.
+          description: Specifies your own tranport time and distance matrices.
           example:
             - data:
                 distances:
@@ -3805,7 +3848,7 @@ components:
             $ref: "#/components/schemas/CostMatrix"
           type: array
         objectives:
-          description: Specifies an array of objective functions. This tells the algorithm the objective of the optimization.
+          description: Specifies an objective function. The vehicle routing problem is solved in such a way that this objective function is minimized.
           example:
             - type: min
               value: vehicles
@@ -3815,24 +3858,24 @@ components:
             $ref: "#/components/schemas/Objective"
           type: array
         relations:
-          description: Specifies an arbitrary number of additional relations between and among services and shipments.
+          description: Defines additional relationships between orders.
           items:
             anyOf:
               - $ref: "#/components/schemas/JobRelation"
               - $ref: "#/components/schemas/GroupRelation"
           type: array
         services:
-          description: Specifies the available services, i.e. pickup, delivery or any other points to be visited by vehicles. Each service only involves exactly one location.
+          description: Specifies the orders of the type "service". These are, for example, pick-ups, deliveries or other stops that are to be approached by the specified vehicles. Each of these orders contains only one location.
           items:
             $ref: "#/components/schemas/Service"
           type: array
         shipments:
-          description: Specifies the available shipments, i.e. pickup AND delivery points to be visited by vehicles subsequently. Each shipment involves exactly two locations, a pickup and a delivery location.
+          description: Specifies the available shipments. Each shipment contains a pickup and a delivery stop, which must be processed one after the other.
           items:
             $ref: "#/components/schemas/Shipment"
           type: array
         vehicle_types:
-          description: Specifies the available vehicle types that are referred to by the specified vehicles.
+          description: Specifies the available vehicle types. These types can be assigned to vehicles.
           items:
             $ref: "#/components/schemas/VehicleType"
           type: array
@@ -5822,11 +5865,11 @@ components:
           $ref: "#/components/schemas/Address"
         type_id:
           default: default-type
-          description: The type_id refers to specified vehicle type (see vehicle types). If it is omitted a default type will be used.
+          description: The type ID assigns a vehicle type to this vehicle. You can specify types in the array of vehicle types. If you omit the type ID, the default type is used. The default type is a `car` with a capacity of 0.
           example: my-own-type
           type: string
         vehicle_id:
-          description: Specifies the id of the vehicle. Ids need to be unique, thus if there two vehicles with the same id, an exception is thrown.
+          description: Specifies the ID of the vehicle. Ids must be unique, i.e. if there are two vehicles with the same ID, an error is returned.
           example: vehicle-1
           type: string
       required:

@@ -6512,17 +6512,6 @@ paths:
       summary: Get a repository by id
       tags:
         - repository
-  /settings/Attachment:
-    get:
-      operationId: getGeneralAttachmentSettings
-      produces:
-        - application/json
-      responses:
-        "200":
-          $ref: "#/responses/GeneralAttachmentSettings"
-      summary: Get instance's global settings for Attachment
-      tags:
-        - settings
   /settings/api:
     get:
       operationId: getGeneralAPISettings
@@ -6532,6 +6521,17 @@ paths:
         "200":
           $ref: "#/responses/GeneralAPISettings"
       summary: Get instance's global settings for api
+      tags:
+        - settings
+  /settings/attachment:
+    get:
+      operationId: getGeneralAttachmentSettings
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/GeneralAttachmentSettings"
+      summary: Get instance's global settings for Attachment
       tags:
         - settings
   /settings/repository:

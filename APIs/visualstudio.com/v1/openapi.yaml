@@ -1,6 +1,7 @@
 openapi: 3.0.1
 servers:
   - url: https://online.visualstudio.com
+  - url: https://online.visualstudio.com
 info:
   description: Public APIs for managing VS Online Environments
   title: VSOnline
@@ -122,19 +123,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/CloudEnvironmentResult"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/CloudEnvironmentResult"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/CloudEnvironmentResult"
-                nullable: true
                 type: array
           description: Success
         "401":
@@ -403,19 +401,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
           description: Bad Request
         "401":
@@ -656,19 +651,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/MessageCodes"
-                nullable: true
                 type: array
           description: Bad Request
         "401":
@@ -1111,19 +1103,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/PlanResult"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/PlanResult"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/PlanResult"
-                nullable: true
                 type: array
           description: Success
         "401":
@@ -1209,19 +1198,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
           description: Success
         "400":
@@ -1277,19 +1263,16 @@ paths:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
             text/json:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
             text/plain:
               schema:
                 items:
                   $ref: "#/components/schemas/ScopedSecretResultBody"
-                nullable: true
                 type: array
           description: Success
         "400":
@@ -2411,7 +2394,7 @@ paths:
 components:
   schemas:
     AgentResponse:
-      nullable: true
+      additionalProperties: false
       properties:
         assetUri:
           nullable: true
@@ -2470,7 +2453,7 @@ components:
       format: int32
       type: integer
     BillingProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         billingType:
           nullable: true
@@ -2489,17 +2472,16 @@ components:
           type: string
       type: object
     CloudEnvironmentFolderBody:
-      nullable: true
+      additionalProperties: false
       properties:
         recentFolderPaths:
           items:
-            nullable: true
             type: string
           nullable: true
           type: array
       type: object
     CloudEnvironmentResult:
-      nullable: true
+      additionalProperties: false
       properties:
         active:
           format: date-time
@@ -2520,7 +2502,6 @@ components:
           type: string
         features:
           additionalProperties:
-            nullable: true
             type: string
           nullable: true
           type: object
@@ -2553,7 +2534,6 @@ components:
           type: string
         recentFolders:
           items:
-            nullable: true
             type: string
           nullable: true
           type: array
@@ -2578,7 +2558,7 @@ components:
           type: string
       type: object
     CollectedData:
-      nullable: true
+      additionalProperties: false
       properties:
         environmentId:
           nullable: true
@@ -2591,7 +2571,7 @@ components:
           type: string
       type: object
     ConnectionInfoBody:
-      nullable: true
+      additionalProperties: false
       properties:
         connectionServiceUri:
           nullable: true
@@ -2604,7 +2584,7 @@ components:
           type: string
       type: object
     CreateCloudEnvironmentBody:
-      nullable: true
+      additionalProperties: false
       properties:
         autoShutdownDelayMinutes:
           format: int32
@@ -2621,7 +2601,6 @@ components:
           $ref: "#/components/schemas/ExperimentalFeaturesBody"
         features:
           additionalProperties:
-            nullable: true
             type: string
           nullable: true
           type: object
@@ -2657,7 +2636,7 @@ components:
         - type
       type: object
     DelegateIdentity:
-      nullable: true
+      additionalProperties: false
       properties:
         displayName:
           nullable: true
@@ -2670,7 +2649,7 @@ components:
           type: string
       type: object
     EnvironmentRegistrationCallbackBody:
-      nullable: true
+      additionalProperties: false
       properties:
         payload:
           $ref: "#/components/schemas/EnvironmentRegistrationCallbackPayloadBody"
@@ -2680,7 +2659,7 @@ components:
         - type
       type: object
     EnvironmentRegistrationCallbackPayloadBody:
-      nullable: true
+      additionalProperties: false
       properties:
         sessionId:
           nullable: true
@@ -2690,17 +2669,21 @@ components:
           type: string
       type: object
     ExperimentalFeaturesBody:
-      nullable: true
+      additionalProperties: false
       properties:
         customContainers:
+          type: boolean
+        localCredentialHelper:
           type: boolean
         newTerminal:
           type: boolean
         queueResourceAllocation:
           type: boolean
+        shallowClone:
+          type: boolean
       type: object
     GitConfigOptionsBody:
-      nullable: true
+      additionalProperties: false
       properties:
         userEmail:
           nullable: true
@@ -2710,7 +2693,7 @@ components:
           type: string
       type: object
     HeartBeatBody:
-      nullable: true
+      additionalProperties: false
       properties:
         agentVersion:
           nullable: true
@@ -2731,11 +2714,10 @@ components:
           type: string
       type: object
     IssueDelegatePlanAccessTokenBody:
-      nullable: true
+      additionalProperties: false
       properties:
         environmentIds:
           items:
-            nullable: true
             type: string
           nullable: true
           type: array
@@ -2750,7 +2732,7 @@ components:
           type: string
       type: object
     LocationInfoResult:
-      nullable: true
+      additionalProperties: false
       properties:
         defaultAutoSuspendDelayMinutes:
           items:
@@ -2765,7 +2747,7 @@ components:
           type: array
       type: object
     LocationsResult:
-      nullable: true
+      additionalProperties: false
       properties:
         available:
           items:
@@ -2776,7 +2758,6 @@ components:
           $ref: "#/components/schemas/AzureLocation"
         hostnames:
           additionalProperties:
-            nullable: true
             type: string
           nullable: true
           type: object
@@ -2815,13 +2796,11 @@ components:
         - 29 (ExportEnvironmentGenericError)
         - 30 (ExceededOrgDevContainerMaxLength)
         - 31 (ActionNotAllowedInThisState)
+        - 32 (ExportRunningEnvironmentError)
       format: int32
       type: integer
-    Object:
-      nullable: true
-      type: object
     PersonalizationInfoBody:
-      nullable: true
+      additionalProperties: false
       properties:
         dotfilesInstallCommand:
           nullable: true
@@ -2834,7 +2813,7 @@ components:
           type: string
       type: object
     PlanResource:
-      nullable: true
+      additionalProperties: false
       properties:
         id:
           nullable: true
@@ -2854,7 +2833,6 @@ components:
           type: string
         tags:
           additionalProperties:
-            nullable: true
             type: string
           nullable: true
           type: object
@@ -2863,7 +2841,7 @@ components:
           type: string
       type: object
     PlanResourceEncryptionProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         keySource:
           nullable: true
@@ -2872,7 +2850,7 @@ components:
           $ref: "#/components/schemas/PlanResourceKeyVaultProperties"
       type: object
     PlanResourceHeaders:
-      nullable: true
+      additionalProperties: false
       properties:
         clientTenantId:
           format: uuid
@@ -2891,7 +2869,7 @@ components:
           type: string
       type: object
     PlanResourceIdentity:
-      nullable: true
+      additionalProperties: false
       properties:
         principalId:
           format: uuid
@@ -2906,7 +2884,7 @@ components:
           type: string
       type: object
     PlanResourceKeyVaultProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         keyName:
           nullable: true
@@ -2919,7 +2897,7 @@ components:
           type: string
       type: object
     PlanResourceList:
-      nullable: true
+      additionalProperties: false
       properties:
         value:
           items:
@@ -2928,7 +2906,7 @@ components:
           type: array
       type: object
     PlanResourceProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         defaultAutoSuspendDelayMinutes:
           format: int32
@@ -2949,7 +2927,7 @@ components:
           $ref: "#/components/schemas/VnetProperties"
       type: object
     PlanResourceUpdateBody:
-      nullable: true
+      additionalProperties: false
       properties:
         identity:
           $ref: "#/components/schemas/PlanResourceIdentity"
@@ -2957,7 +2935,7 @@ components:
           $ref: "#/components/schemas/PlanResourceProperties"
       type: object
     PlanResult:
-      nullable: true
+      additionalProperties: false
       properties:
         id:
           nullable: true
@@ -2975,19 +2953,11 @@ components:
           type: string
       type: object
     ProblemDetails:
-      additionalProperties:
-        $ref: "#/components/schemas/Object"
-      nullable: true
+      additionalProperties: {}
       properties:
         detail:
           nullable: true
           type: string
-        extensions:
-          additionalProperties:
-            $ref: "#/components/schemas/Object"
-          nullable: true
-          readOnly: true
-          type: object
         instance:
           nullable: true
           type: string
@@ -3003,7 +2973,7 @@ components:
           type: string
       type: object
     RPSubscriptionNotification:
-      nullable: true
+      additionalProperties: false
       properties:
         properties:
           $ref: "#/components/schemas/RPSubscriptionProperties"
@@ -3015,7 +2985,7 @@ components:
           type: string
       type: object
     RPSubscriptionProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         accountOwner:
           $ref: "#/components/schemas/SubscriptionAccountOwner"
@@ -3042,7 +3012,7 @@ components:
           type: string
       type: object
     ScopedCreateSecretBody:
-      nullable: true
+      additionalProperties: false
       properties:
         filters:
           items:
@@ -3069,7 +3039,7 @@ components:
           type: string
       type: object
     ScopedSecretResultBody:
-      nullable: true
+      additionalProperties: false
       properties:
         filters:
           items:
@@ -3094,7 +3064,7 @@ components:
           $ref: "#/components/schemas/SecretType"
       type: object
     ScopedUpdateSecretBody:
-      nullable: true
+      additionalProperties: false
       properties:
         filters:
           items:
@@ -3119,7 +3089,7 @@ components:
           type: string
       type: object
     SecretDataBody:
-      nullable: true
+      additionalProperties: false
       properties:
         name:
           nullable: true
@@ -3134,7 +3104,7 @@ components:
           type: string
       type: object
     SecretFilterBody:
-      nullable: true
+      additionalProperties: false
       properties:
         type:
           $ref: "#/components/schemas/SecretFilterType"
@@ -3162,7 +3132,7 @@ components:
       format: int32
       type: integer
     SeedInfoBody:
-      nullable: true
+      additionalProperties: false
       properties:
         gitConfig:
           $ref: "#/components/schemas/GitConfigOptionsBody"
@@ -3176,7 +3146,7 @@ components:
           type: string
       type: object
     SkuInfoResult:
-      nullable: true
+      additionalProperties: false
       properties:
         displayName:
           nullable: true
@@ -3189,7 +3159,7 @@ components:
           type: string
       type: object
     StringStringKeyValuePair:
-      nullable: true
+      additionalProperties: false
       properties:
         key:
           nullable: true
@@ -3201,7 +3171,7 @@ components:
           type: string
       type: object
     SubscriptionAccountOwner:
-      nullable: true
+      additionalProperties: false
       properties:
         email:
           nullable: true
@@ -3211,7 +3181,7 @@ components:
           type: string
       type: object
     SubscriptionAdditionalProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         billingProperties:
           $ref: "#/components/schemas/BillingProperties"
@@ -3220,7 +3190,7 @@ components:
           type: string
       type: object
     SubscriptionData:
-      nullable: true
+      additionalProperties: false
       properties:
         computeQuota:
           format: int32
@@ -3236,7 +3206,7 @@ components:
           type: string
       type: object
     TelemetryData:
-      nullable: true
+      additionalProperties: false
       properties:
         level:
           nullable: true
@@ -3246,7 +3216,6 @@ components:
           type: string
         optionalValues:
           additionalProperties:
-            nullable: true
             type: string
           nullable: true
           type: object
@@ -3255,7 +3224,7 @@ components:
           type: string
       type: object
     UpdateCloudEnvironmentBody:
-      nullable: true
+      additionalProperties: false
       properties:
         autoShutdownDelayMinutes:
           format: int32
@@ -3275,7 +3244,7 @@ components:
           type: string
       type: object
     VnetProperties:
-      nullable: true
+      additionalProperties: false
       properties:
         subnetId:
           nullable: true

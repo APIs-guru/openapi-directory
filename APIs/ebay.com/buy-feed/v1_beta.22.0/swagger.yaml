@@ -165,6 +165,10 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
           x-response-codes:
             errors:
               "13023":
@@ -175,12 +179,10 @@ paths:
                 category: BUSINESS
                 description: Insufficient permissions to access this API for the category {category_id}. Please contact eBay Technical Support for further assistance.
                 domain: API_FEED
-        "404":
-          description: Not found
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -324,6 +326,10 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
           x-response-codes:
             errors:
               "13023":
@@ -334,8 +340,6 @@ paths:
                 category: BUSINESS
                 description: Insufficient permissions to access this API for the category {category_id}. Please contact eBay Technical Support for further assistance.
                 domain: API_FEED
-        "404":
-          description: Not found
         "416":
           description: Range not satisfiable
         "500":
@@ -470,6 +474,10 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
           x-response-codes:
             errors:
               "13023":
@@ -480,8 +488,6 @@ paths:
                 category: BUSINESS
                 description: Insufficient permissions to access this API for the category {category_id}. Please contact eBay Technical Support for further assistance.
                 domain: API_FEED
-        "404":
-          description: Not found
         "416":
           description: Range not satisfiable
         "500":
@@ -535,10 +541,10 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: "The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
+        description: "The text describing the condition of the item. For a list of condition names, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
         description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>
@@ -792,10 +798,10 @@ definitions:
         description: "The ID of the category of the item. For example: The ID for Toys &amp; Hobbies|Action Figures|Comic Book Heroes is 158671."
         type: string
       condition:
-        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
+        description: "The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
         type: string
       conditionId:
-        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500). Code so that your app gracefully handles any future changes to this list."
+        description: "The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Code so that your app gracefully handles any future changes to this list."
         type: string
       deliveryOptions:
         description: A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/buy/feed/types/api:DeliveryOptionsEnum'>eBay API documentation</a>

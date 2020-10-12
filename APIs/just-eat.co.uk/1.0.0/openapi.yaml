@@ -2143,7 +2143,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/availabilities":
     get:
       description: Get all availabilities on the restaurant's menu
@@ -2211,7 +2211,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/categories":
     get:
       description: Get all categories on the restaurant's menu
@@ -2279,7 +2279,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/categories/{categoryId}/items":
     get:
       description: Get all item IDs which are assigned to the specified category
@@ -2353,7 +2353,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/items":
     get:
       description: Get all menu items on the restaurant's menu
@@ -2421,7 +2421,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/items/{itemId}/dealgroups":
     get:
       description: Get all deal groups for the menu item with the provided ID
@@ -2495,7 +2495,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/items/{itemId}/dealgroups/{dealGroupId}/dealitemvariations":
     get:
       description: Get all deal item variations for the deal group with the specified ID, in the menu item with the specified ID
@@ -2575,7 +2575,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/items/{itemId}/modifiergroups":
     get:
       description: Get all modifier groups for the menu item with the provided ID
@@ -2649,7 +2649,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/catalogue/items/{itemId}/variations":
     get:
       description: Get all variations for the menu item with the provided ID
@@ -2723,7 +2723,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
   "/restaurants/{tenant}/{restaurantId}/customerclaims":
     get:
       description: Provides claims for a given restaurant with optional filtering
@@ -4210,7 +4210,7 @@ paths:
       x-status: Draft
   "/search/autocomplete/{tenant}":
     get:
-      description: Used for the predictive dish search feature in Apps and Web
+      description: Provides auto-completed search terms for restaurants, cuisines and products available in a given location.
       parameters:
         - description: A valid country code, e.g. "uk".
           in: path
@@ -4240,7 +4240,7 @@ paths:
             minItems: 2
             type: array
           style: form
-        - description: Limit the number of suggestions returned by the API. Defaults to 7. Valid values 1 - 10
+        - description: Limit the number of auto-completed terms returned by the API. Defaults to 7. Valid values 1 - 10
           in: query
           name: limit
           required: false
@@ -4315,7 +4315,125 @@ paths:
           description: Unauthorized
         "500":
           $ref: "#/components/responses/500ErrorResponse"
-      summary: Get search term completions
+      summary: Get auto-completed search terms
+      tags:
+        - Search
+        - publicly-accessible
+      x-status: Stable
+  "/search/restaurants/{tenant}":
+    get:
+      description: "Get restaurants available in a given lat-long which match a search term.\r
+
+        Matches can be found against the name, a cuisine or a product."
+      parameters:
+        - description: A valid country code, e.g. "uk".
+          in: path
+          name: tenant
+          required: true
+          schema:
+            type: string
+        - description: User's search term.
+          in: query
+          name: searchTerm
+          required: true
+          schema:
+            type: string
+        - description: "The latitude and longitude coordinates of the location in which to search.\r
+
+            Specify the coordinates as latitude,longitude."
+          example: 51.501285,-0.1424422
+          explode: false
+          in: query
+          name: latlong
+          required: true
+          schema:
+            items:
+              format: decimal
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          style: form
+        - description: "Limit the number of restaurants returned by the API.\r
+
+            Valid values are numbers between 1 and 500.\r
+
+            If not provided, the limit defaults to 300."
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: integer
+            type: number
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestaurantSearchResponse"
+          description: Success
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                type: string
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Validation failed on one or more fields
+                    errorCode: 400
+                    fields:
+                      - latlong
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                description: A HTTP 4xx error response
+                properties:
+                  fault:
+                    properties:
+                      errors:
+                        items:
+                          properties:
+                            description:
+                              description: Specific details about the error that may assist the you in resolving the issue
+                              type: string
+                            errorCode:
+                              description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                              type: string
+                            fields:
+                              description: An array of invalid query fields
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        type: array
+                      faultId:
+                        description: A value that helps identify this response back to logs, so we can easily find this specific fault
+                        type: string
+                      traceId:
+                        description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+                        type: string
+                    required:
+                      - faultId
+                    type: object
+                type: object
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                errors:
+                  - errorCode: "401"
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unauthorized
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+      summary: Search restaurants
       tags:
         - Search
         - publicly-accessible
@@ -5145,15 +5263,15 @@ components:
       type: object
     AutoCompleteSearchResponse:
       example:
-        suggestions:
+        terms:
           - classification: Restaurant
-            suggestedTerm: Pizza Palace
+            term: Pizza Palace
           - classification: Cuisine
-            suggestedTerm: Pizza
+            term: Pizza
           - classification: Dish
-            suggestedTerm: Large Hawaiian
+            term: Large Hawaiian
       properties:
-        suggestions:
+        terms:
           description: Ordered list of suggested term completions
           items:
             $ref: "#/components/schemas/AutoCompleteSearchResponseItem"
@@ -5164,7 +5282,7 @@ components:
     AutoCompleteSearchResponseItem:
       example:
         classification: Restaurant
-        suggestedTerm: Pizza Palace
+        term: Pizza Palace
       properties:
         classification:
           description: Grouping to which term belongs
@@ -5173,8 +5291,8 @@ components:
             - Cuisine
             - Dish
           type: string
-        suggestedTerm:
-          description: Suggested search term
+        term:
+          description: Auto-completed search term
           type: string
       type: object
     Availability:
@@ -5567,6 +5685,57 @@ components:
         Comment:
           description: Any additional information
           nullable: true
+          type: string
+      type: object
+    CallerInformationCallRequest:
+      properties:
+        accountSid:
+          description: The SID of the Twilio Account that created the Call resource
+          type: string
+        apiVersion:
+          description: The Twilio API version used to start a new TwiML session
+          type: string
+        callSid:
+          description: A unique identifier for the call, generated by Twilio
+          type: string
+        callStatus:
+          description: A descriptive status for the call
+          type: string
+        called:
+          description: The caller identifier
+          type: string
+        calledCountry:
+          description: The country of the called sender
+          type: string
+        calledState:
+          description: The state of the called sender
+          type: string
+        caller:
+          description: The name or phone number of the caller
+          type: string
+        callerCountry:
+          description: The country of the called sender
+          type: string
+        digits:
+          description: The digits that caller entered on their keypad
+          type: string
+        direction:
+          description: A string describing the direction of the call
+          type: string
+        finishedOnKey:
+          description: Gets or sets a value that caller pressed to submit their digits input
+          type: string
+        from:
+          description: The phone number or client identifier to use as the caller id
+          type: string
+        fromCountry:
+          description: The country of the called sender
+          type: string
+        to:
+          description: The phone number, SIP address, or client identifier to call
+          type: string
+        toCountry:
+          description: The country of the recipient
           type: string
       type: object
     CancelOrderResolution:
@@ -8237,57 +8406,6 @@ components:
         lastName:
           type: string
       type: object
-    CustomerOrderInformationCallRequest:
-      properties:
-        accountSid:
-          description: The SID of the Twilio Account that created the Call resource
-          type: string
-        apiVersion:
-          description: The Twilio API version used to start a new TwiML session
-          type: string
-        callSid:
-          description: A unique identifier for the call, generated by Twilio
-          type: string
-        callStatus:
-          description: A descriptive status for the call
-          type: string
-        called:
-          description: The caller identifier
-          type: string
-        calledCountry:
-          description: The country of the called sender
-          type: string
-        calledState:
-          description: The state of the called sender
-          type: string
-        caller:
-          description: The name or phone number of the caller
-          type: string
-        callerCountry:
-          description: The country of the called sender
-          type: string
-        digits:
-          description: The digits that caller entered on their keypad
-          type: string
-        direction:
-          description: A string describing the direction of the call
-          type: string
-        finishedOnKey:
-          description: Gets or sets a value that caller pressed to submit their digits input
-          type: string
-        from:
-          description: The phone number or client identifier to use as the caller id
-          type: string
-        fromCountry:
-          description: The country of the called sender
-          type: string
-        to:
-          description: The phone number, SIP address, or client identifier to call
-          type: string
-        toCountry:
-          description: The country of the recipient
-          type: string
-      type: object
     CustomisationResponse:
       description: Information about initial options to show to user
       example:
@@ -10824,7 +10942,7 @@ components:
         restaurantId: "100059"
       properties:
         currency:
-          description: The currency of the items on the menu in ISO 4217 format
+          description: The currency of the items on the menu in ISO 4217 format, ie GBP, EUR or AUD
           type: string
         description:
           description: A top level description for the menu.
@@ -13958,6 +14076,88 @@ components:
           nullable: true
           type: string
       type: object
+    RestaurantInvoiceDownloadInformation:
+      description: An information to download invoice content
+      example:
+        downloadUrl: https://invoicesbucket.s3.eu-west-1.amazonaws.com/123456.html?X-Amz-Expires=60&x-amz-security-token=qw12qw12&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ABABABABAB/20201007/eu-west-1/s3/aws4_request&X-Amz-Date=20201007T162255Z&X-Amz-SignedHeaders=host;x-amz-security-token&X-Amz-Signature=34rt34rt
+        expires: 2020-10-07T16:23:55.000Z
+      properties:
+        downloadUrl:
+          description: The URL to download invoice content
+          type: string
+        expires:
+          description: The time when the download URL expires and becomes invalid to download invoice content
+          format: date-time
+          type: string
+      type: object
+    RestaurantInvoiceSummary:
+      description: An invoice summary for the invoice period
+      properties:
+        accountBalance:
+          description: Restaurant account balance at the end of the invoice period in smallest unit of relevant currency
+          format: integer
+          type: number
+        createdDate:
+          description: The invoice created date
+          format: date-time
+          type: string
+        currencyCode:
+          description: The ISO-4217 currency code associated with the invoice
+          type: string
+        endDate:
+          description: The end date of the invoice period
+          format: date
+          type: string
+        id:
+          description: The Id of the invoice
+          type: string
+        invoiceAmount:
+          description: Invoice amount for the invoice period in smallest unit of relevant currency
+          format: integer
+          type: number
+        startDate:
+          description: The start date of the invoice period
+          format: date
+          type: string
+      type: object
+    RestaurantInvoices:
+      example:
+        invoices:
+          - accountBalance: 123540
+            createdDate: 2020-09-29T09:26:09.930Z
+            currencyCode: GBP
+            endDate: 2020-09-27T00:00:00.000Z
+            id: i9999999
+            invoiceAmount: 5421
+            startDate: 2020-09-21T00:00:00.000Z
+          - accountBalance: 167980
+            createdDate: 2020-09-22T11:00:32.800Z
+            currencyCode: GBP
+            endDate: 2020-09-20T00:00:00.000Z
+            id: i8888888
+            invoiceAmount: 6798
+            startDate: 2020-09-14T00:00:00.000Z
+        paging:
+          cursors:
+            after: fewyNzQyOGI3OHYt
+      properties:
+        invoices:
+          description: List of restaurant invoice summaries
+          items:
+            $ref: "#/components/schemas/RestaurantInvoiceSummary"
+          type: array
+        paging:
+          description: Consists of pagination information
+          properties:
+            cursors:
+              description: Consists of cursor markers used in pagination
+              properties:
+                after:
+                  description: The value should be used in the query parameter named after. It is used as a cursor of the last returned record in the previous request, from which next offset going to be fetched. A missing or empty value indicates that the end of the result set has been reached
+                  type: string
+              type: object
+          type: object
+      type: object
     RestaurantOffer:
       properties:
         DiscountApplied:
@@ -14312,6 +14512,71 @@ components:
           type: boolean
         restaurantId:
           description: Id of the restaurant
+          type: string
+      type: object
+    RestaurantSearchProduct:
+      example:
+        fullName: Chicken Korma
+        price: 799
+        productId: "289347"
+      properties:
+        fullName:
+          description: The full name of the product
+          type: string
+        price:
+          description: The price of the product
+          type: number
+        productId:
+          description: The id of the product
+          type: string
+      type: object
+    RestaurantSearchResponse:
+      example:
+        restaurants:
+          - products:
+              - fullName: Chicken Korma
+                price: 799
+                productId: "289347"
+              - fullName: Chicken Madras
+                price: 699
+                productId: "563454"
+            restaurantId: "110230"
+          - products:
+              - fullName: BBQ Chicken Pizza
+                price: 1099
+                productId: "67832"
+              - fullName: Chicken Burger
+                price: 899
+                productId: "23567"
+            restaurantId: "229390"
+      properties:
+        restaurants:
+          description: Ordered list of restaurants
+          items:
+            $ref: "#/components/schemas/RestaurantSearchResponseItem"
+          type: array
+          uniqueItems: false
+      type: object
+    RestaurantSearchResponseItem:
+      example:
+        products:
+          - fullName: Chicken Korma
+            price: 799
+            productId: "289347"
+          - fullName: Chicken Madras
+            price: 699
+            productId: "563454"
+          - restaurantId: "229390"
+        restaurantId: "110230"
+      properties:
+        products:
+          description: Ordered list of products available from the restaurant which matched the search term
+          items:
+            $ref: "#/components/schemas/RestaurantSearchProduct"
+          type: array
+          uniqueItems: false
+        restaurantId:
+          description: The id of the restaurant
           type: string
       type: object
     RestaurantSettingsResponse:

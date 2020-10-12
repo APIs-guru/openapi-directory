@@ -3865,6 +3865,18 @@ paths:
                           example: 2012-12-12T10:53:43-08:00
                           format: date-time
                           type: string
+                        vanity_name:
+                          description: >-
+                            Defines a custom vanity name to use in the shared link URL,
+
+                            for example `https://app.box.com/v/my-shared-link`.
+
+
+                            Custom URLs should not be used when sharing sensitive content
+
+                            as vanity URLs are a lot easier to guess than regular shared links.
+                          example: my-shared-link
+                          type: string
                       type: object
                     - description: >-
                         Defines a shared link for a file. Set this to `null` to remove
@@ -4077,6 +4089,20 @@ paths:
                         users with paid accounts.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
+                      type: string
+                    vanity_name:
+                      description: >-
+                        Defines a custom vanity name to use in the shared link URL,
+
+                        for example `https://app.box.com/v/my-shared-link`.
+
+
+                        Custom URLs should not be used when sharing sensitive content
+
+                        as vanity URLs are a lot easier to guess than regular shared
+
+                        links.
+                      example: my-shared-link
                       type: string
                   type: object
               type: object
@@ -4488,6 +4514,20 @@ paths:
                         users with paid accounts.
                       example: 2012-12-12T10:53:43-08:00
                       format: date-time
+                      type: string
+                    vanity_name:
+                      description: >-
+                        Defines a custom vanity name to use in the shared link URL,
+
+                        for example `https://app.box.com/v/my-shared-link`.
+
+
+                        Custom URLs should not be used when sharing sensitive content
+
+                        as vanity URLs are a lot easier to guess than regular shared
+
+                        links.
+                      example: my-shared-link
                       type: string
                   type: object
               type: object
@@ -8733,6 +8773,18 @@ paths:
                             users with paid accounts.
                           example: 2012-12-12T10:53:43-08:00
                           format: date-time
+                          type: string
+                        vanity_name:
+                          description: >-
+                            Defines a custom vanity name to use in the shared link URL,
+
+                            for example `https://app.box.com/v/my-shared-link`.
+
+
+                            Custom URLs should not be used when sharing sensitive content
+
+                            as vanity URLs are a lot easier to guess than regular shared links.
+                          example: my-shared-link
                           type: string
                       type: object
                     - description: Enables the creation of a shared link for a folder.
@@ -16300,6 +16352,26 @@ paths:
             maximum: 200
             type: integer
         - description: >-
+            Defines whether the search results should include any items
+
+            that the user recently accessed through a shared link.
+
+
+            Please note that when this parameter has been set to true,
+
+            the format of the response of this API changes to return
+
+            a list of [Search Results with
+
+            Shared Links](r://search_results_with_shared_links)
+          example: true
+          in: query
+          name: include_recent_shared_links
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: >-
             A comma-separated list of attributes to include in the
 
             response. This can be used to request fields that are
@@ -16342,7 +16414,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SearchResults"
+                oneOf:
+                  - $ref: "#/components/schemas/SearchResults"
+                  - $ref: "#/components/schemas/SearchResultsWithSharedLinks"
           description: >-
             Returns a collection of search results. If there are no matching
 
@@ -23001,6 +23075,12 @@ components:
                     file request to.
                   example: "42037322"
                   type: string
+                type:
+                  description: "`folder`"
+                  enum:
+                    - folder
+                  example: folder
+                  type: string
               required:
                 - id
               type: object
@@ -26830,48 +26910,146 @@ components:
       type: object
       x-box-resource-id: retention_policy_assignments
       x-box-tag: retention_policy_assignments
-    SearchResults:
-      description: A list of files, folders and web links that matched the search query.
+    SearchResultWithSharedLink:
+      description: >-
+        A single of files, folder or web link that matched the search query,
+
+        including the additional information about the shared link through
+
+        which the item has been shared with the user.
+
+
+        This response format is only returned when the
+
+        `include_recent_shared_links` query parameter has been set to `true`.
       properties:
-        entries:
-          description: The search results for the query provided.
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/File"
-              - $ref: "#/components/schemas/Folder"
-              - $ref: "#/components/schemas/WebLink"
-          type: array
-        limit:
+        accessible_via_shared_link:
           description: >-
-            The limit that was used for this search. This will be the same as the
+            The optional shared link through which the user has access to this
 
-            `limit` query parameter unless that value exceeded the maximum value
+            item. This value is only returned for items for which the user has
 
-            allowed.
-          example: 1000
-          format: int64
-          type: integer
-        offset:
-          description: >-
-            The 0-based offset of the first entry in this set. This will be the same
+            recently accessed the file through a shared link. For all other
 
-            as the `offset` query parameter used.
-          example: 2000
-          format: int64
-          type: integer
-        total_count:
-          description: >-
-            One greater than the offset of the last entry in the search results.
+            items this value will return `null`.
+          example: https://www.box.com/s/vspke7y05sb214wjokpk
+        item:
+          allOf:
+            - oneOf:
+                - $ref: "#/components/schemas/File"
+                - $ref: "#/components/schemas/Folder"
+                - $ref: "#/components/schemas/WebLink"
+            - description: >-
+                The file, folder or web link that matched the
 
-            The total number of entries in the collection may be less than
+                search query.
+      title: Search Result (including Shared Link)
+      type: object
+      x-box-resource-id: search_result_with_shared_link
+      x-box-tag: search
+    SearchResults:
+      allOf:
+        - properties:
+            limit:
+              description: >-
+                The limit that was used for this search. This will be the same as the
 
-            `total_count`.
-          example: 5000
-          format: int64
-          type: integer
+                `limit` query parameter unless that value exceeded the maximum value
+
+                allowed.
+              example: 1000
+              format: int64
+              type: integer
+            offset:
+              description: >-
+                The 0-based offset of the first entry in this set. This will be the same
+
+                as the `offset` query parameter used.
+              example: 2000
+              format: int64
+              type: integer
+            total_count:
+              description: >-
+                One greater than the offset of the last entry in the search results.
+
+                The total number of entries in the collection may be less than
+
+                `total_count`.
+              example: 5000
+              format: int64
+              type: integer
+          type: object
+        - properties:
+            entries:
+              description: The search results for the query provided.
+              items:
+                oneOf:
+                  - $ref: "#/components/schemas/File"
+                  - $ref: "#/components/schemas/Folder"
+                  - $ref: "#/components/schemas/WebLink"
+              type: array
+      description: A list of files, folders and web links that matched the search query.
       title: Search Results
       type: object
       x-box-resource-id: search_results
+      x-box-tag: search
+    SearchResultsWithSharedLinks:
+      allOf:
+        - properties:
+            limit:
+              description: >-
+                The limit that was used for this search. This will be the same as the
+
+                `limit` query parameter unless that value exceeded the maximum value
+
+                allowed.
+              example: 1000
+              format: int64
+              type: integer
+            offset:
+              description: >-
+                The 0-based offset of the first entry in this set. This will be the same
+
+                as the `offset` query parameter used.
+              example: 2000
+              format: int64
+              type: integer
+            total_count:
+              description: >-
+                One greater than the offset of the last entry in the search results.
+
+                The total number of entries in the collection may be less than
+
+                `total_count`.
+              example: 5000
+              format: int64
+              type: integer
+          type: object
+        - properties:
+            entries:
+              description: >-
+                The search results for the query provided, including the
+
+                additional information about any shared links through
+
+                which the item has been shared with the user.
+              items:
+                $ref: "#/components/schemas/SearchResultWithSharedLink"
+              type: array
+      description: >-
+        A list of files, folders and web links that matched the search query,
+
+        including the additional information about any shared links through
+
+        which the item has been shared with the user.
+
+
+        This response format is only returned when the `include_recent_shared_links`
+
+        query parameter has been set to `true`.
+      title: Search Results (including Shared Links)
+      type: object
+      x-box-resource-id: search_results_with_shared_links
       x-box-tag: search
     SkillCard:
       description: A generic Box Skill metadata card.

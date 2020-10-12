@@ -1640,18 +1640,11 @@ components:
           type: boolean
       type: object
     ProblemDetails:
-      additionalProperties: false
+      additionalProperties: {}
       properties:
         detail:
           nullable: true
           type: string
-        extensions:
-          additionalProperties:
-            additionalProperties: false
-            type: object
-          nullable: true
-          readOnly: true
-          type: object
         instance:
           nullable: true
           type: string

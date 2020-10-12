@@ -1953,18 +1953,27 @@ paths:
           name: facilitators
           schema:
             default: "true"
+            enum:
+              - "true"
+              - "false"
             type: string
         - description: If true, learners are included in the results.
           in: query
           name: learners
           schema:
             default: "true"
+            enum:
+              - "true"
+              - "false"
             type: string
         - description: If true, markers are included in the results.
           in: query
           name: markers
           schema:
             default: "true"
+            enum:
+              - "true"
+              - "false"
             type: string
       responses:
         "200":
@@ -1976,6 +1985,15 @@ paths:
                 title: offering's users
                 type: array
           description: offering's users
+        "400":
+          content:
+            application/json:
+              examples:
+                SchemaAllowedValuesError:
+                  $ref: "#/components/examples/SchemaAllowedValuesError"
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Bad Request
         "401":
           $ref: "#/components/responses/NotAuthorizedError"
         "403":
@@ -3102,8 +3120,6 @@ components:
           type: object
         name:
           type: string
-        portfolioId:
-          type: string
         start:
           type: string
       type: object
@@ -3351,6 +3367,8 @@ components:
         awarded:
           type: boolean
         badgeId:
+          type: string
+        badgeUrl:
           type: string
       type: object
     Badge:

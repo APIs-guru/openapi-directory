@@ -9,7 +9,7 @@ info:
   description: Expects only running software, real reactions, and beautifully crafted APIs to serve your every desire to transcribe a piece of paper to digital form.
   termsOfService: https://www.taggun.io/terms
   title: TAGGUN Receipt OCR Scanning API
-  version: 1.3.169
+  version: 1.4.4
   x-apisguru-categories:
     - text
   x-logo:
@@ -778,6 +778,8 @@ definitions:
         $ref: "#/definitions/qrCodeData"
       receiptNumber:
         $ref: "#/definitions/receiptNumber"
+      shoppingMallName:
+        $ref: "#/definitions/shoppingMallName"
       wineListItems:
         $ref: "#/definitions/wineListItems"
     type: object
@@ -1372,6 +1374,23 @@ definitions:
     items:
       $ref: "#/definitions/Model2"
     type: array
+  shoppingMallName:
+    properties:
+      confidenceLevel:
+        example: 0.7216666666666667
+        type: number
+      data:
+        example: Bass Hill Plaza
+        type: string
+      index:
+        example: 3
+        type: number
+      regions:
+        $ref: "#/definitions/regions"
+      text:
+        example: Some Shop Name - Bass Hill
+        type: string
+    type: object
   storagePayload:
     properties:
       contentType:

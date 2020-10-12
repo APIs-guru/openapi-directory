@@ -28,22 +28,81 @@ tags:
   - name: search
   - name: parse
   - name: lookup
+  - name: concepts
   - name: rationale
   - name: recommend_specialist
   - name: red_flags
   - name: triage
   - name: suggest
 paths:
+  /concepts:
+    get:
+      operationId: getConcepts
+      parameters:
+        - description: ids
+          in: query
+          name: ids
+          required: false
+          type: string
+        - description: types
+          in: query
+          name: types
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          headers: {}
+          schema:
+            items:
+              $ref: "#/definitions/ConceptItemModel_Public"
+            type: array
+            uniqueItems: true
+      tags:
+        - concepts
+  "/concepts/{id}":
+    get:
+      operationId: getConcept
+      parameters:
+        - description: concept id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          headers: {}
+          schema:
+            $ref: "#/definitions/ConceptItemModel_Public"
+      tags:
+        - concepts
   /conditions:
     get:
       description: Returns a list of all available conditions.
       operationId: getAllConditions
       parameters:
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -71,11 +130,23 @@ paths:
           name: id
           required: true
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -113,7 +184,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: "#/definitions/DiagnosisResponse"
+            $ref: "#/definitions/DiagnosisResponse_Public"
       summary: Query diagnostic engine
       tags:
         - diagnosis
@@ -144,11 +215,23 @@ paths:
       description: Returns information about data used by diagnostic engine.
       operationId: getDatabaseInfo
       parameters:
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
       produces:
         - application/json
       responses:
@@ -164,11 +247,23 @@ paths:
       description: Returns a list of all available lab tests.
       operationId: getAllLabTests
       parameters:
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
       produces:
         - application/json
       responses:
@@ -191,11 +286,23 @@ paths:
           name: id
           required: true
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
       produces:
         - application/json
       responses:
@@ -228,11 +335,23 @@ paths:
           name: sex
           required: false
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
       produces:
         - application/json
       responses:
@@ -329,11 +448,23 @@ paths:
       description: Returns a list of all available risk factors.
       operationId: getAllRiskFactors
       parameters:
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -361,11 +492,23 @@ paths:
           name: id
           required: true
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -403,11 +546,23 @@ paths:
           name: sex
           required: false
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - default: 8
           description: maximum number of results
           format: int32
@@ -477,11 +632,23 @@ paths:
       description: Returns a list of all available symptoms.
       operationId: getAllSymptoms
       parameters:
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -509,11 +676,23 @@ paths:
           name: id
           required: true
           type: string
-        - description: age
+        - description: age value
+          format: int32
           in: query
-          name: age
+          name: age.value
+          required: false
+          type: integer
+          x-example: 18
+        - default: year
+          description: unit in which age value was provided
+          enum:
+            - year
+            - month
+          in: query
+          name: age.unit
           required: false
           type: string
+          x-example: year
         - description: enable 5-level triage values
           in: query
           name: enable_triage_5
@@ -556,7 +735,7 @@ paths:
       tags:
         - triage
 definitions:
-  Choice:
+  Choice_Public:
     properties:
       id:
         enum:
@@ -570,7 +749,23 @@ definitions:
       - id
       - label
     type: object
-  ConditionProbability:
+  ConceptItemModel_Public:
+    properties:
+      common_name:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      type:
+        enum:
+          - condition
+          - symptom
+          - risk_factor
+          - lab_test
+        type: string
+    type: object
+  ConditionProbability_Public:
     properties:
       common_name:
         description: condition common name
@@ -730,18 +925,18 @@ definitions:
       - age
       - sex
     type: object
-  DiagnosisResponse:
+  DiagnosisResponse_Public:
     properties:
       conditions:
         items:
-          $ref: "#/definitions/ConditionProbability"
+          $ref: "#/definitions/ConditionProbability_Public"
         type: array
       extras:
         additionalProperties:
           type: object
         type: object
       question:
-        $ref: "#/definitions/Question"
+        $ref: "#/definitions/Question_Public"
       should_stop:
         type: boolean
     type: object
@@ -1021,25 +1216,35 @@ definitions:
       - mentions
       - obvious
     type: object
-  Question:
+  QuestionItem_Public:
     properties:
-      explication:
-        description: explication of question
+      choices:
+        description: list of available answer choices
+        items:
+          $ref: "#/definitions/Choice_Public"
+        type: array
+      id:
+        description: observation id
         type: string
+      name:
+        description: name or alias of observation
+        type: string
+    required:
+      - choices
+      - id
+      - name
+    type: object
+  Question_Public:
+    properties:
       extras:
         additionalProperties:
           type: object
         description: additional content, like images or HTML
         type: object
-      instruction:
-        description: instruction to question
-        items:
-          type: string
-        type: array
       items:
         description: one or more observations to evaluate
         items:
-          $ref: "#/definitions/QuestionItem"
+          $ref: "#/definitions/QuestionItem_Public"
         type: array
       text:
         description: question text
@@ -1053,32 +1258,6 @@ definitions:
     required:
       - items
       - text
-    type: object
-  QuestionItem:
-    properties:
-      choices:
-        description: list of available answer choices
-        items:
-          $ref: "#/definitions/Choice"
-        type: array
-      explication:
-        description: explication of question
-        type: string
-      id:
-        description: observation id
-        type: string
-      instruction:
-        description: instruction to question
-        items:
-          type: string
-        type: array
-      name:
-        description: name or alias of observation
-        type: string
-    required:
-      - choices
-      - id
-      - name
     type: object
   RationaleParam:
     properties:

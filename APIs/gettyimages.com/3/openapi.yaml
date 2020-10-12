@@ -5355,6 +5355,8 @@ components:
     AffiliateImageSearchResponse:
       additionalProperties: false
       properties:
+        auto_corrections:
+          $ref: "#/components/schemas/AutoCorrections"
         images:
           items:
             $ref: "#/components/schemas/AffiliateImage"
@@ -5421,6 +5423,8 @@ components:
     AffiliateVideoSearchResponse:
       additionalProperties: false
       properties:
+        auto_corrections:
+          $ref: "#/components/schemas/AutoCorrections"
         videos:
           items:
             $ref: "#/components/schemas/AffiliateVideo"
@@ -5673,6 +5677,13 @@ components:
         - Film
         - Music
       type: string
+    AutoCorrections:
+      additionalProperties: false
+      properties:
+        phrase:
+          nullable: true
+          type: string
+      type: object
     BlendedImageSortOrder:
       enum:
         - best_match
@@ -6025,6 +6036,8 @@ components:
     CreativeImageSearchResults:
       additionalProperties: false
       properties:
+        auto_corrections:
+          $ref: "#/components/schemas/AutoCorrections"
         images:
           items:
             $ref: "#/components/schemas/ImageSearchItemCreative"
@@ -6082,6 +6095,8 @@ components:
     CreativeVideoSearchResults:
       additionalProperties: false
       properties:
+        auto_corrections:
+          $ref: "#/components/schemas/AutoCorrections"
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
         result_count:
@@ -7405,6 +7420,8 @@ components:
     SearchByImageResourceResults:
       additionalProperties: false
       properties:
+        auto_corrections:
+          $ref: "#/components/schemas/AutoCorrections"
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
         image_fingerprint:

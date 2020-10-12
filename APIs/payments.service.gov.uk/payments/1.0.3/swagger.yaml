@@ -406,6 +406,16 @@ paths:
           name: last_digits_card_number
           required: false
           type: string
+        - description: From settled date of payment to be searched (this date is inclusive). Example=2015-08-13
+          in: query
+          name: from_settled_date
+          required: false
+          type: string
+        - description: To settled date of payment to be searched (this date is inclusive). Example=2015-08-14
+          in: query
+          name: to_settled_date
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -768,6 +778,16 @@ paths:
         - description: To date of refunds to be searched (this date is exclusive). Example=2015-08-14T12:35:00Z
           in: query
           name: to_date
+          required: false
+          type: string
+        - description: From settled date of refund to be searched (this date is inclusive). Example=2015-08-13
+          in: query
+          name: from_settled_date
+          required: false
+          type: string
+        - description: To settled date of refund to be searched (this date is inclusive). Example=2015-08-13
+          in: query
+          name: to_settled_date
           required: false
           type: string
         - description: Page number requested for the search, should be a positive integer (optional, defaults to 1)
@@ -1741,6 +1761,9 @@ definitions:
         example: act4c33g40j3edfmi8jknab84x
         readOnly: true
         type: string
+      settlement_summary:
+        $ref: "#/definitions/SettlementSummary"
+        readOnly: true
       status:
         enum:
           - submitted
@@ -1768,6 +1791,9 @@ definitions:
         example: act4c33g40j3edfmi8jknab84x
         readOnly: true
         type: string
+      settlement_summary:
+        $ref: "#/definitions/SettlementSummary"
+        readOnly: true
       status:
         enum:
           - submitted
@@ -1900,12 +1926,17 @@ definitions:
     description: A structure representing information about a settlement
     properties:
       capture_submit_time:
-        description: Date and time capture request has been submitted (may be null if capture request was not immediately acknowledged by payment gateway)
+        description: Date and time capture request has been submitted. May be null if capture request was not immediately acknowledged by payment gateway. Not applicable for refunds.
         example: 2016-01-21T17:15:000Z
         readOnly: true
         type: string
       captured_date:
-        description: Date of the capture event
+        description: Date of the capture event. Not applicable for refunds.
+        example: 2016-01-21
+        readOnly: true
+        type: string
+      settled_date:
+        description: The date that the transaction was settled, for example paid into or refunded from the service's account.
         example: 2016-01-21
         readOnly: true
         type: string

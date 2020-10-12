@@ -243,7 +243,7 @@ paths:
                 description: "The criterion type is required for criterion based campaigns. Valid values are: {criterionTypeValues}."
                 domain: API_MARKETING
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35051":
@@ -287,7 +287,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -358,7 +358,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -418,7 +418,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -460,7 +460,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -476,7 +476,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -532,7 +532,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -620,7 +620,7 @@ paths:
                 description: You have exceeded the maximum number of listing IDs. Only {maxSupportedNumber} listings are supported per call.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -829,7 +829,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -889,7 +889,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -1001,7 +1001,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -1199,7 +1199,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -1326,7 +1326,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -1671,7 +1671,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35052":
@@ -1813,7 +1813,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35062":
@@ -1833,7 +1833,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2068,7 +2068,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -2092,7 +2092,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2161,7 +2161,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35064":
@@ -2169,7 +2169,7 @@ paths:
                 description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2215,7 +2215,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35056":
@@ -2239,7 +2239,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2284,7 +2284,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35056":
@@ -2308,7 +2308,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2413,7 +2413,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2458,7 +2458,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2482,7 +2482,7 @@ paths:
                 $ref: "#/components/schemas/ReportMetadatas"
           description: Success
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2523,7 +2523,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2713,7 +2713,7 @@ paths:
                 description: The maximum number {maxSupportedInventoryReferences} of inventory references has been exceeded.
                 domain: API_MARKETING
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -2798,7 +2798,7 @@ paths:
         "404":
           description: Not found
         "500":
-          description: Internal Server Error
+          description: Internal Server error
           x-response-codes:
             errors:
               "35001":
@@ -3382,7 +3382,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business Error
+          description: Conflict
           x-response-codes:
             errors:
               "38248":
@@ -4159,7 +4159,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business Error
           x-response-codes:
             errors:
               "38243":
@@ -5771,7 +5771,7 @@ components:
           description: Indicates the source of the category ID; eBay or seller's store. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:CategoryScopeEnum'>eBay API documentation</a>
           type: string
         listingConditionIds:
-          description: "The ID of the listing's condition. Note: Starting in mid-September 2020, the &lsquo;Manufacturer Refurbished&rsquo; item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the &lsquo;Seller Refurbished&rsquo; item condition (Condition ID 2500) Valid values: 1000 = New 2000 = Manufacturer refurbished 2500 = Seller refurbished 3000 = Used/Like new/Pre owned"
+          description: "The ID of the listing's condition. Note: In the US and Australian marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', but this item condition is only available for use for a select number of US and Australian sellers. For all other marketplaces besides the US and Australia, Condition ID 2000 still maps to 'Manufacturer Refurbished'. Valid values: 1000 = New 2000 = Manufacturer refurbished 2500 = Seller refurbished 3000 = Used/Like new/Pre owned"
           items:
             type: string
           type: array

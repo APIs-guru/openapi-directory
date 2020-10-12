@@ -10,7 +10,7 @@ info:
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
 
-    > Date: 02 September, 2020
+    > Date: 07 October, 2020
 
     >
 
@@ -28,7 +28,7 @@ info:
 
     [Meraki Homepage](https://www.meraki.com)
   title: Meraki Dashboard API
-  version: 1.1.0
+  version: 1.2.0
   x-apisguru-categories:
     - iot
   x-logo:
@@ -61,6 +61,7 @@ tags:
   - name: cellularGateway
   - name: sm
   - name: accessControlLists
+  - name: accessPolicies
   - name: actionBatches
   - name: admins
   - name: airMarshal
@@ -99,6 +100,7 @@ tags:
   - name: dhcpServerPolicy
   - name: dscpTaggingOptions
   - name: dscpToCosMappings
+  - name: environmental
   - name: eventTypes
   - name: events
   - name: failedConnections
@@ -126,6 +128,7 @@ tags:
   - name: live
   - name: liveTools
   - name: lldpCdp
+  - name: loginSecurity
   - name: logs
   - name: lossAndLatencyHistory
   - name: malware
@@ -368,7 +371,7 @@ paths:
         - subnets
   "/devices/{serial}/appliance/performance":
     get:
-      description: Return the performance score for a single device. Only primary MX devices supported. If no data is available, a 204 error code is returned.
+      description: Return the performance score for a single MX. Only primary MX devices supported. If no data is available, a 204 error code is returned.
       operationId: getDeviceAppliancePerformance
       parameters:
         - in: path
@@ -383,7 +386,7 @@ paths:
               perfScore: 10
           schema:
             type: object
-      summary: Return the performance score for a single device. Only primary MX devices supported. If no data is available, a 204 error code is returned.
+      summary: Return the performance score for a single MX
       tags:
         - appliance
         - monitor
@@ -640,6 +643,7 @@ paths:
                 type: boolean
               timestamp:
                 description: "[optional] The snapshot will be taken from this time on the camera. The timestamp is expected to be in ISO 8601 format. If no timestamp is specified, we will assume current time."
+                format: date-time
                 type: string
             type: object
       responses:
@@ -927,7 +931,7 @@ paths:
               url: https://nxx.meraki.com/office-cameras/n/bs0a1k/manage/nodes/new_list/29048243992402?timestamp=1535732570077
           schema:
             type: object
-      summary: Returns video link to the specified camera. If a timestamp is supplied, it links to that timestamp.
+      summary: Returns video link to the specified camera
       tags:
         - camera
         - configure
@@ -1231,7 +1235,7 @@ paths:
                 vlan: 255
           schema:
             type: object
-      summary: List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
+      summary: List the clients of a device, up to a maximum of a month ago
       tags:
         - devices
         - monitor
@@ -2685,7 +2689,7 @@ paths:
               spareSerial: Q234-ABCD-0002
           schema:
             type: object
-      summary: Update warm spare configuration for a switch. The spare will use the same L3 configuration as the primary. Note that this will irreversibly destroy any existing L3 configuration on the spare.
+      summary: Update warm spare configuration for a switch
       tags:
         - switch
         - configure
@@ -2993,10 +2997,7 @@ paths:
                     type: integer
                 type: object
               rfProfileId:
-                description: >2
-                      The ID of an RF profile to assign to the device. If the value of this parameter is null, the appropriate basic RF profile
-                      (indoor or outdoor) will be assigned to the device. Assigning an RF profile will clear ALL manually configured overrides
-                      on the device (channel width, channel, power).
+                description: The ID of an RF profile to assign to the device. If the value of this parameter is null, the appropriate basic RF profile (indoor or outdoor) will be assigned to the device. Assigning an RF profile will clear ALL manually configured overrides on the device (channel width, channel, power).
                 type: integer
               twoFourGhzSettings:
                 description: Manual radio settings for 2.4 GHz.
@@ -3443,7 +3444,7 @@ paths:
               type: string
           schema:
             type: object
-      summary: List the security events for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: List the security events for a client
       tags:
         - appliance
         - monitor
@@ -5226,6 +5227,28 @@ paths:
         - configure
         - security
         - malware
+  "/networks/{networkId}/appliance/settings":
+    get:
+      description: Return the appliance settings for a network
+      operationId: getNetworkApplianceSettings
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              clientTrackingMethod: MAC address
+          schema:
+            type: object
+      summary: Return the appliance settings for a network
+      tags:
+        - appliance
+        - configure
+        - settings
   "/networks/{networkId}/appliance/singleLan":
     get:
       description: Return single LAN configuration
@@ -5861,11 +5884,7 @@ paths:
                   priority: normal
             properties:
               defaultRulesEnabled:
-                description: >2
-                      Whether default traffic shaping rules are enabled (true) or disabled (false).
-                      There are 4 default rules, which can
-                      be seen on your network's traffic shaping page. Note that default rules
-                      count against the rule limit of 8.
+                description: Whether default traffic shaping rules are enabled (true) or disabled (false). There are 4 default rules, which can be seen on your network's traffic shaping page. Note that default rules count against the rule limit of 8.
                 type: boolean
               rules:
                 description: >2
@@ -7114,7 +7133,7 @@ paths:
                   useVpn: true
           schema:
             type: object
-      summary: Return the site-to-site VPN settings of a network. Only valid for MX networks.
+      summary: Return the site-to-site VPN settings of a network
       tags:
         - appliance
         - configure
@@ -7201,7 +7220,7 @@ paths:
                   useVpn: true
           schema:
             type: object
-      summary: Update the site-to-site VPN settings of a network. Only valid for MX networks in NAT mode.
+      summary: Update the site-to-site VPN settings of a network
       tags:
         - appliance
         - configure
@@ -7482,7 +7501,7 @@ paths:
                 - tag2
           schema:
             type: object
-      summary: Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.
+      summary: Return a Bluetooth client
       tags:
         - networks
         - monitor
@@ -8694,7 +8713,7 @@ paths:
               groupPolicyId: "101"
           schema:
             type: object
-      summary: Provisions a client with a name and policy. Clients can be provisioned before they associate to the network.
+      summary: Provisions a client with a name and policy
       tags:
         - networks
         - configure
@@ -8754,7 +8773,7 @@ paths:
               wirelessCapabilities: 802.11ac - 2.4 and 5 GHz
           schema:
             type: object
-      summary: Return the client associated with the given identifier. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Return the client associated with the given identifier
       tags:
         - networks
         - monitor
@@ -8782,7 +8801,7 @@ paths:
               mac: 00:11:22:33:44:55
           schema:
             type: object
-      summary: Return the policy assigned to a client on the network. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Return the policy assigned to a client on the network
       tags:
         - networks
         - configure
@@ -8828,7 +8847,7 @@ paths:
               mac: 00:11:22:33:44:55
           schema:
             type: object
-      summary: Update the policy assigned to a client on the network. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Update the policy assigned to a client on the network
       tags:
         - networks
         - configure
@@ -8861,7 +8880,7 @@ paths:
                   isAuthorized: false
           schema:
             type: object
-      summary: Return the splash authorization for a client, for each SSID they've associated with through splash. Only enabled SSIDs with Click-through splash enabled will be included. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Return the splash authorization for a client, for each SSID they've associated with through splash
       tags:
         - networks
         - configure
@@ -9016,7 +9035,7 @@ paths:
                   isAuthorized: false
           schema:
             type: object
-      summary: Update a client's splash authorization. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Update a client's splash authorization
       tags:
         - networks
         - configure
@@ -9067,7 +9086,7 @@ paths:
               type: string
           schema:
             type: object
-      summary: Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Return the client's network traffic data over time
       tags:
         - networks
         - monitor
@@ -9096,7 +9115,7 @@ paths:
                 ts: 2018-02-11T00:00:00.090210Z
           schema:
             type: object
-      summary: Return the client's daily usage history. Usage data is in kilobytes. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+      summary: Return the client's daily usage history
       tags:
         - networks
         - monitor
@@ -9205,6 +9224,101 @@ paths:
         - networks
         - configure
         - devices
+  "/networks/{networkId}/environmental/events":
+    get:
+      description: List the environmental events for the network
+      operationId: getNetworkEnvironmentalEvents
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - description: A list of event types. The returned events will be filtered to only include events with these types.
+          in: query
+          items:
+            type: string
+          name: includedEventTypes
+          type: array
+        - description: A list of event types. The returned events will be filtered to exclude events with these types.
+          in: query
+          items:
+            type: string
+          name: excludedEventTypes
+          type: array
+        - description: The serial of the sensor device which the list of events will be filtered with
+          in: query
+          name: sensorSerial
+          type: string
+        - description: The serial of the environmental gateway device which the list of events will be filtered with
+          in: query
+          name: gatewaySerial
+          type: string
+        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 10.
+          in: query
+          name: perPage
+          type: integer
+        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: startingAfter
+          type: string
+        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: endingBefore
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              events:
+                - description: Application upgraded
+                  eventData:
+                    version: mt_1_1
+                  gatewaySerial: Q234-ABCD-5678
+                  networkId: N_24329156
+                  occurredAt: 2018-02-11T00:00:00.090210Z
+                  sensorSerial: Q234-ABCD-5678
+                  type: mt_application_upgraded
+              pageEndAt: 2018-02-11T00:00:00.090210Z
+              pageStartAt: 2018-02-11T00:00:00.090210Z
+          headers:
+            Link:
+              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
+              type: string
+          schema:
+            type: object
+      summary: List the environmental events for the network
+      tags:
+        - networks
+        - monitor
+        - environmental
+        - events
+  "/networks/{networkId}/environmental/events/eventTypes":
+    get:
+      description: List the event type to human-readable description
+      operationId: getNetworkEnvironmentalEventsEventTypes
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - category: Environmental
+                description: Application upgraded
+                type: mt_application_upgraded
+          schema:
+            type: object
+      summary: List the event type to human-readable description
+      tags:
+        - networks
+        - configure
+        - environmental
+        - events
+        - eventTypes
   "/networks/{networkId}/events":
     get:
       description: List the events for the network
@@ -9214,7 +9328,7 @@ paths:
           name: networkId
           required: true
           type: string
-        - description: The product type to fetch events for. This parameter is required for networks with multiple device types. Valid types are wireless, appliance, switch, systemsManager, camera, and cellularGateway
+        - description: The product type to fetch events for. This parameter is required for networks with multiple device types. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway, and environmental
           in: query
           name: productType
           type: string
@@ -11530,7 +11644,7 @@ paths:
         - groupPolicies
   "/networks/{networkId}/merakiAuthUsers":
     get:
-      description: List the splash or RADIUS users configured under Meraki Authentication for a network
+      description: List the users configured under Meraki Authentication for a network (splash guest or RADIUS users for a wireless network, or client VPN users for a wired network)
       operationId: getNetworkMerakiAuthUsers
       parameters:
         - in: path
@@ -11548,19 +11662,20 @@ paths:
                     authorizedByName: Miles Meraki
                     authorizedZone: Store WiFi
                     expiresAt: 2018-03-13T00:00:00.090210Z
+                    ssidNumber: 1
                 createdAt: 2018-02-11T00:00:00.090210Z
                 email: miles@meraki.com
                 merakiAuthUserId: aGlAaGkuY29t
                 name: Miles Meraki
           schema:
             type: object
-      summary: List the splash or RADIUS users configured under Meraki Authentication for a network
+      summary: List the users configured under Meraki Authentication for a network (splash guest or RADIUS users for a wireless network, or client VPN users for a wired network)
       tags:
         - networks
         - configure
         - merakiAuthUsers
     post:
-      description: Create a user configured with Meraki Authentication for a network (currently supports 802.1X and Splash Guest users, and currently, organizations have a 50,000 user cap)
+      description: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
       operationId: createNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11575,10 +11690,11 @@ paths:
             properties:
               accountType:
                 default: 802.1X
-                description: Authorization type for user. Can be either 'Guest' or '802.1X'. Defaults to '802.1X'.
+                description: Authorization type for user. Can be 'Guest' or '802.1X' for wireless networks, or 'Client VPN' for wired networks. Defaults to '802.1X'.
                 enum:
                   - Guest
                   - 802.1X
+                  - Client VPN
                 type: string
               authorizations:
                 description: Authorization zones and expiration dates for the user.
@@ -11589,10 +11705,8 @@ paths:
                       description: Date for authorization to expire. Set to 'Never' for the authorization to not expire, which is the default.
                       type: string
                     ssidNumber:
-                      description: SSID for which the user is being authorized. Must be configured for the user's given accountType. While users may ultimately be authorized for different types of SSIDs, currently, POST /merakiAuthUsers only supports authorizing a user for one type of SSID. Use PUT /merakiAuthUsers/{merakiAuthUserId} to add authorizations for other types of SSIDs.
+                      description: Required for wireless networks. The SSID for which the user is being authorized, which must be configured for the user's given accountType.
                       type: integer
-                  required:
-                    - ssidNumber
                   type: object
                 type: array
               email:
@@ -11624,20 +11738,21 @@ paths:
                   authorizedByName: Miles Meraki
                   authorizedZone: Store WiFi
                   expiresAt: 2018-03-13T00:00:00.090210Z
+                  ssidNumber: 1
               createdAt: 2018-02-11T00:00:00.090210Z
               email: miles@meraki.com
               merakiAuthUserId: aGlAaGkuY29t
               name: Miles Meraki
           schema:
             type: object
-      summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X and Splash Guest users, and currently, organizations have a 50,000 user cap)
+      summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
       tags:
         - networks
         - configure
         - merakiAuthUsers
   "/networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}":
     delete:
-      description: Delete a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be deleted)
+      description: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
       operationId: deleteNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11651,13 +11766,13 @@ paths:
       responses:
         "204":
           description: Successful operation
-      summary: Delete a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be deleted)
+      summary: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
       tags:
         - networks
         - configure
         - merakiAuthUsers
     get:
-      description: Return the Meraki Auth splash or RADIUS user
+      description: Return the Meraki Auth splash guest, RADIUS, or client VPN user
       operationId: getNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11679,19 +11794,20 @@ paths:
                   authorizedByName: Miles Meraki
                   authorizedZone: Store WiFi
                   expiresAt: 2018-03-13T00:00:00.090210Z
+                  ssidNumber: 1
               createdAt: 2018-02-11T00:00:00.090210Z
               email: miles@meraki.com
               merakiAuthUserId: aGlAaGkuY29t
               name: Miles Meraki
           schema:
             type: object
-      summary: Return the Meraki Auth splash or RADIUS user
+      summary: Return the Meraki Auth splash guest, RADIUS, or client VPN user
       tags:
         - networks
         - configure
         - merakiAuthUsers
     put:
-      description: Update a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be updated)
+      description: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
       operationId: updateNetworkMerakiAuthUser
       parameters:
         - in: path
@@ -11743,13 +11859,14 @@ paths:
                   authorizedByName: Miles Meraki
                   authorizedZone: Store WiFi
                   expiresAt: 2018-03-13T00:00:00.090210Z
+                  ssidNumber: 1
               createdAt: 2018-02-11T00:00:00.090210Z
               email: miles@meraki.com
               merakiAuthUserId: aGlAaGkuY29t
               name: Miles Meraki
           schema:
             type: object
-      summary: Update a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be updated)
+      summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
       tags:
         - networks
         - configure
@@ -12141,7 +12258,7 @@ paths:
                   - fakename
           schema:
             type: object
-      summary: List the keys required to access Personally Identifiable Information (PII) for a given identifier. Exactly one identifier will be accepted. If the organization contains org-wide Systems Manager users matching the key provided then there will be an entry with the key "0" containing the applicable keys.
+      summary: List the keys required to access Personally Identifiable Information (PII) for a given identifier
       tags:
         - networks
         - configure
@@ -12399,7 +12516,7 @@ paths:
                 - "8348382288234"
           schema:
             type: object
-      summary: Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details. Exactly one identifier will be accepted.
+      summary: Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier
       tags:
         - networks
         - configure
@@ -12458,7 +12575,7 @@ paths:
                 - "1099541095293"
           schema:
             type: object
-      summary: Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier. These owner IDs can be used with the Systems Manager API endpoints to retrieve owner details. Exactly one identifier will be accepted.
+      summary: Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier
       tags:
         - networks
         - configure
@@ -12598,6 +12715,143 @@ paths:
         - sm
         - configure
         - bypassActivationLockAttempts
+  "/networks/{networkId}/sm/devices":
+    get:
+      description: List the devices enrolled in an SM network with various specified fields and filters
+      operationId: getNetworkSmDevices
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - description: >-
+            Additional fields that will be displayed for each device.
+                The default fields are: id, name, tags, ssid, wifiMac, osName, systemModel, uuid, and serialNumber. The additional fields are: ip,
+                systemType, availableDeviceCapacity, kioskAppName, biosVersion, lastConnected, missingAppsCount, userSuppliedAddress, location, lastUser,
+                ownerEmail, ownerUsername, osBuild, publicIp, phoneNumber, diskInfoJson, deviceCapacity, isManaged, hadMdm, isSupervised, meid, imei, iccid,
+                simCarrierNetwork, cellularDataUsed, isHotspotEnabled, createdAt, batteryEstCharge, quarantined, avName, avRunning, asName, fwName,
+                isRooted, loginRequired, screenLockEnabled, screenLockDelay, autoLoginDisabled, autoTags, hasMdm, hasDesktopAgent, diskEncryptionEnabled,
+                hardwareEncryptionCaps, passCodeLock, usesHardwareKeystore, and androidSecurityPatchVersion.
+          in: query
+          items:
+            type: string
+          name: fields
+          type: array
+        - description: Filter devices by wifi mac(s).
+          in: query
+          items:
+            type: string
+          name: wifiMacs
+          type: array
+        - description: Filter devices by serial(s).
+          in: query
+          items:
+            type: string
+          name: serials
+          type: array
+        - description: Filter devices by id(s).
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Specify a scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags.
+          in: query
+          items:
+            type: string
+          name: scope
+          type: array
+        - description: The number of entries per page returned. Acceptable range is 3 - 1000. Default is 1000.
+          in: query
+          name: perPage
+          type: integer
+        - description: A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: startingAfter
+          type: string
+        - description: A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
+          in: query
+          name: endingBefore
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              id: "1284392014819"
+              ip: 1.2.3.4
+              name: Miles's phone
+              notes: Here's some info about my device
+              osName: iOS 9.3.5
+              serial: F5XKHEBX
+              serialNumber: F5XKHEBX
+              ssid: My SSID
+              systemModel: iPhone
+              tags:
+                - tag1
+                - tag2
+              uuid: 3d990628ede4c628d52
+              wifiMac: 00:11:22:33:44:55
+          headers:
+            Link:
+              description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
+              type: string
+          schema:
+            type: object
+      summary: List the devices enrolled in an SM network with various specified fields and filters
+      tags:
+        - sm
+        - configure
+        - devices
+  "/networks/{networkId}/sm/devices/checkin":
+    post:
+      description: Force check-in a set of devices
+      operationId: checkinNetworkSmDevices
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: checkinNetworkSmDevices
+          schema:
+            example:
+              ids: '"1284392014819"'
+            properties:
+              ids:
+                description: The ids of the devices to be checked-in.
+                items:
+                  type: string
+                type: array
+              scope:
+                description: The scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags of the devices to be checked-in.
+                items:
+                  type: string
+                type: array
+              serials:
+                description: The serials of the devices to be checked-in.
+                items:
+                  type: string
+                type: array
+              wifiMacs:
+                description: The wifiMacs of the devices to be checked-in.
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              ids: '"1284392014819"'
+          schema:
+            type: object
+      summary: Force check-in a set of devices
+      tags:
+        - sm
+        - configure
+        - devices
   "/networks/{networkId}/sm/devices/fields":
     put:
       description: Modify the fields of a device
@@ -12657,6 +12911,185 @@ paths:
         - configure
         - devices
         - fields
+  "/networks/{networkId}/sm/devices/lock":
+    post:
+      description: Lock a set of devices
+      operationId: lockNetworkSmDevices
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: lockNetworkSmDevices
+          schema:
+            example:
+              ids: '"1284392014819"'
+            properties:
+              ids:
+                description: The ids of the devices to be locked.
+                items:
+                  type: string
+                type: array
+              pin:
+                description: The pin number for locking macOS devices (a six digit number). Required only for macOS devices.
+                type: integer
+              scope:
+                description: The scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags of the devices to be wiped.
+                items:
+                  type: string
+                type: array
+              serials:
+                description: The serials of the devices to be locked.
+                items:
+                  type: string
+                type: array
+              wifiMacs:
+                description: The wifiMacs of the devices to be locked.
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              ids: '"1284392014819"'
+          schema:
+            type: object
+      summary: Lock a set of devices
+      tags:
+        - sm
+        - configure
+        - devices
+  "/networks/{networkId}/sm/devices/modifyTags":
+    post:
+      description: Add, delete, or update the tags of a set of devices
+      operationId: modifyNetworkSmDevicesTags
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: modifyNetworkSmDevicesTags
+          required: true
+          schema:
+            example:
+              scope: withAny, old_tag
+              tags:
+                - tag1
+                - tag2
+              updateAction: add
+            properties:
+              ids:
+                description: The ids of the devices to be modified.
+                items:
+                  type: string
+                type: array
+              scope:
+                description: The scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags of the devices to be modified.
+                items:
+                  type: string
+                type: array
+              serials:
+                description: The serials of the devices to be modified.
+                items:
+                  type: string
+                type: array
+              tags:
+                description: The tags to be added, deleted, or updated.
+                items:
+                  type: string
+                type: array
+              updateAction:
+                description: One of add, delete, or update. Only devices that have been modified will be returned.
+                type: string
+              wifiMacs:
+                description: The wifiMacs of the devices to be modified.
+                items:
+                  type: string
+                type: array
+            required:
+              - tags
+              - updateAction
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - id: "1284392014819"
+                serial: F5XKHEBX
+                tags:
+                  - tag1
+                  - tag2
+                wifiMac: 00:11:22:33:44:55
+          schema:
+            type: object
+      summary: Add, delete, or update the tags of a set of devices
+      tags:
+        - sm
+        - configure
+        - devices
+  "/networks/{networkId}/sm/devices/move":
+    post:
+      description: Move a set of devices to a new network
+      operationId: moveNetworkSmDevices
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: moveNetworkSmDevices
+          required: true
+          schema:
+            example:
+              ids: '"1284392014819"'
+              newNetwork: N_24329156
+            properties:
+              ids:
+                description: The ids of the devices to be moved.
+                items:
+                  type: string
+                type: array
+              newNetwork:
+                description: The new network to which the devices will be moved.
+                type: string
+              scope:
+                description: The scope (one of all, none, withAny, withAll, withoutAny, or withoutAll) and a set of tags of the devices to be moved.
+                items:
+                  type: string
+                type: array
+              serials:
+                description: The serials of the devices to be moved.
+                items:
+                  type: string
+                type: array
+              wifiMacs:
+                description: The wifiMacs of the devices to be moved.
+                items:
+                  type: string
+                type: array
+            required:
+              - newNetwork
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              ids: '"1284392014819"'
+              newNetwork: N_24329156
+          schema:
+            type: object
+      summary: Move a set of devices to a new network
+      tags:
+        - sm
+        - configure
+        - devices
   "/networks/{networkId}/sm/devices/wipe":
     post:
       description: Wipe a device
@@ -12721,7 +13154,7 @@ paths:
                 ts: 2018-05-12T00:00:00Z
           schema:
             type: object
-      summary: Return the client's daily cellular data usage history. Usage data is in kilobytes.
+      summary: Return the client's daily cellular data usage history
       tags:
         - sm
         - monitor
@@ -12870,11 +13303,7 @@ paths:
         - desktopLogs
   "/networks/{networkId}/sm/devices/{deviceId}/deviceCommandLogs":
     get:
-      description: >2
-            Return historical records of commands sent to Systems Manager devices.
-            <p>Note that this will include the name of the Dashboard user who initiated the command if it was generated
-            by a Dashboard admin rather than the automatic behavior of the system; you may wish to filter this out
-            of any reports.</p>
+      description: Return historical records of commands sent to Systems Manager devices. Note that this will include the name of the Dashboard user who initiated the command if it was generated by a Dashboard admin rather than the automatic behavior of the system; you may wish to filter this out of any reports.
       operationId: getNetworkSmDeviceDeviceCommandLogs
       parameters:
         - in: path
@@ -12913,11 +13342,7 @@ paths:
               type: string
           schema:
             type: object
-      summary: >2
-            Return historical records of commands sent to Systems Manager devices.
-            <p>Note that this will include the name of the Dashboard user who initiated the command if it was generated
-            by a Dashboard admin rather than the automatic behavior of the system; you may wish to filter this out
-            of any reports.</p>
+      summary: Return historical records of commands sent to Systems Manager devices
       tags:
         - sm
         - monitor
@@ -13433,6 +13858,65 @@ paths:
         - sm
         - configure
         - targetGroups
+  "/networks/{networkId}/sm/users":
+    get:
+      description: List the owners in an SM network with various specified fields and filters
+      operationId: getNetworkSmUsers
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - description: Filter users by id(s).
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Filter users by username(s).
+          in: query
+          items:
+            type: string
+          name: usernames
+          type: array
+        - description: Filter users by email(s).
+          in: query
+          items:
+            type: string
+          name: emails
+          type: array
+        - description: Specifiy a scope (one of all, none, withAny, withAll, withoutAny, withoutAll) and a set of tags.
+          in: query
+          items:
+            type: string
+          name: scope
+          type: array
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - adGroups: []
+                asmGroups: []
+                displayName: Miles Meraki <miles@meraki.com>
+                email: miles@meraki.com
+                fullName: Miles Meraki
+                hasIdentityCertificate: false
+                hasPassword: false
+                id: "1234"
+                isExternal: false
+                tags:
+                  - tag1
+                  - tag2
+                userThumbnail: https://s3.amazonaws.com/image.extension
+                username: ""
+          schema:
+            type: object
+      summary: List the owners in an SM network with various specified fields and filters
+      tags:
+        - sm
+        - configure
+        - users
   "/networks/{networkId}/sm/users/{userId}/deviceProfiles":
     get:
       description: Get the profiles associated with a user
@@ -13845,6 +14329,419 @@ paths:
         - switch
         - configure
         - accessControlLists
+  "/networks/{networkId}/switch/accessPolicies":
+    get:
+      description: List the access policies for a switch network. Only returns access policies with 'my RADIUS server' as authentication method
+      operationId: getNetworkSwitchAccessPolicies
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              - accessPolicyNumber: "1234"
+                accessPolicyType: Hybrid authentication
+                guestVlanId: 100
+                hostMode: Single-Host
+                increaseAccessSpeed: false
+                name: "Access policy #1"
+                radiusAccountingEnabled: true
+                radiusAccountingServers:
+                  - host: 1.2.3.4
+                    port: 22
+                    secret: password1
+                radiusCoaSupportEnabled: false
+                radiusServers:
+                  - host: 1.2.3.4
+                    port: 22
+                    secret: password1
+                radiusTestingEnabled: false
+                urlRedirectWalledGardenEnabled: true
+                urlRedirectWalledGardenRanges: 192.168.1.0/24
+                voiceVlanClients: true
+          schema:
+            type: object
+      summary: List the access policies for a switch network
+      tags:
+        - switch
+        - configure
+        - accessPolicies
+    post:
+      description: Create an access policy for a switch network. This endpoint only supports access policies with 'My RADIUS server' as authentication method.
+      operationId: createNetworkSwitchAccessPolicy
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: body
+          name: createNetworkSwitchAccessPolicy
+          required: true
+          schema:
+            example:
+              accessPolicyType: Hybrid authentication
+              guestVlanId: 100
+              hostMode: Single-Host
+              increaseAccessSpeed: false
+              name: "Access policy #1"
+              radiusAccountingEnabled: true
+              radiusAccountingServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusCoaSupportEnabled: false
+              radiusServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusTestingEnabled: false
+              urlRedirectWalledGardenEnabled: true
+              urlRedirectWalledGardenRanges: 192.168.1.0/24
+              voiceVlanClients: true
+            properties:
+              accessPolicyType:
+                description: Access Type of the policy. Automatically 'Hybrid authentication' when hostMode is 'Multi-Domain'.
+                enum:
+                  - 802.1x
+                  - MAC authentication bypass
+                  - Hybrid authentication
+                type: string
+              guestVlanId:
+                description: ID for the guest VLAN allow unauthorized devices access to limited network resources
+                type: integer
+              hostMode:
+                description: Choose the Host Mode for the access policy.
+                enum:
+                  - Single-Host
+                  - Multi-Domain
+                  - Multi-Host
+                  - Multi-Auth
+                type: string
+              increaseAccessSpeed:
+                description: Enabling this option will make switches execute 802.1X and MAC-bypass authentication simultaneously so that clients authenticate faster. Only required when accessPolicyType is 'Hybrid Authentication.
+                type: boolean
+              name:
+                description: Name of the access policy
+                type: string
+              radiusAccountingEnabled:
+                description: Enable to send start, interim-update and stop messages to a configured RADIUS accounting server for tracking connected clients
+                type: boolean
+              radiusAccountingServers:
+                description: List of RADIUS accounting servers to require connecting devices to authenticate against before granting network access
+                items:
+                  properties:
+                    host:
+                      description: Public IP address of the RADIUS accounting server
+                      type: string
+                    port:
+                      description: UDP port that the RADIUS Accounting server listens on for access requests
+                      type: integer
+                    secret:
+                      description: RADIUS client shared secret
+                      type: string
+                  required:
+                    - host
+                    - port
+                    - secret
+                  type: object
+                type: array
+              radiusCoaSupportEnabled:
+                description: Change of authentication for RADIUS re-authentication and disconnection
+                type: boolean
+              radiusServers:
+                description: List of RADIUS servers to require connecting devices to authenticate against before granting network access
+                items:
+                  properties:
+                    host:
+                      description: Public IP address of the RADIUS server
+                      type: string
+                    port:
+                      description: UDP port that the RADIUS server listens on for access requests
+                      type: integer
+                    secret:
+                      description: RADIUS client shared secret
+                      type: string
+                  required:
+                    - host
+                    - port
+                    - secret
+                  type: object
+                type: array
+              radiusTestingEnabled:
+                description: If enabled, Meraki devices will periodically send access-request messages to these RADIUS servers
+                type: boolean
+              urlRedirectWalledGardenEnabled:
+                description: Enable to restrict access for clients to a specific set of IP addresses or hostnames prior to authentication
+                type: boolean
+              urlRedirectWalledGardenRanges:
+                description: IP address ranges, in CIDR notation, to restrict access for clients to a specific set of IP addresses or hostnames prior to authentication
+                items:
+                  type: string
+                type: array
+              voiceVlanClients:
+                description: CDP/LLDP capable voice clients will be able to use this VLAN. Automatically true when hostMode is 'Multi-Domain'.
+                type: boolean
+            required:
+              - name
+              - radiusServers
+              - radiusTestingEnabled
+              - radiusCoaSupportEnabled
+              - radiusAccountingEnabled
+              - hostMode
+              - urlRedirectWalledGardenEnabled
+            type: object
+      responses:
+        "201":
+          description: Successful operation
+          examples:
+            application/json:
+              accessPolicyNumber: "1234"
+              accessPolicyType: Hybrid authentication
+              guestVlanId: 100
+              hostMode: Single-Host
+              increaseAccessSpeed: false
+              name: "Access policy #1"
+              radiusAccountingEnabled: true
+              radiusAccountingServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusCoaSupportEnabled: false
+              radiusServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusTestingEnabled: false
+              urlRedirectWalledGardenEnabled: true
+              urlRedirectWalledGardenRanges: 192.168.1.0/24
+              voiceVlanClients: true
+          schema:
+            type: object
+      summary: Create an access policy for a switch network
+      tags:
+        - switch
+        - configure
+        - accessPolicies
+  "/networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}":
+    delete:
+      description: Delete an access policy for a switch network
+      operationId: deleteNetworkSwitchAccessPolicy
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: accessPolicyNumber
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Successful operation
+      summary: Delete an access policy for a switch network
+      tags:
+        - switch
+        - configure
+        - accessPolicies
+    get:
+      description: Return a specific access policy for a switch network
+      operationId: getNetworkSwitchAccessPolicy
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: accessPolicyNumber
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              accessPolicyNumber: "1234"
+              accessPolicyType: Hybrid authentication
+              guestVlanId: 100
+              hostMode: Single-Host
+              increaseAccessSpeed: false
+              name: "Access policy #1"
+              radiusAccountingEnabled: true
+              radiusAccountingServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusCoaSupportEnabled: false
+              radiusServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusTestingEnabled: false
+              urlRedirectWalledGardenEnabled: true
+              urlRedirectWalledGardenRanges: 192.168.1.0/24
+              voiceVlanClients: true
+          schema:
+            type: object
+      summary: Return a specific access policy for a switch network
+      tags:
+        - switch
+        - configure
+        - accessPolicies
+    put:
+      description: Update an access policy for a switch network. This endpoint only supports access policies with 'My RADIUS server' as authentication method.
+      operationId: updateNetworkSwitchAccessPolicy
+      parameters:
+        - in: path
+          name: networkId
+          required: true
+          type: string
+        - in: path
+          name: accessPolicyNumber
+          required: true
+          type: string
+        - in: body
+          name: updateNetworkSwitchAccessPolicy
+          schema:
+            example:
+              accessPolicyType: Hybrid authentication
+              guestVlanId: 100
+              hostMode: Single-Host
+              increaseAccessSpeed: false
+              name: "Access policy #1"
+              radiusAccountingEnabled: true
+              radiusAccountingServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusCoaSupportEnabled: false
+              radiusServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusTestingEnabled: false
+              urlRedirectWalledGardenEnabled: true
+              urlRedirectWalledGardenRanges: 192.168.1.0/24
+              voiceVlanClients: true
+            properties:
+              accessPolicyType:
+                description: Access Type of the policy. Automatically 'Hybrid authentication' when hostMode is 'Multi-Domain'.
+                enum:
+                  - 802.1x
+                  - MAC authentication bypass
+                  - Hybrid authentication
+                type: string
+              guestVlanId:
+                description: ID for the guest VLAN allow unauthorized devices access to limited network resources
+                type: integer
+              hostMode:
+                description: Choose the Host Mode for the access policy.
+                enum:
+                  - Single-Host
+                  - Multi-Domain
+                  - Multi-Host
+                  - Multi-Auth
+                type: string
+              increaseAccessSpeed:
+                description: Enabling this option will make switches execute 802.1X and MAC-bypass authentication simultaneously so that clients authenticate faster. Only required when accessPolicyType is 'Hybrid Authentication.
+                type: boolean
+              name:
+                description: Name of the access policy
+                type: string
+              radiusAccountingEnabled:
+                description: Enable to send start, interim-update and stop messages to a configured RADIUS accounting server for tracking connected clients
+                type: boolean
+              radiusAccountingServers:
+                description: List of RADIUS accounting servers to require connecting devices to authenticate against before granting network access
+                items:
+                  properties:
+                    host:
+                      description: Public IP address of the RADIUS accounting server
+                      type: string
+                    port:
+                      description: UDP port that the RADIUS Accounting server listens on for access requests
+                      type: integer
+                    secret:
+                      description: RADIUS client shared secret
+                      type: string
+                  required:
+                    - host
+                    - port
+                    - secret
+                  type: object
+                type: array
+              radiusCoaSupportEnabled:
+                description: Change of authentication for RADIUS re-authentication and disconnection
+                type: boolean
+              radiusServers:
+                description: List of RADIUS servers to require connecting devices to authenticate against before granting network access
+                items:
+                  properties:
+                    host:
+                      description: Public IP address of the RADIUS server
+                      type: string
+                    port:
+                      description: UDP port that the RADIUS server listens on for access requests
+                      type: integer
+                    secret:
+                      description: RADIUS client shared secret
+                      type: string
+                  required:
+                    - host
+                    - port
+                    - secret
+                  type: object
+                type: array
+              radiusTestingEnabled:
+                description: If enabled, Meraki devices will periodically send access-request messages to these RADIUS servers
+                type: boolean
+              urlRedirectWalledGardenEnabled:
+                description: Enable to restrict access for clients to a specific set of IP addresses or hostnames prior to authentication
+                type: boolean
+              urlRedirectWalledGardenRanges:
+                description: IP address ranges, in CIDR notation, to restrict access for clients to a specific set of IP addresses or hostnames prior to authentication
+                items:
+                  type: string
+                type: array
+              voiceVlanClients:
+                description: CDP/LLDP capable voice clients will be able to use this VLAN. Automatically true when hostMode is 'Multi-Domain'.
+                type: boolean
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              accessPolicyNumber: "1234"
+              accessPolicyType: Hybrid authentication
+              guestVlanId: 100
+              hostMode: Single-Host
+              increaseAccessSpeed: false
+              name: "Access policy #1"
+              radiusAccountingEnabled: true
+              radiusAccountingServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusCoaSupportEnabled: false
+              radiusServers:
+                - host: 1.2.3.4
+                  port: 22
+                  secret: password1
+              radiusTestingEnabled: false
+              urlRedirectWalledGardenEnabled: true
+              urlRedirectWalledGardenRanges: 192.168.1.0/24
+              voiceVlanClients: true
+          schema:
+            type: object
+      summary: Update an access policy for a switch network
+      tags:
+        - switch
+        - configure
+        - accessPolicies
   "/networks/{networkId}/switch/dhcpServerPolicy":
     get:
       description: Return the DHCP server policy
@@ -16862,9 +17759,7 @@ paths:
         - syslogServers
   "/networks/{networkId}/traffic":
     get:
-      description: >2
-            The traffic analysis data for this network.
-            <a href="https://documentation.meraki.com/MR/Monitoring_and_Reporting/Hostname_Visibility">Traffic Analysis with Hostname Visibility</a> must be enabled on the network.
+      description: Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.
       operationId: getNetworkTraffic
       parameters:
         - in: path
@@ -16880,9 +17775,7 @@ paths:
           in: query
           name: timespan
           type: number
-        - description: >2
-                Filter the data by device type: 'combined', 'wireless', 'switch' or 'appliance'. Defaults to 'combined'.
-                When using 'combined', for each rule the data will come from the device type with the most usage.
+        - description: "Filter the data by device type: 'combined', 'wireless', 'switch' or 'appliance'. Defaults to 'combined'. When using 'combined', for each rule the data will come from the device type with the most usage."
           enum:
             - combined
             - wireless
@@ -16907,9 +17800,7 @@ paths:
                 sent: 138
           schema:
             type: object
-      summary: >2
-            The traffic analysis data for this network.
-            <a href="https://documentation.meraki.com/MR/Monitoring_and_Reporting/Hostname_Visibility">Traffic Analysis with Hostname Visibility</a> must be enabled on the network.
+      summary: Return the traffic analysis data for this network
       tags:
         - networks
         - monitor
@@ -17646,7 +18537,7 @@ paths:
               uuid: 00000000-0000-0000-000-000000000000
           schema:
             type: object
-      summary: Update the Bluetooth settings for a network. See the docs page for <a href="https://documentation.meraki.com/MR/Bluetooth/Bluetooth_Low_Energy_(BLE)">Bluetooth settings</a>.
+      summary: Update the Bluetooth settings for a network
       tags:
         - wireless
         - configure
@@ -18049,7 +18940,7 @@ paths:
               mac: 00:61:71:c8:51:27
           schema:
             type: object
-      summary: Aggregated connectivity info for a given client on this network. Clients are identified by their MAC.
+      summary: Aggregated connectivity info for a given client on this network
       tags:
         - wireless
         - monitor
@@ -18275,7 +19166,7 @@ paths:
                 t1: 1550620800
           schema:
             type: object
-      summary: "Return the latency history for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP. The latency data is from a sample of 2% of packets and is grouped into 4 traffic categories: background, best effort, video, voice. Within these categories the sampled packet counters are bucketed by latency in milliseconds."
+      summary: Return the latency history for a client
       tags:
         - wireless
         - monitor
@@ -18358,7 +19249,7 @@ paths:
               mac: 00:61:71:c8:51:27
           schema:
             type: object
-      summary: Aggregated latency info for a given client on this network. Clients are identified by their MAC.
+      summary: Aggregated latency info for a given client on this network
       tags:
         - wireless
         - monitor
@@ -18979,9 +19870,7 @@ paths:
           name: networkId
           required: true
           type: string
-        - description: >2
-                If the network is bound to a template, this parameter controls whether or not the non-basic RF profiles defined on the template
-                should be included in the response alongside the non-basic profiles defined on the bound network. Defaults to false.
+        - description: If the network is bound to a template, this parameter controls whether or not the non-basic RF profiles defined on the template should be included in the response alongside the non-basic profiles defined on the bound network. Defaults to false.
           in: query
           name: includeTemplateProfiles
           type: boolean
@@ -19101,10 +19990,7 @@ paths:
                     description: Sets min power (dBm) of 5Ghz band. Can be integer between 8 and 30. Defaults to 8.
                     type: integer
                   rxsop:
-                    description: >2
-                          The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after
-                          consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will
-                          reset this to the default.
+                    description: The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will reset this to the default.
                     type: integer
                   validAutoChannels:
                     description: Sets valid auto channels for 5Ghz band. Can be one of '36', '40', '44', '48', '52', '56', '60', '64', '100', '104', '108', '112', '116', '120', '124', '128', '132', '136', '140', '144', '149', '153', '157', '161' or '165'.Defaults to [36, 40, 44, 48, 52, 56, 60, 64, 100, 104, 108, 112, 116, 120, 124, 128, 132, 136, 140, 144, 149, 153, 157, 161, 165].
@@ -19138,10 +20024,7 @@ paths:
                     description: Sets min power (dBm) of 2.4Ghz band. Can be integer between 5 and 30. Defaults to 5.
                     type: integer
                   rxsop:
-                    description: >2
-                          The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after
-                          consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will
-                          reset this to the default.
+                    description: The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will reset this to the default.
                     type: integer
                   validAutoChannels:
                     description: Sets valid auto channels for 2.4Ghz band. Can be one of '1', '6' or '11'. Defaults to [1, 6, 11].
@@ -19368,10 +20251,7 @@ paths:
                     description: Sets min power (dBm) of 5Ghz band. Can be integer between 8 and 30.
                     type: integer
                   rxsop:
-                    description: >2
-                          The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after
-                          consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will
-                          reset this to the default.
+                    description: The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will reset this to the default.
                     type: integer
                   validAutoChannels:
                     description: Sets valid auto channels for 5Ghz band. Can be one of '36', '40', '44', '48', '52', '56', '60', '64', '100', '104', '108', '112', '116', '120', '124', '128', '132', '136', '140', '144', '149', '153', '157', '161' or '165'.
@@ -19405,10 +20285,7 @@ paths:
                     description: Sets min power (dBm) of 2.4Ghz band. Can be integer between 5 and 30.
                     type: integer
                   rxsop:
-                    description: >2
-                          The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after
-                          consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will
-                          reset this to the default.
+                    description: The RX-SOP level controls the sensitivity of the radio. It is strongly recommended to use RX-SOP only after consulting a wireless expert. RX-SOP can be configured in the range of -65 to -95 (dBm). A value of null will reset this to the default.
                     type: integer
                   validAutoChannels:
                     description: Sets valid auto channels for 2.4Ghz band. Can be one of '1', '6' or '11'.
@@ -20489,10 +21366,20 @@ paths:
           description: Successful operation
           examples:
             application/json:
+              redirectUrl: https://example.com
+              splashImage:
+                ? md5
+              splashLogo:
+                extension: jpg
+                md5: abcd1234
               splashPage: Click-through splash page
+              splashPrepaidFront:
+                ? md5
               splashUrl: https://www.custom_splash_url.com
               ssidNumber: 0
+              useRedirectUrl: true
               useSplashUrl: true
+              welcomeMessage: Welcome!
           schema:
             type: object
       summary: Display the splash page settings for the given SSID
@@ -20518,25 +21405,88 @@ paths:
           name: updateNetworkWirelessSsidSplashSettings
           schema:
             example:
+              redirectUrl: https://example.com
+              splashImage:
+                ? md5
+              splashLogo:
+                extension: jpg
+                md5: abcd1234
+              splashPage: Click-through splash page
+              splashPrepaidFront:
+                ? md5
               splashUrl: https://www.custom_splash_url.com
+              useRedirectUrl: true
               useSplashUrl: true
+              welcomeMessage: Welcome!
             properties:
+              redirectUrl:
+                description: The custom redirect URL where the users will go after the splash page.
+                type: string
+              splashImage:
+                description: The image used in the splash page.
+                properties:
+                  extension:
+                    description: The extension of the image file.
+                    type: string
+                  md5:
+                    description: The MD5 value of the image file. Setting this to null will remove the image from the splash page.
+                    type: string
+                type: object
+              splashLogo:
+                description: The logo used in the splash page.
+                properties:
+                  extension:
+                    description: The extension of the logo file.
+                    type: string
+                  md5:
+                    description: The MD5 value of the logo file. Setting this to null will remove the logo from the splash page.
+                    type: string
+                type: object
+              splashPrepaidFront:
+                description: The prepaid front image used in the splash page.
+                properties:
+                  extension:
+                    description: The extension of the prepaid front image file.
+                    type: string
+                  md5:
+                    description: The MD5 value of the prepaid front image file. Setting this to null will remove the prepaid front from the splash page.
+                    type: string
+                type: object
+              splashTimeout:
+                description: Splash timeout in minutes. This will determine how often users will see the splash page.
+                type: integer
               splashUrl:
                 description: "[optional] The custom splash URL of the click-through splash page. Note that the URL can be configured without necessarily being used. In order to enable the custom URL, see 'useSplashUrl'"
                 type: string
+              useRedirectUrl:
+                description: The Boolean indicating whether the the user will be redirected to the custom redirect URL after the splash page. A custom redirect URL must be set if this is true.
+                type: boolean
               useSplashUrl:
                 description: "[optional] Boolean indicating whether the users will be redirected to the custom splash url. A custom splash URL must be set if this is true. Note that depending on your SSID's access control settings, it may not be possible to use the custom splash URL."
                 type: boolean
+              welcomeMessage:
+                description: The welcome message for the users on the splash page.
+                type: string
             type: object
       responses:
         "200":
           description: Successful operation
           examples:
             application/json:
+              redirectUrl: https://example.com
+              splashImage:
+                ? md5
+              splashLogo:
+                extension: jpg
+                md5: abcd1234
               splashPage: Click-through splash page
+              splashPrepaidFront:
+                ? md5
               splashUrl: https://www.custom_splash_url.com
               ssidNumber: 0
+              useRedirectUrl: true
               useSplashUrl: true
+              welcomeMessage: Welcome!
           schema:
             type: object
       summary: Modify the splash page settings for the given SSID
@@ -20653,11 +21603,7 @@ paths:
               trafficShapingEnabled: true
             properties:
               defaultRulesEnabled:
-                description: >2
-                      Whether default traffic shaping rules are enabled (true) or disabled (false).
-                      There are 4 default rules, which can
-                      be seen on your network's traffic shaping page. Note that default rules
-                      count against the rule limit of 8.
+                description: Whether default traffic shaping rules are enabled (true) or disabled (false). There are 4 default rules, which can be seen on your network's traffic shaping page. Note that default rules count against the rule limit of 8.
                 type: boolean
               rules:
                 description: >2
@@ -22754,7 +23700,7 @@ paths:
                 - "789"
           schema:
             type: object
-      summary: Return the branding policy IDs of an organization in priority order. IDs are ordered in ascending order of priority (IDs later in the array have higher priority).
+      summary: Return the branding policy IDs of an organization in priority order
       tags:
         - organizations
         - configure
@@ -23159,7 +24105,7 @@ paths:
                 - Q234-ABCD-5678
           schema:
             type: object
-      summary: Claim a list of devices, licenses, and/or orders into an organization. When claiming by order, all devices and licenses in the order will be claimed; licenses will be added to the organization and devices will be placed in the organization's inventory.
+      summary: Claim a list of devices, licenses, and/or orders into an organization
       tags:
         - organizations
         - configure
@@ -23785,7 +24731,8 @@ paths:
                 networkId: N_24329156
                 notes: My AP's note
                 serial: Q234-ABCD-5678
-                tags: " recently-added "
+                tags:
+                  - recently-added
           headers:
             Link:
               description: A comma-separated list of first, last, prev, and next relative links used for subsequent paginated requests.
@@ -23922,7 +24869,7 @@ paths:
                 name: Sample VoIP Provider
           schema:
             type: object
-      summary: List the monitored media servers for this organization. Only valid for organizations with Meraki Insight.
+      summary: List the monitored media servers for this organization
       tags:
         - insight
         - configure
@@ -23947,6 +24894,9 @@ paths:
               address:
                 description: The IP address (IPv4 only) or hostname of the media server to monitor
                 type: string
+              bestEffortMonitoringEnabled:
+                description: Indicates that if the media server doesn't respond to ICMP pings, the nearest hop will be used in its stead.
+                type: boolean
               name:
                 description: The name of the VoIP provider
                 type: string
@@ -23965,7 +24915,7 @@ paths:
               name: Sample VoIP Provider
           schema:
             type: object
-      summary: Add a media server to be monitored for this organization. Only valid for organizations with Meraki Insight.
+      summary: Add a media server to be monitored for this organization
       tags:
         - insight
         - configure
@@ -23986,7 +24936,7 @@ paths:
       responses:
         "204":
           description: Successful operation
-      summary: Delete a monitored media server from this organization. Only valid for organizations with Meraki Insight.
+      summary: Delete a monitored media server from this organization
       tags:
         - insight
         - configure
@@ -24014,7 +24964,7 @@ paths:
               name: Sample VoIP Provider
           schema:
             type: object
-      summary: Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.
+      summary: Return a monitored media server for this organization
       tags:
         - insight
         - configure
@@ -24042,6 +24992,9 @@ paths:
               address:
                 description: The IP address (IPv4 only) or hostname of the media server to monitor
                 type: string
+              bestEffortMonitoringEnabled:
+                description: Indicates that if the media server doesn't respond to ICMP pings, the nearest hop will be used in its stead.
+                type: boolean
               name:
                 description: The name of the VoIP provider
                 type: string
@@ -24057,7 +25010,7 @@ paths:
               name: Sample VoIP Provider
           schema:
             type: object
-      summary: Update a monitored media server for this organization. Only valid for organizations with Meraki Insight.
+      summary: Update a monitored media server for this organization
       tags:
         - insight
         - configure
@@ -24280,7 +25233,7 @@ paths:
                   totalDurationInDays: 365
           schema:
             type: object
-      summary: Assign SM seats to a network. This will increase the managed SM device limit of the network
+      summary: Assign SM seats to a network
       tags:
         - organizations
         - configure
@@ -24327,7 +25280,7 @@ paths:
                 - "456"
           schema:
             type: object
-      summary: Move licenses to another organization. This will also move any devices that the licenses are assigned to
+      summary: Move licenses to another organization
       tags:
         - organizations
         - configure
@@ -24454,7 +25407,7 @@ paths:
                   totalDurationInDays: 365
           schema:
             type: object
-      summary: Renew SM seats of a license. This will extend the license expiration date of managed SM devices covered by this license
+      summary: Renew SM seats of a license
       tags:
         - organizations
         - configure
@@ -24555,6 +25508,119 @@ paths:
         - organizations
         - configure
         - licenses
+  "/organizations/{organizationId}/loginSecurity":
+    get:
+      description: Returns the login security settings for an organization.
+      operationId: getOrganizationLoginSecurity
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              accountLockoutAttempts: 3
+              enforceAccountLockout: true
+              enforceDifferentPasswords: true
+              enforceIdleTimeout: true
+              enforceLoginIpRanges: true
+              enforcePasswordExpiration: true
+              enforceStrongPasswords: true
+              enforceTwoFactorAuth: true
+              idleTimeoutMinutes: 30
+              loginIpRanges:
+                - 192.195.83.1
+                - 192.195.83.255
+              numDifferentPasswords: 3
+              passwordExpirationDays: 90
+          schema:
+            type: object
+      summary: Returns the login security settings for an organization.
+      tags:
+        - organizations
+        - configure
+        - loginSecurity
+    put:
+      description: Update the login security settings for an organization
+      operationId: updateOrganizationLoginSecurity
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          type: string
+        - in: body
+          name: updateOrganizationLoginSecurity
+          schema:
+            example: {}
+            properties:
+              accountLockoutAttempts:
+                description: Number of consecutive failed login attempts after which users' accounts will be locked.
+                type: integer
+              enforceAccountLockout:
+                description: Boolean indicating whether users' Dashboard accounts will be locked out after a specified number of consecutive failed login attempts.
+                type: boolean
+              enforceDifferentPasswords:
+                description: Boolean indicating whether users, when setting a new password, are forced to choose a new password that is different from any past passwords.
+                type: boolean
+              enforceIdleTimeout:
+                description: Boolean indicating whether users will be logged out after being idle for the specified number of minutes.
+                type: boolean
+              enforceLoginIpRanges:
+                description: Boolean indicating whether organization will restrict access to Dashboard (including the API) from certain IP addresses.
+                type: boolean
+              enforcePasswordExpiration:
+                description: Boolean indicating whether users are forced to change their password every X number of days.
+                type: boolean
+              enforceStrongPasswords:
+                description: "Boolean indicating whether users will be forced to choose strong passwords for their accounts. Strong passwords are at least 8 characters that contain 3 of the following: number, uppercase letter, lowercase letter, and symbol"
+                type: boolean
+              enforceTwoFactorAuth:
+                description: Boolean indicating whether users in this organization will be required to use an extra verification code when logging in to Dashboard. This code will be sent to their mobile phone via SMS, or can be generated by the Google Authenticator application.
+                type: boolean
+              idleTimeoutMinutes:
+                description: Number of minutes users can remain idle before being logged out of their accounts.
+                type: integer
+              loginIpRanges:
+                description: List of acceptable IP ranges. Entries can be single IP addresses, IP address ranges, and CIDR subnets.
+                items:
+                  type: string
+                type: array
+              numDifferentPasswords:
+                description: Number of recent passwords that new password must be distinct from.
+                type: integer
+              passwordExpirationDays:
+                description: Number of days after which users will be forced to change their password.
+                type: integer
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              accountLockoutAttempts: 3
+              enforceAccountLockout: true
+              enforceDifferentPasswords: true
+              enforceIdleTimeout: true
+              enforceLoginIpRanges: true
+              enforcePasswordExpiration: true
+              enforceStrongPasswords: true
+              enforceTwoFactorAuth: true
+              idleTimeoutMinutes: 30
+              loginIpRanges:
+                - 192.195.83.1
+                - 192.195.83.255
+              numDifferentPasswords: 3
+              passwordExpirationDays: 90
+          schema:
+            type: object
+      summary: Update the login security settings for an organization
+      tags:
+        - organizations
+        - configure
+        - loginSecurity
   "/organizations/{organizationId}/networks":
     get:
       description: List the networks that the user has privileges on in an organization
@@ -24651,7 +25717,7 @@ paths:
                 description: The name of the new network
                 type: string
               productTypes:
-                description: The product type(s) of the new network. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway. If more than one type is included, the network will be a combined network.
+                description: The product type(s) of the new network. Valid types are wireless, appliance, switch, systemsManager, camera, cellularGateway, environmental. If more than one type is included, the network will be a combined network.
                 items:
                   enum:
                     - wireless
@@ -24660,6 +25726,7 @@ paths:
                     - systemsManager
                     - camera
                     - cellularGateway
+                    - environmental
                   type: string
                 type: array
               tags:
@@ -25522,6 +26589,55 @@ paths:
         - organizations
         - configure
         - snmp
+  "/organizations/{organizationId}/switch/devices/clone":
+    post:
+      description: "Clone port-level and some switch-level configuration settings from a source switch to one or more target switches. Cloned settings include: Aggregation Groups, Power Settings, Multicast Settings, MTU Configuration, STP Bridge priority, Port Mirroring"
+      operationId: cloneOrganizationSwitchDevices
+      parameters:
+        - in: path
+          name: organizationId
+          required: true
+          type: string
+        - in: body
+          name: cloneOrganizationSwitchDevices
+          required: true
+          schema:
+            example:
+              sourceSerial: Q234-ABCD-5678
+              targetSerials:
+                - Q234-ABCD-0001
+                - Q234-ABCD-0002
+                - Q234-ABCD-0003
+            properties:
+              sourceSerial:
+                description: Serial number of the source switch (must be on a network not bound to a template)
+                type: string
+              targetSerials:
+                description: Array of serial numbers of one or more target switches (must be on a network not bound to a template)
+                items:
+                  type: string
+                type: array
+            required:
+              - sourceSerial
+              - targetSerials
+            type: object
+      responses:
+        "200":
+          description: Successful operation
+          examples:
+            application/json:
+              sourceSerial: Q234-ABCD-5678
+              targetSerials:
+                - Q234-ABCD-0001
+                - Q234-ABCD-0002
+                - Q234-ABCD-0003
+          schema:
+            type: object
+      summary: Clone port-level and some switch-level configuration settings from a source switch to one or more target switches
+      tags:
+        - switch
+        - configure
+        - devices
   "/organizations/{organizationId}/webhooks/logs":
     get:
       description: Return the log of webhook POSTs sent
@@ -25773,15 +26889,15 @@ x-batchable-actions:
   - group: Meraki auth user
     operation: create
     resource: /networks/{networkId}/merakiAuthUsers
-    summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X and Splash Guest users, and currently, organizations have a 50,000 user cap)
+    summary: Create a user configured with Meraki Authentication for a network (currently supports 802.1X, splash guest, and client VPN users, and currently, organizations have a 50,000 user cap)
   - group: Meraki auth user
     operation: destroy
     resource: /networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}
-    summary: Delete a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be deleted)
+    summary: Delete a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
   - group: Meraki auth user
     operation: update
     resource: /networks/{networkId}/merakiAuthUsers/{merakiAuthUserId}
-    summary: Update a user configured with Meraki Authentication (currently only 802.1X RADIUS users can be updated)
+    summary: Update a user configured with Meraki Authentication (currently, 802.1X RADIUS, splash guest, and client VPN users can be deleted)
   - group: Monitored media server
     operation: create
     resource: /organizations/{organizationId}/insight/monitoredMediaServers
@@ -25850,6 +26966,10 @@ x-batchable-actions:
     operation: update
     resource: /organizations/{organizationId}/saml/idps/{idpId}
     summary: Update a SAML IdP in your organization
+  - group: Organization login security settings
+    operation: update
+    resource: /organizations/{organizationId}/loginSecurity
+    summary: Update the login security settings for an organization
   - group: Ospf routing
     operation: update
     resource: /networks/{networkId}/switch/routing/ospf
@@ -25938,6 +27058,22 @@ x-batchable-actions:
     operation: update
     resource: /networks/{networkId}/switch/stormControl
     summary: Update the storm control configuration for a switch network
+  - group: Switch
+    operation: clone
+    resource: /organizations/{organizationId}/switch/devices
+    summary: "Clone port-level and some switch-level configuration settings from a source switch to one or more target switches. Cloned settings include: Aggregation Groups, Power Settings, Multicast Settings, MTU Configuration, STP Bridge priority, Port Mirroring"
+  - group: Switch access policy
+    operation: create
+    resource: /networks/{networkId}/switch/accessPolicies
+    summary: Create an access policy for a switch network. This endpoint only supports access policies with 'My RADIUS server' as authentication method.
+  - group: Switch access policy
+    operation: destroy
+    resource: /networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}
+    summary: Delete an access policy for a switch network
+  - group: Switch access policy
+    operation: update
+    resource: /networks/{networkId}/switch/accessPolicies/{accessPolicyNumber}
+    summary: Update an access policy for a switch network. This endpoint only supports access policies with 'My RADIUS server' as authentication method.
   - group: Switch port
     operation: cycle
     resource: /devices/{serial}/switch/ports

@@ -20,7 +20,7 @@ info:
     - [JS Client](https://github.com/netlify/js-client)
   termsOfService: https://www.netlify.com/legal/terms-of-use/
   title: Netlify's API documentation
-  version: 0.16.1
+  version: 0.18.1
   x-apisguru-categories:
     - cloud
   x-logo:
@@ -891,7 +891,7 @@ paths:
         "200":
           description: services
           schema:
-            $ref: "#/definitions/serviceInstance"
+            $ref: "#/definitions/service"
             type: object
         default:
           $ref: "#/responses/error"
@@ -1507,6 +1507,25 @@ paths:
           $ref: "#/responses/error"
       tags:
         - metadata
+  "/sites/{site_id}/service-instances":
+    get:
+      operationId: listServiceInstancesForSite
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: "#/definitions/serviceInstance"
+            type: array
+        default:
+          $ref: "#/responses/error"
+      tags:
+        - serviceInstance
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
   "/sites/{site_id}/services/{addon}/instances":
     parameters:
       - in: path
@@ -1549,8 +1568,8 @@ paths:
     get:
       operationId: showServiceInstance
       responses:
-        "201":
-          description: Created
+        "200":
+          description: OK
           schema:
             $ref: "#/definitions/serviceInstance"
         default:
@@ -1582,7 +1601,7 @@ paths:
             type: object
       responses:
         "204":
-          description: Created
+          description: No Content
         default:
           $ref: "#/responses/error"
       tags:
